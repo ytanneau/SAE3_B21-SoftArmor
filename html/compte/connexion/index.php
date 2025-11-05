@@ -70,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("location: ../../../");
                             exit;
                         } else {
-                            echo "L'e-mail ou le mot de passe est incorrect.";
+                            echo "L'e-mail ou le mot de passe est incorrect. <br>";
                         }
                     }
                 } else {
-                    echo "L'e-mail ou le mot de passe est incorrect.";
+                    echo "L'e-mail ou le mot de passe est incorrect. <br>";
                 }
             } else {
                 echo "Il y a eu un problème. Veuillez réessayer plus tard.";
