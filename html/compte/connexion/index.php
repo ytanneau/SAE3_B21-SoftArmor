@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Si j'ai pu récupérer la ligne
 
-                    if ($row = $stmt->fetch()) {
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         //$id_compte = $row['id_compte'];
                         //$mdp_hash = $row['mdp'];
                         var_dump($row);
