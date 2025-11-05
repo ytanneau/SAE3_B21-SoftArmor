@@ -46,6 +46,8 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
+            require_once('.config.php');
+
             //echo "succes";
             $dpo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $requete = $dpo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
