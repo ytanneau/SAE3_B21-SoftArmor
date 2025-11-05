@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Si j'ai pu récupérer la ligne
 
                     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        //$id_compte = $row['id_compte'];
-                        //$mdp_hash = $row['mdp'];
+                        $id_compte = $row['id_compte'];
+                        $mdp_hash = $row['mdp'];
                         var_dump($row);
 
                         // if (password_verify($mdp, $mdp_hash)) {
@@ -70,11 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             // Retour à la page d'accueil
                             header("location: ../../../");
                         } else {
-                            print("L'e-mail ou le mot de passe est incorrect.");
+                            echo "L'e-mail ou le mot de passe est incorrect.";
                         }
                     }
                 } else {
-                    print("L'e-mail ou le mot de passe est incorrect.");
+                    echo "L'e-mail ou le mot de passe est incorrect.";
                 }
             } else {
                 echo "Il y a eu un problème. Veuillez réessayer plus tard.";
