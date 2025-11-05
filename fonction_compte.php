@@ -11,6 +11,8 @@
     define("TAILLE_ADRESSE", 120);
     define("TAILLE_MDP", 100);
 
+    require_once(".config.php");
+    
     //print_r(hash_algos()); | verifier que algos est sur la machine
     //fonction qui renvoir le mot de passe cryper et saler
     function crypte_v1($mdp){
@@ -24,6 +26,8 @@
     
     //fonction qui permer de cree un compte vendeur
     function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
+        global $pdo;
+        
         $raisonSocial = trim($raisonSocial);
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -44,12 +48,8 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            //coucou fix2
-            require_once('.config.php');
-
-            //echo "succes";
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $requete = $dpo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
