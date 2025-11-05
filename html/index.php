@@ -1,7 +1,6 @@
 <?php
 
 require_once("../fonctions_php/fonction_produit.php");
-
 require_once("../.config.php");
 
 // requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
@@ -19,8 +18,9 @@ $result = $pdo->query($query);
     <title>Accueil</title>
 </head>
 <body>
-    
-    <a href="compte/connexion">Se connecter</a>
+    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+        <a href="compte/connexion">Se connecter</a>
+    <?php } ?>
     
     <div>
         <h1>PROMO RENTRÉ</h1>
