@@ -151,7 +151,7 @@
                 })
             </script>
             <?php 
-                require_once "config.php";
+                require_once "../../../config.php";
                 
                 $nomPrv = $_POST["nomPrv"];
                 $nomPblc = $_POST["nomPblc"];
@@ -203,7 +203,7 @@
                 */
                 $image = $_POST["photo"];
                 
-                if(move_uploaded_file($image,"../images/")){
+                if(move_uploaded_file($image,"../../../images/")){
                     $nomImage = $idProduit . "_" . $image;
                     $url = "../images/" . $nomImage;
                     
