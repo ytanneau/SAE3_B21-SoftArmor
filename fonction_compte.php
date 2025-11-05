@@ -11,8 +11,6 @@
     define("TAILLE_ADRESSE", 120);
     define("TAILLE_MDP", 100);
 
-    require_once(".config.php");
-    
     //print_r(hash_algos()); | verifier que algos est sur la machine
     //fonction qui renvoir le mot de passe cryper et saler
     function crypte_v1($mdp){
