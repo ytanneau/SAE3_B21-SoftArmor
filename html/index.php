@@ -1,10 +1,10 @@
 <?php
+
 require_once("../fonctions_php/fonction_produit.php");
-$pdo = new PDO("mysql:dbname=saedb;host=mariadb","sae","dbsae3dunyles");
-// requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
-$test= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy as moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit where produit_note.id_produit = produit_visible.id_produit;";
-$result = $pdo->query($test);
+require_once("../.config.php");
+
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -14,6 +14,7 @@ $result = $pdo->query($test);
 </head>
 <body>
     
+    <a href="compte/connexion">Se connecter</a>
     
     <div>
         <h1>PROMO RENTRÉ</h1>
@@ -25,8 +26,10 @@ $result = $pdo->query($test);
         ?>
             <li>
                 <div>
-                    <img src="images/<?php echo $row['url_image'];?>" title="<?php echo $row['titre'];?>" alt="<?php echo $row['alt'];?>">
-                    <h3><?php echo $row['nom_public']; ?></h3>
+                    <img src="images/<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    
+                    <h3><?= $row['nom_public']; ?></h3>
+
                     <div>
                         <?php 
                             $moy = $row['moyenne'];
