@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');  
+require_once('../../../.config.php');
 // $sql = "select id_produit from _produit where id_compte = :id_compte";
 
 // $stmt = $pdo->prepare($sql);
