@@ -151,7 +151,7 @@
                 })
             </script>
             <?php 
-                require_once "../../../.config.php";
+                require_once '../../../../.config.php';
                 
                 $nomPrv = $_POST["nomPrv"];
                 $nomPblc = $_POST["nomPblc"];
@@ -165,8 +165,6 @@
                 $poidProd = $_POST["poidProd"];
                 $volumeProd = $_POST["volumeProd"];
                 $checkMajeur = isset($_POST["checkMajeur"]);
-
-                
 
                 if($checkMajeur == 'on'){
                     $checkMajeur = true;
