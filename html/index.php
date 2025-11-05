@@ -1,5 +1,5 @@
 <?php
-require_once("../fonctions_php/fonction_produit.php");
+require_once("/docker/data/web/fonctions_php/fonction_produit.php");
 $pdo = new PDO("mysql:dbname=saedb;host=mariadb","sae","dbsae3dunyles");
 // requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
 $test= "SELECT nom_public,prix,url_image,alt,_image.titre,AVG(note) as moyenne FROM _produit INNER JOIN _images_produit ON _produit.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN _avis ON _avis.id_produit = _produit.id_produit where _avis.id_produit = _produit.id_produit;";
