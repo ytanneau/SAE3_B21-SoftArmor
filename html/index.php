@@ -38,8 +38,14 @@ $result = $pdo->query($query);
 
                     <div>
                         <?php 
-                            $moy = $row['moyenne'];
-                            afficher_moyenne_note($moy); 
+                            if($row['moyenne']=="NULL"){
+                                echo "test";
+                            }
+                            else{
+                                $moy = float($row['moyenne']);
+                                afficher_moyenne_note($moy);
+                            }
+                             
                         ?>
 
                     </div>
