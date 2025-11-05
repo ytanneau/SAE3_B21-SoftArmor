@@ -53,7 +53,8 @@
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
-            if ($resSQL['resultat'] === 0){
+            print_r($resSQL);
+            if ($resSQL['resultat'] === null){
                 echo "succes";
             }
             else{
