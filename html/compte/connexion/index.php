@@ -55,8 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Si j'ai pu récupérer la ligne
 
                     if ($row = $stmt->fetch()) {
-                        $id_compte = $row['id_compte'];
-                        $mdp_hash = $row['mdp'];
+                        //$id_compte = $row['id_compte'];
+                        //$mdp_hash = $row['mdp'];
+                        var_dump($row);
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
