@@ -9,6 +9,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 }
 
 require_once "../../../.config.php";
+require_once "../../../fonction_compte.php";
 
 // Initialiser les variables
 $email = $mdp = "";
