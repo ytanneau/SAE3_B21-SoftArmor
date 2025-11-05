@@ -1,6 +1,8 @@
 <?php
-$pdo = new PDO("mysql:dbname=saedb;host=db","sae","dbsae3dunyles");
-$test= "SELECT * FROM _produit";
+require_once("../fonctions_php/fonction_produit");
+$pdo = new PDO("mysql:dbname=saedb;host=mariadb","sae","dbsae3dunyles");
+// requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
+$test= "SELECT nom_public,prix,url_image,AVG(note) as moyenne FROM _produit INNER JOIN _images_produit ON _produit.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN _avis ON _avis.id_produit = _produit.id_produit where _avis.id_produit = _produit.id_produit;";
 $result = $pdo->query($test);
 ?>
 <!DOCTYPE html>
@@ -9,27 +11,37 @@ $result = $pdo->query($test);
     <meta charset="UTF-8">
     <meta name="Page D'Accueil" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    
 </head>
 <body>
-    <?php
-        foreach ($result as $row){
-            echo $row['nom_stock'];
-        }
-    ?>
-    <section>
+    
+    
+    <div>
         <h1>PROMO RENTRÉ</h1>
         <ul>
             <?php
-
-            ?>
+            //boucle pour ajouter un produit dans un <li> 
+        foreach ($result as $row){
+            
+        ?>
             <li>
                 <div>
-                    
+                    <img src="images/<?php echo $row['url_image'];?>" alt="">
+                    <h3><?php echo $row['nom_public']; ?></h3>
+                    <div>
+                        <?php 
+                            $moy = $row['moyenne'];
+                            afficher_moyenne_note($moy); 
+                        ?>
+
+                    </div>
+                    <p><?php echo $row['prix']; ?> €</p>
                 </div>
             </li>
+            <?php
+            }
+            ?>
         </ul>
-    </section>
+        </div>
     
 </body>
 </html>
