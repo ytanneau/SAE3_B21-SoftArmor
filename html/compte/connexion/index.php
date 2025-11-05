@@ -4,17 +4,11 @@ session_start();
 
 // Si l'utilisateur est déjà connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ../../');
+    header('location: ../../../');
     exit;
 }
 
 require_once "config.php";
-require_once "_fonction_compte.php";
-
-$erreurs = [
-    "email" => "L'email est vide"
-    ""
-]
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -22,35 +16,74 @@ $erreur_email = $erreur_mdp = "";
 
 // Si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérifier si l'e-mail est vide
+
+    // Vérifier si l'e-mail est vide, sinon l'enregistrer
+
     if (empty(trim($_POST['email']))) {
         $erreur_email = "E-mail vide";
+    } else {
+        $email = trim($_POST['email']);
     }
 
-    // Vérifier si le mot de passe est vide
-    if (empty(trim($_POST['mdp'])))
+    // Vérifier si le mot de passe est vide, sinon l'enregistrer
 
-    // Si erreur e-mail ou MDP
+    if (empty(trim($_POST['mdp']))) {
+        $erreur_mdp = "Mot de passe vide";
+    } else {
+        $mdp = trim($_POST['mdp']);
+    }
 
-    // Si la requête n'a pas pu être préparée
+    // Si pas d'erreur e-mail ou MDP
 
-    // Si la requête n'a pas pu être exécutée
+    if (empty($erreur_email) && empty($erreur_mdp)) {
+        $sql = "SELECT 1 FROM compte_client WHERE email = :email";
+        
+        // Si la requête a pu être préparée
 
-    // Si l'utilisateur n'existe pas (aucun enregistrement trouvé)
+        if ($stmt = $pdo->prepare($sql)) {
+            $stmt->bindParam(":email", $email);
 
-    // Si je n'ai pas pu récupérer la ligne
+            // Si la requête a pu être exécutée
 
-    // Si le mot de passe est correct
+            if ($stmt->execute()) {
 
+                // Si l'utilisateur existe (1 enregistrement trouvé)
 
+                if ($stmt->rowCount() == 1) {
 
+                    // Si j'ai pu récupérer la ligne
 
-    // SELECT 1 FROM clients (username, password) WHERE username = :username AND password = :password
-    // Si cette ligne existe, le login est valide
+                    if ($row = $stmt->fetch()) {
+                        $id_compte = $row['id_compte'];
+                        $mdp_hash = $row['mdp'];
+
+                        if (password_verify($password, $mdp_hash)) {
+                            session_start();
+
+                            $_SESSION['logged_in'] = true;
+                            $_SESSION['id_compte'] = $id_compte;
+                            $_SESSION['email'] = $email;                            
+                            
+                            // Retour à la page d'accueil
+                            header("location: ../../../");
+                        } else {
+                            print("L'e-mail ou le mot de passe est incorrect.");
+                        }
+                    }
+                } else {
+                    print("L'e-mail ou le mot de passe est incorrect.");
+                }
+            } else {
+                echo "Il y a eu un problème. Veuillez réessayer plus tard.";
+            }
+
+            unset($stmt);
+        }
+    }
+
+    // Fermer la connexion
+    unset($pdo);
 }
-
-// Fermer la connexion
-unset($pdo);
 
 ?>
 
@@ -62,7 +95,7 @@ unset($pdo);
     <title>Connexion</title>
 </head>
 <body>
-    <a href="../../../index.php">Retour à l'accueil</a>
+    <a href="../../../">Retour à l'accueil</a>
     
     <form action="" method="post">
         <fieldset>
