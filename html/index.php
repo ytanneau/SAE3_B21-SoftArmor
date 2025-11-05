@@ -32,14 +32,20 @@ $result = $pdo->query($query);
         ?>
             <li>
                 <div>
-                    <img src="images/<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
                     <div>
                         <?php 
-                            $moy = $row['moyenne'];
-                            afficher_moyenne_note($moy); 
+                            if($row['moyenne']==null){
+                                echo "test";
+                            }
+                            else{
+                                $moy = $row['moyenne'];
+                                afficher_moyenne_note($moy);
+                            }
+                             
                         ?>
 
                     </div>
