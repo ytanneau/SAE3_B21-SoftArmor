@@ -11,8 +11,6 @@
     define("TAILLE_ADRESSE", 120);
     define("TAILLE_MDP", 100);
 
-    require_once(".config.php");
-    
     //print_r(hash_algos()); | verifier que algos est sur la machine
     //fonction qui renvoir le mot de passe cryper et saler
     function crypte_v1($mdp){
@@ -45,6 +43,9 @@
         && check_adresse_all($adresse)
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
+
+            //coucou fix2
+            require_once('.config.php');
 
             //echo "succes";
             $dpo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
