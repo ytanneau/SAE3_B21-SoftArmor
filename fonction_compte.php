@@ -46,7 +46,7 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            //coucou
+            //coucou fix2
             require_once('.config.php');
 
             //echo "succes";
