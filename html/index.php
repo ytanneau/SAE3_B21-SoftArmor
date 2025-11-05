@@ -10,6 +10,7 @@ $query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne F
 $result = $pdo->query($query);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,6 +20,7 @@ $result = $pdo->query($query);
 </head>
 <body>
     
+    <a href="compte/connexion">Se connecter</a>
     
     <div>
         <h1>PROMO RENTRÉ</h1>
@@ -30,8 +32,10 @@ $result = $pdo->query($query);
         ?>
             <li>
                 <div>
-                    <img src="images/<?php echo $row['url_image'];?>" title="<?php echo $row['titre'];?>" alt="<?php echo $row['alt'];?>">
-                    <h3><?php echo $row['nom_public']; ?></h3>
+                    <img src="images/<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    
+                    <h3><?= $row['nom_public']; ?></h3>
+
                     <div>
                         <?php 
                             $moy = $row['moyenne'];
