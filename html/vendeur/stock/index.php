@@ -63,8 +63,6 @@ function getProduit(){
     <body>
         <a href= "html/vendeur/produit/">
         <table>
-        <?php 
-        foreach ($listeProduit as $cleProduit=>$valeur): ?>
             <tr>
                 <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
                 <td><?php $nomProduit?> </td>
@@ -73,9 +71,7 @@ function getProduit(){
                 <td><img src="Fleche.png" alt=""> </td>
                 <td>trait </td>
                 <td><?php $nombreStock ?></td>
-            </tr>  
-            <?php endforeach; ?>
-            
+            </tr>            
         </table>
         </a>
     </body>
