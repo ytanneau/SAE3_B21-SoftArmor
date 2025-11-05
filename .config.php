@@ -1,5 +1,4 @@
 <?php
-    echo "test chemin";
 define('DB_NAME', 'saedb');
 define('DB_HOST', 'mariadb');
 define('DB_USERNAME', 'sae');
