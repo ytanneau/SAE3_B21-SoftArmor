@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
-                            session_regenerate_id();
+                            session_start();
 
                             $_SESSION['logged_in'] = true;
                             $_SESSION['id_compte'] = $id_compte;
