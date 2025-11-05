@@ -1,9 +1,14 @@
 <?php
+
 require_once("../fonctions_php/fonction_produit.php");
-$pdo = new PDO("mysql:dbname=saedb;host=mariadb","sae","dbsae3dunyles");
+
+require_once("../.config.php");
+
 // requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
-$test= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy as moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit where produit_note.id_produit = produit_visible.id_produit;";
-$result = $pdo->query($test);
+$query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit where produit_note.id_produit = produit_visible.id_produit;";
+
+$result = $pdo->query($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
