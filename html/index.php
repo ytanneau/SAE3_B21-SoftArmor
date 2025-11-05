@@ -6,6 +6,8 @@
     <title>B2.1 SoftArmor</title>
 </head>
 <body>
-    <h1>coucou à personne</h1>
+    <h1>Page d'accueil</h1>
+
+    <a href="compte/connexion/">Se connecter</a>
 </body>
 </html>
