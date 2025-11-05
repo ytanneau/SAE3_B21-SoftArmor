@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
-                            session_start();
+                            session_regenerate_id();
 
                             $_SESSION['logged_in'] = true;
                             $_SESSION['id_compte'] = $id_compte;
@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             
                             // Retour à la page d'accueil
                             header("location: ../../../");
+                            exit;
                         } else {
                             echo "L'e-mail ou le mot de passe est incorrect.";
                         }
