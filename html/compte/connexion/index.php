@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // Si l'utilisateur est déjà connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -60,8 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
-                            session_start();
-
                             $_SESSION['logged_in'] = true;
                             $_SESSION['id_compte'] = $id_compte;
                             $_SESSION['email'] = $email;                            
