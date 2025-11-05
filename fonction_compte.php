@@ -54,7 +54,7 @@
             $requete->execute();
             $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
             print_r($resSQL);
-            if ($resSQL['resultat'] === null){
+            if ($resSQL['resultat'] == null){
                 echo "succes";
             }
             else{
