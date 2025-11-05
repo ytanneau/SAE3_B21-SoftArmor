@@ -151,7 +151,7 @@
                 })
             </script>
             <?php 
-                require_once "../../../.config.php";
+                require_once "../../.config.php";
                 
                 $nomPrv = $_POST["nomPrv"];
                 $nomPblc = $_POST["nomPblc"];
