@@ -23,7 +23,7 @@
     }
     
     //fonction qui permer de cree un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
         $raisonSocial = trim($raisonSocial);
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -45,11 +45,11 @@
         && check_create_MDP($mdp, $mdpc)) {
 
             //coucou fix2
-            require_once('.config.php');
+            require_once($chemin . '.config.php');
 
             //echo "succes";
-            $dpo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $requete = $dpo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
