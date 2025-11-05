@@ -1,7 +1,13 @@
 <?php
 
 require_once("../fonctions_php/fonction_produit.php");
+
 require_once("../.config.php");
+
+// requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
+$query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit where produit_note.id_produit = produit_visible.id_produit;";
+
+$result = $pdo->query($query);
 
 ?>
 
