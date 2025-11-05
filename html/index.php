@@ -39,7 +39,7 @@ $result = $pdo->query($query);
                     <div>
                         <?php 
                             if($row['moyenne']==null){
-                                echo "test";
+                                ?><p>Produit Non Noté</p><?php
                             }
                             else{
                                 $moy = $row['moyenne'];
