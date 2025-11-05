@@ -7,5 +7,7 @@
 </head>
 <body>
     <h1>Page d'accueil</h1>
+
+    <a href="compte/connexion/">Se connecter</a>
 </body>
 </html>
