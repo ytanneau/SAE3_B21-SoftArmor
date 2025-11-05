@@ -48,7 +48,7 @@
             require_once('.config.php');
 
             //echo "succes";
-            $dpo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $requete = $dpo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
