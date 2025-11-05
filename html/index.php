@@ -18,6 +18,7 @@ $result = $pdo->query($query);
     <title>Accueil</title>
 </head>
 <body>
+    <!-- A régler, le lien s'affiche toujours même quand on est connecté -->
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
     <?php } ?>
