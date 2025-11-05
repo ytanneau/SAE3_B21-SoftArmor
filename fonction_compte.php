@@ -10,6 +10,8 @@
     define("TAILLE_EMAIL", 80);
     define("TAILLE_ADRESSE", 120);
     define("TAILLE_MDP", 100);
+
+    require_once(".config.php");
     
     //print_r(hash_algos()); | verifier que algos est sur la machine
     //fonction qui renvoir le mot de passe cryper et saler
@@ -44,8 +46,18 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            echo "succes";
-            
+            //echo "succes";
+            $dpo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $requete = $dpo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->execute();
+            $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
+            if ($resSQL['resultat'] === 0){
+                echo "succes";
+            }
+            else{
+                $res['EM'] = EXISTE;
+            }
         }
         else{
             $res = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
