@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si pas d'erreur e-mail ou MDP
 
     if (empty($erreur_email) && empty($erreur_mdp)) {
-        $sql = "SELECT * FROM compte_client WHERE email = :email LIMIT 1";
+        $sql = "SELECT * FROM _client WHERE email = :email LIMIT 1";
         
         // Si la requête a pu être préparée
 
