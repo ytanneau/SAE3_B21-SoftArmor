@@ -57,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         $id_compte = $row['id_compte'];
                         $mdp_hash = $row['mdp'];
-                        var_dump($row);
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
