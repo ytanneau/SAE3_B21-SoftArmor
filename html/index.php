@@ -1,7 +1,8 @@
 <?php
 
-require_once("../fonctions_php/fonction_produit.php");
+session_start();
 
+require_once("../fonctions_php/fonction_produit.php");
 require_once("../.config.php");
 
 // requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
@@ -19,8 +20,12 @@ $result = $pdo->query($query);
     <title>Accueil</title>
 </head>
 <body>
-    
-    <a href="compte/connexion">Se connecter</a>
+    <!-- A régler, le lien s'affiche toujours même quand on est connecté -->
+    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+        <a href="compte/connexion">Se connecter</a>
+    <?php } else { ?>
+        <h1>Bievenue <?= $_SESSION['pseudo'] ?></h1>
+    <?php } ?>
     
     <div>
         <h1>PROMO RENTRÉ</h1>
@@ -32,17 +37,17 @@ $result = $pdo->query($query);
         ?>
             <li>
                 <div>
-                    <img src="images/<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
                     <div>
                         <?php 
-                            if($row['moyenne']=="NULL"){
-                                echo "test";
+                            if($row['moyenne']==null){
+                                ?><p>Produit Non Noté</p><?php
                             }
                             else{
-                                $moy = float($row['moyenne']);
+                                $moy = $row['moyenne'];
                                 afficher_moyenne_note($moy);
                             }
                              
