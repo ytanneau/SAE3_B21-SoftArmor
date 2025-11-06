@@ -46,7 +46,7 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once($getenv('HOME_GIT') . '/fonction_sql.php');
+            require_once(getenv('HOME_GIT') . '/fonction_sql.php');
             
             //print_r($resSQL);
             try{
