@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once("../fonctions_php/fonction_produit.php");
 require_once("../.config.php");
 
