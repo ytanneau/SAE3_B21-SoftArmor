@@ -23,7 +23,9 @@ $result = $pdo->query($query);
     <!-- A régler, le lien s'affiche toujours même quand on est connecté -->
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
-    <?php } ?>
+    <?php } else {
+        var_dump($_SESSION);
+    } ?>
     
     <div>
         <h1>PROMO RENTRÉ</h1>

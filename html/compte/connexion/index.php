@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
-            <input type="text" id="mdp" name="mdp" required>
+            <input type="password" id="mdp" name="mdp" required>
         </fieldset>
         
         <button type="submit">Se connecter</button>
