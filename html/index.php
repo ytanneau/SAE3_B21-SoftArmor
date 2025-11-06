@@ -35,7 +35,9 @@ $produit_reduit = $pdo->query($query);
 <body>
 
     <a href="compte/connexion">Se connecter</a>
-
+<!--header-->
+<!--Produit Banniere au jour (possiblement a faire)-->
+<!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 <!--Produit Ajoutés Récemment-->
     <div>
         <h1>Produit Ajoutés Récemment</h1>
@@ -177,6 +179,13 @@ $produit_reduit = $pdo->query($query);
         </ul>
     </div>
 
-
+<!--Navigation (pour telephone)-->
+    <div>
+        <a href="index.php"><img src="images/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
+        <a href="#"><img src="images/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
+        <a href="#"><img src="images/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
+        <a href="#"><img src="images/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
+    </div>
+<!--footer-->
 </body>
 </html>
