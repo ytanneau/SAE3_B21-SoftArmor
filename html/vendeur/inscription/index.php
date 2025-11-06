@@ -2,7 +2,7 @@
     $res = [];
     if ($_POST != null){
         //echo "présence d'un post";
-        $fichier = '../../../fonction_compte.php';
+        $fichier = $_ENV['HOME_GIT'] . '/fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
             $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], '../../../');
