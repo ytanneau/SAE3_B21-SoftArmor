@@ -2,10 +2,11 @@
     $res = [];
     if ($_POST != null){
         //echo "présence d'un post";
+        print_r($_ENV);
         $fichier = $_ENV['HOME_GIT'] . '/fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], '../../../');
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
 
         } else {
             $res['FT'] = true;
@@ -140,8 +141,7 @@
             <input type="text"
                 name="compAdresse"
                 id="compAdresse"
-                value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>"
-                required>
+                value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
             <p class="contrainte">information compémentaire</p>
 <?php
     if (isset($res['AD'])){
