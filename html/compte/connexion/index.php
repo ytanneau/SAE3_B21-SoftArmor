@@ -57,12 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Si j'ai pu récupérer la ligne
 
                     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $pseudo = $row['pseudo'];
                         $id_compte = $row['id_compte'];
                         $mdp_hash = $row['mdp'];
 
                         // if (password_verify($mdp, $mdp_hash)) {
                         if (check_same_MDP($mdp, $mdp_hash)) {
                             $_SESSION['logged_in'] = true;
+                            $_SESSION['pseudo'] = $pseudo;
                             $_SESSION['id_compte'] = $id_compte;
                             $_SESSION['email'] = $email;                            
                             
