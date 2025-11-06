@@ -26,9 +26,7 @@
     
     //fonction qui permer de cree un compte vendeur
     function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
-        global $pdo;
-        
-        $raisonSocial = trim($raisonSocial);
+        $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
         $email = trim($email);
@@ -48,17 +46,34 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->execute();
-            $resSQL = $requete->fetch(PDO::FETCH_ASSOC);
-            print_r($resSQL);
-            if ($resSQL == null){
-                echo "succes";
+            require_once($_ENV['HOME_GIT'] . '/fonction_sql.php');
+            
+            //print_r($resSQL);
+            try{
+                if (!sql_check_email($pdo, $email)){
+                    echo "succes";
+
+                    if (sql_check_cle($pdo, $numCobrec)){
+                        echo "succes 2";
+
+                        if (sql_create_vendeur()){
+                            echo "succes 3";
+                        
+                        }
+                        else{
+                            // changer l'erreur $res['CR'] = EXISTE_PAS;
+                        }
+                    }
+                    else{
+                        $res['NC'] = EXISTE_PAS;
+                    }
+                }
+                else{
+                    $res['EM'] = EXISTE;
+                }
             }
-            else{
-                $res['EM'] = EXISTE;
+            catch(PDOException $e){
+                $res['FT'] = true;
             }
         }
         else{
@@ -241,9 +256,63 @@
         if (check_vide($mdpc)){
             $res['MDPC'] = VIDE;
         }
-        if (!check_same_MDP($mdp, $mdpc)){
+        else if (!check_same_MDP($mdp, $mdpc)){
             $res['MDPC'] = CORRESPOND_PAS;
         }
 
         return $res;
+    }
+
+
+//fonctuion pour la base de donnée
+
+    //verifie la présence d'un email
+    //return 1 si existe, 0 si absent
+    function sql_check_email($pdo, $email){
+        try{
+            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->execute();
+            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+        }
+        catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            throw $e;
+        }
+    }
+
+    //verifie la présence de la cle de la cobrec
+    //return 1 si existe, 0 si absent
+    function sql_check_cle($pdo, $cle){
+        try{
+            $requete = $pdo->prepare("SELECT 1 FROM _cle_vendeur WHERE cle_cobrec = :cle");
+            $requete->bindValue(':cle', $cle, PDO::PARAM_STR);
+            $requete->execute();
+            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+        }
+        catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
+            throw $e;
+        }
+    }
+
+    //
+    //
+    function sql_create_vendeur($pdo){
+        try{
+            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            throw $e;
+        }
     }

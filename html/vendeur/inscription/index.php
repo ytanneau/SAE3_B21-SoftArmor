@@ -1,10 +1,18 @@
 <?php
     $res = [];
     if ($_POST != null){
-        require_once "../../../fonction_compte.php";
-        echo "présence d'un post";
+        //echo "présence d'un post";
+        $fichier = $_ENV['HOME_GIT'] . '/fonction_compte.php';
+        if (file_exists($fichier)) {
+            require_once $fichier;
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], '../../../');
 
-        $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], '../../../');
+        } else {
+            $res['FT'] = true;
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -20,6 +28,11 @@
     if ($res === true) {
 ?>
         <h1>Félisitation vous avez crée votre compte</h1>
+<?php
+    }
+    else if (isset($res['FT'])){
+?>
+        <h1 class="fatale">Désole nous rencontron des problème serveur</h1>
 <?php
     }
     else{
@@ -123,6 +136,24 @@
 ?>
 
             <br>
+            <label for="compAdresse">Compément adresse</label>
+            <input type="text"
+                name="compAdresse"
+                id="compAdresse"
+                value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>"
+                required>
+            <p class="contrainte">information compémentaire</p>
+<?php
+    if (isset($res['AD'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['AD']?>
+            </p>
+<?php
+    }
+?>
+
+            <br>
             <label for="codePostal">Code postal</label>
             <input type="number" 
                 name="codePostal"
@@ -130,7 +161,7 @@
                 size="5"
                 value="<?php if (isset($_POST['codePostal'])) echo $_POST['codePostal']?>"
                 required>
-            <p class="contrainte"></p>
+            <p class="contrainte">nombre a 4 chiffres</p>
 <?php
     if (isset($res['CP'])){
 ?>
@@ -150,7 +181,7 @@
                 maxlength="100"
                 value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>"
                 required>
-            <p class="contrainte"></p>
+            <p class="contrainte">minum 12 caractères</p>
 <?php
     if (isset($res['MDP'])){
 ?>
