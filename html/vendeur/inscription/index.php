@@ -1,5 +1,6 @@
 <?php
     $res = [];
+    echo getenv('HOME_GIT') . '/fonction_sql.php';
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
