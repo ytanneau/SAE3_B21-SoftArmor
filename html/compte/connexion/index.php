@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // Si l'utilisateur est déjà connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -8,7 +10,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     exit;
 }
 
-require_once ".config.php";
+require_once "../../../.config.php";
+require_once "../../../fonction_compte.php";
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -36,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Si pas d'erreur e-mail ou MDP
 
     if (empty($erreur_email) && empty($erreur_mdp)) {
-        $sql = "SELECT 1 FROM compte_client WHERE email = :email";
+        $sql = "SELECT * FROM compte_client WHERE email = :email LIMIT 1";
         
         // Si la requête a pu être préparée
 
@@ -53,25 +56,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     // Si j'ai pu récupérer la ligne
 
-                    if ($row = $stmt->fetch()) {
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $pseudo = $row['pseudo'];
                         $id_compte = $row['id_compte'];
                         $mdp_hash = $row['mdp'];
 
-                        if (password_verify($password, $mdp_hash)) {
-                            session_start();
-
+                        // if (password_verify($mdp, $mdp_hash)) {
+                        if (check_same_MDP($mdp, $mdp_hash)) {
                             $_SESSION['logged_in'] = true;
+                            $_SESSION['pseudo'] = $pseudo;
                             $_SESSION['id_compte'] = $id_compte;
                             $_SESSION['email'] = $email;                            
                             
                             // Retour à la page d'accueil
                             header("location: ../../../");
+                            exit;
                         } else {
-                            print("L'e-mail ou le mot de passe est incorrect.");
+                            echo "L'e-mail ou le mot de passe est incorrect. <br>";
                         }
                     }
                 } else {
-                    print("L'e-mail ou le mot de passe est incorrect.");
+                    echo "L'e-mail ou le mot de passe est incorrect. <br>";
                 }
             } else {
                 echo "Il y a eu un problème. Veuillez réessayer plus tard.";
@@ -107,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
-            <input type="text" id="mdp" name="mdp" required>
+            <input type="password" id="mdp" name="mdp" required>
         </fieldset>
         
         <button type="submit">Se connecter</button>

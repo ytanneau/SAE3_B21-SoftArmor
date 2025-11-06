@@ -1,7 +1,14 @@
 <?php
 
+session_start();
+
 require_once("../fonctions_php/fonction_produit.php");
 require_once("../.config.php");
+
+// requete pour recuperer le nom public, le prix , la moyenne des notes de chaque produit
+$query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit where produit_note.id_produit = produit_visible.id_produit;";
+
+$result = $pdo->query($query);
 
 ?>
 
@@ -13,8 +20,12 @@ require_once("../.config.php");
     <title>Accueil</title>
 </head>
 <body>
-    
-    <a href="compte/connexion">Se connecter</a>
+    <!-- A régler, le lien s'affiche toujours même quand on est connecté -->
+    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+        <a href="compte/connexion">Se connecter</a>
+    <?php } else { ?>
+        <h1>Bievenue <?= $_SESSION['pseudo'] ?></h1>
+    <?php } ?>
     
     <div>
         <h1>PROMO RENTRÉ</h1>
@@ -26,14 +37,20 @@ require_once("../.config.php");
         ?>
             <li>
                 <div>
-                    <img src="images/<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
                     <div>
                         <?php 
-                            $moy = $row['moyenne'];
-                            afficher_moyenne_note($moy); 
+                            if($row['moyenne']==null){
+                                ?><p>Produit Non Noté</p><?php
+                            }
+                            else{
+                                $moy = $row['moyenne'];
+                                afficher_moyenne_note($moy);
+                            }
+                             
                         ?>
 
                     </div>
