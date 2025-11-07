@@ -14,17 +14,17 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
 
 //requete pour recuperer informations du compte sans l'adresse
-$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8;";    
+$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 1;";    
 
 $info_compte = $pdo->query($sql);
 
 //requete pour recuperer l'adresse du compte
-$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = 8;";
+$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = 1;";
 
 $adresse_compte = $pdo->query($sql);
 
 //requete pour recuperer les avis du compte
-$sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8";
+$sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 1";
 
 $avis = $pdo->query($sql);
 
