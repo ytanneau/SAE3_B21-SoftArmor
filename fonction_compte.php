@@ -68,9 +68,6 @@
             }
         }
         else{
-<<<<<<< Updated upstream
-            $res = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
-=======
             $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
 
             if (isset($res2)) {
@@ -123,7 +120,6 @@
                 $res['correcte'] = false;
                 $res = array_merge($res, $res2);
             }
->>>>>>> Stashed changes
         }
         return $res;
     }
