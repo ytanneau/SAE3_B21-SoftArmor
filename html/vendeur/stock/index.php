@@ -8,6 +8,7 @@
         <body>
 
 <?php
+initialize();
 function initialize(){
 require_once('../../../.config.php');
 // $sql = "select id_produit from _produit where id_compte = :id_compte";
