@@ -6,12 +6,12 @@ if (!isset($_SESSION)) {
 
 // Si l'utilisateur est déjà connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . $_ENV['HOME_GIT'] . '/html');
+    header('location: ../../');
     exit;
 }
 
-require_once ($_ENV['HOME_GIT'] . '/fonction_sql');
-require_once ($_ENV['HOME_GIT'] . "/fonction_compte.php");
+require_once ('../../../.config');
+require_once ("../../../fonction_compte.php");
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['email'] = $email;                            
                             
                             // Retour à la page d'accueil
-                            header('location: ' . $_ENV['HOME_GIT'] . '/html');
+                            header('location: ../../');
                             exit;
                         } else {
                             echo "L'e-mail ou le mot de passe est incorrect. <br>";
