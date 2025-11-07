@@ -1,10 +1,10 @@
 <?php
-
+define('HOME_GIT', '../../..');
 session_start();
 
-require_once("../../../fonctions_php/fonction_produit.php");
+require_once (HOME_GIT . '/.config.php');
+require_once (HOME_GIT . '/fonction_compte.php');
 
-require_once("../../../.config.php");
 //requete pour recuperer informations du compte
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte INNER JOIN client_adresse ON compte_client.id_compte = client_adresse.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";
 
