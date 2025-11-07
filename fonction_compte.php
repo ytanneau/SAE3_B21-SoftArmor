@@ -367,7 +367,6 @@
             $res['email'] = DEPASSE;
         }
         else if (!check_email($email)){
-            echo $email;
             $res['email'] = FORMAT; 
         }
         

@@ -18,7 +18,8 @@
             require_once $fichier;
             $res = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
         } else {
-            echo "erreur 1";
+            // echo "erreur 1";
+
             $res['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
@@ -51,8 +52,6 @@
             echo "test";
         }
 
-        echo "res : ";
-        var_dump($res);
 ?>
         <form action="" method="post">
             <label for="nom">Nom</label>
