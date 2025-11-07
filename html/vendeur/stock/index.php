@@ -23,7 +23,7 @@ function initialize($sql){
     }
     if ($stmt->execute()) {
         if ($stmt->rowCount() > 0) {
-            atrapperNom($stmt);
+            ecrire_nom($stmt);
         } else {
             echo "Vous n'avez pas de produit.";
         }
@@ -37,11 +37,12 @@ function initialize($sql){
 
 
 
-function atrapperNom($nom_stock){
+function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as $row){
+        print_r($row);
         ?>
-        <a href= "html/vendeur/produit/<?php $nom_stock ?>">
+        <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
