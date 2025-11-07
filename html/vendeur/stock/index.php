@@ -8,7 +8,7 @@
         <body>
 
 <?php
-require_once '../../../.config.php';
+require_once '.config.php';
 $sql = 'select nom_stock from _produit where id_vendeur = :id_vendeur';
 $nom_stock = initialize($sql);
 
