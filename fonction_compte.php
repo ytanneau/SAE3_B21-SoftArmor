@@ -112,21 +112,24 @@
                     }
                     else{
                         // changer l'erreur $res['CR'] = EXISTE_PAS;
+                        $res['correcte'] = false;
                     }
                     
                 }
                 else{
                     $res['email'] = EXISTE;
+                    $res['correcte'] = false;
                 }
             }
             catch(PDOException $e){
                 $res['fatal'] = true;
+                $res['correcte'] = false;
             }
         }
         else{
+            $res['correcte'] = false;
             $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
             if ($res2) {
-                $res['correcte'] = false;
                 $res = array_merge($res, $res2);
             }
         }
