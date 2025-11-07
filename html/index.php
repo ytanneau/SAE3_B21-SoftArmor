@@ -1,8 +1,8 @@
 <?php
-define('HOME_GIT', __DIR__);
+define('HOME_GIT', __DIR__ . "../");
 session_start();
 
-require_once (HOME_GIT . '/.config.php');
+require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . '/fonction_compte.php');
 
 // requete pour recuperer le nom public, le prix , la moyenne des notes et les informations de l'image de chaque produit
