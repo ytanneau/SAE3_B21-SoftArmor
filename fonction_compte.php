@@ -100,7 +100,7 @@
         && check_date_passee($date_naiss)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require 'fonction_sql.php';
+            require_once HOME_GIT . '.config.php';
             
             //print_r($resSQL);
             try{
