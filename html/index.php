@@ -1,10 +1,12 @@
 <?php
+define('HOME_GIT', "../" );
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-require_once("../fonctions_php/fonction_produit.php");
-
-require_once("../.config.php");
+require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
 
 // requete pour recuperer le nom public, le prix , la moyenne des notes et les informations de l'image de chaque produit
 $query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
@@ -25,6 +27,9 @@ $produit_recent = $pdo->query($query);
 $query= "SELECT nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN _promotion ON produit_visible.id_produit = _promotion.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
 
 $produit_reduit = $pdo->query($query);
+
+// Fermer la connexion
+unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +42,8 @@ $produit_reduit = $pdo->query($query);
 <body>
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
+    <?php } else { ?>
+        <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
     <?php } ?>
 <!--header-->
 <!--Produit Banniere au jour (possiblement a faire)-->
@@ -75,7 +82,7 @@ $produit_reduit = $pdo->query($query);
             ?>
         </ul>
     </div>    
-
+<hr>
 <!--Produit en reduction-->
     <div>
         <h1>Produit En Réduction</h1>
@@ -111,7 +118,7 @@ $produit_reduit = $pdo->query($query);
             ?>
         </ul>
     </div>
-
+<hr>
 <!--Produit alimentaire-->
     <div>
         <h1>Produit Alimentaire</h1>
@@ -146,7 +153,7 @@ $produit_reduit = $pdo->query($query);
             ?>
         </ul>
     </div>
-
+<hr>
 <!--Tout les produits du catalogue-->
     <div>
         <h1>Produit du catalogue</h1>
