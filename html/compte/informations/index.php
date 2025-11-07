@@ -62,7 +62,7 @@ unset($pdo);
             <?php } ?>
             <label for="">Adresse</label>
             <?php
-            echo $adresse_compte;
+            print_r($adresse_compte);
             //affichage des info du compte
             if($adresse_compte != null){
             foreach ($adresse_compte as $row){  
