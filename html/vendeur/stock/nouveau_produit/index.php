@@ -202,8 +202,6 @@
 
                 const creerProduit = document.getElementById("creerProduit");
 
-                console.log(photo);
-
                 descSimple.addEventListener('input', () => {
                     if(descSimple.value.length === 200){
                         alert("Maximum de caractère atteint");
@@ -324,8 +322,8 @@
                         $cheminTemp = $_FILES['photo']['tmp_name'];
                         
                         $nomImage = $idProduit . "_1.png";
-                        $cheminFinal = "images/" . $nomImage;
-                        $url = "../images/" . $nomImage;
+                        $cheminFinal = "../../../images/" . $nomImage;
+                        $url = "images/" . $nomImage;
 
                         $titre_img = explode('.',$nomImageTemp)[0];
                         $altDefault = "Image du produit : " . $titre_img;
