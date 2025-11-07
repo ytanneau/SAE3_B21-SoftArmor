@@ -1,7 +1,7 @@
 <?php
-define('DB_NAME', 'SAE');
-define('DB_HOST', 'mysql');
-define('DB_USERNAME', 'root');
+define('DB_NAME', 'saedb');
+define('DB_HOST', 'mariadb');
+define('DB_USERNAME', 'sae');
 define('DB_PASSWORD', 'dbsae3dunyles');
 
 try {
