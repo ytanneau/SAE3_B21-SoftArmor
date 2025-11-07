@@ -8,6 +8,7 @@
         <body>
 
 <?php
+require_once '../../../.config.php';
 $sql = 'select nom_stock from _produit where id_vendeur = :id_vendeur';
 $nom_stock = initialize($sql);
 
@@ -32,9 +33,8 @@ unset($stmt);
 
 
 function initialize($sql){
-require_once('../../../.config.php');
-$compte = 1;     
-    
+    global $pdo;
+    $compte = 1;     
     if ($stmt = $pdo->prepare($sql)) {
         $stmt->bindParam(":id_vendeur", $compte);
     }
@@ -69,3 +69,9 @@ function atrapperNom($nom_stock, $quantite){
 
     </body>
 </html>
+
+
+
+<!-- Warning: Undefined variable $pdo in /var/www/html/vendeur/stock/index.php on line 38
+
+Fatal error: Uncaught Error: Call to a member function prepare() on null in /var/www/html/vendeur/stock/index.php:38 Stack trace: #0 /var/www/html/vendeur/stock/index.php(15): initialize('select quantite...') #1 {main} thrown in /var/www/html/vendeur/stock/index.php on line 38 -->
