@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 msgErreurEmail.textContent = "L'adresse e-mail ne doit pas être vide";
                 msgErreurEmail.style.display = "block";
                 event.preventDefault();
-            } else if (!champEmail.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);) {
+            } else if (!champEmail.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/)) {
                 msgErreurEmail.textContent = "L'adresse e-mail est invalide";
                 msgErreurEmail.style.display = "block";
                 event.preventDefault();
