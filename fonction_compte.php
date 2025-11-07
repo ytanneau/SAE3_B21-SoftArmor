@@ -90,7 +90,10 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
+        // Pas d'erreur initialement
         $res["correcte"] = true;
+
+        // Si toutes les informations sont correctes
         if (check_nom($nom)
         && check_nom($prenom) 
         && check_nom($pseudo) 
@@ -507,6 +510,8 @@
     //
     //
     function sql_create_vendeur(){
+        global $pdo;
+
         try{
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
