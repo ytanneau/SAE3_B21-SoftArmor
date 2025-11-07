@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< Updated upstream
     const VIDE = "Champ est vide";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Format invalide";
@@ -15,21 +16,26 @@
     const TAILLE_MDP = 100;
     
     require_once ".config.php";
+=======
+    define("TAILLE_RAISON_SOCIALE", 60);
+    define("TAILLE_EMAIL", 80);
+    define("TAILLE_ADRESSE", 120);
+    define("TAILLE_MDP", 100);
+>>>>>>> Stashed changes
     
-    //print_r(hash_algos()); | verifier que algos est sur la machine
-    //fonction qui renvoir le mot de passe cryper et saler
+    // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v1($mdp){
         return hash(algo: "xxh128",data: $mdp);
     }
 
-    //fonction qui renvoir le mot de passe cryper et saler
+    // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v2($mdp){
         return password_hash(password:$mdp, algo:PASSWORD_BCRYPT);
     }
     
-    //fonction qui permer de cree un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
-        $raisonSocial = strtoupper(trim($raisonSocial));
+    // Fonction qui permet de créer un compte vendeur
+    function create_profile_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+        $raisonSociale = strtoupper(trim($raisonSociale));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
         $email = trim($email);
@@ -40,8 +46,13 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
+<<<<<<< Updated upstream
         $res['correcte'] = true;
         if (check_raison_social_all($raisonSocial)
+=======
+        $res = true;
+        if (check_raison_social_all($raisonSociale)
+>>>>>>> Stashed changes
         && check_num_siret_all($numSiret) 
         && check_num_cobrec_all($numCobrec) 
         && check_email_all($email) 
@@ -73,7 +84,7 @@
             }
         }
         else{
-            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+            $res2 = check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
 
             if (isset($res2)) {
                 $res = array_merge($res, $res2);
@@ -83,7 +94,7 @@
         return $res;
     }
 
-    //fonction qui permer de cree un compte vendeur
+    // Fonction qui permet de créer un compte client
     function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
         $nom = strtoupper(trim($nom));
         $prenom = trim($prenom);
@@ -128,6 +139,7 @@
         return $res;
     }
     
+<<<<<<< Updated upstream
     function connect_compte($email, $mdp, $typeCompte, $chemin){
         $email = trim($email);
         $mdp = trim($mdp);
@@ -188,10 +200,15 @@
 
 
 //toute les fonction de verrification de champ
+=======
+//  +--------------------------------------+
+//  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
+//  +--------------------------------------+ 
+>>>>>>> Stashed changes
 
     //verifie la raison social
     function check_raison_social_all($raisonSocial){
-        return ((!check_vide($raisonSocial)) && check_taille($raisonSocial, TAILLE_RAISON_SOCIAL) && check_raison_social($raisonSocial));
+        return ((!check_vide($raisonSocial)) && check_taille($raisonSocial, TAILLE_RAISON_SOCIALE) && check_raison_social($raisonSocial));
     }
     //verifie la forme de la raison social
     function check_raison_social($raisonSocial){
@@ -199,75 +216,85 @@
     }
 
 
-    //verifie le numero de siret
+    // Vérifie le numéro de SIRET (non vide, bon format)
     function check_num_siret_all($numSiret){
         return ((!check_vide($numSiret)) && check_num_siret($numSiret));
     }
-    //verifie la forme du numero de siret
+
+    // Vérifie le format du numéro de SIRET
     function check_num_siret($numSiret){
         return preg_match("/^[0-9]{14}$/", $numSiret);
     }
 
 
-    //verifie le numero de la cobrec
+    // Vérifie le numéro de la COBREC (non vide, bon format)
     function check_num_cobrec_all($numCobrec){
         return ((!check_vide($numCobrec)) && check_num_cobrec($numCobrec));
     }
-    //verifie la forme du numero de la cobrec
+
+    // Vérifie le format du numéro de la COBREC
     function check_num_cobrec($numCobrec){
         return preg_match("/^[0-9]{15}$/", $numCobrec);
     }
 
 
-    //verifie l'adresse
+    // Vérifie l'email (non vide, bonne taille, bon format)
     function check_email_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
-    //verifie l'email
+
+    // Vérifie le format de l'email
     function check_email($email){
         return preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",$email);
     }
 
 
-    //verifie l'adresse
+    // Vérifie l'adresse (non vide, bonne taille, bon format)
     function check_adresse_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_ADRESSE) && check_adresse($adresse));
     }
-    //verifie la forme de l'adresse
+
+    // Vérifie le format de l'adresse
     function check_adresse($adresse){
         return preg_match("/^([1-9][0-9]*(?:-[1-9][0-9]*)*)[\s,-]+(?:(bis|ter|qua)[\s,-]+)?([\w]+[\-\w]*)[\s,]+([-\w].+)$/", $adresse);
     }
 
 
-    //verifie le code postal
+    // Vérifie le code postal (non vide et format valide)
     function check_code_postal_all($codePostal){
         return ((!check_vide($codePostal)) && check_code_postal($codePostal));
     }
-    //verifie la forme du code postal
+
+    // Vérifie le format du code postal
     function check_code_postal($codePostal){
         return preg_match("/^\d{5}$/", $codePostal);
     }
 
 
-    //verifie le mot de passe
+    // Vérifie le format du mot de passe
     function check_mot_de_passe($mdp){
         return (preg_match("/^.{12,}$/",$mdp));
     }
 
-    //verifie le mot de passe
+    // Verifie si le mot de passe est égal à la confirmation du mot de passe
     function check_create_MDP($mdp, $mdpc){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
+        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
     }
 
+<<<<<<< Updated upstream
     function check_MDP($mdp){
         return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
     //verifie le mot de passe
+=======
+    // Vérifie l'égalité entre deux mots de passe
+>>>>>>> Stashed changes
     function check_same_MDP($mdp1, $mdp2){
         return ($mdp1 === $mdp2);
     }
 
+<<<<<<< Updated upstream
     // verifie un nom (nom, prénom ou pseudo)
     function check_nom($nom) {
         return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
@@ -279,25 +306,33 @@
     }
 
     //supprime les espaces, underscores et tirets
+=======
+    // Supprime les espaces, underscores et tirets
+>>>>>>> Stashed changes
     function nettoyer_chaine($texte) {
         return str_replace([' ', '_', '-'], '', $texte);
     }
 
-    //verifie le mot de passe crypte avec crypte_v2
-    function check_crypte_MDP($mdp, $crypter){
-        return password_verify($mdp, $crypter);
+    // Verifie le mot de passe crypté avec crypte_v2
+    function check_crypte_MDP($mdp, $mdp_hash){
+        return password_verify($mdp, $mdp_hash);
     }
 
+    // Vérifie si chaine vide
     function check_vide($valeur){
         return (strlen($valeur) === 0);
     }
 
+    // Renvoie la taille de la chaine
     function check_taille($valeur, $taille){
         return (strlen($valeur) <= $taille);
     }
 
 
-//toute les fonction d'erreur
+//  +----------------------+
+//  |  FONCTIONS D'ERREUR  |
+//  +----------------------+ 
+
 
     //renvoit toute les erreur posible de champ
     function check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
@@ -307,8 +342,13 @@
         if (check_vide($raisonSocial)){
             $res['raison_sociale'] = VIDE;
         }
+<<<<<<< Updated upstream
         else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIAL)){
             $res['raison_sociale'] = DEPASSE;
+=======
+        else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIALE)){
+            $res['RS'] = DEPASSE;
+>>>>>>> Stashed changes
         }
         else if (!check_raison_social($raisonSocial)){
             $res['raison_sociale'] = FORMAT;
