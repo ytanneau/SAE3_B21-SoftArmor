@@ -9,7 +9,7 @@ require_once('../../../.config.php');
 $sql = "select id_produit from _produit where id_vendeur = 1";
 $compte = 1;     
         // Si la requête a pu être préparée
-    
+
         if ($stmt = $pdo->prepare($sql)) {
             //$stmt->bindParam(":id_vendeur", $compte);
 
@@ -18,7 +18,7 @@ $compte = 1;
             if ($stmt->execute()) {
 
                 // Si l'utilisateur existe (1 enregistrement trouvé)
-            print_r($stmt);
+            
                 if ($stmt->rowCount() > 0) {
 
                     // Si il y a !0 ligne
