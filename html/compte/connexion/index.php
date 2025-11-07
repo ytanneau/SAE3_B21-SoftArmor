@@ -48,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':email', $email);
 
+            echo $stmt->rowCount();
+
             if ($stmt->rowCount() == 1) {
 
                 // Si j'ai pu récupérer la ligne
@@ -56,9 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $pseudo = $row['pseudo'];
                     $id_compte = $row['id_compte'];
                     $mdp_hash = $row['mdp'];
-
-                    echo $mdp;
-                    echo $mdp_hash;
 
                     // if (password_verify($mdp, $mdp_hash)) {
                     if (check_same_MDP($mdp, $mdp_hash)) {
