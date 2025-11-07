@@ -216,7 +216,7 @@
 
     // verifie que la date est passée
     function check_date_passee($date) {
-        return (strtotime("1900-01-01") < strtotime($date) < time());
+        return (strtotime("1900-01-01") < strtotime($date) && strtotime($date) < time());
     }
 
     //supprime les espaces, underscores et tirets
