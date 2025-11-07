@@ -31,7 +31,10 @@ unset($pdo);
 <body>
     <h1>Mon Profil</h1>
     <div>
-
+        <?php
+            //affichage des info du compte
+            foreach ($avis as $row){  
+        ?>
         <form action="" method="post">
             
             <label for="">Nom</label>
@@ -53,7 +56,7 @@ unset($pdo);
             <button type="submit">Modifier mes informations</button>
         </form>
         <img src="<?php echo HOME_GIT . "html/".$produit_recent['url_image'];?>" alt="<?php echo $produit_recent['alt_image'];?>" title="<?php echo $produit_recent['titre_image'];?>">
-        
+        <?php } ?>
     </div>
     <div>
         <h2>Vos Avis</h2>
