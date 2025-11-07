@@ -100,7 +100,7 @@ $produit_reduit = $pdo->query($query);
                         ?>
                     </div>
                     <p><?php echo $row['prix'];?> €</p>
-                    <p><?php echp $row['prix_reduit'];?> €</p>
+                    <p><?php echo $row['prix_reduit'];?> €</p>
                 </a>
             </li>
             <?php
