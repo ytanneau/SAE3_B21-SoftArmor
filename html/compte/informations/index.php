@@ -19,7 +19,7 @@ $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_clie
 $info_compte = $pdo->query($sql);
 
 //requete pour recuperer l'adresse du compte
-$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = 2;";
+$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = 8;";
 
 $adresse_compte = $pdo->query($sql);
 
