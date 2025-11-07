@@ -8,54 +8,48 @@
         <body>
 
 <?php
-initialize();
-function initialize(){
-require_once('../../../.config.php');
-// $sql = "select id_produit from _produit where id_compte = :id_compte";
-
-// $stmt = $pdo->prepare($sql);
-// $stmt->execute([':id_compte => 1']); // a remplacer par dollars session
-// echo $stmt;
-
 $sql = 'select nom_stock from _produit where id_vendeur = :id_vendeur';
+$nom_stock = initialize($sql);
 
-// essai n2 :
-#$req = mysql_query($sql) or die('erreur sql ! <br />' .mysql_error());
-$compte = 1;     
-        // Si la requête a pu être préparée
-    
-    if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_vendeur", $compte);
+$sql2 = 'select quantite from _produit where id_vendeur = :id_vendeur';
+$quantite = initialize($sql2);
 
-        // Si la requête a pu être exécutée
-        
-        if ($stmt->execute()) {
 
-            // Si l'utilisateur existe (1 enregistrement trouvé)
-        
-            if ($stmt->rowCount() > 0) {
+if ($nom_stock->execute()) {
+    if($quantite->execute()){
+        if ($stmt->rowCount() > 0) {
+            atrapperNom($nom_stock, $quantite);
+        } else {
+            echo "Vous n'avez pas de produit.";
+        }
 
-                // Si il y a !0 ligne
-                atrapper($stmt);
-                
-
-            } else {
-                print("Vous n'avez pas de produit.");
-            }
         } else {
             echo "Il y a eu un problème. Veuillez réessayer plus tard.";
         }
-        unset($stmt);
-    }
 }
 
+unset($stmt);
+
+
+function initialize($sql){
+require_once('../../../.config.php');
+$compte = 1;     
+    
+    if ($stmt = $pdo->prepare($sql)) {
+        $stmt->bindParam(":id_vendeur", $compte);
+    }
+    return $stmt;
+} 
 
 
 
-function atrapper($stmt){
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+function atrapperNom($nom_stock, $quantite){
+    $row = $nom_stock->fetch(PDO::FETCH_ASSOC);
+    $row2 = $quantite->fetch(PDO::FETCH_ASSOC);
+    while($row && $row2){
         ?>
-        <a href= "html/vendeur/produit/">
+        <a href= "html/vendeur/produit/<?php $nom_stock ?>">
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
@@ -64,37 +58,14 @@ function atrapper($stmt){
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
                 <td> | </td>
-                <td><?php ?></td>
+                <td><?php $row2 ?></td>
             </tr>            
         </table>
         </a>
         <?php
     }
 }
-
-
-
-
 ?>
 
-<?php
-
-function getAllproduit(){
-    
-}
-
-function getVendeur(){
-
-}
-
-function getProduit(){
-
-}
-?>
- 
- 
-
-    
-        
     </body>
 </html>
