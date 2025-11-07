@@ -47,6 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $sql = "SELECT * FROM compte_client WHERE email = :email LIMIT 1";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':email', $email);
+            $stmt->execute();
 
             echo "Row count : " . $stmt->rowCount();
 
