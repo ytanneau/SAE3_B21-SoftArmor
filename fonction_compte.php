@@ -1,8 +1,5 @@
 <?php
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     const VIDE = "Champ est vide";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Format invalide";
@@ -18,16 +15,6 @@
     const TAILLE_MDP = 100;
     
     require_once ".config.php";
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    define("TAILLE_RAISON_SOCIALE", 60);
-    define("TAILLE_EMAIL", 80);
-    define("TAILLE_ADRESSE", 120);
-    define("TAILLE_MDP", 100);
->>>>>>> Stashed changes
     
     // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v1($mdp){
@@ -40,8 +27,8 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
-        $raisonSociale = strtoupper(trim($raisonSociale));
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
+        $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
         $email = trim($email);
@@ -52,23 +39,8 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         $res['correcte'] = true;
         if (check_raison_social_all($raisonSocial)
-=======
-        $res = true;
-        if (check_raison_social_all($raisonSociale)
->>>>>>> Stashed changes
-=======
-        $res = true;
-        if (check_raison_social_all($raisonSociale)
->>>>>>> Stashed changes
-=======
-        $res = true;
-        if (check_raison_social_all($raisonSociale)
->>>>>>> Stashed changes
         && check_num_siret_all($numSiret) 
         && check_num_cobrec_all($numCobrec) 
         && check_email_all($email) 
@@ -77,15 +49,13 @@
         && check_create_MDP($mdp, $mdpc)) {
 
             require ($chemim . '.config.php');
-            //print_r($resSQL);
+
             try{
                 if (!sql_check_email($pdo, $email)){
                     echo "succes";
 
                     if (sql_check_cle($pdo, $numCobrec)){
                         echo "succes 2";
-
-                        //sql_create_vendeur()
                     }
                     else{
                         $res['numero_cobrec'] = EXISTE_PAS;
@@ -100,7 +70,7 @@
             }
         }
         else{
-            $res2 = check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
 
             if (isset($res2)) {
                 $res = array_merge($res, $res2);
@@ -155,9 +125,8 @@
         return $res;
     }
     
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
+    // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
         $email = trim($email);
         $mdp = trim($mdp);
@@ -166,7 +135,7 @@
         if (check_email_all($email) 
         && check_MDP($mdp)) {
 
-            require ($chemim . '.config.php');
+            require ($chemin . '.config.php');
             
 
             //print_r($resSQL);
@@ -217,30 +186,18 @@
     }
 
 
-//toute les fonction de verrification de champ
-=======
-//  +--------------------------------------+
-//  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
-//  +--------------------------------------+ 
->>>>>>> Stashed changes
-=======
-//  +--------------------------------------+
-//  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
-//  +--------------------------------------+ 
->>>>>>> Stashed changes
-=======
-//  +--------------------------------------+
-//  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
-//  +--------------------------------------+ 
->>>>>>> Stashed changes
+// +---------------------------------------+
+// |  FONCTIONS DE VÉRIFICATION DE CHAMPS  |
+// +---------------------------------------+
 
-    //verifie la raison social
-    function check_raison_social_all($raisonSocial){
-        return ((!check_vide($raisonSocial)) && check_taille($raisonSocial, TAILLE_RAISON_SOCIALE) && check_raison_social($raisonSocial));
+    // Vérifie la raison sociale (non vide, bonne taille, bon format)
+    function check_raison_sociale_all($raisonSociale){
+        return ((!check_vide($raisonSociale)) && check_taille($raisonSociale, TAILLE_RAISON_SOCIAL) && check_raison_sociale($raisonSociale));
     }
-    //verifie la forme de la raison social
-    function check_raison_social($raisonSocial){
-        return (preg_match("/^.{3,}$/", $raisonSocial) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSocial));
+
+    // Vérifie le format de la raison sociale
+    function check_raison_sociale($raisonSociale){
+        return (preg_match("/^.{3,}$/", $raisonSociale) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSociale));
     }
 
 
@@ -266,77 +223,55 @@
     }
 
 
-    // Vérifie l'email (non vide, bonne taille, bon format)
+    //verifie l'adresse
     function check_email_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
-
-    // Vérifie le format de l'email
+    //verifie l'email
     function check_email($email){
         return preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",$email);
     }
 
 
-    // Vérifie l'adresse (non vide, bonne taille, bon format)
+    //verifie l'adresse
     function check_adresse_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_ADRESSE) && check_adresse($adresse));
     }
-
-    // Vérifie le format de l'adresse
+    //verifie la forme de l'adresse
     function check_adresse($adresse){
         return preg_match("/^([1-9][0-9]*(?:-[1-9][0-9]*)*)[\s,-]+(?:(bis|ter|qua)[\s,-]+)?([\w]+[\-\w]*)[\s,]+([-\w].+)$/", $adresse);
     }
 
 
-    // Vérifie le code postal (non vide et format valide)
+    //verifie le code postal
     function check_code_postal_all($codePostal){
         return ((!check_vide($codePostal)) && check_code_postal($codePostal));
     }
-
-    // Vérifie le format du code postal
+    //verifie la forme du code postal
     function check_code_postal($codePostal){
         return preg_match("/^\d{5}$/", $codePostal);
     }
 
 
-    // Vérifie le format du mot de passe
+    //verifie le mot de passe
     function check_mot_de_passe($mdp){
         return (preg_match("/^.{12,}$/",$mdp));
     }
 
-    // Verifie si le mot de passe est égal à la confirmation du mot de passe
+    //verifie le mot de passe
     function check_create_MDP($mdp, $mdpc){
-        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
     }
 
-<<<<<<< Updated upstream
     function check_MDP($mdp){
         return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
     //verifie le mot de passe
-=======
-    // Vérifie l'égalité entre deux mots de passe
->>>>>>> Stashed changes
-=======
-    }
-
-    // Vérifie l'égalité entre deux mots de passe
->>>>>>> Stashed changes
-=======
-    }
-
-    // Vérifie l'égalité entre deux mots de passe
->>>>>>> Stashed changes
     function check_same_MDP($mdp1, $mdp2){
         return ($mdp1 === $mdp2);
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     // verifie un nom (nom, prénom ou pseudo)
     function check_nom($nom) {
         return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
@@ -348,39 +283,27 @@
     }
 
     //supprime les espaces, underscores et tirets
-=======
-    // Supprime les espaces, underscores et tirets
->>>>>>> Stashed changes
-=======
-    // Supprime les espaces, underscores et tirets
->>>>>>> Stashed changes
-=======
-    // Supprime les espaces, underscores et tirets
->>>>>>> Stashed changes
     function nettoyer_chaine($texte) {
         return str_replace([' ', '_', '-'], '', $texte);
     }
 
-    // Verifie le mot de passe crypté avec crypte_v2
-    function check_crypte_MDP($mdp, $mdp_hash){
-        return password_verify($mdp, $mdp_hash);
+    //verifie le mot de passe crypte avec crypte_v2
+    function check_crypte_MDP($mdp, $crypter){
+        return password_verify($mdp, $crypter);
     }
 
-    // Vérifie si chaine vide
     function check_vide($valeur){
         return (strlen($valeur) === 0);
     }
 
-    // Renvoie la taille de la chaine
     function check_taille($valeur, $taille){
         return (strlen($valeur) <= $taille);
     }
 
 
-//  +----------------------+
-//  |  FONCTIONS D'ERREUR  |
-//  +----------------------+ 
-
+// +----------------------+
+// |  FONCTIONS D'ERREUR  |
+// +----------------------+
 
     //renvoit toute les erreur posible de champ
     function check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
@@ -390,19 +313,8 @@
         if (check_vide($raisonSocial)){
             $res['raison_sociale'] = VIDE;
         }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIAL)){
             $res['raison_sociale'] = DEPASSE;
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-        else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIALE)){
-            $res['RS'] = DEPASSE;
->>>>>>> Stashed changes
         }
         else if (!check_raison_social($raisonSocial)){
             $res['raison_sociale'] = FORMAT;
