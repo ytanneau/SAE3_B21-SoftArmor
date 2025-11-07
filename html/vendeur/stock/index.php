@@ -59,7 +59,7 @@ function atrapper($stmt){
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
-                <td><?php afficher_nom_produit($row) ?> </td>
+                <td><?= $row['nom_stock']?> </td>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
@@ -74,9 +74,6 @@ function atrapper($stmt){
 
 
 
-function afficher_nom_produit($nom_produit){
-    echo $nom_produit;
-}
 
 ?>
 
