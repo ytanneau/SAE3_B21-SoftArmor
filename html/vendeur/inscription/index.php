@@ -1,13 +1,14 @@
 <?php
+    define('HOME_GIT', '../../../');
     $res = [];
-    echo getenv('HOME_GIT') . '/fonction_sql.php';
+    echo HOME_GIT . '/fonction_sql.php';
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
-        $fichier = getenv('HOME_GIT') . '/fonction_compte.php';
+        $fichier = '/fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
 
         } else {
             echo "erreur 1";
