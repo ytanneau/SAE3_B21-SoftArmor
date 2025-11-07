@@ -1,6 +1,13 @@
 <?php
 define('HOME_GIT', "../../../");
-session_start();
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+else {
+    // Retour à la page d'accueil
+    header('location: ' . HOME_GIT);
+}
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
