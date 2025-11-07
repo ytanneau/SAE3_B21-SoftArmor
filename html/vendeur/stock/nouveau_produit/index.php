@@ -1,6 +1,6 @@
 <?php                 
     // appel du fichier de configuration bdd
-    require_once "../../../../config.php";
+    require_once "../../../../.config.php";
 
     /*if (!isset($_SESSION)) {
         session_start();
