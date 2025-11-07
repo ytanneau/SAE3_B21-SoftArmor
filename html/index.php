@@ -181,7 +181,7 @@ $produit_reduit = $pdo->query($query);
 
 <!--Navigation (pour telephone)-->
     <div>
-        <a href="index.php"><img src="images/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
+        <a href=""><img src="images/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
         <a href="#"><img src="images/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
         <a href="#"><img src="images/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="images/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>

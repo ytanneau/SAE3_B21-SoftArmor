@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-    <a href="<?= $_ENV['HOME_GIT'] . '/html' ?>">Retour à l'accueil</a>
+    <a href="<?= "../../" ?>">Retour à l'accueil</a>
     
     <form action="" method="post">
         <fieldset>
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <button type="submit">Se connecter</button>
 
-        <p>Pas de compte ? <a href="<?= $_ENV['HOME_GIT'] . '/html/compte/inscription' ?>">S'inscrire</a></p>
+        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </form>
 </body>
 </html>
