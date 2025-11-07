@@ -1,6 +1,7 @@
 <?php
+    const HOME_GIT = '../../../';
     $res = [];
-    echo getenv('HOME_GIT') . '/fonction_sql.php';
+    
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
         if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
@@ -12,7 +13,7 @@
 
         //echo "présence d'un post";
         //print_r($_ENV);
-        $fichier = '../../../fonction_compte.php';
+        $fichier = HOME_GIT . 'fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
             $res = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
@@ -35,7 +36,7 @@
 <body>
     <main>
 <?php
-    if (isset($res['correcte'])) {
+    if (isset($res['correcte']) && $res['correcte']) {
 ?>
         <h1>Félicitations vous avez crée votre compte</h1>
 <?php
@@ -46,6 +47,12 @@
 <?php
     }
     else{
+        if (isset($_POST['correcte'])) {
+            echo "test";
+        }
+
+        echo "res : ";
+        var_dump($res);
 ?>
         <form action="" method="post">
             <label for="nom">Nom</label>
@@ -104,14 +111,14 @@
 ?>
 
             <br>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date">
+            <label for="date_naissance">Date de naissance</label>
+            <input type="date" id="date_naissance" name="date_naissance">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['date'])){
+    if (isset($res['date_naiss'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['date']?>
+                <?="Erreur : ".$res['date_naiss']?>
             </p>
 <?php
     }
@@ -119,7 +126,7 @@
 
             <br>
             <label for="mdp">Mot de passe</label>
-            <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>" required>
+            <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required>
             <p class="contrainte">minimum 12 caractères</p>
 <?php
     if (isset($res['mdp'])){
@@ -133,7 +140,7 @@
 
             <br>
             <label for="mdpc">Mot de passe de confirmation</label>
-            <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" value="<?php if (isset($_POST['mdpc'])) echo $_POST['mdpc']?>" required>
+            <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required>
             <p class="contrainte"></p>
 <?php
     if (isset($res['mdpc'])){
