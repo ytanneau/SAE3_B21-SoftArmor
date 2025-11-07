@@ -149,6 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (champEmail.value === "") {
                 msgErreurMdp.style.display = "block";
                 event.preventDefault();
+            } else {
+                msgErreurEmail.style.display = "none";
             }
         })
     </script>
