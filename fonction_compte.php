@@ -190,7 +190,7 @@
 
     // Vérifie la raison sociale (non vide, bonne taille, bon format)
     function check_raison_sociale_all($raisonSociale){
-        return ((!check_vide($raisonSociale)) && check_taille($raisonSociale, TAILLE_RAISON_SOCIAL) && check_raison_sociale($raisonSociale));
+        return ((!check_vide($raisonSociale)) && check_taille($raisonSociale, TAILLE_RAISON_SOCIALE) && check_raison_sociale($raisonSociale));
     }
 
     // Vérifie le format de la raison sociale
@@ -263,7 +263,7 @@
 
     // Vérifie l'égalité du MDP et de la confirmation du MDP
     function check_create_MDP($mdp, $mdpc){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
+        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
@@ -376,7 +376,7 @@
         if (check_vide($mdpc)){
             $res['mdpc'] = VIDE;
         }
-        else if (!check_same_MDP($mdp, $mdpc)){
+        else if ($mdp !== $mdpc){
             $res['mdpc'] = CORRESPOND_PAS;
         }
 
@@ -445,7 +445,7 @@
         if (check_vide($mdpc)){
             $res['mdpc'] = VIDE;
         }
-        else if (!check_same_MDP($mdp, $mdpc)){
+        else if ($mdp !== $mdpc) {
             $res['mdpc'] = CORRESPOND_PAS;
         }
 
@@ -473,7 +473,7 @@
         }
     }
 
-    //return 1 si existe, 0 si absent
+    // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         try{
             if ($typecompte == 'vendeur'){
@@ -484,7 +484,7 @@
             }
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
-            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+            return $requete->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -511,18 +511,17 @@
         }
     }
 
-    //
-    //
+
+    // EN COURS DE CRÉATION
     function sql_create_vendeur(){
         global $pdo;
 
-        try{
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
@@ -531,7 +530,7 @@
     }
 
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
-        try{
+        try {
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
@@ -552,8 +551,7 @@
 
 
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
