@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const msgErreurEmail    = document.getElementById("msgErreurEmail");
         const msgErreurMdp      = document.getElementById("msgErreurMdp");
 
-        champEmail.addEventListener("input", () => {
+        champEmail.addEventListener('input', () => {
             if (champEmail.value === "") {
                 msgErreurEmail.textContent = "L'adresse e-mail ne doit pas être vide";
                 msgErreurEmail.style.display = "block";
@@ -144,8 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 msgErreurEmail.style.display = "none";
             }
         })
-
-
     </script>
 </body>
 </html>
