@@ -57,12 +57,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $id_compte = $row['id_compte'];
                     $mdp_hash = $row['mdp'];
 
+                    echo $mdp;
+                    echo $mdp_hash;
+
                     // if (password_verify($mdp, $mdp_hash)) {
                     if (check_same_MDP($mdp, $mdp_hash)) {
                         $_SESSION['logged_in'] = true;
                         $_SESSION['pseudo'] = $pseudo;
                         $_SESSION['id_compte'] = $id_compte;
-                        $_SESSION['email'] = $email;                            
+                        $_SESSION['email'] = $email;         
                         
                         // Retour à la page d'accueil
                         header('location: ' . HOME_GIT);
@@ -77,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         } catch (PDOException $e) {
             unset($stmt);
-            
+
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, $date . " Failed SQL request\n", FILE_APPEND);
