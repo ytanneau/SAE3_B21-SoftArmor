@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
             <input type="password" id="mdp" name="mdp" required>
-            <p style="display: none; color: red;" id="msgErreurMdp"></p>
+            <p style="display: none; color: red;" id="msgErreurMdp">Le mot de passe ne doit pas être vide</p>
         </fieldset>
         
         <button type="submit">Se connecter</button>
@@ -142,6 +142,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 event.preventDefault();
             } else {
                 msgErreurEmail.style.display = "none";
+            }
+        })
+
+        champMdp.addEventListener('input', () => {
+            if (champEmail.value === "") {
+                msgErreurMdp.style.display = "block";
+                event.preventDefault();
             }
         })
     </script>
