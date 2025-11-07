@@ -1,6 +1,6 @@
 <?php
 
-define('HOME_GIT', '../../../');
+define('HOME_GIT', '../../..');
 
 if (!isset($_SESSION)) {
     session_start();
