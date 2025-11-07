@@ -100,24 +100,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-    <a href="<?= "../../" ?>">Retour à l'accueil</a>
-    
-    <form action="" method="post">
-        <fieldset>
+    <main>
+        <form action="" method="post">
             <legend>Informations</legend>
 
-            <!-- Adresse e-mail -->
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required>
+                <!-- Adresse e-mail -->
+            <br>
+            <label for="email">Email</label>
+            <input type="email"
+                name="email"
+                id="email"
+                value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
+                required>
 
-            <!-- Mot de passe -->
+                <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
-            <input type="password" id="mdp" name="mdp" required>
-        </fieldset>
-        
-        <button type="submit">Se connecter</button>
-
+            <label for="mdp">Mot de passe</label>
+            <input type="password" 
+                name="mdp"
+                id="mdp"
+                value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>"
+                required>
+            
+            <input type="submit" value="Se connecter">            
+        </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
-    </form>
+    </main>
 </body>
 </html>
