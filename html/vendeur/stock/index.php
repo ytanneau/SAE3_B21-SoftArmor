@@ -40,7 +40,6 @@ function initialize($sql){
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as $row){
-        print_r($row);
         ?>
         <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
         <table>
