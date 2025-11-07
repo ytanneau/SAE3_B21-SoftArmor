@@ -6,12 +6,12 @@ require_once('../../../.config.php');
 // $stmt->execute([':id_compte => 1']); // a remplacer par dollars session
 // echo $stmt;
 
-$sql = "select id_produit from _produit where id_vendeur = :id_vendeur";
+$sql = "select id_produit from _produit where id_vendeur = 1";
 $compte = 1;     
         // Si la requête a pu être préparée
-
+    
         if ($stmt = $pdo->prepare($sql)) {
-            $stmt->bindParam(":id_vendeur", $compte);
+            //$stmt->bindParam(":id_vendeur", $compte);
 
             // Si la requête a pu être exécutée
 
