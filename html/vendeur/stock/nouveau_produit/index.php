@@ -259,98 +259,100 @@
             </script>
             
             <?php 
-                // recupération des données du formulaire
-                $nomPrv = $_POST["nomPrv"];
-                $nomPblc = $_POST["nomPblc"];
-                $categorie = $_POST["categorie"];
-                $qtStock = $_POST["qtStock"];
-                $tva = $_POST["tva"];
-                $prixProd = $_POST["prixProd"];
-                $descSimple = $_POST["descSimple"];
-                $descDetaille = $_POST["descDetaille"];
-                $seuilAlerte = $_POST["seuilAlerte"];
-                $codeBarre = $_POST["codeBarre"];
-                $poidProd = $_POST["poidProd"];
-                $volumeProd = $_POST["volumeProd"];
-                $checkMajeur = isset($_POST["checkMajeur"]);
+                if($_SERVEUR["REQUEST_METHOD"] == "POST"){
+                    // recupération des données du formulaire
+                    $nomPrv = $_POST["nomPrv"];
+                    $nomPblc = $_POST["nomPblc"];
+                    $categorie = $_POST["categorie"];
+                    $qtStock = $_POST["qtStock"];
+                    $tva = $_POST["tva"];
+                    $prixProd = $_POST["prixProd"];
+                    $descSimple = $_POST["descSimple"];
+                    $descDetaille = $_POST["descDetaille"];
+                    $seuilAlerte = $_POST["seuilAlerte"];
+                    $codeBarre = $_POST["codeBarre"];
+                    $poidProd = $_POST["poidProd"];
+                    $volumeProd = $_POST["volumeProd"];
+                    $checkMajeur = isset($_POST["checkMajeur"]);
 
-                // redéfinition du critéres de majorité suivant l'état du bouton
-                if($checkMajeur == 'on'){
-                    $checkMajeur = true;
-                } else {
-                    $checkMajeur = false;
-                }
+                    // redéfinition du critéres de majorité suivant l'état du bouton
+                    if($checkMajeur == 'on'){
+                        $checkMajeur = true;
+                    } else {
+                        $checkMajeur = false;
+                    }
 
-                // insertion du produit dans la base de données
-                $sqlAjoutProduit = "INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18) 
-                                    VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur); 
-                                    ";
-                $stmt = $pdo->prepare($sqlAjoutProduit);
-                $stmt->execute([
-                    ':id_vend' => 1, // passé en $_SESSION une fois la page vendeur finis
-                    ':nomPrv' => $nomPrv,
-                    ':nomPblc' => $nomPblc,
-                    ':descSimple' => $descSimple,
-                    ':descDetaille' => $descDetaille,
-                    ':codeBarre' => $codeBarre,
-                    ':qtStock' => $qtStock,
-                    ':prixProd' => $prixProd,
-                    ':tva' => $tva,
-                    ':seuilAlerte' => $seuilAlerte,
-                    ':poidProd' => $poidProd, 
-                    ':volumeProd' => $volumeProd,
-                    ':checkMajeur' => $checkMajeur
-                ]);
-
-                $idProduit = $pdo->lastInsertId();
-
-                // mise en relation entre le produit et sa catégorie dans la bdd 
-                $sqlProduitCategorie = "INSERT INTO _produit_dans_categorie(id_produit,nom_categorie)
-                                        VALUES(:id_prod,:nom_cate);
+                    // insertion du produit dans la base de données
+                    $sqlAjoutProduit = "INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18) 
+                                        VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur); 
                                         ";
-                $stmt = $pdo->prepare($sqlProduitCategorie);
-                $stmt->execute([
-                    ':id_prod' => $idProduit,
-                    ':nom_cate' => $categorie
-                ]);
+                    $stmt = $pdo->prepare($sqlAjoutProduit);
+                    $stmt->execute([
+                        ':id_vend' => 1, // passé en $_SESSION une fois la page vendeur finis
+                        ':nomPrv' => $nomPrv,
+                        ':nomPblc' => $nomPblc,
+                        ':descSimple' => $descSimple,
+                        ':descDetaille' => $descDetaille,
+                        ':codeBarre' => $codeBarre,
+                        ':qtStock' => $qtStock,
+                        ':prixProd' => $prixProd,
+                        ':tva' => $tva,
+                        ':seuilAlerte' => $seuilAlerte,
+                        ':poidProd' => $poidProd, 
+                        ':volumeProd' => $volumeProd,
+                        ':checkMajeur' => $checkMajeur
+                    ]);
 
-                /*
-                    Image du produit
-                */
-                // vérification de la presence d'une images 
-                if (isset($_FILES['photo'])){
-                    $nomImageTemp = $_FILES['photo']['name'];
-                    $cheminTemp = $_FILES['photo']['tmp_name'];
-                    
-                    $nomImage = $idProduit . "_1.png";
-                    $cheminFinal = "images/" . $nomImage;
-                    $url = "../images/" . $nomImage;
+                    $idProduit = $pdo->lastInsertId();
 
-                    $titre_img = explode('.',$nomImageTemp)[0];
-                    $altDefault = "Image du produit : " . $titre_img;
+                    // mise en relation entre le produit et sa catégorie dans la bdd 
+                    $sqlProduitCategorie = "INSERT INTO _produit_dans_categorie(id_produit,nom_categorie)
+                                            VALUES(:id_prod,:nom_cate);
+                                            ";
+                    $stmt = $pdo->prepare($sqlProduitCategorie);
+                    $stmt->execute([
+                        ':id_prod' => $idProduit,
+                        ':nom_cate' => $categorie
+                    ]);
 
-                    
-                    if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                        // insertion des images dans la bdd 
-                        $sqlImage = "INSERT INTO _image(url_image,titre,alt)
-                                    VALUES(:url_img, :titre_img, :alt_img);";
-                        $stmt = $pdo->prepare($sqlImage);
-                        $stmt->execute([
-                            ':url_img' => $url, 
-                            ':titre_img' => $titre_img, 
-                            ':alt_img' => $altDefault
-                        ]);
+                    /*
+                        Image du produit
+                    */
+                    // vérification de la presence d'une images 
+                    if (isset($_FILES['photo'])){
+                        $nomImageTemp = $_FILES['photo']['name'];
+                        $cheminTemp = $_FILES['photo']['tmp_name'];
                         
-                        // mise en relation entre le produit et l'image principale dans la bdd 
-                        // en utilisant l'id du produit et l'id de l'image 
-                        $sqlImageProduit = "INSERT INTO _images_produit(id_produit,id_image_principale)
-                                            VALUES(:id_prod,:id_image_princ);";
-                        $idImage = $pdo->lastInsertId();
-                        $stmt = $pdo->prepare($sqlImageProduit);
-                        $stmt->execute([
-                            ':id_prod' => $idProduit,
-                            ':id_image_princ' => $idImage
-                        ]);
+                        $nomImage = $idProduit . "_1.png";
+                        $cheminFinal = "images/" . $nomImage;
+                        $url = "../images/" . $nomImage;
+
+                        $titre_img = explode('.',$nomImageTemp)[0];
+                        $altDefault = "Image du produit : " . $titre_img;
+
+                        
+                        if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                            // insertion des images dans la bdd 
+                            $sqlImage = "INSERT INTO _image(url_image,titre,alt)
+                                        VALUES(:url_img, :titre_img, :alt_img);";
+                            $stmt = $pdo->prepare($sqlImage);
+                            $stmt->execute([
+                                ':url_img' => $url, 
+                                ':titre_img' => $titre_img, 
+                                ':alt_img' => $altDefault
+                            ]);
+                            
+                            // mise en relation entre le produit et l'image principale dans la bdd 
+                            // en utilisant l'id du produit et l'id de l'image 
+                            $sqlImageProduit = "INSERT INTO _images_produit(id_produit,id_image_principale)
+                                                VALUES(:id_prod,:id_image_princ);";
+                            $idImage = $pdo->lastInsertId();
+                            $stmt = $pdo->prepare($sqlImageProduit);
+                            $stmt->execute([
+                                ':id_prod' => $idProduit,
+                                ':id_image_princ' => $idImage
+                            ]);
+                        }
                     }
                 }
             ?>
