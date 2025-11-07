@@ -6,7 +6,7 @@ require_once('../../../.config.php');
 // $stmt->execute([':id_compte => 1']); // a remplacer par dollars session
 // echo $stmt;
 
-$sql = 'select id_produit from _produit where id_vendeur = :id_vendeur';
+$sql = 'select nom_stock from _produit where id_vendeur = :id_vendeur';
 
 // essai n2 :
 #$req = mysql_query($sql) or die('erreur sql ! <br />' .mysql_error());
@@ -25,8 +25,8 @@ $compte = 1;
                 if ($stmt->rowCount() > 0) {
 
                     // Si il y a !0 ligne
-
-                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         print_r($row);
                     }
                 } else {
