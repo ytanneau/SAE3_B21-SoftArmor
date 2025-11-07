@@ -2,7 +2,7 @@
 define('HOME_GIT', __DIR__ . "../");
 session_start();
 
-require_once (HOME_GIT . '/.config.php');
+require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . '/fonction_compte.php');
 
 //requete pour recuperer informations du compte
