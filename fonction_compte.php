@@ -100,7 +100,7 @@
         && check_date_passee($date_naiss)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once HOME_GIT . '.config.php';
+            global $pdo;
             
             //print_r($resSQL);
             try{
