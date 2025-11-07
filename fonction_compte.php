@@ -9,7 +9,7 @@
     const CONNECT_PAS = "L'email ou mot de passe invalide";
 
     const TAILLE_NOM = 40;
-    const TAILLE_RAISON_SOCIAL = 60;
+    const TAILLE_RAISON_SOCIALE = 60;
     const TAILLE_EMAIL = 80;
     const TAILLE_ADRESSE = 120;
     const TAILLE_MDP = 100;
@@ -40,7 +40,7 @@
         $mdpc = trim($mdpc);
 
         $res['correcte'] = true;
-        if (check_raison_social_all($raisonSocial)
+        if (check_raison_sociale_all($raisonSocial)
         && check_num_siret_all($numSiret) 
         && check_num_cobrec_all($numCobrec) 
         && check_email_all($email) 
@@ -133,12 +133,10 @@
 
         $res['correcte'] = true;
         if (check_email_all($email) 
-        && check_MDP($mdp)) {
+        && check_mot_de_passe_all($mdp)) {
 
             require ($chemin . '.config.php');
             
-
-            //print_r($resSQL);
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
                 if ($resSQL != null){
@@ -159,27 +157,20 @@
 
                         return $res;
                     }
-                    else{
+                    else {
                         $res['erreur'] = CONNECT_PAS;
                         $res['correcte'] = false;
                     }
                 }
-                else{
+                else {
                     $res['erreur'] = CONNECT_PAS;
                     $res['correcte'] = false;
                 }
-            }
-            catch(PDOException $e){
+            } catch(PDOException $e) {
                 $res['fatal'] = true;
                 $res['correcte'] = false;
             }
         } else {
-            $res2 = check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
-
-            if (isset($res2)) {
-                $res = array_merge($res, $res2);
-                $res['correcte'] = false;
-            }
         }
 
         require ($chemin . '.config.php');
@@ -222,62 +213,58 @@
         return preg_match("/^[0-9]{15}$/", $numCobrec);
     }
 
-
-    //verifie l'adresse
+    // Vérifie l'e-mail (non vide, bonne taille, bon format)
     function check_email_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
-    //verifie l'email
+
+    // Vérifie le format de l'e-mail
     function check_email($email){
         return preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",$email);
     }
 
 
-    //verifie l'adresse
+    // Vérifie l'adresse (non vide, bonne taille, bon format)
     function check_adresse_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_ADRESSE) && check_adresse($adresse));
     }
-    //verifie la forme de l'adresse
+
+    // Vérifie le format de l'adresse
     function check_adresse($adresse){
         return preg_match("/^([1-9][0-9]*(?:-[1-9][0-9]*)*)[\s,-]+(?:(bis|ter|qua)[\s,-]+)?([\w]+[\-\w]*)[\s,]+([-\w].+)$/", $adresse);
     }
 
 
-    //verifie le code postal
+    // Vérifie le code postal (non vide, bon format)
     function check_code_postal_all($codePostal){
         return ((!check_vide($codePostal)) && check_code_postal($codePostal));
     }
-    //verifie la forme du code postal
+    // Vérifie le format du code postal
     function check_code_postal($codePostal){
         return preg_match("/^\d{5}$/", $codePostal);
     }
 
+    // Vérifie le mot de passe (bon format, bonne taille)
+    function check_mot_de_passe_all($mdp){
+        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
+    }
 
-    //verifie le mot de passe
+    // Vérifie le format du mot de passe
     function check_mot_de_passe($mdp){
         return (preg_match("/^.{12,}$/",$mdp));
     }
 
-    //verifie le mot de passe
+    // Vérifie l'égalité du MDP et de la confirmation du MDP
     function check_create_MDP($mdp, $mdpc){
         return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
     }
 
-    function check_MDP($mdp){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
-    }
-
-    //verifie le mot de passe
-    function check_same_MDP($mdp1, $mdp2){
-        return ($mdp1 === $mdp2);
-    }
-
-    // verifie un nom (nom, prénom ou pseudo)
+    // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
     function check_nom($nom) {
         return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
     }
 
-    // verifie que la date est passée
+    // Vérifie que la date est passée
     function check_date_passee($date) {
         return (strtotime("1900-01-01") < strtotime($date) && strtotime($date) < time());
     }
@@ -306,17 +293,17 @@
 // +----------------------+
 
     //renvoit toute les erreur posible de champ
-    function check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
+    function check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
         $res = [];
 
         //recherche l'erreur dans la raison social
-        if (check_vide($raisonSocial)){
+        if (check_vide($raisonSociale)){
             $res['raison_sociale'] = VIDE;
         }
-        else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIAL)){
+        else if (!check_taille($raisonSociale, TAILLE_RAISON_SOCIALE)){
             $res['raison_sociale'] = DEPASSE;
         }
-        else if (!check_raison_social($raisonSocial)){
+        else if (!check_raison_sociale($raisonSociale)){
             $res['raison_sociale'] = FORMAT;
         }
         
