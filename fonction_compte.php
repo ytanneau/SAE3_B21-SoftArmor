@@ -540,7 +540,7 @@
         try{
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->bindValue(':mdp', password_hash(crypte_v2($mdp)), PDO::PARAM_STR);
+            $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
             $requete->execute();
             
             $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
