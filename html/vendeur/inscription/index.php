@@ -1,21 +1,12 @@
 <?php
+    define('HOME_GIT', '../../../');
     $res = [];
-    echo getenv('HOME_GIT') . '/fonction_sql.php';
+    //echo HOME_GIT . 'fonction_sql.php';
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
-        $fichier = getenv('HOME_GIT') . '/fonction_compte.php';
-        if (file_exists($fichier)) {
-            require_once $fichier;
-            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
-
-        } else {
-            echo "erreur 1";
-            $res['FT'] = true;
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
-        }
+        require_once HOME_GIT . 'fonction_compte.php';
+        $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
     }
 ?>
 <!DOCTYPE html>
@@ -127,7 +118,7 @@
                 id="adresse"
                 value="<?php if (isset($_POST['adresse'])) echo $_POST['adresse']?>"
                 required>
-            <p class="contrainte">Numero rue commune</p>
+            <p class="contrainte">Numero nom rue commune</p>
 <?php
     if (isset($res['AD'])){
 ?>
@@ -163,7 +154,7 @@
                 size="5"
                 value="<?php if (isset($_POST['codePostal'])) echo $_POST['codePostal']?>"
                 required>
-            <p class="contrainte">nombre a 4 chiffres</p>
+            <p class="contrainte">Nombre a 5 chiffres</p>
 <?php
     if (isset($res['CP'])){
 ?>
@@ -214,7 +205,8 @@
     }
 ?>
 
-            <input type="submit" value="Crée mon compte">
+            <input type="submit" value="S'inscrire">
+            <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
         </form>
 <?php
     }

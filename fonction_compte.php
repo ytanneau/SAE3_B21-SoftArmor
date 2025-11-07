@@ -10,8 +10,6 @@
     define("TAILLE_EMAIL", 80);
     define("TAILLE_ADRESSE", 120);
     define("TAILLE_MDP", 100);
-
-    require_once(".config.php");
     
     //print_r(hash_algos()); | verifier que algos est sur la machine
     //fonction qui renvoir le mot de passe cryper et saler
@@ -25,7 +23,7 @@
     }
     
     //fonction qui permer de cree un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -46,8 +44,7 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once(getenv('HOME_GIT') . '/fonction_sql.php');
-            
+            require (HOME_GIT . '.config.php');
             //print_r($resSQL);
             try{
                 if (!sql_check_email($pdo, $email)){
@@ -56,13 +53,7 @@
                     if (sql_check_cle($pdo, $numCobrec)){
                         echo "succes 2";
 
-                        if (sql_create_vendeur()){
-                            echo "succes 3";
-                        
-                        }
-                        else{
-                            // changer l'erreur $res['CR'] = EXISTE_PAS;
-                        }
+                        //sql_create_vendeur()
                     }
                     else{
                         $res['NC'] = EXISTE_PAS;
@@ -302,7 +293,7 @@
 
     //
     //
-    function sql_create_vendeur($pdo){
+    function sql_create_vendeur(){
         try{
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -312,7 +303,8 @@
         catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
             throw $e;
         }
     }
+
