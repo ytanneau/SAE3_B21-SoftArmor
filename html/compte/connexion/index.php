@@ -12,13 +12,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     exit;
 }
 
-<<<<<<< Updated upstream
-require_once ('../.config.php');
-require_once ("../fonction_compte.php");
-=======
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_compte.php');
->>>>>>> Stashed changes
 
 // Initialiser les variables
 $email = $mdp = "";
