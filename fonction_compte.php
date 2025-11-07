@@ -294,17 +294,17 @@
     //
     //
     function sql_create_vendeur(){
-        try{
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->execute();
-            return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
-            throw $e;
-        }
+        // try{
+        //     $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+        //     $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        //     $requete->execute();
+        //     return $requete->fetch(PDO::FETCH_ASSOC);
+        // }
+        // catch (PDOException $e) {
+        //     $fichierLog = __DIR__ . "/erreurs.log";
+        //     $date = date("Y-m-d H:i:s");
+        //     file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
+        //     throw $e;
+        // }
     }
 
