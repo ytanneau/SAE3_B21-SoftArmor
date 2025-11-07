@@ -100,7 +100,7 @@
         && check_date_passee($date_naiss)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once 'fonction_sql.php';
+            global $pdo;
             
             try {
                 if (!sql_check_email($pdo, $email)){
@@ -110,18 +110,22 @@
                         echo "succes 2";
                     } else {
                         // changer l'erreur $res['CR'] = EXISTE_PAS;
+                        $res['correcte'] = false;
                     }
                     
                 } else {
                     $res['email'] = EXISTE;
+                    $res['correcte'] = false;
                 }
             } catch(PDOException $e) {
                 $res['fatal'] = true;
+                $res['correcte'] = false;
             }
-        } else {
+        }
+        else{
+            $res['correcte'] = false;
             $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
             if ($res2) {
-                $res['correcte'] = false;
                 $res = array_merge($res, $res2);
             }
         }
@@ -264,7 +268,7 @@
 
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
     function check_nom($nom) {
-        return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
+        return (!check_vide($nom) && check_taille($nom, TAILLE_NOM));
     }
 
     // Vérifie que la date est passée
@@ -530,13 +534,13 @@
         try{
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->bindValue(':mdp', $mdp, PDO::PARAM_STR);
+            $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
             $requete->execute();
             
             $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
             $requete->bindValue(':email', $email);
             $requete->execute();
-            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)[0];
+            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
             $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance)");
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
