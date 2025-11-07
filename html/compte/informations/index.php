@@ -33,29 +33,29 @@ unset($pdo);
     <div>
         <?php
             //affichage des info du compte
-            foreach ($avis as $row){  
+            foreach ($produit_recent as $row){  
         ?>
         <form action="" method="post">
             
             <label for="">Nom</label>
-            <input type="text" name="nom" value="<?php echo $produit_recent['nom'];?>">
+            <input type="text" name="nom" value="<?php echo $row['nom'];?>">
             <label for="">Prenom</label>
-            <input type="text" name="prenom" value="<?php echo $produit_recent['prenom'];?>">
+            <input type="text" name="prenom" value="<?php echo $row['prenom'];?>">
             <label for="">Date de Naissance</label>
-            <input type="date" name="date" value="<?php echo $produit_recent['date_naissance'];?>" >
+            <input type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
             <label for="">Mail</label>
-            <input type="email" name="mail" value="<?php echo $produit_recent['email'];?>">
+            <input type="email" name="mail" value="<?php echo $row['email'];?>">
 
             <label for="">Adresse</label>
 
             <label for="">Rue</label>
-            <input type="text" name="nom" value="<?php echo $produit_recent['adresse'];?>">
+            <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
             <label for="">Code Postal</label>
-            <input type="text" name="nom" value="<?php echo $produit_recent['code_postal'];?>">
+            <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
             
             <button type="submit">Modifier mes informations</button>
         </form>
-        <img src="<?php echo HOME_GIT . "html/".$produit_recent['url_image'];?>" alt="<?php echo $produit_recent['alt_image'];?>" title="<?php echo $produit_recent['titre_image'];?>">
+        <img src="<?php echo HOME_GIT . "html/".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
         <?php } ?>
     </div>
     <div>
