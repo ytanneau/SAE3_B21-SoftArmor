@@ -1,5 +1,5 @@
 <?php  
-    define('HOME_GIT', "../");
+    define('RACINE', __DIR__);
     //fonction pour calculer et afficher les moyennes d'un produit
     function afficher_moyenne_note($moyenne){
         if($moyenne > 5 || $moyenne < 0){
@@ -7,13 +7,13 @@
         }
         // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
         for ($i =1; $i <= floor($moyenne); $i++){
-            ?> <img src="<?php echo HOME_GIT;?>html/images/etoile_pleine.svg" alt="étoile pleine"><?php
+            ?> <img src="<?php echo RACINE;?>/images/etoile_pleine.svg" alt="étoile pleine"><?php
         }
         if(fmod(floor($moyenne*2),2)){
-            ?> <img src="<?php echo HOME_GIT;?>html/images/etoile_demi.svg" alt="étoile à moitié pleine"> <?php 
+            ?> <img src="<?php echo RACINE;?>/images/etoile_demi.svg" alt="étoile à moitié pleine"> <?php 
         }
         for ($i =5; $i > round($moyenne); $i--){
-            ?> <img src="<?php echo HOME_GIT;?>html/images/etoile_vide.svg" alt="étoile vide"><?php
+            ?> <img src="<?php echo RACINE;?>/images/etoile_vide.svg" alt="étoile vide"><?php
         }
     }
 ?>

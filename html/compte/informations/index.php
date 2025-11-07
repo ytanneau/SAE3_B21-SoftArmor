@@ -53,7 +53,7 @@ unset($pdo);
             
             <button type="submit">Modifier mes informations</button>
         </form>
-        <img src="<?php echo HOME_GIT . "html/".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
+        <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
         <?php } ?>
     </div>
     <div>
@@ -67,7 +67,7 @@ unset($pdo);
                 <li>
                     <div>
                         <div>
-                            <img src="<?php echo HOME_GIT . "html/".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
+                            <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
                             <p><?php echo $row['pseudo'];?></p>
                             <?php afficher_moyenne_note($row['note']);?>
                         </div>
