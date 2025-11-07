@@ -83,7 +83,7 @@
         return $res;
     }
 
-    //fonction qui permer de cree un compte vendeur
+    //fonction qui permer de cree un compte client
     function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
         $nom = strtoupper(trim($nom));
         $prenom = trim($prenom);
@@ -100,7 +100,7 @@
         && check_date_passee($date_naiss)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once 'fonction_sql.php';
+            require 'fonction_sql.php';
             
             //print_r($resSQL);
             try{
@@ -278,7 +278,7 @@
 
     // verifie un nom (nom, prénom ou pseudo)
     function check_nom($nom) {
-        return (check_vide($nom) && check_taille($nom, TAILLE_NOM));
+        return (!check_vide($nom) && check_taille($nom, TAILLE_NOM));
     }
 
     // verifie que la date est passée
