@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $val[':email'] = $email;
         $requete_sql->bindValue($val);
         $row = $requete_sql->execute();
-        echo($row);
+        var_dump($row);
 
         /*if ($stmt = $requete_sql->prepare($sql)) {
             $stmt->bindParam(":email", $email);
