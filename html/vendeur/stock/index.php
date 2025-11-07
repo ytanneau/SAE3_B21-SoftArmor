@@ -1,4 +1,5 @@
 <?php
+function initialize(){
 require_once('../../../.config.php');
 // $sql = "select id_produit from _produit where id_compte = :id_compte";
 
@@ -12,30 +13,39 @@ $sql = 'select nom_stock from _produit where id_vendeur = :id_vendeur';
 #$req = mysql_query($sql) or die('erreur sql ! <br />' .mysql_error());
 $compte = 1;     
         // Si la requête a pu être préparée
+    
+    if ($stmt = $pdo->prepare($sql)) {
+        $stmt->bindParam(":id_vendeur", $compte);
 
-        if ($stmt = $pdo->prepare($sql)) {
-            $stmt->bindParam(":id_vendeur", $compte);
+        // Si la requête a pu être exécutée
+        
+        if ($stmt->execute()) {
 
-            // Si la requête a pu être exécutée
-            
-            if ($stmt->execute()) {
+            // Si l'utilisateur existe (1 enregistrement trouvé)
+        
+            if ($stmt->rowCount() > 0) {
 
-                // Si l'utilisateur existe (1 enregistrement trouvé)
-            
-                if ($stmt->rowCount() > 0) {
+                // Si il y a !0 ligne
+                atrapper($stmt);
+                
 
-                    // Si il y a !0 ligne
-                    
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        print_r($row);
-                    }
-                } else {
-                    print("Vous n'avez pas de produit.");
-                }
             } else {
-                echo "Il y a eu un problème. Veuillez réessayer plus tard.";
+                print("Vous n'avez pas de produit.");
             }
-            unset($stmt);
+        } else {
+            echo "Il y a eu un problème. Veuillez réessayer plus tard.";
+        }
+        unset($stmt);
+    }
+}
+        function atrapper($stmt){
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        print_r($row);
+                        afficher_nom_produit($row);
+            }
+        }
+        function afficher_nom_produit($nom_produit){
+            echo $nom_produit;
         }
 
 ?>
@@ -68,7 +78,7 @@ function getProduit(){
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
-                <td><?php $nomProduit?> </td>
+                <td><?php initialize(); ?> </td>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
