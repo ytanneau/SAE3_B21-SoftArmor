@@ -14,7 +14,7 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
 
 //requete pour recuperer informations du compte sans l'adresse
-$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 2;";    
+$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 4;";    
 
 $info_compte = $pdo->query($sql);
 
@@ -63,9 +63,10 @@ unset($pdo);
             <label for="">Adresse</label>
             <?php
             //affichage des info du compte
+            if($adresse_compte != null){
             foreach ($adresse_compte as $row){  
-                if($row != null){
-                    echo "AAAAAAÆ";
+                
+                    
 
                 
             ?>
@@ -75,7 +76,7 @@ unset($pdo);
             <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
             <?php }}
             else {
-                echo "BBBBBBBBBBBBBBB";
+                
                 ?>
             <label for="">Rue</label>
             <input type="text" name="nom" placeholder="À renseigner">
