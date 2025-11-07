@@ -1,7 +1,7 @@
 <?php
     define('HOME_GIT', '../../../');
     $res = [];
-    //echo HOME_GIT . 'fonction_sql.php';
+    echo HOME_GIT . 'fonction_sql.php';
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
