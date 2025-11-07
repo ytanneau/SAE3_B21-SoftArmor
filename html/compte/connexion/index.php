@@ -124,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>Pas de compte ? <a href="<?= HOME_GIT . '/html/compte/inscription' ?>">S'inscrire</a></p>
     </form>
 
+    <!--
     <script>
         const champEmail        = document.getElementById("email");
         const champMdp          = document.getElementById("mdp");
@@ -154,5 +155,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         })
     </script>
+    -->
 </body>
 </html>
