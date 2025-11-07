@@ -278,7 +278,7 @@
 
     // verifie un nom (nom, prénom ou pseudo)
     function check_nom($nom) {
-        return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
+        return (check_vide($nom) && check_taille($nom, TAILLE_NOM));
     }
 
     // verifie que la date est passée
