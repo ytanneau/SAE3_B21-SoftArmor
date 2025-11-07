@@ -146,11 +146,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         })
 
         champMdp.addEventListener('input', () => {
-            if (champEmail.value === "") {
+            if (champMdp.value === "") {
                 msgErreurMdp.style.display = "block";
                 event.preventDefault();
             } else {
-                msgErreurEmail.style.display = "none";
+                msgErreurMdp.style.display = "none";
             }
         })
     </script>
