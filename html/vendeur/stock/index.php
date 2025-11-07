@@ -18,7 +18,7 @@ $quantite = initialize($sql2);
 
 if ($nom_stock->execute()) {
     if($quantite->execute()){
-        if ($stmt->rowCount() > 0) {
+        if ($quantite->rowCount() > 0) {
             atrapperNom($nom_stock, $quantite);
         } else {
             echo "Vous n'avez pas de produit.";
@@ -29,7 +29,7 @@ if ($nom_stock->execute()) {
         }
 }
 
-unset($stmt);
+unset($quantite);
 
 
 function initialize($sql){
