@@ -12,10 +12,15 @@ else {
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
 
-//requete pour recuperer informations du compte
-$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte INNER JOIN client_adresse ON compte_client.id_compte = client_adresse.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";
+//requete pour recuperer informations du compte sans l'adresse
+$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";
 
 $info_compte = $pdo->query($sql);
+
+//requete pour recuperer l'adresse du compte
+$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION['id_compte']};";
+
+$adresse_compte = $pdo->query($sql);
 
 //requete pour recuperer les avis du compte
 $sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']}";
@@ -40,6 +45,8 @@ unset($pdo);
             //affichage des info du compte
             foreach ($info_compte as $row){  
         ?>
+        <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
+
         <form action="" method="post">
             
             <label for="">Nom</label>
@@ -50,18 +57,31 @@ unset($pdo);
             <input type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
             <label for="">Mail</label>
             <input type="email" name="mail" value="<?php echo $row['email'];?>">
-
+            <?php } ?>
             <label for="">Adresse</label>
+            <?php
+            //affichage des info du compte
+            foreach ($adresse_compte as $row){  
+                if($row != null){
 
+                
+            ?>
             <label for="">Rue</label>
             <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
             <label for="">Code Postal</label>
             <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
-            
+            <?php }
+            else {
+                ?>
+            <label for="">Rue</label>
+            <input type="text" name="nom" placeholder="À renseigner">
+            <label for="">Code Postal</label>
+            <input type="text" name="nom" placeholder="À renseigner">
+                <?php
+            }} ?>
             <button type="submit">Modifier mes informations</button>
         </form>
-        <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
-        <?php } ?>
+        
     </div>
     <div>
         <h2>Vos Avis</h2>
