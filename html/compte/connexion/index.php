@@ -49,11 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
-            echo "Row count : " . $stmt->rowCount();
+            // Si on a bien une seule ligne en résultat
 
             if ($stmt->rowCount() == 1) {
 
-                // Si j'ai pu récupérer la ligne
+                // Si on a bien pu récupérer la ligne
 
                 if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $pseudo = $row['pseudo'];
@@ -81,53 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } catch (PDOException $e) {
             unset($stmt);
 
-            $fichierLog = __DIR__ . "/erreurs.log";
+            $fichierLog = "erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, $date . " Failed SQL request\n", FILE_APPEND);
             throw $e;
         }
-
-        /*if ($stmt = $requete_sql->prepare($sql)) {
-            $stmt->bindParam(":email", $email);
-
-            // Si la requête a pu être exécutée
-
-            if ($stmt->execute()) {
-
-                // Si l'utilisateur existe (1 enregistrement trouvé)
-
-                if ($stmt->rowCount() == 1) {
-
-                    // Si j'ai pu récupérer la ligne
-
-                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $pseudo = $row['pseudo'];
-                        $id_compte = $row['id_compte'];
-                        $mdp_hash = $row['mdp'];
-
-                        // if (password_verify($mdp, $mdp_hash)) {
-                        if (check_same_MDP($mdp, $mdp_hash)) {
-                            $_SESSION['logged_in'] = true;
-                            $_SESSION['pseudo'] = $pseudo;
-                            $_SESSION['id_compte'] = $id_compte;
-                            $_SESSION['email'] = $email;                            
-                            
-                            // Retour à la page d'accueil
-                            header('location: ' . HOME_GIT);
-                            exit;
-                        } else {
-                            echo "L'e-mail ou le mot de passe est incorrect. <br>";
-                        }
-                    }
-                } else {
-                    echo "L'e-mail ou le mot de passe est incorrect. <br>";
-                }
-            } else {
-                echo "Il y a eu un problème. Veuillez réessayer plus tard.";
-            }
-
-            unset($stmt);
-        }*/
     }
 
     // Fermer la connexion
@@ -152,16 +110,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Adresse e-mail -->
             <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required>
+            <input type="email" id="email" name="email" required>
+            <p style="display: none; color: red;" id="msgErreurEmail"></p>
 
             <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
             <input type="password" id="mdp" name="mdp" required>
+            <p style="display: none; color: red;" id="msgErreurMdp"></p>
         </fieldset>
         
         <button type="submit">Se connecter</button>
 
         <p>Pas de compte ? <a href="<?= HOME_GIT . '/html/compte/inscription' ?>">S'inscrire</a></p>
     </form>
+
+    <script>
+        const champEmail        = document.getElementById("email");
+        const champMdp          = document.getElementById("mdp");
+
+        const msgErreurEmail    = document.getElementById("msgErreurEmail");
+        const msgErreurMdp      = document.getElementById("msgErreurMdp");
+
+        champEmail.addEventListener("input", () => {
+            if (champEmail.value === "") {
+                msgErreurEmail.textContent = "L'adresse e-mail ne doit pas être vide";
+                msgErreurEmail.style.display = "block";
+                event.preventDefault();
+            } else if (!champEmail.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/);) {
+                msgErreurEmail.textContent = "L'adresse e-mail est invalide";
+                msgErreurEmail.style.display = "block";
+                event.preventDefault();
+            } else {
+                msgErreurEmail.style.display = "none";
+            }
+        })
+
+
+    </script>
 </body>
 </html>
