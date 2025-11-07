@@ -2,6 +2,14 @@
     $res = [];
     echo getenv('HOME_GIT') . '/fonction_sql.php';
     if ($_POST != null){
+        if (!isset($_POST['nom'])) $_POST['nom'] = "";
+        if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
+        if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
+        if (!isset($_POST['email'])) $_POST['email'] = "";
+        if (!isset($_POST['date_naissance'])) $_POST['date_naissance'] = "";
+        if (!isset($_POST['mdp'])) $_POST['mdp'] = "";
+        if (!isset($_POST['mdpc'])) $_POST['mdpc'] = "";
+
         //echo "présence d'un post";
         //print_r($_ENV);
         $fichier = '../../../fonction_compte.php';
@@ -27,7 +35,7 @@
 <body>
     <main>
 <?php
-    if ($res['correcte']) {
+    if (isset($res['correcte'])) {
 ?>
         <h1>Félicitations vous avez crée votre compte</h1>
 <?php
