@@ -1,3 +1,12 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+    <meta charset="utf-8">
+    <title>Alizon</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+        <body>
+
 <?php
 function initialize(){
 require_once('../../../.config.php');
@@ -38,22 +47,42 @@ $compte = 1;
         unset($stmt);
     }
 }
-        function atrapper($stmt){
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        print_r($row);
-                        afficher_nom_produit($row);
-            }
-        }
-        function afficher_nom_produit($nom_produit){
-            echo $nom_produit;
-        }
+
+
+
+
+function atrapper($stmt){
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+        <a href= "html/vendeur/produit/">
+        <table>
+            <tr>
+                <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
+                <td><?php afficher_nom_produit($row) ?> </td>
+                <td><img src="eyeclose.png" alt=""> </td>
+                <td><img src="promotion.png" alt=""> </td>
+                <td><img src="Fleche.png" alt=""> </td>
+                <td> | </td>
+                <td><?php ?></td>
+            </tr>            
+        </table>
+        </a>
+        <?php
+    }
+}
+
+
+
+function afficher_nom_produit($nom_produit){
+    echo $nom_produit;
+}
 
 ?>
 
 <?php
 
 function getAllproduit(){
-
+    
 }
 
 function getVendeur(){
@@ -66,26 +95,8 @@ function getProduit(){
 ?>
  
  
-<!doctype html>
-<html lang="fr">
-    <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <a href= "html/vendeur/produit/">
-        <table>
-            <tr>
-                <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
-                <td><?php initialize(); ?> </td>
-                <td><img src="eyeclose.png" alt=""> </td>
-                <td><img src="promotion.png" alt=""> </td>
-                <td><img src="Fleche.png" alt=""> </td>
-                <td>trait </td>
-                <td><?php $nombreStock ?></td>
-            </tr>            
-        </table>
-        </a>
+
+    
+        
     </body>
 </html>
