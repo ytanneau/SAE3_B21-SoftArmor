@@ -42,7 +42,7 @@
                 }
             }
 
-            function prepare($requete) {
+            function prepare() {
                 try{
                     $this->requete->execute();
                     return $this->requete->fetch(PDO::FETCH_ASSOC);
