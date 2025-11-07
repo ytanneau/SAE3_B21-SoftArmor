@@ -33,7 +33,7 @@ unset($pdo);
     <div>
         <?php
             //affichage des info du compte
-            foreach ($produit_recent as $row){  
+            foreach ($info_compte as $row){  
         ?>
         <form action="" method="post">
             
