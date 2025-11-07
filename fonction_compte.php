@@ -44,23 +44,16 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once(HOME_GIT . '.config2.php');
-            $rsql = new RequeteSQL();
+            require (HOME_GIT . '.config.php');
             //print_r($resSQL);
             try{
-                if (!sql_check_email($rsql, $email)){
+                if (!sql_check_email($pdo, $email)){
                     echo "succes";
 
-                    if (sql_check_cle($rsql, $numCobrec)){
+                    if (sql_check_cle($pdo, $numCobrec)){
                         echo "succes 2";
 
-                        if (sql_create_vendeur()){
-                            echo "succes 3";
-                        
-                        }
-                        else{
-                            // changer l'erreur $res['CR'] = EXISTE_PAS;
-                        }
+                        //sql_create_vendeur()
                     }
                     else{
                         $res['NC'] = EXISTE_PAS;
@@ -266,7 +259,6 @@
 
     //verifie la présence d'un email
     //return 1 si existe, 0 si absent
-    /*
     function sql_check_email($pdo, $email){
         try{
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
@@ -280,11 +272,10 @@
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             throw $e;
         }
-    }*/
+    }
 
     //verifie la présence de la cle de la cobrec
     //return 1 si existe, 0 si absent
-    /*
     function sql_check_cle($pdo, $cle){
         try{
             $requete = $pdo->prepare("SELECT 1 FROM _cle_vendeur WHERE cle_cobrec = :cle");
@@ -298,12 +289,11 @@
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
             throw $e;
         }
-    }*/
+    }
 
     //
     //
-    /*
-    function sql_create_vendeur($pdo){
+    function sql_create_vendeur(){
         try{
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -313,22 +303,8 @@
         catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
-            throw $e;
-        }
-    }*/
-
-        function sql_check_email($rsql, $email){
-        try{
-            $rsql->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $val[':email'] = $email;
-            $rsql->bindValue($val);
-            return ($rsql->execute() != null);
-        }
-        catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
             throw $e;
         }
     }
+
