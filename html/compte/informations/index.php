@@ -65,6 +65,7 @@ unset($pdo);
             //affichage des info du compte
             foreach ($adresse_compte as $row){  
                 if($row != null){
+                    echo "AAAAAAÆ";
 
                 
             ?>
@@ -74,6 +75,7 @@ unset($pdo);
             <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
             <?php }
             else {
+                echo "BBBBBBBBBBBBBBB";
                 ?>
             <label for="">Rue</label>
             <input type="text" name="nom" placeholder="À renseigner">
