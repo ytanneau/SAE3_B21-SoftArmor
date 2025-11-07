@@ -179,8 +179,7 @@
                 $res['fatal'] = true;
                 $res['correcte'] = false;
             }
-        }
-        else{
+        } else {
             $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
 
             if (isset($res2)) {
