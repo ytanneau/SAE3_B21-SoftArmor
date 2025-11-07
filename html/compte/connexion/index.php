@@ -12,8 +12,24 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     exit;
 }
 
-require_once (HOME_GIT . '/.config.php');
+require_once (HOME_GIT . '/.config2.php');
 require_once (HOME_GIT . '/fonction_compte.php');
+
+$requete_sql = new RequeteSQL();
+
+/*
+try {
+    $rsql->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+    $val[':email'] = $email;
+    $rsql->bindValue($val);
+    return ($rsql->execute() != null);
+} catch (PDOException $e) {
+    $fichierLog = __DIR__ . "/erreurs.log";
+    $date = date("Y-m-d H:i:s");
+    file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+    throw $e;
+}
+*/
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -45,7 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Si la requête a pu être préparée
 
-        if ($stmt = $pdo->prepare($sql)) {
+        $requete_sql->prepare($sql);
+        $val[':email'] = $email;
+        $requete_sql->bindValue($val);
+        $row = $requete_sql->execute();
+        echo($row);
+
+        /*if ($stmt = $requete_sql->prepare($sql)) {
             $stmt->bindParam(":email", $email);
 
             // Si la requête a pu être exécutée
@@ -85,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             unset($stmt);
-        }
+        }*/
     }
 
     // Fermer la connexion
