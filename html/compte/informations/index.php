@@ -62,11 +62,10 @@ unset($pdo);
             <?php } ?>
             <label for="">Adresse</label>
             <?php
-            print_r($adresse_compte);
             //affichage des info du compte
-            if($adresse_compte != null){
+            $est_entre = false;
             foreach ($adresse_compte as $row){  
-                
+                $est_entre = true;
                     
 
                 
@@ -75,9 +74,8 @@ unset($pdo);
             <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
             <label for="">Code Postal</label>
             <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
-            <?php }}
-            else {
-                echo "BBBBBBBBBBBB";
+            <?php }
+            if (!$est_entre) {
                 ?>
             <label for="">Rue</label>
             <input type="text" name="nom" placeholder="À renseigner">
