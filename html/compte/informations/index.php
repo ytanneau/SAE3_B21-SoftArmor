@@ -2,8 +2,6 @@
 define('HOME_GIT', "../../../");
 session_start();
 
-echo $_SESSION['id_compte'];
-
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
 
@@ -16,7 +14,7 @@ $info_compte = $pdo->query($sql);
 $sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']}";
 
 $avis = $pdo->query($sql);
-print_r($info_compte);
+
 // Fermer la connexion
 unset($pdo);
 ?>
