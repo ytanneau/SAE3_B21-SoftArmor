@@ -33,8 +33,9 @@ $produit_reduit = $pdo->query($query);
     <title>Accueil</title>
 </head>
 <body>
-
-    <a href="compte/connexion">Se connecter</a>
+    <?php if ($_SESSION['logged_in'] === false) { ?>
+        <a href="compte/connexion">Se connecter</a>
+    <?php } ?>
 <!--header-->
 <!--Produit Banniere au jour (possiblement a faire)-->
 <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
