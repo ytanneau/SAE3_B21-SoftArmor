@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':email', $email);
 
-            echo $stmt->rowCount();
+            echo "Row count : " . $stmt->rowCount();
 
             if ($stmt->rowCount() == 1) {
 
