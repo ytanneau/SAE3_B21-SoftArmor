@@ -6,6 +6,7 @@
     define("EXISTE_PAS","Existe pas");
     define("CORRESPOND_PAS","Ne correspond pas au mot de passe");
 
+    define("TAILLE_NOM", 40);
     define("TAILLE_RAISON_SOCIAL", 60);
     define("TAILLE_EMAIL", 80);
     define("TAILLE_ADRESSE", 120);
@@ -78,6 +79,55 @@
         }
         else{
             $res = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+        }
+        return $res;
+    }
+
+    //fonction qui permer de cree un compte vendeur
+    function create_profile_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc){
+        $nom = strtoupper(trim($nom));
+        $prenom = trim($prenom);
+        $pseudo = trim($pseudo);
+        $email = trim($email);
+
+        $mdp = trim($mdp);
+        $mdpc = trim($mdpc);
+
+        $res["correcte"] = true;
+        if (check_nom($nom)
+        && check_nom($prenom) 
+        && check_nom($pseudo) 
+        && check_date_passee($date_naiss)
+        && check_create_MDP($mdp, $mdpc)) {
+
+            require_once 'fonction_sql.php';
+            
+            //print_r($resSQL);
+            try{
+                if (!sql_check_email($pdo, $email)){
+                    echo "succes";
+                    if (sql_create_client($pdo)){
+                        echo "succes 3";
+                    }
+                    else{
+                        // changer l'erreur $res['CR'] = EXISTE_PAS;
+                    }
+                    
+                }
+                else{
+                    $res['email'] = EXISTE;
+                }
+            }
+            catch(PDOException $e){
+                $res['fatal'] = true;
+            }
+        }
+        else{
+            $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
+            if ($res2) {
+                $res['correcte'] = false;
+                $res = array_push($res, $res2);
+            }
         }
         return $res;
     }
@@ -157,6 +207,16 @@
     //verifie le mot de passe
     function check_same_MDP($mdp1, $mdp2){
         return ($mdp1 === $mdp2);
+    }
+
+    // verifie un nom (nom, prénom ou pseudo)
+    function check_nom($nom) {
+        return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
+    }
+
+    // verifie que la date est passée
+    function check_date_passee($date) {
+        return (strtotime("1900-01-01") < strtotime($date) < time());
     }
 
     //supprime les espaces, underscores et tirets
@@ -262,6 +322,76 @@
 
         return $res;
     }
+
+    // renvoit toutes les erreurs possibles de champ pour inscription client
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc){
+        $res = [];
+
+        // erreur champ nom
+        if (check_vide($nom)){
+            $res['nom'] = VIDE;
+        }
+        else if (!check_taille($nom, TAILLE_NOM)){
+            $res['nom'] = DEPASSE;
+        }
+        
+        // erreur champ prenom
+        if (check_vide($prenom)){
+            $res['prenom'] = VIDE;
+        }
+        else if (!check_taille($prenom, TAILLE_NOM)){
+            $res['prenom'] = DEPASSE;
+        }
+
+        // erreur champ pseudo
+        if (check_vide($pseudo)){
+            $res['pseudo'] = VIDE;
+        }
+        else if (!check_taille($pseudo, TAILLE_NOM)){
+            $res['pseudo'] = DEPASSE;
+        }
+
+        //recherche l'erreur dans l'email
+        if (check_vide($email)){
+            $res['email'] = VIDE;
+        }
+        else if (!check_taille($email, TAILLE_EMAIL)){
+            $res['email'] = DEPASSE;
+        }
+        else if (!check_email($email)){
+            $res['email'] = FORMAT;        
+        }
+        
+        // erreur champ date naissance
+        if (check_vide($date_naiss)) {
+            $res['date_naiss'] = VIDE;
+        }
+        else if (!check_date_passee($email)){
+            $res['email'] = FORMAT;        
+        }
+
+        //recherche l'erreur dans le mot de passe
+        if (check_vide($mdp)){
+            $res['mdp'] = VIDE;
+        }
+        else if (!check_taille($mdp, TAILLE_MDP)){
+            $res['mdp'] = DEPASSE;
+        }
+        else if (!check_mot_de_passe($mdp)){
+            $res['mdp'] = FORMAT;
+        }
+
+        //recherche l'erreur dans le mot de passe
+        if (check_vide($mdpc)){
+            $res['mdpc'] = VIDE;
+        }
+        else if (!check_same_MDP($mdp, $mdpc)){
+            $res['mdpc'] = CORRESPOND_PAS;
+        }
+
+        return $res;
+    }
+
 
 
 //fonctuion pour la base de donnée
