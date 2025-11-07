@@ -71,7 +71,7 @@ unset($pdo);
                         <div>
                             <img src="<?php echo $row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
                             <p><?php echo $row['pseudo'];?></p>
-                            <?php afficher_moyenne_note();?>
+                            <?php afficher_moyenne_note($row['note']);?>
                         </div>
                         <div>
                             <p><?php echo $row['titre'];?></p>
