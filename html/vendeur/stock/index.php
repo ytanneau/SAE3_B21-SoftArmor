@@ -6,7 +6,7 @@ require_once('../../../.config.php');
 // $stmt->execute([':id_compte => 1']); // a remplacer par dollars session
 // echo $stmt;
 
-$sql = 'select id_produit from _produit where id_vendeur = "1"';
+$sql = 'select id_produit from _produit where id_vendeur = :id_vendeur';
 
 // essai n2 :
 #$req = mysql_query($sql) or die('erreur sql ! <br />' .mysql_error());
@@ -14,12 +14,11 @@ $compte = 1;
         // Si la requête a pu être préparée
 
         if ($stmt = $pdo->prepare($sql)) {
-            //$stmt->bindParam(":id_vendeur", $compte);
+            $stmt->bindParam(":id_vendeur", $compte);
 
             // Si la requête a pu être exécutée
             
             if ($stmt->execute()) {
-                print_r($stmt);
 
                 // Si l'utilisateur existe (1 enregistrement trouvé)
             
@@ -27,7 +26,7 @@ $compte = 1;
 
                     // Si il y a !0 ligne
 
-                    if ($row = $stmt->fetch()) {
+                    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         print_r($row);
                     }
                 } else {
