@@ -51,7 +51,7 @@ function ecrire_nom($nom_stock){
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
                 <td> | </td>
-                <td><?php $row['quantite'] ?></td>
+                <td><?php echo $row['quantite'] ?></td>
             </tr>            
         </table>
         </a>
