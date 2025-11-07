@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p style="display: none; color: red;" id="msgErreurMdp">Le mot de passe ne doit pas être vide</p>
         </fieldset>
         
-        <button type="submit">Se connecter</button>
+        <input type="submit" value="Se connecter">
 
         <p>Pas de compte ? <a href="<?= HOME_GIT . '/html/compte/inscription' ?>">S'inscrire</a></p>
     </form>
