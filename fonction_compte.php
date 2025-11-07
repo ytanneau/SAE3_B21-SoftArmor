@@ -68,7 +68,62 @@
             }
         }
         else{
+<<<<<<< Updated upstream
             $res = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+=======
+            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+
+            if (isset($res2)) {
+                $res = array_merge($res, $res2);
+                $res['correcte'] = false;
+            }
+        }
+        return $res;
+    }
+
+    //fonction qui permer de cree un compte vendeur
+    function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
+        $nom = strtoupper(trim($nom));
+        $prenom = trim($prenom);
+        $pseudo = trim($pseudo);
+        $email = trim($email);
+
+        $mdp = trim($mdp);
+        $mdpc = trim($mdpc);
+
+        $res["correcte"] = true;
+
+        if (check_nom($nom)
+        && check_nom($prenom) 
+        && check_nom($pseudo) 
+        && check_date_passee($date_naiss)
+        && check_create_MDP($mdp, $mdpc)) {
+
+            require_once 'fonction_sql.php';
+            
+            try {
+                if (!sql_check_email($pdo, $email)){
+                    echo "succes";
+
+                    if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
+                        echo "succes 2";
+                    } else {
+                        // changer l'erreur $res['CR'] = EXISTE_PAS;
+                    }
+                    
+                } else {
+                    $res['email'] = EXISTE;
+                }
+            } catch(PDOException $e) {
+                $res['fatal'] = true;
+            }
+        } else {
+            $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
+            if ($res2) {
+                $res['correcte'] = false;
+                $res = array_merge($res, $res2);
+            }
+>>>>>>> Stashed changes
         }
         return $res;
     }
