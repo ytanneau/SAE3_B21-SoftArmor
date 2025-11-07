@@ -1,1 +1,2 @@
-<?php session_unset();?>
+<?php session_unset();
+session_destroy();?>
