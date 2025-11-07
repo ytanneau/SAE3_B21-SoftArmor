@@ -44,7 +44,7 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once(HOME_GIT . 'config.php');
+            require_once(HOME_GIT . '.config.php');
             
             //print_r($resSQL);
             try{
