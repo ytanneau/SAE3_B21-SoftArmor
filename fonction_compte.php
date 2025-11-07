@@ -549,7 +549,6 @@
             $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
             $requete->execute();
 
-
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
