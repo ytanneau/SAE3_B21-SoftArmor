@@ -5,8 +5,18 @@
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
-        require_once HOME_GIT . 'fonction_compte.php';
-        $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+        $fichier = getenv('HOME_GIT') . '/fonction_compte.php';
+        if (file_exists($fichier)) {
+            require_once $fichier;
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
+
+        } else {
+            echo "erreur 1";
+            $res['fatal'] = true;
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -19,14 +29,14 @@
 <body>
     <main>
 <?php
-    if ($res === true) {
+    if (isset($res['correcte']) && $res['correcte']) {
 ?>
-        <h1>Félisitation vous avez crée votre compte</h1>
+        <h1>Félicitations vous avez crée votre compte</h1>
 <?php
     }
-    else if (isset($res['FT'])){
+    else if (isset($res['fatal'])){
 ?>
-        <h1 class="fatale">Désole nous rencontron des problème serveur</h1>
+        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
 <?php
     }
     else{
@@ -43,10 +53,10 @@
                 required>
             <p class="contrainte">Nom puis statut juridique</p>
 <?php
-    if (isset($res['RS'])){
+    if (isset($res['taison_sociale'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['RS']?>
+                <?="Erreur : ".$res['taison_sociale']?>
             </p>
 <?php
     }
@@ -62,10 +72,10 @@
                 required>
             <p class="contrainte">Numero a 14 chiffres</p>
 <?php
-    if (isset($res['NS'])){
+    if (isset($res['numero_siret'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['NS']?>
+                <?="Erreur : ".$res['numero_siret']?>
             </p>
 <?php
     }
@@ -82,10 +92,10 @@
                 required>
             <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
 <?php
-    if (isset($res['NC'])){
+    if (isset($res['numero_cobrec'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['NC']?>
+                <?="Erreur : ".$res['numero_cobrec']?>
             </p>
 <?php
     }
@@ -101,10 +111,10 @@
                 required>
             <p class="contrainte"></p>
 <?php
-    if (isset($res['EM'])){
+    if (isset($res['email'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['EM']?>
+                <?="Erreur : ".$res['email']?>
             </p>
 <?php
     }
@@ -120,10 +130,10 @@
                 required>
             <p class="contrainte">Numero nom rue commune</p>
 <?php
-    if (isset($res['AD'])){
+    if (isset($res['adresse'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['AD']?>
+                <?="Erreur : ".$res['adresse']?>
             </p>
 <?php
     }
@@ -137,10 +147,10 @@
                 value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
             <p class="contrainte">information compémentaire</p>
 <?php
-    if (isset($res['AD'])){
+    if (isset($res['adresse'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['AD']?>
+                <?="Erreur : ".$res['adresse']?>
             </p>
 <?php
     }
@@ -156,10 +166,10 @@
                 required>
             <p class="contrainte">Nombre a 5 chiffres</p>
 <?php
-    if (isset($res['CP'])){
+    if (isset($res['code_postal'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['CP']?>
+                <?="Erreur : ".$res['code_postal']?>
             </p>
 <?php
     }
@@ -176,10 +186,10 @@
                 required>
             <p class="contrainte">minum 12 caractères</p>
 <?php
-    if (isset($res['MDP'])){
+    if (isset($res['mdp'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['MDP']?>
+                <?="Erreur : ".$res['mdp']?>
             </p>
 <?php
     }
@@ -196,10 +206,10 @@
                 required>
             <p class="contrainte"></p>
 <?php
-    if (isset($res['MDPC'])){
+    if (isset($res['mdpc'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['MDPC']?>
+                <?="Erreur : ".$res['mdpc']?>
             </p>
 <?php
     }
