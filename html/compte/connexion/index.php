@@ -12,24 +12,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     exit;
 }
 
-require_once (HOME_GIT . '/.config2.php');
+require_once (HOME_GIT . '/.config.php');
 require_once (HOME_GIT . '/fonction_compte.php');
-
-$requete_sql = new RequeteSQL();
-
-/*
-try {
-    $rsql->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-    $val[':email'] = $email;
-    $rsql->bindValue($val);
-    return ($rsql->execute() != null);
-} catch (PDOException $e) {
-    $fichierLog = __DIR__ . "/erreurs.log";
-    $date = date("Y-m-d H:i:s");
-    file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
-    throw $e;
-}
-*/
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -58,14 +42,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($erreur_email) && empty($erreur_mdp)) {
         $sql = "SELECT * FROM compte_client WHERE email = :email LIMIT 1";
-        
-        // Si la requête a pu être préparée
 
-        $requete_sql->prepare($sql);
-        $val[':email'] = $email;
-        $requete_sql->bindValue($val);
-        $row = $requete_sql->execute();
-        var_dump($row);
+        try {
+            $sql = "SELECT * FROM compte_client WHERE email = :email LIMIT 1";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':email', $email);
+
+            if ($stmt->rowCount() == 1) {
+
+                // Si j'ai pu récupérer la ligne
+
+                if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $pseudo = $row['pseudo'];
+                    $id_compte = $row['id_compte'];
+                    $mdp_hash = $row['mdp'];
+
+                    // if (password_verify($mdp, $mdp_hash)) {
+                    if (check_same_MDP($mdp, $mdp_hash)) {
+                        $_SESSION['logged_in'] = true;
+                        $_SESSION['pseudo'] = $pseudo;
+                        $_SESSION['id_compte'] = $id_compte;
+                        $_SESSION['email'] = $email;                            
+                        
+                        // Retour à la page d'accueil
+                        header('location: ' . HOME_GIT);
+                        exit;
+                    } else {
+                        echo "L'e-mail ou le mot de passe est incorrect. <br>";
+                    }
+                }
+            } else {
+                echo "L'e-mail ou le mot de passe est incorrect. <br>";
+            }
+
+        } catch (PDOException $e) {
+            unset($stmt);
+            
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, $date . " Failed SQL request\n", FILE_APPEND);
+            throw $e;
+        }
 
         /*if ($stmt = $requete_sql->prepare($sql)) {
             $stmt->bindParam(":email", $email);
