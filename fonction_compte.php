@@ -2,6 +2,7 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const VIDE = "Champ est vide";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Format invalide";
@@ -18,6 +19,8 @@
     
     require_once ".config.php";
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     define("TAILLE_RAISON_SOCIALE", 60);
@@ -51,8 +54,13 @@
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         $res['correcte'] = true;
         if (check_raison_social_all($raisonSocial)
+=======
+        $res = true;
+        if (check_raison_social_all($raisonSociale)
+>>>>>>> Stashed changes
 =======
         $res = true;
         if (check_raison_social_all($raisonSociale)
@@ -149,6 +157,7 @@
     
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     function connect_compte($email, $mdp, $typeCompte, $chemin){
         $email = trim($email);
         $mdp = trim($mdp);
@@ -209,6 +218,11 @@
 
 
 //toute les fonction de verrification de champ
+=======
+//  +--------------------------------------+
+//  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
+//  +--------------------------------------+ 
+>>>>>>> Stashed changes
 =======
 //  +--------------------------------------+
 //  |  FONCTIONS DE VÉRIFICATION DE CHAMP  |
@@ -294,6 +308,7 @@
     function check_create_MDP($mdp, $mdpc){
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     }
 
 <<<<<<< Updated upstream
@@ -310,10 +325,16 @@
 
     // Vérifie l'égalité entre deux mots de passe
 >>>>>>> Stashed changes
+=======
+    }
+
+    // Vérifie l'égalité entre deux mots de passe
+>>>>>>> Stashed changes
     function check_same_MDP($mdp1, $mdp2){
         return ($mdp1 === $mdp2);
     }
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
     // verifie un nom (nom, prénom ou pseudo)
@@ -327,6 +348,9 @@
     }
 
     //supprime les espaces, underscores et tirets
+=======
+    // Supprime les espaces, underscores et tirets
+>>>>>>> Stashed changes
 =======
     // Supprime les espaces, underscores et tirets
 >>>>>>> Stashed changes
@@ -368,9 +392,12 @@
         }
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIAL)){
             $res['raison_sociale'] = DEPASSE;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
         else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIALE)){
