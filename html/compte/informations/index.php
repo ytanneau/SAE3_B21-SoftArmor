@@ -1,5 +1,5 @@
 <?php
-define('HOME_GIT', '../../..');
+define('HOME_GIT', __DIR__);
 session_start();
 
 require_once (HOME_GIT . '/.config.php');
