@@ -546,7 +546,7 @@
             $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
             $requete->bindValue(':email', $email);
             $requete->execute();
-            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)[0];
+            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
             $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance)");
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
