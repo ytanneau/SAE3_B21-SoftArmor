@@ -38,7 +38,7 @@ function initialize($sql){
 
 
 function atrapperNom($nom_stock){
-    $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC, 'nom_stock', 'quantite');
+    $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as $row){
         ?>
         <a href= "html/vendeur/produit/<?php $nom_stock ?>">
