@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-    <a href="<?= HOME_GIT . '/html' ?>">Retour à l'accueil</a>
+    <a href="<?= HOME_GIT ?>">Retour à l'accueil</a>
     
     <form action="" method="post">
         <fieldset>
