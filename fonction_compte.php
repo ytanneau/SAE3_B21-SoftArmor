@@ -6,6 +6,7 @@
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
     const CORRESPOND_PAS = "Ne correspond pas au mot de passe";
+    const CONNECT_PAS = "L'email ou mot de passe invalide";
 
     const TAILLE_NOM = 40;
     const TAILLE_RAISON_SOCIAL = 60;
@@ -48,7 +49,7 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require (HOME_GIT . '.config.php');
+            require ($chemim . '.config.php');
             //print_r($resSQL);
             try{
                 if (!sql_check_email($pdo, $email)){
@@ -132,6 +133,66 @@
         return $res;
     }
     
+    function connect_compte($email, $mdp, $typeCompte, $chemin){
+        $email = trim($email);
+        $mdp = trim($mdp);
+
+        $res['correcte'] = true;
+        if (check_email_all($email) 
+        && check_MDP($mdp)) {
+
+            require ($chemim . '.config.php');
+            
+
+            //print_r($resSQL);
+            try{
+                $resSQL = sql_email_compte($pdo, $email, $typeCompte);
+                if ($resSQL != null){
+                    echo "succes";
+
+                    if (check_crypte_MDP($mdp, $resSQL['mdp'])){
+                        echo "succes 2";
+
+                        $_SESSION['logged_in'] = true;
+                        $_SESSION['id_compte'] = $resSQL['id_compte'];
+                        $_SESSION['email'] = $email;
+                        if ($typeCompte == 'vendeur'){
+                            $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
+                        }
+                        else{
+                            $_SESSION['pseudo'] = $resSQL['pseudo'];
+                        }
+
+                        return $res;
+                    }
+                    else{
+                        $res['erreur'] = CONNECT_PAS;
+                        $res['correcte'] = false;
+                    }
+                }
+                else{
+                    $res['erreur'] = CONNECT_PAS;
+                    $res['correcte'] = false;
+                }
+            }
+            catch(PDOException $e){
+                $res['fatal'] = true;
+                $res['correcte'] = false;
+            }
+        }
+        else{
+            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+
+            if (isset($res2)) {
+                $res = array_merge($res, $res2);
+                $res['correcte'] = false;
+            }
+        }
+
+        require ($chemin . '.config.php');
+    }
+
+
 //toute les fonction de verrification de champ
 
     //verifie la raison social
@@ -202,6 +263,10 @@
     //verifie le mot de passe
     function check_create_MDP($mdp, $mdpc){
         return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
+    }
+
+    function check_MDP($mdp){
+        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
     //verifie le mot de passe
@@ -402,6 +467,27 @@
     function sql_check_email($pdo, $email){
         try{
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->execute();
+            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+        }
+        catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            throw $e;
+        }
+    }
+
+    //return 1 si existe, 0 si absent
+    function sql_email_compte($pdo, $email, $typecompte){
+        try{
+            if ($typecompte == 'vendeur'){
+                $requete = $pdo->prepare("SELECT * FROM compte_vendeur WHERE email = :email");
+            }
+            else{
+                $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
+            }
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
