@@ -1,4 +1,5 @@
 <?php
+
 define('HOME_GIT', "../../../");
 
 if (!isset($_SESSION)) {
@@ -39,6 +40,7 @@ unset($pdo);
     <title>Informations Compte</title>
 </head>
 <body>
+    <a href="fin_session.php">se deconnecter</a>
     <h1>Mon Profil</h1>
     <div>
         <?php
