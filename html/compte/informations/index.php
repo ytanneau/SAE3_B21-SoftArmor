@@ -73,7 +73,7 @@ unset($pdo);
             <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
             <label for="">Code Postal</label>
             <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
-            <?php }
+            <?php }}
             else {
                 echo "BBBBBBBBBBBBBBB";
                 ?>
@@ -82,7 +82,7 @@ unset($pdo);
             <label for="">Code Postal</label>
             <input type="text" name="nom" placeholder="À renseigner">
                 <?php
-            }} ?>
+            } ?>
             <button type="submit">Modifier mes informations</button>
         </form>
         
