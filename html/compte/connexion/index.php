@@ -1,17 +1,24 @@
 <?php
 
+define('HOME_GIT', '../../../');
+
 if (!isset($_SESSION)) {
     session_start();
 }
 
 // Si l'utilisateur est déjà connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ../../');
+    header('location: ' . HOME_GIT . '/html');
     exit;
 }
 
+<<<<<<< Updated upstream
 require_once ('../.config.php');
 require_once ("../fonction_compte.php");
+=======
+require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonction_compte.php');
+>>>>>>> Stashed changes
 
 // Initialiser les variables
 $email = $mdp = "";
@@ -69,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION['email'] = $email;                            
                             
                             // Retour à la page d'accueil
-                            header('location: ../../');
+                            header('location: ' . HOME_GIT . '/html');
                             exit;
                         } else {
                             echo "L'e-mail ou le mot de passe est incorrect. <br>";
@@ -100,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-    <a href="<?= "../../" ?>">Retour à l'accueil</a>
+    <a href="<?= HOME_GIT . '/html' ?>">Retour à l'accueil</a>
     
     <form action="" method="post">
         <fieldset>
@@ -117,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <button type="submit">Se connecter</button>
 
-        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
+        <p>Pas de compte ? <a href="<?= HOME_GIT . '/html/compte/inscription' ?>">S'inscrire</a></p>
     </form>
 </body>
 </html>
