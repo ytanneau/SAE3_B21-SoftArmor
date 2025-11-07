@@ -259,7 +259,7 @@
             </script>
             
             <?php 
-                if($_SERVEUR["REQUEST_METHOD"] == "POST"){
+                if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // recupération des données du formulaire
                     $nomPrv = $_POST["nomPrv"];
                     $nomPblc = $_POST["nomPblc"];
