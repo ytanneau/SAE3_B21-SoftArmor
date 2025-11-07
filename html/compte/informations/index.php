@@ -74,7 +74,7 @@ unset($pdo);
                         <div>
                             <p><?php echo $row['titre'];?></p>
                             <p><?php echo $row['commentaire'];?></p>
-                            <p><?php echo "Avis publié le" $row['date'];?></p>
+                            <p><?php echo "Avis publié le " . $row['date_avis'];?></p>
                         </div>
                     </div>
                 </li>
