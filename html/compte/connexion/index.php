@@ -1,5 +1,10 @@
 <?php
 
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('location: ' . HOME_GIT . "html");
+    exit;
+}
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -11,11 +16,6 @@ define('HOME_GIT', '../../../');
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     require_once (HOME_GIT . 'fonction_compte.php');
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
-}
-
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT . "html");
-    exit;
 }
 
 ?>
