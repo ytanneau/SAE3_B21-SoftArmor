@@ -55,6 +55,8 @@ if ($_POST != null){
     }
 }
 
+var_dump($res);
+
 if (isset($res) && $res == []) {
     echo "test";
     header('Location: ' . 'bancaire.php');
