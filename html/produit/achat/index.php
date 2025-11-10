@@ -1,4 +1,17 @@
+<?php
 
+if (!isset($_GET['produit'])) {
+    header(HOME_GIT . "html/");
+}
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+const HOMT_GIT = "../../../";
+require_once HOME_GIT . ".config.php";
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -7,17 +20,6 @@
         <meta charset="UTF-8">
         <meta lang="fr">
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-const HOMT_GIT = "../../../";
-require_once HOME_GIT . ".config.php";
-
-if (!isset($_GET['produit'])) {
-    header(HOME_GIT . "html/");
-}
-
 $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
 $pdo->bindValue(":id_produit", $_GET['produit']);
 $pdo->execute();
