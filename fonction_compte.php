@@ -614,9 +614,9 @@
             echo "test succes 4.1";
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
             echo "test succes 4.2";
-            $requete->bindValue(':raison_social', $pseudo, PDO::PARAM_STR);
+            $requete->bindValue(':raison_social', $raisonSocial, PDO::PARAM_STR);
             echo "test succes 4.3";
-            $requete->bindValue(':numero_siret', $nom, PDO::PARAM_STR);
+            $requete->bindValue(':numero_siret', $numSiret, PDO::PARAM_STR);
             echo "test succes 4.4";
             $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
             echo "test succes 4.5";
