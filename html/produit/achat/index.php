@@ -2,7 +2,7 @@
 const HOME_GIT = "../../../";
 
 if (!isset($_GET['produit'])) {
-    header("location: " . HOME_GIT . "html/", );
+    header("location: " . HOME_GIT, );
     exit();
 }
 
