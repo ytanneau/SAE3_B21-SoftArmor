@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_compte.php');
 
 //requete pour recuperer informations du compte sans l'adresse
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8;";    
@@ -35,11 +36,13 @@ unset($pdo);
 if ($_POST != null){
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
-    if (!isset($_POST['email'])) $_POST['email'] = "";
-    if (!isset($_POST['date_naissance'])) $_POST['date_naissance'] = "";
+    if (!isset($_POST['mail'])) $_POST['mail'] = "";
+    if (!isset($_POST['date'])) $_POST['date'] = "";
     if (!isset($_POST['rue'])) $_POST['rue'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
-    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
+
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['mail'],$_POST['date'], $_POST['rue'], $_POST['code_postal']);
+    print_r($verif);
 }
 ?>
 
@@ -81,7 +84,7 @@ if ($_POST != null){
             <label for="rue">Rue</label>
             <input type="text" name="rue" value="<?php echo $row['adresse'];?>">
             <label for="complement_adresse">complement_adresse</label>
-            <input type="text" name="complement_adresse" value="<?php echo $row['complement_adresse'];?>">
+            <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse']} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <label for="code_postal">Code Postal</label>
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
             <?php }
