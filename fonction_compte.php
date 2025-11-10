@@ -58,11 +58,11 @@
                         echo "succes 2";
                     }
                     else{
-                        $res['numero_cobrec'] = EXISTE_PAS;
+                        $res['connect'] = CONNECT_PAS;
                     }
                 }
                 else{
-                    $res['email'] = EXISTE;
+                    $res['connect'] = CONNECT_PAS;
                 }
             }
             catch(PDOException $e){
@@ -147,10 +147,10 @@
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
                 if ($resSQL != null){
-                    echo "succes";
+                    //echo "succes";
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
-                        echo "succes 2";
+                        //echo "succes 2";
 
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
@@ -178,6 +178,7 @@
                 $res['correcte'] = false;
             }
         } else {
+            return check_erreur_connection($email, $mpd);
         }
     }
 
@@ -450,7 +451,32 @@
         return $res;
     }
 
+    function check_erreur_connection($email, $mdp){
 
+        //recherche dans l'email
+        if (check_vide($email)){
+            $res['email'] = VIDE;
+        }
+        else if (!check_taille($email, TAILLE_EMAIL)){
+            $res['email'] = DEPASSE;
+        }
+        else if (!check_email($email)){
+            $res['email'] = FORMAT; 
+        }
+
+        //recherche l'erreur dans le mot de passe
+        if (check_vide($mdp)){
+            $res['mdp'] = VIDE;
+        }
+        else if (!check_taille($mdp, TAILLE_MDP)){
+            $res['mdp'] = DEPASSE;
+        }
+        else if (!check_mot_de_passe($mdp)){
+            $res['mdp'] = FORMAT;
+        }
+
+        return $res;
+    }
 
 //fonctuion pour la base de donnée
 
