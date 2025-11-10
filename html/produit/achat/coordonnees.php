@@ -50,7 +50,7 @@ if ($_POST != null){
         $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
 
         if ($erreurs == [] && $_POST['enregistrer']) {
-            sql_insert_adresse_client($pdo, $_POST['id_client'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
+            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
         }
 
     } else {
