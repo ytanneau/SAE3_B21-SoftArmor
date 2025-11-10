@@ -31,6 +31,7 @@ $produit = $requete->fetch(PDO::FETCH_ASSOC);
     </head>
 
     <body>
+        <?php print_r($produit); ?>
         <h1>Achat du produit <?=$produit['nom_public']?></h1>
 
         <p>Prix HT : <?=$produit['prix']?></p>
