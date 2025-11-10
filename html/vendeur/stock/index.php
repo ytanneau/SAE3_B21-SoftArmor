@@ -54,7 +54,7 @@ function ecrire_nom($nom_stock){
                 <td><img src="Fleche.png" alt=""> </td>
                 <td> | </td>
                 <td><?php echo $row['quantite'] ?></td>
-            </tr>            
+            </tr>
         </table>
         <?php
     }
