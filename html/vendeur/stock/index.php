@@ -23,6 +23,18 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <?php
 
 
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+    <meta charset="utf-8">
+    <title>Alizon</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+        <body>
+
+<?php
+
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
 $sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
 
@@ -34,8 +46,8 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
-    print_r($_SESSION);
-    $compte = 1;
+    print_r(value: $_SESSION);
+    $compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide
     if ($stmt = $pdo->prepare($sql)) {
