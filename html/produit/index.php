@@ -15,7 +15,7 @@ $id_produit = (int) $_GET['id_produit'];
 $sql = "
 SELECT 
     p.*,
-    v.denomination AS vendeur,
+    v.id_compte AS vendeur,
     i_principale.url_image AS image_principale,
     i1.url_image AS image1,
     i2.url_image AS image2
