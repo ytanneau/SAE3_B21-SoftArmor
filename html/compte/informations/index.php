@@ -11,7 +11,7 @@ else {
 }
 
 require_once (HOME_GIT . '.config.php');
-require_once (HOME_GIT . 'fonctions_php/fonction_produit.php');
+require_once (HOME_GIT . 'fonction_produit.php');
 
 //requete pour recuperer informations du compte sans l'adresse
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8;";    
