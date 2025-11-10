@@ -4,21 +4,19 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-define('HOME_GIT', '../../../');
+define('HOME_GIT', '../../');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+// Si l'utilisateur est déjà connecté
+
+if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT . "html");
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
+    header('location: ' . HOME_GIT . 'html/');
     exit;
 }
-
-
-
-// Si l'utilisateur est déjà connecté
 
 ?>
 
