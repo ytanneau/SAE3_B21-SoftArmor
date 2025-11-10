@@ -147,15 +147,6 @@
                 id="compAdresse"
                 value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
             <p class="contrainte">information compémentaire</p>
-<?php
-    if (isset($res['adresse'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$res['adresse']?>
-            </p>
-<?php
-    }
-?>
 
             <br>
             <label for="codePostal">Code postal</label>

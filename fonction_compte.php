@@ -27,7 +27,7 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemin){
         global $pdo;
         
         $raisonSocial = strtoupper(trim($raisonSocial));
