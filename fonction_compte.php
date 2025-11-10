@@ -143,14 +143,14 @@
 
         $res['correcte'] = true;
 
-        echo "Test 1";
-
         if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
 
             echo "Test 2";
             
             try {
+                echo "Test 2.1";
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
+                echo "Test 2.2";
 
                 if ($resSQL != null) {
                     //echo "succes";
@@ -263,8 +263,6 @@
 
     // Vérifie le mot de passe (bon format, bonne taille)
     function check_mot_de_passe_all($mdp){
-        echo ("Format : " . check_mot_de_passe($mdp));
-        echo ("Taille : " . check_taille($mdp, TAILLE_MDP));
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
