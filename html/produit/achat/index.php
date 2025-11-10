@@ -2,7 +2,8 @@
 const HOME_GIT = "../../../";
 
 if (!isset($_GET['produit'])) {
-    header(HOME_GIT . "html/");
+    header("location: " . HOME_GIT . "html/", );
+    exit();
 }
 
 if (!isset($_SESSION)) {
@@ -31,7 +32,6 @@ $produit = $requete->fetch(PDO::FETCH_ASSOC);
     </head>
 
     <body>
-        <?php print_r($produit); ?>
         <h1>Achat du produit <?=$produit['nom_public']?></h1>
 
         <p>Prix HT : <?=$produit['prix']?></p>
