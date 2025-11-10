@@ -1,6 +1,6 @@
 <?php
 // Inclusion du fichier de configuration
-require_once('../.config.php');
+require_once('/docker/data/web/.config.php');
 
 // Vérifie que l'id_produit est passé dans l'URL
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
