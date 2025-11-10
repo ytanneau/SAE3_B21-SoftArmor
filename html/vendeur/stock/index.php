@@ -47,11 +47,11 @@ unset($quantite);
 function initialize($sql){
     global $pdo;
     print_r($_SESSION);
-    $compte = $_SESSION['id_compte'];
+    //$compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide
     if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_vendeur", $compte);
+        $stmt->bindParam(":id_vendeur", 1);
     }
     //regarde si la commande est executable
     if ($stmt->execute()) {
