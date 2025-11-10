@@ -44,7 +44,16 @@ body {
   height: 1.8em;
   font-size: 1.5em;
 }
-#connect_vendeur main form .boutton, #inscription_vendeur main form .boutton {
+#connect_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#connect_vendeur main form input[type=number]::-webkit-outer-spin-button, #inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_vendeur main form input[type=number], #inscription_vendeur main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
   border: none;
   border-radius: 50px;
   padding: 1vh 2vw;
@@ -109,7 +118,16 @@ body {
   height: 1.8em;
   font-size: 1.5em;
 }
-#connect_client main form .boutton, #inscription_client main form .boutton {
+#connect_client main form input[type=number]::-webkit-inner-spin-button,
+#connect_client main form input[type=number]::-webkit-outer-spin-button, #inscription_client main form input[type=number]::-webkit-inner-spin-button,
+#inscription_client main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_client main form input[type=number], #inscription_client main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_client main form .bouton, #inscription_client main form .bouton {
   border: none;
   border-radius: 50px;
   padding: 1vh 2vw;
@@ -125,4 +143,11 @@ body {
 }
 #connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
+}
+
+#inscription_vendeur, #inscription_client {
+  height: 100%;
+}
+#inscription_vendeur main, #inscription_client main {
+  margin: 15vh 0;
 }/*# sourceMappingURL=style.css.map */
