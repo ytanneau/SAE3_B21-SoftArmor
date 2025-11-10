@@ -119,17 +119,17 @@ if ($_POST != null){
             //affichage des info du compte
             $est_entre = false;
             foreach ($adresse_compte as $row){  
-                $est_entre = tadresse;
+                $est_entre = true;
             ?>
             
             
-            <input type="text" name="adresse" value="<?php echo $row['complement_adresse'];?>">
+            <input type="text" name="adresse" value="<?php echo $row['adresse'];?>">
             <!--Erreur adresse-->
             <?php
-                if (isset($verif['adresse']) && $verif['adresse'] != "Champ est vide"){
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['adresse']?>
+                            <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
@@ -155,10 +155,10 @@ if ($_POST != null){
             <input type="text" name="adresse" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
-                if (isset($verif['adresse']) && $verif['adresse'] != "Champ est vide"){
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['adresse']?>
+                            <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
