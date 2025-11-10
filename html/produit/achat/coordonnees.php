@@ -15,15 +15,6 @@ if (!isset($_SESSION['logged_in'])) {
 
 require_once HOME_GIT . ".config.php";
 
-?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Alizon - Achat</title>
-        <meta charset="UTF-8">
-        <meta lang="fr">
-<?php
 $requete = $pdo->prepare("SELECT nom_public, prix, tva, description, description_detaillee FROM produit WHERE id_produit = :id_produit");
 $requete->bindValue(":id_produit", $_GET['produit'], PDO::PARAM_STR);
 $requete->execute();
@@ -49,7 +40,8 @@ if ($_POST != null){
         require_once $fichier;
         $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
 
-        if ($erreurs == [] && $_POST['enregistrer']) {
+        // enregistrer
+        if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
             sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
         }
 
@@ -63,7 +55,18 @@ if ($_POST != null){
     }
 }
 
+if (isset($res) && $res == []) {
+    header('Location: ' . 'bancaire.php');
+}
+
 ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alizon - Achat</title>
+        <meta charset="UTF-8">
+        <meta lang="fr">
     </head>
 
     <body>
