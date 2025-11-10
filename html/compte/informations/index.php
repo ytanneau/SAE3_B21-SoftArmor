@@ -136,7 +136,7 @@ if ($_POST != null){
             <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <label for="code_postal">Code Postal</label>
-            <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
+            <input type="text" name="code_postal" value="<?php if(isset($row['code_postal'])){echo $row['code_postal'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <!--Erreur code postal-->
             <?php
                 if (isset($verif['code_postal'])){
@@ -147,35 +147,7 @@ if ($_POST != null){
             <?php
                 }
             ?>
-            <?php }
-            if (!$est_entre) {
-                ?>
-            <label for="rue">Rue</label>
-            <input type="text" name="rue" placeholder="À renseigner">
-            <!--Erreur rue-->
-            <?php
-                if (isset($verif['rue'])){
-            ?>
-                        <p class="error">
-                            <?="Erreur : ".$verif['rue']?>
-                        </p>
-            <?php
-                }
-            ?>
-            <label for="complement_adresse">Complement Adresse</label>
-            <input type="text" name="complement_adresse" placeholder="À renseigner">
-            <label for="code_postal">Code Postal</label>
-            <input type="text" name="code_postal" placeholder="À renseigner">
-            <!--Erreur code postal-->
-            <?php
-                if (isset($verif['code_postal'])){
-            ?>
-                        <p class="error">
-                            <?="Erreur : ".$verif['code_postal']?>
-                        </p>
-            <?php
-                }
-            ?>
+            
                 <?php
             } ?>
             <button type="submit">Modifier mes informations</button>
