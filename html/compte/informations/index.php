@@ -36,7 +36,7 @@ unset($pdo);
 if ($_POST != null){
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
-    if (!isset($_POST['mail'])) $_POST['mail'] = "";
+    if (!isset($_POST['email'])) $_POST['email'] = "";
     if (!isset($_POST['date'])) $_POST['date'] = "";
     if (!isset($_POST['rue'])) $_POST['rue'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
@@ -102,13 +102,13 @@ if ($_POST != null){
                 }
             ?>
             <label for="mail">Mail</label>
-            <input required type="email" name="mail" value="<?php echo $row['email'];?>">
+            <input required type="email" name="email" value="<?php echo $row['email'];?>">
             <!--Erreur mail-->
             <?php
-                if (isset($verif['mail'])){
+                if (isset($verif['email'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['mail']?>
+                            <?="Erreur : ".$verif['email']?>
                         </p>
             <?php
                 }
@@ -133,7 +133,7 @@ if ($_POST != null){
             <?php
                 }
             ?>
-            <label for="complement_adresse">complement_adresse</label>
+            <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <label for="code_postal">Code Postal</label>
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
@@ -152,10 +152,30 @@ if ($_POST != null){
                 ?>
             <label for="rue">Rue</label>
             <input type="text" name="rue" placeholder="À renseigner">
-            <label for="complement_adresse">complement_adresse</label>
+            <!--Erreur rue-->
+            <?php
+                if (isset($verif['rue'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['rue']?>
+                        </p>
+            <?php
+                }
+            ?>
+            <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" placeholder="À renseigner">
             <label for="code_postal">Code Postal</label>
             <input type="text" name="code_postal" placeholder="À renseigner">
+            <!--Erreur code postal-->
+            <?php
+                if (isset($verif['code_postal'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['code_postal']?>
+                        </p>
+            <?php
+                }
+            ?>
                 <?php
             } ?>
             <button type="submit">Modifier mes informations</button>
