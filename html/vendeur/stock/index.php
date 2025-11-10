@@ -1,11 +1,3 @@
-<!doctype html>
-<html lang="fr">
-    <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-        <body>
 
 <?php
 //permet d'utiliser le fichier config.php
@@ -19,6 +11,18 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ' . HOME_GIT);
     exit;
 }
+
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+    <meta charset="utf-8">
+    <title>Alizon</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+        <body>
+
+<?php
 
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
 $sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
