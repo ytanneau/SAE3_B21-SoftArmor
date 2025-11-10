@@ -41,7 +41,7 @@ $produit = $requete->fetch(PDO::FETCH_ASSOC);
         } if (isset($produit['description_detaillee'])) {
 ?>
         <p>Description détaillée : <?=$produit['description_detaillee']?></p>
-
+<?php } ?>
         <p>Prix HT : <?=$produit['prix']?></p>
         <p>TVA : <?=$produit['tva']?></p>
         <p>Prix TTC : <?=$produit['prix'] * $produit['tva']?></p>
