@@ -38,10 +38,10 @@ if ($_POST != null){
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
     if (!isset($_POST['date'])) $_POST['date'] = "";
-    if (!isset($_POST['rue'])) $_POST['rue'] = "";
+    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['rue'], $_POST['code_postal']);
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
     print_r($verif);
 }
 ?>
@@ -119,17 +119,17 @@ if ($_POST != null){
             //affichage des info du compte
             $est_entre = false;
             foreach ($adresse_compte as $row){  
-                $est_entre = true;
+                $est_entre = tadresse;
             ?>
-            <label for="rue">Rue</label>
             
-            <input type="text" name="rue" value="<?php echo $row['complement_adresse'];?>">
-            <!--Erreur rue-->
+            
+            <input type="text" name="adresse" value="<?php echo $row['complement_adresse'];?>">
+            <!--Erreur adresse-->
             <?php
-                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
+                if (isset($verif['adresse']) && $verif['adresse'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['rue']?>
+                            <?="Erreur : ".$verif['adresse']?>
                         </p>
             <?php
                 }
@@ -151,14 +151,14 @@ if ($_POST != null){
             <?php }
             if (!$est_entre) {
                 ?>
-            <label for="rue">Rue</label>
-            <input type="text" name="rue" placeholder="À renseigner">
-            <!--Erreur rue-->
+            
+            <input type="text" name="adresse" placeholder="À renseigner">
+            <!--Erreur adresse-->
             <?php
-                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
+                if (isset($verif['adresse']) && $verif['adresse'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['rue']?>
+                            <?="Erreur : ".$verif['adresse']?>
                         </p>
             <?php
                 }
@@ -177,6 +177,16 @@ if ($_POST != null){
             <?php
                 }
             ?>
+            <?php
+                if ((isset($verif['code_postal']) && !isset($verif['adresse']) )||(!isset($verif['code_postal']) && isset($verif['adresse']) )){
+            ?>
+                        <p class="error">
+                            <?= "Remplissez les deux champs Adresse et Code Postal" ?>
+                        </p>
+            <?php
+                }
+            ?>
+            
                 <?php
             } ?>
             <button type="submit">Modifier mes informations</button>
