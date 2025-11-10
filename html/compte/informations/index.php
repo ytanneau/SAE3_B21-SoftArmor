@@ -170,7 +170,7 @@ if ($_POST != null){
                             <?php afficher_moyenne_note($row['note']);?>
                         </div>
                         <div>
-                            <p><?php echo $row['titre'];?></p>
+                            <p><?php echo $row['titre'];?></p>  
                             <p><?php echo $row['commentaire'];?></p>
                             <p><?php echo "Avis publié le " . $row['date_avis'];?></p>
                         </div>
