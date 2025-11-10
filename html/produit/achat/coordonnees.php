@@ -13,6 +13,8 @@ if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_GIT, );
 }
 
+var_dump($_SESSION);
+
 require_once HOME_GIT . ".config.php";
 
 ?>
