@@ -126,7 +126,7 @@ if ($_POST != null){
             <input type="text" name="rue" value="<?php echo $row['complement_adresse'];?>">
             <!--Erreur rue-->
             <?php
-                if (isset($verif['rue'])){
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
@@ -140,7 +140,7 @@ if ($_POST != null){
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal'])){
+                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['code_postal']?>
@@ -155,7 +155,7 @@ if ($_POST != null){
             <input type="text" name="rue" placeholder="À renseigner">
             <!--Erreur rue-->
             <?php
-                if (isset($verif['rue'])){
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
@@ -169,7 +169,7 @@ if ($_POST != null){
             <input type="text" name="code_postal" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal'])){
+                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['code_postal']?>
