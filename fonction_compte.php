@@ -152,9 +152,9 @@
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
 
-                        if (!isset($_SESSION)){
-                            session_start();
-                        }
+                        // if (!isset($_SESSION)){
+                        //     session_start();
+                        // }
 
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
