@@ -137,17 +137,25 @@
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
-        if (check_email_all($email) 
-        && check_mot_de_passe_all($mdp)) {
+
+        echo "Test 1";
+
+        if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
+
+            echo "Test 2";
             
-            try{
+            try {
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
-                if ($resSQL != null){
+
+                if ($resSQL != null) {
                     //echo "succes";
+
+                    echo "Test 3";
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         //echo "succes 2";
 
+                        
                         session_start();
 
                         $_SESSION['logged_in'] = true;
@@ -497,11 +505,10 @@
 
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
-        try{
-            if ($typecompte == 'vendeur'){
+        try {
+            if ($typecompte == 'vendeur') {
                 $requete = $pdo->prepare("SELECT * FROM compte_vendeur WHERE email = :email");
-            }
-            else{
+            } else {
                 $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
             }
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
