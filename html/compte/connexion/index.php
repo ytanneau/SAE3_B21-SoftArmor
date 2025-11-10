@@ -44,7 +44,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
-            <label for="mdp">Mot de passe</label>
             <input type="password" 
                 name="mdp"
                 id="mdp"
