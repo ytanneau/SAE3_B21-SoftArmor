@@ -135,14 +135,14 @@
 
     // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
+        global $pdo;
+        
         $email = trim($email);
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
         if (check_email_all($email) 
         && check_mot_de_passe_all($mdp)) {
-
-            require ($chemin . '.config.php');
             
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
