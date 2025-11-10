@@ -1,4 +1,5 @@
 <?php
+const HOMT_GIT = "../../../";
 
 if (!isset($_GET['produit'])) {
     header(HOME_GIT . "html/");
@@ -8,7 +9,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-const HOMT_GIT = "../../../";
 require_once HOME_GIT . ".config.php";
 
 ?>
