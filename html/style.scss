@@ -91,6 +91,6 @@ body{
     overflow-y: hidden;
 }
 
-{
-    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+#connect_client, #inscription_client{
+    @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
 }
