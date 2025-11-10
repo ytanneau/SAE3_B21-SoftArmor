@@ -1,5 +1,5 @@
 <?php
-const HOMT_GIT = "../../../";
+const HOME_GIT = "../../../";
 
 if (!isset($_GET['produit'])) {
     header(HOME_GIT . "html/");
