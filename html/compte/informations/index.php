@@ -43,6 +43,7 @@ if ($_POST != null){
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
     $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
+    print_r($verif);
     if(!empty($verif)){
         
     }
