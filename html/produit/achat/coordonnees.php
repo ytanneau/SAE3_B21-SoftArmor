@@ -13,8 +13,6 @@ if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_GIT, );
 }
 
-var_dump($_SESSION);
-
 require_once HOME_GIT . ".config.php";
 
 ?>
@@ -33,7 +31,7 @@ $requete->execute();
 $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
 $requete = $pdo->prepare("SELECT rue, code_postal, complement_adresse FROM client_adresse WHERE id_client = :id_client");
-$requete->bindValue(":id_client", $_SESSION['id_client'], PDO::PARAM_STR);
+$requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
 $requete->execute();
 
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
