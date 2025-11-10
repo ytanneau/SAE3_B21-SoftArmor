@@ -27,7 +27,7 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemin){
         global $pdo;
         
         $raisonSocial = strtoupper(trim($raisonSocial));
@@ -36,6 +36,7 @@
         $email = trim($email);
         
         $adresse = trim($adresse);
+        $compAdresse = trim($compAdresse);
         $codePostal = trim($codePostal);
 
         $mdp = trim($mdp);
@@ -54,17 +55,21 @@
                 if (!sql_check_email($pdo, $email)){
 
                     if (sql_check_cle($pdo, $numCobrec)){
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
                         $res['connect'] = CONNECT_PAS;
+                        $res['correcte'] = false;
                     }
                 }
                 else{
                     $res['connect'] = CONNECT_PAS;
+                    $res['correcte'] = false;
                 }
             }
             catch(PDOException $e){
                 $res['fatal'] = true;
+                $res['correcte'] = false;
             }
         }
         else{
@@ -139,12 +144,17 @@
         $res['correcte'] = true;
 
         if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
+            
             try {
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
 
                 if ($resSQL != null) {
-                    if (check_crypte_MDP($mdp, $resSQL['mdp'])) {
-                        session_start();
+
+                    if (check_crypte_MDP($mdp, $resSQL['mdp'])){
+
+                        if (!isset($_SESSION)){
+                            session_start();
+                        }
 
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
@@ -377,7 +387,7 @@
     }
 
     // renvoit toutes les erreurs possibles de champ pour inscription client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc){
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $rue = null, $code_postal = null){
         $res = [];
 
         // erreur champ nom
@@ -424,22 +434,43 @@
         }
 
         //recherche l'erreur dans le mot de passe
-        if (check_vide($mdp)){
-            $res['mdp'] = VIDE;
-        }
-        else if (!check_taille($mdp, TAILLE_MDP)){
-            $res['mdp'] = DEPASSE;
-        }
-        else if (!check_mot_de_passe($mdp)){
-            $res['mdp'] = FORMAT;
+        if (isset($mdp)) {
+            if (check_vide($mdp)){
+                $res['mdp'] = VIDE;
+            }
+            else if (!check_taille($mdp, TAILLE_MDP)){
+                $res['mdp'] = DEPASSE;
+            }
+            else if (!check_mot_de_passe($mdp)){
+                $res['mdp'] = FORMAT;
+            }
+
+            //recherche l'erreur dans le mot de passe
+            if (check_vide($mdpc)){
+                $res['mdpc'] = VIDE;
+            }
+            else if ($mdp !== $mdpc) {
+                $res['mdpc'] = CORRESPOND_PAS;
+            }
         }
 
-        //recherche l'erreur dans le mot de passe
-        if (check_vide($mdpc)){
-            $res['mdpc'] = VIDE;
+        // recherche erreur dans adresse
+        if (isset($rue)) {
+            if (check_vide($rue)) {
+                $res['rue'] = VIDE;
+            } 
+            else if (!check_adresse($rue)) {
+                $res['rue'] = FORMAT;
+            }
         }
-        else if ($mdp !== $mdpc) {
-            $res['mdpc'] = CORRESPOND_PAS;
+
+        if (isset($code_postal)) {
+            if (check_vide($code_postal)) {
+                $res['code_postal'] = VIDE;
+            }
+            else if (!check_code_postal($code_postal)) {
+                $res['code_postal'] = FORMAT;
+            }
         }
 
         return $res;
@@ -506,7 +537,7 @@
         catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             throw $e;
         }
     }
@@ -529,22 +560,6 @@
     }
 
     // EN COURS DE CRÉATION
-    function sql_create_vendeur(){
-        global $pdo;
-
-        try {
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            //$requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->execute();
-            return $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
-            throw $e; // lance une erreur que la fonction appelante catchera
-        }
-    }
-
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
         try {
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
@@ -574,3 +589,47 @@
         }
     }
 
+    function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp) {
+        try {
+
+            $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
+            $requete->execute();
+
+            
+            $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
+            $requete->bindValue(':email', $email);
+            $requete->execute();
+            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
+
+
+            $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
+            $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+            $requete->bindValue(':comp_adresse', $compAdresse, PDO::PARAM_STR);
+            $requete->bindValue(':code_postal', $codePostal, PDO::PARAM_STR);
+            $requete->execute();
+
+
+            $requete = $pdo->prepare("SELECT id_adresse FROM _adresse WHERE adresse = :adresse");
+            $requete->bindValue(':adresse', $adresse);
+            $requete->execute();
+            $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
+
+
+            $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_sociale, num_siret, id_adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->bindValue(':raison_social', $raisonSocial, PDO::PARAM_STR);
+            $requete->bindValue(':numero_siret', $numSiret, PDO::PARAM_STR);
+            $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
+            $requete->execute();
+
+
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            throw $e; // lance une erreur que la fonction appelante catchera
+        }
+    }

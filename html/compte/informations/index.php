@@ -1,7 +1,7 @@
 <?php
 
 define('HOME_GIT', "../../../");
-
+// lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
     session_start();
     if (!isset($_SESSION['logged_in'])) {
@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_compte.php');
 
 //requete pour recuperer informations du compte sans l'adresse
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8;";    
@@ -30,6 +31,19 @@ $avis = $pdo->query($sql);
 
 // Fermer la connexion
 unset($pdo);
+
+//traitement de la modification des informations
+if ($_POST != null){
+    if (!isset($_POST['nom'])) $_POST['nom'] = "";
+    if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
+    if (!isset($_POST['mail'])) $_POST['mail'] = "";
+    if (!isset($_POST['date'])) $_POST['date'] = "";
+    if (!isset($_POST['rue'])) $_POST['rue'] = "";
+    if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
+
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['mail'],$_POST['date'], $_POST['rue'], $_POST['code_postal']);
+    print_r($verif);
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,33 +65,37 @@ unset($pdo);
 
         <form action="" method="post">
             
-            <label for="">Nom</label>
-            <input type="text" name="nom" value="<?php echo $row['nom'];?>">
-            <label for="">Prenom</label>
-            <input type="text" name="prenom" value="<?php echo $row['prenom'];?>">
-            <label for="">Date de Naissance</label>
-            <input type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
-            <label for="">Mail</label>
-            <input type="email" name="mail" value="<?php echo $row['email'];?>">
+            <label for="nom">Nom</label>
+            <input required type="text" name="nom" value="<?php echo $row['nom'];?>">
+            <label for="prenom">Prenom</label>
+            <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>">
+            <label for="date">Date de Naissance</label>
+            <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
+            <label for="mail">Mail</label>
+            <input required type="email" name="mail" value="<?php echo $row['email'];?>">
             <?php } ?>
-            <label for="">Adresse</label>
+            <label for="adresse">Adresse</label>
             <?php
             //affichage des info du compte
             $est_entre = false;
             foreach ($adresse_compte as $row){  
                 $est_entre = true;
             ?>
-            <label for="">Rue</label>
-            <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
-            <label for="">Code Postal</label>
-            <input type="text" name="nom" value="<?php echo $row['code_postal'];?>">
+            <label for="rue">Rue</label>
+            <input type="text" name="rue" value="<?php echo $row['adresse'];?>">
+            <label for="complement_adresse">complement_adresse</label>
+            <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
+            <label for="code_postal">Code Postal</label>
+            <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
             <?php }
             if (!$est_entre) {
                 ?>
-            <label for="">Rue</label>
-            <input type="text" name="nom" placeholder="À renseigner">
-            <label for="">Code Postal</label>
-            <input type="text" name="nom" placeholder="À renseigner">
+            <label for="rue">Rue</label>
+            <input type="text" name="rue" placeholder="À renseigner">
+            <label for="complement_adresse">complement_adresse</label>
+            <input type="text" name="complement_adresse" placeholder="À renseigner">
+            <label for="code_postal">Code Postal</label>
+            <input type="text" name="code_postal" placeholder="À renseigner">
                 <?php
             } ?>
             <button type="submit">Modifier mes informations</button>
