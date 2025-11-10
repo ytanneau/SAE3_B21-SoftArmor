@@ -142,7 +142,7 @@
         $res['correcte'] = true;
         if (check_email_all($email) 
         && check_mot_de_passe_all($mdp)) {
-
+            
             require ($chemin . '.config.php');
             
             try{
