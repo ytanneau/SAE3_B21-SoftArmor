@@ -27,7 +27,9 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+        global $pdo;
+        
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -48,8 +50,6 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require ($chemim . '.config.php');
-
             try{
                 if (!sql_check_email($pdo, $email)){
                     echo "succes";
@@ -58,11 +58,11 @@
                         echo "succes 2";
                     }
                     else{
-                        $res['numero_cobrec'] = EXISTE_PAS;
+                        $res['connect'] = CONNECT_PAS;
                     }
                 }
                 else{
-                    $res['email'] = EXISTE;
+                    $res['connect'] = CONNECT_PAS;
                 }
             }
             catch(PDOException $e){
@@ -135,22 +135,22 @@
 
     // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
+        global $pdo;
+
         $email = trim($email);
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
         if (check_email_all($email) 
         && check_mot_de_passe_all($mdp)) {
-
-            require ($chemin . '.config.php');
             
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
                 if ($resSQL != null){
-                    echo "succes";
+                    //echo "succes";
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
-                        echo "succes 2";
+                        //echo "succes 2";
 
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
@@ -178,9 +178,8 @@
                 $res['correcte'] = false;
             }
         } else {
+            return check_erreur_connection($email, $mdp);
         }
-
-        require ($chemin . '.config.php');
     }
 
 
@@ -452,7 +451,32 @@
         return $res;
     }
 
+    function check_erreur_connection($email, $mdp){
 
+        //recherche dans l'email
+        if (check_vide($email)){
+            $res['email'] = VIDE;
+        }
+        else if (!check_taille($email, TAILLE_EMAIL)){
+            $res['email'] = DEPASSE;
+        }
+        else if (!check_email($email)){
+            $res['email'] = FORMAT; 
+        }
+
+        //recherche l'erreur dans le mot de passe
+        if (check_vide($mdp)){
+            $res['mdp'] = VIDE;
+        }
+        else if (!check_taille($mdp, TAILLE_MDP)){
+            $res['mdp'] = DEPASSE;
+        }
+        else if (!check_mot_de_passe($mdp)){
+            $res['mdp'] = FORMAT;
+        }
+
+        return $res;
+    }
 
 //fonctuion pour la base de donnée
 

@@ -12,7 +12,7 @@ if ($_POST != null){
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
     header('location: stock');
     exit;
 }
@@ -23,13 +23,27 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Alizon Vendeur Connexion</title>
 </head>
 <body>
     <main>
+<?php
+    if (isset($res['fatal'])){
+?>
+        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
+<?php
+    }
+    else {
+?>
         <form action="" method="post">
-            <legend>Informations</legend>
-
+            <legend>Connection</legend>
+<?php
+    if (isset($res['connect'])){
+?>
+        <h3 class="error"><?=$res['connect']?></h1>
+<?php
+    }
+?>
                 <!-- Adresse e-mail -->
             <br>
             <label for="email">Email</label>
@@ -38,6 +52,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
                 required>
+<?php
+    if (isset($res['email'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['email']?>
+            </p>
+<?php
+    }
+?>
 
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
@@ -45,12 +68,23 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <input type="password" 
                 name="mdp"
                 id="mdp"
-                value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>"
                 required>
+<?php
+    if (isset($res['mpd'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['mdp']?>
+            </p>
+<?php
+    }
+?>
             
             <input type="submit" value="Se connecter">            
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
+<?php
+    }
+?>
     </main>
 </body>
 </html>
