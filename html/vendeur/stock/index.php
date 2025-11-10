@@ -5,7 +5,7 @@ require_once '../../../.config.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-
+//verifie si quelqun est connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ' . HOME_GIT);
     exit;
@@ -46,11 +46,12 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
-    $compte = $_SESSION['id_compte'];
+    print_r($_SESSION);
+    //$compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide
     if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_vendeur", $compte);
+        $stmt->bindParam(":id_vendeur", 1);
     }
     //regarde si la commande est executable
     if ($stmt->execute()) {
