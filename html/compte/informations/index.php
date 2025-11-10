@@ -122,26 +122,8 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
-            <p>
-            <?php 
-                
-                    if (!empty($row['adresse'])) {
-                        echo 'value="' . $row['adresse'] . '"';
-                    } else {
-                        echo 'placeholder="À renseigner"';
-                    }
-                ?></p>
-            <input 
-                type="text" 
-                name="rue"
-                <?php 
-                
-                    if (!empty($row['adresse'])) {
-                        echo 'value="' . $row['adresse'] . '"';
-                    } else {
-                        echo 'placeholder="À renseigner"';
-                    }
-                ?>>
+            
+            <input type="text" name="rue" value="<?php echo $row['complement_adresse'];?>">
             <!--Erreur rue-->
             <?php
                 if (isset($verif['rue'])){
@@ -153,9 +135,9 @@ if ($_POST != null){
                 }
             ?>
             <label for="complement_adresse">Complement Adresse</label>
-            <input type="text" name="complement_adresse" <?php if(isset($row['complement_adresse']) && $row['complement_adresse']!=null){echo "value=\"".$row['complement_adresse']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
+            <input type="text" name="complement_adresse" value="<?php echo $row['complement_adresse'];?>">
             <label for="code_postal">Code Postal</label>
-            <input type="text" name="code_postal" <?php if(isset($row['code_postal']) && $row['code_postal']!=null){echo "value=\"".$row['code_postal']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
+            <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
             <!--Erreur code postal-->
             <?php
                 if (isset($verif['code_postal'])){
@@ -166,7 +148,35 @@ if ($_POST != null){
             <?php
                 }
             ?>
-            
+            <?php }
+            if (!$est_entre) {
+                ?>
+            <label for="rue">Rue</label>
+            <input type="text" name="rue" placeholder="À renseigner">
+            <!--Erreur rue-->
+            <?php
+                if (isset($verif['rue'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['rue']?>
+                        </p>
+            <?php
+                }
+            ?>
+            <label for="complement_adresse">Complement Adresse</label>
+            <input type="text" name="complement_adresse" placeholder="À renseigner">
+            <label for="code_postal">Code Postal</label>
+            <input type="text" name="code_postal" placeholder="À renseigner">
+            <!--Erreur code postal-->
+            <?php
+                if (isset($verif['code_postal'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['code_postal']?>
+                        </p>
+            <?php
+                }
+            ?>
                 <?php
             } ?>
             <button type="submit">Modifier mes informations</button>
