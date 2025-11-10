@@ -5,7 +5,7 @@ define('HOME_GIT', "../../../");
 if (!isset($_SESSION)) {
     session_start();
     if (!isset($_SESSION['logged_in'])) {
-        header('location: ' . HOME_GIT . "html");
+        header('location: ../../' );
         exit;
     }
 }
@@ -66,9 +66,6 @@ unset($pdo);
             $est_entre = false;
             foreach ($adresse_compte as $row){  
                 $est_entre = true;
-                    
-
-                
             ?>
             <label for="">Rue</label>
             <input type="text" name="nom" value="<?php echo $row['adresse'];?>">
