@@ -44,7 +44,7 @@ $produit = $requete->fetch(PDO::FETCH_ASSOC);
 <?php } ?>
         <p>Prix HT : <?=$produit['prix']?></p>
         <p>TVA : <?=$produit['tva']?></p>
-        <p>Prix TTC : <?=$produit['prix'] * $produit['tva']?></p>
+        <p>Prix TTC : <?=$produit['prix'] * (1 + $produit['tva']/100)?></p>
 
         <button>Acheter</button>
     </body>
