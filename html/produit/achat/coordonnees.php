@@ -71,7 +71,7 @@ if ($_POST != null){
         <form action="" method="post">
 
         <label for="adresse">Adresse</label>
-        <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) echo $adresse_client['adresse']?>" required>
+        <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) {echo $adresse_client['adresse'];} else if (isset($_POST['adresse'])) {echo $_POST['adresse'];}?>" required>
         <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
         <?php
         if (isset($erreurs['adresse'])){
@@ -84,13 +84,13 @@ if ($_POST != null){
         ?>
 
         <br>
-        <label for="compAdresse">Complément adresse</label>
-        <input type="text" name="compAdresse" id="compAdresse" value="<?php if (isset($adresse_client['compAdresse'])) echo $adresse_client['compAdresse']?>"> <p class="contrainte">informations complémentaires</p>
+        <label for="complement_adresse">Complément adresse</label>
+        <input type="text" name="complement_adresse" id="complement_adresse" value="<?php if (isset($adresse_client['complement_adresse'])) {echo $adresse_client['complement_adresse'];} else if (isset($_POST['complement_adresse'])) {echo $_POST['complement_adresse'];}?>"> <p class="contrainte">informations complémentaires</p>
 
 
         <br>
-        <label for="codePostal">Code postal</label>
-        <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($adresse_client['code_postal'])) echo $adresse_client['code_postal']?>" required>
+        <label for="code_postal">Code postal</label>
+        <input type="number" name="code_postal" id="code_postal" size="5" value="<?php if (isset($adresse_client['code_postal'])) {echo $adresse_client['code_postal'];} else if (isset($_POST['code_postal'])) {echo $_POST['code_postal'];}?>" required>
         <p class="contrainte">Nombre à 5 chiffres</p>
         <?php
         if (isset($erreurs['code_postal'])){
