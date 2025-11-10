@@ -47,19 +47,19 @@ if ($_POST != null){
     $fichier = HOME_GIT . 'fonction_compte.php';
     if (file_exists($fichier)) {
         require_once $fichier;
-        $res = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
+        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
 
-        if ($res['correcte'] && $_POST['enregistrer']) {
+        if ($erreurs == [] && $_POST['enregistrer']) {
             sql_insert_adresse_client($pdo, $_POST['id_client'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
         }
 
     } else {
         // echo "erreur 1";
 
-        $res['fatal'] = true;
-        $fichierLog = __DIR__ . "/erreurs.log";
-        $date = date("Y-m-d H:i:s");
-        file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
+        $erreurs['fatal'] = true;
+        // $fichierLog = __DIR__ . "/erreurs.log";
+        // $date = date("Y-m-d H:i:s");
+        // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
     }
 }
 
@@ -74,10 +74,10 @@ if ($_POST != null){
         <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) echo $adresse_client['adresse']?>" required>
         <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
         <?php
-        if (isset($res['adresse'])){
+        if (isset($erreurs['adresse'])){
         ?>
         <p class="error">
-            <?="Erreur : ".$res['adresse']?>
+            <?="Erreur : ".$erreurs['adresse']?>
         </p>
         <?php
         }
@@ -93,10 +93,10 @@ if ($_POST != null){
         <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($adresse_client['code_postal'])) echo $adresse_client['code_postal']?>" required>
         <p class="contrainte">Nombre à 5 chiffres</p>
         <?php
-        if (isset($res['code_postal'])){
+        if (isset($erreurs['code_postal'])){
         ?>
         <p class="error">
-            <?="Erreur : ".$res['code_postal']?>
+            <?="Erreur : ".$erreurs['code_postal']?>
         </p>
         <?php
         }
