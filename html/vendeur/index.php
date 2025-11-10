@@ -26,7 +26,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Vendeur Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
+    <link rel="stylesheet" href="<?= HOME_GIT . "html/style.css" ?>">
 </head>
 <body id="connect_vendeur">
     <main>
