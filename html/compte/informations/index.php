@@ -122,10 +122,19 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
+            <?php 
+                
+                    if (!empty($row['adresse'])) {
+                        echo 'value="' . $row['adresse'] . '"';
+                    } else {
+                        echo 'placeholder="À renseigner"';
+                    }
+                ?>
             <input 
                 type="text" 
                 name="rue"
                 <?php 
+                
                     if (!empty($row['adresse'])) {
                         echo 'value="' . $row['adresse'] . '"';
                     } else {
