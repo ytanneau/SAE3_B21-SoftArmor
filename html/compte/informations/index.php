@@ -54,7 +54,7 @@ if ($_POST != null){
     <title>Informations Compte</title>
 </head>
 <body>
-    <a href="fin_session.php">se deconnecter</a>
+    <a href="../deconnexion/">se deconnecter</a>
     <h1>Mon Profil</h1>
     <div>
         <?php
@@ -122,7 +122,7 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
-            <input type="text" name="rue" value="<?php echo $row['adresse'];?>">
+            <input type="text" name="rue" value="<?php if(isset($row['adresse'])){echo $row['adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <!--Erreur rue-->
             <?php
                 if (isset($verif['rue'])){
