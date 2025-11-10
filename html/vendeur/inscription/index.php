@@ -11,6 +11,7 @@
             $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
 
         } else {
+            echo $fichier;
             echo "erreur 1";
             $res['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
