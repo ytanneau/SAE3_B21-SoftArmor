@@ -9,10 +9,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-print_r($_SESSION);
-var_dump(isset($_SESSION));
-
-if (!isset($_SESSION)) {
+if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_GIT, );
 }
 
