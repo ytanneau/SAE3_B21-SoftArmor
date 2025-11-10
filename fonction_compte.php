@@ -145,6 +145,8 @@
         echo "Test 1";
 
         if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
+
+            echo "Test 2";
             
             try {
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
@@ -152,13 +154,12 @@
                 if ($resSQL != null) {
                     //echo "succes";
 
-                    echo "Test 2";
+                    echo "Test 3";
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         //echo "succes 2";
 
-                        echo "Test 3";
-
+                        
                         session_start();
 
                         $_SESSION['logged_in'] = true;
