@@ -5,12 +5,13 @@
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
-        $fichier = getenv('HOME_GIT') . '/fonction_compte.php';
+        $fichier = HOME_GIT . '/fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
 
         } else {
+            echo $fichier;
             echo "erreur 1";
             $res['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -146,15 +147,6 @@
                 id="compAdresse"
                 value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
             <p class="contrainte">information compémentaire</p>
-<?php
-    if (isset($res['adresse'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$res['adresse']?>
-            </p>
-<?php
-    }
-?>
 
             <br>
             <label for="codePostal">Code postal</label>
