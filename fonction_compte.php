@@ -635,7 +635,7 @@
     // fonction qui rajoute une adresse à un client dans la bdd
     function sql_insert_adresse_client($pdo, $id_compte, $adresse, $compl_adresse, $code_postal) {
         try {
-            $requete = $pdo->prepare("INSERT INTO _adresse (adresse, code_postal, complement_adresse) VALUES (:adresse, :compl_adresse, :code_postal)");
+            $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :compl_adresse, :code_postal)");
             $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);
             $requete->bindValue(":compl_adresse", $compl_adresse, PDO::PARAM_STR);
             $requete->bindValue(":code_postal", $code_postal, PDO::PARAM_STR);
