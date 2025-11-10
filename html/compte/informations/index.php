@@ -34,15 +34,19 @@ unset($pdo);
 
 //traitement de la modification des informations
 if ($_POST != null){
+    $pseudo="null";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
     if (!isset($_POST['date'])) $_POST['date'] = "";
-    if (!isset($_POST['rue'])) $_POST['rue'] = "";
+    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['rue'], $_POST['code_postal']);
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
     print_r($verif);
+    if(!empty($verif)){
+        
+    }
 }
 ?>
 
@@ -52,6 +56,7 @@ if ($_POST != null){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Compte</title>
+    <script src="confirmation.js"></script>
 </head>
 <body>
     <a href="../../deconnexion/">se deconnecter</a>
@@ -63,10 +68,10 @@ if ($_POST != null){
         ?>
         <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
 
-        <form action="" method="post">
+        <form action="" method="post" id="donnee">
             
             <label for="nom">Nom</label>
-            <input required type="text" name="nom" value="<?php echo $row['nom'];?>">
+            <input required type="text" name="nom" value="<?php echo $row['nom'];?>" placeholder="À renseigner">
             <!--Erreur nom-->
             <?php
                 if (isset($verif['nom'])){
@@ -78,7 +83,7 @@ if ($_POST != null){
                 }
             ?>
             <label for="prenom">Prenom</label>
-            <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>">
+            <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>" placeholder="À renseigner">
             <!--Erreur prenom-->
             <?php
                 if (isset($verif['prenom'])){
@@ -90,7 +95,7 @@ if ($_POST != null){
                 }
             ?>
             <label for="date">Date de Naissance</label>
-            <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
+            <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" placeholder="À renseigner">
             <!--Erreur Date-->
             <?php
                 if (isset($verif['date'])){
@@ -102,7 +107,7 @@ if ($_POST != null){
                 }
             ?>
             <label for="mail">Mail</label>
-            <input required type="email" name="email" value="<?php echo $row['email'];?>">
+            <input required type="email" name="email" value="<?php echo $row['email'];?>" placeholder="À renseigner">
             <!--Erreur mail-->
             <?php
                 if (isset($verif['email'])){
@@ -121,12 +126,12 @@ if ($_POST != null){
             foreach ($adresse_compte as $row){  
                 $est_entre = true;
             ?>
-            <label for="rue">Rue</label>
             
-            <input type="text" name="rue" value="<?php echo $row['complement_adresse'];?>">
-            <!--Erreur rue-->
+            
+            <input type="text" name="adresse" value="<?php echo $row['adresse'];?>" placeholder="À renseigner">
+            <!--Erreur adresse-->
             <?php
-                if (isset($verif['rue'])){
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
@@ -135,12 +140,12 @@ if ($_POST != null){
                 }
             ?>
             <label for="complement_adresse">Complement Adresse</label>
-            <input type="text" name="complement_adresse" value="<?php echo $row['complement_adresse'];?>">
+            <input type="text" name="complement_adresse" value="<?php echo $row['complement_adresse'];?>" placeholder="À renseigner">
             <label for="code_postal">Code Postal</label>
-            <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
+            <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal'])){
+                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['code_postal']?>
@@ -151,17 +156,20 @@ if ($_POST != null){
             <?php }
             if (!$est_entre) {
                 ?>
-            <label for="rue">Rue</label>
-            <input type="text" name="rue" placeholder="À renseigner">
-            <!--Erreur rue-->
+            
+            <input type="text" name="adresse" placeholder="À renseigner">
+            <!--Erreur adresse-->
             <?php
-                if (isset($verif['rue'])){
-            ?>
+                echo "test";
+                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
+                    echo "test";
+            ?>  
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
+                echo "test";
             ?>
             <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" placeholder="À renseigner">
@@ -169,7 +177,7 @@ if ($_POST != null){
             <input type="text" name="code_postal" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal'])){
+                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$verif['code_postal']?>
@@ -177,8 +185,19 @@ if ($_POST != null){
             <?php
                 }
             ?>
+            
+            
                 <?php
             } ?>
+            <?php
+                if (empty($verif['code_postal']) xor empty($verif['rue'])){
+            ?>
+                        <p class="error">
+                            <?= "Remplissez les deux champs Adresse et Code Postal" ?>
+                        </p>
+            <?php
+                }
+            ?>
             <button type="submit">Modifier mes informations</button>
         </form>
         

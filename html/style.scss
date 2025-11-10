@@ -1,0 +1,55 @@
+@use "style_const.scss" as *;
+
+@mixin centre_comtenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin page_connect_insciption($background, $background_main){
+    background-color: $background;
+    height: 100vh;
+
+    @include centre_comtenu;
+
+    main{
+        background-color: $background_main;
+        @include centre_comtenu;
+        row-gap: 1em;
+        border-radius: $angle_normal;
+        padding: $padding_normal;
+        width: 200px;
+
+        form{
+            @include centre_comtenu;
+            align-items:baseline;
+            gap: 1vh;
+
+            legend{
+                align-self: center;
+            }
+
+            .champ{
+                border: none;
+                border-radius: $angle_petit;
+            }
+            
+            .boutton{
+                align-self: center;
+                background-color: $focus;
+                border: none;
+                border-radius: $angle_grand;
+                
+            }
+
+            .error{
+                color: $rouge;
+            }
+        }
+    }
+}
+
+#connect_vendeur{
+    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+}
