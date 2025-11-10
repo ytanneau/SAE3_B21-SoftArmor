@@ -11,6 +11,15 @@
 //permet d'utiliser le fichier config.php
 require_once '../../../.config.php';
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('location: ' . HOME_GIT);
+    exit;
+}
+
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
 $sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
 
