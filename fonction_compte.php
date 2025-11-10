@@ -135,14 +135,14 @@
 
     // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
+        global $pdo;
+        
         $email = trim($email);
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
         if (check_email_all($email) 
         && check_mot_de_passe_all($mdp)) {
-
-            require ($chemin . '.config.php');
             
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
@@ -535,14 +535,13 @@
         }
     }
 
-
     // EN COURS DE CRÉATION
     function sql_create_vendeur(){
         global $pdo;
 
         try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            //$requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

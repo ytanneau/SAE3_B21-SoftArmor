@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-define('HOME_GIT', '../../');
+define('HOME_GIT', '../../../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: stock');
+    header('location: ' . HOME_GIT . "html");
     exit;
 }
 ?>
