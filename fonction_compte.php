@@ -258,8 +258,6 @@
 
     // Vérifie le mot de passe (bon format, bonne taille)
     function check_mot_de_passe_all($mdp){
-        echo ("Format : " . check_mot_de_passe($mdp));
-        echo ("Taille : " . check_taille($mdp, TAILLE_MDP));
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
