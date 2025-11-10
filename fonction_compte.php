@@ -55,6 +55,7 @@
                 if (!sql_check_email($pdo, $email)){
 
                     if (sql_check_cle($pdo, $numCobrec)){
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
                         $res['connect'] = CONNECT_PAS;
