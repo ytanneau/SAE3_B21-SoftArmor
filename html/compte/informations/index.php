@@ -122,7 +122,7 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
-            <input type="text" name="rue" value="<?php if(isset($row['adresse']) && $row['adresse']!=null){echo $row['adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
+            <input type="text" name="rue" <?php if(isset($row['adresse']) && $row['adresse']!=null){echo "value=\"".$row['adresse']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
             <!--Erreur rue-->
             <?php
                 if (isset($verif['rue'])){
@@ -134,9 +134,9 @@ if ($_POST != null){
                 }
             ?>
             <label for="complement_adresse">Complement Adresse</label>
-            <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse']) && $row['complement_adresse']!=null){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
+            <input type="text" name="complement_adresse" <?php if(isset($row['complement_adresse']) && $row['complement_adresse']!=null){echo "value=\"".$row['complement_adresse']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
             <label for="code_postal">Code Postal</label>
-            <input type="text" name="code_postal" value="<?php if(isset($row['code_postal']) && $row['adresse']!=null){echo $row['code_postal'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
+            <input type="text" name="code_postal" <?php if(isset($row['code_postal']) && $row['code_postal']!=null){echo "value=\"".$row['code_postal']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
             <!--Erreur code postal-->
             <?php
                 if (isset($verif['code_postal'])){
