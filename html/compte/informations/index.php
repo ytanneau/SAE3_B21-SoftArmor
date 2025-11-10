@@ -122,7 +122,7 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
-            <input type="text" name="rue" <?php if(isset($row['adresse']) && $row['adresse']!=null){echo "value=\"".$row['adresse']."\"";} else{echo "placeholder=\"À renseigner\"";}  ;?>>
+            <input type="text" name="rue" <?php if(isset($row['adresse']) && $row['adresse']!=null){ echo 'value="'.htmlspecialchars($row['adresse'], ENT_QUOTES).'"'; } else { echo 'placeholder="À renseigner"'; } ?>>
             <!--Erreur rue-->
             <?php
                 if (isset($verif['rue'])){
