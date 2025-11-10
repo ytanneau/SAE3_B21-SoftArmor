@@ -36,6 +36,7 @@
         $email = trim($email);
         
         $adresse = trim($adresse);
+        $compAdresse = trim($compAdresse);
         $codePostal = trim($codePostal);
 
         $mdp = trim($mdp);
@@ -538,22 +539,6 @@
     }
 
     // EN COURS DE CRÉATION
-    function sql_create_vendeur(){
-        global $pdo;
-
-        try {
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            //$requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->execute();
-            return $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
-            throw $e; // lance une erreur que la fonction appelante catchera
-        }
-    }
-
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
         try {
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
@@ -583,3 +568,41 @@
         }
     }
 
+    function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp) {
+        try {
+            $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
+            $requete->execute();
+            
+            $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
+            $requete->bindValue(':email', $email);
+            $requete->execute();
+            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
+
+            $requete = $pdo->prepare("INSERT INTO _adresse (adresse, adresse_compement, code_postale) VALUES (:adresse, :comp_adresse, :code_postale)");
+            $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+            $requete->bindValue(':comp_adresse', $compAdresse, PDO::PARAM_STR);
+            $requete->bindValue(':code_postale', $codePostal, PDO::PARAM_STR);
+            $requete->execute();
+
+            $requete = $pdo->prepare("SELECT id_adresse FROM adresse WHERE adresse = :adresse");
+            $requete->bindValue(':email', $email);
+            $requete->execute();
+            $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
+
+            $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_social, numero_siret, adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->bindValue(':raison_social', $pseudo, PDO::PARAM_STR);
+            $requete->bindValue(':numero_siret', $nom, PDO::PARAM_STR);
+            $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
+            $requete->execute();
+
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            throw $e; // lance une erreur que la fonction appelante catchera
+        }
+    }
