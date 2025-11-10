@@ -227,10 +227,6 @@
 
     // Vérifie l'e-mail (non vide, bonne taille, bon format)
     function check_email_all($adresse){
-        echo ("Vide : " . check_vide($adresse));
-        echo ("Taille : " . check_taille($adresse, TAILLE_EMAIL));
-        echo ("Format : " . check_email($adresse));
-
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
 
@@ -262,6 +258,8 @@
 
     // Vérifie le mot de passe (bon format, bonne taille)
     function check_mot_de_passe_all($mdp){
+        echo ("Format : " . check_mot_de_passe($mdp));
+        echo ("Taille : " . check_taille($mdp, TAILLE_MDP));
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
