@@ -58,7 +58,7 @@ unset($pdo);
             foreach ($produit_recent as $row){  
             ?>
             <li>
-                <a href="produit/index.php"> 
+                <a href="produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
                     <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -93,7 +93,7 @@ unset($pdo);
             foreach ($produit_reduit as $row){  
             ?>
             <li>
-                <a href="produit/index.php">
+                <a href="produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
                     <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -129,7 +129,7 @@ unset($pdo);
             foreach ($produit_alimentaire as $row){  
             ?>
             <li>
-                <a href="produit/index.php">
+                <a href="produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
                     <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -164,7 +164,7 @@ unset($pdo);
             foreach ($produit_catalogue as $row){  
             ?>
             <li>
-                <a href="produit/index.php">
+                <a href="produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
                     <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
