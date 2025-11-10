@@ -63,7 +63,3 @@ function ecrire_nom($nom_stock){
 </html>
 
 
-
-<!-- Warning: Undefined variable $pdo in /var/www/html/vendeur/stock/index.php on line 38
-
-Fatal error: Uncaught Error: Call to a member function prepare() on null in /var/www/html/vendeur/stock/index.php:38 Stack trace: #0 /var/www/html/vendeur/stock/index.php(15): initialize('select quantite...') #1 {main} thrown in /var/www/html/vendeur/stock/index.php on line 38 -->
