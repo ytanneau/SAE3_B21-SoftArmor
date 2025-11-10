@@ -42,6 +42,7 @@ unset($pdo);
 <body>
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
+        <a href="compte/inscription">S'inscrire</a>
     <?php } else { ?>
         <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
     <?php } ?>
