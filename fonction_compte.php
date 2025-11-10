@@ -583,11 +583,15 @@
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
             $requete->execute();
+
+            echo "test succes 1";
             
             $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
             $requete->bindValue(':email', $email);
             $requete->execute();
             $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
+
+            echo "test succes 2";
 
             $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
             $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
@@ -595,10 +599,14 @@
             $requete->bindValue(':code_postal', $codePostal, PDO::PARAM_STR);
             $requete->execute();
 
+            echo "test succes 3";
+
             $requete = $pdo->prepare("SELECT id_adresse FROM adresse WHERE adresse = :adresse");
             $requete->bindValue(':adresse', $adresse);
             $requete->execute();
             $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
+
+            echo "test succes 4";
 
             $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_sociale, num_siret, id_adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
@@ -606,6 +614,8 @@
             $requete->bindValue(':numero_siret', $nom, PDO::PARAM_STR);
             $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
             $requete->execute();
+
+            echo "test succes 1";
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
