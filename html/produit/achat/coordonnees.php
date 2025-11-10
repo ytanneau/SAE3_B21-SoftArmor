@@ -63,8 +63,8 @@ $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
         <br>
         <label for="codePostal">Code postal</label>
-        <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($adresse_client['codePostal'])) echo $adresse_client['codePostal']?>" required>
-        <p class="contrainte">Nombre a 5 chiffres</p>
+        <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($adresse_client['code_postal'])) echo $adresse_client['code_postal']?>" required>
+        <p class="contrainte">Nombre à 5 chiffres</p>
         <?php
         if (isset($res['code_postal'])){
         ?>
@@ -74,6 +74,13 @@ $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
         <?php
         }
         ?>
+
+        <br>
+        <label for="enregistrer">Enregistrer l'adresse</label>
+        <input type="checkbox" id="enregistrer" name="enregistrer">
+
+        <br>
+        <input type="submit" value="Continuer l'achat">
 
         </form>
     </body>
