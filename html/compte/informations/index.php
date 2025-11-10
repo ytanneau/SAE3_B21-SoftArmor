@@ -84,7 +84,7 @@ if ($_POST != null){
             <label for="rue">Rue</label>
             <input type="text" name="rue" value="<?php echo $row['adresse'];?>">
             <label for="complement_adresse">complement_adresse</label>
-            <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse']} else{echo "placeholder=\"À renseigner\"";}  ;?>">
+            <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <label for="code_postal">Code Postal</label>
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
             <?php }
