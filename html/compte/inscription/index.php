@@ -48,11 +48,9 @@
 <?php
     }
     else{
-        if (isset($_POST['correcte'])) {
-            echo "test";
-        }
-
 ?>
+        <h1>Inscription client sur Alizon</h1>
+        
         <form action="" method="post">
             <label for="nom">Nom</label>
             <input type="text" id="nom" name="nom" maxlength="40" value="<?php if (isset($_POST["nom"])) echo $_POST["nom"]?>">
