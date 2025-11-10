@@ -41,11 +41,13 @@ function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as $row){
         ?>
-        <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
+        
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt=> </td>
-                <td><?= $row['nom_stock']?> </td>
+                <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
+                    <td><?= $row['nom_stock']?> </td>
+                </a>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
@@ -53,7 +55,7 @@ function ecrire_nom($nom_stock){
                 <td><?php echo $row['quantite'] ?></td>
             </tr>            
         </table>
-        </a>
+        
         <?php
     }
 }
