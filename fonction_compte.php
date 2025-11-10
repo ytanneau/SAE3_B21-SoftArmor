@@ -27,7 +27,9 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemim){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+        global $pdo;
+        
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -49,14 +51,10 @@
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require ($chemim . '.config.php');
-
             try{
                 if (!sql_check_email($pdo, $email)){
-                    echo "succes";
 
                     if (sql_check_cle($pdo, $numCobrec)){
-                        echo "succes 2";
                     }
                     else{
                         $res['connect'] = CONNECT_PAS;
@@ -105,10 +103,8 @@
             
             try {
                 if (!sql_check_email($pdo, $email)){
-                    echo "succes";
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
-                        echo "succes 2";
                     } else {
                         // changer l'erreur $res['CR'] = EXISTE_PAS;
                         $res['correcte'] = false;
@@ -136,30 +132,40 @@
 
     // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
+        global $pdo;
+
         $email = trim($email);
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
-        if (check_email_all($email) 
-        && check_mot_de_passe_all($mdp)) {
+
+        echo "Test 1";
+
+        if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
+
+            echo "Test 2";
             
-            require ($chemin . '.config.php');
-            
-            try{
+            try {
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
-                if ($resSQL != null){
+
+                if ($resSQL != null) {
                     //echo "succes";
+
+                    echo "Test 3";
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         //echo "succes 2";
 
+                        
+                        session_start();
+
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
                         $_SESSION['email'] = $email;
+
                         if ($typeCompte == 'vendeur'){
                             $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
-                        }
-                        else{
+                        } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
 
@@ -179,7 +185,7 @@
                 $res['correcte'] = false;
             }
         } else {
-            return check_erreur_connection($email, $mpd);
+            return check_erreur_connection($email, $mdp);
         }
     }
 
@@ -253,6 +259,8 @@
 
     // Vérifie le mot de passe (bon format, bonne taille)
     function check_mot_de_passe_all($mdp){
+        echo ("Format : " . check_mot_de_passe($mdp));
+        echo ("Taille : " . check_taille($mdp, TAILLE_MDP));
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
     }
 
@@ -500,11 +508,10 @@
 
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
-        try{
-            if ($typecompte == 'vendeur'){
+        try {
+            if ($typecompte == 'vendeur') {
                 $requete = $pdo->prepare("SELECT * FROM compte_vendeur WHERE email = :email");
-            }
-            else{
+            } else {
                 $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
             }
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -535,7 +542,6 @@
             throw $e;
         }
     }
-
 
     // EN COURS DE CRÉATION
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
