@@ -389,7 +389,7 @@
     }
 
     // renvoit toutes les erreurs possibles de champ pour inscription client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc){
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $rue = null, $code_postal = null){
         $res = [];
 
         // erreur champ nom
@@ -436,22 +436,43 @@
         }
 
         //recherche l'erreur dans le mot de passe
-        if (check_vide($mdp)){
-            $res['mdp'] = VIDE;
-        }
-        else if (!check_taille($mdp, TAILLE_MDP)){
-            $res['mdp'] = DEPASSE;
-        }
-        else if (!check_mot_de_passe($mdp)){
-            $res['mdp'] = FORMAT;
+        if (isset($mdp)) {
+            if (check_vide($mdp)){
+                $res['mdp'] = VIDE;
+            }
+            else if (!check_taille($mdp, TAILLE_MDP)){
+                $res['mdp'] = DEPASSE;
+            }
+            else if (!check_mot_de_passe($mdp)){
+                $res['mdp'] = FORMAT;
+            }
+
+            //recherche l'erreur dans le mot de passe
+            if (check_vide($mdpc)){
+                $res['mdpc'] = VIDE;
+            }
+            else if ($mdp !== $mdpc) {
+                $res['mdpc'] = CORRESPOND_PAS;
+            }
         }
 
-        //recherche l'erreur dans le mot de passe
-        if (check_vide($mdpc)){
-            $res['mdpc'] = VIDE;
+        // recherche erreur dans adresse
+        if (isset($rue)) {
+            if (check_vide($rue)) {
+                $res['rue'] = VIDE;
+            } 
+            else if (!check_adresse($rue)) {
+                $res['rue'] = FORMAT;
+            }
         }
-        else if ($mdp !== $mdpc) {
-            $res['mdpc'] = CORRESPOND_PAS;
+
+        if (isset($code_postal)) {
+            if (check_vide($code_postal)) {
+                $res['code_postal'] = VIDE;
+            }
+            else if (!check_code_postal($code_postal)) {
+                $res['code_postal'] = FORMAT;
+            }
         }
 
         return $res;
