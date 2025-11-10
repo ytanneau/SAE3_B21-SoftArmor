@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-define('HOME_GIT', '../../');
+define('HOME_GIT', '../../../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -14,9 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: stock');
+    echo "Vous avez réussi enfin !";
+    header('location: ' . HOME_GIT . "html");
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +43,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 required>
 
                 <!-- Mot de passe -->
-            <label for="mdp">Mot de passe</label>
             <label for="mdp">Mot de passe</label>
             <input type="password" 
                 name="mdp"
