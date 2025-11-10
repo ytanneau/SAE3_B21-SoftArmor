@@ -152,13 +152,15 @@
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         //echo "succes 2";
 
+                        session_start();
+
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
                         $_SESSION['email'] = $email;
+
                         if ($typeCompte == 'vendeur'){
                             $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
-                        }
-                        else{
+                        } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
 
