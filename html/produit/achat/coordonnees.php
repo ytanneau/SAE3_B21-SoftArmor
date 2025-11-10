@@ -30,7 +30,7 @@ $requete->execute();
 
 $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
-$requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_client = :id_client");
+$requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
 $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
 $requete->execute();
 
