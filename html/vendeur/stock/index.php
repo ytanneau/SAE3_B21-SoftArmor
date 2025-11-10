@@ -1,7 +1,7 @@
 <?php
 //permet d'utiliser le fichier config.php
 require_once '../../../.config.php';
-
+define("HOME_GIT", "../");
 if (!isset($_SESSION)) {
     session_start();
 }
