@@ -182,7 +182,7 @@ if ($_POST != null){
                 <?php
             } ?>
             <?php
-                if (empty($verif['code_postal']) xor empty($verif['adresse'])){
+                if (empty($verif['code_postal']) xor empty($verif['rue'])){
             ?>
                         <p class="error">
                             <?= "Remplissez les deux champs Adresse et Code Postal" ?>
