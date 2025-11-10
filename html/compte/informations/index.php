@@ -34,6 +34,7 @@ unset($pdo);
 
 //traitement de la modification des informations
 if ($_POST != null){
+    $pseudo="null"
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
@@ -41,7 +42,7 @@ if ($_POST != null){
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
     print_r($verif);
 }
 ?>
@@ -155,13 +156,16 @@ if ($_POST != null){
             <input type="text" name="adresse" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
+                echo "test";
                 if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
-            ?>
+                    echo "test";
+            ?>  
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
+                echo "test";
             ?>
             <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" placeholder="À renseigner">
