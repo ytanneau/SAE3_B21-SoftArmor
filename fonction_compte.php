@@ -27,7 +27,9 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemin){
+        global $pdo;
+        
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
         $numCobrec = nettoyer_chaine(trim($numCobrec));
@@ -47,8 +49,6 @@
         && check_adresse_all($adresse)
         && check_code_postal_all($codePostal)
         && check_create_MDP($mdp, $mdpc)) {
-
-            require ($chemim . '.config.php');
 
             try{
                 if (!sql_check_email($pdo, $email)){
@@ -136,7 +136,7 @@
     // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
         global $pdo;
-        
+
         $email = trim($email);
         $mdp = trim($mdp);
 
@@ -179,8 +179,6 @@
             }
         } else {
         }
-
-        require ($chemin . '.config.php');
     }
 
 
