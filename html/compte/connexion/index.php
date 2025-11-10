@@ -14,7 +14,7 @@ if ($_POST != null){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
-    header('location: ' . HOME_GIT . 'html/');
+    header('location: ' . HOME_GIT);
     exit;
 }
 
