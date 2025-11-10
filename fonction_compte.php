@@ -55,7 +55,7 @@
                 if (!sql_check_email($pdo, $email)){
 
                     if (sql_check_cle($pdo, $numCobrec)){
-                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp);
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
                         $res['connect'] = CONNECT_PAS;
@@ -582,11 +582,8 @@
             echo "test succes 0";
 
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
-            echo "test succes 0.1";
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            echo "test succes 0.2";
             $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
-            echo "test succes 0.3";
             $requete->execute();
 
             echo "test succes 1";
@@ -627,6 +624,7 @@
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            echo $e;
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
