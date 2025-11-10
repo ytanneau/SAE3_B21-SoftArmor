@@ -45,9 +45,10 @@ function ecrire_nom($nom_stock){
         <table>
             <tr>
                 <td><img src="MenuBurger.png" alt=> </td>
-                <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
-                    <td><?= $row['nom_stock']?> </td>
-                </a>
+                <td> 
+                    <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>"> <?= $row['nom_stock']?> 
+                    </a>
+                </td>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
