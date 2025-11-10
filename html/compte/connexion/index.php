@@ -3,6 +3,7 @@
 define('HOME_GIT', '../../../');
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    echo "Tout marche";
     header('location: ' . HOME_GIT . "html");
     exit;
 }
