@@ -21,7 +21,7 @@ require_once HOME_GIT . ".config.php";
         <meta lang="fr">
 <?php
 $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-$pdo->bindValue(":id_produit", $_GET['produit']);
+$pdo->bindValue(":id_produit", $_GET['produit'], PDO::PARAM_STR);
 $pdo->execute();
 
 $produit = $requete->fetch(PDO::FETCH_ASSOC);
