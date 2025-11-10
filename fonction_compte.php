@@ -9,25 +9,24 @@
     const CONNECT_PAS = "L'email ou mot de passe invalide";
 
     const TAILLE_NOM = 40;
-    const TAILLE_RAISON_SOCIAL = 60;
+    const TAILLE_RAISON_SOCIALE = 60;
     const TAILLE_EMAIL = 80;
     const TAILLE_ADRESSE = 120;
     const TAILLE_MDP = 100;
     
     require_once ".config.php";
     
-    //print_r(hash_algos()); | verifier que algos est sur la machine
-    //fonction qui renvoir le mot de passe cryper et saler
+    // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v1($mdp){
         return hash(algo: "xxh128",data: $mdp);
     }
 
-    //fonction qui renvoir le mot de passe cryper et saler
+    // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v2($mdp){
         return password_hash(password:$mdp, algo:PASSWORD_BCRYPT);
     }
     
-    //fonction qui permer de cree un compte vendeur
+    // Fonction qui permet de créer un compte vendeur
     function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc, $chemim){
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
@@ -41,7 +40,7 @@
         $mdpc = trim($mdpc);
 
         $res['correcte'] = true;
-        if (check_raison_social_all($raisonSocial)
+        if (check_raison_sociale_all($raisonSocial)
         && check_num_siret_all($numSiret) 
         && check_num_cobrec_all($numCobrec) 
         && check_email_all($email) 
@@ -50,15 +49,13 @@
         && check_create_MDP($mdp, $mdpc)) {
 
             require ($chemim . '.config.php');
-            //print_r($resSQL);
+
             try{
                 if (!sql_check_email($pdo, $email)){
                     echo "succes";
 
                     if (sql_check_cle($pdo, $numCobrec)){
                         echo "succes 2";
-
-                        //sql_create_vendeur()
                     }
                     else{
                         $res['numero_cobrec'] = EXISTE_PAS;
@@ -83,7 +80,7 @@
         return $res;
     }
 
-    //fonction qui permer de cree un compte vendeur
+    // Fonction qui permet de créer un compte client
     function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
         $nom = strtoupper(trim($nom));
         $prenom = trim($prenom);
@@ -93,58 +90,60 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
+        // Pas d'erreur initialement
         $res["correcte"] = true;
+
+        // Si toutes les informations sont correctes
         if (check_nom($nom)
         && check_nom($prenom) 
         && check_nom($pseudo) 
         && check_date_passee($date_naiss)
         && check_create_MDP($mdp, $mdpc)) {
 
-            require_once 'fonction_sql.php';
+            global $pdo;
             
-            //print_r($resSQL);
-            try{
+            try {
                 if (!sql_check_email($pdo, $email)){
                     echo "succes";
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
                         echo "succes 2";
-                    }
-                    else{
+                    } else {
                         // changer l'erreur $res['CR'] = EXISTE_PAS;
+                        $res['correcte'] = false;
                     }
                     
-                }
-                else{
+                } else {
                     $res['email'] = EXISTE;
+                    $res['correcte'] = false;
                 }
-            }
-            catch(PDOException $e){
+            } catch(PDOException $e) {
                 $res['fatal'] = true;
+                $res['correcte'] = false;
             }
         }
         else{
+            $res['correcte'] = false;
             $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
             if ($res2) {
-                $res['correcte'] = false;
                 $res = array_merge($res, $res2);
             }
         }
         return $res;
     }
     
+
+    // Fonction pour se connecter à un compte
     function connect_compte($email, $mdp, $typeCompte, $chemin){
         $email = trim($email);
         $mdp = trim($mdp);
 
         $res['correcte'] = true;
         if (check_email_all($email) 
-        && check_MDP($mdp)) {
+        && check_mot_de_passe_all($mdp)) {
 
-            require ($chemim . '.config.php');
+            require ($chemin . '.config.php');
             
-
-            //print_r($resSQL);
             try{
                 $resSQL = sql_email_compte($pdo, $email, $typeCompte);
                 if ($resSQL != null){
@@ -165,120 +164,114 @@
 
                         return $res;
                     }
-                    else{
+                    else {
                         $res['erreur'] = CONNECT_PAS;
                         $res['correcte'] = false;
                     }
                 }
-                else{
+                else {
                     $res['erreur'] = CONNECT_PAS;
                     $res['correcte'] = false;
                 }
-            }
-            catch(PDOException $e){
+            } catch(PDOException $e) {
                 $res['fatal'] = true;
                 $res['correcte'] = false;
             }
         } else {
-            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
-
-            if (isset($res2)) {
-                $res = array_merge($res, $res2);
-                $res['correcte'] = false;
-            }
         }
 
         require ($chemin . '.config.php');
     }
 
 
-//toute les fonction de verrification de champ
+// +---------------------------------------+
+// |  FONCTIONS DE VÉRIFICATION DE CHAMPS  |
+// +---------------------------------------+
 
-    //verifie la raison social
-    function check_raison_social_all($raisonSocial){
-        return ((!check_vide($raisonSocial)) && check_taille($raisonSocial, TAILLE_RAISON_SOCIAL) && check_raison_social($raisonSocial));
-    }
-    //verifie la forme de la raison social
-    function check_raison_social($raisonSocial){
-        return (preg_match("/^.{3,}$/", $raisonSocial) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSocial));
+    // Vérifie la raison sociale (non vide, bonne taille, bon format)
+    function check_raison_sociale_all($raisonSociale){
+        return ((!check_vide($raisonSociale)) && check_taille($raisonSociale, TAILLE_RAISON_SOCIALE) && check_raison_sociale($raisonSociale));
     }
 
+    // Vérifie le format de la raison sociale
+    function check_raison_sociale($raisonSociale){
+        return (preg_match("/^.{3,}$/", $raisonSociale) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSociale));
+    }
 
-    //verifie le numero de siret
+
+    // Vérifie le numéro de SIRET (non vide, bon format)
     function check_num_siret_all($numSiret){
         return ((!check_vide($numSiret)) && check_num_siret($numSiret));
     }
-    //verifie la forme du numero de siret
+
+    // Vérifie le format du numéro de SIRET
     function check_num_siret($numSiret){
         return preg_match("/^[0-9]{14}$/", $numSiret);
     }
 
 
-    //verifie le numero de la cobrec
+    // Vérifie le numéro de la COBREC (non vide, bon format)
     function check_num_cobrec_all($numCobrec){
         return ((!check_vide($numCobrec)) && check_num_cobrec($numCobrec));
     }
-    //verifie la forme du numero de la cobrec
+
+    // Vérifie le format du numéro de la COBREC
     function check_num_cobrec($numCobrec){
         return preg_match("/^[0-9]{15}$/", $numCobrec);
     }
 
-
-    //verifie l'adresse
+    // Vérifie l'e-mail (non vide, bonne taille, bon format)
     function check_email_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
-    //verifie l'email
+
+    // Vérifie le format de l'e-mail
     function check_email($email){
         return preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/",$email);
     }
 
 
-    //verifie l'adresse
+    // Vérifie l'adresse (non vide, bonne taille, bon format)
     function check_adresse_all($adresse){
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_ADRESSE) && check_adresse($adresse));
     }
-    //verifie la forme de l'adresse
+
+    // Vérifie le format de l'adresse
     function check_adresse($adresse){
         return preg_match("/^([1-9][0-9]*(?:-[1-9][0-9]*)*)[\s,-]+(?:(bis|ter|qua)[\s,-]+)?([\w]+[\-\w]*)[\s,]+([-\w].+)$/", $adresse);
     }
 
 
-    //verifie le code postal
+    // Vérifie le code postal (non vide, bon format)
     function check_code_postal_all($codePostal){
         return ((!check_vide($codePostal)) && check_code_postal($codePostal));
     }
-    //verifie la forme du code postal
+    // Vérifie le format du code postal
     function check_code_postal($codePostal){
         return preg_match("/^\d{5}$/", $codePostal);
     }
 
+    // Vérifie le mot de passe (bon format, bonne taille)
+    function check_mot_de_passe_all($mdp){
+        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
+    }
 
-    //verifie le mot de passe
+    // Vérifie le format du mot de passe
     function check_mot_de_passe($mdp){
         return (preg_match("/^.{12,}$/",$mdp));
     }
 
-    //verifie le mot de passe
+    // Vérifie l'égalité du MDP et de la confirmation du MDP
     function check_create_MDP($mdp, $mdpc){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && check_same_MDP($mdp, $mdpc));
+        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
-    function check_MDP($mdp){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP));
-    }
-
-    //verifie le mot de passe
-    function check_same_MDP($mdp1, $mdp2){
-        return ($mdp1 === $mdp2);
-    }
-
-    // verifie un nom (nom, prénom ou pseudo)
+    // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
     function check_nom($nom) {
-        return (!check_vide($nom) && !check_taille($nom, TAILLE_NOM));
+        return (!check_vide($nom) && check_taille($nom, TAILLE_NOM));
     }
 
-    // verifie que la date est passée
+    // Vérifie que la date est passée
     function check_date_passee($date) {
         return (strtotime("1900-01-01") < strtotime($date) && strtotime($date) < time());
     }
@@ -302,20 +295,22 @@
     }
 
 
-//toute les fonction d'erreur
+// +----------------------+
+// |  FONCTIONS D'ERREUR  |
+// +----------------------+
 
     //renvoit toute les erreur posible de champ
-    function check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
+    function check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
         $res = [];
 
         //recherche l'erreur dans la raison social
-        if (check_vide($raisonSocial)){
+        if (check_vide($raisonSociale)){
             $res['raison_sociale'] = VIDE;
         }
-        else if (!check_taille($raisonSocial, TAILLE_RAISON_SOCIAL)){
+        else if (!check_taille($raisonSociale, TAILLE_RAISON_SOCIALE)){
             $res['raison_sociale'] = DEPASSE;
         }
-        else if (!check_raison_social($raisonSocial)){
+        else if (!check_raison_sociale($raisonSociale)){
             $res['raison_sociale'] = FORMAT;
         }
         
@@ -381,7 +376,7 @@
         if (check_vide($mdpc)){
             $res['mdpc'] = VIDE;
         }
-        else if (!check_same_MDP($mdp, $mdpc)){
+        else if ($mdp !== $mdpc){
             $res['mdpc'] = CORRESPOND_PAS;
         }
 
@@ -450,7 +445,7 @@
         if (check_vide($mdpc)){
             $res['mdpc'] = VIDE;
         }
-        else if (!check_same_MDP($mdp, $mdpc)){
+        else if ($mdp !== $mdpc) {
             $res['mdpc'] = CORRESPOND_PAS;
         }
 
@@ -478,7 +473,7 @@
         }
     }
 
-    //return 1 si existe, 0 si absent
+    // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         try{
             if ($typecompte == 'vendeur'){
@@ -489,7 +484,7 @@
             }
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
-            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+            return $requete->fetch(PDO::FETCH_ASSOC);
         }
         catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -516,16 +511,17 @@
         }
     }
 
-    //
-    //
+
+    // EN COURS DE CRÉATION
     function sql_create_vendeur(){
-        try{
+        global $pdo;
+
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : sql_create_vendeur()\n", FILE_APPEND);
@@ -534,16 +530,16 @@
     }
 
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
-        try{
+        try {
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->bindValue(':mdp', $mdp, PDO::PARAM_STR);
+            $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
             $requete->execute();
             
             $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
             $requete->bindValue(':email', $email);
             $requete->execute();
-            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)[0];
+            $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
             $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance)");
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
@@ -553,10 +549,8 @@
             $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
             $requete->execute();
 
-
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
