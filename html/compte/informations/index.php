@@ -41,7 +41,7 @@ if ($_POST != null){
     if (!isset($_POST['rue'])) $_POST['rue'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['mail'],$_POST['date'], $_POST['rue'], $_POST['code_postal']);
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo = null,$_POST['mail'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['rue'], $_POST['code_postal']);
     print_r($verif);
 }
 ?>
@@ -67,12 +67,52 @@ if ($_POST != null){
             
             <label for="nom">Nom</label>
             <input required type="text" name="nom" value="<?php echo $row['nom'];?>">
+            <!--Erreur nom-->
+            <?php
+                if (isset($verif['nom'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['nom']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="prenom">Prenom</label>
             <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>">
+            <!--Erreur prenom-->
+            <?php
+                if (isset($verif['prenom'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['prenom']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="date">Date de Naissance</label>
             <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" >
+            <!--Erreur Date-->
+            <?php
+                if (isset($verif['date'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['date']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="mail">Mail</label>
             <input required type="email" name="mail" value="<?php echo $row['email'];?>">
+            <!--Erreur mail-->
+            <?php
+                if (isset($verif['mail'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['mail']?>
+                        </p>
+            <?php
+                }
+            ?>
             <?php } ?>
             <label for="adresse">Adresse</label>
             <?php
@@ -83,10 +123,30 @@ if ($_POST != null){
             ?>
             <label for="rue">Rue</label>
             <input type="text" name="rue" value="<?php echo $row['adresse'];?>">
+            <!--Erreur rue-->
+            <?php
+                if (isset($verif['rue'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['rue']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="complement_adresse">complement_adresse</label>
             <input type="text" name="complement_adresse" value="<?php if(isset($row['complement_adresse'])){echo $row['complement_adresse'];} else{echo "placeholder=\"À renseigner\"";}  ;?>">
             <label for="code_postal">Code Postal</label>
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>">
+            <!--Erreur code postal-->
+            <?php
+                if (isset($verif['code_postal'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['code_postal']?>
+                        </p>
+            <?php
+                }
+            ?>
             <?php }
             if (!$est_entre) {
                 ?>
