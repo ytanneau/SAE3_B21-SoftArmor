@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    echo "Vous avez réussi !";
     header('location: ' . HOME_GIT . "html");
     exit;
 }
