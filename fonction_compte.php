@@ -647,7 +647,7 @@
 
             $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
 
-            $requete = $pdo->prepare("UPDATE _client SET id_adresse = :id_adresse WHERE id_compte = :id_compte");
+            $requete = $pdo->prepare("UPDATE _client SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
             $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
             $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
             $requete->execute();
