@@ -182,7 +182,6 @@
                 id="mdp"
                 minlength="12"
                 maxlength="100"
-                value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>"
                 required>
             <p class="contrainte">minum 12 caractères</p>
 <?php
@@ -202,7 +201,6 @@
                 id="mdpc"
                 minlength="12"
                 maxlength="100"
-                value="<?php if (isset($_POST['mdpc'])) echo $_POST['mdpc']?>"
                 required>
             <p class="contrainte"></p>
 <?php
