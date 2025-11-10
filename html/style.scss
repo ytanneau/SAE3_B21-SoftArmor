@@ -3,11 +3,16 @@
 @mixin centre_contenu {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
-@mixin page_connect_inscription($background, $background_main){
+@mixin boutton{
+    border: none;
+    border-radius: $angle_grand;
+    padding: 1vh 2vw;
+}
+
+@mixin page_connect_insciption($background, $background_main){
     background-color: $background;
     height: 100vh;
 
@@ -19,28 +24,50 @@
         row-gap: 1em;
         border-radius: $angle_normal;
         padding: $padding_normal;
-        width: 200px;
+        width: 30vw;
+
+        img{
+            width: 18vw;
+        }
+
+        h2{
+            font-size: $font_size_grand;
+            margin: 0
+        }
 
         form{
             @include centre_contenu;
             align-items:baseline;
-            gap: 1vh;
+            width: 100%;
 
-            legend{
-                align-self: center;
+            label{
+                margin-top: 2vh;
+                font-size: $font_size_sup;
             }
 
             .champ{
                 border: none;
                 border-radius: $angle_petit;
+                width: 100%;
+                height: 1.5em;
+                font-size: $font_size_sup;
             }
             
             .boutton{
+                @include boutton;
                 align-self: center;
                 background-color: $focus;
-                border: none;
-                border-radius: $angle_grand;
-                
+                color: white;
+                font-size: $font_size_grand;
+                margin-top: 2vh;
+            }
+
+            p{
+                font-size: $font_size_petit;
+                margin: 0;
+            }
+            .contrainte{
+
             }
 
             .error{
@@ -50,6 +77,14 @@
     }
 }
 
+body{
+    font-family: 'Inter';
+}
+
 #connect_vendeur{
-    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+}
+
+#inscription_vendeur{
+    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
 }

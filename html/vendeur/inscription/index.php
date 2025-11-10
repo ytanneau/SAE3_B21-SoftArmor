@@ -25,9 +25,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription Vendeur</title>
+    <title>Alizon Vendeur - Inscription</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
 </head>
-<body>
+<body id="inscription_vendeur">
     <main>
 <?php
     if (isset($res['correcte']) && $res['correcte']) {
@@ -42,6 +44,11 @@
     }
     else{
 ?>
+        <a href="../">
+            <img src="<?=HOME_GIT?>html/image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
+        </a>
+        <h2>Se connecter</h2>
+
         <form action="" method="post">
             <label for="raisonSocial">Raison Social</label>
             <input type="text" 
@@ -51,7 +58,8 @@
                 maxlength="60"
                 placeholder="ARMOR LUX SAS"
                 value="<?php if (isset($_POST['raisonSocial'])) echo htmlentities($_POST['raisonSocial'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte">Nom puis statut juridique</p>
 <?php
     if (isset($res['taison_sociale'])){
@@ -70,7 +78,8 @@
                 minlenght="14"
                 placeholder="362 521 879 00034"
                 value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte">Numero a 14 chiffres</p>
 <?php
     if (isset($res['numero_siret'])){
@@ -90,7 +99,8 @@
                 minlenght="15"
                 placeholder="12345-12345-12345"
                 value="<?php if (isset($_POST['numCobrec'])) echo htmlentities($_POST['numCobrec'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
 <?php
     if (isset($res['numero_cobrec'])){
@@ -109,7 +119,8 @@
                 id="email"
                 placeholder="exemple@email.com"
                 value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['email'])){
@@ -128,7 +139,8 @@
                 name="adresse"
                 id="adresse"
                 value="<?php if (isset($_POST['adresse'])) echo htmlentities($_POST['adresse'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte">Numero nom rue commune</p>
 <?php
     if (isset($res['adresse'])){
@@ -145,7 +157,8 @@
             <input type="text"
                 name="compAdresse"
                 id="compAdresse"
-                value="<?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>">
+                value="<?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>"
+                class="champ">
             <p class="contrainte">information compémentaire</p>
 
             <br>
@@ -174,7 +187,8 @@
                 id="mdp"
                 minlength="12"
                 maxlength="100"
-                required>
+                required
+                class="champ">
             <p class="contrainte">minum 12 caractères</p>
 <?php
     if (isset($res['mdp'])){
@@ -193,7 +207,8 @@
                 id="mdpc"
                 minlength="12"
                 maxlength="100"
-                required>
+                required
+                class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['mdpc'])){
@@ -205,9 +220,9 @@
     }
 ?>
 
-            <input type="submit" value="S'inscrire">
-            <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
+            <input type="submit" value="S'inscrire" class="boutton">
         </form>
+        <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
 <?php
     }
 ?>

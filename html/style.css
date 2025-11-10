@@ -1,43 +1,123 @@
+body {
+  font-family: "Inter";
+}
+
 #connect_vendeur {
   background-color: #6B31D0;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 #connect_vendeur main {
   background-color: #C3C1F5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   row-gap: 1em;
   border-radius: 20px;
   padding: 2em;
-  width: 200px;
+  width: 30vw;
+}
+#connect_vendeur main img {
+  width: 18vw;
+}
+#connect_vendeur main h2 {
+  font-size: 2em;
+  margin: 0;
 }
 #connect_vendeur main form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   align-items: baseline;
-  gap: 1vh;
+  width: 100%;
 }
-#connect_vendeur main form legend {
-  align-self: center;
+#connect_vendeur main form label {
+  margin-top: 2vh;
+  font-size: 1.5em;
 }
 #connect_vendeur main form .champ {
   border: none;
   border-radius: 5px;
+  width: 100%;
+  height: 1.5em;
+  font-size: 1.5em;
 }
 #connect_vendeur main form .boutton {
-  align-self: center;
-  background-color: #BB2BB2;
   border: none;
   border-radius: 50px;
+  padding: 1vh 2vw;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 2em;
+  margin-top: 2vh;
+}
+#connect_vendeur main form p {
+  font-size: 0.7em;
+  margin: 0;
 }
 #connect_vendeur main form .error {
+  color: #E43737;
+}
+
+#inscription_vendeur {
+  background-color: #6B31D0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#inscription_vendeur main {
+  background-color: #C3C1F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+#inscription_vendeur main img {
+  width: 18vw;
+}
+#inscription_vendeur main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#inscription_vendeur main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: baseline;
+  width: 100%;
+}
+#inscription_vendeur main form label {
+  margin-top: 2vh;
+  font-size: 1.5em;
+}
+#inscription_vendeur main form .champ {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 1.5em;
+  font-size: 1.5em;
+}
+#inscription_vendeur main form .boutton {
+  border: none;
+  border-radius: 50px;
+  padding: 1vh 2vw;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 2em;
+  margin-top: 2vh;
+}
+#inscription_vendeur main form p {
+  font-size: 0.7em;
+  margin: 0;
+}
+#inscription_vendeur main form .error {
   color: #E43737;
 }/*# sourceMappingURL=style.css.map */
