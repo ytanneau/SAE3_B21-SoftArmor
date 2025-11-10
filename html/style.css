@@ -41,7 +41,7 @@ body {
   border: none;
   border-radius: 5px;
   width: 100%;
-  height: 1.5em;
+  height: 1.8em;
   font-size: 1.5em;
 }
 #connect_vendeur main form .boutton {
@@ -60,6 +60,11 @@ body {
 }
 #connect_vendeur main form .error {
   color: #E43737;
+}
+
+#connect_vendeur, #connect_client {
+  justify-content: center;
+  overflow-y: hidden;
 }
 
 #inscription_vendeur {
@@ -101,7 +106,7 @@ body {
   border: none;
   border-radius: 5px;
   width: 100%;
-  height: 1.5em;
+  height: 1.8em;
   font-size: 1.5em;
 }
 #inscription_vendeur main form .boutton {
