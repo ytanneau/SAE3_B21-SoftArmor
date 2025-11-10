@@ -511,14 +511,13 @@
         }
     }
 
-
     // EN COURS DE CRÉATION
     function sql_create_vendeur(){
         global $pdo;
 
         try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            //$requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
