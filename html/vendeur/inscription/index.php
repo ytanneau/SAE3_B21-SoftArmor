@@ -50,7 +50,7 @@
                 minlength="3"
                 maxlength="60"
                 placeholder="ARMOR LUX SAS"
-                value="<?php if (isset($_POST['raisonSocial'])) echo $_POST['raisonSocial']?>"
+                value="<?php if (isset($_POST['raisonSocial'])) echo htmlentities($_POST['raisonSocial'])?>"
                 required>
             <p class="contrainte">Nom puis statut juridique</p>
 <?php
@@ -69,7 +69,7 @@
                 id="numSiret"
                 minlenght="14"
                 placeholder="362 521 879 00034"
-                value="<?php if (isset($_POST['numSiret'])) echo $_POST['numSiret']?>"
+                value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
                 required>
             <p class="contrainte">Numero a 14 chiffres</p>
 <?php
@@ -89,7 +89,7 @@
                 id="numCobrec"
                 minlenght="15"
                 placeholder="12345-12345-12345"
-                value="<?php if (isset($_POST['numCobrec'])) echo $_POST['numCobrec']?>"
+                value="<?php if (isset($_POST['numCobrec'])) echo htmlentities($_POST['numCobrec'])?>"
                 required>
             <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
 <?php
@@ -108,7 +108,7 @@
                 name="email"
                 id="email"
                 placeholder="exemple@email.com"
-                value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
+                value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email'])?>"
                 required>
             <p class="contrainte"></p>
 <?php
@@ -127,7 +127,7 @@
             <input type="text"
                 name="adresse"
                 id="adresse"
-                value="<?php if (isset($_POST['adresse'])) echo $_POST['adresse']?>"
+                value="<?php if (isset($_POST['adresse'])) echo htmlentities($_POST['adresse'])?>"
                 required>
             <p class="contrainte">Numero nom rue commune</p>
 <?php
@@ -145,7 +145,7 @@
             <input type="text"
                 name="compAdresse"
                 id="compAdresse"
-                value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
+                value="<?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>">
             <p class="contrainte">information compémentaire</p>
 
             <br>
@@ -154,7 +154,7 @@
                 name="codePostal"
                 id="codePostal"
                 size="5"
-                value="<?php if (isset($_POST['codePostal'])) echo $_POST['codePostal']?>"
+                value="<?php if (isset($_POST['codePostal'])) echo htmlentities($_POST['codePostal'])?>"
                 required>
             <p class="contrainte">Nombre a 5 chiffres</p>
 <?php

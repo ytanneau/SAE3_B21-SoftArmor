@@ -201,7 +201,6 @@
         return (preg_match("/^.{3,}$/", $raisonSociale) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSociale));
     }
 
-
     // Vérifie le numéro de SIRET (non vide, bon format)
     function check_num_siret_all($numSiret){
         return ((!check_vide($numSiret)) && check_num_siret($numSiret));
@@ -211,7 +210,6 @@
     function check_num_siret($numSiret){
         return preg_match("/^[0-9]{14}$/", $numSiret);
     }
-
 
     // Vérifie le numéro de la COBREC (non vide, bon format)
     function check_num_cobrec_all($numCobrec){
@@ -289,10 +287,12 @@
         return password_verify($mdp, $crypter);
     }
 
+    //verifie si la chaine est vide
     function check_vide($valeur){
         return (strlen($valeur) === 0);
     }
 
+    //verifie la taille de la chaine
     function check_taille($valeur, $taille){
         return (strlen($valeur) <= $taille);
     }
