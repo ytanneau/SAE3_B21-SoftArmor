@@ -1,6 +1,6 @@
 @use "style_const.scss" as *;
 
-@mixin centre_comtenu{
+@mixin centre_contenu {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,11 +16,11 @@
     background-color: $background;
     height: 100vh;
 
-    @include centre_comtenu;
+    @include centre_contenu;
 
     main{
         background-color: $background_main;
-        @include centre_comtenu;
+        @include centre_contenu;
         row-gap: 1em;
         border-radius: $angle_normal;
         padding: $padding_normal;
@@ -36,7 +36,7 @@
         }
 
         form{
-            @include centre_comtenu;
+            @include centre_contenu;
             align-items:baseline;
             width: 100%;
 

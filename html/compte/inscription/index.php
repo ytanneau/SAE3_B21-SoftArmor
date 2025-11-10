@@ -36,6 +36,9 @@
 </head>
 <body>
     <main>
+
+    <a href=<?= HOME_GIT ?>>Revenir à l'accueil</a>
+
 <?php
     if (isset($res['correcte']) && $res['correcte']) {
 ?>

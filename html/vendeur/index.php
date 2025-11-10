@@ -16,6 +16,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
     header('location: stock');
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
