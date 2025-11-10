@@ -52,10 +52,8 @@
 
             try{
                 if (!sql_check_email($pdo, $email)){
-                    echo "succes";
 
                     if (sql_check_cle($pdo, $numCobrec)){
-                        echo "succes 2";
                     }
                     else{
                         $res['connect'] = CONNECT_PAS;
@@ -104,10 +102,8 @@
             
             try {
                 if (!sql_check_email($pdo, $email)){
-                    echo "succes";
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
-                        echo "succes 2";
                     } else {
                         // changer l'erreur $res['CR'] = EXISTE_PAS;
                         $res['correcte'] = false;
