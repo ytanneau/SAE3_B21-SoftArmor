@@ -20,6 +20,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
 
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,6 +31,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
 </head>
 <body>
     <main>
+        <a href=<?= HOME_GIT ?>>Revenir à l'accueil</a>
+
         <form action="" method="post">
             <legend>Informations</legend>
 
