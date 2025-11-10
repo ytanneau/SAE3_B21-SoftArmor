@@ -36,6 +36,33 @@ $requete->execute();
 
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
+// gestion du POST
+if ($_POST != null){
+    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
+    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
+    if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
+
+    //echo "présence d'un post";
+    //print_r($_ENV);
+    $fichier = HOME_GIT . 'fonction_compte.php';
+    if (file_exists($fichier)) {
+        require_once $fichier;
+        $res = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
+
+        if ($res['correcte'] && $_POST['enregistrer']) {
+            sql_insert_adresse_client($pdo, $_POST['id_client'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
+        }
+
+    } else {
+        // echo "erreur 1";
+
+        $res['fatal'] = true;
+        $fichierLog = __DIR__ . "/erreurs.log";
+        $date = date("Y-m-d H:i:s");
+        file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
+    }
+}
+
 ?>
     </head>
 
@@ -75,10 +102,11 @@ $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
         }
         ?>
 
+<?php if (!isset($adresse_client['adresse'])) { ?>
         <br>
         <label for="enregistrer">Enregistrer l'adresse</label>
-        <input type="checkbox" id="enregistrer" name="enregistrer">
-
+        <input type="checkbox" id="enregistrer" name="enregistrer" >
+<?php } ?>
         <br>
         <input type="submit" value="Continuer l'achat">
 

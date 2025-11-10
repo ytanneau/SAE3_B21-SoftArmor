@@ -345,24 +345,8 @@
         }
 
         
-        //recherche l'erreur dans l'adresse'
-        if (check_vide($adresse)){
-            $res['adresse'] = VIDE;
-        }
-        else if (!check_taille($adresse, TAILLE_ADRESSE)){
-            $res['adresse'] = DEPASSE;
-        }
-        else if (!check_adresse($adresse)){
-            $res['adresse'] = FORMAT;
-        }
-
-        //recherche l'erreur dans code postal
-        if (check_vide($codePostal)){
-            $res['code_postal'] = VIDE;
-        }
-        else if (!check_code_postal($codePostal)){
-            $res['code_postal'] = FORMAT;
-        }
+        //recherche l'erreur dans l'adresse
+        $res = array_merge($res, check_coordonnees($adresse, $codePostal));
 
         //recherche l'erreur dans le mot de passe
         if (check_vide($mdp)){
@@ -387,7 +371,7 @@
     }
 
     // renvoit toutes les erreurs possibles de champ pour inscription client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $rue = null, $code_postal = null){
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
         $res = [];
 
         // erreur champ nom
@@ -455,20 +439,34 @@
         }
 
         // recherche erreur dans adresse
-        if (isset($rue)) {
-            if (check_vide($rue)) {
-                $res['rue'] = VIDE;
-            } 
-            else if (!check_adresse($rue)) {
-                $res['rue'] = FORMAT;
+        $res = array_merge($res, check_coordonnees($adresse, $code_postal));
+
+        return $res;
+    }
+
+    // renvoit toutes les erreurs possbiles pour la partie coordonnées
+    function check_coordonnees($adresse, $code_postal) {
+        $res = [];
+
+        //recherche l'erreur dans l'adresse
+        if (isset($adresse)) {
+            if (check_vide($adresse)){
+                $res['adresse'] = VIDE;
+            }
+            else if (!check_taille($adresse, TAILLE_ADRESSE)){
+                $res['adresse'] = DEPASSE;
+            }
+            else if (!check_adresse($adresse)){
+                $res['adresse'] = FORMAT;
             }
         }
 
+        //recherche l'erreur dans code postal
         if (isset($code_postal)) {
-            if (check_vide($code_postal)) {
+            if (check_vide($code_postal)){
                 $res['code_postal'] = VIDE;
             }
-            else if (!check_code_postal($code_postal)) {
+            else if (!check_code_postal($code_postal)){
                 $res['code_postal'] = FORMAT;
             }
         }
@@ -631,5 +629,31 @@
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
             throw $e; // lance une erreur que la fonction appelante catchera
+        }
+    }
+
+    // fonction qui rajoute une adresse à un client dans la bdd
+    function sql_insert_adresse_client($pdo, $id_compte, $adresse, $compl_adresse, $code_postal) {
+        try {
+            $requete = $pdo->prepare("INSERT INTO _adresse (adresse, code_postal, complement_adresse) VALUES (:adresse, :compl_adresse, :code_postal)");
+            $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);
+            $requete->bindValue(":compl_adresse", $compl_adresse, PDO::PARAM_STR);
+            $requete->bindValue(":code_postal", $code_postal, PDO::PARAM_STR);
+            $requete->execute();
+
+            $requete = $pdo->prepare("SELECT * FROM _adresse WHERE adresse = :adresse");
+            $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);
+            $requete->execute();
+
+            $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
+
+            $requete = $pdo->prepare("UPDATE _client SET id_adresse = :id_adresse WHERE id_compte = :id_compte");
+            $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+
+            return 1;
+        } catch (PDOException $e) {
+            return 0;
         }
     }
