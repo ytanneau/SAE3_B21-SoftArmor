@@ -9,6 +9,13 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+print_r($_SESSION);
+var_dump(isset($_SESSION));
+
+if (!isset($_SESSION)) {
+    header("location: " . HOME_GIT, );
+}
+
 require_once HOME_GIT . ".config.php";
 
 ?>
