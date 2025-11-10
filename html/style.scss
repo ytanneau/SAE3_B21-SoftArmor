@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-@mixin boutton{
+@mixin bouton {
     border: none;
     border-radius: $angle_grand;
     padding: 1vh 2vw;
@@ -54,7 +54,7 @@
             }
             
             .boutton{
-                @include boutton;
+                @include bouton;
                 align-self: center;
                 background-color: $focus;
                 color: white;
