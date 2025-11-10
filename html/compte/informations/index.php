@@ -15,17 +15,17 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
 
 //requete pour recuperer informations du compte sans l'adresse
-$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8;";    
+$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
 
 $info_compte = $pdo->query($sql);
 
 //requete pour recuperer l'adresse du compte
-$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = 8;";
+$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION['id_compte']};";
 
 $adresse_compte = $pdo->query($sql);
 
 //requete pour recuperer les avis du compte
-$sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = 8";
+$sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']}";
 
 $avis = $pdo->query($sql);
 
@@ -122,6 +122,7 @@ if ($_POST != null){
                 $est_entre = true;
             ?>
             <label for="rue">Rue</label>
+            <p>
             <?php 
                 
                     if (!empty($row['adresse'])) {
@@ -129,7 +130,7 @@ if ($_POST != null){
                     } else {
                         echo 'placeholder="À renseigner"';
                     }
-                ?>
+                ?></p>
             <input 
                 type="text" 
                 name="rue"
