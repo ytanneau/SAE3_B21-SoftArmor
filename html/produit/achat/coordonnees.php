@@ -55,12 +55,8 @@ if ($_POST != null){
     }
 }
 
-var_dump($res);
-
-if (isset($res) && $res == []) {
-    echo "test";
+if (isset($erreurs) && $erreurs == []) {
     header('Location: ' . 'bancaire.php');
-    exit();
 }
 
 ?>
