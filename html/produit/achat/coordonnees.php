@@ -44,7 +44,7 @@ $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
         <form action="" method="post">
 
         <label for="adresse">Adresse</label>
-        <input type="text" name="adresse" id="adresse" value="<?php if (isset($_POST['adresse'])) echo $_POST['adresse']?>" required>
+        <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) echo $adresse_client['adresse']?>" required>
         <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
         <?php
         if (isset($res['adresse'])){
@@ -58,12 +58,12 @@ $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
         <br>
         <label for="compAdresse">Complément adresse</label>
-        <input type="text" name="compAdresse" id="compAdresse" value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>"> <p class="contrainte">informations complémentaires</p>
+        <input type="text" name="compAdresse" id="compAdresse" value="<?php if (isset($adresse_client['compAdresse'])) echo $adresse_client['compAdresse']?>"> <p class="contrainte">informations complémentaires</p>
 
 
         <br>
         <label for="codePostal">Code postal</label>
-        <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($_POST['codePostal'])) echo $_POST['codePostal']?>" required>
+        <input type="number" name="codePostal" id="codePostal" size="5" value="<?php if (isset($adresse_client['codePostal'])) echo $adresse_client['codePostal']?>" required>
         <p class="contrainte">Nombre a 5 chiffres</p>
         <?php
         if (isset($res['code_postal'])){
