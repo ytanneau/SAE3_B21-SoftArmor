@@ -45,6 +45,7 @@ unset($pdo);
         <a href="compte/inscription">S'inscrire</a>
     <?php } else { ?>
         <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
+        <a href="deconnexion">Se déconnecter</a>
     <?php } ?>
 <!--header-->
 <!--Produit Banniere au jour (possiblement a faire)-->
