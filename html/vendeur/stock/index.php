@@ -1,4 +1,3 @@
-
 <?php
 //permet d'utiliser le fichier config.php
 require_once '../../../.config.php';
@@ -11,6 +10,18 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ' . HOME_GIT);
     exit;
 }
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+    <meta charset="utf-8">
+    <title>Alizon</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+        <body>
+
+<?php
+
 
 ?>
 <!doctype html>
