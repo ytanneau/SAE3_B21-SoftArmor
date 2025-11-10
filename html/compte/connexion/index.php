@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-define('HOME_GIT', '../../../');
+define('HOME_GIT', '../../');
 
 // Si l'utilisateur est déjà connecté
 
