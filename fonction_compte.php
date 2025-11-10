@@ -579,9 +579,14 @@
 
     function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp) {
         try {
+            echo "test succes 0";
+
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
+            echo "test succes 0.1";
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            echo "test succes 0.2";
             $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
+            echo "test succes 0.3";
             $requete->execute();
 
             echo "test succes 1";
@@ -615,7 +620,7 @@
             $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
             $requete->execute();
 
-            echo "test succes 1";
+            echo "test succes 5";
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
