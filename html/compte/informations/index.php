@@ -177,6 +177,10 @@ if ($_POST != null){
             <?php
                 }
             ?>
+            
+            
+                <?php
+            } ?>
             <?php
                 if ((isset($verif['code_postal']) && !isset($verif['adresse']) )||(!isset($verif['code_postal']) && isset($verif['adresse']) )){
             ?>
@@ -186,9 +190,6 @@ if ($_POST != null){
             <?php
                 }
             ?>
-            
-                <?php
-            } ?>
             <button type="submit">Modifier mes informations</button>
         </form>
         
