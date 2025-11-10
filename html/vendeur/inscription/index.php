@@ -1,10 +1,23 @@
 <?php
+    define('HOME_GIT', '../../../');
     $res = [];
+    //echo HOME_GIT . 'fonction_sql.php';
     if ($_POST != null){
-        require_once "../../../fonction_compte.php";
-        echo "présence d'un post";
+        //echo "présence d'un post";
+        //print_r($_ENV);
+        $fichier = HOME_GIT . '/fonction_compte.php';
+        if (file_exists($fichier)) {
+            require_once $fichier;
+            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
 
-        $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc']);
+        } else {
+            echo $fichier;
+            echo "erreur 1";
+            $res['fatal'] = true;
+            $fichierLog = __DIR__ . "/erreurs.log";
+            $date = date("Y-m-d H:i:s");
+            file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -17,9 +30,14 @@
 <body>
     <main>
 <?php
-    if ($res === true) {
+    if (isset($res['correcte']) && $res['correcte']) {
 ?>
-        <h1>Félisitation vous avez crée votre compte</h1>
+        <h1>Félicitations vous avez crée votre compte</h1>
+<?php
+    }
+    else if (isset($res['fatal'])){
+?>
+        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
 <?php
     }
     else{
@@ -36,10 +54,10 @@
                 required>
             <p class="contrainte">Nom puis statut juridique</p>
 <?php
-    if (isset($res['RS'])){
+    if (isset($res['taison_sociale'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['RS']?>
+                <?="Erreur : ".$res['taison_sociale']?>
             </p>
 <?php
     }
@@ -55,10 +73,10 @@
                 required>
             <p class="contrainte">Numero a 14 chiffres</p>
 <?php
-    if (isset($res['NS'])){
+    if (isset($res['numero_siret'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['NS']?>
+                <?="Erreur : ".$res['numero_siret']?>
             </p>
 <?php
     }
@@ -75,10 +93,10 @@
                 required>
             <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
 <?php
-    if (isset($res['NC'])){
+    if (isset($res['numero_cobrec'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['NC']?>
+                <?="Erreur : ".$res['numero_cobrec']?>
             </p>
 <?php
     }
@@ -94,10 +112,10 @@
                 required>
             <p class="contrainte"></p>
 <?php
-    if (isset($res['EM'])){
+    if (isset($res['email'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['EM']?>
+                <?="Erreur : ".$res['email']?>
             </p>
 <?php
     }
@@ -111,16 +129,24 @@
                 id="adresse"
                 value="<?php if (isset($_POST['adresse'])) echo $_POST['adresse']?>"
                 required>
-            <p class="contrainte">Numero rue commune</p>
+            <p class="contrainte">Numero nom rue commune</p>
 <?php
-    if (isset($res['AD'])){
+    if (isset($res['adresse'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['AD']?>
+                <?="Erreur : ".$res['adresse']?>
             </p>
 <?php
     }
 ?>
+
+            <br>
+            <label for="compAdresse">Compément adresse</label>
+            <input type="text"
+                name="compAdresse"
+                id="compAdresse"
+                value="<?php if (isset($_POST['compAdresse'])) echo $_POST['compAdresse']?>">
+            <p class="contrainte">information compémentaire</p>
 
             <br>
             <label for="codePostal">Code postal</label>
@@ -130,12 +156,12 @@
                 size="5"
                 value="<?php if (isset($_POST['codePostal'])) echo $_POST['codePostal']?>"
                 required>
-            <p class="contrainte"></p>
+            <p class="contrainte">Nombre a 5 chiffres</p>
 <?php
-    if (isset($res['CP'])){
+    if (isset($res['code_postal'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['CP']?>
+                <?="Erreur : ".$res['code_postal']?>
             </p>
 <?php
     }
@@ -148,14 +174,13 @@
                 id="mdp"
                 minlength="12"
                 maxlength="100"
-                value="<?php if (isset($_POST['mdp'])) echo $_POST['mdp']?>"
                 required>
-            <p class="contrainte"></p>
+            <p class="contrainte">minum 12 caractères</p>
 <?php
-    if (isset($res['MDP'])){
+    if (isset($res['mdp'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['MDP']?>
+                <?="Erreur : ".$res['mdp']?>
             </p>
 <?php
     }
@@ -168,20 +193,20 @@
                 id="mdpc"
                 minlength="12"
                 maxlength="100"
-                value="<?php if (isset($_POST['mdpc'])) echo $_POST['mdpc']?>"
                 required>
             <p class="contrainte"></p>
 <?php
-    if (isset($res['MDPC'])){
+    if (isset($res['mdpc'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['MDPC']?>
+                <?="Erreur : ".$res['mdpc']?>
             </p>
 <?php
     }
 ?>
 
-            <input type="submit" value="Crée mon compte">
+            <input type="submit" value="S'inscrire">
+            <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
         </form>
 <?php
     }

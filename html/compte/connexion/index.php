@@ -1,88 +1,21 @@
 <?php
 
-session_start();
-
-// Si l'utilisateur est déjà connecté
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ../../../');
-    exit;
+if (!isset($_SESSION)) {
+    session_start();
 }
 
-require_once ".config.php";
+define('HOME_GIT', '../../../');
 
-// Initialiser les variables
-$email = $mdp = "";
-$erreur_email = $erreur_mdp = "";
+// Si l'utilisateur est déjà connecté
 
-// Si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_POST != null){
+    require_once (HOME_GIT . 'fonction_compte.php');
+    $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+}
 
-    // Vérifier si l'e-mail est vide, sinon l'enregistrer
-
-    if (empty(trim($_POST['email']))) {
-        $erreur_email = "E-mail vide";
-    } else {
-        $email = trim($_POST['email']);
-    }
-
-    // Vérifier si le mot de passe est vide, sinon l'enregistrer
-
-    if (empty(trim($_POST['mdp']))) {
-        $erreur_mdp = "Mot de passe vide";
-    } else {
-        $mdp = trim($_POST['mdp']);
-    }
-
-    // Si pas d'erreur e-mail ou MDP
-
-    if (empty($erreur_email) && empty($erreur_mdp)) {
-        $sql = "SELECT 1 FROM compte_client WHERE email = :email";
-        
-        // Si la requête a pu être préparée
-
-        if ($stmt = $pdo->prepare($sql)) {
-            $stmt->bindParam(":email", $email);
-
-            // Si la requête a pu être exécutée
-
-            if ($stmt->execute()) {
-
-                // Si l'utilisateur existe (1 enregistrement trouvé)
-
-                if ($stmt->rowCount() == 1) {
-
-                    // Si j'ai pu récupérer la ligne
-
-                    if ($row = $stmt->fetch()) {
-                        $id_compte = $row['id_compte'];
-                        $mdp_hash = $row['mdp'];
-
-                        if (password_verify($password, $mdp_hash)) {
-                            session_start();
-
-                            $_SESSION['logged_in'] = true;
-                            $_SESSION['id_compte'] = $id_compte;
-                            $_SESSION['email'] = $email;                            
-                            
-                            // Retour à la page d'accueil
-                            header("location: ../../../");
-                        } else {
-                            print("L'e-mail ou le mot de passe est incorrect.");
-                        }
-                    }
-                } else {
-                    print("L'e-mail ou le mot de passe est incorrect.");
-                }
-            } else {
-                echo "Il y a eu un problème. Veuillez réessayer plus tard.";
-            }
-
-            unset($stmt);
-        }
-    }
-
-    // Fermer la connexion
-    unset($pdo);
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
+    header('location: ' . HOME_GIT);
+    exit;
 }
 
 ?>
@@ -95,24 +28,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Connexion</title>
 </head>
 <body>
-    <a href="../../../">Retour à l'accueil</a>
-    
-    <form action="" method="post">
-        <fieldset>
+    <main>
+        <form action="" method="post">
             <legend>Informations</legend>
 
             <!-- Adresse e-mail -->
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required>
+            <br>
+            <label for="email">Email</label>
+            <input type="email"
+                name="email"
+                id="email"
+                value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
+                required>
 
-            <!-- Mot de passe -->
+                <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
-            <input type="text" id="mdp" name="mdp" required>
-        </fieldset>
-        
-        <button type="submit">Se connecter</button>
+            <input type="password" 
+                name="mdp"
+                id="mdp"
+                value=""
+                required>
+            
+            <input type="submit" value="Se connecter">            
+        </form>
+        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
+    </main>
 
-        <p>Pas de compte ? <a href="compte/inscription">S'inscrire</a></p>
-    </form>
+    <!--
+    <script>
+        const champEmail        = document.getElementById("email");
+        const champMdp          = document.getElementById("mdp");
+
+        const msgErreurEmail    = document.getElementById("msgErreurEmail");
+        const msgErreurMdp      = document.getElementById("msgErreurMdp");
+
+        champEmail.addEventListener('input', () => {
+            if (champEmail.value === "") {
+                msgErreurEmail.textContent = "L'adresse e-mail ne doit pas être vide";
+                msgErreurEmail.style.display = "block";
+                event.preventDefault();
+            } else if (!champEmail.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/)) {
+                msgErreurEmail.textContent = "L'adresse e-mail est invalide";
+                msgErreurEmail.style.display = "block";
+                event.preventDefault();
+            } else {
+                msgErreurEmail.style.display = "none";
+            }
+        })
+
+        champMdp.addEventListener('input', () => {
+            if (champMdp.value === "") {
+                msgErreurMdp.style.display = "block";
+                event.preventDefault();
+            } else {
+                msgErreurMdp.style.display = "none";
+            }
+        })
+    </script>
+    -->
 </body>
 </html>
