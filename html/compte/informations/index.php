@@ -34,7 +34,7 @@ unset($pdo);
 
 //traitement de la modification des informations
 if ($_POST != null){
-    $pseudo="null"
+    $pseudo="null";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
