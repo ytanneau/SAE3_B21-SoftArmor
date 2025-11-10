@@ -227,6 +227,10 @@
 
     // Vérifie l'e-mail (non vide, bonne taille, bon format)
     function check_email_all($adresse){
+        echo ("Vide : " . check_vide($adresse));
+        echo ("Taille : " . check_taille($adresse, TAILLE_EMAIL));
+        echo ("Format : " . check_email($adresse));
+
         return ((!check_vide($adresse)) && check_taille($adresse, TAILLE_EMAIL) && check_email($adresse));
     }
 
