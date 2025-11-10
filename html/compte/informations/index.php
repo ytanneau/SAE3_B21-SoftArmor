@@ -4,10 +4,10 @@ define('HOME_GIT', "../../../");
 
 if (!isset($_SESSION)) {
     session_start();
-}
-else {
-    // Retour à la page d'accueil
-    header('location: ' . HOME_GIT);
+    if (!isset($_SESSION['logged_in'])) {
+        header('location: ' . HOME_GIT . "html");
+        exit;
+    }
 }
 
 require_once (HOME_GIT . '.config.php');
