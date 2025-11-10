@@ -611,10 +611,15 @@
             echo "test succes 4";
 
             $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_sociale, num_siret, id_adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
+            echo "test succes 4.1";
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            echo "test succes 4.2";
             $requete->bindValue(':raison_social', $pseudo, PDO::PARAM_STR);
+            echo "test succes 4.3";
             $requete->bindValue(':numero_siret', $nom, PDO::PARAM_STR);
+            echo "test succes 4.4";
             $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
+            echo "test succes 4.5";
             $requete->execute();
 
             echo "test succes 5";
