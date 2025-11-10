@@ -6,13 +6,13 @@
     align-items: center;
 }
 
-@mixin boutton{
+@mixin bouton {
     border: none;
     border-radius: $angle_grand;
     padding: 1vh 2vw;
 }
 
-@mixin page_connect_insciption($background, $background_main){
+@mixin page_connect_inscription($background, $background_main){
     background-color: $background;
     height: 100vh;
 
@@ -54,7 +54,7 @@
             }
             
             .boutton{
-                @include boutton;
+                @include bouton;
                 align-self: center;
                 background-color: $focus;
                 color: white;
@@ -82,9 +82,9 @@ body{
 }
 
 #connect_vendeur{
-    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
 }
 
 #inscription_vendeur{
-    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
 }
