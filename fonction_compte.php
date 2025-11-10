@@ -178,7 +178,7 @@
                 $res['correcte'] = false;
             }
         } else {
-            return check_erreur_connection($email, $mpd);
+            return check_erreur_connection($email, $mdp);
         }
     }
 
