@@ -83,7 +83,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
             
             <input type="submit" value="Se connecter" class="boutton">            
         </form>
-        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
+        <p>Pas de compte ? <a href="inscription/">S'inscrire</a></p>
 <?php
     }
 ?>
