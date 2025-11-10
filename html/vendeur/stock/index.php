@@ -9,7 +9,7 @@
 
 <?php
 require_once '../../../.config.php';
-$sql = 'select nom_stock, quantite from _produit where id_vendeur = :id_vendeur';
+$sql = 'select nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
 $stmt = initialize($sql);
 
 unset($quantite);
@@ -44,7 +44,7 @@ function ecrire_nom($nom_stock){
         <a href= "html/vendeur/produit/<?php $row['nom_stock'] ?>">
         <table>
             <tr>
-                <td><img src="MenuBurger.png" alt="Menu Burger"> </td>
+                <td><img src="MenuBurger.png" alt=> </td>
                 <td><?= $row['nom_stock']?> </td>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
