@@ -51,7 +51,7 @@ function initialize($sql){
 
     //prepare la commande et verifie si elle est pas vide
     if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_vendeur", 1);
+        $stmt->bindParam(":id_vendeur", $compte);
     }
     //regarde si la commande est executable
     if ($stmt->execute()) {
