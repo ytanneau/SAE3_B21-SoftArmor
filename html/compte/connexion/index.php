@@ -8,15 +8,15 @@ define('HOME_GIT', '../../../');
 
 // Si l'utilisateur est déjà connecté
 
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    require_once (HOME_GIT . 'fonction_compte.php');
+    $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+}
+
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     echo "Vous avez réussi enfin !";
     header('location: ' . HOME_GIT . "html");
     exit;
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
-    require_once (HOME_GIT . 'fonction_compte.php');
-    $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 }
 
 ?>
