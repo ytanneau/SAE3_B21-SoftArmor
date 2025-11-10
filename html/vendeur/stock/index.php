@@ -46,6 +46,7 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
+    print_r($_SESSION);
     $compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide
