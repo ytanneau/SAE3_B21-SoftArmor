@@ -187,6 +187,7 @@
             } catch(PDOException $e) {
                 $res['fatal'] = true;
                 $res['correcte'] = false;
+                echo $e;
             }
         } else {
             return check_erreur_connection($email, $mdp);
