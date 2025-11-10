@@ -1,28 +1,28 @@
 @use "style_const.scss" as *;
 
-@mixin centre_comtenu{
+@mixin centre_contenu {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-@mixin page_connect_insciption($background, $background_main){
+@mixin page_connect_inscription($background, $background_main){
     background-color: $background;
     height: 100vh;
 
-    @include centre_comtenu;
+    @include centre_contenu;
 
     main{
         background-color: $background_main;
-        @include centre_comtenu;
+        @include centre_contenu;
         row-gap: 1em;
         border-radius: $angle_normal;
         padding: $padding_normal;
         width: 200px;
 
         form{
-            @include centre_comtenu;
+            @include centre_contenu;
             align-items:baseline;
             gap: 1vh;
 
@@ -51,5 +51,5 @@
 }
 
 #connect_vendeur{
-    @include page_connect_insciption($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
 }
