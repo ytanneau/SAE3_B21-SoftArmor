@@ -5,7 +5,7 @@ require_once '../../../.config.php';
 if (!isset($_SESSION)) {
     session_start();
 }
-
+//verifie si quelqun est connecté
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ' . HOME_GIT);
     exit;
