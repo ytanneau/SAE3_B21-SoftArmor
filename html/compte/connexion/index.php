@@ -15,7 +15,7 @@ define('HOME_GIT', '../../../');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     require_once (HOME_GIT . 'fonction_compte.php');
-    $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+    $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 }
 
 ?>
