@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 class="champ">
             
             <p class="error"><?php 
-                if (isset($erreurs['mdp'])) { 
+                if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { 
                     echo $erreurs['mdp']; 
                 } ?>
             </p>
