@@ -40,6 +40,8 @@ unset($pdo);
     <title>Accueil</title>
 </head>
 <body>
+    <?php include "header.php"; ?>
+
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
         <a href="compte/inscription">S'inscrire</a>
