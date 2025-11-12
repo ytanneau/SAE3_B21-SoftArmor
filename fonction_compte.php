@@ -667,7 +667,7 @@
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
-function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte) {
+function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
         
         $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -683,8 +683,8 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
         $requete->execute();
         
-        $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_compte = :id_compte");
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
+        $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_STR);
         $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
         $requete->bindValue(':complement_adresse', $complement_adresse, PDO::PARAM_STR);
