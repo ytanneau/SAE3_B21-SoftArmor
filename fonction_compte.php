@@ -67,8 +67,8 @@
                 }
             }
             catch(PDOException $e){
-                $res['fatal'] = true;
-                $res['correcte'] = false;
+                $erreurs['fatal'] = true;
+                $erreurs['correcte'] = false;
                 echo "test sql fatal";
             }
         }
