@@ -12,8 +12,8 @@ if ($_POST != null){
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
-    header('location: stock');
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('location: stock/');
     exit;
 }
 
@@ -24,7 +24,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alizon Vendeur Connexion</title>
+    <title>Alizon Vendeur - Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="<?= HOME_GIT . "html/style.css" ?>">
 </head>
@@ -88,7 +88,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
     }
 ?>
             
-            <input type="submit" value="Se connecter" class="boutton">            
+            <input type="submit" value="Se connecter" class="bouton">            
         </form>
         <p>Pas de compte ? <a href="inscription/">S'inscrire</a></p>
 <?php

@@ -44,10 +44,11 @@
     }
     else{
 ?>
+        <img src=""  alt="">
         <a href="../">
             <img src="<?=HOME_GIT?>html/image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
-        <h2>Se connecter</h2>
+        <h2>S'inscrire</h2>
 
         <form action="" method="post">
             <label for="raisonSocial">Raison Social</label>
@@ -168,7 +169,8 @@
                 id="codePostal"
                 size="5"
                 value="<?php if (isset($_POST['codePostal'])) echo htmlentities($_POST['codePostal'])?>"
-                required>
+                required
+                class="champ">
             <p class="contrainte">Nombre a 5 chiffres</p>
 <?php
     if (isset($res['code_postal'])){
@@ -220,7 +222,7 @@
     }
 ?>
 
-            <input type="submit" value="S'inscrire" class="boutton">
+            <input type="submit" value="S'inscrire" class="bouton">
         </form>
         <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
 <?php

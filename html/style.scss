@@ -52,8 +52,19 @@
                 height: 1.8em;
                 font-size: $font_size_sup;
             }
+
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
             
-            .boutton{
+            .bouton{
                 @include bouton;
                 align-self: center;
                 background-color: $focus;
@@ -94,3 +105,12 @@ body{
 #connect_client, #inscription_client{
     @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
 }
+
+#inscription_vendeur, #inscription_client{
+    height: 100%;
+    main{
+        margin: 15vh 0;
+    }
+}
+
+
