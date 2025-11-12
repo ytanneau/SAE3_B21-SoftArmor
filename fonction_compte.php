@@ -103,6 +103,7 @@
                 if (!sql_check_email($pdo, $email)){
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
+                        
                     } else {
                         // changer l'erreur $erreurs['CR'] = EXISTE_PAS;
                     }
@@ -244,7 +245,7 @@
 
     // Vérifie l'égalité du MDP et de la confirmation du MDP
     function check_create_MDP($mdp, $mdpc){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
+        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
@@ -509,12 +510,12 @@
         if (check_vide($mdp)){
             $erreurs['mdp'] = VIDE;
         }
-        else if (!check_taille($mdp, TAILLE_MDP)){
-            $erreurs['connecte'] = CONNECTE_PAS;
-        }
-        else if (!check_mot_de_passe($mdp)){
-            $erreurs['connecte'] = CONNECTE_PAS;
-        }
+        // else if (!check_taille($mdp, TAILLE_MDP)){
+        //     $erreurs['connecte'] = CONNECTE_PAS;
+        // }
+        // else if (!check_mot_de_passe($mdp)){
+        //     $erreurs['connecte'] = CONNECTE_PAS;
+        // }
 
         return $erreurs;
     }
