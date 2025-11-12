@@ -1,6 +1,6 @@
 <?php
 
-    const VIDE = "Champ est vide";
+    const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Format invalide";
     const EXISTE = "Existe déjà";

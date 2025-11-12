@@ -11,6 +11,7 @@ define('HOME_GIT', '../../../');
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+    print_r($erreurs);
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
