@@ -67,8 +67,8 @@ if ($_POST != null){
 
         <br>
         <label for="date_exp">Date d'expiration de la carte</label>
-        <input type="date" name="date_exp" id="date_exp">
-        <p class="contrainte">ex: 12/25</p>
+        <input type="text" name="date_exp" id="date_exp" size="5">
+        <p class="contrainte">ex: 12/25, 01/26</p>
         <?php
         if (isset($erreurs['date_exp'])){
         ?>
@@ -82,7 +82,7 @@ if ($_POST != null){
 
         <br>
         <label for="code_securite">Code de sécurité</label>
-        <input type="number" name="code_securite" id="code_securite" size="3" required>
+        <input type="number" name="code_securite" id="code_securite" min="100" max="999" required>
         <p class="contrainte">Nombre à 3 chiffres</p>
         <?php
         if (isset($erreurs['code_securite'])){
@@ -94,6 +94,7 @@ if ($_POST != null){
         }
         ?>
 
+        <input type="hidden" type="number" name="produit" id="produit" required value="<?=$_POST['produit']?>">
         <br>
         <input type="submit" value="Effectuer l'achat">
 
