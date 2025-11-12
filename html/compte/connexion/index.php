@@ -27,14 +27,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Alizon Connexion</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
 </head>
-<body>
+<body id="connect_client">
     <main>
-        <a href=<?= HOME_GIT ?>>Revenir à l'accueil</a>
+        <img src="" alt="">
+        <a href="../">
+            <img src="<?=HOME_GIT?>html/image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+        </a>
+        <h2>S’identifier</h2>
 
         <form action="" method="post">
-            <legend>Informations</legend>
 
             <!-- Adresse e-mail -->
             <br>
@@ -43,7 +48,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
-                required>
+                required
+                class="champ">
 
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
@@ -51,9 +57,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
                 name="mdp"
                 id="mdp"
                 value=""
-                required>
+                required
+                class="champ">
             
-            <input type="submit" value="Se connecter">            
+            <input type="submit" value="Se connecter" class="bouton">            
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>

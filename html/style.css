@@ -125,4 +125,11 @@ body {
 }
 #connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
+}
+
+#inscription_vendeur, #inscription_client {
+  height: 100%;
+}
+#inscription_vendeur main, #inscription_client main {
+  margin: 15vh 0;
 }/*# sourceMappingURL=style.css.map */
