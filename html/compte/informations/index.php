@@ -13,6 +13,10 @@ if (!isset($_SESSION)) {
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
+//requete pour recuperer mot de passe cryptée
+$sql = "SELECT mdp FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
+
+$mot_de_passe= $pdo->query($sql);
 
 //requete pour recuperer informations du compte sans l'adresse
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
@@ -31,7 +35,7 @@ $avis = $pdo->query($sql);
 
 
 
-foreach ($info_compte as $row){
+foreach ($mot_de_passe as $row){
 $mdp_cryptee = $row['mdp'];
 }
 
