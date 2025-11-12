@@ -53,7 +53,7 @@
 
             try{
                 if (!sql_check_email($pdo, $email)){
-
+                    echo "test sql 1.2";
                     if (sql_check_cle($pdo, $numCobrec)){
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
@@ -65,11 +65,13 @@
                 else{
                     $res['connect'] = CONNECT_PAS;
                     $res['correcte'] = false;
+                    echo "test sql error";
                 }
             }
             catch(PDOException $e){
                 $res['fatal'] = true;
                 $res['correcte'] = false;
+                echo "test sql fatal";
             }
         }
         else{
