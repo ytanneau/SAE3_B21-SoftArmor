@@ -104,8 +104,8 @@ if (isset($erreurs) && $erreurs == []) {
 <?php } ?>
 
 
-        <input style="display:none" type="number" name="produit" id="produit" required value="<?=$_GET['produit']?>">
-
+        <input type="number" name="produit" id="produit" required value="<?=$_GET['produit']?>">
+        <!-- style="display:none" -->
         <br>
         <input type="submit" value="Continuer l'achat">
 
