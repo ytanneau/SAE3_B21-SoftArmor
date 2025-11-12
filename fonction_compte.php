@@ -542,7 +542,7 @@
         try {
             //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             echo "test sql";
-            $requete = $pdo->prepare("CALL email_actif_existe(:email)");
+            $requete = $pdo->prepare("SELECT email_actif_existe(:email)");
             echo "test sql2";
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             echo "test sql3";
