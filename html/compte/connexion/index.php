@@ -1,5 +1,11 @@
 <?php
 
+// Variables utilisées plus tard pour stocker les erreurs
+$pas_erreur_format;
+$erreur_email;
+$erreur_mdp_vide;
+$erreur_mdp__non_vide;
+
 if (!isset($_SESSION)) {
     session_start();
 }
