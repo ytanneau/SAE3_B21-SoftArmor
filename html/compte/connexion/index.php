@@ -11,6 +11,11 @@ define('HOME_GIT', '../../../');
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+
+    $pas_erreur_format = isset($erreurs['connecte']);
+    $erreur_email = !isset($erreurs['email']);
+    $erreur_mdp_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE);
+    $erreur_mdp__non_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE);
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -49,7 +54,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
                 class="champ">
 
-            <?php if (isset($erreurs['email'])) { ?>
+            <?php if ($erreur_email) { ?>
                 <p style="color: red"><?= $erreurs['email'] ?></p>
             <?php } ?>
 
@@ -62,17 +67,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 class="champ">
             
             <p class="error"><?php 
-                if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { 
+                if ($erreur_mdp_vide) { 
                     echo $erreurs['mdp']; 
                 } ?>
             </p>
                 
 
             <p class="error"><?php
-                $mdp_incorrect_non_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE);
-
                 // Si aucune erreur de format mais identifiants incorrects OU erreur de format de mot de passe (autre que vide)
-                if (isset($erreurs['connecte']) || (!isset($erreurs['email']) && $mdp_incorrect_non_vide)) { 
+                if ($pas_erreur_format || ($erreur_email && $erreur_mdp_non_vide)) { 
                     echo CONNECTE_PAS; 
                 } ?>
             </p>
