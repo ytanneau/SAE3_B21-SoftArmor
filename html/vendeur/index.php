@@ -13,7 +13,7 @@ if ($_POST != null){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: stock');
+    header('location: stock/');
     exit;
 }
 
