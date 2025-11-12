@@ -675,7 +675,7 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->execute();
 
-        $requete = $pdo->prepare("UPDATE _client SET :pseudo, :nom, :prenom, :date_naissance WHERE id_compte = :id_compte");
+        $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
@@ -683,7 +683,7 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
         $requete->execute();
         
-        $requete = $pdo->prepare("UPDATE _adresse SET :adresse, :code_postal, :complement_adresse WHERE id_compte = :id_compte");
+        $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
