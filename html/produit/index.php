@@ -84,6 +84,14 @@ try {
         echo '<p><strong>Détails :</strong> ' . nl2br(htmlspecialchars($produit['description_detaillee'])) . '</p>';
     }
     ?>
+    <?php
+    $stock = isset($produit['stock']) ? (int)$produit['stock'] : null;
+    $disabled = ($stock !== null && $stock <= 0) ? 'disabled' : '';
+    ?>
+    
+    <button type="button" onclick="window.location.href='achat/coordonnees.php?id_produit=<?php echo (int)$id_produit; ?>'" <?php echo $disabled; ?>>
+        <?php echo $disabled ? 'Indisponible' : 'Acheter'; ?>
+    </button>
 
 </body>
 </html>
