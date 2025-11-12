@@ -57,7 +57,7 @@
             <h1>Ajouter un produit au stock</h1>
 
             <!-- Formulaire de saisie des infos du produit -->
-            <form action="" name="formulaire" method="post" enctype="multipart/form-data" target="../">
+            <form action="" name="formulaire" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <h3>Informations produit</h3>
                     <div class="infoPlus">
@@ -437,6 +437,7 @@
                                 ':id_prod' => $idProduit,
                                 ':id_image_princ' => $idImage
                             ]);
+                            header('Location: ../index.php');
                         }
                     }
                 }
