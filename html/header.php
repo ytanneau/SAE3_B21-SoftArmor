@@ -4,7 +4,7 @@
     <!-- Flex horizontal -->
     <div>
         <a href="<?= HOME_GIT ?>">
-            <img src="<?= HOME_GIT . 'html/image/Alizon_blanc.png' ?>" alt="Logo Alizon" title="Logo Alizon">
+            <img src="<?= HOME_GIT . 'image/Alizon_blanc.png' ?>" alt="Logo Alizon" title="Logo Alizon">
         </a>
 
         <form action="<?= HOME_GIT . 'recherche' ?>" method="get">
