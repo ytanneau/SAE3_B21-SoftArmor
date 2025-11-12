@@ -538,15 +538,16 @@
     // Return true si existe, false sinon
     function sql_check_email($pdo, $email){
         try {
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete = $pdo->prepare("CALL email_actif_existe(:email)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
 
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             
             throw $e;
         }
@@ -566,9 +567,9 @@
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             
             throw $e;
         }
@@ -584,9 +585,9 @@
 
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
 
             throw $e;
         }
@@ -615,9 +616,9 @@
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
             
             throw $e; // lance une erreur que la fonction appelante catchera
         }
