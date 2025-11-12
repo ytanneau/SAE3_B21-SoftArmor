@@ -1,8 +1,6 @@
 <?php
 const HOME_GIT = "../../../";
 
-print_r($_POST);
-
 if (!isset($_POST['produit'])) {
     header("location: " . HOME_GIT, );
 }
@@ -96,6 +94,7 @@ if ($_POST != null){
         }
         ?>
 
+        <input style="display:none" type="number" name="produit" id="produit" required value="<?=$_POST['produit']?>">
         <br>
         <input type="submit" value="Effectuer l'achat">
 
