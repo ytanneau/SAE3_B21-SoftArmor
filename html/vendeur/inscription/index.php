@@ -1,19 +1,17 @@
 <?php
     define('HOME_GIT', '../../../');
-    $res = [];
     //echo HOME_GIT . 'fonction_sql.php';
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
+        $erreurs = [];
         $fichier = HOME_GIT . '/fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $res = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
 
         } else {
-            echo $fichier;
-            echo "erreur 1";
-            $res['fatal'] = true;
+            $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
@@ -32,12 +30,12 @@
 <body id="inscription_vendeur">
     <main>
 <?php
-    if (isset($res['correcte']) && $res['correcte']) {
+    if (isset($erreurs) && $erreurs == []) {
 ?>
         <h1>Félicitations vous avez crée votre compte</h1>
 <?php
     }
-    else if (isset($res['fatal'])){
+    else if (isset($erreurs['fatal'])){
 ?>
         <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
 <?php
@@ -63,10 +61,10 @@
                 class="champ">
             <p class="contrainte">Nom puis statut juridique</p>
 <?php
-    if (isset($res['taison_sociale'])){
+    if (isset($erreurs['raison_sociale'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['taison_sociale']?>
+                <?="Erreur : ".$erreurs['raison_sociale']?>
             </p>
 <?php
     }
@@ -83,10 +81,10 @@
                 class="champ">
             <p class="contrainte">Numero a 14 chiffres</p>
 <?php
-    if (isset($res['numero_siret'])){
+    if (isset($erreurs['numero_siret'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['numero_siret']?>
+                <?="Erreur : ".$erreurs['numero_siret']?>
             </p>
 <?php
     }
@@ -104,10 +102,10 @@
                 class="champ">
             <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
 <?php
-    if (isset($res['numero_cobrec'])){
+    if (isset($erreurs['numero_cobrec'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['numero_cobrec']?>
+                <?="Erreur : ".$erreurs['numero_cobrec']?>
             </p>
 <?php
     }
@@ -124,10 +122,10 @@
                 class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['email'])){
+    if (isset($erreurs['email'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['email']?>
+                <?="Erreur : ".$erreurs['email']?>
             </p>
 <?php
     }
@@ -144,10 +142,10 @@
                 class="champ">
             <p class="contrainte">Numero nom rue commune</p>
 <?php
-    if (isset($res['adresse'])){
+    if (isset($erreurs['adresse'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['adresse']?>
+                <?="Erreur : ".$erreurs['adresse']?>
             </p>
 <?php
     }
@@ -173,10 +171,10 @@
                 class="champ">
             <p class="contrainte">Nombre a 5 chiffres</p>
 <?php
-    if (isset($res['code_postal'])){
+    if (isset($erreurs['code_postal'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['code_postal']?>
+                <?="Erreur : ".$erreurs['code_postal']?>
             </p>
 <?php
     }
@@ -193,10 +191,10 @@
                 class="champ">
             <p class="contrainte">minum 12 caractères</p>
 <?php
-    if (isset($res['mdp'])){
+    if (isset($erreurs['mdp'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['mdp']?>
+                <?="Erreur : ".$erreurs['mdp']?>
             </p>
 <?php
     }
@@ -213,10 +211,10 @@
                 class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['mdpc'])){
+    if (isset($erreurs['mdpc'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['mdpc']?>
+                <?="Erreur : ".$erreurs['mdpc']?>
             </p>
 <?php
     }

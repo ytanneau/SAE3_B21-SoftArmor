@@ -55,9 +55,9 @@ if ($_POST != null){
     if (!isset($_POST['n_mdpc'])) $_POST['n_mdpc'] = "";
 
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
+    $erreurs = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
 
-    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($verif) && !(empty($verif['code_postal']) xor empty($verif['rue'])) && !(empty($verif['mdp']) xor empty($verif['mdpc']))){
+    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($erreurs) && !(empty($erreurs['code_postal']) xor empty($erreurs['rue'])) && !(empty($erreurs['mdp']) xor empty($erreurs['mdpc']))){
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte'],$id_adresse);
     }
 }
@@ -88,10 +88,10 @@ unset($pdo);
             <input type="text" name="pseudo" value="<?php echo $row['pseudo'];?>" placeholder="À renseigner">
             <!--Erreur pseudo-->
             <?php
-                if (isset($verif['pseudo'])){
+                if (isset($erreurs['pseudo'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['pseudo']?>
+                            <?="Erreur : ".$erreurs['pseudo']?>
                         </p>
             <?php
                 }
@@ -100,10 +100,10 @@ unset($pdo);
             <input required type="text" name="nom" value="<?php echo $row['nom'];?>" placeholder="À renseigner">
             <!--Erreur nom-->
             <?php
-                if (isset($verif['nom'])){
+                if (isset($erreurs['nom'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['nom']?>
+                            <?="Erreur : ".$erreurs['nom']?>
                         </p>
             <?php
                 }
@@ -112,10 +112,10 @@ unset($pdo);
             <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>" placeholder="À renseigner">
             <!--Erreur prenom-->
             <?php
-                if (isset($verif['prenom'])){
+                if (isset($erreurs['prenom'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['prenom']?>
+                            <?="Erreur : ".$erreurs['prenom']?>
                         </p>
             <?php
                 }
@@ -124,10 +124,10 @@ unset($pdo);
             <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" placeholder="À renseigner">
             <!--Erreur Date-->
             <?php
-                if (isset($verif['date'])){
+                if (isset($erreurs['date'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['date']?>
+                            <?="Erreur : ".$erreurs['date']?>
                         </p>
             <?php
                 }
@@ -136,10 +136,10 @@ unset($pdo);
             <input required type="email" name="email" value="<?php echo $row['email'];?>" placeholder="À renseigner">
             <!--Erreur mail-->
             <?php
-                if (isset($verif['email'])){
+                if (isset($erreurs['email'])){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['email']?>
+                            <?="Erreur : ".$erreurs['email']?>
                         </p>
             <?php
                 }
@@ -157,10 +157,10 @@ unset($pdo);
             <input type="text" name="adresse" value="<?php echo $row['adresse'];?>" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
-                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
+                if (isset($erreurs['rue']) && $erreurs['rue'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['rue']?>
+                            <?="Erreur : ".$erreurs['rue']?>
                         </p>
             <?php
                 }
@@ -171,10 +171,10 @@ unset($pdo);
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
+                if (isset($erreurs['code_postal']) && $erreurs['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['code_postal']?>
+                            <?="Erreur : ".$erreurs['code_postal']?>
                         </p>
             <?php
                 }
@@ -187,11 +187,11 @@ unset($pdo);
             <!--Erreur adresse-->
             <?php
                 echo "test";
-                if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
+                if (isset($erreurs['rue']) && $erreurs['rue'] != "Champ est vide"){
                     echo "test";
             ?>  
                         <p class="error">
-                            <?="Erreur : ".$verif['rue']?>
+                            <?="Erreur : ".$erreurs['rue']?>
                         </p>
             <?php
                 }
@@ -203,10 +203,10 @@ unset($pdo);
             <input type="text" name="code_postal" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($verif['code_postal']) && $verif['code_postal'] != "Champ est vide"){
+                if (isset($erreurs['code_postal']) && $erreurs['code_postal'] != "Champ est vide"){
             ?>
                         <p class="error">
-                            <?="Erreur : ".$verif['code_postal']?>
+                            <?="Erreur : ".$erreurs['code_postal']?>
                         </p>
             <?php
                 }
@@ -216,7 +216,7 @@ unset($pdo);
                 <?php
             } ?>
             <?php
-                if (empty($verif['code_postal']) xor empty($verif['rue'])){
+                if (empty($erreurs['code_postal']) xor empty($erreurs['rue'])){
             ?>
                         <p class="error">
                             <?= "Remplissez les deux champs Adresse et Code Postal" ?>
