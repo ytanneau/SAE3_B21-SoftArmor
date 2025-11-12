@@ -13,6 +13,10 @@ if (!isset($_SESSION)) {
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
+//requete pour recuperer mot de passe cryptée
+$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
+
+$mot_de_passe= $pdo->query($sql);
 
 //requete pour recuperer informations du compte sans l'adresse
 $sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
@@ -29,25 +33,36 @@ $sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_i
 
 $avis = $pdo->query($sql);
 
-// Fermer la connexion
-unset($pdo);
+
+
+foreach ($mot_de_passe as $row){
+$mdp_cryptee = $row['mdp'];
+$id_adresse = $row['id_adresse'];
+}
 
 //traitement de la modification des informations
 if ($_POST != null){
-    $pseudo="null";
+    if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
     if (!isset($_POST['date'])) $_POST['date'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
+    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
+    if (!isset($_POST['mdp'])) $_POST['mdp'] = "";
+    if (!isset($_POST['n_mdp'])) $_POST['n_mdp'] = "";
+    if (!isset($_POST['n_mdpc'])) $_POST['n_mdpc'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
-    print_r($verif);
-    if(!empty($verif)){
-        
+
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
+
+    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($verif) && !(empty($verif['code_postal']) xor empty($verif['rue'])) && !(empty($verif['mdp']) xor empty($verif['mdpc']))){
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte'],$id_adresse);
     }
 }
+// Fermer la connexion
+unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +84,18 @@ if ($_POST != null){
         <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
 
         <form action="" method="post" id="donnee">
-            
+            <label for="pseudo">Pseudonyme</label>
+            <input type="text" name="pseudo" value="<?php echo $row['pseudo'];?>" placeholder="À renseigner">
+            <!--Erreur pseudo-->
+            <?php
+                if (isset($verif['pseudo'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['pseudo']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="nom">Nom</label>
             <input required type="text" name="nom" value="<?php echo $row['nom'];?>" placeholder="À renseigner">
             <!--Erreur nom-->
@@ -198,6 +224,16 @@ if ($_POST != null){
             <?php
                 }
             ?>
+            
+            <label for="mdp">Mot de Passe</label>
+            <input type="password" name="mdp" placeholder="À renseigner">
+        
+            <label for="n_mdp">Nouveau Mot de Passe</label>
+            <input type="password" name="n_mdp" placeholder="À renseigner">
+            
+            <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
+            <input type="password" name="n_mdpc" placeholder="À renseigner">
+
             <button type="submit">Modifier mes informations</button>
         </form>
         
