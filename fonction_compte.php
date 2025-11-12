@@ -2,11 +2,11 @@
 
     const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
-    const FORMAT = "Format invalide";
+    const FORMAT = "Le format est invalide";
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
-    const CORRESPOND_PAS = "Ne correspond pas au mot de passe";
-    const CONNECTE_PAS = "L'email ou mot de passe invalide";
+    const CORRESPOND_PAS = "Les deux mots de passe ne correspondent pas";
+    const CONNECTE_PAS = "L'email ou le mot de passe est invalide";
 
     const TAILLE_NOM = 40;
     const TAILLE_RAISON_SOCIALE = 60;
@@ -159,11 +159,11 @@
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
             }
-
-            return $erreurs;
         } else {
-            return check_erreur_connection($email, $mdp);
+            $erreurs = check_erreur_connection($email, $mdp);
         }
+
+        return $erreurs;
     }
 
 
@@ -510,10 +510,10 @@
             $erreurs['mdp'] = VIDE;
         }
         else if (!check_taille($mdp, TAILLE_MDP)){
-            $erreurs['mdp'] = DEPASSE;
+            $erreurs['connecte'] = CONNECTE_PAS;
         }
         else if (!check_mot_de_passe($mdp)){
-            $erreurs['mdp'] = FORMAT;
+            $erreurs['connecte'] = CONNECTE_PAS;
         }
 
         return $erreurs;

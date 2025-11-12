@@ -29,13 +29,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
+    <link rel="stylesheet" href="<?=HOME_GIT?>style.css">
 </head>
 <body id="connect_client">
     <main>
         <img src="" alt="">
         <a href="../">
-            <img src="<?=HOME_GIT?>html/image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+            <img src="<?=HOME_GIT?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S’identifier</h2>
 
@@ -44,7 +44,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <!-- Adresse e-mail -->
             <br>
             <label for="email">Email</label>
-            <input type="email"
+            <input type="text"
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
@@ -62,15 +62,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value=""
                 class="champ">
             
-            <?php if ($erreurs['mdp'] === VIDE) { ?>
-                <p style="color: red"><?= $erreurs['mdp'] ?></p>
-            <?php } ?>
+            <p class="error"><?php 
+                if (isset($erreurs['mdp'])) { 
+                    echo $erreurs['mdp']; 
+                } ?>
+            </p>
+        
+            <p class="error"><?php 
+                if (isset($erreurs['connecte'])) { 
+                    echo $erreurs['connecte']; 
+                } ?>
+            </p>
             
             <input type="submit" value="Se connecter" class="bouton"> 
-            
-            <?php if (isset($erreurs['connecte'])) { ?>
-                <p style="color: red"><?= $erreurs['connecte'] ?></p>
-            <?php } ?>
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>
