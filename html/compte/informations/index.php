@@ -143,8 +143,8 @@ unset($pdo);
                         </p>
             <?php
                 }
+            }
             ?>
-            <?php } ?>
             <label for="adresse">Adresse</label>
             <?php
             //affichage des info du compte
@@ -178,24 +178,22 @@ unset($pdo);
                         </p>
             <?php
                 }
-            ?>
-            <?php }
+            }
             if (!$est_entre) {
                 ?>
             
             <input type="text" name="adresse" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
-                echo "test";
+                
                 if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
-                    echo "test";
+                    
             ?>  
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
-                echo "test";
             ?>
             <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" placeholder="À renseigner">
@@ -210,12 +208,7 @@ unset($pdo);
                         </p>
             <?php
                 }
-            ?>
-            
-            
-                <?php
-            } ?>
-            <?php
+            }
                 if (empty($verif['code_postal']) xor empty($verif['rue'])){
             ?>
                         <p class="error">
@@ -230,10 +223,35 @@ unset($pdo);
         
             <label for="n_mdp">Nouveau Mot de Passe</label>
             <input type="password" name="n_mdp" placeholder="À renseigner">
-            
+            <!--Erreur nouveau mot de passe-->
+            <?php
+                if (isset($verif['mdp']) && $verif['mdp'] != "Champ est vide"){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['mdp']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
             <input type="password" name="n_mdpc" placeholder="À renseigner">
-
+            <!--Erreur confirmation nouveau mot de passe-->
+            <?php
+                if (isset($verif['mdpc']) && $verif['mdpc'] != "Champ est vide"){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['mdpc']?>
+                        </p>
+            <?php
+                }
+            if (empty($verif['mdp']) xor empty($verif['mdpc'])){
+            ?>
+                        <p class="error">
+                            <?= "Remplissez les deux champs Nouveau Mot de Passe" ?>
+                        </p>
+            <?php
+                }
+            ?>
             <button type="submit">Modifier mes informations</button>
         </form>
         
