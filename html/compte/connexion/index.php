@@ -51,6 +51,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 required
                 class="champ">
 
+            <?php if (isset($erreurs['email'])) { ?>
+                <p style="color: red"><?= $erreurs['email'] ?></p>
+            <?php } ?>
+
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
             <input type="password" 
@@ -59,6 +63,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value=""
                 required
                 class="champ">
+            
+            <?php if (isset($erreurs['mdp'])) { ?>
+                <p style="color: red"><?= $erreurs['mdp'] ?></p>
+            <?php } ?>
             
             <input type="submit" value="Se connecter" class="bouton">            
         </form>
