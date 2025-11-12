@@ -12,10 +12,11 @@ if ($_POST != null){
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
-    header('location: stock');
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('location: stock/');
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +24,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alizon Vendeur Connexion</title>
-    <link rel="stylesheet" href="../style.css">
+    <title>Alizon Vendeur - Connexion</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?= HOME_GIT . "html/style.css" ?>">
 </head>
 <body id="connect_vendeur">
     <main>
@@ -36,8 +38,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
     }
     else {
 ?>
+        <img src="" alt="">
+        <a href="../">
+            <img src="<?=HOME_GIT?>html/image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
+        </a>
+        <h2>S’identifier</h2>
+
         <form action="" method="post">
-            <legend>S'identifier</legend>
 <?php
     if (isset($res['connect'])){
 ?>
@@ -81,9 +88,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['co
     }
 ?>
             
-            <input type="submit" value="Se connecter" class="boutton">            
+            <input type="submit" value="Se connecter" class="bouton">            
         </form>
-        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
+        <p>Pas de compte ? <a href="inscription/">S'inscrire</a></p>
 <?php
     }
 ?>

@@ -152,10 +152,6 @@
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
 
-                        // if (!isset($_SESSION)){
-                        //     session_start();
-                        // }
-
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
                         $_SESSION['email'] = $email;
@@ -307,11 +303,11 @@
 // |  FONCTIONS D'ERREUR  |
 // +----------------------+
 
-    //renvoit toute les erreur posible de champ
+    // Renvoie toutes les erreurs possibles de champ vendeur
     function check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
         $res = [];
 
-        //recherche l'erreur dans la raison social
+        // Recherche l'erreur dans la raison sociale
         if (check_vide($raisonSociale)){
             $res['raison_sociale'] = VIDE;
         }
@@ -322,7 +318,7 @@
             $res['raison_sociale'] = FORMAT;
         }
         
-        //recherche l'erreur dans le numero de siret
+        // Recherche l'erreur dans le numero de SIRET
         if (check_vide($numSiret)){
             $res['numero_siret'] = VIDE;
         }
@@ -330,7 +326,7 @@
             $res['numero_siret'] = FORMAT;
         }
 
-        //recherche l'erreur dans le numero de la COBREC
+        // Recherche l'erreur dans le numéro de la COBREC
         if (check_vide($numCobrec)){
             $res['numero_cobrec'] = VIDE;
         }
@@ -338,7 +334,7 @@
             $res['numero_cobrec'] = FORMAT;
         }
 
-        //recherche l'erreur dans l'email
+        // Recherche l'erreur dans l'e-mail
         if (check_vide($email)){
             $res['email'] = VIDE;
         }
@@ -350,10 +346,10 @@
         }
 
         
-        //recherche l'erreur dans l'adresse
+        // Recherche l'erreur dans l'adresse
         $res = array_merge($res, check_coordonnees($adresse, $codePostal));
 
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (check_vide($mdp)){
             $res['mdp'] = VIDE;
         }
@@ -364,7 +360,7 @@
             $res['mdp'] = FORMAT;
         }
 
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (check_vide($mdpc)){
             $res['mdpc'] = VIDE;
         }
@@ -375,7 +371,7 @@
         return $res;
     }
 
-    // renvoit toutes les erreurs possibles de champ pour inscription client
+    // Renvoie toutes les erreurs de champ possibles pour un client
     function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
         $res = [];
 
@@ -422,7 +418,7 @@
             $res['date_naiss'] = FORMAT;  
         }
 
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (isset($mdp)) {
             if (check_vide($mdp)){
                 $res['mdp'] = VIDE;
@@ -434,7 +430,7 @@
                 $res['mdp'] = FORMAT;
             }
 
-            //recherche l'erreur dans le mot de passe
+            // Recherche l'erreur dans le mot de passe
             if (check_vide($mdpc)){
                 $res['mdpc'] = VIDE;
             }
@@ -443,17 +439,17 @@
             }
         }
 
-        // recherche erreur dans adresse
+        // Recherche l'erreur dans l'adresse
         $res = array_merge($res, check_coordonnees($adresse, $code_postal));
 
         return $res;
     }
 
-    // renvoit toutes les erreurs possbiles pour la partie coordonnées
+    // Renvoie toutes les erreurs possbiles pour la partie coordonnées
     function check_coordonnees($adresse, $code_postal) {
         $res = [];
 
-        //recherche l'erreur dans l'adresse
+        // Recherche l'erreur dans l'adresse
         if (isset($adresse)) {
             if (check_vide($adresse)){
                 $res['adresse'] = VIDE;
@@ -466,7 +462,7 @@
             }
         }
 
-        //recherche l'erreur dans code postal
+        // Recherche l'erreur dans le code postal
         if (isset($code_postal)) {
             if (check_vide($code_postal)){
                 $res['code_postal'] = VIDE;
@@ -534,21 +530,24 @@
         return $res;
     }
 
-//fonctuion pour la base de donnée
+// +-----------------------------+
+// |  FONCTIONS BASE DE DONNÉES  |
+// +-----------------------------+
 
-    //verifie la présence d'un email
-    //return 1 si existe, 0 si absent
+    // Vérifie la présence d'un email dans la BDD
+    // Return true si existe, false sinon
     function sql_check_email($pdo, $email){
-        try{
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
+
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            
             throw $e;
         }
     }
@@ -561,31 +560,34 @@
             } else {
                 $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
             }
+
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
+
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
-            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            
             throw $e;
         }
     }
 
-    //verifie la présence de la cle de la cobrec
-    //return 1 si existe, 0 si absent
+    // Vérifie l'existence d'une clé COBREC
+    // Return true si existe, false sinon
     function sql_check_cle($pdo, $cle){
-        try{
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM _cle_vendeur WHERE cle_cobrec = :cle");
             $requete->bindValue(':cle', $cle, PDO::PARAM_STR);
             $requete->execute();
+
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
+
             throw $e;
         }
     }
@@ -616,6 +618,7 @@
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
@@ -665,7 +668,7 @@
         }
     }
 
-    // fonction qui rajoute une adresse à un client dans la bdd
+    // Fonction qui rajoute une adresse à un client dans la BDD
     function sql_insert_adresse_client($pdo, $id_compte, $adresse, $compl_adresse, $code_postal) {
         try {
             $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :compl_adresse, :code_postal)");

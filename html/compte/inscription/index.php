@@ -32,12 +32,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alizon - Inscription Client</title>
+    <title>Alizon - Inscription</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
 </head>
-<body>
+<body id="inscription_client">
     <main>
-
-    <a href=<?= HOME_GIT ?>>Revenir à l'accueil</a>
+        
 
 <?php
     if (isset($res['correcte']) && $res['correcte']) {
@@ -52,11 +53,16 @@
     }
     else{
 ?>
-        <h1>Inscription client sur Alizon</h1>
+        <img src="" alt="">
+        <a href="../">
+            <img src="<?=HOME_GIT?>html/image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+        </a>
+        <h2>S'inscrire</h2>
         
         <form action="" method="post">
             <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" maxlength="40" value="<?php if (isset($_POST["nom"])) echo $_POST["nom"]?>">
+            <input type="text" id="nom" name="nom" maxlength="40" value="<?php if (isset($_POST["nom"])) echo $_POST["nom"]?>"
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['nom'])){
@@ -70,7 +76,8 @@
 
             <br>
             <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?php if (isset($_POST["prenom"])) echo $_POST["prenom"]?>">
+            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?php if (isset($_POST["prenom"])) echo $_POST["prenom"]?>"
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['prenom'])){
@@ -84,7 +91,8 @@
 
             <br>
             <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?php if (isset($_POST["pseudo"])) echo $_POST["pseudo"]?>">
+            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?php if (isset($_POST["pseudo"])) echo $_POST["pseudo"]?>"
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['pseudo'])){
@@ -98,7 +106,8 @@
 
             <br>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" maxlength="80" value="<?php if (isset($_POST["email"])) echo $_POST["email"]?>">
+            <input type="email" id="email" name="email" maxlength="80" value="<?php if (isset($_POST["email"])) echo $_POST["email"]?>"
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['email'])){
@@ -112,7 +121,8 @@
 
             <br>
             <label for="date_naissance">Date de naissance</label>
-            <input type="date" id="date_naissance" name="date_naissance">
+            <input type="date" id="date_naissance" name="date_naissance"
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['date_naiss'])){
@@ -126,7 +136,8 @@
 
             <br>
             <label for="mdp">Mot de passe</label>
-            <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required>
+            <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required
+            class="champ">
             <p class="contrainte">minimum 12 caractères</p>
 <?php
     if (isset($res['mdp'])){
@@ -140,7 +151,8 @@
 
             <br>
             <label for="mdpc">Mot de passe de confirmation</label>
-            <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required>
+            <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required
+            class="champ">
             <p class="contrainte"></p>
 <?php
     if (isset($res['mdpc'])){
@@ -152,7 +164,7 @@
     }
 ?>
 
-            <input type="submit" value="Crée mon compte">
+            <input type="submit" value="Crée mon compte" class="bouton">
         </form>
 <?php
     }
