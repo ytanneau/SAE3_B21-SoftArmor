@@ -277,6 +277,11 @@
         return (strtotime("1900-01-01") < strtotime($date) && strtotime($date) < time());
     }
 
+    // vérifie le code de la carte bancaire
+    function check_code_carte($code) {
+        return (99999999999 < $code && $code <= 999999999999);
+    }
+
     //supprime les espaces, underscores et tirets
     function nettoyer_chaine($texte) {
         return str_replace([' ', '_', '-'], '', $texte);
@@ -472,6 +477,34 @@
         }
 
         return $res;
+    }
+
+    // renvoit toutes les erreurs possibles pour la partie coordonnées bancaires
+    function check_coordonnees_bancaires($code_carte, $date_exp, $code_securite) {
+        $erreurs = [];
+
+        // erreur sur code de carte
+        if (check_vide($code_carte)) {
+            $erreurs['code_carte'] = VIDE;
+        }
+        else if (!check_code_carte($code_carte)) {
+            $erreurs['code_carte'] = FORMAT;
+        }
+
+        // erreur sur date d'expiration
+        if (check_vide($date_exp)) {
+            $erreurs['date_exp'] = VIDE;
+        }
+        
+        // erreur sur code de sécurité
+        if (check_vide($code_securite)) {
+            $erreurs['code_securite'] = VIDE;
+        }
+        else if (!check_taille($code_securite, 3)) {
+            $erreurs['code_securite'] = FORMAT;
+        }
+
+        return $erreurs;
     }
 
     function check_erreur_connection($email, $mdp){

@@ -15,12 +15,6 @@ if (!isset($_SESSION['logged_in'])) {
 
 require_once HOME_GIT . ".config.php";
 
-$requete = $pdo->prepare("SELECT nom_public, prix, tva, description, description_detaillee FROM produit WHERE id_produit = :id_produit");
-$requete->bindValue(":id_produit", $_GET['produit'], PDO::PARAM_STR);
-$requete->execute();
-
-$produit = $requete->fetch(PDO::FETCH_ASSOC);
-
 $requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
 $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
 $requete->execute();
@@ -28,13 +22,11 @@ $requete->execute();
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
 // gestion du POST
-if ($_POST != null){
+if (isset($_POST)){
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
-    //echo "présence d'un post";
-    //print_r($_ENV);
     $fichier = HOME_GIT . 'fonction_compte.php';
     if (file_exists($fichier)) {
         require_once $fichier;
@@ -46,7 +38,7 @@ if ($_POST != null){
         }
 
     } else {
-        // echo "erreur 1";
+        // pas d'accès au fichier fonctions
 
         $erreurs['fatal'] = true;
         // $fichierLog = __DIR__ . "/erreurs.log";
@@ -115,3 +107,4 @@ if (isset($erreurs) && $erreurs == []) {
 
         </form>
     </body>
+</html>
