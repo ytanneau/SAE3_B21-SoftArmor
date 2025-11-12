@@ -68,10 +68,30 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             </p>
         
             <p class="error"><?php 
-                if (isset($erreurs['connecte'])) { 
-                    echo $erreurs['connecte']; 
+                if (isset($erreurs['connecte']) || (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE)) { 
+                    echo CONNECTE_PAS; 
                 } ?>
             </p>
+
+            <!-- 
+
+            benoit
+            123
+
+            isset($erreurs['email']) : true
+            isset($erreurs['mdp']) : false
+            isset($erreurs['connecte']) : true
+
+            Résultat attendu :
+            Email : Format invalide
+            MDP : Rien
+            Erreur finale : Rien
+
+            Résultat obtenu :
+            Email : Format invalide
+            MDP : Rien
+            Erreur finale : Email ou MDP invalide
+            -->
             
             <input type="submit" value="Se connecter" class="bouton"> 
         </form>

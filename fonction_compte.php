@@ -516,10 +516,10 @@
             $erreurs['mdp'] = VIDE;
         }
         else if (!check_taille($mdp, TAILLE_MDP)){
-            $erreurs['connecte'] = CONNECTE_PAS;
+            $erreurs['mdp'] = DEPASSE;
         }
         else if (!check_mot_de_passe($mdp)){
-            $erreurs['connecte'] = CONNECTE_PAS;
+            $erreurs['mdp'] = FORMAT;
         }
 
         return $erreurs;
