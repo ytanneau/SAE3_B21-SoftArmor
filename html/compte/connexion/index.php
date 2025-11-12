@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value=""
                 class="champ">
             
-            <?php if ($erreurs['mdp'] === VIDE) { ?>
+            <?php if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { ?>
                 <p style="color: red"><?= $erreurs['mdp'] ?></p>
             <?php } ?>
             
