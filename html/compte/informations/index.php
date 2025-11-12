@@ -58,13 +58,13 @@ if ($_POST != null){
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     print_r($_POST);
     echo "<br>";
-    echo $_POST['mdp'];
+    echo "mdp :".$_POST['mdp'];
     echo "<br>";
-    echo $mdp_cryptee;  
+    echo "mdp hash:".$mdp_cryptee;  
     echo "<br>";
-    echo !check_vide($_POST['mdp']);
+    echo "pas vide : ".!check_vide($_POST['mdp']);
     echo "<br>";
-    echo (check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp']));
+    echo "mdp valide et pas vide :".(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp']));
     echo "<br>";
     if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
         echo "test entré";
