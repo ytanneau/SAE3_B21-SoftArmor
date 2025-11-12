@@ -71,8 +71,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <?php } ?>
             
             <input type="submit" value="Se connecter" class="bouton"> 
-            
-            <?php 
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>
