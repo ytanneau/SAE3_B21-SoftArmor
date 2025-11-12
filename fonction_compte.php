@@ -62,7 +62,7 @@
                     }
                 }
                 else{
-                    $res['connect'] = CONNECT_PAS;
+                    $res['connecte'] = CONNECTE_PAS;
                     $res['correcte'] = false;
                     echo "test sql error";
                 }
