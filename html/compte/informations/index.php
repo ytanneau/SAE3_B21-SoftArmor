@@ -55,7 +55,7 @@ if ($_POST != null){
     if (!isset($_POST['n_mdpc'])) $_POST['n_mdpc'] = "";
 
 
-    $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
 
     if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($verif) && !(empty($verif['code_postal']) xor empty($verif['rue'])) && !(empty($verif['mdp']) xor empty($verif['mdpc']))){
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte'],$id_adresse);
@@ -143,8 +143,8 @@ unset($pdo);
                         </p>
             <?php
                 }
-            }
             ?>
+            <?php } ?>
             <label for="adresse">Adresse</label>
             <?php
             //affichage des info du compte
@@ -152,8 +152,8 @@ unset($pdo);
             foreach ($adresse_compte as $row){  
                 $est_entre = true;
             ?>
-            
-            
+
+
             <input type="text" name="adresse" value="<?php echo $row['adresse'];?>" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
@@ -178,22 +178,24 @@ unset($pdo);
                         </p>
             <?php
                 }
-            }
+            ?>
+            <?php }
             if (!$est_entre) {
                 ?>
-            
+
             <input type="text" name="adresse" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
-                
+                echo "test";
                 if (isset($verif['rue']) && $verif['rue'] != "Champ est vide"){
-                    
+                    echo "test";
             ?>  
                         <p class="error">
                             <?="Erreur : ".$verif['rue']?>
                         </p>
             <?php
                 }
+                echo "test";
             ?>
             <label for="complement_adresse">Complement Adresse</label>
             <input type="text" name="complement_adresse" placeholder="À renseigner">
@@ -208,7 +210,12 @@ unset($pdo);
                         </p>
             <?php
                 }
-            }
+            ?>
+
+
+                <?php
+            } ?>
+            <?php
                 if (empty($verif['code_postal']) xor empty($verif['rue'])){
             ?>
                         <p class="error">
@@ -217,44 +224,19 @@ unset($pdo);
             <?php
                 }
             ?>
-            
+
             <label for="mdp">Mot de Passe</label>
             <input type="password" name="mdp" placeholder="À renseigner">
-        
+
             <label for="n_mdp">Nouveau Mot de Passe</label>
             <input type="password" name="n_mdp" placeholder="À renseigner">
-            <!--Erreur nouveau mot de passe-->
-            <?php
-                if (isset($erreur['mdp']) && $erreur['mdp'] != "Champ est vide"){
-            ?>
-                        <p class="error">
-                            <?="Erreur : ".$erreur['mdp']?>
-                        </p>
-            <?php
-                }
-            ?>
+
             <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
             <input type="password" name="n_mdpc" placeholder="À renseigner">
-            <!--Erreur confirmation nouveau mot de passe-->
-            <?php
-                if (isset($erreur['mdpc']) && $erreur['mdpc'] != "Champ est vide"){
-            ?>
-                        <p class="error">
-                            <?="Erreur : ".$erreur['mdpc']?>
-                        </p>
-            <?php
-                }
-            if (empty($erreur['mdp']) xor empty($erreur['mdpc'])){
-            ?>
-                        <p class="error">
-                            <?= "Remplissez les deux champs Nouveau Mot de Passe " ?>
-                        </p>
-            <?php
-                }
-            ?>
+
             <button type="submit">Modifier mes informations</button>
         </form>
-        
+
     </div>
     <div>
         <h2>Vos Avis</h2>
@@ -282,6 +264,5 @@ unset($pdo);
             </ul>
         </div>
     </div>
-    
+
 </body>
-</html>
