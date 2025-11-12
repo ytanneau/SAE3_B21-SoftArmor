@@ -60,11 +60,11 @@ if ($_POST != null){
     echo "<br>";
     echo $_POST['mdp'];
     echo "<br>";
-    echo $mdp_cryptee;
+    echo $mdp_cryptee;  
     echo "<br>";
     echo check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee);
     echo "<br>";
-    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
+    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
         echo "test entré";
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte'],$id_adresse);
     }
