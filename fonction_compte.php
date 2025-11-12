@@ -62,7 +62,7 @@
                     }
                 }
                 else{
-                    $res['email'] = EXISTE;
+                    $erreurs['email'] = EXISTE;
                     echo "test sql error";
                 }
             }
