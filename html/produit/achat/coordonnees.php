@@ -1,7 +1,7 @@
 <?php
 const HOME_GIT = "../../../";
 
-if (!isset($_GET['produit'])) {
+if (!isset($_POST['produit'])) {
     header("location: " . HOME_GIT, );
 }
 
