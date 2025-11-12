@@ -62,11 +62,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value=""
                 class="champ">
             
-            <?php if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { ?>
-                <p style="color: red"><?= $erreurs['mdp'] ?></p>
-            <?php } else if (isset($erreurs['connecte']) || isset($erreurs['mdp'])) { ?>
-                <p style="color: red"><?= CONNECTE_PAS ?></p>
-            <?php } ?>
+            <p class="error"><?php if (isset($erreurs['mdp'])) { $erreurs['mdp']; } ?></p>
+        
+            <p class="error"><?php if (isset($erreurs['connecte'])) { echo $erreurs['connecte']; } ?></p>
             
             <input type="submit" value="Se connecter" class="bouton"> 
         </form>
