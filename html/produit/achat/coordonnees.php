@@ -15,45 +15,12 @@ if (!isset($_SESSION['logged_in'])) {
 
 require_once HOME_GIT . ".config.php";
 
-$requete = $pdo->prepare("SELECT nom_public, prix, tva, description, description_detaillee FROM produit WHERE id_produit = :id_produit");
-$requete->bindValue(":id_produit", $_GET['produit'], PDO::PARAM_STR);
-$requete->execute();
-
-$produit = $requete->fetch(PDO::FETCH_ASSOC);
-
 $requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
 $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
 $requete->execute();
 
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
-// gestion du POST
-if ($_POST != null){
-    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
-    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
-    if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
-
-    //echo "présence d'un post";
-    //print_r($_ENV);
-    $fichier = HOME_GIT . 'fonction_compte.php';
-    if (file_exists($fichier)) {
-        require_once $fichier;
-        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
-
-        // enregistrer
-        if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
-            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
-        }
-
-    } else {
-        // echo "erreur 1";
-
-        $erreurs['fatal'] = true;
-        // $fichierLog = __DIR__ . "/erreurs.log";
-        // $date = date("Y-m-d H:i:s");
-        // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
-    }
-}
 
 if (isset($erreurs) && $erreurs == []) {
     header('Location: ' . 'bancaire.php');
@@ -71,7 +38,7 @@ if (isset($erreurs) && $erreurs == []) {
 
     <body>
         <h1>Entrez vos coordonnées</h1>
-        <form action="" method="post">
+        <form action="bancaire.php" method="post">
 
         <label for="adresse">Adresse</label>
         <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) {echo $adresse_client['adresse'];} else if (isset($_POST['adresse'])) {echo $_POST['adresse'];}?>" required>
@@ -110,8 +77,13 @@ if (isset($erreurs) && $erreurs == []) {
         <label for="enregistrer">Enregistrer l'adresse</label>
         <input type="checkbox" id="enregistrer" name="enregistrer" >
 <?php } ?>
+
+
+        <input type="number" name="produit" id="produit" required value="<?=$_GET['produit']?>">
+        <!-- style="display:none" -->
         <br>
         <input type="submit" value="Continuer l'achat">
 
         </form>
     </body>
+</html>
