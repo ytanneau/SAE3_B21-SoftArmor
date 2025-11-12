@@ -66,37 +66,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     echo $erreurs['mdp']; 
                 } ?>
             </p>
-        
+                
+
             <p class="error"><?php
                 $mdp_incorrect_non_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE);
 
+                // Si aucune erreur de format mais identifiants incorrects OU erreur de format de mot de passe (autre que vide)
                 if (isset($erreurs['connecte']) || (!isset($erreurs['email']) && $mdp_incorrect_non_vide)) { 
                     echo CONNECTE_PAS; 
                 } ?>
             </p>
-
-            <!-- 
-            
-            Valeurs de test
-            Email : benoit
-            Mot de passe : 123
-
-            isset($erreurs['email']) : true
-            isset($erreurs['mdp']) : true
-            isset($erreurs['connecte']) : true
-
-            Résultat attendu :
-            Email : Format invalide
-            MDP : Rien
-            Erreur finale : Rien
-
-            Résultat obtenu :
-            Email : Format invalide
-            MDP : Rien
-            Erreur finale : Email ou MDP invalide
-
-            Si aucune erreur OU (erreur dans l'email ET )
-            -->
             
             <input type="submit" value="Se connecter" class="bouton"> 
         </form>
