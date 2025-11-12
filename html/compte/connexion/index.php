@@ -33,7 +33,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 </head>
 <body id="connect_client">
     <main>
-        <img src="" alt="">
         <a href="../">
             <img src="<?=HOME_GIT?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
