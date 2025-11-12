@@ -24,7 +24,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
 
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
-$sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
+$sql = 'select nom_stock, quantite, nom_public, description, description_detaillee, tva, poids, prix, volume from _produit where id_produit = :id_produit';
 
 //initialise la variable qui porte la commande sql 
 $stmt = initialize($sql);
@@ -35,11 +35,11 @@ unset($quantite);
 function initialize($sql){
     global $pdo;
     print_r(value: $_SESSION);
-    $compte = $_SESSION['id_compte'];
+    $produit = 1;
 
     //prepare la commande et verifie si elle est pas vide
     if ($stmt = $pdo->prepare($sql)) {
-        $stmt->bindParam(":id_vendeur", $compte);
+        $stmt->bindParam(":id_vendeur", $produit);
     }
     //regarde si la commande est executable
     if ($stmt->execute()) {
@@ -60,27 +60,37 @@ function initialize($sql){
 // écris le tableau avec les valeurs a l'interieur
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($rows as $row){
+    $nom_stock = $rows['nom_stock'];
+    $quantite = $rows['quantite'];
+    $nom_public = $rows['nom_public'];
+    $description = $rows['description'];
+    $description_detaillee = $rows['description_detaillee'];
+    $tva = $rows['tva'];
+    $poids = $rows['poids'];
+    $volume = $rows['volume'];
+    $prix = $rows['prix'];
         ?>
         
         <table>
             <tr>
-                <td><img src="MenuBurger.png" alt=> </td>
-                <td> 
-                    <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
-                    <a href= "../produit/index.php?produit=<?php echo $row['id_produit'] ?>"> <?= $row['nom_stock']?> 
-                    </a>
-                </td>
-                <td><img src="eyeclose.png" alt=""> </td>
-                <td><img src="promotion.png" alt=""> </td>
-                <td><img src="Fleche.png" alt=""> </td>
-                <td> | </td>
-                <td><?php echo $row['quantite'] ?></td>
+                <th>nom en stock </th>
+                <th>nom public </th>
+                <th>Prix actuelle </th>
+                <th>taux TVA </th>
+                <th>Poids </th>
+                <th>Volume </th>
+            </tr>
+            <tr>
+                <td><?php echo $rows['nom_stock']?> </td>
+                <td><?php echo $rows['nom_public']?>  </td>
+                <td><?php echo $rows['prix']?>  </td>
+                <td><?php echo $rows['tva']?>  </td>
+                <td><?php echo $rows['poids']?>  </td>
+                <td><?php echo $rows['volume'] ?></td>
             </tr>
         </table>
         <?php
     }
-}
 ?>
 
     </body>
