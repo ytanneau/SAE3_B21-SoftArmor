@@ -94,7 +94,7 @@ if ($_POST != null){
         }
         ?>
 
-        <input style="display:none" type="number" name="produit" id="produit" required value="<?=$_POST['produit']?>">
+        <input type="hidden" type="number" name="produit" id="produit" required value="<?=$_POST['produit']?>">
         <br>
         <input type="submit" value="Effectuer l'achat">
 
