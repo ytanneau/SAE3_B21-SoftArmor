@@ -60,6 +60,7 @@ function initialize($sql){
 // écris le tableau avec les valeurs a l'interieur
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
+    print_r($rows);
         ?>
         
         <table>
