@@ -6,7 +6,7 @@
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
     const CORRESPOND_PAS = "Ne correspond pas au mot de passe";
-    const CONNECT_PAS = "L'email ou mot de passe invalide";
+    const CONNECTE_PAS = "L'email ou mot de passe invalide";
 
     const TAILLE_NOM = 40;
     const TAILLE_RAISON_SOCIALE = 60;
@@ -58,11 +58,11 @@
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
-                        $erreurs['connect'] = CONNECT_PAS;
+                        $erreurs['connecte'] = CONNECTE_PAS;
                     }
                 }
                 else{
-                    $erreurs['connect'] = CONNECT_PAS;
+                    $erreurs['connecte'] = CONNECTE_PAS;
                 }
             }
             catch(PDOException $e){
@@ -70,7 +70,7 @@
             }
         }
         else{
-            $erreurs = array_push($erreurs, check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc));
+            $erreurs = array_merge($erreurs, check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc));
 
         }
         return $erreurs;
@@ -148,15 +148,14 @@
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
-
                         return $erreurs;
                     }
                     else {
-                        $erreurs['erreur'] = CONNECT_PAS;
+                        $erreurs['connecte'] = CONNECTE_PAS;
                     }
                 }
                 else {
-                    $erreurs['erreur'] = CONNECT_PAS;
+                    $erreurs['connecte'] = CONNECTE_PAS;
                 }
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
