@@ -50,7 +50,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 class="champ">
 
             <?php if (isset($erreurs['email'])) { ?>
-                <p style="color: red"><?= $erreurs['email'] . ". Exemple : xyz@domaine.fr" ?></p>
+                <p style="color: red">
+                    <?php 
+                        echo $erreurs['email'];
+                        
+                        if ($erreurs['email'] === FORMAT) {
+                            echo ". Exemple : xyz@domaine.fr"; 
+                        }
+                    ?>
+                </p>
             <?php } ?>
 
                 <!-- Mot de passe -->
