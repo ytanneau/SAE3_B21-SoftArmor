@@ -53,7 +53,6 @@
 
             try{
                 if (!sql_check_email($pdo, $email)){
-                    echo "test sql 1.2";
                     if (sql_check_cle($pdo, $numCobrec)){
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
@@ -63,13 +62,11 @@
                 }
                 else{
                     $erreurs['email'] = EXISTE;
-                    echo "test sql error";
                 }
             }
             catch(PDOException $e){
                 $erreurs['fatal'] = true;
                 $erreurs['correcte'] = false;
-                echo "test sql fatal";
             }
         }
         else{
@@ -533,20 +530,15 @@
     function sql_check_email($pdo, $email){
         try {
             //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            echo "test sql";
             $requete = $pdo->prepare("SELECT email_actif_existe(:email)");
-            echo "test sql2";
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            echo "test sql3";
             $requete->execute();
-            echo "test sql4";
 
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
         } catch (PDOException $e) {
             //$fichierLog = __DIR__ . "/erreurs.log";
             //$date = date("Y-m-d H:i:s");
             //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
-            echo "test sql fatal 2";
             throw $e;
         }
     }
