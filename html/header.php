@@ -1,5 +1,17 @@
 <!-- Flex column -->
-<header style="background-color: blue">
+<!-- <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?= HOME_GIT . 'style.css' ?>">
+</head>
+<body>
+    
+</body>
+</html> -->
+<header>
     <!-- Logo Alizon, barre de recherche, onglets compte/panier -->
     <!-- Flex horizontal -->
     <div>
