@@ -44,7 +44,7 @@
     }
     else{
 ?>
-        <img src="" alt="">
+        <img src=""  alt="">
         <a href="../">
             <img src="<?=HOME_GIT?>html/image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
