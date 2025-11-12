@@ -61,26 +61,46 @@ function initialize($sql){
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     $rows = $rows[0];
-    print_r($rows);
         ?>
         
         <table>
             <tr>
                 <th>nom en stock </th>
-                <th>nom public </th>
-                <th>Prix actuelle </th>
-                <th>taux TVA </th>
-                <th>Poids </th>
-                <th>Volume </th>
-            </tr>
-            <tr>
                 <td><?php echo $rows['nom_stock']?> </td>
+            </tr>
+                <th>nom public </th>
                 <td><?php echo $rows['nom_public']?>  </td>
+            </tr>
+                <th>Prix actuelle </th>
                 <td><?php echo $rows['prix']?>  </td>
+            </tr>
+                <th>taux TVA </th>
                 <td><?php echo $rows['tva']?>  </td>
+            </tr>
+                <th>Poids </th>
                 <td><?php echo $rows['poids']?>  </td>
+            </tr>
+                <th>Volume </th>
                 <td><?php echo $rows['volume'] ?></td>
             </tr>
+            <div>
+                <?php echo $rows['description'] ?>
+                description_detaillee
+            </div>
+
+            <div>
+                <?php echo $rows['description_detaillee'] ?>
+            </div>
+
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <?php echo $rows['quantite'] ?>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </table>
         <?php
     }
