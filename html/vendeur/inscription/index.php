@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Vendeur - Inscription</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
+    <link rel="stylesheet" href="<?=HOME_GIT?>style.css">
 </head>
 <body id="inscription_vendeur">
     <main>
@@ -44,7 +44,7 @@
 ?>
         <img src=""  alt="">
         <a href="../">
-            <img src="<?=HOME_GIT?>html/image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
+            <img src="<?=HOME_GIT?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S'inscrire</h2>
 
