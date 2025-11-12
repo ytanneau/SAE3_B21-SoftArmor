@@ -29,25 +29,36 @@ $sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_i
 
 $avis = $pdo->query($sql);
 
-// Fermer la connexion
-unset($pdo);
+
+
+foreach ($info_compte as $row){
+$mdp_cryptee = $row['mdp'];
+}
 
 //traitement de la modification des informations
 if ($_POST != null){
-    $pseudo="null";
+    if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
     if (!isset($_POST['date'])) $_POST['date'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
+    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
+    if (!isset($_POST['mdp'])) $_POST['mdp'] = "";
+    if (!isset($_POST['n_mdp'])) $_POST['n_mdp'] = "";
+    if (!isset($_POST['n_mdpc'])) $_POST['n_mdpc'] = "";
 
-    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $pseudo,$_POST['email'],$_POST['date'], $mdp = null, $mdpc = null, $_POST['adresse'], $_POST['code_postal']);
+
+    $verif = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     print_r($verif);
-    if(!empty($verif)){
-        
+
+    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($verif) && !(empty($verif['code_postal']) xor empty($verif['rue']))){
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte']);
     }
 }
+// Fermer la connexion
+unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +80,18 @@ if ($_POST != null){
         <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
 
         <form action="" method="post" id="donnee">
-            
+            <label for="pseudo">Pseudonyme</label>
+            <input type="text" name="pseudo" value="<?php echo $row['pseudo'];?>" placeholder="À renseigner">
+            <!--Erreur pseudo-->
+            <?php
+                if (isset($verif['pseudo'])){
+            ?>
+                        <p class="error">
+                            <?="Erreur : ".$verif['pseudo']?>
+                        </p>
+            <?php
+                }
+            ?>
             <label for="nom">Nom</label>
             <input required type="text" name="nom" value="<?php echo $row['nom'];?>" placeholder="À renseigner">
             <!--Erreur nom-->
@@ -198,6 +220,16 @@ if ($_POST != null){
             <?php
                 }
             ?>
+            
+            <label for="mdp">Mot de Passe</label>
+            <input type="password" name="mdp" placeholder="À renseigner">
+        
+            <label for="n_mdp">Nouveau Mot de Passe</label>
+            <input type="password" name="n_mdp" placeholder="À renseigner">
+            
+            <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
+            <input type="password" name="n_mdpc" placeholder="À renseigner">
+
             <button type="submit">Modifier mes informations</button>
         </form>
         
