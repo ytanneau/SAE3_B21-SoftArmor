@@ -498,6 +498,7 @@
     }
 
     function check_erreur_connection($email, $mdp){
+        $erreurs = [];
 
         //recherche dans l'email
         if (check_vide($email)){
