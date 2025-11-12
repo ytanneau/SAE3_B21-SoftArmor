@@ -9,7 +9,7 @@ if (!isset($_SESSION)) {
 
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
-    $res = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
+    $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -31,7 +31,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <body id="connect_vendeur">
     <main>
 <?php
-    if (isset($res['fatal'])){
+    if (isset($erreurs['fatal'])){
 ?>
         <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
 <?php
@@ -46,9 +46,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
         <form action="" method="post">
 <?php
-    if (isset($res['connect'])){
+    if (isset($erreurs['connect'])){
 ?>
-        <h3 class="error"><?=$res['connect']?></h1>
+        <h3 class="error"><?=$erreurs['connect']?></h1>
 <?php
     }
 ?>
@@ -62,10 +62,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 required
                 class="champ">
 <?php
-    if (isset($res['email'])){
+    if (isset($erreurs['email'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['email']?>
+                <?="Erreur : ".$erreurs['email']?>
             </p>
 <?php
     }
@@ -79,10 +79,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 required
                 class="champ">
 <?php
-    if (isset($res['mpd'])){
+    if (isset($erreurs['mpd'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['mdp']?>
+                <?="Erreur : ".$erreurs['mdp']?>
             </p>
 <?php
     }

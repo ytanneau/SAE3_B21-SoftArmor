@@ -10,7 +10,7 @@ define('HOME_GIT', '../../../');
 
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
-    $res = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+    $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -44,12 +44,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <!-- Adresse e-mail -->
             <br>
             <label for="email">Email</label>
-            <input type="email"
+            <input type="text"
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
-                required
                 class="champ">
+
+            <?php if (isset($erreurs['email'])) { ?>
+                <p style="color: red"><?= $erreurs['email'] ?></p>
+            <?php } ?>
 
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
@@ -57,10 +60,21 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 name="mdp"
                 id="mdp"
                 value=""
-                required
                 class="champ">
             
-            <input type="submit" value="Se connecter" class="bouton">            
+            <p class="error"><?php 
+                if (isset($erreurs['mdp'])) { 
+                    echo $erreurs['mdp']; 
+                } ?>
+            </p>
+        
+            <p class="error"><?php 
+                if (isset($erreurs['connecte'])) { 
+                    echo $erreurs['connecte']; 
+                } ?>
+            </p>
+            
+            <input type="submit" value="Se connecter" class="bouton"> 
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>

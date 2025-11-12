@@ -1,13 +1,15 @@
 <?php
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
-define("HOME_GIT", "../");
+define("HOME_GIT", "../../../");
+
+require_once HOME_GIT . '.config.php';
+
 if (!isset($_SESSION)) {
     session_start();
 }
 //verifie si quelqun est connecté
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-    header('location: ' . HOME_GIT);
+    header('location: ../');
     exit;
 }
 
@@ -47,7 +49,6 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
-    print_r(value: $_SESSION);
     $compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide
