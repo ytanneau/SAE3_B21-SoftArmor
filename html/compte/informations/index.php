@@ -247,7 +247,7 @@ unset($pdo);
             if (empty($verif['mdp']) xor empty($verif['mdpc'])){
             ?>
                         <p class="error">
-                            <?= "Remplissez les deux champs Nouveau Mot de Passe" ?>
+                            <?= "Remplissez les deux champs Nouveau Mot de Passe " ?>
                         </p>
             <?php
                 }
