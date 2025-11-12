@@ -16,17 +16,21 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 
-// gestion du POST
-if (isset($_POST)) {
-    if (!isset($_POST['code_carte'])) $_POST['code_carte'] = "";
-    if (!isset($_POST['date_exp'])) $_POST['date_exp'] = "";
-    if (!isset($_POST['code_securite'])) $_POST['code_securite'] = "";
+// gestion du POST des données adresse 
+if ($_POST != null){
+    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
+    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
+    if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
 
     $fichier = HOME_GIT . 'fonction_compte.php';
     if (file_exists($fichier)) {
         require_once $fichier;
-        $erreurs = check_coordonnees_bancaires($_POST['code_carte'], $_POST['date_exp'], $_POST['code_securite']);
+        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
 
+        // enregistrer
+        if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
+            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
+        }
 
     } else {
         // pas d'accès au fichier fonctions
@@ -37,6 +41,7 @@ if (isset($_POST)) {
         // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +52,7 @@ if (isset($_POST)) {
 </head>
 <body>
         <h1>Entrez vos coordonnées bancaires</h1>
-        <form action="" method="post">
+        <form action="payement_reussi.php" method="post">
 
         <label for="code_carte">Code de carte bancaire</label>
         <input type="text" name="code_carte" id="code_carte" required>

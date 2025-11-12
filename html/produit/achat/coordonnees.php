@@ -21,31 +21,6 @@ $requete->execute();
 
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
-// gestion du POST
-if ($_POST != null){
-    if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
-    if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
-    if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
-
-    $fichier = HOME_GIT . 'fonction_compte.php';
-    if (file_exists($fichier)) {
-        require_once $fichier;
-        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
-
-        // enregistrer
-        if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
-            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
-        }
-
-    } else {
-        // pas d'accès au fichier fonctions
-
-        $erreurs['fatal'] = true;
-        // $fichierLog = __DIR__ . "/erreurs.log";
-        // $date = date("Y-m-d H:i:s");
-        // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
-    }
-}
 
 if (isset($erreurs) && $erreurs == []) {
     header('Location: ' . 'bancaire.php');
@@ -63,7 +38,7 @@ if (isset($erreurs) && $erreurs == []) {
 
     <body>
         <h1>Entrez vos coordonnées</h1>
-        <form action="" method="post">
+        <form action="bancaire.php" method="post">
 
         <label for="adresse">Adresse</label>
         <input type="text" name="adresse" id="adresse" value="<?php if (isset($adresse_client['adresse'])) {echo $adresse_client['adresse'];} else if (isset($_POST['adresse'])) {echo $_POST['adresse'];}?>" required>
