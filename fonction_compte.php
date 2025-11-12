@@ -693,3 +693,23 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         return $requete->fetch(PDO::FETCH_ASSOC);
         
     }
+
+    // fonction qui insère l'adresse pour le client
+    function sql_insert_adresse_client($pdo, $id_compte, $adresse, $complement_adresse, $code_postal) {
+        $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
+        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+        $requete->bindValue(':comp_adresse', $complement_adresse, PDO::PARAM_STR);
+        $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
+        $requete->execute();
+
+
+        $requete = $pdo->prepare("SELECT id_adresse FROM _adresse WHERE adresse = :adresse");
+        $requete->bindValue(':adresse', $adresse);
+        $requete->execute();
+        $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
+
+        $requete = $pdo->prepare("UPDATE _compte SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
+        $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->execute();
+    }
