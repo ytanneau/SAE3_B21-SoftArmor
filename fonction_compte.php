@@ -1,6 +1,6 @@
 <?php
 
-    const VIDE = "Champ est vide";
+    const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Format invalide";
     const EXISTE = "Existe déjà";
@@ -148,7 +148,6 @@
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
-                        return $erreurs;
                     }
                     else {
                         $erreurs['connecte'] = CONNECTE_PAS;
@@ -160,6 +159,8 @@
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
             }
+
+            return $erreurs;
         } else {
             return check_erreur_connection($email, $mdp);
         }
