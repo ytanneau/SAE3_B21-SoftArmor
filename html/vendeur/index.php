@@ -27,11 +27,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon Vendeur - Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="<?= HOME_GIT . "html/style.css" ?>">
-    <style>
-        body{
-            background-color: red;
-        }
-    </style>
 </head>
 <body id="connect_vendeur">
     <main>
