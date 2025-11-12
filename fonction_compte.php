@@ -159,11 +159,11 @@
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
             }
-
-            return $erreurs;
         } else {
-            return check_erreur_connection($email, $mdp);
+            $erreurs = check_erreur_connection($email, $mdp);
         }
+
+        return $erreurs;
     }
 
 

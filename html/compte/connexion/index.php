@@ -64,13 +64,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             
             <?php if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { ?>
                 <p style="color: red"><?= $erreurs['mdp'] ?></p>
+            <?php }
+            
+            if (isset($erreurs['connecte'])) { ?>
+                <p style="color: red"><?= $erreurs['connecte'] ?></p>
             <?php } ?>
             
             <input type="submit" value="Se connecter" class="bouton"> 
             
-            <?php if (isset($erreurs['connecte'])) { ?>
-                <p style="color: red"><?= $erreurs['connecte'] ?></p>
-            <?php } ?>
+            <?php 
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>
