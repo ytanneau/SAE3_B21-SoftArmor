@@ -148,7 +148,6 @@
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
-                        return $erreurs;
                     }
                     else {
                         $erreurs['connecte'] = CONNECTE_PAS;
@@ -160,6 +159,8 @@
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
             }
+
+            return $erreurs;
         } else {
             return check_erreur_connection($email, $mdp);
         }
