@@ -1,5 +1,5 @@
 <!-- Flex column -->
-<header>
+<header style="background-color: blue">
     <!-- Logo Alizon, barre de recherche, onglets compte/panier -->
     <!-- Flex horizontal -->
     <div>
