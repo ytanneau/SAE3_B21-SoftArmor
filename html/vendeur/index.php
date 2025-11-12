@@ -79,7 +79,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 required
                 class="champ">
 <?php
-    if (isset($erreurs['mpd'])){
+    if (isset($erreurs['mdp'])){
 ?>
             <p class="error">
                 <?="Erreur : ".$erreurs['mdp']?>

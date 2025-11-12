@@ -515,12 +515,12 @@
         if (check_vide($mdp)){
             $erreurs['mdp'] = VIDE;
         }
-        // else if (!check_taille($mdp, TAILLE_MDP)){
-        //     $erreurs['connecte'] = CONNECTE_PAS;
-        // }
-        // else if (!check_mot_de_passe($mdp)){
-        //     $erreurs['connecte'] = CONNECTE_PAS;
-        // }
+        else if (!check_taille($mdp, TAILLE_MDP)){
+            $erreurs['connecte'] = CONNECTE_PAS;
+        }
+        else if (!check_mot_de_passe($mdp)){
+            $erreurs['connecte'] = CONNECTE_PAS;
+        }
 
         return $erreurs;
     }
