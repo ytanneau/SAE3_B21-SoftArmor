@@ -1,0 +1,116 @@
+@use "style_const.scss" as *;
+
+@mixin centre_contenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin bouton {
+    border: none;
+    border-radius: $angle_grand;
+    padding: 1vh 2vw;
+}
+
+@mixin page_connect_inscription($background, $background_main){
+    background-color: $background;
+    height: 100vh;
+
+    @include centre_contenu;
+
+    main{
+        background-color: $background_main;
+        @include centre_contenu;
+        row-gap: 1em;
+        border-radius: $angle_normal; 
+        padding: $padding_normal;
+        width: 30vw;
+
+        img{
+            width: 18vw;
+        }
+
+        h2{
+            font-size: $font_size_grand;
+            margin: 0
+        }
+
+        form{
+            @include centre_contenu;
+            align-items:baseline;
+            width: 100%;
+
+            label{
+                margin-top: 2vh;
+                font-size: $font_size_sup;
+            }
+
+            .champ{
+                border: none;
+                border-radius: $angle_petit;
+                width: 100%;
+                height: 1.8em;
+                font-size: $font_size_sup;
+            }
+
+
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance: textfield;
+            }
+            
+            .bouton{
+                @include bouton;
+                align-self: center;
+                background-color: $focus;
+                color: white;
+                font-size: $font_size_grand;
+                margin-top: 2vh;
+            }
+
+            p{
+                font-size: $font_size_petit;
+                margin: 0;
+            }
+
+            //.contrainte{
+                
+            //}
+
+            .error{
+                color: $rouge;
+            }
+        }
+    }
+}
+
+body{
+    font-family: 'Inter';
+}
+
+#connect_vendeur, #inscription_vendeur{
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+}
+
+#connect_vendeur, #connect_client{
+    justify-content: center;
+    overflow-y: hidden;
+}
+
+#connect_client, #inscription_client{
+    @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
+}
+
+#inscription_vendeur, #inscription_client{
+    height: 100%;
+    main{
+        margin: 15vh 0;
+    }
+}
+
+

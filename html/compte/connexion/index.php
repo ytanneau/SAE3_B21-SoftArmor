@@ -1,10 +1,5 @@
 <?php
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT . "html");
-    exit;
-}
-
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -13,24 +8,38 @@ define('HOME_GIT', '../../../');
 
 // Si l'utilisateur est déjà connecté
 
-if ($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 }
 
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('location: ' . HOME_GIT);
+    exit;
+}
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Alizon Connexion</title>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
 </head>
-<body>
+<body id="connect_client">
     <main>
+        <img src="" alt="">
+        <a href="../">
+            <img src="<?=HOME_GIT?>html/image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+        </a>
+        <h2>S’identifier</h2>
+
         <form action="" method="post">
-            <legend>Informations</legend>
 
             <!-- Adresse e-mail -->
             <br>
@@ -39,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
-                required>
+                required
+                class="champ">
 
                 <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
@@ -47,9 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 name="mdp"
                 id="mdp"
                 value=""
-                required>
+                required
+                class="champ">
             
-            <input type="submit" value="Se connecter">            
+            <input type="submit" value="Se connecter" class="bouton">            
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>

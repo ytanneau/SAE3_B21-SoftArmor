@@ -29,6 +29,7 @@
     // Fonction qui permet de créer un compte vendeur
     function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemin){
         global $pdo;
+        $erreurs = [];
         
         $raisonSocial = strtoupper(trim($raisonSocial));
         $numSiret = nettoyer_chaine(trim($numSiret));
@@ -42,7 +43,6 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
-        $res['correcte'] = true;
         if (check_raison_sociale_all($raisonSocial)
         && check_num_siret_all($numSiret) 
         && check_num_cobrec_all($numCobrec) 
@@ -58,29 +58,22 @@
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
-                        $res['connect'] = CONNECT_PAS;
-                        $res['correcte'] = false;
+                        $erreurs['connect'] = CONNECT_PAS;
                     }
                 }
                 else{
-                    $res['connect'] = CONNECT_PAS;
-                    $res['correcte'] = false;
+                    $erreurs['connect'] = CONNECT_PAS;
                 }
             }
             catch(PDOException $e){
-                $res['fatal'] = true;
-                $res['correcte'] = false;
+                $erreurs['fatal'] = true;
             }
         }
         else{
-            $res2 = check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc);
+            $erreurs = array_push($erreurs, check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc));
 
-            if (isset($res2)) {
-                $res = array_merge($res, $res2);
-                $res['correcte'] = false;
-            }
         }
-        return $res;
+        return $erreurs;
     }
 
     // Fonction qui permet de créer un compte client
@@ -93,8 +86,9 @@
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
 
+        $erreurs = [];
+
         // Pas d'erreur initialement
-        $res["correcte"] = true;
 
         // Si toutes les informations sont correctes
         if (check_nom($nom)
@@ -110,27 +104,20 @@
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
                     } else {
-                        // changer l'erreur $res['CR'] = EXISTE_PAS;
-                        $res['correcte'] = false;
+                        // changer l'erreur $erreurs['CR'] = EXISTE_PAS;
                     }
                     
                 } else {
-                    $res['email'] = EXISTE;
-                    $res['correcte'] = false;
+                    $erreurs['email'] = EXISTE;
                 }
             } catch(PDOException $e) {
-                $res['fatal'] = true;
-                $res['correcte'] = false;
+                $erreurs['fatal'] = true;
             }
         }
         else{
-            $res['correcte'] = false;
-            $res2 = check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc);
-            if ($res2) {
-                $res = array_merge($res, $res2);
-            }
+            $erreurs = array_merge($erreurs, check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc));
         }
-        return $res;
+        return $erreurs;
     }
     
 
@@ -141,7 +128,7 @@
         $email = trim($email);
         $mdp = trim($mdp);
 
-        $res['correcte'] = true;
+        $erreurs = [];
 
         if (check_email_all($email) && check_mot_de_passe_all($mdp)) {
             
@@ -151,10 +138,6 @@
                 if ($resSQL != null) {
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
-
-                        // if (!isset($_SESSION)){
-                        //     session_start();
-                        // }
 
                         $_SESSION['logged_in'] = true;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
@@ -166,20 +149,17 @@
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
                         }
 
-                        return $res;
+                        return $erreurs;
                     }
                     else {
-                        $res['erreur'] = CONNECT_PAS;
-                        $res['correcte'] = false;
+                        $erreurs['erreur'] = CONNECT_PAS;
                     }
                 }
                 else {
-                    $res['erreur'] = CONNECT_PAS;
-                    $res['correcte'] = false;
+                    $erreurs['erreur'] = CONNECT_PAS;
                 }
             } catch(PDOException $e) {
-                $res['fatal'] = true;
-                $res['correcte'] = false;
+                $erreurs['fatal'] = true;
             }
         } else {
             return check_erreur_connection($email, $mdp);
@@ -201,7 +181,6 @@
         return (preg_match("/^.{3,}$/", $raisonSociale) && preg_match("/(EI|EIRL|EURL|SASU|SARL|SAS|SNC|SA|SCA|SCS)$/",$raisonSociale));
     }
 
-
     // Vérifie le numéro de SIRET (non vide, bon format)
     function check_num_siret_all($numSiret){
         return ((!check_vide($numSiret)) && check_num_siret($numSiret));
@@ -211,7 +190,6 @@
     function check_num_siret($numSiret){
         return preg_match("/^[0-9]{14}$/", $numSiret);
     }
-
 
     // Vérifie le numéro de la COBREC (non vide, bon format)
     function check_num_cobrec_all($numCobrec){
@@ -279,6 +257,11 @@
         return (strtotime("1900-01-01") < strtotime($date) && strtotime($date) < time());
     }
 
+    // vérifie le code de la carte bancaire
+    function check_code_carte($code) {
+        return (99999999999 < $code && $code <= 999999999999);
+    }
+
     //supprime les espaces, underscores et tirets
     function nettoyer_chaine($texte) {
         return str_replace([' ', '_', '-'], '', $texte);
@@ -289,10 +272,12 @@
         return password_verify($mdp, $crypter);
     }
 
+    //verifie si la chaine est vide
     function check_vide($valeur){
         return (strlen($valeur) === 0);
     }
 
+    //verifie la taille de la chaine
     function check_taille($valeur, $taille){
         return (strlen($valeur) <= $taille);
     }
@@ -302,222 +287,251 @@
 // |  FONCTIONS D'ERREUR  |
 // +----------------------+
 
-    //renvoit toute les erreur posible de champ
+    // Renvoie toutes les erreurs possibles de champ vendeur
     function check_erreur_vendeur($raisonSociale, $numSiret, $numCobrec, $email, $adresse, $codePostal, $mdp, $mdpc){
-        $res = [];
+        $erreurs = [];
 
-        //recherche l'erreur dans la raison social
+        // Recherche l'erreur dans la raison sociale
         if (check_vide($raisonSociale)){
-            $res['raison_sociale'] = VIDE;
+            $erreurs['raison_sociale'] = VIDE;
         }
         else if (!check_taille($raisonSociale, TAILLE_RAISON_SOCIALE)){
-            $res['raison_sociale'] = DEPASSE;
+            $erreurs['raison_sociale'] = DEPASSE;
         }
         else if (!check_raison_sociale($raisonSociale)){
-            $res['raison_sociale'] = FORMAT;
+            $erreurs['raison_sociale'] = FORMAT;
         }
         
-        //recherche l'erreur dans le numero de siret
+        // Recherche l'erreur dans le numero de SIRET
         if (check_vide($numSiret)){
-            $res['numero_siret'] = VIDE;
+            $erreurs['numero_siret'] = VIDE;
         }
         else if (!check_num_siret($numSiret) ){
-            $res['numero_siret'] = FORMAT;
+            $erreurs['numero_siret'] = FORMAT;
         }
 
-        //recherche l'erreur dans le numero de la COBREC
+        // Recherche l'erreur dans le numéro de la COBREC
         if (check_vide($numCobrec)){
-            $res['numero_cobrec'] = VIDE;
+            $erreurs['numero_cobrec'] = VIDE;
         }
         else if (!check_num_cobrec($numCobrec) ){
-            $res['numero_cobrec'] = FORMAT;
+            $erreurs['numero_cobrec'] = FORMAT;
         }
 
-        //recherche l'erreur dans l'email
+        // Recherche l'erreur dans l'e-mail
         if (check_vide($email)){
-            $res['email'] = VIDE;
+            $erreurs['email'] = VIDE;
         }
         else if (!check_taille($email, TAILLE_EMAIL)){
-            $res['email'] = DEPASSE;
+            $erreurs['email'] = DEPASSE;
         }
         else if (!check_email($email)){
-            $res['email'] = FORMAT;        
+            $erreurs['email'] = FORMAT;        
         }
 
         
-        //recherche l'erreur dans l'adresse'
-        if (check_vide($adresse)){
-            $res['adresse'] = VIDE;
-        }
-        else if (!check_taille($adresse, TAILLE_ADRESSE)){
-            $res['adresse'] = DEPASSE;
-        }
-        else if (!check_adresse($adresse)){
-            $res['adresse'] = FORMAT;
-        }
+        // Recherche l'erreur dans l'adresse
+        $erreurs = array_merge($erreurs, check_coordonnees($adresse, $codePostal));
 
-        //recherche l'erreur dans code postal
-        if (check_vide($codePostal)){
-            $res['code_postal'] = VIDE;
-        }
-        else if (!check_code_postal($codePostal)){
-            $res['code_postal'] = FORMAT;
-        }
-
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (check_vide($mdp)){
-            $res['mdp'] = VIDE;
+            $erreurs['mdp'] = VIDE;
         }
         else if (!check_taille($mdp, TAILLE_MDP)){
-            $res['mdp'] = DEPASSE;
+            $erreurs['mdp'] = DEPASSE;
         }
         else if (!check_mot_de_passe($mdp)){
-            $res['mdp'] = FORMAT;
+            $erreurs['mdp'] = FORMAT;
         }
 
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (check_vide($mdpc)){
-            $res['mdpc'] = VIDE;
+            $erreurs['mdpc'] = VIDE;
         }
         else if ($mdp !== $mdpc){
-            $res['mdpc'] = CORRESPOND_PAS;
+            $erreurs['mdpc'] = CORRESPOND_PAS;
         }
 
-        return $res;
+        return $erreurs;
     }
 
-    // renvoit toutes les erreurs possibles de champ pour inscription client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $rue = null, $code_postal = null){
-        $res = [];
+    // Renvoie toutes les erreurs de champ possibles pour un client
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
+        $erreurs = [];
 
         // erreur champ nom
         if (check_vide($nom)){
-            $res['nom'] = VIDE;
+            $erreurs['nom'] = VIDE;
         }
         else if (!check_taille($nom, TAILLE_NOM)){
-            $res['nom'] = DEPASSE;
+            $erreurs['nom'] = DEPASSE;
         }
         
         // erreur champ prenom
         if (check_vide($prenom)){
-            $res['prenom'] = VIDE;
+            $erreurs['prenom'] = VIDE;
         }
         else if (!check_taille($prenom, TAILLE_NOM)){
-            $res['prenom'] = DEPASSE;
+            $erreurs['prenom'] = DEPASSE;
         }
 
         // erreur champ pseudo
         if (check_vide($pseudo)){
-            $res['pseudo'] = VIDE;
+            $erreurs['pseudo'] = VIDE;
         }
         else if (!check_taille($pseudo, TAILLE_NOM)){
-            $res['pseudo'] = DEPASSE;
+            $erreurs['pseudo'] = DEPASSE;
         }
 
         //recherche l'erreur dans l'email
         if (check_vide($email)){
-            $res['email'] = VIDE;
+            $erreurs['email'] = VIDE;
         }
         else if (!check_taille($email, TAILLE_EMAIL)){
-            $res['email'] = DEPASSE;
+            $erreurs['email'] = DEPASSE;
         }
         else if (!check_email($email)){
-            $res['email'] = FORMAT; 
+            $erreurs['email'] = FORMAT; 
         }
         
         // erreur champ date naissance
         if (check_vide($date_naiss)) {
-            $res['date_naiss'] = VIDE;
+            $erreurs['date_naiss'] = VIDE;
         }
         else if (!check_date_passee($date_naiss)){
-            $res['date_naiss'] = FORMAT;  
+            $erreurs['date_naiss'] = FORMAT;  
         }
 
-        //recherche l'erreur dans le mot de passe
+        // Recherche l'erreur dans le mot de passe
         if (isset($mdp)) {
             if (check_vide($mdp)){
-                $res['mdp'] = VIDE;
+                $erreurs['mdp'] = VIDE;
             }
             else if (!check_taille($mdp, TAILLE_MDP)){
-                $res['mdp'] = DEPASSE;
+                $erreurs['mdp'] = DEPASSE;
             }
             else if (!check_mot_de_passe($mdp)){
-                $res['mdp'] = FORMAT;
+                $erreurs['mdp'] = FORMAT;
             }
 
-            //recherche l'erreur dans le mot de passe
+            // Recherche l'erreur dans le mot de passe
             if (check_vide($mdpc)){
-                $res['mdpc'] = VIDE;
+                $erreurs['mdpc'] = VIDE;
             }
             else if ($mdp !== $mdpc) {
-                $res['mdpc'] = CORRESPOND_PAS;
+                $erreurs['mdpc'] = CORRESPOND_PAS;
             }
         }
 
-        // recherche erreur dans adresse
-        if (isset($rue)) {
-            if (check_vide($rue)) {
-                $res['rue'] = VIDE;
-            } 
-            else if (!check_adresse($rue)) {
-                $res['rue'] = FORMAT;
+        // Recherche l'erreur dans l'adresse
+        $erreurs = array_merge($erreurs, check_coordonnees($adresse, $code_postal));
+
+        return $erreurs;
+    }
+
+    // Renvoie toutes les erreurs possbiles pour la partie coordonnées
+    function check_coordonnees($adresse, $code_postal) {
+        $erreurs = [];
+
+        // Recherche l'erreur dans l'adresse
+        if (isset($adresse)) {
+            if (check_vide($adresse)){
+                $erreurs['adresse'] = VIDE;
+            }
+            else if (!check_taille($adresse, TAILLE_ADRESSE)){
+                $erreurs['adresse'] = DEPASSE;
+            }
+            else if (!check_adresse($adresse)){
+                $erreurs['adresse'] = FORMAT;
             }
         }
 
+        // Recherche l'erreur dans le code postal
         if (isset($code_postal)) {
-            if (check_vide($code_postal)) {
-                $res['code_postal'] = VIDE;
+            if (check_vide($code_postal)){
+                $erreurs['code_postal'] = VIDE;
             }
-            else if (!check_code_postal($code_postal)) {
-                $res['code_postal'] = FORMAT;
+            else if (!check_code_postal($code_postal)){
+                $erreurs['code_postal'] = FORMAT;
             }
         }
 
-        return $res;
+        return $erreurs;
+    }
+
+    // renvoit toutes les erreurs possibles pour la partie coordonnées bancaires
+    function check_coordonnees_bancaires($code_carte, $date_exp, $code_securite) {
+        $erreurs = [];
+
+        // erreur sur code de carte
+        if (check_vide($code_carte)) {
+            $erreurs['code_carte'] = VIDE;
+        }
+        else if (!check_code_carte($code_carte)) {
+            $erreurs['code_carte'] = FORMAT;
+        }
+
+        // erreur sur date d'expiration
+        if (check_vide($date_exp)) {
+            $erreurs['date_exp'] = VIDE;
+        }
+        
+        // erreur sur code de sécurité
+        if (check_vide($code_securite)) {
+            $erreurs['code_securite'] = VIDE;
+        }
+        else if (!check_taille($code_securite, 3)) {
+            $erreurs['code_securite'] = FORMAT;
+        }
+
+        return $erreurs;
     }
 
     function check_erreur_connection($email, $mdp){
 
         //recherche dans l'email
         if (check_vide($email)){
-            $res['email'] = VIDE;
+            $erreurs['email'] = VIDE;
         }
         else if (!check_taille($email, TAILLE_EMAIL)){
-            $res['email'] = DEPASSE;
+            $erreurs['email'] = DEPASSE;
         }
         else if (!check_email($email)){
-            $res['email'] = FORMAT; 
+            $erreurs['email'] = FORMAT; 
         }
 
         //recherche l'erreur dans le mot de passe
         if (check_vide($mdp)){
-            $res['mdp'] = VIDE;
+            $erreurs['mdp'] = VIDE;
         }
         else if (!check_taille($mdp, TAILLE_MDP)){
-            $res['mdp'] = DEPASSE;
+            $erreurs['mdp'] = DEPASSE;
         }
         else if (!check_mot_de_passe($mdp)){
-            $res['mdp'] = FORMAT;
+            $erreurs['mdp'] = FORMAT;
         }
 
-        return $res;
+        return $erreurs;
     }
 
-//fonctuion pour la base de donnée
+// +-----------------------------+
+// |  FONCTIONS BASE DE DONNÉES  |
+// +-----------------------------+
 
-    //verifie la présence d'un email
-    //return 1 si existe, 0 si absent
+    // Vérifie la présence d'un email dans la BDD
+    // Return true si existe, false sinon
     function sql_check_email($pdo, $email){
-        try{
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
+
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            
             throw $e;
         }
     }
@@ -530,36 +544,39 @@
             } else {
                 $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
             }
+
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
+
             return $requete->fetch(PDO::FETCH_ASSOC);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
-            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            
             throw $e;
         }
     }
 
-    //verifie la présence de la cle de la cobrec
-    //return 1 si existe, 0 si absent
+    // Vérifie l'existence d'une clé COBREC
+    // Return true si existe, false sinon
     function sql_check_cle($pdo, $cle){
-        try{
+        try {
             $requete = $pdo->prepare("SELECT 1 FROM _cle_vendeur WHERE cle_cobrec = :cle");
             $requete->bindValue(':cle', $cle, PDO::PARAM_STR);
             $requete->execute();
+
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
+
             throw $e;
         }
     }
 
-    // EN COURS DE CRÉATION
+    
     function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
         try {
             $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
@@ -585,6 +602,7 @@
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
@@ -632,4 +650,50 @@
             file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
             throw $e; // lance une erreur que la fonction appelante catchera
         }
+    }
+function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        
+        $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':mdpc', $mdpc, PDO::PARAM_STR);
+        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete->execute();
+
+        $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
+        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
+        $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
+        $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
+        $requete->execute();
+        
+        $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
+        $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_STR);
+        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+        $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
+        $requete->bindValue(':complement_adresse', $complement_adresse, PDO::PARAM_STR);
+        $requete->execute();
+
+        return $requete->fetch(PDO::FETCH_ASSOC);
+        
+    }
+
+    // fonction qui insère l'adresse pour le client
+    function sql_insert_adresse_client($pdo, $id_compte, $adresse, $complement_adresse, $code_postal) {
+        $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
+        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+        $requete->bindValue(':comp_adresse', $complement_adresse, PDO::PARAM_STR);
+        $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
+        $requete->execute();
+
+
+        $requete = $pdo->prepare("SELECT id_adresse FROM _adresse WHERE adresse = :adresse");
+        $requete->bindValue(':adresse', $adresse);
+        $requete->execute();
+        $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
+
+        $requete = $pdo->prepare("UPDATE _compte SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
+        $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->execute();
     }
