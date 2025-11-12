@@ -48,7 +48,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
-                required
                 class="champ">
 
             <?php if (isset($erreurs['email'])) { ?>
@@ -61,7 +60,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 name="mdp"
                 id="mdp"
                 value=""
-                required
                 class="champ">
             
             <?php if (isset($erreurs['mdp'])) { ?>
