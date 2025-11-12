@@ -84,7 +84,6 @@ function ecrire_nom($nom_stock){
             </tr>
             <div>
                 <?php echo $rows['description'] ?>
-                description_detaillee
             </div>
 
             <div>
