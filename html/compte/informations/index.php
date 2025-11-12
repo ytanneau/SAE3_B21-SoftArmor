@@ -62,7 +62,9 @@ if ($_POST != null){
     echo "<br>";
     echo $mdp_cryptee;  
     echo "<br>";
-    echo check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee);
+    echo !check_vide($_POST['mdp']);
+    echo "<br>";
+    echo (check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp']));
     echo "<br>";
     if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
         echo "test entré";
