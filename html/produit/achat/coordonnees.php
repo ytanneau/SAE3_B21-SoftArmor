@@ -22,7 +22,7 @@ $requete->execute();
 $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
 
 // gestion du POST
-if (isset($_POST)){
+if ($_POST != null){
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
