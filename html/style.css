@@ -1,43 +1,128 @@
-#connect_vendeur {
+body {
+  font-family: "Inter";
+}
+
+#connect_vendeur, #inscription_vendeur {
   background-color: #6B31D0;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
-#connect_vendeur main {
+#connect_vendeur main, #inscription_vendeur main {
   background-color: #C3C1F5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   row-gap: 1em;
   border-radius: 20px;
   padding: 2em;
-  width: 200px;
+  width: 30vw;
 }
-#connect_vendeur main form {
+#connect_vendeur main img, #inscription_vendeur main img {
+  width: 18vw;
+}
+#connect_vendeur main h2, #inscription_vendeur main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_vendeur main form, #inscription_vendeur main form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   align-items: baseline;
-  gap: 1vh;
+  width: 100%;
 }
-#connect_vendeur main form legend {
-  align-self: center;
+#connect_vendeur main form label, #inscription_vendeur main form label {
+  margin-top: 2vh;
+  font-size: 1.5em;
 }
-#connect_vendeur main form .champ {
+#connect_vendeur main form .champ, #inscription_vendeur main form .champ {
   border: none;
   border-radius: 5px;
+  width: 100%;
+  height: 1.8em;
+  font-size: 1.5em;
 }
-#connect_vendeur main form .boutton {
-  align-self: center;
-  background-color: #BB2BB2;
+#connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
   border: none;
   border-radius: 50px;
+  padding: 1vh 2vw;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 2em;
+  margin-top: 2vh;
 }
-#connect_vendeur main form .error {
+#connect_vendeur main form p, #inscription_vendeur main form p {
+  font-size: 0.7em;
+  margin: 0;
+}
+#connect_vendeur main form .error, #inscription_vendeur main form .error {
+  color: #E43737;
+}
+
+#connect_vendeur, #connect_client {
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+#connect_client, #inscription_client {
+  background-color: #3157A3;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#connect_client main, #inscription_client main {
+  background-color: #CBCCEA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+#connect_client main img, #inscription_client main img {
+  width: 18vw;
+}
+#connect_client main h2, #inscription_client main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_client main form, #inscription_client main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: baseline;
+  width: 100%;
+}
+#connect_client main form label, #inscription_client main form label {
+  margin-top: 2vh;
+  font-size: 1.5em;
+}
+#connect_client main form .champ, #inscription_client main form .champ {
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 1.8em;
+  font-size: 1.5em;
+}
+#connect_client main form .bouton, #inscription_client main form .bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 1vh 2vw;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 2em;
+  margin-top: 2vh;
+}
+#connect_client main form p, #inscription_client main form p {
+  font-size: 0.7em;
+  margin: 0;
+}
+#connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
 }/*# sourceMappingURL=style.css.map */
