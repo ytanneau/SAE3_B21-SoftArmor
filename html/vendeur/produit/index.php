@@ -6,10 +6,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 //verifie si quelqun est connecté
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT);
-    exit;
-}
+// if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+//     header('location: ' . HOME_GIT);
+//     exit;
+// }
 ?>
 <!doctype html>
 <html lang="fr">
