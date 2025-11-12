@@ -12,7 +12,7 @@ if ($_POST != null){
     $res = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $res['correcte']) {
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: stock');
     exit;
 }
