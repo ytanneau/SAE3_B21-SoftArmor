@@ -34,7 +34,6 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
-    print_r(value: $_SESSION);
     $produit = 1;
 
     //prepare la commande et verifie si elle est pas vide
