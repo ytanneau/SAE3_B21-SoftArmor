@@ -497,6 +497,7 @@
     }
 
     function check_erreur_connection($email, $mdp){
+        $erreurs = [];
 
         //recherche dans l'email
         if (check_vide($email)){
@@ -513,12 +514,12 @@
         if (check_vide($mdp)){
             $erreurs['mdp'] = VIDE;
         }
-        // else if (!check_taille($mdp, TAILLE_MDP)){
-        //     $erreurs['connecte'] = CONNECTE_PAS;
-        // }
-        // else if (!check_mot_de_passe($mdp)){
-        //     $erreurs['connecte'] = CONNECTE_PAS;
-        // }
+        else if (!check_taille($mdp, TAILLE_MDP)){
+            $erreurs['mdp'] = DEPASSE;
+        }
+        else if (!check_mot_de_passe($mdp)){
+            $erreurs['mdp'] = FORMAT;
+        }
 
         return $erreurs;
     }

@@ -33,6 +33,10 @@ if (isset($_POST)) {
         // $date = date("Y-m-d H:i:s");
         // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
     }
+
+    if ($erreurs != []) {
+        header("Location: " . "bancaire.php");
+    }
 }
 ?>
 <!DOCTYPE html>

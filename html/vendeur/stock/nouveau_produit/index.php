@@ -437,6 +437,7 @@
                                 ':id_prod' => $idProduit,
                                 ':id_image_princ' => $idImage
                             ]);
+                            header('Location: ../index.php');
                         }
                     }
                 }
