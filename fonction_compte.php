@@ -259,7 +259,12 @@
 
     // vérifie le code de la carte bancaire
     function check_code_carte($code) {
-        return (99999999999 < $code && $code <= 999999999999);
+        return (strlen($code) == 16);
+    }
+
+    // vérifie la date d'expiration de la carte
+    function check_date_exp($date) {
+        return preg_match('/^\d{2}\/\d{2}$/', $date) && (0 < (int) substr($date, 0, 2) && (int) substr($date, 0, 2) <= 12) && ((int) substr($date, 3, 2) >= 25);
     }
 
     //supprime les espaces, underscores et tirets
