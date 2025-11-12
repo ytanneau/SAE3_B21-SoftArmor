@@ -65,7 +65,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <?php if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { ?>
                 <p style="color: red"><?= $erreurs['mdp'] ?></p>
             <?php } else if (isset($erreurs['connecte']) || isset($erreurs['mdp'])) { ?>
-                <p style="color: red"><?= $erreurs['connecte'] ?></p>
+                <p style="color: red"><?= CONNECTE_PAS ?></p>
             <?php } ?>
             
             <input type="submit" value="Se connecter" class="bouton"> 
