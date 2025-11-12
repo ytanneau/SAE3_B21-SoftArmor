@@ -58,18 +58,17 @@
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
-                        $erreurs['connecte'] = CONNECTE_PAS;
+                        $erreurs['numCobrec'] = EXISTE_PAS;
                     }
                 }
                 else{
-                    $res['connecte'] = CONNECTE_PAS;
-                    $res['correcte'] = false;
+                    $erreurs['email'] = EXISTE;
                     echo "test sql error";
                 }
             }
             catch(PDOException $e){
-                $res['fatal'] = true;
-                $res['correcte'] = false;
+                $erreurs['fatal'] = true;
+                $erreurs['correcte'] = false;
                 echo "test sql fatal";
             }
         }
@@ -547,7 +546,7 @@
             //$fichierLog = __DIR__ . "/erreurs.log";
             //$date = date("Y-m-d H:i:s");
             //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
-            
+            echo "test sql fatal 2";
             throw $e;
         }
     }
