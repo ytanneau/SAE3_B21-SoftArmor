@@ -1,15 +1,17 @@
 <?php
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
-define("HOME_GIT", "../");
+define("HOME_GIT", "../../../");
+
+require_once HOME_GIT . '.config.php';
+
 if (!isset($_SESSION)) {
     session_start();
 }
 //verifie si quelqun est connecté
-// if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-//     header('location: ' . HOME_GIT);
-//     exit;
-// }
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    header('location: ../');
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -19,11 +21,11 @@ if (!isset($_SESSION)) {
     <link rel="stylesheet" href="style.css">
     </head>
         <body>
-
+            <main>
 <?php
 
 
-//commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
+//commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
 $sql = 'select nom_stock, quantite, nom_public, description, description_detaillee, tva, poids, prix, volume from _produit where id_produit = :id_produit';
 
 //initialise la variable qui porte la commande sql 
@@ -56,12 +58,12 @@ function initialize($sql){
 
 
 
-// écris le tableau avec les valeurs a l'interieur
+// écris le tableau avec les valeurs a l'interieur en utilisant rows['le nom donnéé dans la commande sql']
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     $rows = $rows[0];
         ?>
-        
+<!-- tableau a mettre en haut a droite -->
         <table>
             <tr>
                 <th>nom en stock </th>
@@ -82,14 +84,15 @@ function ecrire_nom($nom_stock){
                 <th>Volume </th>
                 <td><?php echo $rows['volume'] ?></td>
             </tr>
+            <!-- div a mettre en dessous du tableau -->
             <div>
                 <?php echo $rows['description'] ?>
             </div>
-
+<!-- A mettre encore en dessous -->
             <div>
                 <?php echo $rows['description_detaillee'] ?>
             </div>
-
+                
             <div>
                 <table>
                     <tr>
@@ -103,7 +106,7 @@ function ecrire_nom($nom_stock){
         <?php
     }
 ?>
-
+        </main>
     </body>
 </html>
 

@@ -35,11 +35,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     <link rel="stylesheet" href="style.css">
     </head>
         <body>
+            <main>
 
 <?php
 
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
-$sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
+$sql = 'select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur';
 
 //initialise la variable qui porte la commande sql 
 $stmt = initialize($sql);
@@ -92,11 +93,15 @@ function ecrire_nom($nom_stock){
                 <td><?php echo $row['quantite'] ?></td>
             </tr>
         </table>
+        
         <?php
     }
 }
 ?>
-
+        <div>
+            <a href="./nouveau_produit/"> Ajouter un produit</a>
+        </div>
+        </main>
     </body>
 </html>
 
