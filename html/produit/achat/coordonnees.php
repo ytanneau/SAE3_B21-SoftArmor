@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged_in'])) {
 require_once HOME_GIT . ".config.php";
 $numEtape = -1;
 
+// $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
     $numEtape = 1;
 
@@ -36,8 +37,7 @@ if (!isset($_POST['form'])) {
 
 
 
-
-// $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
+// si $_POST['form'] = 'adresse', alors le dernier formulaire envoyé est le form d'adresse
 else if ($_POST['form'] == 'adresse') {
 
     // gestion du POST des données adresse 
@@ -146,7 +146,7 @@ if ($numEtape == 1) {
 ?>
 
         <h1>Entrez vos coordonnées</h1>
-        <form action="bancaire.php" method="post">
+        <form action="" method="post">
 
         <label for="adresse">Adresse</label>
         <input type="text" name="adresse" id="adresse" value="<?=$adresse_client['adresse']?>" required>
@@ -205,7 +205,7 @@ else if ($numEtape == 2) {
 ?>
 
         <h1>Entrez vos coordonnées bancaires</h1>
-        <form action="payement_reussi.php" method="post">
+        <form action="" method="post">
 
         <label for="code_carte">Code de carte bancaire</label>
         <input type="text" name="code_carte" id="code_carte" required>
