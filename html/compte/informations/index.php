@@ -5,11 +5,14 @@ define('HOME_GIT', "../../../");
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
     session_start();
+    if(isset($_SESSION['raison_sociale'])){
+        header('location: '.HOME_GIT.'vendeur/stock/');
+    }
     if (!isset($_SESSION['logged_in'])) {
         header('location: ../../');
         exit;
     }else{
-        header('location: index.php');
+        header("Refresh:0");
     }
 }
 
