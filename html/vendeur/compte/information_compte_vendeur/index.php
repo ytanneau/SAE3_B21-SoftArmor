@@ -7,7 +7,7 @@
     }
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../');
+        header('location: ../../');
         exit;
     }
     
