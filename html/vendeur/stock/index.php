@@ -32,6 +32,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="style.css">
     </head>
         <body>
+            <main>
 
 <?php
 
@@ -97,6 +98,7 @@ function ecrire_nom($nom_stock){
         <div>
             <a href="./nouveau_produit/"> Ajouter un produit</a>
         </div>
+        </main>
     </body>
 </html>
 
