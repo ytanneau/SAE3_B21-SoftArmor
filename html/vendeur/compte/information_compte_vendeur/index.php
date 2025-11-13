@@ -14,10 +14,10 @@
     $id_compte = $_SESSION['id_compte'];
     // requete pour recuperer les informations du vendeur
     $stmt = $pdo->prepare("SELECT * FROM _vendeur WHERE id_compte = :id_compte");
-    $informationsVendeur = $stmt->execute([':id_compte' => $id_compte]);
+    $stmt->execute([':id_compte' => $id_compte]);
 
     // decoupage des informations en tableau
-    $tabVendeur = $informationsVendeur->fetchAll(PDO::FETCH_ASSOC);
+    $tabVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $tabVendeur = $tabVendeur[0];
     // assignation des variables aux élements du tableau
     $raisonSociale = $tabVendeur['raison_sociale'];
