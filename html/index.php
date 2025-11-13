@@ -40,14 +40,17 @@ unset($pdo);
     <title>Accueil</title>
 </head>
 <body>
-    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
-        <a href="compte/connexion">Se connecter</a>
-        <a href="compte/inscription">S'inscrire</a>
-    <?php } else { ?>
-        <a href="deconnexion">Se déconnecter</a>
-        <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
-    <?php } ?>
+    <header>
+        <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+            <a href="compte/connexion">Se connecter</a>
+            <a href="compte/inscription">S'inscrire</a>
+        <?php } else { ?>
+            <a href="deconnexion">Se déconnecter</a>
+            <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
+        <?php } ?>
 <!--header-->
+    </header>
+    <main>
 <!--Produit Banniere au jour (possiblement a faire)-->
 <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 <!--Produit Ajoutés Récemment-->
@@ -198,6 +201,9 @@ unset($pdo);
         <a href="#"><img src="images/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="images/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
     </div>
+    </main>
+    <footer>
 <!--footer-->
+    </footer>
 </body>
 </html>
