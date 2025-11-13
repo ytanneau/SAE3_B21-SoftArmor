@@ -265,7 +265,10 @@
 
     // vérifie la date d'expiration de la carte
     function check_date_exp($date) {
-        return preg_match('/^\d{2}\/\d{2}$/', $date) && (0 < (int) substr($date, 0, 2) && (int) substr($date, 0, 2) <= 12) && ((int) substr($date, 3, 2) >= 25);
+        $mois = substr($date, 0, 2);
+        $annee = substr($date, 3, 2);
+
+        return preg_match('/^\d{2}\/\d{2}$/', $date) && 0 < $mois && $mois <= 12 && $annee >= date('Y') % 100;
     }
 
     //supprime les espaces, underscores et tirets
@@ -480,6 +483,8 @@
         // erreur sur date d'expiration
         if (check_vide($date_exp)) {
             $erreurs['date_exp'] = VIDE;
+        } else if (!check_date_exp($date_exp)) {
+            $erreurs['date_exp'] = FORMAT;
         }
         
         // erreur sur code de sécurité
@@ -659,12 +664,19 @@
         }
     }
 function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        if($mdpc==""){
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }else{
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':mdpc', crypte_v2($mdpc), PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }
         
-        $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mdpc', $mdpc, PDO::PARAM_STR);
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
-        $requete->execute();
 
         $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);

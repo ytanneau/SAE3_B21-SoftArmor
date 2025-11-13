@@ -18,40 +18,41 @@
     padding: 1vh 2vw;
 }
 
-@mixin page_connect_inscription($background, $background_main){
+@mixin page_connect_inscription($background, $background_main) {
     background-color: $background;
     height: 100vh;
 
     @include centre_contenu;
 
-    main{
-        background-color: $background_main;
+    main {
         @include centre_contenu;
+
+        background-color: $background_main;
         row-gap: 1em;
         border-radius: $angle_normal; 
         padding: $padding_normal;
         width: 30vw;
 
-        img{
+        img {
             width: 18vw;
         }
 
-        h2{
+        h2 {
             font-size: $font_size_grand;
             margin: 0
         }
 
-        form{
+        form {
             @include centre_contenu;
             align-items:baseline;
             width: 100%;
 
-            label{
+            label {
                 margin-top: 2vh;
                 font-size: $font_size_sup;
             }
 
-            .champ{
+            .champ {
                 border: none;
                 border-radius: $angle_petit;
                 width: 100%;
@@ -70,7 +71,7 @@
                 -moz-appearance: textfield;
             }
             
-            .bouton{
+            .bouton {
                 @include bouton;
                 align-self: center;
                 background-color: $focus;
@@ -79,14 +80,10 @@
                 margin-top: 2vh;
             }
 
-            p{
+            p {
                 font-size: $font_size_petit;
                 margin: 0;
             }
-
-            //.contrainte{
-                
-            //}
 
             .error{
                 color: $rouge;
@@ -101,12 +98,29 @@ body{
     margin: 0;
 }
 
-header {
+#header_client {
+    display: flex;
+    flex-direction: column;
     background-color: $couleur_primaire_client;
 
-    img {
-        height: 20px;
+    
+    > div {
+        display: flex;
+        flex-direction: row;
+
+        // Logo Alizon
+        > a > img {
+            height: 100px;
+        }
+
+        // Formulaire de recherche
+        form {
+            display: flex;
+        }
     }
+    
+
+    
 }
 
 #connect_vendeur, #inscription_vendeur{
