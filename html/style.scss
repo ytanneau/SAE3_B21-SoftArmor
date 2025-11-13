@@ -6,6 +6,12 @@
     align-items: center;
 }
 
+@mixin ligne_contenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;
@@ -89,6 +95,7 @@
 body{
     font-family: 'Inter';
     padding: 0;
+    margin: 0;
 }
 
 #header_client {
@@ -137,3 +144,48 @@ body{
 }
 
 
+#header_vendeur{
+    background-color: $couleur_primaire_vendeur;
+    list-style: none;
+
+    >div:first-child{
+        @include ligne_contenu();
+        padding: 3px 40px;
+        height: 50px;
+        >a{
+           img{
+            height: 40px;
+           } 
+        }
+
+        >nav{
+            ul{
+                margin: 0;
+                li{
+                    background-color: $nuance_primaire_vendeur;
+                    color: black;
+                    padding: 5px 10px;
+                    border-radius: $angle_grand;
+                }
+            }
+        }
+
+        >ul{
+            position: absolute;
+            right: 40px;
+
+            @include ligne_contenu();
+            margin: 0;
+            color: white;
+            
+        }
+
+        li{
+            @include ligne_contenu();
+        }
+        
+        a{
+            text-decoration: none;
+        }
+    }
+}
