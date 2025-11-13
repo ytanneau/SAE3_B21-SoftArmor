@@ -1,6 +1,7 @@
 body {
   font-family: "Inter";
   padding: 0;
+  margin: 0;
 }
 
 header {
@@ -158,4 +159,45 @@ header img {
 }
 #inscription_vendeur main, #inscription_client main {
   margin: 15vh 0;
+}
+
+#header_vendeur {
+  background-color: #6B31D0;
+  list-style: none;
+}
+#header_vendeur > div:first-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px 40px;
+  height: 50px;
+}
+#header_vendeur > div:first-child > a img {
+  height: 40px;
+}
+#header_vendeur > div:first-child > nav ul {
+  margin: 0;
+}
+#header_vendeur > div:first-child > nav ul li {
+  background-color: #C3C1F5;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 50px;
+}
+#header_vendeur > div:first-child > ul {
+  position: absolute;
+  right: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  color: white;
+}
+#header_vendeur > div:first-child li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#header_vendeur > div:first-child a {
+  text-decoration: none;
 }/*# sourceMappingURL=style.css.map */
