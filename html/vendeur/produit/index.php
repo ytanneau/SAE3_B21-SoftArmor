@@ -21,7 +21,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     <link rel="stylesheet" href="style.css">
     </head>
         <body>
-
+            <main>
 <?php
 
 
@@ -106,7 +106,7 @@ function ecrire_nom($nom_stock){
         <?php
     }
 ?>
-
+        </main>
     </body>
 </html>
 
