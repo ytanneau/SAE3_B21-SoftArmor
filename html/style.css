@@ -10,9 +10,10 @@ body {
 }
 #header_client > div {
   display: flex;
+  flex-direction: row;
 }
 #header_client > div > a > img {
-  height: 40px;
+  height: 100px;
 }
 #header_client > div form {
   display: flex;
