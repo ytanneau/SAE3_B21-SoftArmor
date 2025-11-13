@@ -51,7 +51,8 @@ unset($pdo);
         <a href="deconnexion">Se déconnecter</a>
         <h1>Bienvenue <?= htmlentities($_SESSION['pseudo']) ?></h1>
     <?php } ?>
-<!--header-->
+
+    <main>
 <!--Produit Banniere au jour (possiblement a faire)-->
 <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 <!--Produit Ajoutés Récemment-->
@@ -202,6 +203,9 @@ unset($pdo);
         <a href="#"><img src="images/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="images/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
     </div>
+    </main>
+    <footer>
 <!--footer-->
+    </footer>
 </body>
 </html>
