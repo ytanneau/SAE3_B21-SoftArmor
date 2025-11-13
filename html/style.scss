@@ -99,6 +99,7 @@ body{
     
     > div {
         display: flex;
+        flex-direction: row;
 
         // Logo Alizon
         > a > img {
