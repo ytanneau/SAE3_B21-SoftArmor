@@ -8,7 +8,10 @@ body {
 }
 #header_client > div > a > img {
   display: block;
-  height: 20px;
+  height: 40px;
+}
+#header_client form {
+  display: inline-block;
 }
 
 #connect_vendeur, #inscription_vendeur {

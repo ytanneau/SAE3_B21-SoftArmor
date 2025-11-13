@@ -97,7 +97,12 @@ body{
     // Logo Alizon
     > div > a > img {
         display: block;
-        height: 20px;
+        height: 40px;
+    }
+
+    // Formulaire de recherche
+    form {
+        display: inline-block;
     }
 }
 
