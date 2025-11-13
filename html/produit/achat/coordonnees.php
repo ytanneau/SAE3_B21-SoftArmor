@@ -75,7 +75,7 @@ else if ($_POST['form'] == 'adresse') {
     } else {
         // sinon reste sur étape 1
         $numEtape = 1;
-        
+
         // récup les anciennes valeurs remplies pour préremplir les champs d'adresse
         $adresse_client['adresse'] = $_POST['adresse'];
         $adresse_client['complement_adresse'] = $_POST['complement_adresse'];
@@ -114,7 +114,7 @@ else if ($_POST['form'] == 'bancaire') {
             // file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
         }
     
-        if ($erreurs != []) {
+        if ($erreurs == []) {
             // si aucune erreur, alors on passe à l'étape suivante
             $numEtape = 3;
         } else {
