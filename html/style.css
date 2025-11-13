@@ -4,14 +4,19 @@ body {
 }
 
 #header_client {
+  display: flex;
+  flex-direction: column;
   background-color: #3157A3;
+}
+#header_client > div {
+  display: flex;
 }
 #header_client > div > a > img {
   display: block;
   height: 40px;
 }
-#header_client form {
-  display: inline-block;
+#header_client > div form {
+  display: flex;
 }
 
 #connect_vendeur, #inscription_vendeur {

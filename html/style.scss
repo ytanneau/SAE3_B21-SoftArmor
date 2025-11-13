@@ -92,18 +92,28 @@ body{
 }
 
 #header_client {
+    display: flex;
+    flex-direction: column;
     background-color: $couleur_primaire_client;
 
-    // Logo Alizon
-    > div > a > img {
-        display: block;
-        height: 40px;
-    }
+    
+    > div {
+        display: flex;
 
-    // Formulaire de recherche
-    form {
-        display: inline-block;
+        // Logo Alizon
+        > a > img {
+            display: block;
+            height: 40px;
+        }
+
+        // Formulaire de recherche
+        form {
+            display: flex;
+        }
     }
+    
+
+    
 }
 
 #connect_vendeur, #inscription_vendeur{
