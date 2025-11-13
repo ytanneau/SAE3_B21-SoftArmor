@@ -59,6 +59,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         if ($erreurs['email'] === FORMAT) {
                             $message .= ". Exemple : xyz@domaine.fr"; 
                         }
+
+                        echo $message;
                     }
                 ?>
             </p>
