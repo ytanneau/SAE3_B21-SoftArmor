@@ -652,12 +652,19 @@
         }
     }
 function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        if($mdpc==""){
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }else{
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':mdpc', crypte_v2($mdpc), PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }
         
-        $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mdpc', $mdpc, PDO::PARAM_STR);
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
-        $requete->execute();
 
         $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
