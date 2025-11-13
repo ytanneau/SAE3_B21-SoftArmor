@@ -265,7 +265,10 @@
 
     // vérifie la date d'expiration de la carte
     function check_date_exp($date) {
-        return preg_match('/^\d{2}\/\d{2}$/', $date) && (0 < (int) substr($date, 0, 2) && (int) substr($date, 0, 2) <= 12) && ((int) substr($date, 3, 2) >= 25);
+        $mois = substr($date, 0, 2);
+        $annee = substr($date, 3, 2);
+
+        return preg_match('/^\d{2}\/\d{2}$/', $date) && 0 < $mois && $mois <= 12 && $annee >= date('Y') % 100;
     }
 
     //supprime les espaces, underscores et tirets
@@ -480,6 +483,8 @@
         // erreur sur date d'expiration
         if (check_vide($date_exp)) {
             $erreurs['date_exp'] = VIDE;
+        } else if (!check_date_exp($date_exp)) {
+            $erreurs['date_exp'] = FORMAT;
         }
         
         // erreur sur code de sécurité
