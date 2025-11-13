@@ -19,12 +19,9 @@
     // decoupage des informations en tableau
     $tabVendeur = $informationsVendeur->fetchAll(PDO::FETCH_ASSOC);
     $tabVendeur = $tabVendeur[0];
+
     // assignation des variables aux élements du tableau
-    echo "<pre>";
-    print_r($tabVendeur);
-    echo "</pre>";
     $raisonSociale = $tabVendeur['raison_sociale'];
-    $denomination = $tabVendeur['denomination'];
     $numSiret = $tabVendeur['num_siret'];
     $id_adresse = $tabVendeur['id_adresse'];
     $description = $tabVendeur['description'];
@@ -32,9 +29,11 @@
     // recuperation des informations d'adresse du vendeur
     $stmt = $pdo->prepare("SELECT * FROM _adresse WHERE id_adresse = :id_adresse");
     $stmt->execute([':id_adresse' => $id_adresse]);
+
     // decoupage des informations en tableau
     $tabAdresseVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $tabAdresseVendeur = $tabAdresseVendeur[0];
+
     // définiton de la chaine addresse
     $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];
 ?>
@@ -53,8 +52,6 @@
         <h1>Mes informations</h1>
         <h3>Raison sociale</h3>
         <p><?php echo $raisonSociale ?></p>
-        <h3>Denomination</h3>
-        <p><?php echo $denomination ?></p>
         <h3>Numero de siret</h3>
         <p><?php echo $numSiret ?></p>
         <h3>Adresse</h3>
