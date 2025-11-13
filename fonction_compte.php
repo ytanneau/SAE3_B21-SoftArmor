@@ -6,7 +6,7 @@
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
     const CORRESPOND_PAS = "Les deux mots de passe ne correspondent pas";
-    const CONNECTE_PAS = "L'email ou le mot de passe est invalide";
+    const CONNECTE_PAS = "L'email ou le mot de passe est incorrect";
 
     const TAILLE_NOM = 40;
     const TAILLE_RAISON_SOCIALE = 60;

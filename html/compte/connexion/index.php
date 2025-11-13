@@ -22,7 +22,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -37,6 +36,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <a href="../">
             <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
+
         <h2>S’identifier</h2>
 
         <form action="" method="post">
@@ -50,11 +50,20 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value="<?php if (isset($_POST['email'])) echo $_POST['email']?>"
                 class="champ">
 
-            <?php if (isset($erreurs['email'])) { ?>
-                <p style="color: red"><?= $erreurs['email'] ?></p>
-            <?php } ?>
+            <!-- Message d'erreur pour l'email -->
+            <p class="error">
+                <?php
+                    if (isset($erreurs['email'])) {
+                        $message = $erreurs['email'];
+                        
+                        if ($erreurs['email'] === FORMAT) {
+                            $message .= ". Exemple : xyz@domaine.fr"; 
+                        }
+                    }
+                ?>
+            </p>
 
-                <!-- Mot de passe -->
+            <!-- Mot de passe -->
             <label for="mdp">Mot de passe</label>
             <input type="password" 
                 name="mdp"
@@ -62,74 +71,34 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 value=""
                 class="champ">
             
-            <p class="error"><?php 
-                if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { 
-                    echo $erreurs['mdp']; 
-                } ?>
+            <!-- Message d'erreur pour le MDP -->
+            <p class="error">
+                <?php 
+                    if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { 
+                        echo $erreurs['mdp']; 
+                    } 
+                ?>
             </p>
-        
-            <p class="error"><?php 
-                if (isset($erreurs['connecte']) || (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE)) { 
-                    echo CONNECTE_PAS; 
-                } ?>
+                
+            <!-- Message d'erreur en cas d'identifiants invalides -->
+            <p class="error">
+                <?php
+                    $pas_erreur_format = isset($erreurs['connecte']);
+                    $erreur_email = isset($erreurs['email']);
+                    $mdp_incorrect_non_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE);
+
+                    // Si aucune erreur de format mais identifiants incorrects OU erreur de format de mot de passe (autre que vide)
+                    if ($pas_erreur_format || (!$erreur_email && $mdp_incorrect_non_vide)) { 
+                        echo CONNECTE_PAS; 
+                    } 
+                ?>
             </p>
-
-            <!-- 
-
-            benoit
-            123
-
-            isset($erreurs['email']) : true
-            isset($erreurs['mdp']) : false
-            isset($erreurs['connecte']) : true
-
-            Résultat attendu :
-            Email : Format invalide
-            MDP : Rien
-            Erreur finale : Rien
-
-            Résultat obtenu :
-            Email : Format invalide
-            MDP : Rien
-            Erreur finale : Email ou MDP invalide
-            -->
             
             <input type="submit" value="Se connecter" class="bouton"> 
         </form>
         <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
     </main>
 
-    <!--
-    <script>
-        const champEmail        = document.getElementById("email");
-        const champMdp          = document.getElementById("mdp");
-
-        const msgErreurEmail    = document.getElementById("msgErreurEmail");
-        const msgErreurMdp      = document.getElementById("msgErreurMdp");
-
-        champEmail.addEventListener('input', () => {
-            if (champEmail.value === "") {
-                msgErreurEmail.textContent = "L'adresse e-mail ne doit pas être vide";
-                msgErreurEmail.style.display = "block";
-                event.preventDefault();
-            } else if (!champEmail.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/)) {
-                msgErreurEmail.textContent = "L'adresse e-mail est invalide";
-                msgErreurEmail.style.display = "block";
-                event.preventDefault();
-            } else {
-                msgErreurEmail.style.display = "none";
-            }
-        })
-
-        champMdp.addEventListener('input', () => {
-            if (champMdp.value === "") {
-                msgErreurMdp.style.display = "block";
-                event.preventDefault();
-            } else {
-                msgErreurMdp.style.display = "none";
-            }
-        })
-    </script>
-    -->
+    
 </body>
 </html>
