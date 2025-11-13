@@ -1,13 +1,15 @@
 <?php
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
-define("HOME_GIT", "../");
+define("HOME_GIT", "../../../");
+
+require_once HOME_GIT . '.config.php';
+
 if (!isset($_SESSION)) {
     session_start();
 }
 //verifie si quelqun est connecté
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT);
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    header('location: ../');
     exit;
 }
 ?>
@@ -19,7 +21,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === true) {
     <link rel="stylesheet" href="style.css">
     </head>
         <body>
-
+            <main>
 <?php
 
 
@@ -104,7 +106,7 @@ function ecrire_nom($nom_stock){
         <?php
     }
 ?>
-
+        </main>
     </body>
 </html>
 

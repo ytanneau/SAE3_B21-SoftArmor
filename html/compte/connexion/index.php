@@ -29,12 +29,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
+    <link rel="stylesheet" href="<?= HOME_SITE . 'style.css' ?>">
 </head>
 <body id="connect_client">
     <main>
-        <a href="../">
-            <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+        <a href="<?= HOME_SITE ?>">
+            <img src="<?= HOME_SITE . 'image/Alizon_noir.png' ?>" alt="Logo alizon" title="Logo alizon">
         </a>
 
         <h2>S’identifier</h2>
@@ -59,6 +59,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                         if ($erreurs['email'] === FORMAT) {
                             $message .= ". Exemple : xyz@domaine.fr"; 
                         }
+
+                        echo $message;
                     }
                 ?>
             </p>

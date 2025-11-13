@@ -3,6 +3,9 @@ define('HOME_GIT', "../" );
 
 if (!isset($_SESSION)) {
     session_start();
+    if(isset($_SESSION['raison_sociale'])){
+        header('location: /vendeur/stock/');
+    }
 }
 
 require_once (HOME_GIT . '.config.php');
@@ -42,7 +45,7 @@ unset($pdo);
     <title>Accueil</title>
 </head>
 <body>
-    <?php //include "header.php"; ?>
+    <?php include "header.php"; ?>
 
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
@@ -51,7 +54,8 @@ unset($pdo);
         <a href="deconnexion">Se déconnecter</a>
         <h1>Bienvenue <?= htmlentities($_SESSION['pseudo']) ?></h1>
     <?php } ?>
-<!--header-->
+
+    <main>
 <!--Produit Banniere au jour (possiblement a faire)-->
 <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 <!--Produit Ajoutés Récemment-->
@@ -197,11 +201,14 @@ unset($pdo);
 
 <!--Navigation (pour telephone)-->
     <div>
-        <a href=""><img src="images/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
-        <a href="#"><img src="images/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
-        <a href="#"><img src="images/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
-        <a href="#"><img src="images/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
+        <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
+        <a href="#"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
+        <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
+        <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
     </div>
+    </main>
+    <footer>
 <!--footer-->
+    </footer>
 </body>
 </html>
