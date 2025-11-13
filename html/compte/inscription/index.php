@@ -1,4 +1,6 @@
 <?php
+    
+    define('HOME_SITE', '../../');
     const HOME_GIT = '../../../';
     
     if ($_POST != null){
@@ -35,7 +37,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Inscription</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>style.css">
+    <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
 </head>
 <body id="inscription_client">
     <main>
@@ -56,7 +58,7 @@
 ?>
         <img src="" alt="">
         <a href="../">
-            <img src="<?=HOME_GIT?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+            <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S'inscrire</h2>
         

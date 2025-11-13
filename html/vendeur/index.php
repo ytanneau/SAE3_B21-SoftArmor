@@ -4,6 +4,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
     define('HOME_GIT', '../../');
+    define('HOME_SITE', '../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -26,7 +27,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Vendeur - Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?= HOME_GIT . "style.css" ?>">
+    <link rel="stylesheet" href="<?= HOME_SITE . "style.css" ?>">
 </head>
 <body id="connect_vendeur">
     <main>
@@ -40,7 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 ?>
         <img src="" alt="">
         <a href="../">
-            <img src="<?=HOME_GIT?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
+            <img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S’identifier</h2>
 

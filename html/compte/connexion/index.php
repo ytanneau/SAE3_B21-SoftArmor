@@ -5,6 +5,7 @@ if (!isset($_SESSION)) {
 }
 
 define('HOME_GIT', '../../../');
+define('HOME_SITE', '../../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -14,7 +15,7 @@ if ($_POST != null){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT);
+    header('location: ' . HOME_SITE);
     exit;
 }
 
@@ -28,12 +29,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>style.css">
+    <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
 </head>
 <body id="connect_client">
     <main>
-        <a href=<?= HOME_GIT ?>>
-            <img src="<?= HOME_GIT . 'image/Alizon_noir.png' ?>" alt="logo alizon" title="logo alizon">
+        <a href="../">
+            <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
 
         <h2>S’identifier</h2>
