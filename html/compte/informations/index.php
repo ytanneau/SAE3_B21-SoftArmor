@@ -57,12 +57,18 @@ if ($_POST != null){
 
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     print_r($_POST);
-    echo $_POST['mdp'];
-    echo $mdp_cryptee;
-    echo check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee);
-    if(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
+    echo "<br>";
+    echo "mdp :".$_POST['mdp'];
+    echo "<br>";
+    echo "mdp hash:".$mdp_cryptee;  
+    echo "<br>";
+    echo "pas vide : ".!check_vide($_POST['mdp']);
+    echo "<br>";
+    echo "mdp valide et pas vide :".(check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp']));
+    echo "<br>";
+    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
         echo "test entré";
-        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],crypte_v2($_POST['n_mdp']), $_SESSION['id_compte'],$id_adresse);
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
     }
 }
 // Fermer la connexion
@@ -161,7 +167,7 @@ unset($pdo);
             <input type="text" name="adresse" value="<?php echo $row['adresse'];?>" placeholder="À renseigner">
             <!--Erreur adresse-->
             <?php
-                if (isset($erreur['rue']) && $erreur['rue'] != "Champ est vide"){
+                if (isset($erreur['rue']) && $erreur['rue'] != "Veuillez renseigner ce champ"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$erreur['rue']?>
@@ -175,7 +181,7 @@ unset($pdo);
             <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Champ est vide"){
+                if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$erreur['code_postal']?>
@@ -190,7 +196,7 @@ unset($pdo);
             <!--Erreur adresse-->
             <?php
                 
-                if (isset($erreur['rue']) && $erreur['rue'] != "Champ est vide"){
+                if (isset($erreur['rue']) && $erreur['rue'] != "Veuillez renseigner ce champ"){
                     
             ?>  
                         <p class="error">
@@ -205,7 +211,7 @@ unset($pdo);
             <input type="text" name="code_postal" placeholder="À renseigner">
             <!--Erreur code postal-->
             <?php
-                if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Champ est vide"){
+                if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
             ?>
                         <p class="error">   
                             <?="Erreur : ".$erreur['code_postal']?>
@@ -229,7 +235,7 @@ unset($pdo);
             <input type="password" name="n_mdp" placeholder="À renseigner">
             <!--Erreur nouveau mot de passe-->
             <?php
-                if (isset($erreur['mdp']) && $erreur['mdp'] != "Champ est vide"){
+                if (isset($erreur['mdp']) && $erreur['mdp'] != "Veuillez renseigner ce champ"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$erreur['mdp']?>
@@ -241,7 +247,7 @@ unset($pdo);
             <input type="password" name="n_mdpc" placeholder="À renseigner">
             <!--Erreur confirmation nouveau mot de passe-->
             <?php
-                if (isset($erreur['mdpc']) && $erreur['mdpc'] != "Champ est vide"){
+                if (isset($erreur['mdpc']) && $erreur['mdpc'] != "Veuillez renseigner ce champ"){
             ?>
                         <p class="error">
                             <?="Erreur : ".$erreur['mdpc']?>

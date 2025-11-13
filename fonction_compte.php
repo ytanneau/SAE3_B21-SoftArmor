@@ -2,11 +2,11 @@
 
     const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
-    const FORMAT = "Format invalide";
+    const FORMAT = "Le format est invalide";
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
-    const CORRESPOND_PAS = "Ne correspond pas au mot de passe";
-    const CONNECTE_PAS = "L'email ou mot de passe invalide";
+    const CORRESPOND_PAS = "Les deux mots de passe ne correspondent pas";
+    const CONNECTE_PAS = "L'email ou le mot de passe est incorrect";
 
     const TAILLE_NOM = 40;
     const TAILLE_RAISON_SOCIALE = 60;
@@ -53,20 +53,20 @@
 
             try{
                 if (!sql_check_email($pdo, $email)){
-
                     if (sql_check_cle($pdo, $numCobrec)){
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
-                        $erreurs['connecte'] = CONNECTE_PAS;
+                        $erreurs['numCobrec'] = EXISTE_PAS;
                     }
                 }
                 else{
-                    $erreurs['connecte'] = CONNECTE_PAS;
+                    $erreurs['email'] = EXISTE;
                 }
             }
             catch(PDOException $e){
                 $erreurs['fatal'] = true;
+                $erreurs['correcte'] = false;
             }
         }
         else{
@@ -103,6 +103,7 @@
                 if (!sql_check_email($pdo, $email)){
 
                     if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
+                        
                     } else {
                         // changer l'erreur $erreurs['CR'] = EXISTE_PAS;
                     }
@@ -244,7 +245,7 @@
 
     // Vérifie l'égalité du MDP et de la confirmation du MDP
     function check_create_MDP($mdp, $mdpc){
-        return (check_Mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
+        return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
@@ -259,7 +260,12 @@
 
     // vérifie le code de la carte bancaire
     function check_code_carte($code) {
-        return (99999999999 < $code && $code <= 999999999999);
+        return (strlen($code) == 16);
+    }
+
+    // vérifie la date d'expiration de la carte
+    function check_date_exp($date) {
+        return preg_match('/^\d{2}\/\d{2}$/', $date) && (0 < (int) substr($date, 0, 2) && (int) substr($date, 0, 2) <= 12) && ((int) substr($date, 3, 2) >= 25);
     }
 
     //supprime les espaces, underscores et tirets
@@ -488,6 +494,7 @@
     }
 
     function check_erreur_connection($email, $mdp){
+        $erreurs = [];
 
         //recherche dans l'email
         if (check_vide($email)){
@@ -522,16 +529,16 @@
     // Return true si existe, false sinon
     function sql_check_email($pdo, $email){
         try {
-            $requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
+            $requete = $pdo->prepare("SELECT email_actif_existe(:email)");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
 
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
-            
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             throw $e;
         }
     }
@@ -550,9 +557,9 @@
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_email()\n", FILE_APPEND);
             
             throw $e;
         }
@@ -568,9 +575,9 @@
 
             return ($requete->fetch(PDO::FETCH_ASSOC) != null);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : check_cle()", FILE_APPEND);
 
             throw $e;
         }
@@ -599,9 +606,9 @@
 
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
+            //$fichierLog = __DIR__ . "/erreurs.log";
+            //$date = date("Y-m-d H:i:s");
+            //file_put_contents($fichierLog, "[$date] Failed SQL request : create_vendeur()\n", FILE_APPEND);
             
             throw $e; // lance une erreur que la fonction appelante catchera
         }
@@ -652,12 +659,19 @@
         }
     }
 function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        if($mdpc==""){
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }else{
+            $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->bindValue(':mdpc', crypte_v2($mdpc), PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        }
         
-        $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mdpc', $mdpc, PDO::PARAM_STR);
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
-        $requete->execute();
 
         $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
