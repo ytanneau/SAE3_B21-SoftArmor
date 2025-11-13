@@ -15,6 +15,10 @@ require_once HOME_GIT . ".config.php";
 $numEtape = -1;
 
 var_dump($_POST);
+echo "FORMULAIRE : ";
+var_dump($_POST['form']);
+echo "IS SET :";
+var_dump(isset($_POST['form']));
 
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
@@ -122,11 +126,6 @@ else if ($_POST['form'] == 'bancaire') {
 
 
 
-
-
-if (isset($erreurs) && $erreurs == []) {
-    header('Location: ' . 'bancaire.php');
-}
 
 ?>
 
