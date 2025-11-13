@@ -3,10 +3,11 @@ body {
   padding: 0;
 }
 
-header {
+#header_client {
   background-color: #3157A3;
 }
-header img {
+#header_client > div > a > img {
+  display: block;
   height: 20px;
 }
 
@@ -18,10 +19,10 @@ header img {
   align-items: center;
 }
 #connect_vendeur main, #inscription_vendeur main {
-  background-color: #C3C1F5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #C3C1F5;
   row-gap: 1em;
   border-radius: 20px;
   padding: 2em;
@@ -92,10 +93,10 @@ header img {
   align-items: center;
 }
 #connect_client main, #inscription_client main {
-  background-color: #CBCCEA;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #CBCCEA;
   row-gap: 1em;
   border-radius: 20px;
   padding: 2em;

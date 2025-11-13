@@ -91,10 +91,12 @@ body{
     padding: 0;
 }
 
-header {
+#header_client {
     background-color: $couleur_primaire_client;
 
-    img {
+    // Logo Alizon
+    > div > a > img {
+        display: block;
         height: 20px;
     }
 }
