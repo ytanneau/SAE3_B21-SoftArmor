@@ -20,6 +20,9 @@
     $tabVendeur = $informationsVendeur->fetchAll(PDO::FETCH_ASSOC);
     $tabVendeur = $tabVendeur[0];
     // assignation des variables aux élements du tableau
+    echo "<pre>";
+    print_r($tabVendeur);
+    echo "</pre>";
     $raisonSociale = $tabVendeur['raison_sociale'];
     $denomination = $tabVendeur['denomination'];
     $numSiret = $tabVendeur['num_siret'];
