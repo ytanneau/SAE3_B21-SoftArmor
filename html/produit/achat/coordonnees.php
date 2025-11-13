@@ -14,6 +14,8 @@ if (!isset($_SESSION['logged_in'])) {
 require_once HOME_GIT . ".config.php";
 $numEtape = -1;
 
+var_dump($_POST);
+
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
     $numEtape = 1;
