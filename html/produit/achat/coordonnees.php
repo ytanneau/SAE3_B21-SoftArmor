@@ -14,12 +14,6 @@ if (!isset($_SESSION['logged_in'])) {
 require_once HOME_GIT . ".config.php";
 $numEtape = -1;
 
-var_dump($_POST);
-echo "FORMULAIRE : ";
-var_dump($_POST['form']);
-echo "IS SET :";
-var_dump(isset($_POST['form']));
-
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
     $numEtape = 1;
@@ -79,6 +73,9 @@ else if ($_POST['form'] == 'adresse') {
         $numEtape = 2;
 
     } else {
+        // sinon reste sur étape 1
+        $numEtape = 1;
+        
         // récup les anciennes valeurs remplies pour préremplir les champs d'adresse
         $adresse_client['adresse'] = $_POST['adresse'];
         $adresse_client['complement_adresse'] = $_POST['complement_adresse'];
@@ -120,6 +117,9 @@ else if ($_POST['form'] == 'bancaire') {
         if ($erreurs != []) {
             // si aucune erreur, alors on passe à l'étape suivante
             $numEtape = 3;
+        } else {
+            // sinon, reste sur étape 2
+            $numEtape = 2;
         }
     }
 }
