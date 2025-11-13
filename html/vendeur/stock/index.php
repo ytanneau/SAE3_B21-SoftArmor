@@ -1,15 +1,18 @@
 <?php
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
-define("HOME_GIT", "../");
+define("HOME_GIT", "../../../");
+
+require_once HOME_GIT . '.config.php';
+
 if (!isset($_SESSION)) {
     session_start();
 }
 //verifie si quelqun est connecté
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_GIT);
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    header('location: ../');
     exit;
 }
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -36,7 +39,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <?php
 
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
-$sql = 'select id_produit, nom_stock, quantite from produit_visible where id_vendeur = :id_vendeur';
+$sql = 'select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur';
 
 //initialise la variable qui porte la commande sql 
 $stmt = initialize($sql);
@@ -46,7 +49,6 @@ unset($quantite);
 //fonction qui execute la commande et gere les cas d'erreur
 function initialize($sql){
     global $pdo;
-    print_r(value: $_SESSION);
     $compte = $_SESSION['id_compte'];
 
     //prepare la commande et verifie si elle est pas vide

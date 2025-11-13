@@ -37,15 +37,19 @@ unset($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="Page D'Accueil" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
     <title>Accueil</title>
 </head>
 <body>
+    <?php //include "header.php"; ?>
+
     <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
         <a href="compte/connexion">Se connecter</a>
         <a href="compte/inscription">S'inscrire</a>
     <?php } else { ?>
         <a href="deconnexion">Se déconnecter</a>
-        <h1>Bienvenue <?= $_SESSION['pseudo'] ?></h1>
+        <h1>Bienvenue <?= htmlentities($_SESSION['pseudo']) ?></h1>
     <?php } ?>
 <!--header-->
 <!--Produit Banniere au jour (possiblement a faire)-->

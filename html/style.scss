@@ -91,6 +91,15 @@
 
 body{
     font-family: 'Inter';
+    padding: 0;
+}
+
+header {
+    background-color: $couleur_primaire_client;
+
+    img {
+        height: 20px;
+    }
 }
 
 #connect_vendeur, #inscription_vendeur{

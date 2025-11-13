@@ -1,6 +1,7 @@
 <?php
+    
+    define('HOME_SITE', '../../');
     const HOME_GIT = '../../../';
-    $res = [];
     
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
@@ -11,16 +12,18 @@
         if (!isset($_POST['mdp'])) $_POST['mdp'] = "";
         if (!isset($_POST['mdpc'])) $_POST['mdpc'] = "";
 
+        $erreurs = [];
+
         //echo "présence d'un post";
         //print_r($_ENV);
         $fichier = HOME_GIT . 'fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $res = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
+            $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
         } else {
             // echo "erreur 1";
 
-            $res['fatal'] = true;
+            $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
@@ -34,19 +37,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Inscription</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_GIT?>html/style.css">
+    <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
 </head>
 <body id="inscription_client">
     <main>
         
 
 <?php
-    if (isset($res['correcte']) && $res['correcte']) {
+    if (isset($erreurs) && $erreurs == []) {
 ?>
         <h1>Félicitations vous avez crée votre compte</h1>
 <?php
     }
-    else if (isset($res['fatal'])){
+    else if (isset($erreurs['fatal'])){
 ?>
         <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
 <?php
@@ -55,7 +58,7 @@
 ?>
         <img src="" alt="">
         <a href="../">
-            <img src="<?=HOME_GIT?>html/image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+            <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S'inscrire</h2>
         
@@ -65,10 +68,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['nom'])){
+    if (isset($erreurs['nom'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['nom']?>
+                <?="Erreur : ".$erreurs['nom']?>
             </p>
 <?php
     }
@@ -80,10 +83,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['prenom'])){
+    if (isset($erreurs['prenom'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['prenom']?>
+                <?="Erreur : ".$erreurs['prenom']?>
             </p>
 <?php
     }
@@ -95,10 +98,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['pseudo'])){
+    if (isset($erreurs['pseudo'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['pseudo']?>
+                <?="Erreur : ".$erreurs['pseudo']?>
             </p>
 <?php
     }
@@ -110,10 +113,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['email'])){
+    if (isset($erreurs['email'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['email']?>
+                <?="Erreur : ".$erreurs['email']?>
             </p>
 <?php
     }
@@ -125,10 +128,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['date_naiss'])){
+    if (isset($erreurs['date_naiss'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['date_naiss']?>
+                <?="Erreur : ".$erreurs['date_naiss']?>
             </p>
 <?php
     }
@@ -140,10 +143,10 @@
             class="champ">
             <p class="contrainte">minimum 12 caractères</p>
 <?php
-    if (isset($res['mdp'])){
+    if (isset($erreurs['mdp'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['mdp']?>
+                <?="Erreur : ".$erreurs['mdp']?>
             </p>
 <?php
     }
@@ -155,10 +158,10 @@
             class="champ">
             <p class="contrainte"></p>
 <?php
-    if (isset($res['mdpc'])){
+    if (isset($erreurs['mdpc'])){
 ?>
             <p class="error">
-                <?="Erreur : ".$res['mdpc']?>
+                <?="Erreur : ".$erreurs['mdpc']?>
             </p>
 <?php
     }
