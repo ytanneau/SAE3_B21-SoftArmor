@@ -53,7 +53,7 @@
         </header>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="../"><img src="" alt="bouton retour en arrière"></a>
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Ajouter un produit au stock</h1>
 
             <!-- Formulaire de saisie des infos du produit -->
