@@ -11,8 +11,6 @@ if (!isset($_SESSION)) {
     if (!isset($_SESSION['logged_in'])) {
         header('location: ../../');
         exit;
-    }else{
-        header("Refresh:0");
     }
 }
 
@@ -69,6 +67,10 @@ if ($_POST != null){
     if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
         //update la BDD
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
+        
+        //refresh la page pour afficher les infos
+        header("Refresh:0");
+    
     }
 }
 // Fermer la connexion
