@@ -12,7 +12,6 @@ body {
   display: flex;
 }
 #header_client > div > a > img {
-  display: block;
   height: 40px;
 }
 #header_client > div form {
