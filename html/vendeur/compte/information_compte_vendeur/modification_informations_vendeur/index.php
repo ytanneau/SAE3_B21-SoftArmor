@@ -1,13 +1,13 @@
 <?php 
     // appel du fichier de configuration bdd
-    require_once "../.config.php";
+    require_once "../../../../../.config.php";
 
     if (!isset($_SESSION)) {
     session_start();
     }
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../');
+        header('location: ../../../');
         exit;
     }
     $id_compte = $_SESSION['id_compte'];
