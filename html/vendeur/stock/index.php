@@ -89,6 +89,9 @@ function ecrire_nom($nom_stock){
                 <td><?php echo $row['quantite'] ?></td>
             </tr>
         </table>
+        <div>
+            <a href="./nouveau_produit/"> Ajouter un produit</a>
+        </div>
         <?php
     }
 }
