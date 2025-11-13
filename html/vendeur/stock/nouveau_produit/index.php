@@ -53,7 +53,7 @@
         </header>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="pageVendeur.php"><img src="" alt="bouton retour en arrière"></a>
+            <a href="../"><img src="" alt="bouton retour en arrière"></a>
             <h1>Ajouter un produit au stock</h1>
 
             <!-- Formulaire de saisie des infos du produit -->
@@ -73,7 +73,7 @@
                     <div class="infoPlus">
                         <p>
                             <label for="prixProd">Prix* hors taxe (€)</label>
-                            <input type="number" name="prixProd" id="prixProd" required>
+                            <input type="text" name="prixProd" id="prixProd" required>
                         </p>
                         <p>
                             <label for="tva">TVA* (%)</label>
@@ -139,7 +139,7 @@
                     <div class="infoPlus">
                         <p>
                             <label for="">Quantité acheté</label>
-                            <input type="number" name="qtAchete">
+                            <input type="text" name="qtAchete">
                         </p>
                         <p id="blockUniteVetement" style="display:none;">
                             <label for="uniteVetement">Unités de Masse</label>
@@ -212,7 +212,7 @@
                         </p>   
                     </div>
                     <br>
-                    <input type="submit" value="Créer le produit" id="creerProduit">
+                    <a href="../index.php"><input type="submit" value="Créer le produit" id="creerProduit"></a>
                 </fieldset>
             </form>
             
@@ -437,7 +437,6 @@
                                 ':id_prod' => $idProduit,
                                 ':id_image_princ' => $idImage
                             ]);
-                            header('Location: ../index.php');
                         }
                     }
                 }
