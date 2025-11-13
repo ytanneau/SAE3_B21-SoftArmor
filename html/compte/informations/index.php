@@ -64,7 +64,7 @@ if ($_POST != null){
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
     //verifie que les condition de l'insertin sont remplies
-    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !empty($erreur) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc']))){
+    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) && (!isset($erreur['nom'])) && (!isset($erreur['prenom']))&& (!isset($erreur['email']))&& (!isset($erreur['pseudo']))&& (!isset($erreur['date_naiss']))){
         //update la BDD
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
         
