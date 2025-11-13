@@ -48,26 +48,28 @@
         <header>
 
         </header>
-        <!-- Zone d'affichage des informations du vendeur -->
-        <h1>Mes informations</h1>
-        <h3>Raison sociale</h3>
-        <p><?php echo $raisonSociale ?></p>
-        <h3>Numero de siret</h3>
-        <p><?php echo $numSiret ?></p>
-        <h3>Adresse</h3>
-        <p><?php echo $chaineAdresse ?></p>
-        <h3>Description</h3>
-        <p>
-            <?php
-                if($description === null){
-                    echo "Pas de description";
-                } else {
-                    echo $description;
-                } 
-            ?>
-        </p>
-        <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
-        <button><a href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
+        <main>
+            <!-- Zone d'affichage des informations du vendeur -->
+            <h1>Mes informations</h1>
+            <h3>Raison sociale</h3>
+            <p><?php echo $raisonSociale ?></p>
+            <h3>Numero de siret</h3>
+            <p><?php echo $numSiret ?></p>
+            <h3>Adresse</h3>
+            <p><?php echo $chaineAdresse ?></p>
+            <h3>Description</h3>
+            <p>
+                <?php
+                    if($description === null){
+                        echo "Pas de description";
+                    } else {
+                        echo $description;
+                    } 
+                ?>
+            </p>
+            <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
+            <button><a href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
+        </main>
         <footer>
 
         </footer>
