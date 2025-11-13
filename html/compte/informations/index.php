@@ -64,7 +64,7 @@ if ($_POST != null){
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
     //verifie que les condition de l'insertin sont remplies
-    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !(empty($erreur['code_postal']) xor empty($erreur['rue'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) && (!isset($erreur['nom'])) && (!isset($erreur['prenom']))&& (!isset($erreur['email']))&& (!isset($erreur['pseudo']))&& (!isset($erreur['date_naiss']))){
+    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !(empty($erreur['code_postal']) xor empty($erreur['adresse'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) && (!isset($erreur['nom'])) && (!isset($erreur['prenom']))&& (!isset($erreur['email']))&& (!isset($erreur['pseudo']))&& (!isset($erreur['date_naiss']))){
         //update la BDD
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
         
@@ -145,10 +145,10 @@ unset($pdo);
                 
                 <!--Erreur Date-->
                 <?php
-                    if (isset($erreur['date'])){
+                    if (isset($erreur['date_naiss'])){
                 ?>
                     <p class="error">
-                        <?="Erreur : ".$erreur['date']?>
+                        <?="Erreur : ".$erreur['date_naiss']?>
                     </p>
                 <?php
                     }
@@ -182,10 +182,10 @@ unset($pdo);
 
                 <!--Erreur adresse-->
                 <?php
-                    if (isset($erreur['rue']) && $erreur['rue'] != "Veuillez renseigner ce champ"){
+                    if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
                 ?>
                     <p class="error">
-                        <?="Erreur : ".$erreur['rue']?>
+                        <?="Erreur : ".$erreur['adresse']?>
                     </p>
                 <?php
                     }
@@ -215,11 +215,11 @@ unset($pdo);
                 <!--Erreur adresse-->
                 <?php
                     
-                    if (isset($erreur['rue']) && $erreur['rue'] != "Veuillez renseigner ce champ"){
+                    if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
                         
                 ?>  
                     <p class="error">
-                        <?="Erreur : ".$erreur['rue']?>
+                        <?="Erreur : ".$erreur['adresse']?>
                     </p>
                 <?php
                     }
@@ -241,7 +241,7 @@ unset($pdo);
                 <?php
                     }
                 }
-                if (empty($erreur['code_postal']) xor empty($erreur['rue'])){
+                if (empty($erreur['code_postal']) xor empty($erreur['adresse'])){
                 ?>
                     <p class="error">
                         <?= "Les deux champs Adresse et Code Postal doivent être valides" ?>
