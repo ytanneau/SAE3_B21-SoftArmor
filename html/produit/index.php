@@ -50,6 +50,7 @@ try {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <?php include HOME_SITE . "link_head.php"; ?>
     <title><?php echo htmlspecialchars($produit['nom_public'] ?? 'Produit'); ?></title>
 </head>
 <body>
