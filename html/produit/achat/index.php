@@ -125,9 +125,51 @@ else if ($_POST['form'] == 'bancaire') {
 }
 
 
+// si le client a bien répondu à tous les formulaire, alors une commande est créée et enregistrée
+else if ($numEtape == 3) {
+    $CHEMIN_FACTURE = "ressources/facture/";
+
+    $requete = $pdo->prepare("INSERT INTO _commande (id_compte, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
+    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->execute();
+
+    $requete = $pdo->prepare("SELECT id_commande FROM _commande WHERE id_compte = :id_compte AND chemin_fichier = 'ATTENTE'");
+    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->execute();
+    $id_commande = $requete->fetch(PDO::FETCH_ASSOC)['id_commande'];
+
+    $nom_fichier = $id_compte . "_" . $id_commande;
+    $requete = $pdo->prepare("UPDATE _commande SET chemin_fichier = :chemin");
+    $requete->bindValue(":chemin", "$CHEMIN_FACTURE" . $nom_fichier);
+    $requete->execute();
+
+
+    $requete = $pdo->prepare("SELECT nom, prenom, pseudo FROM compte_client WHERE id_compte = :id_compte");
+    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->execute();
+    $client = $requete->fetch(PDO::FETCH_ASSOC);
+
+    $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
+    $requete->bindValue(":id_produit", $_POST['id_produit']);
+    $requete->execute();
+    $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+    $contenu_fichier = $client['nom'] . " " . $client['prenom'] . "\n";
+
+    date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
+    $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
+    $contenu_fichier .= "Produit acheté : " . $produit['nom'] . "\n";
+    $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€";
+    $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%";
+    $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€";
+
+    file_put_contents($CHEMIN_FACTURE . $nom_fichier, $contenu_fichier);
+}
+
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
