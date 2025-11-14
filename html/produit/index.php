@@ -13,6 +13,7 @@ if (!isset($_SESSION)) {
 
 require_once(HOME_GIT . '.config.php');
 require_once(HOME_GIT . 'fonction_avis.php');
+require_once(HOME_GIT . 'fonction_produit.php');
 require_once(HOME_GIT . 'fonction_global.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
