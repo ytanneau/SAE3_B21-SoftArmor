@@ -37,6 +37,7 @@ body {
 #header_client > div > ul {
   display: flex;
   list-style: none;
+  margin: 0;
 }
 #header_client > div > ul > li > a {
   display: flex;
