@@ -1,10 +1,17 @@
 <?php
+// Inclusion du fichier de configuration
+define('HOME_GIT', '../../');
+define('HOME_SITE', '../');
 
 if (!isset($_SESSION)) {
     session_start();
+
+    if(isset($_SESSION['raison_sociale'])){
+        header('location: /vendeur/stock/');
+    }
 }
 
-require_once('../../.config.php');
+require_once(HOME_GIT . '.config.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
