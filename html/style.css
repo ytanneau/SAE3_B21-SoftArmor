@@ -48,6 +48,7 @@ body {
 #header_client > div > ul > li > .dropdown {
   position: relative;
   display: inline-block;
+  padding: 0;
   font-size: 16px;
 }
 #header_client > div > ul > li > .dropdown > .dropdown-button {
