@@ -133,7 +133,7 @@ if (isset($produit['prix'])) {
     
     <!-- Affichage des avis -->
     <ul>
-        <?php foreach ($liste_avis as $avis) { var_dump($avis)?>
+        <?php foreach ($liste_avis as $avis) { var_dump($avis); ?>
 
             <li>
                 <p><?= htmlentities($avis['pseudo'] ?? '') ?></p>
