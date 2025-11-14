@@ -11,19 +11,19 @@ if (!isset($_SESSION)) {
     }
 }
 
-require_once(HOME_GIT . '.config.php');
-require_once(HOME_GIT . 'fonction_avis.php');
-require_once(HOME_GIT . 'fonction_produit.php');
-require_once(HOME_GIT . 'fonction_global.php');
+require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonction_avis.php');
+require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_global.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
 }
 
-$id_produit = (int) $_GET['id_produit'];
+$id_produit = htmlentities($_GET['id_produit']);
 
 // Requête SQL pour récupérer les informations du produit avec les images et le vendeur
-$sql = "
+/*$sql = "
 SELECT
     p.*,
     v.raison_sociale AS id_vendeur,
@@ -60,10 +60,24 @@ try {
     $liste_avis = avis_client_produit($_GET['id_produit']);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
+}*/
+
+try {
+    $produit = detail_produit_image($id_produit);
+
+    if (!$produit) {
+        die("Produit introuvable.");
+    }
+
+    // Récupérer les avis
+    $liste_avis = avis_client_produit($_GET['id_produit']);
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
 
 // Preparer le prix formaté
 $formatted_prix = '';
+
 if (isset($produit['prix'])) {
     if (is_numeric($produit['prix'])) {
         $formatted_prix = number_format($produit['prix'], 2, ',', ' ') . ' €';
@@ -71,6 +85,7 @@ if (isset($produit['prix'])) {
         $formatted_prix = htmlentities($produit['prix'] ?? '');
     }
 }
+
 ?>
 
 

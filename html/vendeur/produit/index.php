@@ -1,19 +1,21 @@
 <?php
-//permet d'utiliser le fichier config.php
+    // Permet d'utiliser le fichier .config.php
     define("HOME_GIT", "../../../");
-    require_once HOME_GIT . '.config.php';
+    define("HOME_SITE", "../../");
     
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
 
     if (!isset($_SESSION)) {
         session_start();
     }
-    //verifie si quelqun est connecté
+
+    // Vérifie si quelqu'un est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         header('location: ../');
         exit;
     }
-
-    require_once HOME_GIT . 'fonction_produit.php';
+    
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
@@ -41,8 +43,9 @@
                 <td><?= $rows['volume'] ?></td>
             </tr>
         </table>
+
         <div>
-            <img src= "../ressource/produit/<?= $produit . '_' . $rows2['id_image_principale'] ?>" > 
+            <img src="<ressource/produit/<?= $produit . '_' . $rows2['id_image_principale'] ?>" > 
             <?php
                 if ($rows2['id_image1'] != NULL) {
                     ?> <img src= "../ressource/produit/<?php $produit . `_` . $rows2['id_image1'] ?>" > <?php
