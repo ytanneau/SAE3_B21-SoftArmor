@@ -1,6 +1,9 @@
 <?php
 // Inclusion du fichier de configuration
-require_once('../../.config.php');
+define('HOME_GIT', '../../');
+define('HOME_SITE', '../');
+
+require_once(HOME_GIT . '.config.php');
 
 // Vérifie que l'id_produit est passé dans l'URL
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
@@ -50,7 +53,7 @@ try {
     <title><?php echo htmlspecialchars($produit['nom_public'] ?? 'Produit'); ?></title>
 </head>
 <body>
-    <?php include "header.php"; ?>
+    <?php include HOME_SITE . "header.php"; ?>
 
     <?php
     // Affichage des images en priorité (image principale puis secondaires)
