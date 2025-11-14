@@ -2,7 +2,11 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../');
 
-    require_once HOME_GIT . 'fonction_global.php';
+    function pset($value) {
+        return isset($value) ? htmlentities($value) : "";
+    }
+
+
     require_once HOME_GIT . 'fonction_avis.php';
 
     if (!isset($_SESSION)) {
@@ -30,8 +34,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon avis</title>
+<?php
+    require_once HOME_SITE . 'link_head.php';
+?>
 </head>
+
 <body>
+<?php
+    require_once HOME_SITE . 'vendeur/header.php';
+?>
     <main>
 <?php
     if ($data === NULL){
