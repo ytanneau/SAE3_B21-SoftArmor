@@ -136,7 +136,7 @@ if (isset($produit['prix'])) {
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
                 <p><?= htmlentities($avis['pseudo']) ?></p>
-                <p><?= htmlentities($avis['note']) ?></p>
+                <p><?= htmlentities($avis['note']) . ' étoiles' ?></p>
                 <p><?= htmlentities($avis['titre']) ?></p>
                 <p><?= htmlentities($avis['commentaire']) ?></p>
                 <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis']))) ?></p>
