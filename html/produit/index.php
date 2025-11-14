@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 }
 
 require_once(HOME_GIT . '.config.php');
+require_once(HOME_GIT . 'fonction_avis.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
@@ -56,6 +57,10 @@ try {
     if (!$produit) {
         die("Produit introuvable.");
     }
+
+    // Récupérer les avis
+    $avis = avis_client_produit($produit['id_produit']);
+    print_r($avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -70,6 +75,8 @@ if (isset($produit['prix'])) {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -123,6 +130,11 @@ if (isset($produit['prix'])) {
     <?php if (!empty($produit['description_detaillee'])): ?>
         <p><strong>Détails :</strong><br><?= nl2br(htmlspecialchars($produit['description_detaillee'])) ?></p>
     <?php endif; ?>
+
+    <?php
+        // Afficher les avis
+
+    ?>
 
     <a href="../produit/achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
 
