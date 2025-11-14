@@ -53,6 +53,7 @@ body {
 #header_client > div > ul > li > .dropdown > .dropdown-button {
   display: flex;
   align-items: center;
+  margin: 0 1em;
   font-size: 16px;
   background-color: #3157A3;
   color: white;
