@@ -100,15 +100,15 @@ if (isset($produit['prix'])) {
         print($img2_url);
     ?>
 
-    <img src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
+    <img height="200px" src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
     
     <!-- Afficher les images facultatives -->
     <?php if (!empty($img1_url)) { ?>
-        <img src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
+        <img height="200px" src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
     <?php } ?>
 
     <?php if (!empty($img2_url)) { ?>
-        <img src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_alt ?>">
+        <img height="200px" src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_alt ?>">
     <?php } ?>
     
         
