@@ -51,7 +51,10 @@
         </style>
     </head>
     <body>
-        <?php $images = HOME_SITE . "image/" ?>
+        <?php $images = HOME_SITE . "image/";
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";?>
         <header id="header_client">
             <div>
                 <a href=<?= HOME_SITE ?>>
