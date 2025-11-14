@@ -50,6 +50,7 @@ try {
     <title><?php echo htmlspecialchars($produit['nom_public'] ?? 'Produit'); ?></title>
 </head>
 <body>
+    <?php include "header.php"; ?>
 
     <?php
     // Affichage des images en priorité (image principale puis secondaires)

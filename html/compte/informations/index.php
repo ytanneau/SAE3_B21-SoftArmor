@@ -86,7 +86,8 @@ unset($pdo);
     <script src="confirmation.js"></script>
 </head>
 <body>
-    <a href="../../deconnexion/">se deconnecter</a>
+    <?php include "header.php"; ?>
+    
     <main>
         <h1>Mon Profil</h1>
         <div>
