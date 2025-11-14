@@ -110,7 +110,6 @@ body{
     
     * {
         font-family: 'Montserrat';
-        font-size: 16px;
         font-weight: bold;
     }
 
@@ -154,13 +153,13 @@ body{
                     position: relative;
                     display: inline-block;
 
-                    font-size: 14px;
+                    font-size: 16px;
 
                     > .dropdown-button {
                         display: flex;
                         align-items: center;
                         
-                        font-size: 14px;
+                        font-size: 16px;
                         background-color: #3157A3;
                         color: white;
                         border: none;

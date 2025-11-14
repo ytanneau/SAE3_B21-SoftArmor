@@ -15,7 +15,6 @@ body {
 }
 #header_client * {
   font-family: "Montserrat";
-  font-size: 16px;
   font-weight: bold;
 }
 #header_client > div {
@@ -49,12 +48,12 @@ body {
 #header_client > div > ul > li > .dropdown {
   position: relative;
   display: inline-block;
-  font-size: 14px;
+  font-size: 16px;
 }
 #header_client > div > ul > li > .dropdown > .dropdown-button {
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   background-color: #3157A3;
   color: white;
   border: none;
