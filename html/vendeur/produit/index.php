@@ -1,9 +1,9 @@
 <?php
 //permet d'utiliser le fichier config.php
     define("HOME_GIT", "../../../");
-
     require_once HOME_GIT . '.config.php';
-    require_once '../../../fonction_produit.php';
+    require_once HOME_GIT . 'fonction_produit.php';
+
     if (!isset($_SESSION)) {
         session_start();
     }
