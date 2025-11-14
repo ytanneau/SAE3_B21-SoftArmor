@@ -48,14 +48,14 @@
         <li>
             <table>
                 <tr>
-                    <td><?=htmlentities($row['pseudo'])?></td>
-                    <td><?=htmlentities($row['note'])?></td>
-                    <td><?=htmlentities($row['titre'])?></td>
-                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . htmlentities($row['url_image'])?>" alt="<?=htmlentities($row['alt_image'])?>" tilte="<?=htmlentities($row['titre_image'])?>"></td>
+                    <td><?=pset($row['pseudo'])?></td>
+                    <td><?=pset($row['note'])?></td>
+                    <td><?=pset($row['titre'])?></td>
+                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
                 </tr>
                 <tr>
-                    <td><?=htmlentities($row['date_avis'])?></td>
-                    <td colspan="2"><?=htmlentities($row['commentaire'])?></td>
+                    <td><?=pset($row['date_avis'])?></td>
+                    <td colspan="2"><?=pset($row['commentaire'])?></td>
                 </tr>
             </table>
         </li>
