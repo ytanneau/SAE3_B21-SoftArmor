@@ -98,7 +98,7 @@ if (isset($produit['prix'])) {
 
         $img2_url   = htmlentities($produit['image_2_url'] ?? '');
         $img2_title = htmlentities($produit['image_2_titre'] ?? ($produit['nom_public'] ?? ''));
-        $img2_title   = htmlentities($produit['image_2_alt'] ?? ($produit['nom_public'] ?? ''));
+        $img2_alt   = htmlentities($produit['image_2_alt'] ?? ($produit['nom_public'] ?? ''));
     ?>
 
     <img src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
