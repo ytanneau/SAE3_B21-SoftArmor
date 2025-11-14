@@ -139,7 +139,7 @@ if (isset($produit['prix'])) {
                 <p><?= $avis['note'] ?></p>
                 <p><?= $avis['titre'] ?></p>
                 <p><?= $avis['commentaire'] ?></p>
-                <p><?= $avis['date_avis'] ?></p>
+                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime($avis['date_avis'])) ?></p>
             </li>
         <?php } ?>
     </ul>
