@@ -189,9 +189,11 @@ unset($pdo);
     <!-- Navigation (pour teléphone) -->
     <div>
         <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
+        <!--
         <a href="#"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
         <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
+        --->
     </div>
 
     </main>
