@@ -2,12 +2,16 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../');
 
-    require_once HOME_GIT . 'fonction_global.php';
-    require_once HOME_GIT . 'fonction_avis.php';
-
     if (!isset($_SESSION)) {
         session_start();
     }
+
+    function pset($value) {
+        return isset($value) ? htmlentities($value) : "";
+    }
+
+    require_once HOME_GIT . 'fonction_produit.php';
+    require_once HOME_GIT . 'fonction_avis.php';
 
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
@@ -30,8 +34,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon avis</title>
+<?php
+    require_once HOME_SITE . 'link_head.php';
+?>
 </head>
+
 <body>
+<?php
+    require_once HOME_SITE . 'vendeur/header.php';
+?>
     <main>
 <?php
     if ($data === NULL){
@@ -50,7 +61,11 @@
             <table>
                 <tr>
                     <td><?=pset($row['pseudo'])?></td>
-                    <td><?=pset($row['note'])?></td>
+                    <td><?=pset($row['note'])?>/5 
+<?php
+    afficher_moyenne_note($row['note']);
+?>
+                    </td>
                     <td><?=pset($row['titre'])?></td>
                     <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
                 </tr>
@@ -60,9 +75,12 @@
                 </tr>
             </table>
         </li>
-    </ul>
+    
 <?php
         }
+?>
+    </ul>
+<?php
     }
 ?>
     </main>

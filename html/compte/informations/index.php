@@ -156,7 +156,7 @@ unset($pdo);
                 foreach ($info_compte as $row){  
             ?>
 
-            <img src="<?= pset("../../".$row['url_image'])?>" alt="<?= pset(['alt_image'])?>" title="<?= pset(['titre_image'])?>">
+            <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities(['alt_image'] ?? '')?>" title="<?= htmlentities(['titre_image'] ?? '')?>">
 
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
@@ -164,7 +164,7 @@ unset($pdo);
                 <input type="file" name="pdp" accept=".png">
 
                 <label for="pseudo">Pseudonyme</label>
-                <input type="text" name="pseudo" value="<?= pset(['pseudo'])?>" placeholder="À renseigner">
+                <input type="text" name="pseudo" value="<?= htmlentities(['pseudo'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur pseudo-->
                 <?php
@@ -178,7 +178,7 @@ unset($pdo);
                 ?>
 
                 <label for="nom">Nom</label>
-                <input required type="text" name="nom" value="<?= pset(['nom'])?>" placeholder="À renseigner">
+                <input required type="text" name="nom" value="<?= htmlentities(['nom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur nom-->
                 <?php
@@ -192,7 +192,7 @@ unset($pdo);
                 ?>
 
                 <label for="prenom">Prenom</label>
-                <input required type="text" name="prenom" value="<?= pset(['prenom'])?>" placeholder="À renseigner">
+                <input required type="text" name="prenom" value="<?= htmlentities(['prenom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur prenom-->
                 <?php
@@ -206,7 +206,7 @@ unset($pdo);
                 ?>
 
                 <label for="date">Date de Naissance</label>
-                <input required type="date" name="date" value="<?= pset(['date_naissance'])?>" placeholder="À renseigner">
+                <input required type="date" name="date" value="<?= htmlentities(['date_naissance'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur Date-->
                 <?php
@@ -220,7 +220,7 @@ unset($pdo);
                 ?>
 
                 <label for="mail">Mail</label>
-                <input required type="email" name="email" value="<?= pset(['email'])?>" placeholder="À renseigner">
+                <input required type="email" name="email" value="<?= htmlentities(['email'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur mail-->
                 <?php
@@ -243,7 +243,7 @@ unset($pdo);
                     $est_entre = true;
                 ?>
                 
-                <input type="text" name="adresse" value="<?= pset(['adresse'])?>" placeholder="À renseigner">
+                <input type="text" name="adresse" value="<?= htmlentities(['adresse'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur adresse-->
                 <?php
@@ -257,10 +257,10 @@ unset($pdo);
                 ?>
 
                 <label for="complement_adresse">Complement Adresse</label>
-                <input type="text" name="complement_adresse" value="<?= pset(['complement_adresse'])?>" placeholder="À renseigner">
+                <input type="text" name="complement_adresse" value="<?= htmlentities(['complement_adresse'] ?? '')?>" placeholder="À renseigner">
                 
                 <label for="code_postal">Code Postal</label>
-                <input type="text" name="code_postal" value="<?= pset(['code_postal'])?>" placeholder="À renseigner">
+                <input type="text" name="code_postal" value="<?= htmlentities(['code_postal'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur code postal-->
                 <?php
@@ -368,14 +368,14 @@ unset($pdo);
                     <li>
                         <div>
                             <div>
-                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= pset(['alt_image'])?>" title="<?= pset(['titre_image'])?>">
-                                <p><?= pset(['pseudo'])?></p>
+                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities(['alt_image'] ?? '')?>" title="<?= htmlentities(['titre_image'] ?? '')?>">
+                                <p><?= htmlentities(['pseudo'] ?? '')?></p>
                                 <?php afficher_moyenne_note($row['note']);?>
                             </div>
                             <div>
-                                <p><?= pset($row['titre'])?></p>  
-                                <p><?= pset($row['commentaire'])?></p>
-                                <p><?= pset("Avis publié le " . $row['date_avis'])?></p>
+                                <p><?= htmlentities($row['titre'] ?? '')?></p>  
+                                <p><?= htmlentities($row['commentaire'] ?? '')?></p>
+                                <p><?= htmlentities("Avis publié le " . $row['date_avis'] ?? '')?></p>
                             </div>
                         </div>
                     </li>
