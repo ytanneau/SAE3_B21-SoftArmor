@@ -1,6 +1,7 @@
 <?php
 //racine
 define('HOME_GIT', "../../../");
+define('HOME_SITE', '../../');
 
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
@@ -83,10 +84,12 @@ unset($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Compte</title>
+    <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
 <body>
-    <a href="../../deconnexion/">se deconnecter</a>
+    <?php include HOME_SITE . 'header.php'; ?>
+    
     <main>
         <h1>Mon Profil</h1>
         <div>
