@@ -3,6 +3,14 @@
 define('HOME_GIT', '../../');
 define('HOME_SITE', '../');
 
+if (!isset($_SESSION)) {
+    session_start();
+
+    if(isset($_SESSION['raison_sociale'])){
+        header('location: /vendeur/stock/');
+    }
+}
+
 require_once(HOME_GIT . '.config.php');
 
 // Vérifie que l'id_produit est passé dans l'URL
