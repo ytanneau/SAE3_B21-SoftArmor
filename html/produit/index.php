@@ -88,22 +88,22 @@ if (isset($produit['prix'])) {
     <a href="../"><p>Revenir au catalogue</p></a>
 
     <?php
-        $img1_url   = $produit['image_principale_url'] ?? '';
-        $img1_title = $produit['image_principale_titre'] ?? ($produit['nom_public'] ?? '');
-        $img1_alt   = $produit['image_principale_alt'] ?? ($produit['nom_public'] ?? '');
+        $img_principale_url   = htmlentities($produit['image_principale_url'] ?? '');
+        $img_principale_title = htmlentities($produit['image_principale_titre'] ?? ($produit['nom_public'] ?? ''));
+        $img_principale_alt   = htmlentities($produit['image_principale_alt'] ?? ($produit['nom_public'] ?? ''));
 
-        $img2_url   = $produit['image_1_url'] ?? '';
-        $img2_title = $produit['image_1_titre'] ?? ($produit['nom_public'] ?? '');
-        $img2_alt   = $produit['image_1_alt'] ?? ($produit['nom_public'] ?? '');
+        $img1_url   = htmlentities($produit['image_1_url'] ?? '');
+        $img1_title = htmlentities($produit['image_1_titre'] ?? ($produit['nom_public'] ?? ''));
+        $img1_alt   = htmlentities($produit['image_1_alt'] ?? ($produit['nom_public'] ?? ''));
 
-        $img3_url   = $produit['image_2_url'] ?? '';
-        $img3_title = $produit['image_2_titre'] ?? ($produit['nom_public'] ?? '');
-        $img3_alt   = $produit['image_2_alt'] ?? ($produit['nom_public'] ?? '');
+        $img2_url   = htmlentities($produit['image_2_url'] ?? '');
+        $img2_title = htmlentities($produit['image_2_titre'] ?? ($produit['nom_public'] ?? ''));
+        $img2_title   = htmlentities($produit['image_2_alt'] ?? ($produit['nom_public'] ?? ''));
     ?>
 
-    <img src="<?= HOME_SITE . htmlentities($img1_url) ?>" title="<?= HOME_SITE . htmlentities($img1_title) ?>" alt="<?= HOME_SITE . htmlentities($img1_alt) ?>">
-    <img src="<?= HOME_SITE . htmlentities($img2_url) ?>" title="<?= HOME_SITE . htmlentities($img2_title) ?>" alt="<?= HOME_SITE . htmlentities($img2_alt) ?>">
-    <img src="<?= HOME_SITE . htmlentities($img3_url) ?>" title="<?= HOME_SITE . htmlentities($img3_title) ?>" alt="<?= HOME_SITE . htmlentities($img3_alt) ?>">
+    <img src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
+    <img src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
+    <img src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_title ?>">
 
     <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
