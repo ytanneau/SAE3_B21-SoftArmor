@@ -1,6 +1,7 @@
 <?php
 //racine
 define('HOME_GIT', "../../../");
+define('HOME_SITE', '../../');
 
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
@@ -45,8 +46,10 @@ foreach ($mot_de_passe as $row){
     $id_adresse = $row['id_adresse'];
 }
 
+
 //traitement de la modification des informations
 if ($_POST != null){
+    print_r($_FILES);
     //initialise les vaiables a ""
     if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
@@ -64,10 +67,35 @@ if ($_POST != null){
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
     //verifie que les condition de l'insertin sont remplies
-    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) && !check_vide($_POST['mdp'])) && !(empty($erreur['code_postal']) xor empty($erreur['adresse'])) && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) && (!isset($erreur['nom'])) && (!isset($erreur['prenom']))&& (!isset($erreur['email']))&& (!isset($erreur['pseudo']))&& (!isset($erreur['date_naiss']))){
+    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) 
+        && !check_vide($_POST['mdp'])) 
+        && !(empty($erreur['code_postal']) xor empty($erreur['adresse'])) 
+        && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) 
+        && (!isset($erreur['nom'])) 
+        && (!isset($erreur['prenom']))
+        && (!isset($erreur['email']))
+        && (!isset($erreur['pseudo']))
+        && (!isset($erreur['date_naiss']))){
+
         //update la BDD
         sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
         
+        //modifie la photo de profil
+        $id=$_SESSION['id_compte'];
+        $ext=".png";
+        $dossier= "../../ressources/client/";
+        $chemin = "'ressources/client/".$id.$ext."'";
+        $file_name = $dossier.$id . $ext;
+        $titre="'Image de Profil'";
+        $alt="'Image de Profil'";
+        if ($_FILES!=NULL) {
+            if(!$_FILES["pdp"]["error"]){
+                move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
+                $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
+                $pdo->query($sql);
+            }
+        }
+
         //refresh la page pour afficher les infos
         header("Refresh:0");
     
@@ -83,10 +111,12 @@ unset($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informations Compte</title>
+    <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
 <body>
-    <a href="../../deconnexion/">se deconnecter</a>
+    <?php include HOME_SITE . 'header.php'; ?>
+    
     <main>
         <h1>Mon Profil</h1>
         <div>
@@ -94,9 +124,13 @@ unset($pdo);
                 //affichage des info du compte
                 foreach ($info_compte as $row){  
             ?>
+
             <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
 
-            <form action="" method="post" id="donnee">
+            <form action="" method="post" id="donnee" enctype="multipart/form-data">
+                
+                <label for="pdp">Modifier Image de Profil</label>
+                <input type="file" name="pdp" accept=".png">
 
                 <label for="pseudo">Pseudonyme</label>
                 <input type="text" name="pseudo" value="<?php echo $row['pseudo'];?>" placeholder="À renseigner">
