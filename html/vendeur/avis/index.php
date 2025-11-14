@@ -6,7 +6,7 @@
         return isset($value) ? htmlentities($value) : "";
     }
 
-
+    require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . 'fonction_avis.php';
 
     if (!isset($_SESSION)) {
@@ -61,7 +61,11 @@
             <table>
                 <tr>
                     <td><?=pset($row['pseudo'])?></td>
-                    <td><?=pset($row['note'])?></td>
+                    <td><?=pset($row['note'])?>/5 
+<?php
+    afficher_moyenne_note($row['note']);
+?>
+                    </td>
                     <td><?=pset($row['titre'])?></td>
                     <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
                 </tr>
@@ -71,9 +75,12 @@
                 </tr>
             </table>
         </li>
-    </ul>
+    
 <?php
         }
+?>
+    </ul>
+<?php
     }
 ?>
     </main>
