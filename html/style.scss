@@ -152,14 +152,12 @@ body {
                     position: relative;
                     display: inline-block;
 
-                    padding: 0;
+                    margin: 0 1em;
                     font-size: 16px;
 
                     > .dropdown-button {
                         display: flex;
                         align-items: center;
-
-                        margin: 0 1em;
                         
                         font-size: 16px;
                         background-color: #3157A3;
