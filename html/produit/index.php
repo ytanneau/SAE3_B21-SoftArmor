@@ -60,6 +60,7 @@ try {
 
     // Récupérer les avis
     $liste_avis = avis_client_produit($_GET['id_produit']);
+    var_dump($liste_avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -138,6 +139,7 @@ if (isset($produit['prix'])) {
                 <p><?= $avis['note'] ?></p>
                 <p><?= $avis['titre'] ?></p>
                 <p><?= $avis['commentaire'] ?></p>
+                <p><?= $avis['date_avis'] ?></p>
             </li>
         <?php } ?>
     </ul>
