@@ -1,20 +1,45 @@
 <header id="header_client">
-    <!-- Logo Alizon, barre de recherche, onglets compte/panier -->
-    <!-- Flex horizontal -->
     <div>
-        <a href="<?= HOME_GIT ?>">
-            <img src="<?= HOME_GIT . 'image/Alizon_blanc.png' ?>" alt="Logo Alizon" title="Logo Alizon">
+        <a href="#">
+            <img src="images/Alizon blanc.png" alt="Logo Alizon" title="Logo Alizon">
         </a>
-        
-        <form action="<?= HOME_GIT . 'recherche' ?>" method="get">
-            <input type="search" name="recherche" id="recherche">
-            <input type="submit" value="Rechercher">
-        </form>
-    </div>
 
-    <!-- Liste des catégories -->
-    <!-- Flex horizontal -->
-    <ul>
-        
-    </ul>
+        <ul>
+            <li>
+                <div class="dropdown">
+                    <button onclick="ouvrirMenu()" class="dropdown-button">
+                        <img src="image/compte_blanc.svg" class="icon">
+                        <?= "Roger" ?>
+                    </button>
+
+                    <div id="dropdown-compte" class="dropdown-content">
+                        <a href="#"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
+                        <a href="#"> <img src="image/options.svg" class="icon"> Paramètres</a>
+                        <a href="#"> <img src="image/deconnexion.svg" class="icon"> Déconnexion</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </header>
+
+<script>
+    function ouvrirMenu() {
+        document.getElementById("dropdown-compte").classList.toggle("show");
+    }
+
+    // Ferme le menu si on clique ailleurs
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropdown-button')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

@@ -4,20 +4,85 @@ body {
   margin: 0;
 }
 
+.icon {
+  height: 25px;
+  margin: 0 8px 0 0;
+}
+
 #header_client {
-  display: flex;
-  flex-direction: column;
+  padding: 0 1em;
   background-color: #3157A3;
+}
+#header_client * {
+  font-weight: bold;
 }
 #header_client > div {
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 #header_client > div > a > img {
-  height: 100px;
+  height: 30px;
 }
-#header_client > div form {
+#header_client > div > form input[type=search] {
+  background-image: url(images/loupe.svg);
+  background-repeat: no-repeat;
+  background-position: left center;
+  height: 2.5em;
+  padding: 0.5em 0.5em 0.5em 2.5em;
+  border-radius: 20px;
+  border: none;
+}
+#header_client > div > ul {
   display: flex;
+  list-style: none;
+}
+#header_client > div > ul > li > a {
+  display: flex;
+  align-items: center;
+  margin: 0 1em;
+  color: white;
+  text-decoration: none;
+}
+#header_client > div > ul > li > .dropdown {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+}
+#header_client > div > ul > li > .dropdown > .dropdown-button {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#header_client > div > ul > li > .dropdown > .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 2.5em;
+  right: 0.5em;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+#header_client > div > ul > li > .dropdown > .dropdown-content > a {
+  display: flex;
+  align-items: center;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+}
+#header_client > div > ul > li > .dropdown > .dropdown-content > a:hover {
+  background-color: #ECEDF9;
+}
+#header_client > div > ul > li > .dropdown > .show {
+  display: block;
 }
 
 #connect_vendeur, #inscription_vendeur {
