@@ -37,18 +37,14 @@ SELECT
     i2.url_image AS image_2_url,
     i2.titre AS image_2_titre,
     i2.alt AS image_2_alt
-FROM _produit p
-JOIN _vendeur v ON p.id_vendeur = v.id_compte
+FROM produit p
+JOIN compte_vendeur v ON p.id_vendeur = v.id_compte
 LEFT JOIN _images_produit ip ON p.id_produit = ip.id_produit
 LEFT JOIN _image i_principale ON ip.id_image_principale = i_principale.id_image
 LEFT JOIN _image i1 ON ip.id_image1 = i1.id_image
 LEFT JOIN _image i2 ON ip.id_image2 = i2.id_image
 WHERE p.id_produit = :id_produit
 ";
-
-// au cas ou j'en ai besoin
-// $query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
-// $produit_img = $pdo->query($query);
 
 try {
     $stmt = $pdo->prepare($sql);
