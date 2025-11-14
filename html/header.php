@@ -11,7 +11,7 @@
                 <li>
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
-                            <img src="image/compte_blanc.svg" class="icon">
+                            <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">
                             <?= $_SESSION['pseudo'] ?>
                         </button>
 
