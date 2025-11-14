@@ -13,6 +13,7 @@ if (!isset($_SESSION)) {
 
 require_once(HOME_GIT . '.config.php');
 require_once(HOME_GIT . 'fonction_avis.php');
+require_once(HOME_GIT . 'fonction_global.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
@@ -60,7 +61,6 @@ try {
 
     // Récupérer les avis
     $liste_avis = avis_client_produit($_GET['id_produit']);
-    var_dump($liste_avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -71,7 +71,7 @@ if (isset($produit['prix'])) {
     if (is_numeric($produit['prix'])) {
         $formatted_prix = number_format($produit['prix'], 2, ',', ' ') . ' €';
     } else {
-        $formatted_prix = htmlspecialchars($produit['prix']);
+        $formatted_prix = pset($produit['prix']);
     }
 }
 ?>
@@ -81,7 +81,7 @@ if (isset($produit['prix'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($produit['nom_public'] ?? 'Produit') ?></title>
+    <title><?= pset($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
 <body>
     <a href="../"><p>Revenir au catalogue</p></a>
@@ -102,44 +102,44 @@ if (isset($produit['prix'])) {
     ?>
 
     <?php if ($img1_url !== ''): ?>
-        <img src="<?= htmlspecialchars($img1_url) ?>" title="<?= htmlspecialchars($img1_title) ?>" alt="<?= htmlspecialchars($img1_alt) ?>">
+        <img src="<?= pset($img1_url) ?>" title="<?= pset($img1_title) ?>" alt="<?= pset($img1_alt) ?>">
     <?php endif; ?>
 
     <?php if ($img2_url !== ''): ?>
-        <img src="<?= htmlspecialchars($img2_url) ?>" title="<?= htmlspecialchars($img2_title) ?>" alt="<?= htmlspecialchars($img2_alt) ?>">
+        <img src="<?= pset($img2_url) ?>" title="<?= pset($img2_title) ?>" alt="<?= pset($img2_alt) ?>">
     <?php endif; ?>
 
     <?php if ($img3_url !== ''): ?>
-        <img src="<?= htmlspecialchars($img3_url) ?>" title="<?= htmlspecialchars($img3_title) ?>" alt="<?= htmlspecialchars($img3_alt) ?>">
+        <img src="<?= pset($img3_url) ?>" title="<?= pset($img3_title) ?>" alt="<?= pset($img3_alt) ?>">
     <?php endif; ?>
 
-    <h1><?= htmlspecialchars($produit['nom_public'] ?? 'Produit') ?></h1>
+    <h1><?= pset($produit['nom_public']) ?></h1>
 
     <?php if (!empty($produit['id_vendeur'])): ?>
-        <p><strong>Vendeur :</strong> <?= htmlspecialchars($produit['id_vendeur']) ?></p>
+        <p><strong>Vendeur :</strong> <?= pset($produit['id_vendeur']) ?></p>
     <?php endif; ?>
 
     <?php if (!empty($produit['description'])): ?>
-        <p><strong>Description :</strong><br><?= nl2br(htmlspecialchars($produit['description'])) ?></p>
+        <p><strong>Description :</strong><br><?= nl2br(pset($produit['description'])) ?></p>
     <?php endif; ?>
 
     <?php if ($formatted_prix !== ''): ?>
-        <p><strong>Prix :</strong> <?= $formatted_prix ?> (TVA <?= htmlspecialchars($produit['tva'] ?? '') ?>%)</p>
+        <p><strong>Prix :</strong> <?= $formatted_prix ?> (TVA <?= pset($produit['tva']) ?>%)</p>
     <?php endif; ?>
 
     <?php if (!empty($produit['description_detaillee'])): ?>
-        <p><strong>Détails :</strong><br><?= nl2br(htmlspecialchars($produit['description_detaillee'])) ?></p>
+        <p><strong>Détails :</strong><br><?= nl2br(pset($produit['description_detaillee'])) ?></p>
     <?php endif; ?>
     
     <!-- Affichage des avis -->
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
-                <p><?= $avis['pseudo'] ?></p>
-                <p><?= $avis['note'] ?></p>
-                <p><?= $avis['titre'] ?></p>
-                <p><?= $avis['commentaire'] ?></p>
-                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime($avis['date_avis'])) ?></p>
+                <p><?= pset($avis['pseudo']) ?></p>
+                <p><?= pset($avis['note']) . ' étoiles' ?></p>
+                <p><?= pset($avis['titre']) ?></p>
+                <p><?= pset($avis['commentaire']) ?></p>
+                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(pset($avis['date_avis']))) ?></p>
             </li>
         <?php } ?>
     </ul>

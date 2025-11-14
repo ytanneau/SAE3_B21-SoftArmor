@@ -535,11 +535,11 @@
     function sql_check_email($pdo, $email){
         try {
             //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete = $pdo->prepare("SELECT email_actif_existe(:email)");
+            $requete = $pdo->prepare("SELECT email_actif_existe(:email) AS existe");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
 
-            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+            return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
         } catch (PDOException $e) {
             //$fichierLog = __DIR__ . "/erreurs.log";
             //$date = date("Y-m-d H:i:s");
