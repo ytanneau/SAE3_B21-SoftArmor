@@ -10,7 +10,7 @@ body {
 }
 
 #header_client {
-  padding: 0 0.5em;
+  padding: 0 1em;
   background-color: #3157A3;
 }
 #header_client * {
@@ -21,7 +21,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0;
 }
 #header_client > div > a > img {
   height: 30px;
