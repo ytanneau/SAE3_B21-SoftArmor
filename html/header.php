@@ -5,7 +5,7 @@
         </a>
 
         <ul>
-            <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li>
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
