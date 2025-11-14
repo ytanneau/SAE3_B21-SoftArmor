@@ -130,7 +130,7 @@ else if ($_POST['form'] == 'bancaire') {
 
 
 // si le client a bien répondu à tous les formulaire, alors une commande est créée et enregistrée
-else if ($numEtape == 3) {
+if ($numEtape == 3) {
     $CHEMIN_FACTURE = "ressources/facture/";
 
     $requete = $pdo->prepare("INSERT INTO _commande (id_compte, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
