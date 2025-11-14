@@ -5,20 +5,22 @@
         </a>
 
         <ul>
-            <li>
-                <div class="dropdown">
-                    <button onclick="ouvrirMenu()" class="dropdown-button">
-                        <img src="image/compte_blanc.svg" class="icon">
-                        <?= "Roger" ?>
-                    </button>
+            <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
+                <li>
+                    <div class="dropdown">
+                        <button onclick="ouvrirMenu()" class="dropdown-button">
+                            <img src="image/compte_blanc.svg" class="icon">
+                            <?= "Roger" ?>
+                        </button>
 
-                    <div id="dropdown-compte" class="dropdown-content">
-                        <a href="#"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
-                        <a href="#"> <img src="image/options.svg" class="icon"> Paramètres</a>
-                        <a href="#"> <img src="image/deconnexion.svg" class="icon"> Déconnexion</a>
+                        <div id="dropdown-compte" class="dropdown-content">
+                            <a href="#"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
+                            <a href="#"> <img src="image/options.svg" class="icon"> Paramètres</a>
+                            <a href="#"> <img src="image/deconnexion.svg" class="icon"> Déconnexion</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            <?php } ?>
         </ul>
     </div>
 </header>
