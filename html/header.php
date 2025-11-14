@@ -10,7 +10,7 @@
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
                             <img src="image/compte_blanc.svg" class="icon">
-                            <?= "Roger" ?>
+                            <?= $_SESSION['pseudo'] ?>
                         </button>
 
                         <div id="dropdown-compte" class="dropdown-content">
