@@ -195,7 +195,7 @@ if ($numEtape == 1) {
         <form action="" method="post">
 
         <label for="adresse">Adresse</label>
-        <input type="text" name="adresse" id="adresse" value="<?=pset($adresse_client['adresse'])?>" required>
+        <input type="text" name="adresse" id="adresse" value="<?=htmlentities($adresse_client['adresse'] ?? '')?>" required>
         <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
         <?php
         if (isset($erreurs['adresse'])){
@@ -209,12 +209,12 @@ if ($numEtape == 1) {
 
         <br>
         <label for="complement_adresse">Complément adresse</label>
-        <input type="text" name="complement_adresse" id="complement_adresse" value="<?=pset($adresse_client['complement_adresse'])?>"> <p class="contrainte">informations complémentaires</p>
+        <input type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>"> <p class="contrainte">informations complémentaires</p>
 
 
         <br>
         <label for="code_postal">Code postal</label>
-        <input type="number" name="code_postal" id="code_postal" size="5" value="<?=pset($adresse_client['code_postal'])?>" required>
+        <input type="number" name="code_postal" id="code_postal" size="5" value="<?=htmlentities($adresse_client['code_postal'] ?? '')?>" required>
         <p class="contrainte">Nombre à 5 chiffres</p>
         <?php
         if (isset($erreurs['code_postal'])){
@@ -233,7 +233,7 @@ if ($numEtape == 1) {
         <?php } ?>
 
 
-        <input type="hidden" name="produit" id="produit" required value="<?=pset($_GET['produit'])?>">
+        <input type="hidden" name="produit" id="produit" required value="<?=htmlentities($_GET['produit'])?>">
         <input type="hidden" name="form" id="form" required value="adresse">
         <br>
         <input type="submit" value="Continuer l'achat">
