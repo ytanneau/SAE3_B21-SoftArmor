@@ -14,6 +14,7 @@ body {
   background-color: #3157A3;
 }
 #header_client * {
+  font-family: "Montserrat";
   font-weight: bold;
 }
 #header_client > div {
