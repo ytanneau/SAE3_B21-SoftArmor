@@ -61,7 +61,6 @@ try {
 
     // Récupérer les avis
     $liste_avis = avis_client_produit($_GET['id_produit']);
-    var_dump($liste_avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -87,7 +86,6 @@ if (isset($produit['prix'])) {
 <body>
     <a href="../"><p>Revenir au catalogue</p></a>
 
-    
     <?php
         $img1_url   = $produit['image_principale_url'] ?? '';
         $img1_title = $produit['image_principale_titre'] ?? ($produit['nom_public'] ?? '');
@@ -103,18 +101,18 @@ if (isset($produit['prix'])) {
     ?>
 
     <?php if ($img1_url !== ''): ?>
-        <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title) ?>" alt="<?= htmlentities($img1_alt) ?>">
+        <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title ?? '') ?>" alt="<?= htmlentities($img1_alt ?? '') ?>">
     <?php endif; ?>
 
     <?php if ($img2_url !== ''): ?>
-        <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title) ?>" alt="<?= htmlentities($img2_alt) ?>">
+        <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title ?? '') ?>" alt="<?= htmlentities($img2_alt ?? '') ?>">
     <?php endif; ?>
 
     <?php if ($img3_url !== ''): ?>
-        <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title) ?>" alt="<?= htmlentities($img3_alt) ?>">
+        <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title ?? '') ?>" alt="<?= htmlentities($img3_alt ?? '') ?>">
     <?php endif; ?>
 
-    <h1><?= htmlentities($produit['nom_public']) ?></h1>
+    <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
     <?php if (!empty($produit['id_vendeur'])): ?>
         <p><strong>Vendeur :</strong> <?= htmlentities($produit['id_vendeur'] ?? '') ?></p>
@@ -134,8 +132,7 @@ if (isset($produit['prix'])) {
     
     <!-- Affichage des avis -->
     <ul>
-        <?php foreach ($liste_avis as $avis) { var_dump($avis); ?>
-
+        <?php foreach ($liste_avis as $avis) { ?>
             <li>
                 <p><?= htmlentities($avis['pseudo'] ?? '') ?></p>
                 <p><?= htmlentities($avis['note'] ?? '') . 'étoile(s)' ?></p>
