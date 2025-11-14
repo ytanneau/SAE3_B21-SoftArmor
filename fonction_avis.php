@@ -8,7 +8,7 @@
             $requete = $pdo->prepare("CALL avis_client_produit(:id_produit)");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
             $requete->execute();
-            return $requete->fetchAll(PDO::FETCH_ASSOC);
+            return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw $e;
         }
