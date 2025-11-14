@@ -93,7 +93,7 @@
 }
 
 body {
-    font-family: 'Inter';
+    font-family: $font_text;
     padding: 0;
     margin: 0;
 }
@@ -108,19 +108,19 @@ body {
     background-color: #3157A3;
     
     * {
-        font-family: 'Montserrat';
+        font-family: $font_title;
         font-weight: bold;
     }
 
     > div {
-        display: flex;
-        align-items: center;
+        @include contenu_centre_horizontal();
         justify-content: space-between;
 
         > a > img {
             height: 30px;
         }
 
+        /* Pour la barre de recherche
         > form {
             input[type=search] {
                 background-image: url(images/loupe.svg);
@@ -133,17 +133,16 @@ body {
                 border: none;
             }
         }
+        */
 
         > ul {
-            display: flex;
+            @include contenu_centre_horizontal();
             list-style: none;
-
             margin: 0;
 
             > li {
                 > a {
-                    display: flex;
-                    align-items: center;
+                    @include contenu_centre_horizontal();
                     margin: 0 1em;
 
                     color: white;
@@ -155,13 +154,12 @@ body {
                     display: inline-block;
 
                     margin: 0 1em;
-                    font-size: 16px;
+                    font-size: $font_size_normal;
 
                     > .dropdown-button {
-                        display: flex;
-                        align-items: center;
+                        @include contenu_centre_horizontal();
                         
-                        font-size: 16px;
+                        font-size: $font_size_normal;
                         background-color: #3157A3;
                         color: white;
                         border: none;
@@ -183,8 +181,7 @@ body {
                         border-radius: 5px;
 
                         > a {
-                            display: flex;
-                            align-items: center;
+                            @include contenu_centre_horizontal();
 
                             padding: 0.25em 0.5em;
                             text-decoration: none;
