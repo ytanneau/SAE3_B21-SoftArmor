@@ -42,7 +42,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Modifier mes informations</title>
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="../../../link_head.php">
         <style>
             p{
                 display:flex;
