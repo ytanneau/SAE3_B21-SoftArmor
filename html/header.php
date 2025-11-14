@@ -21,8 +21,8 @@
                     </div>
                 </li>
             <?php } else { ?>
-                <li> <a href="compte/connexion"> <img src="image/connexion_blanc.svg">Se connecter</a> </li>
-                <li> <a href="compte/inscription"> <img src="image/compte_blanc.svg">S'inscrire</a> </li>
+                <li> <a href="compte/connexion"> <img src="image/connexion_blanc.svg" class="icon">Se connecter</a> </li>
+                <li> <a href="compte/inscription"> <img src="image/compte_blanc.svg" class="icon">S'inscrire</a> </li>
             <?php } ?>
         </ul>
     </div>
