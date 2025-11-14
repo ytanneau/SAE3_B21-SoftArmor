@@ -3,7 +3,7 @@ define('HOME_GIT', "../" );
 
 if (!isset($_SESSION)) {
     session_start();
-    
+
     if(isset($_SESSION['raison_sociale'])){
         header('location: /vendeur/stock/');
     }
@@ -48,14 +48,6 @@ unset($pdo);
 </head>
 <body>
     <?php include "header.php"; ?>
-
-    <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) { ?>
-        <a href="compte/connexion">Se connecter</a>
-        <a href="compte/inscription">S'inscrire</a>
-    <?php } else { ?>
-        <a href="deconnexion">Se déconnecter</a>
-        <h1>Bienvenue <?= htmlentities($_SESSION['pseudo']) ?></h1>
-    <?php } ?>
 
     <main>
 <!--Produit Banniere au jour (possiblement a faire)-->
