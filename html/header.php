@@ -1,7 +1,9 @@
+<?php $images = HOME_SITE . "image/" ?>
+
 <header id="header_client">
     <div>
         <a href="#">
-            <img src="image/Alizon_blanc.png" alt="Logo Alizon" title="Logo Alizon">
+            <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" title="Logo Alizon">
         </a>
 
         <ul>
@@ -14,15 +16,15 @@
                         </button>
 
                         <div id="dropdown-compte" class="dropdown-content">
-                            <a href="compte/informations"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
-                            <a href="#"> <img src="image/options.svg" class="icon"> Paramètres</a>
-                            <a href="deconnexion"> <img src="image/deconnexion.svg" class="icon"> Déconnexion</a>
+                            <a href="compte/informations"> <img src="<?= $images . 'compte.svg' ?>" class="icon">Mon profil</a> 
+                            <a href="#"> <img src="<?= $images . 'options.svg' ?>" class="icon">Paramètres</a>
+                            <a href="deconnexion"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
                         </div>
                     </div>
                 </li>
             <?php } else { ?>
-                <li> <a href="compte/inscription"> <img src="image/compte_blanc.svg" class="icon">S'inscrire</a> </li>
-                <li> <a href="compte/connexion"> <img src="image/connexion_blanc.svg" class="icon">Se connecter</a> </li>
+                <li> <a href="compte/inscription"> <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">S'inscrire</a> </li>
+                <li> <a href="compte/connexion"> <img src="<?= $images . 'connexion_blanc.svg' ?>" class="icon">Se connecter</a> </li>
             <?php } ?>
         </ul>
     </div>
