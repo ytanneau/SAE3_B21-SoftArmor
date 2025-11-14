@@ -101,35 +101,31 @@ if (isset($produit['prix'])) {
         $img3_alt   = $produit['image_2_alt'] ?? ($produit['nom_public'] ?? '');
     ?>
 
-    <?php if ($img1_url !== ''): ?>
-        <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title ?? '') ?>" alt="<?= htmlentities($img1_alt ?? '') ?>">
-    <?php endif; ?>
-
-    <?php if ($img2_url !== ''): ?>
-        <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title ?? '') ?>" alt="<?= htmlentities($img2_alt ?? '') ?>">
-    <?php endif; ?>
-
-    <?php if ($img3_url !== ''): ?>
-        <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title ?? '') ?>" alt="<?= htmlentities($img3_alt ?? '') ?>">
-    <?php endif; ?>
+    <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title) ?>" alt="<?= htmlentities($img1_alt) ?>">
+    <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title) ?>" alt="<?= htmlentities($img2_alt) ?>">
+    <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title) ?>" alt="<?= htmlentities($img3_alt) ?>">
 
     <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
-    <?php if (!empty($produit['id_vendeur'])): ?>
-        <p><strong>Vendeur :</strong> <?= htmlentities($produit['id_vendeur'] ?? '') ?></p>
-    <?php endif; ?>
+    <p>
+        <strong>Vendeur :</strong>
+        <?= htmlentities($produit['id_vendeur'] ?? '') ?>
+    </p>
 
-    <?php if (!empty($produit['description'])): ?>
-        <p><strong>Description :</strong><br><?= nl2br(htmlentities($produit['description'] ?? '')) ?></p>
-    <?php endif; ?>
+    <p>
+        <strong>Description :</strong>
+        <?= nl2br(htmlentities($produit['description'] ?? '')) ?>
+    </p>
 
-    <?php if ($formatted_prix !== ''): ?>
-        <p><strong>Prix :</strong> <?= $formatted_prix ?> (TVA <?= htmlentities($produit['tva'] ?? '') ?>%)</p>
-    <?php endif; ?>
+    <p>
+        <strong>Prix :</strong>
+        <?= $formatted_prix ?> (TVA <?= htmlentities($produit['tva'] ?? '') ?>%)
+    </p>
 
-    <?php if (!empty($produit['description_detaillee'])): ?>
-        <p><strong>Détails :</strong><br><?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?></p>
-    <?php endif; ?>
+    <p>
+        <strong>Détails :</strong>
+        <?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?>
+    </p>
     
     <!-- Affichage des avis -->
     <h3>Avis</h3>
