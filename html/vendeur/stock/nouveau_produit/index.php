@@ -20,7 +20,8 @@
 <html lang="fr">
     <head>
         <title>Ajout produit</title>
-    
+
+        <link rel="stylesheet" href="../../../link_head.php">
         <meta charset="UTF-8">
         <style>
             fieldset{

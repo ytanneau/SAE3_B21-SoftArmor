@@ -46,6 +46,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Consulter mes informations</title>
+        <link rel="stylesheet" href="../../../link_head.php">
     </head>
     <body>
         <?php $images = HOME_SITE . "image/" ?>
