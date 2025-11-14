@@ -135,11 +135,11 @@ if (isset($produit['prix'])) {
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
-                <p><?= pset($avis['pseudo']) ?></p>
-                <p><?= pset($avis['note']) . ' étoiles' ?></p>
-                <p><?= pset($avis['titre']) ?></p>
-                <p><?= pset($avis['commentaire']) ?></p>
-                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(pset($avis['date_avis']))) ?></p>
+                <p><?= htmlentities($avis['pseudo'] ?? '') ?></p>
+                <p><?= htmlentities($avis['note'] ?? '') . 'étoile(s)' ?></p>
+                <p><?= htmlentities($avis['titre'] ?? '') ?></p>
+                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
             </li>
         <?php } ?>
     </ul>
