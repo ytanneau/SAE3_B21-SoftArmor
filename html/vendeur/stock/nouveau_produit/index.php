@@ -51,10 +51,7 @@
         </style>
     </head>
     <body>
-        <?php $images = HOME_SITE . "image/";
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";?>
+        <?php $images = HOME_SITE . "image/"?>
         <header id="header_client">
             <div>
                 <a href=<?= HOME_SITE ?>>
@@ -67,7 +64,7 @@
                             <div class="dropdown">
                                 <button onclick="ouvrirMenu()" class="dropdown-button">
                                     <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">
-                                    <?= $_SESSION['pseudo'] ?>
+                                    <?= $_SESSION['raison_sociale'] ?>
                                 </button>
 
                                 <div id="dropdown-compte" class="dropdown-content">
