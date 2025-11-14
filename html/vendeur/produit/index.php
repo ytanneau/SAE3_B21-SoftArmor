@@ -42,13 +42,13 @@
             </tr>
         </table>
         <div>
-            <img src= "../ressource/produit/<?php $produit . `_` . $rows2['id_image_principale'] ?>" > 
+            <img src= "../ressource/produit/<?= $produit . `_` . $rows2['id_image_principale'] ?>" > 
             <?php
                 if ($rows2['id_image1'] != NULL) {
-                    ?> <img src= "../ressource/produit/<?= $produit . `_` . $rows2['id_image1'] ?>" > <?php
+                    ?> <img src= "../ressource/produit/<?php $produit . `_` . $rows2['id_image1'] ?>" > <?php
                 }
                 if ($rows2['id_image2'] != NULL) {
-                    ?> <img src= "../ressource/produit/<?= $produit . `_` . $rows2['id_image2'] ?>" > <?php
+                    ?> <img src= "../ressource/produit/<?= $produit . "_" . $rows2['id_image2'] ?>" > <?php
                 }
             ?>
         </div>
