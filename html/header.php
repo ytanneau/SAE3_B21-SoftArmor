@@ -14,15 +14,15 @@
                         </button>
 
                         <div id="dropdown-compte" class="dropdown-content">
-                            <a href="#"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
+                            <a href="compte/informations"> <img src="image/compte.svg" class="icon"> Mon profil </a> 
                             <a href="#"> <img src="image/options.svg" class="icon"> Paramètres</a>
                             <a href="deconnexion"> <img src="image/deconnexion.svg" class="icon"> Déconnexion</a>
                         </div>
                     </div>
                 </li>
             <?php } else { ?>
-                <li> <a href="compte/connexion"> <img src="image/connexion_blanc.svg" class="icon">Se connecter</a> </li>
                 <li> <a href="compte/inscription"> <img src="image/compte_blanc.svg" class="icon">S'inscrire</a> </li>
+                <li> <a href="compte/connexion"> <img src="image/connexion_blanc.svg" class="icon">Se connecter</a> </li>
             <?php } ?>
         </ul>
     </div>
