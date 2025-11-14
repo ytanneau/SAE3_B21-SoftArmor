@@ -137,11 +137,11 @@ if (isset($produit['prix'])) {
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
-                <p><?= htmlentities($avis['pseudo'] ?? '') ?></p>
+                <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= afficher_moyenne_note(htmlentities($avis['note'] ?? ''))?></p>
                 <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
-                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
+                <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
             </li>
         <?php } ?>
     </ul>
