@@ -168,6 +168,8 @@ else if ($numEtape == 3) {
 }
 
 
+var_dump($adresse_client);
+
 
 ?>
 
