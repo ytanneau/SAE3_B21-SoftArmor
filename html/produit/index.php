@@ -101,9 +101,9 @@ if (isset($produit['prix'])) {
         $img3_alt   = $produit['image_2_alt'] ?? ($produit['nom_public'] ?? '');
     ?>
 
-    <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title) ?>" alt="<?= htmlentities($img1_alt) ?>">
-    <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title) ?>" alt="<?= htmlentities($img2_alt) ?>">
-    <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title) ?>" alt="<?= htmlentities($img3_alt) ?>">
+    <img src="<?= HOME_SITE . htmlentities($img1_url) ?>" title="<?= HOME_SITE . htmlentities($img1_title) ?>" alt="<?= HOME_SITE . htmlentities($img1_alt) ?>">
+    <img src="<?= HOME_SITE . htmlentities($img2_url) ?>" title="<?= HOME_SITE . htmlentities($img2_title) ?>" alt="<?= HOME_SITE . htmlentities($img2_alt) ?>">
+    <img src="<?= HOME_SITE . htmlentities($img3_url) ?>" title="<?= HOME_SITE . htmlentities($img3_title) ?>" alt="<?= HOME_SITE . htmlentities($img3_alt) ?>">
 
     <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
