@@ -1,6 +1,8 @@
 <?php 
     // appel du fichier de configuration bdd
     require_once "../../../../../.config.php";
+    define('HOME_GIT', '../../../../../');
+    define('HOME_SITE', '../../../../');
 
     if (!isset($_SESSION)) {
     session_start();

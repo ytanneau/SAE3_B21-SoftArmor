@@ -1,6 +1,9 @@
 <?php
     // importer le fichier de connexion à la bdd
     require_once "../../../../.config.php";
+    
+    define('HOME_GIT', '../../../../');
+    define('HOME_SITE', '../../../');
 
     if (!isset($_SESSION)) {
     session_start();
