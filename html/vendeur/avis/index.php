@@ -31,6 +31,7 @@
     <title>Alizon avis</title>
 </head>
 <body>
+    <main>
 <?php
     if ($data === NULL){
 ?>
@@ -38,8 +39,31 @@
 <?php        
     }
     else{
-        print_r($data);
+        //print_r($data);
+?>
+    <ul>
+<?php
+        foreach($data as $row){
+?>
+        <li>
+            <table>
+                <tr>
+                    <td><?=htmlentities($row['pseudo'])?></td>
+                    <td><?=htmlentities($row['note'])?></td>
+                    <td><?=htmlentities($row['titre'])?></td>
+                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . htmlentities($row['url_image'])?>" alt="<?=htmlentities($row['alt_image'])?>" tilte="<?=htmlentities($row['titre_image'])?>"></td>
+                </tr>
+                <tr>
+                    <td><?=htmlentities($row['date_avis'])?></td>
+                    <td colspan="2"><?=htmlentities($row['commentaire'])?></td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+<?php
+        }
     }
 ?>
+    </main>
 </body>
 </html>
