@@ -59,7 +59,7 @@ try {
     }
 
     // Récupérer les avis
-    $avis = avis_client_produit($produit['id_produit']);
+    $avis = avis_client_produit($_GET['id_produit']);
     var_dump($avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
