@@ -32,6 +32,9 @@ if (!isset($_POST['form'])) {
     $requete->execute();
     
     $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
+    if ($adresse_client == false) {
+        $adresse_client = [];
+    }
 }
 
 
@@ -166,9 +169,6 @@ else if ($numEtape == 3) {
 
     file_put_contents($CHEMIN_FACTURE . $nom_fichier, $contenu_fichier);
 }
-
-
-var_dump($adresse_client);
 
 
 ?>
