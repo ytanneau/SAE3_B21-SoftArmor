@@ -6,6 +6,11 @@
         session_start();
     }
 
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+        header('location: ../');
+        exit;
+    }
+
     function pset($value) {
         return isset($value) ? htmlentities($value) : "";
     }
@@ -14,10 +19,7 @@
     require_once HOME_GIT . 'fonction_avis.php';
 
     //verifie si quelqun est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../');
-        exit;
-    }
+
 
     if (isset($_GET['produit'])) {
         $data = avis_client_produit($_GET['produit']);
