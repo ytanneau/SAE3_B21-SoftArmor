@@ -133,11 +133,11 @@ else if ($_POST['form'] == 'bancaire') {
 if ($numEtape == 3) {
     $CHEMIN_FACTURE = "ressources/facture/";
 
-    $requete = $pdo->prepare("INSERT INTO _commande (id_compte, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
+    $requete = $pdo->prepare("INSERT INTO _commande (id_client, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->execute();
 
-    $requete = $pdo->prepare("SELECT id_commande FROM _commande WHERE id_compte = :id_compte AND chemin_fichier = 'ATTENTE'");
+    $requete = $pdo->prepare("SELECT id_commande FROM _commande WHERE id_client = :id_compte AND chemin_fichier = 'ATTENTE'");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->execute();
     $id_commande = $requete->fetch(PDO::FETCH_ASSOC)['id_commande'];
