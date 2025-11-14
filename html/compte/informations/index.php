@@ -19,6 +19,7 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
+require_once (HOME_GIT . 'fonction_avis.php');
 
 //requete pour recuperer mot de passe cryptée
 $sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
