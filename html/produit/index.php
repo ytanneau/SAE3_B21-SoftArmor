@@ -71,7 +71,7 @@ if (isset($produit['prix'])) {
     if (is_numeric($produit['prix'])) {
         $formatted_prix = number_format($produit['prix'], 2, ',', ' ') . ' €';
     } else {
-        $formatted_prix = pset($produit['prix']);
+        $formatted_prix = htmlentities($produit['prix'] ?? '');
     }
 }
 ?>
@@ -81,7 +81,7 @@ if (isset($produit['prix'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title><?= pset($produit['nom_public'] ?? 'Produit') ?></title>
+    <title><?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
 <body>
     <a href="../"><p>Revenir au catalogue</p></a>
@@ -102,33 +102,33 @@ if (isset($produit['prix'])) {
     ?>
 
     <?php if ($img1_url !== ''): ?>
-        <img src="<?= pset($img1_url) ?>" title="<?= pset($img1_title) ?>" alt="<?= pset($img1_alt) ?>">
+        <img src="<?= htmlentities($img1_url) ?>" title="<?= htmlentities($img1_title) ?>" alt="<?= htmlentities($img1_alt) ?>">
     <?php endif; ?>
 
     <?php if ($img2_url !== ''): ?>
-        <img src="<?= pset($img2_url) ?>" title="<?= pset($img2_title) ?>" alt="<?= pset($img2_alt) ?>">
+        <img src="<?= htmlentities($img2_url) ?>" title="<?= htmlentities($img2_title) ?>" alt="<?= htmlentities($img2_alt) ?>">
     <?php endif; ?>
 
     <?php if ($img3_url !== ''): ?>
-        <img src="<?= pset($img3_url) ?>" title="<?= pset($img3_title) ?>" alt="<?= pset($img3_alt) ?>">
+        <img src="<?= htmlentities($img3_url) ?>" title="<?= htmlentities($img3_title) ?>" alt="<?= htmlentities($img3_alt) ?>">
     <?php endif; ?>
 
-    <h1><?= pset($produit['nom_public']) ?></h1>
+    <h1><?= htmlentities($produit['nom_public']) ?></h1>
 
     <?php if (!empty($produit['id_vendeur'])): ?>
-        <p><strong>Vendeur :</strong> <?= pset($produit['id_vendeur']) ?></p>
+        <p><strong>Vendeur :</strong> <?= htmlentities($produit['id_vendeur'] ?? '') ?></p>
     <?php endif; ?>
 
     <?php if (!empty($produit['description'])): ?>
-        <p><strong>Description :</strong><br><?= nl2br(pset($produit['description'])) ?></p>
+        <p><strong>Description :</strong><br><?= nl2br(htmlentities($produit['description'] ?? '')) ?></p>
     <?php endif; ?>
 
     <?php if ($formatted_prix !== ''): ?>
-        <p><strong>Prix :</strong> <?= $formatted_prix ?> (TVA <?= pset($produit['tva']) ?>%)</p>
+        <p><strong>Prix :</strong> <?= $formatted_prix ?> (TVA <?= htmlentities($produit['tva'] ?? '') ?>%)</p>
     <?php endif; ?>
 
     <?php if (!empty($produit['description_detaillee'])): ?>
-        <p><strong>Détails :</strong><br><?= nl2br(pset($produit['description_detaillee'])) ?></p>
+        <p><strong>Détails :</strong><br><?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?></p>
     <?php endif; ?>
     
     <!-- Affichage des avis -->
