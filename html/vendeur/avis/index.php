@@ -2,16 +2,16 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../');
 
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
     function pset($value) {
         return isset($value) ? htmlentities($value) : "";
     }
 
     require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . 'fonction_avis.php';
-
-    if (!isset($_SESSION)) {
-        session_start();
-    }
 
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
