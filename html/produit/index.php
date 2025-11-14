@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 }
 
 require_once(HOME_GIT . '.config.php');
+require_once(HOME_GIT . 'fonction_avis.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
@@ -56,6 +57,10 @@ try {
     if (!$produit) {
         die("Produit introuvable.");
     }
+
+    // Récupérer les avis
+    $liste_avis = avis_client_produit($_GET['id_produit']);
+    var_dump($liste_avis);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -70,6 +75,8 @@ if (isset($produit['prix'])) {
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -81,17 +88,17 @@ if (isset($produit['prix'])) {
 
     
     <?php
-    $img1_url   = $produit['image_principale_url'] ?? '';
-    $img1_title = $produit['image_principale_titre'] ?? ($produit['nom_public'] ?? '');
-    $img1_alt   = $produit['image_principale_alt'] ?? ($produit['nom_public'] ?? '');
+        $img1_url   = $produit['image_principale_url'] ?? '';
+        $img1_title = $produit['image_principale_titre'] ?? ($produit['nom_public'] ?? '');
+        $img1_alt   = $produit['image_principale_alt'] ?? ($produit['nom_public'] ?? '');
 
-    $img2_url   = $produit['image_1_url'] ?? '';
-    $img2_title = $produit['image_1_titre'] ?? ($produit['nom_public'] ?? '');
-    $img2_alt   = $produit['image_1_alt'] ?? ($produit['nom_public'] ?? '');
+        $img2_url   = $produit['image_1_url'] ?? '';
+        $img2_title = $produit['image_1_titre'] ?? ($produit['nom_public'] ?? '');
+        $img2_alt   = $produit['image_1_alt'] ?? ($produit['nom_public'] ?? '');
 
-    $img3_url   = $produit['image_2_url'] ?? '';
-    $img3_title = $produit['image_2_titre'] ?? ($produit['nom_public'] ?? '');
-    $img3_alt   = $produit['image_2_alt'] ?? ($produit['nom_public'] ?? '');
+        $img3_url   = $produit['image_2_url'] ?? '';
+        $img3_title = $produit['image_2_titre'] ?? ($produit['nom_public'] ?? '');
+        $img3_alt   = $produit['image_2_alt'] ?? ($produit['nom_public'] ?? '');
     ?>
 
     <?php if ($img1_url !== ''): ?>
@@ -123,6 +130,20 @@ if (isset($produit['prix'])) {
     <?php if (!empty($produit['description_detaillee'])): ?>
         <p><strong>Détails :</strong><br><?= nl2br(htmlspecialchars($produit['description_detaillee'])) ?></p>
     <?php endif; ?>
+    
+    <!-- Affichage des avis -->
+    <ul>
+        <?php foreach ($liste_avis as $avis) { ?>
+            <li>
+                <p><?= $avis['pseudo'] ?></p>
+                <p><?= $avis['note'] ?></p>
+                <p><?= $avis['titre'] ?></p>
+                <p><?= $avis['commentaire'] ?></p>
+                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime($avis['date_avis'])) ?></p>
+            </li>
+        <?php } ?>
+    </ul>
+    
 
     <a href="../produit/achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
 
