@@ -1,7 +1,7 @@
 <header id="header_client">
     <div>
         <a href="#">
-            <img src="images/Alizon blanc.png" alt="Logo Alizon" title="Logo Alizon">
+            <img src="image/Alizon_blanc.png" alt="Logo Alizon" title="Logo Alizon">
         </a>
 
         <ul>
