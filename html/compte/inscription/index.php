@@ -64,7 +64,7 @@
         
         <form action="" method="post">
             <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" maxlength="40" value="<?php if (isset($_POST["nom"])) echo htmlentities($_POST["nom"])?>"
+            <input type="text" id="nom" name="nom" maxlength="40" value="<?=pset($_POST["nom"])?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -79,7 +79,7 @@
 
             <br>
             <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?php if (isset($_POST["prenom"])) echo htmlentities($_POST["prenom"])?>"
+            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?=pset($_POST["prenom"])?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -94,7 +94,7 @@
 
             <br>
             <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?php if (isset($_POST["pseudo"])) echo htmlentities($_POST["pseudo"])?>"
+            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?=pset($_POST["pseudo"])?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -109,7 +109,7 @@
 
             <br>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" maxlength="80" value="<?php if (isset($_POST["email"])) echo htmlentities($_POST["email"])?>"
+            <input type="email" id="email" name="email" maxlength="80" value="<?=pset($_POST["email"])?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -125,7 +125,7 @@
             <br>
             <label for="date_naissance">Date de naissance</label>
             <input type="date" id="date_naissance" name="date_naissance"
-            class="champ" value="<?php if (isset($_POST['date_naissance'])) echo htmlentities($_POST['date_naissance'])?>">
+            class="champ" value="<?=pset($_POST['date_naissance'])?>">
             <p class="contrainte"></p>
 <?php
     if (isset($erreurs['date_naiss'])){
