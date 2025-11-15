@@ -3,6 +3,9 @@
 define('HOME_GIT', "../../../");
 define('HOME_SITE', '../../');
 
+//taille max de pdp
+define('MAX_SIZE', 2 * 1024 * 1024);
+
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
     session_start();
@@ -36,7 +39,7 @@ $sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION
 
 $adresse_compte = $pdo->query($sql);
 
-//rrecuperer les avis du compte
+//recuperer les avis du compte
 $avis = tout_avis_client($_SESSION['id_compte']);
 
 
@@ -94,32 +97,36 @@ if ($_POST != null){
         $alt="'Image de Profil'";
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
-                move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
-                $est_entre_img= false;
-                foreach ($possede_image as $row){ 
-                    $est_entre_img=true;
-                }
-                if($est_entre_img){
-                    //met a jour les données de l'image de profil
-                    $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
-                }
-                else {
-                    //insere l'image de profil dans _image
-                    $sql="INSERT INTO _image VALUES ({$chemin},{$titre},{$alt});";
-                    $pdo->query($sql);
-
-                    //recupere l'id de l'image inséré
-                    $sql="SELECT id_image FROM _image WHERE url_image = {$chemin}";
-                    $recup_id_image = $pdo->query($sql);
-
-                    foreach ($recup_id_image as $row){ 
-                       $id_image = $row['id_image'];
+                if ($_FILES["pdp"]["size"] < MAX_SIZE) {
+                
+                    move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
+                    $est_entre_img= false;
+                    foreach ($possede_image as $row){ 
+                        $est_entre_img=true;
                     }
+                    if($est_entre_img){
+                        //met a jour les données de l'image de profil
+                        $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
+                    }
+                    else {
+                        //insere l'image de profil dans _image
+                        $sql="INSERT INTO _image VALUES ({$chemin},{$titre},{$alt});";
+                        $pdo->query($sql);
 
-                    //met a jour _compte pour dire quil y a une image de profil
-                    $sql="UPDATE _compte SET id_image_profil = {$id_image}";
+                        //recupere l'id de l'image inséré
+                        $sql="SELECT id_image FROM _image WHERE url_image = {$chemin}";
+                        $recup_id_image = $pdo->query($sql);
+
+                        foreach ($recup_id_image as $row){ 
+                        $id_image = $row['id_image'];
+                        }
+
+                        //met a jour _compte pour dire quil y a une image de profil
+                        $sql="UPDATE _compte SET id_image_profil = {$id_image}";
+                    }
+                    $pdo->query($sql);
                 }
-                $pdo->query($sql);
+                
             }
         }
 
@@ -156,7 +163,7 @@ unset($pdo);
                 foreach ($info_compte as $row){  
             ?>
 
-            <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities(['alt_image'] ?? '')?>" title="<?= htmlentities(['titre_image'] ?? '')?>">
+            <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
 
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
@@ -164,7 +171,7 @@ unset($pdo);
                 <input type="file" name="pdp" accept=".png">
 
                 <label for="pseudo">Pseudonyme</label>
-                <input type="text" name="pseudo" value="<?= htmlentities(['pseudo'] ?? '')?>" placeholder="À renseigner">
+                <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur pseudo-->
                 <?php
@@ -178,7 +185,7 @@ unset($pdo);
                 ?>
 
                 <label for="nom">Nom</label>
-                <input required type="text" name="nom" value="<?= htmlentities(['nom'] ?? '')?>" placeholder="À renseigner">
+                <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur nom-->
                 <?php
@@ -192,7 +199,7 @@ unset($pdo);
                 ?>
 
                 <label for="prenom">Prenom</label>
-                <input required type="text" name="prenom" value="<?= htmlentities(['prenom'] ?? '')?>" placeholder="À renseigner">
+                <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur prenom-->
                 <?php
@@ -206,7 +213,7 @@ unset($pdo);
                 ?>
 
                 <label for="date">Date de Naissance</label>
-                <input required type="date" name="date" value="<?= htmlentities(['date_naissance'] ?? '')?>" placeholder="À renseigner">
+                <input required type="date" name="date" value="<?= htmlentities($row['date_naissance'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur Date-->
                 <?php
@@ -220,7 +227,7 @@ unset($pdo);
                 ?>
 
                 <label for="mail">Mail</label>
-                <input required type="email" name="email" value="<?= htmlentities(['email'] ?? '')?>" placeholder="À renseigner">
+                <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur mail-->
                 <?php
@@ -243,7 +250,7 @@ unset($pdo);
                     $est_entre = true;
                 ?>
                 
-                <input type="text" name="adresse" value="<?= htmlentities(['adresse'] ?? '')?>" placeholder="À renseigner">
+                <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur adresse-->
                 <?php
@@ -257,10 +264,10 @@ unset($pdo);
                 ?>
 
                 <label for="complement_adresse">Complement Adresse</label>
-                <input type="text" name="complement_adresse" value="<?= htmlentities(['complement_adresse'] ?? '')?>" placeholder="À renseigner">
+                <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner">
                 
                 <label for="code_postal">Code Postal</label>
-                <input type="text" name="code_postal" value="<?= htmlentities(['code_postal'] ?? '')?>" placeholder="À renseigner">
+                <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur code postal-->
                 <?php
@@ -368,8 +375,8 @@ unset($pdo);
                     <li>
                         <div>
                             <div>
-                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities(['alt_image'] ?? '')?>" title="<?= htmlentities(['titre_image'] ?? '')?>">
-                                <p><?= htmlentities(['pseudo'] ?? '')?></p>
+                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                                <p><?= htmlentities($row['pseudo'] ?? '')?></p>
                                 <?php afficher_moyenne_note($row['note']);?>
                             </div>
                             <div>

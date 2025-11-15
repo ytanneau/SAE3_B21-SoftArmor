@@ -59,7 +59,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_recent as $row) { ?>
                 <li>
-                    <a href="/produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
+                    <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
                         <img src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
@@ -76,7 +76,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?php echo $row['prix'];?> €</p>
+                        <p><?= $row['prix'];?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -94,7 +94,7 @@ unset($pdo);
             foreach ($produit_reduit as $row){  
             ?>
             <li>
-                <a href="/produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
+                <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
                     <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -111,8 +111,8 @@ unset($pdo);
                             }
                         ?>
                     </div>
-                    <p><?php echo $row['prix'];?> €</p>
-                    <p><?php echo $row['prix_reduit'];?> €</p>
+                    <p><?= $row['prix'];?> €</p>
+                    <p><?= $row['prix_reduit'];?> €</p>
                 </a>
             </li>
             <?php
@@ -131,7 +131,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
-                    <a href="/produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
+                    <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
                         <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
@@ -148,7 +148,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?php echo $row['prix'];?> €</p>
+                        <p><?= $row['prix'];?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -164,7 +164,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
                 <li>
-                    <a href="/produit/index.php?id_produit=<?php echo $row['id_produit'];?>"> 
+                    <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
                         <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
