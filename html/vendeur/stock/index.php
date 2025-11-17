@@ -17,7 +17,6 @@ require_once '../../../.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
 function ecrire_nom($rows){
-    print_r($rows);
     foreach ($rows as $row){
         ?>
         
@@ -57,8 +56,10 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     </head>
     <body>
         <main>
+            <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
             <div>
+                <!-- lien pour ajouter un produit -->
                 <a href="./nouveau_produit/"> Ajouter un produit</a>
             </div>
         </main>
