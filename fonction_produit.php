@@ -103,13 +103,13 @@
         }
     }
 
-    function vendeur_All_produit($id_produit){
+    function vendeur_All_produit($id_vendeur){
         global $pdo;
         try {
             $requete = $pdo->prepare('select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur');
-            $requete->bindValue(':id_vendeur', $id_produit, PDO::PARAM_STR);
+            $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_STR);
             $requete->execute();
-            return $requete->fetch(PDO::FETCH_ASSOC);
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw $e;
         }
