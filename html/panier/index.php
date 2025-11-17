@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 // Constantes
 define('HOME_GIT', "../../");
 define('HOME_SITE', '../');
@@ -23,6 +22,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+var_dump($_POST);
 
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
