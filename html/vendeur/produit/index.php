@@ -84,7 +84,7 @@
     print_r($sqlverif);
     if ($sqlverif == NULL) {
         echo "ce produit n'existe pas";
-        header("../");
+        header("location : ../");
     }
 ?>
 <!doctype html>
