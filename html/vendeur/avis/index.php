@@ -6,7 +6,10 @@
         session_start();
     }
 
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    if (!isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         header('location: ../');
         exit;
     }

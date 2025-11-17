@@ -14,13 +14,19 @@
             exit(header("Location: ../"));
         }
     }
+
+
     // Vérifie si quelqu'un est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    if (!isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         renvoi();
     }
+
     if ($_GET == NULL) {
        echo "produit non trouver";
-       header("../");
+       header("location: ../");
     }
     
     require_once HOME_GIT . '.config.php';
