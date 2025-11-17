@@ -8,7 +8,7 @@
     }
     function renvoi(){
         if (headers_sent()) {
-            die("echec de redirection. cliquer sur ce lien svp : <a href=...>");
+            die(`echec de redirection. cliquer sur ce lien svp : <a href=ici>`);
         }
         else{
             exit(header("Location: /user.php"));
