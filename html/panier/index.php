@@ -22,6 +22,7 @@ if (!isset($_SESSION)) {
 }
 
 require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonction_produit.php');
 
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
@@ -35,6 +36,12 @@ try {
     die("Erreur lors de la récupération du panier : " . $e->getMessage());
 }
 
+//supprime le produit selectionné
+if($_POST!=NULL){
+    $id_prod = $_POST['id_produit'];
+    supprimer_produit_panier($id_prod,$id_client);
+    header('Refresh:0');
+}   
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +82,11 @@ try {
                     <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
                     <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
                     <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
+                        <button type="submit">Supprimer</button>
+                    </form>
                 </li>
             <?php } 
         ?>
