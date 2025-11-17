@@ -9,13 +9,15 @@
     define('ANONYMISATION_STRING', 'Compte désactivé');
 
     if (!isset($_SESSION)) {
-    session_start();
+        session_start();
     }
+
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         header('location: ../../../');
         exit;
     }
+
     $id_compte = $_SESSION['id_compte'];
     // recuperation des informations vendeur
     $stmt = $pdo->prepare("SELECT * FROM _vendeur WHERE id_compte = :id_compte");

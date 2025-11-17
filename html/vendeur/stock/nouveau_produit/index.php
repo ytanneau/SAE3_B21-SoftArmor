@@ -10,7 +10,7 @@
     }
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
-    if (!isset($_SESSION['raison_sociale']) && isset($_SESSION['logged_in']) && isset($_SESSION['raison_sociale'])) {
+    if (!isset($_SESSION['raison_sociale']) && isset($_SESSION['logged_in']) && !isset($_SESSION['raison_sociale'])) {
         header('location: ' . HOME_SITE);
         exit;
 
