@@ -6,11 +6,13 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-
-    // Vérifie si quelqu'un est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    function renvoi(){
         header('location: ../');
         exit;
+    }
+    // Vérifie si quelqu'un est connecté
+    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+        renvoi();
     }
     if ($_GET == NULL) {
        echo "produit non trouver";
@@ -85,8 +87,7 @@
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
     print_r($sqlverif);
     if ($sqlverif == NULL) {
-        header('location: ../');
-        exit;
+        renvoi();
     }
 ?>
 <!doctype html>
