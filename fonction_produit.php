@@ -67,6 +67,7 @@
         if ($requete == NULL) {
             echo "ce produit n'existe pas";
             header("../html/vendeur/stock/");
+            return NULL;
         }
     }
 

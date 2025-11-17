@@ -81,6 +81,10 @@
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
+    if ($sqlverif == NULL) {
+        echo "ce produit n'existe pas";
+        header("../");
+    }
 ?>
 <!doctype html>
 <html lang="fr">
