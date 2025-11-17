@@ -41,6 +41,18 @@
         }
     }
 
+    function url_image_produit($id_image){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM _image WHERE  id_image = :id_image');
+            $requete->bindValue(':id_image', $id_image, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     function vendeur_verif_produit($id_produit, $id_vendeur){
         global $pdo;
         try {
