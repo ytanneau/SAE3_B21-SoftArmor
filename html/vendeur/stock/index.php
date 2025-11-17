@@ -16,8 +16,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 require_once '../../../.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
-function ecrire_nom($nom_stock){
-    $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
+function ecrire_nom($rows){
     foreach ($rows as $row){
         ?>
         
