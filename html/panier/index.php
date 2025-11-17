@@ -20,6 +20,9 @@ if (!isset($_SESSION)) {
     $id_client = $_SESSION['id_compte'];
 }
 
+require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonction_produit.php');
+
 //supprime le produit selectionné
 if ($_POST != NULL) {
     $id_prod = $_POST['id_produit'];
@@ -27,9 +30,6 @@ if ($_POST != NULL) {
     supprimer_produit_panier($id_prod,$id_client);
     header('Refresh: 0');
 }
-
-require_once (HOME_GIT . '.config.php');
-require_once (HOME_GIT . 'fonction_produit.php');
 
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
