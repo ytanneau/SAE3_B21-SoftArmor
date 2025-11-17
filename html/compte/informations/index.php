@@ -214,17 +214,6 @@ unset($pdo);
 
                 <label for="date">Date de Naissance</label>
                 <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
-                
-                <!--Erreur Date-->
-                <?php
-                    if (isset($erreur['date_naiss'])){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['date_naiss']?>
-                    </p>
-                <?php
-                    }
-                ?>
 
                 <label for="mail">Mail</label>
                 <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
