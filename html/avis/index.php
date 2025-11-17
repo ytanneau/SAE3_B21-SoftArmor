@@ -16,7 +16,7 @@
         }
     }
 
-    if (isset($_FILES)) {
+    if (isset($_FILES['image'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $fichier);
     }
@@ -78,11 +78,12 @@
     <h1>Le produit n'existe pas</h1>
 <?php
     }
+    /**<img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>"> */
 ?>
         <article>
             <?=print_r($sql_produit)?>
             <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-            <img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>">
+            
         </article>
         <form action="?produit=<?=htmlentities($_GET['produit'])?>" method="post" enctype="multipart/form-data">
             <input type="text" 
