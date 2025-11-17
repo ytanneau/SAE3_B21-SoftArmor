@@ -29,7 +29,7 @@
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        if (!isset($_POST['produit'])){
+        if (!isset($_FILES['image'])){
             $image = null;
         }
         else{
