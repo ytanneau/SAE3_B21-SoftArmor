@@ -19,13 +19,13 @@ $numEtape = -1;
 if (!isset($_POST['form'])) {
     $numEtape = 1;
 
-    // si y'a pas de produit dans le lien, alors problème (à moins de mettre en place le PANIER)
-    if (!isset($_GET['produit'])) {
+    // si y'a pas de produit dans le lien, ou que c'est pas par le panier qu'on a atteint cette page, alors problème
+    if (!isset($_GET['produit']) && !isset($_POST['panier'])) {
         header("location: " . HOME_GIT, );
     }
 
     
-    // récup les données adresse préenregistrées
+    // récup les données adresse préenregistrées dans la base de données
     
     $requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
     $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
@@ -41,7 +41,7 @@ if (!isset($_POST['form'])) {
 
 
 
-// si $_POST['form'] = 'adresse', alors le dernier formulaire envoyé est le form d'adresse
+// si dernier formulaire envoyé est 'adresse'
 else if ($_POST['form'] == 'adresse') {
 
     // gestion du POST des données adresse 
@@ -153,21 +153,37 @@ if ($numEtape == 3) {
     $requete->execute();
     $client = $requete->fetch(PDO::FETCH_ASSOC);
 
-
-    $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-    $requete->bindValue(":id_produit", $_POST['produit']);
-    $requete->execute();
-    $produit = $requete->fetch(PDO::FETCH_ASSOC);
-
-
+    
     $contenu_fichier = $client['nom'] . " " . $client['prenom'] . "\n";
 
     date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
-    $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
-    $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
-    $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
-    $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+
+    if ($_POST['produit'] != 'panier') {
+        $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
+        $requete->bindValue(":id_produit", $_POST['produit']);
+        $requete->execute();
+        $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+        $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
+        $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
+        $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
+        $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+    } else {
+        $requete = $pdo->prepare("SELECT p.nom_public AS nom_public, p.prix AS prix, p.tva AS tva, e.quantite AS quantite FROM produit_panier WHERE id_client = :id_compte");
+        $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+        $requete->execute();
+        $liste_produits = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        $contenu_fichier .= "Liste des produits achetés : \n";
+        foreach ($liste_produits as $produit) {
+            $contenu_fichier .= "-> " . $produit['nom_public'] . "\n";
+            $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
+            $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
+            $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+            $contenu_fichier .= "\tPrix TTC total \t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite'] . "€\n\n";
+        }
+    }
 
     $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
     fwrite($fichier, $contenu_fichier);
@@ -237,7 +253,7 @@ if ($numEtape == 1) {
         <?php } ?>
 
 
-        <input type="hidden" name="produit" id="produit" required value="<?=htmlentities($_GET['produit'])?>">
+        <input type="hidden" name="produit" id="produit" required value="<?php if (isset($_GET['produit'])) {echo htmlentities($_GET['produit']);} else {echo "panier";}?>">
         <input type="hidden" name="form" id="form" required value="adresse">
         <br>
         <input type="submit" value="Continuer l'achat">
@@ -308,14 +324,6 @@ else if ($numEtape == 2) {
 
 <?php
 }
-
-// dans le cas où l'utilisateur a déjà bien répondu aux 2 formulaires
-else if ($numEtape == 3) {
-    ?>
-    <h1>Bravo !! Vous avez réussi à acheter un produit !</h1>
-    <?php
-}
-
 ?>
     
     </body>
