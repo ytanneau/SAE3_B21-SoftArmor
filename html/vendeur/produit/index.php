@@ -1,7 +1,6 @@
 <?php
 //permet d'utiliser le fichier config.php
     define("HOME_GIT", "../../../");
-    require_once HOME_GIT . '.config.php';
     
 
     if (!isset($_SESSION)) {
@@ -16,6 +15,8 @@
        echo "produit non trouver";
        header("../");
     }
+    
+    require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
