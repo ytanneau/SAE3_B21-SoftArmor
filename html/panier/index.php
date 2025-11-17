@@ -17,9 +17,21 @@ if (!isset($_SESSION)) {
         header('location: ' . HOME_SITE);
         exit;
     }
+
+    $id_client = $_SESSION['id_compte'];
 }
 
+// Récupération des éléments du panier
+$sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
 
+try {
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+    $stmt->execute();
+    $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération du panier : " . $e->getMessage());
+}
 
 ?>
 
@@ -34,6 +46,19 @@ if (!isset($_SESSION)) {
 <body>
     <?php include HOME_SITE . 'header.php' ?>
 
-    <?= "Bienvenue dans votre panier " . $_SESSION['pseudo']; ?>
+    <h1>Mon panier</h1>
+
+    <?php if (!$elts_panier) { ?>
+        <h2>Votre panier est vide.</h2>
+    <?php } ?>
+
+    <ul>
+        <?php foreach ($elts_panier as $elt) { ?>
+            <li>
+                <p><?= $elt['nom_public'] ?></p>
+                <p><?= $elt['prix'] . ' €' ?></p>
+            </li>
+        <?php } ?>
+    </ul>
 </body>
 </html>
