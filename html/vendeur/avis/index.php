@@ -13,7 +13,7 @@
 
     // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
     } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../../');
+        header('location: ../');
         exit;
     }
 
