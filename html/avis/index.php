@@ -79,26 +79,25 @@
 <?php
     }
     /**<img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>"> */
+    //print_r($sql_produit)
 ?>
         <article>
-            <?=print_r($sql_produit)?>
             <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
             
         </article>
         <form action="?produit=<?=htmlentities($_GET['produit'])?>" method="post" enctype="multipart/form-data">
-            <input type="text" 
-                name="produit" 
-                id="produit"
-                value="<?=htmlentities($_GET['produit'])?>"
-                required>
 
             <label for="note">Note</label>
             <input type="range" 
                 name="note" 
                 id="note"
-                minlength="0"
+                minlength="1"
                 maxlength="5"
+                step="1"
+                value="5"
+                oninput="output.value = this.value"
                 required>
+            <output id="output">5</output>
 
             <label for="titre">Titre</label>
             <input type="text" 
