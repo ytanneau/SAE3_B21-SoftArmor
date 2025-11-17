@@ -13,9 +13,11 @@
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
             header('location: '. HOME_SITE);
-            exit;
         }
     }
+
+    require_once HOME_GIT . 'fonction_avis.php';
+    require_once HOME_GIT . 'fonction_produit.php';
 
     // verifie si le produit existe et si l'avis existe pas déjà, et recuper les info du produit
     if (isset($_GET['produit'])){
@@ -23,7 +25,7 @@
             $erreur['avis'] = EXISTE;
         }
         else{
-            //$sql_produit = info();
+            $sql_produit = detail_produit_image($_GET['produit']);
             if ($sql_produit == null){
                 $erreur['produit'] = EXISTE_PAS;   
             }
