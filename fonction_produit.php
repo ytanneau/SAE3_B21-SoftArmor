@@ -33,15 +33,11 @@
 
         $sql = "SELECT * FROM produit_image WHERE id_produit = :id_produit";
 
-        try {
-            $requete = $pdo->prepare($sql);
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
-            $requete->execute();
+        $requete = $pdo->prepare($sql);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+        $requete->execute();
 
-            return $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            throw $e;
-        }
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
     function vendeur_image_produit($id_produit){

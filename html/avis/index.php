@@ -42,8 +42,14 @@
         if (!isset($_POST['description'])) $_POST['description'] = null;
         if (!isset($_POST['image'])) $_POST['image'] = null;
 
+        $id_avis = null; // A DEFINIR, DEBROUILLE toi YANN;
 
+
+        if (isset($_POST['image'])) {
+            move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $id_avis);
+        }
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,7 +61,7 @@
 <body>
     
     <main>
-        <form action="" method="post" media...>
+        <form action="" method="post" media... enctype="multipart/form-data">
             <input type="text" 
                 name="produit" 
                 id="produit"
@@ -82,10 +88,11 @@
 
             <label for="image">Image</label>
             <input type="image" 
+                name="image"
                 src="image" 
                 alt="image">
 
-            <input type="submit" value="crée l'avie">
+            <input type="submit" value="créer l'avis">
         </form>
     </main>
 
