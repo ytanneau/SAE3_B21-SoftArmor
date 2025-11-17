@@ -85,8 +85,8 @@
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
     print_r($sqlverif);
     if ($sqlverif == NULL) {
-        echo "ce produit n'existe pas";
-        header("location : ../");
+        header('location: ../');
+        exit;
     }
 ?>
 <!doctype html>
