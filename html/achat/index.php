@@ -324,6 +324,10 @@ else if ($numEtape == 2) {
 
 <?php
 }
+    else if ($numEtape == 3) {
+        echo "<h1>Bravo vous avez réussi à effectuer l'achat !</h1>";
+    }
+
 ?>
     
     </body>

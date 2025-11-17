@@ -52,7 +52,7 @@ try {
 
     <?php if (!$elts_panier) { ?>
         <h2>Votre panier est vide.</h2>
-    <?php } ?>
+    <?php } else { ?>
 
     <ul>
         <?php 
@@ -82,5 +82,13 @@ try {
 
     <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
     <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+
+    <!-- bouton de paiement -->
+    <form method="post">
+        <input type="hidden" name="panier" value="1">
+        <input type="submit" value="Passer au paiement">
+    </form>
+
+    <?php } ?>
 </body>
 </html>
