@@ -2,9 +2,6 @@
     // Permet d'utiliser le fichier .config.php
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
-    
-    require_once HOME_GIT . '.config.php';
-    require_once HOME_GIT . 'fonction_produit.php';
 
     if (!isset($_SESSION)) {
         session_start();
@@ -15,7 +12,13 @@
         header('location: ../');
         exit;
     }
+    if ($_GET == NULL) {
+       echo "produit non trouver";
+       header("../");
+    }
     
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
