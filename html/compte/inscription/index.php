@@ -63,7 +63,7 @@
         
         <form action="" method="post">
             <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" maxlength="40" value="<?if (isset($_POST["nom"])) echo $_POST['nom']?>"
+            <input type="text" id="nom" name="nom" maxlength="40" value="<?= $_POST["nom"] ?? ''?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -78,7 +78,7 @@
 
             <br>
             <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?php if (isset($_POST["prenom"])) echo $_POST['prenom']?>"
+            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?=$_POST['prenom'] ?? ''?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -93,7 +93,7 @@
 
             <br>
             <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?if (isset($_POST["pseudo"])) echo $_POST['pseudo']?>"
+            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?=$_POST['pseudo'] ?? ''?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -108,7 +108,7 @@
 
             <br>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" maxlength="80" value="<?php if (isset($_POST["email"])) echo $_POST['email']?>"
+            <input type="email" id="email" name="email" maxlength="80" value="<?=$_POST['email'] ?? ''?>"
             class="champ">
             <p class="contrainte"></p>
 <?php
@@ -124,7 +124,7 @@
             <br>
             <label for="date_naissance">Date de naissance</label>
             <input type="date" id="date_naissance" name="date_naissance"
-            class="champ" value="<?php if (isset($_POST['date_naissance'])) echo $_POST['date_naissance']?>">
+            class="champ" value="<?=$_POST['date_naissance'] ?? ''?>">
             <p class="contrainte"></p>
 <?php
     if (isset($erreurs['date_naiss'])){

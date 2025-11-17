@@ -1,13 +1,14 @@
 <?php
 const HOME_GIT = "../../";
+const HOME_SITE = "../";
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
-// Si pas co, alors retour à l'accueil
+// Si pas co, alors go page inscription
 if (!isset($_SESSION['logged_in'])) {
-    header("location: " . HOME_GIT, );
+    header("location: " . HOME_SITE . "compte/inscription");
 }
 
 
@@ -188,6 +189,7 @@ if ($numEtape == 3) {
     $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
     fwrite($fichier, $contenu_fichier);
     fclose($fichier);
+    $_POST = [];
 }
 
 
