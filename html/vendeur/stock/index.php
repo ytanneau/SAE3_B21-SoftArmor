@@ -56,11 +56,13 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
 <!doctype html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+        <?php include HOME_SITE . 'link_head.php' ?>
+        <title>Alizon Vendeur - Stock</title>
     </head>
     <body>
+        <?php include HOME_SITE . 'vendeur/header.php'; ?>
+
         <main>
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
