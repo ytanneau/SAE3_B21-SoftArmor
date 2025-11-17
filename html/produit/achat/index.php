@@ -153,10 +153,14 @@ if ($numEtape == 3) {
     $requete->execute();
     $client = $requete->fetch(PDO::FETCH_ASSOC);
 
+    var_dump($client);
+
     $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
     $requete->bindValue(":id_produit", $_POST['id_produit']);
     $requete->execute();
     $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+    var_dump($produit);
 
     $contenu_fichier = $client['nom'] . " " . $client['prenom'] . "\n";
 
@@ -166,6 +170,7 @@ if ($numEtape == 3) {
     $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€";
     $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%";
     $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€";
+    echo $contenu_fichier;
 
     file_put_contents($CHEMIN_FACTURE . $nom_fichier, $contenu_fichier);
 }
