@@ -20,6 +20,13 @@ if (!isset($_SESSION)) {
     $id_client = $_SESSION['id_compte'];
 }
 
+//supprime le produit selectionné
+if ($_POST != NULL) {
+    $id_prod = $_POST['id_produit'];
+    supprimer_produit_panier($id_prod,$id_client);
+    header('Refresh: 0');
+}  
+
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 
@@ -35,11 +42,7 @@ try {
     die("Erreur lors de la récupération du panier : " . $e->getMessage());
 }
 
-//supprime le produit selectionné
-if ($_POST != NULL) {
-    $id_prod = $_POST['id_produit'];
-    supprimer_produit_panier($id_prod,$id_client);
-}   
+ 
 ?>
 
 <!DOCTYPE html>
