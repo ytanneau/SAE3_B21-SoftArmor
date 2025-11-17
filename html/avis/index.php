@@ -102,7 +102,7 @@
     <h1>Vous avis a été enregister</h1>
 <?php
     }
-    if (isset($erreur['avis'])){
+    else if (isset($erreur['avis'])){
 ?>
         <h1>Vous avez déjà donner votre avis</h1>
 <?php
