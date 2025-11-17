@@ -17,9 +17,23 @@ if (!isset($_SESSION)) {
         header('location: ' . HOME_SITE);
         exit;
     }
+
+    $id_client = $_SESSION['id_compte'];
 }
 
+require_once (HOME_GIT . '.config.php');
 
+// Récupération des éléments du panier
+$sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
+
+try {
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+    $stmt->execute();
+    $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Erreur lors de la récupération du panier : " . $e->getMessage());
+}
 
 ?>
 
@@ -34,6 +48,39 @@ if (!isset($_SESSION)) {
 <body>
     <?php include HOME_SITE . 'header.php' ?>
 
-    <?= "Bienvenue dans votre panier " . $_SESSION['pseudo']; ?>
+    <h1>Mon panier</h1>
+
+    <?php if (!$elts_panier) { ?>
+        <h2>Votre panier est vide.</h2>
+    <?php } ?>
+
+    <ul>
+        <?php 
+            $total_ht = 0;
+            $total_ttc = 0;
+
+            foreach ($elts_panier as $elt) { ?>
+                <?php 
+                    $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
+
+                    $total_ht += $elt['prix'];
+                    $total_ttc += $prix_ttc;
+                ?>
+
+                <li>
+                    <img height="200px" src="<?= HOME_SITE . $elt['img_principale_url'] ?>" title="<?= $elt['img_principale_titre'] ?>" alt="<?= $elt['img_principale_alt'] ?>">
+                    <p><?= $elt['nom_public'] ?></p>
+                    <p><?= $elt['nom_vendeur'] ?></p>
+                    <p><?= $elt['description'] ?></p>
+                    <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
+                    <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
+                    <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
+                </li>
+            <?php } 
+        ?>
+    </ul>
+
+    <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
+    <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
 </body>
 </html>
