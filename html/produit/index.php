@@ -25,6 +25,7 @@ $id_produit = htmlentities($_GET['id_produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
+    var_dump($produit);
 
     if (!$produit) {
         die("Produit introuvable.");
