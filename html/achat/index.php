@@ -15,14 +15,12 @@ require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 $numEtape = -1;
 
-var_dump($_POST);
-
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
     $numEtape = 1;
 
     // si y'a pas de produit dans le lien, ou que c'est pas par le panier qu'on a atteint cette page, alors problème
-    if (!isset($_GET['produit']) && !isset($_POST['panier'])) {
+    if (!isset($_GET['produit'])) {
         header("location: " . HOME_GIT, );
     }
 

@@ -57,6 +57,7 @@ if($_POST!=NULL){
     <h1>Mon panier</h1>
 
     <?php if (!$elts_panier) { ?>
+        <img src="<?=HOME_SITE?>image/panier_vide.svg">
         <h2>Votre panier est vide.</h2>
     <?php } else { ?>
 
@@ -99,7 +100,7 @@ if($_POST!=NULL){
 
     <!-- bouton de paiement -->
     <form action="../achat" method="get">
-        <input type="text" name="panier" id="panier" value="1">
+        <input type="hidden" name="produit" id="produit" value="panier">
         <input type="submit" value="Passer au paiement">
     </form>
 
