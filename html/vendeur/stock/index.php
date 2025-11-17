@@ -16,8 +16,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
 require_once '../../../.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
-function ecrire_nom($nom_stock){
-    $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
+function ecrire_nom($rows){
     foreach ($rows as $row){
         ?>
         
@@ -26,14 +25,14 @@ function ecrire_nom($nom_stock){
                 <td><img src="MenuBurger.png" alt=> </td>
                 <td> 
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
-                    <a href= "../produit/index.php?produit=<?= $row['id_produit'] ?>"> <?= $row['nom_stock']?> 
+                    <a href= "../produit/index.php?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
                 </td>
                 <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td>
                 <td> | </td>
-                <td><?= $row['quantite'] ?></td>
+                <td><?= htmlentities($row['quantite'] ?? '') ?></td>
             </tr>
         </table>
         
@@ -57,8 +56,10 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     </head>
     <body>
         <main>
+            <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
             <div>
+                <!-- lien pour ajouter un produit -->
                 <a href="./nouveau_produit/"> Ajouter un produit</a>
             </div>
         </main>
