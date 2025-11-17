@@ -1,6 +1,6 @@
 <?php $images = HOME_SITE . "image/" ?>
 
-<header id="header_client">
+<header id="header_vendeur">
     <div>
         <a href=<?= HOME_SITE . 'vendeur' ?>>
             <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon vendeur" title="Logo Alizon vendeur">
