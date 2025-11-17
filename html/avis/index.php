@@ -24,21 +24,8 @@
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
     echo 1;
-    // verifie si le produit existe et si l'avis existe pas déjà, et recuper les info du produit
-    if (isset($_GET['produit'])){
-        if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
-            $erreur['avis'] = EXISTE;
-        }
-        else{
-            echo 1.5;
-            $sql_produit = detail_produit_image($_GET['produit']);
-            if ($sql_produit == null){
-                $erreur['produit'] = EXISTE_PAS;   
-            }
-        }
-    }
-    //echo 2;
-    else if (isset($_POST) && (!isset($erreur))){
+    
+    if (isset($_POST) && (!isset($erreur))){
         if (!isset($_POST['produit'])) $_POST['note'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
@@ -57,11 +44,25 @@
             $succes = true;
         }        
     }
+    else if (isset($_GET['produit'])){
+        if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
+            $erreur['avis'] = EXISTE;
+        }
+        else{
+            echo 1.5;
+            $sql_produit = detail_produit_image($_GET['produit']);
+            if ($sql_produit == null){
+                $erreur['produit'] = EXISTE_PAS;   
+            }
+        }
+    }    
     else{
         echo 6;
         $_GET['produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
+
+    
 
     
     function condition_avis(){
