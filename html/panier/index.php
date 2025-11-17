@@ -20,3 +20,5 @@ if (!isset($_SESSION)) {
 }
 
 echo "Bienvenue dans votre panier " . $_SESSION['pseudo'];
+
+?>
