@@ -68,6 +68,7 @@
     <?php include HOME_SITE . "header.php"; ?>
     <main>
         <article>
+            <?=print_r($sql_produit)?>
             <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
             <img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>">
         </article>
