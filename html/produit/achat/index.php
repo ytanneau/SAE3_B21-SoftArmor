@@ -165,9 +165,9 @@ if ($numEtape == 3) {
     date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
     $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
-    $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€";
-    $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%";
-    $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€";
+    $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
+    $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
+    $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
 
     $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
     fwrite($fichier, $contenu_fichier);
