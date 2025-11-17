@@ -14,10 +14,7 @@ if ($_POST != null){
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (!isset($_SESSION['raison_sociale'])) {
-    header('location: ' . HOME_SITE);
-    exit;
-} else if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ./stock');
     exit;
 }

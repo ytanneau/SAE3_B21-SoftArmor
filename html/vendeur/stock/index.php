@@ -6,14 +6,19 @@ define("HOME_SITE", "../../");
 if (!isset($_SESSION)) {
     session_start();
 }
-//verifie si quelqun est connecté
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+
+// Redirige l'utilisateur s'il n'a pas accès à cette page
+
+if (!isset($_SESSION['raison_sociale'])) {
+    header('location: ' . HOME_SITE);
+    exit;
+} else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     header('location: ../');
     exit;
 }
 
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
+require_once HOME_GIT . '.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
 function ecrire_nom($rows){
