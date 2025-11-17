@@ -2,10 +2,13 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../');
 
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
     // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : ('location: ' . HOME_SITE));
+        header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
     }
 
     if ($_POST != null) {
