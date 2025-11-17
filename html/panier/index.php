@@ -56,12 +56,14 @@ try {
 
     <ul>
         <?php foreach ($elts_panier as $elt) { ?>
+            <?php $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100); ?>
+
             <li>
                 <p><?= $elt['nom_public'] ?></p>
                 <p><?= $elt['nom_vendeur'] ?></p>
                 <p><?= $elt['description'] ?></p>
-                <p><?= 'Prix HT : ' . $elt['prix'] . ' €' ?></p>
-                <p><?= 'Prix TTC : ' . $elt['prix'] * (1 + $elt['tva'] / 100) . ' €' ?></p>
+                <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
+                <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
             </li>
         <?php } ?>
     </ul>
