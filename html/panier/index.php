@@ -68,6 +68,7 @@ try {
                 ?>
 
                 <li>
+                    <img height="200px" src="<?= HOME_SITE . $elt['img_principale_url'] ?>" title="<?= $elt['img_principale_titre'] ?>" alt="<?= $elt['img_principale_alt'] ?>">
                     <p><?= $elt['nom_public'] ?></p>
                     <p><?= $elt['nom_vendeur'] ?></p>
                     <p><?= $elt['description'] ?></p>
