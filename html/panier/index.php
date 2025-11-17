@@ -19,6 +19,21 @@ if (!isset($_SESSION)) {
     }
 }
 
-echo "Bienvenue dans votre panier " . $_SESSION['pseudo'];
+
 
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <?php include HOME_SITE . 'link_head.php' ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon panier</title>
+</head>
+<body>
+    <?php include HOME_SITE . 'header.php' ?>
+
+    <?= "Bienvenue dans votre panier " . $_SESSION['pseudo']; ?>
+</body>
+</html>
