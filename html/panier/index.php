@@ -95,7 +95,7 @@ if($_POST!=NULL){
     <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
 
     <!-- bouton de paiement -->
-    <form action="../achat" method="post">
+    <form action="../achat" method="get">
         <input type="text" name="panier" id="panier" value="1">
         <input type="submit" value="Passer au paiement">
     </form>
