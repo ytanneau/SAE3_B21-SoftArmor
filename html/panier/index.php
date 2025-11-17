@@ -100,7 +100,7 @@ if($_POST!=NULL){
 
     <!-- bouton de paiement -->
     <form action="../achat" method="get">
-        <input type="text" name="produit" id="produit" value="panier">
+        <input type="hidden" name="produit" id="produit" value="panier">
         <input type="submit" value="Passer au paiement">
     </form>
 

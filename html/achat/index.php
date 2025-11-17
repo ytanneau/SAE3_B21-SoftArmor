@@ -15,8 +15,6 @@ require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 $numEtape = -1;
 
-var_dump($_POST);
-
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
 if (!isset($_POST['form'])) {
     $numEtape = 1;
