@@ -95,7 +95,7 @@ unset($pdo);
             ?>
             <li>
                 <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                    <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
@@ -132,7 +132,7 @@ unset($pdo);
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
@@ -165,7 +165,7 @@ unset($pdo);
             foreach ($produit_catalogue as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
