@@ -716,3 +716,55 @@
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
     }
+
+    //requete pour recuperer mot de passe cryptée
+    function sql_get_mdp_cryptee($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT mdp,id_adresse FROM compte_client WHERE id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour recuperer informations du compte sans l'adresse
+    function sql_get_info_compte($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour recuperer l'adresse du compte
+    function sql_get_adresse_compte($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM client_adresse WHERE client_adresse.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour savoir si il y a une image de profil
+    function sql_get_img_profil($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM _image INNER JOIN _compte ON _image.id_image = _compte.id_image_profil WHERE _compte.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
