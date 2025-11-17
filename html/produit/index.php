@@ -23,46 +23,6 @@ if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
 
 $id_produit = htmlentities($_GET['id_produit']);
 
-// Requête SQL pour récupérer les informations du produit avec les images et le vendeur
-/*$sql = "
-SELECT
-    p.*,
-    v.raison_sociale AS id_vendeur,
-    ip.id_image_principale,
-    i_principale.url_image AS image_principale_url,
-    i_principale.titre AS image_principale_titre,
-    i_principale.alt AS image_principale_alt,
-    i1.url_image AS image_1_url,
-    i1.titre AS image_1_titre,
-    i1.alt AS image_1_alt,
-    i2.url_image AS image_2_url,
-    i2.titre AS image_2_titre,
-    i2.alt AS image_2_alt
-FROM produit p
-JOIN compte_vendeur v ON p.id_vendeur = v.id_compte
-LEFT JOIN _images_produit ip ON p.id_produit = ip.id_produit
-LEFT JOIN _image i_principale ON ip.id_image_principale = i_principale.id_image
-LEFT JOIN _image i1 ON ip.id_image1 = i1.id_image
-LEFT JOIN _image i2 ON ip.id_image2 = i2.id_image
-WHERE p.id_produit = :id_produit
-";
-
-try {
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id_produit', $id_produit, PDO::PARAM_INT);
-    $stmt->execute();
-    $produit = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$produit) {
-        die("Produit introuvable.");
-    }
-
-    // Récupérer les avis
-    $liste_avis = avis_client_produit($_GET['id_produit']);
-} catch (PDOException $e) {
-    die("Erreur lors de la récupération du produit : " . $e->getMessage());
-}*/
-
 try {
     $produit = detail_produit_image($id_produit);
 
@@ -87,7 +47,7 @@ if (isset($produit['prix'])) {
     }
 }
 
-if($_POST!=NULL){
+if ($_POST != NULL) {
     $qte= $_POST['quantite'];
     $id_prod = $_GET['id_produit'];
     $id_cli = $_SESSION['id_compte'];
@@ -174,12 +134,16 @@ if($_POST!=NULL){
     </ul>
     
 
-    <a href="../produit/achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    <a href="../achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
     
     <form action="" method="post">
-        <label for="quantite">Quantité</label>
-        <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
-        <button type="submit">Ajouter au Panier</button>
+        <?php if (isset($_SESSION['logged_in'])) { ?>
+            <label for="quantite">Quantité</label>
+            <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
+            <button type="submit">Ajouter au Panier</button>
+        <?php } else { ?>
+            <p>Connectez-vous pour ajouter ce produit à votre panier.</p>
+        <?php } ?>
     </form>
 
 </body>

@@ -6,11 +6,17 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-
+    function renvoi(){
+        if (headers_sent()) {
+            die("echec de redirection. cliquer sur ce lien svp : <a href=...>");
+        }
+        else{
+            exit(header("Location: /user.php"));
+        }
+    }
     // Vérifie si quelqu'un est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../');
-        exit;
+        renvoi();
     }
     if ($_GET == NULL) {
        echo "produit non trouver";
@@ -83,6 +89,10 @@
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
+    print_r($sqlverif);
+    if ($sqlverif == NULL) {
+        renvoi();
+    }
 ?>
 <!doctype html>
 <html lang="fr">

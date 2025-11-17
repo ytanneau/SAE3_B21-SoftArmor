@@ -5,7 +5,7 @@
     function avis_client_produit($id_produit){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=id_produit");
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit = :id_produit");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
