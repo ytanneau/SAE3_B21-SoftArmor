@@ -24,6 +24,7 @@
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
     
+    $succes = false;
     if ($_POST != null){
         print_r($_POST);
         echo 1;
@@ -31,7 +32,7 @@
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        if (!isset($_FILES['image'])){
+        if ($_FILES['image'] == null){
             $image = null;
         }
         else{
@@ -42,6 +43,7 @@
             if ($image != null){
                 rename('ressources/avis/' . $fichier, $image);
             }
+            
             print_r($_POST);
             cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
             $succes = true;
@@ -95,7 +97,7 @@
     <?php include HOME_SITE . "header.php"; ?>
     <main>
 <?php
-    if (isset($succes)){
+    if ($succes == true){
 ?>
     <h1>Vous avis a été enregister</h1>
 <?php
