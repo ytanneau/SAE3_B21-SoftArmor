@@ -92,8 +92,11 @@ if($_POST!=NULL){
         ?>
     </ul>
 
-    <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
-    <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+    <?php if ($elts_panier) { ?>
+        <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
+        <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+    <?php } ?>
+    
 
     <!-- bouton de paiement -->
     <form action="../achat" method="get">
