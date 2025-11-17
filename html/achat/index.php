@@ -167,7 +167,7 @@ if ($numEtape == 3) {
 
         $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
         $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
-        $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
+        $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
         $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
     } else {
         $requete = $pdo->prepare("SELECT nom_public, prix, tva, quantite_panier FROM produit_panier WHERE id_client = :id_compte");
@@ -177,11 +177,11 @@ if ($numEtape == 3) {
 
         $contenu_fichier .= "Liste des produits achetés : \n";
         foreach ($liste_produits as $produit) {
-            $contenu_fichier .= "-> " . $produit['nom_public'] . "\n";
+            $contenu_fichier .= "-> " . $produit['nom_public'] . " (x" . $produit['quantite_panier'] . ")\n";
             $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
-            $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
+            $contenu_fichier .= "\tTaux de taxe \t\t: " . $produit['tva'] . "%\n";
             $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
-            $contenu_fichier .= "\tPrix TTC total \t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
+            $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
         }
     }
 
