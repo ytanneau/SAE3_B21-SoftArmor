@@ -55,18 +55,31 @@ try {
     <?php } ?>
 
     <ul>
-        <?php foreach ($elts_panier as $elt) { ?>
-            <?php $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100); ?>
+        <?php 
+            $total_ht = 0;
+            $total_ttc = 0;
 
-            <li>
-                <p><?= $elt['nom_public'] ?></p>
-                <p><?= $elt['nom_vendeur'] ?></p>
-                <p><?= $elt['description'] ?></p>
-                <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
-                <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
-                <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
-            </li>
-        <?php } ?>
+            foreach ($elts_panier as $elt) { ?>
+                <?php 
+                    $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
+
+                    $total_ht += $elt['prix'];
+                    $total_ttc += $prix_ttc;
+                ?>
+
+                <li>
+                    <p><?= $elt['nom_public'] ?></p>
+                    <p><?= $elt['nom_vendeur'] ?></p>
+                    <p><?= $elt['description'] ?></p>
+                    <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
+                    <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
+                    <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
+                </li>
+            <?php } 
+        ?>
     </ul>
+
+    <p>Prix total HT : <?= $total_ht ?></p>
+    <p>Prix total TTC : <?= $total_ttc ?> </p>
 </body>
 </html>
