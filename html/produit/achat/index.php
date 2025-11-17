@@ -131,7 +131,7 @@ else if ($_POST['form'] == 'bancaire') {
 
 // si le client a bien répondu à tous les formulaire, alors une commande est créée et enregistrée
 if ($numEtape == 3) {
-    $CHEMIN_FACTURE = "ressources/facture/";
+    $CHEMIN_FACTURE = HOME_GIT . "ressources/facture/";
 
     $requete = $pdo->prepare("INSERT INTO _commande (id_client, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
@@ -153,24 +153,21 @@ if ($numEtape == 3) {
     $requete->execute();
     $client = $requete->fetch(PDO::FETCH_ASSOC);
 
-    var_dump($client);
 
     $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
     $requete->bindValue(":id_produit", $_POST['produit']);
     $requete->execute();
     $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
-    var_dump($produit);
 
     $contenu_fichier = $client['nom'] . " " . $client['prenom'] . "\n";
 
     date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
-    $contenu_fichier .= "Produit acheté : " . $produit['nom'] . "\n";
+    $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
     $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€";
     $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%";
     $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€";
-    echo $contenu_fichier;
 
     $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
     fwrite($fichier, $contenu_fichier);
