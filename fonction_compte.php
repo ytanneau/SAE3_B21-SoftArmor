@@ -663,7 +663,7 @@
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
-function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+    function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);

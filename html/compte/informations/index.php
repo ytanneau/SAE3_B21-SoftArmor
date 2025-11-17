@@ -213,7 +213,7 @@ unset($pdo);
                 ?>
 
                 <label for="date">Date de Naissance</label>
-                <input required type="date" name="date" value="<?= htmlentities($row['date_naissance'] ?? '')?>" placeholder="À renseigner">
+                <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
                 
                 <!--Erreur Date-->
                 <?php
@@ -382,7 +382,7 @@ unset($pdo);
                             <div>
                                 <p><?= htmlentities($row['titre'] ?? '')?></p>  
                                 <p><?= htmlentities($row['commentaire'] ?? '')?></p>
-                                <p><?= htmlentities("Avis publié le " . $row['date_avis'] ?? '')?></p>
+                                <p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p>
                             </div>
                         </div>
                     </li>

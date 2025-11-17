@@ -15,6 +15,7 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
+require_once (HOME_GIT . 'fonction_panier.php');
 
 if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
     die("ID du produit invalide.");
@@ -84,6 +85,13 @@ if (isset($produit['prix'])) {
     } else {
         $formatted_prix = htmlentities($produit['prix'] ?? '');
     }
+}
+
+if($_POST!=NULL){
+    $qte= $_POST['quantite'];
+    $id_prod = $_GET['id_produit'];
+    $id_cli = $_SESSION['id_compte'];
+    ajouter_panier($id_prod,$id_cli,$qte);
 }
 
 ?>
@@ -164,6 +172,12 @@ if (isset($produit['prix'])) {
     
 
     <a href="../produit/achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    
+    <form action="" method="post">
+        <label for="quantite">Quantité</label>
+        <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
+        <button type="submit">Ajouter au Panier</button>
+    </form>
 
 </body>
 </html>
