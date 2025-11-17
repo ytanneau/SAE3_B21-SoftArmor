@@ -142,7 +142,7 @@ if ($numEtape == 3) {
     $requete->execute();
     $id_commande = $requete->fetch(PDO::FETCH_ASSOC)['id_commande'];
 
-    $nom_fichier = $id_compte . "_" . $id_commande;
+    $nom_fichier = $_SESSION['id_compte'] . "_" . $id_commande;
     $requete = $pdo->prepare("UPDATE _commande SET chemin_fichier = :chemin");
     $requete->bindValue(":chemin", "$CHEMIN_FACTURE" . $nom_fichier);
     $requete->execute();
@@ -156,7 +156,7 @@ if ($numEtape == 3) {
     var_dump($client);
 
     $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-    $requete->bindValue(":id_produit", $_POST['id_produit']);
+    $requete->bindValue(":id_produit", $_POST['produit']);
     $requete->execute();
     $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
@@ -172,7 +172,9 @@ if ($numEtape == 3) {
     $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€";
     echo $contenu_fichier;
 
-    file_put_contents($CHEMIN_FACTURE . $nom_fichier, $contenu_fichier);
+    $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
+    fwrite($fichier, $contenu_fichier);
+    fclose($fichier);
 }
 
 
