@@ -41,18 +41,18 @@
         $erreur['produit'] = EXISTE_PAS; 
     }
 
-    if (isset($_POST)){
+    if (isset($_POST) && (!isset($erreur))){
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        if (!isset($_POST['image'])) $_POST['image'] = null;
+        if (!isset($_FILES['image'])) $image = null ?? $image = $_GET['produit'].'_'.$_SESSION['id_compte'];
 
         $id_avis = null; // A DEFINIR, DEBROUILLE toi YANN;
 
 
         
 
-        //cree_avis($$_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description']);
+        cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
     }
 
 ?>
@@ -91,8 +91,8 @@
             <input type="range" 
                 name="note" 
                 id="note"
-                minlength="1"
-                maxlength="5"
+                min="1"
+                max="5"
                 step="1"
                 value="5"
                 oninput="output.value = this.value"
@@ -110,10 +110,10 @@
                 id="description">
 
             <label for="image">Image</label>
-            <input type="image" 
-                name="image"
-                src="image" 
-                alt="image">
+            <input type="file" 
+                name="image" 
+                alt="image"
+                accept=".png">
 
             <input type="submit" value="créer l'avis">
         </form>
