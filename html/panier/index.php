@@ -23,9 +23,10 @@ if (!isset($_SESSION)) {
 //supprime le produit selectionné
 if ($_POST != NULL) {
     $id_prod = $_POST['id_produit'];
+    unset($_POST);
     supprimer_produit_panier($id_prod,$id_client);
     header('Refresh: 0');
-}  
+}
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
