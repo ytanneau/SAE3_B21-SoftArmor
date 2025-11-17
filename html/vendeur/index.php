@@ -3,8 +3,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-    define('HOME_GIT', '../../');
-    define('HOME_SITE', '../');
+
+define('HOME_GIT', '../../');
+define('HOME_SITE', '../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -13,7 +14,7 @@ if ($_POST != null){
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+if (isset($_SESSION['logged_in']) && isset($_SESSION['raison_sociale']) && $_SESSION['logged_in'] === true) {
     header('location: ./stock');
     exit;
 }
