@@ -23,22 +23,23 @@
 
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
-    echo 1;
     
     if (isset($_POST) && (!isset($erreur))){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'png' ?? null;
-        echo 3;
+        if (!isset($_POST['produit'])){
+            $image = null;
+        }
+        else{
+            $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'png';
+        }
 
         if (condition_avis()){
-            echo 4;
             if ($image != null){
                 rename('ressources/avis/' . $fichier, $image);
             }
-            echo 5;
             print_r($_POST);
             cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
             $succes = true;
