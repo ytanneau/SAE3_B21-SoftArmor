@@ -3,7 +3,7 @@
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
 
-    require_once HOME_SITE . ".config.php";
+    require_once HOME_GIT . ".config.php";
 
     if (!isset($_SESSION)) {
         session_start();
@@ -19,7 +19,7 @@
         header('location: ../../');
         exit;
     }
-    
+
     $id_compte = $_SESSION['id_compte'];
 ?>
 
