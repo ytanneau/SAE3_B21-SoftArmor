@@ -23,6 +23,13 @@ if (!isset($_SESSION)) {
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 
+//supprime le produit selectionné
+if ($_POST != NULL) {
+    $id_prod = $_POST['id_produit'];
+    supprimer_produit_panier($id_prod,$id_client);
+    header('Refresh: 0');
+}
+
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
 
@@ -35,12 +42,7 @@ try {
     die("Erreur lors de la récupération du panier : " . $e->getMessage());
 }
 
-//supprime le produit selectionné
-if($_POST!=NULL){
-    $id_prod = $_POST['id_produit'];
-    supprimer_produit_panier($id_prod,$id_client);
-    //header('Refresh:0');
-}   
+ 
 ?>
 
 <!DOCTYPE html>
