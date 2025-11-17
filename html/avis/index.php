@@ -25,6 +25,7 @@
     require_once HOME_GIT . 'fonction_produit.php';
     
     if (isset($_POST) && (!isset($erreur))){
+        echo 1;
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
@@ -46,6 +47,7 @@
         }        
     }
     else if (isset($_GET['produit'])){
+        echo 2;
         if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
             $erreur['avis'] = EXISTE;
         }
@@ -57,6 +59,7 @@
         }
     }    
     else{
+        echo 3;
         $_GET['produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
