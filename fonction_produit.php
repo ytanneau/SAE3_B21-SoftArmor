@@ -67,7 +67,7 @@
     function vendeur_verif_produit($id_produit, $id_vendeur){
         global $pdo;
         try {
-            $requete = $pdo->prepare('SELECT id_produit from `_produit` where id_vendeur = :id_vendeur AND id_produit = :id_produit');
+            $requete = $pdo->prepare('SELECT id_produit from _produit where id_vendeur = :id_vendeur AND id_produit = :id_produit');
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
             $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_STR);
             $requete->execute();
