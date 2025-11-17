@@ -21,6 +21,8 @@ if (!isset($_SESSION)) {
     $id_client = $_SESSION['id_compte'];
 }
 
+require_once (HOME_GIT . '.config.php');
+
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
 
