@@ -43,6 +43,7 @@
         if (!isset($_POST['image'])) $_POST['image'] = null;
 
 
+        cree_avis($$_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description']);
     }
 ?>
 <!DOCTYPE html>
@@ -51,9 +52,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Avis</title>
+    <?php include HOME_SITE . "link_head.php"; ?>
 </head>
 <body>
-    
+    <?php include HOME_SITE . "header.php"; ?>
     <main>
         <form action="" method="post" media...>
             <input type="text" 
