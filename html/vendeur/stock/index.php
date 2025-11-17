@@ -17,6 +17,7 @@ require_once '../../../.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
 function ecrire_nom($rows){
+    print_r($rows);
     foreach ($rows as $row){
         ?>
         
