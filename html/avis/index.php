@@ -36,12 +36,7 @@
             }
         }
     }
-    else{
-        $_GET['produit'] = null;
-        $erreur['produit'] = EXISTE_PAS; 
-    }
-
-    if (isset($_POST) && (!isset($erreur))){
+    else if (isset($_POST) && (!isset($erreur))){
         if (!isset($_POST['produit'])) $_POST['note'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
@@ -49,16 +44,34 @@
         if (!isset($_FILES['image'])) $image = null ?? $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'png';
         //print_r($_POST);
 
-
-
-        if ($image != null){
-            rename('ressources/avis/' . $fichier, $image);
-        }
-        
-
-        cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
+        if (condition_avis()){
+            if ($image != null){
+                rename('ressources/avis/' . $fichier, $image);
+            }
+            cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
+            $succes = true;
+        }        
+    }
+    else{
+        $_GET['produit'] = null;
+        $erreur['produit'] = EXISTE_PAS; 
     }
 
+    
+    function condition_avis(){
+        if (!(1 <= $_POST['note'] && $_POST['note'] <= 5)){
+            return false;
+        }
+        if (isset($_POST['description']) && !isset($_POST['titre'])){
+            return false;
+        }
+        $sql_produit = detail_produit_image($_POST['produit']);
+        if ($sql_produit == null){
+            $erreur['produit'] = EXISTE_PAS;
+            return false; 
+        }
+        return true;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -72,6 +85,11 @@
     <?php include HOME_SITE . "header.php"; ?>
     <main>
 <?php
+    if (isset($succes)){
+?>
+    <h1>Vous avis a été enregister</h1>
+<?php
+    }
     if (isset($erreur['avis'])){
 ?>
         <h1>Vous avez déjà donner votre avis</h1>
