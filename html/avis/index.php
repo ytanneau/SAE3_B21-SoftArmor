@@ -57,9 +57,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Avis</title>
+    <?php include HOME_SITE . "link_head.php"; ?>
 </head>
 <body>
-    
+    <?php include HOME_SITE . "header.php"; ?>
     <main>
         <form action="" method="post" media... enctype="multipart/form-data">
             <input type="text" 
