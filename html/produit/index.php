@@ -134,7 +134,7 @@ if($_POST!=NULL){
     </ul>
     
 
-    <a href="../produit/achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    <a href="../achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
     
     <form action="" method="post">
         <label for="quantite">Quantité</label>
