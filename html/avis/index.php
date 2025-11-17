@@ -37,7 +37,7 @@
             }
         }
     }
-    echo 2;
+    //echo 2;
     else if (isset($_POST) && (!isset($erreur))){
         if (!isset($_POST['produit'])) $_POST['note'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
