@@ -87,7 +87,7 @@ try {
 
                     <form action="" method="post">
                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                        <button type="submit">Supprimer</button>
+                        <button onclick="actualiser()" type="submit">Supprimer</button>
                     </form>
                 </li>
             <?php } 
@@ -108,4 +108,10 @@ try {
 
     <?php } ?>
 </body>
+
+    <script>
+        function actualiser() {
+            window.location.reload();
+        }
+    </script>
 </html>
