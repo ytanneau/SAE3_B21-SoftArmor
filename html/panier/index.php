@@ -85,7 +85,7 @@ try {
 
     <!-- bouton de paiement -->
     <form action="../achat" method="post">
-        <input type="hidden" name="panier" id="panier" value="1">
+        <input type="text" name="panier" id="panier" value="1">
         <input type="submit" value="Passer au paiement">
     </form>
 
