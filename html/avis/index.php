@@ -50,7 +50,6 @@
             $erreur['avis'] = EXISTE;
         }
         else{
-            echo 1.5;
             $sql_produit = detail_produit_image($_GET['produit']);
             if ($sql_produit == null){
                 $erreur['produit'] = EXISTE_PAS;   
@@ -58,7 +57,6 @@
         }
     }    
     else{
-        echo 6;
         $_GET['produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
