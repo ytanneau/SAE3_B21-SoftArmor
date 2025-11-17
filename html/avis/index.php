@@ -16,7 +16,7 @@
         }
     }
 
-    if (isset($_POST['image'])) {
+    if (isset($_FILES)) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $fichier);
     }
@@ -67,6 +67,18 @@
 <body>
     <?php include HOME_SITE . "header.php"; ?>
     <main>
+<?php
+    if (isset($erreur['avis'])){
+?>
+    <h1>Vous avez déjà donner votre avis</h1>
+<?php
+    }
+    else if (isset($erreur['produit'])){
+?>
+    <h1>Le produit n'existe pas</h1>
+<?php
+    }
+?>
         <article>
             <?=print_r($sql_produit)?>
             <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
