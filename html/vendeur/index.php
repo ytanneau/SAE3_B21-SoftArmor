@@ -14,9 +14,9 @@ if ($_POST != null){
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
+// Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ./stock');
-    exit;
+    header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
 }
 
 ?>

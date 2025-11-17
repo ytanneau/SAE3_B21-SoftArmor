@@ -1,8 +1,9 @@
 <?php 
     // appel du fichier de configuration bdd
-    require_once "../../../../../.config.php";
     define('HOME_GIT', '../../../../../');
     define('HOME_SITE', '../../../../');
+
+    require_once HOME_GIT . ".config.php";
 
     define('ANONYMISATION_INT', 0);
     define('ANONYMISATION_STRING', 'Compte désactivé');
