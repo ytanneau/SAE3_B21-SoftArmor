@@ -181,7 +181,7 @@ if ($numEtape == 3) {
             $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
             $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva']/100 . "%\n";
             $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
-            $contenu_fichier .= "\tPrix TTC total \t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite'] . "€\n\n";
+            $contenu_fichier .= "\tPrix TTC total \t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
         }
     }
 
