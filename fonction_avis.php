@@ -5,7 +5,7 @@
     function avis_client_produit($id_produit){
         global $pdo;
         try {
-            $requete = $pdo->prepare("CALL avis_client_produit(:id_produit)");
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=id_produit");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -26,3 +26,34 @@
             throw $e;
         }
     }
+
+    // requete pour crée un avis
+    function cree_avis($id_produit, $note, $titre , $description, $image){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+            $requete->bindValue(':note', $note, PDO::PARAM_STR);
+            $requete->bindValue(':titre', $titre, PDO::PARAM_STR);
+            $requete->bindValue(':description', $description, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    // verifie si un avis existe déjà
+    function check_avis_existe($id_produit, $id_client){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=id_produit AND id_client=:id_client");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
