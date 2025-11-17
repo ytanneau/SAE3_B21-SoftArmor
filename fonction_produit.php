@@ -69,5 +69,17 @@
             header("../html/vendeur/stock/");
         }
     }
+
+    function vendeur_All_produit($id_produit){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur');
+            $requete->bindValue(':id_vendeur', $id_produit, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 ?>
 
