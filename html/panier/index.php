@@ -26,7 +26,7 @@ require_once (HOME_GIT . 'fonction_produit.php');
 //supprime le produit selectionné
 if ($_POST != NULL) {
     $id_prod = $_POST['id_produit'];
-    supprimer_produit_panier($id_prod,$id_client);
+    //supprimer_produit_panier($id_prod,$id_client);
     header('Refresh: 0');
 }
 
