@@ -51,9 +51,9 @@
     function check_avis_existe($id_produit, $id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=id_produit AND id_client=:id_client");
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
-            $requete->bindValue(':id_client', $id_client, PDO::PARAM_STR);
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

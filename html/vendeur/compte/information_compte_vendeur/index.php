@@ -70,6 +70,7 @@
             </p>
             <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
             <button><a href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
+            <button><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
         </main>
         <footer>
 
