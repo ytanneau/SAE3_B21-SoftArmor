@@ -25,19 +25,19 @@ require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 
 //requete pour recuperer mot de passe cryptée
-$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
+//$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
 
-$mot_de_passe= $pdo->query($sql);
+$mot_de_passe= sql_get_mdp_cryptee($_SESSION['id_compte']);
 
 //requete pour recuperer informations du compte sans l'adresse
-$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
+//$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
 
-$info_compte = $pdo->query($sql);
+$info_compte = sql_get_info_compte($_SESSION['id_compte']);
 
 //requete pour recuperer l'adresse du compte
-$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION['id_compte']};";
+//$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION['id_compte']};";
 
-$adresse_compte = $pdo->query($sql);
+$adresse_compte = sql_get_adresse_compte($_SESSION['id_compte']);
 
 //recuperer les avis du compte
 $avis = tout_avis_client($_SESSION['id_compte']);
@@ -50,9 +50,9 @@ foreach ($mot_de_passe as $row){
 }
 
 //requete pour savoir si il y a une image de profil
-$sql ="SELECT * FROM _image inner join _compte on _image.id_image = _compte.id_image_profil where _compte.id_compte = {$_SESSION['id_compte']};";
+//$sql ="SELECT * FROM _image inner join _compte on _image.id_image = _compte.id_image_profil where _compte.id_compte = {$_SESSION['id_compte']};";
 
-$possede_image = $pdo->query($sql);
+$possede_image = sql_get_img_profil($_SESSION['id_compte']);
 
 //traitement de la modification des informations
 if ($_POST != null){
