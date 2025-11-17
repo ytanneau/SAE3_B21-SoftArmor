@@ -98,17 +98,22 @@ if ($_POST != null){
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
                 if ($_FILES["pdp"]["size"] < MAX_SIZE) {
-                
+                    echo "img bon poid";
                     move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
+                    echo "img sur la bdd";
                     $est_entre_img= false;
+                    
                     foreach ($possede_image as $row){ 
+                        echo "rentre boucle foreach";
                         $est_entre_img=true;
                     }
                     if($est_entre_img){
+                        echo "possede une image";
                         //met a jour les données de l'image de profil
                         $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
                     }
                     else {
+                        echo "possede pas une image";
                         //insere l'image de profil dans _image
                         $sql="INSERT INTO _image VALUES ({$chemin},{$titre},{$alt});";
                         $pdo->query($sql);
@@ -118,7 +123,8 @@ if ($_POST != null){
                         $recup_id_image = $pdo->query($sql);
 
                         foreach ($recup_id_image as $row){ 
-                        $id_image = $row['id_image'];
+                            echo "recup id image";
+                            $id_image = $row['id_image'];
                         }
 
                         //met a jour _compte pour dire quil y a une image de profil
