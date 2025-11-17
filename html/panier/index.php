@@ -79,7 +79,7 @@ try {
         ?>
     </ul>
 
-    <p>Prix total HT : <?= $total_ht ?></p>
-    <p>Prix total TTC : <?= $total_ttc ?> </p>
+    <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
+    <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
 </body>
 </html>
