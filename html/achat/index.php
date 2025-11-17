@@ -1,5 +1,5 @@
 <?php
-const HOME_GIT = "../../../";
+const HOME_GIT = "../../";
 
 if (!isset($_SESSION)) {
     session_start();
