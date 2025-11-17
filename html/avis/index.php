@@ -42,12 +42,18 @@
     }
 
     if (isset($_POST) && (!isset($erreur))){
+        if (!isset($_POST['produit'])) $_POST['note'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        if (!isset($_FILES['image'])) $image = null ?? $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'];
-        print_r($_POST);
+        if (!isset($_FILES['image'])) $image = null ?? $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'png';
+        //print_r($_POST);
 
+
+
+        if ($image != null){
+            rename('ressources/avis/' . $fichier, $image);
+        }
         
 
         cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
@@ -68,14 +74,15 @@
 <?php
     if (isset($erreur['avis'])){
 ?>
-    <h1>Vous avez déjà donner votre avis</h1>
+        <h1>Vous avez déjà donner votre avis</h1>
 <?php
     }
     else if (isset($erreur['produit'])){
 ?>
-    <h1>Le produit n'existe pas</h1>
+        <h1>Le produit n'existe pas</h1>
 <?php
     }
+    else{
     /**<img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>"> */
     //print_r($sql_produit)
 ?>
@@ -83,7 +90,11 @@
             <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
             
         </article>
-        <form action="?produit=<?=htmlentities($_GET['produit'])?>" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" 
+                value="<?=htmlentities(trim($_GET['produit']))?>"
+                name="produit"
+                id="produit">
 
             <label for="note">Note</label>
             <input type="range" 
@@ -115,6 +126,9 @@
 
             <input type="submit" value="créer l'avis">
         </form>
+<?php
+    }
+?>
     </main>
 
 </body>
