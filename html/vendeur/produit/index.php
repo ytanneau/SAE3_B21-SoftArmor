@@ -1,7 +1,7 @@
 <?php
 //permet d'utiliser le fichier config.php
     define("HOME_GIT", "../../../");
-    
+    define("HOME_SITE", "../../");
 
     if (!isset($_SESSION)) {
         session_start();
