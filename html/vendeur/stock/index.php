@@ -1,6 +1,5 @@
 <?php
-//permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
+
 define("HOME_GIT", "../");
 if (!isset($_SESSION)) {
     session_start();
@@ -10,6 +9,11 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('location: ' . HOME_GIT);
     exit;
 }
+
+//permet d'utiliser le fichier config.php
+require_once '../../../.config.php';
+require_once HOME_GIT . 'fonction_produit.php';
+
 function ecrire_nom($nom_stock){
     $rows = $nom_stock->fetchAll(PDO::FETCH_ASSOC);
     foreach ($rows as $row){
