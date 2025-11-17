@@ -1,7 +1,7 @@
 <?php
     
     define('HOME_SITE', '../../');
-    const HOME_GIT = '../../../';
+    define('HOME_GIT', '../../../');
     
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
@@ -56,8 +56,7 @@
     }
     else{
 ?>
-        <img src="" alt="">
-        <a href="../">
+        <a href="<?= HOME_SITE ?>">
             <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S'inscrire</h2>
