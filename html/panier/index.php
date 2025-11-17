@@ -20,7 +20,7 @@ if (!isset($_SESSION)) {
     $id_client = $_SESSION['id_compte'];
 }
 
-require_once (HOME_GIT . '.config.php');
+//require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 
 //supprime le produit selectionné
