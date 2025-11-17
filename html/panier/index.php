@@ -84,7 +84,7 @@ if($_POST!=NULL){
                     <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
 
                     <form action="" method="post">
-                        <input type="text" name="id_produit" style="display:none" value="<?= $elt['id_produit'] ?>">
+                        <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
                         <button type="submit">Supprimer</button>
                     </form>
                 </li>
