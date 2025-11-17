@@ -76,6 +76,10 @@
         } catch (PDOException $e) {
             throw $e;
         }
+        if ($requete['id_produit'] == NULL) {
+            echo "ce produit n'existe pas";
+            return NULL;
+        }
     }
 
     function vendeur_All_produit($id_vendeur){
