@@ -69,8 +69,8 @@ if($_POST!=NULL){
                 <?php 
                     $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
 
-                    $total_ht += $elt['prix'];
-                    $total_ttc += $prix_ttc;
+                    $total_ht += $elt['prix'] * $elt['quantite_panier'];
+                    $total_ttc += $prix_ttc * $elt['quantite_panier'];
                 ?>
 
                 <li>
