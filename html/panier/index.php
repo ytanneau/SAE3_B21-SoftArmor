@@ -22,7 +22,6 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
-var_dump($_POST);
 
 // Récupération des éléments du panier
 $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
@@ -96,7 +95,7 @@ if($_POST!=NULL){
     <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
 
     <!-- bouton de paiement -->
-    <form action="" method="post">
+    <form action="../achat" method="post">
         <input type="text" name="panier" id="panier" value="1">
         <input type="submit" value="Passer au paiement">
     </form>
