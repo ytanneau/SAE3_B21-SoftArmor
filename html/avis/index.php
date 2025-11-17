@@ -45,10 +45,8 @@
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        if (!isset($_FILES['image'])) $image = null ?? $image = $_GET['produit'].'_'.$_SESSION['id_compte'];
-
-        $id_avis = null; // A DEFINIR, DEBROUILLE toi YANN;
-
+        if (!isset($_FILES['image'])) $image = null ?? $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'];
+        print_r($_POST);
 
         
 
