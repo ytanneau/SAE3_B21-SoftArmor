@@ -2,6 +2,13 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../../');
     //echo HOME_GIT . 'fonction_sql.php';
+
+
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+        header('location: ../stock');
+        exit;
+    }
+
     if ($_POST != null){
         //echo "présence d'un post";
         //print_r($_ENV);
@@ -13,9 +20,6 @@
 
         } else {
             $erreurs['fatal'] = true;
-            $fichierLog = __DIR__ . "/erreurs.log";
-            $date = date("Y-m-d H:i:s");
-            file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
         }
     }
 ?>

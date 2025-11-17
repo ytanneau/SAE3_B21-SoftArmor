@@ -3,6 +3,9 @@
 define('HOME_GIT', "../../../");
 define('HOME_SITE', '../../');
 
+//taille max de pdp
+define('MAX_SIZE', 2 * 1024 * 1024);
+
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
     session_start();
@@ -18,6 +21,8 @@ if (!isset($_SESSION)) {
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
+require_once (HOME_GIT . 'fonction_global.php');
+require_once (HOME_GIT . 'fonction_avis.php');
 
 //requete pour recuperer mot de passe cryptée
 $sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
@@ -34,10 +39,8 @@ $sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION
 
 $adresse_compte = $pdo->query($sql);
 
-//requete pour recuperer les avis du compte
-$sql="SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']}";
-
-$avis = $pdo->query($sql);
+//recuperer les avis du compte
+$avis = tout_avis_client($_SESSION['id_compte']);
 
 
 //recupere le mdp crypté et l'id de l'adresse du client
@@ -46,10 +49,14 @@ foreach ($mot_de_passe as $row){
     $id_adresse = $row['id_adresse'];
 }
 
+//requete pour savoir si il y a une image de profil
+$sql ="SELECT * FROM _image inner join _compte on _image.id_image = _compte.id_image_profil where _compte.id_compte = {$_SESSION['id_compte']};";
+
+$possede_image = $pdo->query($sql);
 
 //traitement de la modification des informations
 if ($_POST != null){
-    print_r($_FILES);
+
     //initialise les vaiables a ""
     if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
@@ -90,11 +97,42 @@ if ($_POST != null){
         $alt="'Image de Profil'";
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
-                move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
-                $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
-                $pdo->query($sql);
+                if ($_FILES["pdp"]["size"] < MAX_SIZE) {
+                
+                    move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
+                    $est_entre_img= false;
+                    foreach ($possede_image as $row){ 
+                        $est_entre_img=true;
+                    }
+                    if($est_entre_img){
+                        //met a jour les données de l'image de profil
+                        $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
+                    }
+                    else {
+                        //insere l'image de profil dans _image
+                        $sql="INSERT INTO _image VALUES ({$chemin},{$titre},{$alt});";
+                        $pdo->query($sql);
+
+                        //recupere l'id de l'image inséré
+                        $sql="SELECT id_image FROM _image WHERE url_image = {$chemin}";
+                        $recup_id_image = $pdo->query($sql);
+
+                        foreach ($recup_id_image as $row){ 
+                        $id_image = $row['id_image'];
+                        }
+
+                        //met a jour _compte pour dire quil y a une image de profil
+                        $sql="UPDATE _compte SET id_image_profil = {$id_image}";
+                    }
+                    $pdo->query($sql);
+                }
+                
             }
         }
+
+        //vide les variables globales
+        $_POST = null;
+        $_FILES = null;
 
         //refresh la page pour afficher les infos
         header("Refresh:0");
@@ -125,7 +163,7 @@ unset($pdo);
                 foreach ($info_compte as $row){  
             ?>
 
-            <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
+            <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
 
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
@@ -133,7 +171,7 @@ unset($pdo);
                 <input type="file" name="pdp" accept=".png">
 
                 <label for="pseudo">Pseudonyme</label>
-                <input type="text" name="pseudo" value="<?php echo $row['pseudo'];?>" placeholder="À renseigner">
+                <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur pseudo-->
                 <?php
@@ -147,7 +185,7 @@ unset($pdo);
                 ?>
 
                 <label for="nom">Nom</label>
-                <input required type="text" name="nom" value="<?php echo $row['nom'];?>" placeholder="À renseigner">
+                <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur nom-->
                 <?php
@@ -161,7 +199,7 @@ unset($pdo);
                 ?>
 
                 <label for="prenom">Prenom</label>
-                <input required type="text" name="prenom" value="<?php echo $row['prenom'];?>" placeholder="À renseigner">
+                <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur prenom-->
                 <?php
@@ -175,7 +213,7 @@ unset($pdo);
                 ?>
 
                 <label for="date">Date de Naissance</label>
-                <input required type="date" name="date" value="<?php echo $row['date_naissance'];?>" placeholder="À renseigner">
+                <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
                 
                 <!--Erreur Date-->
                 <?php
@@ -189,7 +227,7 @@ unset($pdo);
                 ?>
 
                 <label for="mail">Mail</label>
-                <input required type="email" name="email" value="<?php echo $row['email'];?>" placeholder="À renseigner">
+                <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur mail-->
                 <?php
@@ -212,7 +250,7 @@ unset($pdo);
                     $est_entre = true;
                 ?>
                 
-                <input type="text" name="adresse" value="<?php echo $row['adresse'];?>" placeholder="À renseigner">
+                <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner">
 
                 <!--Erreur adresse-->
                 <?php
@@ -226,10 +264,10 @@ unset($pdo);
                 ?>
 
                 <label for="complement_adresse">Complement Adresse</label>
-                <input type="text" name="complement_adresse" value="<?php echo $row['complement_adresse'];?>" placeholder="À renseigner">
+                <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner">
                 
                 <label for="code_postal">Code Postal</label>
-                <input type="text" name="code_postal" value="<?php echo $row['code_postal'];?>" placeholder="À renseigner">
+                <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner">
                 
                 <!--Erreur code postal-->
                 <?php
@@ -337,14 +375,14 @@ unset($pdo);
                     <li>
                         <div>
                             <div>
-                                <img src="<?php echo "../../".$row['url_image'];?>" alt="<?php echo $row['alt_image'];?>" title="<?php echo $row['titre_image'];?>">
-                                <p><?php echo $row['pseudo'];?></p>
+                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                                <p><?= htmlentities($row['pseudo'] ?? '')?></p>
                                 <?php afficher_moyenne_note($row['note']);?>
                             </div>
                             <div>
-                                <p><?php echo $row['titre'];?></p>  
-                                <p><?php echo $row['commentaire'];?></p>
-                                <p><?php echo "Avis publié le " . $row['date_avis'];?></p>
+                                <p><?= htmlentities($row['titre'] ?? '')?></p>  
+                                <p><?= htmlentities($row['commentaire'] ?? '')?></p>
+                                <p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p>
                             </div>
                         </div>
                     </li>
