@@ -60,7 +60,7 @@ unset($pdo);
             foreach ($produit_recent as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
