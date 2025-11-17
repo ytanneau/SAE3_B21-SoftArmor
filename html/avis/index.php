@@ -24,7 +24,7 @@
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
     
-    if (isset($_POST)){
+    if ($_POST != null){
         print_r($_POST);
         echo 1;
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
