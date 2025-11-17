@@ -16,6 +16,11 @@
         }
     }
 
+    if (isset($_POST['image'])) {
+        $fichier = $_SESSION['id_compte'] . '_'. time();
+        move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $fichier);
+    }
+
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
 
@@ -45,9 +50,9 @@
         $id_avis = null; // A DEFINIR, DEBROUILLE toi YANN;
 
 
-        if (isset($_POST['image'])) {
-            move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $id_avis);
-        }
+        
+
+        //cree_avis($$_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description']);
     }
 
 ?>
@@ -62,7 +67,10 @@
 <body>
     <?php include HOME_SITE . "header.php"; ?>
     <main>
-        <form action="" method="post" media... enctype="multipart/form-data">
+        <article>
+
+        </article>
+        <form action="?produit=<?=htmlentities($_GET['produit'])?>" method="post" enctype="multipart/form-data">
             <input type="text" 
                 name="produit" 
                 id="produit"
