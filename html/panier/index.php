@@ -64,6 +64,7 @@ try {
                 <p><?= $elt['description'] ?></p>
                 <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
                 <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
+                <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
             </li>
         <?php } ?>
     </ul>
