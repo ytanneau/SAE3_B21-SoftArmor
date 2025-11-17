@@ -144,5 +144,16 @@
         }
     }
 
+    function supprimer_produit_panier($id_produit,$id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('DELETE FROM _elt_panier WHERE id_produit =:id_produit and id_client = :id_client;');
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+            $requete->bindValue(':id_client', $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 ?>
 
