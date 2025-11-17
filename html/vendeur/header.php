@@ -2,7 +2,7 @@
 
 <header id="header_client">
     <div>
-        <a href=<?= HOME_SITE ?>>
+        <a href=<?= HOME_SITE . 'vendeur' ?>>
             <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon vendeur" title="Logo Alizon vendeur">
         </a>
 

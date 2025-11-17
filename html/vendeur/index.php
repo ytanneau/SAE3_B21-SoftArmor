@@ -41,7 +41,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     else {
 ?>
         <img src="" alt="">
-        <a href="../">
+        <a href="./">
             <img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S’identifier</h2>
