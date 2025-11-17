@@ -15,20 +15,21 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 
 // Nom public, prix, moyenne des notes et informations de l'image de chaque produit
-$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
-$produit_catalogue = $pdo->query($query);
+//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
+$produit_catalogue = info_produit_accueil();
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits alimentaires
-$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit AND _produit_dans_categorie.nom_categorie = \"Alimentaire\";";
-$produit_alimentaire = $pdo->query($query);
+//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit AND _produit_dans_categorie.nom_categorie = \"Alimentaire\";";
+$cat='Alimentaire';
+$produit_alimentaire = info_produit_accueil_categorie($cat);
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits les plus récents
-$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit ORDER BY date_creation DESC;";
-$produit_recent = $pdo->query($query);
+//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit ORDER BY date_creation DESC;";
+$produit_recent = info_produit_accueil_plus_recent();
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits en réduction
-$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN _promotion ON produit_visible.id_produit = _promotion.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
-$produit_reduit = $pdo->query($query);
+// $query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN _promotion ON produit_visible.id_produit = _promotion.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
+$produit_reduit = info_produit_accueil_reduction();
 
 // Fermer la connexion
 unset($pdo);
@@ -60,7 +61,7 @@ unset($pdo);
             foreach ($produit_recent as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
@@ -95,7 +96,7 @@ unset($pdo);
             ?>
             <li>
                 <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                    <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
@@ -132,7 +133,7 @@ unset($pdo);
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
@@ -165,7 +166,7 @@ unset($pdo);
             foreach ($produit_catalogue as $row) { ?>
                 <li>
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
-                        <img src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
