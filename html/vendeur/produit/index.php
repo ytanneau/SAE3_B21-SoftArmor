@@ -6,6 +6,7 @@
     if (!isset($_SESSION)) {
         session_start();
     }
+
     function renvoi(){
         if (headers_sent()) {
             die("echec de redirection. cliquer sur ce lien svp : <a href=`../`>Ici</a>");
@@ -30,6 +31,7 @@
     if ($_GET == NULL) {
        echo "Produit non trouvé";
        header("location: ../");
+       exit;
     }
     
     require_once HOME_GIT . '.config.php';

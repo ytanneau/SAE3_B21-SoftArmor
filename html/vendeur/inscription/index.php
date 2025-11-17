@@ -14,10 +14,10 @@
     if ($_POST != null) {
         $erreurs = [];
         $fichier = HOME_GIT . 'fonction_compte.php';
+        
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
-
         } else {
             $erreurs['fatal'] = true;
         }
