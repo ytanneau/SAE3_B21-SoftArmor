@@ -84,7 +84,7 @@ try {
     <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
 
     <!-- bouton de paiement -->
-    <form method="post">
+    <form action="../achat" method="post">
         <input type="hidden" name="panier" value="1">
         <input type="submit" value="Passer au paiement">
     </form>
