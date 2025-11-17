@@ -7,8 +7,12 @@
         session_start();
     }
     function renvoi(){
-        header('location: ../');
-        exit;
+        if (headers_sent()) {
+            die("echec de redirection. cliquer sur ce lien svp : <a href=...>");
+        }
+        else{
+            exit(header("Location: /user.php"));
+        }
     }
     // Vérifie si quelqu'un est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
