@@ -47,7 +47,7 @@ if (isset($produit['prix'])) {
     }
 }
 
-if($_POST!=NULL){
+if ($_POST != NULL) {
     $qte= $_POST['quantite'];
     $id_prod = $_GET['id_produit'];
     $id_cli = $_SESSION['id_compte'];
@@ -139,7 +139,10 @@ if($_POST!=NULL){
     <form action="" method="post">
         <label for="quantite">Quantité</label>
         <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
-        <button type="submit">Ajouter au Panier</button>
+        
+        <?php if (isset($_SESSION['logged_in'])) { ?>
+            <button type="submit">Ajouter au Panier</button>
+        <?php } ?>
     </form>
 
 </body>
