@@ -121,7 +121,7 @@ if ($_POST != NULL) {
     <!-- Affichage des avis -->
     <h3>Avis</h3>
 
-    <a href="../avis/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Ajouter un avis</p></a>
+    <a href="../avis/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>"><p>Ajouter un avis</p></a>
 
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
@@ -143,12 +143,12 @@ if ($_POST != NULL) {
         $page = HOME_SITE . "compte/inscription";
     } ?>
 
-    <a href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    <a href="<?=$page?>/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
     
     <form action="" method="post">
         <?php if (isset($_SESSION['logged_in'])) { ?>
             <label for="quantite">Quantité</label>
-            <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
+            <input type="number" name="quantite" min=1 max=50000 value=1 pattern="\d*" required>
             <button type="submit">Ajouter au Panier</button>
         <?php } else { ?>
             <p>Connectez-vous pour ajouter ce produit à votre panier.</p>

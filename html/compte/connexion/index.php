@@ -15,9 +15,9 @@ if ($_POST != null){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    if (isset($_GET['produit'])) {
+    if (isset($_GET['id_produit'])) {
         // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . "produit/index.php?id_produit=" . htmlentities($_GET['produit']));
+        header('Location: ' . HOME_SITE . "produit/index.php?id_produit=" . htmlentities($_GET['id_produit']));
     } else {
         // Sinon, retour accueil
         header('location: ' . HOME_SITE);
@@ -102,9 +102,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 ?>
             </p>
             
-            <input type="submit" value="Se connecter" class="bouton"> 
+            <input type="submit" value="Se connecter" class="bouton">
         </form>
-        <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">S'inscrire</a></p>
+        <!-- <p><a href="../reinitialiser">Mot de passe oublié ?</a></p> -->
+        <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['id_produit'])) echo "?id_produit=" . $_GET['id_produit']?>">S'inscrire</a></p>
         </main>
 
     

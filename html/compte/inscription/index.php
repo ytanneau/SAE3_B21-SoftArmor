@@ -11,13 +11,15 @@
         if (!isset($_POST['date_naissance'])) $_POST['date_naissance'] = "";
         if (!isset($_POST['mdp'])) $_POST['mdp'] = "";
         if (!isset($_POST['mdpc'])) $_POST['mdpc'] = "";
+        if (!isset($_POST['question'])) $_POST['question'] = "";
+        if (!isset($_POST['reponse'])) $_POST['reponse'] = "";
 
         $erreurs = [];
 
         $fichier = HOME_GIT . 'fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
-            $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
+            $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc'], $_POST['question'], $_POST['reponse']);
         } else {
             $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -29,7 +31,7 @@
     
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $param = "";
-        if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit'];
+        if (isset($_GET['id_produit'])) $param = "?id_produit=" . $_GET['id_produit'];
         header('location: ' . HOME_SITE . "compte/connexion" . $param);
         exit;
     }
@@ -139,11 +141,31 @@
                     </p>
                 <?php } ?>
 
-                <input type="submit" value="Crée mon compte" class="bouton">
+                <br>
+                <label for="question">Question secrète</label>
+                <select id="question" name="question" class="champ">
+                    <option value="">Sélectionnez une question secrète</option>
+                    <option value="mere">Quel était le nom de famille de votre mère ?</option>
+                    <option value="animal">Quel était le nom de votre premier animal de compagnie ?</option>
+                    <option value="professeur">Quel était le nom de votre professeur préféré ?</option>
+                </select>
+
+                <br>
+                <label for="reponse">Votre réponse</label>
+                <input type="text" name="reponse" id="reponse" class="champ">
+                <p class="contrainte"></p>
+
+                <?php if (isset($erreurs['reponse'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['reponse']?>
+                    </p>
+                <?php } ?>
+
+                <input type="submit" value="Créer mon compte" class="bouton">
             </form>
         <?php } ?>
 
-        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
+        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['id_produit'])) echo "?id_produit=" . $_GET['id_produit']?>">Se connecter</a></p>
     </main>
 </body>
 </html>
