@@ -41,7 +41,7 @@
             $image = null;
         }
         else{
-            $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'png';
+            $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'.png';
         }
 
         if (condition_avis()){
