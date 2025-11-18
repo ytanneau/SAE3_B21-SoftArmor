@@ -32,6 +32,7 @@
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
+        print_r($_FILES['image']);
         if ($_FILES['image'] == null){
             $image = null;
         }
@@ -41,7 +42,7 @@
 
         if (condition_avis()){
             if ($image != null){
-                rename('ressources/avis/' . $fichier, $image);
+                rename('../ressources/avis/' . $fichier, '../' . $image);
             }
             
             print_r($_POST);
