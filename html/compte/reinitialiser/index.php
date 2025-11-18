@@ -8,7 +8,6 @@ define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
 $erreurs = [];
-$etape = 0;
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['id_produit'])) {
@@ -25,7 +24,7 @@ if ($_POST == null) {
     $etape = 1;
 } else {
     require_once HOME_GIT . 'fonction_compte.php';
-    
+
     $email = htmlentities(trim($_POST['email'] ?? ''));
     $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     $mdp = htmlentities(trim($_POST['mdp'] ?? ''));
