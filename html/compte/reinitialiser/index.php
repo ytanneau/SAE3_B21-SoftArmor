@@ -59,6 +59,11 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
 
 // Deuxième formulaire (après saisie réponse)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
+    // Si l'e-mail n'est plus dans le POST, il y a eu une modification intentionnelle de la page
+    if (check_vide($email)) {
+        die("Erreur lors de la récupération de l'adresse e-mail");
+    }
+
     if (empty($reponse)) {
         $erreurs['reponse'] = VIDE;
     } 
@@ -81,6 +86,11 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
 
 // Troisième formulaire (après saisie MDP et MDPC)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
+    // Si l'e-mail n'est plus dans le POST, il y a eu une modification intentionnelle de la page
+    if (check_vide($email)) {
+        die("Erreur lors de la récupération de l'adresse e-mail");
+    }
+    
     // Vérifier les erreurs du MDP
     if (check_vide($mdp)){
         $erreurs['mdp'] = VIDE;
