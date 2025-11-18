@@ -92,7 +92,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
     
     // Si pas d'erreur sur la réponse
     if (!isset($erreurs['reponse'])) {
-        $reponse_valide = sql_verifier_reponse($email, $reponse);
+        $reponse_valide = sql_check_reponse($email, $reponse);
 
         if (!$reponse_valide) {
             // Si pas de question associée à cet e-mail
@@ -105,16 +105,23 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
 
 // Troisième formulaire (après saisie MDP et MDPC)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
-    if (empty($mdp)) {
+    // Vérifier les erreurs du MDP
+    if (check_vide($mdp)){
         $erreurs['mdp'] = VIDE;
-    } 
-
-    if (empty($mdpc)) {
-        $erreurs['mdpc'] = VIDE;
+    }
+    else if (!check_taille($mdp, TAILLE_MDP)){
+        $erreurs['mdp'] = DEPASSE;
+    }
+    else if (!check_mot_de_passe($mdp)){
+        $erreurs['mdp'] = FORMAT;
     }
 
-    if ($mdp !== $mdpc) {
-        $erreurs['final'] = CORRESPOND_PAS;
+    // Vérifier les erreurs du MDPC
+    if (check_vide($mdpc)){
+        $erreurs['mdpc'] = VIDE;
+    }
+    else if ($mdp !== $mdpc) {
+        $erreurs['mdpc'] = CORRESPOND_PAS;
     }
     
     if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc']) && !isset($erreurs['final'])) {

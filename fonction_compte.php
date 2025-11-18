@@ -572,8 +572,16 @@
         return ($requete->fetch(PDO::FETCH_ASSOC));
     }
 
-    function sql_verifier_reponse($email, $reponse) {
-        return null;
+    // Vérifie si la réponse donnée est bien celle associée à l'e-mail donné
+    function sql_check_reponse($email, $reponse) {
+        global $pdo;
+
+        $requete = $pdo->prepare("SELECT reponse FROM compte_client WHERE email = :email AND reponse = :reponse");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+        $requete->execute();
+
+        return ($requete->fetch(PDO::FETCH_ASSOC) != null);
     }
 
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
