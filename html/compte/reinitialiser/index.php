@@ -52,7 +52,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
         } else {
             $etape = 2;
         }
-
+    } else {
+        $etape = 1;
     }
 }
 
@@ -73,6 +74,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
         } else {
             $etape = 3;
         }
+    } else {
+        $etape = 2;
     }
 }
 
@@ -97,7 +100,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         $erreurs['mdpc'] = CORRESPOND_PAS;
     }
     
-    if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc']) && !isset($erreurs['final'])) {
+    // Si pas d'erreur sur les mots de passe
+    if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc'])) {
         // Hasher et update le mot de passe associé à l'email en POST
         $res = sql_change_mdp($email, $mdp);
 
