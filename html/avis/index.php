@@ -125,8 +125,10 @@
 ?>
     <section>
         <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
+            <article>
                 <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
                 <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
+            </article>
         </a>
     </section>
     <section>
@@ -136,7 +138,8 @@
                 name="produit"
                 id="produit">
 
-            <label for="note">Note</label>
+            <label for="note">Note : <output id="output">5</output></label>
+            
             <input type="range" 
                 name="note" 
                 id="note"
@@ -145,8 +148,8 @@
                 step="1"
                 value="5"
                 oninput="output.value = this.value"
-                required>
-            <output id="output">5</output>
+                required
+                class="champ">
 <?php
     if (isset($erreur['note'])){
 ?>
@@ -202,7 +205,7 @@
     }
 ?>
 
-            <input type="submit" value="créer l'avis">
+            <input type="submit" value="Créer l'avis" class="bouton">
         </form>
     </section>
 <?php
