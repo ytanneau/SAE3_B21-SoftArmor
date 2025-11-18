@@ -163,7 +163,7 @@
         <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
             <article>
                 <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_tilte'])?>">
+                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
             </article>
         </a>
         <form action="" method="post" enctype="multipart/form-data">
