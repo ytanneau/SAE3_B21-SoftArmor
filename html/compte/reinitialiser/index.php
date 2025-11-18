@@ -13,13 +13,13 @@ if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
 
     // Premier formulaire (email)
-    if (!isset($email_existe)) {
+    if (!isset($_POST['mdp'])) {
         $email_existe = sql_check_email($pdo, htmlentities(trim($_POST['email'] ?? '')));
+
     // Deuxième formulaire (mdp)
-    } else if ($email_existe === true) {
+    } else {
         echo $_POST['mdp'];
     }
-    
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
