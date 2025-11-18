@@ -384,9 +384,9 @@ unset($pdo);
                     foreach ($avis as $row){  
                     ?>
                     <li>
-                        <div>
+                        <a href="/html/produit/index.php?id_produit=<?= $row['id_produit']?>">
                             <div>
-                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                                <img src="<?= "../../".$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
                                 <p><?= htmlentities($row['pseudo'] ?? '')?></p>
                                 <?php afficher_moyenne_note($row['note']);?>
                             </div>
@@ -395,7 +395,8 @@ unset($pdo);
                                 <p><?= htmlentities($row['commentaire'] ?? '')?></p>
                                 <p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p>
                             </div>
-                        </div>
+                            <img src="<?= $row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>">
+                        </a>
                     </li>
                     <?php } ?>
                 </ul>

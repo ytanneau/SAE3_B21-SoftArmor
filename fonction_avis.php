@@ -18,7 +18,16 @@
     function tout_avis_client($id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT pseudo,date_avis,note,titre,commentaire,url_image,titre_image,alt_image FROM compte_client INNER JOIN _avis ON compte_client.id_compte = _avis.id_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_client");
+            $requete = $pdo->prepare("SELECT _avis.id_produit,pseudo,date_avis,note,_avis.titre as titre,commentaire,compte_image_profil.url_image AS url_pdp,compte_image_profil.titre_image AS titre_pdp,compte_image_profil.alt_image AS alt_pdp,_image.url_image AS url_img,_image.titre AS titre_img,_image.alt AS alt_img FROM compte_client 
+                                        INNER JOIN _avis 
+                                        ON compte_client.id_compte = _avis.id_client 
+                                        LEFT JOIN compte_image_profil 
+                                        ON compte_client.id_compte = compte_image_profil.id_compte 
+                                        INNER JOIN _images_produit 
+                                        ON _avis.id_produit = _images_produit.id_produit 
+                                        INNER JOIN _image 
+                                        ON _images_produit.id_image_principale = _image.id_image 
+                                        WHERE compte_client.id_compte = :id_client;");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_STR);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
