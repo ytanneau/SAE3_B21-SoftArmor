@@ -1,10 +1,13 @@
 <?php                 
     // appel du fichier de configuration bdd
+    
+    include "fonction_categorie.php";
+    include "fonction_produit.php";
+
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
 
     require_once HOME_GIT . ".config.php";
-
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -28,36 +31,10 @@
     <head>
         <title>Ajout produit</title>
         <meta charset="UTF-8">
-        <style>
-            fieldset{
-                width: 50em;
-            }
-            .nomProd{
-                width: 20em;
-            }
-            .infoPlus{
-                display: flex;
-                flex-direction: row;
-            }
-            .infoPlus > p{
-                margin-right: 10px;
-            }
-            .descSimple{
-                width: 50em;
-                height : 10em;
-            }
-            .descDetaille{
-                width: 50em;
-                height : 25em;
-            }
-            p{
-                display : flex;
-                flex-direction : column; 
-            }
-        </style>
     </head>
     <body>
-        <?php include "../../header.php"?>
+        <?php include "../../header.php"
+          ?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
@@ -67,83 +44,73 @@
             <form action="" name="formulaire" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <h3>Informations produit</h3>
-                    <div class="infoPlus">
+                    <div>
                         <p>
                             <label for="nomPrv">Libellé privé*</label>
-                            <input class="nomProd" type="text" name="nomPrv" id="nomPrv" required>
+                            <input required type="text" name="nomPrv" id="idNomPrv">
                         </p>
                         <p>
                             <label for="nomPblc">Libellé public*</label>
-                            <input class="nomProd" type="text" name="nomPblc" id="nomPblc" required>
+                            <input required type="text" name="nomPblc" id="idNomPblc">
                         </p>
                     </div>
-                    <div class="infoPlus">
+                    <div>
                         <p>
                             <label for="prixProd">Prix* hors taxe (€)</label>
-                            <input type="text" name="prixProd" id="prixProd" required>
+                            <input required type="text" name="prixProd" id="idPrixProd">
                         </p>
                         <p>
                             <label for="tva">TVA* (%)</label>
-                            <input type="number" name="tva" id="tva" required>
+                            <input required type="number" name="tva" id="idTVA">
                         </p>
                         
                         <p>
                             <label for="codeBarre">Code barre*</label>
-                            <input type="text" name="codeBarre" id="codeBarre" maxlength="13" style="width:162.4px" required>
-                            <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
+                            <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px">
+                            <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                         </p>
                     </div>
                     <div>
                         <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="checkMajeur">
+                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
                     </div>
-                    <div class="infoPlus">
+                    <div>
+                        <!--
+                        <p>
+                            <label for="venteUnitaire">Vente unitaire</label>
+                            <input type="checkbox" name="venteUnitaire" id="venteUnitaire">
+                        </p>
+                        -->
                         <p>
                             <label for="categorie">Catégories*</label>
-                            <select name="categorie" id="categorie" style="width: 175px;" required>
+                            <select name="categorie" id="idCategorie" style="width: 175px;" required>
                                 <option value="">-- Choisir une catégorie --</option>
-
                                 <?php
-                                    $categorie = $pdo->query("SELECT nom_categorie FROM _categorie WHERE nom_categorie_sup IS NULL");
-                                    $lignesCategorie = $categorie->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach($lignesCategorie as $nomCat){ ?>
-                                    <option value="<?php echo htmlspecialchars($nomCat['nom_categorie']) ?>">
-                                        <?php echo htmlspecialchars($nomCat['nom_categorie']) ?>
-                                    </option>
-                                <?php    
-                                }
+                                    $tabCategorie = get_categorie_parent();
+                                    foreach($tabCategorie as $nomCat){
                                 ?>
+                                <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
+                                    <?= htmlspecialchars($nomCat['nom_categorie']) ?>
+                                </option>
+                                <?php } ?>
                             </select>
-                            <div id="divSousCategorieAlimentaire" style="display:none;">
-                                <p>
-                                    <label for="sous_categorie">Sous-catégories*</label>
-
-                                    <select name="sous_categorie" id="sous_cate">
-                                        <option value="">-- Choisir une catégorie --</option>
-                                        <option value="Boisson">
-                                            <?php 
-                                                $categorie = $pdo->query("SELECT nom_categorie FROM _categorie WHERE nom_categorie = 'Boisson' "); 
-                                                echo $categorie->fetch(PDO::FETCH_ASSOC)['nom_categorie']; 
-                                            ?>
-                                        </option>
-                                        <option value="Salé">
-                                            <?php 
-                                                $categorie = $pdo->query("SELECT nom_categorie FROM _categorie WHERE nom_categorie = 'Salé' "); 
-                                                echo $categorie->fetch(PDO::FETCH_ASSOC)['nom_categorie']; 
-                                            ?>
-                                        </option>
-                                        <option value="Sucré">
-                                            <?php 
-                                                $categorie = $pdo->query("SELECT nom_categorie FROM _categorie WHERE nom_categorie = 'Sucré' "); 
-                                                echo $categorie->fetch(PDO::FETCH_ASSOC)['nom_categorie']; 
-                                            ?>
-                                        </option>
-                                    </select>
-                                </p>
-                            </div>
+                        </p>
+                        <p id="pSousCategorieAlimentaire" style="display:none;">
+                            <label for="sous_categorie">Sous-catégories alimentaire*</label>
+                            <select name="sous_categorie" id="sous_cate">
+                                <option value="">-- Choisir une catégorie --</option>
+                                <?php 
+                                    $tabSousCategorie = get_sousCategorie("Alimentaire");
+                                    foreach($tabSousCategorie as $sousCat){                  
+                                ?>
+                                <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
+                                        <?= htmlspecialchars($sousCat['nom_categorie'])?>
+                                </option>
+                                <?php } ?>
+                            </select>
                         </p>
                     </div>
-                    <div class="infoPlus">
+                    <div>
                         <p>
                             <label for="">Quantité acheté</label>
                             <input type="text" name="qtAchete">
@@ -188,7 +155,7 @@
                     </div>
                     <hr>
                     <h3>Gestion de stock</h3>
-                    <div class="infoPlus">
+                    <div>
                         <p>
                             <label for="qtStock">Quantité en stock</label>
                             <input type="number" name="qtStock" id="qtStock">
@@ -200,22 +167,24 @@
                     </div>
                     <hr>
                     <h3>Description</h3>
-                    <p>
-                        <label for="descSimple">Description simple (200 caractéres maximum)</label>
-                        <textarea class="descSimple" name="descSimple" id="descSimple" maxlength="200"></textarea>
-                        <label for="descDetaille">Description détaillé (2000 caractéres maximum)</label>
-                        <textarea class="descDetaille" type="textarea" name="descDetaille" id="descDetaille" maxlength="2000"></textarea>
-                    </p>
+                    <div>
+                        <p>
+                            <label for="descSimple">Description simple (200 caractéres maximum)</label>
+                            <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
+                            <label for="descDetaille">Description détaillé (2000 caractéres maximum)</label>
+                            <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
+                        </p>
+                    </div>
                     <hr>
                     <h3>Livraison</h3>
-                    <div class="infoPlus">
+                    <div>
                         <p>
-                            <label for="poidProd">Poids* (Kg)</label>
-                            <input type="text" name="poidProd" id="poidProd" required>
+                            <label for="poidColis">Poids* (Kg)</label>
+                            <input type="text" name="poidColis" id="poidColis" required>
                         </p>
                         <p>
-                            <label for="volumeProd">Volume du colis* (L)</label>
-                            <input type="text" name="volumeProd" id="volumeProd" required>
+                            <label for="volumeColis">Volume du colis* (L)</label>
+                            <input type="text" name="volumeColis" id="volumeColis" required>
                         </p>   
                     </div>
                     <br>
@@ -227,28 +196,28 @@
                 /*
                     Script pour assuré l'intégrité des données en temps réel (dynamique)
                 */
-                const nomPrv = document.getElementById("nomPrv"); 
-                const nomPblc = document.getElementById("nomPblc");
+                const nomPrv = document.getElementById("idNomPrv"); 
+                const nomPblc = document.getElementById("idNomPblc");
 
-                const categorie = document.getElementById("categorie");
-                const divSousCategorie = document.getElementById("divSousCategorieAlimentaire");
+                const categorie = document.getElementById("idCategorie");
+                const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
                 const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
 
                 const uniteLiquide = document.getElementById("blockUniteLiquide");
                 const uniteMasse = document.getElementById("blockUniteMasse");
                 const uniteVetement = document.getElementById("blockUniteVetement");
 
-                const tva = document.getElementById("tva");
-                const prix = document.getElementById("prixProd");
+                const tva = document.getElementById("idTVA");
+                const prix = document.getElementById("idPrixProd");
 
-                const descSimple = document.getElementById("descSimple");
-                const descDetaille = document.getElementById("descDetaille");
+                const descSimple = document.getElementById("idDescSimple");
+                const descDetaille = document.getElementById("idDescDetaille");
                 
-                const codeBarre = document.getElementById("codeBarre");
-                const messageErrCodeBarre = document.getElementById("messageErrCodeBarre");
+                const codeBarre = document.getElementById("idCodeBarre");
+                const messageErrCodeBarre = document.getElementById("idMessageErrCodeBarre");
 
-                const poid = document.getElementById("poidProd");
-                const volume = document.getElementById("volumeProd");
+                const poid = document.getElementById("poidColis");
+                const volume = document.getElementById("volumeColis");
                 const checkMajeur = document.getElementById("checkMajeur");
 
                 const photo = document.getElementById("photo");
@@ -275,7 +244,7 @@
 
                 categorie.addEventListener('change', () => {
                     if(categorie.value === "Alimentaire"){
-                        divSousCategorie.style.display = "block";
+                        pSousCategorie.style.display = "block";
                     } 
                     else if(categorie.value === "Electroménager" || categorie.value === "Electronique" ||
                     categorie.value === "Soin & Hygiène"){
@@ -285,7 +254,7 @@
                         uniteLiquide.style.display = "none";
                         
                         selectSousCategorieAlimentaire.value = null;
-                        divSousCategorie.style.display = "none";
+                        pSousCategorie.style.display = "none";
                     } else {
                         uniteMasse.style.display = "none";
                     }
@@ -351,18 +320,19 @@
                     $nomPrv = $_POST["nomPrv"];
                     $nomPblc = $_POST["nomPblc"];
                     
+                    $qtStock = $_POST["qtStock"];
                     $tva = $_POST["tva"];
                     $prixProd = $_POST["prixProd"];
                     $descSimple = $_POST["descSimple"];
                     $descDetaille = $_POST["descDetaille"];
                     $codeBarre = $_POST["codeBarre"];
-                    $poidProd = $_POST["poidProd"];
-                    $volumeProd = $_POST["volumeProd"];
+                    $poidColis = $_POST["poidColis"];
+                    $volumeColis = $_POST["volumeColis"];
                     $quantite = $_POST["qtAchete"];
                     $unite = $_POST["unite"];
 
-                    if($_POST["sous_categorie"] === ""){ $categorie = $_POST["categorie"]; }
-                    else { $categorie = $_POST["sous_categorie"]; }                    
+                    if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
+                    else { $categorie = $_POST["categorie"]; }
 
                     if($_POST["qtStock"] === ""){ $qtStock = 0; } 
                     else { $qtStock = $_POST["qtStock"]; }
@@ -374,76 +344,40 @@
                     $checkMajeur = isset($_POST["checkMajeur"]) ? 1 : 0;
 
                     // insertion du produit dans la base de données
-                    $sqlAjoutProduit = "INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) 
-                                        VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite); 
-                                        ";
-                    $stmt = $pdo->prepare($sqlAjoutProduit);
-                    $stmt->execute([
-                        ':id_vend' => $id_compte, // passé en $_SESSION une fois la page vendeur finis
-                        ':nomPrv' => $nomPrv,
-                        ':nomPblc' => $nomPblc,
-                        ':descSimple' => $descSimple,
-                        ':descDetaille' => $descDetaille,
-                        ':codeBarre' => $codeBarre,
-                        ':qtStock' => $qtStock,
-                        ':prixProd' => $prixProd,
-                        ':tva' => $tva,
-                        ':seuilAlerte' => $seuilAlerte,
-                        ':poidProd' => $poidProd, 
-                        ':volumeProd' => $volumeProd,
-                        ':checkMajeur' => $checkMajeur,
-                        ':qtunite' => $quantite . ";" . $unite
-                    ]);
-
-                    $idProduit = $pdo->lastInsertId();
+                    
+                    $qtachete = $quantite . ";" . $unite;
+                    $idProduit = add_produit(1, $nomPrv,$nomPblc,
+                                            $prixProd, $tva, $codeBarre, $checkMajeur,
+                                            $qtachete, $qtStock,$seuilAlerte,
+                                            $descSimple,$descDetaille, $poidColis,
+                                             $volumeColis);
 
                     // mise en relation entre le produit et sa catégorie dans la bdd 
-                    $sqlProduitCategorie = "INSERT INTO _produit_dans_categorie(id_produit,nom_categorie)
-                                            VALUES(:id_prod,:nom_cate);
-                                            ";
-                    $stmt = $pdo->prepare($sqlProduitCategorie);
-                    $stmt->execute([
-                        ':id_prod' => $idProduit,
-                        ':nom_cate' => $categorie
-                    ]);
 
-                    /*
-                        Image du produit
-                    */
+                    set_produit_categorie($idProduit,$categorie);
+
+                    /**********************
+                    *   Image du produit  *
+                    ***********************/
                     // vérification de la presence d'une images 
                     if (isset($_FILES['photo'])){
                         $nomImageTemp = $_FILES['photo']['name'];
                         $cheminTemp = $_FILES['photo']['tmp_name'];
                         
                         $nomImage = $idProduit . "_1.png";
-                        $cheminFinal = "../../../images/" . $nomImage;
-                        $url = "images/" . $nomImage;
+                        $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+                        $url = "ressources/produit/" . $nomImage;
 
                         $titre_img = explode('.',$nomImageTemp)[0];
                         $altDefault = "Image du produit : " . $titre_img;
-
                         
                         if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                            // insertion des images dans la bdd 
-                            $sqlImage = "INSERT INTO _image(url_image,titre,alt)
-                                        VALUES(:url_img, :titre_img, :alt_img);";
-                            $stmt = $pdo->prepare($sqlImage);
-                            $stmt->execute([
-                                ':url_img' => $url, 
-                                ':titre_img' => $titre_img, 
-                                ':alt_img' => $altDefault
-                            ]);
+                            // insertion des images dans la bdd
+
+                            $idImage = add_image($url, $titre_img, $altDefault);
+
+                            add_image_produit($idProduit,$idImage);
                             
-                            // mise en relation entre le produit et l'image principale dans la bdd 
-                            // en utilisant l'id du produit et l'id de l'image 
-                            $sqlImageProduit = "INSERT INTO _images_produit(id_produit,id_image_principale)
-                                                VALUES(:id_prod,:id_image_princ);";
-                            $idImage = $pdo->lastInsertId();
-                            $stmt = $pdo->prepare($sqlImageProduit);
-                            $stmt->execute([
-                                ':id_prod' => $idProduit,
-                                ':id_image_princ' => $idImage
-                            ]);
                         }
                     }
                 }
