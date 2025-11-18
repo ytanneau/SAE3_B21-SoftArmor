@@ -64,17 +64,14 @@
                 <td><?= $rows['volume'] ?></td>
             </tr>
         </table>
-        <?php echo $_GET['produit'];
-        print_r($rows2)?>
-        
         <div>
-            <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image_principale'] . '.png' ?>" > 
+            <img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_' . $rows2['id_image_principale'] . '.png' ?>" > 
             <?php
                 if (isset($rows2['id_image1'])) {
-                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
+                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
                 }
                 if (isset($rows2['id_image2'])) {
-                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image2'] . '.png' ?>" > <?php
+                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_' . $rows2['id_image2'] . '.png' ?>" > <?php
                 }
             ?>
         </div>
