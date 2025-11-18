@@ -30,6 +30,8 @@ if ($_POST == null) {
     $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     $mdp = htmlentities(trim($_POST['mdp'] ?? ''));
     $mdpc = htmlentities(trim($_POST['mdpc'] ?? ''));
+
+    $row = sql_email_question($email);
 }
 
 // Premier formulaire (après saisie adresse)
@@ -40,8 +42,6 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
     
     // Si pas d'erreur sur l'e-mail
     if (!isset($erreurs['email'])) {
-        $row = sql_email_question($email);
-
         if (!isset($row['question'])) {
             // Si pas de question associée à cet e-mail
             $erreurs['final'] = "L'adresse e-mail est incorrecte ou aucune question n'a été renseignée pour ce compte";
