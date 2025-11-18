@@ -485,6 +485,8 @@
         }
 
         // erreur sur date d'expiration
+        $date_exp = trim($date_exp);
+        
         if (check_vide($date_exp)) {
             $erreurs['date_exp'] = VIDE;
         } else if (!check_date_exp($date_exp)) {
