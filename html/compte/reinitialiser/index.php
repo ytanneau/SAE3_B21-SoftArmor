@@ -127,6 +127,20 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <label for="email">Votre adresse e-mail</label>
             <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
 
+            <p class="error">
+                <?php
+                    if (isset($erreurs['email'])) {
+                        $message = $erreurs['email'];
+                        
+                        if ($erreurs['email'] === FORMAT) {
+                            $message .= ". Exemple : xyz@domaine.fr"; 
+                        }
+
+                        echo $message;
+                    }
+                ?>
+            </p>
+
             <input type="submit" value="Confirmer">
         </form>
 
@@ -141,6 +155,10 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <label for="reponse">Votre réponse</label>
             <input type="text" id="reponse" name="reponse">
 
+            <p class="error">
+                <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
+            </p>
+
             <input type="submit" value="Confirmer">
         </form>
 
@@ -153,8 +171,16 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <label for="mdp">Nouveau mot de passe</label>
             <input type="password" id="mdp" name="mdp">
 
+            <p class="error">
+                <?= isset($erreurs['mdp']) ? $erreurs['mdp'] : ''; ?>
+            </p>
+
             <label for="mdp">Confirmation du nouveau mot de passe</label>
             <input type="password" id="mdpc" name="mdpc">
+
+            <p class="error">
+                <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
+            </p>
 
             <input type="submit" value="Confirmer">
         </form>
