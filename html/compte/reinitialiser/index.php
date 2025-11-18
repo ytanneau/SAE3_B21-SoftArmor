@@ -45,6 +45,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
         if (!isset($row['question'])) {
             // Si pas de question associée à cet e-mail
             $erreurs['final'] = "L'adresse e-mail est incorrecte ou aucune question n'a été renseignée pour ce compte";
+            $etape = 1;
         } else {
             $etape = 2;
         }
@@ -65,6 +66,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
         if (!$reponse_valide) {
             // Si pas de question associée à cet e-mail
             $erreurs['reponse'] = "La réponse est incorrecte";
+            $etape = 2;
         } else {
             $etape = 3;
         }
@@ -102,6 +104,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 
         // Rediriger vers la page de connexion
         header('location: ' . HOME_SITE . 'compte/connexion');
+    } else {
+        $etape = 3;
     }
 }
 
