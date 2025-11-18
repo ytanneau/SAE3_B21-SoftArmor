@@ -9,7 +9,7 @@
 
     function renvoi(){
         if (headers_sent()) {
-            die("echec de redirection. cliquer sur ce lien svp : <a href=`../`>Ici</a>");
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
         }
         else{
             exit(header("Location: ../"));
