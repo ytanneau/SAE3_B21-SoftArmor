@@ -15,7 +15,13 @@ if ($_POST != null){
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ' . HOME_SITE);
+    if (isset($_GET['produit'])) {
+        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
+        header('Location: ' . HOME_SITE . "produit/index.php?produit=" . htmlentities($_GET['produit']));
+    } else {
+        // Sinon, retour accueil
+        header('location: ' . HOME_SITE);
+    }
     exit;
 }
 
@@ -27,7 +33,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alizon Connexion</title>
+    <title>Alizon - Connexion</title>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="<?= HOME_SITE . 'style.css' ?>">
 </head>
@@ -98,8 +104,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             
             <input type="submit" value="Se connecter" class="bouton"> 
         </form>
-        <p>Pas de compte ? <a href="../inscription/">S'inscrire</a></p>
-    </main>
+        <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">S'inscrire</a></p>
+        </main>
 
     
 </body>

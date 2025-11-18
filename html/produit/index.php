@@ -134,7 +134,13 @@ if ($_POST != NULL) {
     </ul>
     
 
-    <a href="../achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    <?php if (isset($_SESSION['logged_in'])) {
+        $page = "../achat";
+    } else {
+        $page = HOME_SITE . "compte/inscription";
+    } ?>
+
+    <a href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
     
     <form action="" method="post">
         <?php if (isset($_SESSION['logged_in'])) { ?>

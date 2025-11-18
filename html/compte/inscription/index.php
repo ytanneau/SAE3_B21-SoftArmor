@@ -25,6 +25,14 @@
             file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
         }
     }
+
+    
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+        $param = "";
+        if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit'];
+        header('location: ' . HOME_SITE . "compte/connexion" . $param);
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -134,6 +142,8 @@
                 <input type="submit" value="Crée mon compte" class="bouton">
             </form>
         <?php } ?>
+
+        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
     </main>
 </body>
 </html>
