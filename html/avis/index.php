@@ -96,7 +96,7 @@
     <title>Alizon - Avis</title>
     <?php include HOME_SITE . "link_head.php"; ?>
 </head>
-<body id="avis_client">
+<body class="form_client">
     <?php include HOME_SITE . "header.php"; ?>
     <main>
 <?php

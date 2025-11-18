@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged_in'])) {
 
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
+require_once HOME_SITE . "link_head.php";
 $numEtape = -1;
 
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
@@ -204,7 +205,8 @@ if ($numEtape == 3) {
         <meta lang="fr">
     </head>
 
-    <body>
+    <body class="form_client">
+        <main>
 
 <?php
 
@@ -213,52 +215,51 @@ if ($numEtape == 3) {
 if ($numEtape == 1) {
 ?>
 
-        <h1>Entrez vos coordonnées</h1>
         <form action="" method="post">
+            <h2>Entrez votre adresse</h2>
 
-        <label for="adresse">Adresse</label>
-        <input type="text" name="adresse" id="adresse" value="<?=htmlentities($adresse_client['adresse'] ?? '')?>" required>
-        <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
-        <?php
-        if (isset($erreurs['adresse'])){
-        ?>
-        <p class="error">
-            <?="Erreur : ".$erreurs['adresse']?>
-        </p>
-        <?php
-        }
-        ?>
+            <label for="adresse">Adresse</label>
+            <input type="text" name="adresse" id="adresse" value="<?=htmlentities($adresse_client['adresse'] ?? '')?>" required class="champ">
+            <?php
+            if (isset($erreurs['adresse'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['adresse']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
 
-        <br>
-        <label for="complement_adresse">Complément adresse</label>
-        <input type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>"> <p class="contrainte">informations complémentaires</p>
-
-
-        <br>
-        <label for="code_postal">Code postal</label>
-        <input type="number" name="code_postal" id="code_postal" size="5" value="<?=htmlentities($adresse_client['code_postal'] ?? '')?>" required>
-        <p class="contrainte">Nombre à 5 chiffres</p>
-        <?php
-        if (isset($erreurs['code_postal'])){
-        ?>
-        <p class="error">
-            <?="Erreur : ".$erreurs['code_postal']?>
-        </p>
-        <?php
-        }
-        ?>
-
-        <?php if (!isset($adresse_client['adresse'])) { ?>
-        <br>
-        <label for="enregistrer">Enregistrer l'adresse</label>
-        <input type="checkbox" id="enregistrer" name="enregistrer" >
-        <?php } ?>
+            <label for="complement_adresse">Complément adresse</label>
+            <input type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>" class="champ text">
+            <p class="contrainte">informations complémentaires</p>
 
 
-        <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['id_produit'])) {echo htmlentities($_GET['id_produit']);} else {echo "panier";}?>">
-        <input type="hidden" name="form" id="form" required value="adresse">
-        <br>
-        <input type="submit" value="Continuer l'achat">
+            <br>
+            <label for="code_postal">Code postal</label>
+            <input type="number" name="code_postal" id="code_postal" size="5" value="<?=htmlentities($adresse_client['code_postal'] ?? '')?>" required class="petit champ">
+            <?php
+            if (isset($erreurs['code_postal'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['code_postal']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">Nombre à 5 chiffres</p>
+
+            <?php if (!isset($adresse_client['adresse'])) { ?>
+            <label for="enregistrer">Enregistrer l'adresse
+            <input type="checkbox" id="enregistrer" name="enregistrer" ></label>
+            <?php } ?>
+
+
+            <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['id_produit'])) {echo htmlentities($_GET['id_produit']);} else {echo "panier";}?>">
+            <input type="hidden" name="form" id="form" required value="adresse">
+            
+            <input type="submit" value="Continuer l'achat" class="bouton">
 
         </form>
 
@@ -272,65 +273,64 @@ if ($numEtape == 1) {
 else if ($numEtape == 2) {
 ?>
 
-        <h1>Entrez vos coordonnées bancaires</h1>
         <form action="" method="post">
+            <h2>Entrez vos coordonnées bancaires</h2>
 
-        <label for="code_carte">Code de carte bancaire</label>
-        <input type="text" name="code_carte" id="code_carte" required>
-        <p class="contrainte">16 chiffres ex: 1234567891234567</p>
-        <?php
-        if (isset($erreurs['code_carte'])){
-        ?>
-        <p class="error">
-            <?="Erreur : ".$erreurs['code_carte']?>
-        </p>
-        <?php
-        }
-        ?>
-
-        <br>
-        <label for="date_exp">Date d'expiration de la carte</label>
-        <input type="text" name="date_exp" id="date_exp" size="5" required>
-        <p class="contrainte">MM/YY ex: 12/25, 01/26</p>
-        <?php
-        if (isset($erreurs['date_exp'])){
-        ?>
-        <p class="error">
-            <?="Erreur : ".$erreurs['date_exp']?>
-        </p>
-        <?php
-        }
-        ?>
+            <label for="code_carte">Code de carte bancaire</label>
+            <input type="text" name="code_carte" id="code_carte" required class="champ">
+            <?php
+            if (isset($erreurs['code_carte'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['code_carte']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">16 chiffres ex: 1234567891234567</p>
 
 
-        <br>
-        <label for="code_securite">Code de sécurité</label>
-        <input type="number" name="code_securite" id="code_securite" min="100" max="999" required>
-        <p class="contrainte">Nombre à 3 chiffres</p>
-        <?php
-        if (isset($erreurs['code_securite'])){
-        ?>
-        <p class="error">
-            <?="Erreur : ".$erreurs['code_securite']?>
-        </p>
-        <?php
-        }
-        ?>
+            <label for="date_exp">Date d'expiration de la carte</label>
+            <input type="text" name="date_exp" id="date_exp" size="5" required class="petit champ">
+            <?php
+            if (isset($erreurs['date_exp'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['date_exp']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">MM/YY ex: 12/25, 01/26</p>
 
-        <input type="hidden" type="number" name="id_produit" id="id_produit" required value="<?=$_POST['id_produit']?>">
-        <input type="hidden" name="form" id="form" required value="bancaire">
-        <br>
-        <input type="submit" value="Effectuer l'achat">
+
+            <label for="code_securite">Code de sécurité</label>
+            <input type="number" name="code_securite" id="code_securite" min="100" max="999" required class="petit champ">
+            <?php
+            if (isset($erreurs['code_securite'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['code_securite']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">Nombre à 3 chiffres</p>
+
+            <input type="hidden" type="number" name="id_produit" id="id_produit" required value="<?=$_POST['id_produit']?>">
+            <input type="hidden" name="form" id="form" required value="bancaire">
+            
+            <input type="submit" value="Effectuer l'achat" class="bouton">
 
         </form>
 
 <?php
 }
     else if ($numEtape == 3) {
-        echo "<h1>Bravo vous avez réussi à effectuer l'achat !</h1>";
+        echo "<h2>Bravo vous avez réussi à effectuer l'achat !</h2>";
     }
 
 ?>
-    
+        </main>
     </body>
 </html>

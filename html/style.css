@@ -206,8 +206,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-items: baseline;
-  width: 100%;
+  align-items: normal;
 }
 #connect_vendeur main form label, #inscription_vendeur main form label {
   margin-top: 2vh;
@@ -216,9 +215,17 @@ main {
 #connect_vendeur main form .champ, #inscription_vendeur main form .champ {
   border: none;
   border-radius: 5px;
-  width: 100%;
-  height: 1.8em;
-  font-size: 1.5em;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+#connect_vendeur main form .text, #inscription_vendeur main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_vendeur main form .petit, #inscription_vendeur main form .petit {
+  width: 30%;
 }
 #connect_vendeur main form input[type=number]::-webkit-inner-spin-button,
 #connect_vendeur main form input[type=number]::-webkit-outer-spin-button, #inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
@@ -233,15 +240,16 @@ main {
   border: none;
   border-radius: 50px;
   padding: 1vh 2vw;
+  font-weight: bold;
   align-self: center;
   background-color: #BB2BB2;
   color: white;
-  font-size: 2em;
+  font-size: 1em;
   margin-top: 2vh;
 }
 #connect_vendeur main form p, #inscription_vendeur main form p {
-  font-size: 0.7em;
-  margin: 0;
+  font-size: 0.75em;
+  margin: 0.4vh 0;
 }
 #connect_vendeur main form .error, #inscription_vendeur main form .error {
   color: #E43737;
@@ -280,8 +288,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-items: baseline;
-  width: 100%;
+  align-items: normal;
 }
 #connect_client main form label, #inscription_client main form label {
   margin-top: 2vh;
@@ -290,9 +297,17 @@ main {
 #connect_client main form .champ, #inscription_client main form .champ {
   border: none;
   border-radius: 5px;
-  width: 100%;
-  height: 1.8em;
-  font-size: 1.5em;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+#connect_client main form .text, #inscription_client main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_client main form .petit, #inscription_client main form .petit {
+  width: 30%;
 }
 #connect_client main form input[type=number]::-webkit-inner-spin-button,
 #connect_client main form input[type=number]::-webkit-outer-spin-button, #inscription_client main form input[type=number]::-webkit-inner-spin-button,
@@ -307,15 +322,16 @@ main {
   border: none;
   border-radius: 50px;
   padding: 1vh 2vw;
+  font-weight: bold;
   align-self: center;
   background-color: #BB2BB2;
   color: white;
-  font-size: 2em;
+  font-size: 1em;
   margin-top: 2vh;
 }
 #connect_client main form p, #inscription_client main form p {
-  font-size: 0.7em;
-  margin: 0;
+  font-size: 0.75em;
+  margin: 0.4vh 0;
 }
 #connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
@@ -328,25 +344,79 @@ main {
   margin: 15vh 0;
 }
 
-#avis_client {
+.form_client {
   overflow-x: hidden;
 }
-#avis_client main {
+.form_client main {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
   margin: 0;
   padding: 0;
-}
-#avis_client main section {
   padding-top: 5vh;
 }
-#avis_client main section a {
+.form_client main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  background-color: #CBCCEA;
+  width: 30vw;
+  border-radius: 20px;
+  padding: 1em 3em 2em;
+  font-size: 1em;
+}
+.form_client main form label {
+  margin-top: 2vh;
+  font-size: 1.5em;
+}
+.form_client main form .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.form_client main form .text {
+  height: 10em;
+  text-align: start;
+}
+.form_client main form .petit {
+  width: 30%;
+}
+.form_client main form input[type=number]::-webkit-inner-spin-button,
+.form_client main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form_client main form input[type=number] {
+  -moz-appearance: textfield;
+}
+.form_client main form .bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 1vh 2vw;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2vh;
+}
+.form_client main form p {
+  font-size: 0.75em;
+  margin: 0.4vh 0;
+}
+.form_client main form .error {
+  color: #E43737;
+}
+.form_client main a {
   color: black;
   text-decoration: none;
 }
-#avis_client main article {
+.form_client main article {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -355,47 +425,16 @@ main {
   height: 60vh;
   border-radius: 20px;
   padding: 3em 3em;
+  text-align: center;
 }
-#avis_client main article h3 {
+.form_client main article h2 {
   margin-top: 0;
   font-size: 2em;
+  text-align: center;
 }
-#avis_client main article img {
+.form_client main article img {
   width: 40vh;
   height: 40vh;
   -o-object-fit: cover;
      object-fit: cover;
-}
-#avis_client main form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: start;
-  background-color: #CBCCEA;
-  width: 30vw;
-  height: 60vh;
-  border-radius: 20px;
-  padding: 1em 3em;
-  font-size: 1em;
-}
-#avis_client main form label {
-  margin-top: 2vh;
-}
-#avis_client main form .champ {
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-  height: 1.8em;
-}
-#avis_client main form .text {
-  height: 10em;
-}
-#avis_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 1vh 2vw;
-  background-color: #BB2BB2;
-  color: white;
-  margin-top: 2vh;
-  align-self: center;
 }/*# sourceMappingURL=style.css.map */

@@ -12,86 +12,6 @@
     align-items: center;
 }
 
-@mixin bouton {
-    border: none;
-    border-radius: $angle_grand;
-    padding: 1vh 2vw;
-}
-
-@mixin page_connect_inscription($background, $nuance) {
-    background-color: $background;
-    height: 100vh;
-
-    @include contenu_centre_vertical;
-
-    main {
-        @include contenu_centre_vertical;
-
-        background-color: $nuance;
-        row-gap: 1em;
-        border-radius: $angle_normal; 
-        padding: $padding_normal;
-        width: 30vw;
-
-        img {
-            width: 18vw;
-        }
-
-        h2 {
-            font-size: $font_size_grand;
-            margin: 0
-        }
-
-        form {
-            @include contenu_centre_vertical;
-            align-items:baseline;
-            width: 100%;
-
-            label {
-                margin-top: 2vh;
-                font-size: $font_size_sup;
-            }
-
-            .champ {
-                border: none;
-                border-radius: $angle_petit;
-                width: 100%;
-                height: 1.8em;
-                font-size: $font_size_sup;
-            }
-
-
-            input[type=number]::-webkit-inner-spin-button,
-            input[type=number]::-webkit-outer-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-
-            input[type=number] {
-                -moz-appearance: textfield;
-            }
-            
-            .bouton {
-                @include bouton;
-                align-self: center;
-                background-color: $focus;
-                color: white;
-                font-size: $font_size_grand;
-                margin-top: 2vh;
-            }
-
-            p {
-                font-size: $font_size_petit;
-                margin: 0;
-            }
-
-            .error{
-                color: $rouge;
-            }
-        }
-    }
-}
-
 @mixin header($background) {
     position: sticky;
     top: 0;
@@ -181,6 +101,104 @@
     }
 }
 
+
+@mixin bouton {
+    border: none;
+    border-radius: $angle_grand;
+    padding: 1vh 2vw;
+    font-weight: bold;
+}
+
+// mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
+@mixin formulaire {
+    align-items: normal;
+
+    label {
+        margin-top: 2vh;
+        font-size: $font_size_sup;
+    }
+
+    .champ {
+        border: none;
+        border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+    }
+    
+    // pour les champs avec beaucoup de texte (ex : description)
+    .text {
+        height: 10em;
+        text-align: start;
+    }
+
+    .petit {
+        width: 30%;
+    }
+
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    
+    .bouton {
+        @include bouton;
+        align-self: center;
+        background-color: $focus;
+        color: white;
+        font-size: $font_size_normal;
+        margin-top: 2vh;
+    }
+
+    // généralement contraintes et erreurs
+    p {
+        font-size: $font_size_petit;
+        margin: 0.4vh 0;
+    }
+
+    .error{
+        color: $rouge;
+    }
+}
+
+@mixin page_connect_inscription($background, $nuance) {
+    background-color: $background;
+    height: 100vh;
+
+    @include contenu_centre_vertical;
+
+    main {
+        @include contenu_centre_vertical;
+
+        background-color: $nuance;
+        row-gap: 1em;
+        border-radius: $angle_normal; 
+        padding: $padding_normal;
+        width: 30vw;
+
+        img {
+            width: 18vw;
+        }
+
+        h2 {
+            font-size: $font_size_grand;
+            margin: 0
+        }
+
+        form {
+            @include contenu_centre_vertical;
+            @include formulaire;
+        }
+    }
+}
+
 body {
     font-family: $font_text;
     padding: 0;
@@ -218,6 +236,7 @@ main {
     @include header($couleur_primaire_vendeur);
 }
 
+// définition des pages inscriptions et connexions
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
 }
@@ -238,7 +257,8 @@ main {
     }
 }
 
-#avis_client{
+// pages côté client où y'a qu'un formulaire (ou à peu près)
+.form_client {
     overflow-x: hidden;
     
     main{
@@ -247,13 +267,21 @@ main {
         
         margin: 0;
         padding: 0;
+        padding-top: 5vh;
 
-        section{
-            padding-top: 5vh;
-            a{
-                color: black;
-                text-decoration: none;
-            }
+        form{
+            @include contenu_centre_vertical();
+            @include formulaire();
+            background-color: $nuance_primaire_client;
+            width: 30vw;
+            border-radius: $angle_normal;
+            padding: 1em 3em 2em;
+            font-size: $font_size_normal;
+        }
+
+        a{
+            color: black;
+            text-decoration: none;
         }
 
         article{
@@ -263,10 +291,12 @@ main {
             height: 60vh;
             border-radius: $angle_normal;
             padding: 3em 3em;
+            text-align: center;
 
-            h3{
+            h2{
                 margin-top: 0;
                 font-size: $font_size_grand;
+                text-align: center;
             }
 
             img{
@@ -274,41 +304,6 @@ main {
                 height: 40vh;
                 object-fit: cover;    
                 
-            }
-        }
-
-        form{
-            @include contenu_centre_vertical();
-            align-items: start;
-            background-color: $nuance_primaire_client;
-            width: 30vw;
-            height: 60vh;
-            border-radius: $angle_normal;
-            padding: 1em 3em;
-            font-size: $font_size_normal;
-
-            label{
-                margin-top: 2vh;
-            }
-
-            .champ {
-                border: none;
-                border-radius: $angle_petit;
-                width: 100%;
-                height: 1.8em;
-            }
-
-            .text {
-                height: 10em;
-                text-align: start;
-            }
-
-            .bouton{
-                @include bouton();
-                background-color: $focus;
-                color: white;
-                margin-top: 2vh;
-                align-self: center;
             }
         }
     }
