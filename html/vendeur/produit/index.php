@@ -31,8 +31,7 @@
 
     if ($_GET == NULL) {
        echo "Produit non trouvé";
-       header("location: ../");
-       exit;
+       renvoi();
     }
 
     require_once HOME_GIT . '.config.php';
