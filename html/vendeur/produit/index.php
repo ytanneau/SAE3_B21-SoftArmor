@@ -69,7 +69,7 @@
             <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image_principale'] . '.png' ?>" > 
             <?php
                 if ($rows2['id_image1'] != NULL) {
-                    ?> <img src= "../ressources/produit/<?= $produit . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
+                    ?> <img src="../ressources/produit/<?= $produit . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
                 }
                 if ($rows2['id_image2'] != NULL) {
                     ?> <img src= "../ressources/produit/<?= $produit . '_' . $rows2['id_image2'] . '.png' ?>" > <?php
@@ -118,9 +118,10 @@
 <!doctype html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+        <title>Alizon</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="confirmation.js"></script>
     </head>
     <body>
         <main>
@@ -131,8 +132,8 @@
                 <a href="../stock">Revenir au stock</a>
             <?php } ?>
             
-            <form action="" method="post">
-                <input type="submit" value="Supprimer" id="supprimer">
+            <form id="supprimer" action="" method="post">
+                <input type="submit" value="Supprimer">
             </form>
         </main>
     </body>
