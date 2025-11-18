@@ -283,12 +283,12 @@
 
     //verifie si la chaine est vide
     function check_vide($valeur){
-        return (strlen($valeur) === 0);
+        return (strlen($valeur ?? '') === 0);
     }
 
     //verifie la taille de la chaine
     function check_taille($valeur, $taille){
-        return (strlen($valeur) <= $taille);
+        return (strlen($valeur ?? '') <= $taille);
     }
 
 
