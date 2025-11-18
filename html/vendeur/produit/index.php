@@ -125,7 +125,7 @@
     </head>
     <body>
         <main>
-            <?php if (isset($supprime) && $supprime === false) {
+            <?php if (!isset($supprime) || $supprime === false) {
                 ecrire_nom($rows, $rows2, $_GET['produit']);
             } else { ?>
                 <h1>Produit supprimé</h1>
