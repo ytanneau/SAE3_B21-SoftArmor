@@ -74,14 +74,9 @@
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
             $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_STR);
             $requete->execute();
-            print_r($requete);
             return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw $e;
-        }
-        if ($requete['id_produit'] == NULL) {
-            echo "ce produit n'existe pas";
-            return NULL;
         }
     }
 
