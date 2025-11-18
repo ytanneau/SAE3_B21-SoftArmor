@@ -72,14 +72,14 @@
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <p>
                     <label for="raison_sociale">Raison sociale</label>
-                    <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?php echo $raisonSociale ?>">
+                    <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
 
                     <label for="adresse">Adresse</label>
-                    <input type="text" name="adresse" id="id_adresse" value="<?php echo $tabAdresseVendeur['adresse'] ?>">
+                    <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
                     <label for="code_postal">Code postal</label>
-                    <input type="text" name="code_postal" id="id_code_postal" value="<?php echo $tabAdresseVendeur['code_postal'] ?>">
+                    <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
                     <label for="complementAdr">Complement d'adresse</label>
-                    <input type="text" name="complementAdr" id="id_complementAdr" value="<?php echo $tabAdresseVendeur['complement_adresse'] ?>">
+                    <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
 
                     <label for="description">Description</label>
                     <textarea type="textarea" name="description" id="id_description" value="<?php if($description != null) echo $description ?>"></textarea>
