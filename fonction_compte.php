@@ -729,7 +729,7 @@
     function sql_get_infos_randoms($id_compte){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac FROM compte_client WHERE id_compte = :id_compte;');
+        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac AS id_adresse FROM compte_client WHERE id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
