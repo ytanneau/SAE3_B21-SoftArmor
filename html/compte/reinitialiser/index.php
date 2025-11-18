@@ -36,9 +36,12 @@ if ($_POST == null) {
 
 // Premier formulaire (après saisie adresse)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
-    if (empty($email)) {
+    // Vérifier les erreurs d'e-mail
+    if (check_vide($email)) {
         $erreurs['email'] = VIDE;
-    } 
+    } else if (check_email($email)) {
+        $erreurs['email'] = FORMAT;
+    }
     
     // Si pas d'erreur sur l'e-mail
     if (!isset($erreurs['email'])) {
@@ -139,6 +142,10 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                         echo $message;
                     }
                 ?>
+            </p>
+
+            <p class="error">
+                <?= isset($erreurs['final']) ? $erreurs['final'] : '' ?>
             </p>
 
             <input type="submit" value="Confirmer">
