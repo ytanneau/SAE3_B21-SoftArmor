@@ -572,8 +572,6 @@
         return ($requete->fetch(PDO::FETCH_ASSOC));
     }
 
-    function sql_question($)
-
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
