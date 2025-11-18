@@ -61,7 +61,7 @@
                     }
                 }
                 else{
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             }
             catch(PDOException $e){
@@ -114,7 +114,7 @@
                     }
                     
                 } else {
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
@@ -414,7 +414,7 @@
             $erreurs['email'] = FORMAT; 
         }
         else if (sql_check_email($pdo,$email)){
-            $erreurs['email'] = $email ." ". EXISTE; 
+            $erreurs['email'] = "l'email ".$email ." ". EXISTE; 
         }
         
         // erreur champ date naissance
@@ -500,6 +500,8 @@
         }
 
         // erreur sur date d'expiration
+        $date_exp = trim($date_exp);
+        
         if (check_vide($date_exp)) {
             $erreurs['date_exp'] = VIDE;
         } else if (!check_date_exp($date_exp)) {

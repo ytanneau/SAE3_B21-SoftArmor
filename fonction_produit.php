@@ -207,7 +207,7 @@ $desc_simple, $desc_detaille, $poid, $volume_colis){
                                         ";
         $stmt = $pdo->prepare($sqlAjoutProduit);
         $stmt->execute([
-            ':id_vend' => 1, // $id_compte_vendeur,
+            ':id_vend' => $id_compte_vendeur,
             ':nomPrv' => $libelle_prive,
             ':nomPblc' => $libelle_public,
             ':descSimple' => $desc_simple,

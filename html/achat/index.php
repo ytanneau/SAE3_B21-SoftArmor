@@ -277,7 +277,7 @@ else if ($numEtape == 2) {
 
         <label for="code_carte">Code de carte bancaire</label>
         <input type="text" name="code_carte" id="code_carte" required>
-        <p class="contrainte">ex: 1234 5678 9123 4567</p>
+        <p class="contrainte">16 chiffres ex: 1234567891234567</p>
         <?php
         if (isset($erreurs['code_carte'])){
         ?>
@@ -290,8 +290,8 @@ else if ($numEtape == 2) {
 
         <br>
         <label for="date_exp">Date d'expiration de la carte</label>
-        <input type="text" name="date_exp" id="date_exp" size="5">
-        <p class="contrainte">ex: 12/25, 01/26</p>
+        <input type="text" name="date_exp" id="date_exp" required>
+        <p class="contrainte">MM/YY ex: 12/25, 01/26</p>
         <?php
         if (isset($erreurs['date_exp'])){
         ?>

@@ -1,13 +1,10 @@
 <?php                 
     // appel du fichier de configuration bdd
     
-    include "fonction_categorie.php";
-    include "fonction_produit.php";
 
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
-
-    require_once HOME_GIT . ".config.php";
+ 
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -19,17 +16,91 @@
 
     // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
     } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../');
+        header('location: ../');
         exit;
     }
 
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_categorie.php";
+    include HOME_GIT . "fonction_produit.php";
+
     $id_compte = $_SESSION['id_compte'];
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        // recupération des données du formulaire
+        $nomPrv = $_POST["nomPrv"];
+        $nomPblc = $_POST["nomPblc"];
+        
+        $qtStock = $_POST["qtStock"];
+        $tva = $_POST["tva"];
+        $prixProd = $_POST["prixProd"];
+        $descSimple = $_POST["descSimple"];
+        $descDetaille = $_POST["descDetaille"];
+        $codeBarre = $_POST["codeBarre"];
+        $poidColis = $_POST["poidColis"];
+        $volumeColis = $_POST["volumeColis"];
+        $quantite = $_POST["qtAchete"];
+        $unite = $_POST["unite"];
+
+        if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
+        else { $categorie = $_POST["categorie"]; }
+
+        if($_POST["qtStock"] === ""){ $qtStock = 0; } 
+        else { $qtStock = $_POST["qtStock"]; }
+        
+        if($_POST["seuilAlerte"] === ""){ $seuilAlerte = 0; } 
+        else { $seuilAlerte = $_POST["seuilAlerte"]; }
+
+        // redéfinition du critéres sur la majorité suivant l'état du bouton
+        $checkMajeur = isset($_POST["checkMajeur"]) ? 1 : 0;
+
+        // insertion du produit dans la base de données
+        
+        $qtachete = $quantite . ";" . $unite;
+        $idProduit = add_produit($id_compte, $nomPrv,$nomPblc,
+                                $prixProd, $tva, $codeBarre, $checkMajeur,
+                                $qtachete, $qtStock,$seuilAlerte,
+                                $descSimple,$descDetaille, $poidColis,
+                                    $volumeColis);
+
+        // mise en relation entre le produit et sa catégorie dans la bdd 
+
+        set_produit_categorie($idProduit,$categorie);
+
+        /**********************
+        *   Image du produit  *
+        ***********************/
+        // vérification de la presence d'une images 
+        if (isset($_FILES['photo'])){
+            $nomImageTemp = $_FILES['photo']['name'];
+            $cheminTemp = $_FILES['photo']['tmp_name'];
+            
+            $nomImage = $idProduit . "_1.png";
+            $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+            $url = "ressources/produit/" . $nomImage;
+
+            $titre_img = explode('.',$nomImageTemp)[0];
+            $altDefault = "Image du produit : " . $titre_img;
+            
+            if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                // insertion des images dans la bdd
+
+                $idImage = add_image($url, $titre_img, $altDefault);
+
+                add_image_produit($idProduit,$idImage);
+                
+                header("Location: ../");
+                exit();
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <title>Ajout produit</title>
+        <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
     </head>
     <body>
@@ -314,74 +385,7 @@
                 })
             </script>
             
-            <?php 
-                if($_SERVER["REQUEST_METHOD"] == "POST"){
-                    // recupération des données du formulaire
-                    $nomPrv = $_POST["nomPrv"];
-                    $nomPblc = $_POST["nomPblc"];
-                    
-                    $qtStock = $_POST["qtStock"];
-                    $tva = $_POST["tva"];
-                    $prixProd = $_POST["prixProd"];
-                    $descSimple = $_POST["descSimple"];
-                    $descDetaille = $_POST["descDetaille"];
-                    $codeBarre = $_POST["codeBarre"];
-                    $poidColis = $_POST["poidColis"];
-                    $volumeColis = $_POST["volumeColis"];
-                    $quantite = $_POST["qtAchete"];
-                    $unite = $_POST["unite"];
-
-                    if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
-                    else { $categorie = $_POST["categorie"]; }
-
-                    if($_POST["qtStock"] === ""){ $qtStock = 0; } 
-                    else { $qtStock = $_POST["qtStock"]; }
-                    
-                    if($_POST["seuilAlerte"] === ""){ $seuilAlerte = 0; } 
-                    else { $seuilAlerte = $_POST["seuilAlerte"]; }
-
-                    // redéfinition du critéres sur la majorité suivant l'état du bouton
-                    $checkMajeur = isset($_POST["checkMajeur"]) ? 1 : 0;
-
-                    // insertion du produit dans la base de données
-                    
-                    $qtachete = $quantite . ";" . $unite;
-                    $idProduit = add_produit(1, $nomPrv,$nomPblc,
-                                            $prixProd, $tva, $codeBarre, $checkMajeur,
-                                            $qtachete, $qtStock,$seuilAlerte,
-                                            $descSimple,$descDetaille, $poidColis,
-                                             $volumeColis);
-
-                    // mise en relation entre le produit et sa catégorie dans la bdd 
-
-                    set_produit_categorie($idProduit,$categorie);
-
-                    /**********************
-                    *   Image du produit  *
-                    ***********************/
-                    // vérification de la presence d'une images 
-                    if (isset($_FILES['photo'])){
-                        $nomImageTemp = $_FILES['photo']['name'];
-                        $cheminTemp = $_FILES['photo']['tmp_name'];
-                        
-                        $nomImage = $idProduit . "_1.png";
-                        $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
-                        $url = "ressources/produit/" . $nomImage;
-
-                        $titre_img = explode('.',$nomImageTemp)[0];
-                        $altDefault = "Image du produit : " . $titre_img;
-                        
-                        if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                            // insertion des images dans la bdd
-
-                            $idImage = add_image($url, $titre_img, $altDefault);
-
-                            add_image_produit($idProduit,$idImage);
-                            
-                        }
-                    }
-                }
-            ?>
+            
         </main>
         <footer>
 
