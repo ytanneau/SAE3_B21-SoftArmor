@@ -30,13 +30,13 @@
     
     $succes = false;
     if ($_POST != null){
-        print_r($_POST);
-        echo 1;
+        //print_r($_POST);
+        //echo 1;
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        print_r($_FILES['image']);
+        //print_r($_FILES['image']);
         if ($_FILES['image'] == null){
             $image = null;
         }
@@ -49,13 +49,13 @@
                 rename('../ressources/avis/' . $fichier, '../' . $image);
             }
             
-            print_r($_POST);
+            //print_r($_POST);
             cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
             $succes = true;
         }        
     }
     else if (isset($_GET['produit'])){
-        echo 2;
+        //echo 2;
         if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
             $erreur['avis'] = EXISTE;
         }
@@ -67,7 +67,7 @@
         }
     }    
     else{
-        echo 3;
+        //echo 3;
         $_GET['produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
