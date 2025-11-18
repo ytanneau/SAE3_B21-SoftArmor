@@ -1,6 +1,9 @@
 <?php
     // Fonction pour calculer et afficher les moyennes d'un produit
     function afficher_moyenne_note($moyenne){
+        if(is_null($moyenne)){
+            return null
+        }
         if($moyenne > 5 || $moyenne < 0){
             return null;
         }
