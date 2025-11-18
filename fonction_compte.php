@@ -664,8 +664,6 @@
         $pseudo = trim($pseudo);
         $email = trim($email);
 
-        $mdp = trim($mdp);
-        $mdpc = trim($mdpc);
 
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
