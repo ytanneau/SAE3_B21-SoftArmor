@@ -154,5 +154,17 @@
             throw $e;
         }
     }
+
+    function supprimer_produit_stock($id_produit) {
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->execute();
+            return $requete->rowCount() > 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 ?>
 
