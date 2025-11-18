@@ -137,11 +137,13 @@ if ($_POST != NULL){
                 }
             }
         }
+        //actualise la session
+        $_SESSION['pseudo'] = $_POST['pseudo'];
 
         //vide les variables globales
         $_POST = null;
         $_FILES = null;
-
+        
         //refresh la page pour afficher les infos
         header("Refresh:0");
     
