@@ -24,6 +24,7 @@
         }
     }
 
+    //met le limage avec les autre pour éviter de la perdre
     if (isset($_FILES['image'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
@@ -33,6 +34,7 @@
     require_once HOME_GIT . 'fonction_produit.php';
     
     $succes = false;
+    // si le post a été envoyer
     if ($_POST != null){
         //print_r($_POST);
         //echo 1;
@@ -45,7 +47,7 @@
             $image = null;
         }
         else{
-            $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'.png';
+            $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
         if (($res = condition_avis()) == true){
             if ($image != null){
@@ -54,7 +56,7 @@
             
             //print_r($_POST);
             try{
-                cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
+                cree_avis($_SESSION['id_compte'], $_GET['id_produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
@@ -62,13 +64,13 @@
             }
         }        
     }
-    else if (isset($_GET['produit'])){
+    else if (isset($_GET['id_produit'])){
         //echo 2;
-        if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
+        if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
             $erreur['avis'] = EXISTE;
         }
         else{
-            $sql_produit = detail_produit_image($_GET['produit']);
+            $sql_produit = detail_produit_image($_GET['id_produit']);
             if ($sql_produit == null){
                 $erreur['produit'] = EXISTE_PAS;   
             }
@@ -76,17 +78,17 @@
     }    
     else{
         //echo 3;
-        $_GET['produit'] = null;
+        $_GET['id_produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
 
-
+    //supprimer l'image si la saugarede ne sai pas passer
     if ($succes != true && isset($_FILES['image'])){
         unlink('../ressources/avis/' . $fichier);
         unlink('../' . $image);
     }
 
-    
+    // fonction qui verife 
     function condition_avis(){
         $res = true;
 
@@ -156,16 +158,17 @@
 <?php
     }
     else{
-    /**<img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>"> */
-    //print_r($sql_produit)
+    //print_r($sql_produit);
 ?>
-        <article>
-            <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-            
-        </article>
+        <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
+            <article>
+                <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
+                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
+            </article>
+        </a>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" 
-                value="<?=htmlentities(trim($_GET['produit']))?>"
+                value="<?=htmlentities(trim($_GET['id_produit']))?>"
                 name="produit"
                 id="produit">
 
@@ -180,26 +183,58 @@
                 oninput="output.value = this.value"
                 required>
             <output id="output">5</output>
-            <p class="error"><?=$res['note']?></p>
+<?php
+    if (isset($res['note'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['note']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="titre">Titre</label>
             <input type="text" 
                 name="titre" 
                 id="titre">
-            <p class="error"><?=$res['titre']?></p>
+<?php
+    if (isset($res['titre'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['titre']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="description">Description</label>
             <input type="text" 
                 name="description" 
                 id="description">
-            <p class="error"><?=$res['Description']?></p>
+<?php
+    if (isset($res['description'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['description']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="image">Image</label>
             <input type="file" 
                 name="image" 
                 alt="image"
                 accept=".png">
-            <p class="error"><?=$res['Image']?></p>
+<?php
+    if (isset($res['image'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['image']?>
+            </p>
+<?php
+    }
+?>
 
             <input type="submit" value="créer l'avis">
         </form>

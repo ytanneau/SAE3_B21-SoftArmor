@@ -61,7 +61,7 @@
                     }
                 }
                 else{
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             }
             catch(PDOException $e){
@@ -77,14 +77,17 @@
     }
 
     // Fonction qui permet de créer un compte client
-    function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
+    function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc, $question, $reponse){
         $nom = strtoupper(trim($nom));
-        $prenom = trim($prenom);
+        $prenom = capitalize(trim($prenom));
         $pseudo = trim($pseudo);
         $email = trim($email);
 
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
+
+        $question = trim($question);
+        $reponse = trim($reponse);
 
         $erreurs = [];
 
@@ -95,28 +98,30 @@
         && check_nom($prenom) 
         && check_nom($pseudo) 
         && check_date_passee($date_naiss)
-        && check_create_MDP($mdp, $mdpc)) {
+        && check_create_MDP($mdp, $mdpc)
+        && check_reponse($reponse))
+        {
 
             global $pdo;
             
             try {
                 if (!sql_check_email($pdo, $email)){
 
-                    if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
+                    if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $question, $reponse)){
                         
                     } else {
                         // changer l'erreur $erreurs['CR'] = EXISTE_PAS;
                     }
                     
                 } else {
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
             }
         }
         else{
-            $erreurs = array_merge($erreurs, check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc));
+            $erreurs = array_merge($erreurs, check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc, $reponse));
         }
         return $erreurs;
     }
@@ -248,6 +253,11 @@
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
+    function check_reponse($reponse) {
+        return (!check_vide($reponse));
+    }
+
+
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
     function check_nom($nom) {
         return (!check_vide($nom) && check_taille($nom, TAILLE_NOM));
@@ -283,12 +293,12 @@
 
     //verifie si la chaine est vide
     function check_vide($valeur){
-        return (strlen($valeur) === 0);
+        return (strlen($valeur ?? '') === 0);
     }
 
     //verifie la taille de la chaine
     function check_taille($valeur, $taille){
-        return (strlen($valeur) <= $taille);
+        return (strlen($valeur ?? '') <= $taille);
     }
 
 
@@ -365,7 +375,7 @@
     }
 
     // Renvoie toutes les erreurs de champ possibles pour un client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null, $reponse = null){
         $erreurs = [];
         global $pdo;
 
@@ -404,7 +414,7 @@
             $erreurs['email'] = FORMAT; 
         }
         else if (sql_check_email($pdo,$email)){
-            $erreurs['email'] = $email ." ". EXISTE; 
+            $erreurs['email'] = "l'email ".$email ." ". EXISTE; 
         }
         
         // erreur champ date naissance
@@ -438,6 +448,11 @@
 
         // Recherche l'erreur dans l'adresse
         $erreurs = array_merge($erreurs, check_coordonnees($adresse, $code_postal));
+
+        // Recherche l'erreur dans la réponse secrète
+        if (check_vide($reponse)){
+            $erreurs['reponse'] = VIDE;
+        }
 
         return $erreurs;
     }
@@ -485,6 +500,8 @@
         }
 
         // erreur sur date d'expiration
+        $date_exp = trim($date_exp);
+        
         if (check_vide($date_exp)) {
             $erreurs['date_exp'] = VIDE;
         } else if (!check_date_exp($date_exp)) {
@@ -544,6 +561,17 @@
         return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
     }
 
+    // Return la question associée à une adresse email, sinon null
+    function sql_email_question($email) {
+        global $pdo;
+
+        $requete = $pdo->prepare("SELECT q.question FROM compte_client c INNER JOIN _question_secu q ON c.question = q.mot_clef WHERE email = :email");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->execute();
+
+        return ($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
@@ -569,7 +597,7 @@
     }
 
     
-    function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
+    function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $question, $reponse) {
         $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
@@ -580,12 +608,14 @@
         $requete->execute();
         $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
-        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance)");
+        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance, question, reponse) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance, :question, :reponse)");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
+        $requete->bindValue(':question', $question, PDO::PARAM_STR);
+        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
         $requete->execute();
 
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -629,6 +659,12 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
     function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        $nom = strtoupper(trim($nom));
+        $prenom = ucfirst(trim($prenom));
+        $pseudo = trim($pseudo);
+        $email = trim($email);
+
+
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -650,13 +686,19 @@
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $requete->execute();
         
-        $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
-        $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_STR);
-        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
-        $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
-        $requete->bindValue(':complement_adresse', $complement_adresse, PDO::PARAM_STR);
-        $requete->execute();
-
+        $ancienne_adresse=sql_get_adresse_compte($id_compte);
+        if($ancienne_adresse!=null){
+            $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
+            $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_STR);
+            $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
+            $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
+            $requete->bindValue(':complement_adresse', $complement_adresse, PDO::PARAM_STR);
+            $requete->execute();
+        }else{
+            sql_insert_adresse_client($pdo, $id_compte, $adresse, $complement_adresse, $code_postal);
+        }
+        
+        
         return $requete->fetch(PDO::FETCH_ASSOC);
         
     }
@@ -675,17 +717,17 @@
         $requete->execute();
         $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
 
-        $requete = $pdo->prepare("UPDATE _compte SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
+        $requete = $pdo->prepare("UPDATE _client SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
         $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
     }
 
-    //requete pour recuperer mot de passe cryptée
-    function sql_get_mdp_cryptee($id_compte){
+    //requete pour recuperer mot de passe cryptée et id adresse
+    function sql_get_infos_randoms($id_compte){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT mdp,id_adresse FROM compte_client WHERE id_compte = :id_compte;');
+        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac AS id_adresse FROM compte_client WHERE id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);

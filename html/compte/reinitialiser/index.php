@@ -9,17 +9,22 @@ define('HOME_SITE', '../../');
 
 // Si l'utilisateur est déjà connecté
 
-if ($_POST != null){
+if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
 
-    // Premier formulaire (email)
-    if (!isset($email_existe)) {
-        $email_existe = sql_check_email($pdo, htmlentities(trim($_POST['email'] ?? '')));
-    // Deuxième formulaire (mdp)
-    } else if ($email_existe === true) {
-        echo $_POST['mdp'];
+    // Premier formulaire (après email)
+    if (!isset($_POST['reponse'])) {
+        $row = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
+
+        if (!isset($row) || empty($row['question'])) {
+            echo "Aucune question, réinitialisation impossible";
+            // Redirection
+        }
+
+    // Deuxième formulaire (après réponse)
+    } else {
+        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     }
-    
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -43,7 +48,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <?php if (!isset($email_existe) || $email_existe === false) { ?>
+    <?php if (!isset($row['question']) || empty($row['question'])) { ?>
         <form action="" method="post">
             <label for="email">Votre adresse e-mail</label>
             <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
@@ -51,12 +56,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <input type="submit" value="Confirmer">
         </form>
     <?php } else { ?>
+        <p><?= $row['question'] ?? '' ?></p>
         <form action="" method="post">
-            <label for="mdp">Nouveau mot de passe</label>
-            <input type="text" id="mdp" name="mdp">
-
-            <label for="mdpC">Confirmer le nouveau mot de passe</label>
-            <input type="text" id="mdpC" name="mdpC">
+            <label for="reponse">Votre réponse</label>
+            <input type="text" id="reponse" name="reponse">
 
             <input type="submit" value="Confirmer">
         </form>

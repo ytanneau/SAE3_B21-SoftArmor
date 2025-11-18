@@ -46,48 +46,48 @@
         <table>
             <tr>
                 <th>nom en stock </th>
-                <td><?= $rows['nom_stock']?> </td>
+                <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
             </tr>
                 <th>nom public </th>
-                <td><?= $rows['nom_public']?>  </td>
+                <td><?= htmlentities($rows['nom_public'] ?? '') ?>  </td>
             </tr>
                 <th>Prix actuelle </th>
-                <td><?= $rows['prix']?>  </td>
+                <td><?= htmlentities($rows['prix'] ?? '') ?>  </td>
             </tr>
                 <th>taux TVA </th>
-                <td><?= $rows['tva']?>  </td>
+                <td><?= htmlentities($rows['tva'] ?? '') ?>  </td>
             </tr>
                 <th>Poids </th>
-                <td><?=$rows['poids']?> </td>
+                <td><?= htmlentities($rows['poids'] ?? '') ?> </td>
             </tr>
                 <th>Volume </th>
-                <td><?= $rows['volume'] ?></td>
+                <td><?= htmlentities($rows['volume'] ?? '')  ?></td>
             </tr>
         </table>
         <div>
-            <img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_1.png' ?>" > 
+            <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
             <?php
                 if (isset($rows2['id_image1'])) {
-                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_2.png' ?>" > <?php
+                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
                 }
                 if (isset($rows2['id_image2'])) {
-                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . $_GET['produit'] . '_3.png' ?>" > <?php
+                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
                 }
             ?>
         </div>
         <!-- div a mettre en dessous du tableau -->
         <div>
-            <?= $rows['description'] ?>
+            <?= htmlentities($rows['description'] ?? '') ?>
         </div>
         <!-- A mettre encore en dessous -->
         <div>
-            <?= $rows['description_detaillee'] ?>
+            <?= htmlentities($rows['description_detaillee'] ?? '') ?>
         </div>
         <div>
             <table>
                 <tr>
                     <td>
-                        <?= $rows['quantite'] ?>
+                        <?= htmlentities($rows['quantite'] ?? '')  ?>
                     </td>
                 </tr>
             </table>
@@ -134,6 +134,7 @@
             <form id="supprimer" action="" method="post">
                 <input type="submit" value="Supprimer">
             </form>
+            <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>"> modifier ce produit</a>
         </main>
     </body>
 </html>
