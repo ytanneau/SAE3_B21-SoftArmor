@@ -158,12 +158,12 @@
 <?php
     }
     else{
-    print_r($sql_produit);
+    //print_r($sql_produit);
 ?>
         <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
             <article>
                 <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>">
+                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_tilte'])?>">
             </article>
         </a>
         <form action="" method="post" enctype="multipart/form-data">
@@ -183,26 +183,58 @@
                 oninput="output.value = this.value"
                 required>
             <output id="output">5</output>
-            <p class="error"><?=$res['note']?></p>
+<?php
+    if (isset($res['note'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['note']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="titre">Titre</label>
             <input type="text" 
                 name="titre" 
                 id="titre">
-            <p class="error"><?=$res['titre']?></p>
+<?php
+    if (isset($res['titre'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['titre']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="description">Description</label>
             <input type="text" 
                 name="description" 
                 id="description">
-            <p class="error"><?=$res['Description']?></p>
+<?php
+    if (isset($res['description'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['description']?>
+            </p>
+<?php
+    }
+?>
 
             <label for="image">Image</label>
             <input type="file" 
                 name="image" 
                 alt="image"
                 accept=".png">
-            <p class="error"><?=$res['Image']?></p>
+<?php
+    if (isset($res['image'])){
+?>
+            <p class="error">
+                <?="Erreur : ".$res['image']?>
+            </p>
+<?php
+    }
+?>
 
             <input type="submit" value="créer l'avis">
         </form>
