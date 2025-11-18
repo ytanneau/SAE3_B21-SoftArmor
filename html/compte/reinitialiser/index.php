@@ -9,7 +9,7 @@ define('HOME_SITE', '../../');
 
 // Si l'utilisateur est déjà connecté
 
-if ($_POST != null){
+if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
 
     // Premier formulaire (email)
