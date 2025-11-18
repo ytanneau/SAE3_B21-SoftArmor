@@ -39,7 +39,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
     // Vérifier les erreurs d'e-mail
     if (check_vide($email)) {
         $erreurs['email'] = VIDE;
-    } else if (check_email($email)) {
+    } else if (!check_email($email)) {
         $erreurs['email'] = FORMAT;
     }
     
@@ -128,7 +128,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <input type="hidden" name="etape" value="etape_adresse">
 
             <label for="email">Votre adresse e-mail</label>
-            <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
+            <input type="text" id="email" name="email" placeholder="abc@domaine.fr">
 
             <p class="error">
                 <?php
@@ -136,7 +136,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                         $message = $erreurs['email'];
                         
                         if ($erreurs['email'] === FORMAT) {
-                            $message .= ". Exemple : xyz@domaine.fr"; 
+                            $message .= ". Exemple : abc@domaine.fr"; 
                         }
 
                         echo $message;
