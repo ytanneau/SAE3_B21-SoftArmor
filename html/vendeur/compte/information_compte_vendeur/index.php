@@ -53,11 +53,11 @@
             <!-- Zone d'affichage des informations du vendeur -->
             <h1>Mes informations</h1>
             <h3>Raison sociale</h3>
-            <p><?php echo $raisonSociale ?></p>
+            <p><?= $raisonSociale ?></p>
             <h3>Numero de siret</h3>
-            <p><?php echo $numSiret ?></p>
+            <p><?= $numSiret ?></p>
             <h3>Adresse</h3>
-            <p><?php echo $chaineAdresse ?></p>
+            <p><?= $chaineAdresse ?></p>
             <h3>Description</h3>
             <p>
                 <?php

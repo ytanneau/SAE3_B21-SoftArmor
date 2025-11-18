@@ -6,7 +6,7 @@
     define('HOME_SITE', '../../../');
 
     if (!isset($_SESSION)) {
-    session_start();
+        session_start();
     }
     //verifie si quelqun est connecté
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
@@ -21,33 +21,6 @@
     <head>
         <title>Ajout produit</title>
         <meta charset="UTF-8">
-        <style>
-            fieldset{
-                width: 50em;
-            }
-            .nomProd{
-                width: 20em;
-            }
-            .infoPlus{
-                display: flex;
-                flex-direction: row;
-            }
-            .infoPlus > p{
-                margin-right: 10px;
-            }
-            .descSimple{
-                width: 50em;
-                height : 10em;
-            }
-            .descDetaille{
-                width: 50em;
-                height : 25em;
-            }
-            p{
-                display : flex;
-                flex-direction : column; 
-            }
-        </style>
     </head>
     <body>
         <?php include "../../header.php"?>
@@ -100,8 +73,8 @@
                                     $categorie = $pdo->query("SELECT nom_categorie FROM _categorie WHERE nom_categorie_sup IS NULL");
                                     $lignesCategorie = $categorie->fetchAll(PDO::FETCH_ASSOC);
                                     foreach($lignesCategorie as $nomCat){ ?>
-                                    <option value="<?php echo htmlspecialchars($nomCat['nom_categorie']) ?>">
-                                        <?php echo htmlspecialchars($nomCat['nom_categorie']) ?>
+                                    <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
+                                        <?= htmlspecialchars($nomCat['nom_categorie']) ?>
                                     </option>
                                 <?php    
                                 }
@@ -212,7 +185,7 @@
                         </p>   
                     </div>
                     <br>
-                    <a href="../index.php"><input type="submit" value="Créer le produit" id="creerProduit"></a>
+                    <input type="submit" value="Créer le produit" id="creerProduit">
                 </fieldset>
             </form>
             
