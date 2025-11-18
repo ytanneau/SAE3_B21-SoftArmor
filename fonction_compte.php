@@ -576,12 +576,14 @@
     function sql_check_reponse($email, $reponse) {
         global $pdo;
 
-        $requete = $pdo->prepare("SELECT reponse FROM compte_client WHERE email = :email AND reponse = :reponse");
+        $requete = $pdo->prepare("SELECT reponse FROM compte_client WHERE email = :email");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
         $requete->execute();
 
-        return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+        $res = $requete->fetch(PDO::FETCH_ASSOC);
+
+        return (check_crypte_MDP($reponse, $res['reponse']));
     }
 
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
