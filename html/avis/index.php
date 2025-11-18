@@ -123,13 +123,13 @@
     else{
     //print_r($sql_produit);
 ?>
+    <section>
         <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
-            <article>
                 <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
                 <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
-            </article>
         </a>
-        <article>
+    </section>
+    <section>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" 
                 value="<?=htmlentities(trim($_GET['id_produit']))?>"
@@ -204,7 +204,7 @@
 
             <input type="submit" value="créer l'avis">
         </form>
-        </article>
+    </section>
 <?php
     }
 ?>
