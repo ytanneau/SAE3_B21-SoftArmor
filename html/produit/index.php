@@ -148,7 +148,7 @@ if ($_POST != NULL) {
     <form action="" method="post">
         <?php if (isset($_SESSION['logged_in'])) { ?>
             <label for="quantite">Quantité</label>
-            <input type="number" name="quantite" min=1 value=1 pattern="\d*" required>
+            <input type="number" name="quantite" min=1 max=50000 value=1 pattern="\d*" required>
             <button type="submit">Ajouter au Panier</button>
         <?php } else { ?>
             <p>Connectez-vous pour ajouter ce produit à votre panier.</p>
