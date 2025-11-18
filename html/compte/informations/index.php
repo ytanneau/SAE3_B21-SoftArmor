@@ -323,6 +323,18 @@ unset($pdo);
                 
                 <label for="mdp">Mot de Passe</label>
                 <input type="password" name="mdp" placeholder="À renseigner">
+                <!--Erreur mot de passe-->
+                <?php
+                    
+                    if (isset($erreur['mdp'])){
+                        
+                ?>  
+                    <p class="error">
+                        <?="Erreur : ".$erreur['mdp']?>
+                    </p>
+                <?php
+                    }
+                ?>
             
                 <label for="n_mdp">Nouveau Mot de Passe</label>
                 <input type="password" name="n_mdp" placeholder="À renseigner">
