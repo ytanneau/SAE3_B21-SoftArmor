@@ -164,5 +164,162 @@
             throw $e;
         }
     }
+
+function get_info_produit($id_compte_vendeur, $id_produit){
+    global $pdo;
+    
+    // cette fonction renvoie un tableau avec les informations d'un produit
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM _produit WHERE id_vendeur = :id_compte_vendeur and id_produit = :id_produit;");
+        $stmt->execute([':id_compte_vendeur' => $id_compte_vendeur, ':id_produit' => $id_produit]);
+
+        $tableau = $stmt->fetch(PDO::FETCH_ASSOC);   
+        return $tableau;
+    } catch(PDOException $e) {
+        throw $e;
+    }
+}
+
+function set_photo_produit($id_produit, $photo_principal = null, $photo_1 = null, $photo_2 = null){
+    
+}
+
+function set_info_produit($id_compte_vendeur,$id_produit, $libelle_prive, $libelle_public, $prix_ht,
+$tva, $code_barre, $reserve_majeur, $en_ligne, $est_supprime, $categorie, $qt_achete,
+$quantite_stock, $seuil_alerte, $desc_simple, 
+$desc_detaille, $poid, $volume_colis){
+    global $pdo;
+    try{
+        $stmt = $pdo->prepare("UPDATE _produit 
+                                    SET nom_stock = :libelle_prive,
+                                        nom_public = :libelle_public,
+                                        description = :desc_simple,
+                                        description_detaille = :desc_detaille,
+                                        code_barre = :code_barre,
+                                        quantite = :quantite_stock,
+                                        prix = :prix_ht,
+                                        tva = :tva,
+                                        en_ligne = :en_ligne,
+                                        seuil_alerte = :seuil_alerte,
+                                        est_supprime = :est_supprime,
+                                        poids = :poid,
+                                        volume = :volume_colis,
+                                        plus_18 = :reserve_majeur,
+                                        quantite_unite = :qt_achete
+                                    WHERE id_produit = :id_produit AND id_vendeur = :id_vendeur");
+        $stmt->execute([":id_vendeur"=> $id_compte_vendeur, 
+                                ":id_produit" => $id_produit, 
+                                ":libelle_prive" => $libelle_prive, 
+                                ":libelle_public" => $libelle_public,
+                                ":desc_simple" => $desc_simple,
+                                ":desc_detaille" => $desc_detaille,
+                                ":code_barre" => $code_barre,
+                                ":quantite_stock" => $quantite_stock,
+                                ":prix_ht" => $prix_ht,
+                                ":tva" => $tva,
+                                ":en_ligne" => $en_ligne,
+                                ":seuil_alerte" => $seuil_alerte,
+                                ":est_supprime" => $est_supprime,
+                                ":poid" => $poid,
+                                ":volume" => $volume_colis,
+                                ":reserve_majeur" => $reserve_majeur,
+                                ":qt_achete" => $qt_achete]);
+    } catch (PDOException $e) {
+        throw $e; // lance une erreur que la fonction appelante catchera
+    }
+}
+
+function add_produit($id_compte_vendeur, $libelle_prive, $libelle_public, $prix_ht,
+$tva, $code_barre, $reserve_majeur, $qt_achete, $quantite_stock, $seuil_alerte,
+$desc_simple, $desc_detaille, $poid, $volume_colis){
+    global $pdo;
+
+    try{
+        $sqlAjoutProduit = "INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) 
+                                        VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite); 
+                                        ";
+        $stmt = $pdo->prepare($sqlAjoutProduit);
+        $stmt->execute([
+            ':id_vend' => 1, // $id_compte_vendeur,
+            ':nomPrv' => $libelle_prive,
+            ':nomPblc' => $libelle_public,
+            ':descSimple' => $desc_simple,
+            ':descDetaille' => $desc_detaille,
+            ':codeBarre' => $code_barre,
+            ':qtStock' => $quantite_stock,
+            ':prixProd' => $prix_ht,
+            ':tva' => $tva,
+            ':seuilAlerte' => $seuil_alerte,
+            ':poidProd' => $poid, 
+            ':volumeProd' => $volume_colis,
+            ':checkMajeur' => $reserve_majeur,
+            ':qtunite' => $qt_achete
+        ]);
+
+        $id = $pdo->lastInsertId();
+        return $id;
+    } catch (PDOException $e) {
+        throw $e; // lance une erreur que la fonction appelante catchera
+    }
+}
+
+function get_categorieProduit($id_produit){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _produit_dans_categorie WHERE id_produit = :id_produit");
+            $stmt->execute([":id_produit" => $id_produit]);
+            $tabCategorie = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $tabCategorie;
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+function set_produit_categorie($id_produit, $categorie){
+    global $pdo;
+    try{
+        $sqlProduitCategorie = "INSERT INTO _produit_dans_categorie(id_produit,nom_categorie)
+                                            VALUES(:id_prod,:nom_cate);
+                                            ";
+        $stmt = $pdo->prepare($sqlProduitCategorie);
+        $stmt->execute([
+            ':id_prod' => $id_produit,
+            ':nom_cate' => $categorie
+        ]);
+    } catch(PDOException $e){
+        throw $e;
+    }
+}
+
+function add_image($url, $titre_img, $altDefault){
+    global $pdo;
+    try{
+        $sqlImage = "INSERT INTO _image(url_image,titre,alt)
+                     VALUES(:url_img, :titre_img, :alt_img);";
+        $stmt = $pdo->prepare($sqlImage);
+        $stmt->execute([
+            ':url_img' => $url, 
+            ':titre_img' => $titre_img, 
+            ':alt_img' => $altDefault
+        ]);
+        return $pdo->lastInsertId();
+    } catch(PDOException $e){
+        throw $e;
+    }
+}
+
+function add_image_produit($idProduit,$idImage){
+    global $pdo;
+    try{
+        $sqlImageProduit = "INSERT INTO _images_produit(id_produit,id_image_principale)
+                            VALUES(:id_prod,:id_image_princ);";
+        $stmt = $pdo->prepare($sqlImageProduit);
+        $stmt->execute([
+            ':id_prod' => $idProduit,
+            ':id_image_princ' => $idImage
+        ]);
+    } catch(PDOException $e){
+        throw $e;
+    }
+}
 ?>
 
