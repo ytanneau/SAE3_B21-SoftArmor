@@ -61,7 +61,7 @@
                     }
                 }
                 else{
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             }
             catch(PDOException $e){
@@ -109,7 +109,7 @@
                     }
                     
                 } else {
-                    $erreurs['email'] = EXISTE;
+                    $erreurs['email'] = "l'email ".$email ." ". EXISTE;
                 }
             } catch(PDOException $e) {
                 $erreurs['fatal'] = true;
@@ -404,7 +404,7 @@
             $erreurs['email'] = FORMAT; 
         }
         else if (sql_check_email($pdo,$email)){
-            $erreurs['email'] = $email ." ". EXISTE; 
+            $erreurs['email'] = "l'email ".$email ." ". EXISTE; 
         }
         
         // erreur champ date naissance
