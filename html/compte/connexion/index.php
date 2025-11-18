@@ -17,7 +17,7 @@ if ($_POST != null){
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['produit'])) {
         // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . "produit/index.php?produit=" . htmlentities($_GET['produit']));
+        header('Location: ' . HOME_SITE . "produit/index.php?id_produit=" . htmlentities($_GET['produit']));
     } else {
         // Sinon, retour accueil
         header('location: ' . HOME_SITE);
