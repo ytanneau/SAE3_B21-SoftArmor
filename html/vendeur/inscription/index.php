@@ -1,23 +1,23 @@
 <?php
     define('HOME_GIT', '../../../');
-    define('HOME_SITE', '../../../');
-    //echo HOME_GIT . 'fonction_sql.php';
+    define('HOME_SITE', '../../');
 
-
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        header('location: ../stock');
-        exit;
+    if (!isset($_SESSION)) {
+        session_start();
     }
 
-    if ($_POST != null){
-        //echo "présence d'un post";
-        //print_r($_ENV);
+    // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+        header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
+    }
+
+    if ($_POST != null) {
         $erreurs = [];
-        $fichier = HOME_GIT . '/fonction_compte.php';
+        $fichier = HOME_GIT . 'fonction_compte.php';
+        
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
-
         } else {
             $erreurs['fatal'] = true;
         }

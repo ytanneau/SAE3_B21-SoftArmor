@@ -6,14 +6,20 @@ define("HOME_SITE", "../../");
 if (!isset($_SESSION)) {
     session_start();
 }
-//verifie si quelqun est connecté
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+
+// Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+    header('location: ' . HOME_SITE);
+    exit;
+
+// Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+} else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     header('location: ../');
     exit;
 }
 
 //permet d'utiliser le fichier config.php
-require_once '../../../.config.php';
+require_once HOME_GIT . '.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
 function ecrire_nom($rows){
@@ -50,11 +56,13 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
 <!doctype html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+        <?php include HOME_SITE . 'link_head.php' ?>
+        <title>Alizon Vendeur - Stock</title>
     </head>
     <body>
+        <?php include HOME_SITE . 'vendeur/header.php'; ?>
+
         <main>
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>

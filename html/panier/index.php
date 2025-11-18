@@ -27,7 +27,6 @@ require_once (HOME_GIT . 'fonction_produit.php');
 if ($_POST != NULL) {
     $id_prod = $_POST['id_produit'];
     supprimer_produit_panier($id_prod,$id_client);
-    header('Refresh: 0');
 }
 
 // Récupération des éléments du panier
@@ -87,7 +86,7 @@ try {
 
                     <form action="" method="post">
                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                        <button type="submit">Supprimer</button>
+                        <button onclick="actualiser()" type="submit">Supprimer</button>
                     </form>
                 </li>
             <?php } 
@@ -108,4 +107,10 @@ try {
 
     <?php } ?>
 </body>
+
+    <script>
+        function actualiser() {
+            window.location.reload();
+        }
+    </script>
 </html>

@@ -55,14 +55,13 @@ foreach ($mot_de_passe as $row){
 $possede_image = sql_get_img_profil($_SESSION['id_compte']);
 
 //traitement de la modification des informations
-if ($_POST != null){
+if ($_POST != NULL){
 
     //initialise les vaiables a ""
     if (!isset($_POST['pseudo'])) $_POST['pseudo'] = "";
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
-    if (!isset($_POST['date'])) $_POST['date'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
@@ -70,8 +69,11 @@ if ($_POST != null){
     if (!isset($_POST['n_mdp'])) $_POST['n_mdp'] = "";
     if (!isset($_POST['n_mdpc'])) $_POST['n_mdpc'] = "";
 
+    //initialise une date valide car je ne veut pas refaire une fonction identique ou on ne verifie pas la date de naissance
+    $date='01-01-2000';
+
     //check les erreur de saisies
-    $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$_POST['date'], $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
+    $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$date, $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
     //verifie que les condition de l'insertin sont remplies
     if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) 
@@ -81,11 +83,10 @@ if ($_POST != null){
         && (!isset($erreur['nom'])) 
         && (!isset($erreur['prenom']))
         && (!isset($erreur['email']))
-        && (!isset($erreur['pseudo']))
-        && (!isset($erreur['date_naiss']))){
+        && (!isset($erreur['pseudo']))){
 
         //update la BDD
-        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['date'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
         
         //modifie la photo de profil
         $id=$_SESSION['id_compte'];
@@ -98,24 +99,20 @@ if ($_POST != null){
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
                 if ($_FILES["pdp"]["size"] < MAX_SIZE) {
-                    echo "img bon poid";
                     move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
-                    echo "img sur la bdd";
+
                     $est_entre_img= false;
                     
                     foreach ($possede_image as $row){ 
-                        echo "rentre boucle foreach";
                         $est_entre_img=true;
                     }
                     if($est_entre_img){
-                        echo "possede une image";
                         //met a jour les données de l'image de profil
                         $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
                     }
                     else {
-                        echo "possede pas une image";
                         //insere l'image de profil dans _image
-                        $sql="INSERT INTO _image VALUES ({$chemin},{$titre},{$alt});";
+                        $sql="INSERT INTO _image (url_image,titre,alt) VALUES ({$chemin},{$titre},{$alt});";
                         $pdo->query($sql);
 
                         //recupere l'id de l'image inséré
@@ -123,16 +120,14 @@ if ($_POST != null){
                         $recup_id_image = $pdo->query($sql);
 
                         foreach ($recup_id_image as $row){ 
-                            echo "recup id image";
                             $id_image = $row['id_image'];
                         }
 
                         //met a jour _compte pour dire quil y a une image de profil
-                        $sql="UPDATE _compte SET id_image_profil = {$id_image}";
+                        $sql="UPDATE _compte SET id_image_profil = {$id_image} WHERE id_compte={$id}";
                     }
                     $pdo->query($sql);
                 }
-                
             }
         }
 

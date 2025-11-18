@@ -6,25 +6,41 @@
     if (!isset($_SESSION)) {
         session_start();
     }
+    ob_start();
     function renvoi(){
         if (headers_sent()) {
-            die("echec de redirection. cliquer sur ce lien svp : <a href=`../`>Ici</a>");
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
         }
         else{
+            ob_flush();
             exit(header("Location: ../"));
         }
     }
-    // Vérifie si quelqu'un est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        renvoi();
+
+
+    // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+
+    // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+        header('location: ../');
+        exit;
     }
+
     if ($_GET == NULL) {
-       echo "produit non trouver";
-       header("../");
+       echo "Produit non trouvé";
+       renvoi();
     }
-    
+
     require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';
+
+    if ($_POST != NULL) {
+        echo "Supprimé !";
+    }
+
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
@@ -89,7 +105,6 @@
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
-    print_r($sqlverif);
     if ($sqlverif == NULL) {
         renvoi();
     }
@@ -104,8 +119,13 @@
     <body>
         <main>
             <?php ecrire_nom($rows, $rows2, $_GET['produit']); ?>
+            
+            <form action="" method="post">
+                <input type="submit" value="Supprimer" id="supprimer">
+            </form>
         </main>
     </body>
 </html>
-
+<?php
+ob_end_clean();
 
