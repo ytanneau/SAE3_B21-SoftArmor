@@ -14,15 +14,16 @@ if ($_POST != null) {
 
     // Premier formulaire (après email)
     if (!isset($_POST['reponse'])) {
-        $question = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
-        echo $question;
+        $row = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
 
-        if (!isset($question) || empty($question)) {
+        if (!isset($row) || empty($row['question'])) {
             echo "Aucune question, réinitialisation impossible";
+            // Redirection
         }
+
     // Deuxième formulaire (après réponse)
     } else {
-        echo $_POST['mdp'];
+        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     }
 }
 
@@ -47,7 +48,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <?php if (!isset($question) || empty($question)) { ?>
+    <?php if (!isset($row['question']) || empty($row['question'])) { ?>
         <form action="" method="post">
             <label for="email">Votre adresse e-mail</label>
             <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
@@ -55,7 +56,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <input type="submit" value="Confirmer">
         </form>
     <?php } else { ?>
-        <p><?= $question ?? '' ?></p>
+        <p><?= $row['question'] ?? '' ?></p>
         <form action="" method="post">
             <label for="reponse">Votre réponse</label>
             <input type="text" id="reponse" name="reponse">

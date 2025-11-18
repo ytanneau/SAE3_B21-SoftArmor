@@ -24,10 +24,10 @@ require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 
-//requete pour recuperer mot de passe cryptée
+//requete pour recuperer mot de passe cryptée et id adresse
 //$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
 
-$mot_de_passe= sql_get_mdp_cryptee($_SESSION['id_compte']);
+$mot_de_passe= sql_get_infos_randoms($_SESSION['id_compte']);
 
 //requete pour recuperer informations du compte sans l'adresse
 //$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
@@ -323,6 +323,18 @@ unset($pdo);
                 
                 <label for="mdp">Mot de Passe</label>
                 <input type="password" name="mdp" placeholder="À renseigner">
+                <!--Erreur mot de passe-->
+                <?php
+                    
+                    if (isset($erreur['mdp'])){
+                        
+                ?>  
+                    <p class="error">
+                        <?="Erreur : ".$erreur['mdp']?>
+                    </p>
+                <?php
+                    }
+                ?>
             
                 <label for="n_mdp">Nouveau Mot de Passe</label>
                 <input type="password" name="n_mdp" placeholder="À renseigner">
@@ -361,6 +373,7 @@ unset($pdo);
 
                 <button type="submit">Modifier mes informations</button>
             </form>
+            <button><a href="anonymisation/index.php">Désactiver mon compte</a></button>
             
         </div>
         <div>
@@ -372,9 +385,9 @@ unset($pdo);
                     foreach ($avis as $row){  
                     ?>
                     <li>
-                        <div>
+                        <a href="/produit/index.php?id_produit=<?= $row['id_produit']?>">
                             <div>
-                                <img src="<?= "../../".$row['url_image'];?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                                <img src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
                                 <p><?= htmlentities($row['pseudo'] ?? '')?></p>
                                 <?php afficher_moyenne_note($row['note']);?>
                             </div>
@@ -383,7 +396,8 @@ unset($pdo);
                                 <p><?= htmlentities($row['commentaire'] ?? '')?></p>
                                 <p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p>
                             </div>
-                        </div>
+                            <img src="<?= HOME_SITE.$row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>">
+                        </a>
                     </li>
                     <?php } ?>
                 </ul>
