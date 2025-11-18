@@ -134,7 +134,7 @@
             <form id="supprimer" action="" method="post">
                 <input type="submit" value="Supprimer">
             </form>
-            <a href="../stock/modifier_produit?produit=<?php $_GET['produit']?>"> modifier ce produit</a>
+            <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>"> modifier ce produit</a>
         </main>
     </body>
 </html>
