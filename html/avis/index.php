@@ -1,6 +1,8 @@
 <?php
     define('HOME_GIT', '../../');
     define('HOME_SITE', '../');
+    define ('SITE_ROOT', realpath(dirname(__FILE__)));
+
     const EXISTE = "Existe déjà";
     const EXISTE_PAS = "Existe pas";
 
@@ -18,7 +20,9 @@
 
     if (isset($_FILES['image'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
-        move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $fichier);
+        move_uploaded_file($_FILES['image']['tmp_name'], SITE_ROOT.'../ressources/avis/'. $fichier);
+
+        //move_uploaded_file($_FILES['image']['tmp_name'], HOME_GIT . "ressources/avis/" . $fichier);
     }
 
     require_once HOME_GIT . 'fonction_avis.php';
