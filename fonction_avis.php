@@ -1,6 +1,45 @@
 <?php
     require_once HOME_GIT . '.config.php';
 
+    
+
+    // fonction qui verifie les champs de l'avis 
+    function condition_avis(){
+        $erreur = [];
+
+        if (!isset($_POST['note'])){
+            $erreur['note'] = VIDE;
+        }
+        else if (!(1 <= $_POST['note'] && $_POST['note'] <= 5)){
+            $erreur['note'] = FORMAT;
+        }
+
+        if (isset($_POST['description']) && !isset($_POST['titre'])){
+            $erreur['titre'] = "Une description a besoin d'un titre";
+        }
+        else if (strlen($_POST['titre']) > TAILLE_TITRE){
+            $erreur['titre'] = DEPASSE;
+        }
+
+        if (strlen($_POST['description']) > TAILLE_DESCRIPTION){
+            $erreur['description'] = DEPASSE;
+        }
+
+        if (preg_match("/png/",$_FILES['image']['type'])){
+            $erreur['image'] = "Type de l'image";
+        }
+        else if ($_FILES['image']['size'] > TAILLE_IMAGE){
+            $erreur['image'] = "Image trop lourd";
+        }
+
+        $sql_produit = detail_produit_image($_POST['produit']);
+        if ($sql_produit == null){
+            $erreur['produit'] = EXISTE_PAS;
+        }
+
+        return $erreur;
+    }
+
     // retourne les avis des client pour un produit donnée
     function avis_client_produit($id_produit){
         global $pdo;
