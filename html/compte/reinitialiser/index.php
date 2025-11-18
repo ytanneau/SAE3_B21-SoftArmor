@@ -10,40 +10,6 @@ define('HOME_SITE', '../../');
 $erreurs = [];
 $etape = 0;
 
-/*
-if ($_POST != null) {
-    require_once (HOME_GIT . 'fonction_compte.php');
-
-    // Premier formulaire (après saisie email)
-    if ($email_saisi && !$reponse_saisie) {
-        $email = htmlentities(trim($_POST['email'] ?? ''));
-        $row = sql_email_question($email);
-        
-        // S'il n'y a rien dans la ligne (pas de question associée), rediriger à la page connexion
-
-    // Deuxième formulaire (après saisie réponse)
-    } else if ($reponse_saisie) {
-        $email = 
-        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
-
-        if (empty($reponse)) {
-            $erreurs['reponse'] = VIDE;
-        } else {
-            $reponse_valide = sql_verifier_reponse($reponse);
-            
-            // Si la réponse ne correspond pas à la réponse stockée, stocker un message d'erreur
-            $erreurs['final'] = $reponse_valide ? null : "La réponse est incorrecte";
-        }
-
-
-
-    // Troisième formulaire (après saisie MDP et MDPC)
-    } else if ($mdp_saisi) {
-
-    }
-}
-*/
-
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['id_produit'])) {
         // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
@@ -126,6 +92,14 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     
     if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc']) && !isset($erreurs['final'])) {
         // Hasher et update le mot de passe associé à l'email en POST
+        $res = sql_change_mdp($email, $mdp);
+
+        if ($res === false) {
+            die('Erreur lors de la mise à jour du mot de passe');
+        }
+
+        // Rediriger vers la page de connexion
+        header('location: ' . HOME_SITE . 'compte/connexion');
     }
 }
 

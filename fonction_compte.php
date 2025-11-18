@@ -714,6 +714,18 @@
         
     }
 
+    // Fonction pour changer le mot de passe d'un client à partir de son e-mail
+    function sql_change_mdp($email, $mdp) {
+        global $pdo;
+
+        $requete = $pdo->prepare("UPDATE _compte SET mdp = :mdp WHERE email = :email");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
+        $requete->execute();
+
+        return $requete->rowCount() > 0;
+    }
+
     // fonction qui insère l'adresse pour le client
     function sql_insert_adresse_client($pdo, $id_compte, $adresse, $complement_adresse, $code_postal) {
         $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
