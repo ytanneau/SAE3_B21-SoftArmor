@@ -33,9 +33,14 @@
        header("location: ../");
        exit;
     }
-    
+
     require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';
+
+    if ($_POST != NULL) {
+        echo "Supprimé !";
+    }
+
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
@@ -115,6 +120,10 @@
     <body>
         <main>
             <?php ecrire_nom($rows, $rows2, $_GET['produit']); ?>
+            
+            <form action="" method="post">
+                <input type="submit" value="Supprimer" id="supprimer">
+            </form>
         </main>
     </body>
 </html>
