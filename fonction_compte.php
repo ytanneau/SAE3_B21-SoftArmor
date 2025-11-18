@@ -367,6 +367,7 @@
     // Renvoie toutes les erreurs de champ possibles pour un client
     function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
         $erreurs = [];
+        global $pdo;
 
         // erreur champ nom
         if (check_vide($nom)){
@@ -401,6 +402,9 @@
         }
         else if (!check_email($email)){
             $erreurs['email'] = FORMAT; 
+        }
+        else if (sql_check_email($pdo,$email)){
+            $erreurs['email'] = $email ." ". EXISTE; 
         }
         
         // erreur champ date naissance
@@ -710,8 +714,18 @@
     //requete pour savoir si il y a une image de profil
     function sql_get_img_profil($id_compte){
         global $pdo;
-
+        
         $requete = $pdo->prepare('SELECT * FROM _image INNER JOIN _compte ON _image.id_image = _compte.id_image_profil WHERE _compte.id_compte = :id_compte;');
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    
+    //requete pour obtenir l'adresse email d'un compte
+    function sql_get_email($id_compte){
+        global $pdo;
+        $requete = $pdo->prepare('SELECT email FROM compte_actif WHERE compte_actif.id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
