@@ -578,7 +578,6 @@
 
         $requete = $pdo->prepare("SELECT reponse FROM compte_client WHERE email = :email");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
         $requete->execute();
 
         $res = $requete->fetch(PDO::FETCH_ASSOC);
