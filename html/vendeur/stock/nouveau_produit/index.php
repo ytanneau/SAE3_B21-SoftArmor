@@ -16,7 +16,7 @@
 
     // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
     } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../');
+        header('location: ../');
         exit;
     }
 
@@ -31,6 +31,7 @@
 <html lang="fr">
     <head>
         <title>Ajout produit</title>
+        <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
     </head>
     <body>
