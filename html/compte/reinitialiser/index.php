@@ -12,11 +12,14 @@ define('HOME_SITE', '../../');
 if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
 
-    // Premier formulaire (email)
-    if (!isset($_POST['mdp'])) {
-        $email_existe = sql_check_email($pdo, htmlentities(trim($_POST['email'] ?? '')));
+    // Premier formulaire (après email)
+    if (!isset($_POST['reponse'])) {
+        $question = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
 
-    // Deuxième formulaire (mdp)
+        if (!isset($question) || empty($question)) {
+            echo "Aucune question, réinitialisation impossible";
+        }
+    // Deuxième formulaire (après réponse)
     } else {
         echo $_POST['mdp'];
     }
@@ -51,12 +54,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <input type="submit" value="Confirmer">
         </form>
     <?php } else { ?>
+        <p><?= $question ?? '' ?></p>
         <form action="" method="post">
-            <label for="mdp">Nouveau mot de passe</label>
-            <input type="text" id="mdp" name="mdp">
-
-            <label for="mdpC">Confirmer le nouveau mot de passe</label>
-            <input type="text" id="mdpC" name="mdpC">
+            <label for="reponse">Votre réponse</label>
+            <input type="text" id="reponse" name="reponse">
 
             <input type="submit" value="Confirmer">
         </form>

@@ -561,6 +561,21 @@
         return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
     }
 
+    // Return la question
+    function sql_email_question($email) {
+        global $pdo;
+
+        $requete = $pdo->prepare("SELECT question FROM compte_client WHERE email = :email");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->execute();
+
+        return ($requete->fetch(PDO::FETCH_ASSOC));
+    }
+
+    function sql_check_reponse() {
+
+    }
+
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
