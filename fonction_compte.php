@@ -77,7 +77,7 @@
     }
 
     // Fonction qui permet de créer un compte client
-    function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc){
+    function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc, $question, $reponse){
         $nom = strtoupper(trim($nom));
         $prenom = trim($prenom);
         $pseudo = trim($pseudo);
@@ -85,6 +85,9 @@
 
         $mdp = trim($mdp);
         $mdpc = trim($mdpc);
+
+        $question = trim($question);
+        $reponse = trim($reponse);
 
         $erreurs = [];
 
@@ -95,14 +98,16 @@
         && check_nom($prenom) 
         && check_nom($pseudo) 
         && check_date_passee($date_naiss)
-        && check_create_MDP($mdp, $mdpc)) {
+        && check_create_MDP($mdp, $mdpc)
+        && check_reponse($reponse))
+        {
 
             global $pdo;
             
             try {
                 if (!sql_check_email($pdo, $email)){
 
-                    if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp)){
+                    if (sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $question, $reponse)){
                         
                     } else {
                         // changer l'erreur $erreurs['CR'] = EXISTE_PAS;
@@ -116,7 +121,7 @@
             }
         }
         else{
-            $erreurs = array_merge($erreurs, check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc));
+            $erreurs = array_merge($erreurs, check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $mdpc, $reponse));
         }
         return $erreurs;
     }
@@ -248,6 +253,11 @@
         return (check_mot_de_passe($mdp) && check_taille($mdp, TAILLE_MDP) && ($mdp === $mdpc));
     }
 
+    function check_reponse($reponse) {
+        return (!check_vide($reponse));
+    }
+
+
     // Vérifie un nom/prénom/pseudo (non vide, bonne taille)
     function check_nom($nom) {
         return (!check_vide($nom) && check_taille($nom, TAILLE_NOM));
@@ -365,7 +375,7 @@
     }
 
     // Renvoie toutes les erreurs de champ possibles pour un client
-    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null){
+    function check_erreur_client($nom, $prenom, $pseudo, $email, $date_naiss, $mdp = null, $mdpc = null, $adresse = null, $code_postal = null, $reponse = null){
         $erreurs = [];
         global $pdo;
 
@@ -438,6 +448,11 @@
 
         // Recherche l'erreur dans l'adresse
         $erreurs = array_merge($erreurs, check_coordonnees($adresse, $code_postal));
+
+        // Recherche l'erreur dans la réponse secrète
+        if (check_vide($reponse)){
+            $erreurs['reponse'] = VIDE;
+        }
 
         return $erreurs;
     }
@@ -571,7 +586,7 @@
     }
 
     
-    function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp) {
+    function sql_create_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $mdp, $question, $reponse) {
         $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
@@ -582,12 +597,14 @@
         $requete->execute();
         $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
-        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance)");
+        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance, question, reponse) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance, :question, :reponse)");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
+        $requete->bindValue(':question', $question, PDO::PARAM_STR);
+        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
         $requete->execute();
 
         return $requete->fetch(PDO::FETCH_ASSOC);
