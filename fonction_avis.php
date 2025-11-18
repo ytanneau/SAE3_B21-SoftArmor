@@ -45,7 +45,7 @@
         global $pdo;
         try {
             $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit = :id_produit");
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -67,7 +67,7 @@
                                         INNER JOIN _image 
                                         ON _images_produit.id_image_principale = _image.id_image 
                                         WHERE compte_client.id_compte = :id_client;");
-            $requete->bindValue(':id_client', $id_client, PDO::PARAM_STR);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
