@@ -385,7 +385,7 @@ unset($pdo);
                     foreach ($avis as $row){  
                     ?>
                     <li>
-                        <a href="/html/produit/index.php?id_produit=<?= $row['id_produit']?>">
+                        <a href="/produit/index.php?id_produit=<?= $row['id_produit']?>">
                             <div>
                                 <img src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
                                 <p><?= htmlentities($row['pseudo'] ?? '')?></p>
