@@ -15,6 +15,7 @@ if ($_POST != null) {
     // Premier formulaire (après email)
     if (!isset($_POST['reponse'])) {
         $question = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
+        echo $question;
 
         if (!isset($question) || empty($question)) {
             echo "Aucune question, réinitialisation impossible";
@@ -46,7 +47,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <?php if (!isset($email_existe) || $email_existe === false) { ?>
+    <?php if (!isset($question) || empty($question)) { ?>
         <form action="" method="post">
             <label for="email">Votre adresse e-mail</label>
             <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
