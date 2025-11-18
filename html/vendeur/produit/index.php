@@ -88,7 +88,6 @@
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
-    print_r($sqlverif);
     if ($sqlverif == NULL) {
         renvoi();
     }
