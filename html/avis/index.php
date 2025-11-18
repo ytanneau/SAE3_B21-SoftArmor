@@ -47,7 +47,7 @@
             $image = null;
         }
         else{
-            $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'.png';
+            $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
         if (($res = condition_avis()) == true){
             if ($image != null){
@@ -56,7 +56,7 @@
             
             //print_r($_POST);
             try{
-                cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
+                cree_avis($_SESSION['id_compte'], $_GET['id_produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
@@ -64,13 +64,13 @@
             }
         }        
     }
-    else if (isset($_GET['produit'])){
+    else if (isset($_GET['id_produit'])){
         //echo 2;
-        if (check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
+        if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
             $erreur['avis'] = EXISTE;
         }
         else{
-            $sql_produit = detail_produit_image($_GET['produit']);
+            $sql_produit = detail_produit_image($_GET['id_produit']);
             if ($sql_produit == null){
                 $erreur['produit'] = EXISTE_PAS;   
             }
@@ -78,7 +78,7 @@
     }    
     else{
         //echo 3;
-        $_GET['produit'] = null;
+        $_GET['id_produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
 
@@ -160,7 +160,7 @@
     else{
     //print_r($sql_produit)
 ?>
-        <a href="../produit?id_produit=<?=htmlentities($_GET['produit'])?>">
+        <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
             <article>
                 <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
                 <img src="<?=HOME_SITE . htmlentities($sql_produit['image_pricipale_url'])?>" alt="<?=htmlentities($sql_produit['image_pricipale_alt'])?>" title="<?=htmlentities($sql_produit['image_pricipale_tilte'])?>">
@@ -168,7 +168,7 @@
         </a>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" 
-                value="<?=htmlentities(trim($_GET['produit']))?>"
+                value="<?=htmlentities(trim($_GET['id_produit']))?>"
                 name="produit"
                 id="produit">
 
