@@ -627,7 +627,7 @@
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
         $requete->bindValue(':question', $question, PDO::PARAM_STR);
-        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+        $requete->bindValue(':reponse', crypte_v2($reponse), PDO::PARAM_STR);
         $requete->execute();
 
         return $requete->fetch(PDO::FETCH_ASSOC);
