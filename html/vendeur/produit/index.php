@@ -31,8 +31,7 @@
 
     if ($_GET == NULL || !isset($_GET['produit'])) {
        echo "Produit non trouvé";
-       header("location: ../");
-       exit;
+       renvoi();
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
