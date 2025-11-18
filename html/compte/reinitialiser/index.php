@@ -96,7 +96,6 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     if (check_vide($mdpc)){
         $erreurs['mdpc'] = VIDE;
     }
-    else 
     
     // Si pas d'erreur sur les mots de passe
     if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc'])) {
