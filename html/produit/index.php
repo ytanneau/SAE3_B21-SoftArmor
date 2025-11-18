@@ -121,6 +121,8 @@ if ($_POST != NULL) {
     <!-- Affichage des avis -->
     <h3>Avis</h3>
 
+    <a href="../avis/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
