@@ -3,8 +3,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-    define('HOME_GIT', '../../');
-    define('HOME_SITE', '../');
+
+define('HOME_GIT', '../../');
+define('HOME_SITE', '../');
 
 // Si l'utilisateur est déjà connecté
 
@@ -13,9 +14,9 @@ if ($_POST != null){
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
 }
 
+// Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header('location: ./stock');
-    exit;
+    header(isset($_SESSION['raison_sociale']) ? 'location: stock' : 'location: ' . HOME_SITE);
 }
 
 ?>
@@ -25,9 +26,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon Vendeur - Connexion</title>
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?= HOME_SITE . "style.css" ?>">
 </head>
 <body id="connect_vendeur">
     <main>
@@ -40,7 +40,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     else {
 ?>
         <img src="" alt="">
-        <a href="../">
+        <a href="./">
             <img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon">
         </a>
         <h2>S’identifier</h2>

@@ -1,18 +1,25 @@
 <?php                 
     // appel du fichier de configuration bdd
-    require_once "../../../../.config.php";
-
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
+
+    require_once HOME_GIT . ".config.php";
 
     if (!isset($_SESSION)) {
         session_start();
     }
-    //verifie si quelqun est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+
+    // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+
+    // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         header('location: ../../');
         exit;
     }
+
     $id_compte = $_SESSION['id_compte'];
 ?>
 

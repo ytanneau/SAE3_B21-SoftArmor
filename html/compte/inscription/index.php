@@ -1,7 +1,7 @@
 <?php
     
     define('HOME_SITE', '../../');
-    const HOME_GIT = '../../../';
+    define('HOME_GIT', '../../../');
     
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
@@ -14,20 +14,24 @@
 
         $erreurs = [];
 
-        //echo "présence d'un post";
-        //print_r($_ENV);
         $fichier = HOME_GIT . 'fonction_compte.php';
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc']);
         } else {
-            // echo "erreur 1";
-
             $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
             $date = date("Y-m-d H:i:s");
             file_put_contents($fichierLog, "[$date] Failed find : require_once $fichier;\n", FILE_APPEND);
         }
+    }
+
+    
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+        $param = "";
+        if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit'];
+        header('location: ' . HOME_SITE . "compte/connexion" . $param);
+        exit;
     }
 ?>
 <!DOCTYPE html>
@@ -41,137 +45,105 @@
 </head>
 <body id="inscription_client">
     <main>
-        
+        <?php if (isset($erreurs) && $erreurs == []) { ?>
+            <h1>Félicitations, vous avez créé votre compte</h1>
+        <?php } else if (isset($erreurs['fatal'])) { ?>
+            <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
+        <?php } else { ?>
+            <a href="<?= HOME_SITE ?>">
+                <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
+            </a>
+            
+            <h2>S'inscrire</h2>
+            
+            <form action="" method="post">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" maxlength="40" value="<?= $_POST["nom"] ?? ''?>"
+                class="champ">
+                <p class="contrainte"></p>
 
-<?php
-    if (isset($erreurs) && $erreurs == []) {
-?>
-        <h1>Félicitations vous avez crée votre compte</h1>
-<?php
-    }
-    else if (isset($erreurs['fatal'])){
-?>
-        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
-<?php
-    }
-    else{
-?>
-        <img src="" alt="">
-        <a href="../">
-            <img src="<?=HOME_SITE?>image/Alizon_noir.png" alt="logo alizon" title="logo alizon">
-        </a>
-        <h2>S'inscrire</h2>
-        
-        <form action="" method="post">
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="nom" maxlength="40" value="<?php if (isset($_POST["nom"])) echo htmlentities($_POST["nom"])?>"
-            class="champ">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['nom'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['nom']?>
-            </p>
-<?php
-    }
-?>
+                <?php if (isset($erreurs['nom'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['nom']?>
+                    </p>
+                <?php } ?>
 
-            <br>
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="prenom" maxlength="40" value="<?php if (isset($_POST["prenom"])) echo htmlentities($_POST["prenom"])?>"
-            class="champ">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['prenom'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['prenom']?>
-            </p>
-<?php
-    }
-?>
+                <br>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" maxlength="40" value="<?=$_POST['prenom'] ?? ''?>" class="champ">
+                <p class="contrainte"></p>
 
-            <br>
-            <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?php if (isset($_POST["pseudo"])) echo htmlentities($_POST["pseudo"])?>"
-            class="champ">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['pseudo'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['pseudo']?>
-            </p>
-<?php
-    }
-?>
+                <?php if (isset($erreurs['prenom'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['prenom']?>
+                    </p>
+                <?php } ?>
 
-            <br>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" maxlength="80" value="<?php if (isset($_POST["email"])) echo htmlentities($_POST["email"])?>"
-            class="champ">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['email'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['email']?>
-            </p>
-<?php
-    }
-?>
+                <br>
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?=$_POST['pseudo'] ?? ''?>"
+                class="champ">
+                <p class="contrainte"></p>
 
-            <br>
-            <label for="date_naissance">Date de naissance</label>
-            <input type="date" id="date_naissance" name="date_naissance"
-            class="champ" value="<?php if (isset($_POST['date_naissance'])) echo htmlentities($_POST['date_naissance'])?>">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['date_naiss'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['date_naiss']?>
-            </p>
-<?php
-    }
-?>
+                <?php if (isset($erreurs['pseudo'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['pseudo']?>
+                    </p>
+                <?php } ?>
 
-            <br>
-            <label for="mdp">Mot de passe</label>
-            <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required
-            class="champ">
-            <p class="contrainte">minimum 12 caractères</p>
-<?php
-    if (isset($erreurs['mdp'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['mdp']?>
-            </p>
-<?php
-    }
-?>
+                <br>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" maxlength="80" value="<?=$_POST['email'] ?? ''?>"
+                class="champ">
+                <p class="contrainte"></p>
 
-            <br>
-            <label for="mdpc">Mot de passe de confirmation</label>
-            <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required
-            class="champ">
-            <p class="contrainte"></p>
-<?php
-    if (isset($erreurs['mdpc'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreurs['mdpc']?>
-            </p>
-<?php
-    }
-?>
+                <?php if (isset($erreurs['email'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['email']?>
+                    </p>
+                <?php } ?>
 
-            <input type="submit" value="Crée mon compte" class="bouton">
-        </form>
-<?php
-    }
-?>
+                <br>
+                <label for="date_naissance">Date de naissance</label>
+                <input type="date" id="date_naissance" name="date_naissance"
+                class="champ" value="<?=$_POST['date_naissance'] ?? ''?>">
+                <p class="contrainte"></p>
+
+                <?php if (isset($erreurs['date_naiss'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['date_naiss']?>
+                    </p>
+                <?php } ?>
+
+                <br>
+                <label for="mdp">Mot de passe</label>
+                <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required
+                class="champ">
+                <p class="contrainte">minimum 12 caractères</p>
+
+                <?php if (isset($erreurs['mdp'])){ ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['mdp']?>
+                    </p>
+                <?php } ?>
+
+                <br>
+                <label for="mdpc">Mot de passe de confirmation</label>
+                <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required
+                class="champ">
+                <p class="contrainte"></p>
+
+                <?php if (isset($erreurs['mdpc'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['mdpc']?>
+                    </p>
+                <?php } ?>
+
+                <input type="submit" value="Crée mon compte" class="bouton">
+            </form>
+        <?php } ?>
+
+        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
     </main>
 </body>
 </html>

@@ -535,11 +535,11 @@
     function sql_check_email($pdo, $email){
         try {
             //$requete = $pdo->prepare("SELECT 1 FROM compte_actif WHERE email = :email");
-            $requete = $pdo->prepare("SELECT email_actif_existe(:email)");
+            $requete = $pdo->prepare("SELECT email_actif_existe(:email) AS existe");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
 
-            return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+            return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
         } catch (PDOException $e) {
             //$fichierLog = __DIR__ . "/erreurs.log";
             //$date = date("Y-m-d H:i:s");
@@ -663,7 +663,7 @@
             throw $e; // lance une erreur que la fonction appelante catchera
         }
     }
-function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+    function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -678,12 +678,11 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         }
         
 
-        $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom, date_naissance = :date_naissance WHERE id_compte = :id_compte");
+        $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom WHERE id_compte = :id_compte");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
-        $requete->bindValue(':date_naissance', $date_naiss, PDO::PARAM_STR);
         $requete->execute();
         
         $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
@@ -715,4 +714,56 @@ function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $date_naiss, $a
         $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
+    }
+
+    //requete pour recuperer mot de passe cryptée
+    function sql_get_mdp_cryptee($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT mdp,id_adresse FROM compte_client WHERE id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour recuperer informations du compte sans l'adresse
+    function sql_get_info_compte($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour recuperer l'adresse du compte
+    function sql_get_adresse_compte($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM client_adresse WHERE client_adresse.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    //requete pour savoir si il y a une image de profil
+    function sql_get_img_profil($id_compte){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare('SELECT * FROM _image INNER JOIN _compte ON _image.id_image = _compte.id_image_profil WHERE _compte.id_compte = :id_compte;');
+            $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+            $requete->execute();
+            return $requete->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }

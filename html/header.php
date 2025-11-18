@@ -8,6 +8,7 @@
 
         <ul>
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
+                <li> <a href="<?= HOME_SITE . 'panier/' ?>"> <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier</a> </li>
                 <li>
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
@@ -17,7 +18,7 @@
 
                         <div id="dropdown-compte" class="dropdown-content">
                             <a href="<?= HOME_SITE . 'compte/informations' ?>"> <img src="<?= $images . 'compte.svg' ?>" class="icon">Mon profil</a> 
-                            <a href="#"> <img src="<?= $images . 'options.svg' ?>" class="icon">Paramètres</a>
+                            <!-- <a href="#"> <img src="<?= $images . 'options.svg' ?>" class="icon">Paramètres</a> -->
                             <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
                         </div>
                     </div>

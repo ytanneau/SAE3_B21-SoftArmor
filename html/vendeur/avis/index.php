@@ -2,17 +2,30 @@
     define('HOME_GIT', '../../../');
     define('HOME_SITE', '../../');
 
-    require_once HOME_GIT . 'fonction_avis.php';
-
     if (!isset($_SESSION)) {
         session_start();
     }
 
-    //verifie si quelqun est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+
+    // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
         header('location: ../');
         exit;
     }
+
+    function pset($value) {
+        return isset($value) ? htmlentities($value) : "";
+    }
+
+    require_once HOME_GIT . 'fonction_produit.php';
+    require_once HOME_GIT . 'fonction_avis.php';
+
+    //verifie si quelqun est connecté
+
 
     if (isset($_GET['produit'])) {
         $data = avis_client_produit($_GET['produit']);
@@ -29,8 +42,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon avis</title>
+<?php
+    require_once HOME_SITE . 'link_head.php';
+?>
 </head>
+
 <body>
+<?php
+    require_once HOME_SITE . 'vendeur/header.php';
+?>
     <main>
 <?php
     if ($data === NULL){
@@ -48,20 +68,27 @@
         <li>
             <table>
                 <tr>
-                    <td><?=htmlentities($row['pseudo'])?></td>
-                    <td><?=htmlentities($row['note'])?></td>
-                    <td><?=htmlentities($row['titre'])?></td>
-                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . htmlentities($row['url_image'])?>" alt="<?=htmlentities($row['alt_image'])?>" tilte="<?=htmlentities($row['titre_image'])?>"></td>
+                    <td><?=pset($row['pseudo'])?></td>
+                    <td><?=pset($row['note'])?>/5 
+<?php
+    afficher_moyenne_note($row['note']);
+?>
+                    </td>
+                    <td><?=pset($row['titre'])?></td>
+                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
                 </tr>
                 <tr>
-                    <td><?=htmlentities($row['date_avis'])?></td>
-                    <td colspan="2"><?=htmlentities($row['commentaire'])?></td>
+                    <td><?=pset($row['date_avis'])?></td>
+                    <td colspan="2"><?=pset($row['commentaire'])?></td>
                 </tr>
             </table>
         </li>
-    </ul>
+    
 <?php
         }
+?>
+    </ul>
+<?php
     }
 ?>
     </main>
