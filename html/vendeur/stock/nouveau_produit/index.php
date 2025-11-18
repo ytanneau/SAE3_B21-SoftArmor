@@ -347,7 +347,7 @@
                     // insertion du produit dans la base de données
                     
                     $qtachete = $quantite . ";" . $unite;
-                    $idProduit = add_produit(1, $nomPrv,$nomPblc,
+                    $idProduit = add_produit($id_compte, $nomPrv,$nomPblc,
                                             $prixProd, $tva, $codeBarre, $checkMajeur,
                                             $qtachete, $qtStock,$seuilAlerte,
                                             $descSimple,$descDetaille, $poidColis,
