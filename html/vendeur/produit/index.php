@@ -64,15 +64,16 @@
                 <td><?= $rows['volume'] ?></td>
             </tr>
         </table>
-
+        <?php echo $produit;
+        print_r($rows2)?>
         <div>
             <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image_principale'] . '.png' ?>" > 
             <?php
-                if ($rows2['id_image1'] != NULL) {
-                    ?> <img src= "../ressources/produit/<?= $produit . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
+                if (isset($rows2['id_image1'])) {
+                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image1'] . '.png' ?>" > <?php
                 }
-                if ($rows2['id_image2'] != NULL) {
-                    ?> <img src= "../ressources/produit/<?= $produit . '_' . $rows2['id_image2'] . '.png' ?>" > <?php
+                if (isset($rows2['id_image2'])) {
+                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image2'] . '.png' ?>" > <?php
                 }
             ?>
         </div>
@@ -118,21 +119,22 @@
 <!doctype html>
 <html lang="fr">
     <head>
-    <meta charset="utf-8">
-    <title>Alizon</title>
-    <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+        <title>Alizon</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="confirmation.js"></script>
     </head>
     <body>
         <main>
-            <?php if (!$supprime) {
+            <?php if (!isset($supprime) || $supprime === false) {
                 ecrire_nom($rows, $rows2, $_GET['produit']);
             } else { ?>
                 <h1>Produit supprimé</h1>
                 <a href="../stock">Revenir au stock</a>
             <?php } ?>
             
-            <form action="" method="post">
-                <input type="submit" value="Supprimer" id="supprimer">
+            <form id="supprimer" action="" method="post">
+                <input type="submit" value="Supprimer">
             </form>
         </main>
     </body>
