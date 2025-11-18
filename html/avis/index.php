@@ -179,7 +179,7 @@
             <input type="text" 
                 name="description" 
                 id="description"
-                class="champ">
+                class="champ texte">
 <?php
     if (isset($erreur['description'])){
 ?>
