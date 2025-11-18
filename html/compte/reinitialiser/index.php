@@ -195,6 +195,10 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                 <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
             </p>
 
+            <p class="error">
+                <?= isset($erreurs['final']) ? $erreurs['final'] : ''; ?>
+            </p>
+
             <input type="submit" value="Confirmer">
         </form>
     <?php } ?>
