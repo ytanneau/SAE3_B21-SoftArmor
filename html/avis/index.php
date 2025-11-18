@@ -158,7 +158,7 @@
 <?php
     }
     else{
-    //print_r($sql_produit)
+    print_r($sql_produit);
 ?>
         <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
             <article>
