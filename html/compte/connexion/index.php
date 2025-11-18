@@ -102,8 +102,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 ?>
             </p>
             
-            <input type="submit" value="Se connecter" class="bouton"> 
+            <input type="submit" value="Se connecter" class="bouton">
         </form>
+        <p><a href="../reinitialiser">Mot de passe oublié ?</a></p>
         <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['id_produit'])) echo "?id_produit=" . $_GET['id_produit']?>">S'inscrire</a></p>
         </main>
 
