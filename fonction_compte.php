@@ -718,7 +718,7 @@
     }
 
     //requete pour recuperer mot de passe cryptée
-    function sql_get_mdp_cryptee($id_compte){
+    function sql_get_infos_randoms($id_compte){
         global $pdo;
         
         $requete = $pdo->prepare('SELECT mdp,id_adresse FROM compte_client WHERE id_compte = :id_compte;');
