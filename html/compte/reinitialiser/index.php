@@ -8,7 +8,7 @@ define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
 $erreurs = [];
-$etape = 1;
+$etape = 0;
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['id_produit'])) {
