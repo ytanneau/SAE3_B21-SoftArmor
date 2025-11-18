@@ -79,7 +79,7 @@
     // Fonction qui permet de créer un compte client
     function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc, $question, $reponse){
         $nom = strtoupper(trim($nom));
-        $prenom = capitalize(trim($prenom));
+        $prenom = ucfirst(trim($prenom));
         $pseudo = trim($pseudo);
         $email = trim($email);
 
@@ -613,7 +613,7 @@
         $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
         $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance, question, reponse) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance, :question, :reponse)");
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
@@ -634,7 +634,7 @@
 
         
         $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
-        $requete->bindValue(':email', $email);
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->execute();
         $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
@@ -647,16 +647,16 @@
 
 
         $requete = $pdo->prepare("SELECT id_adresse FROM _adresse WHERE adresse = :adresse");
-        $requete->bindValue(':adresse', $adresse);
+        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $requete->execute();
         $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
 
 
         $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_sociale, num_siret, id_adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
         $requete->bindValue(':raison_social', $raisonSocial, PDO::PARAM_STR);
-        $requete->bindValue(':numero_siret', $numSiret, PDO::PARAM_STR);
-        $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_STR);
+        $requete->bindValue(':numero_siret', $numSiret, PDO::PARAM_INT);
+        $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_INT);
         $requete->execute();
 
 
@@ -671,19 +671,19 @@
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
-            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
             $requete->execute();
         }else{
             $requete = $pdo->prepare("UPDATE _compte SET email = :email, mdp = :mdpc WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->bindValue(':mdpc', crypte_v2($mdpc), PDO::PARAM_STR);
-            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
             $requete->execute();
         }
         
 
         $requete = $pdo->prepare("UPDATE _client SET pseudo = :pseudo, nom = :nom, prenom = :prenom WHERE id_compte = :id_compte");
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
@@ -692,7 +692,7 @@
         $ancienne_adresse=sql_get_adresse_compte($id_compte);
         if($ancienne_adresse!=null){
             $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
-            $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_STR);
+            $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_INT);
             $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
             $requete->bindValue(':code_postal', $code_postal, PDO::PARAM_STR);
             $requete->bindValue(':complement_adresse', $complement_adresse, PDO::PARAM_STR);
@@ -721,8 +721,8 @@
         $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
 
         $requete = $pdo->prepare("UPDATE _client SET id_adresse_fac = :id_adresse WHERE id_compte = :id_compte");
-        $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_STR);
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_INT);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
     }
 
@@ -730,8 +730,8 @@
     function sql_get_infos_randoms($id_compte){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac FROM compte_client WHERE id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac AS id_adresse FROM compte_client WHERE id_compte = :id_compte;');
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -741,7 +741,7 @@
         global $pdo;
     
         $requete = $pdo->prepare('SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -751,7 +751,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('SELECT * FROM client_adresse WHERE client_adresse.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -761,7 +761,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('SELECT * FROM _image INNER JOIN _compte ON _image.id_image = _compte.id_image_profil WHERE _compte.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -771,7 +771,7 @@
     function sql_get_email($id_compte){
         global $pdo;
         $requete = $pdo->prepare('SELECT email FROM compte_actif WHERE compte_actif.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }

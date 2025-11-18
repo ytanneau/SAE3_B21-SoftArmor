@@ -23,7 +23,7 @@
         global $pdo;
         
         $requete = $pdo->prepare("SELECT * from _produit where id_produit = :id_produit");
-        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
@@ -34,7 +34,7 @@
         $sql = "SELECT * FROM produit_image WHERE id_produit = :id_produit";
 
         $requete = $pdo->prepare($sql);
-        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
 
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -44,7 +44,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('SELECT * FROM `_images_produit` WHERE  id_produit = :id_produit');
-        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
@@ -53,7 +53,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('SELECT * FROM _image WHERE  id_image = :id_image');
-        $requete->bindValue(':id_image', $id_image, PDO::PARAM_STR);
+        $requete->bindValue(':id_image', $id_image, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
@@ -62,8 +62,8 @@
         global $pdo;
         
         $requete = $pdo->prepare('SELECT id_produit from _produit where id_vendeur = :id_vendeur AND id_produit = :id_produit');
-        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
-        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_STR);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
@@ -72,7 +72,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur');
-        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_STR);
+        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -118,8 +118,8 @@
         global $pdo;
 
         $requete = $pdo->prepare('DELETE FROM _elt_panier WHERE id_produit =:id_produit and id_client = :id_client;');
-        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
-        $requete->bindValue(':id_client', $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(':id_client', $id_compte, PDO::PARAM_INT);
         $requete->execute();
     }
 
