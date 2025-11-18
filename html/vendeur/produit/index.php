@@ -64,8 +64,9 @@
                 <td><?= $rows['volume'] ?></td>
             </tr>
         </table>
-        <?php echo $produit;
+        <?php echo $_GET['produit'];
         print_r($rows2)?>
+        
         <div>
             <img src="<?= HOME_SITE . 'ressources/produit/' . $produit . '_' . $rows2['id_image_principale'] . '.png' ?>" > 
             <?php
