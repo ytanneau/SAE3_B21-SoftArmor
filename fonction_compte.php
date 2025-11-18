@@ -79,7 +79,7 @@
     // Fonction qui permet de créer un compte client
     function create_profile_client($email, $nom, $prenom, $pseudo, $date_naiss, $mdp, $mdpc, $question, $reponse){
         $nom = strtoupper(trim($nom));
-        $prenom = trim($prenom);
+        $prenom = capitalize(trim($prenom));
         $pseudo = trim($pseudo);
         $email = trim($email);
 
@@ -661,6 +661,14 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
     function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
+        $nom = strtoupper(trim($nom));
+        $prenom = ucfirst(trim($prenom));
+        $pseudo = trim($pseudo);
+        $email = trim($email);
+
+        $mdp = trim($mdp);
+        $mdpc = trim($mdpc);
+
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -719,11 +727,11 @@
         $requete->execute();
     }
 
-    //requete pour recuperer mot de passe cryptée
-    function sql_get_mdp_cryptee($id_compte){
+    //requete pour recuperer mot de passe cryptée et id adresse
+    function sql_get_infos_randoms($id_compte){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT mdp,id_adresse FROM compte_client WHERE id_compte = :id_compte;');
+        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac FROM compte_client WHERE id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);

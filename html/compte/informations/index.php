@@ -24,10 +24,10 @@ require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 
-//requete pour recuperer mot de passe cryptée
+//requete pour recuperer mot de passe cryptée et id adresse
 //$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
 
-$mot_de_passe= sql_get_mdp_cryptee($_SESSION['id_compte']);
+$mot_de_passe= sql_get_infos_randoms($_SESSION['id_compte']);
 
 //requete pour recuperer informations du compte sans l'adresse
 //$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
