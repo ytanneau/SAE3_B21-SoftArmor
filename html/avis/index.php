@@ -133,7 +133,7 @@
     <title>Alizon - Avis</title>
     <?php include HOME_SITE . "link_head.php"; ?>
 </head>
-<body>
+<body id="avis_client">
     <?php include HOME_SITE . "header.php"; ?>
     <main>
 <?php
@@ -166,6 +166,7 @@
                 <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
             </article>
         </a>
+        <article>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" 
                 value="<?=htmlentities(trim($_GET['id_produit']))?>"
@@ -196,7 +197,8 @@
             <label for="titre">Titre</label>
             <input type="text" 
                 name="titre" 
-                id="titre">
+                id="titre"
+                class="champ">
 <?php
     if (isset($res['titre'])){
 ?>
@@ -210,7 +212,8 @@
             <label for="description">Description</label>
             <input type="text" 
                 name="description" 
-                id="description">
+                id="description"
+                class="champ">
 <?php
     if (isset($res['description'])){
 ?>
@@ -238,6 +241,7 @@
 
             <input type="submit" value="créer l'avis">
         </form>
+        </article>
 <?php
     }
 ?>
