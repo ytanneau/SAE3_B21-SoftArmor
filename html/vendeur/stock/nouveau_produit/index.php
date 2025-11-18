@@ -1,11 +1,13 @@
 <?php                 
     // appel du fichier de configuration bdd
-    require_once HOME_GIT . ".config.php";
-    include "fonction_categorie.php";
-    include "fonction_produit.php";
+    
 
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
+
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_categorie.php";
+    include HOME_GIT . "fonction_produit.php";
 
     if (!isset($_SESSION)) {
         session_start();
