@@ -7,25 +7,42 @@ if (!isset($_SESSION)) {
 define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
-// Si l'utilisateur est déjà connecté
+$erreurs = [];
+$etape = 0;
 
+/*
 if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
 
-    // Premier formulaire (après email)
-    if (!isset($_POST['reponse'])) {
-        $row = sql_email_question(htmlentities(trim($_POST['email'] ?? '')));
+    // Premier formulaire (après saisie email)
+    if ($email_saisi && !$reponse_saisie) {
+        $email = htmlentities(trim($_POST['email'] ?? ''));
+        $row = sql_email_question($email);
+        
+        // S'il n'y a rien dans la ligne (pas de question associée), rediriger à la page connexion
 
-        if (!isset($row) || empty($row['question'])) {
-            echo "Aucune question, réinitialisation impossible";
-            // Redirection
+    // Deuxième formulaire (après saisie réponse)
+    } else if ($reponse_saisie) {
+        $email = 
+        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
+
+        if (empty($reponse)) {
+            $erreurs['reponse'] = VIDE;
+        } else {
+            $reponse_valide = sql_verifier_reponse($reponse);
+            
+            // Si la réponse ne correspond pas à la réponse stockée, stocker un message d'erreur
+            $erreurs['final'] = $reponse_valide ? null : "La réponse est incorrecte";
         }
 
-    // Deuxième formulaire (après réponse)
-    } else {
-        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
+
+
+    // Troisième formulaire (après saisie MDP et MDPC)
+    } else if ($mdp_saisi) {
+
     }
 }
+*/
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['id_produit'])) {
@@ -38,6 +55,73 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     exit;
 }
 
+if ($_POST == null) {
+    $etape = 1;
+} else {
+    $email = htmlentities(trim($_POST['email'] ?? ''));
+    $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
+    $mdp = htmlentities(trim($_POST['mdp'] ?? ''));
+    $mdpc = htmlentities(trim($_POST['mdpc'] ?? ''));
+}
+
+// Premier formulaire (après saisie adresse)
+if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
+    if (empty($email)) {
+        $erreurs['email'] = VIDE;
+    } 
+    
+    // Si pas d'erreur sur l'e-mail
+    if (!isset($erreurs['email'])) {
+        $row = sql_email_question($email);
+
+        if (!isset($row['question'])) {
+            // Si pas de question associée à cet e-mail
+            $erreurs['final'] = "L'adresse e-mail est incorrecte ou aucune question n'a été renseignée pour ce compte";
+        } else {
+            $etape = 2;
+        }
+
+    }
+}
+
+// Deuxième formulaire (après saisie réponse)
+if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
+    if (empty($reponse)) {
+        $erreurs['reponse'] = VIDE;
+    } 
+    
+    // Si pas d'erreur sur la réponse
+    if (!isset($erreurs['reponse'])) {
+        $reponse_valide = sql_verifier_reponse($email, $reponse);
+
+        if (!$reponse_valide) {
+            // Si pas de question associée à cet e-mail
+            $erreurs['reponse'] = "La réponse est incorrecte";
+        } else {
+            $etape = 3;
+        }
+    }
+}
+
+// Troisième formulaire (après saisie MDP et MDPC)
+if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
+    if (empty($mdp)) {
+        $erreurs['mdp'] = VIDE;
+    } 
+
+    if (empty($mdpc)) {
+        $erreurs['mdpc'] = VIDE;
+    }
+
+    if ($mdp !== $mdpc) {
+        $erreurs['final'] = CORRESPOND_PAS;
+    }
+    
+    if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc']) && !isset($erreurs['final'])) {
+        // Hasher et update le mot de passe associé à l'email en POST
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -48,21 +132,47 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <?php if (!isset($row['question']) || empty($row['question'])) { ?>
+    <!-- Premier formulaire (saisir l'email) -->
+    <?php if ($etape === 1) { ?>
         <form action="" method="post">
+            <input type="hidden" name="etape" value="etape_adresse">
+
             <label for="email">Votre adresse e-mail</label>
             <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
 
             <input type="submit" value="Confirmer">
         </form>
-    <?php } else { ?>
+
+    <!-- Deuxième formulaire (saisir la réponse à la question) -->
+    <?php } else if ($etape === 2) { ?>
         <p><?= $row['question'] ?? '' ?></p>
+
         <form action="" method="post">
+            <input type="hidden" name="etape" value="etape_reponse">
+            <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+
             <label for="reponse">Votre réponse</label>
             <input type="text" id="reponse" name="reponse">
 
             <input type="submit" value="Confirmer">
         </form>
+
+    <!-- Troisième formulaire (saisir le nouveau MDP) -->
+    <?php } else if ($etape === 3) { ?>
+        <form action="" method="post">
+            <input type="hidden" name="etape" value="etape_mdp">
+            <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+
+            <label for="mdp">Nouveau mot de passe</label>
+            <input type="password" id="mdp" name="mdp">
+
+            <label for="mdp">Confirmation du nouveau mot de passe</label>
+            <input type="password" id="mdpc" name="mdpc">
+
+            <input type="submit" value="Confirmer">
+        </form>
     <?php } ?>
+
+    
 </body>
 </html>

@@ -572,6 +572,10 @@
         return ($requete->fetch(PDO::FETCH_ASSOC));
     }
 
+    function sql_verifier_reponse($email, $reponse) {
+        return null;
+    }
+
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
@@ -663,9 +667,6 @@
         $prenom = ucfirst(trim($prenom));
         $pseudo = trim($pseudo);
         $email = trim($email);
-
-        $mdp = trim($mdp);
-        $mdpc = trim($mdpc);
 
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
