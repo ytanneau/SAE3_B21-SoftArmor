@@ -12,7 +12,7 @@
             ?> <img src="../../image/etoile_pleine.svg" alt="étoile pleine"><?php
         }
         if(fmod(floor($moyenne*2),2)){
-            ?> <img src="../../image/etoile_demi.svg" alt="étoile à moitié pleine"> <?php 
+            ?> <img src="../../image/etoile_demi.svg" alt="étoile à moitié pleine" test="<?=__DIR__?>"> <?php 
         }
         for ($i =5; $i > round($moyenne); $i--){
             ?> <img src="../../image/etoile_vide.svg" alt="étoile vide"><?php
