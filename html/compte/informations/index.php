@@ -71,10 +71,17 @@ if ($_POST != NULL){
 
     //initialise une date valide car je ne veut pas refaire une fonction identique ou on ne verifie pas la date de naissance
     $date='01-01-2000';
-
+    
     //check les erreur de saisies
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$date, $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
+    //verifie si email n'est pas changé
+    $ancien_mail=sql_get_email($_SESSION['id_compte']);
+
+    if($_POST['email'] == $ancien_mail[0]['email']){
+        $erreur['email']=NULL;
+    }
+
     //verifie que les condition de l'insertin sont remplies
     if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) 
         && !check_vide($_POST['mdp'])) 
@@ -130,11 +137,13 @@ if ($_POST != NULL){
                 }
             }
         }
+        //actualise la session
+        $_SESSION['pseudo'] = $_POST['pseudo'];
 
         //vide les variables globales
         $_POST = null;
         $_FILES = null;
-
+        
         //refresh la page pour afficher les infos
         header("Refresh:0");
     

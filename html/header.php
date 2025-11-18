@@ -23,9 +23,13 @@
                         </div>
                     </div>
                 </li>
-            <?php } else { ?>
-                <li> <a href="<?= HOME_SITE . 'compte/inscription' ?>"> <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">S'inscrire</a> </li>
-                <li> <a href="<?= HOME_SITE . 'compte/connexion' ?>"> <img src="<?= $images . 'connexion_blanc.svg' ?>" class="icon">Se connecter</a> </li>
+            <?php } else { 
+                $param = "";
+                // permet de faire que si un utilisateur est sur une page produit, et qu'il passe par les boutons du header, une fois co, il soit remis sur la page où il était
+                if (isset($_GET['id_produit'])) $param = "?id_produit=" . $_GET['id_produit'];
+                ?>
+                <li> <a href="<?= HOME_SITE . 'compte/inscription' . $param?>"> <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">S'inscrire</a> </li>
+                <li> <a href="<?= HOME_SITE . 'compte/connexion' . $param?>"> <img src="<?= $images . 'connexion_blanc.svg' ?>" class="icon">Se connecter</a> </li>
             <?php } ?>
         </ul>
     </div>

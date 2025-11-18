@@ -75,7 +75,7 @@
 ?>
                     </td>
                     <td><?=pset($row['titre'])?></td>
-                    <td rowspan="2"><img src="<?=HOME_SITE . "ressources/avis/" . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
+                    <td rowspan="2"><img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
                 </tr>
                 <tr>
                     <td><?=pset($row['date_avis'])?></td>

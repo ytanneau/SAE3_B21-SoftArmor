@@ -32,16 +32,16 @@
         global $pdo;
         try {
             $requete = $pdo->prepare("CALL creer_avis(:id_client, :id_produit, :note, :titre, :description, :url, :img_titre, :alt)");
-            $requete->bindValue(':id_client', $id_client, PDO::PARAM_STR);
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_STR);
-            $requete->bindValue(':note', $note, PDO::PARAM_STR);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':note', $note, PDO::PARAM_INT);
             $requete->bindValue(':titre', $titre, PDO::PARAM_STR);
             $requete->bindValue(':description', $description, PDO::PARAM_STR);
             $requete->bindValue(':url', $image, PDO::PARAM_STR);
             $requete->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
             $requete->bindValue(':alt', 'image avis', PDO::PARAM_STR);
             $requete->execute();
-            return $requete->fetchAll(PDO::FETCH_ASSOC);
+            return 0;
         } catch (PDOException $e) {
             throw $e;
         }
