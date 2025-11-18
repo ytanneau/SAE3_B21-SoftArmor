@@ -21,7 +21,7 @@ if (!isset($_POST['form'])) {
     $numEtape = 1;
 
     // si y'a pas de produit dans le lien, ou que c'est pas par le panier qu'on a atteint cette page, alors problème
-    if (!isset($_GET['produit'])) {
+    if (!isset($_GET['id_produit'])) {
         header("location: " . HOME_GIT, );
     }
 
@@ -160,9 +160,9 @@ if ($numEtape == 3) {
     date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
 
-    if ($_POST['produit'] != 'panier') {
+    if ($_POST['id_produit'] != 'panier') {
         $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-        $requete->bindValue(":id_produit", $_POST['produit']);
+        $requete->bindValue(":id_produit", $_POST['id_produit']);
         $requete->execute();
         $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
@@ -255,7 +255,7 @@ if ($numEtape == 1) {
         <?php } ?>
 
 
-        <input type="hidden" name="produit" id="produit" required value="<?php if (isset($_GET['produit'])) {echo htmlentities($_GET['produit']);} else {echo "panier";}?>">
+        <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['id_produit'])) {echo htmlentities($_GET['id_produit']);} else {echo "panier";}?>">
         <input type="hidden" name="form" id="form" required value="adresse">
         <br>
         <input type="submit" value="Continuer l'achat">
@@ -317,7 +317,7 @@ else if ($numEtape == 2) {
         }
         ?>
 
-        <input type="hidden" type="number" name="produit" id="produit" required value="<?=$_POST['produit']?>">
+        <input type="hidden" type="number" name="id_produit" id="id_produit" required value="<?=$_POST['id_produit']?>">
         <input type="hidden" name="form" id="form" required value="bancaire">
         <br>
         <input type="submit" value="Effectuer l'achat">
