@@ -14,6 +14,8 @@ main {
 }
 
 #header_client {
+  position: sticky;
+  top: 0;
   padding: 0.5em 1em;
   background-color: #3157A3;
 }
@@ -99,6 +101,8 @@ main {
 }
 
 #header_vendeur {
+  position: sticky;
+  top: 0;
   padding: 0.5em 1em;
   background-color: #6B31D0;
 }
@@ -141,7 +145,7 @@ main {
   flex-direction: row;
   align-items: center;
   font-size: 1em;
-  background-color: #3157A3;
+  background-color: #6B31D0;
   color: white;
   border: none;
   cursor: pointer;

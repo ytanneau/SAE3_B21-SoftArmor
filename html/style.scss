@@ -93,6 +93,8 @@
 }
 
 @mixin header($background) {
+    position: sticky;
+    top: 0;
     padding: 0.5em 1em;
     background-color: $background;
     
@@ -134,7 +136,7 @@
                         @include contenu_centre_horizontal();
                         
                         font-size: $font_size_normal;
-                        background-color: #3157A3;
+                        background-color: $background;
                         color: white;
                         border: none;
                         cursor: pointer;

@@ -6,10 +6,9 @@
     if (!isset($_SESSION)) {
         session_start();
     }
-
     function renvoi(){
         if (headers_sent()) {
-            die("echec de redirection. cliquer sur ce lien svp : <a href=`../`>Ici</a>");
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
         }
         else{
             exit(header("Location: ../"));
@@ -28,14 +27,16 @@
         exit;
     }
 
-    if ($_GET == NULL) {
+    if ($_GET == NULL || !isset($_GET['produit'])) {
        echo "Produit non trouvé";
-       header("location: ../");
-       exit;
+       renvoi();
     }
-    
+
+    $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
+
     require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';
+
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
@@ -100,9 +101,18 @@
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
     $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
-    print_r($sqlverif);
+
     if ($sqlverif == NULL) {
         renvoi();
+    }
+
+    // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
+    if ($_POST != NULL && isset($rows)) {
+        try {
+            $supprime = supprimer_produit_stock($_GET['produit']);
+        } catch (PDOException $e) {
+            die('Suppression du produit ' . $_GET['produit'] . ' impossible');
+        }
     }
 ?>
 <!doctype html>
@@ -114,9 +124,19 @@
     </head>
     <body>
         <main>
-            <?php ecrire_nom($rows, $rows2, $_GET['produit']); ?>
+            <?php if (!$supprime) {
+                ecrire_nom($rows, $rows2, $_GET['produit']);
+            } else { ?>
+                <h1>Produit supprimé</h1>
+                <a href="../stock">Revenir au stock</a>
+            <?php } ?>
+            
+            <form action="" method="post">
+                <input type="submit" value="Supprimer" id="supprimer">
+            </form>
         </main>
     </body>
 </html>
-
+<?php
+ob_end_clean();
 
