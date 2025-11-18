@@ -290,7 +290,7 @@ else if ($numEtape == 2) {
 
         <br>
         <label for="date_exp">Date d'expiration de la carte</label>
-        <input type="text" name="date_exp" id="date_exp" size="5" maxlength="5" required>
+        <input type="text" name="date_exp" id="date_exp" required>
         <p class="contrainte">MM/YY ex: 12/25, 01/26</p>
         <?php
         if (isset($erreurs['date_exp'])){
