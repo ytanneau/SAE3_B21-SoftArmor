@@ -8,7 +8,7 @@ define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
 $erreurs = [];
-$etape = 1;
+$etape = 0;
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['id_produit'])) {
@@ -30,6 +30,8 @@ if ($_POST == null) {
     $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     $mdp = htmlentities(trim($_POST['mdp'] ?? ''));
     $mdpc = htmlentities(trim($_POST['mdpc'] ?? ''));
+
+    $row = sql_email_question($email);
 }
 
 // Premier formulaire (après saisie adresse)
@@ -40,11 +42,10 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
     
     // Si pas d'erreur sur l'e-mail
     if (!isset($erreurs['email'])) {
-        $row = sql_email_question($email);
-
         if (!isset($row['question'])) {
             // Si pas de question associée à cet e-mail
             $erreurs['final'] = "L'adresse e-mail est incorrecte ou aucune question n'a été renseignée pour ce compte";
+            $etape = 1;
         } else {
             $etape = 2;
         }
@@ -65,6 +66,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
         if (!$reponse_valide) {
             // Si pas de question associée à cet e-mail
             $erreurs['reponse'] = "La réponse est incorrecte";
+            $etape = 2;
         } else {
             $etape = 3;
         }
@@ -102,6 +104,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 
         // Rediriger vers la page de connexion
         header('location: ' . HOME_SITE . 'compte/connexion');
+    } else {
+        $etape = 3;
     }
 }
 
