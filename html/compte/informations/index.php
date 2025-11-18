@@ -373,6 +373,7 @@ unset($pdo);
 
                 <button type="submit">Modifier mes informations</button>
             </form>
+            <button><a href="anonymisation/index.php">Désactiver mon compte</a></button>
             
         </div>
         <div>

@@ -19,38 +19,19 @@
     }
 
     $id_compte = $_SESSION['id_compte'];
-    // recuperation des informations vendeur
-    $stmt = $pdo->prepare("SELECT * FROM _vendeur WHERE id_compte = :id_compte");
+    // recuperation des informations client
+    $stmt = $pdo->prepare("SELECT * FROM _client WHERE id_compte = :id_compte");
     $stmt->execute([':id_compte' => $id_compte]);
-
-    // decoupage des informations en tableau
-    $tabVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $tabVendeur = $tabVendeur[0];
-
-    // definition des variables suivant les valeurs du tableau
-    $raisonSociale = $tabVendeur['raison_sociale'];
-    $description = $tabVendeur['description'];
-    $numSiret = $tabVendeur['num_siret'];
-
-    $id_adresse = $tabVendeur['id_adresse'];
-    // recuperation des informations d'adresse du vendeur
-    $stmt = $pdo->prepare("SELECT * FROM _adresse WHERE id_adresse = :id_adresse");
-    $stmt->execute([':id_adresse' => $id_adresse]);
-    // decoupage des informations en tableau
-    $tabAdresseVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $tabAdresseVendeur = $tabAdresseVendeur[0];
-    // définiton de la chaine addresse
-    $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Désactivation du compte</title>
+        <title>Anonymisation du compte</title>
     </head>
     <body>
-        <?php include "../../../header.php"?>
+        <?php include HOME_SITE . "header.php"?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Confirmer la désactivation du compte">
@@ -58,13 +39,16 @@
             <?php
                 if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // récupération des données du formulaire de saisie
-                    $modifRaisonSociale = ANONYMISATION_STRING;
+                    // _client
+                    $modifPseudo = ANONYMISATION_STRING;
+                    $modifNom = ANONYMISATION_STRING;
+                    $modifPrenom = ANONYMISATION_STRING;
+                    $modifDateNaissance = date('0-0-0 0:0:0');
+                    $modifDateDerniereModifPanier = NULL;
+
                     $modifAdresse = ANONYMISATION_STRING;
                     $modifCodePostal = ANONYMISATION_INT;
                     $modifCompelementAdr = ANONYMISATION_STRING;
-                    $modifNumSiret = ANONYMISATION_INT;
-
-                    $modifDescription = ANONYMISATION_STRING;
 
                     // _compte
                     $modifEmail = bin2hex(random_bytes(10));
@@ -76,16 +60,16 @@
                     
 
                     // Mise à jour des informations dans la base de donnée
-                    $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :modifRaisonSociale, num_siret = :modifNumSiret, description = :modifDescription WHERE id_compte = :id_compte");
-                    $stmt->execute([':modifRaisonSociale' => $modifRaisonSociale, ':modifNumSiret' => $modifNumSiret, ':modifDescription' => $modifDescription, ':id_compte' => $id_compte]);
+                    $stmt = $pdo->prepare("UPDATE _client SET pseudo = :modifPseudo, nom = :modifNom, prenom = :modifPrenom, date_naissance = :modifDateNaissance, date_derniere_modif_panier = :modifDateDerniereModifPanier WHERE id_compte = :id_compte");
+                    $stmt->execute([':modifPseudo' => $modifPseudo, ':modifNom' => $modifNom, ':modifPrenom' => $modifPrenom, ':modifDateNaissance' => $modifDateNaissance, ':modifDateDerniereModifPanier' => $modifDateDerniereModifPanier, ':id_compte' => $id_compte]);
 
                     $stmt = $pdo->prepare("UPDATE _adresse AS a 
-                                            JOIN _vendeur AS v 
-                                            ON v.id_adresse = a.id_adresse 
+                                            JOIN _client AS c 
+                                            ON c.id_adresse_fac = a.id_adresse 
                                             SET a.adresse = :adresse, 
                                                 a.code_postal = :code_postal,
                                                 a.complement_adresse = :complement_adresse 
-                                            WHERE v.id_compte = $id_compte;");
+                                            WHERE c.id_compte = $id_compte;");
                     $stmt->execute([':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
 
                     $stmt = $pdo->prepare("UPDATE _compte SET email = :modifEmail, mdp = :modifMdp, supprime = :modifBoolSupprime, id_image_profil = :modifIdImageProfil, date_creation = :modifDateCreation WHERE id_compte = :id_compte");
