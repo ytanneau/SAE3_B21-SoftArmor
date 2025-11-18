@@ -96,21 +96,24 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     if (check_vide($mdpc)){
         $erreurs['mdpc'] = VIDE;
     }
-    else if ($mdp !== $mdpc) {
-        $erreurs['mdpc'] = CORRESPOND_PAS;
-    }
+    else 
     
     // Si pas d'erreur sur les mots de passe
     if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc'])) {
-        // Hasher et update le mot de passe associé à l'email en POST
-        $res = sql_change_mdp($email, $mdp);
+        if ($mdp !== $mdpc) {
+            $erreurs['final'] = CORRESPOND_PAS;
+            $etape = 3;
+        } else {
+            // Hasher et update le mot de passe associé à l'email en POST
+            $res = sql_change_mdp($email, $mdp);
 
-        if ($res === false) {
-            die('Erreur lors de la mise à jour du mot de passe');
+            if ($res === false) {
+                die('Erreur lors de la mise à jour du mot de passe');
+            }
+
+            // Rediriger vers la page de connexion
+            header('location: ' . HOME_SITE . 'compte/connexion');
         }
-
-        // Rediriger vers la page de connexion
-        header('location: ' . HOME_SITE . 'compte/connexion');
     } else {
         $etape = 3;
     }
