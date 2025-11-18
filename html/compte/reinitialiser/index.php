@@ -18,10 +18,12 @@ if ($_POST != null) {
 
         if (!isset($row) || empty($row['question'])) {
             echo "Aucune question, réinitialisation impossible";
+            // Redirection
         }
+
     // Deuxième formulaire (après réponse)
     } else {
-        echo $_POST['mdp'];
+        $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     }
 }
 

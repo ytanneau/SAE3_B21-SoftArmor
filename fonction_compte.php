@@ -561,11 +561,11 @@
         return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
     }
 
-    // Return la question
+    // Return la question associée à une adresse email, sinon null
     function sql_email_question($email) {
         global $pdo;
 
-        $requete = $pdo->prepare("SELECT question FROM compte_client WHERE email = :email");
+        $requete = $pdo->prepare("SELECT q.question FROM compte_client c INNER JOIN _question_secu q ON c.question = q.mot_clef WHERE email = :email");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->execute();
 
