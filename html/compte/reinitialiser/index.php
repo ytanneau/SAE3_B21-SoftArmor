@@ -24,6 +24,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 if ($_POST == null) {
     $etape = 1;
 } else {
+    require_once HOME_GIT . 'fonction_compte.php';
+    
     $email = htmlentities(trim($_POST['email'] ?? ''));
     $reponse = htmlentities(trim($_POST['reponse'] ?? ''));
     $mdp = htmlentities(trim($_POST['mdp'] ?? ''));
