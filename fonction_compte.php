@@ -572,6 +572,18 @@
         return ($requete->fetch(PDO::FETCH_ASSOC));
     }
 
+    // Vérifie si la réponse donnée est bien celle associée à l'e-mail donné
+    function sql_check_reponse($email, $reponse) {
+        global $pdo;
+
+        $requete = $pdo->prepare("SELECT reponse FROM compte_client WHERE email = :email AND reponse = :reponse");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+        $requete->execute();
+
+        return ($requete->fetch(PDO::FETCH_ASSOC) != null);
+    }
+
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
@@ -664,7 +676,6 @@
         $pseudo = trim($pseudo);
         $email = trim($email);
 
-
         if($mdpc==""){
             $requete = $pdo->prepare("UPDATE _compte SET email = :email WHERE id_compte = :id_compte");
             $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -701,6 +712,18 @@
         
         return $requete->fetch(PDO::FETCH_ASSOC);
         
+    }
+
+    // Fonction pour changer le mot de passe d'un client à partir de son e-mail
+    function sql_change_mdp($email, $mdp) {
+        global $pdo;
+
+        $requete = $pdo->prepare("UPDATE _compte SET mdp = :mdp WHERE email = :email");
+        $requete->bindValue(':email', $email, PDO::PARAM_STR);
+        $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
+        $requete->execute();
+
+        return $requete->rowCount() > 0;
     }
 
     // fonction qui insère l'adresse pour le client
