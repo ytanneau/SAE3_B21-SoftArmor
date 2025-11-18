@@ -21,8 +21,8 @@
         renvoi();
     }
     if ($_GET == NULL) {
-       echo "produit non trouver";
-       header("../");
+       echo "Produit non trouvé";
+       renvoi();
     }
     
     require_once HOME_GIT . '.config.php';
