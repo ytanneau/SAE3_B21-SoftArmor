@@ -6,11 +6,13 @@
     if (!isset($_SESSION)) {
         session_start();
     }
+    ob_start();
     function renvoi(){
         if (headers_sent()) {
             die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
         }
         else{
+            ob_flush();
             exit(header("Location: ../"));
         }
     }
@@ -105,5 +107,6 @@
         </main>
     </body>
 </html>
-
+<?php
+ob_end_clean();
 
