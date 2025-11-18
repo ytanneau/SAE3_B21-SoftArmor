@@ -121,6 +121,8 @@ if ($_POST != NULL) {
     <!-- Affichage des avis -->
     <h3>Avis</h3>
 
+    <a href="../avis/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Ajouter un avis</p></a>
+
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
@@ -128,13 +130,20 @@ if ($_POST != NULL) {
                 <p><?= afficher_moyenne_note(htmlentities($avis['note'] ?? ''))?></p>
                 <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                <img height="200px" src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                 <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
             </li>
         <?php } ?>
     </ul>
     
 
-    <a href="../achat/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
+    <?php if (isset($_SESSION['logged_in'])) {
+        $page = "../achat";
+    } else {
+        $page = HOME_SITE . "compte/inscription";
+    } ?>
+
+    <a href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
     
     <form action="" method="post">
         <?php if (isset($_SESSION['logged_in'])) { ?>

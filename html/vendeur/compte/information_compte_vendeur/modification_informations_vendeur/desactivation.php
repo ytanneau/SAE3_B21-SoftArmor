@@ -6,7 +6,7 @@
     require_once HOME_GIT . ".config.php";
 
     define('ANONYMISATION_INT', 0);
-    define('ANONYMISATION_STRING', 'Compte désactivé');
+    define('ANONYMISATION_STRING', 'xxxxxxxxx');
 
     if (!isset($_SESSION)) {
         session_start();
@@ -66,6 +66,13 @@
 
                     $modifDescription = ANONYMISATION_STRING;
 
+                    // _compte
+                    $modifEmail = bin2hex(random_bytes(10));
+                    $modifMdp = ANONYMISATION_STRING;
+                    $modifBoolSupprime = 1;
+                    $modifIdImageProfil = NULL;
+                    $modifDateCreation = date('0-0-0 0:0:0');
+
                     
 
                     // Mise à jour des informations dans la base de donnée
@@ -80,6 +87,9 @@
                                                 a.complement_adresse = :complement_adresse 
                                             WHERE v.id_compte = $id_compte;");
                     $stmt->execute([':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
+
+                    $stmt = $pdo->prepare("UPDATE _compte SET email = :modifEmail, mdp = :modifMdp, supprime = :modifBoolSupprime, id_image_profil = :modifIdImageProfil, date_creation = :modifDateCreation WHERE id_compte = :id_compte");
+                    $stmt->execute([':modifEmail' => $modifEmail, ':modifMdp' => $modifMdp, ':modifBoolSupprime' => $modifBoolSupprime, ':modifIdImageProfil' => $modifIdImageProfil, ':modifDateCreation' => $modifDateCreation, ':id_compte' => $id_compte]);
                 }
             ?>
         </main>
