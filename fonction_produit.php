@@ -152,7 +152,7 @@ function set_photo_produit($id_produit, $photo_principal = null, $photo_1 = null
 }
 
 function set_info_produit($id_compte_vendeur,$id_produit, $libelle_prive, $libelle_public, $prix_ht,
-$tva, $code_barre, $reserve_majeur, $en_ligne, $est_supprime, $categorie, $qt_achete,
+$tva, $code_barre, $reserve_majeur, $en_ligne, $qt_achete,
 $quantite_stock, $seuil_alerte, $desc_simple, 
 $desc_detaille, $poid, $volume_colis){
     global $pdo;
@@ -168,7 +168,6 @@ $desc_detaille, $poid, $volume_colis){
                                         tva = :tva,
                                         en_ligne = :en_ligne,
                                         seuil_alerte = :seuil_alerte,
-                                        est_supprime = :est_supprime,
                                         poids = :poid,
                                         volume = :volume_colis,
                                         plus_18 = :reserve_majeur,
@@ -186,7 +185,6 @@ $desc_detaille, $poid, $volume_colis){
                                 ":tva" => $tva,
                                 ":en_ligne" => $en_ligne,
                                 ":seuil_alerte" => $seuil_alerte,
-                                ":est_supprime" => $est_supprime,
                                 ":poid" => $poid,
                                 ":volume" => $volume_colis,
                                 ":reserve_majeur" => $reserve_majeur,
@@ -288,5 +286,38 @@ function add_image_produit($idProduit,$idImage){
         throw $e;
     }
 }
-?>
 
+function update_image_produit($idImage, $url, $titre_img, $altDefault){
+    global $pdo;
+
+    try{
+        $stmt = $pdo->prepare('UPDATE _image 
+                                SET url_image = :url_image,
+                                titre = :titre_img,
+                                alt = :altDefault 
+                                WHERE $id_image = :idImage');
+        $stmt->execute([
+            'url_image' => $url,
+            ':titre_img' => $titre_img,
+            ':altDefault' => $altDefault,
+            ':idImage' => $idImage,
+        ]);    
+    } catch(PDOException $e){
+        throw $e;
+    }
+}
+
+function get_id_image_produit($idProduit){
+    global $pdo;
+
+    try{
+        $stmt = $pdo->prepare('SELECT * FROM _images_produit WHERE id_produit = :id_produit');
+        $stmt->execute([ ':id_produit' => $idProduit]);
+
+        $tabIdImage = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $tabIdImage;
+    } catch(PDOException $e){
+        throw $e;
+    }
+}
+?>

@@ -3,7 +3,6 @@
     include "fonction_produit.php";
     include "fonction_categorie.php";
 
-/*
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -15,31 +14,19 @@
     $id_compte = $_SESSION['id_compte'];
 
     $idProduit = $_GET['produit'];
-*/
-    $tabInfoProduit = get_info_produit(1,123); //(idProduit,id_compte);
-    $categorieDuProduit = get_categorieProduit(123); //(idProduit);
-    $tabImageProduit = get_id_image_produit(123); //(idProduit);
 
-    echo "<pre>";
-    print_r($tabInfoProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($categorieDuProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($tabImageProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    $tabInfoProduit = get_info_produit($id_compte,$idProduit); //(idProduit,id_compte);
+    $categorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
+    $tabImageProduit = get_id_image_produit($idProduit); //(idProduit);
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
 
-        set_info_produit(1, // $id_compte,
-                        1,
+        set_info_produit( $id_compte,
+                        $idProduit,
                         $_POST['nomPrv'],
                         $_POST['nomPblc'],
                         $_POST['prixProd'],
@@ -61,7 +48,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPrincipale']['tmp_name'];
             
-            $nomImage = "1" . "_1.png";
+            $nomImage = $idProduit . "_1.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
@@ -80,7 +67,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photo2']['tmp_name'];
             
-            $nomImage = "1" . "_2.png";
+            $nomImage = $idProduit . "_2.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
@@ -99,7 +86,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photo3']['tmp_name'];
             
-            $nomImage = "1" . "_3.png";
+            $nomImage = $idProduit . "_3.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
