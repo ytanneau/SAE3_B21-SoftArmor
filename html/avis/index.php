@@ -12,14 +12,18 @@
     define('TAILLE_DESCRIPTION', '1000');
     define('TAILLE_IMAGE', '5000000');
 
+    ob_start();
+
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
         session_start();
 
         if(isset($_SESSION['raison_sociale'])){
+            ob_end_flush();
             header('location: '. HOME_SITE .'/vendeur/stock/');
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+            ob_end_flush();
             header('location: '. HOME_SITE);
         }
     }
@@ -35,8 +39,9 @@
     
     $succes = false;
     if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
-            $erreur['avis'] = EXISTE;
+        $erreur['avis'] = EXISTE;
     }
+
     else if ($_POST != null){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
@@ -55,8 +60,7 @@
                 rename('../ressources/avis/' . $fichier, '../' . $image);
             }
             
-            //print_r($_POST);
-            try{
+            try {
                 cree_avis($_SESSION['id_compte'], $_GET['id_produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
@@ -66,8 +70,8 @@
         }        
     }
     else if (isset($_GET['id_produit'])){
-        //echo 2;    
         $sql_produit = detail_produit_image($_GET['id_produit']);
+
         if ($sql_produit == null){
             $erreur['produit'] = EXISTE_PAS;   
         }
@@ -77,8 +81,13 @@
         $erreur['produit'] = EXISTE_PAS; 
     }
 
-    //supprimer l'image si la saugarede ne sai pas passer
-    if ($succes != true && isset($_FILES['image'])){
+    if ($succes === true) {
+        ob_end_flush();
+        header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']);
+    }
+
+    // Supprimer l'image si la sauvegarde ne s'est pas passée
+    if ($succes !== true && isset($_FILES['image']['name'])){
         unlink('../ressources/avis/' . $fichier);
         unlink('../' . $image);
     }
@@ -96,7 +105,6 @@
     <main>
         <?php if ($succes == true) { ?>
             <h1>Votre avis a été enregistré</h1>
-            <?php header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']) ?>
         <?php } else if (isset($erreur['fatal'])) { ?>
             <h1>Désolé, nous rencontrons des problèmes serveur</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
