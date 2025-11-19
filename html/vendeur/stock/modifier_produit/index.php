@@ -115,13 +115,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Modifier un produit</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <header>
-
-        </header>
+        <?php include HOME_SITE . "header.php" ?>
         <main>
             <h1>Modifier mon produit</h1>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
