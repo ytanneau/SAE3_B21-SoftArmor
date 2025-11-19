@@ -64,7 +64,6 @@
         }        
     }
     else if (isset($_GET['id_produit'])){
-        //echo 2;
         if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
             $erreur['avis'] = EXISTE;
         }
@@ -76,7 +75,6 @@
         }
     }    
     else{
-        //echo 3;
         $_GET['id_produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
@@ -100,6 +98,7 @@
     <main>
         <?php if ($succes == true) { ?>
             <h1>Votre avis a été enregistré</h1>
+            <?php header('location: ' . HOME_SITE . 'produit/index.php?id_produit=' . $_GET['id_produit']) ?>
         <?php } else if (isset($erreur['fatal'])) { ?>
             <h1>Désolé, nous rencontrons des problèmes serveur</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
