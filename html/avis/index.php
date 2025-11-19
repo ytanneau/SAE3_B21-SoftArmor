@@ -29,7 +29,7 @@
     }
 
     //met le limage avec les autre pour éviter de la perdre
-    if (isset($_FILES['image'])) {
+    if ($_FILES['image']['size'] > 0) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
     }
@@ -55,7 +55,7 @@
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
 
-        if (($erreur = condition_avis()) == []){
+        if (($erreur = condition_avis()) === []){
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
             }
@@ -115,15 +115,15 @@
             <section>
                 <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
                     <article>
-                        <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-                        <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
+                        <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
+                        <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'] ?? '')?>" alt="<?=htmlentities($sql_produit['image_principale_alt'] ?? '')?>" title="<?=htmlentities($sql_produit['image_principale_titre'] ?? '')?>">
                     </article>
                 </a>
             </section>
             <section>
                 <form action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" 
-                        value="<?=htmlentities(trim($_GET['id_produit']))?>"
+                        value="<?=htmlentities(trim($_GET['id_produit'] ?? ''))?>"
                         name="produit"
                         id="produit">
 
