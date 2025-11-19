@@ -30,7 +30,7 @@
 
     //met le limage avec les autre pour éviter de la perdre
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
-        $fichier = $_SESSION['id_compte'] . '_'. time();
+        $fichier = $_SESSION['id_compte'] . '_'. time() . '.png';
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
         echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
     }
