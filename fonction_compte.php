@@ -3,8 +3,8 @@
     const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Le format est invalide";
-    const EXISTE = "Existe déjà";
-    const EXISTE_PAS = "Existe pas";
+    const EXISTE = "existe déjà";
+    const EXISTE_PAS = "n'existe pas";
     const CORRESPOND_PAS = "Les deux mots de passe ne correspondent pas";
     const CONNECTE_PAS = "L'email ou le mot de passe est incorrect";
 
