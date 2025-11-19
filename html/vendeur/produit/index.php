@@ -107,16 +107,12 @@
     }
 
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    print_r($_POST);
-    if ($_POST != NULL) {
-        echo "Bonjour";
-        /*
+    if ($_POST != NULL && isset($rows)) {
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
             die('Suppression du produit ' . $_GET['produit'] . ' impossible');
         }
-        */
     }
 ?>
 <!doctype html>
@@ -138,7 +134,7 @@
             <?php } ?>
             
             <form id="supprimer" action="" method="post">
-                <input type="hidden" name="supprimer" value="1">
+                <input type="hidden" name="supprimer" value="true">
                 <input type="submit" value="Supprimer">
             </form>
             <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>"> modifier ce produit</a>
