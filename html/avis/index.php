@@ -87,10 +87,12 @@
     }
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
+    /*
     if ($succes !== true && isset($_FILES['image']['name'])){
         unlink('../ressources/avis/' . $fichier);
         unlink('../' . $image);
     }
+        */
 ?>
 <!DOCTYPE html>
 <html lang="fr">
