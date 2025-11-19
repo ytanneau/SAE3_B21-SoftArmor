@@ -68,7 +68,7 @@
                                         INNER JOIN _image 
                                         ON _images_produit.id_image_principale = _image.id_image 
                                         WHERE compte_client.id_compte = :id_client;");*/
-            $requete = $pdo->prepare("SELECT tout_avis_client WHERE id_compte = :id_client;");
+            $requete = $pdo->prepare("SELECT * FROM tout_avis_client WHERE id_compte = :id_client;");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
