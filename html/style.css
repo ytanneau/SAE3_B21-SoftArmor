@@ -259,6 +259,7 @@ main {
 #connect_vendeur, #connect_client {
   justify-content: center;
   overflow-y: hidden;
+  height: 100vh;
 }
 
 #connect_client, #inscription_client {
