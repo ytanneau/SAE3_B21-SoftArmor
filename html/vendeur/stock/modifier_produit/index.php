@@ -122,6 +122,8 @@
     <body>
         <?php include "../../header.php" ?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Modifier mon produit</h1>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
                 <h3>Informations produit</h3>
