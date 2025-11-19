@@ -164,245 +164,251 @@ unset($pdo);
 </head>
 <body>
     <?php include HOME_SITE . 'header.php'; ?>
-    
+
+    <h1>Mon Profil</h1>
     <main>
-        <h1>Mon Profil</h1>
-        <div>
+        <section>
             <?php
                 //affichage des info du compte
                 foreach ($info_compte as $row){  
             ?>
 
-            <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
 
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
-                <label for="pdp">Modifier Image de Profil</label>
-                <input type="file" name="pdp" accept=".png">
+                <article>
+                    <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                    <label for="pdp">Modifier Image de Profil</label>
+                    <input type="file" name="pdp" accept=".png">
+                </article>
 
-                <label for="pseudo">Pseudonyme</label>
-                <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner">
+                <article>
+                    <label for="pseudo">Pseudonyme</label>
+                    <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner">
 
-                <!--Erreur pseudo-->
-                <?php
-                    if (isset($erreur['pseudo'])){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['pseudo']?>
-                    </p>
-                <?php
-                    }
-                ?>
-
-                <label for="nom">Nom</label>
-                <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner">
-
-                <!--Erreur nom-->
-                <?php
-                    if (isset($erreur['nom'])){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['nom']?>
-                    </p>
-                <?php
-                    }
-                ?>
-
-                <label for="prenom">Prenom</label>
-                <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner">
-
-                <!--Erreur prenom-->
-                <?php
-                    if (isset($erreur['prenom'])){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['prenom']?>
-                    </p>
-                <?php
-                    }
-                ?>
-
-                <label for="date">Date de Naissance</label>
-                <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
-
-                <label for="mail">Mail</label>
-                <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
-                
-                <!--Erreur mail-->
-                <?php
-                    if (isset($erreur['email'])){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['email']?>
-                    </p>
-                <?php
-                    }
-                }
-                ?>
-
-                <label for="adresse">Adresse</label>
-
-                <?php
-                //affichage des info du compte
-                $est_entre = false;
-                foreach ($adresse_compte as $row){  
-                    $est_entre = true;
-                ?>
-                
-                <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner">
-
-                <!--Erreur adresse-->
-                <?php
-                    if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['adresse']?>
-                    </p>
-                <?php
-                    }
-                ?>
-
-                <label for="complement_adresse">Complement Adresse</label>
-                <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner">
-                
-                <label for="code_postal">Code Postal</label>
-                <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner">
-                
-                <!--Erreur code postal-->
-                <?php
-                    if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
-                ?>
-                    <p class="error">
-                        <?="Erreur : ".$erreur['code_postal']?>
-                    </p>
-                <?php
-                    }
-                }
-                if (!$est_entre) {
-                    ?>
-                
-                <input type="text" name="adresse" placeholder="À renseigner">
-
-                <!--Erreur adresse-->
-                <?php
-                    
-                    if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
-                        
-                ?>  
-                    <p class="error">
-                        <?="Erreur : ".$erreur['adresse']?>
-                    </p>
-                <?php
-                    }
-                ?>
-
-                <label for="complement_adresse">Complement Adresse</label>
-                <input type="text" name="complement_adresse" placeholder="À renseigner">
-
-                <label for="code_postal">Code Postal</label>
-                <input type="text" name="code_postal" placeholder="À renseigner">
-
-                <!--Erreur code postal-->
-                <?php
-                    if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
-                ?>
-                            <p class="error">   
-                                <?="Erreur : ".$erreur['code_postal']?>
-                            </p>
-                <?php
-                    }
-                }
-                if (empty($erreur['code_postal']) xor empty($erreur['adresse'])){
-                ?>
-                    <p class="error">
-                        <?= "Les deux champs Adresse et Code Postal doivent être valides" ?>
-                    </p>
-                <?php
-                    }
-                ?>
-                
-                <label for="mdp">Mot de Passe</label>
-                <input type="password" name="mdp" placeholder="À renseigner">
-                <!--Erreur mot de passe-->
-                <?php
-                    
-                    if (isset($erreur['mdp'])){
-                        
-                ?>  
-                    <p class="error">
-                        <?="Erreur : ".$erreur['mdp']?>
-                    </p>
-                <?php
-                    }
-                ?>
-            
-                <label for="n_mdp">Nouveau Mot de Passe</label>
-                <input type="password" name="n_mdp" placeholder="À renseigner">
-
-                <!--Erreur nouveau mot de passe-->
-                <?php
-                    if (isset($erreur['mdp']) && $erreur['mdp'] != "Veuillez renseigner ce champ"){
-                ?>
-                            <p class="error">
-                                <?="Erreur : ".$erreur['mdp']?>
-                            </p>
-                <?php
-                    }
-                ?>
-
-                <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
-                <input type="password" name="n_mdpc" placeholder="À renseigner">
-
-                <!--Erreur confirmation nouveau mot de passe-->
-                <?php
-                    if (isset($erreur['mdpc']) && $erreur['mdpc'] != "Veuillez renseigner ce champ"){
-                ?>
-                            <p class="error">
-                                <?="Erreur : ".$erreur['mdpc']?>
-                            </p>
-                <?php
-                    }
-                if (empty($erreur['mdp']) xor empty($erreur['mdpc'])){
-                ?>
-                            <p class="error">
-                                <?= "Les deux champs Nouveau Mot de Passe doivent être valides" ?>
-                            </p>
-                <?php
-                    }
-                ?>
-
-                <button type="submit">Modifier mes informations</button>
-            </form>
-            <button><a href="anonymisation/index.php">Désactiver mon compte</a></button>
-            
-        </div>
-        <div>
-            <h2>Vos Avis</h2>
-            <div>
-                <ul>
+                    <!--Erreur pseudo-->
                     <?php
-                    //boucle afficher les avis du comte dans un <li>
-                    foreach ($avis as $row){  
+                        if (isset($erreur['pseudo'])){
                     ?>
-                    <li>
-                        <a href="/produit/index.php?id_produit=<?= $row['id_produit']?>">
-                            <div>
-                                <img src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
-                                <p><?= htmlentities($row['pseudo'] ?? '')?></p>
-                                <?php afficher_moyenne_note($row['note']);?>
-                            </div>
-                            <div>
-                                <p><?= htmlentities($row['titre'] ?? '')?></p>  
-                                <p><?= htmlentities($row['commentaire'] ?? '')?></p>
-                                <p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p>
-                            </div>
-                            <img src="<?= HOME_SITE.$row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>">
-                        </a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </div>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['pseudo']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="nom">Nom</label>
+                    <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner">
+
+                    <!--Erreur nom-->
+                    <?php
+                        if (isset($erreur['nom'])){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['nom']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="prenom">Prenom</label>
+                    <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner">
+
+                    <!--Erreur prenom-->
+                    <?php
+                        if (isset($erreur['prenom'])){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['prenom']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="date">Date de Naissance</label>
+                    <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
+
+                    <label for="mail">Mail</label>
+                    <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
+                    
+                    <!--Erreur mail-->
+                    <?php
+                        if (isset($erreur['email'])){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['email']?>
+                        </p>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                    <label for="adresse">Adresse</label>
+
+                    <?php
+                    //affichage des info du compte
+                    $est_entre = false;
+                    foreach ($adresse_compte as $row){  
+                        $est_entre = true;
+                    ?>
+                    
+                    <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner">
+
+                    <!--Erreur adresse-->
+                    <?php
+                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['adresse']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="complement_adresse">Complement Adresse</label>
+                    <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner">
+                    
+                    <label for="code_postal">Code Postal</label>
+                    <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner">
+                    
+                    <!--Erreur code postal-->
+                    <?php
+                        if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['code_postal']?>
+                        </p>
+                    <?php
+                        }
+                    }
+                    if (!$est_entre) {
+                        ?>
+                    
+                    <input type="text" name="adresse" placeholder="À renseigner">
+
+                    <!--Erreur adresse-->
+                    <?php
+                        
+                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
+                            
+                    ?>  
+                        <p class="error">
+                            <?="Erreur : ".$erreur['adresse']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="complement_adresse">Complement Adresse</label>
+                    <input type="text" name="complement_adresse" placeholder="À renseigner">
+
+                    <label for="code_postal">Code Postal</label>
+                    <input type="text" name="code_postal" placeholder="À renseigner">
+
+                    <!--Erreur code postal-->
+                    <?php
+                        if (isset($erreur['code_postal']) && $erreur['code_postal'] != "Veuillez renseigner ce champ"){
+                    ?>
+                                <p class="error">   
+                                    <?="Erreur : ".$erreur['code_postal']?>
+                                </p>
+                    <?php
+                        }
+                    }
+                    if (empty($erreur['code_postal']) xor empty($erreur['adresse'])){
+                    ?>
+                        <p class="error">
+                            <?= "Les deux champs Adresse et Code Postal doivent être valides" ?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+                    
+                    <label for="mdp">Mot de Passe</label>
+                    <input type="password" name="mdp" placeholder="À renseigner">
+                    <!--Erreur mot de passe-->
+                    <?php
+                        
+                        if (isset($erreur['mdp'])){
+                            
+                    ?>  
+                        <p class="error">
+                            <?="Erreur : ".$erreur['mdp']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+                
+                    <label for="n_mdp">Nouveau Mot de Passe</label>
+                    <input type="password" name="n_mdp" placeholder="À renseigner">
+
+                    <!--Erreur nouveau mot de passe-->
+                    <?php
+                        if (isset($erreur['mdp']) && $erreur['mdp'] != "Veuillez renseigner ce champ"){
+                    ?>
+                                <p class="error">
+                                    <?="Erreur : ".$erreur['mdp']?>
+                                </p>
+                    <?php
+                        }
+                    ?>
+
+                    <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
+                    <input type="password" name="n_mdpc" placeholder="À renseigner">
+
+                    <!--Erreur confirmation nouveau mot de passe-->
+                    <?php
+                        if (isset($erreur['mdpc']) && $erreur['mdpc'] != "Veuillez renseigner ce champ"){
+                    ?>
+                                <p class="error">
+                                    <?="Erreur : ".$erreur['mdpc']?>
+                                </p>
+                    <?php
+                        }
+                    if (empty($erreur['mdp']) xor empty($erreur['mdpc'])){
+                    ?>
+                                <p class="error">
+                                    <?= "Les deux champs Nouveau Mot de Passe doivent être valides" ?>
+                                </p>
+                    <?php
+                        }
+                    ?>
+
+                    <button type="submit">Modifier mes informations</button>
+                    <button><a href="anonymisation/index.php">Désactiver mon compte</a></button>
+                </article>
+            </form>
+
+        </section>
+            
+        <section>
+            <h2>Vos Avis</h2>
+            <ul>
+                <?php
+                //boucle afficher les avis du comte dans un <li>
+                foreach ($avis as $row){  
+                ?>
+                <li class="avis">
+                    <a href="/produit/index.php?id_produit=<?= $row['id_produit']?>">
+                        <table>
+                            <tr>
+                            <td><img src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
+                            <p><?= htmlentities($row['pseudo'] ?? '')?></p></td>
+                            <td><?php afficher_moyenne_note($row['note']);?></td>
+                            <td><p><?= htmlentities($row['titre'] ?? '')?></p>  </td>
+                            <td colspan="2" rowspan="2"><img src="<?= HOME_SITE.$row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>"></td>
+                            </tr>
+                            
+                            <tr>
+                            <td><p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p></td>
+                            <td colspan="2"><p><?= htmlentities($row['commentaire'] ?? '')?></p></td>
+                            </tr>
+                        </table>
+                    </a>
+                </li>
+                <?php } ?>
+            </ul>
+        </section>
     </main>
 </body>
 </html>

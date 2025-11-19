@@ -105,7 +105,7 @@
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;
-    padding: 1vh 2vw;
+    padding: 1% 2vw;
     font-weight: bold;
 }
 
@@ -115,7 +115,7 @@
     width: 100%;
 
     label {
-        margin-top: 2vh;
+        margin-top: 2%;
         font-size: $font_size_sup;
     }
 
@@ -155,13 +155,13 @@
         background-color: $focus;
         color: white;
         font-size: $font_size_normal;
-        margin-top: 2vh;
+        margin-top: 2%;
     }
 
     // généralement contraintes et erreurs
     p {
         font-size: $font_size_petit;
-        margin: 0.4vh 0;
+        margin: 0.4% 0;
     }
 
     .error{
@@ -171,7 +171,7 @@
 
 @mixin page_connect_inscription($background, $nuance) {
     background-color: $background;
-    height: 100vh;
+    height: 100%;
 
     @include contenu_centre_vertical;
 
@@ -254,7 +254,7 @@ main {
 #inscription_vendeur, #inscription_client{
     height: 100%;
     main{
-        margin: 15vh 0;
+        margin: 15% 0;
     }
 }
 
@@ -268,7 +268,7 @@ main {
         
         margin: 0;
         padding: 0;
-        padding-top: 5vh;
+        padding-top: 5%;
 
         form{
             @include contenu_centre_vertical();
@@ -289,7 +289,7 @@ main {
             @include contenu_centre_vertical();
             background-color: $nuance_primaire_client;
             width: 30vw;
-            height: 60vh;
+            height: 60%;
             border-radius: $angle_normal;
             padding: 3em 3em;
             text-align: center;
@@ -301,9 +301,10 @@ main {
             }
 
             img{
-                width: 40vh;
-                height: 40vh;
-                object-fit: cover;    
+                width: 40%;
+                height: 40%;
+                object-fit: contain;
+                background-color: white;
                 
             }
         }
@@ -357,6 +358,62 @@ main {
                     }
                 }
             }
+        }
+    }
+}
+.infos {
+    main {
+        display: flex;
+    }
+
+    form {
+        display: flex;
+        flex-direction: row-reverse;
+
+        article {
+            display: flex;
+            flex-direction: column;
+            padding: 0 2em;
+        }
+
+        >:last-child {
+            width: 100%;
+        }
+
+        @include formulaire();
+        width: 60vw;
+        border-radius: $angle_normal;
+        padding: 3em 3em;
+
+        .champ {
+            border:rgba(0,0,0,0.25) 1px solid;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .grave {
+            background-color: $rouge;
+        }
+    }
+
+}
+
+.avis {
+    border: 1px solid black;
+
+    div:first-child {
+        display: flex;
+        flex-direction: row;
+    }
+
+    div:last-child{
+        display: flex;
+    }
+
+    td {
+        align-items: center;
+
+        &:first-child {
+            display: flex;
         }
     }
 }

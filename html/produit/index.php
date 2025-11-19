@@ -100,7 +100,7 @@ if ($_POST != NULL) {
 
     <p>
         <strong>Vendeur :</strong>
-        <?= htmlentities($produit['id_vendeur'] ?? '') ?>
+        <?= htmlentities($produit['nom_vendeur'] ?? '') ?>
     </p>
 
     <p>
@@ -128,9 +128,12 @@ if ($_POST != NULL) {
             <li>
                 <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= afficher_moyenne_note(htmlentities($avis['note'] ?? ''))?></p>
-                <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
-                <img height="200px" src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                
+                <?php if (isset($avis['url_image'])) { ?>
+                    <img height="200px" src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                <?php } ?>
+
                 <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
             </li>
         <?php } ?>

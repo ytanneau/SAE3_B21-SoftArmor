@@ -106,12 +106,16 @@
     }
 
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    if ($_POST != NULL && isset($rows)) {
+    print_r($_POST);
+    if ($_POST != NULL) {
+        echo "Bonjour";
+        /*
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
             die('Suppression du produit ' . $_GET['produit'] . ' impossible');
         }
+        */
     }
 ?>
 <!doctype html>
@@ -121,6 +125,7 @@
         <title>Alizon</title>
         <link rel="stylesheet" href="style.css">
         <script src="confirmation.js"></script>
+        <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
         <main>

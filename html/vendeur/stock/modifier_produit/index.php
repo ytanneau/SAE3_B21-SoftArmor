@@ -1,45 +1,41 @@
 <?php 
-    require_once ".config.php";
-    include "fonction_produit.php";
-    include "fonction_categorie.php";
-
-/*
+    define('HOME_GIT', '../../../../');
+    define('HOME_SITE', '../../../');
+ 
     if (!isset($_SESSION)) {
         session_start();
     }
-    //verifie si quelqun est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../');
+
+    // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+
+    // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+        header('location: ../');
         exit;
     }
+
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_categorie.php";
+    include HOME_GIT . "fonction_produit.php";
+
     $id_compte = $_SESSION['id_compte'];
-
     $idProduit = $_GET['produit'];
-*/
-    $tabInfoProduit = get_info_produit(1,123); //(idProduit,id_compte);
-    $categorieDuProduit = get_categorieProduit(123); //(idProduit);
-    $tabImageProduit = get_id_image_produit(123); //(idProduit);
 
-    echo "<pre>";
-    print_r($tabInfoProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($categorieDuProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($tabImageProduit);
-    echo "</pre>";
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    $tabInfoProduit = get_info_produit($id_compte,$idProduit); //(idProduit,id_compte);
+    $categorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
+    $tabImageProduit = get_id_image_produit($idProduit); //(idProduit);
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
 
-        set_info_produit(1, // $id_compte,
-                        1,
+        set_info_produit( $id_compte,
+                        $idProduit,
                         $_POST['nomPrv'],
                         $_POST['nomPblc'],
                         $_POST['prixProd'],
@@ -61,7 +57,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPrincipale']['tmp_name'];
             
-            $nomImage = "1" . "_1.png";
+            $nomImage = $idProduit . "_1.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
@@ -80,7 +76,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photo2']['tmp_name'];
             
-            $nomImage = "1" . "_2.png";
+            $nomImage = $idProduit . "_2.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
@@ -99,7 +95,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photo3']['tmp_name'];
             
-            $nomImage = "1" . "_3.png";
+            $nomImage = $idProduit . "_3.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
@@ -119,14 +115,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Modifier un produit</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <header>
-
-        </header>
+        <?php include "../../header.php" ?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Modifier mon produit</h1>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
                 <h3>Informations produit</h3>
@@ -170,25 +167,11 @@
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
                             <option value="">-- Choisir une catégorie --</option>
                             <?php
-                                $tabCategorie = get_categorie_parent();
+                                $tabCategorie = get_categorie();
                                 foreach($tabCategorie as $nomCat){
                             ?>
                             <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
                                 <?= htmlspecialchars($nomCat['nom_categorie']) ?>
-                            </option>
-                            <?php } ?>
-                        </select>
-                    </p>
-                    <p id="pSousCategorieAlimentaire" style="display:none;">
-                        <label for="sous_categorie">Sous-catégories alimentaire*</label>
-                        <select name="sous_categorie" id="sous_cate">
-                            <option value="">-- Choisir une catégorie --</option>
-                            <?php 
-                                $tabSousCategorie = get_sousCategorie("Alimentaire");
-                                foreach($tabSousCategorie as $sousCat){                  
-                            ?>
-                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
-                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
                             </option>
                             <?php } ?>
                         </select>
