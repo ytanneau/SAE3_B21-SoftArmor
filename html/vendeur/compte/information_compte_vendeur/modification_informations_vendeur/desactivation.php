@@ -48,9 +48,10 @@
     <head>
         <meta charset="UTF-8">
         <title>Désactivation du compte</title>
+        <?php include HOME_SITE . 'link_head.php'; ?>
     </head>
     <body>
-        <?php include "../../../header.php"?>
+        <?php include HOME_SITE . "header.php"?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Confirmer la désactivation du compte">
