@@ -120,7 +120,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <?php include HOME_SITE . "header.php" ?>
+        <?php include "../../header.php" ?>
         <main>
             <h1>Modifier mon produit</h1>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
