@@ -6,7 +6,6 @@
     // fonction qui verifie les champs de l'avis 
     function condition_avis(){
         $erreur = [];
-        print_r($_POST);
 
         if (!isset($_POST['note'])){
             $erreur['note'] = VIDE;
@@ -26,7 +25,7 @@
             $erreur['description'] = DEPASSE;
         }
 
-        if ($_FILES['image']['type'] !== 'image/png'){
+        if (isset($_FILES['image']['type']) && $_FILES['image']['type'] !== 'image/png'){
             $erreur['image'] = "Type de l'image";
         }
         else if ($_FILES['image']['size'] > TAILLE_IMAGE){
