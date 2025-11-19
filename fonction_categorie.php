@@ -22,4 +22,17 @@
             throw $e;
         }
     }
+
+    function get_categorie(){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT nom_categorie FROM _categorie");
+            $stmt->execute();
+            $tabCategorie = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            print_r($tabCategorie);
+            return $tabCategorie;
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
 ?>

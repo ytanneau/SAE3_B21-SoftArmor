@@ -47,7 +47,7 @@
 ?>
 </head>
 
-<body>
+<body id="avis_vendeur">
 <?php
     require_once HOME_SITE . 'vendeur/header.php';
 ?>
@@ -61,33 +61,37 @@
     else{
         //print_r($data);
 ?>
-    <ul>
+    <article>
+
+    </article>
+    <section>
+        <ul>
 <?php
         foreach($data as $row){
 ?>
-        <li>
-            <table>
-                <tr>
-                    <td><?=pset($row['pseudo'])?></td>
-                    <td><?=pset($row['note'])?>/5 
+            <li>
+                <table>
+                    <tr>
+                        <td><?=pset($row['pseudo'])?></td>
+                        <td><?=pset($row['note'])?>/5 
 <?php
-    afficher_moyenne_note($row['note']);
+            afficher_moyenne_note($row['note']);
 ?>
-                    </td>
-                    <td><?=pset($row['titre'])?></td>
-                    <td rowspan="2"><img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
-                </tr>
-                <tr>
-                    <td><?=pset($row['date_avis'])?></td>
-                    <td colspan="2"><?=pset($row['commentaire'])?></td>
-                </tr>
-            </table>
-        </li>
-    
+                        </td>
+                        <td><?=pset($row['titre'])?></td>
+                        <td rowspan="2"><img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
+                    </tr>
+                    <tr>
+                        <td><?=pset($row['date_avis'])?></td>
+                        <td colspan="2"><?=pset($row['commentaire'])?></td>
+                    </tr>
+                </table>
+            </li>
 <?php
         }
 ?>
-    </ul>
+        </ul>
+    </section>
 <?php
     }
 ?>

@@ -303,7 +303,6 @@ main {
             img{
                 width: 40%;
                 height: 40%;
-<<<<<<< Updated upstream
                 object-fit: contain;
                 background-color: white;
                 
@@ -312,6 +311,56 @@ main {
     }
 }
 
+#avis_vendeur{
+    $value_width: 200px;
+    $value_height: 100px;
+    article{
+
+    }
+
+    section{
+        ul{
+            @include contenu_centre_vertical();
+            gap: 10px;
+            
+            li{
+                width: $value_width*6;
+                list-style: none;
+                table{
+                    border-collapse: collapse;
+                    
+                    td{
+                        height: $value_height;
+                        border: solid black 1px;
+                    }
+
+                    tr:first-child{
+                        td:nth-child(1), td:nth-child(2), td:nth-child(3){
+                            width: $value_width;
+                        }
+
+                        td:nth-child(4){
+                            height: $value_height*2;
+                            width: $value_width;
+
+                            img{
+                                display: flex;
+                                height: 100%;
+                                width: 100%;
+                                object-fit: contain;
+                                background-color: white;
+                            }
+                        }
+                    }
+
+                    tr:last-child{
+
+                    }
+                }
+            }
+        }
+    }
+}
 .infos {
     main {
         display: flex;
@@ -366,13 +415,5 @@ main {
         &:first-child {
             display: flex;
         }
-=======
-    @include contenu_centre_horizontal();
-    }
-    form {
-        @include formulaire();
-        border-radius: $angle_normal;
-        padding: 3em 3em;
->>>>>>> Stashed changes
     }
 }
