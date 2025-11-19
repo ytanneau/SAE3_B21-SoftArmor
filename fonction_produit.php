@@ -147,10 +147,6 @@ function get_info_produit($id_compte_vendeur, $id_produit){
     }
 }
 
-function set_photo_produit($id_produit, $photo_principal = null, $photo_1 = null, $photo_2 = null){
-    
-}
-
 function set_info_produit($id_compte_vendeur,$id_produit, $libelle_prive, $libelle_public, $prix_ht,
 $tva, $code_barre, $reserve_majeur, $en_ligne, $qt_achete,
 $quantite_stock, $seuil_alerte, $desc_simple, 
@@ -161,7 +157,7 @@ $desc_detaille, $poid, $volume_colis){
                                     SET nom_stock = :libelle_prive,
                                         nom_public = :libelle_public,
                                         description = :desc_simple,
-                                        description_detaille = :desc_detaille,
+                                        description_detaillee = :desc_detaille,
                                         code_barre = :code_barre,
                                         quantite = :quantite_stock,
                                         prix = :prix_ht,
@@ -186,7 +182,7 @@ $desc_detaille, $poid, $volume_colis){
                                 ":en_ligne" => $en_ligne,
                                 ":seuil_alerte" => $seuil_alerte,
                                 ":poid" => $poid,
-                                ":volume" => $volume_colis,
+                                ":volume_colis" => $volume_colis,
                                 ":reserve_majeur" => $reserve_majeur,
                                 ":qt_achete" => $qt_achete]);
     } catch (PDOException $e) {
