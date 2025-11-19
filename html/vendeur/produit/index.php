@@ -114,6 +114,10 @@
             die('Suppression du produit ' . $_GET['produit'] . ' impossible');
         }
     }
+
+    if ($supprime === true) {
+        renvoi();
+    }
 ?>
 <!doctype html>
 <html lang="fr">
@@ -137,9 +141,6 @@
                 </form>
                 
                 <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-            <?php } else { ?>
-                <h1>Produit supprimé</h1>
-                <a href="../stock">Revenir au stock</a>
             <?php } ?>
             
             
