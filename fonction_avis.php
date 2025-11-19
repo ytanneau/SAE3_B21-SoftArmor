@@ -6,6 +6,7 @@
     // fonction qui verifie les champs de l'avis 
     function condition_avis(){
         $erreur = [];
+        print_r($_POST);
 
         if (!isset($_POST['note'])){
             $erreur['note'] = VIDE;

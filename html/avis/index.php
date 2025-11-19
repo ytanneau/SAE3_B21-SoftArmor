@@ -57,7 +57,8 @@
         }
 
         echo "Bah alors que pasa";
-        if (($erreur = condition_avis()) === []){
+        $erreur = condition_avis();
+        if ($erreur === []) {
             echo "Les conditions sont bonnes";
 
             if ($image != null){
