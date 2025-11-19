@@ -1,18 +1,27 @@
 <?php 
-    require_once ".config.php";
-    include "fonction_produit.php";
-    include "fonction_categorie.php";
-
+    define('HOME_GIT', '../../../../');
+    define('HOME_SITE', '../../../');
+ 
     if (!isset($_SESSION)) {
         session_start();
     }
-    //verifie si quelqun est connecté
-    if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../');
+
+    // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+        header('location: ' . HOME_SITE);
+        exit;
+
+    // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+    } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+        header('location: ../');
         exit;
     }
-    $id_compte = $_SESSION['id_compte'];
 
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_categorie.php";
+    include HOME_GIT . "fonction_produit.php";
+
+    $id_compte = $_SESSION['id_compte'];
     $idProduit = $_GET['produit'];
 
     $tabInfoProduit = get_info_produit($id_compte,$idProduit); //(idProduit,id_compte);
@@ -106,14 +115,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Modifier un produit</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <header>
-
-        </header>
+        <?php include "../../header.php" ?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Modifier mon produit</h1>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
                 <h3>Informations produit</h3>
