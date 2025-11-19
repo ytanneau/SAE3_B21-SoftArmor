@@ -125,8 +125,8 @@
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
-        <?php include HOME_SITE . 'header.php'; ?>
-        
+        <?php include HOME_SITE . 'vendeur/header.php'; ?>
+
         <main>
             <?php if (!isset($supprime) || $supprime === false) {
                 ecrire_nom($rows, $rows2, $_GET['produit']); ?>
