@@ -186,7 +186,7 @@ $desc_detaille, $poid, $volume_colis){
                                 ":en_ligne" => $en_ligne,
                                 ":seuil_alerte" => $seuil_alerte,
                                 ":poid" => $poid,
-                                ":volume" => $volume_colis,
+                                ":volume_colis" => $volume_colis,
                                 ":reserve_majeur" => $reserve_majeur,
                                 ":qt_achete" => $qt_achete]);
     } catch (PDOException $e) {
