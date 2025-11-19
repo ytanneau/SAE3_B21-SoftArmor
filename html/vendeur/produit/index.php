@@ -96,6 +96,7 @@
     <?php
 
     }
+
     //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
@@ -137,6 +138,7 @@
             <?php } ?>
             
             <form id="supprimer" action="" method="post">
+                <input type="hidden" name="supprimer" value="1">
                 <input type="submit" value="Supprimer">
             </form>
             <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>"> modifier ce produit</a>
