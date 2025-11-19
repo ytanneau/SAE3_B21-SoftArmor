@@ -107,7 +107,7 @@
 
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
     if ($_POST != NULL) {
-        print("Bonjour");
+        echo "Bonjour";
         /*
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
