@@ -86,7 +86,6 @@
             }
         }        
     }
-    else 
 
     if ($succes === true) {
         //ob_end_flush();
