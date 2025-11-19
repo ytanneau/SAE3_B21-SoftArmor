@@ -289,7 +289,7 @@ unset($pdo);
                     <!--Erreur adresse-->
                     <?php
                         
-                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner  class="champ"ce champ"){
+                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
                             
                     ?>  
                         <p class="error">
