@@ -31,7 +31,7 @@
     function detail_produit_image($id_produit) {
         global $pdo;
 
-        $sql = "SELECT * FROM produit_image";
+        $sql = "SELECT * FROM produit_image WHERE id_produit = :id_produit";
 
         $requete = $pdo->prepare($sql);
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
