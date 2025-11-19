@@ -104,8 +104,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <?php include "../../header.php"
-          ?>
+        <?php include "../../header.php" ?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
