@@ -48,21 +48,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
         <title>Modifier mes informations</title>
-        <style>
-            p{
-                display:flex;
-                flex-direction:column;
-            }
-            p>input{
-                width: 300px;
-            }
-            textarea{
-                height : 500px;
-                width : 500px;
-            }
-        </style>
+        
     </head>
     <body>
         <?php include "../../../header.php"?>
