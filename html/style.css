@@ -207,6 +207,7 @@ main {
   flex-direction: column;
   align-items: center;
   align-items: normal;
+  width: 100%;
 }
 #connect_vendeur main form label, #inscription_vendeur main form label {
   margin-top: 2vh;
@@ -289,6 +290,7 @@ main {
   flex-direction: column;
   align-items: center;
   align-items: normal;
+  width: 100%;
 }
 #connect_client main form label, #inscription_client main form label {
   margin-top: 2vh;
@@ -361,6 +363,7 @@ main {
   flex-direction: column;
   align-items: center;
   align-items: normal;
+  width: 100%;
   background-color: #CBCCEA;
   width: 30vw;
   border-radius: 20px;

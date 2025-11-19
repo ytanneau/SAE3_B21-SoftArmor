@@ -112,6 +112,7 @@
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
 @mixin formulaire {
     align-items: normal;
+    width: 100%;
 
     label {
         margin-top: 2vh;
