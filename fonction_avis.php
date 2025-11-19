@@ -26,7 +26,7 @@
             $erreur['description'] = DEPASSE;
         }
 
-        if (preg_match("/png/",$_FILES['image']['type'])){
+        if ($_FILES['image']['type'] !== 'image/png'){
             $erreur['image'] = "Type de l'image";
         }
         else if ($_FILES['image']['size'] > TAILLE_IMAGE){
