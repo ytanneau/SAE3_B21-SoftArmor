@@ -106,13 +106,15 @@
     }
 
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    if ($_POST != NULL && isset($rows)) {
+    if ($_POST != NULL) {
         print("Bonjour");
+        /*
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
             die('Suppression du produit ' . $_GET['produit'] . ' impossible');
         }
+        */
     }
 ?>
 <!doctype html>
