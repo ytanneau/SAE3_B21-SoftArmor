@@ -29,7 +29,7 @@
     }
 
     //met le limage avec les autre pour éviter de la perdre
-    if ($_FILES['image']['size'] > 0) {
+    if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
     }
