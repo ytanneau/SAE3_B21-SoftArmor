@@ -65,7 +65,7 @@
 
         // mise en relation entre le produit et sa catégorie dans la bdd 
 
-        set_produit_categorie($idProduit,$categorie);
+        add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
@@ -104,8 +104,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <?php include "../../header.php"
-          ?>
+        <?php include "../../header.php" ?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>

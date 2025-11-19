@@ -96,6 +96,7 @@
     <?php
 
     }
+
     //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
     $rows = detail_produit($_GET['produit']);
     $rows2 = vendeur_image_produit($_GET['produit']);
@@ -124,18 +125,24 @@
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
+        <?php include HOME_SITE . 'vendeur/header.php'; ?>
+
         <main>
             <?php if (!isset($supprime) || $supprime === false) {
-                ecrire_nom($rows, $rows2, $_GET['produit']);
-            } else { ?>
+                ecrire_nom($rows, $rows2, $_GET['produit']); ?>
+
+                <form id="supprimer" action="" method="post">
+                    <input type="hidden" name="supprimer" value="true">
+                    <input type="submit" value="Supprimer">
+                </form>
+                
+                <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+            <?php } else { ?>
                 <h1>Produit supprimé</h1>
                 <a href="../stock">Revenir au stock</a>
             <?php } ?>
             
-            <form id="supprimer" action="" method="post">
-                <input type="submit" value="Supprimer">
-            </form>
-            <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>"> modifier ce produit</a>
+            
         </main>
     </body>
 </html>

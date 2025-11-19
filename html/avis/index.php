@@ -2,15 +2,15 @@
     define('HOME_GIT', '../../');
     define('HOME_SITE', '../');
 
-    const EXISTE = "Existe déjà";
-    const EXISTE_PAS = "Existe pas";
-    const VIDE = "Veuillez renseigner ce champ";
-    const DEPASSE = "Dépassement de champ";
-    const FORMAT = "Le format est invalide";
+    define('EXISTE', 'Existe déjà');
+    define('EXISTE_PAS', 'Existe pas');
+    define('VIDE', 'Veuillez renseigner ce champ');
+    define('DEPASSE', 'Dépassement de champ');
+    define('FORMAT', 'Le format est invalide');
 
-    const TAILLE_TITRE = 100;
-    const TAILLE_DESCRIPTION = 1000;
-    const TAILLE_IMAGE = 5000000;
+    define('TAILLE_TITRE', '100');
+    define('TAILLE_DESCRIPTION', '1000');
+    define('TAILLE_IMAGE', '5000000');
 
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
@@ -34,21 +34,22 @@
     require_once HOME_GIT . 'fonction_produit.php';
     
     $succes = false;
-    // si le post a été envoyer
-    if ($_POST != null){
-        //print_r($_POST);
-        //echo 1;
+    if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
+            $erreur['avis'] = EXISTE;
+    }
+    else if ($_POST != null){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        //print_r($_FILES['image']);
-        if ($_FILES['image'] == null){
+
+        if ($_FILES['image']['size'] == 0){
             $image = null;
         }
         else{
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
+
         if (($erreur = condition_avis()) == []){
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
@@ -65,19 +66,13 @@
         }        
     }
     else if (isset($_GET['id_produit'])){
-        //echo 2;
-        if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
-            $erreur['avis'] = EXISTE;
-        }
-        else{
-            $sql_produit = detail_produit_image($_GET['id_produit']);
-            if ($sql_produit == null){
-                $erreur['produit'] = EXISTE_PAS;   
-            }
+        //echo 2;    
+        $sql_produit = detail_produit_image($_GET['id_produit']);
+        if ($sql_produit == null){
+            $erreur['produit'] = EXISTE_PAS;   
         }
     }    
     else{
-        //echo 3;
         $_GET['id_produit'] = null;
         $erreur['produit'] = EXISTE_PAS; 
     }
@@ -99,119 +94,90 @@
 <body class="form_client">
     <?php include HOME_SITE . "header.php"; ?>
     <main>
-<?php
-    if ($succes == true){
-?>
-    <h1>Vous avis a été enregister</h1>
-<?php
-    }
-    else if (isset($erreur['fatal'])){
-?>
-        <h1>Nous rencontrons des problème serveur</h1>
-<?php
-    }
-    else if (isset($erreur['avis'])){
-?>
-        <h1>Vous avez déjà donner votre avis</h1>
-<?php
-    }
-    else if (isset($erreur['produit'])){
-?>
-        <h1>Le produit n'existe pas</h1>
-<?php
-    }
-    else{
-    //print_r($sql_produit);
-?>
-    <section>
-        <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
-            <article>
-                <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
-                <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
-            </article>
-        </a>
-    </section>
-    <section>
-        <form action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" 
-                value="<?=htmlentities(trim($_GET['id_produit']))?>"
-                name="produit"
-                id="produit">
+        <?php if ($succes == true) { ?>
+            <h1>Votre avis a été enregistré</h1>
+            <?php header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']) ?>
+        <?php } else if (isset($erreur['fatal'])) { ?>
+            <h1>Désolé, nous rencontrons des problèmes serveur</h1>
+        <?php } else if (isset($erreur['avis'])) { ?>
+            <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+        <?php } else if (isset($erreur['produit'])) { ?>
+            <h1>Le produit n'existe pas</h1>
+        <?php } else{ ?>
+            <section>
+                <a href="../produit?id_produit=<?=htmlentities($_GET['id_produit'])?>">
+                    <article>
+                        <h3><?=htmlentities($sql_produit['nom_public'])?></h3>
+                        <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'])?>" alt="<?=htmlentities($sql_produit['image_principale_alt'])?>" title="<?=htmlentities($sql_produit['image_principale_titre'])?>">
+                    </article>
+                </a>
+            </section>
+            <section>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" 
+                        value="<?=htmlentities(trim($_GET['id_produit']))?>"
+                        name="produit"
+                        id="produit">
 
-            <label for="note">Note : <output id="output">5</output></label>
-            
-            <input type="range" 
-                name="note" 
-                id="note"
-                min="1"
-                max="5"
-                step="1"
-                value="5"
-                oninput="output.value = this.value"
-                required
-                class="champ">
-<?php
-    if (isset($erreur['note'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreur['note']?>
-            </p>
-<?php
-    }
-?>
+                    <label for="note">Note : <output id="output">5</output></label>
+                    
+                    <input type="range" 
+                        name="note" 
+                        id="note"
+                        min="1"
+                        max="5"
+                        step="1"
+                        value="5"
+                        oninput="output.value = this.value"
+                        required
+                        class="champ">
 
-            <label for="titre">Titre</label>
-            <input type="text" 
-                name="titre" 
-                id="titre"
-                class="champ">
-<?php
-    if (isset($erreur['titre'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreur['titre']?>
-            </p>
-<?php
-    }
-?>
+                    <?php if (isset($erreur['note'])) { ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['note']?>
+                        </p>
+                    <?php } ?>
 
-            <label for="description">Description</label>
-            <input type="text" 
-                name="description" 
-                id="description"
-                class="champ text">
-<?php
-    if (isset($erreur['description'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreur['description']?>
-            </p>
-<?php
-    }
-?>
+                    <label for="titre">Titre</label>
+                    <input type="text" 
+                        name="titre" 
+                        id="titre"
+                        class="champ">
 
-            <label for="image">Image</label>
-            <input type="file" 
-                name="image" 
-                alt="image"
-                accept=".png">
-<?php
-    if (isset($erreur['image'])){
-?>
-            <p class="error">
-                <?="Erreur : ".$erreur['image']?>
-            </p>
-<?php
-    }
-?>
+                    <?php if (isset($erreur['titre'])) { ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['titre']?>
+                        </p>
+                    <?php } ?>
 
-            <input type="submit" value="Créer l'avis" class="bouton">
-        </form>
-    </section>
-<?php
-    }
-?>
+                    <label for="description">Description</label>
+                    <input type="text" 
+                        name="description" 
+                        id="description"
+                        class="champ text">
+
+                    <?php if (isset($erreur['description'])) { ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['description']?>
+                        </p>
+                    <?php } ?>
+
+                    <label for="image">Image</label>
+                    <input type="file" 
+                        name="image" 
+                        alt="image"
+                        accept=".png">
+
+                    <?php if (isset($erreur['image'])) { ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['image']?>
+                        </p>
+                    <?php } ?>
+
+                    <input type="submit" value="Créer l'avis" class="bouton">
+                </form>
+            </section>
+        <?php } ?>
     </main>
-
 </body>
 </html>
