@@ -36,9 +36,12 @@ if ($_POST == null) {
 
 // Premier formulaire (après saisie adresse)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
-    if (empty($email)) {
+    // Vérifier les erreurs d'e-mail
+    if (check_vide($email)) {
         $erreurs['email'] = VIDE;
-    } 
+    } else if (!check_email($email)) {
+        $erreurs['email'] = FORMAT;
+    }
     
     // Si pas d'erreur sur l'e-mail
     if (!isset($erreurs['email'])) {
@@ -49,12 +52,18 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_adresse') {
         } else {
             $etape = 2;
         }
-
+    } else {
+        $etape = 1;
     }
 }
 
 // Deuxième formulaire (après saisie réponse)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
+    // Si l'e-mail n'est plus dans le POST, il y a eu une modification intentionnelle de la page
+    if (check_vide($email)) {
+        die("Erreur lors de la récupération de l'adresse e-mail");
+    }
+
     if (empty($reponse)) {
         $erreurs['reponse'] = VIDE;
     } 
@@ -70,11 +79,18 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_reponse') {
         } else {
             $etape = 3;
         }
+    } else {
+        $etape = 2;
     }
 }
 
 // Troisième formulaire (après saisie MDP et MDPC)
 if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
+    // Si l'e-mail n'est plus dans le POST, il y a eu une modification intentionnelle de la page
+    if (check_vide($email)) {
+        die("Erreur lors de la récupération de l'adresse e-mail");
+    }
+    
     // Vérifier les erreurs du MDP
     if (check_vide($mdp)){
         $erreurs['mdp'] = VIDE;
@@ -90,20 +106,23 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     if (check_vide($mdpc)){
         $erreurs['mdpc'] = VIDE;
     }
-    else if ($mdp !== $mdpc) {
-        $erreurs['mdpc'] = CORRESPOND_PAS;
-    }
     
-    if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc']) && !isset($erreurs['final'])) {
-        // Hasher et update le mot de passe associé à l'email en POST
-        $res = sql_change_mdp($email, $mdp);
+    // Si pas d'erreur sur les mots de passe
+    if (!isset($erreurs['mdp']) && !isset($erreurs['mdpc'])) {
+        if ($mdp !== $mdpc) {
+            $erreurs['final'] = CORRESPOND_PAS;
+            $etape = 3;
+        } else {
+            // Hasher et update le mot de passe associé à l'email en POST
+            $res = sql_change_mdp($email, $mdp);
 
-        if ($res === false) {
-            die('Erreur lors de la mise à jour du mot de passe');
+            if ($res === false) {
+                die('Erreur lors de la mise à jour du mot de passe');
+            }
+
+            // Rediriger vers la page de connexion
+            header('location: ' . HOME_SITE . 'compte/connexion');
         }
-
-        // Rediriger vers la page de connexion
-        header('location: ' . HOME_SITE . 'compte/connexion');
     } else {
         $etape = 3;
     }
@@ -125,7 +144,25 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <input type="hidden" name="etape" value="etape_adresse">
 
             <label for="email">Votre adresse e-mail</label>
-            <input type="text" id="email" name="email" placeholder="abc@xyz.fr">
+            <input type="text" id="email" name="email" placeholder="abc@domaine.fr">
+
+            <p class="error">
+                <?php
+                    if (isset($erreurs['email'])) {
+                        $message = $erreurs['email'];
+                        
+                        if ($erreurs['email'] === FORMAT) {
+                            $message .= ". Exemple : abc@domaine.fr"; 
+                        }
+
+                        echo $message;
+                    }
+                ?>
+            </p>
+
+            <p class="error">
+                <?= isset($erreurs['final']) ? $erreurs['final'] : '' ?>
+            </p>
 
             <input type="submit" value="Confirmer">
         </form>
@@ -141,6 +178,10 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <label for="reponse">Votre réponse</label>
             <input type="text" id="reponse" name="reponse">
 
+            <p class="error">
+                <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
+            </p>
+
             <input type="submit" value="Confirmer">
         </form>
 
@@ -153,8 +194,20 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             <label for="mdp">Nouveau mot de passe</label>
             <input type="password" id="mdp" name="mdp">
 
+            <p class="error">
+                <?= isset($erreurs['mdp']) ? $erreurs['mdp'] : ''; ?>
+            </p>
+
             <label for="mdp">Confirmation du nouveau mot de passe</label>
             <input type="password" id="mdpc" name="mdpc">
+
+            <p class="error">
+                <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
+            </p>
+
+            <p class="error">
+                <?= isset($erreurs['final']) ? $erreurs['final'] : ''; ?>
+            </p>
 
             <input type="submit" value="Confirmer">
         </form>
