@@ -54,12 +54,12 @@
         }
         else{
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
-            echo "Le nom de l'image est " . $image;
         }
 
         if (($erreur = condition_avis()) === []){
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
+                echo "L'image est dans " . '../' . $image;
             }
             
             try {
