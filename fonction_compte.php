@@ -562,11 +562,11 @@
         return ($requete->fetch(PDO::FETCH_ASSOC)['existe'] == 1);
     }
 
-    // Return la mot_clef associée à une adresse email, sinon null
-    function sql_email_mot_clef($email) {
+    // Return la question associée à une adresse email, sinon null
+    function sql_email_question($email) {
         global $pdo;
 
-        $requete = $pdo->prepare("SELECT q.mot_clef FROM compte_client c INNER JOIN _mot_clef_secu q ON c.mot_clef = q.mot_clef WHERE email = :email");
+        $requete = $pdo->prepare("SELECT q.question FROM compte_client c INNER JOIN _question_secu q ON c.question = q.mot_clef WHERE email = :email");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->execute();
 
@@ -610,7 +610,7 @@
         return ($requete->fetch(PDO::FETCH_ASSOC) != null);
     }
 
-    // Vérifie l'existence d'une mot_clef
+    // Vérifie l'existence d'un mot clef
     function sql_check_mot_clef($mot_clef) {
         global $pdo;
 
@@ -633,7 +633,7 @@
         $requete->execute();
         $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
 
-        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance, mot_clef, reponse) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance, :mot_clef, :reponse)");
+        $requete = $pdo->prepare("INSERT INTO _client (id_compte, pseudo, nom, prenom, date_naissance, question, reponse) VALUES (:id_compte, :pseudo, :nom, :prenom, :date_naissance, :mot_clef, :reponse)");
         $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
         $requete->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
         $requete->bindValue(':nom', $nom, PDO::PARAM_STR);
