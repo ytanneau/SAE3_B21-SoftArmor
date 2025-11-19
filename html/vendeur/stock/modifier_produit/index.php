@@ -111,6 +111,8 @@
                 update_image_produit($idImage, $url, $titre_img, $altDefault);
             }
         }
+        header("Location: ../");
+        exit();
     }
     
 ?>

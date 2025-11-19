@@ -30,6 +30,7 @@
     if (isset($_GET['produit'])) {
         $data = avis_client_produit($_GET['produit']);
         $produit = avis_produit($_GET['produit']);
+        print_r($produit);
     }
     else{
         $data = NULL;
