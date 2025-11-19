@@ -106,6 +106,7 @@
     }
 
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
+    print_r($_POST);
     if ($_POST != NULL) {
         echo "Bonjour";
         /*
