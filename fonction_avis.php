@@ -25,11 +25,11 @@
             $erreur['description'] = DEPASSE;
         }
 
-        if (isset($_FILES['image']['type']) && $_FILES['image']['type'] !== 'image/png'){
+        if ($_FILES['image']['size'] > 0 && $_FILES['image']['type'] !== 'image/png'){
             $erreur['image'] = "Type de l'image";
         }
         else if ($_FILES['image']['size'] > TAILLE_IMAGE){
-            $erreur['image'] = "Image trop lourd";
+            $erreur['image'] = "Image trop lourde";
         }
 
         $sql_produit = detail_produit_image($_POST['produit']);
