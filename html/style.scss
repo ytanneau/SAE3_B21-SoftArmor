@@ -116,6 +116,9 @@
 
     label {
         margin-top: 2%;
+        @media (max-width: 1440px) {
+            margin-top: 5%;
+        }
         font-size: $font_size_sup;
     }
 
@@ -156,6 +159,10 @@
         color: white;
         font-size: $font_size_normal;
         margin-top: 2%;
+        @media (max-width: 1440px) {
+            margin-top: 5%;
+        }
+        
     }
 
     // généralement contraintes et erreurs
@@ -183,9 +190,16 @@
         border-radius: $angle_normal; 
         padding: $padding_normal;
         width: 30vw;
+        @media (max-width: 1440px) {
+            width: 60vw;
+        }
+        
 
         img {
             width: 18vw;
+            @media (max-width: 1440px) {
+                width: 50vw;
+            }
         }
 
         h2 {

@@ -195,8 +195,18 @@ main {
   padding: 2em;
   width: 30vw;
 }
+@media (max-width: 1440px) {
+  #connect_vendeur main, #inscription_vendeur main {
+    width: 60vw;
+  }
+}
 #connect_vendeur main img, #inscription_vendeur main img {
   width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main img, #inscription_vendeur main img {
+    width: 50vw;
+  }
 }
 #connect_vendeur main h2, #inscription_vendeur main h2 {
   font-size: 2em;
@@ -212,6 +222,11 @@ main {
 #connect_vendeur main form label, #inscription_vendeur main form label {
   margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main form label, #inscription_vendeur main form label {
+    margin-top: 5%;
+  }
 }
 #connect_vendeur main form .champ, #inscription_vendeur main form .champ {
   border: none;
@@ -248,6 +263,11 @@ main {
   font-size: 1em;
   margin-top: 2%;
 }
+@media (max-width: 1440px) {
+  #connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
+    margin-top: 5%;
+  }
+}
 #connect_vendeur main form p, #inscription_vendeur main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -279,8 +299,18 @@ main {
   padding: 2em;
   width: 30vw;
 }
+@media (max-width: 1440px) {
+  #connect_client main, #inscription_client main {
+    width: 60vw;
+  }
+}
 #connect_client main img, #inscription_client main img {
   width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_client main img, #inscription_client main img {
+    width: 50vw;
+  }
 }
 #connect_client main h2, #inscription_client main h2 {
   font-size: 2em;
@@ -296,6 +326,11 @@ main {
 #connect_client main form label, #inscription_client main form label {
   margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  #connect_client main form label, #inscription_client main form label {
+    margin-top: 5%;
+  }
 }
 #connect_client main form .champ, #inscription_client main form .champ {
   border: none;
@@ -331,6 +366,11 @@ main {
   color: white;
   font-size: 1em;
   margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  #connect_client main form .bouton, #inscription_client main form .bouton {
+    margin-top: 5%;
+  }
 }
 #connect_client main form p, #inscription_client main form p {
   font-size: 0.75em;
@@ -375,6 +415,11 @@ main {
   margin-top: 2%;
   font-size: 1.5em;
 }
+@media (max-width: 1440px) {
+  .form_client main form label {
+    margin-top: 5%;
+  }
+}
 .form_client main form .champ {
   border: none;
   border-radius: 5px;
@@ -408,6 +453,11 @@ main {
   color: white;
   font-size: 1em;
   margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .form_client main form .bouton {
+    margin-top: 5%;
+  }
 }
 .form_client main form p {
   font-size: 0.75em;
@@ -500,6 +550,11 @@ main {
   margin-top: 2%;
   font-size: 1.5em;
 }
+@media (max-width: 1440px) {
+  .infos form label {
+    margin-top: 5%;
+  }
+}
 .infos form .champ {
   border: none;
   border-radius: 5px;
@@ -533,6 +588,11 @@ main {
   color: white;
   font-size: 1em;
   margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .infos form .bouton {
+    margin-top: 5%;
+  }
 }
 .infos form p {
   font-size: 0.75em;
