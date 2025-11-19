@@ -303,6 +303,7 @@ main {
             img{
                 width: 40%;
                 height: 40%;
+<<<<<<< Updated upstream
                 object-fit: contain;
                 background-color: white;
                 
@@ -365,5 +366,13 @@ main {
         &:first-child {
             display: flex;
         }
+=======
+    @include contenu_centre_horizontal();
+    }
+    form {
+        @include formulaire();
+        border-radius: $angle_normal;
+        padding: 3em 3em;
+>>>>>>> Stashed changes
     }
 }
