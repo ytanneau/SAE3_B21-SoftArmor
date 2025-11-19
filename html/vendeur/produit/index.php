@@ -115,7 +115,7 @@
         }
     }
 
-    if ($supprime === true) {
+    if (isset($supprime) && $supprime === true) {
         renvoi();
     }
 ?>
