@@ -28,6 +28,10 @@
     $categorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
     $tabImageProduit = get_id_image_produit($idProduit); //(idProduit);
 
+    echo "<pre>";
+    print_r($categorieDuProduit);
+    echo "</pre>";
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
         // permet de verifier si les checkbox sont definis et/ou selectionné
@@ -169,7 +173,7 @@
                             <?php
                                 $tabCategorie = get_categorie();
                                 foreach($tabCategorie as $nomCat){
-                                    $select = ($nomCat['nom_categorie'] === $categorieDuProduit) ? 'selected' : '';
+                                    $select = ($nomCat['nom_categorie'] == $categorieDuProduit) ? 'selected' : '';
                             ?>
                             <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
                                 <?= htmlspecialchars($nomCat['nom_categorie']) ?>
