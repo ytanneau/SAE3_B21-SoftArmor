@@ -34,9 +34,10 @@
     require_once HOME_GIT . 'fonction_produit.php';
     
     $succes = false;
-
-    // Si le POST a été envoyé
-    if ($_POST != null){
+    if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
+            $erreur['avis'] = EXISTE;
+    }
+    else if ($_POST != null){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
@@ -48,6 +49,7 @@
         else{
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
+
         if (($erreur = condition_avis()) == []){
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
@@ -64,15 +66,10 @@
         }        
     }
     else if (isset($_GET['id_produit'])){
-        //echo 2;
-        if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
-            $erreur['avis'] = EXISTE;
-        }
-        else{
-            $sql_produit = detail_produit_image($_GET['id_produit']);
-            if ($sql_produit == null){
-                $erreur['produit'] = EXISTE_PAS;   
-            }
+        //echo 2;    
+        $sql_produit = detail_produit_image($_GET['id_produit']);
+        if ($sql_produit == null){
+            $erreur['produit'] = EXISTE_PAS;   
         }
     }    
     else{
