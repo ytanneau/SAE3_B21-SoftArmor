@@ -94,7 +94,7 @@
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
-            return $requete->fetchAll(PDO::FETCH_ASSOC);
+            return $requete->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             throw $e;
         }
@@ -105,6 +105,6 @@
         $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit ");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
