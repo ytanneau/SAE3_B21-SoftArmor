@@ -28,6 +28,9 @@
         }
     }
 
+    require_once HOME_GIT . 'fonction_avis.php';
+    require_once HOME_GIT . 'fonction_produit.php';
+
     $erreur = [];
 
     if (isset($_GET['id_produit'])) {
@@ -48,8 +51,7 @@
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
     }
 
-    require_once HOME_GIT . 'fonction_avis.php';
-    require_once HOME_GIT . 'fonction_produit.php';
+    
     
     $succes = false;
     if (check_avis_existe($_GET['id_produit'], $_SESSION['id_compte'])){
