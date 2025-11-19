@@ -162,7 +162,7 @@ unset($pdo);
     <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
-<body class=".infos">
+<body class="infos">
     <?php include HOME_SITE . 'header.php'; ?>
 
     <h1>Mon Profil</h1>
