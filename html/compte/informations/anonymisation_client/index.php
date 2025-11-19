@@ -29,6 +29,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Anonymisation du compte</title>
+        <?php include HOME_SITE . 'link_head.php'; ?>
     </head>
     <body>
         <?php include HOME_SITE . "header.php"?>
