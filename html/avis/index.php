@@ -34,16 +34,15 @@
     require_once HOME_GIT . 'fonction_produit.php';
     
     $succes = false;
-    // si le post a été envoyer
+
+    // Si le POST a été envoyé
     if ($_POST != null){
-        //print_r($_POST);
-        //echo 1;
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
         if (!isset($_POST['description'])) $_POST['description'] = null;
-        //print_r($_FILES['image']);
-        if ($_FILES['image'] == null){
+
+        if ($_FILES['image']['size'] == 0){
             $image = null;
         }
         else{
