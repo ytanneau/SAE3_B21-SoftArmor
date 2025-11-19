@@ -65,7 +65,7 @@
 
         // mise en relation entre le produit et sa catégorie dans la bdd 
 
-        set_produit_categorie($idProduit,$categorie);
+        add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *

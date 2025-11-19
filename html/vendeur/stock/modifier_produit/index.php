@@ -50,6 +50,9 @@
                         $_POST['descDetaille'],
                         $_POST['poidColis'],
                         $_POST['volumeColis']);
+        if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
+            update_categorie_produit($id_produit, $tabCategorieDuProduit['nom_categorie']);
+        }
         
         if (isset($_FILES['photoPrincipale'])){
             // recupere le nom du fichier envoyé
