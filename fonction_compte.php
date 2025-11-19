@@ -614,7 +614,7 @@
     function sql_check_mot_clef($mot_clef) {
         global $pdo;
 
-        $requete = $pdo->prepare("SELECT mot_clef FROM _mot_clef_secu WHERE mot_clef = :mot_clef");
+        $requete = $pdo->prepare("SELECT mot_clef FROM _question_secu WHERE mot_clef = :mot_clef");
         $requete->bindValue(':mot_clef', $mot_clef, PDO::PARAM_STR);
         $requete->execute();
 
