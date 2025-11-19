@@ -438,14 +438,9 @@ main {
 .form_client main article img {
   width: 40%;
   height: 40%;
-<<<<<<< Updated upstream
   -o-object-fit: contain;
      object-fit: contain;
   background-color: white;
-=======
-  -o-object-fit: cover;
-     object-fit: cover;
->>>>>>> Stashed changes
 }
 
 #avis_vendeur section ul {
@@ -482,7 +477,6 @@ main {
 }
 .infos main {
   display: flex;
-<<<<<<< Updated upstream
 }
 .infos form {
   display: flex;
@@ -501,16 +495,6 @@ main {
 .infos form > :last-child {
   width: 100%;
 }
-=======
-  flex-direction: row;
-  align-items: center;
-}
-.infos form {
-  align-items: normal;
-  border-radius: 20px;
-  padding: 3em 3em;
-}
->>>>>>> Stashed changes
 .infos form label {
   margin-top: 2%;
   font-size: 1.5em;
@@ -555,7 +539,6 @@ main {
 }
 .infos form .error {
   color: #E43737;
-<<<<<<< Updated upstream
 }
 .infos form .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
@@ -580,6 +563,5 @@ main {
 }
 .avis td:first-child {
   display: flex;
-=======
->>>>>>> Stashed changes
 }/*# sourceMappingURL=style.css.map */
+
