@@ -12,18 +12,18 @@
     define('TAILLE_DESCRIPTION', '1000');
     define('TAILLE_IMAGE', '5000000');
 
-    //ob_start();
+    ob_start();
 
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
         session_start();
 
         if(isset($_SESSION['raison_sociale'])){
-            //ob_end_flush();
+            ob_end_flush();
             header('location: '. HOME_SITE .'/vendeur/stock/');
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-            //ob_end_flush();
+            ob_end_flush();
             header('location: '. HOME_SITE);
         }
     }
@@ -56,11 +56,8 @@
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
 
-        echo "Bah alors que pasa";
         $erreur = condition_avis();
         if ($erreur === []) {
-            echo "Les conditions sont bonnes";
-
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
             }
@@ -87,7 +84,7 @@
     }
 
     if ($succes === true) {
-        //ob_end_flush();
+        ob_end_flush();
         header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']);
     }
 
