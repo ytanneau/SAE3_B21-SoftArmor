@@ -28,11 +28,24 @@
         }
     }
 
+    $erreur = [];
+
+    if (isset($_GET['id_produit'])) {
+        $_GET['id_produit'] = htmlentities(trim($_GET['id_produit']));
+        $sql_produit = detail_produit_image($_GET['id_produit']);
+
+        if ($sql_produit == null){
+            $erreur['produit'] = EXISTE_PAS;
+
+            //ob_end_flush();
+            header('location: '. HOME_SITE);
+        }
+    }
+
     //met le limage avec les autre pour éviter de la perdre
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
-        //echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
     }
 
     require_once HOME_GIT . 'fonction_avis.php';
@@ -71,17 +84,7 @@
             }
         }        
     }
-    else if (isset($_GET['id_produit'])){
-        $sql_produit = detail_produit_image($_GET['id_produit']);
-
-        if ($sql_produit == null){
-            $erreur['produit'] = EXISTE_PAS;   
-        }
-    }    
-    else{
-        $_GET['id_produit'] = null;
-        $erreur['produit'] = EXISTE_PAS; 
-    }
+    else 
 
     if ($succes === true) {
         //ob_end_flush();
