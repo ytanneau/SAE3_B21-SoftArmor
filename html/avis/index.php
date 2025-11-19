@@ -57,9 +57,10 @@
         }
 
         if (($erreur = condition_avis()) === []){
+            echo "Les conditions sont bonnes";
+            
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
-                echo "L'image est dans " . '../' . $image;
             }
             
             try {
