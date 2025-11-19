@@ -169,8 +169,9 @@
                             <?php
                                 $tabCategorie = get_categorie();
                                 foreach($tabCategorie as $nomCat){
+                                    $select = ($nomCat['nom_categorie'] === $categorieDuProduit) ? 'selected' : '';
                             ?>
-                            <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
+                            <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
                                 <?= htmlspecialchars($nomCat['nom_categorie']) ?>
                             </option>
                             <?php } ?>
