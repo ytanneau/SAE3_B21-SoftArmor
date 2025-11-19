@@ -25,12 +25,8 @@
     $idProduit = $_GET['produit'];
 
     $tabInfoProduit = get_info_produit($id_compte,$idProduit); //(idProduit,id_compte);
-    $categorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
+    $tabCategorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
     $tabImageProduit = get_id_image_produit($idProduit); //(idProduit);
-
-    echo "<pre>";
-    print_r($categorieDuProduit);
-    echo "</pre>";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
@@ -54,6 +50,9 @@
                         $_POST['descDetaille'],
                         $_POST['poidColis'],
                         $_POST['volumeColis']);
+        if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
+            update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
+        }
         
         if (isset($_FILES['photoPrincipale'])){
             // recupere le nom du fichier envoyé
@@ -112,6 +111,8 @@
                 update_image_produit($idImage, $url, $titre_img, $altDefault);
             }
         }
+        header("Location: ../");
+        exit();
     }
     
 ?>
@@ -173,7 +174,7 @@
                             <?php
                                 $tabCategorie = get_categorie();
                                 foreach($tabCategorie as $nomCat){
-                                    $select = ($nomCat['nom_categorie'] == $categorieDuProduit) ? 'selected' : '';
+                                    $select = ($nomCat['nom_categorie'] == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
                             ?>
                             <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
                                 <?= htmlspecialchars($nomCat['nom_categorie']) ?>
