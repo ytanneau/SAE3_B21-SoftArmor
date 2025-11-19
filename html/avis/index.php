@@ -32,7 +32,7 @@
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time() . '.png';
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
-        echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
+        //echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
     }
 
     require_once HOME_GIT . 'fonction_avis.php';
@@ -177,7 +177,7 @@
                     <input type="file" 
                         name="image" 
                         alt="image"
-                        accept=".png">
+                        accept="image/png">
 
                     <?php if (isset($erreur['image'])) { ?>
                         <p class="error">
