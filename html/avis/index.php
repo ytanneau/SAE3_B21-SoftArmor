@@ -88,17 +88,14 @@
     }
 
     if ($succes === true) {
-        //ob_end_flush();
         header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']);
     }
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
-    /*
-    if ($succes !== true && isset($_FILES['image']['name'])){
+    else if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
         unlink('../ressources/avis/' . $fichier);
         unlink('../' . $image);
     }
-        */
 ?>
 <!DOCTYPE html>
 <html lang="fr">
