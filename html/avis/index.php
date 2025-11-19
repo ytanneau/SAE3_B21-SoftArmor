@@ -2,15 +2,15 @@
     define('HOME_GIT', '../../');
     define('HOME_SITE', '../');
 
-    const EXISTE = "Existe déjà";
-    const EXISTE_PAS = "Existe pas";
-    const VIDE = "Veuillez renseigner ce champ";
-    const DEPASSE = "Dépassement de champ";
-    const FORMAT = "Le format est invalide";
+    define('EXISTE', 'Existe déjà');
+    define('EXISTE_PAS', 'Existe pas');
+    define('VIDE', 'Veuillez renseigner ce champ');
+    define('DEPASSE', 'Dépassement de champ');
+    define('FORMAT', 'Le format est invalide');
 
-    const TAILLE_TITRE = 100;
-    const TAILLE_DESCRIPTION = 1000;
-    const TAILLE_IMAGE = 5000000;
+    define('TAILLE_TITRE', '100');
+    define('TAILLE_DESCRIPTION', '1000');
+    define('TAILLE_IMAGE', '5000000');
 
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
