@@ -56,9 +56,10 @@
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
         }
 
+        echo "Bah alors que pasa";
         if (($erreur = condition_avis()) === []){
             echo "Les conditions sont bonnes";
-            
+
             if ($image != null){
                 rename('../ressources/avis/' . $fichier, '../' . $image);
             }
