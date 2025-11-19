@@ -12,18 +12,18 @@
     define('TAILLE_DESCRIPTION', '1000');
     define('TAILLE_IMAGE', '5000000');
 
-    ob_start();
+    //ob_start();
 
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
         session_start();
 
         if(isset($_SESSION['raison_sociale'])){
-            ob_end_flush();
+            //ob_end_flush();
             header('location: '. HOME_SITE .'/vendeur/stock/');
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-            ob_end_flush();
+            //ob_end_flush();
             header('location: '. HOME_SITE);
         }
     }
@@ -32,6 +32,7 @@
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
+        echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
     }
 
     require_once HOME_GIT . 'fonction_avis.php';
@@ -82,7 +83,7 @@
     }
 
     if ($succes === true) {
-        ob_end_flush();
+        //ob_end_flush();
         header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['id_produit']);
     }
 
