@@ -184,7 +184,7 @@ unset($pdo);
 
                 <article>
                     <label for="pseudo">Pseudonyme</label>
-                    <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner">
+                    <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur pseudo-->
                     <?php
@@ -198,7 +198,7 @@ unset($pdo);
                     ?>
 
                     <label for="nom">Nom</label>
-                    <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner">
+                    <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur nom-->
                     <?php
@@ -212,7 +212,7 @@ unset($pdo);
                     ?>
 
                     <label for="prenom">Prenom</label>
-                    <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner">
+                    <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur prenom-->
                     <?php
@@ -229,7 +229,7 @@ unset($pdo);
                     <label name="date"><?= date("m/d/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
 
                     <label for="mail">Mail</label>
-                    <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner">
+                    <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner" class="champ">
                     
                     <!--Erreur mail-->
                     <?php
@@ -252,7 +252,7 @@ unset($pdo);
                         $est_entre = true;
                     ?>
                     
-                    <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner">
+                    <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur adresse-->
                     <?php
@@ -266,10 +266,10 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner">
+                    <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
                     <label for="code_postal">Code Postal</label>
-                    <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner">
+                    <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
                     
                     <!--Erreur code postal-->
                     <?php
@@ -284,12 +284,12 @@ unset($pdo);
                     if (!$est_entre) {
                         ?>
                     
-                    <input type="text" name="adresse" placeholder="À renseigner">
+                    <input type="text" name="adresse" placeholder="À renseigner" class="champ">
 
                     <!--Erreur adresse-->
                     <?php
                         
-                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner ce champ"){
+                        if (isset($erreur['adresse']) && $erreur['adresse'] != "Veuillez renseigner  class="champ"ce champ"){
                             
                     ?>  
                         <p class="error">
@@ -300,10 +300,10 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" placeholder="À renseigner">
+                    <input type="text" name="complement_adresse" placeholder="À renseigner" class="champ text">
 
                     <label for="code_postal">Code Postal</label>
-                    <input type="text" name="code_postal" placeholder="À renseigner">
+                    <input type="text" name="code_postal" placeholder="À renseigner" class="petit champ">
 
                     <!--Erreur code postal-->
                     <?php
@@ -325,7 +325,7 @@ unset($pdo);
                     ?>
                     
                     <label for="mdp">Mot de Passe</label>
-                    <input type="password" name="mdp" placeholder="À renseigner">
+                    <input type="password" name="mdp" placeholder="À renseigner" class="champ">
                     <!--Erreur mot de passe-->
                     <?php
                         
@@ -340,7 +340,7 @@ unset($pdo);
                     ?>
                 
                     <label for="n_mdp">Nouveau Mot de Passe</label>
-                    <input type="password" name="n_mdp" placeholder="À renseigner">
+                    <input type="password" name="n_mdp" placeholder="À renseigner" class="champ">
 
                     <!--Erreur nouveau mot de passe-->
                     <?php
@@ -354,7 +354,7 @@ unset($pdo);
                     ?>
 
                     <label for="n_mdpc">Confirmer Nouveau Mot de Passe</label>
-                    <input type="password" name="n_mdpc" placeholder="À renseigner">
+                    <input type="password" name="n_mdpc" placeholder="À renseigner" class="champ">
 
                     <!--Erreur confirmation nouveau mot de passe-->
                     <?php
@@ -374,8 +374,8 @@ unset($pdo);
                         }
                     ?>
 
-                    <button type="submit">Modifier mes informations</button>
-                    <button><a href="anonymisation/index.php">Désactiver mon compte</a></button>
+                    <button type="submit" class="bouton">Modifier mes informations</button>
+                    <button class="bouton grave"><a href="anonymisation/index.php">Désactiver mon compte</a></button>
                 </article>
             </form>
 
@@ -398,7 +398,7 @@ unset($pdo);
                             <td><p><?= htmlentities($row['titre'] ?? '')?></p>  </td>
                             <td colspan="2" rowspan="2"><img src="<?= HOME_SITE.$row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>"></td>
                             </tr>
-                            
+
                             <tr>
                             <td><p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p></td>
                             <td colspan="2"><p><?= htmlentities($row['commentaire'] ?? '')?></p></td>
