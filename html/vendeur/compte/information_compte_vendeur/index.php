@@ -50,6 +50,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
         <title>Consulter mes informations</title>
     </head>
