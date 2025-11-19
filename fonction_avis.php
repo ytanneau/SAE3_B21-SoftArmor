@@ -101,6 +101,7 @@
     }
 
     function avis_produit($id_produit){
+        global $pdo;
         $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit ");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
