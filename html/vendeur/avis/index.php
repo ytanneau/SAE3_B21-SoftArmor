@@ -29,6 +29,7 @@
 
     if (isset($_GET['produit'])) {
         $data = avis_client_produit($_GET['produit']);
+        $produit = avis_produit($_GET['produit']);
     }
     else{
         $data = NULL;
@@ -62,7 +63,14 @@
         //print_r($data);
 ?>
     <article>
-
+        <div>
+            <img src="<?=HOME_SITE . htmlentities($produit['image_principale_url'])?>" alt="<?=htmlentities($produit['image_principale_alt'])?>" title="<?=htmlentities($produit['image_principale_titre'])?>">
+        </div>
+        <div>
+            <?=htmlentities($produit['nom_public'])?>
+            <br>Note moyenne : <?=htmlentities($produit['note_moy'])?>
+            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'])?>
+        </div>
     </article>
     <section>
         <ul>
