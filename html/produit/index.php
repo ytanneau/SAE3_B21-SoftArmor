@@ -26,8 +26,6 @@ $id_produit = htmlentities($_GET['id_produit']);
 try {
     $produit = detail_produit_image($id_produit);
 
-    print_r($produit);
-
     if (!$produit) {
         die("Produit introuvable.");
     }
@@ -102,7 +100,7 @@ if ($_POST != NULL) {
 
     <p>
         <strong>Vendeur :</strong>
-        <?= htmlentities($produit['raison_sociale'] ?? '') ?>
+        <?= htmlentities($produit['nom_vendeur'] ?? '') ?>
     </p>
 
     <p>

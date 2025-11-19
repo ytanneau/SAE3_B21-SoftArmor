@@ -31,7 +31,7 @@
     function detail_produit_image($id_produit) {
         global $pdo;
 
-        $sql = "SELECT * FROM produit_image INNER JOIN compte_vendeur ON produit_image.id_vendeur = compte_vendeur.id_compte WHERE id_produit = :id_produit";
+        $sql = "SELECT * FROM produit_image";
 
         $requete = $pdo->prepare($sql);
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
