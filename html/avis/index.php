@@ -30,7 +30,7 @@
 
     //met le limage avec les autre pour éviter de la perdre
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
-        $fichier = $_SESSION['id_compte'] . '_'. time() . '.png';
+        $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
         //echo "Image déplacée vers " . HOME_SITE . "ressources/avis/" . $fichier;
     }
@@ -54,6 +54,7 @@
         }
         else{
             $image = 'ressources/avis/'.$_GET['id_produit'].'_'.$_SESSION['id_compte'].'.png';
+            echo "Le nom de l'image est " . $image;
         }
 
         if (($erreur = condition_avis()) === []){
