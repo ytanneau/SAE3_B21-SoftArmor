@@ -135,84 +135,87 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <!-- Premier formulaire (saisir l'email) -->
-    <?php if ($etape === 1) { ?>
-        <form action="" method="post">
-            <input type="hidden" name="etape" value="etape_adresse">
+    <?php include HOME_SITE . 'header.php'; ?>
 
-            <label for="email">Votre adresse e-mail</label>
-            <input type="text" id="email" name="email" placeholder="abc@domaine.fr">
+    <main>
+        <!-- Premier formulaire (saisir l'email) -->
+        <?php if ($etape === 1) { ?>
+            <form action="" method="post">
+                <input type="hidden" name="etape" value="etape_adresse">
 
-            <p class="error">
-                <?php
-                    if (isset($erreurs['email'])) {
-                        $message = $erreurs['email'];
-                        
-                        if ($erreurs['email'] === FORMAT) {
-                            $message .= ". Exemple : abc@domaine.fr"; 
+                <label for="email">Votre adresse e-mail</label>
+                <input type="text" id="email" name="email" placeholder="abc@domaine.fr">
+
+                <p class="error">
+                    <?php
+                        if (isset($erreurs['email'])) {
+                            $message = $erreurs['email'];
+                            
+                            if ($erreurs['email'] === FORMAT) {
+                                $message .= ". Exemple : abc@domaine.fr"; 
+                            }
+
+                            echo $message;
                         }
+                    ?>
+                </p>
 
-                        echo $message;
-                    }
-                ?>
-            </p>
+                <p class="error">
+                    <?= isset($erreurs['final']) ? $erreurs['final'] : '' ?>
+                </p>
 
-            <p class="error">
-                <?= isset($erreurs['final']) ? $erreurs['final'] : '' ?>
-            </p>
+                <input type="submit" value="Confirmer">
+            </form>
 
-            <input type="submit" value="Confirmer">
-        </form>
+        <!-- Deuxième formulaire (saisir la réponse à la question) -->
+        <?php } else if ($etape === 2) { ?>
+            <p><?= $row['question'] ?? '' ?></p>
 
-    <!-- Deuxième formulaire (saisir la réponse à la question) -->
-    <?php } else if ($etape === 2) { ?>
-        <p><?= $row['question'] ?? '' ?></p>
+            <form action="" method="post">
+                <input type="hidden" name="etape" value="etape_reponse">
+                <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
-        <form action="" method="post">
-            <input type="hidden" name="etape" value="etape_reponse">
-            <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+                <label for="reponse">Votre réponse</label>
+                <input type="text" id="reponse" name="reponse">
 
-            <label for="reponse">Votre réponse</label>
-            <input type="text" id="reponse" name="reponse">
+                <p class="error">
+                    <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
+                </p>
 
-            <p class="error">
-                <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
-            </p>
+                <input type="submit" value="Confirmer">
+            </form>
 
-            <input type="submit" value="Confirmer">
-        </form>
+        <!-- Troisième formulaire (saisir le nouveau MDP) -->
+        <?php } else if ($etape === 3) { ?>
+            <form action="" method="post">
+                <input type="hidden" name="etape" value="etape_mdp">
+                <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
-    <!-- Troisième formulaire (saisir le nouveau MDP) -->
-    <?php } else if ($etape === 3) { ?>
-        <form action="" method="post">
-            <input type="hidden" name="etape" value="etape_mdp">
-            <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
+                <label for="mdp">Nouveau mot de passe</label>
+                <input type="password" id="mdp" name="mdp">
 
-            <label for="mdp">Nouveau mot de passe</label>
-            <input type="password" id="mdp" name="mdp">
+                <p class="error">
+                    <?= isset($erreurs['mdp']) ? $erreurs['mdp'] : ''; ?>
+                </p>
 
-            <p class="error">
-                <?= isset($erreurs['mdp']) ? $erreurs['mdp'] : ''; ?>
-            </p>
+                <label for="mdp">Confirmation du nouveau mot de passe</label>
+                <input type="password" id="mdpc" name="mdpc">
 
-            <label for="mdp">Confirmation du nouveau mot de passe</label>
-            <input type="password" id="mdpc" name="mdpc">
+                <p class="error">
+                    <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
+                </p>
 
-            <p class="error">
-                <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
-            </p>
+                <p class="error">
+                    <?= isset($erreurs['final']) ? $erreurs['final'] : ''; ?>
+                </p>
 
-            <p class="error">
-                <?= isset($erreurs['final']) ? $erreurs['final'] : ''; ?>
-            </p>
-
-            <input type="submit" value="Confirmer">
-        </form>
-    <?php } ?>
-
-    
+                <input type="submit" value="Confirmer">
+            </form>
+        <?php } ?>
+    </main>
 </body>
 </html>
