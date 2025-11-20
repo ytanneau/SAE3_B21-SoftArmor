@@ -146,7 +146,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
-            <form action="" method="post">
+            <form class="form_client" action="" method="post">
                 <input type="hidden" name="etape" value="etape_adresse">
 
                 <label for="email">Votre adresse e-mail</label>
