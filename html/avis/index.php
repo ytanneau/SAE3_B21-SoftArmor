@@ -140,7 +140,7 @@
                         min="1"
                         max="5"
                         step="1"
-                        value="5"
+                        value="<?= $_POST['note'] ?? 5 ?>"
                         oninput="output.value = this.value"
                         required
                         class="champ">
@@ -155,6 +155,7 @@
                     <input type="text" 
                         name="titre" 
                         id="titre"
+                        value="<?= $_POST['titre'] ?? '' ?>"
                         class="champ">
 
                     <?php if (isset($erreur['titre'])) { ?>
@@ -167,6 +168,7 @@
                     <input type="text" 
                         name="description" 
                         id="description"
+                        value="<?= $_POST['description'] ?? '' ?>"
                         class="champ text">
 
                     <?php if (isset($erreur['description'])) { ?>
