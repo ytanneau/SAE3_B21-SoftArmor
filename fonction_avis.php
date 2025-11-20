@@ -70,7 +70,6 @@
     function cree_avis($id_client, $id_produit, $note, $titre , $description, $image){
         global $pdo;
         try {
-            echo "Tout va bien 1";
             $requete = $pdo->prepare("CALL creer_avis(:id_client, :id_produit, :note, :titre, :description, :url, :img_titre, :alt)");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
@@ -81,7 +80,7 @@
             $requete->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
             $requete->bindValue(':alt', 'image avis', PDO::PARAM_STR);
             $requete->execute();
-            echo "Tout va bien 2";
+            
             return 0;
         } catch (PDOException $e) {
             throw $e;

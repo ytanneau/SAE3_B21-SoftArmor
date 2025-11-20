@@ -82,6 +82,7 @@
                 $succes = true;
             }
             catch (PDOException $e){
+                echo $e->getMessage();
                 $erreur['fatal'] = true;
             }
         }        
