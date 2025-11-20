@@ -92,7 +92,7 @@
     }
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
-    else if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+    if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
         unlink('../ressources/avis/' . $fichier);
         unlink('../' . $image);
     }
@@ -111,7 +111,7 @@
         <?php if ($succes == true) { ?>
             <h1>Votre avis a été enregistré</h1>
         <?php } else if (isset($erreur['fatal'])) { ?>
-            <h1>Désolé, nous rencontrons des problèmes serveur</h1>
+            <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
             <h1>Vous avez déjà donné votre avis sur ce produit</h1>
         <?php } else if (isset($erreur['produit'])) { ?>
