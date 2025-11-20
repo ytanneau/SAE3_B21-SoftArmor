@@ -176,6 +176,9 @@
     }
 }
 
+.formulaire {
+    @include formulaire();
+}
 
 @mixin page_connect_inscription($background, $nuance) {
     background-color: $background;
