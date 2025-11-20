@@ -142,6 +142,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <?php include HOME_SITE . 'header.php'; ?>
 
     <main>
+        <h1>Réinitialisation du mot de passe</h1>
+        
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
             <form action="" method="post">
