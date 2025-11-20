@@ -138,7 +138,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
-<body>
+<body class="form_client">
     <?php include HOME_SITE . 'header.php'; ?>
 
     <main>
@@ -146,7 +146,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
-            <form class="form_client" action="" method="post">
+            <form action="" method="post">
                 <input type="hidden" name="etape" value="etape_adresse">
 
                 <label for="email">Votre adresse e-mail</label>
