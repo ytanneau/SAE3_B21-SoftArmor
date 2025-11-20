@@ -138,7 +138,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
-<body class="form_client">
+<body>
     <?php include HOME_SITE . 'header.php'; ?>
 
     <main>
@@ -146,11 +146,11 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
-            <form action="" method="post">
+            <form class="formulaire" action="" method="post">
                 <input type="hidden" name="etape" value="etape_adresse">
 
                 <label for="email">Votre adresse e-mail</label>
-                <input type="text" id="email" name="email" placeholder="abc@domaine.fr">
+                <input class="champ" type="text" id="email" name="email" placeholder="abc@domaine.fr">
 
                 <p class="error">
                     <?php
@@ -170,25 +170,25 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                     <?= isset($erreurs['final']) ? $erreurs['final'] : '' ?>
                 </p>
 
-                <input type="submit" value="Confirmer">
+                <input class="bouton" type="submit" value="Confirmer">
             </form>
 
         <!-- Deuxième formulaire (saisir la réponse à la question) -->
         <?php } else if ($etape === 2) { ?>
             <p><?= $row['question'] ?? '' ?></p>
 
-            <form action="" method="post">
+            <form class="formulaire" action="" method="post">
                 <input type="hidden" name="etape" value="etape_reponse">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
                 <label for="reponse">Votre réponse</label>
-                <input type="text" id="reponse" name="reponse">
+                <input class="champ" type="text" id="reponse" name="reponse">
 
                 <p class="error">
                     <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
                 </p>
 
-                <input type="submit" value="Confirmer">
+                <input class="bouton" type="submit" value="Confirmer">
             </form>
 
         <!-- Troisième formulaire (saisir le nouveau MDP) -->
@@ -198,14 +198,14 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
                 <label for="mdp">Nouveau mot de passe</label>
-                <input type="password" id="mdp" name="mdp">
+                <input class="champ" type="password" id="mdp" name="mdp">
 
                 <p class="error">
                     <?= isset($erreurs['mdp']) ? $erreurs['mdp'] : ''; ?>
                 </p>
 
                 <label for="mdp">Confirmation du nouveau mot de passe</label>
-                <input type="password" id="mdpc" name="mdpc">
+                <input class="champ" type="password" id="mdpc" name="mdpc">
 
                 <p class="error">
                     <?= isset($erreurs['mdpc']) ? $erreurs['mdpc'] : ''; ?>
@@ -215,7 +215,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                     <?= isset($erreurs['final']) ? $erreurs['final'] : ''; ?>
                 </p>
 
-                <input type="submit" value="Confirmer">
+                <input class="bouton" type="submit" value="Confirmer">
             </form>
         <?php } ?>
     </main>
