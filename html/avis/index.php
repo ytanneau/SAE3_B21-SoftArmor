@@ -132,7 +132,7 @@
                         name="produit"
                         id="produit">
 
-                    <label for="note">Note : <output id="output">5</output></label>
+                    <label for="note">Note : <output id="output"><?= $_POST['note'] ?? 5 ?></output></label>
                     
                     <input type="range" 
                         name="note" 
