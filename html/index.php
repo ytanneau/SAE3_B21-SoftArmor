@@ -43,7 +43,7 @@ unset($pdo);
     <?php include HOME_SITE . "link_head.php"; ?>
     <title>Accueil</title>
 </head>
-<body>
+<body class="accueil">
     <?php include HOME_SITE . "header.php"; ?>
 
     <main>
@@ -112,7 +112,7 @@ unset($pdo);
                             }
                         ?>
                     </div>
-                    <p><?= $row['prix'];?> €</p>
+                    <p class="ancien_prix"><?= $row['prix'];?> €</p>
                     <p><?= $row['prix_reduit'];?> €</p>
                 </a>
             </li>
