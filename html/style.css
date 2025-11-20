@@ -1,17 +1,17 @@
-.formulaire {
+.formulaire_client {
   align-items: normal;
   width: 100%;
 }
-.formulaire label {
+.formulaire_client label {
   margin-top: 2%;
   font-size: 1.5em;
 }
 @media (max-width: 1440px) {
-  .formulaire label {
+  .formulaire_client label {
     margin-top: 5%;
   }
 }
-.formulaire .champ {
+.formulaire_client .champ {
   border: none;
   border-radius: 5px;
   height: 2em;
@@ -19,22 +19,22 @@
   padding-left: 0.6em;
   padding-right: 0;
 }
-.formulaire .text {
+.formulaire_client .text {
   height: 10em;
   text-align: start;
 }
-.formulaire .petit {
+.formulaire_client .petit {
   width: 30%;
 }
-.formulaire input[type=number]::-webkit-inner-spin-button,
-.formulaire input[type=number]::-webkit-outer-spin-button {
+.formulaire_client input[type=number]::-webkit-inner-spin-button,
+.formulaire_client input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.formulaire input[type=number] {
+.formulaire_client input[type=number] {
   -moz-appearance: textfield;
 }
-.formulaire .bouton {
+.formulaire_client .bouton {
   border: none;
   border-radius: 50px;
   padding: 0.5em 2em;
@@ -46,15 +46,15 @@
   margin-top: 2%;
 }
 @media (max-width: 1440px) {
-  .formulaire .bouton {
+  .formulaire_client .bouton {
     margin-top: 5%;
   }
 }
-.formulaire p {
+.formulaire_client p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-.formulaire .error {
+.formulaire_client .error {
   color: #E43737;
 }
 
