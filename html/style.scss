@@ -15,6 +15,7 @@
 @mixin header($background) {
     position: sticky;
     top: 0;
+    z-index: 10;
     padding: 0.5em 1em;
     background-color: $background;
     
