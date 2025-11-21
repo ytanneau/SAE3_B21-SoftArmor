@@ -714,8 +714,6 @@ main {
   height: 15vw;
   -o-object-fit: contain;
      object-fit: contain;
-}
-.accueil > main > div > ul > li > img {
   background-color: #CBCCEA;
 }
 .accueil > main > div > ul > li a {
@@ -729,6 +727,7 @@ main {
 .accueil > main > div > ul > li a > div > img {
   width: 20px;
   height: 20px;
+  background-color: none;
 }
 .accueil > main > div > ul > li a .prix {
   color: #2E7A30;
