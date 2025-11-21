@@ -102,6 +102,12 @@
     }
 }
 
+@mixin image_produit($taille, $angle: $angle_petit) {
+    object-fit: contain;
+    width: $taille;
+    height: $taille;
+    border-radius: $angle;
+}
 
 @mixin bouton {
     border: none;
@@ -219,7 +225,7 @@ main {
 }
 
 .icon {
-    height: 25px;
+    height: $image_petit;
     margin: 0 8px 0 0;
 }
 
