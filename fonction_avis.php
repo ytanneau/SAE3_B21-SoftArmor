@@ -14,7 +14,7 @@
             $erreur['note'] = FORMAT;
         }
 
-        if (isset($_POST['description']) && !isset($_POST['titre'])){
+        if (isset($_POST['description']) && isset($_POST['titre']) && empty($_POST['titre'])){
             $erreur['titre'] = "Une description a besoin d'un titre";
         }
         else if (strlen($_POST['titre']) > TAILLE_TITRE){
@@ -25,11 +25,11 @@
             $erreur['description'] = DEPASSE;
         }
 
-        if (preg_match("/png/",$_FILES['image']['type'])){
+        if ($_FILES['image']['size'] > 0 && $_FILES['image']['type'] !== 'image/png'){
             $erreur['image'] = "Type de l'image";
         }
         else if ($_FILES['image']['size'] > TAILLE_IMAGE){
-            $erreur['image'] = "Image trop lourd";
+            $erreur['image'] = "Image trop lourde";
         }
 
         $sql_produit = detail_produit_image($_POST['produit']);
@@ -80,6 +80,7 @@
             $requete->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
             $requete->bindValue(':alt', 'image avis', PDO::PARAM_STR);
             $requete->execute();
+            
             return 0;
         } catch (PDOException $e) {
             throw $e;

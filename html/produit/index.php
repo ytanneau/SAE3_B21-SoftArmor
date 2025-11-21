@@ -126,8 +126,8 @@ if ($_POST != NULL) {
     <ul>
         <?php foreach ($liste_avis as $avis) { ?>
             <li>
-                <p><?= htmlentities($avis['titre'] ?? '') ?></p>
                 <p><?= afficher_moyenne_note(htmlentities($avis['note'] ?? ''))?></p>
+                <p><strong><?= htmlentities($avis['titre'] ?? '') ?></strong></p>
                 <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
                 
                 <?php if (isset($avis['url_image'])) { ?>

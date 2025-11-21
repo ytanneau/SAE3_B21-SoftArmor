@@ -24,9 +24,9 @@
     $id_compte = $_SESSION['id_compte'];
     $idProduit = $_GET['produit'];
 
-    $tabInfoProduit = get_info_produit($id_compte,$idProduit); //(idProduit,id_compte);
-    $tabCategorieDuProduit = get_categorieProduit($idProduit); //(idProduit);
-    $tabImageProduit = get_id_image_produit($idProduit); //(idProduit);
+    $tabInfoProduit = get_info_produit($id_compte,$idProduit);
+    $tabCategorieDuProduit = get_categorieProduit($idProduit);
+    $tabImageProduit = get_id_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
@@ -50,6 +50,7 @@
                         $_POST['descDetaille'],
                         $_POST['poidColis'],
                         $_POST['volumeColis']);
+        
         if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
             update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
         }
@@ -221,15 +222,19 @@
                 <hr>
                 <h3>Photos du produit</h3>
                 <div>
+                    <h6>Image principale</h6>
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_produit'] . '_1.png')?>" alt="">
                     <p>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
                     </p>
+                    <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_2.png' ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
                         <input type="file" name="photo2">
                     </p>
-                    <p>
+                    <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
+                    <p style="display:none" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3">
                     </p>
@@ -273,6 +278,16 @@
                 <input type="submit" value="Valider les modifications">
             </form>
         </main>
+        <script>
+            const blockPhoto3 = getElementById("idbBockPhoto3");
+            const inputPhoto2 = getElementById("idInputPhoto2");
+
+            inputPhoto2.addEventListener( 'input' => {
+                if(inputPhoto2.value != null){
+                    blockPhoto3.style.display = "block";
+                }
+            })
+        </script>
         <footer>
 
         </footer>

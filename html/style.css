@@ -1,3 +1,47 @@
+.formulaire_client {
+  align-items: normal;
+  width: 100%;
+}
+.formulaire_client label {
+  margin-top: 2%;
+  font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  .formulaire_client label {
+    margin-top: 5%;
+  }
+}
+.formulaire_client .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.formulaire_client .text {
+  height: 10em;
+  text-align: start;
+}
+.formulaire_client .petit {
+  width: 30%;
+}
+.formulaire_client input[type=number]::-webkit-inner-spin-button,
+.formulaire_client input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.formulaire_client input[type=number] {
+  -moz-appearance: textfield;
+}
+.formulaire_client p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+.formulaire_client .error {
+  color: #E43737;
+}
+
 body {
   font-family: "Inter";
   padding: 0;
@@ -16,6 +60,7 @@ main {
 #header_client {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding: 0.5em 1em;
   background-color: #3157A3;
 }
@@ -103,6 +148,7 @@ main {
 #header_vendeur {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding: 0.5em 1em;
   background-color: #6B31D0;
 }
@@ -252,22 +298,6 @@ main {
 #connect_vendeur main form input[type=number], #inscription_vendeur main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_vendeur main form p, #inscription_vendeur main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -356,22 +386,6 @@ main {
 #connect_client main form input[type=number], #inscription_client main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_client main form .bouton, #inscription_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_client main form .bouton, #inscription_client main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_client main form p, #inscription_client main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -442,22 +456,6 @@ main {
 }
 .form_client main form input[type=number] {
   -moz-appearance: textfield;
-}
-.form_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .form_client main form .bouton {
-    margin-top: 5%;
-  }
 }
 .form_client main form p {
   font-size: 0.75em;
@@ -600,22 +598,6 @@ main {
 .infos form input[type=number] {
   -moz-appearance: textfield;
 }
-.infos form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .infos form .bouton {
-    margin-top: 5%;
-  }
-}
 .infos form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -626,6 +608,9 @@ main {
 .infos form .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+.infos form img {
+  width: 200px;
 }
 
 .avis {
@@ -645,11 +630,137 @@ main {
   display: flex;
 }
 
+.bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .grave {
   border: none;
   border-radius: 50px;
   padding: 0.5em 2em;
   font-weight: bold;
+  align-self: center;
   background-color: #E43737;
   color: white;
+}
+
+.accueil > main > div {
+  display: flex;
+  flex-direction: column;
+}
+.accueil > main > div > ul {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  list-style: none;
+}
+.accueil > main > div > ul > li {
+  width: 20vw;
+  margin: 20px;
+}
+.accueil > main > div > ul > li img {
+  width: 15vw;
+  height: 15vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #CBCCEA;
+}
+.accueil > main > div > ul > li a {
+  color: black;
+  text-decoration: none;
+}
+.accueil > main > div > ul > li a > div > img {
+  width: 20px;
+  height: 20px;
+  background-color: none;
+}
+.accueil > main > div > ul > li a > p, .accueil > main > div > ul > li a > h3 {
+  margin: 0;
+}
+
+.prix {
+  color: #2E7A30;
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.HT {
+  color: black;
+}
+
+.ancien_prix {
+  color: black;
+  text-decoration: line-through;
+}
+
+.produit_panier {
+  display: flex;
+}
+
+h3 {
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+
+.liste main img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.liste main .entete {
+  display: flex;
+}
+.liste main .entete > * {
+  margin-right: 3em;
+}
+.liste main ul {
+  width: 65vw;
+}
+.liste main ul li > article:nth-child(2) {
+  width: 40vw;
+}
+.liste main ul li > article:nth-child(2) p {
+  width: 90%;
+}
+.liste main li {
+  padding: 1em 0;
+}
+.liste main img {
+  padding-right: 3em;
+}
+.liste main hr {
+  color: #9C9C9C;
+}
+.liste main h3 {
+  font-size: 1.6em;
+}
+.liste main aside {
+  position: fixed;
+  right: 6em;
+  top: 8em;
+  font-size: 1.2em;
+  width: 20vw;
+}
+.liste main aside .prix, .liste main aside p {
+  font-size: 1.4em;
+}
+.liste main aside div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.liste main aside .bouton {
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */
