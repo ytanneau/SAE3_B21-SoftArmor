@@ -321,57 +321,73 @@ main {
 }
 
 #avis_vendeur{
-    $value_width: 200px;
-    $value_height: 100px;
 
     article{
         @include contenu_centre_horizontal();
-        
-        img{
-            width: 30vw;
-            height: 30vw;
+        justify-content: center;
+        gap: 20px;
+
+        div:first-child{
+            img{
+                width: 10vw;
+                height: 10vw;
+                object-fit: contain;
+                background-color: white;
+            }
         }
+
+        .etoile{
+            width: 30px;
+            height: 30px;
+        }
+
+        
     }
 
     section{
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
+
+            hr{
+                width: 50%;
+                color: $nuance_primaire_vendeur;
+            }
             
             li{
-                width: $value_width*6;
+                @include contenu_centre_horizontal();
                 list-style: none;
-                table{
-                    border-collapse: collapse;
-                    
-                    td{
-                        height: $value_height;
-                        border: solid black 1px;
+                
+                >div:first-child{
+                    @include contenu_centre_vertical();
+                    width: 40vw;
+                    align-items: start;
+
+                    .info{
+                        color: $nuance_primaire_vendeur;
                     }
 
-                    tr:first-child{
-                        td:nth-child(1), td:nth-child(2), td:nth-child(3){
-                            width: $value_width;
+                    >div{
+                        @include contenu_centre_horizontal();
+                        img{
+                            width: 20px;
+                            height: 20px;
                         }
-
-                        td:nth-child(4){
-                            height: $value_height*2;
-                            width: $value_width;
-
-                            img{
-                                display: flex;
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                                background-color: white;
-                            }
-                        }
-                    }
-
-                    tr:last-child{
-
                     }
                 }
+
+                >div:last-child{
+                    width: 5vw;
+                    height: 5vw;
+
+                    img{
+                        width: 5vw;
+                        height: 5vw;
+                        object-fit: contain;
+                        background-color: white;
+                    }
+                }
+                
             }
         }
     }
