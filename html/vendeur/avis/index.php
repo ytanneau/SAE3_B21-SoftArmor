@@ -70,6 +70,7 @@
         <div>
             <?=htmlentities($produit['nom_public'])?>
             <br>Note moyenne : <?=htmlentities($produit['note_moy'])?>
+            <br>
 <?php
     afficher_moyenne_note($produit['note_moy']);
 ?>
@@ -92,7 +93,13 @@
                     <p><?=pset($row['commentaire'])?></p>
                     <?=pset($row['date_avis'])?>
                 </div>
+<?php
+    if (isset($row['url_image'])){
+?>
                 <img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>">
+<?php
+    }
+?>
             </li>
 <?php
         }

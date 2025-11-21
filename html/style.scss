@@ -352,6 +352,7 @@ main {
                 >div{
                     @include contenu_centre_vertical();
                     width: 40vw;
+                    align-items: start;
 
                     >div{
                         @include contenu_centre_horizontal();
