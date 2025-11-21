@@ -279,8 +279,8 @@
             </form>
         </main>
         <script>
-            const blockPhoto3 = getElementById("idbBockPhoto3");
-            const inputPhoto2 = getElementById("idInputPhoto2");
+            const blockPhoto3 = document.getElementById("idBlockPhoto3");
+            const inputPhoto2 = document.getElementById("idInputPhoto2");
 
             inputPhoto2.addEventListener( 'change', () => {
                 if(inputPhoto2.files.length > 0){
