@@ -113,6 +113,10 @@
     @include image_produit($image_normal);
 }
 
+.image_produit_petit {
+    @include image_produit($image_petit);
+}
+
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;
