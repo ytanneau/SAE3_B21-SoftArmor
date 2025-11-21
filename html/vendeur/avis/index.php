@@ -69,7 +69,10 @@
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-            <br>Note moyenne : <?=htmlentities($produit['note_moy']) . afficher_moyenne_note($produit['note_moy'])?>
+            <br>Note moyenne : <?=htmlentities($produit['note_moy'])?>
+<?php
+    afficher_moyenne_note($produit['note_moy']);
+?>
             <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'])?>
         </div>
     </article>
@@ -79,22 +82,17 @@
         foreach($data as $row){
 ?>
             <li>
-                <table>
-                    <tr>
-                        <td><?=pset($row['pseudo'])?></td>
-                        <td><?=pset($row['note'])?>/5 
+                <div>
+                    <?=pset($row['pseudo'])?>
+                    <br>
 <?php
-            afficher_moyenne_note($row['note']);
+                    afficher_moyenne_note($row['note']);
 ?>
-                        </td>
-                        <td><?=pset($row['titre'])?></td>
-                        <td rowspan="2"><img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>"></td>
-                    </tr>
-                    <tr>
-                        <td><?=pset($row['date_avis'])?></td>
-                        <td colspan="2"><?=pset($row['commentaire'])?></td>
-                    </tr>
-                </table>
+                    <br><?=pset($row['titre'])?>
+                    <p><?=pset($row['commentaire'])?></p>
+                    <?=pset($row['date_avis'])?>
+                </div>
+                <img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>">
             </li>
 <?php
         }

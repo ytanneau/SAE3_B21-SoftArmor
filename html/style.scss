@@ -327,16 +327,17 @@ main {
 }
 
 #avis_vendeur{
-    $value_width: 200px;
-    $value_height: 100px;
 
     article{
         @include contenu_centre_horizontal();
         
-        img{
-            width: 30vw;
-            height: 30vw;
+        div:first-child{
+            img{
+                width: 30vw;
+                height: 30vw;
+            }
         }
+        
     }
 
     section{
@@ -345,38 +346,17 @@ main {
             gap: 10px;
             
             li{
-                width: $value_width*6;
+                @include contenu_centre_horizontal();
                 list-style: none;
-                table{
-                    border-collapse: collapse;
-                    
-                    td{
-                        height: $value_height;
-                        border: solid black 1px;
-                    }
+                
+                >div{
+                    @include contenu_centre_vertical();
+                    width: 40vw;
+                }
 
-                    tr:first-child{
-                        td:nth-child(1), td:nth-child(2), td:nth-child(3){
-                            width: $value_width;
-                        }
-
-                        td:nth-child(4){
-                            height: $value_height*2;
-                            width: $value_width;
-
-                            img{
-                                display: flex;
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                                background-color: white;
-                            }
-                        }
-                    }
-
-                    tr:last-child{
-
-                    }
+                img{
+                    width: 15vw;
+                    height: 15vw;
                 }
             }
         }
