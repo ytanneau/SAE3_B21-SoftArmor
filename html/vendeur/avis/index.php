@@ -93,6 +93,7 @@
                     <p><?=pset($row['commentaire'])?></p>
                     <?=pset($row['date_avis'])?>
                 </div>
+                <div>
 <?php
     if (isset($row['url_image'])){
 ?>
@@ -100,6 +101,7 @@
 <?php
     }
 ?>
+                </div>
             </li>
 <?php
         }

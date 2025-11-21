@@ -330,11 +330,15 @@ main {
 
     article{
         @include contenu_centre_horizontal();
-        
+        justify-content: center;
+        gap: 20px;
+
         div:first-child{
             img{
                 width: 10vw;
                 height: 10vw;
+                object-fit: contain;
+                background-color: white;
             }
         }
         
@@ -349,7 +353,7 @@ main {
                 @include contenu_centre_horizontal();
                 list-style: none;
                 
-                >div{
+                >div:first-child{
                     @include contenu_centre_vertical();
                     width: 40vw;
                     align-items: start;
@@ -363,10 +367,18 @@ main {
                     }
                 }
 
-                img{
+                >div:last-child{
                     width: 15vw;
                     height: 15vw;
+
+                    img{
+                        width: 15vw;
+                        height: 15vw;
+                        object-fit: contain;
+                        background-color: white;
+                    }
                 }
+                
             }
         }
     }
