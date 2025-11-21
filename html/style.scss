@@ -109,6 +109,10 @@
     border-radius: $angle;
 }
 
+.image_produit_moyen {
+    @include image_produit($image_normal);
+}
+
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;

@@ -1,3 +1,11 @@
+.image_produit_moyen {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+
 .formulaire_client {
   align-items: normal;
   width: 100%;
@@ -506,11 +514,19 @@ main {
      object-fit: contain;
   background-color: white;
 }
+#avis_vendeur article .etoile {
+  width: 30px;
+  height: 30px;
+}
 #avis_vendeur section ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+}
+#avis_vendeur section ul hr {
+  width: 50%;
+  color: #C3C1F5;
 }
 #avis_vendeur section ul li {
   display: flex;
@@ -524,6 +540,9 @@ main {
   align-items: center;
   width: 40vw;
   align-items: start;
+}
+#avis_vendeur section ul li > div:first-child .info {
+  color: #C3C1F5;
 }
 #avis_vendeur section ul li > div:first-child > div {
   display: flex;
