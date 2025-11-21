@@ -15,6 +15,7 @@
 @mixin header($background) {
     position: sticky;
     top: 0;
+    z-index: 10;
     padding: 0.5em 1em;
     background-color: $background;
     
@@ -101,12 +102,19 @@
     }
 }
 
+@mixin image_produit($taille, $angle: $angle_petit) {
+    object-fit: contain;
+    width: $taille;
+    height: $taille;
+    border-radius: $angle;
+}
 
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;
     padding: 0.5em 2em;
     font-weight: bold;
+    align-self: center;
 }
 
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
@@ -152,18 +160,6 @@
         -moz-appearance: textfield;
     }
     
-    .bouton {
-        @include bouton;
-        align-self: center;
-        background-color: $focus;
-        color: white;
-        font-size: $font_size_normal;
-        margin-top: 2%;
-        @media (max-width: 1440px) {
-            margin-top: 5%;
-        }
-        
-    }
 
     // généralement contraintes et erreurs
     p {
@@ -229,7 +225,7 @@ main {
 }
 
 .icon {
-    height: 25px;
+    height: $image_petit;
     margin: 0 8px 0 0;
 }
 
@@ -331,51 +327,73 @@ main {
 }
 
 #avis_vendeur{
-    $value_width: 200px;
-    $value_height: 100px;
-    article{
 
+    article{
+        @include contenu_centre_horizontal();
+        justify-content: center;
+        gap: 20px;
+
+        div:first-child{
+            img{
+                width: 10vw;
+                height: 10vw;
+                object-fit: contain;
+                background-color: white;
+            }
+        }
+
+        .etoile{
+            width: 30px;
+            height: 30px;
+        }
+
+        
     }
 
     section{
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
+
+            hr{
+                width: 50%;
+                color: $nuance_primaire_vendeur;
+            }
             
             li{
-                width: $value_width*6;
+                @include contenu_centre_horizontal();
                 list-style: none;
-                table{
-                    border-collapse: collapse;
-                    
-                    td{
-                        height: $value_height;
-                        border: solid black 1px;
+                
+                >div:first-child{
+                    @include contenu_centre_vertical();
+                    width: 40vw;
+                    align-items: start;
+
+                    .info{
+                        color: $nuance_primaire_vendeur;
                     }
 
-                    tr:first-child{
-                        td:nth-child(1), td:nth-child(2), td:nth-child(3){
-                            width: $value_width;
+                    >div{
+                        @include contenu_centre_horizontal();
+                        img{
+                            width: 20px;
+                            height: 20px;
                         }
-
-                        td:nth-child(4){
-                            height: $value_height*2;
-                            width: $value_width;
-
-                            img{
-                                display: flex;
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                                background-color: white;
-                            }
-                        }
-                    }
-
-                    tr:last-child{
-
                     }
                 }
+
+                >div:last-child{
+                    width: 5vw;
+                    height: 5vw;
+
+                    img{
+                        width: 5vw;
+                        height: 5vw;
+                        object-fit: contain;
+                        background-color: white;
+                    }
+                }
+                
             }
         }
     }
@@ -440,63 +458,225 @@ main {
     }
 }
 
+.bouton {
+    @include bouton;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
 .grave {
     @include bouton();
     background-color: $rouge;
     color: white;
 }
-
-.accueil {
-    > main {
-        > div {
+//format telephone
+@media screen and (max-width: 1024px){
+    .accueil {
+        nav {
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            background-color: $couleur_background;
+            height: 3em;
             
-            > ul {
+        }
+        > main {
+            > div {
                 display: flex;
-                flex-direction: row;
-                overflow:auto;
-                list-style: none;
+                flex-direction: column;
                 
-                > li {
-                    width: 20vw;
-                    margin: 20px;
+                > ul {
+                    list-style: none;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                    justify-items:center;
+                    padding: 0;
+                    > li {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        margin: 20px;
 
-                    > img {
-                        width: 15vw;
-                        height: 15vw;
-                        object-fit: contain;
-                        background-color: $nuance_primaire_client;
-                        border-radius: 1em;
-                    }
-               
-                    > a {
-                        color : black;
-                        text-decoration: none;
-                        h3 {
-                            font-family: $font_title;
-                            font-weight: bold;
-                        }
-                        > div {
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            
                             > img {
-                                width: 20px;
-                                height: 20px;
-                                background: none;
+                                width: 30vw;
+                                height: 30vw;
+                                object-fit: contain;
+                                background-color: $nuance_primaire_client;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
                             }
-                        }
-                        .prix {
-                            color: $couleur_prix;
-                            font-size: $font_size_sup;
-                        }
-                        > p , > h3 {
-                            margin: 0;
-                        }
-                        > .ancien_prix {
-                            color: black;
-                            text-decoration: line-through;
+                            > p , > h3 {
+                                margin: 0;
+                                width: $image_normal;
+                            }
                         }
                     }
                 }
+            }
+        }
+    }
+}
+//format ordinateur
+@media screen and (min-width: 1024px){
+    .accueil {
+        nav {
+            display: none;
+        }
+        > main {
+            > div {
+                display: flex;
+                flex-direction: column;
+                
+                > ul {
+                    display: flex;
+                    flex-direction: row;
+                    overflow:auto;
+                    list-style: none;
+                    
+                    > li {
+                        width: 20vw;
+                        margin: 20px 40px 20px 20px;
+
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            > img {
+                                width: 15vw;
+                                height: 15vw;
+                                object-fit: contain;
+                                background-color: $nuance_primaire_client;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
+                            }
+                            > p , > h3 {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.prix {
+    color: $couleur_prix;
+    font-size: 2.2em;
+    font-weight: bold;
+
+}
+
+.HT {
+    color: black;
+}
+
+.ancien_prix {
+    color: black;
+    text-decoration: line-through;
+}
+
+.produit_panier {
+    display: flex;
+}
+
+h3 {
+    font-family: $font_title;
+    font-weight: bold;
+}
+
+.liste {
+    main {
+        img {
+            object-fit: contain;
+            // width:270px;
+        }
+
+        // l'entête, le truc au dessus de la liste
+        .entete {
+            display: flex;
+            // tous les enfants de l'entête
+            >* {
+                margin-right: 3em;
+            }
+            
+        }
+
+
+        ul {
+            width: 65vw;
+
+            // la partie description etc. du produit
+            li>article:nth-child(2) {
+                width: 40vw;
+                p {
+                    width: 90%;
+                }
+            }
+        }
+
+        li {
+            padding: 1em 0;
+        }
+
+        img {
+            padding-right: 3em;
+        }
+
+        hr {
+            color: #9C9C9C;
+        }
+
+        h3 {
+            font-size: 1.6em;
+        }
+
+        // la partie à droite (ex. avec récap)
+        aside {
+            position: fixed;
+            right: 6em;
+            top: 8em;
+
+            font-size: 1.2em;
+
+            .prix, p {
+                font-size: 1.4em;
+            }
+
+            width: 20vw;
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .bouton {
+                width:100%;
             }
         }
     }

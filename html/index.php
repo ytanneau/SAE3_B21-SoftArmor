@@ -77,7 +77,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
+                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -149,7 +149,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
+                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -181,7 +181,7 @@ unset($pdo);
                             ?>
                         </div>
 
-                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
+                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -189,14 +189,14 @@ unset($pdo);
     </div>
 
     <!-- Navigation (pour teléphone) -->
-    <div>
+    <nav>
         <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
         <a href="/panier"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
         <!--
         <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
         --->
-    </div>
+    </nav>
 
     </main>
 

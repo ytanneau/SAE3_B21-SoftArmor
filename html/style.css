@@ -34,22 +34,6 @@
 .formulaire_client input[type=number] {
   -moz-appearance: textfield;
 }
-.formulaire_client .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .formulaire_client .bouton {
-    margin-top: 5%;
-  }
-}
 .formulaire_client p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -76,6 +60,7 @@ main {
 #header_client {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding: 0.5em 1em;
   background-color: #3157A3;
 }
@@ -163,6 +148,7 @@ main {
 #header_vendeur {
   position: sticky;
   top: 0;
+  z-index: 10;
   padding: 0.5em 1em;
   background-color: #6B31D0;
 }
@@ -312,22 +298,6 @@ main {
 #connect_vendeur main form input[type=number], #inscription_vendeur main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_vendeur main form p, #inscription_vendeur main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -416,22 +386,6 @@ main {
 #connect_client main form input[type=number], #inscription_client main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_client main form .bouton, #inscription_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_client main form .bouton, #inscription_client main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_client main form p, #inscription_client main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -503,22 +457,6 @@ main {
 .form_client main form input[type=number] {
   -moz-appearance: textfield;
 }
-.form_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .form_client main form .bouton {
-    margin-top: 5%;
-  }
-}
 .form_client main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -554,38 +492,71 @@ main {
   background-color: white;
 }
 
+#avis_vendeur article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#avis_vendeur article div:first-child img {
+  width: 10vw;
+  height: 10vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: white;
+}
+#avis_vendeur article .etoile {
+  width: 30px;
+  height: 30px;
+}
 #avis_vendeur section ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
+#avis_vendeur section ul hr {
+  width: 50%;
+  color: #C3C1F5;
+}
 #avis_vendeur section ul li {
-  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   list-style: none;
 }
-#avis_vendeur section ul li table {
-  border-collapse: collapse;
-}
-#avis_vendeur section ul li table td {
-  height: 100px;
-  border: solid black 1px;
-}
-#avis_vendeur section ul li table tr:first-child td:nth-child(1), #avis_vendeur section ul li table tr:first-child td:nth-child(2), #avis_vendeur section ul li table tr:first-child td:nth-child(3) {
-  width: 200px;
-}
-#avis_vendeur section ul li table tr:first-child td:nth-child(4) {
-  height: 200px;
-  width: 200px;
-}
-#avis_vendeur section ul li table tr:first-child td:nth-child(4) img {
+#avis_vendeur section ul li > div:first-child {
   display: flex;
-  height: 100%;
-  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 40vw;
+  align-items: start;
+}
+#avis_vendeur section ul li > div:first-child .info {
+  color: #C3C1F5;
+}
+#avis_vendeur section ul li > div:first-child > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#avis_vendeur section ul li > div:first-child > div img {
+  width: 20px;
+  height: 20px;
+}
+#avis_vendeur section ul li > div:last-child {
+  width: 5vw;
+  height: 5vw;
+}
+#avis_vendeur section ul li > div:last-child img {
+  width: 5vw;
+  height: 5vw;
   -o-object-fit: contain;
      object-fit: contain;
   background-color: white;
 }
+
 .infos main {
   display: flex;
 }
@@ -638,22 +609,6 @@ main {
 .infos form input[type=number] {
   -moz-appearance: textfield;
 }
-.infos form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .infos form .bouton {
-    margin-top: 5%;
-  }
-}
 .infos form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -686,58 +641,195 @@ main {
   display: flex;
 }
 
+.bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .grave {
   border: none;
   border-radius: 50px;
   padding: 0.5em 2em;
   font-weight: bold;
+  align-self: center;
   background-color: #E43737;
   color: white;
 }
 
-.accueil > main > div {
-  display: flex;
-  flex-direction: column;
+@media screen and (max-width: 1024px) {
+  .accueil nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    background-color: #FFFFFF;
+    height: 3em;
+  }
+  .accueil > main > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .accueil > main > div > ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    justify-items: center;
+    padding: 0;
+  }
+  .accueil > main > div > ul > li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 20px;
+  }
+  .accueil > main > div > ul > li > a {
+    color: black;
+    text-decoration: none;
+  }
+  .accueil > main > div > ul > li > a > img {
+    width: 30vw;
+    height: 30vw;
+    -o-object-fit: contain;
+       object-fit: contain;
+    background-color: #CBCCEA;
+    border-radius: 5px;
+  }
+  .accueil > main > div > ul > li > a > div > img {
+    width: 20px;
+    height: 20px;
+    background: none;
+  }
+  .accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
+    margin: 0;
+    width: 200px;
+  }
 }
-.accueil > main > div > ul {
-  display: flex;
-  flex-direction: row;
-  overflow: auto;
-  list-style: none;
+@media screen and (min-width: 1024px) {
+  .accueil nav {
+    display: none;
+  }
+  .accueil > main > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .accueil > main > div > ul {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    list-style: none;
+  }
+  .accueil > main > div > ul > li {
+    width: 20vw;
+    margin: 20px 40px 20px 20px;
+  }
+  .accueil > main > div > ul > li > a {
+    color: black;
+    text-decoration: none;
+  }
+  .accueil > main > div > ul > li > a > img {
+    width: 15vw;
+    height: 15vw;
+    -o-object-fit: contain;
+       object-fit: contain;
+    background-color: #CBCCEA;
+    border-radius: 5px;
+  }
+  .accueil > main > div > ul > li > a > div > img {
+    width: 20px;
+    height: 20px;
+    background: none;
+  }
+  .accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
+    margin: 0;
+  }
 }
-.accueil > main > div > ul > li {
-  width: 20vw;
-  margin: 20px;
+.prix {
+  color: #2E7A30;
+  font-size: 2.2em;
+  font-weight: bold;
 }
-.accueil > main > div > ul > li > img {
-  width: 15vw;
-  height: 15vw;
-  -o-object-fit: contain;
-     object-fit: contain;
-  background-color: #CBCCEA;
-  border-radius: 1em;
-}
-.accueil > main > div > ul > li > a {
+
+.HT {
   color: black;
-  text-decoration: none;
 }
-.accueil > main > div > ul > li > a h3 {
+
+.ancien_prix {
+  color: black;
+  text-decoration: line-through;
+}
+
+.produit_panier {
+  display: flex;
+}
+
+h3 {
   font-family: "Montserrat";
   font-weight: bold;
 }
-.accueil > main > div > ul > li > a > div > img {
-  width: 20px;
-  height: 20px;
-  background: none;
+
+.liste main img {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
-.accueil > main > div > ul > li > a .prix {
-  color: #2E7A30;
-  font-size: 1.5em;
+.liste main .entete {
+  display: flex;
 }
-.accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
-  margin: 0;
+.liste main .entete > * {
+  margin-right: 3em;
 }
-.accueil > main > div > ul > li > a > .ancien_prix {
-  color: black;
-  text-decoration: line-through;
+.liste main ul {
+  width: 65vw;
+}
+.liste main ul li > article:nth-child(2) {
+  width: 40vw;
+}
+.liste main ul li > article:nth-child(2) p {
+  width: 90%;
+}
+.liste main li {
+  padding: 1em 0;
+}
+.liste main img {
+  padding-right: 3em;
+}
+.liste main hr {
+  color: #9C9C9C;
+}
+.liste main h3 {
+  font-size: 1.6em;
+}
+.liste main aside {
+  position: fixed;
+  right: 6em;
+  top: 8em;
+  font-size: 1.2em;
+  width: 20vw;
+}
+.liste main aside .prix, .liste main aside p {
+  font-size: 1.4em;
+}
+.liste main aside div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.liste main aside .bouton {
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */

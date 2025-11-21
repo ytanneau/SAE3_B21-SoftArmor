@@ -52,15 +52,18 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon panier</title>
 </head>
-<body>
+<body class="liste">
     <?php include HOME_SITE . 'header.php' ?>
 
-    <h1>Mon panier</h1>
+    <main>
+    <article class="entete">
+        <h1>Mon panier</h1>
 
-    <?php if (!$elts_panier) { ?>
-        <img src="<?=HOME_SITE?>image/panier_vide.svg">
-        <h2>Votre panier est vide.</h2>
-    <?php } else { ?>
+        <?php if (!$elts_panier) { ?>
+            <img src="<?=HOME_SITE?>image/panier_vide.svg">
+            <h2>Votre panier est vide.</h2>
+        <?php } else { ?>
+    </article>
 
     <ul>
         <?php 
@@ -75,37 +78,46 @@ try {
                     $total_ttc += $prix_ttc * $elt['quantite_panier'];
                 ?>
 
-                <li>
-                    <img height="200px" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
-                    <p><?= $elt['nom_public'] ?></p>
-                    <p><?= $elt['nom_vendeur'] ?></p>
-                    <p><?= $elt['description'] ?></p>
-                    <p><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
-                    <p><?= 'Prix TTC : ' . number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
-                    <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
+                <li class="produit_panier">
+                    <img src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
+                    <article>
+                        <h3><?= $elt['nom_public'] ?></h3>
+                        <p><?= $elt['description'] ?></p>
+                        <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
+                    </article>
+                    <article>
+                        <p class="prix"><?=number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
+                        <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
 
-                    <form action="" method="post">
-                        <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                        <button onclick="actualiser()" type="submit">Supprimer</button>
-                    </form>
+                        <form action="" method="post">
+                            <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
+                            <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                        </form>
+                    </article>
                 </li>
+
+                <hr>
             <?php } 
         ?>
     </ul>
-
-    <?php if ($elts_panier) { ?>
-        <p><strong>Prix total HT :</strong> <?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
-        <p><strong>Prix total TTC :</strong> <?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
-    <?php } ?>
     
-
     <!-- bouton de paiement -->
-    <form action="../achat" method="get">
-        <input type="hidden" name="id_produit" id="id_produit" value="panier">
-        <input type="submit" value="Passer au paiement">
-    </form>
+     <aside>
+        <?php if ($elts_panier) { ?>
+            <p>Prix total HT</p><p class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
+            <p>Prix total TTC</p><p class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+        <?php } ?>
+        
+
+        <form action="../achat" method="get">
+            <input type="hidden" name="id_produit" id="id_produit" value="panier">
+            <input type="submit" value="Passer au paiement" class="bouton">
+        </form>
+    </aside>
 
     <?php } ?>
+
+    </main>
 </body>
 
     <script>
