@@ -76,6 +76,7 @@
             $cheminTemp = $_FILES['photo']['tmp_name'];
             
             $nomImage = $idProduit . "_1.png";
+            
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
 
             $url = "ressources/produit/" . $nomImage;
