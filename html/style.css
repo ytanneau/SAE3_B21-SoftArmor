@@ -34,22 +34,6 @@
 .formulaire_client input[type=number] {
   -moz-appearance: textfield;
 }
-.formulaire_client .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .formulaire_client .bouton {
-    margin-top: 5%;
-  }
-}
 .formulaire_client p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -312,22 +296,6 @@ main {
 #connect_vendeur main form input[type=number], #inscription_vendeur main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_vendeur main form .bouton, #inscription_vendeur main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_vendeur main form p, #inscription_vendeur main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -416,22 +384,6 @@ main {
 #connect_client main form input[type=number], #inscription_client main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_client main form .bouton, #inscription_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  #connect_client main form .bouton, #inscription_client main form .bouton {
-    margin-top: 5%;
-  }
-}
 #connect_client main form p, #inscription_client main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -502,22 +454,6 @@ main {
 }
 .form_client main form input[type=number] {
   -moz-appearance: textfield;
-}
-.form_client main form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .form_client main form .bouton {
-    margin-top: 5%;
-  }
 }
 .form_client main form p {
   font-size: 0.75em;
@@ -638,22 +574,6 @@ main {
 .infos form input[type=number] {
   -moz-appearance: textfield;
 }
-.infos form .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .infos form .bouton {
-    margin-top: 5%;
-  }
-}
 .infos form p {
   font-size: 0.75em;
   margin: 0.4% 0;
@@ -683,11 +603,29 @@ main {
   display: flex;
 }
 
+.bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .grave {
   border: none;
   border-radius: 50px;
   padding: 0.5em 2em;
   font-weight: bold;
+  align-self: center;
   background-color: #E43737;
   color: white;
 }
@@ -716,22 +654,84 @@ main {
   color: black;
   text-decoration: none;
 }
-.accueil > main > div > ul > li a h3 {
-  font-family: "Montserrat";
-  font-weight: bold;
-}
 .accueil > main > div > ul > li a > div > img {
   width: 20px;
   height: 20px;
 }
-.accueil > main > div > ul > li a > p {
-  color: #2E7A30;
-  font-size: 1.5em;
-}
 .accueil > main > div > ul > li a > p, .accueil > main > div > ul > li a > h3 {
   margin: 0;
 }
-.accueil > main > div > ul > li a > .ancien_prix {
+
+.prix {
+  color: #2E7A30;
+  font-size: 2.2em;
+  font-weight: bold;
+}
+
+.HT {
+  color: black;
+}
+
+.ancien_prix {
   color: black;
   text-decoration: line-through;
+}
+
+.produit_panier {
+  display: flex;
+}
+
+h3 {
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+
+.liste main img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.liste main .entete {
+  display: flex;
+}
+.liste main .entete > * {
+  margin-right: 3em;
+}
+.liste main ul {
+  width: 65vw;
+}
+.liste main ul li > article:nth-child(2) {
+  width: 40vw;
+}
+.liste main ul li > article:nth-child(2) p {
+  width: 90%;
+}
+.liste main li {
+  padding: 1em 0;
+}
+.liste main img {
+  padding-right: 3em;
+}
+.liste main hr {
+  color: #9C9C9C;
+}
+.liste main h3 {
+  font-size: 1.6em;
+}
+.liste main aside {
+  position: fixed;
+  right: 6em;
+  top: 8em;
+  font-size: 1.2em;
+  width: 20vw;
+}
+.liste main aside .prix, .liste main aside p {
+  font-size: 1.4em;
+}
+.liste main aside div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.liste main aside .bouton {
+  width: 100%;
 }/*# sourceMappingURL=style.css.map */

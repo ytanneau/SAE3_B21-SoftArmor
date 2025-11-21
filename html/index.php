@@ -77,7 +77,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= $row['prix'];?> €</p>
+                        <p class="prix"><?= $row['prix'];?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -113,7 +113,7 @@ unset($pdo);
                         ?>
                     </div>
                     <p class="ancien_prix"><?= $row['prix'];?> €</p>
-                    <p><?= $row['prix_reduit'];?> €</p>
+                    <p class="prix"><?= $row['prix_reduit'];?> €</p>
                 </a>
             </li>
             <?php
@@ -149,7 +149,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= $row['prix'];?> €</p>
+                        <p class="prix"><?= $row['prix'];?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -181,7 +181,7 @@ unset($pdo);
                             ?>
                         </div>
 
-                        <p><?= $row['prix'];?> €</p>
+                        <p class="prix"><?= $row['prix'];?> €</p>
                     </a>
                 </li>
             <?php } ?>

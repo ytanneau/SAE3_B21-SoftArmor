@@ -107,6 +107,7 @@
     border-radius: $angle_grand;
     padding: 0.5em 2em;
     font-weight: bold;
+    align-self: center;
 }
 
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
@@ -152,18 +153,6 @@
         -moz-appearance: textfield;
     }
     
-    .bouton {
-        @include bouton;
-        align-self: center;
-        background-color: $focus;
-        color: white;
-        font-size: $font_size_normal;
-        margin-top: 2%;
-        @media (max-width: 1440px) {
-            margin-top: 5%;
-        }
-        
-    }
 
     // généralement contraintes et erreurs
     p {
@@ -435,6 +424,17 @@ main {
     }
 }
 
+.bouton {
+    @include bouton;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
 .grave {
     @include bouton();
     background-color: $rouge;
@@ -466,29 +466,114 @@ main {
                     a {
                         color : black;
                         text-decoration: none;
-                        h3 {
-                            font-family: $font_title;
-                            font-weight: bold;
-                        }
                         > div {
                             > img {
                                 width: 20px;
                                 height: 20px;
                             }
                         }
-                        > p {
-                            color: $couleur_prix;
-                            font-size: $font_size_sup;
-                        }
                         > p , > h3 {
                             margin: 0;
                         }
-                        > .ancien_prix {
-                            color: black;
-                            text-decoration: line-through;
-                        }
                     }
                 }
+            }
+        }
+    }
+}
+
+.prix {
+    color: $couleur_prix;
+    font-size: 2.2em;
+    font-weight: bold;
+
+}
+
+.HT {
+    color: black;
+}
+
+.ancien_prix {
+    color: black;
+    text-decoration: line-through;
+}
+
+.produit_panier {
+    display: flex;
+}
+
+h3 {
+    font-family: $font_title;
+    font-weight: bold;
+}
+
+.liste {
+    main {
+        img {
+            object-fit: contain;
+            // width:270px;
+        }
+
+        // l'entête, le truc au dessus de la liste
+        .entete {
+            display: flex;
+            // tous les enfants de l'entête
+            >* {
+                margin-right: 3em;
+            }
+            
+        }
+
+
+        ul {
+            width: 65vw;
+
+            // la partie description etc. du produit
+            li>article:nth-child(2) {
+                width: 40vw;
+                p {
+                    width: 90%;
+                }
+            }
+        }
+
+        li {
+            padding: 1em 0;
+        }
+
+        img {
+            padding-right: 3em;
+        }
+
+        hr {
+            color: #9C9C9C;
+        }
+
+        h3 {
+            font-size: 1.6em;
+        }
+
+        // la partie à droite (ex. avec récap)
+        aside {
+            position: fixed;
+            right: 6em;
+            top: 8em;
+
+            font-size: 1.2em;
+
+            .prix, p {
+                font-size: 1.4em;
+            }
+
+            width: 20vw;
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .bouton {
+                width:100%;
             }
         }
     }
