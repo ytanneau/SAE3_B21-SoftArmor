@@ -73,6 +73,7 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
+                
                 update_image_produit($tabImageProduit['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
@@ -90,8 +91,13 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                if($tabImageProduit['id_image2'] == null){
+                    $idImage2 = add_image( $url, $nomPblc, $altDefault);
+                    add_image_produit($idProduit,$idImage2);        
+                }else{
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
+                    update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
+                }
             }
         }
         if(isset($_FILES['photo3'])){
@@ -108,8 +114,13 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                if($tabImageProduit['id_image2'] == null){
+                    $idImage3 = add_image( $url, $nomPblc, $altDefault);
+                    add_image_produit($idProduit,$idImage3);        
+                }else{
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($tabImageProduit['id_image2'], $url, $nomPblc, $altDefault);
+                    update_image_produit($tabImageProduit['id_image2'], $url, $nomPblc, $altDefault);
+                }
             }
         }
         header("Location: ../");
