@@ -475,42 +475,62 @@ main {
     background-color: $rouge;
     color: white;
 }
-
-.accueil {
-    > main {
-        > div {
+//format telephone
+@media screen and (max-width: 1024px){
+    .accueil {
+        nav {
+            width: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            background-color: $couleur_background;
+            height: 3em;
             
-            > ul {
+        }
+        > main {
+            > div {
                 display: flex;
-                flex-direction: row;
-                overflow:auto;
-                list-style: none;
+                flex-direction: column;
                 
-                > li {
-                    width: 20vw;
-                    margin: 20px;
+                > ul {
+                    list-style: none;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                    justify-items:center;
+                    padding: 0;
+                    > li {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        margin: 20px;
 
-                    img {
-                        width: 15vw;
-                        height: 15vw;
-                        object-fit: contain;
-                        background-color: $nuance_primaire_client;
-                    }
-               
-                    a {
-                        color : black;
-                        text-decoration: none;
-                        > div {
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            
                             > img {
-                                width: 20px;
-                                height: 20px;
-                                background-color: none;
+                                width: 30vw;
+                                height: 30vw;
+                                object-fit: contain;
+                                background-color: $nuance_primaire_client;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
                             }
-                        }
-                        > p , > h3 {
-                            margin: 0;
+                            > p , > h3 {
+                                margin: 0;
+                                width: $image_normal;
+                            }
                         }
                     }
                 }
@@ -518,7 +538,54 @@ main {
         }
     }
 }
+//format ordinateur
+@media screen and (min-width: 1024px){
+    .accueil {
+        nav {
+            display: none;
+        }
+        > main {
+            > div {
+                display: flex;
+                flex-direction: column;
+                
+                > ul {
+                    display: flex;
+                    flex-direction: row;
+                    overflow:auto;
+                    list-style: none;
+                    
+                    > li {
+                        width: 20vw;
+                        margin: 20px 40px 20px 20px;
 
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            > img {
+                                width: 15vw;
+                                height: 15vw;
+                                object-fit: contain;
+                                background-color: $nuance_primaire_client;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
+                            }
+                            > p , > h3 {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .prix {
     color: $couleur_prix;
     font-size: 2.2em;
