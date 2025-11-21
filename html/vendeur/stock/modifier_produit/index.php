@@ -27,9 +27,7 @@
     $tabInfoProduit = get_info_produit($id_compte,$idProduit);
     $tabCategorieDuProduit = get_categorieProduit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
-    echo "<pre>";
-    print_r($tabImageProduit);
-    echo "</pre>";
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nomPblc = $_POST['nomPblc'];
 
