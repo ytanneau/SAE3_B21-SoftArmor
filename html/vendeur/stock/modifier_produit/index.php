@@ -282,7 +282,7 @@
             const blockPhoto3 = getElementById("idbBockPhoto3");
             const inputPhoto2 = getElementById("idInputPhoto2");
 
-            inputPhoto2.addEventListener(('change') => {
+            inputPhoto2.addEventListener( 'input' => {
                 if(inputPhoto2.value != null){
                     blockPhoto3.style.display = "block";
                 }
