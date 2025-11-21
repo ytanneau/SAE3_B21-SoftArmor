@@ -176,6 +176,10 @@
     }
 }
 
+.formulaire_client {
+    @include formulaire();
+}
+
 @mixin page_connect_inscription($background, $nuance) {
     background-color: $background;
     height: 100%;
@@ -462,6 +466,7 @@ main {
                         width: 15vw;
                         height: 15vw;
                         object-fit: contain;
+                        background-color: $nuance_primaire_client;
                     }
                
                     a {
@@ -477,7 +482,7 @@ main {
                                 height: 20px;
                             }
                         }
-                        > p {
+                        .prix {
                             color: $couleur_prix;
                             font-size: $font_size_sup;
                         }
