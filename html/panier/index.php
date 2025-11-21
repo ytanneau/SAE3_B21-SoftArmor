@@ -79,19 +79,19 @@ try {
                 ?>
 
                 <li class="produit_panier">
-                    <img height="200px" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
+                    <img src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
                     <article>
                         <h3><?= $elt['nom_public'] ?></h3>
                         <p><?= $elt['description'] ?></p>
                         <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
                     </article>
                     <article>
-                        <p class="prix"><?= 'Prix HT : ' . number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
+                        <p class="prix"><?=number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
                         <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
 
                         <form action="" method="post">
                             <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                            <button onclick="actualiser()" type="submit">Supprimer</button>
+                            <button onclick="actualiser()" type="submit" class="bouton">Supprimer</button>
                         </form>
                     </article>
                 </li>
