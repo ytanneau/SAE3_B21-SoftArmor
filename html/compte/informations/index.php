@@ -392,7 +392,7 @@ unset($pdo);
                     <a href="/produit/index.php?id_produit=<?= $row['id_produit']?>">
                         <table>
                             <tr>
-                            <td><img src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
+                            <td><img class="image_produit_moyen" src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
                             <p><?= htmlentities($row['pseudo'] ?? '')?></p></td>
                             <td><?php afficher_moyenne_note($row['note']);?></td>
                             <td><p><?= htmlentities($row['titre'] ?? '')?></p>  </td>

@@ -345,13 +345,6 @@ main {
                 background-color: white;
             }
         }
-
-        .etoile{
-            width: 30px;
-            height: 30px;
-        }
-
-        
     }
 
     section{
@@ -551,7 +544,6 @@ h3 {
     main {
         img {
             object-fit: contain;
-            // width:270px;
         }
 
         // l'entête, le truc au dessus de la liste
@@ -592,29 +584,35 @@ h3 {
         h3 {
             font-size: 1.6em;
         }
-
-        // la partie à droite (ex. avec récap)
-        aside {
-            position: fixed;
-            right: 6em;
-            top: 8em;
-
-            font-size: 1.2em;
-
-            .prix, p {
-                font-size: 1.4em;
-            }
-
-            width: 20vw;
-            div {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-
-            .bouton {
-                width:100%;
-            }
-        }
     }
+}
+
+// la partie à droite d'une page (ex. avec récap dans page panier)
+aside {
+    position: fixed;
+    right: 6em;
+    top: 8em;
+
+    font-size: 1.2em;
+
+    .prix, p {
+        font-size: 1.4em;
+    }
+
+    width: 20vw;
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .bouton {
+        width:100%;
+    }
+}
+
+
+.etoile{
+    width: 30px;
+    height: 30px;
 }

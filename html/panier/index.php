@@ -79,7 +79,7 @@ try {
                 ?>
 
                 <li class="produit_panier">
-                    <img src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
+                    <img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
                     <article>
                         <h3><?= $elt['nom_public'] ?></h3>
                         <p><?= $elt['description'] ?></p>
