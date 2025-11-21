@@ -234,7 +234,7 @@
                         <input type="file" name="photo2">
                     </p>
                     <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
-                    <p style="display:none" id="idBlockPhoto3">
+                    <p style="display:none;" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3">
                     </p>
@@ -282,8 +282,8 @@
             const blockPhoto3 = getElementById("idbBockPhoto3");
             const inputPhoto2 = getElementById("idInputPhoto2");
 
-            inputPhoto2.addEventListener( 'input', () => {
-                if(inputPhoto2.value != null){
+            inputPhoto2.addEventListener( 'change', () => {
+                if(inputPhoto2.files.length > 0){
                     blockPhoto3.style.display = "block";
                 }
             })
