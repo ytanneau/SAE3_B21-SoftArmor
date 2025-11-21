@@ -556,6 +556,15 @@ main {
   background-color: white;
 }
 
+#avis_vendeur article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#avis_vendeur article img {
+  width: 30vw;
+  height: 30vw;
+}
 #avis_vendeur section ul {
   display: flex;
   flex-direction: column;

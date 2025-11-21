@@ -334,8 +334,14 @@ main {
 #avis_vendeur{
     $value_width: 200px;
     $value_height: 100px;
-    article{
 
+    article{
+        @include contenu_centre_horizontal();
+        
+        img{
+            width: 30vw;
+            height: 30vw;
+        }
     }
 
     section{
