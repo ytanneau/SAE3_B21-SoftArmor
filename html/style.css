@@ -667,6 +667,9 @@ main {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
+.infos form img {
+  width: 200px;
+}
 
 .avis {
   border: 1px solid black;
@@ -727,7 +730,7 @@ main {
   width: 20px;
   height: 20px;
 }
-.accueil > main > div > ul > li a > p {
+.accueil > main > div > ul > li a .prix {
   color: #2E7A30;
   font-size: 1.5em;
 }

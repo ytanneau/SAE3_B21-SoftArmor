@@ -411,6 +411,11 @@ main {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
+        img {
+            width: 200px;
+            
+        }
+
     }
 
 }
@@ -478,7 +483,7 @@ main {
                                 height: 20px;
                             }
                         }
-                        > p {
+                        .prix {
                             color: $couleur_prix;
                             font-size: $font_size_sup;
                         }

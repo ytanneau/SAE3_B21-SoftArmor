@@ -145,7 +145,7 @@ if ($_POST != NULL){
         $_FILES = null;
         
         //refresh la page pour afficher les infos
-        header("Refresh:0");
+        header("Location: ./");
     
     }
 }
