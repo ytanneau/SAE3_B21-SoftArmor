@@ -533,8 +533,8 @@ main {
   align-items: center;
 }
 #avis_vendeur section ul li > div:first-child > div img {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
 }
 #avis_vendeur section ul li > div:last-child {
   width: 5vw;
