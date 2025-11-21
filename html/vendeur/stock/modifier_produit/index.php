@@ -75,7 +75,7 @@
                 update_image_produit($tabImageProduit['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
-        if(isset($_POST['photo2'])){
+        if(isset($_FILES['photo2'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo2']['name'];
             // recupere le nom temporaire du fichier pour le deplacer
@@ -93,7 +93,7 @@
                 update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
             }
         }
-        if(isset($_POST['photo3'])){
+        if(isset($_FILES['photo3'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo3']['name'];
             // recupere le nom temporaire du fichier pour le deplacer
@@ -222,17 +222,17 @@
                 <h3>Photos du produit</h3>
                 <div>
                     <h6>Image principale</h6>
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_produit'] . '_1.png')?>" alt="">
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                     <p>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
                     </p>
-                    <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_2.png' ?>" alt=""> <?php }?>
+                    <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
                         <input type="file" name="photo2" id="idInputPhoto2" accept="image/png">
                     </p>
-                    <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
+                    <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit) . '_3.png' ?>" alt=""> <?php }?>
                     <p style="display:none;" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3" accept="image/png">

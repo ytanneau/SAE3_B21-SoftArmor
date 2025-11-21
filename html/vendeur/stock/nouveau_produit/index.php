@@ -85,7 +85,6 @@
                 // insertion des images dans la bdd
 
                 $idImage = add_image($url, $nomPblc, $altDefault);
-
                 add_image_produit($idProduit,$idImage);
                 
                 header("Location: ../");
