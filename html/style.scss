@@ -462,14 +462,15 @@ main {
                     width: 20vw;
                     margin: 20px;
 
-                    img {
+                    > img {
                         width: 15vw;
                         height: 15vw;
                         object-fit: contain;
                         background-color: $nuance_primaire_client;
+                        border-radius: 1em;
                     }
                
-                    a {
+                    > a {
                         color : black;
                         text-decoration: none;
                         h3 {
@@ -480,7 +481,7 @@ main {
                             > img {
                                 width: 20px;
                                 height: 20px;
-                                background-color: none;
+                                background: none;
                             }
                         }
                         .prix {
