@@ -521,6 +521,15 @@ main {
   align-items: center;
   width: 40vw;
 }
+#avis_vendeur section ul li > div > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#avis_vendeur section ul li > div > div img {
+  width: 10px;
+  height: 10px;
+}
 #avis_vendeur section ul li img {
   width: 15vw;
   height: 15vw;

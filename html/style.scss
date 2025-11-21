@@ -352,6 +352,14 @@ main {
                 >div{
                     @include contenu_centre_vertical();
                     width: 40vw;
+
+                    >div{
+                        @include contenu_centre_horizontal();
+                        img{
+                            width: 10px;
+                            height: 10px;
+                        }
+                    }
                 }
 
                 img{
