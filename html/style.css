@@ -6,6 +6,14 @@
   border-radius: 5px;
 }
 
+.image_produit_petit {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+
 .formulaire_client {
   align-items: normal;
   width: 100%;
@@ -514,10 +522,6 @@ main {
      object-fit: contain;
   background-color: white;
 }
-#avis_vendeur article .etoile {
-  width: 30px;
-  height: 30px;
-}
 #avis_vendeur section ul {
   display: flex;
   flex-direction: column;
@@ -765,21 +769,27 @@ h3 {
 .liste main h3 {
   font-size: 1.6em;
 }
-.liste main aside {
+
+aside {
   position: fixed;
   right: 6em;
   top: 8em;
   font-size: 1.2em;
   width: 20vw;
 }
-.liste main aside .prix, .liste main aside p {
+aside .prix, aside p {
   font-size: 1.4em;
 }
-.liste main aside div {
+aside div {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.liste main aside .bouton {
+aside .bouton {
   width: 100%;
+}
+
+.etoile {
+  width: 30px;
+  height: 30px;
 }/*# sourceMappingURL=style.css.map */
