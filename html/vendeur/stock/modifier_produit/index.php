@@ -93,7 +93,7 @@
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 if($tabImageProduit['id_image2'] == null){
                     $idImage2 = add_image( $url, $nomPblc, $altDefault);
-                    add_image_produit($idProduit,$idImage2);        
+                    link_image_produit($idProduit,$idImage2,2);        
                 }else{
                 // appel à la fonction pour modifier la bdd
                     update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
@@ -116,7 +116,7 @@
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 if($tabImageProduit['id_image2'] == null){
                     $idImage3 = add_image( $url, $nomPblc, $altDefault);
-                    add_image_produit($idProduit,$idImage3);        
+                    link_image_produit($idProduit,$idImage3,3);        
                 }else{
                 // appel à la fonction pour modifier la bdd
                     update_image_produit($tabImageProduit['id_image2'], $url, $nomPblc, $altDefault);
