@@ -91,13 +91,17 @@
 ?>
                     </div><br><?=pset($row['titre'])?>
                     <p><?=pset($row['commentaire'])?></p>
-                    <?=pset($row['date_avis'])?>
+                    <div class="info">
+                        <?=pset($row['date_avis'])?>
+                    </div>
                 </div>
                 <div>
 <?php
     if (isset($row['url_image'])){
 ?>
-                <img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>">
+                <a href="<?=HOME_SITE . pset($row['url_image'])?>" target="_blank">
+                    <img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>">
+                </a>
 <?php
     }
 ?>

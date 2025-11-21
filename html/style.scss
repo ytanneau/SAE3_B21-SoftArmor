@@ -348,6 +348,11 @@ main {
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
+
+            hr{
+                width: 50%;
+                color: $nuance_primaire_vendeur;
+            }
             
             li{
                 @include contenu_centre_horizontal();
@@ -357,6 +362,10 @@ main {
                     @include contenu_centre_vertical();
                     width: 40vw;
                     align-items: start;
+
+                    .info{
+                        color: $nuance_primaire_vendeur;
+                    }
 
                     >div{
                         @include contenu_centre_horizontal();
