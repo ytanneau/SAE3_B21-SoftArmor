@@ -66,12 +66,11 @@
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
             $url = "ressources/produit/" . $nomImage;
-            $titre_img = explode('.',$nomImageTemp)[0];
-            $altDefault = "Image du produit : " . $titre_img;
+            $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage, $url, $titre_img, $altDefault);
+                update_image_produit($idImage['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
         if(isset($_POST['photo2'])){
@@ -85,12 +84,11 @@
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
             $url = "ressources/produit/" . $nomImage;
-            $titre_img = explode('.',$nomImageTemp)[0];
-            $altDefault = "Image du produit : " . $titre_img;
+            $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage, $url, $titre_img, $altDefault);
+                update_image_produit($idImage['id_image1'], $url, $nomPblc, $altDefault);
             }
         }
         if(isset($_POST['photo3'])){
@@ -104,12 +102,11 @@
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
             $url = "ressources/produit/" . $nomImage;
-            $titre_img = explode('.',$nomImageTemp)[0];
-            $altDefault = "Image du produit : " . $titre_img;
+            $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage, $url, $titre_img, $altDefault);
+                update_image_produit($idImage['id_image2'], $url, $nomPblc, $altDefault);
             }
         }
         header("Location: ../");
