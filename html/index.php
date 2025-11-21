@@ -77,7 +77,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= $row['prix'];?> €</p>
+                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -112,7 +112,7 @@ unset($pdo);
                             }
                         ?>
                     </div>
-                    <p class="ancien_prix"><?= $row['prix'];?> €</p>
+                    <p class="ancien_prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     <p><?= $row['prix_reduit'];?> €</p>
                 </a>
             </li>
@@ -149,7 +149,7 @@ unset($pdo);
                                 }
                             ?>
                         </div>
-                        <p><?= $row['prix'];?> €</p>
+                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
@@ -181,7 +181,7 @@ unset($pdo);
                             ?>
                         </div>
 
-                        <p><?= $row['prix'];?> €</p>
+                        <p><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
                     </a>
                 </li>
             <?php } ?>
