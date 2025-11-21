@@ -500,8 +500,8 @@ main {
   align-items: center;
 }
 #avis_vendeur article div:first-child img {
-  width: 30vw;
-  height: 30vw;
+  width: 10vw;
+  height: 10vw;
 }
 #avis_vendeur section ul {
   display: flex;

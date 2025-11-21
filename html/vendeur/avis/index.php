@@ -84,11 +84,11 @@
             <li>
                 <div>
                     <?=pset($row['pseudo'])?>
-                    <br>
+                    <br><p>
 <?php
                     afficher_moyenne_note($row['note']);
 ?>
-                    <br><?=pset($row['titre'])?>
+                    </p><br><?=pset($row['titre'])?>
                     <p><?=pset($row['commentaire'])?></p>
                     <?=pset($row['date_avis'])?>
                 </div>
