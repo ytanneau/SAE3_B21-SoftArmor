@@ -231,12 +231,12 @@
                     <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_2.png' ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
-                        <input type="file" name="photo2" id="idInputPhoto2">
+                        <input type="file" name="photo2" id="idInputPhoto2" accept="image/png">
                     </p>
                     <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
                     <p style="display:none;" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
-                        <input type="file" name="photo3">
+                        <input type="file" name="photo3" accept="image/png">
                     </p>
                 </div>
                 <hr>
