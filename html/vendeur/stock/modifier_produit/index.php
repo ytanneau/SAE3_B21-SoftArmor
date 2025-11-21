@@ -223,7 +223,7 @@
                 <h3>Photos du produit</h3>
                 <div>
                     <h6>Image principale</h6>
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_image_principale'] . '_1.png')?>" alt="">
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_produit'] . '_1.png')?>" alt="">
                     <p>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
