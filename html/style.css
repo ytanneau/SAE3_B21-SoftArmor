@@ -541,8 +541,8 @@ main {
   height: 15vw;
 }
 #avis_vendeur section ul li > div:last-child img {
-  width: 15vw;
-  height: 15vw;
+  width: 5vw;
+  height: 5vw;
   -o-object-fit: contain;
      object-fit: contain;
   background-color: white;
