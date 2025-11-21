@@ -537,8 +537,8 @@ main {
   height: 10px;
 }
 #avis_vendeur section ul li > div:last-child {
-  width: 15vw;
-  height: 15vw;
+  width: 5vw;
+  height: 5vw;
 }
 #avis_vendeur section ul li > div:last-child img {
   width: 5vw;
