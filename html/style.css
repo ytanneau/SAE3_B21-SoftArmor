@@ -714,6 +714,8 @@ main {
   height: 15vw;
   -o-object-fit: contain;
      object-fit: contain;
+}
+.accueil > main > div > ul > li > img {
   background-color: #CBCCEA;
 }
 .accueil > main > div > ul > li a {

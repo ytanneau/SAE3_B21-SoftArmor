@@ -452,7 +452,7 @@ main {
             display: flex;
             flex-direction: column;
             
-            > ul {
+            > ul { 
                 display: flex;
                 flex-direction: row;
                 overflow:auto;
@@ -466,6 +466,9 @@ main {
                         width: 15vw;
                         height: 15vw;
                         object-fit: contain;
+                        
+                    }
+                    > img {
                         background-color: $nuance_primaire_client;
                     }
                
