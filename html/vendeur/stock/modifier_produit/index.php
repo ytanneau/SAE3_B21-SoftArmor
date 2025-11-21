@@ -27,9 +27,6 @@
     $tabInfoProduit = get_info_produit($id_compte,$idProduit);
     $tabCategorieDuProduit = get_categorieProduit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
-    echo "<pre>";
-    print_r($tabImageProduit);
-    echo "</pre>";
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
@@ -226,15 +223,17 @@
                 <h3>Photos du produit</h3>
                 <div>
                     <h6>Image principale</h6>
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit)?>" alt="">
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_image_principale'] . '_1.png')?>" alt="">
                     <p>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
                     </p>
+                    <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_2.png' ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
                         <input type="file" name="photo2">
                     </p>
+                    <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
                     <p style="display:none" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3">
