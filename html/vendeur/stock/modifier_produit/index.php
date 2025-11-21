@@ -72,7 +72,7 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage['id_image_principale'], $url, $nomPblc, $altDefault);
+                update_image_produit($tabImageProduit['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
         if(isset($_POST['photo2'])){
@@ -90,7 +90,7 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage['id_image1'], $url, $nomPblc, $altDefault);
+                update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
             }
         }
         if(isset($_POST['photo3'])){
@@ -108,7 +108,7 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // appel à la fonction pour modifier la bdd
-                update_image_produit($idImage['id_image2'], $url, $nomPblc, $altDefault);
+                update_image_produit($tabImageProduit['id_image2'], $url, $nomPblc, $altDefault);
             }
         }
         header("Location: ../");
