@@ -104,8 +104,8 @@ try {
     <!-- bouton de paiement -->
      <aside>
         <?php if ($elts_panier) { ?>
-            <p>Prix total HT</p><p class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
-            <p>Prix total TTC</p><p class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+            <div><p>Prix total HT</p><p class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p></div>
+            <div><p>Prix total TTC</p><p class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p></div>
         <?php } ?>
         
 
