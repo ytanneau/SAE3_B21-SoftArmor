@@ -27,10 +27,11 @@
     $tabInfoProduit = get_info_produit($id_compte,$idProduit);
     $tabCategorieDuProduit = get_categorieProduit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
-    $nomPblc = $_POST['nomPblc'];
+    
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        
+        $nomPblc = $_POST['nomPblc'];
+
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
