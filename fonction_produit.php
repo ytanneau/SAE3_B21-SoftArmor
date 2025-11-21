@@ -302,9 +302,9 @@
                                     SET url_image = :url_image,
                                     titre = :titre_img,
                                     alt = :altDefault 
-                                    WHERE $id_image = :idImage');
+                                    WHERE id_image = :idImage');
             $stmt->execute([
-                'url_image' => $url,
+                ':url_image' => $url,
                 ':titre_img' => $titre_img,
                 ':altDefault' => $altDefault,
                 ':idImage' => $idImage,
