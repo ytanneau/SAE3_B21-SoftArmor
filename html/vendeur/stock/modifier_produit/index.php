@@ -227,12 +227,12 @@
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
                     </p>
-                    <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
+                    <?php if($tabImageProduit['id_image1'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
                         <input type="file" name="photo2" id="idInputPhoto2" accept="image/png">
                     </p>
-                    <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit) . '_3.png' ?>" alt=""> <?php }?>
+                    <?php if($tabImageProduit['id_image2'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt=""> <?php }?>
                     <p style="display:none;" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3" accept="image/png">

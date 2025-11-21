@@ -304,10 +304,10 @@
                                     alt = :altDefault 
                                     WHERE id_image = :idImage');
             $stmt->execute([
-                ':url_image' => $url,
-                ':titre_img' => $titre_img,
-                ':altDefault' => $altDefault,
-                ':idImage' => $idImage,
+                'url_image' => $url,
+                'titre_img' => $titre_img,
+                'altDefault' => $altDefault,
+                'idImage' => $idImage,
             ]);    
         } catch(PDOException $e){
             throw $e;
