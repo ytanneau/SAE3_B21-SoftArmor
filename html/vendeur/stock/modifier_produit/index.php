@@ -27,6 +27,7 @@
     $tabInfoProduit = get_info_produit($id_compte,$idProduit);
     $tabCategorieDuProduit = get_categorieProduit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
+    $nomPblc = $_POST['nomPblc'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         
@@ -37,7 +38,7 @@
         set_info_produit( $id_compte,
                         $idProduit,
                         $_POST['nomPrv'],
-                        $_POST['nomPblc'],
+                        $nomPblc,
                         $_POST['prixProd'],
                         $_POST['tva'],
                         $_POST['codeBarre'],
