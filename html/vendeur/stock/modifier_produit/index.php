@@ -223,7 +223,7 @@
                 <h3>Photos du produit</h3>
                 <div>
                     <h6>Image principale</h6>
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_image_principale'] . '_1.png')?>" alt="">
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($tabImageProduit['id_produit'] . '_1.png')?>" alt="">
                     <p>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
@@ -231,12 +231,12 @@
                     <?php if($tabImageProduit['id_image1'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_2.png' ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
-                        <input type="file" name="photo2">
+                        <input type="file" name="photo2" id="idInputPhoto2" accept="image/png">
                     </p>
                     <?php if($tabImageProduit['id_image2'] != ""){?> <img src="<?= HOME_SITE . 'ressources/produit' . htmlentities($tabImageProduit) . '_3.png' ?>" alt=""> <?php }?>
-                    <p style="display:none" id="idBlockPhoto3">
+                    <p style="display:none;" id="idBlockPhoto3">
                         <label for="photo3">Troisième photo</label>
-                        <input type="file" name="photo3">
+                        <input type="file" name="photo3" accept="image/png">
                     </p>
                 </div>
                 <hr>
@@ -279,11 +279,11 @@
             </form>
         </main>
         <script>
-            const blockPhoto3 = getElementById("idbBockPhoto3");
-            const inputPhoto2 = getElementById("idInputPhoto2");
+            const blockPhoto3 = document.getElementById("idBlockPhoto3");
+            const inputPhoto2 = document.getElementById("idInputPhoto2");
 
-            inputPhoto2.addEventListener(('change') => {
-                if(inputPhoto2.value != null){
+            inputPhoto2.addEventListener( 'change', () => {
+                if(inputPhoto2.files.length > 0){
                     blockPhoto3.style.display = "block";
                 }
             })

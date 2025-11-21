@@ -77,15 +77,14 @@
             
             $nomImage = $idProduit . "_1.png";
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
-            $url = "ressources/produit/" . $nomImage;
 
-            $titre_img = explode('.',$nomImageTemp)[0];
-            $altDefault = "Image du produit : " . $titre_img;
+            $url = "ressources/produit/" . $nomImage;
+            $altDefault = "Image du produit : " . $nomPblc;
             
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // insertion des images dans la bdd
 
-                $idImage = add_image($url, $titre_img, $altDefault);
+                $idImage = add_image($url, $nomPblc, $altDefault);
 
                 add_image_produit($idProduit,$idImage);
                 
