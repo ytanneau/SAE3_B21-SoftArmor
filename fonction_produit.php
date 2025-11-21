@@ -300,7 +300,7 @@
             if($numeroImage === 2){
                 $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
             } else if ($numeroImage === 3){
-                $stmt = $pdo->prepare("INSERT INTO _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
             } else { return; }
             $stmt->execute([
                 ':id_produit' => $idProduit,
