@@ -298,18 +298,14 @@
         global $pdo;
         try{
             if($numeroImage === 2){
-                $stmt = $pdo->prepare("INSERT INTO _images_produit(id_image1) VALUES(:id_image) WHERE id_produit = :id_produit");
-                $stmt->execute([
-                    ':id_produit' => $idProduit,
-                    'id_image'=> $idImage,
-                ]);
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
             } else if ($numeroImage === 3){
-                $stmt = $pdo->prepare("INSERT INTO _images_produit(id_image2) VALUES(:id_image) WHERE id_produit = :id_produit");
-                $stmt->execute([
-                    ':id_produit' => $idProduit,
-                    'id_image'=> $idImage,
-                ]);
-            }
+                $stmt = $pdo->prepare("INSERT INTO _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+            } else { return; }
+            $stmt->execute([
+                ':id_produit' => $idProduit,
+                'id_image'=> $idImage,
+            ]);
         } catch(PDOException $e){
             throw $e;
         }
