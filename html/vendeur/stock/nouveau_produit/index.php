@@ -77,14 +77,14 @@
             
             $nomImage = $idProduit . "_1.png";
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
-            $url = "ressources/produit/" . $nomImage;
 
+            $url = "ressources/produit/" . $nomImage;
             $altDefault = "Image du produit : " . $nomPblc;
             
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 // insertion des images dans la bdd
 
-                $idImage = add_image($url, $titre_img, $altDefault);
+                $idImage = add_image($url, $nomPblc, $altDefault);
 
                 add_image_produit($idProduit,$idImage);
                 
@@ -220,7 +220,7 @@
                     <h3>Photo principale</h3>
                     <div>
                         <label for="photo">Importer des images du produit*</label>
-                        <input type="file" name="photo" id="photo" accept="image/png" required>
+                        <input type="file" name="photo" id="photo" accept=".png" required>
                     </div>
                     <hr>
                     <h3>Gestion de stock</h3>
