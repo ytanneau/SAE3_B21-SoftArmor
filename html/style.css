@@ -711,6 +711,7 @@ main {
   height: 15vw;
   -o-object-fit: contain;
      object-fit: contain;
+  background-color: #CBCCEA;
 }
 .accueil > main > div > ul > li a {
   color: black;
