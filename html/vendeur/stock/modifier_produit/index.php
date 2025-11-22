@@ -240,10 +240,10 @@
                     <?php if($tabImageProduit['id_image1'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
                     <p>
                         <label for="photo2">Seconde photo</label>
-                        <input type="file" name="photo2" id="idInputPhoto2" accept="image/png">
+                        <input type="file" name="photo2" accept="image/png">
                     </p>
                     <?php if($tabImageProduit['id_image2'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt=""> <?php }?>
-                    <p style="display:none;" id="idBlockPhoto3">
+                    <p>
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3" accept="image/png">
                     </p>
@@ -287,16 +287,6 @@
                 <input type="submit" value="Valider les modifications">
             </form>
         </main>
-        <script>
-            const blockPhoto3 = document.getElementById("idBlockPhoto3");
-            const inputPhoto2 = document.getElementById("idInputPhoto2");
-
-            inputPhoto2.addEventListener( 'change', () => {
-                if(inputPhoto2.files.length > 0){
-                    blockPhoto3.style.display = "block";
-                }
-            })
-        </script>
         <footer>
 
         </footer>
