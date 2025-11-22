@@ -43,6 +43,32 @@
     $tabAdresseVendeur = $tabAdresseVendeur[0];
     // définiton de la chaine addresse
     $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        // récupération des données du formulaire de saisie
+        $modifRaisonSociale = $_POST['raison_sociale'];
+        $modifAdresse = $_POST['adresse'];
+        $modifCodePostal = $_POST['code_postal'];
+        $modifCompelementAdr = $_POST['complementAdr'];
+
+        $modifDescription = $_POST['description'];
+
+        
+
+        // Mise à jour des informations dans la base de donnée
+        $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :modifRaisonSociale, description = :modifDescription WHERE id_compte = :id_compte");
+        $stmt->execute([':modifRaisonSociale' => $modifRaisonSociale, ':modifDescription' => $modifDescription, ':id_compte' => $id_compte]);
+
+        $stmt = $pdo->prepare("UPDATE _adresse AS a 
+                                JOIN _vendeur AS v 
+                                ON v.id_adresse = a.id_adresse 
+                                SET a.adresse = :adresse, 
+                                    a.code_postal = :code_postal,
+                                    a.complement_adresse = :complement_adresse 
+                                WHERE v.id_compte = $id_compte;");
+        $stmt->execute([':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
+        header('Location: ../');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -76,30 +102,7 @@
                 <input type="submit" value="Valider la modification">
             </form>
             <?php
-                if($_SERVER["REQUEST_METHOD"] == "POST"){
-                    // récupération des données du formulaire de saisie
-                    $modifRaisonSociale = $_POST['raison_sociale'];
-                    $modifAdresse = $_POST['adresse'];
-                    $modifCodePostal = $_POST['code_postal'];
-                    $modifCompelementAdr = $_POST['complementAdr'];
-
-                    $modifDescription = $_POST['description'];
-
-                    
-
-                    // Mise à jour des informations dans la base de donnée
-                    $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :modifRaisonSociale, description = :modifDescription WHERE id_compte = :id_compte");
-                    $stmt->execute([':modifRaisonSociale' => $modifRaisonSociale, ':modifDescription' => $modifDescription, ':id_compte' => $id_compte]);
-
-                    $stmt = $pdo->prepare("UPDATE _adresse AS a 
-                                            JOIN _vendeur AS v 
-                                            ON v.id_adresse = a.id_adresse 
-                                            SET a.adresse = :adresse, 
-                                                a.code_postal = :code_postal,
-                                                a.complement_adresse = :complement_adresse 
-                                            WHERE v.id_compte = $id_compte;");
-                    $stmt->execute([':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
-                }
+                
             ?>
         </main>
         <footer>
