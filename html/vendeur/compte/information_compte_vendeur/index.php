@@ -57,6 +57,8 @@
     <body>
         <?php include "../../header.php"?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <!-- Zone d'affichage des informations du vendeur -->
             <h1>Mes informations</h1>
             <h3>Raison sociale</h3>
