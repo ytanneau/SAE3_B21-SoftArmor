@@ -82,6 +82,8 @@
     <body>
         <?php include "../../../header.php"?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Modifier mes informations</h1>
             <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
