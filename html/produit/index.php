@@ -131,7 +131,11 @@ if ($_POST != NULL) {
 
                     <div>
                         <div class="etoiles">
-                            <?= afficher_moyenne_note($note) ?? 'Produit non noté' ?>
+                            <?php if (count($liste_avis) > 0) {
+                                afficher_moyenne_note($note);
+                            } else {
+                                echo 'Produit non noté';
+                            } ?>
                         </div>
                         
                         <!-- Nombre d'avis -->
