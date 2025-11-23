@@ -1023,6 +1023,12 @@ aside {
   font-size: 1.4em;
   width: 20vw;
 }
+aside .prix {
+  font-family: "Montserrat";
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #2E7A30;
+}
 aside div {
   display: flex;
   align-items: center;

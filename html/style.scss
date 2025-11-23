@@ -914,6 +914,13 @@ aside {
     font-size: 1.4em;
     width: 20vw;
 
+    .prix {
+        font-family: $font_title;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: $couleur_prix;
+    }
+
     div {
         display: flex;
         align-items: center;
