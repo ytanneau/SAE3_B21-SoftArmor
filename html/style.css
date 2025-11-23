@@ -5,7 +5,8 @@ body {
 }
 
 main {
-  padding: 3em;
+  padding: 2.5em;
+  line-height: 1.5em;
 }
 
 .image_produit_moyen {
