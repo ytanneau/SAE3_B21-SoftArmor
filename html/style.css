@@ -11,6 +11,7 @@ main {
 .image_produit_moyen {
   -o-object-fit: contain;
      object-fit: contain;
+  background-color: #f3f1fb;
   width: 200px;
   height: 200px;
   border-radius: 5px;
@@ -19,6 +20,7 @@ main {
 .image_produit_petit {
   -o-object-fit: contain;
      object-fit: contain;
+  background-color: #f3f1fb;
   width: 25px;
   height: 25px;
   border-radius: 5px;
@@ -715,6 +717,7 @@ main {
 .detail_produit > article:first-child > div:first-child > div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
+  background-color: #f3f1fb;
   width: 300px;
   height: 300px;
   border-radius: 5px;
@@ -722,6 +725,7 @@ main {
 .detail_produit > article:first-child > div:first-child > div:nth-child(2) img {
   -o-object-fit: contain;
      object-fit: contain;
+  background-color: #f3f1fb;
   width: 100px;
   height: 100px;
   border-radius: 5px;
