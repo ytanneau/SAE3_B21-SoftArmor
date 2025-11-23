@@ -105,11 +105,11 @@ try {
      <aside>
         <?php if ($elts_panier) { ?>
             <div>
-                <span>Prix total HT</span>
+                <span>Total HT</span>
                 <span class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></span>
             </div>
             <div>
-                <span>Prix total TTC</span>
+                <span>Total TTC</span>
                 <span class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?></span>
             </div>
         <?php } ?>
