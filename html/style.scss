@@ -1,5 +1,15 @@
 @use "style_const.scss" as *;
 
+body {
+    font-family: $font_text;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 1em;
+}
+
 @mixin contenu_centre_vertical {
     display: flex;
     flex-direction: column;
@@ -256,15 +266,7 @@
     }
 }
 
-body {
-    font-family: $font_text;
-    padding: 0;
-    margin: 0;
-}
 
-main {
-    padding: 1em;
-}
 
 .icon {
     height: $image_petit;
