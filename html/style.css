@@ -996,7 +996,7 @@ h3 {
   display: block;
   max-width: 100%;
   width: auto;
-  padding: 0.5em;
+  padding: 0.5em 1em;
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
