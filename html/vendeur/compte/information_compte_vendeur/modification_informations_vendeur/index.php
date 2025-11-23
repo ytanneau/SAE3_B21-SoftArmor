@@ -19,7 +19,7 @@
     }
 
     require_once HOME_GIT . ".config.php";
-    include HOME_GIT . "fonction_vendeur";
+    include HOME_GIT . "fonction_vendeur.php";
 
     $id_compte = $_SESSION['id_compte'];
 
