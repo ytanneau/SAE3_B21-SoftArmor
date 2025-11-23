@@ -157,7 +157,7 @@ if ($_POST != NULL) {
         </section>
 
         <!-- Section des avis -->
-        <section class="liste_avis" id="avis">
+        <section id="avis">
             <!-- Rajouter le nombre -->
             <h2>Avis (1)</h2>
 
