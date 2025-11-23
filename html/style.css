@@ -883,7 +883,7 @@ hr {
     height: 30vw;
     -o-object-fit: contain;
        object-fit: contain;
-    background-color: #CBCCEA;
+    background-color: #f3f1fb;
     border-radius: 5px;
   }
   .accueil > main > div > ul > li > a > div > img {
@@ -923,7 +923,7 @@ hr {
     height: 15vw;
     -o-object-fit: contain;
        object-fit: contain;
-    background-color: #CBCCEA;
+    background-color: #f3f1fb;
     border-radius: 5px;
   }
   .accueil > main > div > ul > li > a > div > img {
