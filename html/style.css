@@ -955,6 +955,7 @@ a.bouton:has(+ .liste_avis):hover {
 .produit_panier {
   display: flex;
   justify-content: space-between;
+  padding: 0;
 }
 
 h3 {
