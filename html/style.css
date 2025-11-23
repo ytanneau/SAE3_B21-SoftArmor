@@ -70,6 +70,58 @@ main {
   color: #E43737;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat";
+}
+
+button, input[type=button] {
+  cursor: pointer;
+}
+
+hr {
+  margin: 2em 0;
+}
+
+.input_quantite * {
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 0.75em;
+}
+.input_quantite input[type=button], .input_quantite input[type=number] {
+  height: 2em;
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  border: solid 2px #d5d5d5;
+}
+.input_quantite input[type=button] {
+  width: 2em;
+}
+.input_quantite input[type=button]:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.input_quantite input[type=button]:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.input_quantite input[type=button]:hover {
+  background-color: #d5d5d5;
+}
+.input_quantite input[type=number] {
+  width: 3em;
+  box-sizing: border-box;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.input_quantite input[type=number]::-webkit-inner-spin-button, .input_quantite input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
 .icon {
   height: 25px;
   margin: 0 8px 0 0;

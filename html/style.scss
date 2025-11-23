@@ -267,7 +267,74 @@ main {
     }
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font_title;
+}
 
+button, input[type="button"] {
+    cursor: pointer;
+}
+
+hr {
+    margin: 2em 0;
+}
+
+.input_quantite {
+    * {
+        font-family: $font_title;
+        font-weight: bold;
+        font-size: 0.75em;
+    }
+    
+
+    // Champ et boutons - et +
+    input[type="button"], input[type="number"] {
+        height: 2em;
+        margin: 0;
+        padding: 0;
+
+        background-color: $couleur_background;
+        border: solid 2px #d5d5d5; 
+    }
+
+    // Boutons
+    input[type="button"] {
+        width: 2em;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        &:hover {
+            background-color: #d5d5d5;
+        }
+    }
+
+    // Champ
+    input[type="number"] {
+        width: 3em;
+        box-sizing: border-box;
+        border-left: 0;
+        border-right: 0;
+
+        text-align: center;
+
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+    }
+}
 
 .icon {
     height: $image_petit;
