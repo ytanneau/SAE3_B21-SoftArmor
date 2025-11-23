@@ -438,6 +438,65 @@ main {
 
 }
 
+.liste_avis {
+    width: 60vw;
+    list-style: none;
+    padding: 0;
+
+    a.bouton {
+        @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em, $size: 1em);
+    }
+
+    // Avis + image
+    li {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 2.5em 0; 
+
+        // Avis
+        > div:first-child {
+            flex-basis: 2;
+            display: flex;
+            flex-direction: column;
+
+            // PP + étoiles
+            > div:first-child {
+                display: flex;
+                align-items: center;
+
+                > img:not(.etoiles) {
+                    @include image_pp(30px);
+                    margin-right: 0.5em;
+                } 
+            }
+
+            // Reste de l'avis
+            > div:nth-child(2) {
+                > h3, > p {
+                    margin-top: 0.5em;
+                    margin-bottom: 0;
+                }
+
+                > p:last-child {
+                    margin-top: 1em;
+                    font-style: italic;
+                    font-weight: 100;
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        // Image de l'avis
+        > img { 
+            width: 20%;
+            margin-left: 2em;
+        }
+    }
+}
+
 .avis {
     border: 1px solid black;
 

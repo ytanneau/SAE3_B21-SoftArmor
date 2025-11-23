@@ -522,10 +522,6 @@ main {
      object-fit: contain;
   background-color: white;
 }
-#avis_vendeur article .etoile {
-  width: 30px;
-  height: 30px;
-}
 #avis_vendeur section ul {
   display: flex;
   flex-direction: column;
