@@ -543,6 +543,17 @@ hr {
 
 }
 
+.bouton {
+    @include bouton;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
 .liste_avis {
     width: 60vw;
     list-style: none;
@@ -678,17 +689,6 @@ hr {
         &:first-child {
             display: flex;
         }
-    }
-}
-
-.bouton {
-    @include bouton;
-    background-color: $focus;
-    color: white;
-    font-size: $font_size_normal;
-    margin-top: 2%;
-    @media (max-width: 1440px) {
-        margin-top: 5%;
     }
 }
 

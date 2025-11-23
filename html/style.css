@@ -691,6 +691,23 @@ hr {
   width: 200px;
 }
 
+.bouton {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .liste_avis {
   width: 60vw;
   list-style: none;
@@ -815,23 +832,6 @@ hr {
 }
 .avis td:first-child {
   display: flex;
-}
-
-.bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .bouton {
-    margin-top: 5%;
-  }
 }
 
 .grave {
