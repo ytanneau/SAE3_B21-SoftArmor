@@ -25,7 +25,7 @@ $id_produit = htmlentities($_GET['id_produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
-    $note = note_produit($id_produit);
+    $note = note_produit($id_produit)['note_moy'];
 
     if (!$produit) {
         die("Produit introuvable.");
