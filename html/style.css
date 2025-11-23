@@ -986,7 +986,7 @@ h3 {
   flex-direction: column;
   align-items: end;
 }
-.liste main p {
+.liste main ul li > article:nth-child(3) .prix {
   margin-top: 0;
 }
 .liste main li {
@@ -999,6 +999,7 @@ h3 {
   color: #9C9C9C;
 }
 .liste main h3 {
+  margin-top: 0;
   font-size: 1.6em;
 }
 
