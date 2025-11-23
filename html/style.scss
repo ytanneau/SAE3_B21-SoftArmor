@@ -827,6 +827,7 @@ a.bouton:has(+ .liste_avis) {
 
 .produit_panier {
     display: flex;
+    justify-content: space-between;
 }
 
 h3 {
@@ -855,11 +856,18 @@ h3 {
             width: 60vw;
 
             // la partie description etc. du produit
-            li>article:nth-child(2) {
-                width: 40vw;
+            li > article:nth-child(2) {
+                flex-grow: 1;
+
                 p {
                     width: 90%;
                 }
+            }
+
+            li > article:nth-child(3) {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
             }
         }
 

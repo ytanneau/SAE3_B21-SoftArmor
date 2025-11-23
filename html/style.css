@@ -954,6 +954,7 @@ a.bouton:has(+ .liste_avis):hover {
 
 .produit_panier {
   display: flex;
+  justify-content: space-between;
 }
 
 h3 {
@@ -975,10 +976,15 @@ h3 {
   width: 60vw;
 }
 .liste main ul li > article:nth-child(2) {
-  width: 40vw;
+  flex-grow: 1;
 }
 .liste main ul li > article:nth-child(2) p {
   width: 90%;
+}
+.liste main ul li > article:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 .liste main li {
   padding: 1em 0;
