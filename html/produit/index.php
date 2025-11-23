@@ -131,11 +131,11 @@ if ($_POST != NULL) {
 
                     <div>
                         <div class="etoiles">
-                            <?php afficher_moyenne_note($note) ?>
+                            <?= afficher_moyenne_note($note) ?? 'Produit non noté' ?>
                         </div>
                         
                         <!-- Nombre d'avis -->
-                        <a href="#avis">10 avis</a>
+                        <a href="#avis"><?= count($liste_avis) > 0 ? count($liste_avis) . ' avis' : '' ?></a>
                     </div>
                     
                     <!-- Description du produit -->
@@ -160,7 +160,7 @@ if ($_POST != NULL) {
         <!-- Section des avis -->
         <section id="avis">
             <!-- Rajouter le nombre -->
-            <h2>Avis (1)</h2>
+            <h2>Avis (<?= count($liste_avis) ?>)</h2>
 
             <a class="bouton" href="../avis/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>">Ajouter un avis</a>
 
