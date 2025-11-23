@@ -185,11 +185,11 @@ if ($_POST != NULL) {
                                 <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
                             </div>
                         </div>
-                    </li>
 
-                    <?php if (isset($avis['url_image'])) { ?>
-                        <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
-                    <?php } ?>
+                        <?php if (isset($avis['url_image'])) { ?>
+                            <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                        <?php } ?>
+                    </li>
                 <?php } ?>
             </ul>
         </section>
