@@ -1,5 +1,15 @@
 @use "style_const.scss" as *;
 
+body {
+    font-family: $font_text;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 1em;
+}
+
 @mixin contenu_centre_vertical {
     display: flex;
     flex-direction: column;
@@ -125,6 +135,40 @@
     align-self: center;
 }
 
+@mixin bouton_new($background: $couleur_primaire_client, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+
+    width: $largeur;
+    padding: $padding 0;
+
+    font-family: $font_title;
+    font-size: $size;
+    font-weight: bold;
+    
+    background-color: $background;
+    color: $color;
+
+    border: none;
+    border-radius: $angle;
+
+    text-decoration: none;
+    text-align: center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: adjust-color($color: $background, $lightness: 15%);
+    }
+}
+
+@mixin image_pp($taille) {
+    height: $taille;
+    width: $taille;
+    border-radius: $taille;
+}
+
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
 @mixin formulaire {
     align-items: normal;
@@ -222,15 +266,7 @@
     }
 }
 
-body {
-    font-family: $font_text;
-    padding: 0;
-    margin: 0;
-}
 
-main {
-    padding: 1em;
-}
 
 .icon {
     height: $image_petit;
@@ -436,6 +472,123 @@ main {
 
     }
 
+}
+
+.liste_avis {
+    width: 60vw;
+    list-style: none;
+    padding: 0;
+
+    a.bouton {
+        @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em, $size: 1em);
+    }
+
+    // Avis + image
+    li {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 2.5em 0; 
+
+        // Avis
+        > div:first-child {
+            flex-basis: 2;
+            display: flex;
+            flex-direction: column;
+
+            // PP + étoiles
+            > div:first-child {
+                display: flex;
+                align-items: center;
+
+                > img:not(.etoiles) {
+                    @include image_pp(30px);
+                    margin-right: 0.5em;
+                } 
+            }
+
+            // Reste de l'avis
+            > div:nth-child(2) {
+                > h3, > p {
+                    margin-top: 0.5em;
+                    margin-bottom: 0;
+                }
+
+                > p:last-child {
+                    margin-top: 1em;
+                    font-style: italic;
+                    font-weight: 100;
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        // Image de l'avis
+        > img { 
+            width: 20%;
+            margin-left: 2em;
+        }
+    }
+}
+
+.detail_produit {
+    font-family: $font_text;
+    width: 60vw;
+
+    > article:first-child {
+        margin: 0 0 2em 0;
+        display: flex;
+
+        // Images
+        > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 0 4em;
+
+            // Image principale
+            > div:first-child {
+                img {
+                    @include image_produit(300px);
+                }
+            }
+
+            // Images secondaires
+            > div:nth-child(2) {
+                img {
+                    @include image_produit(100px);
+                }
+            }
+        }
+
+        // Détails du produit
+        > div:nth-child(2) {
+            > h1 {
+                margin: 0;
+                font-size: 2em;
+
+                font-family: $font_title;
+                font-weight: 700;
+            } 
+
+            // Étoiles + nombre d'avis
+            > div {
+                .etoiles {
+                    margin-right: 0.5em;
+                }
+
+                display: flex;
+                align-items: center;
+            }
+
+            > p:last-child {
+                margin-top: 2em;
+            }
+        }
+    }
 }
 
 .avis {
