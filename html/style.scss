@@ -875,6 +875,10 @@ h3 {
                     margin-bottom: 0;
                     text-align: right;
                 }
+
+                .bouton {
+                    @include bouton_new($rouge, $color: white, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit)
+                }
             }
         }
 
