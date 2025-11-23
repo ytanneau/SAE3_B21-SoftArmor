@@ -104,11 +104,16 @@ try {
     <!-- bouton de paiement -->
      <aside>
         <?php if ($elts_panier) { ?>
-            <div><p>Prix total HT</p><p class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p></div>
-            <div><p>Prix total TTC</p><p class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p></div>
+            <div>
+                <span>Prix total HT</p>
+                <span class="prix HT"><?= number_format($total_ht, 2, ',', ' ') . ' €'; ?></p>
+            </div>
+            <div>
+                <span>Prix total TTC</p>
+                <span class="prix"><?= number_format($total_ttc, 2, ',', ' ') . ' €'; ?> </p>
+            </div>
         <?php } ?>
         
-
         <form action="../achat" method="get">
             <input type="hidden" name="id_produit" id="id_produit" value="panier">
             <input type="submit" value="Passer au paiement" class="bouton">
