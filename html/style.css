@@ -1012,9 +1012,6 @@ h3 {
 .liste main ul li > article:nth-child(3) .bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.liste main li {
-  padding: 1em 0;
-}
 .liste main img {
   margin-right: 3em;
 }
