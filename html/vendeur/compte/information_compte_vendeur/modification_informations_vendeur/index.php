@@ -49,10 +49,9 @@
         $modifAdresse = $_POST['adresse'];
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
-
         $modifDescription = $_POST['description'];
 
-        
+        $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
         $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :modifRaisonSociale, description = :modifDescription WHERE id_compte = :id_compte");
