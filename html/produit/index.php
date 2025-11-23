@@ -25,6 +25,7 @@ $id_produit = htmlentities($_GET['id_produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
+    $note = note_produit($id_produit);
 
     if (!$produit) {
         die("Produit introuvable.");
@@ -95,7 +96,7 @@ if ($_POST != NULL) {
     ?>
     
     <main>
-        <a href="../">Revenir au catalogue</a>
+        <a href="../"><img src="../image/retour.svg"></a>
 
         <section class="detail_produit">
             <!-- Présentation du produit -->
@@ -130,7 +131,7 @@ if ($_POST != NULL) {
 
                     <div>
                         <div class="etoiles">
-                            <?php afficher_moyenne_note(5) ?>
+                            <?php afficher_moyenne_note($note) ?>
                         </div>
                         
                         <!-- Nombre d'avis -->

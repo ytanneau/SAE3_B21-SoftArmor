@@ -28,6 +28,15 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    function note_produit($id_produit) {
+        global $pdo;
+        
+        $requete = $pdo->prepare("SELECT note_moy from produit_note where id_produit = :id_produit");
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
     function detail_produit_image($id_produit) {
         global $pdo;
 
