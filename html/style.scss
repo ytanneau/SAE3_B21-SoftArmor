@@ -870,7 +870,9 @@ h3 {
                 align-items: end;
 
                 .prix {
+                    min-width: 5em;
                     margin-top: 0;
+                    text-align: right;
                 }
             }
         }
