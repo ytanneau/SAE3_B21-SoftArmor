@@ -1010,6 +1010,11 @@ aside .bouton {
   width: 100%;
 }
 
+.etoiles {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .etoile {
   width: 30px;
   height: 30px;

@@ -903,8 +903,13 @@ aside {
     }
 }
 
+// Groupe de 5 étoiles
+.etoiles {
+    display: flex;
+    flex-wrap: nowrap;
+}
 
-.etoile{
+.etoile {
     width: 30px;
     height: 30px;
 }
