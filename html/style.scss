@@ -554,14 +554,15 @@ hr {
     }
 }
 
+// Bouton Ajouter un avis
+a.bouton + .liste_avis {
+    @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em, $size: 1em);
+}
+
 .liste_avis {
     width: 60vw;
     list-style: none;
     padding: 0;
-
-    a.bouton {
-        @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em, $size: 1em);
-    }
 
     // Avis + image
     li {

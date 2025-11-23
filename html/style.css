@@ -708,12 +708,7 @@ hr {
   }
 }
 
-.liste_avis {
-  width: 60vw;
-  list-style: none;
-  padding: 0;
-}
-.liste_avis a.bouton {
+a.bouton + .liste_avis {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -730,8 +725,14 @@ hr {
   text-align: center;
   cursor: pointer;
 }
-.liste_avis a.bouton:hover {
+a.bouton + .liste_avis:hover {
   background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+
+.liste_avis {
+  width: 60vw;
+  list-style: none;
+  padding: 0;
 }
 .liste_avis li {
   width: 100%;
