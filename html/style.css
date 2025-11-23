@@ -995,7 +995,7 @@ h3 {
 .liste main ul li > article:nth-child(3) .bouton {
   display: block;
   max-width: 100%;
-  width: 5em;
+  width: auto;
   padding: 0.5em;
   font-family: "Montserrat";
   font-size: 1em;

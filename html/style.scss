@@ -876,7 +876,7 @@ h3 {
                 }
 
                 .bouton {
-                    @include bouton_new($rouge, $color: white, $largeur: 5em, $padding: 0.5em, $size: 1em, $angle: $angle_petit)
+                    @include bouton_new($rouge, $color: white, $padding: 0.5em, $size: 1em, $angle: $angle_petit)
                 }
             }
         }
