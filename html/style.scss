@@ -153,6 +153,12 @@
     }
 }
 
+@mixin image_pp($taille) {
+    height: $taille;
+    width: $taille;
+    border-radius: $taille;
+}
+
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
 @mixin formulaire {
     align-items: normal;
