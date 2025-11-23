@@ -940,6 +940,7 @@ a.bouton:has(+ .liste_avis):hover {
 .prix {
   color: #2E7A30;
   font-size: 2.2em;
+  font-family: "Montserrat";
   font-weight: bold;
 }
 
