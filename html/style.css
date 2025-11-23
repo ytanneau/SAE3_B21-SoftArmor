@@ -990,6 +990,7 @@ h3 {
 .liste main ul li > article:nth-child(3) .prix {
   min-width: 5em;
   margin-top: 0;
+  margin-bottom: 0;
   text-align: right;
 }
 .liste main li {

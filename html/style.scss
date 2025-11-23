@@ -814,7 +814,6 @@ a.bouton:has(+ .liste_avis) {
     font-size: 2.2em;
     font-family: $font_title;
     font-weight: bold;
-
 }
 
 .HT {
@@ -873,6 +872,7 @@ h3 {
                 .prix {
                     min-width: 5em;
                     margin-top: 0;
+                    margin-bottom: 0;
                     text-align: right;
                 }
             }
