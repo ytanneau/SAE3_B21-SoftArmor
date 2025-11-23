@@ -710,7 +710,6 @@ hr {
 
 a.bouton:has(+ .liste_avis) {
   display: block;
-  width: 100%;
   max-width: 100%;
   width: 10em;
   padding: 0.5em 0;
@@ -995,10 +994,9 @@ h3 {
 }
 .liste main ul li > article:nth-child(3) .bouton {
   display: block;
-  width: 100%;
   max-width: 100%;
-  width: auto;
-  padding: 1em 0;
+  width: 5em;
+  padding: 0.5em;
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
@@ -1078,10 +1076,9 @@ aside .bouton {
 }
 aside a.bouton {
   display: block;
-  width: 100%;
   max-width: 100%;
   width: 100%;
-  padding: 0.3em 0;
+  padding: 0.3em;
   font-family: "Montserrat";
   font-size: 0.8em;
   font-weight: bold;
@@ -1098,10 +1095,9 @@ aside a.bouton:hover {
 }
 aside input.bouton {
   display: block;
-  width: 100%;
   max-width: 100%;
   width: 100%;
-  padding: 0.5em 0;
+  padding: 0.5em;
   font-family: "Montserrat";
   font-size: 0.8em;
   font-weight: bold;
