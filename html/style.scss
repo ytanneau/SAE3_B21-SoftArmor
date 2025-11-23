@@ -555,7 +555,7 @@ hr {
 }
 
 // Bouton Ajouter un avis
-a.bouton + .liste_avis {
+a.bouton:has(+ .liste_avis) {
     @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em, $size: 1em);
 }
 

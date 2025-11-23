@@ -708,7 +708,7 @@ hr {
   }
 }
 
-a.bouton + .liste_avis {
+a.bouton:has(+ .liste_avis) {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -725,7 +725,7 @@ a.bouton + .liste_avis {
   text-align: center;
   cursor: pointer;
 }
-a.bouton + .liste_avis:hover {
+a.bouton:has(+ .liste_avis):hover {
   background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }
 
