@@ -34,7 +34,6 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
-    print_r($tabAdresseVendeur);
 
     // définiton de la chaine adresse
     $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];

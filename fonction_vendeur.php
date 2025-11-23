@@ -28,7 +28,7 @@
      
     function get_informations_vendeur($id_compte){
         global $pdo;
-        
+
         try{
             $stmt = $pdo->prepare("SELECT * FROM _vendeur WHERE id_compte = :id_compte");
             $stmt->execute([':id_compte' => $id_compte]);
@@ -46,7 +46,7 @@
         try{
             $stmt = $pdo->prepare("SELECT * FROM _adresse WHERE id_adresse = :id_adresse");
             $stmt->execute([':id_adresse' => $id_adresse]);
-            $tabAdresseVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tabAdresseVendeur = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $tabAdresseVendeur;
         } catch(PDOException $e) {
