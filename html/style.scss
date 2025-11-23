@@ -881,6 +881,7 @@ h3 {
 }
 
 // la partie à droite d'une page (ex. avec récap dans page panier)
+/*
 aside {
     position: fixed;
     right: 6em;
@@ -901,6 +902,40 @@ aside {
 
     .bouton {
         width:100%;
+    }
+}*/
+
+aside {
+    position: fixed;
+    right: 6em;
+    top: 7em;
+
+    font-size: 1.2em;
+    font-size: 1.4em;
+    width: 20vw;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 1em 0;
+    }
+
+    > div:first-child {
+        margin-top: 0;
+    }
+
+    .bouton {
+        margin: 0.5em 0;
+    }
+
+    a.bouton {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em, $size: 0.8em);
+    }
+
+    input.bouton {
+        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
     }
 }
 
