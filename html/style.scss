@@ -20,11 +20,6 @@ main {
     @include image_produit($image_petit);
 }
 
-.formulaire_client {
-    @include contenu_centre_vertical;
-    @include formulaire();
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: $font_title;
 }
