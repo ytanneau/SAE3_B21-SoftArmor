@@ -24,7 +24,7 @@ if (!isset($_POST['form'])) {
 
     // si y'a pas de produit dans le lien, ou que c'est pas par le panier qu'on a atteint cette page, alors problème
     if (!isset($_GET['id_produit'])) {
-        header("location: " . HOME_GIT, );
+        header("location: " . HOME_GIT);
     }
 
     
