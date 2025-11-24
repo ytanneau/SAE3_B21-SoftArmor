@@ -95,10 +95,13 @@ hr {
 }
 
 .toolbar {
+    position: sticky;
+    top: 0;
+
     background-color: $nuance;
     width: 100%;
     margin: 0;
-    padding: 0.5em 0;
+    padding: 0.25em 0;
 
     ul {
         @include contenu_centre_horizontal();

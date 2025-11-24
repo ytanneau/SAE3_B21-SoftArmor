@@ -85,10 +85,12 @@ hr {
 }
 
 .toolbar {
+  position: sticky;
+  top: 0;
   background-color: #A6A6BF;
   width: 100%;
   margin: 0;
-  padding: 0.5em 0;
+  padding: 0.25em 0;
 }
 .toolbar ul {
   display: flex;
