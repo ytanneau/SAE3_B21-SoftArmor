@@ -57,11 +57,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 <!-- Adresse e-mail -->
             <br>
             <label for="email">Email</label>
-            <input type="email"
+            <input type="text"
                 name="email"
                 id="email"
                 value="<?php if (isset($_POST['email'])) echo htmlentities($_POST['email'])?>"
-                required
                 class="champ">
 <?php
     if (isset($erreurs['email'])){
@@ -78,7 +77,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <input type="password" 
                 name="mdp"
                 id="mdp"
-                required
                 class="champ">
 <?php
     if (isset($erreurs['mdp'])){
