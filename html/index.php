@@ -55,7 +55,8 @@ unset($pdo);
 
     <div>
         <h1>Produits ajoutés récemment</h1>
-        <ul>
+        <button class="fleche-gauche-ajout-recent"><</button>
+        <ul class="container-recent">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_recent as $row) { ?>
@@ -82,6 +83,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
+        <button class="fleche-droite-ajout-recent">></button>
     </div>    
     <hr>
 
@@ -89,13 +91,14 @@ unset($pdo);
     <!-- Produits en réduction -->
     <div>
         <h1>Produits en réduction</h1>
-        <ul>
+        <button class="fleche-gauche-reduction"><</button>
+        <ul class="container-reduction">
             <?php
             //boucle pour ajouter un produit dans un <li> 
             foreach ($produit_reduit as $row){  
             ?>
             <li>
-                <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
+                <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
                     <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -120,6 +123,7 @@ unset($pdo);
             }
             ?>
         </ul>
+        <button class="fleche-droite-reduction">></button>
     </div>
     <hr>
     
@@ -127,12 +131,13 @@ unset($pdo);
     <!-- Produits alimentaires -->
     <div>
         <h1>Produits alimentaires</h1>
-        <ul>
+        <button class="fleche-gauche-alimentaire"><</button>
+        <ul class="container-alimentaire">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
-                    <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
+                    <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
                         <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
@@ -154,18 +159,20 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
+        <button class="fleche-droite-alimentaire">></button>
     </div>
     <hr>
 
     <!-- Tous les produits du catalogue -->
     <div>
         <h1>Produits du catalogue</h1>
-        <ul>
+        <button class="fleche-gauche-catalogue"><</button>
+        <ul class="container-catalogue">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
                 <li>
-                    <a href="/produit/index.php?id_produit=<?= $row['id_produit'];?>"> 
+                    <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
                         <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
@@ -186,6 +193,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
+        <button class="fleche-droite-catalogue">></button>
     </div>
 
     <!-- Navigation (pour teléphone) -->

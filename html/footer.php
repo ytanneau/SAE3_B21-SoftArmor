@@ -4,15 +4,16 @@
   <div class="footer-top">
 
     <div class="footer-logos">
-      <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
-      <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+      <a href= <?= HOME_SITE?> >
+        <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
+      </a>
     </div>
 
     <div class="footer-columns">
       <div class="footer-column">
         <h4>Catégorie</h4>
-        <a href="#">Lien pratique</a>
-        <a href="#">Lien pratique</a>
+        <a href=<?= HOME_SITE . 'vendeur/' ?>>Connexion page vendeur</a>
+        <a href=<?= HOME_SITE . 'compte/connexion' ?>>Connexion page client</a>
       </div>
 
       <div class="footer-column">
