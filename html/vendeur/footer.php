@@ -4,8 +4,12 @@
   <div class="footer-top">
 
     <div class="footer-logos">
-      <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
-      <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+<a href= <?= HOME_SITE?> >
+        <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
+      </a>
+      <a href= <?= HOME_SITE?> >
+        <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+      </a>    
     </div>
 
     <div class="footer-columns">
@@ -35,14 +39,13 @@
     </div>
 
     <div class="footer-socials">
-      <a href="#"><img src="<?= $image ?>/x-blanc.svg" alt="X"></a>
-      <a href="#"><img src="<?= $image ?>/instagram-blanc.svg" alt="Instagram"></a>
+      <a href="#"><img src="<?= $image ?>/x-blanc.png" alt="X"></a>
+      <a href="#"><img src="<?= $image ?>/instagram-blanc.png" alt="Instagram"></a>
       <a href="#"><img src="<?= $image ?>/facebook-blanc.svg" alt="Facebook"></a>
       <a href="#"><img src="<?= $image ?>/youtube-blanc.svg" alt="YouTube"></a>
       <a href="#"><img src="<?= $image ?>/tiktok-blanc.svg" alt="TikTok"></a>
-      <a href="#"><img src="<?= $image ?>/linkedin-blanc.svg" alt="LinkedIn"></a>
+      <a href="#"><img src="<?= $image ?>/linkedin-blanc.png" alt="LinkedIn"></a>
     </div>
-
   </div>
 
   <div class="footer-bottom">

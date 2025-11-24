@@ -28,6 +28,9 @@ main {
 }
 
 .formulaire_client {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   align-items: normal;
   width: 100%;
 }
