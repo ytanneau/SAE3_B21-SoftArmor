@@ -135,6 +135,7 @@ else if ($_POST['form'] == 'bancaire') {
 if ($numEtape == 3) {
     $CHEMIN_FACTURE = HOME_GIT . "html/ressources/facture/";
 
+
     $requete = $pdo->prepare("INSERT INTO _commande (id_client, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->execute();
@@ -162,28 +163,52 @@ if ($numEtape == 3) {
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
 
     if ($_POST['id_produit'] != 'panier') {
-        $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-        $requete->bindValue(":id_produit", $_POST['id_produit']);
-        $requete->execute();
-        $produit = $requete->fetch(PDO::FETCH_ASSOC);
+        $stock = detail_produit($_POST['id_produit'])['stock'];
+        if ($stock >= 1) {
 
-        $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
-        $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
-        $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
-        $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+            $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
+            $requete->bindValue(":id_produit", $_POST['id_produit']);
+            $requete->execute();
+            $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+            $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
+            $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
+            $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
+            $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+
+            update_stock($_POST['id_produit'], 1);
+        } else {
+            echo "Une erreur est survenue ! (le produit n'est plus en stock)";
+        }
     } else {
-        $requete = $pdo->prepare("SELECT nom_public, prix, tva, quantite_panier FROM produit_panier WHERE id_client = :id_compte");
+        $requete = $pdo->prepare("SELECT id_produit, nom_public, prix, tva, quantite_panier FROM produit_panier WHERE id_client = :id_compte");
         $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
         $requete->execute();
         $liste_produits = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-        $contenu_fichier .= "Liste des produits achetés : \n";
+        $produits_plus_en_stock = [];
+
         foreach ($liste_produits as $produit) {
-            $contenu_fichier .= "-> " . $produit['nom_public'] . " (x" . $produit['quantite_panier'] . ")\n";
-            $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
-            $contenu_fichier .= "\tTaux de taxe \t\t: " . $produit['tva'] . "%\n";
-            $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
-            $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
+            if (detail_produit($produit['id_produit'])['stock'] < $produit['quantite_panier']) {
+                array_push($produits_plus_en_stock, $produit);
+            }
+        }
+        if ($produits_plus_en_stock == []) {
+            $contenu_fichier .= "Liste des produits achetés : \n";
+            foreach ($liste_produits as $produit) {
+                $contenu_fichier .= "-> " . $produit['nom_public'] . " (x" . $produit['quantite_panier'] . ")\n";
+                $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
+                $contenu_fichier .= "\tTaux de taxe \t\t: " . $produit['tva'] . "%\n";
+                $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
+                $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
+
+                update_stock($produit['id_produit'], $produit['quantite_panier']);
+            }
+        } else {
+            echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
+            foreach ($produits_plus_en_stock as $produit) {
+                echo "\n- " . $produit['nom_public'];
+            }
         }
     }
 
