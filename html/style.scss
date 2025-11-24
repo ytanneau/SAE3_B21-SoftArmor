@@ -1,4 +1,5 @@
 @use "style_const.scss" as *;
+@use "style_mixin.scss" as *;
 
 body {
     font-family: $font_text;
@@ -11,116 +12,6 @@ main {
     line-height: 2em;
 }
 
-@mixin contenu_centre_vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-@mixin contenu_centre_horizontal {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-@mixin header($background) {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    padding: 0.5em 1em;
-    background-color: $background;
-    
-    * {
-        font-family: $font_title;
-        font-weight: bold;
-    }
-
-    > div {
-        @include contenu_centre_horizontal();
-        justify-content: space-between;
-
-        > a > img {
-            height: 30px;
-        }
-
-        > ul {
-            @include contenu_centre_horizontal();
-            list-style: none;
-            margin: 0;
-
-            > li {
-                > a {
-                    @include contenu_centre_horizontal();
-                    margin: 0 1em;
-
-                    color: white;
-                    text-decoration: none;
-                }
-
-                > .dropdown {
-                    position: relative;
-                    display: inline-block;
-
-                    margin: 0 1em;
-                    font-size: $font_size_normal;
-
-                    > .dropdown-button {
-                        @include contenu_centre_horizontal();
-                        
-                        font-size: $font_size_normal;
-                        background-color: $background;
-                        color: white;
-                        border: none;
-                        cursor: pointer;
-                    }
-
-                    > .dropdown-content {
-                        display: none;
-
-                        position: absolute;
-                        top: 2.5em;
-                        right: 0;
-
-                        min-width: 160px;
-                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.25);
-                        z-index: 1;
-
-                        background-color: #ffffff;
-                        border-radius: 5px;
-
-                        > a {
-                            @include contenu_centre_horizontal();
-
-                            padding: 0.25em 0.5em;
-                            text-decoration: none;
-                            color: black;
-                            font-weight: bold;
-
-                            border-radius: 5px;
-
-                            &:hover {
-                                background-color: #ECEDF9;
-                            }
-                        }
-                    }
-
-                    > .show {
-                        display: block;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@mixin image_produit($taille, $angle: $angle_petit) {
-    object-fit: contain;
-    background-color: #f3f1fb;
-    width: $taille;
-    height: $taille;
-    border-radius: $angle;
-}
-
 .image_produit_moyen {
     @include image_produit($image_normal);
 }
@@ -129,143 +20,8 @@ main {
     @include image_produit($image_petit);
 }
 
-@mixin bouton {
-    border: none;
-    border-radius: $angle_grand;
-    padding: 0.5em 2em;
-    font-weight: bold;
-    align-self: center;
-}
-
-@mixin bouton_new($background: $couleur_primaire_client, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
-    display: block;
-    max-width: 100%;
-
-    width: $largeur;
-    padding: $padding;
-
-    font-family: $font_title;
-    font-size: $size;
-    font-weight: bold;
-    
-    background-color: $background;
-    color: $color;
-
-    border: none;
-    border-radius: $angle;
-
-    text-decoration: none;
-    text-align: center;
-
-    cursor: pointer;
-
-    &:hover {
-        background-color: adjust-color($color: $background, $lightness: 15%);
-    }
-}
-
-@mixin image_pp($taille) {
-    height: $taille;
-    width: $taille;
-    border-radius: $taille;
-}
-
-// mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
-@mixin formulaire {
-    align-items: normal;
-    width: 100%;
-
-    label {
-        margin-top: 2%;
-        @media (max-width: 1440px) {
-            margin-top: 5%;
-        }
-        font-size: $font_size_sup;
-    }
-
-    .champ {
-        border: none;
-        border-radius: $angle_petit;
-        height: 2em;
-        font-size: $font_size_normal;
-        padding-left: 0.6em;
-        padding-right: 0;
-    }
-    
-    // pour les textarea avec beaucoup de texte (ex : description)
-    .text {
-        font-family: $font_text;
-        height: 10em;
-        resize: none;
-        text-align: start;
-    }
-
-    .petit {
-        width: 30%;
-    }
-
-
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-    
-
-    // généralement contraintes et erreurs
-    p {
-        font-size: $font_size_petit;
-        margin: 0.4% 0;
-    }
-
-    .error{
-        color: $rouge;
-    }
-}
-
 .formulaire_client {
     @include formulaire();
-}
-
-@mixin page_connect_inscription($background, $nuance) {
-    background-color: $background;
-
-    @include contenu_centre_vertical;
-
-    main {
-        @include contenu_centre_vertical;
-
-        background-color: $nuance;
-        row-gap: 1em;
-        border-radius: $angle_normal; 
-        padding: $padding_normal;
-        width: 30vw;
-        @media (max-width: 1440px) {
-            width: 60vw;
-        }
-        
-
-        img {
-            width: 18vw;
-            @media (max-width: 1440px) {
-                width: 50vw;
-            }
-        }
-
-        h2 {
-            font-size: $font_size_grand;
-            margin: 0
-        }
-
-        form {
-            @include contenu_centre_vertical;
-            @include formulaire;
-        }
-    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -696,84 +452,85 @@ a.bouton:has(+ .liste_avis) {
     }
 }
 
-#footer_client {
-    .footer {
+
+
+.footer {
     background: #000;
     color: #fff;
     padding: 40px 60px;
     font-family: sans-serif;
-    }
+}
 
-    .footer a {
+.footer a {
     color: #dcdcdc;
     text-decoration: none;
     font-size: 14px;
-    }
+}
 
-    .footer a:hover {
+.footer a:hover {
     text-decoration: underline;
-    }
+}
 
-    .footer-top {
+.footer-top {
     display: flex;
     justify-content: space-between;
     gap: 40px;
     padding-bottom: 30px;
     border-bottom: 1px solid #333;
-    }
+}
 
-    .footer-logos {
+.footer-logos {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    }
+}
 
-    .footer-logos .logo {
+.footer-logos .logo {
     width: 150px;
-    }
+}
 
-    .footer-columns {
+.footer-columns {
     display: flex;
     flex: 1;
     justify-content: space-around;
-    }
+}
 
-    .footer-column h4 {
+.footer-column h4 {
     margin-bottom: 10px;
     font-size: 15px;
     color: #ffffff;
-    }
+}
 
-    .footer-column a {
+.footer-column a {
     display: block;
     margin-bottom: 5px;
-    }
+}
 
-    .footer-socials {
+.footer-socials {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    }
+}
 
-    .footer-socials img {
+.footer-socials img {
     width: 26px;
     height: 26px;
-    }
+}
 
-    .footer-bottom {
+.footer-bottom {
     margin-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    }
+}
 
-    .footer-bottom .footer-links {
+.footer-bottom .footer-links {
     display: flex;
     gap: 25px;
-    }
+}
 
-    @media (max-width: 900px) {
+@media (max-width: 900px) {
     .footer-top {
         flex-direction: column;
         align-items: flex-start;
@@ -792,16 +549,72 @@ a.bouton:has(+ .liste_avis) {
         flex-direction: column;
         gap: 15px;
     }
-    }
 }
+
 .grave {
     @include bouton();
     background-color: $rouge;
     color: white;
 }
-//format telephone
-@media screen and (max-width: 1024px){
-    .accueil {
+
+.accueil {
+    nav {
+        display: none;
+    }
+    > main {
+        > div {
+            display: flex;
+            flex-direction: column;
+            
+            > ul {
+                display: flex;
+                flex-direction: row;
+                overflow:auto;
+                list-style: none;
+                
+                > li {
+                    width: 20vw;
+                    margin: 20px 40px 20px 20px;
+
+                    > a {
+                        color : black;
+                        text-decoration: none;
+                        line-height: 1.5em;
+                        > img {
+                            width: 15vw;
+                            height: 15vw;
+                            object-fit: contain;
+                            background-color: $nuance_primaire_client;
+                            border-radius: $angle_petit;
+                        }   
+                        > div {
+                            > img {
+                                width: 20px;
+                                height: 20px;
+                                background: none;
+                            }
+                            > p {
+                                margin: 5px 0 ;
+                            }
+                            height :2em;
+                            display: flex;
+                            align-items: center;
+                        }
+                        > p, > h3 {
+                            margin: 5px 0 ;
+                            width: 100%;
+                        }
+                        > h3 {
+                            
+                            height :3em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // format telephone
+    @media screen and (max-width: 1024px){
         nav {
             width: 100%;
             display: flex;
@@ -812,15 +625,10 @@ a.bouton:has(+ .liste_avis) {
             bottom: 0;
             background-color: $couleur_background;
             height: 3em;
-            
         }
         > main {
             > div {
-                display: flex;
-                flex-direction: column;
-                
                 > ul {
-                    list-style: none;
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 10px;
@@ -832,29 +640,10 @@ a.bouton:has(+ .liste_avis) {
                         align-items: center;
                         width: 100%;
                         margin: 20px;
-
-                        > a {
-                            color : black;
-                            text-decoration: none;
-                            
+                        > a {  
                             > img {
-                                width: 30vw;
-                                height: 30vw;
-                                object-fit: contain;
-                                background-color: $couleur_fond_produit;
-                                border-radius: $angle_petit;
+                                width: 100%;  
                             }   
-                            > div {
-                                > img {
-                                    width: 20px;
-                                    height: 20px;
-                                    background: none;
-                                }
-                            }
-                            > p , > h3 {
-                                margin: 0;
-                                width: $image_normal;
-                            }
                         }
                     }
                 }
@@ -862,54 +651,7 @@ a.bouton:has(+ .liste_avis) {
         }
     }
 }
-//format ordinateur
-@media screen and (min-width: 1024px){
-    .accueil {
-        nav {
-            display: none;
-        }
-        > main {
-            > div {
-                display: flex;
-                flex-direction: column;
-                
-                > ul {
-                    display: flex;
-                    flex-direction: row;
-                    overflow:auto;
-                    list-style: none;
-                    
-                    > li {
-                        width: 20vw;
-                        margin: 20px 40px 20px 20px;
 
-                        > a {
-                            color : black;
-                            text-decoration: none;
-                            > img {
-                                width: 15vw;
-                                height: 15vw;
-                                object-fit: contain;
-                                background-color: $couleur_fond_produit;
-                                border-radius: $angle_petit;
-                            }   
-                            > div {
-                                > img {
-                                    width: 20px;
-                                    height: 20px;
-                                    background: none;
-                                }
-                            }
-                            > p , > h3 {
-                                margin: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 .prix {
     color: $couleur_prix;
     font-size: 2.2em;
