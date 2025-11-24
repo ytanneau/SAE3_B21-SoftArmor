@@ -865,6 +865,10 @@ aside {
 #panier_vide {
     @include contenu_centre_vertical;
     width: 100%;
+
+    h2 {
+        margin-top: 0;
+    }
 }
 
 .anonymisation-client {

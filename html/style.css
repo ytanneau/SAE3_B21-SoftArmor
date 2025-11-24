@@ -1256,6 +1256,9 @@ aside input.bouton:hover {
   align-items: center;
   width: 100%;
 }
+#panier_vide h2 {
+  margin-top: 0;
+}
 
 .anonymisation-client main {
   display: flex;
