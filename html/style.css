@@ -974,12 +974,18 @@ div:has(> aside) {
 }
 .accueil > main > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+.accueil > main > div > button {
+  width: 30px;
+  height: 25px;
+  border-radius: 20px;
+  align-self: center;
 }
 .accueil > main > div > ul {
   display: flex;
   flex-direction: row;
-  overflow: auto;
+  overflow: hidden;
   list-style: none;
 }
 .accueil > main > div > ul > li {
@@ -1030,6 +1036,9 @@ div:has(> aside) {
     bottom: 0;
     background-color: #FFFFFF;
     height: 3em;
+  }
+  .accueil > main > div > button {
+    display: none;
   }
   .accueil > main > div > ul {
     display: grid;

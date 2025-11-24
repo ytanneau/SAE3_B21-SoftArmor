@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="html/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body class="liste">
+    
+<header id="header_client">
+    <div>
+        <a href="../">
+            <img src="../image/Alizon_blanc.png" alt="Logo Alizon" title="Logo Alizon">
+        </a>
+
+        <ul>
+                            <li> <a href="../panier/"> <img src="../image/panier_blanc.svg" class="icon">Mon panier</a> </li>
+                <li>
+                    <div class="dropdown">
+                        <button onclick="ouvrirMenu()" class="dropdown-button">
+                            <img src="../image/compte_blanc.svg" class="icon">
+                            arkenive                        </button>
+
+                        <div id="dropdown-compte" class="dropdown-content">
+                            <a href="../compte/informations"> <img src="../image/compte.svg" class="icon">Mon profil</a> 
+                            <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
+                            <a href="../deconnexion"> <img src="../image/deconnexion.svg" class="icon">Déconnexion</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+    </div>
+</header>
+
+<script>
+    function ouvrirMenu() {
+        document.getElementById("dropdown-compte").classList.toggle("show");
+    }
+
+    // Ferme le menu si on clique ailleurs
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropdown-button')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+
+
+    <main>
+        <article class="entete"> <!--Entete-->
+            <h1>Mon panier</h1>
+            <button class="grave">Vider mon panier</button>
+        </article>
+
+        <ul>
+                            
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Galettes blé noir">
+                <article>
+                    <h3>Galettes de blé noir</h3>
+                    <p>Galettes traditionnelles au sarrasin breton Galettes traditionnelles au sarrasin breton Galettes traditionnelles au sarrasin breton Galettes traditionnelles au sarrasin breton Galettes traditionnelles au sarrasin breton Galet</p>
+                    <p>Vendeur : dédélevendeur</p>
+                </article>
+                <article>
+                    <p class="prix">4,50 €</p>
+                    <p>Quantité : 2</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="2">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+
+            </li>
+
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Rillettes maquereau">
+                <article>
+                    <p>Rillettes de maquereau au cidre</p>
+                    <p>Tartinade marine typique</p>
+                    <p>Vendeur : dédélevendeur</p>
+                </article>
+                <article>
+                    <p class="prix">4,70 €</p>
+                    <p>Quantité : 6</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="8">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+            
+            <hr>
+                        
+            <li class="produit_panier">
+                <img height="200px" src="html/ressources/client/4.png" title="Montre connectée CeltWatch S">
+                <article>
+                    <p>Montre connectée CeltWatch S</p>
+                    <p>Montre connectée étanche et élégante</p>
+                    <p>Vendeur : ThusaCorp</p>
+                </article>
+                    <article>
+                    <p class="prix">89,90 €</p>
+                    <p>Quantité : 14</p>
+
+                    <form action="" method="post">
+                        <input type="hidden" name="id_produit" value="12">
+                        <button onclick="actualiser()" type="submit" class="grave">Supprimer</button>
+                    </form>
+                </article>
+            </li>
+        </ul>
+
+        <aside> <!--Boutons-->
+            <div><p>Prix total HT</p> <p class="prix HT">1 295,80 €</p></div>
+            <div><p>Prix total TTC</p> <p class="prix">1 554,96 € </p></div>
+                
+
+            <!-- bouton de paiement -->
+            <form action="../achat" method="get">
+                <input type="hidden" name="id_produit" id="id_produit" value="panier">
+                <input type="submit" value="Passer au paiement" class="bouton">
+            </form>
+        </aside>
+    </main>
+
+    </body>
+
+    <script>
+        function actualiser() {
+            window.location.reload();
+        }
+    </script>
+</html>
