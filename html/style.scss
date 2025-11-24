@@ -591,13 +591,13 @@ div:has(> aside) {
             display: flex;
             flex-direction: row;
             > button {
-                width: 50px;
+                width: 40px;
                 height: 40px;
                 border-radius: $angle_grand;
                 align-self: center;
                 position: relative;
                 background-color: $couleur_primaire_client;
-
+                color:$couleur_background;
             }
             .gauche {
                 left: 50px;
@@ -610,6 +610,7 @@ div:has(> aside) {
                 overflow: hidden;
                 list-style: none;
                 padding: 0;
+                width:100%;
                 
                 > li {
                     width: 20vw;

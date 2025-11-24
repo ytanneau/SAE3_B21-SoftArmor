@@ -54,7 +54,7 @@ unset($pdo);
     <!--Produit Ajoutés Récemment-->
     <h1>Produits ajoutés récemment</h1>
     <div>
-        <button class="fleche gauche recent"><</button>
+        <button class="fleche gauche recent">&lt</button>
         <ul class="container recent">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
@@ -82,7 +82,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite recent">></button>
+        <button class="fleche droite recent">&gt</button>
     </div>    
     <hr>
 
@@ -90,7 +90,7 @@ unset($pdo);
     <!-- Produits en réduction -->
     <h1>Produits en réduction</h1>
     <div>  
-        <button class="fleche gauche reduction"><</button>
+        <button class="fleche gauche reduction">&lt</button>
         <ul class="container reduction">
             <?php
             //boucle pour ajouter un produit dans un <li> 
@@ -122,7 +122,7 @@ unset($pdo);
             }
             ?>
         </ul>
-        <button class="fleche droite reduction">></button>
+        <button class="fleche droite reduction">&gt</button>
     </div>
     <hr>
     
@@ -130,7 +130,7 @@ unset($pdo);
     <!-- Produits alimentaires -->
     <h1>Produits alimentaires</h1>
     <div>
-        <button class="fleche gauche alimentaire"><</button>
+        <button class="fleche gauche alimentaire">&lt</button>
         <ul class="container alimentaire">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
@@ -158,7 +158,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite alimentaire">></button>
+        <button class="fleche droite alimentaire">&gt</button>
     </div>
     <hr>
 
@@ -166,7 +166,7 @@ unset($pdo);
     <h1>Produits du catalogue</h1>
     <div>
 
-        <button class="fleche gauche catalogue"><</button>
+        <button class="fleche gauche catalogue">&gt</button>
         <ul class="container catalogue">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
@@ -193,7 +193,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite catalogue">></button>
+        <button class="fleche droite catalogue">&lt</button>
     </div>
 
     <!-- Navigation (pour teléphone) -->
