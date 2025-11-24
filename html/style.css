@@ -88,6 +88,7 @@ hr {
   background-color: #A6A6BF;
   width: 100%;
   margin: 0;
+  padding: 0.5em 0;
 }
 .toolbar ul {
   display: flex;
@@ -104,6 +105,8 @@ hr {
   margin: 0 1em;
   color: black;
   text-decoration: none;
+  font-family: "Montserrat";
+  font-weight: bold;
 }
 
 #header_client {

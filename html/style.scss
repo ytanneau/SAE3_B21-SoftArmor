@@ -98,6 +98,7 @@ hr {
     background-color: $nuance;
     width: 100%;
     margin: 0;
+    padding: 0.5em 0;
 
     ul {
         @include contenu_centre_horizontal();
@@ -112,6 +113,8 @@ hr {
 
                 color: black;
                 text-decoration: none;
+                font-family: $font_title;
+                font-weight: bold;
             }
         }
     }
