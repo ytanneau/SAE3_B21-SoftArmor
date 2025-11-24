@@ -12,6 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 
+require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_SITE . "link_head.php";
