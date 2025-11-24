@@ -565,3 +565,8 @@ main {
   display: flex;
 }/*# sourceMappingURL=style.css.map */
 
+footer{
+  display: flex;
+  background-color: black;    
+  color: white;
+}
