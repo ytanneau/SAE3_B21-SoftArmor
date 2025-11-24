@@ -52,7 +52,7 @@ unset($pdo);
     <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 
     <!--Produit Ajoutés Récemment-->
-
+    <h1>Produits ajoutés récemment</h1>
     <div>
         <h1>Produits ajoutés récemment</h1>
         <button class="fleche gauche recent"><</button>
@@ -91,8 +91,8 @@ unset($pdo);
     <!-- Produits en réduction -->
     <div>
         <h1>Produits en réduction</h1>
-        <button class="fleche-gauche-reduction"><</button>
-        <ul class="container-reduction">
+        <button class="fleche gauche reduction"><</button>
+        <ul class="container reduction">
             <?php
             //boucle pour ajouter un produit dans un <li> 
             foreach ($produit_reduit as $row){  
@@ -123,7 +123,7 @@ unset($pdo);
             }
             ?>
         </ul>
-        <button class="fleche-droite-reduction">></button>
+        <button class="fleche droite reduction">></button>
     </div>
     <hr>
     
@@ -131,8 +131,8 @@ unset($pdo);
     <!-- Produits alimentaires -->
     <div>
         <h1>Produits alimentaires</h1>
-        <button class="fleche-gauche-alimentaire"><</button>
-        <ul class="container-alimentaire">
+        <button class="fleche gauche alimentaire"><</button>
+        <ul class="container alimentaire">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
@@ -159,15 +159,15 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche-droite-alimentaire">></button>
+        <button class="fleche droite alimentaire">></button>
     </div>
     <hr>
 
     <!-- Tous les produits du catalogue -->
     <div>
         <h1>Produits du catalogue</h1>
-        <button class="fleche-gauche-catalogue"><</button>
-        <ul class="container-catalogue">
+        <button class="fleche gauche catalogue"><</button>
+        <ul class="container catalogue">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
@@ -193,7 +193,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche-droite-catalogue">></button>
+        <button class="fleche droite catalogue">></button>
     </div>
 
     <!-- Navigation (pour teléphone) -->
