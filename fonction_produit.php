@@ -376,4 +376,15 @@
             throw $e;
         }
     }
-?>
+
+    function update_stock($id_produit, $nb_produit){
+        global $pdo;
+
+        $requete = $pdo->prepare('SELECT update_stock(:id_produit, :nb_produit)');
+        $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(":nb_produit", $nb_produit, PDO::PARAM_INT);
+        $requete->execute();
+        $res = $requete->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    
+    }
