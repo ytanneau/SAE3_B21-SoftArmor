@@ -237,7 +237,7 @@ if ($numEtape == 1) {
             <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
 
             <label for="complement_adresse">Complément adresse</label>
-            <textarea type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>" class="champ text">
+            <textarea type="text" name="complement_adresse" id="complement_adresse" class="champ text"><?=htmlentities($adresse_client['complement_adresse'] ?? '')?></textarea>
             <p class="contrainte">informations complémentaires</p>
 
 
