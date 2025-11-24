@@ -36,6 +36,9 @@
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
+        
+        if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
+        if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
 
         update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prixProd'],$_POST['tva'],
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],

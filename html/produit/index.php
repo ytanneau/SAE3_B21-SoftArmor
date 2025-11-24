@@ -96,7 +96,7 @@ if ($_POST != NULL) {
     ?>
     
     <main>
-        <div>
+        <div class="gauche">
             <a href="../"><img src="../image/retour.svg"></a>
 
             <section class="detail_produit">

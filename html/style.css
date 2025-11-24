@@ -785,7 +785,7 @@ main:has(.detail_produit) {
   justify-content: space-between;
 }
 
-div:has(.detail_produit) {
+div.gauche {
   flex-basis: 60%;
 }
 
@@ -1120,6 +1120,9 @@ h3 {
   font-weight: bold;
 }
 
+.liste main {
+  display: flex;
+}
 .liste main img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1129,9 +1132,6 @@ h3 {
 }
 .liste main .entete > * {
   margin-right: 3em;
-}
-.liste main ul {
-  width: 60vw;
 }
 .liste main ul li > article:nth-child(2) {
   flex-grow: 1;
@@ -1178,6 +1178,9 @@ h3 {
 .liste main h3 {
   margin-top: 0;
   font-size: 1.6em;
+}
+.liste main aside {
+  top: 8em;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
@@ -1301,25 +1304,59 @@ aside input.bouton:hover {
   height: 30px;
 }
 
-.anonymisation-client main form {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.5em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #E43737;
-  color: white;
+.anonymisation-client main {
+  display: flex;
+}
+.anonymisation-client form {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: normal;
+  width: 100%;
+  width: 60vw;
+  border-radius: 20px;
+  padding: 3em 3em;
+}
+.anonymisation-client form > :last-child {
+  width: 100%;
+}
+.anonymisation-client form label {
+  margin-top: 2%;
+  font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  .anonymisation-client form label {
+    margin-top: 5%;
+  }
+}
+.anonymisation-client form .champ {
   border: none;
   border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  justify-content: center;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
 }
-.anonymisation-client main form:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+.anonymisation-client form .text {
+  height: 10em;
+  text-align: start;
+}
+.anonymisation-client form .petit {
+  width: 30%;
+}
+.anonymisation-client form input[type=number]::-webkit-inner-spin-button,
+.anonymisation-client form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.anonymisation-client form input[type=number] {
+  -moz-appearance: textfield;
+}
+.anonymisation-client form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+.anonymisation-client form .error {
+  color: #E43737;
 }
 
 .error {
