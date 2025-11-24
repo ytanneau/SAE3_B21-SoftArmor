@@ -57,7 +57,7 @@
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
                     }
                     else{
-                        $erreurs['numCobrec'] = EXISTE_PAS;
+                        $erreurs['numero_cobrec'] = EXISTE_PAS;
                     }
                 }
                 else{
