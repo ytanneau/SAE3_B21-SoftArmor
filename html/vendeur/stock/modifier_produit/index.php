@@ -156,12 +156,14 @@
                         <input type="text" name="prix" id="idPrix" value="<?= $tabInfoProduit['prix']?>" required>
                     </p>
                     <p>
-                        <label for="tva">TVA* (%)</label>
+                        <label for="tva">TVA*</label>
+                        <?php $select5 = ''; $select10 = ''; $select20 = '';
+                            if($tabInfoProduit['tva'] === 5){$select5 = 'selected';}elseif($tabInfoProduit['tva'] === 10){$select10 = 'selected';}else{$select20 = 'selected';} ?>
                         <select name="tva" id="idtva" required>
                             <option value="">-- Taux de TVA --</option>
-                            <option value="5">5%</option>
-                            <option value="10">10%</option>
-                            <option value="20">20%</option>
+                            <option value="5" <?= $select5 ?>>5%</option>
+                            <option value="10" <?= $select10 ?>>10%</option>
+                            <option value="20" <?= $select20 ?>>20%</option>
                         </select>
                     </p>
                     

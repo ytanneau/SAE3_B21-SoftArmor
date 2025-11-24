@@ -129,10 +129,14 @@
                             <input required type="text" name="prixProd" id="idPrixProd">
                         </p>
                         <p>
-                            <label for="tva">TVA* (%)</label>
-                            <input required type="number" name="tva" id="idTVA">
+                            <label for="tva">TVA*</label>
+                            <select name="tva" id="idtva" required>
+                                <option value="">-- Taux de TVA --</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                            </select>
                         </p>
-                        
                         <p>
                             <label for="codeBarre">Code barre*</label>
                             <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px">
@@ -270,7 +274,7 @@
                 const uniteMasse = document.getElementById("blockUniteMasse");
                 const uniteVetement = document.getElementById("blockUniteVetement");
 
-                const tva = document.getElementById("idTVA");
+                const tva = document.getElementById("idtva");
                 const prix = document.getElementById("idPrixProd");
 
                 const descSimple = document.getElementById("idDescSimple");
