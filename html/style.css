@@ -780,9 +780,21 @@ a.bouton:has(+ .liste_avis):hover {
   margin-left: 2em;
 }
 
+main:has(.detail_produit) {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.gauche {
+  flex-basis: 60%;
+}
+
+div:has(> aside) {
+  flex-grow: 1;
+}
+
 .detail_produit {
   font-family: "Inter";
-  width: 60vw;
 }
 .detail_produit > article:first-child {
   margin: 0 0 2em 0;
@@ -1055,6 +1067,9 @@ h3 {
   font-weight: bold;
 }
 
+.liste main {
+  display: flex;
+}
 .liste main img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1064,9 +1079,6 @@ h3 {
 }
 .liste main .entete > * {
   margin-right: 3em;
-}
-.liste main ul {
-  width: 60vw;
 }
 .liste main ul li > article:nth-child(2) {
   flex-grow: 1;
@@ -1114,6 +1126,9 @@ h3 {
   margin-top: 0;
   font-size: 1.6em;
 }
+.liste main aside {
+  top: 8em;
+}
 @media screen and (max-width: 1024px) {
   .liste main {
     display: flex;
@@ -1124,6 +1139,9 @@ h3 {
   }
   .liste main ul {
     order: 2;
+  }
+  .liste main img {
+    width: 10em;
   }
 }
 
@@ -1151,12 +1169,10 @@ aside {
     }
 }*/
 aside {
-  position: fixed;
-  right: 5vw;
-  top: 7em;
-  font-size: 1.2em;
+  position: sticky;
+  top: 5em;
+  margin: 0 3em 2em 3em;
   font-size: 1.4em;
-  width: 20vw;
 }
 aside .prix {
   font-family: "Montserrat";
@@ -1218,7 +1234,6 @@ aside input.bouton:hover {
   aside {
     position: static;
     order: 1;
-    width: 100%;
   }
   aside p {
     margin-bottom: 0;
@@ -1233,4 +1248,73 @@ aside input.bouton:hover {
 .etoile {
   width: 30px;
   height: 30px;
+}
+
+#panier_vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+#panier_vide a h2 {
+  margin-top: 0;
+}
+
+.anonymisation-client main {
+  display: flex;
+}
+.anonymisation-client form {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: normal;
+  width: 100%;
+  width: 60vw;
+  border-radius: 20px;
+  padding: 3em 3em;
+}
+.anonymisation-client form > :last-child {
+  width: 100%;
+}
+.anonymisation-client form label {
+  margin-top: 2%;
+  font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  .anonymisation-client form label {
+    margin-top: 5%;
+  }
+}
+.anonymisation-client form .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.anonymisation-client form .text {
+  height: 10em;
+  text-align: start;
+}
+.anonymisation-client form .petit {
+  width: 30%;
+}
+.anonymisation-client form input[type=number]::-webkit-inner-spin-button,
+.anonymisation-client form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.anonymisation-client form input[type=number] {
+  -moz-appearance: textfield;
+}
+.anonymisation-client form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+.anonymisation-client form .error {
+  color: #E43737;
+}
+
+.error {
+  color: #E43737;
 }/*# sourceMappingURL=style.css.map */

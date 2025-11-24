@@ -1,7 +1,4 @@
 <?php                 
-    // appel du fichier de configuration bdd
-    
-
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
  
@@ -20,6 +17,7 @@
         exit;
     }
 
+    // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
     include HOME_GIT . "fonction_categorie.php";
     include HOME_GIT . "fonction_produit.php";
@@ -42,34 +40,34 @@
         $quantite = $_POST["qtAchete"];
         $unite = $_POST["unite"];
 
+        $qtachete = $quantite . ";" . $unite;
+
         if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
         else { $categorie = $_POST["categorie"]; }
 
+        // redefinition des variables de type checkbox pour l'insertion MySql
         if($_POST["qtStock"] === ""){ $qtStock = 0; } 
         else { $qtStock = $_POST["qtStock"]; }
         
         if($_POST["seuilAlerte"] === ""){ $seuilAlerte = 0; } 
         else { $seuilAlerte = $_POST["seuilAlerte"]; }
 
-        // redéfinition du critéres sur la majorité suivant l'état du bouton
         $checkMajeur = isset($_POST["checkMajeur"]) ? 1 : 0;
 
         // insertion du produit dans la base de données
-        
-        $qtachete = $quantite . ";" . $unite;
         $idProduit = add_produit($id_compte, $nomPrv,$nomPblc,
                                 $prixProd, $tva, $codeBarre, $checkMajeur,
                                 $qtachete, $qtStock,$seuilAlerte,
                                 $descSimple,$descDetaille, $poidColis,
                                     $volumeColis);
 
-        // mise en relation entre le produit et sa catégorie dans la bdd 
-
+        // mise en relation entre le produit et sa catégorie
         add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
         ***********************/
+
         // vérification de la presence d'une images 
         if (isset($_FILES['photo'])){
             $nomImageTemp = $_FILES['photo']['name'];
@@ -82,12 +80,14 @@
             $url = "ressources/produit/" . $nomImage;
             $altDefault = "Image du produit : " . $nomPblc;
             
+            // deplace le fichier, stocké dans un espace temporaire, dans un dossier definis plus tot
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                // insertion des images dans la bdd
 
+                // insertion des images dans la bdd
                 $idImage = add_image($url, $nomPblc, $altDefault);
                 add_image_produit($idProduit,$idImage);
                 
+                // redirection vers la page de stock
                 header("Location: ../");
                 exit();
             }
@@ -109,7 +109,7 @@
             <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Ajouter un produit au stock</h1>
 
-            <!-- Formulaire de saisie des infos du produit -->
+            <!-- Formulaire de saisie des informations du produit -->
             <form action="" name="formulaire" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <h3>Informations produit</h3>
@@ -129,10 +129,14 @@
                             <input required type="text" name="prixProd" id="idPrixProd">
                         </p>
                         <p>
-                            <label for="tva">TVA* (%)</label>
-                            <input required type="number" name="tva" id="idTVA">
+                            <label for="tva">TVA*</label>
+                            <select name="tva" id="idtva" required>
+                                <option value="">-- Taux de TVA --</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                            </select>
                         </p>
-                        
                         <p>
                             <label for="codeBarre">Code barre*</label>
                             <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px">
@@ -144,12 +148,6 @@
                         <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
                     </div>
                     <div>
-                        <!--
-                        <p>
-                            <label for="venteUnitaire">Vente unitaire</label>
-                            <input type="checkbox" name="venteUnitaire" id="venteUnitaire">
-                        </p>
-                        -->
                         <p>
                             <label for="categorie">Catégories*</label>
                             <select name="categorie" id="idCategorie" style="width: 175px;" required>
@@ -169,7 +167,7 @@
                             <select name="sous_categorie" id="sous_cate">
                                 <option value="">-- Choisir une catégorie --</option>
                                 <?php 
-                                    $tabSousCategorie = get_sousCategorie("Alimentaire");
+                                    $tabSousCategorie = get_sous_categorie("Alimentaire");
                                     foreach($tabSousCategorie as $sousCat){                  
                                 ?>
                                 <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
@@ -276,7 +274,7 @@
                 const uniteMasse = document.getElementById("blockUniteMasse");
                 const uniteVetement = document.getElementById("blockUniteVetement");
 
-                const tva = document.getElementById("idTVA");
+                const tva = document.getElementById("idtva");
                 const prix = document.getElementById("idPrixProd");
 
                 const descSimple = document.getElementById("idDescSimple");
@@ -367,7 +365,7 @@
                     if(!checkMajeur.checked){
                         checkMajeur.checked = 0;
                     }
-
+                    
                     if ((nomPrv.value === "") || (nomPblc.value === "") || 
                         (categorie.value === "") || (tva.value === "") || 
                         (prix.value === "") || (codeBarre.value === "") || 

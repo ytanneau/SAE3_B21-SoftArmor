@@ -17,7 +17,8 @@
         header('location: ../');
         exit;
     }
-
+    
+    // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
     include HOME_GIT . "fonction_vendeur.php";  
     
@@ -47,6 +48,7 @@
         <title>Consulter mes informations</title>
     </head>
     <body>
+        <!-- inclusion du header -->
         <?php include "../../header.php"?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
@@ -71,6 +73,7 @@
             </p>
             <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
             <button><a href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
+            <!-- bouton pour etre rediriger vers la desactivation du compte vendeur -->
             <button><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
         </main>
         <footer>

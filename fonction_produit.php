@@ -141,27 +141,17 @@
         return $requete->rowCount() > 0;
     }
 
-    function get_info_produit($id_compte_vendeur, $id_produit){
-        global $pdo;
-        // cette fonction renvoie un tableau avec les informations d'un produit
-        try {
-            $stmt = $pdo->prepare("SELECT * FROM _produit WHERE id_vendeur = :id_compte_vendeur and id_produit = :id_produit;");
-            $stmt->execute([':id_compte_vendeur' => $id_compte_vendeur, ':id_produit' => $id_produit]);
-
-            $tableau = $stmt->fetch(PDO::FETCH_ASSOC);   
-            return $tableau;
-        } catch(PDOException $e) {
-            throw $e;
-        }
-    }
-
-    function set_info_produit($id_compte_vendeur,$id_produit, $libelle_prive, $libelle_public, $prix_ht,
+    function update_info_produit($id_produit, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $en_ligne, $qt_achete,
     $quantite_stock, $seuil_alerte, $desc_simple, 
     $desc_detaille, $poid, $volume_colis){
+        /**
+         * Fonction set_info_produit() prend en parametre tout les informations d'un produit
+         * Modifie les informations du produit la base de données
+         */
         global $pdo;
         try{
-            $stmt = $pdo->prepare("UPDATE _produit 
+            $requete = $pdo->prepare("UPDATE _produit 
                                 SET nom_stock = :libelle_prive,
                                     nom_public = :libelle_public,
                                     description = :desc_simple,
@@ -176,9 +166,8 @@
                                     volume = :volume_colis,
                                     plus_18 = :reserve_majeur,
                                     quantite_unite = :qt_achete
-                                WHERE id_produit = :id_produit AND id_vendeur = :id_vendeur");
-            $stmt->execute([":id_vendeur"=> $id_compte_vendeur, 
-                            ":id_produit" => $id_produit, 
+                                WHERE id_produit = :id_produit");
+            $requete->execute([":id_produit" => $id_produit, 
                             ":libelle_prive" => $libelle_prive, 
                             ":libelle_public" => $libelle_public,
                             ":desc_simple" => $desc_simple,
@@ -194,21 +183,23 @@
                             ":reserve_majeur" => $reserve_majeur,
                             ":qt_achete" => $qt_achete]);
         } catch (PDOException $e) {
-            throw $e; // lance une erreur que la fonction appelante catchera
+            throw $e;
         }
     }
 
     function add_produit($id_compte_vendeur, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $qt_achete, $quantite_stock, $seuil_alerte,
     $desc_simple, $desc_detaille, $poid, $volume_colis){
+        /**
+         * Fonction add_produit() prend en parametre toutes les informations du produit
+         * Ajoute un nouveau produit dans la base de donnée
+         * Renvoie l'id du produit qui vient d'etre ajouté
+         */
         global $pdo;
 
-        try{
-            $sqlAjoutProduit = "INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) 
-                                VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite); 
-                                ";
-            $stmt = $pdo->prepare($sqlAjoutProduit);
-            $stmt->execute([
+        try{ 
+            $requete = $pdo->prepare("INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite)");
+            $requete->execute([
                 ':id_vend' => $id_compte_vendeur,
                 ':nomPrv' => $libelle_prive,
                 ':nomPblc' => $libelle_public,
@@ -228,29 +219,37 @@
             $id = $pdo->lastInsertId();
             return $id;
         } catch (PDOException $e) {
-            throw $e; // lance une erreur que la fonction appelante catchera
+            throw $e;
         }
     }
 
-    function get_categorieProduit($id_produit){
+    function get_categorie_produit($id_produit){
+            /**
+             * Fonction get_categorie_produit() prend en parametre l'id du produit
+             * Renvoie un tableau avec toute les informations d'un produit
+             */
             global $pdo;
             try{
-                $stmt = $pdo->prepare("SELECT * FROM _produit_dans_categorie WHERE id_produit = :id_produit");
-                $stmt->execute([":id_produit" => $id_produit]);
-                $tabCategorie = $stmt->fetch(PDO::FETCH_ASSOC);
+                $requete = $pdo->prepare("SELECT * FROM _produit_dans_categorie WHERE id_produit = :id_produit");
+                $requete->execute([":id_produit" => $id_produit]);
+                $tabCategorie = $requete->fetch(PDO::FETCH_ASSOC);
                 return $tabCategorie;
             } catch(PDOException $e){
                 throw $e;
             }
         }
     function add_produit_categorie($id_produit, $categorie){
+        /**
+         * Fonction add_produit_categorie() prend en parametre l'id d'un produit et une categorie
+         * Fait le lien entre la categorie et l'id du produit donnés en parametre
+         */
         global $pdo;
         try{
             $sqlProduitCategorie = "INSERT INTO _produit_dans_categorie(id_produit,nom_categorie)
                                                 VALUES(:id_prod,:nom_cate);
                                                 ";
-            $stmt = $pdo->prepare($sqlProduitCategorie);
-            $stmt->execute([
+            $requete = $pdo->prepare($sqlProduitCategorie);
+            $requete->execute([
                 ':id_prod' => $id_produit,
                 ':nom_cate' => $categorie
             ]);
@@ -259,12 +258,16 @@
         }
     }
 
-    function update_categorie_produit($id_produit, $categorieDuProduit){
+    function update_categorie_produit($id_produit, $categorie){
+        /**
+         * Fonction update_categorie_produit() prend en parametre l'id du produit et une categorie
+         * Met a jour la categorie du produit
+         */
         global $pdo;
         try{
-            $stmt = $pdo->prepare("UPDATE _produit_dans_categorie SET nom_categorie = :categorie WHERE id_produit = :id_produit");
-            $stmt->execute([
-                ":categorie" => $categorieDuProduit,
+            $requete = $pdo->prepare("UPDATE _produit_dans_categorie SET nom_categorie = :categorie WHERE id_produit = :id_produit");
+            $requete->execute([
+                ":categorie" => $categorie,
                 ":id_produit"=> $id_produit]);
         } catch(PDOException $e){
             throw $e;
@@ -272,12 +275,17 @@
     }
 
     function add_image($url, $titre_img, $altDefault){
+        /**
+         * Fonction add_image() prend en parametre les caractéristiques d'une image
+         * Ajoute l'image dans la base de données avec les parametres
+         * Renvoie l'id de l'image dernierment ajouté
+         */
         global $pdo;
         try{
             $sqlImage = "INSERT INTO _image(url_image,titre,alt)
                         VALUES(:url_img, :titre_img, :alt_img);";
-            $stmt = $pdo->prepare($sqlImage);
-            $stmt->execute([
+            $requete = $pdo->prepare($sqlImage);
+            $requete->execute([
                 ':url_img' => $url, 
                 ':titre_img' => $titre_img, 
                 ':alt_img' => $altDefault
@@ -289,12 +297,16 @@
     }
 
     function add_image_produit($idProduit,$idImage){
+        /**
+         * Fonction add_image_produit() prend en parametre l'id du produit et l'id d'une image
+         * Fait le lien entre une nouvelle image et un produit
+         */
         global $pdo;
         try{
             $sqlImageProduit = "INSERT INTO _images_produit(id_produit,id_image_principale)
                                 VALUES(:id_prod,:id_image_princ);";
-            $stmt = $pdo->prepare($sqlImageProduit);
-            $stmt->execute([
+            $requete = $pdo->prepare($sqlImageProduit);
+            $requete->execute([
                 ':id_prod' => $idProduit,
                 ':id_image_princ' => $idImage
             ]);
@@ -304,14 +316,18 @@
     }
 
     function link_image_produit($idProduit,$idImage,$numeroImage){
+        /**
+         * Fonction link_image_produit() prend en parametre l'id du produit, l'id de l'image ainsi que le numero de l'image (2 ou 3)
+         * Fait le lien entre la deuxieme ou troisieme image du produit  
+         */
         global $pdo;
         try{
             if($numeroImage === 2){
-                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
+                $requete = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
             } else if ($numeroImage === 3){
-                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+                $requete = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
             } else { return; }
-            $stmt->execute([
+            $requete->execute([
                 ':id_produit' => $idProduit,
                 'id_image'=> $idImage,
             ]);
@@ -321,15 +337,18 @@
     }
 
     function update_image_produit($idImage, $url, $titre_img, $altDefault){
+        /**
+         * Fonction update_image_produit() prend en parametre les informations d'une image 
+         * Met a jour les informations d'une image dans la base de données
+         */
         global $pdo;
-
         try{
-            $stmt = $pdo->prepare('UPDATE _image 
+            $requete = $pdo->prepare('UPDATE _image 
                                     SET url_image = :url_image,
                                     titre = :titre_img,
                                     alt = :altDefault 
                                     WHERE id_image = :idImage');
-            $stmt->execute([
+            $requete->execute([
                 ':url_image' => $url,
                 ':titre_img' => $titre_img,
                 ':altDefault' => $altDefault,
@@ -341,16 +360,30 @@
     }
 
     function get_id_image_produit($idProduit){
+        /**
+         * Fonction get_id_image_produit prend en parametre l'id d'un produit
+         * Renvoie un tableau avec l'id du produit et les id des images en lien avec celui-ci
+         */
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare('SELECT * FROM _images_produit WHERE id_produit = :id_produit');
-            $stmt->execute([ ':id_produit' => $idProduit]);
+            $requete = $pdo->prepare('SELECT * FROM _images_produit WHERE id_produit = :id_produit');
+            $requete->execute([ ':id_produit' => $idProduit]);
 
-            $tabIdImage = $stmt->fetch(PDO::FETCH_ASSOC);
+            $tabIdImage = $requete->fetch(PDO::FETCH_ASSOC);
             return $tabIdImage;
         } catch(PDOException $e){
             throw $e;
         }
     }
-?>
+
+    function update_stock($id_produit, $nb_produit){
+        global $pdo;
+
+        $requete = $pdo->prepare('SELECT update_stock(:id_produit, :nb_produit)');
+        $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(":nb_produit", $nb_produit, PDO::PARAM_INT);
+        $requete->execute();
+        $res = $requete->fetch(PDO::FETCH_ASSOC);
+        return $res;
+    }

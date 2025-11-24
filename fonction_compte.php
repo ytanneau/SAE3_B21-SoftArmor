@@ -54,10 +54,10 @@
             try{
                 if (!sql_check_email($pdo, $email)){
                     if (sql_check_cle($pdo, $numCobrec)){
-                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec);
                     }
                     else{
-                        $erreurs['numCobrec'] = EXISTE_PAS;
+                        $erreurs['numero_cobrec'] = EXISTE_PAS;
                     }
                 }
                 else{
@@ -653,43 +653,20 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp) {
+    function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
+        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec");
+        $requete->bindValue(":email", $email, PDO::PARAM_STR);
+        $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
+        $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);
+        $requete->bindValue(":comp_adresse", $compAdresse, PDO::PARAM_STR);
+        $requete->bindValue(":code_postal", $codePostal, PDO::PARAM_STR);
+        $requete->bindValue(":raison_sociale", $raisonSociale, PDO::PARAM_STR);
+        $requete->bindValue(":num_siret", $numSiret, PDO::PARAM_STR);
+        $requete->bindValue(":cle_cobrec", $numCobrec, PDO::PARAM_STR);
 
-        $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->bindValue(':mdp', crypte_v2($mdp), PDO::PARAM_STR);
         $requete->execute();
-
-        
-        $requete = $pdo->prepare("SELECT id_compte FROM _compte WHERE email = :email");
-        $requete->bindValue(':email', $email, PDO::PARAM_STR);
-        $requete->execute();
-        $id_compte = $requete->fetch(PDO::FETCH_ASSOC)['id_compte'];
-
-
-        $requete = $pdo->prepare("INSERT INTO _adresse (adresse, complement_adresse, code_postal) VALUES (:adresse, :comp_adresse, :code_postal)");
-        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
-        $requete->bindValue(':comp_adresse', $compAdresse, PDO::PARAM_STR);
-        $requete->bindValue(':code_postal', $codePostal, PDO::PARAM_STR);
-        $requete->execute();
-
-
-        $requete = $pdo->prepare("SELECT id_adresse FROM _adresse WHERE adresse = :adresse");
-        $requete->bindValue(':adresse', $adresse, PDO::PARAM_STR);
-        $requete->execute();
-        $id_adresse = $requete->fetch(PDO::FETCH_ASSOC)['id_adresse'];
-
-
-        $requete = $pdo->prepare("INSERT INTO _vendeur (id_compte, raison_sociale, num_siret, id_adresse) VALUES (:id_compte, :raison_social, :numero_siret, :adresse)");
-        $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
-        $requete->bindValue(':raison_social', $raisonSocial, PDO::PARAM_STR);
-        $requete->bindValue(':numero_siret', $numSiret, PDO::PARAM_INT);
-        $requete->bindValue(':adresse', $id_adresse, PDO::PARAM_INT);
-        $requete->execute();
-
-
-        return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
     function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
         $nom = strtoupper(trim($nom));
         $prenom = ucfirst(trim($prenom));

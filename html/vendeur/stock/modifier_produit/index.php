@@ -17,6 +17,7 @@
         exit;
     }
 
+    // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
     include HOME_GIT . "fonction_categorie.php";
     include HOME_GIT . "fonction_produit.php";
@@ -24,8 +25,9 @@
     $id_compte = $_SESSION['id_compte'];
     $idProduit = $_GET['produit'];
 
-    $tabInfoProduit = get_info_produit($id_compte,$idProduit);
-    $tabCategorieDuProduit = get_categorieProduit($idProduit);
+    // utilisation des fonctions de recuperation des données
+    $tabInfoProduit = detail_produit($idProduit);
+    $tabCategorieDuProduit = get_categorie_produit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -34,23 +36,14 @@
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
+        
+        if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
+        if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
 
-        set_info_produit( $id_compte,
-                        $idProduit,
-                        $_POST['nomPrv'],
-                        $nomPblc,
-                        $_POST['prixProd'],
-                        $_POST['tva'],
-                        $_POST['codeBarre'],
-                        $checkMajeur,
-                        $checkEnLigne,
-                        $_POST['qtAchete'],
-                        $_POST['qtStock'],
-                        $_POST['seuilAlerte'],
-                        $_POST['descSimple'],
-                        $_POST['descDetaille'],
-                        $_POST['poidColis'],
-                        $_POST['volumeColis']);
+        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
+                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
+                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
+                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
         
         if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
             update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
@@ -75,6 +68,7 @@
                 update_image_produit($tabImageProduit['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
+
         if(isset($_FILES['photo2'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo2']['name'];
@@ -89,15 +83,17 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                // ajout d'une image dans la base de données si elle n'est pas deja présente
                 if($tabImageProduit['id_image2'] == null){
                     $idImage2 = add_image( $url, $nomPblc, $altDefault);
                     link_image_produit($idProduit,$idImage2,2);        
                 }else{
-                // appel à la fonction pour modifier la bdd
+                    // appel à la fonction pour modifier la bdd
                     update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
                 }
             }
         }
+
         if(isset($_FILES['photo3'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo3']['name'];
@@ -112,6 +108,7 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                // ajout d'une image dans la base de données si elle n'est pas deja présente
                 if($tabImageProduit['id_image2'] == null){
                     $idImage3 = add_image( $url, $nomPblc, $altDefault);
                     link_image_produit($idProduit,$idImage3,3);        
@@ -121,10 +118,11 @@
                 }
             }
         }
+
+        // rediraction vers la page produit apres validation du formulaire
         header("Location: ../");
         exit();
-    }
-    
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -145,33 +143,40 @@
                 <div>
                     <p>
                         <label for="nomPrv">Libellé privé*</label>
-                        <input type="text" name="nomPrv" id="nomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
+                        <input type="text" name="nomPrv" id="idNomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
                     </p>
                     <p>
                         <label for="nomPblc">Libellé public*</label>
-                        <input type="text" name="nomPblc" id="nomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
+                        <input type="text" name="nomPblc" id="idNomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
                     </p>
                 </div>
                 <div>
                     <p>
                         <label for="prixProd">Prix* hors taxe (€)</label>
-                        <input type="text" name="prixProd" id="prixProd" value="<?= $tabInfoProduit['prix']?>" required>
+                        <input type="text" name="prix" id="idPrix" value="<?= $tabInfoProduit['prix']?>" required>
                     </p>
                     <p>
-                        <label for="tva">TVA* (%)</label>
-                        <input type="number" name="tva" id="tva" value="<?= $tabInfoProduit['tva']?>" required>
+                        <label for="tva">TVA*</label>
+                        <?php $select5 = ''; $select10 = ''; $select20 = '';
+                            if($tabInfoProduit['tva'] == 5){$select5 = 'selected';}elseif($tabInfoProduit['tva'] == 10){$select10 = 'selected';}else{$select20 = 'selected';} ?>
+                        <select name="tva" id="idtva" required>
+                            <option value="">-- Taux de TVA --</option>
+                            <option value="5" <?= $select5 ?>>5%</option>
+                            <option value="10" <?= $select10 ?>>10%</option>
+                            <option value="20" <?= $select20 ?>>20%</option>
+                        </select>
                     </p>
                     
                     <p>
                         <label for="codeBarre">Code barre*</label>
-                        <input type="text" name="codeBarre" id="codeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
+                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
                 <div>
                     <p>
                         <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="checkMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
+                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
                     </p>
                     <p>
                         <label for="checkEnLigne">Produit en ligne</label>
@@ -284,9 +289,61 @@
                         <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
                     </p>
                 </div>
-                <input type="submit" value="Valider les modifications">
+                <input type="submit" value="Valider les modifications" id="idModifierProduit">
             </form>
         </main>
+        <script>
+            const nomPrv = document.getElementById("idNomPrv");
+            const nomPblc = document.getElementById("idNomPblc");
+            const prix = document.getElementById("idPrix");
+            const tva = document.getElementById("idtva");
+            const codeBarre = document.getElementById("idCodeBarre");
+            const modifierProduit = document.getElementById("idModifierProduit");
+            
+            const descSimple = document.getElementById("idDescSimple");
+            const descDetaille = document.getElementById("idDescDetaille");
+
+            const poidColis = document.getElementById("idPoidColis");
+            const volumeColis = document.getElementById("idVolumeColis");
+
+            descSimple.addEventListener('input', () => {
+                if(descSimple.value.length === 200){
+                    alert("Maximum de caractère atteint");
+                }
+            })
+            descDetaille.addEventListener('input', ()=> {
+                if(descDetaille.value.length === 2000){
+                    alert("Maximum de caratère atteint");
+                }
+            })
+            
+            codeBarre.addEventListener('input', () =>{
+                codeBarre.value = codeBarre.value.replace(/\D/g,"");
+                if(codeBarre.value.length < 13){
+                    messageErrCodeBarre.style.display = "block";
+                    event.preventDefault();
+                } else {
+                    messageErrCodeBarre.style.display = "none";
+                }
+            })
+            function checkCodeBarre(chaineCodeBarre){
+                if(chaineCodeBarre.length < 13) return true;
+                else return false;
+            }
+
+            modifierProduit.addEventListener('click' , () =>  {
+                if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
+                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
+                    checkCodeBarre(codeBarre.value)){
+                    alert("Les champs obligatoires ne sont pas tous remplis");
+                    event.preventDefault();
+                } else if(confirm("Confirmer la création du produit ?")) {
+                    alert("Produit modifier");
+                } else {
+                    event.preventDefault();
+                }
+            })
+        </script>
         <footer>
 
         </footer>

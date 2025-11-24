@@ -1,16 +1,24 @@
 <?php 
-    function set_informations_vendeur($raisonSociale, $description, $id_compte){
+    function update_informations_vendeur($raisonSociale, $description, $id_compte){
+        /**
+         * Fonction update_informations_vendeur() prend en parametre les informations d'un vendeur
+         * Met a jour les infromations d'un vendeur dans la base de données
+         */
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :raisonSociale, description = :desc$description WHERE id_compte = :id_compte");
-            $stmt->execute([':raisonSociale' => $raisonSociale, ':desc$description' => $description, ':id_compte' => $id_compte]);
+            $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :raisonSociale, description = :description WHERE id_compte = :id_compte");
+            $stmt->execute([':raisonSociale' => $raisonSociale, ':description' => $description, ':id_compte' => $id_compte]);
         } catch(PDOException $e) {
             throw $e;
         }
     }
 
-    function set_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
+    function update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
+        /**
+         * Fonction update_adresse_vendeur() prend en parametre les informations d'une adresse et l'id d'un vendeur
+         * Met a jour les informations de l'adresse dans la base de données 
+         */
         global $pdo;
         try{
             $stmt = $pdo->prepare("UPDATE _adresse AS a JOIN _vendeur AS v 
@@ -27,6 +35,10 @@
 
      
     function get_informations_vendeur($id_compte){
+        /**
+         * Fonction get_informations_vendeur() prend en parametre l'id d'un compte vendeur
+         * Renvoie un tableau avec toutes les informations d'un vendeur
+         */
         global $pdo;
 
         try{
@@ -41,6 +53,10 @@
     }
 
     function get_adresse_vendeur($id_adresse){
+        /**
+         * Fonction get_adresse_vendeur() prend en paremetre l'id d'une adresse
+         * Renvoie un tableau avec toutes les informations d'une adresse
+         */
         global $pdo;
 
         try{

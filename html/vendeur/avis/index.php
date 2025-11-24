@@ -29,7 +29,7 @@
 
     if (isset($_GET['produit'])) {
         $data = avis_client_produit($_GET['produit']);
-        $produit = avis_produit($_GET['produit']);
+        $produit = avis_produit($_GET['produit'], $_SESSION['id_compte']);
         //print_r($produit);
     }
     else{
@@ -69,7 +69,7 @@
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-            <br>Note moyenne : <?=htmlentities($produit['note_moy'])?>
+            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'], 1))?>
             <br>
 <?php
     afficher_moyenne_note($produit['note_moy']);
@@ -116,7 +116,7 @@
                             </a>
                         <?php } ?>
                     </li>
-                    <hr>
+
                 <?php } ?>
             </ul>
 <?php 

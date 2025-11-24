@@ -45,14 +45,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </a>
         <h2>S’identifier</h2>
 
-        <form action="" method="post">
+        
 <?php
-    if (isset($erreurs['connect'])){
+    if (isset($erreurs['connecte'])){
 ?>
-        <h3 class="error"><?=$erreurs['connect']?></h1>
+        <h3 class="error"><?=$erreurs['connecte']?></h3>
 <?php
     }
 ?>
+        <form action="" method="post">
                 <!-- Adresse e-mail -->
             <br>
             <label for="email">Email</label>
@@ -89,7 +90,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     }
 ?>
             
-            <input type="submit" value="Se connecter" class="bouton">        
+        <input type="submit" value="Se connecter" class="bouton">        
         </form>
         <p>Pas de compte ? <a href="inscription/">S'inscrire</a></p>
 <?php
