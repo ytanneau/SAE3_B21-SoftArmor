@@ -182,7 +182,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
                 <label for="reponse">Votre réponse</label>
-                <input class="champ" type="text" id="reponse" name="reponse">
+                <input class="champ" type="password" id="reponse" name="reponse">
 
                 <p class="error">
                     <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
