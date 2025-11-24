@@ -927,6 +927,56 @@ a.bouton:has(+ .liste_avis):hover {
   color: white;
 }
 
+.accueil nav {
+  display: none;
+}
+.accueil > main > div {
+  display: flex;
+  flex-direction: column;
+}
+.accueil > main > div > ul {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  list-style: none;
+}
+.accueil > main > div > ul > li {
+  width: 20vw;
+  margin: 20px 40px 20px 20px;
+}
+.accueil > main > div > ul > li > a {
+  color: black;
+  text-decoration: none;
+  line-height: 1.5em;
+}
+.accueil > main > div > ul > li > a > img {
+  width: 15vw;
+  height: 15vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #CBCCEA;
+  border-radius: 5px;
+}
+.accueil > main > div > ul > li > a > div {
+  height: 2em;
+  display: flex;
+  align-items: center;
+}
+.accueil > main > div > ul > li > a > div > img {
+  width: 20px;
+  height: 20px;
+  background: none;
+}
+.accueil > main > div > ul > li > a > div > p {
+  margin: 5px 0;
+}
+.accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
+  margin: 5px 0;
+  width: 100%;
+}
+.accueil > main > div > ul > li > a > h3 {
+  height: 3em;
+}
 @media screen and (max-width: 1024px) {
   .accueil nav {
     width: 100%;
@@ -939,12 +989,7 @@ a.bouton:has(+ .liste_avis):hover {
     background-color: #FFFFFF;
     height: 3em;
   }
-  .accueil > main > div {
-    display: flex;
-    flex-direction: column;
-  }
   .accueil > main > div > ul {
-    list-style: none;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -958,67 +1003,11 @@ a.bouton:has(+ .liste_avis):hover {
     width: 100%;
     margin: 20px;
   }
-  .accueil > main > div > ul > li > a {
-    color: black;
-    text-decoration: none;
-  }
   .accueil > main > div > ul > li > a > img {
-    width: 30vw;
-    height: 30vw;
-    -o-object-fit: contain;
-       object-fit: contain;
-    background-color: #f3f1fb;
-    border-radius: 5px;
-  }
-  .accueil > main > div > ul > li > a > div > img {
-    width: 20px;
-    height: 20px;
-    background: none;
-  }
-  .accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
-    margin: 0;
-    width: 200px;
+    width: 100%;
   }
 }
-@media screen and (min-width: 1024px) {
-  .accueil nav {
-    display: none;
-  }
-  .accueil > main > div {
-    display: flex;
-    flex-direction: column;
-  }
-  .accueil > main > div > ul {
-    display: flex;
-    flex-direction: row;
-    overflow: auto;
-    list-style: none;
-  }
-  .accueil > main > div > ul > li {
-    width: 20vw;
-    margin: 20px 40px 20px 20px;
-  }
-  .accueil > main > div > ul > li > a {
-    color: black;
-    text-decoration: none;
-  }
-  .accueil > main > div > ul > li > a > img {
-    width: 15vw;
-    height: 15vw;
-    -o-object-fit: contain;
-       object-fit: contain;
-    background-color: #f3f1fb;
-    border-radius: 5px;
-  }
-  .accueil > main > div > ul > li > a > div > img {
-    width: 20px;
-    height: 20px;
-    background: none;
-  }
-  .accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
-    margin: 0;
-  }
-}
+
 .prix {
   color: #2E7A30;
   font-size: 2.2em;
