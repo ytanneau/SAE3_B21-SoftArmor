@@ -1164,6 +1164,7 @@ aside {
 aside {
   position: sticky;
   top: 5em;
+  width: 100%;
   margin: 0 3em 2em 3em;
   font-size: 1.4em;
 }
