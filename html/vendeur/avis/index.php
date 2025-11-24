@@ -55,9 +55,9 @@
 ?>
     <main>
 <?php
-    if ($data === NULL){
+    if ($produit == NULL ){
 ?>
-    <h1>Désoler se produit existe pas</h1>
+        <h1>Désoler se produit existe pas</h1>
 <?php        
     }
     else{
@@ -78,40 +78,44 @@
         </div>
     </article>
     <section>
-        <ul>
 <?php
-        foreach($data as $row){
+    if ($data == null){
 ?>
-            <li>
-                <div>
-                    <?=pset($row['pseudo'])?>
-                    <br><div>
-<?php
-                    afficher_moyenne_note($row['note']);
-?>
-                    </div><br><?=pset($row['titre'])?>
-                    <p><?=pset($row['commentaire'])?></p>
-                    <div class="info">
-                        <?=pset($row['date_avis'])?>
-                    </div>
-                </div>
-                <div>
-<?php
-    if (isset($row['url_image'])){
-?>
-                <a href="<?=HOME_SITE . pset($row['url_image'])?>" target="_blank">
-                    <img src="<?=HOME_SITE . pset($row['url_image'])?>" alt="<?=pset($row['alt_image'])?>" tilte="<?=pset($row['titre_image'])?>">
-                </a>
+    <h3>Il n'y a pas d'avis pour ce produit</h3>
 <?php
     }
+    else{
 ?>
-                </div>
-            </li>
-            <hr>
-<?php
-        }
+            <ul class="liste_avis">
+                <?php foreach ($data as $avis) { ?>
+                    <li>
+                        <div>
+                            <div>
+                                <img height="40px" width="40px" src="../ressources/27_1.png">
+                                <div class="etoiles">
+                                    <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
+                                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                                <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
+                            </div>
+                        </div>
+
+                        <?php if (isset($avis['url_image'])) { ?>
+                            <a href="<?=HOME_SITE . $avis['url_image']?>" target="_blank">
+                                <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                            </a>
+                        <?php } ?>
+                    </li>
+                    <hr>
+                <?php } ?>
+            </ul>
+<?php 
+    }
 ?>
-        </ul>
     </section>
 <?php
     }
