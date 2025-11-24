@@ -457,6 +457,9 @@ hr {
     }
 
     section{
+        display: flex;
+        justify-content: center;
+        /*
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
@@ -501,7 +504,7 @@ hr {
                 }
                 
             }
-        }
+        }*/
     }
 }
 
@@ -693,104 +696,104 @@ a.bouton:has(+ .liste_avis) {
     }
 }
 
+#footer_client {
+    .footer {
+    background: #000;
+    color: #fff;
+    padding: 40px 60px;
+    font-family: sans-serif;
+    }
 
-.footer {
-  background: #000;
-  color: #fff;
-  padding: 40px 60px;
-  font-family: sans-serif;
-}
+    .footer a {
+    color: #dcdcdc;
+    text-decoration: none;
+    font-size: 14px;
+    }
 
-.footer a {
-  color: #dcdcdc;
-  text-decoration: none;
-  font-size: 14px;
-}
+    .footer a:hover {
+    text-decoration: underline;
+    }
 
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #333;
-}
-
-.footer-logos {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.footer-logos .logo {
-  width: 150px;
-}
-
-.footer-columns {
-  display: flex;
-  flex: 1;
-  justify-content: space-around;
-}
-
-.footer-column h4 {
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #ffffff;
-}
-
-.footer-column a {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.footer-socials {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.footer-socials img {
-  width: 26px;
-  height: 26px;
-}
-
-.footer-bottom {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-}
-
-.footer-bottom .footer-links {
-  display: flex;
-  gap: 25px;
-}
-
-@media (max-width: 900px) {
-  .footer-top {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .footer-columns {
-    width: 100%;
+    .footer-top {
+    display: flex;
     justify-content: space-between;
-  }
+    gap: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #333;
+    }
 
-  .footer-socials {
-    flex-direction: row;
-  }
+    .footer-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    }
 
-  .footer-bottom {
+    .footer-logos .logo {
+    width: 150px;
+    }
+
+    .footer-columns {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    }
+
+    .footer-column h4 {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #ffffff;
+    }
+
+    .footer-column a {
+    display: block;
+    margin-bottom: 5px;
+    }
+
+    .footer-socials {
+    display: flex;
     flex-direction: column;
     gap: 15px;
-  }
-}
+    }
 
+    .footer-socials img {
+    width: 26px;
+    height: 26px;
+    }
+
+    .footer-bottom {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    }
+
+    .footer-bottom .footer-links {
+    display: flex;
+    gap: 25px;
+    }
+
+    @media (max-width: 900px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-columns {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .footer-socials {
+        flex-direction: row;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+    }
+    }
+}
 .grave {
     @include bouton();
     background-color: $rouge;
