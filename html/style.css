@@ -562,8 +562,11 @@ hr {
 }
 
 #avis_vendeur {
-  /*
+  
       section{
+        display: flex;
+        justify-content: center;
+        /*
           ul{
               @include contenu_centre_vertical();
               gap: 10px;
@@ -608,8 +611,8 @@ hr {
                   }
 
               }
-          }
-      }*/
+          }*/
+      }
 }
 #avis_vendeur article {
   display: flex;
