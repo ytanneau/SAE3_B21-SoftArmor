@@ -382,7 +382,7 @@ main:has(.detail_produit) {
     justify-content: space-between;
 }
 
-div:has(.detail_produit) {
+div.gauche {
     flex-basis: 60%;
 }
 
@@ -697,6 +697,8 @@ h3 {
 
 .liste {
     main {
+        display: flex;
+        
         img {
             object-fit: contain;
         }
@@ -713,8 +715,6 @@ h3 {
 
 
         ul {
-            width: 60vw;
-
             // la partie description etc. du produit
             li > article:nth-child(2) {
                 flex-grow: 1;

@@ -785,7 +785,7 @@ main:has(.detail_produit) {
   justify-content: space-between;
 }
 
-div:has(.detail_produit) {
+div.gauche {
   flex-basis: 60%;
 }
 
@@ -1067,6 +1067,9 @@ h3 {
   font-weight: bold;
 }
 
+.liste main {
+  display: flex;
+}
 .liste main img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -1076,9 +1079,6 @@ h3 {
 }
 .liste main .entete > * {
   margin-right: 3em;
-}
-.liste main ul {
-  width: 60vw;
 }
 .liste main ul li > article:nth-child(2) {
   flex-grow: 1;
