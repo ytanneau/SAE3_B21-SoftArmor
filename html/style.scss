@@ -388,7 +388,6 @@ div:has(.detail_produit) {
 
 .detail_produit {
     font-family: $font_text;
-    width: 60vw;
 
     > article:first-child {
         margin: 0 0 2em 0;
@@ -797,8 +796,8 @@ aside {
 }*/
 
 aside {
-    position: fixed;
-    right: 5vw;
+    position: sticky;
+    //right: 5vw;
     top: 7em;
 
     font-size: 1.2em;
