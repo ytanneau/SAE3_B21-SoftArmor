@@ -799,9 +799,65 @@ a.bouton:has(+ .liste_avis) {
     background-color: $rouge;
     color: white;
 }
-//format telephone
-@media screen and (max-width: 1024px){
-    .accueil {
+
+.accueil {
+    nav {
+        display: none;
+    }
+    > main {
+        > div {
+            display: flex;
+            flex-direction: column;
+            
+            > ul {
+                display: flex;
+                flex-direction: row;
+                overflow:auto;
+                list-style: none;
+                
+                > li {
+                    width: 20vw;
+                    margin: 20px 40px 20px 20px;
+
+                    > a {
+                        color : black;
+                        text-decoration: none;
+                        line-height: 1.5em;
+                        > img {
+                            width: 15vw;
+                            height: 15vw;
+                            object-fit: contain;
+                            background-color: $nuance_primaire_client;
+                            border-radius: $angle_petit;
+                        }   
+                        > div {
+                            > img {
+                                width: 20px;
+                                height: 20px;
+                                background: none;
+                            }
+                            > p {
+                                margin: 5px 0 ;
+                            }
+                            height :2em;
+                            display: flex;
+                            align-items: center;
+                        }
+                        > p, > h3 {
+                            margin: 5px 0 ;
+                            width: 100%;
+                        }
+                        > h3 {
+                            
+                            height :3em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // format telephone
+    @media screen and (max-width: 1024px){
         nav {
             width: 100%;
             display: flex;
@@ -812,15 +868,10 @@ a.bouton:has(+ .liste_avis) {
             bottom: 0;
             background-color: $couleur_background;
             height: 3em;
-            
         }
         > main {
             > div {
-                display: flex;
-                flex-direction: column;
-                
                 > ul {
-                    list-style: none;
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 10px;
@@ -832,29 +883,10 @@ a.bouton:has(+ .liste_avis) {
                         align-items: center;
                         width: 100%;
                         margin: 20px;
-
-                        > a {
-                            color : black;
-                            text-decoration: none;
-                            
+                        > a {  
                             > img {
-                                width: 30vw;
-                                height: 30vw;
-                                object-fit: contain;
-                                background-color: $couleur_fond_produit;
-                                border-radius: $angle_petit;
+                                width: 100%;  
                             }   
-                            > div {
-                                > img {
-                                    width: 20px;
-                                    height: 20px;
-                                    background: none;
-                                }
-                            }
-                            > p , > h3 {
-                                margin: 0;
-                                width: $image_normal;
-                            }
                         }
                     }
                 }
@@ -862,54 +894,7 @@ a.bouton:has(+ .liste_avis) {
         }
     }
 }
-//format ordinateur
-@media screen and (min-width: 1024px){
-    .accueil {
-        nav {
-            display: none;
-        }
-        > main {
-            > div {
-                display: flex;
-                flex-direction: column;
-                
-                > ul {
-                    display: flex;
-                    flex-direction: row;
-                    overflow:auto;
-                    list-style: none;
-                    
-                    > li {
-                        width: 20vw;
-                        margin: 20px 40px 20px 20px;
 
-                        > a {
-                            color : black;
-                            text-decoration: none;
-                            > img {
-                                width: 15vw;
-                                height: 15vw;
-                                object-fit: contain;
-                                background-color: $couleur_fond_produit;
-                                border-radius: $angle_petit;
-                            }   
-                            > div {
-                                > img {
-                                    width: 20px;
-                                    height: 20px;
-                                    background: none;
-                                }
-                            }
-                            > p , > h3 {
-                                margin: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 .prix {
     color: $couleur_prix;
     font-size: 2.2em;
