@@ -561,59 +561,6 @@ hr {
   background-color: white;
 }
 
-#avis_vendeur {
-  
-      section{
-        display: flex;
-        justify-content: center;
-        /*
-          ul{
-              @include contenu_centre_vertical();
-              gap: 10px;
-
-              hr{
-                  width: 50%;
-                  color: $nuance_primaire_vendeur;
-              }
-
-              li{
-                  @include contenu_centre_horizontal();
-                  list-style: none;
-
-                  >div:first-child{
-                      @include contenu_centre_vertical();
-                      width: 40vw;
-                      align-items: start;
-
-                      .info{
-                          color: $nuance_primaire_vendeur;
-                      }
-
-                      >div{
-                          @include contenu_centre_horizontal();
-                          img{
-                              width: 20px;
-                              height: 20px;
-                          }
-                      }
-                  }
-
-                  >div:last-child{
-                      width: 5vw;
-                      height: 5vw;
-
-                      img{
-                          width: 5vw;
-                          height: 5vw;
-                          object-fit: contain;
-                          background-color: white;
-                      }
-                  }
-
-              }
-          }*/
-      }
-}
 #avis_vendeur article {
   display: flex;
   flex-direction: row;
@@ -627,6 +574,56 @@ hr {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: white;
+}
+#avis_vendeur section {
+  display: flex;
+  justify-content: center;
+  /*
+  ul{
+      @include contenu_centre_vertical();
+      gap: 10px;
+
+      hr{
+          width: 50%;
+          color: $nuance_primaire_vendeur;
+      }
+
+      li{
+          @include contenu_centre_horizontal();
+          list-style: none;
+
+          >div:first-child{
+              @include contenu_centre_vertical();
+              width: 40vw;
+              align-items: start;
+
+              .info{
+                  color: $nuance_primaire_vendeur;
+              }
+
+              >div{
+                  @include contenu_centre_horizontal();
+                  img{
+                      width: 20px;
+                      height: 20px;
+                  }
+              }
+          }
+
+          >div:last-child{
+              width: 5vw;
+              height: 5vw;
+
+              img{
+                  width: 5vw;
+                  height: 5vw;
+                  object-fit: contain;
+                  background-color: white;
+              }
+          }
+
+      }
+  }*/
 }
 
 .infos main {

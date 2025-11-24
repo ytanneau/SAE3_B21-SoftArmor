@@ -453,8 +453,11 @@ hr {
             }
         }
     }
-/*
+
     section{
+        display: flex;
+        justify-content: center;
+        /*
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
@@ -499,8 +502,8 @@ hr {
                 }
                 
             }
-        }
-    }*/
+        }*/
+    }
 }
 
 .infos {
