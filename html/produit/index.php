@@ -180,7 +180,13 @@ if ($_POST != NULL) {
                         <li>
                             <div>
                                 <div>
-                                    <img height="40px" width="40px" src="../ressources/27_1.png">
+                                    <?php if (isset($avis['profile'])) {?>
+                                        <img height="40px" width="40px" src="../ressources/27_1.png">
+                                    <?php
+                                        } else {?>
+                                        <img height="40px" width="40px" src="<?=HOME_SITE . 'image/compte.svg'?>">
+                                    <?php } ?>
+
                                     <div class="etoiles">
                                         <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                     </div>
