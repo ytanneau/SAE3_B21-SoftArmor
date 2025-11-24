@@ -56,18 +56,19 @@ try {
     <?php include HOME_SITE . 'header.php' ?>
 
     <main>
+
+    <?php if (!$elts_panier) { ?>
+        <div id="panier_vide">
+            <img src="<?=HOME_SITE?>image/panier_vide.svg">
+            <h2>Votre panier est vide.</h2>
+        </div>
+    <?php } else { ?>
+
         <div class="gauche">
             <article class="entete">
                 <h1>Mon panier</h1>
             </article>
 
-            <?php if (!$elts_panier) { ?>
-                <div id="panier_vide">
-                    <img src="<?=HOME_SITE?>image/panier_vide.svg">
-                    <h2>Votre panier est vide.</h2>
-                </div>
-            <?php } else { ?>
-        
             <ul>
                 <?php 
                     $total_ht = 0;
