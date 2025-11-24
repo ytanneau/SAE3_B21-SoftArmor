@@ -288,7 +288,7 @@ if ($numEtape == 1) {
             <?php } ?>
 
 
-            <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['id_produit'])) {echo htmlentities($_GET['id_produit']);} else {echo "panier";}?>">
+            <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['produit'])) {echo htmlentities($_GET['produit']);} else {echo "panier";}?>">
             <input type="hidden" name="form" id="form" required value="adresse">
             
             <input type="submit" value="Continuer l'achat" class="bouton">
