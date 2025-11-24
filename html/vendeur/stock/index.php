@@ -72,6 +72,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
             </div>
         </main>
     </body>
+    <?php include HOME_SITE . "vendeur/footer.php" ?>
 </html>
 
 
