@@ -1163,10 +1163,9 @@ aside {
 }*/
 aside {
   position: sticky;
-  top: 7em;
-  font-size: 1.2em;
+  top: 5em;
+  margin: 0 3em 2em 3em;
   font-size: 1.4em;
-  width: 20vw;
 }
 aside .prix {
   font-family: "Montserrat";
@@ -1243,4 +1242,16 @@ aside input.bouton:hover {
 .etoile {
   width: 30px;
   height: 30px;
+}
+
+.anonymisation-client main {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=style.css.map */
