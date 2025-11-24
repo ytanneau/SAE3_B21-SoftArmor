@@ -141,12 +141,12 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 <body class="form_client">
     <?php include HOME_SITE . 'header.php'; ?>
 
-    <main>
-        <h1>Réinitialisation du mot de passe</h1>
-        
+    <main>  
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
             <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+
                 <input type="hidden" name="etape" value="etape_adresse">
 
                 <label for="email">Votre adresse e-mail</label>
