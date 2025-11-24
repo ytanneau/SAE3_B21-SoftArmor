@@ -69,7 +69,7 @@
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-            <br>Note moyenne : <?=htmlentities($produit['note_moy'])?>
+            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'], 1))?>
             <br>
 <?php
     afficher_moyenne_note($produit['note_moy']);

@@ -38,6 +38,7 @@
     if (isset($erreurs) && $erreurs == []) {
 ?>
         <h1>Félicitations vous avez crée votre compte</h1>
+        <a href="../">Connectez-vous</a>
 <?php
     }
     else if (isset($erreurs['fatal'])){
