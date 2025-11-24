@@ -69,8 +69,7 @@ if ($_POST != NULL) {
     <title><?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
 <body>
-    <?php include HOME_SITE . "header.php"; 
-    include HOME_SITE . "footer.php" ?>
+    <?php include HOME_SITE . "header.php"; ?>
 
     <script>
         function changer(val) {
@@ -239,5 +238,6 @@ if ($_POST != NULL) {
             </form>
         </aside>
     </main>
+        <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>
