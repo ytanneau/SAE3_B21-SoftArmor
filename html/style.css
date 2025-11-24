@@ -784,6 +784,11 @@ main:has(.detail_produit) {
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width: 1024px) {
+  main:has(.detail_produit) {
+    flex-direction: column;
+  }
+}
 
 div.gauche {
   flex-basis: 60%;
@@ -1233,7 +1238,7 @@ aside input.bouton:hover {
 @media screen and (max-width: 1024px) {
   aside {
     position: static;
-    order: 1;
+    order: -1;
   }
   aside p {
     margin-bottom: 0;
