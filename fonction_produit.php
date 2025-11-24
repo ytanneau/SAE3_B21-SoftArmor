@@ -380,7 +380,7 @@
     function update_stock($id_produit, $quantite){
         global $pdo;
 
-        $ancienne_quantite = detail_produit($id_produit)['stock'];
+        $ancienne_quantite = detail_produit($id_produit)['quantite'];
         if (str_contains($quantite, '+') or str_contains($quantite, '-')) {
             $nouvelle_quantite = $ancienne_quantite + (int) $quantite;
         }

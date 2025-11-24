@@ -163,7 +163,7 @@ if ($numEtape == 3) {
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
 
     if ($_POST['id_produit'] != 'panier') {
-        $stock = detail_produit($_POST['id_produit'])['stock'];
+        $stock = detail_produit($_POST['id_produit'])['quantite'];
         if ($stock >= 1) {
 
             $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
@@ -189,7 +189,7 @@ if ($numEtape == 3) {
         $produits_plus_en_stock = [];
 
         foreach ($liste_produits as $produit) {
-            if (detail_produit($produit['id_produit'])['stock'] < $produit['quantite_panier']) {
+            if (detail_produit($produit['id_produit'])['quantite'] < $produit['quantite_panier']) {
                 array_push($produits_plus_en_stock, $produit);
             }
         }
