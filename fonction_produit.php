@@ -377,6 +377,12 @@
         }
     }
 
+    /*
+    Modifie la valeur du stock d'un produit
+    si on veut mettre une valeur, juste mettre un entier dans la quantité
+    si on veut ajouter une valeur au stock (`stock += 1`), alors mettre "+1" en quantité (donc un str)
+    si on veut retirer une valeur du stock (`stock -= 1`), alors mettre "-1" en quantité (donc un str)
+    */
     function update_stock($id_produit, $quantite){
         global $pdo;
 
