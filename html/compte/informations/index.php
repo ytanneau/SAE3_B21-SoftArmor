@@ -410,5 +410,6 @@ unset($pdo);
             </ul>
         </section>
     </main>
+    <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>
