@@ -6,7 +6,7 @@ body {
 
 main {
   padding: 2.5em;
-  line-height: 1.5em;
+  line-height: 2em;
 }
 
 .image_produit_moyen {
@@ -832,11 +832,6 @@ a.bouton:has(+ .liste_avis):hover {
   display: flex;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
 #footer_client .footer {
   background: #000;
   color: #fff;
@@ -918,7 +913,6 @@ a.bouton:has(+ .liste_avis):hover {
   }
 }
 
->>>>>>> Stashed changes
 .grave {
   border: none;
   border-radius: 50px;

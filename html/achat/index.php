@@ -206,7 +206,10 @@ if ($numEtape == 3) {
     </head>
 
     <body class="form_client">
+        <?php include HOME_SITE . 'header.php'; ?>
+
         <main>
+            
 
 <?php
 
@@ -216,6 +219,8 @@ if ($numEtape == 1) {
 ?>
 
         <form action="" method="post">
+            <a href="../"><img src="../image/retour.svg"></a>
+            
             <h2>Entrez votre adresse</h2>
 
             <label for="adresse">Adresse</label>
