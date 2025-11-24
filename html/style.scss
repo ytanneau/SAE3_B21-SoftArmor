@@ -698,7 +698,7 @@ h3 {
 .liste {
     main {
         display: flex;
-        
+
         img {
             object-fit: contain;
         }
@@ -753,6 +753,10 @@ h3 {
         h3 {
             margin-top: 0;
             font-size: 1.6em;
+        }
+
+        aside {
+            top: 8em;
         }
 
         @media screen and (max-width: 1024px) {
