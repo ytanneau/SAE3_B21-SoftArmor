@@ -61,8 +61,10 @@ try {
                 <h1>Mon panier</h1>
         
                 <?php if (!$elts_panier) { ?>
-                    <img src="<?=HOME_SITE?>image/panier_vide.svg">
-                    <h2>Votre panier est vide.</h2>
+                    <div id="panier_vide">
+                        <img src="<?=HOME_SITE?>image/panier_vide.svg">
+                        <h2>Votre panier est vide.</h2>
+                    </div>
                 <?php } else { ?>
             </article>
         
