@@ -60,7 +60,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_recent as $row) { ?>
                 <li>
-                    <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
+                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
                         <img height="200px" src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
@@ -97,7 +97,7 @@ unset($pdo);
             foreach ($produit_reduit as $row){  
             ?>
             <li>
-                <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
+                <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
                     <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
@@ -136,7 +136,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
-                    <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
+                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
                         <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
@@ -172,7 +172,7 @@ unset($pdo);
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
                 <li>
-                    <a href="/produit/?id_produit=<?= $row['id_produit'];?>"> 
+                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
                         <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
