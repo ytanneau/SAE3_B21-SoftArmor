@@ -789,7 +789,7 @@ div:has(.detail_produit) {
   flex-basis: 60%;
 }
 
-div:has(aside) {
+div:has(> aside) {
   flex-grow: 1;
 }
 
