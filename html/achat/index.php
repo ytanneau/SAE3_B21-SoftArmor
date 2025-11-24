@@ -220,7 +220,7 @@ if ($numEtape == 1) {
 
         <form action="" method="post">
             <a href="../"><img src="../image/retour.svg"></a>
-            
+
             <h2>Entrez votre adresse</h2>
 
             <label for="adresse">Adresse</label>
@@ -237,7 +237,7 @@ if ($numEtape == 1) {
             <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
 
             <label for="complement_adresse">Complément adresse</label>
-            <input type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>" class="champ text">
+            <textarea type="text" name="complement_adresse" id="complement_adresse" value="<?=htmlentities($adresse_client['complement_adresse'] ?? '')?>" class="champ text">
             <p class="contrainte">informations complémentaires</p>
 
 

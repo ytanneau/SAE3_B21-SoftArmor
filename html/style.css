@@ -49,7 +49,9 @@ main {
   padding-right: 0;
 }
 .formulaire_client .text {
+  font-family: "Inter";
   height: 10em;
+  resize: none;
   text-align: start;
 }
 .formulaire_client .petit {
@@ -353,7 +355,9 @@ hr {
   padding-right: 0;
 }
 #connect_vendeur main form .text, #inscription_vendeur main form .text {
+  font-family: "Inter";
   height: 10em;
+  resize: none;
   text-align: start;
 }
 #connect_vendeur main form .petit, #inscription_vendeur main form .petit {
@@ -440,7 +444,9 @@ hr {
   padding-right: 0;
 }
 #connect_client main form .text, #inscription_client main form .text {
+  font-family: "Inter";
   height: 10em;
+  resize: none;
   text-align: start;
 }
 #connect_client main form .petit, #inscription_client main form .petit {
@@ -512,7 +518,9 @@ hr {
   padding-right: 0;
 }
 .form_client main form .text {
+  font-family: "Inter";
   height: 10em;
+  resize: none;
   text-align: start;
 }
 .form_client main form .petit {
@@ -660,7 +668,9 @@ hr {
   padding-right: 0;
 }
 .infos form .text {
+  font-family: "Inter";
   height: 10em;
+  resize: none;
   text-align: start;
 }
 .infos form .petit {
@@ -832,87 +842,99 @@ a.bouton:has(+ .liste_avis):hover {
   display: flex;
 }
 
-#footer .footer {
+.footer {
   background: #000;
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
 }
-#footer .footer a {
+
+.footer a {
   color: #dcdcdc;
   text-decoration: none;
   font-size: 14px;
 }
-#footer .footer a:hover {
+
+.footer a:hover {
   text-decoration: underline;
 }
-#footer .footer-top {
+
+.footer-top {
   display: flex;
   justify-content: space-between;
   gap: 40px;
   padding-bottom: 30px;
   border-bottom: 1px solid #333;
 }
-#footer .footer-logos {
+
+.footer-logos {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-#footer .footer-logos .logo {
+
+.footer-logos .logo {
   width: 150px;
 }
-#footer .footer-columns {
+
+.footer-columns {
   display: flex;
   flex: 1;
   justify-content: space-around;
 }
-#footer .footer-column h4 {
+
+.footer-column h4 {
   margin-bottom: 10px;
   font-size: 15px;
   color: #ffffff;
 }
-#footer .footer-column a {
+
+.footer-column a {
   display: block;
   margin-bottom: 5px;
 }
-#footer .footer-socials {
+
+.footer-socials {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-#footer .footer-socials img {
+
+.footer-socials img {
   width: 26px;
   height: 26px;
 }
-#footer .footer-bottom {
+
+.footer-bottom {
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
 }
-#footer .footer-bottom .footer-links {
+
+.footer-bottom .footer-links {
   display: flex;
   gap: 25px;
 }
+
 @media (max-width: 900px) {
-  #footer .footer-top {
+  .footer-top {
     flex-direction: column;
     align-items: flex-start;
   }
-  #footer .footer-columns {
+  .footer-columns {
     width: 100%;
     justify-content: space-between;
   }
-  #footer .footer-socials {
+  .footer-socials {
     flex-direction: row;
   }
-  #footer .footer-bottom {
+  .footer-bottom {
     flex-direction: column;
     gap: 15px;
   }
 }
-
 .grave {
   border: none;
   border-radius: 50px;
