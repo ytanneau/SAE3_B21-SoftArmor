@@ -1246,15 +1246,24 @@ aside input.bouton:hover {
 }
 
 .anonymisation-client main {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
   font-weight: bold;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
   justify-content: center;
+}
+.anonymisation-client main:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
 
 .error {
