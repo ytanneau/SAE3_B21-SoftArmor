@@ -49,9 +49,7 @@ main {
   padding-right: 0;
 }
 .formulaire_client .text {
-  font-family: "Inter";
   height: 10em;
-  resize: none;
   text-align: start;
 }
 .formulaire_client .petit {
@@ -355,9 +353,7 @@ hr {
   padding-right: 0;
 }
 #connect_vendeur main form .text, #inscription_vendeur main form .text {
-  font-family: "Inter";
   height: 10em;
-  resize: none;
   text-align: start;
 }
 #connect_vendeur main form .petit, #inscription_vendeur main form .petit {
@@ -444,9 +440,7 @@ hr {
   padding-right: 0;
 }
 #connect_client main form .text, #inscription_client main form .text {
-  font-family: "Inter";
   height: 10em;
-  resize: none;
   text-align: start;
 }
 #connect_client main form .petit, #inscription_client main form .petit {
@@ -518,9 +512,7 @@ hr {
   padding-right: 0;
 }
 .form_client main form .text {
-  font-family: "Inter";
   height: 10em;
-  resize: none;
   text-align: start;
 }
 .form_client main form .petit {
@@ -672,9 +664,7 @@ hr {
   padding-right: 0;
 }
 .infos form .text {
-  font-family: "Inter";
   height: 10em;
-  resize: none;
   text-align: start;
 }
 .infos form .petit {
@@ -909,7 +899,6 @@ a.bouton:has(+ .liste_avis):hover {
   display: flex;
   gap: 25px;
 }
-
 @media (max-width: 900px) {
   #footer_client .footer-top {
     flex-direction: column;
@@ -927,6 +916,7 @@ a.bouton:has(+ .liste_avis):hover {
     gap: 15px;
   }
 }
+
 .grave {
   border: none;
   border-radius: 50px;
