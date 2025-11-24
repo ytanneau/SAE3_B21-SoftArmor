@@ -118,7 +118,7 @@ hr {
             }
 
             &:hover {
-                background-color: adjust-color($color: $nuance, $lightness: 15%);
+                background-color: adjust-color($color: $nuance, $lightness: 5%);
             }
         }
     }
