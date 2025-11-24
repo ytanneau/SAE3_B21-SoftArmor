@@ -596,7 +596,7 @@ div:has(> aside) {
                 align-self: center;
                 position: relative;
                 background-color: $couleur_primaire_client;
-
+                color:$couleur_background;
             }
             .gauche {
                 left: 50px;

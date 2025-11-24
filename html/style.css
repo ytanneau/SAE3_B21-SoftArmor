@@ -983,6 +983,7 @@ div:has(> aside) {
   align-self: center;
   position: relative;
   background-color: #3157A3;
+  color: #FFFFFF;
 }
 .accueil > main > div .gauche {
   left: 50px;
