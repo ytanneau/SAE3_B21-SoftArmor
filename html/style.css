@@ -797,6 +797,11 @@ div.gauche {
 div:has(> aside) {
   flex-grow: 1;
 }
+@media screen and (max-width: 1024px) {
+  div:has(> aside) {
+    order: -1;
+  }
+}
 
 .detail_produit {
   font-family: "Inter";
@@ -1085,6 +1090,10 @@ h3 {
 .liste main .entete > * {
   margin-right: 3em;
 }
+.liste main ul {
+  width: 60vw;
+  padding: 0;
+}
 .liste main ul li > article:nth-child(2) {
   flex-grow: 1;
 }
@@ -1144,9 +1153,16 @@ h3 {
   }
   .liste main ul {
     order: 2;
+    width: 100%;
   }
   .liste main img {
     width: 10em;
+  }
+  .liste main li > article:nth-child(2) p:nth-child(2) {
+    display: none;
+  }
+  .liste main li > article:nth-child(2) p, .liste main li > article:nth-child(2) h3 {
+    font-size: 1em;
   }
 }
 
