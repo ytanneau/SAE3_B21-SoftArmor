@@ -1101,6 +1101,18 @@ h3 {
   margin-top: 0;
   font-size: 1.6em;
 }
+@media screen and (max-width: 1024px) {
+  .liste main {
+    display: flex;
+    flex-direction: column;
+  }
+  .liste main .entete {
+    order: 0;
+  }
+  .liste main ul {
+    order: 2;
+  }
+}
 
 /*
 aside {
@@ -1188,6 +1200,16 @@ aside input.bouton {
 }
 aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+@media screen and (max-width: 1024px) {
+  aside {
+    position: static;
+    order: 1;
+    width: 100%;
+  }
+  aside p {
+    margin-bottom: 0;
+  }
 }
 
 .etoiles {
