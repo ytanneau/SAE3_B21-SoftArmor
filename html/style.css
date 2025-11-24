@@ -339,7 +339,7 @@ hr {
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: #3157A3;
+  background-color: #BB2BB2;
   color: white;
   border: none;
   border-radius: 50px;
@@ -348,7 +348,7 @@ hr {
   cursor: pointer;
 }
 #connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
-  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
 #connect_vendeur, #connect_client {
@@ -445,7 +445,7 @@ hr {
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: #3157A3;
+  background-color: #BB2BB2;
   color: white;
   border: none;
   border-radius: 50px;
@@ -454,7 +454,7 @@ hr {
   cursor: pointer;
 }
 #connect_client main .bouton:hover, #inscription_client main .bouton:hover {
-  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
 #inscription_vendeur, #inscription_client {
