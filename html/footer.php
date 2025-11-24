@@ -6,12 +6,12 @@
   <title>Titre de la page</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<footer class="footer">
+<footer id="header_client" class="footer">
   <div class="footer-top">
 
     <div class="footer-logos">
-      <img src="/alizon-logo-blanc.png" alt="Alizon" class="logo">
-      <img src="/path/alizon-vendeur-blanc.png" alt="Alizon vendeur" class="logo">
+      <img src="<?= $image ?>/alizon-logo-blanc.png" alt="Alizon" class="logo">
+      <img src="<?= $image ?>/path/alizon-vendeur-blanc.png" alt="Alizon vendeur" class="logo">
     </div>
 
     <div class="footer-columns">
@@ -41,12 +41,12 @@
     </div>
 
     <div class="footer-socials">
-      <a href="#"><img src="/path/x-white.svg" alt="X"></a>
-      <a href="#"><img src="/path/instagram-white.svg" alt="Instagram"></a>
-      <a href="#"><img src="/path/facebook-white.svg" alt="Facebook"></a>
-      <a href="#"><img src="/path/youtube-white.svg" alt="YouTube"></a>
-      <a href="#"><img src="/path/tiktok-white.svg" alt="TikTok"></a>
-      <a href="#"><img src="/path/linkedin-white.svg" alt="LinkedIn"></a>
+      <a href="#"><img src="<?= $image ?>/x-white.svg" alt="X"></a>
+      <a href="#"><img src="<?= $image ?>/instagram-white.svg" alt="Instagram"></a>
+      <a href="#"><img src="<?= $image ?>/facebook-white.svg" alt="Facebook"></a>
+      <a href="#"><img src="<?= $image ?>/youtube-white.svg" alt="YouTube"></a>
+      <a href="#"><img src="<?= $image ?>/tiktok-white.svg" alt="TikTok"></a>
+      <a href="#"><img src="<?= $image ?>/linkedin-white.svg" alt="LinkedIn"></a>
     </div>
 
   </div>
