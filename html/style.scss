@@ -262,6 +262,12 @@ hr {
     }
 }
 
+.text {
+    resize: none;
+    height: 10em;
+    font-family: $font_text;
+}
+
 .infos {
     main {
         display: flex;

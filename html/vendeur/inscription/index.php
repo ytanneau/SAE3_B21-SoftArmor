@@ -54,7 +54,7 @@
         <h2>S'inscrire</h2>
 
         <form action="" method="post">
-            <label for="raisonSocial">Raison Social</label>
+            <label for="raisonSocial">Raison sociale</label>
             <input type="text" 
                 name="raisonSocial"
                 id="raisonSocial"
@@ -75,7 +75,7 @@
     }
 ?>
             <br>
-            <label for="numSiret">Numero de siret</label>
+            <label for="numSiret">Numéro de SIRET</label>
             <input type="text" 
                 name="numSiret"
                 id="numSiret"
@@ -84,7 +84,7 @@
                 value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
                 required
                 class="champ">
-            <p class="contrainte">Numero a 14 chiffres</p>
+            <p class="contrainte">Numéro à 14 chiffres</p>
 <?php
     if (isset($erreurs['numero_siret'])){
 ?>
@@ -105,7 +105,7 @@
                 value="<?php if (isset($_POST['numCobrec'])) echo htmlentities($_POST['numCobrec'])?>"
                 required
                 class="champ">
-            <p class="contrainte">Numero a 15 chiffres donnée par la COBREC</p>
+            <p class="contrainte">Numéro a 15 chiffres donné par la COBREC</p>
 <?php
     if (isset($erreurs['numero_cobrec'])){
 ?>
@@ -145,7 +145,7 @@
                 value="<?php if (isset($_POST['adresse'])) echo htmlentities($_POST['adresse'])?>"
                 required
                 class="champ">
-            <p class="contrainte">Numero nom rue commune</p>
+            <p class="contrainte">Numéro, nom de la voie, commune</p>
 <?php
     if (isset($erreurs['adresse'])){
 ?>
@@ -157,13 +157,14 @@
 ?>
 
             <br>
-            <label for="compAdresse">Compément adresse</label>
-            <input type="text"
+            <label for="compAdresse">Complément d'adresse</label>
+            <textarea type="text"
                 name="compAdresse"
                 id="compAdresse"
-                value="<?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>"
-                class="champ">
-            <p class="contrainte">information compémentaire</p>
+                class="champ text">
+                <?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>
+            </textarea>
+            <p class="contrainte">Informations complémentaires</p>
 
             <br>
             <label for="codePostal">Code postal</label>
@@ -174,7 +175,7 @@
                 value="<?php if (isset($_POST['codePostal'])) echo htmlentities($_POST['codePostal'])?>"
                 required
                 class="champ">
-            <p class="contrainte">Nombre a 5 chiffres</p>
+            <p class="contrainte">Nombre à 5 chiffres</p>
 <?php
     if (isset($erreurs['code_postal'])){
 ?>
@@ -194,7 +195,7 @@
                 maxlength="100"
                 required
                 class="champ">
-            <p class="contrainte">minum 12 caractères</p>
+            <p class="contrainte">Minimum 12 caractères</p>
 <?php
     if (isset($erreurs['mdp'])){
 ?>
@@ -206,7 +207,7 @@
 ?>
 
             <br>
-            <label for="mdpc">Mot de passe de comfirmation</label>
+            <label for="mdpc">Mot de passe de confirmation</label>
             <input type="password" 
                 name="mdpc"
                 id="mdpc"

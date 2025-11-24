@@ -628,6 +628,12 @@ hr {
   }*/
 }
 
+.text {
+  resize: none;
+  height: 10em;
+  font-family: "Inter";
+}
+
 .infos main {
   display: flex;
 }
@@ -913,6 +919,7 @@ a.bouton:has(+ .liste_avis):hover {
   display: flex;
   gap: 25px;
 }
+
 @media (max-width: 900px) {
   .footer-top {
     flex-direction: column;
@@ -930,7 +937,6 @@ a.bouton:has(+ .liste_avis):hover {
     gap: 15px;
   }
 }
-
 .grave {
   border: none;
   border-radius: 50px;
