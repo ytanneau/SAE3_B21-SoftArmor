@@ -26,7 +26,7 @@ function ecrire_nom($rows){
     foreach ($rows as $row){
         ?>
         
-        <table>
+        <table id=<?= htmlentities($row['id_produit'] ?? '')?>>
             <tr>
                 <td><img src="MenuBurger.png" alt=""> </td>
                 <td> 

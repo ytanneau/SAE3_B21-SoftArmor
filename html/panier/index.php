@@ -132,7 +132,7 @@ try {
 
     </main>
 </body>
-
+    <?php include HOME_SITE . "footer.php" ?>
     <script>
         function actualiser() {
             window.location.reload();

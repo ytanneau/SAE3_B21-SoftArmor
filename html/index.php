@@ -212,5 +212,6 @@ unset($pdo);
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
     <script src="script.js"></script>
+    <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>

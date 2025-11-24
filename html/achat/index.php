@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged_in'])) {
 require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
-require_once HOME_SITE . "link_head.php";
+
 $numEtape = -1;
 
 // $_POST['form'] = le nom du dernier formulaire envoyé par l'utilisateur
@@ -23,8 +23,8 @@ if (!isset($_POST['form'])) {
     $numEtape = 1;
 
     // si y'a pas de produit dans le lien, ou que c'est pas par le panier qu'on a atteint cette page, alors problème
-    if (!isset($_GET['id_produit'])) {
-        header("location: " . HOME_GIT, );
+    if (!isset($_GET['produit'])) {
+        header("location: " . HOME_GIT);
     }
 
     
@@ -229,6 +229,7 @@ if ($numEtape == 3) {
         <title>Alizon - Achat</title>
         <meta charset="UTF-8">
         <meta lang="fr">
+        <?php include HOME_SITE . 'link_head.php' ?>
     </head>
 
     <body class="form_client">
