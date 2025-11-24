@@ -742,6 +742,23 @@ h3 {
             margin-top: 0;
             font-size: 1.6em;
         }
+
+        @media screen and (max-width: 1024px) {
+            display: flex;
+            flex-direction: column;
+
+            .entete {
+                order: 0;
+            }
+
+            ul {
+                order: 2;
+            }
+
+            img {
+                width: 10em;
+            }
+        }
     }
 }
 
@@ -808,6 +825,16 @@ aside {
 
     input.bouton {
         @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    }
+
+    @media screen and (max-width : 1024px){
+        position: static;
+        order: 1;
+        width: 100%;
+
+        p {
+            margin-bottom: 0;
+        }     
     }
 }
 
