@@ -54,7 +54,7 @@
             try{
                 if (!sql_check_email($pdo, $email)){
                     if (sql_check_cle($pdo, $numCobrec)){
-                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp);
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec);
                     }
                     else{
                         $erreurs['numero_cobrec'] = EXISTE_PAS;
@@ -653,7 +653,7 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp) {
+    function sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
 
         $requete = $pdo->prepare("INSERT INTO _compte (email, mdp) VALUES (:email, :mdp)");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -690,6 +690,7 @@
 
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
     function sql_update_client($pdo, $nom, $prenom, $pseudo, $email, $adresse, $code_postal,$complement_adresse,$mdpc , $id_compte,$id_adresse) {
         $nom = strtoupper(trim($nom));
         $prenom = ucfirst(trim($prenom));

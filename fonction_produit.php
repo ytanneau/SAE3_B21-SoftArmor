@@ -386,5 +386,4 @@
         $requete->execute();
         $res = $requete->fetch(PDO::FETCH_ASSOC);
         return $res;
-    
     }
