@@ -907,6 +907,19 @@ aside {
     }
 }
 
+.desactivation-vendeur {
+    main form input{
+        @include bouton();
+        background-color: $rouge;
+        color: white;
+        font-size: $font_size_normal;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: $angle_petit;
+        cursor: pointer;
+    }
+}
+
 .error{
         color: $rouge;
 }
