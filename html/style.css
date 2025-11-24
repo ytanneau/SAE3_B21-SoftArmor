@@ -856,24 +856,39 @@ div:has(> aside) {
   display: flex;
 }
 
+<<<<<<< Updated upstream
 .footer {
+=======
+#footer_client .footer {
+>>>>>>> Stashed changes
   background: #000;
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
 }
+<<<<<<< Updated upstream
 
 .footer a {
+=======
+#footer_client .footer a {
+>>>>>>> Stashed changes
   color: #dcdcdc;
   text-decoration: none;
   font-size: 14px;
 }
+<<<<<<< Updated upstream
 
 .footer a:hover {
   text-decoration: underline;
 }
 
 .footer-top {
+=======
+#footer_client .footer a:hover {
+  text-decoration: underline;
+}
+#footer_client .footer-top {
+>>>>>>> Stashed changes
   display: flex;
   justify-content: space-between;
   gap: 40px;
@@ -886,12 +901,19 @@ div:has(> aside) {
   flex-direction: column;
   gap: 20px;
 }
+<<<<<<< Updated upstream
 
 .footer-logos .logo {
   width: 150px;
 }
 
 .footer-columns {
+=======
+#footer_client .footer-logos .logo {
+  width: 150px;
+}
+#footer_client .footer-columns {
+>>>>>>> Stashed changes
   display: flex;
   flex: 1;
   justify-content: space-around;
@@ -907,12 +929,17 @@ div:has(> aside) {
   display: block;
   margin-bottom: 5px;
 }
+<<<<<<< Updated upstream
 
 .footer-socials {
+=======
+#footer_client .footer-socials {
+>>>>>>> Stashed changes
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
+<<<<<<< Updated upstream
 
 .footer-socials img {
   width: 26px;
@@ -920,19 +947,31 @@ div:has(> aside) {
 }
 
 .footer-bottom {
+=======
+#footer_client .footer-socials img {
+  width: 26px;
+  height: 26px;
+}
+#footer_client .footer-bottom {
+>>>>>>> Stashed changes
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
 }
+<<<<<<< Updated upstream
 
 .footer-bottom .footer-links {
+=======
+#footer_client .footer-bottom .footer-links {
+>>>>>>> Stashed changes
   display: flex;
   gap: 25px;
 }
 
 @media (max-width: 900px) {
+<<<<<<< Updated upstream
   .footer-top {
     flex-direction: column;
     align-items: flex-start;
@@ -945,6 +984,20 @@ div:has(> aside) {
     flex-direction: row;
   }
   .footer-bottom {
+=======
+  #footer_client .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #footer_client .footer-columns {
+    width: 100%;
+    justify-content: space-between;
+  }
+  #footer_client .footer-socials {
+    flex-direction: row;
+  }
+  #footer_client .footer-bottom {
+>>>>>>> Stashed changes
     flex-direction: column;
     gap: 15px;
   }
