@@ -61,7 +61,8 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         <title>Alizon Vendeur - Stock</title>
     </head>
     <body>
-        <?php include HOME_SITE . 'vendeur/header.php'; ?>
+        <?php include HOME_SITE . 'vendeur/header.php'; 
+        include HOME_SITE . 'vendeur/footer.php'?>
 
         <main>
             <!-- affiche tous les produits -->
