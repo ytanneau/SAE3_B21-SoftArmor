@@ -47,9 +47,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
         
 <?php
-    if (isset($erreurs['connect'])){
+    if (isset($erreurs['connecte'])){
 ?>
-        <h3 class="error"><?=$erreurs['connect']?></h3>
+        <h3 class="error"><?=$erreurs['connecte']?></h3>
 <?php
     }
 ?>
