@@ -7,8 +7,8 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :raisonSociale, description = :desc$description WHERE id_compte = :id_compte");
-            $stmt->execute([':raisonSociale' => $raisonSociale, ':desc$description' => $description, ':id_compte' => $id_compte]);
+            $stmt = $pdo->prepare("UPDATE _vendeur SET raison_sociale = :raisonSociale, description = :description WHERE id_compte = :id_compte");
+            $stmt->execute([':raisonSociale' => $raisonSociale, ':description' => $description, ':id_compte' => $id_compte]);
         } catch(PDOException $e) {
             throw $e;
         }
