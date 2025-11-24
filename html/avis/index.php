@@ -24,7 +24,7 @@
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
             //ob_end_flush();
-            header('location: '. HOME_SITE . 'compte/connextion');
+            header('location: '. HOME_SITE . 'compte/connexion');
         }
     }
 
