@@ -62,6 +62,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
+        <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
 
         <main>
             <!-- affiche tous les produits -->
