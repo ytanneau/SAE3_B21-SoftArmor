@@ -55,8 +55,8 @@ unset($pdo);
 
     <div>
         <h1>Produits ajoutés récemment</h1>
-        <button class="fleche-gauche-ajout-recent"><</button>
-        <ul class="container-recent">
+        <button class="fleche gauche recent"><</button>
+        <ul class="container recent">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_recent as $row) { ?>
@@ -83,7 +83,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche-droite-ajout-recent">></button>
+        <button class="fleche droite recent">></button>
     </div>    
     <hr>
 
