@@ -146,7 +146,7 @@
                 <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
             <?php } ?>
             
-            
+            <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
     </body>
 </html>
