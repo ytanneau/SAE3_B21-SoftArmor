@@ -61,6 +61,7 @@ try {
         <div id="panier_vide">
             <img src="<?=HOME_SITE?>image/panier_vide.svg">
             <h2>Votre panier est vide.</h2>
+            <a href="../"><h2>Revenir au catalogue</h2></a>
         </div>
     <?php } else { ?>
 
