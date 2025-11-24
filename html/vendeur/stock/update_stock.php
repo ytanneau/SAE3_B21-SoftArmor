@@ -33,7 +33,7 @@ if (!(isset($_GET['produit']) && isset($_GET['nb']))){
 if (vendeur_possede_produit($_SESSION['id_compte'], ($_GET['produit'])) == null){
     header('location: .');
 }
-
+var_dump($_GET['nb']);
 update_stock($_GET['produit'], $_GET['nb']);
 header('location: .#'. htmlentities($_GET['produit']));
 
