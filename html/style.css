@@ -297,7 +297,6 @@ hr {
 
 #connect_vendeur, #inscription_vendeur {
   background-color: #6B31D0;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,7 +384,6 @@ hr {
 
 #connect_client, #inscription_client {
   background-color: #3157A3;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

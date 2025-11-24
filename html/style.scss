@@ -231,7 +231,6 @@ main {
 
 @mixin page_connect_inscription($background, $nuance) {
     background-color: $background;
-    height: 100%;
 
     @include contenu_centre_vertical;
 
