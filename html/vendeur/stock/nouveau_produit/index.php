@@ -361,7 +361,7 @@
                     if(!checkMajeur.checked){
                         checkMajeur.checked = 0;
                     }
-
+                    
                     if ((nomPrv.value === "") || (nomPblc.value === "") || 
                         (categorie.value === "") || (tva.value === "") || 
                         (prix.value === "") || (codeBarre.value === "") || 
