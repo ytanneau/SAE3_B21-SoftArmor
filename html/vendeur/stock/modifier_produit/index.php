@@ -40,7 +40,7 @@
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
 
-        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prixProd'],$_POST['tva'],
+        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
@@ -143,33 +143,33 @@
                 <div>
                     <p>
                         <label for="nomPrv">Libellé privé*</label>
-                        <input type="text" name="nomPrv" id="nomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
+                        <input type="text" name="nomPrv" id="idNomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
                     </p>
                     <p>
                         <label for="nomPblc">Libellé public*</label>
-                        <input type="text" name="nomPblc" id="nomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
+                        <input type="text" name="nomPblc" id="idNomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
                     </p>
                 </div>
                 <div>
                     <p>
                         <label for="prixProd">Prix* hors taxe (€)</label>
-                        <input type="text" name="prixProd" id="prixProd" value="<?= $tabInfoProduit['prix']?>" required>
+                        <input type="text" name="prix" id="idPrix" value="<?= $tabInfoProduit['prix']?>" required>
                     </p>
                     <p>
                         <label for="tva">TVA* (%)</label>
-                        <input type="number" name="tva" id="tva" value="<?= $tabInfoProduit['tva']?>" required>
+                        <input type="number" name="tva" id="idtva" value="<?= $tabInfoProduit['tva']?>" required>
                     </p>
                     
                     <p>
                         <label for="codeBarre">Code barre*</label>
-                        <input type="text" name="codeBarre" id="codeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
+                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
                 <div>
                     <p>
                         <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="checkMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
+                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
                     </p>
                     <p>
                         <label for="checkEnLigne">Produit en ligne</label>
@@ -282,12 +282,33 @@
                         <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
                     </p>
                 </div>
-                <input type="submit" value="Valider les modifications" id="modifierProduit">
+                <input type="submit" value="Valider les modifications" id="idModifierProduit">
             </form>
         </main>
         <script>
-            const codeBarre = document.getElementById("codeBarre");
-            const modifierProduit = document.getElementById("modifierProduit");
+            const nomPrv = document.getElementById("idNomPrv");
+            const nomPblc = document.getElementById("idNomPblc");
+            const prix = document.getElementById("idPrix");
+            const tva = document.getElementById("idtva");
+            const codeBarre = document.getElementById("idCodeBarre");
+            const modifierProduit = document.getElementById("idModifierProduit");
+            
+            const descSimple = document.getElementById("idDescSimple");
+            const descDetaille = document.getElementById("idDescDetaille");
+
+            const poidColis = document.getElementById("idPoidColis");
+            const volumeColis = document.getElementById("idVolumeColis");
+
+            descSimple.addEventListener('input', () => {
+                if(descSimple.value.length === 200){
+                    alert("Maximum de caractère atteint");
+                }
+            })
+            descDetaille.addEventListener('input', ()=> {
+                if(descDetaille.value.length === 2000){
+                    alert("Maximum de caratère atteint");
+                }
+            })
             
             codeBarre.addEventListener('input', () =>{
                 codeBarre.value = codeBarre.value.replace(/\D/g,"");
@@ -304,7 +325,9 @@
             }
 
             modifierProduit.addEventListener('click' , () =>  {
-                if(checkCodeBarre(codeBarre.value)){
+                if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
+                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
+                    checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis")
                     event.preventDefault();
                 } else if(confirm("Confirmer la création du produit ?")) {
