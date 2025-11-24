@@ -580,13 +580,20 @@ div:has(> aside) {
     > main {
         > div {
             display: flex;
-            flex-direction: column;
-            
+            flex-direction: row;
+            > button {
+                width: 30px;
+                height: 25px;
+                border-radius: $angle_normal;
+                align-self: center;
+            }
             > ul {
                 display: flex;
                 flex-direction: row;
-                overflow:auto;
+                overflow: hidden;
                 list-style: none;
+                
+
                 
                 > li {
                     width: 20vw;
@@ -644,6 +651,9 @@ div:has(> aside) {
         }
         > main {
             > div {
+                > button {
+                    display:none;
+                }
                 > ul {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
@@ -717,7 +727,7 @@ h3 {
         ul {
             width: 60vw;
             padding: 0;
-
+            
             // la partie description etc. du produit
             li > article:nth-child(2) {
                 flex-grow: 1;

@@ -52,9 +52,8 @@ unset($pdo);
     <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 
     <!--Produit Ajoutés Récemment-->
-
+    <h1>Produits ajoutés récemment</h1>
     <div>
-        <h1>Produits ajoutés récemment</h1>
         <button class="fleche-gauche-ajout-recent"><</button>
         <ul class="container-recent">
             <?php
@@ -89,8 +88,8 @@ unset($pdo);
 
 
     <!-- Produits en réduction -->
-    <div>
-        <h1>Produits en réduction</h1>
+    <h1>Produits en réduction</h1>
+    <div>       
         <button class="fleche-gauche-reduction"><</button>
         <ul class="container-reduction">
             <?php
@@ -129,8 +128,8 @@ unset($pdo);
     
 
     <!-- Produits alimentaires -->
-    <div>
-        <h1>Produits alimentaires</h1>
+     <h1>Produits alimentaires</h1>
+    <div>        
         <button class="fleche-gauche-alimentaire"><</button>
         <ul class="container-alimentaire">
             <?php
@@ -164,8 +163,8 @@ unset($pdo);
     <hr>
 
     <!-- Tous les produits du catalogue -->
-    <div>
-        <h1>Produits du catalogue</h1>
+    <h1>Produits du catalogue</h1>
+    <div>        
         <button class="fleche-gauche-catalogue"><</button>
         <ul class="container-catalogue">
             <?php

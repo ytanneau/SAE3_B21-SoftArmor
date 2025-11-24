@@ -964,12 +964,18 @@ div:has(> aside) {
 }
 .accueil > main > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+.accueil > main > div > button {
+  width: 30px;
+  height: 25px;
+  border-radius: 20px;
+  align-self: center;
 }
 .accueil > main > div > ul {
   display: flex;
   flex-direction: row;
-  overflow: auto;
+  overflow: hidden;
   list-style: none;
 }
 .accueil > main > div > ul > li {
@@ -1020,6 +1026,9 @@ div:has(> aside) {
     bottom: 0;
     background-color: #FFFFFF;
     height: 3em;
+  }
+  .accueil > main > div > button {
+    display: none;
   }
   .accueil > main > div > ul {
     display: grid;
@@ -1080,6 +1089,10 @@ h3 {
 .liste main .entete > * {
   margin-right: 3em;
 }
+.liste main ul {
+  width: 60vw;
+  padding: 0;
+}
 .liste main ul li > article:nth-child(2) {
   flex-grow: 1;
 }
@@ -1139,9 +1152,16 @@ h3 {
   }
   .liste main ul {
     order: 2;
+    width: 100%;
   }
   .liste main img {
     width: 10em;
+  }
+  .liste main li > article:nth-child(2) p:nth-child(2) {
+    display: none;
+  }
+  .liste main li > article:nth-child(2) p, .liste main li > article:nth-child(2) h3 {
+    font-size: 1em;
   }
 }
 
