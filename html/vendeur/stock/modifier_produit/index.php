@@ -157,7 +157,12 @@
                     </p>
                     <p>
                         <label for="tva">TVA* (%)</label>
-                        <input type="number" name="tva" id="idtva" value="<?= $tabInfoProduit['tva']?>" required>
+                        <select name="tva" id="idtva" required>
+                            <option value="">-- Taux de TVA --</option>
+                            <option value="5">5%</option>
+                            <option value="10">10%</option>
+                            <option value="20">20%</option>
+                        </select>
                     </p>
                     
                     <p>
@@ -328,7 +333,7 @@
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
                     checkCodeBarre(codeBarre.value)){
-                    alert("Les champs obligatoires ne sont pas tous remplis")
+                    alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
                 } else if(confirm("Confirmer la création du produit ?")) {
                     alert("Produit modifier");
