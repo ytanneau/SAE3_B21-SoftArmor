@@ -282,9 +282,38 @@
                         <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
                     </p>
                 </div>
-                <input type="submit" value="Valider les modifications">
+                <input type="submit" value="Valider les modifications" id="modifierProduit">
             </form>
         </main>
+        <script>
+            const codeBarre = document.getElementById("codeBarre");
+            const modifierProduit = document.getElementById("modifierProduit");
+            
+            codeBarre.addEventListener('input', () =>{
+                codeBarre.value = codeBarre.value.replace(/\D/g,"");
+                if(codeBarre.value.length < 13){
+                    messageErrCodeBarre.style.display = "block";
+                    event.preventDefault();
+                } else {
+                    messageErrCodeBarre.style.display = "none";
+                }
+            })
+            function checkCodeBarre(chaineCodeBarre){
+                if(chaineCodeBarre.length < 13) return true;
+                else return false;
+            }
+
+            modifierProduit.addEventListener('click' , () =>  {
+                if(checkCodeBarre(codeBarre.value)){
+                    alert("Les champs obligatoires ne sont pas tous remplis")
+                    event.preventDefault();
+                } else if(confirm("Confirmer la création du produit ?")) {
+                    alert("Produit modifier");
+                } else {
+                    event.preventDefault();
+                }
+            })
+        </script>
         <footer>
 
         </footer>
