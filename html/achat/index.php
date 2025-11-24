@@ -176,7 +176,7 @@ if ($numEtape == 3) {
             $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
             $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
 
-            update_stock($_POST['id_produit'], 1);
+            update_stock($_POST['id_produit'], "-1");
         } else {
             echo "Une erreur est survenue ! (le produit n'est plus en stock)";
         }
@@ -202,7 +202,7 @@ if ($numEtape == 3) {
                 $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
                 $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
 
-                update_stock($produit['id_produit'], $produit['quantite_panier']);
+                update_stock($produit['id_produit'], '-' . $produit['quantite_panier']);
             }
         } else {
             echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
