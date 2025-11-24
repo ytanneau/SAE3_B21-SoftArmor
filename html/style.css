@@ -836,82 +836,82 @@ a.bouton:has(+ .liste_avis):hover {
   display: flex;
 }
 
-#footer .footer {
+#footer_client .footer {
   background: #000;
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
 }
-#footer .footer a {
+#footer_client .footer a {
   color: #dcdcdc;
   text-decoration: none;
   font-size: 14px;
 }
-#footer .footer a:hover {
+#footer_client .footer a:hover {
   text-decoration: underline;
 }
-#footer .footer-top {
+#footer_client .footer-top {
   display: flex;
   justify-content: space-between;
   gap: 40px;
   padding-bottom: 30px;
   border-bottom: 1px solid #333;
 }
-#footer .footer-logos {
+#footer_client .footer-logos {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-#footer .footer-logos .logo {
+#footer_client .footer-logos .logo {
   width: 150px;
 }
-#footer .footer-columns {
+#footer_client .footer-columns {
   display: flex;
   flex: 1;
   justify-content: space-around;
 }
-#footer .footer-column h4 {
+#footer_client .footer-column h4 {
   margin-bottom: 10px;
   font-size: 15px;
   color: #ffffff;
 }
-#footer .footer-column a {
+#footer_client .footer-column a {
   display: block;
   margin-bottom: 5px;
 }
-#footer .footer-socials {
+#footer_client .footer-socials {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-#footer .footer-socials img {
+#footer_client .footer-socials img {
   width: 26px;
   height: 26px;
 }
-#footer .footer-bottom {
+#footer_client .footer-bottom {
   margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 13px;
 }
-#footer .footer-bottom .footer-links {
+#footer_client .footer-bottom .footer-links {
   display: flex;
   gap: 25px;
 }
 @media (max-width: 900px) {
-  #footer .footer-top {
+  #footer_client .footer-top {
     flex-direction: column;
     align-items: flex-start;
   }
-  #footer .footer-columns {
+  #footer_client .footer-columns {
     width: 100%;
     justify-content: space-between;
   }
-  #footer .footer-socials {
+  #footer_client .footer-socials {
     flex-direction: row;
   }
-  #footer .footer-bottom {
+  #footer_client .footer-bottom {
     flex-direction: column;
     gap: 15px;
   }
