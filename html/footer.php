@@ -4,7 +4,7 @@
   <div class="footer-top">
 
     <div class="footer-logos">
-      <a href= <?= HOME_SITE . 'vendeur/stock/' ?> >
+      <a href= <?= HOME_SITE?> >
         <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
       </a>
     </div>
@@ -13,7 +13,7 @@
       <div class="footer-column">
         <h4>Catégorie</h4>
         <a href=<?= HOME_SITE . 'vendeur/' ?>>Connexion page vendeur</a>
-        <a href=<?= HOME_SITE . '/' ?>>Connexion page client</a>
+        <a href=<?= HOME_SITE . 'compte/connexion' ?>>Connexion page client</a>
       </div>
 
       <div class="footer-column">
