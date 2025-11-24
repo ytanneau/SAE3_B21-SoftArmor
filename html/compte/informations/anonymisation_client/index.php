@@ -31,7 +31,7 @@
         <title>Anonymisation du compte</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
     </head>
-    <body>
+    <body class="anonymisation-client">
         <?php include HOME_SITE . "header.php"?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">

@@ -101,10 +101,11 @@
         }
     }
 
-    function avis_produit($id_produit){
+    function avis_produit($id_produit, $id_vendeur){
         global $pdo;
-        $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit ");
+        $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit AND id_vendeur=:id_vendeur");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }

@@ -204,9 +204,7 @@ hr {
 
         div:first-child{
             img{
-                width: 10vw;
-                height: 10vw;
-                object-fit: contain;
+                @include image_produit(10vw);
                 background-color: white;
             }
         }
@@ -379,9 +377,17 @@ a.bouton:has(+ .liste_avis) {
     }
 }
 
+main:has(.detail_produit) {
+    display: flex;
+    justify-content: space-between;
+}
+
+div:has(.detail_produit) {
+    flex-basis: 60%;
+}
+
 .detail_produit {
     font-family: $font_text;
-    width: 60vw;
 
     > article:first-child {
         margin: 0 0 2em 0;
@@ -744,6 +750,23 @@ h3 {
             margin-top: 0;
             font-size: 1.6em;
         }
+
+        @media screen and (max-width: 1024px) {
+            display: flex;
+            flex-direction: column;
+
+            .entete {
+                order: 0;
+            }
+
+            ul {
+                order: 2;
+            }
+
+            img {
+                width: 10em;
+            }
+        }
     }
 }
 
@@ -773,8 +796,8 @@ aside {
 }*/
 
 aside {
-    position: fixed;
-    right: 5vw;
+    position: sticky;
+    //right: 5vw;
     top: 7em;
 
     font-size: 1.2em;
@@ -811,6 +834,16 @@ aside {
     input.bouton {
         @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
     }
+
+    @media screen and (max-width : 1024px){
+        position: static;
+        order: 1;
+        width: 100%;
+
+        p {
+            margin-bottom: 0;
+        }     
+    }
 }
 
 // Groupe de 5 étoiles
@@ -822,4 +855,14 @@ aside {
 .etoile {
     width: 30px;
     height: 30px;
+}
+
+
+
+.anonymisation-client {
+    main {
+        @include bouton();
+        @include contenu_centre_horizontal();
+        justify-content: center;
+    }
 }

@@ -104,7 +104,7 @@
 
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
-    background-color: #f3f1fb;
+    background-color: $couleur_fond_produit;
     width: $taille;
     height: $taille;
     border-radius: $angle;
