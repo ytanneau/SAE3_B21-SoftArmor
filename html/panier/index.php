@@ -84,9 +84,9 @@ try {
                         ?>
         
                         <li class="produit_panier">
-                            <img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>">
+                            <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>"></a>
                             <article>
-                                <h3><?= $elt['nom_public'] ?></h3>
+                                <a href="../produit/?produit=<?=$elt['id_produit']?>"><h3><?= $elt['nom_public'] ?></h3></a>
                                 <p><?= $elt['description'] ?></p>
                                 <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
                             </article>
