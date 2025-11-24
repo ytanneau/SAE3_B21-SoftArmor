@@ -400,3 +400,14 @@
 
         return true;
     }
+
+
+    function vendeur_possede_produit($id_vendeur, $id_produit){
+        global $pdo;
+        
+        $requete = $pdo->prepare('SELECT * FROM produit WHERE id_vendeur = :id_vendeur AND :id_produit');
+        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
