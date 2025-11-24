@@ -150,6 +150,12 @@
                     <option value="professeur">Quel était le nom de votre professeur préféré ?</option>
                 </select>
 
+                <?php if (isset($erreurs['question'])) { ?>
+                    <p class="error">
+                        <?="Erreur : ".$erreurs['question']?>
+                    </p>
+                <?php } ?>
+
                 <br>
                 <label for="reponse">Votre réponse</label>
                 <input type="text" name="reponse" id="reponse" class="champ">

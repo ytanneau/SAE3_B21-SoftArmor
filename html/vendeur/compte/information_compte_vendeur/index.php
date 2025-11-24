@@ -3,12 +3,10 @@
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
 
-    require_once HOME_GIT . ".config.php";
-
     if (!isset($_SESSION)) {
         session_start();
     }
-    
+
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
         header('location: ' . HOME_SITE);
@@ -16,18 +14,17 @@
 
     // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
     } else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-        header('location: ../../');
+        header('location: ../');
         exit;
     }
+
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_vendeur.php";  
     
     $id_compte = $_SESSION['id_compte'];
-    // requete pour recuperer les informations du vendeur
-    $stmt = $pdo->prepare("SELECT * FROM _vendeur WHERE id_compte = :id_compte");
-    $stmt->execute([':id_compte' => $id_compte]);
 
-    // decoupage des informations en tableau
-    $tabVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $tabVendeur = $tabVendeur[0];
+    // recuperation des informations du vendeur
+    $tabVendeur = get_informations_vendeur($id_compte);
 
     // assignation des variables aux élements du tableau
     $raisonSociale = $tabVendeur['raison_sociale'];
@@ -36,14 +33,9 @@
     $description = $tabVendeur['description'];
 
     // recuperation des informations d'adresse du vendeur
-    $stmt = $pdo->prepare("SELECT * FROM _adresse WHERE id_adresse = :id_adresse");
-    $stmt->execute([':id_adresse' => $id_adresse]);
+    $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
 
-    // decoupage des informations en tableau
-    $tabAdresseVendeur = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $tabAdresseVendeur = $tabAdresseVendeur[0];
-
-    // définiton de la chaine addresse
+    // définiton de la chaine adresse
     $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];
 ?>
 
@@ -57,6 +49,8 @@
     <body>
         <?php include "../../header.php"?>
         <main>
+            <!-- Bouton de retour sur la page de gestion des stocks -->
+            <a href="../../stock/index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <!-- Zone d'affichage des informations du vendeur -->
             <h1>Mes informations</h1>
             <h3>Raison sociale</h3>

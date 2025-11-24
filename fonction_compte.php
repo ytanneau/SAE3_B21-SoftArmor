@@ -3,8 +3,8 @@
     const VIDE = "Veuillez renseigner ce champ";
     const DEPASSE = "Dépassement de champ";
     const FORMAT = "Le format est invalide";
-    const EXISTE = "Existe déjà";
-    const EXISTE_PAS = "Existe pas";
+    const EXISTE = "existe déjà";
+    const EXISTE_PAS = "n'existe pas";
     const CORRESPOND_PAS = "Les deux mots de passe ne correspondent pas";
     const CONNECTE_PAS = "L'email ou le mot de passe est incorrect";
 
@@ -449,6 +449,13 @@
 
         // Recherche l'erreur dans l'adresse
         $erreurs = array_merge($erreurs, check_coordonnees($adresse, $code_postal));
+
+        // Recherche l'erreur dans la question secrète (mot clef)
+        if (check_vide($mot_clef)) {
+            $erreurs['question'] = VIDE;
+        } else if (!sql_check_mot_clef($mot_clef)) {
+            $erreurs['question'] = EXISTE_PAS;
+        }
 
         // Recherche l'erreur dans la réponse secrète
         if (check_vide($reponse)){

@@ -37,6 +37,31 @@
     require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';
 
+    //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
+    $rows = detail_produit($_GET['produit']);
+    $rows2 = vendeur_image_produit($_GET['produit']);
+    $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
+
+    if ($sqlverif == NULL) {
+        renvoi();
+    }
+
+    // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
+    if ($_POST != NULL && isset($rows)) {
+        try {
+            $supprime = supprimer_produit_stock($_GET['produit']);
+        } catch (PDOException $e) {
+            die('Suppression du produit ' . $_GET['produit'] . ' impossible');
+        }
+    }
+
+    if (isset($supprime) && $supprime === true) {
+        renvoi();
+    }
+
+
+    // Fonctions
+
     function ecrire_nom($rows, $rows2, $produit){
         global $rows;
         global $rows2;
@@ -96,24 +121,6 @@
     <?php
 
     }
-
-    //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
-    $rows = detail_produit($_GET['produit']);
-    $rows2 = vendeur_image_produit($_GET['produit']);
-    $sqlverif = vendeur_verif_produit($_GET['produit'], $_SESSION['id_compte']);
-
-    if ($sqlverif == NULL) {
-        renvoi();
-    }
-
-    // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    if ($_POST != NULL && isset($rows)) {
-        try {
-            $supprime = supprimer_produit_stock($_GET['produit']);
-        } catch (PDOException $e) {
-            die('Suppression du produit ' . $_GET['produit'] . ' impossible');
-        }
-    }
 ?>
 <!doctype html>
 <html lang="fr">
@@ -137,9 +144,6 @@
                 </form>
                 
                 <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-            <?php } else { ?>
-                <h1>Produit supprimé</h1>
-                <a href="../stock">Revenir au stock</a>
             <?php } ?>
             
             

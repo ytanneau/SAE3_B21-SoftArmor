@@ -1,5 +1,16 @@
 @use "style_const.scss" as *;
 
+body {
+    font-family: $font_text;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 2.5em;
+    line-height: 1.5em;
+}
+
 @mixin contenu_centre_vertical {
     display: flex;
     flex-direction: column;
@@ -15,6 +26,7 @@
 @mixin header($background) {
     position: sticky;
     top: 0;
+    z-index: 10;
     padding: 0.5em 1em;
     background-color: $background;
     
@@ -101,12 +113,61 @@
     }
 }
 
+@mixin image_produit($taille, $angle: $angle_petit) {
+    object-fit: contain;
+    background-color: #f3f1fb;
+    width: $taille;
+    height: $taille;
+    border-radius: $angle;
+}
+
+.image_produit_moyen {
+    @include image_produit($image_normal);
+}
+
+.image_produit_petit {
+    @include image_produit($image_petit);
+}
 
 @mixin bouton {
     border: none;
     border-radius: $angle_grand;
-    padding: 1% 2vw;
+    padding: 0.5em 2em;
     font-weight: bold;
+    align-self: center;
+}
+
+@mixin bouton_new($background: $couleur_primaire_client, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
+    display: block;
+    max-width: 100%;
+
+    width: $largeur;
+    padding: $padding;
+
+    font-family: $font_title;
+    font-size: $size;
+    font-weight: bold;
+    
+    background-color: $background;
+    color: $color;
+
+    border: none;
+    border-radius: $angle;
+
+    text-decoration: none;
+    text-align: center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: adjust-color($color: $background, $lightness: 15%);
+    }
+}
+
+@mixin image_pp($taille) {
+    height: $taille;
+    width: $taille;
+    border-radius: $taille;
 }
 
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
@@ -116,6 +177,9 @@
 
     label {
         margin-top: 2%;
+        @media (max-width: 1440px) {
+            margin-top: 5%;
+        }
         font-size: $font_size_sup;
     }
 
@@ -149,14 +213,6 @@
         -moz-appearance: textfield;
     }
     
-    .bouton {
-        @include bouton;
-        align-self: center;
-        background-color: $focus;
-        color: white;
-        font-size: $font_size_normal;
-        margin-top: 2%;
-    }
 
     // généralement contraintes et erreurs
     p {
@@ -169,9 +225,12 @@
     }
 }
 
+.formulaire_client {
+    @include formulaire();
+}
+
 @mixin page_connect_inscription($background, $nuance) {
     background-color: $background;
-    height: 100%;
 
     @include contenu_centre_vertical;
 
@@ -183,9 +242,16 @@
         border-radius: $angle_normal; 
         padding: $padding_normal;
         width: 30vw;
+        @media (max-width: 1440px) {
+            width: 60vw;
+        }
+        
 
         img {
             width: 18vw;
+            @media (max-width: 1440px) {
+                width: 50vw;
+            }
         }
 
         h2 {
@@ -200,18 +266,77 @@
     }
 }
 
-body {
-    font-family: $font_text;
-    padding: 0;
-    margin: 0;
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font_title;
 }
 
-main {
-    padding: 1em;
+button, input[type="button"] {
+    cursor: pointer;
+}
+
+hr {
+    margin: 2em 0;
+}
+
+.input_quantite {
+    * {
+        font-family: $font_title;
+        font-weight: bold;
+        font-size: 0.75em;
+    }
+    
+
+    // Champ et boutons - et +
+    input[type="button"], input[type="number"] {
+        height: 2em;
+        margin: 0;
+        padding: 0;
+
+        background-color: $couleur_background;
+        border: solid 2px #d5d5d5; 
+    }
+
+    // Boutons
+    input[type="button"] {
+        width: 2em;
+
+        &:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        &:hover {
+            background-color: #d5d5d5;
+        }
+    }
+
+    // Champ
+    input[type="number"] {
+        width: 3em;
+        box-sizing: border-box;
+        border-left: 0;
+        border-right: 0;
+
+        text-align: center;
+
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+    }
 }
 
 .icon {
-    height: 25px;
+    height: $image_petit;
     margin: 0 8px 0 0;
 }
 
@@ -245,6 +370,7 @@ main {
 #connect_vendeur, #connect_client{
     justify-content: center;
     overflow-y: hidden;
+    height: 100vh;
 }
 
 #connect_client, #inscription_client{
@@ -312,51 +438,66 @@ main {
 }
 
 #avis_vendeur{
-    $value_width: 200px;
-    $value_height: 100px;
-    article{
 
+    article{
+        @include contenu_centre_horizontal();
+        justify-content: center;
+        gap: 20px;
+
+        div:first-child{
+            img{
+                width: 10vw;
+                height: 10vw;
+                object-fit: contain;
+                background-color: white;
+            }
+        }
     }
 
     section{
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
+
+            hr{
+                width: 50%;
+                color: $nuance_primaire_vendeur;
+            }
             
             li{
-                width: $value_width*6;
+                @include contenu_centre_horizontal();
                 list-style: none;
-                table{
-                    border-collapse: collapse;
-                    
-                    td{
-                        height: $value_height;
-                        border: solid black 1px;
+                
+                >div:first-child{
+                    @include contenu_centre_vertical();
+                    width: 40vw;
+                    align-items: start;
+
+                    .info{
+                        color: $nuance_primaire_vendeur;
                     }
 
-                    tr:first-child{
-                        td:nth-child(1), td:nth-child(2), td:nth-child(3){
-                            width: $value_width;
+                    >div{
+                        @include contenu_centre_horizontal();
+                        img{
+                            width: 20px;
+                            height: 20px;
                         }
-
-                        td:nth-child(4){
-                            height: $value_height*2;
-                            width: $value_width;
-
-                            img{
-                                display: flex;
-                                height: 100%;
-                                width: 100%;
-                                object-fit: contain;
-                                background-color: white;
-                            }
-                        }
-                    }
-
-                    tr:last-child{
-
                     }
                 }
+
+                >div:last-child{
+                    width: 5vw;
+                    height: 5vw;
+
+                    img{
+                        width: 5vw;
+                        height: 5vw;
+                        object-fit: contain;
+                        background-color: white;
+                    }
+                }
+                
             }
         }
     }
@@ -391,11 +532,142 @@ main {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        .grave {
-            background-color: $rouge;
+        img {
+            width: 200px;
+            
         }
+
     }
 
+}
+
+.bouton {
+    @include bouton;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
+// Bouton Ajouter un avis
+a.bouton:has(+ .liste_avis) {
+    @include bouton_new($couleur_primaire_client, $color: white, $largeur: 10em, $padding: 0.5em 0, $size: 1em);
+}
+
+.liste_avis {
+    width: 60vw;
+    list-style: none;
+    padding: 0;
+
+    // Avis + image
+    li {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 2.5em 0; 
+
+        // Avis
+        > div:first-child {
+            flex-basis: 2;
+            display: flex;
+            flex-direction: column;
+
+            // PP + étoiles
+            > div:first-child {
+                display: flex;
+                align-items: center;
+
+                > img:not(.etoiles) {
+                    @include image_pp(30px);
+                    margin-right: 0.5em;
+                } 
+            }
+
+            // Reste de l'avis
+            > div:nth-child(2) {
+                > h3, > p {
+                    margin-top: 0.5em;
+                    margin-bottom: 0;
+                }
+
+                > p:last-child {
+                    margin-top: 1em;
+                    font-style: italic;
+                    font-weight: 100;
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        // Image de l'avis
+        > img { 
+            width: 20%;
+            margin-left: 2em;
+        }
+    }
+}
+
+.detail_produit {
+    font-family: $font_text;
+    width: 60vw;
+
+    > article:first-child {
+        margin: 0 0 2em 0;
+        display: flex;
+
+        // Images
+        > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 0 4em;
+
+            // Image principale
+            > div:first-child {
+                img {
+                    @include image_produit(300px);
+                }
+            }
+
+            // Images secondaires
+            > div:nth-child(2) {
+                img {
+                    @include image_produit(100px);
+                }
+            }
+        }
+
+        // Détails du produit
+        > div:nth-child(2) {
+            > h1 {
+                margin: 0;
+                font-size: 2em;
+
+                font-family: $font_title;
+                font-weight: 700;
+            } 
+
+            // Étoiles + nombre d'avis
+            > div {
+                .etoiles {
+                    margin-right: 0.5em;
+                }
+
+                display: flex;
+                align-items: center;
+            }
+
+            > p:last-child {
+                margin-top: 2em;
+            }
+        }
+    }
 }
 
 .avis {
@@ -517,4 +789,285 @@ main {
         gap: 15px;
     }
     }
+}
+.grave {
+    @include bouton();
+    background-color: $rouge;
+    color: white;
+}
+//format telephone
+@media screen and (max-width: 1024px){
+    .accueil {
+        nav {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            background-color: $couleur_background;
+            height: 3em;
+            
+        }
+        > main {
+            > div {
+                display: flex;
+                flex-direction: column;
+                
+                > ul {
+                    list-style: none;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+                    justify-items:center;
+                    padding: 0;
+                    > li {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: 100%;
+                        margin: 20px;
+
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            
+                            > img {
+                                width: 30vw;
+                                height: 30vw;
+                                object-fit: contain;
+                                background-color: $couleur_fond_produit;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
+                            }
+                            > p , > h3 {
+                                margin: 0;
+                                width: $image_normal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+//format ordinateur
+@media screen and (min-width: 1024px){
+    .accueil {
+        nav {
+            display: none;
+        }
+        > main {
+            > div {
+                display: flex;
+                flex-direction: column;
+                
+                > ul {
+                    display: flex;
+                    flex-direction: row;
+                    overflow:auto;
+                    list-style: none;
+                    
+                    > li {
+                        width: 20vw;
+                        margin: 20px 40px 20px 20px;
+
+                        > a {
+                            color : black;
+                            text-decoration: none;
+                            > img {
+                                width: 15vw;
+                                height: 15vw;
+                                object-fit: contain;
+                                background-color: $couleur_fond_produit;
+                                border-radius: $angle_petit;
+                            }   
+                            > div {
+                                > img {
+                                    width: 20px;
+                                    height: 20px;
+                                    background: none;
+                                }
+                            }
+                            > p , > h3 {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.prix {
+    color: $couleur_prix;
+    font-size: 2.2em;
+    font-family: $font_title;
+    font-weight: bold;
+}
+
+.HT {
+    color: black;
+}
+
+.ancien_prix {
+    color: black;
+    text-decoration: line-through;
+}
+
+.produit_panier {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+h3 {
+    font-family: $font_title;
+    font-weight: bold;
+}
+
+.liste {
+    main {
+        img {
+            object-fit: contain;
+        }
+
+        // l'entête, le truc au dessus de la liste
+        .entete {
+            display: flex;
+            // tous les enfants de l'entête
+            >* {
+                margin-right: 3em;
+            }
+            
+        }
+
+
+        ul {
+            width: 60vw;
+
+            // la partie description etc. du produit
+            li > article:nth-child(2) {
+                flex-grow: 1;
+
+                p {
+                    width: 90%;
+                }
+            }
+
+            li > article:nth-child(3) {
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+
+                .prix {
+                    min-width: 5em;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    text-align: right;
+                }
+
+                .bouton {
+                    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
+                }
+            }
+        }
+
+        img {
+            margin-right: 3em;
+        }
+
+        hr {
+            color: #9C9C9C;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 1.6em;
+        }
+    }
+}
+
+// la partie à droite d'une page (ex. avec récap dans page panier)
+/*
+aside {
+    position: fixed;
+    right: 6em;
+    top: 8em;
+
+    font-size: 1.2em;
+
+    .prix, p {
+        font-size: 1.4em;
+    }
+
+    width: 20vw;
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .bouton {
+        width:100%;
+    }
+}*/
+
+aside {
+    position: fixed;
+    right: 5vw;
+    top: 7em;
+
+    font-size: 1.2em;
+    font-size: 1.4em;
+    width: 20vw;
+
+    .prix {
+        font-family: $font_title;
+        font-size: 1.25em;
+        font-weight: bold;
+        color: $couleur_prix;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 1em 0;
+    }
+
+    > div:first-child {
+        margin-top: 0;
+    }
+
+    .bouton {
+        margin: 0.5em 0;
+    }
+
+    a.bouton {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
+    }
+
+    input.bouton {
+        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    }
+}
+
+// Groupe de 5 étoiles
+.etoiles {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.etoile {
+    width: 30px;
+    height: 30px;
 }

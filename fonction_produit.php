@@ -9,13 +9,13 @@
         }
         // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
         for ($i =1; $i <= floor($moyenne); $i++){
-            ?> <img src="/image/etoile_pleine.svg" alt="étoile pleine"><?php
+            ?> <img src="/image/etoile_pleine.svg" alt="étoile pleine" title="étoile pleine" class="etoile"><?php
         }
         if(fmod(floor($moyenne*2),2)){
-            ?> <img src="/image/etoile_demi.svg" alt="étoile à moitié pleine"> <?php 
+            ?> <img src="/image/etoile_demi.svg" alt="étoile à moitié pleine"  title="étoile à moitié pleine" class="etoile"> <?php 
         }
         for ($i =5; $i > round($moyenne); $i--){
-            ?> <img src="/image/etoile_vide.svg" alt="étoile vide"><?php
+            ?> <img src="/image/etoile_vide.svg" alt="étoile vide"  title="étoile vide" class="etoile"><?php
         }
     }
 
@@ -23,6 +23,15 @@
         global $pdo;
         
         $requete = $pdo->prepare("SELECT * from _produit where id_produit = :id_produit");
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function note_produit($id_produit) {
+        global $pdo;
+        
+        $requete = $pdo->prepare("SELECT note_moy from produit_note where id_produit = :id_produit");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -109,7 +118,7 @@
     function info_produit_accueil_reduction(){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN _promotion ON produit_visible.id_produit = _promotion.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;');
+        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN promo_jour ON produit_visible.id_produit = promo_jour.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;');
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -294,6 +303,23 @@
         }
     }
 
+    function link_image_produit($idProduit,$idImage,$numeroImage){
+        global $pdo;
+        try{
+            if($numeroImage === 2){
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
+            } else if ($numeroImage === 3){
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+            } else { return; }
+            $stmt->execute([
+                ':id_produit' => $idProduit,
+                'id_image'=> $idImage,
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
     function update_image_produit($idImage, $url, $titre_img, $altDefault){
         global $pdo;
 
@@ -302,9 +328,9 @@
                                     SET url_image = :url_image,
                                     titre = :titre_img,
                                     alt = :altDefault 
-                                    WHERE $id_image = :idImage');
+                                    WHERE id_image = :idImage');
             $stmt->execute([
-                'url_image' => $url,
+                ':url_image' => $url,
                 ':titre_img' => $titre_img,
                 ':altDefault' => $altDefault,
                 ':idImage' => $idImage,

@@ -25,6 +25,7 @@ $id_produit = htmlentities($_GET['id_produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
+    $note = note_produit($id_produit)['note_moy'];
 
     if (!$produit) {
         die("Produit introuvable.");
@@ -37,13 +38,16 @@ try {
 }
 
 // Preparer le prix formaté
-$formatted_prix = '';
+$formatted_prix_ht = '';
+$formatted_prix_ttc = '';
 
 if (isset($produit['prix'])) {
     if (is_numeric($produit['prix'])) {
-        $formatted_prix = number_format($produit['prix'], 2, ',', ' ') . ' €';
+        $formatted_prix_ht = number_format($produit['prix'], 2, ',', ' ') . ' €';
+        $formatted_prix_ttc = number_format($produit['prix'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . ' €';
     } else {
-        $formatted_prix = htmlentities($produit['prix'] ?? '');
+        $formatted_prix_ht = htmlentities($produit['prix'] ?? '');
+        $formatted_prix_ttc = $formatted_prix_ht;
     }
 }
 
@@ -67,7 +71,15 @@ if ($_POST != NULL) {
 <body>
     <?php include HOME_SITE . "header.php"; ?>
 
-    <a href="../"><p>Revenir au catalogue</p></a>
+    <script>
+        function changer(val) {
+            const inputQuantite = document.getElementById('input_quantite');
+            let value = Number(inputQuantite.value);
+            if (value + val > 0 && value + val < 50000) {
+                inputQuantite.stepUp(val);
+            }
+        }
+    </script>
 
     <?php
         $img_principale_url   = htmlentities($produit['image_principale_url'] ?? '');
@@ -82,81 +94,149 @@ if ($_POST != NULL) {
         $img2_title = htmlentities($produit['image_2_titre'] ?? ($produit['nom_public'] ?? ''));
         $img2_alt   = htmlentities($produit['image_2_alt'] ?? ($produit['nom_public'] ?? ''));
     ?>
-
-    <img height="200px" src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
     
-    <!-- Afficher les images facultatives -->
-    <?php if (!empty($img1_url)) { ?>
-        <img height="200px" src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
-    <?php } ?>
+    <main>
+        <a href="../"><img src="../image/retour.svg"></a>
 
-    <?php if (!empty($img2_url)) { ?>
-        <img height="200px" src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_alt ?>">
-    <?php } ?>
-    
-        
-    
-    <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
+        <section class="detail_produit">
+            <!-- Présentation du produit -->
+            <article>
+                <div>
+                    <!-- Image principale -->
+                    <div>
+                        <img src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
+                    </div>
 
-    <p>
-        <strong>Vendeur :</strong>
-        <?= htmlentities($produit['nom_vendeur'] ?? '') ?>
-    </p>
+                    <!-- Images facultatives -->
+                    <div>
+                        <?php 
+                            if (!empty($img1_url)) { ?>
+                                <img src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
+                            <?php }
 
-    <p>
-        <strong>Description :</strong>
-        <?= nl2br(htmlentities($produit['description'] ?? '')) ?>
-    </p>
-
-    <p>
-        <strong>Prix :</strong>
-        <?= $formatted_prix ?> (TVA <?= htmlentities($produit['tva'] ?? '') ?>%)
-    </p>
-
-    <p>
-        <strong>Détails :</strong>
-        <?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?>
-    </p>
-    
-    <!-- Affichage des avis -->
-    <h3>Avis</h3>
-
-    <a href="../avis/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>"><p>Ajouter un avis</p></a>
-
-    <ul>
-        <?php foreach ($liste_avis as $avis) { ?>
-            <li>
-                <p><?= htmlentities($avis['titre'] ?? '') ?></p>
-                <p><?= afficher_moyenne_note(htmlentities($avis['note'] ?? ''))?></p>
-                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                            if (!empty($img2_url)) { ?>
+                                <img src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_alt ?>">
+                            <?php } 
+                        ?>
+                    </div>
+                </div>
                 
-                <?php if (isset($avis['url_image'])) { ?>
-                    <img height="200px" src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                <!-- Détails du produit -->
+                <div>
+                    <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
+
+                    <p>
+                        <em>par <?= htmlentities($produit['nom_vendeur'] ?? '') ?></em>
+                    </p>
+
+                    <div>
+                        <div class="etoiles">
+                            <?php if (count($liste_avis) > 0) {
+                                afficher_moyenne_note($note);
+                            } else {
+                                echo 'Produit non noté';
+                            } ?>
+                        </div>
+                        
+                        <!-- Nombre d'avis -->
+                        <a href="#avis"><?= count($liste_avis) > 0 ? count($liste_avis) . ' avis' : '' ?></a>
+                    </div>
+                    
+                    <!-- Description du produit -->
+                    <p>
+                        <?= nl2br(htmlentities($produit['description'] ?? '')) ?>
+                    </p>
+                </div>
+            </article>
+
+
+            <!-- Description détaillée -->
+            <article>
+                <h2>Description détaillée</h2>
+                <p>
+                    <?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?>
+                </p>
+            </article>
+
+            <hr>
+        </section>
+
+        <!-- Section des avis -->
+        <section id="avis">
+            <!-- Rajouter le nombre -->
+            <h2>Avis (<?= count($liste_avis) ?>)</h2>
+
+            <a class="bouton" href="../avis/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>">Ajouter un avis</a>
+
+            <ul class="liste_avis">
+                <?php foreach ($liste_avis as $avis) { ?>
+                    <li>
+                        <div>
+                            <div>
+                                <img height="40px" width="40px" src="../ressources/27_1.png">
+                                <div class="etoiles">
+                                    <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
+                                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                                <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
+                            </div>
+                        </div>
+
+                        <?php if (isset($avis['url_image'])) { ?>
+                            <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
+                        <?php } ?>
+                    </li>
+                <?php } ?>
+            </ul>
+        </section>
+
+        <!-- Achat du produit  -->
+
+        <?php if (isset($_SESSION['logged_in'])) {
+            $page = "../achat";
+        } else {
+            $page = HOME_SITE . "compte/inscription";
+        } ?>
+        
+        <aside>
+            <div>
+                <span>Prix HT</span> 
+                <span class="prix">
+                    <?= $formatted_prix_ht ?>
+                </span>
+            </div>
+
+            <div>
+                <span>Prix TTC</span> 
+                <span class="prix">
+                    <?= $formatted_prix_ttc ?>
+                </span>
+            </div>
+
+            <form action="" method="post">
+                <div>
+                    <?php if (isset($_SESSION['logged_in'])) { ?>
+                        <label for="quantite">Quantité</label>
+            
+                        <span class="input_quantite">
+                            <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
+                        </span>
+                    <?php } ?>
+                </div> 
+                
+                <?php if (isset($_SESSION['logged_in'])) { ?>
+                    <input class="bouton" type="submit" value="Ajouter au panier">
+                <?php } else { ?>
+                    <p>Connectez-vous pour ajouter ce produit à votre panier</p>
                 <?php } ?>
 
-                <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
-            </li>
-        <?php } ?>
-    </ul>
-    
-
-    <?php if (isset($_SESSION['logged_in'])) {
-        $page = "../achat";
-    } else {
-        $page = HOME_SITE . "compte/inscription";
-    } ?>
-
-    <a href="<?=$page?>/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>"><p>Acheter</p></a>
-    
-    <form action="" method="post">
-        <?php if (isset($_SESSION['logged_in'])) { ?>
-            <label for="quantite">Quantité</label>
-            <input type="number" name="quantite" min=1 max=50000 value=1 pattern="\d*" required>
-            <button type="submit">Ajouter au Panier</button>
-        <?php } else { ?>
-            <p>Connectez-vous pour ajouter ce produit à votre panier.</p>
-        <?php } ?>
-    </form>
-
+                <a class="bouton" href="<?=$page?>/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>">Acheter</a>
+            </form>
+        </aside>
+    </main>
 </body>
 </html>
