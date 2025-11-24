@@ -392,6 +392,10 @@ div.gauche {
 
 div:has(> aside) {
     flex-grow: 1;
+
+    @media screen and (max-width : 1024px){
+        order: -1; 
+    }
 }
 
 .detail_produit {
@@ -584,13 +588,20 @@ div:has(> aside) {
     > main {
         > div {
             display: flex;
-            flex-direction: column;
-            
+            flex-direction: row;
+            > button {
+                width: 30px;
+                height: 25px;
+                border-radius: $angle_normal;
+                align-self: center;
+            }
             > ul {
                 display: flex;
                 flex-direction: row;
-                overflow:auto;
+                overflow: hidden;
                 list-style: none;
+                
+
                 
                 > li {
                     width: 20vw;
@@ -648,6 +659,9 @@ div:has(> aside) {
         }
         > main {
             > div {
+                > button {
+                    display:none;
+                }
                 > ul {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
@@ -721,7 +735,7 @@ h3 {
         ul {
             width: 60vw;
             padding: 0;
-
+            
             // la partie description etc. du produit
             li > article:nth-child(2) {
                 flex-grow: 1;
@@ -891,6 +905,19 @@ aside {
 }
 
 .anonymisation-client {
+    main form input{
+        @include bouton();
+        background-color: $rouge;
+        color: white;
+        font-size: $font_size_normal;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: $angle_petit;
+        cursor: pointer;
+    }
+}
+
+.desactivation-vendeur {
     main form input{
         @include bouton();
         background-color: $rouge;
