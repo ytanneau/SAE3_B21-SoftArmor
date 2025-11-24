@@ -1243,4 +1243,20 @@ aside input.bouton:hover {
 .etoile {
   width: 30px;
   height: 30px;
+}
+
+.anonymisation-client main {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: #E43737;
 }/*# sourceMappingURL=style.css.map */
