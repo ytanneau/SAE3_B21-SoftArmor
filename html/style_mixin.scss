@@ -242,7 +242,7 @@
         }
 
         .bouton {
-            @include bouton_new($focus, $color: white, $padding: 0.5em, $size: 1em, $angle: $angle_grand);
+            @include bouton_new($focus, $color: white, $padding: 0.75em 1em, $size: 1em, $angle: $angle_grand);
         }
     }
 }
