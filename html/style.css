@@ -297,7 +297,6 @@ hr {
 
 #connect_vendeur, #inscription_vendeur {
   background-color: #6B31D0;
-  height: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -385,7 +384,6 @@ hr {
 
 #connect_client, #inscription_client {
   background-color: #3157A3;
-  height: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -832,6 +830,87 @@ a.bouton:has(+ .liste_avis):hover {
 }
 .avis td:first-child {
   display: flex;
+}
+
+#footer .footer {
+  background: #000;
+  color: #fff;
+  padding: 40px 60px;
+  font-family: sans-serif;
+}
+#footer .footer a {
+  color: #dcdcdc;
+  text-decoration: none;
+  font-size: 14px;
+}
+#footer .footer a:hover {
+  text-decoration: underline;
+}
+#footer .footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #333;
+}
+#footer .footer-logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#footer .footer-logos .logo {
+  width: 150px;
+}
+#footer .footer-columns {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
+#footer .footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #ffffff;
+}
+#footer .footer-column a {
+  display: block;
+  margin-bottom: 5px;
+}
+#footer .footer-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#footer .footer-socials img {
+  width: 26px;
+  height: 26px;
+}
+#footer .footer-bottom {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+#footer .footer-bottom .footer-links {
+  display: flex;
+  gap: 25px;
+}
+@media (max-width: 900px) {
+  #footer .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #footer .footer-columns {
+    width: 100%;
+    justify-content: space-between;
+  }
+  #footer .footer-socials {
+    flex-direction: row;
+  }
+  #footer .footer-bottom {
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 .grave {
