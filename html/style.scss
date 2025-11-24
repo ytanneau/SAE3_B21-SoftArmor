@@ -377,9 +377,17 @@ a.bouton:has(+ .liste_avis) {
     }
 }
 
+main:has(.detail_produit) {
+    display: flex;
+    justify-content: space-between;
+}
+
+div:has(.detail_produit) {
+    flex-basis: 60%;
+}
+
 .detail_produit {
     font-family: $font_text;
-    width: 60vw;
 
     > article:first-child {
         margin: 0 0 2em 0;
@@ -788,8 +796,8 @@ aside {
 }*/
 
 aside {
-    position: fixed;
-    right: 5vw;
+    position: sticky;
+    //right: 5vw;
     top: 7em;
 
     font-size: 1.2em;

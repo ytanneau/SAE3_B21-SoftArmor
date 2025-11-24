@@ -780,9 +780,17 @@ a.bouton:has(+ .liste_avis):hover {
   margin-left: 2em;
 }
 
+main:has(.detail_produit) {
+  display: flex;
+  justify-content: space-between;
+}
+
+div:has(.detail_produit) {
+  flex-basis: 60%;
+}
+
 .detail_produit {
   font-family: "Inter";
-  width: 60vw;
 }
 .detail_produit > article:first-child {
   margin: 0 0 2em 0;
@@ -1125,6 +1133,9 @@ h3 {
   .liste main ul {
     order: 2;
   }
+  .liste main img {
+    width: 10em;
+  }
 }
 
 /*
@@ -1151,8 +1162,7 @@ aside {
     }
 }*/
 aside {
-  position: fixed;
-  right: 5vw;
+  position: sticky;
   top: 7em;
   font-size: 1.2em;
   font-size: 1.4em;
