@@ -85,12 +85,10 @@ hr {
 }
 
 .toolbar {
-  position: sticky;
-  top: 0;
   background-color: #A6A6BF;
   width: 100%;
   margin: 0;
-  padding: 0.25em 0;
+  padding: 0;
 }
 .toolbar ul {
   display: flex;
@@ -104,11 +102,14 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0 1em;
+  margin: 0.25em 1em;
   color: black;
   text-decoration: none;
   font-family: "Montserrat";
   font-weight: bold;
+}
+.toolbar ul > li:hover {
+  background-color: rgb(210.5, 210.5, 223);
 }
 
 #header_client {
