@@ -4,6 +4,7 @@
   <div class="footer-top">
 
     <div class="footer-logos">
+      <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
       <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
     </div>
 
