@@ -12,6 +12,7 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 
+require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_SITE . "link_head.php";
@@ -163,7 +164,7 @@ if ($numEtape == 3) {
     $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
 
     if ($_POST['id_produit'] != 'panier') {
-        $stock = detail_produit($_POST['id_produit'])['stock'];
+        $stock = detail_produit($_POST['id_produit'])['quantite'];
         if ($stock >= 1) {
 
             $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
@@ -176,7 +177,7 @@ if ($numEtape == 3) {
             $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
             $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
 
-            update_stock($_POST['id_produit'], 1);
+            update_stock($_POST['id_produit'], "-1");
         } else {
             echo "Une erreur est survenue ! (le produit n'est plus en stock)";
         }
@@ -189,7 +190,7 @@ if ($numEtape == 3) {
         $produits_plus_en_stock = [];
 
         foreach ($liste_produits as $produit) {
-            if (detail_produit($produit['id_produit'])['stock'] < $produit['quantite_panier']) {
+            if (detail_produit($produit['id_produit'])['quantite'] < $produit['quantite_panier']) {
                 array_push($produits_plus_en_stock, $produit);
             }
         }
@@ -202,7 +203,7 @@ if ($numEtape == 3) {
                 $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
                 $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
 
-                update_stock($produit['id_produit'], $produit['quantite_panier']);
+                update_stock($produit['id_produit'], '-' . $produit['quantite_panier']);
             }
         } else {
             echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";

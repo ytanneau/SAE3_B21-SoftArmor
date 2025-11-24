@@ -1265,59 +1265,19 @@ aside input.bouton:hover {
   margin-top: 0;
 }
 
-.anonymisation-client main {
-  display: flex;
-}
-.anonymisation-client form {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: normal;
-  width: 100%;
-  width: 60vw;
-  border-radius: 20px;
-  padding: 3em 3em;
-}
-.anonymisation-client form > :last-child {
-  width: 100%;
-}
-.anonymisation-client form label {
-  margin-top: 2%;
-  font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  .anonymisation-client form label {
-    margin-top: 5%;
-  }
-}
-.anonymisation-client form .champ {
+.anonymisation-client main form input {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #E43737;
+  color: white;
+  font-size: 1em;
+  padding: 0.5em 1em;
   border: none;
   border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-.anonymisation-client form .text {
-  height: 10em;
-  text-align: start;
-}
-.anonymisation-client form .petit {
-  width: 30%;
-}
-.anonymisation-client form input[type=number]::-webkit-inner-spin-button,
-.anonymisation-client form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.anonymisation-client form input[type=number] {
-  -moz-appearance: textfield;
-}
-.anonymisation-client form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-.anonymisation-client form .error {
-  color: #E43737;
+  cursor: pointer;
 }
 
 .error {
