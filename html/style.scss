@@ -380,6 +380,10 @@ a.bouton:has(+ .liste_avis) {
 main:has(.detail_produit) {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 1024px) {
+        flex-direction: column;
+    }
 }
 
 div.gauche {
