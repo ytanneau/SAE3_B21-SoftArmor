@@ -4,8 +4,12 @@
   <div class="footer-top">
 
     <div class="footer-logos">
-      <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
-      <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+<a href= <?= HOME_SITE?> >
+        <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
+      </a>
+      <a href= <?= HOME_SITE?> >
+        <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+      </a>    
     </div>
 
     <div class="footer-columns">
