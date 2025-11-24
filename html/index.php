@@ -89,10 +89,10 @@ unset($pdo);
 
 
     <!-- Produits en réduction -->
-    <h1>Produits en réduction</h1>
-    <div>       
-        <button class="fleche-gauche-reduction"><</button>
-        <ul class="container-reduction">
+    <div>
+        <h1>Produits en réduction</h1>
+        <button class="fleche gauche reduction"><</button>
+        <ul class="container reduction">
             <?php
             //boucle pour ajouter un produit dans un <li> 
             foreach ($produit_reduit as $row){  
@@ -123,16 +123,16 @@ unset($pdo);
             }
             ?>
         </ul>
-        <button class="fleche-droite-reduction">></button>
+        <button class="fleche droite reduction">></button>
     </div>
     <hr>
     
 
     <!-- Produits alimentaires -->
-     <h1>Produits alimentaires</h1>
-    <div>        
-        <button class="fleche-gauche-alimentaire"><</button>
-        <ul class="container-alimentaire">
+    <div>
+        <h1>Produits alimentaires</h1>
+        <button class="fleche gauche alimentaire"><</button>
+        <ul class="container alimentaire">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
@@ -159,15 +159,15 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche-droite-alimentaire">></button>
+        <button class="fleche droite alimentaire">></button>
     </div>
     <hr>
 
     <!-- Tous les produits du catalogue -->
-    <h1>Produits du catalogue</h1>
-    <div>        
-        <button class="fleche-gauche-catalogue"><</button>
-        <ul class="container-catalogue">
+    <div>
+        <h1>Produits du catalogue</h1>
+        <button class="fleche gauche catalogue"><</button>
+        <ul class="container catalogue">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
@@ -193,7 +193,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche-droite-catalogue">></button>
+        <button class="fleche droite catalogue">></button>
     </div>
 
     <!-- Navigation (pour teléphone) -->
