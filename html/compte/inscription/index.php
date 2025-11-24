@@ -31,7 +31,7 @@
     
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $param = "";
-        if (isset($_GET['id_produit'])) $param = "?id_produit=" . $_GET['id_produit'];
+        if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit'];
         header('location: ' . HOME_SITE . "compte/connexion" . $param);
         exit;
     }
@@ -171,7 +171,7 @@
             </form>
         <?php } ?>
 
-        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['id_produit'])) echo "?id_produit=" . $_GET['id_produit']?>">Se connecter</a></p>
+        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
     </main>
 </body>
 </html>
