@@ -98,11 +98,12 @@ hr {
     background-color: $nuance;
     width: 100%;
     margin: 0;
-    
+
     ul {
         @include contenu_centre_horizontal();
         list-style: none;
         margin: 0;
+        padding: 0;
 
         > li {
             > a {
