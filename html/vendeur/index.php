@@ -49,7 +49,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <?php
     if (isset($erreurs['connect'])){
 ?>
-        <h3 class="error"><?=$erreurs['connect']?></h1>
+        <h3 class="error"><?=$erreurs['connect']?></h3>
 <?php
     }
 ?>
