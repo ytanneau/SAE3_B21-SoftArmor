@@ -17,6 +17,7 @@
         exit;
     }
 
+    // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
     include HOME_GIT . "fonction_categorie.php";
     include HOME_GIT . "fonction_produit.php";
@@ -24,8 +25,9 @@
     $id_compte = $_SESSION['id_compte'];
     $idProduit = $_GET['produit'];
 
-    $tabInfoProduit = get_info_produit($id_compte,$idProduit);
-    $tabCategorieDuProduit = get_categorieProduit($idProduit);
+    // utilisation des fonctions de recuperation des données
+    $tabInfoProduit = detail_produit($idProduit);
+    $tabCategorieDuProduit = get_categorie_produit($idProduit);
     $tabImageProduit = get_id_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -35,22 +37,10 @@
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
 
-        set_info_produit( $id_compte,
-                        $idProduit,
-                        $_POST['nomPrv'],
-                        $nomPblc,
-                        $_POST['prixProd'],
-                        $_POST['tva'],
-                        $_POST['codeBarre'],
-                        $checkMajeur,
-                        $checkEnLigne,
-                        $_POST['qtAchete'],
-                        $_POST['qtStock'],
-                        $_POST['seuilAlerte'],
-                        $_POST['descSimple'],
-                        $_POST['descDetaille'],
-                        $_POST['poidColis'],
-                        $_POST['volumeColis']);
+        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prixProd'],$_POST['tva'],
+                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
+                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
+                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
         
         if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
             update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
@@ -75,6 +65,7 @@
                 update_image_produit($tabImageProduit['id_image_principale'], $url, $nomPblc, $altDefault);
             }
         }
+
         if(isset($_FILES['photo2'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo2']['name'];
@@ -89,15 +80,17 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                // ajout d'une image dans la base de données si elle n'est pas deja présente
                 if($tabImageProduit['id_image2'] == null){
                     $idImage2 = add_image( $url, $nomPblc, $altDefault);
                     link_image_produit($idProduit,$idImage2,2);        
                 }else{
-                // appel à la fonction pour modifier la bdd
+                    // appel à la fonction pour modifier la bdd
                     update_image_produit($tabImageProduit['id_image1'], $url, $nomPblc, $altDefault);
                 }
             }
         }
+
         if(isset($_FILES['photo3'])){
             // recupere le nom du fichier envoyé
             $nomImageTemp = $_FILES['photo3']['name'];
@@ -112,6 +105,7 @@
             $altDefault = "Image du produit : " . $nomPblc;
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                // ajout d'une image dans la base de données si elle n'est pas deja présente
                 if($tabImageProduit['id_image2'] == null){
                     $idImage3 = add_image( $url, $nomPblc, $altDefault);
                     link_image_produit($idProduit,$idImage3,3);        
@@ -121,10 +115,11 @@
                 }
             }
         }
+
+        // rediraction vers la page produit apres validation du formulaire
         header("Location: ../");
         exit();
-    }
-    
+    } 
 ?>
 
 <!DOCTYPE html>
