@@ -847,7 +847,7 @@ aside {
 
     @media screen and (max-width : 1024px){
         position: static;
-        order: 1;
+        order: -1;
 
         p {
             margin-bottom: 0;
