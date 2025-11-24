@@ -392,6 +392,10 @@ div.gauche {
 
 div:has(> aside) {
     flex-grow: 1;
+
+    @media screen and (max-width : 1024px){
+        order: -1; 
+    }
 }
 
 .detail_produit {
