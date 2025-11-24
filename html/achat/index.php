@@ -206,7 +206,10 @@ if ($numEtape == 3) {
     </head>
 
     <body class="form_client">
+        <?php include HOME_SITE . 'header.php'; ?>
+
         <main>
+            <a href="../"><img src="../image/retour.svg"></a>
 
 <?php
 
