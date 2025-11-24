@@ -873,8 +873,14 @@ aside {
 
 .anonymisation-client {
     main form input{
-        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
-        justify-content: center;
+        @include bouton();
+        background-color: $rouge;
+        color: white;
+        font-size: $font_size_normal;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: $angle_petit;
+        cursor: pointer;
     }
 }
 
