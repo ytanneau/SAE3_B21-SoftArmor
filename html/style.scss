@@ -192,9 +192,11 @@ main {
         padding-right: 0;
     }
     
-    // pour les champs avec beaucoup de texte (ex : description)
+    // pour les textarea avec beaucoup de texte (ex : description)
     .text {
+        font-family: $font_text;
         height: 10em;
+        resize: none;
         text-align: start;
     }
 
@@ -455,6 +457,9 @@ hr {
     }
 
     section{
+        display: flex;
+        justify-content: center;
+        /*
         ul{
             @include contenu_centre_vertical();
             gap: 10px;
@@ -499,7 +504,7 @@ hr {
                 }
                 
             }
-        }
+        }*/
     }
 }
 
