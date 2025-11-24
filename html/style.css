@@ -1255,4 +1255,8 @@ aside input.bouton:hover {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.error {
+  color: #E43737;
 }/*# sourceMappingURL=style.css.map */
