@@ -872,23 +872,9 @@ aside {
 }
 
 .anonymisation-client {
-    main {
-        display: flex;
-    }
-
-    input {
-        display: flex;
-        flex-direction: row-reverse;
-
-        >:last-child {
-            width: 100%;
-        }
-
-        @include formulaire();
-        width: 60vw;
-        border-radius: $angle_normal;
-        padding: 3em 3em;
-
+    main form input{
+        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
+        justify-content: center;
     }
 }
 
