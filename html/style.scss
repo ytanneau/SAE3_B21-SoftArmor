@@ -857,3 +857,13 @@ aside {
     width: 30px;
     height: 30px;
 }
+
+
+
+.anonymisation-client {
+    main {
+        @include bouton();
+        @include contenu_centre_horizontal();
+        justify-content: center;
+    }
+}
