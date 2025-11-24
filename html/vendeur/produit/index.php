@@ -51,7 +51,7 @@
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
-            die('Suppression du produit ' . $_GET['produit'] . ' impossible');
+            die('Suppression du produit ' . $_GET['produit'] . ' impossible : ' . $e->getMessage());
         }
     }
 
