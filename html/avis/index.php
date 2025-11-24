@@ -89,7 +89,7 @@
     }
 
     if ($succes === true) {
-        header('location: ' . HOME_SITE . 'produit/?id_produit=' . $_GET['produit']);
+        header('location: ' . HOME_SITE . 'produit/?produit=' . $_GET['produit']);
     }
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
@@ -121,7 +121,7 @@
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
             <section>
-                <a href="../produit?id_produit=<?=htmlentities($_GET['produit'])?>">
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">
                     <article>
                         <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
                         <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'] ?? '')?>" alt="<?=htmlentities($sql_produit['image_principale_alt'] ?? '')?>" title="<?=htmlentities($sql_produit['image_principale_titre'] ?? '')?>">
