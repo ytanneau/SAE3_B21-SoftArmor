@@ -377,13 +377,26 @@
         }
     }
 
-    function update_stock($id_produit, $nb_produit){
+    function update_stock($id_produit, $quantite){
         global $pdo;
 
-        $requete = $pdo->prepare('SELECT update_stock(:id_produit, :nb_produit)');
+        $ancienne_quantite = detail_produit($id_produit)['stock'];
+        if (str_contains($quantite, '+') or str_contains($quantite, '-')) {
+            $nouvelle_quantite = $ancienne_quantite + (int) $quantite;
+        }
+
+        else {
+            $nouvelle_quantite = (int) $ancienne_quantite;
+        }
+
+        if ($nouvelle_quantite < 0) {
+            return false;
+        }
+
+        $requete = $pdo->prepare('UPDATE _produit SET stock = :quantite WHERE id_produit = :id_produit');
+        $requete->bindValue(":quantite", $quantite, PDO::PARAM_INT);
         $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
-        $requete->bindValue(":nb_produit", $nb_produit, PDO::PARAM_INT);
         $requete->execute();
-        $res = $requete->fetch(PDO::FETCH_ASSOC);
-        return $res;
+
+        return true;
     }
