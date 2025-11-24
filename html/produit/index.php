@@ -153,10 +153,16 @@ if ($_POST != NULL) {
 
                 <!-- Description détaillée -->
                 <article>
-                    <h2>Description détaillée</h2>
-                    <p>
-                        <?= nl2br(htmlentities($produit['description_detaillee'] ?? '')) ?>
-                    </p>
+                    <?php
+                        $description_detaillee = nl2br(htmlentities($produit['description_detaillee'] ?? ''));
+
+                        if (!empty($description_detaillee)) { ?>
+                            <h2>Description détaillée</h2>
+                            <p>
+                                <?= $description_detaillee ?>
+                            </p>
+                        <?php } 
+                    ?>
                 </article>
 
                 <hr>
