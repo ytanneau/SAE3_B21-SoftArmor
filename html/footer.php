@@ -39,12 +39,12 @@
     </div>
 
     <div class="footer-socials">
-      <a href="#"><img src="<?= $image ?>x_blanc.png" alt="X"></a>
-      <a href="#"><img src="<?= $image ?>instagram_blanc.png" alt="Instagram"></a>
-      <a href="#"><img src="<?= $image ?>facebook-blanc.svg" alt="Facebook"></a>
-      <a href="#"><img src="<?= $image ?>youtube-blanc.svg" alt="YouTube"></a>
-      <a href="#"><img src="<?= $image ?>tiktok-blanc.svg" alt="TikTok"></a>
-      <a href="#"><img src="<?= $image ?>linkedin_blanc.png" alt="LinkedIn"></a>
+      <a href="#"><img src="<?= $images ?>x_blanc.png" alt="X"></a>
+      <a href="#"><img src="<?= $images ?>instagram-blanc.png" alt="Instagram"></a>
+      <a href="#"><img src="<?= $images ?>facebook-blanc.svg" alt="Facebook"></a>
+      <a href="#"><img src="<?= $images ?>youtube-blanc.svg" alt="YouTube"></a>
+      <a href="#"><img src="<?= $images ?>tiktok-blanc.svg" alt="TikTok"></a>
+      <a href="#"><img src="<?= $images ?>linkedin-blanc.png" alt="LinkedIn"></a>
     </div>
 
   </div>
