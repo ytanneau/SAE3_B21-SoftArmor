@@ -148,7 +148,7 @@
 
     function supprimer_images_produit($id_produit) {
         foreach (glob(HOME_SITE . "ressources/produit/" . $id_produit . "*.png") as $filename) {
-            echo $filename;
+            unlink($filename);
         }
     }
 
