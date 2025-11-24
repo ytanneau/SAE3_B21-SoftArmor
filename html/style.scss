@@ -21,6 +21,7 @@ main {
 }
 
 .formulaire_client {
+    @include contenu_centre_vertical;
     @include formulaire();
 }
 
