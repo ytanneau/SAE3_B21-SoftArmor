@@ -386,6 +386,10 @@ div:has(.detail_produit) {
     flex-basis: 60%;
 }
 
+div:has(> aside) {
+    flex-grow: 1;
+}
+
 .detail_produit {
     font-family: $font_text;
 
@@ -797,12 +801,10 @@ aside {
 
 aside {
     position: sticky;
-    //right: 5vw;
-    top: 7em;
+    top: 5em;
 
-    font-size: 1.2em;
+    margin: 0 3em 2em 3em;
     font-size: 1.4em;
-    width: 20vw;
 
     .prix {
         font-family: $font_title;
@@ -860,9 +862,12 @@ aside {
 
 
 .anonymisation-client {
-    main {
-        @include bouton();
-        @include contenu_centre_horizontal();
+    main form{
+        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
         justify-content: center;
     }
+}
+
+.error{
+        color: $rouge;
 }

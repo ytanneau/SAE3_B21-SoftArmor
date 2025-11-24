@@ -789,6 +789,10 @@ div:has(.detail_produit) {
   flex-basis: 60%;
 }
 
+div:has(> aside) {
+  flex-grow: 1;
+}
+
 .detail_produit {
   font-family: "Inter";
 }
@@ -1163,10 +1167,9 @@ aside {
 }*/
 aside {
   position: sticky;
-  top: 7em;
-  font-size: 1.2em;
+  top: 5em;
+  margin: 0 3em 2em 3em;
   font-size: 1.4em;
-  width: 20vw;
 }
 aside .prix {
   font-family: "Montserrat";
@@ -1243,4 +1246,29 @@ aside input.bouton:hover {
 .etoile {
   width: 30px;
   height: 30px;
+}
+
+.anonymisation-client main form {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+}
+.anonymisation-client main form:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
+.error {
+  color: #E43737;
 }/*# sourceMappingURL=style.css.map */
