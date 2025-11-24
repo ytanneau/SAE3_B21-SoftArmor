@@ -386,7 +386,7 @@
         }
 
         else {
-            $nouvelle_quantite = (int) $ancienne_quantite;
+            $nouvelle_quantite = (int) $quantite;
         }
 
         if ($nouvelle_quantite < 0) {
@@ -394,7 +394,7 @@
         }
 
         $requete = $pdo->prepare('UPDATE _produit SET quantite = :quantite WHERE id_produit = :id_produit');
-        $requete->bindValue(":quantite", $quantite, PDO::PARAM_INT);
+        $requete->bindValue(":quantite", $nouvelle_quantite, PDO::PARAM_INT);
         $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
         $requete->execute();
 

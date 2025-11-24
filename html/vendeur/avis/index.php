@@ -69,12 +69,12 @@
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'], 1))?>
+            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'], 1) ?? "N/A")?>
             <br>
 <?php
     afficher_moyenne_note($produit['note_moy']);
 ?>
-            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'])?>
+            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
     </article>
     <section>
