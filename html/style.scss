@@ -590,7 +590,7 @@ div:has(> aside) {
             display: flex;
             flex-direction: row;
             > button {
-                width: 50px;
+                width: 40px;
                 height: 40px;
                 border-radius: $angle_grand;
                 align-self: center;
@@ -609,6 +609,7 @@ div:has(> aside) {
                 overflow: hidden;
                 list-style: none;
                 padding: 0;
+                width:100%;
                 
                 > li {
                     width: 20vw;

@@ -977,7 +977,7 @@ div:has(> aside) {
   flex-direction: row;
 }
 .accueil > main > div > button {
-  width: 50px;
+  width: 40px;
   height: 40px;
   border-radius: 50px;
   align-self: center;
@@ -997,6 +997,7 @@ div:has(> aside) {
   overflow: hidden;
   list-style: none;
   padding: 0;
+  width: 100%;
 }
 .accueil > main > div > ul > li {
   width: 20vw;
