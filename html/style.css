@@ -331,6 +331,25 @@ hr {
 #connect_vendeur main form .error, #inscription_vendeur main form .error {
   color: #E43737;
 }
+#connect_vendeur main .bouton, #inscription_vendeur main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+#connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
 
 #connect_vendeur, #connect_client {
   justify-content: center;
@@ -417,6 +436,25 @@ hr {
 }
 #connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
+}
+#connect_client main .bouton, #inscription_client main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+#connect_client main .bouton:hover, #inscription_client main .bouton:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }
 
 #inscription_vendeur, #inscription_client {

@@ -240,5 +240,9 @@
             @include contenu_centre_vertical;
             @include formulaire;
         }
+
+        .bouton {
+            @include bouton_new($background: $focus, $color: white, $padding: 1em, $size: 1em, $angle: $angle_grand);
+        }
     }
 }
