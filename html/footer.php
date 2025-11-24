@@ -6,7 +6,7 @@
   <title>Titre de la page</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<footer class="footer">
+<footer id="footer_client" class="footer">
   <div class="footer-top">
 
     <div class="footer-logos">
