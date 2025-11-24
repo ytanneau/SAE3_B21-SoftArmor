@@ -11,27 +11,27 @@
 
     <div class="footer-columns">
       <div class="footer-column">
-        <h4>Catégorie</h4>
-        <a href=<?= HOME_SITE . 'vendeur/' ?>>Connexion page vendeur</a>
-        <a href=<?= HOME_SITE . 'compte/connexion' ?>>Connexion page client</a>
+        <h4>Connexion</h4>
+        <a href=<?= HOME_SITE . 'vendeur/' ?>>Compte vendeur</a>
+        <a href=<?= HOME_SITE . 'compte/connexion' ?>>Compte client</a>
       </div>
 
       <div class="footer-column">
-        <h4>Catégorie</h4>
-        <a href="#">Lien pratique</a>
+        <h4>Inscription</h4>
+        <a href=<?= HOME_SITE . 'vendeur/inscription' ?>>Compte vendeur</a>
+        <a href=<?= HOME_SITE . 'compte/inscription' ?>>Compte client</a>
+      </div>
+
+      <div class="footer-column">
+        <h4>Des Questions ?</h4>
+        <a href="#">Aide</a>
         <a href="#">Lien pratique</a>
       </div>
 
       <div class="footer-column">
-        <h4>Catégorie</h4>
-        <a href="#">Lien pratique</a>
-        <a href="#">Lien pratique</a>
-      </div>
-
-      <div class="footer-column">
-        <h4>Catégorie</h4>
-        <a href="#">Lien pratique</a>
-        <a href="#">Lien pratique</a>
+        <h4>A propos d'Alizon</h4>
+        <a href="#">Qui sommes nous ?</a>
+        <a href="#">Plan du site</a>
       </div>
     </div>
 

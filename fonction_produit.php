@@ -380,7 +380,7 @@
     function update_stock($id_produit, $quantite){
         global $pdo;
 
-        $ancienne_quantite = detail_produit($id_produit)['stock'];
+        $ancienne_quantite = detail_produit($id_produit)['quantite'];
         if (str_contains($quantite, '+') or str_contains($quantite, '-')) {
             $nouvelle_quantite = $ancienne_quantite + (int) $quantite;
         }
@@ -393,7 +393,7 @@
             return false;
         }
 
-        $requete = $pdo->prepare('UPDATE _produit SET stock = :quantite WHERE id_produit = :id_produit');
+        $requete = $pdo->prepare('UPDATE _produit SET quantite = :quantite WHERE id_produit = :id_produit');
         $requete->bindValue(":quantite", $quantite, PDO::PARAM_INT);
         $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
         $requete->execute();
