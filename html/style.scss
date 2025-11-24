@@ -590,18 +590,25 @@ div:has(> aside) {
             display: flex;
             flex-direction: row;
             > button {
-                width: 30px;
-                height: 25px;
-                border-radius: $angle_normal;
+                width: 50px;
+                height: 40px;
+                border-radius: $angle_grand;
                 align-self: center;
+                position: relative;
+                background-color: $couleur_primaire_client;
+
+            }
+            .gauche {
+                left: 50px;
+            }
+            .droite {
+                right: 50px;
             }
             > ul {
-                display: flex;
-                flex-direction: row;
+                @include contenu_centre_horizontal;
                 overflow: hidden;
                 list-style: none;
-                
-
+                padding: 0;
                 
                 > li {
                     width: 20vw;
@@ -612,11 +619,7 @@ div:has(> aside) {
                         text-decoration: none;
                         line-height: 1.5em;
                         > img {
-                            width: 15vw;
-                            height: 15vw;
-                            object-fit: contain;
-                            background-color: $nuance_primaire_client;
-                            border-radius: $angle_petit;
+                            @include image_produit(15vw);
                         }   
                         > div {
                             > img {
@@ -628,8 +631,7 @@ div:has(> aside) {
                                 margin: 5px 0 ;
                             }
                             height :2em;
-                            display: flex;
-                            align-items: center;
+                            @include contenu_centre_horizontal;
                         }
                         > p, > h3 {
                             margin: 5px 0 ;
@@ -648,10 +650,8 @@ div:has(> aside) {
     @media screen and (max-width: 1024px){
         nav {
             width: 100%;
-            display: flex;
-            flex-direction: row;
+            @include contenu_centre_horizontal;
             justify-content: space-evenly;
-            align-items: center;
             position: sticky;
             bottom: 0;
             background-color: $couleur_background;
@@ -669,9 +669,7 @@ div:has(> aside) {
                     justify-items:center;
                     padding: 0;
                     > li {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
+                        @include contenu_centre_vertical;
                         width: 100%;
                         margin: 20px;
                         > a {  
