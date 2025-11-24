@@ -238,5 +238,6 @@ if ($_POST != NULL) {
             </form>
         </aside>
     </main>
+        <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>
