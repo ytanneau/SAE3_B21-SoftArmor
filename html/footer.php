@@ -13,7 +13,7 @@
       <div class="footer-column">
         <h4>Catégorie</h4>
         <a href=<?= HOME_SITE . 'vendeur/' ?>>Connexion page vendeur</a>
-        <a href="#">Lien pratique</a>
+        <a href=<?= HOME_SITE . '/' ?>>Connexion page client</a>
       </div>
 
       <div class="footer-column">
