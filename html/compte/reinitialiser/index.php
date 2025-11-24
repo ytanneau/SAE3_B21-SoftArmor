@@ -175,9 +175,13 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 
         <!-- Deuxième formulaire (saisir la réponse à la question) -->
         <?php } else if ($etape === 2) { ?>
-            <p><?= $row['question'] ?? '' ?></p>
+            
 
             <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+
+                <h2><?= $row['question'] ?? '' ?></h2>
+
                 <input type="hidden" name="etape" value="etape_reponse">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
@@ -194,6 +198,8 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         <!-- Troisième formulaire (saisir le nouveau MDP) -->
         <?php } else if ($etape === 3) { ?>
             <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+                
                 <input type="hidden" name="etape" value="etape_mdp">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
