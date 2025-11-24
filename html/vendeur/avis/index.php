@@ -28,8 +28,8 @@
 
 
     if (isset($_GET['produit'])) {
-        $data = avis_client_produit($_GET['produit'], $_SESSION['id_compte']);
-        $produit = avis_produit($_GET['produit']);
+        $data = avis_client_produit($_GET['produit']);
+        $produit = avis_produit($_GET['produit'], $_SESSION['id_compte']);
         //print_r($produit);
     }
     else{

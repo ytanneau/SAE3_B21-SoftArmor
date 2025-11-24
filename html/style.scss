@@ -863,8 +863,7 @@ aside {
 
 .anonymisation-client {
     main {
-        @include bouton();
-        @include contenu_centre_horizontal();
+        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
         justify-content: center;
     }
 }
