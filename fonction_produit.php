@@ -393,7 +393,7 @@
             return false;
         }
 
-        $requete = $pdo->prepare('UPDATE _produit SET stock = :quantite WHERE id_produit = :id_produit');
+        $requete = $pdo->prepare('UPDATE _produit SET quantite = :quantite WHERE id_produit = :id_produit');
         $requete->bindValue(":quantite", $quantite, PDO::PARAM_INT);
         $requete->bindValue(":id_produit", $id_produit, PDO::PARAM_INT);
         $requete->execute();
