@@ -17,11 +17,11 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
-if (!isset($_GET['id_produit']) || !is_numeric($_GET['id_produit'])) {
+if (!isset($_GET['produit']) || !is_numeric($_GET['produit'])) {
     die("ID du produit invalide.");
 }
 
-$id_produit = htmlentities($_GET['id_produit']);
+$id_produit = htmlentities($_GET['produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
@@ -32,7 +32,7 @@ try {
     }
 
     // Récupérer les avis
-    $liste_avis = avis_client_produit($_GET['id_produit']);
+    $liste_avis = avis_client_produit($_GET['produit']);
 } catch (PDOException $e) {
     die("Erreur lors de la récupération du produit : " . $e->getMessage());
 }
@@ -53,7 +53,7 @@ if (isset($produit['prix'])) {
 
 if ($_POST != NULL) {
     $qte= $_POST['quantite'];
-    $id_prod = $_GET['id_produit'];
+    $id_prod = $_GET['produit'];
     $id_cli = $_SESSION['id_compte'];
     ajouter_panier($id_prod,$id_cli,$qte);
 }
@@ -249,7 +249,7 @@ if ($_POST != NULL) {
                         <p>Connectez-vous pour ajouter ce produit à votre panier</p>
                     <?php } ?>
 
-                    <a class="bouton" href="<?=$page?>/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>">Acheter</a>
+                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter</a>
                 </form>
             </aside>
         </div>
