@@ -1109,8 +1109,8 @@ div:has(> aside) {
   .accueil > main > div > ul > li > a {
     display: flex;
     flex-direction: column;
-    max-width: -moz-fit-content;
-    max-width: fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
     text-align: left;
     align-items: flex-start;
   }
@@ -1412,4 +1412,28 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
+}
+.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.image:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }/*# sourceMappingURL=style.css.map */
