@@ -123,6 +123,7 @@
             <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
             <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+            <br>
             <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
