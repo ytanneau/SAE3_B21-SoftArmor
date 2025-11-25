@@ -76,8 +76,6 @@
             <!-- bouton pour etre rediriger vers la desactivation du compte vendeur -->
             <button><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
         </main>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>

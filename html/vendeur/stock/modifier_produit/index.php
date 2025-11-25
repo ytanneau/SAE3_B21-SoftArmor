@@ -344,8 +344,6 @@
                 }
             })
         </script>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>
