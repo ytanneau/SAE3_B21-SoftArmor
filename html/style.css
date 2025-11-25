@@ -953,6 +953,7 @@ div:has(> aside) {
 .footer-columns-all {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .footer-columns-all .footer-columns {
   display: flex;
@@ -1755,7 +1756,8 @@ aside input.bouton:hover {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   height: 300px;
   border-radius: 5px;
 }
@@ -1763,7 +1765,8 @@ aside input.bouton:hover {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
   height: 100px;
   border-radius: 5px;
 }
