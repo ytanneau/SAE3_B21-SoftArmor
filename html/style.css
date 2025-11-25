@@ -1017,6 +1017,9 @@ div:has(> aside) {
 .accueil > main > div > button > img {
   width: 75%;
 }
+.accueil > main > div > button:hover {
+  background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
+}
 .accueil > main > div .gauche {
   transform: rotate(180deg);
   left: 50px;
@@ -1106,21 +1109,24 @@ div:has(> aside) {
   .accueil > main > div > ul > li > a {
     display: flex;
     flex-direction: column;
-    max-width: 20vw;
+    width: -moz-fit-content;
+    width: fit-content;
     text-align: left;
     align-items: flex-start;
   }
   .accueil > main > div > ul > li > a > img {
-    -o-object-fit: contain;
-       object-fit: contain;
     background-color: #f3f1fb;
-    width: 300px;
-    height: 300px;
-    border-radius: 5px;
+    width: 25vw;
+    max-width: 300px;
+    height: 25vw;
+    border-radius: 10px;
     align-self: center;
   }
   .accueil > main > div > ul > li > a > p {
     font-size: 1.5em;
+  }
+  .accueil > main > div > ul > li > a > h3 {
+    height: 2em;
   }
 }
 
@@ -1393,6 +1399,9 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Inter";
+  padding: 0;
+  margin: 0;
 }
 .bodyAjoutProduit p {
   display: flex;
@@ -1406,4 +1415,28 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
+}
+.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.image:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }/*# sourceMappingURL=style.css.map */
