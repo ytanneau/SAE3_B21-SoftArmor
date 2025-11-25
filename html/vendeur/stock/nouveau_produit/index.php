@@ -101,8 +101,9 @@
         <title>Ajout produit</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="<?= HOME_GIT . "/html/style.css"?>">
     </head>
-    <body>
+    <body class="bodyAjoutProduit">
         <?php include "../../header.php" ?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
