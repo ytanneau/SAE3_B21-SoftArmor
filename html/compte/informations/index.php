@@ -405,8 +405,8 @@ unset($pdo);
                             </div>
 
                             <div>
-                                <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
-                                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                                <h3><?= htmlentities($row['titre'] ?? '') ?></h3>
+                                <p><?= htmlentities($row['commentaire'] ?? '') ?></p>
                                 <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($row['date_avis'] ?? ''))) ?></p>
                             </div>
                         </div>

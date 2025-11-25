@@ -656,6 +656,9 @@ hr {
   font-family: "Inter";
 }
 
+.infos .liste_avis {
+  width: 33vw;
+}
 .infos form {
   display: flex;
   flex-direction: row-reverse;
