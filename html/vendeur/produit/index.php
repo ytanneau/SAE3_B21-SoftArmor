@@ -62,66 +62,7 @@
 
     // Fonctions
 
-    function ecrire_nom($rows, $rows2, $produit){
-        global $rows;
-        global $rows2;
-        global $produit;
-        ?>
-        <!-- tableau a mettre en haut a droite -->
-        <table>
-            <tr>
-                <th>nom en stock </th>
-                <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
-            </tr>
-                <th>nom public </th>
-                <td><?= htmlentities($rows['nom_public'] ?? '') ?>  </td>
-            </tr>
-                <th>Prix actuelle </th>
-                <td><?= htmlentities($rows['prix'] ?? '') ?>  </td>
-            </tr>
-                <th>taux TVA </th>
-                <td><?= htmlentities($rows['tva'] ?? '') ?>  </td>
-            </tr>
-                <th>Poids </th>
-                <td><?= htmlentities($rows['poids'] ?? '') ?> </td>
-            </tr>
-                <th>Volume </th>
-                <td><?= htmlentities($rows['volume'] ?? '')  ?></td>
-            </tr>
-        </table>
-        <div>
-            <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
-            <?php
-                if (isset($rows2['id_image1'])) {
-                    ?><img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
-                }
-                if (isset($rows2['id_image2'])) {
-                    ?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
-                }
-            ?>
-        </div>
-        <!-- div a mettre en dessous du tableau -->
-        <div>
-            <?= htmlentities($rows['description'] ?? '') ?>
-        </div>
-        <!-- A mettre encore en dessous -->
-        <div>
-            <?= htmlentities($rows['description_detaillee'] ?? '') ?>
-        </div>
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        <?= htmlentities($rows['quantite'] ?? '')  ?>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    <?php
-
-    }
-?>
+?>   
 <!doctype html>
 <html lang="fr">
     <head>
@@ -134,10 +75,57 @@
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
 
-        <main>
-            <?php if (!isset($supprime) || $supprime === false) {
-                ecrire_nom($rows, $rows2, $_GET['produit']); ?>
-
+        <main class="produit-vendeur">
+            <?php if (!isset($supprime) || $supprime === false) {?>
+                <table>
+                    <tr>
+                        <th>nom en stock </th>
+                        <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
+                    </tr>
+                        <th>nom public </th>
+                        <td><?= htmlentities($rows['nom_public'] ?? '') ?>  </td>
+                    </tr>
+                        <th>Prix actuelle </th>
+                        <td><?= htmlentities($rows['prix'] ?? '') ?>  </td>
+                    </tr>
+                        <th>taux TVA </th>
+                        <td><?= htmlentities($rows['tva'] ?? '') ?>  </td>
+                    </tr>
+                        <th>Poids </th>
+                        <td><?= htmlentities($rows['poids'] ?? '') ?> </td>
+                    </tr>
+                        <th>Volume </th>
+                        <td><?= htmlentities($rows['volume'] ?? '')  ?></td>
+                    </tr>
+                </table>
+                <div>
+                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
+                    <?php
+                        if (isset($rows2['id_image1'])) {
+                            ?><img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
+                        }
+                        if (isset($rows2['id_image2'])) {
+                            ?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
+                        }
+                    ?>
+                </div>
+                <!-- div a mettre en dessous du tableau -->
+                <div>
+                    <?= htmlentities($rows['description'] ?? '') ?>
+                </div>
+                <!-- A mettre encore en dessous -->
+                <div>
+                    <?= htmlentities($rows['description_detaillee'] ?? '') ?>
+                </div>
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <?= htmlentities($rows['quantite'] ?? '')  ?>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <form id="supprimer" action="" method="post">
                     <input type="hidden" name="supprimer" value="true">
                     <input type="submit" value="Supprimer">
