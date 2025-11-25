@@ -346,8 +346,9 @@
 
             document.addEventListener("DOMContentLoaded", function () {
 
-            const selectCat = document.getElementById("idCategorie");
-            const divSousCat = document.getElementById("pSousCategorieAlimentaire");
+            const categorie = document.getElementById("idCategorie");
+            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
+            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
 
             selectSousCategorieAlimentaire.addEventListener('change', () => {
                 if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
