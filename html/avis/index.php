@@ -179,8 +179,7 @@
                         name="description"
                         value="" 
                         id="description"
-                        class="champ text">
-                        <?= $_POST['description'] ?? '' ?></textarea>
+                        class="champ text"><?= $_POST['description'] ?? '' ?></textarea>
 
                     <?php if (isset($erreur['description'])) { ?>
                         <p class="error">
