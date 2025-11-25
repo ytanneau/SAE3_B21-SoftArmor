@@ -906,11 +906,11 @@ div:has(> aside) {
   font-family: sans-serif;
   margin-top: 50px;
   width: 100vw;
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
 .footer > div {
-  margin: 40px 60px;
+  padding: 40px 60px;
 }
 .footer a {
   color: #dcdcdc;
