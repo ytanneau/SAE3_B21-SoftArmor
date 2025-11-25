@@ -943,13 +943,17 @@ div:has(> aside) {
 
 .footer-logos {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
 }
 .footer-logos .logo {
   width: 150px;
 }
 
+.footer-columns-all {
+  display: flex;
+  flex-direction: row;
+}
 .footer-columns-all .footer-columns {
   display: flex;
   flex: 1;
