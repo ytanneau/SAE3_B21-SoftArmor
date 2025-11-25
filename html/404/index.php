@@ -38,6 +38,7 @@ $images = HOME_SITE . "image/"
         .all_404{
             display: flex;
             justify-content: center;
+            align-items: center;
             flex-direction: column;
         }
     </style>
