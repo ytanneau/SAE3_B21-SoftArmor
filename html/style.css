@@ -1609,10 +1609,16 @@ aside input.bouton:hover {
   flex-direction: column;
   width: 600px;
 }
+.bodyAjoutProduit #idCodeBarre {
+  width: 150px;
+}
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
   gap: 70px;
+}
+.bodyAjoutProduit input[type=file] {
+  padding-top: 7px;
 }
 .bodyAjoutProduit #creerProduit {
   margin-top: 20px;
@@ -1633,12 +1639,6 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.bodyAjoutProduit input[type=file] {
-  padding-top: 7px;
-}
-.bodyAjoutProduit #idCodeBarre {
-  width: 150px;
 }
 
 .bodyModifProduit {
@@ -1679,12 +1679,28 @@ aside input.bouton:hover {
   flex-direction: column;
   width: 600px;
 }
+.bodyModifProduit #idCodeBarre {
+  width: 150px;
+}
 .bodyModifProduit .divEnLigne {
   display: flex;
   flex-direction: row;
   gap: 70px;
 }
+.bodyModifProduit .blockImg img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 250px;
+  max-width: 250px;
+  height: 250px;
+  border-radius: 5px;
+}
+.bodyModifProduit #idCheckMajeur {
+  margin-right: 70px;
+}
 .bodyModifProduit #idModifierProduit {
+  margin-top: 20px;
   display: block;
   max-width: 100%;
   width: auto;
@@ -1702,21 +1718,6 @@ aside input.bouton:hover {
 }
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.bodyModifProduit .blockImg img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  background-color: #f3f1fb;
-  min-width: 250px;
-  max-width: 250px;
-  height: 250px;
-  border-radius: 5px;
-}
-.bodyModifProduit #idCheckMajeur {
-  margin-right: 70px;
-}
-.bodyModifProduit #idCodeBarre {
-  width: 150px;
 }
 
 #create_avis main {
