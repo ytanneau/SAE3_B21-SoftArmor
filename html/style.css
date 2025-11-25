@@ -1017,6 +1017,9 @@ div:has(> aside) {
 .accueil > main > div > button > img {
   width: 75%;
 }
+.accueil > main > div > button:hover {
+  background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
+}
 .accueil > main > div .gauche {
   transform: rotate(180deg);
   left: 50px;
@@ -1106,21 +1109,24 @@ div:has(> aside) {
   .accueil > main > div > ul > li > a {
     display: flex;
     flex-direction: column;
-    max-width: 20vw;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
     text-align: left;
     align-items: flex-start;
   }
   .accueil > main > div > ul > li > a > img {
-    -o-object-fit: contain;
-       object-fit: contain;
     background-color: #f3f1fb;
-    width: 300px;
-    height: 300px;
+    width: 25vw;
+    max-width: 300px;
+    height: 25vw;
     border-radius: 5px;
     align-self: center;
   }
   .accueil > main > div > ul > li > a > p {
     font-size: 1.5em;
+  }
+  .accueil > main > div > ul > li > a > h3 {
+    height: 2em;
   }
 }
 
