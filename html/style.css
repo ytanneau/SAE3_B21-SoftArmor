@@ -1530,6 +1530,23 @@ aside input.bouton:hover {
   height: 25px;
 }
 
+.bodyModifProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyModifProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyModifProduit .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.bodyModifProduit .entete h1 {
+  margin-right: 30px;
+}
+
 #create_avis main {
   padding-top: 2em;
 }
