@@ -1090,3 +1090,22 @@ aside {
         padding-top: 2em;
     }
 }
+
+.info_vendeur {
+    p { 
+        padding: 0 10px;
+        width: max-content;
+        border-radius: $angle_petit;
+        border:rgba(0,0,0,0.25) 1px solid;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    }
+    .desc {
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+    }
+    .modif_info {
+        color: $couleur_background;
+        text-decoration: none;
+    }
+}
