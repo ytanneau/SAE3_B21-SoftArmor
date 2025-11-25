@@ -1052,7 +1052,7 @@ aside {
         align-items: center;
         a{
             height: 24px;
-            margin-left: 50px;
+            margin-right: 50px;
         }
         h1{
             margin-right: 30px;
@@ -1078,10 +1078,11 @@ aside {
     .divEnLigne{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        gap: 70px;
     }
     .divCreerProduit{
         @include contenu_centre_vertical;
+        margin-top: 20px;
         #creerProduit{
             @include bouton_new;
         }
@@ -1091,6 +1092,9 @@ aside {
     }
     #idtva{
         height: 20.3px;
+    }
+    input[type="text"]{
+        height: 35px;
     }
 }
 
