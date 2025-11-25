@@ -1094,20 +1094,23 @@ aside {
     }
 }
 
-.image_bouton{
-    @include bouton_new($couleur_etoile);
-    border-radius: $angle_normal;
-    margin-top: 2em;
-    margin-bottom: 1em;
 
-    p{
-        font-size: 0.75em;
-    }
-}
 
 
 #create_avis{
     main{
         padding-top: 2em;
+
+        .image_bouton{
+            @include bouton_new($couleur_etoile);
+            border-radius: $angle_normal;
+            padding: 0.5em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+
+            p{
+                font-size: 10px;
+            }
+        }
     }
 }

@@ -1519,7 +1519,10 @@ aside input.bouton:hover {
   height: 20.3px;
 }
 
-.image_bouton {
+#create_avis main {
+  padding-top: 2em;
+}
+#create_avis main .image_bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1535,16 +1538,13 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
+  padding: 0.5em;
   margin-top: 2em;
   margin-bottom: 1em;
 }
-.image_bouton:hover {
+#create_avis main .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
-.image_bouton p {
-  font-size: 0.75em;
-}
-
-#create_avis main {
-  padding-top: 2em;
+#create_avis main .image_bouton p {
+  font-size: 10px;
 }/*# sourceMappingURL=style.css.map */
