@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-// Si pas co, alors go page inscription
+// Si pas co, alors go page connexion
 if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_SITE . "compte/connexion");
 }
