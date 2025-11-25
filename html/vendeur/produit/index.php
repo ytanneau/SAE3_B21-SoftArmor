@@ -148,7 +148,7 @@
             
             <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
-        <?php include HOME_SITE . "vendeur/footer.php" ?>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>
 
