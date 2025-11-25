@@ -508,8 +508,7 @@ div:has(> aside) {
     color: #fff;
     padding: 40px 60px;
     font-family: sans-serif;
-    position: absolute;
-    top: 0px;
+    flex : 1;
 }
 
 .footer a {
