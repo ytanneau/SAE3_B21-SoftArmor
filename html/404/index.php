@@ -18,20 +18,33 @@ $images = HOME_SITE . "image/"
             <?php
                 http_response_code(404);
                 ?>
+                <div class ="all_404">
                 <h1 class="titre_404">404</h1>
                 <p>Oups on dirait que cette page n’existe pas !</p>
                 <a href= <?= HOME_SITE?> >
                     <img src="<?= $images . 'Alizon_noir.png' ?>" alt="Logo Alizon" class="logo">
                 </a>
                 <a href= <?= HOME_SITE?>>Retour à l'accueil</a>
-                <style>
-                    .le404 {
-                        background: linear-gradient(to right, #CBCCEA, #3157A3);
-                        display: flex;
-                        justify-content: center;
-                        flex-direction: column;
-                    }
-                </style>
+                </div>
         </main>
     </body>
+    <style>
+        .le404 {
+            background: linear-gradient(to right, #CBCCEA, #3157A3);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width :100%;
+            height: 100%;
+        }
+        .all_404{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .all_404 h1{
+            justify-self: center;
+        }
+    </style>
 </html>

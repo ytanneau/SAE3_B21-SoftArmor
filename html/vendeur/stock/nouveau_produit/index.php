@@ -107,8 +107,10 @@
         <?php include "../../header.php" ?>
         <main class="bodyAjoutProduit">
             <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-            <h1>Ajouter un produit au stock</h1>
+            <div class="entete">
+                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <h1>Ajouter un produit au stock</h1>
+            </div>
 
             <!-- Formulaire de saisie des informations du produit -->
             <form action="" name="formulaire" method="post" enctype="multipart/form-data">

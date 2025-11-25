@@ -657,7 +657,15 @@ hr {
 }
 
 .infos .liste_avis {
-  width: 33vw;
+  width: 100%;
+}
+.infos .liste_avis li > img:first-child {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 5px;
 }
 .infos form {
   display: flex;
@@ -1012,7 +1020,7 @@ div:has(> aside) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 10px black;
+  box-shadow: 0 0 20px black;
 }
 .accueil > main > div > button > img {
   width: 75%;
