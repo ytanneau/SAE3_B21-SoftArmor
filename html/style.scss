@@ -1141,3 +1141,59 @@ aside {
         text-decoration: none;
     }
 }
+
+.stock {
+    main {
+        display: flex;
+        flex-direction: column;
+
+        tr {
+            width: 50vw;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid black;
+            margin-top: 1em;
+            padding-bottom: 1em;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .bouton {
+            @include bouton_new($color: white, $padding: 0.8em, $size: 0.8em, $display: inline);
+
+        }
+        
+        td {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+
+            button {
+                margin:0;
+                padding:0;
+            }
+
+            >.bouton {
+                // bouton voir les avis
+                &:nth-child(2) {
+                    @include bouton_new(white, $padding: 0, $size: 0.8em, $display: inline);
+                }
+                
+                // bouton modifier
+                &:first-child {
+                    @include bouton_new(white, $padding: 0, $size: 0.8em, $display: inline);
+                }
+
+            }
+
+            form {
+                * {
+                    margin: auto 10px;
+                }
+            }
+        }
+    }
+}

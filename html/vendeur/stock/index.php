@@ -23,11 +23,13 @@ require_once HOME_GIT . '.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
 function ecrire_nom($rows){
+    ?>
+        <table>
+    <?php
     foreach ($rows as $row){
         ?>
         
-        <table id=<?= htmlentities($row['id_produit'] ?? '')?>>
-            <tr>
+            <tr id=<?= htmlentities($row['id_produit'] ?? '')?>>
                 <!-- <td><img src="MenuBurger.png" alt=""> </td> -->
                 <td> 
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
@@ -37,20 +39,27 @@ function ecrire_nom($rows){
                 <!-- <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
                 <td><img src="Fleche.png" alt=""> </td> -->
-                <td> | </td>
                 <td>
+
+                    <button type="submit" class="bouton" value="Valider"><img src="SAE3_B21-SoftArmor/html/image/etoile.svg"></button>
+                    <button type="submit" class="bouton" value="Valider"><img src="SAE3_B21-SoftArmor/html/image/modifier.svg"></button>
+
+                    <span> | </span>
+
                     <form action="./update_stock.php">
-                    <label for="nb">quantité</label>
-                    <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
-                    <input type="text" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
-                    <input type="submit" value="Valider">
+                        <label for="nb">Quantité</label>
+                        <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
+                        <input type="text" size="8" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
+                        <input type="submit" class="bouton" value="Valider">
                     </form> 
                 </td>
             </tr>
-        </table>
         
         <?php
     }
+    ?>
+        </table>
+    <?php
 }
 
 //commande qui permet de séléctionner l'id du produit, son nom et sa quantité en stock
