@@ -172,7 +172,7 @@
                     </p>
                     <p>
                         <label for="codeBarre">Code barre*</label>
-                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
+                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" value="<?= $tabInfoProduit['code_barre']?>" required>
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>

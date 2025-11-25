@@ -249,9 +249,7 @@
                         <input type="text" name="volumeColis" id="volumeColis" required>
                     </p>   
                 </div>
-                <div class="divCreerProduit">
-                    <input type="submit" value="Créer le produit" id="creerProduit">
-                </div>
+                <input type="submit" value="Créer le produit" id="creerProduit">
             </form>
             
             <script>
