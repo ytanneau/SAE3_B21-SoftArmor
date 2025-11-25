@@ -665,6 +665,71 @@ hr {
   font-family: "Inter";
 }
 
+.infos .modif {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.infos .modif:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.infos .grave {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.infos .grave:hover {
+  background-color: rgb(255, 76.5, 76.5);
+}
+.infos .image_bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+.infos .image_bouton:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+.infos .image_bouton p {
+  font-size: 10px;
+}
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
@@ -776,7 +841,7 @@ hr {
     text-align: center;
   }
   .infos section form article:last-child input,
-  .infos section form article:last-child button {
+  .infos section form article:last-child button, .infos section form article:last-child a {
     width: 100%;
   }
   .infos section form article:last-child .champ {
