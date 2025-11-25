@@ -181,6 +181,7 @@
                         <label for="checkEnLigne">Produit en ligne</label>
                         <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
+                <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
@@ -312,6 +313,14 @@
             const tva = document.getElementById("idtva");
             const codeBarre = document.getElementById("idCodeBarre");
             const modifierProduit = document.getElementById("idModifierProduit");
+
+            const categorie = document.getElementById("idCategorie");
+            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
+            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+
+            const uniteLiquide = document.getElementById("blockUniteLiquide");
+            const uniteMasse = document.getElementById("blockUniteMasse");
+            const uniteVetement = document.getElementById("blockUniteVetement");
             
             const descSimple = document.getElementById("idDescSimple");
             const descDetaille = document.getElementById("idDescDetaille");
@@ -344,9 +353,7 @@
                 else return false;
             }
 
-            const categorie = document.getElementById("idCategorie");
-            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
-            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+            
 
             selectSousCategorieAlimentaire.addEventListener('change', () => {
                 if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
