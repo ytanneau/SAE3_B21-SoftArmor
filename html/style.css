@@ -656,9 +656,6 @@ hr {
   font-family: "Inter";
 }
 
-.infos main {
-  display: flex;
-}
 .infos form {
   display: flex;
   flex-direction: row-reverse;
