@@ -122,19 +122,19 @@
             <div class="fini">
                 <h1>Votre avis a été enregistré</h1>                
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['fatal'])) { ?>
             <div class="fini">
                 <h1>Désolé, nous rencontrons des problèmes serveur</h1>
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['avis'])) { ?>
             <div class="fini">
                 <h1>Vous avez déjà donné votre avis sur ce produit</h1>
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
