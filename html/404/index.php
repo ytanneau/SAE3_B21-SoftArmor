@@ -49,7 +49,7 @@ $images = HOME_SITE . "image/"
             justify-self: center;
         }
         .logo{
-            width: 500; 
+            width: 400px;
         }
     </style>
 </html>
