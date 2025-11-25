@@ -1069,7 +1069,7 @@ aside {
             @include bouton_new;
         }
     }
-    input[file]{
+    input[type="file"]{
         padding-top: 7px;
     }
     #idtva{
