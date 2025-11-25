@@ -1370,10 +1370,7 @@ aside {
   }
 
   > div img {
-    max-width: 220px;
-    margin-right: 1rem;
-    border-radius: 8px;
-    transition: transform 0.25s ease;
+    @include image_produit($image_normal);
   }
 
   > div img:hover {
