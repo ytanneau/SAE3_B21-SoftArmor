@@ -360,6 +360,7 @@ else if ($numEtape == 2) {
 }
     else if ($numEtape == 3) {
         echo "<h2>Bravo vous avez réussi à effectuer l'achat !</h2>";
+        echo "<a href=<?=HOME_SITE?>>Revenir à l'accueil</a>";
     }
 
 ?>
