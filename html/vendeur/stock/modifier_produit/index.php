@@ -131,6 +131,7 @@
         <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Modifier un produit</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <?php include "../../header.php" ?>
