@@ -1595,7 +1595,7 @@ aside input.bouton:hover {
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.bodyModifProduit img {
+.bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
@@ -1702,7 +1702,7 @@ aside input.bouton:hover {
 }
 
 .titre404 {
-  font-size: 100px;
+  font-size: 99px;
   font-style: "Montserrat";
 }
 
