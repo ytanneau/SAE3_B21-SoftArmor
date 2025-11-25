@@ -29,6 +29,7 @@ $images = HOME_SITE . "image/"
                         background: linear-gradient(to right, #CBCCEA, #3157A3);
                         display: flex;
                         justify-content: center;
+                        flex-direction: column;
                     }
                 </style>
         </main>
