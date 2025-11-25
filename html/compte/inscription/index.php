@@ -49,6 +49,8 @@
     <main>
         <?php if (isset($erreurs) && $erreurs == []) { ?>
             <h1>Félicitations, vous avez créé votre compte</h1>
+            <p>Prochaine étape : <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
+
         <?php } else if (isset($erreurs['fatal'])) { ?>
             <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
         <?php } else { ?>
@@ -169,9 +171,10 @@
 
                 <input type="submit" value="Créer mon compte" class="bouton">
             </form>
+            
+            <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
         <?php } ?>
 
-        <p>Déjà inscrit ? <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
     </main>
 </body>
 </html>
