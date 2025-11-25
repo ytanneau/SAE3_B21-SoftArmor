@@ -1141,35 +1141,34 @@ aside {
     }
 }
 
-#body404{
-    .body404{
-        height: 100vh;
-        width: 100vw;
-        background: #3157A3;
-    }
-    .le404 {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        color: white;
-    }
-    .all_404{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .all_404 h1{
-        justify-self: center;
-    }
-    .logo{
-        width: 400px;
-    }
-    .titre404{
-        font-size: 100px;
-    }
 
-    .bouton404{
-        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
-    }
+#body404{
+    height: 100vh;
+    width: 100vw;
+    background: #3157A3;
+}
+.le404 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+.all_404{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.all_404 h1{
+    justify-self: center;
+}
+.logo{
+    width: 400px;
+}
+.titre404{
+    font-size: 100px;
+}
+
+.bouton404{
+    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
