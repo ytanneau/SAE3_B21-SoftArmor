@@ -86,11 +86,11 @@
                     <label for="complementAdr">Complement d'adresse</label>
                     <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
                     <label for="description">Description</label>
-                    <textarea type="textarea" name="description" id="id_description"><?= $description ?></textarea>
+                    <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                 </p>
-                <input type="submit" value="Valider la modification">
+                <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
             </form>
-            <a href="desactivation/desactivation.php">Desactiver le compte</a>
+            <a href="desactivation/desactivation.php" id="idDesactivationCompte">Desactiver le compte</a>
         </main>
         <footer>
 
