@@ -187,7 +187,7 @@
                         </p>
                     <?php } ?>
                     
-                        <label for="image" class="image">Ajouter une image 
+                        <label for="image" class="image_bouton">Ajouter une image 
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
                     <input id="image"

@@ -13,7 +13,7 @@ $images = HOME_SITE . "image/"
         <title>Alizon</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body class = "body404">
         <main class = "le404">
             <?php
                 http_response_code(404);
@@ -29,13 +29,15 @@ $images = HOME_SITE . "image/"
         </main>
     </body>
     <style>
-        .le404 {
+        .body404{
+            height: 100vh;
+            width: 100vw;
             background: linear-gradient(to right, #CBCCEA, #3157A3);
+        }
+        .le404 {
             display: flex;
             justify-content: center;
             flex-direction: column;
-            width :100%;
-            height: 100%;
         }
         .all_404{
             display: flex;
@@ -45,6 +47,9 @@ $images = HOME_SITE . "image/"
         }
         .all_404 h1{
             justify-self: center;
+        }
+        .all_404 img{
+            width: 500; 
         }
     </style>
 </html>

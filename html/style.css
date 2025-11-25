@@ -1458,6 +1458,17 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
 }
+.bodyAjoutProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyAjoutProduit .entete a {
+  height: 24px;
+  margin-left: 50px;
+}
+.bodyAjoutProduit .entete h1 {
+  margin-right: 30px;
+}
 .bodyAjoutProduit form {
   display: flex;
   flex-direction: column;
@@ -1508,7 +1519,7 @@ aside input.bouton:hover {
   height: 20.3px;
 }
 
-.image {
+.image_bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1527,8 +1538,11 @@ aside input.bouton:hover {
   margin-top: 2em;
   margin-bottom: 1em;
 }
-.image:hover {
+.image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+.image_bouton p {
+  font-size: 0.75em;
 }
 
 #create_avis main {
