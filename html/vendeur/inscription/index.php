@@ -229,8 +229,8 @@
 
             <input type="submit" value="S'inscrire" class="bouton">
         </form>
-        <p>Déjà inscrit ? <a href="../">Se connecter</a>
-        <a href="../">Retourner au côté client</a></p>
+        <p>Déjà inscrit ? <a href="../">Se connecter</a></p>
+        <a href="../">Retourner au côté client</a>
 <?php
     }
 ?>
