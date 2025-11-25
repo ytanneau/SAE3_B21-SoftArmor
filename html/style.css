@@ -1708,6 +1708,84 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
+.mainInfoVendeur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur .entete {
+  display: flex;
+  align-items: center;
+}
+.mainInfoVendeur .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.mainInfoVendeur .entete h1 {
+  margin-right: 30px;
+}
+.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.mainInfoVendeur p {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+  height: 25px;
+}
+.mainInfoVendeur form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.mainInfoVendeur #idValiderModifVendeur {
+  margin-top: 20px;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.mainInfoVendeur #idValiderModifVendeur:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.mainInfoVendeur #idDesactivationCompte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.mainInfoVendeur #idDesactivationCompte:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
 #create_avis {
   display: flex;
   flex-direction: column;
@@ -2047,7 +2125,7 @@ aside input.bouton:hover {
   transition: opacity 0.2s ease;
 }
 
-.content {
+.content_produit_vendeur {
   flex: 1;
 }
 
