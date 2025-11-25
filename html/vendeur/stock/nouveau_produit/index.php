@@ -251,8 +251,7 @@
                         <input type="text" name="volumeColis" id="volumeColis" required>
                     </p>   
                 </div>
-                <br>
-                <a href="../index.php"><input type="submit" value="Créer le produit" id="creerProduit"></a>
+                <input type="submit" value="Créer le produit" id="creerProduit">
             </form>
             
             <script>
