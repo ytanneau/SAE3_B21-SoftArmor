@@ -1116,11 +1116,11 @@ aside {
 
         @media (max-width: 1024px) {
             flex-direction: column;
+            gap: 20px;
 
-            article{
-                width: 80vw;
-                padding: 0;
-                padding-bottom: 0.5em;
+            article, form{
+                width: 70vw;
+                padding: 0 1em 1em;
             }
         }
     }

@@ -1552,10 +1552,10 @@ aside input.bouton:hover {
 @media (max-width: 1024px) {
   #create_avis main {
     flex-direction: column;
+    gap: 20px;
   }
-  #create_avis main article {
-    width: 80vw;
-    padding: 0;
-    padding-bottom: 0.5em;
+  #create_avis main article, #create_avis main form {
+    width: 70vw;
+    padding: 0 1em 1em;
   }
 }/*# sourceMappingURL=style.css.map */
