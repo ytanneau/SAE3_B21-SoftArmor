@@ -28,9 +28,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon Vendeur - Inscription</title>
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
 </head>
 <body id="inscription_vendeur">
     <main>
@@ -230,6 +229,7 @@
             <input type="submit" value="S'inscrire" class="bouton">
         </form>
         <p>Déjà inscrit ? <a href="../">Se connecter</a>
+        <br>
         <a href="../">Retourner au côté client</a></p>
 <?php
     }

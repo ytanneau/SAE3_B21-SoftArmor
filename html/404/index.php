@@ -12,8 +12,9 @@ $images = HOME_SITE . "image/"
         <meta charset="utf-8">
         <title>Alizon</title>
         <link rel="stylesheet" href="style.css">
+        <?php include HOME_SITE . 'link_head.php' ?>
     </head>
-    <body class = "body404">
+    <body id = "body404">
         <main class = "le404">
             <?php
                 http_response_code(404);

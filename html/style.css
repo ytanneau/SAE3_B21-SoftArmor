@@ -661,9 +661,6 @@ hr {
   font-family: "Inter";
 }
 
-.infos .liste_avis {
-  width: 100%;
-}
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
@@ -786,7 +783,7 @@ a.bouton:has(+ .liste_avis):hover {
   margin: 2.5em 0;
 }
 .liste_avis li > div:first-of-type {
-  flex-basis: 2;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
@@ -1474,19 +1471,27 @@ aside input.bouton:hover {
 .bodyAjoutProduit .entete h1 {
   margin-right: 30px;
 }
-.bodyAjoutProduit form {
-  display: flex;
-  flex-direction: column;
+.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
   width: 600px;
+  height: 200px;
+  resize: vertical;
 }
 .bodyAjoutProduit p {
   display: flex;
   flex-direction: column;
 }
-.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
+.bodyAjoutProduit select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
+  height: 25px;
+}
+.bodyAjoutProduit form {
+  display: flex;
+  flex-direction: column;
   width: 600px;
-  height: 200px;
-  resize: vertical;
 }
 .bodyAjoutProduit .divEnLigne {
   display: flex;
@@ -1521,13 +1526,44 @@ aside input.bouton:hover {
 .bodyAjoutProduit input[type=file] {
   padding-top: 7px;
 }
-.bodyAjoutProduit select {
+
+.bodyModifProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyModifProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyModifProduit .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.bodyModifProduit .entete h1 {
+  margin-right: 30px;
+}
+.bodyModifProduit #idDescDetaille, .bodyModifProduit #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.bodyModifProduit p {
+  display: flex;
+  flex-direction: column;
+}
+.bodyModifProduit select {
   height: 32px;
   width: -moz-fit-content;
   width: fit-content;
 }
-.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
+.bodyModifProduit input[type=text], .bodyModifProduit input[type=number] {
   height: 25px;
+}
+.bodyModifProduit form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
 }
 
 #create_avis main {
@@ -1573,60 +1609,22 @@ aside input.bouton:hover {
     margin-top: 1em;
     margin-bottom: 0;
   }
-
-#create_avis main {
-  padding-top: 2em;
 }
 
-.body404 {
-  height: 100vh;
-  width: 100vw;
-  background: #3157A3;
-}
-
-.le404 {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: white;
-}
-
-.all_404 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.all_404 h1 {
-  justify-self: center;
-}
-
-.logo {
-  width: 400px;
-}
-
-.titre404 {
-  font-size: 100px;
-}
-
-.bouton404 {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.5em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #E43737;
-  color: white;
-  border: none;
+.info_vendeur p {
+  padding: 0 10px;
+  width: -moz-max-content;
+  width: max-content;
   border-radius: 5px;
+  border: rgba(0, 0, 0, 0.25) 1px solid;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+.info_vendeur .desc {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+.info_vendeur .modif_info {
+  color: #FFFFFF;
   text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-}
-.bouton404:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
-}

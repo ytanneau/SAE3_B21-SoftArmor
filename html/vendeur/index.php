@@ -86,6 +86,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         <input type="submit" value="Se connecter" class="bouton">        
         </form>
         <p>Pas de compte ? <a href="inscription/">S'inscrire</a>
+        <br>
         <a href="../">Retourner au côté client</a></p>
 <?php
     }

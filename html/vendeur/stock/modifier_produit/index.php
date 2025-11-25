@@ -131,13 +131,16 @@
         <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Modifier un produit</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <main>
+        <main class="bodyModifProduit">
             <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-            <h1>Modifier mon produit</h1>
+            <div class="entete">
+                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <h1>Modifier mon produit</h1>
+            </div>
             <form action="" name="formulaire_modification_produit" method="post" enctype="multipart/form-data">
                 <h3>Informations produit</h3>
                 <div>
