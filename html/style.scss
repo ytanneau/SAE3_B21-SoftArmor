@@ -1024,4 +1024,12 @@ aside {
     @include bouton_new($couleur_etoile);
     border-radius: $angle_normal;
     margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+
+#create_avis{
+    main{
+        margin-top: 2em;
+    }
 }
