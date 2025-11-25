@@ -1418,10 +1418,6 @@ aside input.bouton:hover {
   flex-direction: row;
   justify-content: space-around;
 }
-.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
-  width: -moz-fit-content;
-  width: fit-content;
-}
 
 .image {
   display: block;
