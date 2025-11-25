@@ -1065,6 +1065,7 @@ aside {
         margin-top: 20px;
         #creerProduit{
             @include bouton_new;
+            color: $couleur_background;
         }
     }
     input[type="file"]{
@@ -1083,6 +1084,7 @@ aside {
     }
     #idModifierProduit{
         @include bouton_new;
+        color: $couleur_background;
     }
     .blockImg{
         img{
