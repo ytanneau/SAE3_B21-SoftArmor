@@ -88,17 +88,23 @@
         }        
     }
 
+    /*
     if ($succes === true) {
         header('location: ' . HOME_SITE . 'produit/?produit=' . $_GET['produit']);
-    }
+    }*/
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
-    /*
+    
     if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-        unlink('../ressources/avis/' . $fichier);
-        unlink('../' . $image);
+        if (file_exists('../ressources/avis/' . $fichier)){
+            unlink('../ressources/avis/' . $fichier);
+        }
+        else if (file_exists(HOME_SITE . $image)){
+            unlink(HOME_SITE . $image);
+        }
+        
     }
-    */
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -117,6 +123,7 @@
             <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
             <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+            <a href="../produit?=produit<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
