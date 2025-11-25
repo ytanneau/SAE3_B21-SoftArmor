@@ -1,7 +1,7 @@
 <?php 
     // appel du fichier de configuration bdd
-    define('HOME_GIT', '../../../../../');
-    define('HOME_SITE', '../../../../');
+    define('HOME_GIT', '../../../../');
+    define('HOME_SITE', '../../../');
 
     if (!isset($_SESSION)) {
         session_start();
