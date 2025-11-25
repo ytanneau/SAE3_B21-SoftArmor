@@ -1579,6 +1579,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyAjoutProduit p {
   display: flex;
@@ -1649,6 +1650,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyModifProduit p {
   display: flex;
@@ -1728,6 +1730,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .mainInfoVendeur p {
   display: flex;
