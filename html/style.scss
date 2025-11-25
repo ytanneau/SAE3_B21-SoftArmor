@@ -973,4 +973,7 @@ aside {
         display: flex;
         flex-direction: row;
     }
+    #idNomPrv, #idNomPblc{
+        width: fit-content;
+    }
 }

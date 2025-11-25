@@ -1377,4 +1377,8 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
+}
+.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=style.css.map */
