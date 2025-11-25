@@ -34,7 +34,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 <?php
     if (isset($erreurs['fatal'])){
 ?>
-        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
+        <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 <?php
     }
     else {
@@ -45,14 +45,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </a>
         <h2>S’identifier</h2>
 
-        
-<?php
-    if (isset($erreurs['connecte'])){
-?>
-        <h3 class="error"><?=$erreurs['connecte']?></h3>
-<?php
-    }
-?>
         <form action="" method="post">
                 <!-- Adresse e-mail -->
             <br>
@@ -86,7 +78,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             </p>
 <?php
     }
-?>
+?>      
+        <?php if (isset($erreurs['connecte'])) { ?>
+            <p class="error"><?=$erreurs['connecte']?></p>
+        <?php } ?>
             
         <input type="submit" value="Se connecter" class="bouton">        
         </form>
