@@ -1172,24 +1172,31 @@ h3 {
   width: 60vw;
   padding: 0;
 }
-.liste main ul li > article:nth-child(2) {
-  flex-grow: 1;
+.liste main ul li > div {
+  display: flex;
 }
-.liste main ul li > article:nth-child(2) p {
+.liste main ul li article:first-child {
+  display: flex;
+}
+.liste main ul li article:first-child p {
   width: 90%;
 }
-.liste main ul li > article:nth-child(3) {
+.liste main ul li article:first-child form {
+  display: none;
+}
+.liste main ul li article:last-child {
   display: flex;
   flex-direction: column;
   align-items: end;
+  text-align: end;
 }
-.liste main ul li > article:nth-child(3) .prix {
+.liste main ul li article:last-child .prix {
   min-width: 5em;
   margin-top: 0;
   margin-bottom: 0;
   text-align: right;
 }
-.liste main ul li > article:nth-child(3) .bouton {
+.liste main ul li article:last-child .bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1205,11 +1212,15 @@ h3 {
   text-align: center;
   cursor: pointer;
 }
-.liste main ul li > article:nth-child(3) .bouton:hover {
+.liste main ul li article:last-child .bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.liste main img {
+.liste main .image_produit_moyen {
   margin-right: 3em;
+}
+.liste main .icon {
+  height: auto;
+  margin: 0;
 }
 .liste main hr {
   color: #9C9C9C;
@@ -1223,6 +1234,7 @@ h3 {
 }
 @media screen and (max-width: 1024px) {
   .liste main {
+    line-height: 1em;
     display: flex;
     flex-direction: column;
   }
@@ -1233,14 +1245,53 @@ h3 {
     order: 2;
     width: 100%;
   }
-  .liste main img {
-    width: 10em;
+  .liste main ul .image_produit_moyen {
+    width: 35vw;
+    margin-right: 0.5em;
   }
-  .liste main li > article:nth-child(2) p:nth-child(2) {
+  .liste main ul div {
+    flex-direction: column;
+    width: 100%;
+  }
+  .liste main ul li article:first-child p:nth-child(2) {
     display: none;
   }
-  .liste main li > article:nth-child(2) p, .liste main li > article:nth-child(2) h3 {
+  .liste main ul li article:first-child p, .liste main ul li article:first-child h3 {
     font-size: 1em;
+  }
+  .liste main ul li article:first-child form {
+    display: initial;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .liste main ul li article:first-child form button {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    padding: auto;
+    font-family: "Montserrat";
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #E43737;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+  }
+  .liste main ul li article:first-child form button:hover {
+    background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+  }
+  .liste main ul li article:last-child {
+    flex-direction: column-reverse;
+  }
+  .liste main ul li article:last-child form {
+    display: none;
+  }
+  .liste main ul .prix {
+    text-align: left;
+    font-size: 1.5em;
   }
 }
 
@@ -1270,7 +1321,7 @@ aside {
 aside {
   position: sticky;
   top: 5em;
-  margin: 0 3em 2em 3em;
+  margin: 0 2em 2em 2em;
   font-size: 1.4em;
 }
 aside .prix {
@@ -1333,6 +1384,7 @@ aside input.bouton:hover {
   aside {
     position: static;
     order: -1;
+    margin: 0;
   }
   aside p {
     margin-bottom: 0;
@@ -1399,10 +1451,9 @@ aside input.bouton:hover {
   align-items: center;
 }
 .bodyAjoutProduit form {
-  width: 600px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  width: 600px;
 }
 .bodyAjoutProduit p {
   display: flex;
@@ -1418,7 +1469,12 @@ aside input.bouton:hover {
   flex-direction: row;
   justify-content: space-around;
 }
-.bodyAjoutProduit #creerProduit {
+.bodyAjoutProduit .divCreerProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyAjoutProduit .divCreerProduit #creerProduit {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1434,7 +1490,7 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
 }
-.bodyAjoutProduit #creerProduit:hover {
+.bodyAjoutProduit .divCreerProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
@@ -1462,5 +1518,5 @@ aside input.bouton:hover {
 }
 
 #create_avis main {
-  margin-top: 2em;
+  padding-top: 2em;
 }/*# sourceMappingURL=style.css.map */

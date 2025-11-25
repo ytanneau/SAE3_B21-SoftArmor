@@ -211,13 +211,11 @@
                         </select>
                     </p>
                 </div>
-                <hr>
                 <h3>Photo principale</h3>
                 <div class="divEnLigne">
                     <label for="photo">Importer des images du produit*</label>
                     <input type="file" name="photo" id="photo" accept=".png" required>
                 </div>
-                <hr>
                 <h3>Gestion de stock</h3>
                 <div class="divEnLigne">
                     <p>
@@ -229,7 +227,6 @@
                         <input type="number" name="seuilAlerte" id="seuilAlerte">
                     </p>
                 </div>
-                <hr>
                 <h3>Description</h3>
                 <div>
                     <p class="blockDescription">
@@ -239,7 +236,6 @@
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
                     </p>
                 </div>
-                <hr>
                 <h3>Livraison</h3>
                 <div class="divEnLigne">
                     <p>
@@ -251,7 +247,9 @@
                         <input type="text" name="volumeColis" id="volumeColis" required>
                     </p>   
                 </div>
-                <input type="submit" value="Créer le produit" id="creerProduit">
+                <div class="divCreerProduit">
+                    <input type="submit" value="Créer le produit" id="creerProduit">
+                </div>
             </form>
             
             <script>
