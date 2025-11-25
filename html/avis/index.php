@@ -114,7 +114,7 @@
     <title>Alizon - Avis</title>
     <?php include HOME_SITE . "link_head.php"; ?>
 </head>
-<body class="form_client">
+<body class="form_client" id="create_avis">
     <?php include HOME_SITE . "header.php"; ?>
     <main>
         <?php if ($succes == true) { ?>
