@@ -86,9 +86,16 @@ try {
                         <li class="produit_panier">
                             <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>"></a>
                             <article>
-                                <a href="../produit/?produit=<?=$elt['id_produit']?>"><h3><?= $elt['nom_public'] ?></h3></a>
-                                <p><?= $elt['description'] ?></p>
-                                <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
+                                <div>
+                                    <a href="../produit/?produit=<?=$elt['id_produit']?>"><h3><?= $elt['nom_public'] ?></h3></a>
+                                    <p><?= $elt['description'] ?></p>
+                                    <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
+                                </div>
+            
+                                <form action="" method="post"> <!-- Bouton poubelle à droite pour format tel -->
+                                    <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
+                                    <button onclick="actualiser()" type="submit"><img class="icon" src="<?=HOME_SITE?>image/supprimer_blanc.svg"></button>
+                                </form> 
                             </article>
                             <article>
                                 <p class="prix"><?=number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>

@@ -736,20 +736,31 @@ h3 {
         ul {
             width: 60vw;
             padding: 0;
+
+            li > div {
+                display: flex;
+            }
             
             // la partie description etc. du produit
-            li > article:nth-child(2) {
-                flex-grow: 1;
+            li article:first-child {
+                display: flex;
 
                 p {
                     width: 90%;
                 }
-            }
 
-            li > article:nth-child(3) {
+                // bouton suppr pour tel
+                form {
+                    display: none;
+                }
+            }
+             
+            // l'autre partie avec quantité et prix
+            li article:last-child {
                 display: flex;
                 flex-direction: column;
                 align-items: end;
+                text-align: end;
 
                 .prix {
                     min-width: 5em;
@@ -764,8 +775,13 @@ h3 {
             }
         }
 
-        img {
+        .image_produit_moyen {
             margin-right: 3em;
+        }
+
+        .icon {
+            height: auto;
+            margin: 0;
         }
 
         hr {
@@ -782,6 +798,7 @@ h3 {
         }
 
         @media screen and (max-width: 1024px) {
+            line-height: 1em;
             display: flex;
             flex-direction: column;
 
@@ -792,20 +809,49 @@ h3 {
             ul {
                 order: 2;
                 width: 100%;
-            }
 
-            img {
-                width: 10em;
-            }
-
-            li > article:nth-child(2) {
-                // retirer le description 
-                p:nth-child(2) {
-                    display: none;
+                .image_produit_moyen {
+                    width: 35vw;
+                    margin-right: 0.5em;
                 }
 
-                p, h3 {
-                    font-size: 1em;
+                div {
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                li article:first-child {
+                    // retirer le description 
+                    p:nth-child(2) {
+                        display: none;
+                    }
+
+                    p, h3 {
+                        font-size: 1em;
+                    }
+
+                    form {
+                        display: initial;
+                        width: fit-content;
+
+                        button {
+                            @include bouton_new($rouge, $padding: auto);
+                        }
+                    }
+                }
+
+                li article:last-child {
+                    // bouton supprimer côté ordi
+                    form {
+                        display: none;
+                    }
+
+                    flex-direction: column-reverse;
+                }
+
+                .prix {
+                    text-align: left;
+                    font-size: 1.5em;
                 }
             }
         }
@@ -841,7 +887,7 @@ aside {
     position: sticky;
     top: 5em;
 
-    margin: 0 3em 2em 3em;
+    margin: 0 2em 2em 2em;
     font-size: 1.4em;
 
     .prix {
@@ -878,6 +924,7 @@ aside {
     @media screen and (max-width : 1024px){
         position: static;
         order: -1;
+        margin:0;
 
         p {
             margin-bottom: 0;
