@@ -1052,23 +1052,9 @@ aside {
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
+    @include format_textarea_p_select_input_form;
 
-    form{
-        display: flex;
-        flex-direction: column;
-        width: 600px;
-        
-    }
-    p{
-        display: flex;
-        flex-direction: column;
-    }
     
-    #idDescDetaille,#idDescSimple{
-        width: 600px;
-        height: 200px;
-        resize: vertical;
-    }
     .divEnLigne{
         display: flex;
         flex-direction: row;
@@ -1084,18 +1070,13 @@ aside {
     input[type="file"]{
         padding-top: 7px;
     }
-    select{
-        height: 32px;
-        width: fit-content;
-    }
-    input[type="text"], input[type="number"]{
-        height: 25px;
-    }
+    
 }
 
 .bodyModifProduit{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
+    @include format_textarea_p_select_input_form;
 }
 
 

@@ -260,3 +260,27 @@
         }
     }
 }
+
+@mixin format_textarea_p_select_input_form{
+    #idDescDetaille,#idDescSimple{
+        width: 600px;
+        height: 200px;
+        resize: vertical;
+    }
+    p{
+        display: flex;
+        flex-direction: column;
+    }
+    select{
+        height: 32px;
+        width: fit-content;
+    }
+    input[type="text"], input[type="number"]{
+        height: 25px;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+    }
+}
