@@ -560,7 +560,6 @@ hr {
 }
 .form_client main a {
   color: black;
-  text-decoration: none;
 }
 .form_client main article {
   display: flex;
