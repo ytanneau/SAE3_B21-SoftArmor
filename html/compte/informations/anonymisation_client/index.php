@@ -75,6 +75,7 @@
 
                     $stmt = $pdo->prepare("UPDATE _compte SET email = :modifEmail, mdp = :modifMdp, supprime = :modifBoolSupprime, id_image_profil = :modifIdImageProfil, date_creation = :modifDateCreation WHERE id_compte = :id_compte");
                     $stmt->execute([':modifEmail' => $modifEmail, ':modifMdp' => $modifMdp, ':modifBoolSupprime' => $modifBoolSupprime, ':modifIdImageProfil' => $modifIdImageProfil, ':modifDateCreation' => $modifDateCreation, ':id_compte' => $id_compte]);
+                    header('location:' .HOME_SITE.'deconnexion.php');
                 }
             ?>
         </main>

@@ -1247,7 +1247,7 @@ aside {
     @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
 
-.produit-vendeur {
+/*.produit-vendeur {
     font-family: $font_text;
 
     > article:first-child {
@@ -1302,7 +1302,8 @@ aside {
             }
         }
     }
-}
+}*/
+
 
 // #stock_vendeur{
 
