@@ -1054,7 +1054,7 @@ aside {
         flex-direction: column;
     }
     #idDescDetaille,#idDescSimple{
-        width: 400px;
+        width: 600px;
         height: 200px;
         resize: vertical;
     }
@@ -1069,7 +1069,12 @@ aside {
             @include bouton_new;
         }
     }
-    
+    input[file]{
+        padding-top: 7px;
+    }
+    #idtva{
+        height: 20.3px;
+    }
 }
 
 .image{
