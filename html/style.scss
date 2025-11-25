@@ -556,6 +556,7 @@ div:has(> aside) {
 .footer-columns-all{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     .footer-columns {
         display: flex;
         flex: 1;
