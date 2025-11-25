@@ -138,14 +138,17 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
-<body class="form_client">
-    <?php include HOME_SITE . 'header.php'; ?>
+<body id="connect_client">
 
     <main>  
+        <a href="<?= HOME_SITE ?>">
+            <img src="<?= HOME_SITE . 'image/Alizon_noir.png' ?>" alt="Logo alizon" title="Logo alizon">
+        </a>
+
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
             <form action="" method="post">
-                <h1>Réinitialisation du mot de passe</h1>
+                <h2>Réinitialisation du mot de passe</h2>
 
                 <input type="hidden" name="etape" value="etape_adresse">
 
@@ -178,9 +181,9 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             
 
             <form action="" method="post">
-                <h1>Réinitialisation du mot de passe</h1>
+                <h2>Réinitialisation du mot de passe</h2>
 
-                <h2><?= $row['question'] ?? '' ?></h2>
+                <h3><?= $row['question'] ?? '' ?></h3>
 
                 <input type="hidden" name="etape" value="etape_reponse">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
@@ -198,7 +201,7 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
         <!-- Troisième formulaire (saisir le nouveau MDP) -->
         <?php } else if ($etape === 3) { ?>
             <form action="" method="post">
-                <h1>Réinitialisation du mot de passe</h1>
+                <h2>Réinitialisation du mot de passe</h2>
                 
                 <input type="hidden" name="etape" value="etape_mdp">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
