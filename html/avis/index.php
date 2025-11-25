@@ -187,10 +187,9 @@
                         </p>
                     <?php } ?>
                     
-                    <div class="image">
-                        <label for="image">Ajouter une image</label>
-                        <p id="image-name">Aucun fichier choisi</p>
-                    </div>
+                        <label for="image" class="image">Ajouter une image 
+                            <p id="image-name">Aucun fichier choisi</p>
+                        </label>
                     <input id="image"
                         type="file" 
                         name="image" 
