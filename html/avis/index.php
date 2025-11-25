@@ -188,8 +188,8 @@
                     <?php } ?>
 
                     <label for="image">Ajouter une image</label>
-                    <span id="file-name">Aucun fichier choisi</span>
-                    <input id="file"
+                    <span id="image-name">Aucun fichier choisi</span>
+                    <input id="image"
                         type="file" 
                         name="image" 
                         alt="image"
@@ -208,16 +208,15 @@
         <?php } ?>
     </main>
     <?php include HOME_SITE . "footer.php" ?>
+    <script>
+        const fileInput = document.getElementById("image");
+        const fileName = document.getElementById("image-name");
+
+        fileInput.addEventListener("change", () => {
+            fileName.textContent = fileInput.files.length > 0 
+            ? fileInput.files[0].name 
+            : "Aucun fichier choisi";
+        });
+    </script>
 </body>
-<script>
-    const fileInput = document.getElementById("file");
-    const fileName = document.getElementById("file-name");
-
-    fileInput.addEventListener("change", () => {
-        fileName.textContent = fileInput.files.length > 0 
-        ? fileInput.files[0].name 
-        : "Aucun fichier choisi";
-    });
-
-</script>
 </html>
