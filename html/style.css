@@ -905,13 +905,11 @@ div:has(> aside) {
   font-family: sans-serif;
   margin-top: 150px;
 }
-
 .footer a {
   color: #dcdcdc;
   text-decoration: none;
   font-size: 14px;
 }
-
 .footer a:hover {
   text-decoration: underline;
 }
@@ -929,7 +927,6 @@ div:has(> aside) {
   flex-direction: column;
   gap: 20px;
 }
-
 .footer-logos .logo {
   width: 150px;
 }
@@ -939,14 +936,12 @@ div:has(> aside) {
   flex: 1;
   justify-content: space-around;
 }
-
-.footer-column h4 {
+.footer-columns h4 {
   margin-bottom: 10px;
   font-size: 15px;
   color: #ffffff;
 }
-
-.footer-column a {
+.footer-columns a {
   display: block;
   margin-bottom: 5px;
 }
@@ -956,7 +951,6 @@ div:has(> aside) {
   flex-direction: column;
   gap: 15px;
 }
-
 .footer-socials img {
   width: 26px;
   height: 26px;
@@ -969,7 +963,6 @@ div:has(> aside) {
   align-items: center;
   font-size: 13px;
 }
-
 .footer-bottom .footer-links {
   display: flex;
   gap: 25px;
