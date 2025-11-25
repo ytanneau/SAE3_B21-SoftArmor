@@ -1859,4 +1859,8 @@ aside input.bouton:hover {
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s ease;
+}
+
+.stock_vendeur {
+  flex: 1;
 }/*# sourceMappingURL=style.css.map */
