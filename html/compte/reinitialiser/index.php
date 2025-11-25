@@ -139,7 +139,6 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
 <body id="connect_client">
-    <?php include HOME_SITE . 'header.php'; ?>
 
     <main>  
         <a href="<?= HOME_SITE ?>">
