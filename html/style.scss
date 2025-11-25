@@ -293,8 +293,9 @@ hr {
     font-family: $font_text;
 }
 
-.infos {
-    main {
+.infos{
+
+    main{
         //display: flex;
     }
 
@@ -1011,4 +1012,11 @@ aside {
         display: flex;
         flex-direction: row;
     }
+    #idNomPrv, #idNomPblc{
+        width: fit-content;
+    }
+}
+
+.image{
+    @include bouton_new($couleur_etoile);
 }
