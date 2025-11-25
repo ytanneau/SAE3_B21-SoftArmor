@@ -1720,12 +1720,53 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
+<<<<<<< Updated upstream
 #create_avis {
   min-height: 100vh;
 }
+=======
+.mainInfoVendeur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur .entete {
+  display: flex;
+  align-items: center;
+}
+.mainInfoVendeur .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.mainInfoVendeur .entete h1 {
+  margin-right: 30px;
+}
+.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.mainInfoVendeur p {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+  height: 25px;
+}
+.mainInfoVendeur form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+>>>>>>> Stashed changes
 #create_avis main {
   padding-top: 2em;
-  flex: 1;
 }
 #create_avis main .image_bouton {
   display: block;
@@ -1979,10 +2020,12 @@ aside input.bouton:hover {
   transition: opacity 0.2s ease;
 }
 
-.content_produit_vendeur {
+.content {
   flex: 1;
 }
 
 #stock_vendeur {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }/*# sourceMappingURL=style.css.map */
