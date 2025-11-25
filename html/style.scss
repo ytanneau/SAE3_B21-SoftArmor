@@ -337,6 +337,59 @@ hr {
         }
 
     }
+    @media screen and (max-width: 1024px) {
+        main{
+            padding: 0;
+        }
+        section {
+                @include contenu_centre_vertical;
+            form {
+                flex-direction: column;        
+                align-items: center; 
+                padding: 0;
+                margin: 1em;
+                gap: 2em;                      
+            
+                
+                article {
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                    &:first-child {
+                        align-items: center;
+
+                        img {
+                            width: clamp(140px, 40vw, 240px);  
+                            border-radius: 8px;
+                        }
+
+                        label {
+                            margin-top: 1em;
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }
+
+
+                    &:last-child {
+                        input,
+                        button {
+                            width: 100%;
+                        }
+
+                        .champ {
+                            margin-bottom: 1em;
+                        }
+
+                        .bouton {
+                            margin-top: 1.2em;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }
 
