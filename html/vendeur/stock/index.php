@@ -40,9 +40,9 @@ function ecrire_nom($rows){
                 <td> | </td>
                 <td>
                     <form action="./update_stock.php">
-                    <label for="fname">quantité</label>
-                    <input type="text" id="fname" name="fname" value=<?= htmlentities($row['quantite'] ?? '')?>>
-                    <input type="submit" value="Submit">
+                    <label for="nb">quantité</label>
+                    <input type="text" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
+                    <input type="submit" value="Valider">
                     </form> 
                 </td>
             </tr>
