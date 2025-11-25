@@ -996,12 +996,10 @@ aside {
 
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
-    font-family: $font_text;
-    padding: 0;
-    margin: 0;
 
     form{
         width: 600px;
+        @include contenu_centre_horizontal;
     }
     p{
         display: flex;
