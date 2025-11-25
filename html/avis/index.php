@@ -176,7 +176,8 @@
 
                     <label for="description">Description</label>
                     <textarea class="champ text"
-                        name="description" 
+                        name="description"
+                        value="" 
                         id="description"
                         class="champ text">
                         <?= $_POST['description'] ?? '' ?></textarea>
