@@ -664,11 +664,9 @@ div:has(> aside) {
                     > a {
                         color : black;
                         text-decoration: none;
-                        line-height: 1.5em;
+                        line-height: 1.5em; 
                         > img {
-                            @media screen and (min-width: 1024px){
-                                @include image_produit(15vw);
-                            }
+                            @include image_produit(15vw);
                         }   
                         > div {
                             > img {
@@ -1018,9 +1016,6 @@ aside {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-    }
-    #idNomPrv, #idNomPblc{
-        width: fit-content;
     }
 }
 
