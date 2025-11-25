@@ -937,24 +937,24 @@ div:has(> aside) {
 
 .footer-logos {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
 }
 .footer-logos .logo {
   width: 150px;
 }
 
-.footer-columns {
+.footer-columns-all .footer-columns {
   display: flex;
   flex: 1;
   justify-content: space-around;
 }
-.footer-columns h4 {
+.footer-columns-all .footer-columns h4 {
   margin-bottom: 10px;
   font-size: 15px;
   color: #ffffff;
 }
-.footer-columns a {
+.footer-columns-all .footer-columns a {
   display: block;
   margin-bottom: 5px;
 }
@@ -981,12 +981,12 @@ div:has(> aside) {
   gap: 25px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .footer-top {
     flex-direction: column;
     align-items: flex-start;
   }
-  .footer-columns {
+  .footer-columns-all .footer-columns {
     width: 100%;
     justify-content: space-between;
   }
