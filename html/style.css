@@ -2,6 +2,7 @@ body {
   font-family: "Inter";
   padding: 0;
   margin: 0;
+  min-height: 100vh;
 }
 
 main {
@@ -902,9 +903,14 @@ div:has(> aside) {
 .footer {
   background: #000;
   color: #fff;
-  padding: 40px 60px;
   font-family: sans-serif;
-  margin-top: 150px;
+  margin-top: 50px;
+  width: 100vw;
+  position: relative;
+  bottom: 0;
+}
+.footer > div {
+  margin: 40px 60px;
 }
 .footer a {
   color: #dcdcdc;
@@ -1629,13 +1635,13 @@ aside input.bouton:hover {
   }
 }
 
-.info_vendeur div {
+.info_vendeur > main div {
   width: 60vw;
 }
-.info_vendeur p {
+.info_vendeur > main p {
   border: none;
   border-radius: 5px;
-  height: 2em;
+  height: auto;
   font-size: 1em;
   padding-left: 0.6em;
   padding-right: 0;
@@ -1643,11 +1649,11 @@ aside input.bouton:hover {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.info_vendeur .modif_info {
+.info_vendeur > main .modif_info {
   color: #FFFFFF;
   text-decoration: none;
 }
-.info_vendeur h3 {
+.info_vendeur > main h3 {
   font-size: 1.5em;
   margin-top: 2%;
 }/*# sourceMappingURL=style.css.map */
