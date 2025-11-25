@@ -1132,21 +1132,20 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+    @include code_barre;
 
     
     .divEnLigne{
         @include en_ligne;
     }
-    #creerProduit{
-        margin-top: 20px;
-        @include bouton_new($color: $couleur_background);
-
-    }
+    
     input[type="file"]{
         padding-top: 7px;
     }
-    #idCodeBarre{
-        width: 150px;
+    
+    #creerProduit{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
     }
 }
 
@@ -1154,13 +1153,12 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+    @include code_barre;
 
     .divEnLigne{
         @include en_ligne;
     }
-    #idModifierProduit{
-        @include bouton_new($color: $couleur_background);
-    }
+    
     .blockImg{
         img{
             @include image_produit(250px);
@@ -1169,8 +1167,9 @@ aside {
     #idCheckMajeur{
         margin-right: 70px;
     }
-    #idCodeBarre{
-        width: 150px;
+    #idModifierProduit{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
     }
 }
 
@@ -1423,4 +1422,11 @@ aside {
 
 .content {
   flex: 1; 
+}
+
+
+#stock_vendeur {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
 }

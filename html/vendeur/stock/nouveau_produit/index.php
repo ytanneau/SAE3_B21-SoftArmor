@@ -213,7 +213,7 @@
                         </select>
                     </p>
                 </div>
-                <h3>Photo principale</h3>
+                <h3>Image principale</h3>
                 <div class="divEnLigne">
                     <label for="photo">Importer des images du produit*</label>
                     <input type="file" name="photo" id="photo" accept=".png" required>
