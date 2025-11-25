@@ -1136,7 +1136,6 @@ aside {
     }
 }
 
-<<<<<<< HEAD
 .info_vendeur {
     p { 
         padding: 0 10px;
@@ -1155,38 +1154,3 @@ aside {
         text-decoration: none;
     }
 }
-=======
-
-#body404{
-    height: 100vh;
-    width: 100vw;
-    background: #3157A3;
-}
-.le404 {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-    font-style: $font_text; 
-}
-.all_404{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.all_404 h1{
-    justify-self: center;
-}
-.logo{
-    width: 400px;
-}
-.titre404{
-    font-size: 100px;
-    font-style: $font_title;
-}
-
-.bouton404{
-    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
-}
->>>>>>> 01fd30a281b3540768048ff7243cf453580c57dc
