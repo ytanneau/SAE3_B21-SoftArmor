@@ -28,17 +28,23 @@ function ecrire_nom($rows){
         
         <table id=<?= htmlentities($row['id_produit'] ?? '')?>>
             <tr>
-                <td><img src="MenuBurger.png" alt=""> </td>
+                <!-- <td><img src="MenuBurger.png" alt=""> </td> -->
                 <td> 
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
                 </td>
-                <td><img src="eyeclose.png" alt=""> </td>
+                <!-- <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
-                <td><img src="Fleche.png" alt=""> </td>
+                <td><img src="Fleche.png" alt=""> </td> -->
                 <td> | </td>
-                <td><?= htmlentities($row['quantite'] ?? '') ?></td>
+                <td>
+                    <form action="./update_stock.php">
+                    <label for="fname">quantité</label>
+                    <input type="text" id="fname" name="fname" value=<?= htmlentities($row['quantite'] ?? '')?>>
+                    <input type="submit" value="Submit">
+                    </form> 
+                </td>
             </tr>
         </table>
         
