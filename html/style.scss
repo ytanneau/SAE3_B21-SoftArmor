@@ -1077,11 +1077,15 @@ aside {
     }
 }
 
-.image{
+.image_bouton{
     @include bouton_new($couleur_etoile);
     border-radius: $angle_normal;
     margin-top: 2em;
     margin-bottom: 1em;
+
+    p{
+        font-size: 0.75em;
+    }
 }
 
 
