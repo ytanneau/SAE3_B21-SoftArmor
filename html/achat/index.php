@@ -361,7 +361,8 @@ else if ($numEtape == 2) {
     else if ($numEtape == 3) {
     ?>
         <h2>Bravo vous avez réussi à effectuer l'achat !</h2>
-        <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>";
+        <br>
+        <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>
     <?php
     }
 
