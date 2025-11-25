@@ -780,26 +780,26 @@ a.bouton:has(+ .liste_avis):hover {
   justify-content: space-between;
   margin: 2.5em 0;
 }
-.liste_avis li > div:first-child {
+.liste_avis li > div:first-of-type {
   flex-basis: 2;
   display: flex;
   flex-direction: column;
 }
-.liste_avis li > div:first-child > div:first-child {
+.liste_avis li > div:first-of-type > div:first-child {
   display: flex;
   align-items: center;
 }
-.liste_avis li > div:first-child > div:first-child > img:not(.etoiles) {
+.liste_avis li > div:first-of-type > div:first-child > img:not(.etoiles) {
   height: 30px;
   width: 30px;
   border-radius: 30px;
   margin-right: 0.5em;
 }
-.liste_avis li > div:first-child > div:nth-child(2) > h3, .liste_avis li > div:first-child > div:nth-child(2) > p {
+.liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-.liste_avis li > div:first-child > div:nth-child(2) > p:last-child {
+.liste_avis li > div:first-of-type > div:nth-child(2) > p:last-child {
   margin-top: 1em;
   font-style: italic;
   font-weight: 100;
