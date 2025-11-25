@@ -187,10 +187,10 @@
                         </p>
                     <?php } ?>
                     
-                    <button class="image">
+                    <div class="image">
                         <label for="image">Ajouter une image</label>
                         <p id="image-name">Aucun fichier choisi</p>
-                    </button>
+                    </div>
                     <input id="image"
                         type="file" 
                         name="image" 
