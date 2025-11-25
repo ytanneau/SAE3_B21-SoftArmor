@@ -1183,7 +1183,7 @@ aside {
         @include bouton_new($color: $couleur_background);
     }
     #idDesactivationCompte{
-        @include bouton_new($color: $rouge);
+        @include bouton_new($background: $rouge, $color: $couleur_background);
     }
 }
 
