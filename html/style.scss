@@ -300,7 +300,11 @@ hr {
     }
 
     .liste_avis {
-        width: 33vw;
+        width: 100%;
+
+        li > img:first-child {
+            @include image_produit(10vw);
+        }
     }
 
     form {
