@@ -41,5 +41,8 @@ $images = HOME_SITE . "image/"
             align-items: center;
             flex-direction: column;
         }
+        .all_404 h1{
+            justify-self: center;
+        }
     </style>
 </html>
