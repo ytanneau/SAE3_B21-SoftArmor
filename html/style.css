@@ -732,7 +732,11 @@ hr {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 .infos form img {
+  height: 200px;
   width: 200px;
+  border-radius: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .bouton {
@@ -794,9 +798,11 @@ a.bouton:has(+ .liste_avis):hover {
   align-items: center;
 }
 .liste_avis li > div:first-of-type > div:first-child > img:not(.etoiles) {
-  height: 30px;
-  width: 30px;
-  border-radius: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-right: 0.5em;
 }
 .liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
@@ -1589,6 +1595,14 @@ aside input.bouton:hover {
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+.bodyModifProduit .blockImg img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+}
 
 #create_avis main {
   padding-top: 2em;
@@ -1688,7 +1702,7 @@ aside input.bouton:hover {
 }
 
 .titre404 {
-  font-size: 100px;
+  font-size: 99px;
   font-style: "Montserrat";
 }
 
