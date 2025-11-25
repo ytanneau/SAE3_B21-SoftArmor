@@ -12,7 +12,6 @@ $images = HOME_SITE . "image/"
         <meta charset="utf-8">
         <title>Alizon</title>
         <?php include HOME_SITE . 'link_head.php' ?>
-        <link rel="stylesheet" href="<?= HOME_SITE . "style.css" ?>">
     </head>
     <body id = "body404">
         <main class = "le404">
