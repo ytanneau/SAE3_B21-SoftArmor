@@ -16,7 +16,7 @@
 
         //print_r($_POST);
         //var_dump($_POST);
-        if (strlen($_POST['description']) == 0 && (strlen($_POST['titre']) == 0)){
+        if (strlen(trim($_POST['description'])) == 0 && (strlen(trim($_POST['titre'])) == 0)){
             $erreur['titre'] = "Une description a besoin d'un titre";
         }
         else if (strlen($_POST['titre']) > TAILLE_TITRE){
