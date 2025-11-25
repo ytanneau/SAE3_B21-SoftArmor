@@ -1182,7 +1182,7 @@ aside {
     width: 400px;
 }
 .titre404{
-    font-size: 100px;
+    font-size: 99px;
     font-style: $font_title;
     
 }
@@ -1190,8 +1190,3 @@ aside {
 .bouton404{
     @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
-
-// #stock_vendeur{
-
-    
-// }
