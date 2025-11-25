@@ -1107,10 +1107,15 @@ aside {
             padding: 0.5em;
             margin-top: 2em;
             margin-bottom: 1em;
+            font-size: $font_size_sup;
 
             p{
                 font-size: 10px;
             }
+        }
+
+        @media screen and (max-width: 1024px) {
+            flex-direction: column;
         }
     }
 }
