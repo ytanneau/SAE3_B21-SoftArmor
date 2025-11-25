@@ -11,9 +11,9 @@ if (!isset($_SESSION)) {
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
     header('location: ' . HOME_SITE);
     exit;
-
+}
 // Sinon si je ne suis pas connecté, retour à la page connexion vendeur
-} else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     header('location: ../');
     exit;
 }
@@ -26,19 +26,26 @@ function ecrire_nom($rows){
     foreach ($rows as $row){
         ?>
         
-        <table>
+        <table id=<?= htmlentities($row['id_produit'] ?? '')?>>
             <tr>
-                <td><img src="MenuBurger.png" alt=""> </td>
+                <!-- <td><img src="MenuBurger.png" alt=""> </td> -->
                 <td> 
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
                 </td>
-                <td><img src="eyeclose.png" alt=""> </td>
+                <!-- <td><img src="eyeclose.png" alt=""> </td>
                 <td><img src="promotion.png" alt=""> </td>
-                <td><img src="Fleche.png" alt=""> </td>
+                <td><img src="Fleche.png" alt=""> </td> -->
                 <td> | </td>
-                <td><?= htmlentities($row['quantite'] ?? '') ?></td>
+                <td>
+                    <form action="./update_stock.php">
+                    <label for="nb">quantité</label>
+                    <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
+                    <input type="text" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
+                    <input type="submit" value="Valider">
+                    </form> 
+                </td>
             </tr>
         </table>
         
@@ -62,17 +69,14 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
+        <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
 
         <main>
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
-            <div>
-                <!-- lien pour ajouter un produit -->
-                <a href="./nouveau_produit/"> Ajouter un produit</a>
-            </div>
         </main>
+        <?php include HOME_SITE . "vendeur/footer.php" ?>
     </body>
-    <?php include HOME_SITE . "vendeur/footer.php" ?>
 </html>
 
 

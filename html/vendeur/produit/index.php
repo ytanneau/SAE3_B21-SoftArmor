@@ -51,7 +51,7 @@
         try {
             $supprime = supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
-            die('Suppression du produit ' . $_GET['produit'] . ' impossible');
+            die('Suppression du produit ' . $_GET['produit'] . ' impossible : ' . $e->getMessage());
         }
     }
 
@@ -148,6 +148,7 @@
             
             <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
+        <?php include HOME_SITE . "vendeur/footer.php" ?>
     </body>
 </html>
 

@@ -7,7 +7,7 @@
       <a href= <?= HOME_SITE?> >
         <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
       </a>
-      <a href= <?= HOME_SITE?> >
+      <a href= <?= HOME_SITE . "vendeur/"?> >
         <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
       </a>
     </div>
@@ -15,8 +15,12 @@
     <div class="footer-columns">
       <div class="footer-column">
         <h4>Connexion</h4>
+        <?php if(isset($_SESSION['logged_in'])){?>
+        <a href=<?= HOME_SITE . 'deconnexion/'?>>Se déconnecter</a>
+        <?php } else {?>
         <a href=<?= HOME_SITE . 'vendeur/' ?>>Compte vendeur</a>
         <a href=<?= HOME_SITE . 'compte/connexion' ?>>Compte client</a>
+        <?php } ?>
       </div>
 
       <div class="footer-column">
@@ -39,12 +43,9 @@
     </div>
 
     <div class="footer-socials">
-      <a href="#"><img src="<?= $image ?>/x-blanc.svg" alt="X"></a>
-      <a href="#"><img src="<?= $image ?>/instagram-blanc.svg" alt="Instagram"></a>
-      <a href="#"><img src="<?= $image ?>/facebook-blanc.svg" alt="Facebook"></a>
-      <a href="#"><img src="<?= $image ?>/youtube-blanc.svg" alt="YouTube"></a>
-      <a href="#"><img src="<?= $image ?>/tiktok-blanc.svg" alt="TikTok"></a>
-      <a href="#"><img src="<?= $image ?>/linkedin-blanc.svg" alt="LinkedIn"></a>
+      <a href="#"><img src="<?= $images ?>x_blanc.png" alt="X"></a>
+      <a href="#"><img src="<?= $images ?>instagram-blanc.png" alt="Instagram"></a>
+      <a href="#"><img src="<?= $images ?>linkedin-blanc.png" alt="LinkedIn"></a>
     </div>
 
   </div>

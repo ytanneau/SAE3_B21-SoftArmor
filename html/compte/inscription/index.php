@@ -158,7 +158,7 @@
 
                 <br>
                 <label for="reponse">Votre réponse</label>
-                <input type="text" name="reponse" id="reponse" class="champ">
+                <input type="password" name="reponse" id="reponse" class="champ">
                 <p class="contrainte"></p>
 
                 <?php if (isset($erreurs['reponse'])) { ?>

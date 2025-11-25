@@ -173,7 +173,7 @@ if ($_POST != NULL) {
                 <!-- Rajouter le nombre -->
                 <h2>Avis (<?= count($liste_avis) ?>)</h2>
 
-                <a class="bouton" href="../avis/index.php?id_produit=<?= urlencode($produit['id_produit']) ?>">Ajouter un avis</a>
+                <a class="bouton" href="../avis/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Ajouter un avis</a>
 
                 <ul class="liste_avis">
                     <?php foreach ($liste_avis as $avis) { ?>

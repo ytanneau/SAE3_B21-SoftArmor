@@ -54,14 +54,14 @@ unset($pdo);
     <!--Produit Ajoutés Récemment-->
     <h1>Produits ajoutés récemment</h1>
     <div>
-        <button class="fleche gauche recent"><</button>
+        <button class="fleche gauche recent"><img src="image/fleche_droite_blanc.svg"></button>
         <ul class="container recent">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_recent as $row) { ?>
                 <li>
                     <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
 
@@ -82,7 +82,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite recent">></button>
+        <button class="fleche droite recent"><img src="image/fleche_droite_blanc.svg"></button>
     </div>    
     <hr>
 
@@ -90,7 +90,7 @@ unset($pdo);
     <!-- Produits en réduction -->
     <h1>Produits en réduction</h1>
     <div>  
-        <button class="fleche gauche reduction"><</button>
+        <button class="fleche gauche reduction"><img src="image/fleche_droite_blanc.svg"></button>
         <ul class="container reduction">
             <?php
             //boucle pour ajouter un produit dans un <li> 
@@ -98,7 +98,7 @@ unset($pdo);
             ?>
             <li>
                 <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                    <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                    <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                     
                     <h3><?= $row['nom_public']; ?></h3>
 
@@ -122,7 +122,7 @@ unset($pdo);
             }
             ?>
         </ul>
-        <button class="fleche droite reduction">></button>
+        <button class="fleche droite reduction"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
     <hr>
     
@@ -130,14 +130,14 @@ unset($pdo);
     <!-- Produits alimentaires -->
     <h1>Produits alimentaires</h1>
     <div>
-        <button class="fleche gauche alimentaire"><</button>
+        <button class="fleche gauche alimentaire"><img src="image/fleche_droite_blanc.svg"></button>
         <ul class="container alimentaire">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_alimentaire as $row) { ?>
                 <li>
                     <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
@@ -158,7 +158,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite alimentaire">></button>
+        <button class="fleche droite alimentaire"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
     <hr>
 
@@ -166,14 +166,14 @@ unset($pdo);
     <h1>Produits du catalogue</h1>
     <div>
 
-        <button class="fleche gauche catalogue"><</button>
+        <button class="fleche gauche catalogue"><img src="image/fleche_droite_blanc.svg"></button>
         <ul class="container catalogue">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
             foreach ($produit_catalogue as $row) { ?>
                 <li>
                     <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img height="200px" src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
+                        <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
                         
                         <h3><?= $row['nom_public']; ?></h3>
 
@@ -193,7 +193,7 @@ unset($pdo);
                 </li>
             <?php } ?>
         </ul>
-        <button class="fleche droite catalogue">></button>
+        <button class="fleche droite catalogue"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
 
     <!-- Navigation (pour teléphone) -->
@@ -212,5 +212,6 @@ unset($pdo);
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
     <script src="script.js"></script>
+    <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>

@@ -22,7 +22,19 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($
 require_once HOME_GIT . '.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
 
+
+
 // si l'un des élément est vide on le renvoir sur le stock
 if (!(isset($_GET['produit']) && isset($_GET['nb']))){
     header('location: .');
 }
+
+// si le vendeur possède pas le produit
+if (vendeur_possede_produit($_SESSION['id_compte'], ($_GET['produit'])) == null){
+    header('location: .');
+}
+
+//var_dump($_GET['nb']);
+update_stock($_GET['produit'], $_GET['nb']);
+header('location: .#'. htmlentities($_GET['produit']));
+

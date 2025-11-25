@@ -27,53 +27,6 @@ main {
   border-radius: 5px;
 }
 
-.formulaire_client {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: normal;
-  width: 100%;
-}
-.formulaire_client label {
-  margin-top: 2%;
-  font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  .formulaire_client label {
-    margin-top: 5%;
-  }
-}
-.formulaire_client .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-.formulaire_client .text {
-  height: 10em;
-  text-align: start;
-}
-.formulaire_client .petit {
-  width: 30%;
-}
-.formulaire_client input[type=number]::-webkit-inner-spin-button,
-.formulaire_client input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.formulaire_client input[type=number] {
-  -moz-appearance: textfield;
-}
-.formulaire_client p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-.formulaire_client .error {
-  color: #E43737;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat";
 }
@@ -129,6 +82,34 @@ hr {
 .icon {
   height: 25px;
   margin: 0 8px 0 0;
+}
+
+.toolbar {
+  background-color: #A6A6BF;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.toolbar ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toolbar ul > li > a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25em 1em;
+  color: black;
+  text-decoration: none;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+.toolbar ul > li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
 
 #header_client {
@@ -378,6 +359,25 @@ hr {
 #connect_vendeur main form .error, #inscription_vendeur main form .error {
   color: #E43737;
 }
+#connect_vendeur main .bouton, #inscription_vendeur main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+#connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
 
 #connect_vendeur, #connect_client {
   justify-content: center;
@@ -465,12 +465,31 @@ hr {
 #connect_client main form .error, #inscription_client main form .error {
   color: #E43737;
 }
+#connect_client main .bouton, #inscription_client main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+#connect_client main .bouton:hover, #inscription_client main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
 
 #inscription_vendeur, #inscription_client {
   height: 100%;
 }
 #inscription_vendeur main, #inscription_client main {
-  margin: 15% 0;
+  margin: 5% 0;
 }
 
 .form_client {
@@ -637,8 +656,8 @@ hr {
   font-family: "Inter";
 }
 
-.infos main {
-  display: flex;
+.infos .liste_avis {
+  width: 33vw;
 }
 .infos form {
   display: flex;
@@ -874,6 +893,7 @@ div:has(> aside) {
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
+  margin-top: 150px;
 }
 
 .footer a {
@@ -980,16 +1000,43 @@ div:has(> aside) {
   flex-direction: row;
 }
 .accueil > main > div > button {
-  width: 30px;
-  height: 25px;
-  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
   align-self: center;
+  position: relative;
+  background-color: #3157A3;
+  color: #FFFFFF;
+  border: 5px #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 10px black;
+}
+.accueil > main > div > button > img {
+  width: 75%;
+}
+.accueil > main > div > button:hover {
+  background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
+}
+.accueil > main > div .gauche {
+  transform: rotate(180deg);
+  left: 50px;
+  padding: 0 3px;
+}
+.accueil > main > div .droite {
+  right: 50px;
+  padding: 0 3px;
 }
 .accueil > main > div > ul {
   display: flex;
   flex-direction: row;
+  align-items: center;
   overflow: hidden;
   list-style: none;
+  padding: 0;
+  width: 100%;
 }
 .accueil > main > div > ul > li {
   width: 20vw;
@@ -1001,16 +1048,17 @@ div:has(> aside) {
   line-height: 1.5em;
 }
 .accueil > main > div > ul > li > a > img {
-  width: 15vw;
-  height: 15vw;
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #CBCCEA;
+  background-color: #f3f1fb;
+  width: 15vw;
+  height: 15vw;
   border-radius: 5px;
 }
 .accueil > main > div > ul > li > a > div {
   height: 2em;
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 .accueil > main > div > ul > li > a > div > img {
@@ -1033,8 +1081,8 @@ div:has(> aside) {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: space-evenly;
     position: sticky;
     bottom: 0;
     background-color: #FFFFFF;
@@ -1054,11 +1102,29 @@ div:has(> aside) {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     margin: 20px;
   }
+  .accueil > main > div > ul > li > a {
+    display: flex;
+    flex-direction: column;
+    width: -moz-fit-content;
+    width: fit-content;
+    text-align: left;
+    align-items: flex-start;
+  }
   .accueil > main > div > ul > li > a > img {
-    width: 100%;
+    background-color: #f3f1fb;
+    width: 25vw;
+    max-width: 300px;
+    height: 25vw;
+    border-radius: 5px;
+    align-self: center;
+  }
+  .accueil > main > div > ul > li > a > p {
+    font-size: 1.5em;
+  }
+  .accueil > main > div > ul > li > a > h3 {
+    height: 2em;
   }
 }
 
@@ -1377,4 +1443,76 @@ aside input.bouton:hover {
 
 .error {
   color: #E43737;
+}
+
+.bodyAjoutProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyAjoutProduit form {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyAjoutProduit p {
+  display: flex;
+  flex-direction: column;
+}
+.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
+  width: 400px;
+  height: 200px;
+  resize: vertical;
+}
+.bodyAjoutProduit .divEnLigne {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.bodyAjoutProduit #creerProduit {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bodyAjoutProduit #creerProduit:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+.image:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+
+#create_avis main {
+  margin-top: 2em;
 }/*# sourceMappingURL=style.css.map */

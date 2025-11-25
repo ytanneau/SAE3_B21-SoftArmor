@@ -1,3 +1,9 @@
+<?php
+const HOME_GIT = "../../";
+const HOME_SITE = "../";
+?>
+
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -7,7 +13,12 @@
     </head>
     <body>
         <main>
-            <p>Erreur</p>
+            <?php
+                http_response_code(404);
+                ?>
+                <h1>404 - Page introuvable la honte</h1>
+                <p>La page demandée n'existe pas.</p>
+                <a href= <?= HOME_SITE?>>Retour à l'accueil</a>
         </main>
     </body>
 </html>

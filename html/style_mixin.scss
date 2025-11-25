@@ -118,7 +118,7 @@
     align-self: center;
 }
 
-@mixin bouton_new($background: $couleur_primaire_client, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
+@mixin bouton_new($background: $focus, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
     display: block;
     max-width: 100%;
 
@@ -239,6 +239,10 @@
         form {
             @include contenu_centre_vertical;
             @include formulaire;
+        }
+
+        .bouton {
+            @include bouton_new($focus, $color: white, $padding: 0.75em 1em, $size: 1em, $angle: $angle_grand);
         }
     }
 }

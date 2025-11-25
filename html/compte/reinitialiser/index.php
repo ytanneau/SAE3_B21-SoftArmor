@@ -138,15 +138,15 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Réinitialiser le mot de passe</title>
 </head>
-<body>
+<body class="form_client">
     <?php include HOME_SITE . 'header.php'; ?>
 
-    <main>
-        <h1>Réinitialisation du mot de passe</h1>
-        
+    <main>  
         <!-- Premier formulaire (saisir l'email) -->
         <?php if ($etape === 1) { ?>
-            <form class="formulaire_client" action="" method="post">
+            <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+
                 <input type="hidden" name="etape" value="etape_adresse">
 
                 <label for="email">Votre adresse e-mail</label>
@@ -175,14 +175,18 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 
         <!-- Deuxième formulaire (saisir la réponse à la question) -->
         <?php } else if ($etape === 2) { ?>
-            <p><?= $row['question'] ?? '' ?></p>
+            
 
-            <form class="formulaire_client" action="" method="post">
+            <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+
+                <h2><?= $row['question'] ?? '' ?></h2>
+
                 <input type="hidden" name="etape" value="etape_reponse">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 
                 <label for="reponse">Votre réponse</label>
-                <input class="champ" type="text" id="reponse" name="reponse">
+                <input class="champ" type="password" id="reponse" name="reponse">
 
                 <p class="error">
                     <?= isset($erreurs['reponse']) ? $erreurs['reponse'] : ''; ?>
@@ -193,7 +197,9 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
 
         <!-- Troisième formulaire (saisir le nouveau MDP) -->
         <?php } else if ($etape === 3) { ?>
-            <form class="formulaire_client" action="" method="post">
+            <form action="" method="post">
+                <h1>Réinitialisation du mot de passe</h1>
+                
                 <input type="hidden" name="etape" value="etape_mdp">
                 <input type="hidden" name="email" value="<?= $_POST['email'] ?>">
 

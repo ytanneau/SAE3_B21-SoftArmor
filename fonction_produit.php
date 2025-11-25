@@ -138,7 +138,18 @@
         $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
+
+        if ($requete->rowCount() > 0) {
+            supprimer_images_produit($id_produit);
+        }
+
         return $requete->rowCount() > 0;
+    }
+
+    function supprimer_images_produit($id_produit) {
+        foreach (glob(HOME_SITE . "ressources/produit/" . $id_produit . "*.png") as $filename) {
+            unlink($filename);
+        }
     }
 
     function update_info_produit($id_produit, $libelle_prive, $libelle_public, $prix_ht,
@@ -405,4 +416,15 @@
         $requete->execute();
 
         return true;
+    }
+
+
+    function vendeur_possede_produit($id_vendeur, $id_produit){
+        global $pdo;
+        
+        $requete = $pdo->prepare('SELECT * FROM produit WHERE id_vendeur = :id_vendeur AND :id_produit');
+        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }
