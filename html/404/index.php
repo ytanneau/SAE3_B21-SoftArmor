@@ -32,9 +32,9 @@ $images = HOME_SITE . "image/"
         .body404{
             height: 100vh;
             width: 100vw;
+            background: linear-gradient(to right, #CBCCEA, #3157A3);
         }
         .le404 {
-            background: linear-gradient(to right, #CBCCEA, #3157A3);
             display: flex;
             justify-content: center;
             flex-direction: column;
