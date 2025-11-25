@@ -19,7 +19,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   height: 200px;
   border-radius: 5px;
 }
@@ -28,7 +29,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 25px;
+  min-width: 25px;
+  max-width: 25px;
   height: 25px;
   border-radius: 5px;
 }
@@ -906,7 +908,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   height: 300px;
   border-radius: 5px;
 }
@@ -914,7 +917,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
   height: 100px;
   border-radius: 5px;
 }
@@ -1035,6 +1039,7 @@ div:has(> aside) {
   .footer-columns {
     width: 100%;
     justify-content: space-between;
+    flex-direction: column;
   }
   .footer-socials {
     flex-direction: row;
@@ -1113,7 +1118,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
   height: 15vw;
   border-radius: 5px;
 }
@@ -1645,7 +1651,8 @@ aside input.bouton:hover {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
   height: 250px;
   border-radius: 5px;
 }
@@ -1773,4 +1780,58 @@ aside input.bouton:hover {
 }
 .bouton404:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
+.produit-vendeur {
+  font-family: "Inter";
+}
+.produit-vendeur > article:first-child {
+  margin: 0 0 2em 0;
+  display: flex;
+}
+.produit-vendeur > article:first-child > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4em;
+}
+.produit-vendeur > article:first-child > div:first-child > div:first-child img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 300px;
+  max-width: 300px;
+  height: 300px;
+  border-radius: 5px;
+}
+.produit-vendeur > article:first-child > div:first-child > div:nth-child(2) img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 100px;
+  max-width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+.produit-vendeur > article:first-child > div:nth-child(2) > h1 {
+  margin: 0;
+  font-size: 2em;
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+.produit-vendeur > article:first-child > div:nth-child(2) > div {
+  display: flex;
+  align-items: center;
+}
+.produit-vendeur > article:first-child > div:nth-child(2) > div .etoiles {
+  margin-right: 0.5em;
+}
+.produit-vendeur > article:first-child > div:nth-child(2) > p:last-child {
+  margin-top: 2em;
+}
+
+.fini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */
