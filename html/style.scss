@@ -1017,6 +1017,9 @@ aside {
         flex-direction: row;
         justify-content: space-around;
     }
+    #creerProduit{
+        @include bouton_new;
+    }
 }
 
 .image{

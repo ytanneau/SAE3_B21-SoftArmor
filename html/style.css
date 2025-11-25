@@ -1418,6 +1418,25 @@ aside input.bouton:hover {
   flex-direction: row;
   justify-content: space-around;
 }
+.bodyAjoutProduit #creerProduit {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bodyAjoutProduit #creerProduit:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
 
 .image {
   display: block;
