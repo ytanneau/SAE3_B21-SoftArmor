@@ -2,6 +2,7 @@ body {
   font-family: "Inter";
   padding: 0;
   margin: 0;
+  min-height: 100vh;
 }
 
 main {
@@ -668,7 +669,7 @@ hr {
   width: 10vw;
   height: 10vw;
   border-radius: 5px;
-  margin-left: 0;
+  margin-right: 2em;
 }
 .infos form {
   display: flex;
@@ -902,9 +903,14 @@ div:has(> aside) {
 .footer {
   background: #000;
   color: #fff;
-  padding: 40px 60px;
   font-family: sans-serif;
-  margin-top: 150px;
+  margin-top: 50px;
+  width: 100vw;
+  position: relative;
+  bottom: 0;
+}
+.footer > div {
+  margin: 40px 60px;
 }
 .footer a {
   color: #dcdcdc;
