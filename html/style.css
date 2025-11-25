@@ -734,6 +734,50 @@ hr {
 .infos form img {
   width: 200px;
 }
+@media screen and (max-width: 1024px) {
+  .infos main {
+    padding: 0;
+  }
+  .infos section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infos section form {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 1em;
+    gap: 2em;
+  }
+  .infos section form article {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos section form article:first-child {
+    align-items: center;
+  }
+  .infos section form article:first-child img {
+    width: clamp(140px, 40vw, 240px);
+    border-radius: 8px;
+  }
+  .infos section form article:first-child label {
+    margin-top: 1em;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .infos section form article:last-child input,
+  .infos section form article:last-child button {
+    width: 100%;
+  }
+  .infos section form article:last-child .champ {
+    margin-bottom: 1em;
+  }
+  .infos section form article:last-child .bouton {
+    margin-top: 1.2em;
+  }
+}
 
 .bouton {
   border: none;
