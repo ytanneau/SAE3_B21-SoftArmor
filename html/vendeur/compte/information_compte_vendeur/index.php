@@ -62,7 +62,7 @@
     <head>
         <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
-        <title>Mes informations</title>
+        <title>Alizon Vendeur - Mes informations</title>
     </head>
     <body>
         <!-- inclusion du header -->
@@ -71,8 +71,7 @@
             <div class="entete">
                 <!-- Bouton de retour sur la page de gestion des stocks -->
                 <a href="../../stock/"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-
-                <h1>Modifier mes informations</h1>
+                <h1>Mes informations</h1>
             </div>
             <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
 

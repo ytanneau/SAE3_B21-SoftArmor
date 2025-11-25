@@ -130,7 +130,7 @@
 <html>
     <head>
         <?php include HOME_SITE . 'link_head.php'; ?>
-        <title>Modifier un produit</title>
+        <title>Alizon Vendeur - Modifier un produit</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -328,6 +328,10 @@
 
             const poidColis = document.getElementById("idPoidColis");
             const volumeColis = document.getElementById("idVolumeColis");
+
+            prix.addEventListener('input', () => {
+                prix.value = prix.value.replace(",",".");
+            })
 
             descSimple.addEventListener('input', () => {
                 if(descSimple.value.length === 200){

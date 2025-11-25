@@ -98,7 +98,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Ajout produit</title>
+        <title>Alizon Vendeur - Créer un produit</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
@@ -269,6 +269,9 @@
 
                 const tva = document.getElementById("idtva");
                 const prix = document.getElementById("idPrixProd");
+                prix.addEventListener('input', () => {
+                    prix.value = prix.value.replace(",",".");
+                })
 
                 const descSimple = document.getElementById("idDescSimple");
                 const descDetaille = document.getElementById("idDescDetaille");
