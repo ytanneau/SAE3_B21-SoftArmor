@@ -1570,7 +1570,7 @@ aside input.bouton:hover {
   flex-direction: row;
   gap: 70px;
 }
-.bodyModifProduit .idModifierProduit {
+.bodyModifProduit #idModifierProduit {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1586,7 +1586,7 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
 }
-.bodyModifProduit .idModifierProduit:hover {
+.bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 

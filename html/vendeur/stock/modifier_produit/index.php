@@ -236,20 +236,20 @@
                 <div>
                     <h6>Image principale</h6>
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
-                    <p>
+                    <div>
                         <label for="photoPrincipale">Photo principale</label>
                         <input type="file" name="photoPrincipale">
-                    </p>
+                    </div>
                     <?php if($tabImageProduit['id_image1'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
-                    <p>
+                    <div>
                         <label for="photo2">Seconde photo</label>
                         <input type="file" name="photo2" accept="image/png">
-                    </p>
+                    </div>
                     <?php if($tabImageProduit['id_image2'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt=""> <?php }?>
-                    <p>
+                    <div>
                         <label for="photo3">Troisième photo</label>
                         <input type="file" name="photo3" accept="image/png">
-                    </p>
+                    </div>
                 </div>
                 <h3>Gestion du stock</h3>
                 <div class="divEnLigne">
