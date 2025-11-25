@@ -810,7 +810,7 @@ a.bouton:has(+ .liste_avis):hover {
   font-weight: 100;
   font-size: 0.9em;
 }
-.liste_avis li > img {
+.liste_avis li > img:last-of-type {
   width: 20%;
   margin-left: 2em;
 }
