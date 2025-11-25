@@ -269,6 +269,9 @@
 
                 const tva = document.getElementById("idtva");
                 const prix = document.getElementById("idPrixProd");
+                prix.addEventListener('input', () => {
+                    prix.value = prix.value.replace(",",".");
+                })
 
                 const descSimple = document.getElementById("idDescSimple");
                 const descDetaille = document.getElementById("idDescDetaille");

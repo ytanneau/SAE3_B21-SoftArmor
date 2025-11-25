@@ -329,6 +329,10 @@
             const poidColis = document.getElementById("idPoidColis");
             const volumeColis = document.getElementById("idVolumeColis");
 
+            prix.addEventListener('input', () => {
+                prix.value = prix.value.replace(",",".");
+            })
+
             descSimple.addEventListener('input', () => {
                 if(descSimple.value.length === 200){
                     alert("Maximum de caractère atteint");
