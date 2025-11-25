@@ -1464,7 +1464,7 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit .entete a {
   height: 24px;
-  margin-left: 50px;
+  margin-right: 50px;
 }
 .bodyAjoutProduit .entete h1 {
   margin-right: 30px;
@@ -1486,12 +1486,13 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  gap: 70px;
 }
 .bodyAjoutProduit .divCreerProduit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 .bodyAjoutProduit .divCreerProduit #creerProduit {
   display: block;
@@ -1517,6 +1518,9 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit #idtva {
   height: 20.3px;
+}
+.bodyAjoutProduit input[type=text] {
+  height: 35px;
 }
 
 .image_bouton {
