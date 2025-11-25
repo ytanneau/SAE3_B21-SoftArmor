@@ -309,7 +309,7 @@ else if ($numEtape == 2) {
             <h2>Entrez vos coordonnées bancaires</h2>
 
             <label for="code_carte">Code de carte bancaire</label>
-            <input type="text" name="code_carte" id="code_carte" required class="champ">
+            <input type="text" name="code_carte" id="code_carte" required class="champ"  maxlength="13">
             <?php
             if (isset($erreurs['code_carte'])){
                 ?>
