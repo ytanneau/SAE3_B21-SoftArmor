@@ -13,7 +13,7 @@ $images = HOME_SITE . "image/"
         <title>Alizon</title>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body class = "body404">
+    <body id = "body404">
         <main class = "le404">
             <?php
                 http_response_code(404);

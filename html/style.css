@@ -1573,44 +1573,35 @@ aside input.bouton:hover {
     margin-top: 1em;
     margin-bottom: 0;
   }
-
-#create_avis main {
-  padding-top: 2em;
 }
 
-.body404 {
+#body404 .body404 {
   height: 100vh;
   width: 100vw;
   background: #3157A3;
 }
-
-.le404 {
+#body404 .le404 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   color: white;
 }
-
-.all_404 {
+#body404 .all_404 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
-.all_404 h1 {
+#body404 .all_404 h1 {
   justify-self: center;
 }
-
-.logo {
+#body404 .logo {
   width: 400px;
 }
-
-.titre404 {
+#body404 .titre404 {
   font-size: 100px;
 }
-
-.bouton404 {
+#body404 .bouton404 {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1626,7 +1617,6 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
 }
-.bouton404:hover {
+#body404 .bouton404:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
-}
