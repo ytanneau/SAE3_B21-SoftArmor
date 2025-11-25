@@ -1641,7 +1641,7 @@ aside input.bouton:hover {
 .info_vendeur p {
   border: none;
   border-radius: 5px;
-  height: 2em;
+  height: auto;
   font-size: 1em;
   padding-left: 0.6em;
   padding-right: 0;

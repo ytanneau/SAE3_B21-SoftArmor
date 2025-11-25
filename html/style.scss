@@ -1137,13 +1137,14 @@ aside {
     p { 
         border: none;
         border-radius: $angle_petit;
-        height: 2em;
+        height: auto;
         font-size: $font_size_normal;
         padding-left: 0.6em;
         padding-right: 0;
         width: 50%;
         border:rgba(0,0,0,0.25) 1px solid;
         box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+
     }
 
     .modif_info {
