@@ -1622,13 +1622,8 @@ aside input.bouton:hover {
   flex-direction: row;
   gap: 70px;
 }
-.bodyAjoutProduit .divCreerProduit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.bodyAjoutProduit #creerProduit {
   margin-top: 20px;
-}
-.bodyAjoutProduit .divCreerProduit #creerProduit {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1637,19 +1632,21 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  color: #FFFFFF;
 }
-.bodyAjoutProduit .divCreerProduit #creerProduit:hover {
+.bodyAjoutProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 .bodyAjoutProduit input[type=file] {
   padding-top: 7px;
+}
+.bodyAjoutProduit #idCodeBarre {
+  width: 150px;
 }
 
 .bodyModifProduit {
@@ -1725,6 +1722,9 @@ aside input.bouton:hover {
 }
 .bodyModifProduit #idCheckMajeur {
   margin-right: 70px;
+}
+.bodyModifProduit #idCodeBarre {
+  width: 150px;
 }
 
 #create_avis main {
