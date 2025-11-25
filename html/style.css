@@ -1549,8 +1549,13 @@ aside input.bouton:hover {
 #create_avis main .image_bouton p {
   font-size: 10px;
 }
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
   #create_avis main {
     flex-direction: column;
+  }
+  #create_avis main article {
+    width: 80vw;
+    padding: 0;
+    padding-bottom: 0.5em;
   }
 }/*# sourceMappingURL=style.css.map */

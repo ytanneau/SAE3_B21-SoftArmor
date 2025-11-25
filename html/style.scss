@@ -1114,8 +1114,14 @@ aside {
             }
         }
 
-        @media screen and (max-width: 1024px) {
+        @media (max-width: 1024px) {
             flex-direction: column;
+
+            article{
+                width: 80vw;
+                padding: 0;
+                padding-bottom: 0.5em;
+            }
         }
     }
 }
