@@ -184,6 +184,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
+                        <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
                             <option value="">-- Choisir une catégorie --</option>
 
