@@ -1366,7 +1366,7 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
 }
-.bodyAjoutProduit #descDetaill, .bodyAjoutProduit #descSimple {
+.bodyAjoutProduit #idDescDetaill, .bodyAjoutProduit #idDescSimple {
   width: 200px;
   height: 200px;
   resize: vertical;
