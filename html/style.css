@@ -1530,7 +1530,10 @@ aside input.bouton:hover {
   height: 25px;
 }
 
-.image_bouton {
+#create_avis main {
+  padding-top: 2em;
+}
+#create_avis main .image_bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1546,16 +1549,28 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
+  padding: 0.5em;
   margin-top: 2em;
   margin-bottom: 1em;
+  font-size: 1.5em;
 }
-.image_bouton:hover {
+#create_avis main .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
-.image_bouton p {
-  font-size: 0.75em;
+#create_avis main .image_bouton p {
+  font-size: 10px;
 }
-
-#create_avis main {
-  padding-top: 2em;
+@media (max-width: 1024px) {
+  #create_avis main {
+    flex-direction: column;
+    gap: 20px;
+  }
+  #create_avis main article, #create_avis main form {
+    width: 70vw;
+    padding: 0 1em 1em;
+  }
+  #create_avis main article .image_bouton, #create_avis main form .image_bouton {
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
 }/*# sourceMappingURL=style.css.map */
