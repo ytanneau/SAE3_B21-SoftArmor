@@ -127,7 +127,7 @@
     <head>
         <meta charset="utf-8">
         <title>Alizon</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="<?= HOME_SITE?>style.css">
         <script src="confirmation.js"></script>
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
