@@ -135,7 +135,7 @@ else if ($_POST['form'] == 'bancaire') {
 // si le client a bien répondu à tous les formulaire, alors une commande est créée et enregistrée
 if ($numEtape == 3) {
     $CHEMIN_FACTURE = HOME_GIT . "html/ressources/facture/";
-
+    $achat_reussi = true;
 
     $requete = $pdo->prepare("INSERT INTO _commande (id_client, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
@@ -180,6 +180,7 @@ if ($numEtape == 3) {
             update_stock($_POST['id_produit'], "-1");
         } else {
             echo "Une erreur est survenue ! (le produit n'est plus en stock)";
+            $achat_reussi = false;
         }
     } else {
         $requete = $pdo->prepare("SELECT id_produit, nom_public, prix, tva, quantite_panier FROM produit_panier WHERE id_client = :id_compte");
@@ -206,6 +207,7 @@ if ($numEtape == 3) {
                 update_stock($produit['id_produit'], '-' . $produit['quantite_panier']);
             }
         } else {
+            $achat_reussi = false;
             echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
             foreach ($produits_plus_en_stock as $produit) {
                 echo "\n- " . $produit['nom_public'];
@@ -358,11 +360,12 @@ else if ($numEtape == 2) {
 
 <?php
 }
-    else if ($numEtape == 3) {
+    else if ($numEtape == 3 && $achat_reussi) {
     ?>
-        <h2>Bravo vous avez réussi à effectuer l'achat !</h2>
-        <br>
-        <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>
+        <div style="text-align: center;">
+            <h2>Bravo vous avez réussi à effectuer l'achat !</h2>
+            <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>
+        </div>
     <?php
     }
 
