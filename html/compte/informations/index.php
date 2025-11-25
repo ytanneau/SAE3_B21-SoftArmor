@@ -411,11 +411,9 @@ unset($pdo);
                             </div>
                         </div>
                         
-                        <!--
-                        <?php if (isset($row['url_img'])) { ?>
-                            <img src="<?= HOME_SITE . $row['url_img'] ?>" title="<?= $row['alt_img'] ?>" alt="<?= $row['alt_img'] ?>">
+                        <?php if (isset($row['url_img_avis'])) { ?>
+                            <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
                         <?php } ?>
-                        -->
                     </li>
                 <?php } ?>
             </ul>

@@ -1,6 +1,8 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+
+$images = HOME_SITE . "image/"
 ?>
 
 
@@ -12,13 +14,37 @@ const HOME_SITE = "../";
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <main>
+        <main class = "le404">
             <?php
                 http_response_code(404);
                 ?>
-                <h1>404 - Page introuvable la honte</h1>
-                <p>La page demandée n'existe pas.</p>
+                <div class ="all_404">
+                <h1 class="titre_404">404</h1>
+                <p>Oups on dirait que cette page n’existe pas !</p>
+                <a href= <?= HOME_SITE?> >
+                    <img src="<?= $images . 'Alizon_noir.png' ?>" alt="Logo Alizon" class="logo">
+                </a>
                 <a href= <?= HOME_SITE?>>Retour à l'accueil</a>
+                </div>
         </main>
     </body>
+    <style>
+        .le404 {
+            background: linear-gradient(to right, #CBCCEA, #3157A3);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width :100%;
+            height: 100%;
+        }
+        .all_404{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .all_404 h1{
+            justify-self: center;
+        }
+    </style>
 </html>

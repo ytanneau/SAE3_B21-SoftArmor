@@ -657,7 +657,15 @@ hr {
 }
 
 .infos .liste_avis {
-  width: 33vw;
+  width: 100%;
+}
+.infos .liste_avis li > img:first-child {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 5px;
 }
 .infos form {
   display: flex;
@@ -1012,7 +1020,7 @@ div:has(> aside) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 10px black;
+  box-shadow: 0 0 20px black;
 }
 .accueil > main > div > button > img {
   width: 75%;
@@ -1460,7 +1468,7 @@ aside input.bouton:hover {
   flex-direction: column;
 }
 .bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
-  width: 400px;
+  width: 600px;
   height: 200px;
   resize: vertical;
 }
@@ -1492,6 +1500,12 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit .divCreerProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.bodyAjoutProduit input[type=file] {
+  padding-top: 7px;
+}
+.bodyAjoutProduit #idtva {
+  height: 20.3px;
 }
 
 .image {

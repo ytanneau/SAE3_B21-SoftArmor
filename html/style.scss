@@ -300,7 +300,11 @@ hr {
     }
 
     .liste_avis {
-        width: 33vw;
+        width: 100%;
+
+        li > img:first-child {
+            @include image_produit(10vw);
+        }
     }
 
     form {
@@ -631,7 +635,7 @@ div:has(> aside) {
                 border: 5px $couleur_background;
                 @include contenu_centre_horizontal;
                 justify-content: center;
-                box-shadow: 2px 2px 10px black;
+                box-shadow: 0 0 20px black;
                     
                 > img {
                     width: 75%;
@@ -1054,7 +1058,7 @@ aside {
         flex-direction: column;
     }
     #idDescDetaille,#idDescSimple{
-        width: 400px;
+        width: 600px;
         height: 200px;
         resize: vertical;
     }
@@ -1069,7 +1073,12 @@ aside {
             @include bouton_new;
         }
     }
-    
+    input[type="file"]{
+        padding-top: 7px;
+    }
+    #idtva{
+        height: 20.3px;
+    }
 }
 
 .image{
