@@ -1192,3 +1192,12 @@ aside {
 .bouton404{
     @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
+
+// #stock_vendeur{
+
+    
+// }
+
+.fini{
+    @include contenu_centre_vertical();
+}
