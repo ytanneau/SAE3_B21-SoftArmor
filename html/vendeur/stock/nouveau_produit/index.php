@@ -101,7 +101,7 @@
         <title>Ajout produit</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="<?= HOME_GIT . "html/style.css"?>">
+        <link rel="stylesheet" href="<?= HOME_GIT?>html/style.css">
     </head>
     <body class="bodyAjoutProduit">
         <?php include "../../header.php" ?>
