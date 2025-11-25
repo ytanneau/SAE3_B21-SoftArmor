@@ -41,8 +41,8 @@ function ecrire_nom($rows){
                 <td><img src="Fleche.png" alt=""> </td> -->
                 <td>
 
-                    <button type="submit" class="bouton" value="Valider"><img src="SAE3_B21-SoftArmor/html/image/etoile.svg"></button>
-                    <button type="submit" class="bouton" value="Valider"><img src="SAE3_B21-SoftArmor/html/image/modifier.svg"></button>
+                    <button type="submit" class="bouton" value="Valider"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button>
+                    <button type="submit" class="bouton" value="Valider"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button>
 
                     <span> | </span>
 
