@@ -1205,3 +1205,7 @@ aside {
 
     
 // }
+
+.fini{
+    @include contenu_centre_vertical();
+}
