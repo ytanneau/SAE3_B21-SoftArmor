@@ -962,8 +962,11 @@ aside {
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
 
-    #idDescDetaill,#idDescSimple{
-        width: 200px;
+    p{
+        @include contenu_centre_vertical;
+    }
+    #idDescDetaille,#idDescSimple{
+        width: 400px;
         height: 200px;
         resize: vertical;
     }
