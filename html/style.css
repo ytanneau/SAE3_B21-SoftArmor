@@ -1746,7 +1746,7 @@ aside input.bouton:hover {
   flex-direction: column;
   width: 600px;
 }
-.mainInfoVendeur #idValiderModifVendeur, .mainInfoVendeur #idDesactivationCompte {
+.mainInfoVendeur #idValiderModifVendeur {
   margin-top: 20px;
   display: block;
   max-width: 100%;
@@ -1763,7 +1763,26 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
 }
-.mainInfoVendeur #idValiderModifVendeur:hover, .mainInfoVendeur #idDesactivationCompte:hover {
+.mainInfoVendeur #idValiderModifVendeur:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.mainInfoVendeur #idDesactivationCompte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #E43737;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.mainInfoVendeur #idDesactivationCompte:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 

@@ -68,10 +68,12 @@
         <!-- inclusion du header -->
         <?php include "../../header.php"?>
         <main class="mainInfoVendeur">
-            <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="../../stock/"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+            <div class="entete">
+                <!-- Bouton de retour sur la page de gestion des stocks -->
+                <a href="../../stock/"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
 
-            <h1>Modifier mes informations</h1>
+                <h1>Modifier mes informations</h1>
+            </div>
             <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
 
             <!-- formulaire de saisie des modifications des informations d'un vendeur -->
