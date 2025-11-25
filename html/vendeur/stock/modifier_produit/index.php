@@ -153,7 +153,7 @@
                         <input type="text" name="nomPblc" id="idNomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
                     </p>
                 </div>
-                <div>
+                <div class="divEnLigne">
                     <p>
                         <label for="prixProd">Prix* hors taxe (€)</label>
                         <input type="text" name="prix" id="idPrix" value="<?= $tabInfoProduit['prix']?>" required>
@@ -169,14 +169,13 @@
                             <option value="20" <?= $select20 ?>>20%</option>
                         </select>
                     </p>
-                    
                     <p>
                         <label for="codeBarre">Code barre*</label>
                         <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
-                <div>
+                <div class="divEnLigne">
                     <p>
                         <label for="checkMajeur">Réservé aux majeurs</label>
                         <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
@@ -200,13 +199,14 @@
                             <?php } ?>
                         </select>
                     </p>
+                </div>
+                <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
                         <input type="text" name="qtAchete">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
-                        <br>
                         <select name="unite" id="uniteVetement">
                             <option value="">-- Choisir une unitée --</option>
                             <option value="xs">XS</option>
@@ -218,7 +218,6 @@
                     </p>
                     <p id="blockUniteMasse" style="display:none;">
                         <label for="uniteMasse">Unités de masse</label>
-                        <br>
                         <select name="unite" id="uniteMasse">
                             <option value="">-- Choisir une unitée --</option>
                             <option value="g">g</option>
@@ -227,7 +226,6 @@
                     </p>
                     <p id="blockUniteLiquide" style="display:none;">
                         <label for="uniteLiquide">Unités de liquide</label>
-                        <br>
                         <select name="unite" id="uniteLiquide">
                             <option value="">-- Choisir une unitée --</option>
                             <option value="ml">ml</option>
@@ -236,7 +234,6 @@
                         </select>
                     </p>
                 </div>
-                <hr>
                 <h3>Photos du produit</h3>
                 <div>
                     <h6>Image principale</h6>
@@ -256,9 +253,8 @@
                         <input type="file" name="photo3" accept="image/png">
                     </p>
                 </div>
-                <hr>
                 <h3>Gestion du stock</h3>
-                <div>
+                <div class="divEnLigne">
                     <p>
                         <label for="qtStock">Quantite en stock</label>
                         <input type="number" name="qtStock" id="idQtStock" value="<?= $tabInfoProduit['quantite'] ?>">
@@ -268,7 +264,6 @@
                         <input type="number" name="seuilAlerte" id="idSeuilAlerte" value="<?= $tabInfoProduit['seuil_alerte']?>">
                     </p>
                 </div>
-                <hr>
                 <h3>Description</h3>
                 <div>
                     <p>
@@ -280,9 +275,8 @@
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"><?= $tabInfoProduit['description_detaillee']?></textarea>
                     </p>
                 </div>
-                <hr>
                 <h3>Livraison</h3>
-                <div>
+                <div class="divEnLigne">
                     <p>
                         <label for="poidColis">Poid du colis</label>
                         <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>">
