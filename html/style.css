@@ -1720,11 +1720,10 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
-<<<<<<< Updated upstream
 #create_avis {
+  display: flex;
   min-height: 100vh;
 }
-=======
 .mainInfoVendeur {
   display: flex;
   flex-direction: column;
@@ -1764,7 +1763,6 @@ aside input.bouton:hover {
   width: 600px;
 }
 
->>>>>>> Stashed changes
 #create_avis main {
   padding-top: 2em;
 }
