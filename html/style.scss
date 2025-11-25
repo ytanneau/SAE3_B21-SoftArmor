@@ -1125,21 +1125,28 @@ aside {
 }
 
 .info_vendeur {
+    div {
+        width: 60vw;
+    }
     p { 
-        padding: 0 10px;
-        width: max-content;
+        border: none;
         border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+        width: 50%;
         border:rgba(0,0,0,0.25) 1px solid;
         box-shadow: 0 2px 5px rgba(0,0,0,0.25);
     }
-    .desc {
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-    }
+
     .modif_info {
         color: $couleur_background;
         text-decoration: none;
+    }
+    h3 {
+        font-size: $font_size_sup;
+        margin-top: 2%;
     }
 }
 

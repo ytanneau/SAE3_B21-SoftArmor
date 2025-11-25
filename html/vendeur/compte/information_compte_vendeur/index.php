@@ -54,23 +54,25 @@
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../../stock/index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <!-- Zone d'affichage des informations du vendeur -->
-            <h1>Mes informations</h1>
-            <h3>Raison sociale</h3>
-            <p><?= $raisonSociale ?></p>
-            <h3>Numero de siret</h3>
-            <p><?= $numSiret ?></p>
-            <h3>Adresse</h3>
-            <p><?= $chaineAdresse ?></p>
-            <h3>Description</h3>
-            <p class="desc">
-                <?php
-                    if($description === null){
-                        echo "Pas de description";
-                    } else {
-                        echo $description;
-                    } 
-                ?>
-            </p>
+            <div>
+                <h1>Mes informations</h1>
+                <h3>Raison sociale</h3>
+                <p><?= $raisonSociale ?></p>
+                <h3>Numero de siret</h3>
+                <p><?= $numSiret ?></p>
+                <h3>Adresse</h3>
+                <p><?= $chaineAdresse ?></p>
+                <h3>Description</h3>
+                <p>
+                    <?php
+                        if($description === null){
+                            echo "Pas de description";
+                        } else {
+                            echo $description;
+                        } 
+                    ?>
+                </p>
+            </div>
             <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
             <button class="bouton"><a class="modif_info" href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
             <!-- bouton pour etre rediriger vers la desactivation du compte vendeur -->
