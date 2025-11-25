@@ -179,8 +179,11 @@ unset($pdo);
                 
                 <article>
                     <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
-                    <label for="pdp">Modifier Image de Profil</label>
-                    <input type="file" name="pdp" accept=".png">
+                    
+                    <label for="pdp" class="image_bouton">Ajouter une image 
+                            <p id="image-name">Aucun fichier choisi</p>
+                        </label>
+                    <input id="pdp" type="file" name="pdp" accept=".png" hidden>
                 </article>
 
                 <article>
@@ -375,8 +378,8 @@ unset($pdo);
                         }
                     ?>
 
-                    <button type="submit" class="bouton">Modifier mes informations</button>
-                    <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
+                    <button type="submit" class="bouton modif">Modifier mes informations</button>
+                    <a class="bouton grave" href="anonymisation_client/index.php">Désactiver mon compte</a>
                 </article>
             </form>
 
@@ -421,4 +424,14 @@ unset($pdo);
     </main>
     <?php include HOME_SITE . "footer.php" ?>
 </body>
+<script>
+        const fileInput = document.getElementById("image");
+        const fileName = document.getElementById("image-name");
+
+        fileInput.addEventListener("change", () => {
+            fileName.textContent = fileInput.files.length > 0 
+            ? fileInput.files[0].name 
+            : "Aucun fichier choisi";
+        });
+    </script>
 </html>

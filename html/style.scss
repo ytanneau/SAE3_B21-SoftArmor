@@ -299,16 +299,36 @@ hr {
 }
 
 .infos{
-
-    main{
-        //display: flex;
+    .bouton {
+        
     }
+    .modif{
+        @include bouton_new($color: white);
+    }
+    .grave {
+        @include bouton_new($background:red,$color: white);
+    }
+    .image_bouton{
+        @include bouton_new($couleur_etoile);
+        border-radius: $angle_normal;
+        padding: 0.5em;
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: $font_size_sup;
+
+        p{
+            font-size: 10px;
+        }
+    }
+
 
     .liste_avis {
         li {
-            > img:first-child {
-                @include image_produit(10vw);
-                margin-left: 0;
+            > img{
+                &:first-child {
+                    @include image_produit(10vw);
+                    margin-left: 0;
+                }
             }
         }
     }
@@ -323,7 +343,7 @@ hr {
             padding: 0 2em;
         }
 
-        >:last-child {
+        > :last-child {
             width: 100%;
         }
 
@@ -380,7 +400,7 @@ hr {
 
                     &:last-child {
                         input,
-                        button {
+                        button,a {
                             width: 100%;
                         }
 
