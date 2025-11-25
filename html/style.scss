@@ -304,8 +304,11 @@ hr {
     }
 
     .liste_avis {
-        li > img:first-child {
-            @include image_produit(10vw);
+        li {
+            > img:first-of-type:not(img:last-of-type) {
+                @include image_produit(10vw);
+                margin-left: 0;
+            }
         }
     }
 

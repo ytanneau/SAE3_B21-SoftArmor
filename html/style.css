@@ -661,13 +661,14 @@ hr {
   font-family: "Inter";
 }
 
-.infos .liste_avis li > img:first-child {
+.infos .liste_avis li > img:first-of-type:not(img:last-of-type) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
   width: 10vw;
   height: 10vw;
   border-radius: 5px;
+  margin-left: 0;
 }
 .infos form {
   display: flex;
