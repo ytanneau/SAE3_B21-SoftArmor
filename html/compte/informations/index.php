@@ -388,7 +388,7 @@ unset($pdo);
                 <?php foreach ($avis as $row) { ?>
                     <li>
                         <!-- Image du produit -->
-                        <img class="image_produit_petit" src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
+                        <img src="<?= HOME_SITE.$row['url_img'];?>" alt="<?= htmlentities($row['alt_img'] ?? '')?>" title="<?= htmlentities($row['titre_img'] ?? '')?>">
 
                         <div>
                             <div>
@@ -405,14 +405,14 @@ unset($pdo);
                             </div>
 
                             <div>
-                                <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
-                                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                                <h3><?= htmlentities($row['titre'] ?? '') ?></h3>
+                                <p><?= htmlentities($row['commentaire'] ?? '') ?></p>
                                 <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($row['date_avis'] ?? ''))) ?></p>
                             </div>
                         </div>
-
-                        <?php if (isset($row['url_image'])) { ?>
-                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['alt_image'] ?>" alt="<?= $row['alt_image'] ?>">
+                        
+                        <?php if (isset($row['url_img_avis'])) { ?>
+                            <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
                         <?php } ?>
                     </li>
                 <?php } ?>

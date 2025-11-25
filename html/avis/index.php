@@ -88,17 +88,23 @@
         }        
     }
 
+    /*
     if ($succes === true) {
         header('location: ' . HOME_SITE . 'produit/?produit=' . $_GET['produit']);
-    }
+    }*/
 
     // Supprimer l'image si la sauvegarde ne s'est pas passée
-    /*
+    
     if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-        unlink('../ressources/avis/' . $fichier);
-        unlink('../' . $image);
+        if (file_exists('../ressources/avis/' . $fichier)){
+            unlink('../ressources/avis/' . $fichier);
+        }
+        else if (file_exists(HOME_SITE . $image)){
+            unlink(HOME_SITE . $image);
+        }
+        
     }
-    */
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -108,7 +114,7 @@
     <title>Alizon - Avis</title>
     <?php include HOME_SITE . "link_head.php"; ?>
 </head>
-<body class="form_client">
+<body class="form_client" id="create_avis">
     <?php include HOME_SITE . "header.php"; ?>
     <main>
         <?php if ($succes == true) { ?>
@@ -117,6 +123,7 @@
             <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
             <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+            <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
@@ -179,12 +186,17 @@
                             <?="Erreur : ".$erreur['description']?>
                         </p>
                     <?php } ?>
-
-                    <label for="image">Image</label>
-                    <input type="file" 
+                    
+                    <div class="image">
+                        <label for="image">Ajouter une image</label>
+                        <p id="image-name">Aucun fichier choisi</p>
+                    </div>
+                    <input id="image"
+                        type="file" 
                         name="image" 
                         alt="image"
-                        accept="image/png">
+                        accept="image/png"
+                        hidden>
 
                     <?php if (isset($erreur['image'])) { ?>
                         <p class="error">
@@ -198,5 +210,15 @@
         <?php } ?>
     </main>
     <?php include HOME_SITE . "footer.php" ?>
+    <script>
+        const fileInput = document.getElementById("image");
+        const fileName = document.getElementById("image-name");
+
+        fileInput.addEventListener("change", () => {
+            fileName.textContent = fileInput.files.length > 0 
+            ? fileInput.files[0].name 
+            : "Aucun fichier choisi";
+        });
+    </script>
 </body>
 </html>

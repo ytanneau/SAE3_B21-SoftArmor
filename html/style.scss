@@ -293,9 +293,14 @@ hr {
     font-family: $font_text;
 }
 
-.infos {
-    main {
-        display: flex;
+.infos{
+
+    main{
+        //display: flex;
+    }
+
+    .liste_avis {
+        width: 33vw;
     }
 
     form {
@@ -623,12 +628,27 @@ div:has(> aside) {
                 position: relative;
                 background-color: $couleur_primaire_client;
                 color:$couleur_background;
+                border: 5px $couleur_background;
+                @include contenu_centre_horizontal;
+                justify-content: center;
+                box-shadow: 2px 2px 10px black;
+                    
+                > img {
+                    width: 75%;
+                }
+
+                &:hover {
+                    background-color: adjust-color($color: $couleur_primaire_client, $lightness: 5%);
+                }
             }
             .gauche {
+                transform: rotate(180deg);
                 left: 50px;
+                padding: 0 3px;
             }
             .droite {
                 right: 50px;
+                padding: 0 3px;
             }
             > ul {
                 @include contenu_centre_horizontal;
@@ -644,7 +664,7 @@ div:has(> aside) {
                     > a {
                         color : black;
                         text-decoration: none;
-                        line-height: 1.5em;
+                        line-height: 1.5em; 
                         > img {
                             @include image_produit(15vw);
                         }   
@@ -697,12 +717,27 @@ div:has(> aside) {
                     padding: 0;
                     > li {
                         @include contenu_centre_vertical;
-                        width: 100%;
                         margin: 20px;
                         > a {  
+                            display: flex;
+                            flex-direction: column;
+                            width: fit-content;
+                            text-align: left;   
+                            align-items: flex-start;
                             > img {
-                                width: 100%;  
+                                background-color: $couleur_fond_produit;
+                                width: 25vw;
+                                max-width: 300px;
+                                height: 25vw;
+                                border-radius: $angle_petit;
+                                align-self: center;
+                            }
+                            > p {
+                                font-size: $font_size_sup;
                             }   
+                            > h3 {                            
+                                height :2em;
+                            }
                         }
                     }
                 }
@@ -760,20 +795,31 @@ h3 {
         ul {
             width: 60vw;
             padding: 0;
+
+            li > div {
+                display: flex;
+            }
             
             // la partie description etc. du produit
-            li > article:nth-child(2) {
-                flex-grow: 1;
+            li article:first-child {
+                display: flex;
 
                 p {
                     width: 90%;
                 }
-            }
 
-            li > article:nth-child(3) {
+                // bouton suppr pour tel
+                form {
+                    display: none;
+                }
+            }
+             
+            // l'autre partie avec quantité et prix
+            li article:last-child {
                 display: flex;
                 flex-direction: column;
                 align-items: end;
+                text-align: end;
 
                 .prix {
                     min-width: 5em;
@@ -788,8 +834,13 @@ h3 {
             }
         }
 
-        img {
+        .image_produit_moyen {
             margin-right: 3em;
+        }
+
+        .icon {
+            height: auto;
+            margin: 0;
         }
 
         hr {
@@ -806,6 +857,7 @@ h3 {
         }
 
         @media screen and (max-width: 1024px) {
+            line-height: 1em;
             display: flex;
             flex-direction: column;
 
@@ -816,20 +868,49 @@ h3 {
             ul {
                 order: 2;
                 width: 100%;
-            }
 
-            img {
-                width: 10em;
-            }
-
-            li > article:nth-child(2) {
-                // retirer le description 
-                p:nth-child(2) {
-                    display: none;
+                .image_produit_moyen {
+                    width: 35vw;
+                    margin-right: 0.5em;
                 }
 
-                p, h3 {
-                    font-size: 1em;
+                div {
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                li article:first-child {
+                    // retirer le description 
+                    p:nth-child(2) {
+                        display: none;
+                    }
+
+                    p, h3 {
+                        font-size: 1em;
+                    }
+
+                    form {
+                        display: initial;
+                        width: fit-content;
+
+                        button {
+                            @include bouton_new($rouge, $padding: auto);
+                        }
+                    }
+                }
+
+                li article:last-child {
+                    // bouton supprimer côté ordi
+                    form {
+                        display: none;
+                    }
+
+                    flex-direction: column-reverse;
+                }
+
+                .prix {
+                    text-align: left;
+                    font-size: 1.5em;
                 }
             }
         }
@@ -865,7 +946,7 @@ aside {
     position: sticky;
     top: 5em;
 
-    margin: 0 3em 2em 3em;
+    margin: 0 2em 2em 2em;
     font-size: 1.4em;
 
     .prix {
@@ -902,6 +983,7 @@ aside {
     @media screen and (max-width : 1024px){
         position: static;
         order: -1;
+        margin:0;
 
         p {
             margin-bottom: 0;
@@ -962,8 +1044,14 @@ aside {
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
 
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+    }
     p{
-        @include contenu_centre_vertical;
+        display: flex;
+        flex-direction: column;
     }
     #idDescDetaille,#idDescSimple{
         width: 400px;
@@ -973,8 +1061,27 @@ aside {
     .divEnLigne{
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
     }
-    #idNomPrv, #idNomPblc{
-        width: fit-content;
+    .divCreerProduit{
+        @include contenu_centre_vertical;
+        #creerProduit{
+            @include bouton_new;
+        }
+    }
+    
+}
+
+.image{
+    @include bouton_new($couleur_etoile);
+    border-radius: $angle_normal;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+
+#create_avis{
+    main{
+        padding-top: 2em;
     }
 }
