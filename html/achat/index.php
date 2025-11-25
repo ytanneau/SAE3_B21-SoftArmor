@@ -8,7 +8,7 @@ if (!isset($_SESSION)) {
 
 // Si pas co, alors go page inscription
 if (!isset($_SESSION['logged_in'])) {
-    header("location: " . HOME_SITE . "compte/inscription");
+    header("location: " . HOME_SITE . "compte/connexion");
 }
 
 
