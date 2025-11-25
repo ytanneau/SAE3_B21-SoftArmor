@@ -305,8 +305,11 @@ hr {
     }
 
     .liste_avis {
-        li > img:first-child {
-            @include image_produit(10vw);
+        li {
+            > img:first-child {
+                @include image_produit(10vw);
+                margin-left: 0;
+            }
         }
     }
 
@@ -407,7 +410,7 @@ a.bouton:has(+ .liste_avis) {
         }
 
         // Image de l'avis
-        > img:last-of-type { 
+        > img:last-child { 
             width: 20%;
             margin-left: 2em;
         }
@@ -521,16 +524,16 @@ div:has(> aside) {
     padding: 40px 60px;
     font-family: sans-serif;
     margin-top: 150px;
-}
 
-.footer a {
-    color: #dcdcdc;
-    text-decoration: none;
-    font-size: 14px;
-}
+    a {
+        color: #dcdcdc;
+        text-decoration: none;
+        font-size: 14px;
 
-.footer a:hover {
-    text-decoration: underline;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .footer-top {
@@ -545,38 +548,38 @@ div:has(> aside) {
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
-
-.footer-logos .logo {
-    width: 150px;
+    
+    .logo {
+        width: 150px;
+    }
 }
 
 .footer-columns {
     display: flex;
     flex: 1;
     justify-content: space-around;
-}
+    
+    h4 {
+        margin-bottom: 10px;
+        font-size: 15px;
+        color: #ffffff;
+    }
 
-.footer-column h4 {
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #ffffff;
-}
-
-.footer-column a {
-    display: block;
-    margin-bottom: 5px;
+    a {
+        display: block;
+        margin-bottom: 5px;
+    }
 }
 
 .footer-socials {
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
-
-.footer-socials img {
-    width: 26px;
-    height: 26px;
+    
+    img {
+        width: 26px;
+        height: 26px;
+    }
 }
 
 .footer-bottom {
@@ -585,11 +588,11 @@ div:has(> aside) {
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-}
-
-.footer-bottom .footer-links {
-    display: flex;
-    gap: 25px;
+    
+    .footer-links {
+        display: flex;
+        gap: 25px;
+    }
 }
 
 @media (max-width: 900px) {
