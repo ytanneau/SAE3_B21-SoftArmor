@@ -1474,19 +1474,27 @@ aside input.bouton:hover {
 .bodyAjoutProduit .entete h1 {
   margin-right: 30px;
 }
-.bodyAjoutProduit form {
-  display: flex;
-  flex-direction: column;
+.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
   width: 600px;
+  height: 200px;
+  resize: vertical;
 }
 .bodyAjoutProduit p {
   display: flex;
   flex-direction: column;
 }
-.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
+.bodyAjoutProduit select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
+  height: 25px;
+}
+.bodyAjoutProduit form {
+  display: flex;
+  flex-direction: column;
   width: 600px;
-  height: 200px;
-  resize: vertical;
 }
 .bodyAjoutProduit .divEnLigne {
   display: flex;
@@ -1521,14 +1529,6 @@ aside input.bouton:hover {
 .bodyAjoutProduit input[type=file] {
   padding-top: 7px;
 }
-.bodyAjoutProduit select {
-  height: 32px;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
-  height: 25px;
-}
 
 .bodyModifProduit {
   display: flex;
@@ -1545,6 +1545,28 @@ aside input.bouton:hover {
 }
 .bodyModifProduit .entete h1 {
   margin-right: 30px;
+}
+.bodyModifProduit #idDescDetaille, .bodyModifProduit #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.bodyModifProduit p {
+  display: flex;
+  flex-direction: column;
+}
+.bodyModifProduit select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.bodyModifProduit input[type=text], .bodyModifProduit input[type=number] {
+  height: 25px;
+}
+.bodyModifProduit form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
 }
 
 #create_avis main {
