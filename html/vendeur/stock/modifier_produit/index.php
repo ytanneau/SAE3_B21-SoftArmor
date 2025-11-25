@@ -219,7 +219,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="text" name="qtAchete" value="<?= $tabInfoProduit['qtAchete']?>">
+                        <input type="text" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
