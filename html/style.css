@@ -1591,6 +1591,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyAjoutProduit p {
   display: flex;
@@ -1661,6 +1662,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyModifProduit p {
   display: flex;
@@ -1740,6 +1742,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .mainInfoVendeur p {
   display: flex;
@@ -1793,6 +1796,9 @@ aside input.bouton:hover {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
 }
 .mainInfoVendeur #idDesactivationCompte:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -2067,4 +2073,8 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.fleche_produit_arriere {
+  margin: 5px;
 }/*# sourceMappingURL=style.css.map */
