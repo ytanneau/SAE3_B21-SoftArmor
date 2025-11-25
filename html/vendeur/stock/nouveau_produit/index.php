@@ -98,7 +98,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Alizon - Créer un produit</title>
+        <title>Alizon Vendeur - Créer un produit</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">

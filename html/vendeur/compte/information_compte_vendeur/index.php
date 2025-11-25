@@ -62,7 +62,7 @@
     <head>
         <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
-        <title>Alizon - Mes informations</title>
+        <title>Alizon Vendeur - Mes informations</title>
     </head>
     <body>
         <!-- inclusion du header -->
