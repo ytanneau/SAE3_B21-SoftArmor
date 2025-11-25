@@ -186,9 +186,11 @@
                             <?="Erreur : ".$erreur['description']?>
                         </p>
                     <?php } ?>
-
-                    <label for="image">Ajouter une image</label>
-                    <span id="image-name">Aucun fichier choisi</span>
+                    
+                    <button class="image">
+                        <label for="image">Ajouter une image</label>
+                        <p id="image-name">Aucun fichier choisi</p>
+                    </button>
                     <input id="image"
                         type="file" 
                         name="image" 
