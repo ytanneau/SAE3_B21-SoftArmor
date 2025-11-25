@@ -20,11 +20,11 @@ $images = HOME_SITE . "image/"
                 ?>
                 <div class ="all_404">
                 <h1 class="titre_404">Page inexistante</h1>
-                <p>Oups on dirait que cette page n’existe pas !</p>
+                <h2>Oups on dirait que cette page n’existe pas !</h2>
                 <a href= <?= HOME_SITE?> class = "lien404">
                     <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
                 </a>
-                <a href= <?= HOME_SITE?>>Retour à l'accueil</a>
+                <button href="HOME_SITE" type="button">Revenir à l'accueil</button>
                 </div>
         </main>
     </body>
@@ -54,9 +54,6 @@ $images = HOME_SITE . "image/"
         }
         .titre404{
             font-size: 100px;
-        }
-        .lien404{
-            color: white;
         }
 
     </style>
