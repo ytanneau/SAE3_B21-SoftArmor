@@ -5,6 +5,7 @@ body {
     font-family: $font_text;
     padding: 0;
     margin: 0;
+    min-height: 100vh;
 }
 
 main {
@@ -195,7 +196,7 @@ hr {
 
         a{
             color: black;
-            text-decoration: none;
+            //text-decoration: none;
         }
 
         article{
@@ -298,16 +299,36 @@ hr {
 }
 
 .infos{
-
-    main{
-        //display: flex;
+    .bouton {
+        
     }
+    .modif{
+        @include bouton_new($color: white);
+    }
+    .grave {
+        @include bouton_new($background:red,$color: white);
+    }
+    .image_bouton{
+        @include bouton_new($couleur_etoile);
+        border-radius: $angle_normal;
+        padding: 0.5em;
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: $font_size_sup;
+
+        p{
+            font-size: 10px;
+        }
+    }
+
 
     .liste_avis {
         li {
-            > img:first-child {
-                @include image_produit(10vw);
-                margin-left: 0;
+            > img{
+                &:first-child {
+                    @include image_produit(10vw);
+                    margin-left: 0;
+                }
             }
         }
     }
@@ -322,7 +343,7 @@ hr {
             padding: 0 2em;
         }
 
-        >:last-child {
+        > :last-child {
             width: 100%;
         }
 
@@ -337,10 +358,62 @@ hr {
         }
 
         img {
-            width: 200px;
-            
+            @include image_pp(200px);
         }
 
+    }
+    @media screen and (max-width: 1024px) {
+        main{
+            padding: 0;
+        }
+        section {
+                @include contenu_centre_vertical;
+            form {
+                flex-direction: column;        
+                align-items: center; 
+                padding: 0;
+                margin: 1em;
+                gap: 2em;                      
+            
+                
+                article {
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                    &:first-child {
+                        align-items: center;
+
+                        img {
+                            width: clamp(140px, 40vw, 240px);  
+                            border-radius: 8px;
+                        }
+
+                        label {
+                            margin-top: 1em;
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }
+
+
+                    &:last-child {
+                        input,
+                        button,a {
+                            width: 100%;
+                        }
+
+                        .champ {
+                            margin-bottom: 1em;
+                        }
+
+                        .bouton {
+                            margin-top: 1.2em;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
@@ -387,7 +460,7 @@ a.bouton:has(+ .liste_avis) {
                 align-items: center;
 
                 > img:not(.etoiles) {
-                    @include image_pp(30px);
+                    @include image_pp(40px);
                     margin-right: 0.5em;
                 } 
             }
@@ -520,9 +593,15 @@ div:has(> aside) {
 .footer {
     background: #000;
     color: #fff;
-    padding: 40px 60px;
     font-family: sans-serif;
-    margin-top: 150px;
+    margin-top: 50px;
+    width: 100vw;
+    position: relative;
+    bottom: 0;
+
+    >div{
+        padding: 40px 60px;
+    }
 
     a {
         color: #dcdcdc;
@@ -552,7 +631,6 @@ div:has(> aside) {
         width: 150px;
     }
 }
-
 .footer-columns {
     display: flex;
     flex: 1;
@@ -569,6 +647,7 @@ div:has(> aside) {
         margin-bottom: 5px;
     }
 }
+
 
 .footer-socials {
     display: flex;
@@ -594,17 +673,16 @@ div:has(> aside) {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .footer-top {
         flex-direction: column;
         align-items: flex-start;
     }
-
     .footer-columns {
         width: 100%;
         justify-content: space-between;
+        flex-direction: column;
     }
-
     .footer-socials {
         flex-direction: row;
     }
@@ -1054,44 +1132,72 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+    @include code_barre;
 
     
     .divEnLigne{
         @include en_ligne;
     }
-    .divCreerProduit{
-        @include contenu_centre_vertical;
-        margin-top: 20px;
-        #creerProduit{
-            @include bouton_new;
-        }
-    }
+    
     input[type="file"]{
         padding-top: 7px;
     }
     
+    #creerProduit{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+    }
 }
 
 .bodyModifProduit{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+    @include code_barre;
 
     .divEnLigne{
         @include en_ligne;
     }
-    .idModifierProduit{
-        @include bouton_new;
+    
+    .blockImg{
+        img{
+            @include image_produit(250px);
+        }
+    }
+    #idCheckMajeur{
+        margin-right: 70px;
+    }
+    #idModifierProduit{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+    }
+}
+
+.mainInfoVendeur{
+    @include contenu_centre_vertical;
+    @include entete_page_vendeur;
+    @include format_textarea_p_select_input_form;
+    
+    #idValiderModifVendeur{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+    }
+    #idDesactivationCompte{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        margin-top: 30px;
+        padding: 0.6em;
+        width: 577px;
     }
 }
 
 
-
-
 #create_avis{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     main{
         padding-top: 2em;
-
+        flex: 1;
         .image_bouton{
             @include bouton_new($couleur_etoile);
             border-radius: $angle_normal;
@@ -1124,22 +1230,217 @@ aside {
 }
 
 .info_vendeur {
+    > main {
+        div {
+        width: 60vw;
+    }
     p { 
-        padding: 0 10px;
-        width: max-content;
+        border: none;
         border-radius: $angle_petit;
+        height: auto;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+        width: 50%;
         border:rgba(0,0,0,0.25) 1px solid;
         box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+
     }
-    .desc {
-        border-radius: 0;
-        border: none;
-        box-shadow: none;
-    }
+
     .modif_info {
         color: $couleur_background;
         text-decoration: none;
     }
+    h3 {
+        font-size: $font_size_sup;
+        margin-top: 2%;
+    }
+    }
+}
+
+
+#body404{
+    height: 100vh;
+    width: 100vw;
+    background: #3157A3;
+}
+.le404 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-style: $font_text; 
+}
+.all_404{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.all_404 h1{
+    justify-self: center;
+}
+.logo{
+    width: 400px;
+}
+.titre404{
+    font-size: 100px;
+    font-style: $font_title;
+    
+}
+
+.bouton404{
+    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
+}
+
+/*.produit-vendeur {
+    font-family: $font_text;
+
+    > article:first-child {
+        margin: 0 0 2em 0;
+        display: flex;
+
+        // Images
+        > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 0 4em;
+
+            // Image principale
+            > div:first-child {
+                img {
+                    @include image_produit(300px);
+                }
+            }
+
+            // Images secondaires
+            > div:nth-child(2) {
+                img {
+                    @include image_produit(100px);
+                }
+            }
+        }
+
+        // Détails du produit
+        > div:nth-child(2) {
+            > h1 {
+                margin: 0;
+                font-size: 2em;
+
+                font-family: $font_title;
+                font-weight: 700;
+            } 
+
+            // Étoiles + nombre d'avis
+            > div {
+                .etoiles {
+                    margin-right: 0.5em;
+                }
+
+                display: flex;
+                align-items: center;
+            }
+
+            > p:last-child {
+                margin-top: 2em;
+            }
+        }
+    }
+}*/
+
+
+.fini{
+    @include contenu_centre_vertical();
+}
+
+
+.produit-vendeur {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    th {
+      text-align: left;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  > div img {
+    @include image_produit($image_normal);
+  }
+
+  > div img:hover {
+    transform: scale(1.04);
+  }
+
+  > div {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #444;
+  }
+
+  div table td {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  form#supprimer {
+    margin-top: 1.5rem;
+  }
+
+  form#supprimer input[type="submit"] {
+    background: #d32f2f;
+    color: #fff;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+  }
+
+  form#supprimer input[type="submit"]:hover {
+    background: #b71c1c;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 0.8rem;
+    color: #0d47a1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
+}
+
+
+.content_produit_vendeur {
+  flex: 1; 
+}
+
+
+
+.fleche_produit_arriere{
+    margin: 5px;
 }
 
 .stock {

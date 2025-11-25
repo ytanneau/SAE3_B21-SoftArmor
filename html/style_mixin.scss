@@ -105,7 +105,8 @@
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
     background-color: $couleur_fond_produit;
-    width: $taille;
+    min-width: $taille;
+    max-width: $taille;
     height: $taille;
     border-radius: $angle;
 }
@@ -149,6 +150,7 @@
     height: $taille;
     width: $taille;
     border-radius: $taille;
+    object-fit: cover;
 }
 
 // mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
@@ -157,10 +159,7 @@
     width: 100%;
 
     label {
-        margin-top: 2%;
-        @media (max-width: 1440px) {
-            margin-top: 5%;
-        }
+        margin-top: 5%;
         font-size: $font_size_sup;
     }
 
@@ -266,6 +265,7 @@
         width: 600px;
         height: 200px;
         resize: vertical;
+        font-family: $font_text;
     }
     p{
         display: flex;
@@ -289,4 +289,10 @@
     display: flex;
     flex-direction: row;
     gap: 70px;
+}
+
+@mixin code_barre{
+    #idCodeBarre{
+        width: 150px;
+    }
 }

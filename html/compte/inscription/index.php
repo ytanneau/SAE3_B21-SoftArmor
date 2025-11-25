@@ -70,7 +70,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="prenom">Prénom</label>
                 <input type="text" id="prenom" name="prenom" maxlength="40" value="<?=$_POST['prenom'] ?? ''?>" class="champ">
                 <p class="contrainte"></p>
@@ -81,7 +81,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="pseudo">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" maxlength="40" value="<?=$_POST['pseudo'] ?? ''?>"
                 class="champ">
@@ -93,7 +93,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" maxlength="80" value="<?=$_POST['email'] ?? ''?>"
                 class="champ">
@@ -105,7 +105,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="date_naissance">Date de naissance</label>
                 <input type="date" id="date_naissance" name="date_naissance"
                 class="champ" value="<?=$_POST['date_naissance'] ?? ''?>">
@@ -117,7 +117,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="mdp">Mot de passe</label>
                 <input type="password" name="mdp" id="mdp" minlength="12" maxlength="100" required
                 class="champ">
@@ -129,7 +129,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="mdpc">Mot de passe de confirmation</label>
                 <input type="password" name="mdpc" id="mdpc" minlength="12" maxlength="100" required
                 class="champ">
@@ -141,7 +141,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="question">Question secrète</label>
                 <select id="question" name="question" class="champ">
                     <option value="">Sélectionnez une question secrète</option>
@@ -156,7 +156,7 @@
                     </p>
                 <?php } ?>
 
-                <br>
+                
                 <label for="reponse">Votre réponse</label>
                 <input type="password" name="reponse" id="reponse" class="champ">
                 <p class="contrainte"></p>

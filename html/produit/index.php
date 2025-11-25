@@ -215,7 +215,7 @@ if ($_POST != NULL) {
         <?php if (isset($_SESSION['logged_in'])) {
             $page = "../achat";
         } else {
-            $page = HOME_SITE . "compte/inscription";
+            $page = HOME_SITE . "compte/connexion";
         } ?>
         
         <div>

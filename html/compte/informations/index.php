@@ -179,8 +179,11 @@ unset($pdo);
                 
                 <article>
                     <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
-                    <label for="pdp">Modifier Image de Profil</label>
-                    <input type="file" name="pdp" accept=".png">
+                    
+                    <label for="pdp" class="image_bouton">Ajouter une image 
+                            <p id="image-name">Aucun fichier choisi</p>
+                        </label>
+                    <input id="pdp" type="file" name="pdp" accept=".png" hidden>
                 </article>
 
                 <article>
@@ -375,8 +378,8 @@ unset($pdo);
                         }
                     ?>
 
-                    <button type="submit" class="bouton">Modifier mes informations</button>
-                    <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
+                    <button type="submit" class="bouton modif">Modifier mes informations</button>
+                    <a class="bouton grave" href="anonymisation_client/index.php">Désactiver mon compte</a>
                 </article>
             </form>
 
@@ -392,11 +395,11 @@ unset($pdo);
 
                         <div>
                             <div>
-                                <?php if (isset($_SESSION['profile'])) {?>
-                                    <img height="40px" width="40px" src="../ressources/27_1.png">
+                                <?php if (isset($row['url_pdp'])) {?>
+                                    <img src="<?= HOME_SITE . $row['url_pdp'] ?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
                                 <?php
                                     } else {?>
-                                    <img height="40px" width="40px" src="<?=HOME_SITE . 'image/compte.svg'?>">
+                                    <img src="<?= HOME_SITE . 'image/compte.svg'?>">
                                 <?php } ?>
 
                                 <div class="etoiles">
@@ -421,4 +424,14 @@ unset($pdo);
     </main>
     <?php include HOME_SITE . "footer.php" ?>
 </body>
+<script>
+        const fileInput = document.getElementById("image");
+        const fileName = document.getElementById("image-name");
+
+        fileInput.addEventListener("change", () => {
+            fileName.textContent = fileInput.files.length > 0 
+            ? fileInput.files[0].name 
+            : "Aucun fichier choisi";
+        });
+    </script>
 </html>

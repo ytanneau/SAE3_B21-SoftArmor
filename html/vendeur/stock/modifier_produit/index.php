@@ -44,9 +44,10 @@
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        
-        if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
-            update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
+        if($_POST['sous_categorie'] == ""){
+            update_categorie_produit($idProduit, $_POST['categorie']);
+        } else {
+            update_categorie_produit($idProduit, $_POST['sous_categorie']);
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -129,7 +130,7 @@
 <html>
     <head>
         <?php include HOME_SITE . 'link_head.php'; ?>
-        <title>Modifier un produit</title>
+        <title>Alizon Vendeur - Modifier un produit</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -171,41 +172,54 @@
                     </p>
                     <p>
                         <label for="codeBarre">Code barre*</label>
-                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px" value="<?= $tabInfoProduit['code_barre']?>" required>
+                        <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" value="<?= $tabInfoProduit['code_barre']?>" required>
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
-                    </p>
-                    <p>
-                        <label for="checkEnLigne">Produit en ligne</label>
-                        <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
-                    </p>
+                <div>
+                    <label for="checkMajeur">Réservé aux majeurs</label>
+                    <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
+                    <label for="checkEnLigne">Produit en ligne</label>
+                    <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
+                <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
                             <option value="">-- Choisir une catégorie --</option>
+
                             <?php
-                                $tabCategorie = get_categorie();
+                                $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
-                                    $select = ($nomCat['nom_categorie'] == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
+                                    $cat = htmlspecialchars($nomCat['nom_categorie']);
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
                             ?>
-                            <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
-                                <?= htmlspecialchars($nomCat['nom_categorie']) ?>
+                                <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
+                            <?php } ?>
+                        </select>
+                    </p>
+
+                    <p id="pSousCategorieAlimentaire" style="display:none;">
+                        <label for="sous_categorie">Sous-catégories alimentaire*</label>
+                        <select name="sous_categorie" id="sous_cate">
+                            <option value="">-- Choisir une catégorie --</option>
+                            <?php 
+                                $tabSousCategorie = get_sous_categorie("Alimentaire");
+                                foreach($tabSousCategorie as $sousCat){                  
+                            ?>
+                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
+                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
                             </option>
                             <?php } ?>
                         </select>
                     </p>
                 </div>
+
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="text" name="qtAchete">
+                        <input type="number" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -236,24 +250,26 @@
                         </select>
                     </p>
                 </div>
-                <h3>Photos du produit</h3>
-                <div>
-                    <h6>Image principale</h6>
+                <h3>Images du produit</h3>
+                <div class="blockImg">
+                    <h4>Image principale</h4>
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
-                    <p>
-                        <label for="photoPrincipale">Photo principale</label>
+                    <div>
+                        <label for="photoPrincipale">Modifier l'image principale</label>
                         <input type="file" name="photoPrincipale">
-                    </p>
+                    </div>
+                    <h4>Image secondaire</h4>
                     <?php if($tabImageProduit['id_image1'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
-                    <p>
-                        <label for="photo2">Seconde photo</label>
+                    <div>
+                        <label for="photo2">Ajouter/Modifier la seconde image</label>
                         <input type="file" name="photo2" accept="image/png">
-                    </p>
+                    </div>
+                    <h4>Troisième image</h4>
                     <?php if($tabImageProduit['id_image2'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt=""> <?php }?>
-                    <p>
-                        <label for="photo3">Troisième photo</label>
+                    <div>
+                        <label for="photo3">Ajouter/Modifier la troisième image</label>
                         <input type="file" name="photo3" accept="image/png">
-                    </p>
+                    </div>
                 </div>
                 <h3>Gestion du stock</h3>
                 <div class="divEnLigne">
@@ -298,12 +314,30 @@
             const tva = document.getElementById("idtva");
             const codeBarre = document.getElementById("idCodeBarre");
             const modifierProduit = document.getElementById("idModifierProduit");
+
+            const categorie = document.getElementById("idCategorie");
+            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
+            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+
+            const uniteLiquide = document.getElementById("blockUniteLiquide");
+            const uniteMasse = document.getElementById("blockUniteMasse");
+            const uniteVetement = document.getElementById("blockUniteVetement");
             
             const descSimple = document.getElementById("idDescSimple");
             const descDetaille = document.getElementById("idDescDetaille");
 
             const poidColis = document.getElementById("idPoidColis");
             const volumeColis = document.getElementById("idVolumeColis");
+            
+            poidColis.addEventListener('input', () => {
+                poidColis.value = poidColis.value.replace(",",".");
+            })
+            volumeColis.addEventListener('input', () => {
+                volumeColis.value = volumeColis.value.replace(",",".");
+            })
+            prix.addEventListener('input', () => {
+                prix.value = prix.value.replace(",",".");
+            })
 
             descSimple.addEventListener('input', () => {
                 if(descSimple.value.length === 200){
@@ -330,21 +364,57 @@
                 else return false;
             }
 
+            
+
+            selectSousCategorieAlimentaire.addEventListener('change', () => {
+                if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
+                    uniteLiquide.style.display = "none";
+                    uniteVetement.style.display = "none";
+                    
+                    uniteMasse.style.display = "flex";
+                } else if (selectSousCategorieAlimentaire.value === "Boisson"){
+                    uniteMasse.style.display = "none";
+                    uniteVetement.style.display = "none";
+
+                    uniteLiquide.style.display = "flex";
+                } else {
+                    uniteMasse.style.display = "none";
+                    uniteVetement.style.display = "none";
+                    uniteLiquide.style.display = "none";
+                }
+            })
+
+            categorie.addEventListener('change', () => {
+                if(categorie.value === "Alimentaire"){
+                    pSousCategorie.style.display = "flex";
+                } 
+                else if(categorie.value === "Electroménager" || categorie.value === "Electronique" ||
+                categorie.value === "Soin & Hygiène"){
+                    uniteMasse.style.display = "flex";
+
+                    uniteVetement.style.display = "none";
+                    uniteLiquide.style.display = "none";
+                    
+                    selectSousCategorieAlimentaire.value = null;
+                    pSousCategorie.style.display = "none";
+                } else {
+                    uniteMasse.style.display = "none";
+                }
+            })
+
             modifierProduit.addEventListener('click' , () =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
-                } else if(confirm("Confirmer la création du produit ?")) {
+                } else if(confirm("Confirmer la modification du produit ?")) {
                     alert("Produit modifier");
                 } else {
                     event.preventDefault();
                 }
             })
         </script>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>

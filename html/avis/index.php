@@ -116,15 +116,26 @@
 </head>
 <body class="form_client" id="create_avis">
     <?php include HOME_SITE . "header.php"; ?>
-    <main>
+    <main class = "content_avis_client">
         <?php if ($succes == true) { ?>
             <h1>Votre avis a été enregistré</h1>
+            <div class="fini">
+                <h1>Votre avis a été enregistré</h1>                
+                <br>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+            </div>
         <?php } else if (isset($erreur['fatal'])) { ?>
-            <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
+            <div class="fini">
+                <h1>Désolé, nous rencontrons des problèmes serveur</h1>
+                <br>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+            </div>
         <?php } else if (isset($erreur['avis'])) { ?>
-            <h1>Vous avez déjà donné votre avis sur ce produit</h1>
-            <br>
-            <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
+            <div class="fini">
+                <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+                <br>
+                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+            </div>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>

@@ -1,7 +1,9 @@
+@charset "UTF-8";
 body {
   font-family: "Inter";
   padding: 0;
   margin: 0;
+  min-height: 100vh;
 }
 
 main {
@@ -18,7 +20,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   height: 200px;
   border-radius: 5px;
 }
@@ -27,7 +30,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 25px;
+  min-width: 25px;
+  max-width: 25px;
   height: 25px;
   border-radius: 5px;
 }
@@ -325,13 +329,8 @@ hr {
   width: 100%;
 }
 #connect_vendeur main form label, #inscription_vendeur main form label {
-  margin-top: 2%;
+  margin-top: 5%;
   font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  #connect_vendeur main form label, #inscription_vendeur main form label {
-    margin-top: 5%;
-  }
 }
 #connect_vendeur main form .champ, #inscription_vendeur main form .champ {
   border: none;
@@ -431,13 +430,8 @@ hr {
   width: 100%;
 }
 #connect_client main form label, #inscription_client main form label {
-  margin-top: 2%;
+  margin-top: 5%;
   font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  #connect_client main form label, #inscription_client main form label {
-    margin-top: 5%;
-  }
 }
 #connect_client main form .champ, #inscription_client main form .champ {
   border: none;
@@ -522,13 +516,8 @@ hr {
   font-size: 1em;
 }
 .form_client main form label {
-  margin-top: 2%;
+  margin-top: 5%;
   font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  .form_client main form label {
-    margin-top: 5%;
-  }
 }
 .form_client main form .champ {
   border: none;
@@ -562,7 +551,6 @@ hr {
 }
 .form_client main a {
   color: black;
-  text-decoration: none;
 }
 .form_client main article {
   display: flex;
@@ -599,7 +587,8 @@ hr {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 10vw;
+  min-width: 10vw;
+  max-width: 10vw;
   height: 10vw;
   border-radius: 5px;
   background-color: white;
@@ -661,11 +650,77 @@ hr {
   font-family: "Inter";
 }
 
+.infos .modif {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.infos .modif:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.infos .grave {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.infos .grave:hover {
+  background-color: rgb(255, 76.5, 76.5);
+}
+.infos .image_bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
+}
+.infos .image_bouton:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+.infos .image_bouton p {
+  font-size: 10px;
+}
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 10vw;
+  min-width: 10vw;
+  max-width: 10vw;
   height: 10vw;
   border-radius: 5px;
   margin-left: 0;
@@ -688,13 +743,8 @@ hr {
   width: 100%;
 }
 .infos form label {
-  margin-top: 2%;
+  margin-top: 5%;
   font-size: 1.5em;
-}
-@media (max-width: 1440px) {
-  .infos form label {
-    margin-top: 5%;
-  }
 }
 .infos form .champ {
   border: none;
@@ -731,7 +781,55 @@ hr {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 .infos form img {
+  height: 200px;
   width: 200px;
+  border-radius: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media screen and (max-width: 1024px) {
+  .infos main {
+    padding: 0;
+  }
+  .infos section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infos section form {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 1em;
+    gap: 2em;
+  }
+  .infos section form article {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos section form article:first-child {
+    align-items: center;
+  }
+  .infos section form article:first-child img {
+    width: clamp(140px, 40vw, 240px);
+    border-radius: 8px;
+  }
+  .infos section form article:first-child label {
+    margin-top: 1em;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .infos section form article:last-child input,
+  .infos section form article:last-child button, .infos section form article:last-child a {
+    width: 100%;
+  }
+  .infos section form article:last-child .champ {
+    margin-bottom: 1em;
+  }
+  .infos section form article:last-child .bouton {
+    margin-top: 1.2em;
+  }
 }
 
 .bouton {
@@ -793,9 +891,11 @@ a.bouton:has(+ .liste_avis):hover {
   align-items: center;
 }
 .liste_avis li > div:first-of-type > div:first-child > img:not(.etoiles) {
-  height: 30px;
-  width: 30px;
-  border-radius: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-right: 0.5em;
 }
 .liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
@@ -853,7 +953,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   height: 300px;
   border-radius: 5px;
 }
@@ -861,7 +962,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
   height: 100px;
   border-radius: 5px;
 }
@@ -902,9 +1004,14 @@ div:has(> aside) {
 .footer {
   background: #000;
   color: #fff;
-  padding: 40px 60px;
   font-family: sans-serif;
-  margin-top: 150px;
+  margin-top: 50px;
+  width: 100vw;
+  position: relative;
+  bottom: 0;
+}
+.footer > div {
+  padding: 40px 60px;
 }
 .footer a {
   color: #dcdcdc;
@@ -969,7 +1076,7 @@ div:has(> aside) {
   gap: 25px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .footer-top {
     flex-direction: column;
     align-items: flex-start;
@@ -977,6 +1084,7 @@ div:has(> aside) {
   .footer-columns {
     width: 100%;
     justify-content: space-between;
+    flex-direction: column;
   }
   .footer-socials {
     flex-direction: row;
@@ -1055,7 +1163,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
   height: 15vw;
   border-radius: 5px;
 }
@@ -1469,6 +1578,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyAjoutProduit p {
   display: flex;
@@ -1487,18 +1597,19 @@ aside input.bouton:hover {
   flex-direction: column;
   width: 600px;
 }
+.bodyAjoutProduit #idCodeBarre {
+  width: 150px;
+}
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
   gap: 70px;
 }
-.bodyAjoutProduit .divCreerProduit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+.bodyAjoutProduit input[type=file] {
+  padding-top: 7px;
 }
-.bodyAjoutProduit .divCreerProduit #creerProduit {
+.bodyAjoutProduit #creerProduit {
+  margin-top: 20px;
   display: block;
   max-width: 100%;
   width: auto;
@@ -1507,18 +1618,15 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
 }
-.bodyAjoutProduit .divCreerProduit #creerProduit:hover {
+.bodyAjoutProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.bodyAjoutProduit input[type=file] {
-  padding-top: 7px;
 }
 
 .bodyModifProduit {
@@ -1541,6 +1649,7 @@ aside input.bouton:hover {
   width: 600px;
   height: 200px;
   resize: vertical;
+  font-family: "Inter";
 }
 .bodyModifProduit p {
   display: flex;
@@ -1559,12 +1668,28 @@ aside input.bouton:hover {
   flex-direction: column;
   width: 600px;
 }
+.bodyModifProduit #idCodeBarre {
+  width: 150px;
+}
 .bodyModifProduit .divEnLigne {
   display: flex;
   flex-direction: row;
   gap: 70px;
 }
-.bodyModifProduit .idModifierProduit {
+.bodyModifProduit .blockImg img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 250px;
+  max-width: 250px;
+  height: 250px;
+  border-radius: 5px;
+}
+.bodyModifProduit #idCheckMajeur {
+  margin-right: 70px;
+}
+.bodyModifProduit #idModifierProduit {
+  margin-top: 20px;
   display: block;
   max-width: 100%;
   width: auto;
@@ -1573,19 +1698,193 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
 }
-.bodyModifProduit .idModifierProduit:hover {
+.bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
+.mainInfoVendeur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur .entete {
+  display: flex;
+  align-items: center;
+}
+.mainInfoVendeur .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.mainInfoVendeur .entete h1 {
+  margin-right: 30px;
+}
+.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+  font-family: "Inter";
+}
+.mainInfoVendeur p {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+  height: 25px;
+}
+.mainInfoVendeur form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.mainInfoVendeur #idValiderModifVendeur {
+  margin-top: 20px;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.mainInfoVendeur #idValiderModifVendeur:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.mainInfoVendeur #idDesactivationCompte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
+}
+.mainInfoVendeur #idDesactivationCompte:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
+#create_avis {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.mainInfoVendeur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur .entete {
+  display: flex;
+  align-items: center;
+}
+.mainInfoVendeur .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.mainInfoVendeur .entete h1 {
+  margin-right: 30px;
+}
+.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.mainInfoVendeur p {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+  height: 25px;
+}
+.mainInfoVendeur form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.mainInfoVendeur #idValiderModifVendeur {
+  margin-top: 20px;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.mainInfoVendeur #idValiderModifVendeur:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.mainInfoVendeur #idDesactivationCompte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
+}
+.mainInfoVendeur #idDesactivationCompte:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
+#create_avis {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 #create_avis main {
   padding-top: 2em;
+  flex: 1;
 }
 #create_avis main .image_bouton {
   display: block;
@@ -1629,22 +1928,228 @@ aside input.bouton:hover {
   }
 }
 
-.info_vendeur p {
-  padding: 0 10px;
-  width: -moz-max-content;
-  width: max-content;
+.info_vendeur > main div {
+  width: 60vw;
+}
+.info_vendeur > main p {
+  border: none;
   border-radius: 5px;
+  height: auto;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+  width: 50%;
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.info_vendeur .desc {
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-}
-.info_vendeur .modif_info {
+.info_vendeur > main .modif_info {
   color: #FFFFFF;
   text-decoration: none;
+}
+.info_vendeur > main h3 {
+  font-size: 1.5em;
+  margin-top: 2%;
+}
+
+#body404 {
+  height: 100vh;
+  width: 100vw;
+  background: #3157A3;
+}
+
+.le404 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-style: "Inter";
+}
+
+.all_404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.all_404 h1 {
+  justify-self: center;
+}
+
+.logo {
+  width: 400px;
+}
+
+.titre404 {
+  font-size: 100px;
+  font-style: "Montserrat";
+}
+
+.bouton404 {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bouton404:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+
+/*.produit-vendeur {
+    font-family: $font_text;
+
+    > article:first-child {
+        margin: 0 0 2em 0;
+        display: flex;
+
+        // Images
+        > div:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 0 4em;
+
+            // Image principale
+            > div:first-child {
+                img {
+                    @include image_produit(300px);
+                }
+            }
+
+            // Images secondaires
+            > div:nth-child(2) {
+                img {
+                    @include image_produit(100px);
+                }
+            }
+        }
+
+        // Détails du produit
+        > div:nth-child(2) {
+            > h1 {
+                margin: 0;
+                font-size: 2em;
+
+                font-family: $font_title;
+                font-weight: 700;
+            } 
+
+            // Étoiles + nombre d'avis
+            > div {
+                .etoiles {
+                    margin-right: 0.5em;
+                }
+
+                display: flex;
+                align-items: center;
+            }
+
+            > p:last-child {
+                margin-top: 2em;
+            }
+        }
+    }
+}*/
+.fini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.produit-vendeur {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.produit-vendeur table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.produit-vendeur table th, .produit-vendeur table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+.produit-vendeur table th {
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+}
+.produit-vendeur > div img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 200px;
+  max-width: 200px;
+  height: 200px;
+  border-radius: 5px;
+}
+.produit-vendeur > div img:hover {
+  transform: scale(1.04);
+}
+.produit-vendeur > div {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+.produit-vendeur div table td {
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+.produit-vendeur form#supprimer {
+  margin-top: 1.5rem;
+}
+.produit-vendeur form#supprimer input[type=submit] {
+  background: #d32f2f;
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+.produit-vendeur form#supprimer input[type=submit]:hover {
+  background: #b71c1c;
+}
+.produit-vendeur a {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.content_produit_vendeur {
+  flex: 1;
+}
+
+#stock_vendeur {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.fleche_produit_arriere {
+  margin: 5px;
 }
 
 .stock main {

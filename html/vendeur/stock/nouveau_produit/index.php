@@ -98,7 +98,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Ajout produit</title>
+        <title>Alizon Vendeur - Créer un produit</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
@@ -106,8 +106,8 @@
     <body>
         <?php include "../../header.php" ?>
         <main class="bodyAjoutProduit">
-            <!-- Bouton de retour sur la page de gestion des stocks -->
             <div class="entete">
+                <!-- Bouton de retour sur la page de gestion des stocks -->
                 <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Ajouter un produit au stock</h1>
             </div>
@@ -213,7 +213,7 @@
                         </select>
                     </p>
                 </div>
-                <h3>Photo principale</h3>
+                <h3>Image principale</h3>
                 <div class="divEnLigne">
                     <label for="photo">Importer des images du produit*</label>
                     <input type="file" name="photo" id="photo" accept=".png" required>
@@ -249,9 +249,7 @@
                         <input type="text" name="volumeColis" id="volumeColis" required>
                     </p>   
                 </div>
-                <div class="divCreerProduit">
-                    <input type="submit" value="Créer le produit" id="creerProduit">
-                </div>
+                <input type="submit" value="Créer le produit" id="creerProduit">
             </form>
             
             <script>
@@ -278,14 +276,22 @@
                 const codeBarre = document.getElementById("idCodeBarre");
                 const messageErrCodeBarre = document.getElementById("idMessageErrCodeBarre");
 
-                const poid = document.getElementById("poidColis");
-                const volume = document.getElementById("volumeColis");
+                const poidColis = document.getElementById("poidColis");
+                const volumeColis = document.getElementById("volumeColis");
                 const checkMajeur = document.getElementById("checkMajeur");
 
                 const photo = document.getElementById("photo");
 
                 const creerProduit = document.getElementById("creerProduit");
-                
+                prix.addEventListener('input', () => {
+                    prix.value = prix.value.replace(",",".");
+                })
+                poidColis.addEventListener('input', () => {
+                    poidColis.value = poidColis.value.replace(",",".");
+                })
+                volumeColis.addEventListener('input', () => {
+                    volumeColis.value = volumeColis.value.replace(",",".");
+                })
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
                     if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
                         uniteLiquide.style.display = "none";
@@ -378,8 +384,6 @@
             
             
         </main>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>
