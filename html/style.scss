@@ -546,7 +546,7 @@ div:has(> aside) {
 
 .footer-logos {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 20px;
     
     .logo {
@@ -554,6 +554,8 @@ div:has(> aside) {
     }
 }
 .footer-columns-all{
+    display: flex;
+    flex-direction: row;
     .footer-columns {
         display: flex;
         flex: 1;

@@ -19,7 +19,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   height: 200px;
   border-radius: 5px;
 }
@@ -28,7 +29,8 @@ main {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 25px;
+  min-width: 25px;
+  max-width: 25px;
   height: 25px;
   border-radius: 5px;
 }
@@ -860,7 +862,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   height: 300px;
   border-radius: 5px;
 }
@@ -868,7 +871,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
   height: 100px;
   border-radius: 5px;
 }
@@ -937,13 +941,17 @@ div:has(> aside) {
 
 .footer-logos {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
 }
 .footer-logos .logo {
   width: 150px;
 }
 
+.footer-columns-all {
+  display: flex;
+  flex-direction: row;
+}
 .footer-columns-all .footer-columns {
   display: flex;
   flex: 1;
@@ -1067,7 +1075,8 @@ div:has(> aside) {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
   height: 15vw;
   border-radius: 5px;
 }
@@ -1599,7 +1608,8 @@ aside input.bouton:hover {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
-  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
   height: 250px;
   border-radius: 5px;
 }
