@@ -1017,6 +1017,10 @@ aside {
         flex-direction: row;
         justify-content: space-around;
     }
+    #creerProduit{
+        @include bouton;
+        background-color: $focus;
+    }
 }
 
 .image{

@@ -1418,6 +1418,14 @@ aside input.bouton:hover {
   flex-direction: row;
   justify-content: space-around;
 }
+.bodyAjoutProduit #creerProduit {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #BB2BB2;
+}
 
 .image {
   display: block;
