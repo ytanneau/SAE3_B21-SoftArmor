@@ -1084,8 +1084,10 @@ aside {
     #idModifierProduit{
         @include bouton_new;
     }
-    img{
-        @include image_produit(250px);
+    .blockImg{
+        img{
+            @include image_produit(250px);
+        }
     }
 }
 
