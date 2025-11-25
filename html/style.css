@@ -6,7 +6,12 @@ body {
 
 main {
   padding: 2.5em;
-  line-height: 1.8em;
+  line-height: 2em;
+}
+@media screen and (max-width: 1024px) {
+  main {
+    line-height: 1.8em;
+  }
 }
 
 .image_produit_moyen {
