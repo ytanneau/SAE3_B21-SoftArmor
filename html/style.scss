@@ -304,8 +304,11 @@ hr {
     }
 
     .liste_avis {
-        li > img:first-child {
-            @include image_produit(10vw);
+        li {
+            > img:first-child {
+                @include image_produit(10vw);
+                margin-left: 0;
+            }
         }
     }
 
@@ -406,7 +409,7 @@ a.bouton:has(+ .liste_avis) {
         }
 
         // Image de l'avis
-        > img:last-of-type { 
+        > img:last-child { 
             width: 20%;
             margin-left: 2em;
         }

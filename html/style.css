@@ -668,6 +668,7 @@ hr {
   width: 10vw;
   height: 10vw;
   border-radius: 5px;
+  margin-left: 0;
 }
 .infos form {
   display: flex;
@@ -807,7 +808,7 @@ a.bouton:has(+ .liste_avis):hover {
   font-weight: 100;
   font-size: 0.9em;
 }
-.liste_avis li > img:last-of-type {
+.liste_avis li > img:last-child {
   width: 20%;
   margin-left: 2em;
 }

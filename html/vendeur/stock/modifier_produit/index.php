@@ -184,6 +184,8 @@
                         <label for="checkEnLigne">Produit en ligne</label>
                         <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                     </p>
+                </div>
+                <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
