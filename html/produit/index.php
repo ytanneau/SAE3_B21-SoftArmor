@@ -25,11 +25,13 @@ $id_produit = htmlentities($_GET['produit']);
 
 try {
     $produit = detail_produit_image($id_produit);
-    $note = note_produit($id_produit)['note_moy'];
+    
 
     if (!$produit) {
+
         die("Produit introuvable.");
     }
+    $note = note_produit($id_produit)['note_moy'];
 
     // Récupérer les avis
     $liste_avis = avis_client_produit($_GET['produit']);
