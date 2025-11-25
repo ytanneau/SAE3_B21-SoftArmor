@@ -906,7 +906,7 @@ div:has(> aside) {
   font-family: sans-serif;
   margin-top: 50px;
   width: 100vw;
-  position: relative;
+  position: absolute;
   bottom: 0;
 }
 .footer > div {
