@@ -24,7 +24,9 @@ $images = HOME_SITE . "image/"
                 <a href= <?= HOME_SITE?> class = "lien404">
                     <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
                 </a>
-                <button href="HOME_SITE" type="button">Revenir à l'accueil</button>
+                <a href=<?= HOME_SITE ?>>
+                    <button type="button">Revenir à l'accueil</button>
+                </a>
                 </div>
         </main>
     </body>
