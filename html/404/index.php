@@ -48,7 +48,7 @@ $images = HOME_SITE . "image/"
         .all_404 h1{
             justify-self: center;
         }
-        .all_404 img{
+        .logo{
             width: 500; 
         }
     </style>
