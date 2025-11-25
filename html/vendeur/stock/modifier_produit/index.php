@@ -44,10 +44,10 @@
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if(!isset($_POST['sous_categorie'])){
-            if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
-                update_categorie_produit($idProduit, $_POST['categorie']);
-            }
+        if($_POST['sous_categorie'] == ""){
+            update_categorie_produit($idProduit, $_POST['categorie']);
+        } else {
+            update_categorie_produit($idProduit, $_POST['sous_categorie']);
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -398,7 +398,7 @@
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
-                } else if(confirm("Confirmer la création du produit ?")) {
+                } else if(confirm("Confirmer la modification du produit ?")) {
                     alert("Produit modifier");
                 } else {
                     event.preventDefault();

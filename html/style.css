@@ -1643,6 +1643,7 @@ aside input.bouton:hover {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  color: #FFFFFF;
 }
 .bodyAjoutProduit .divCreerProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -1709,6 +1710,7 @@ aside input.bouton:hover {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
+  color: #FFFFFF;
 }
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
