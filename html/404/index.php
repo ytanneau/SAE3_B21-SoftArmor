@@ -27,6 +27,8 @@ $images = HOME_SITE . "image/"
                 <style>
                     .le404 {
                         background: linear-gradient(to right, #CBCCEA, #3157A3);
+                        display: flex;
+                        justify-content: center;
                     }
                 </style>
         </main>
