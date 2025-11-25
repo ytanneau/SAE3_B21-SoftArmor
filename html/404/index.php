@@ -25,38 +25,9 @@ $images = HOME_SITE . "image/"
                     <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
                 </a>
                 <a href=<?= HOME_SITE ?>>
-                    <button type="button">Revenir à l'accueil</button>
+                    <button class="bouton404" type="button">Revenir à l'accueil</button>
                 </a>
                 </div>
         </main>
     </body>
-    <style>
-        .body404{
-            height: 100vh;
-            width: 100vw;
-            background: #3157A3;
-        }
-        .le404 {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            color: white;
-        }
-        .all_404{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .all_404 h1{
-            justify-self: center;
-        }
-        .logo{
-            width: 400px;
-        }
-        .titre404{
-            font-size: 100px;
-        }
-
-    </style>
 </html>
