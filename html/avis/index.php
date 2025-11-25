@@ -178,8 +178,9 @@
                     <textarea class="champ text"
                         name="description" 
                         id="description"
-                        value="<?= $_POST['description'] ?? '' ?>"
                         class="champ text">
+                        <?= $_POST['description'] ?? '' ?>
+                    </textarea>
 
                     <?php if (isset($erreur['description'])) { ?>
                         <p class="error">
