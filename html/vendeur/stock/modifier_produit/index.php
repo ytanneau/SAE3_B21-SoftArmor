@@ -187,12 +187,26 @@
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
                             <option value="">-- Choisir une catégorie --</option>
                             <?php
-                                $tabCategorie = get_categorie();
+                                $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
                                     $select = ($nomCat['nom_categorie'] == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
                             ?>
                             <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
                                 <?= htmlspecialchars($nomCat['nom_categorie']) ?>
+                            </option>
+                            <?php } ?>
+                        </select>
+                    </p>
+                    <p id="pSousCategorieAlimentaire" style="display:none;">
+                        <label for="sous_categorie">Sous-catégories alimentaire*</label>
+                        <select name="sous_categorie" id="sous_cate">
+                            <option value="">-- Choisir une catégorie --</option>
+                            <?php 
+                                $tabSousCategorie = get_sous_categorie("Alimentaire");
+                                foreach($tabSousCategorie as $sousCat){                  
+                            ?>
+                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
+                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
                             </option>
                             <?php } ?>
                         </select>

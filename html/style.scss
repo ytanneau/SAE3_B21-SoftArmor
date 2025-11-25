@@ -1085,7 +1085,7 @@ aside {
         @include bouton_new;
     }
     img{
-        @include image_produit;
+        @include image_produit(250px);
     }
 }
 
