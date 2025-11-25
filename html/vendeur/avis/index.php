@@ -73,7 +73,7 @@
 <?php
             if ($data != null) {
 ?>
-            <span>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></span>
+            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
 <?php
             afficher_moyenne_note($produit['note_moy']);
 
@@ -81,7 +81,7 @@
                 echo "Il n'y a pas d'avis pour ce produit";
             }
 ?>
-            <span>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?></span>
+            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
     </article>
     <section>
