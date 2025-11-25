@@ -1137,18 +1137,17 @@ aside {
     .divEnLigne{
         @include en_ligne;
     }
-    .divCreerProduit{
-        @include contenu_centre_vertical;
+    #creerProduit{
         margin-top: 20px;
-        #creerProduit{
-            @include bouton_new;
-            color: $couleur_background;
-        }
+        @include bouton_new($color: $couleur_background);
+
     }
     input[type="file"]{
         padding-top: 7px;
     }
-    
+    #idCodeBarre{
+        width: 150px;
+    }
 }
 
 .bodyModifProduit{
@@ -1169,6 +1168,9 @@ aside {
     }
     #idCheckMajeur{
         margin-right: 70px;
+    }
+    #idCodeBarre{
+        width: 150px;
     }
 }
 
@@ -1416,4 +1418,9 @@ aside {
     font-weight: 500;
     transition: opacity 0.2s ease;
   }
+}
+
+
+.content {
+  flex: 1; 
 }

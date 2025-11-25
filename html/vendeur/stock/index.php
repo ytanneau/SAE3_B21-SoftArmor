@@ -71,7 +71,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
         <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
 
-        <main>
+        <main class="content">
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
         </main>
