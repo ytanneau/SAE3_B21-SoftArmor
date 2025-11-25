@@ -176,14 +176,10 @@
                     </p>
                 </div>
                 <div class="divEnLigne">
-                    <p>
                         <label for="checkMajeur">Réservé aux majeurs</label>
                         <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
-                    </p>
-                    <p>
                         <label for="checkEnLigne">Produit en ligne</label>
                         <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
-                    </p>
                 </div>
                 <div class="divEnLigne">
                     <p>
@@ -343,8 +339,6 @@
                 }
             })
         </script>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>
