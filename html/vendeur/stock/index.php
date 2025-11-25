@@ -41,8 +41,8 @@ function ecrire_nom($rows){
                 <td><img src="Fleche.png" alt=""> </td> -->
                 <td>
 
-                    <button type="submit" class="bouton" value="Valider"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button>
-                    <button type="submit" class="bouton" value="Valider"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button>
+                    <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button></a>
+                    <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
 
                     <span> | </span>
 
