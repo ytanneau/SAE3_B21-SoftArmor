@@ -344,8 +344,6 @@
                 else return false;
             }
 
-            document.addEventListener("DOMContentLoaded", function () {
-
             const categorie = document.getElementById("idCategorie");
             const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
             const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
@@ -385,13 +383,6 @@
                     uniteMasse.style.display = "none";
                 }
             })
-
-            // Exécute au chargement (pour préremplissage)
-            majAffichage();
-
-            // Exécute lors du changement
-            selectCat.addEventListener("change", majAffichage);
-        });
 
             modifierProduit.addEventListener('click' , () =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
