@@ -250,24 +250,24 @@
                         </select>
                     </p>
                 </div>
-                <h3>Photos du produit</h3>
+                <h3>Images du produit</h3>
                 <div class="blockImg">
                     <h4>Image principale</h4>
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                     <div>
-                        <label for="photoPrincipale">Modifier la photo principale</label>
+                        <label for="photoPrincipale">Modifier l'image principale</label>
                         <input type="file" name="photoPrincipale">
                     </div>
                     <h4>Image secondaire</h4>
                     <?php if($tabImageProduit['id_image1'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt=""> <?php }?>
                     <div>
-                        <label for="photo2">Ajouter/Modifier la seconde photo</label>
+                        <label for="photo2">Ajouter/Modifier la seconde image</label>
                         <input type="file" name="photo2" accept="image/png">
                     </div>
                     <h4>Troisième image</h4>
                     <?php if($tabImageProduit['id_image2'] != null){?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt=""> <?php }?>
                     <div>
-                        <label for="photo3">Ajouter/Modifier la troisième photo</label>
+                        <label for="photo3">Ajouter/Modifier la troisième image</label>
                         <input type="file" name="photo3" accept="image/png">
                     </div>
                 </div>

@@ -1,7 +1,7 @@
-<?php
-    // importer le fichier de connexion à la bdd
-    define('HOME_GIT', '../../../../');
-    define('HOME_SITE', '../../../');
+<?php 
+    // appel du fichier de configuration bdd
+    define('HOME_GIT', '../../../../../');
+    define('HOME_SITE', '../../../../');
 
     if (!isset($_SESSION)) {
         session_start();
@@ -17,67 +17,83 @@
         header('location: ../');
         exit;
     }
-    
+
     // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
-    include HOME_GIT . "fonction_vendeur.php";  
-    
+    include HOME_GIT . "fonction_vendeur.php";
+
     $id_compte = $_SESSION['id_compte'];
 
-    // recuperation des informations du vendeur
+    // recuperation des informations vendeur
     $tabVendeur = get_informations_vendeur($id_compte);
 
-    // assignation des variables aux élements du tableau
+    // definition des variables suivant les valeurs du tableau
     $raisonSociale = $tabVendeur['raison_sociale'];
-    $numSiret = $tabVendeur['num_siret'];
-    $id_adresse = $tabVendeur['id_adresse'];
     $description = $tabVendeur['description'];
+    $id_adresse = $tabVendeur['id_adresse'];
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
 
-    // définiton de la chaine adresse
-    $chaineAdresse = $tabAdresseVendeur['adresse'] . " " . $tabAdresseVendeur['code_postal'] . " " . $tabAdresseVendeur['complement_adresse'];
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        // récupération des données du formulaire de saisie
+        $modifRaisonSociale = $_POST['raison_sociale'];
+        $modifAdresse = $_POST['adresse'];
+        $modifCodePostal = $_POST['code_postal'];
+        $modifCompelementAdr = $_POST['complementAdr'];
+        $modifDescription = $_POST['description'];
+
+        $_SESSION['raison_sociale'] = $modifRaisonSociale;
+
+        // Mise à jour des informations dans la base de donnée
+        update_informations_vendeur($modifRaisonSociale, $modifDescription, $id_compte);
+
+        // mise à jour de l'adresse du vendeur
+        update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
+
+        // redirection vers la page precedente apres la validation du formulaire
+        header('Location: ../');
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
         <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
-        <title>Consulter mes informations</title>
+        <title>Mes informations</title>
     </head>
-    <body class="info_vendeur">
+    <body>
         <!-- inclusion du header -->
-        <?php include "../../header.php"?>
+        <?php include "../../../header.php"?>
         <main>
             <!-- Bouton de retour sur la page de gestion des stocks -->
-            <a href="../../stock/index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-            <!-- Zone d'affichage des informations du vendeur -->
-            <div>
-                <h1>Mes informations</h1>
-                <h3>Raison sociale</h3>
-                <p><?= $raisonSociale ?></p>
-                <h3>Numero de siret</h3>
-                <p><?= $numSiret ?></p>
-                <h3>Adresse</h3>
-                <p><?= $chaineAdresse ?></p>
-                <h3>Description</h3>
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+
+            <h1>Modifier mes informations</h1>
+            <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
+
+            <!-- formulaire de saisie des modifications des informations d'un vendeur -->
+            <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <p>
-                    <?php
-                        if($description === null){
-                            echo "Pas de description";
-                        } else {
-                            echo $description;
-                        } 
-                    ?>
+                    <label for="raison_sociale">Raison sociale</label>
+                    <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
+                    <label for="adresse">Adresse</label>
+                    <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
+                    <label for="code_postal">Code postal</label>
+                    <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
+                    <label for="complementAdr">Complement d'adresse</label>
+                    <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
+                    <label for="description">Description</label>
+                    <textarea type="textarea" name="description" id="id_description"><?= $description ?></textarea>
                 </p>
-            </div>
-            <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
-            <button class="bouton"><a class="modif_info" href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
-            <!-- bouton pour etre rediriger vers la desactivation du compte vendeur -->
-            <button class="bouton grave"><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
+                <input type="submit" value="Valider la modification">
+            </form>
+            <a href="desactivation/desactivation.php">Desactiver le compte</a>
         </main>
-        <?php include HOME_SITE . "footer.php" ?>
+        <footer>
+
+        </footer>
     </body>
 </html>

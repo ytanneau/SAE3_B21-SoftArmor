@@ -292,3 +292,9 @@
     flex-direction: row;
     gap: 70px;
 }
+
+@mixin code_barre{
+    #idCodeBarre{
+        width: 150px;
+    }
+}
