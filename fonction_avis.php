@@ -14,8 +14,8 @@
             $erreur['note'] = FORMAT;
         }
 
-        print_r($_POST);
-        var_dump($_POST);
+        //print_r($_POST);
+        //var_dump($_POST);
         if (isset($_POST['description']) && (strlen($_POST['titre']) == 0)){
             $erreur['titre'] = "Une description a besoin d'un titre";
         }
