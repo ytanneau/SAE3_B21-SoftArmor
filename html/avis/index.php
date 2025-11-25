@@ -176,7 +176,7 @@
 
                     <label for="description">Description</label>
                     <textarea class="champ text" name="description" id="description" class="champ text"><?php
-                        echo $_POST['description'] ?? '' 
+                        echo trim($_POST['description'] ?? '');
                     ?></textarea>
 
                     <?php if (isset($erreur['description'])) { ?>
