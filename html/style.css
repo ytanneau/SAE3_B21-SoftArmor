@@ -661,7 +661,7 @@ hr {
   font-family: "Inter";
 }
 
-.infos .liste_avis li > img:first-of-type:not(img:last-of-type) {
+.infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
@@ -808,7 +808,7 @@ a.bouton:has(+ .liste_avis):hover {
   font-weight: 100;
   font-size: 0.9em;
 }
-.liste_avis li > img:last-of-type {
+.liste_avis li > img:last-child {
   width: 20%;
   margin-left: 2em;
 }
