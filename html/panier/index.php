@@ -131,7 +131,7 @@ try {
                 <?php } ?>
                 
                 <form action="../achat" method="get">
-                    <input type="hidden" name="id_produit" id="id_produit" value="panier">
+                    <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
             </aside>
