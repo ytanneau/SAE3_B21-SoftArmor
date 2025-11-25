@@ -1656,4 +1656,58 @@ aside input.bouton:hover {
 .info_vendeur > main h3 {
   font-size: 1.5em;
   margin-top: 2%;
+}
+
+#body404 {
+  height: 100vh;
+  width: 100vw;
+  background: #3157A3;
+}
+
+.le404 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-style: "Inter";
+}
+
+.all_404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.all_404 h1 {
+  justify-self: center;
+}
+
+.logo {
+  width: 400px;
+}
+
+.titre404 {
+  font-size: 100px;
+  font-style: "Montserrat";
+}
+
+.bouton404 {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bouton404:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
