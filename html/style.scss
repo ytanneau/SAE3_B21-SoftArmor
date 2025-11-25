@@ -508,8 +508,6 @@ div:has(> aside) {
     color: #fff;
     padding: 40px 60px;
     font-family: sans-serif;
-    position: absolute;
-    top: 0px;
 }
 
 .footer a {
@@ -962,5 +960,20 @@ aside {
 
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
-    
+
+    p{
+        @include contenu_centre_vertical;
+    }
+    #idDescDetaille,#idDescSimple{
+        width: 400px;
+        height: 200px;
+        resize: vertical;
+    }
+    .divEnLigne{
+        display: flex;
+        flex-direction: row;
+    }
+    #idNomPrv, #idNomPblc{
+        width: fit-content;
+    }
 }

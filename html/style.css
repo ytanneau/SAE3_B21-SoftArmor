@@ -893,8 +893,6 @@ div:has(> aside) {
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
-  position: absolute;
-  bottom: 0px;
 }
 
 .footer a {
@@ -1365,4 +1363,22 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.bodyAjoutProduit p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
+  width: 400px;
+  height: 200px;
+  resize: vertical;
+}
+.bodyAjoutProduit .divEnLigne {
+  display: flex;
+  flex-direction: row;
+}
+.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=style.css.map */
