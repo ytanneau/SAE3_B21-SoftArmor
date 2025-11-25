@@ -1710,6 +1710,7 @@ aside input.bouton:hover {
 
 #create_avis {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 .mainInfoVendeur {
@@ -1792,6 +1793,7 @@ aside input.bouton:hover {
 
 #create_avis main {
   padding-top: 2em;
+  flex: 1;
 }
 #create_avis main .image_bouton {
   display: block;
