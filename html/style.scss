@@ -1160,8 +1160,7 @@ aside {
         @include en_ligne;
     }
     #idModifierProduit{
-        @include bouton_new;
-        color: $couleur_background;
+        @include bouton_new($color: $couleur_background);
     }
     .blockImg{
         img{
