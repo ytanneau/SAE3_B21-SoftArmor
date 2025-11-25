@@ -177,10 +177,10 @@
                     </p>
                 </div>
                 <div>
-                        <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
-                        <label for="checkEnLigne">Produit en ligne</label>
-                        <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
+                    <label for="checkMajeur">Réservé aux majeurs</label>
+                    <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
+                    <label for="checkEnLigne">Produit en ligne</label>
+                    <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
                 <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
                 <div class="divEnLigne">
@@ -219,7 +219,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="text" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
+                        <input type="number" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -328,7 +328,13 @@
 
             const poidColis = document.getElementById("idPoidColis");
             const volumeColis = document.getElementById("idVolumeColis");
-
+            
+            poidColis.addEventListener('input', () => {
+                poidColis.value = poidColis.value.replace(",",".");
+            })
+            volumeColis.addEventListener('input', () => {
+                volumeColis.value = volumeColis.value.replace(",",".");
+            })
             prix.addEventListener('input', () => {
                 prix.value = prix.value.replace(",",".");
             })

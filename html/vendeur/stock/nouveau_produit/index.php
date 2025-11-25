@@ -269,9 +269,6 @@
 
                 const tva = document.getElementById("idtva");
                 const prix = document.getElementById("idPrixProd");
-                prix.addEventListener('input', () => {
-                    prix.value = prix.value.replace(",",".");
-                })
 
                 const descSimple = document.getElementById("idDescSimple");
                 const descDetaille = document.getElementById("idDescDetaille");
@@ -279,14 +276,22 @@
                 const codeBarre = document.getElementById("idCodeBarre");
                 const messageErrCodeBarre = document.getElementById("idMessageErrCodeBarre");
 
-                const poid = document.getElementById("poidColis");
-                const volume = document.getElementById("volumeColis");
+                const poidColis = document.getElementById("poidColis");
+                const volumeColis = document.getElementById("volumeColis");
                 const checkMajeur = document.getElementById("checkMajeur");
 
                 const photo = document.getElementById("photo");
 
                 const creerProduit = document.getElementById("creerProduit");
-                
+                prix.addEventListener('input', () => {
+                    prix.value = prix.value.replace(",",".");
+                })
+                poidColis.addEventListener('input', () => {
+                    poidColis.value = poidColis.value.replace(",",".");
+                })
+                volumeColis.addEventListener('input', () => {
+                    volumeColis.value = volumeColis.value.replace(",",".");
+                })
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
                     if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
                         uniteLiquide.style.display = "none";
