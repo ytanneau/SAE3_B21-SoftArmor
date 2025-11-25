@@ -603,6 +603,7 @@ div:has(> aside) {
     .footer-columns {
         width: 100%;
         justify-content: space-between;
+        flex-direction: column;
     }
     .footer-socials {
         flex-direction: row;
