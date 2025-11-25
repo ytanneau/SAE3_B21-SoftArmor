@@ -408,7 +408,7 @@ a.bouton:has(+ .liste_avis) {
         }
 
         // Image de l'avis
-        > img { 
+        > img:last-of-type { 
             width: 20%;
             margin-left: 2em;
         }
@@ -1094,28 +1094,81 @@ aside {
     input[type="file"]{
         padding-top: 7px;
     }
-    #idtva{
-        height: 20.3px;
+    select{
+        height: 32px;
+        width: fit-content;
     }
-    input[type="text"]{
-        height: 35px;
+    input[type="text"], input[type="number"]{
+        height: 25px;
     }
 }
 
-.image_bouton{
-    @include bouton_new($couleur_etoile);
-    border-radius: $angle_normal;
-    margin-top: 2em;
-    margin-bottom: 1em;
 
-    p{
-        font-size: 0.75em;
-    }
-}
 
 
 #create_avis{
     main{
         padding-top: 2em;
+
+        .image_bouton{
+            @include bouton_new($couleur_etoile);
+            border-radius: $angle_normal;
+            padding: 0.5em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-size: $font_size_sup;
+
+            p{
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            gap: 20px;
+
+            article, form{
+                width: 70vw;
+                padding: 0 1em 1em;
+
+                .image_bouton{
+                    margin-top: 1em;
+                    margin-bottom: 0;
+                }
+
+            }
+        }
     }
+}
+
+
+.body404{
+    height: 100vh;
+    width: 100vw;
+    background: #3157A3;
+}
+.le404 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+.all_404{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.all_404 h1{
+    justify-self: center;
+}
+.logo{
+    width: 400px;
+}
+.titre404{
+    font-size: 100px;
+}
+
+.bouton404{
+    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
