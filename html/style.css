@@ -1630,10 +1630,10 @@ aside input.bouton:hover {
   }
 }
 
-.info_vendeur div {
+.info_vendeur > main div {
   width: 60vw;
 }
-.info_vendeur p {
+.info_vendeur > main p {
   border: none;
   border-radius: 5px;
   height: auto;
@@ -1644,11 +1644,11 @@ aside input.bouton:hover {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.info_vendeur .modif_info {
+.info_vendeur > main .modif_info {
   color: #FFFFFF;
   text-decoration: none;
 }
-.info_vendeur h3 {
+.info_vendeur > main h3 {
   font-size: 1.5em;
   margin-top: 2%;
 }/*# sourceMappingURL=style.css.map */

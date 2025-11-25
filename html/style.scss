@@ -1125,7 +1125,8 @@ aside {
 }
 
 .info_vendeur {
-    div {
+    > main {
+        div {
         width: 60vw;
     }
     p { 
@@ -1148,5 +1149,6 @@ aside {
     h3 {
         font-size: $font_size_sup;
         margin-top: 2%;
+    }
     }
 }
