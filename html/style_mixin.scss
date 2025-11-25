@@ -284,3 +284,9 @@
         width: 600px;
     }
 }
+
+@mixin en_ligne{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
