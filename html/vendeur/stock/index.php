@@ -41,6 +41,7 @@ function ecrire_nom($rows){
                 <td>
                     <form action="./update_stock.php">
                     <label for="nb">quantité</label>
+                    <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
                     <input type="text" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
                     <input type="submit" value="Valider">
                     </form> 
@@ -74,8 +75,8 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
         </main>
+        <?php include HOME_SITE . "vendeur/footer.php" ?>
     </body>
-    <?php include HOME_SITE . "vendeur/footer.php" ?>
 </html>
 
 
