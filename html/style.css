@@ -1460,7 +1460,7 @@ aside input.bouton:hover {
   flex-direction: column;
 }
 .bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
-  width: 400px;
+  width: 600px;
   height: 200px;
   resize: vertical;
 }
@@ -1492,6 +1492,12 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit .divCreerProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.bodyAjoutProduit input[file] {
+  padding-top: 7px;
+}
+.bodyAjoutProduit #idtva {
+  height: 20.3px;
 }
 
 .image {

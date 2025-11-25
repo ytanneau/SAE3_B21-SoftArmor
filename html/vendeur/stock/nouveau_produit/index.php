@@ -129,7 +129,7 @@
                         <input required type="text" name="prixProd" id="idPrixProd">
                     </p>
                     <p>
-                        <label for="tva">TVA*</label>
+                        <label for="idtva">TVA*</label>
                         <select name="tva" id="idtva" required>
                             <option value="">-- Taux de TVA --</option>
                             <option value="5">5%</option>
@@ -138,13 +138,13 @@
                         </select>
                     </p>
                     <p>
-                        <label for="codeBarre">Code barre*</label>
-                        <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" style="width:162.4px">
+                        <label for="idCodeBarre">Code barre*</label>
+                        <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13">
                         <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
-                <div class="divEnLigne">
-                    <label for="checkMajeur">Réservé aux majeurs</label>
+                <div>
+                    <label for="idcheckMajeur">Réservé aux majeurs</label>
                     <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
                 </div>
                 <div class="divEnLigne">
