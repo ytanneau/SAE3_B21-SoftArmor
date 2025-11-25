@@ -1523,6 +1523,8 @@ aside input.bouton:hover {
 }
 .bodyAjoutProduit select {
   height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
   height: 25px;
