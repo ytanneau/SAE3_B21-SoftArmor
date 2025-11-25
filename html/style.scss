@@ -299,11 +299,6 @@ hr {
 }
 
 .infos{
-
-    main{
-        //display: flex;
-    }
-
     .liste_avis {
         li {
             > img:first-child {
@@ -338,8 +333,7 @@ hr {
         }
 
         img {
-            width: 200px;
-            
+            @include image_pp(200px);
         }
 
     }
