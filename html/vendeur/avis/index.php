@@ -70,22 +70,23 @@
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'], 1) ?? "N/A")?>
+<?php
+            if ($data != null) {
+?>
+            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?>
             <br>
 <?php
-    afficher_moyenne_note($produit['note_moy']);
+            afficher_moyenne_note($produit['note_moy']);
+            } else {
+                echo "Il n'y a pas d'avis pour ce produit";
+            }
 ?>
             <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
     </article>
     <section>
 <?php
-    if ($data == null){
-?>
-    <h3>Il n'y a pas d'avis pour ce produit</h3>
-<?php
-    }
-    else{
+    if ($data != null){
 ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { ?>
