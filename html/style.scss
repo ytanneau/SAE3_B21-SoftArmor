@@ -1045,8 +1045,9 @@ aside {
     @include contenu_centre_vertical;
 
     form{
+        display: flex;
+        flex-direction: column;
         width: 600px;
-        @include contenu_centre_vertical;
     }
     p{
         display: flex;
@@ -1062,9 +1063,13 @@ aside {
         flex-direction: row;
         justify-content: space-around;
     }
-    #creerProduit{
-        @include bouton_new;
+    .divCreerProduit{
+        @include contenu_centre_vertical;
+        #creerProduit{
+            @include bouton_new;
+        }
     }
+    
 }
 
 .image{
