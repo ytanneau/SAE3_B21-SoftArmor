@@ -1615,6 +1615,9 @@ aside input.bouton:hover {
   height: 250px;
   border-radius: 5px;
 }
+.bodyModifProduit #idCheckMajeur {
+  margin-right: 70px;
+}
 
 #create_avis main {
   padding-top: 2em;

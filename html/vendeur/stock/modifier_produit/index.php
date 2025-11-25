@@ -44,9 +44,10 @@
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        
-        if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
-            update_categorie_produit($idProduit, $_POST['categorie']);
+        if(!isset($_POST['sous_categorie'])){
+            if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
+                update_categorie_produit($idProduit, $_POST['categorie']);
+            }
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -218,7 +219,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="text" name="qtAchete">
+                        <input type="text" name="qtAchete" value="<?= $tabInfoProduit['qtAchete']?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
