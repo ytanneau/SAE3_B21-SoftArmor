@@ -246,3 +246,17 @@
         }
     }
 }
+
+@mixin entete_page_vendeur{
+    .entete{
+        display: flex;
+        align-items: center;
+        a{
+            height: 24px;
+            margin-right: 50px;
+        }
+        h1{
+            margin-right: 30px;
+        }
+    }
+}

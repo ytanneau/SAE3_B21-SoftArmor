@@ -1051,17 +1051,7 @@ aside {
 
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
-    .entete{
-        display: flex;
-        align-items: center;
-        a{
-            height: 24px;
-            margin-right: 50px;
-        }
-        h1{
-            margin-right: 30px;
-        }
-    }
+    @include entete_page_vendeur;
 
     form{
         display: flex;
@@ -1103,6 +1093,11 @@ aside {
     }
 }
 
+.bodyModifProduit{
+    @include contenu_centre_vertical;
+    @include entete_page_vendeur;
+}
+
 
 
 
@@ -1141,35 +1136,36 @@ aside {
     }
 }
 
-#body404{
-    .body404{
-        height: 100vh;
-        width: 100vw;
-        background: #3157A3;
-    }
-    .le404 {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        color: white;
-    }
-    .all_404{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .all_404 h1{
-        justify-self: center;
-    }
-    .logo{
-        width: 400px;
-    }
-    .titre404{
-        font-size: 100px;
-    }
 
-    .bouton404{
-        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
-    }
+#body404{
+    height: 100vh;
+    width: 100vw;
+    background: #3157A3;
+}
+.le404 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    font-style: $font_text; 
+}
+.all_404{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.all_404 h1{
+    justify-self: center;
+}
+.logo{
+    width: 400px;
+}
+.titre404{
+    font-size: 100px;
+    font-style: $font_title;
+}
+
+.bouton404{
+    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
