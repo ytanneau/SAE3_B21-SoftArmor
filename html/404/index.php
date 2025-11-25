@@ -16,7 +16,7 @@ const HOME_SITE = "../";
             <?php
                 http_response_code(404);
                 ?>
-                <h1>404 - Page introuvable</h1>
+                <h1>404 - Page introuvable la honte</h1>
                 <p>La page demandée n'existe pas.</p>
                 <a href= <?= HOME_SITE?>>Retour à l'accueil</a>
         </main>
