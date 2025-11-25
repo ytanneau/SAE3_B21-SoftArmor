@@ -46,7 +46,7 @@
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
         
         if($_POST['categorie'] != $tabCategorieDuProduit['nom_categorie']){
-            update_categorie_produit($idProduit, $tabCategorieDuProduit['nom_categorie']);
+            update_categorie_produit($idProduit, $_POST['categorie']);
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -175,7 +175,7 @@
                         <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
-                <div class="divEnLigne">
+                <div>
                         <label for="checkMajeur">Réservé aux majeurs</label>
                         <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
                         <label for="checkEnLigne">Produit en ligne</label>
