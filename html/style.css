@@ -1708,6 +1708,45 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
+.mainInfoVendeur {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur .entete {
+  display: flex;
+  align-items: center;
+}
+.mainInfoVendeur .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.mainInfoVendeur .entete h1 {
+  margin-right: 30px;
+}
+.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+  width: 600px;
+  height: 200px;
+  resize: vertical;
+}
+.mainInfoVendeur p {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+  height: 25px;
+}
+.mainInfoVendeur form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
 #create_avis main {
   padding-top: 2em;
 }

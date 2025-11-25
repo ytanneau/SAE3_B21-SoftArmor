@@ -67,7 +67,7 @@
     <body>
         <!-- inclusion du header -->
         <?php include "../../header.php"?>
-        <main>
+        <main class="mainInfoVendeur">
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../../stock/"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
 
