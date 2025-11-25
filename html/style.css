@@ -1575,33 +1575,39 @@ aside input.bouton:hover {
   }
 }
 
-#body404 .body404 {
+#body404 {
   height: 100vh;
   width: 100vw;
   background: #3157A3;
 }
-#body404 .le404 {
+
+.le404 {
   display: flex;
   justify-content: center;
   flex-direction: column;
   color: white;
 }
-#body404 .all_404 {
+
+.all_404 {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-#body404 .all_404 h1 {
+
+.all_404 h1 {
   justify-self: center;
 }
-#body404 .logo {
+
+.logo {
   width: 400px;
 }
-#body404 .titre404 {
+
+.titre404 {
   font-size: 100px;
 }
-#body404 .bouton404 {
+
+.bouton404 {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1617,6 +1623,6 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
 }
-#body404 .bouton404:hover {
+.bouton404:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
