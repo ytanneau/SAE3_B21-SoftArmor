@@ -961,5 +961,6 @@ aside {
 }
 
 .bodyAjoutProduit{
-    background-color: aqua;
+    @include contenu_centre_vertical;
+    
 }
