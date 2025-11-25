@@ -1177,9 +1177,11 @@ aside {
 
 
 #create_avis{
+    min-height: 100vh;
+    
     main{
         padding-top: 2em;
-
+        flex: 1;
         .image_bouton{
             @include bouton_new($couleur_etoile);
             border-radius: $angle_normal;
@@ -1420,13 +1422,14 @@ aside {
 }
 
 
-.content {
+.content_produit_vendeur {
   flex: 1; 
 }
 
 
 #stock_vendeur {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh; 
 }
+
+
+  

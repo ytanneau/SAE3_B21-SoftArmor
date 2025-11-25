@@ -116,7 +116,7 @@
 </head>
 <body class="form_client" id="create_avis">
     <?php include HOME_SITE . "header.php"; ?>
-    <main>
+    <main class = "content_avis_client">
         <?php if ($succes == true) { ?>
             <h1>Votre avis a été enregistré</h1>
             <div class="fini">

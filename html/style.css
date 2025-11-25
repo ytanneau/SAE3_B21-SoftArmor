@@ -1720,8 +1720,12 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
+#create_avis {
+  min-height: 100vh;
+}
 #create_avis main {
   padding-top: 2em;
+  flex: 1;
 }
 #create_avis main .image_bouton {
   display: block;
@@ -1975,12 +1979,10 @@ aside input.bouton:hover {
   transition: opacity 0.2s ease;
 }
 
-.content {
+.content_produit_vendeur {
   flex: 1;
 }
 
 #stock_vendeur {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }/*# sourceMappingURL=style.css.map */
