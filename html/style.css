@@ -894,7 +894,7 @@ div:has(> aside) {
   padding: 40px 60px;
   font-family: sans-serif;
   position: absolute;
-  bottom: 0px;
+  top: 0px;
 }
 
 .footer a {
@@ -1365,4 +1365,9 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.bodyAjoutProduit #descDetaill, .bodyAjoutProduit #descSimple {
+  width: 200px;
+  height: 200px;
+  resize: vertical;
 }/*# sourceMappingURL=style.css.map */

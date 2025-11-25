@@ -962,5 +962,10 @@ aside {
 
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
-    
+
+    #descDetaill,#descSimple{
+        width: 200px;
+        height: 200px;
+        resize: vertical;
+    }
 }
