@@ -1022,4 +1022,6 @@ aside {
 
 .image{
     @include bouton_new($couleur_etoile);
+    border-radius: $angle_normal;
+    margin-top: 2em;
 }
