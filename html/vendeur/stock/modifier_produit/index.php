@@ -312,6 +312,14 @@
             const tva = document.getElementById("idtva");
             const codeBarre = document.getElementById("idCodeBarre");
             const modifierProduit = document.getElementById("idModifierProduit");
+
+            const categorie = document.getElementById("idCategorie");
+            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
+            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+
+            const uniteLiquide = document.getElementById("blockUniteLiquide");
+            const uniteMasse = document.getElementById("blockUniteMasse");
+            const uniteVetement = document.getElementById("blockUniteVetement");
             
             const descSimple = document.getElementById("idDescSimple");
             const descDetaille = document.getElementById("idDescDetaille");
@@ -344,9 +352,7 @@
                 else return false;
             }
 
-            const categorie = document.getElementById("idCategorie");
-            const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
-            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+            
 
             selectSousCategorieAlimentaire.addEventListener('change', () => {
                 if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
