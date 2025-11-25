@@ -1103,20 +1103,40 @@ aside {
     }
 }
 
-.image_bouton{
-    @include bouton_new($couleur_etoile);
-    border-radius: $angle_normal;
-    margin-top: 2em;
-    margin-bottom: 1em;
 
-    p{
-        font-size: 0.75em;
-    }
-}
 
 
 #create_avis{
     main{
         padding-top: 2em;
+
+        .image_bouton{
+            @include bouton_new($couleur_etoile);
+            border-radius: $angle_normal;
+            padding: 0.5em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-size: $font_size_sup;
+
+            p{
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            flex-direction: column;
+            gap: 20px;
+
+            article, form{
+                width: 70vw;
+                padding: 0 1em 1em;
+
+                .image_bouton{
+                    margin-top: 1em;
+                    margin-bottom: 0;
+                }
+
+            }
+        }
     }
 }
