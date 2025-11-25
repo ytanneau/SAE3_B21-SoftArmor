@@ -297,12 +297,12 @@
                         uniteLiquide.style.display = "none";
                         uniteVetement.style.display = "none";
                         
-                        uniteMasse.style.display = "block";
+                        uniteMasse.style.display = "flex";
                     } else if (selectSousCategorieAlimentaire.value === "Boisson"){
                         uniteMasse.style.display = "none";
                         uniteVetement.style.display = "none";
 
-                        uniteLiquide.style.display = "block";
+                        uniteLiquide.style.display = "flex";
                     } else {
                         uniteMasse.style.display = "none";
                         uniteVetement.style.display = "none";
@@ -312,11 +312,11 @@
 
                 categorie.addEventListener('change', () => {
                     if(categorie.value === "Alimentaire"){
-                        pSousCategorie.style.display = "block";
+                        pSousCategorie.style.display = "flex";
                     } 
                     else if(categorie.value === "Electroménager" || categorie.value === "Electronique" ||
                     categorie.value === "Soin & Hygiène"){
-                        uniteMasse.style.display = "block";
+                        uniteMasse.style.display = "flex";
 
                         uniteVetement.style.display = "none";
                         uniteLiquide.style.display = "none";
