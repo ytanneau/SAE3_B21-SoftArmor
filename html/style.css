@@ -1450,6 +1450,17 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
 }
+.bodyAjoutProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyAjoutProduit .entete a {
+  height: 24px;
+  margin-left: 50px;
+}
+.bodyAjoutProduit .entete h1 {
+  margin-right: 30px;
+}
 .bodyAjoutProduit form {
   display: flex;
   flex-direction: column;
