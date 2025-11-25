@@ -553,27 +553,23 @@ div:has(> aside) {
         width: 150px;
     }
 }
-.footer-columns-all{
+.footer-columns {
     display: flex;
-    flex-direction: row;
+    flex: 1;
     justify-content: space-around;
-    .footer-columns {
-        display: flex;
-        flex: 1;
-        justify-content: space-around;
-        
-        h4 {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #ffffff;
-        }
+    
+    h4 {
+        margin-bottom: 10px;
+        font-size: 15px;
+        color: #ffffff;
+    }
 
-        a {
-            display: block;
-            margin-bottom: 5px;
-        }
+    a {
+        display: block;
+        margin-bottom: 5px;
     }
 }
+
 
 .footer-socials {
     display: flex;
@@ -604,11 +600,9 @@ div:has(> aside) {
         flex-direction: column;
         align-items: flex-start;
     }
-    .footer-columns-all{
-        .footer-columns {
-            width: 100%;
-            justify-content: space-between;
-        }
+    .footer-columns {
+        width: 100%;
+        justify-content: space-between;
     }
     .footer-socials {
         flex-direction: row;
