@@ -969,4 +969,8 @@ aside {
         height: 200px;
         resize: vertical;
     }
+    .enLigne{
+        display: flex;
+        flex-direction: row;
+    }
 }

@@ -124,7 +124,7 @@
                             <input required type="text" name="nomPblc" id="idNomPblc">
                         </p>
                     </div>
-                    <div>
+                    <div class="divEnLigne">
                         <p>
                             <label for="prixProd">Prix* hors taxe (€)</label>
                             <input required type="text" name="prixProd" id="idPrixProd">
@@ -144,11 +144,11 @@
                             <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                         </p>
                     </div>
-                    <div>
+                    <div class="divEnLigne">
                         <label for="checkMajeur">Réservé aux majeurs</label>
                         <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
                     </div>
-                    <div>
+                    <div class="divEnLigne">
                         <p>
                             <label for="categorie">Catégories*</label>
                             <select name="categorie" id="idCategorie" style="width: 175px;" required>
@@ -178,7 +178,7 @@
                             </select>
                         </p>
                     </div>
-                    <div>
+                    <div class="divEnLigne">
                         <p>
                             <label for="">Quantité acheté</label>
                             <input type="text" name="qtAchete">
@@ -217,13 +217,13 @@
                     </div>
                     <hr>
                     <h3>Photo principale</h3>
-                    <div>
+                    <div class="divEnLigne">
                         <label for="photo">Importer des images du produit*</label>
                         <input type="file" name="photo" id="photo" accept=".png" required>
                     </div>
                     <hr>
                     <h3>Gestion de stock</h3>
-                    <div>
+                    <div class="divEnLigne">
                         <p>
                             <label for="qtStock">Quantité en stock</label>
                             <input type="number" name="qtStock" id="qtStock">
@@ -236,7 +236,7 @@
                     <hr>
                     <h3>Description</h3>
                     <div>
-                        <p>
+                        <p class="blockDescription">
                             <label for="descSimple">Description simple (200 caractéres maximum)</label>
                             <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
                             <label for="descDetaille">Description détaillé (2000 caractéres maximum)</label>
@@ -245,7 +245,7 @@
                     </div>
                     <hr>
                     <h3>Livraison</h3>
-                    <div>
+                    <div class="divEnLigne">
                         <p>
                             <label for="poidColis">Poids* (Kg)</label>
                             <input type="text" name="poidColis" id="poidColis" required>

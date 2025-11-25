@@ -893,7 +893,6 @@ div:has(> aside) {
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
-  flex: 1;
 }
 
 .footer a {
@@ -1374,4 +1373,8 @@ aside input.bouton:hover {
   width: 400px;
   height: 200px;
   resize: vertical;
+}
+.bodyAjoutProduit .enLigne {
+  display: flex;
+  flex-direction: row;
 }/*# sourceMappingURL=style.css.map */
