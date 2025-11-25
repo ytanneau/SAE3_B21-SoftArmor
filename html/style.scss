@@ -1094,11 +1094,11 @@ aside {
     input[type="file"]{
         padding-top: 7px;
     }
-    #idtva{
-        height: 20.3px;
+    select{
+        height: 32px;
     }
-    input[type="text"]{
-        height: 35px;
+    input[type="text"], input[type="number"]{
+        height: 25px;
     }
 }
 

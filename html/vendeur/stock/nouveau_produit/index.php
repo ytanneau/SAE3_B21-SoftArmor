@@ -118,11 +118,11 @@
                 <div>
                     <p>
                         <label for="nomPrv">Libellé privé*</label>
-                        <input required type="text" name="nomPrv" id="idNomPrv">
+                        <input required type="text" name="nomPrv" id="idNomPrv" placeholder="Oignon rosé">
                     </p>
                     <p>
                         <label for="nomPblc">Libellé public*</label>
-                        <input required type="text" name="nomPblc" id="idNomPblc">
+                        <input required type="text" name="nomPblc" id="idNomPblc" placeholder="Oignon rosé de Roscoff">
                     </p>
                 </div>
                 <div class="divEnLigne">
@@ -232,9 +232,9 @@
                 <h3>Description</h3>
                 <div>
                     <p class="blockDescription">
-                        <label for="descSimple">Description simple (200 caractéres maximum)</label>
+                        <label for="descSimple">Description simple (200 caractéres max)</label>
                         <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
-                        <label for="descDetaille">Description détaillé (2000 caractéres maximum)</label>
+                        <label for="descDetaille">Description détaillé (2000 caractéres max)</label>
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
                     </p>
                 </div>
