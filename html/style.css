@@ -893,6 +893,7 @@ div:has(> aside) {
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
+  margin-top: 100px;
 }
 
 .footer a {
