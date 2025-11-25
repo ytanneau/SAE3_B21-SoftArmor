@@ -123,7 +123,7 @@
             <h1>Désolé, nous rencontrons des problèmes trop chelous</h1>
         <?php } else if (isset($erreur['avis'])) { ?>
             <h1>Vous avez déjà donné votre avis sur ce produit</h1>
-            <a href="../produit?=produit<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
+            <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retoure au produit</a>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
@@ -187,11 +187,14 @@
                         </p>
                     <?php } ?>
 
-                    <label for="image">Image</label>
-                    <input type="file" 
+                    <label for="image">Ajouter une image</label>
+                    <span id="file-name">Aucun fichier choisi</span>
+                    <input id="file"
+                        type="file" 
                         name="image" 
                         alt="image"
-                        accept="image/png">
+                        accept="image/png"
+                        hidden>
 
                     <?php if (isset($erreur['image'])) { ?>
                         <p class="error">
@@ -206,4 +209,15 @@
     </main>
     <?php include HOME_SITE . "footer.php" ?>
 </body>
+<script>
+    const fileInput = document.getElementById("file");
+    const fileName = document.getElementById("file-name");
+
+    fileInput.addEventListener("change", () => {
+        fileName.textContent = fileInput.files.length > 0 
+        ? fileInput.files[0].name 
+        : "Aucun fichier choisi";
+    });
+
+</script>
 </html>
