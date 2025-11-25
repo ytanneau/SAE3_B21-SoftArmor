@@ -1516,11 +1516,11 @@ aside input.bouton:hover {
 .bodyAjoutProduit input[type=file] {
   padding-top: 7px;
 }
-.bodyAjoutProduit #idtva {
-  height: 20.3px;
+.bodyAjoutProduit select {
+  height: 32px;
 }
-.bodyAjoutProduit input[type=text] {
-  height: 35px;
+.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
+  height: 25px;
 }
 
 .image_bouton {
