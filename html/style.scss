@@ -957,3 +957,7 @@ aside {
 .error{
         color: $rouge;
 }
+
+.bodyAjoutProduit{
+    @include contenu_centre_vertical;
+}
