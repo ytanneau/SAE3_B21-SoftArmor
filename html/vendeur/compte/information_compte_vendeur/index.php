@@ -47,7 +47,7 @@
         <meta charset="UTF-8">
         <title>Consulter mes informations</title>
     </head>
-    <body>
+    <body class="info_vendeur">
         <!-- inclusion du header -->
         <?php include "../../header.php"?>
         <main>
@@ -62,7 +62,7 @@
             <h3>Adresse</h3>
             <p><?= $chaineAdresse ?></p>
             <h3>Description</h3>
-            <p>
+            <p class="desc">
                 <?php
                     if($description === null){
                         echo "Pas de description";
@@ -72,9 +72,9 @@
                 ?>
             </p>
             <!-- bouton pour etre rediriger vers la modification des informations du vendeur -->
-            <button><a href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
+            <button class="bouton"><a class="modif_info" href="modification_informations_vendeur/index.php">Modifier mes informations</a></button>
             <!-- bouton pour etre rediriger vers la desactivation du compte vendeur -->
-            <button><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
+            <button class="bouton grave"><a href="modification_informations_vendeur/desactivation.php">Désactiver mon compte</a></button>
         </main>
         <footer>
 

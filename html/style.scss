@@ -1049,34 +1049,10 @@ aside {
 
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
-    .entete{
-        display: flex;
-        align-items: center;
-        a{
-            height: 24px;
-            margin-right: 50px;
-        }
-        h1{
-            margin-right: 30px;
-        }
-    }
+    @include entete_page_vendeur;
+    @include format_textarea_p_select_input_form;
 
-    form{
-        display: flex;
-        flex-direction: column;
-        width: 600px;
-        
-    }
-    p{
-        display: flex;
-        flex-direction: column;
-    }
     
-    #idDescDetaille,#idDescSimple{
-        width: 600px;
-        height: 200px;
-        resize: vertical;
-    }
     .divEnLigne{
         display: flex;
         flex-direction: row;
@@ -1092,13 +1068,13 @@ aside {
     input[type="file"]{
         padding-top: 7px;
     }
-    select{
-        height: 32px;
-        width: fit-content;
-    }
-    input[type="text"], input[type="number"]{
-        height: 25px;
-    }
+    
+}
+
+.bodyModifProduit{
+    @include contenu_centre_vertical;
+    @include entete_page_vendeur;
+    @include format_textarea_p_select_input_form;
 }
 
 
@@ -1139,35 +1115,21 @@ aside {
     }
 }
 
-#body404{
-    .body404{
-        height: 100vh;
-        width: 100vw;
-        background: #3157A3;
+.info_vendeur {
+    p { 
+        padding: 0 10px;
+        width: max-content;
+        border-radius: $angle_petit;
+        border:rgba(0,0,0,0.25) 1px solid;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.25);
     }
-    .le404 {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        color: white;
+    .desc {
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
     }
-    .all_404{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
-    .all_404 h1{
-        justify-self: center;
-    }
-    .logo{
-        width: 400px;
-    }
-    .titre404{
-        font-size: 100px;
-    }
-
-    .bouton404{
-        @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
+    .modif_info {
+        color: $couleur_background;
+        text-decoration: none;
     }
 }
