@@ -8,6 +8,11 @@ main {
   padding: 2.5em;
   line-height: 2em;
 }
+@media screen and (max-width: 1024px) {
+  main {
+    line-height: 1.8em;
+  }
+}
 
 .image_produit_moyen {
   -o-object-fit: contain;
@@ -657,7 +662,15 @@ hr {
 }
 
 .infos .liste_avis {
-  width: 33vw;
+  width: 100%;
+}
+.infos .liste_avis li > img:first-child {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 5px;
 }
 .infos form {
   display: flex;
@@ -772,32 +785,32 @@ a.bouton:has(+ .liste_avis):hover {
   justify-content: space-between;
   margin: 2.5em 0;
 }
-.liste_avis li > div:first-child {
+.liste_avis li > div:first-of-type {
   flex-basis: 2;
   display: flex;
   flex-direction: column;
 }
-.liste_avis li > div:first-child > div:first-child {
+.liste_avis li > div:first-of-type > div:first-child {
   display: flex;
   align-items: center;
 }
-.liste_avis li > div:first-child > div:first-child > img:not(.etoiles) {
+.liste_avis li > div:first-of-type > div:first-child > img:not(.etoiles) {
   height: 30px;
   width: 30px;
   border-radius: 30px;
   margin-right: 0.5em;
 }
-.liste_avis li > div:first-child > div:nth-child(2) > h3, .liste_avis li > div:first-child > div:nth-child(2) > p {
+.liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-.liste_avis li > div:first-child > div:nth-child(2) > p:last-child {
+.liste_avis li > div:first-of-type > div:nth-child(2) > p:last-child {
   margin-top: 1em;
   font-style: italic;
   font-weight: 100;
   font-size: 0.9em;
 }
-.liste_avis li > img {
+.liste_avis li > img:last-of-type {
   width: 20%;
   margin-left: 2em;
 }
@@ -1450,6 +1463,17 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
 }
+.bodyAjoutProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyAjoutProduit .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.bodyAjoutProduit .entete h1 {
+  margin-right: 30px;
+}
 .bodyAjoutProduit form {
   display: flex;
   flex-direction: column;
@@ -1467,12 +1491,13 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  gap: 70px;
 }
 .bodyAjoutProduit .divCreerProduit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
 }
 .bodyAjoutProduit .divCreerProduit #creerProduit {
   display: block;
@@ -1496,11 +1521,36 @@ aside input.bouton:hover {
 .bodyAjoutProduit input[type=file] {
   padding-top: 7px;
 }
-.bodyAjoutProduit #idtva {
-  height: 20.3px;
+.bodyAjoutProduit select {
+  height: 32px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.bodyAjoutProduit input[type=text], .bodyAjoutProduit input[type=number] {
+  height: 25px;
 }
 
-.image {
+.bodyModifProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyModifProduit .entete {
+  display: flex;
+  align-items: center;
+}
+.bodyModifProduit .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.bodyModifProduit .entete h1 {
+  margin-right: 30px;
+}
+
+#create_avis main {
+  padding-top: 2em;
+}
+#create_avis main .image_bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -1516,13 +1566,33 @@ aside input.bouton:hover {
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
+  padding: 0.5em;
   margin-top: 2em;
   margin-bottom: 1em;
+  font-size: 1.5em;
 }
-.image:hover {
+#create_avis main .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
+#create_avis main .image_bouton p {
+  font-size: 10px;
+}
+@media (max-width: 1024px) {
+  #create_avis main {
+    flex-direction: column;
+    gap: 20px;
+  }
+  #create_avis main article, #create_avis main form {
+    width: 70vw;
+    padding: 0 1em 1em;
+  }
+  #create_avis main article .image_bouton, #create_avis main form .image_bouton {
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
+}
 
+<<<<<<< HEAD
 #create_avis main {
   padding-top: 2em;
 }
@@ -1543,4 +1613,58 @@ aside input.bouton:hover {
 .info_vendeur .modif_info {
   color: #FFFFFF;
   text-decoration: none;
+=======
+#body404 {
+  height: 100vh;
+  width: 100vw;
+  background: #3157A3;
+}
+
+.le404 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-style: "Inter";
+}
+
+.all_404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.all_404 h1 {
+  justify-self: center;
+}
+
+.logo {
+  width: 400px;
+}
+
+.titre404 {
+  font-size: 100px;
+  font-style: "Montserrat";
+}
+
+.bouton404 {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bouton404:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+>>>>>>> 01fd30a281b3540768048ff7243cf453580c57dc
 }/*# sourceMappingURL=style.css.map */

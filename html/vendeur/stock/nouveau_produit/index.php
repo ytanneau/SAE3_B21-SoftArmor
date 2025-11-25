@@ -118,17 +118,17 @@
                 <div>
                     <p>
                         <label for="nomPrv">Libellé privé*</label>
-                        <input required type="text" name="nomPrv" id="idNomPrv">
+                        <input required type="text" name="nomPrv" id="idNomPrv" placeholder="Oignon rosé / 500g">
                     </p>
                     <p>
                         <label for="nomPblc">Libellé public*</label>
-                        <input required type="text" name="nomPblc" id="idNomPblc">
+                        <input required type="text" name="nomPblc" id="idNomPblc" placeholder="Oignon rosé de Roscoff - 500g">
                     </p>
                 </div>
                 <div class="divEnLigne">
                     <p>
                         <label for="prixProd">Prix* hors taxe (€)</label>
-                        <input required type="text" name="prixProd" id="idPrixProd">
+                        <input required type="text" name="prixProd" id="idPrixProd" placeholder="4.50">
                     </p>
                     <p>
                         <label for="idtva">TVA*</label>
@@ -141,7 +141,7 @@
                     </p>
                     <p>
                         <label for="idCodeBarre">Code barre*</label>
-                        <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13">
+                        <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" placeholder="1234512345123">
                         <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                     </p>
                 </div>
@@ -182,7 +182,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="">Quantité acheté</label>
-                        <input type="text" name="qtAchete">
+                        <input type="text" name="qtAchete" placeholder="500">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -222,19 +222,19 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtStock">Quantité en stock</label>
-                        <input type="number" name="qtStock" id="qtStock">
+                        <input type="number" name="qtStock" id="qtStock" placeholder="100">
                     </p>
                     <p>
                         <label for="seuilAlerte">Seuil d'alerte</label>
-                        <input type="number" name="seuilAlerte" id="seuilAlerte">
+                        <input type="number" name="seuilAlerte" id="seuilAlerte" placeholder="10">
                     </p>
                 </div>
                 <h3>Description</h3>
                 <div>
                     <p class="blockDescription">
-                        <label for="descSimple">Description simple (200 caractéres maximum)</label>
+                        <label for="descSimple">Description simple (200 caractéres max)</label>
                         <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
-                        <label for="descDetaille">Description détaillé (2000 caractéres maximum)</label>
+                        <label for="descDetaille">Description détaillé (2000 caractéres max)</label>
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
                     </p>
                 </div>

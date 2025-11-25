@@ -1,6 +1,6 @@
 .config.php
 ressources/
 test.html
-style.css.map
-style_mixin.css.map
-style_const.css.map
+html/style.css.map
+html/style_mixin.css.map
+html/style_const.css.map
