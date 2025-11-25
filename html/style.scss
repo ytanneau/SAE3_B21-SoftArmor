@@ -1177,6 +1177,11 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+    
+    #idValiderModifVendeur, #idDesactivationCompte{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+    }
 }
 
 
