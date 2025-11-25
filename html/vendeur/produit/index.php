@@ -134,7 +134,7 @@
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
 
-        <main>
+        <main class="produit-vendeur">
             <?php if (!isset($supprime) || $supprime === false) {
                 ecrire_nom($rows, $rows2, $_GET['produit']); ?>
 
