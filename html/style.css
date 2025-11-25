@@ -1592,20 +1592,25 @@ aside input.bouton:hover {
   }
 }
 
+.info_vendeur div {
+  width: 60vw;
+}
 .info_vendeur p {
-  padding: 0 10px;
-  width: -moz-max-content;
-  width: max-content;
+  border: none;
   border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+  width: 50%;
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-}
-.info_vendeur .desc {
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
 }
 .info_vendeur .modif_info {
   color: #FFFFFF;
   text-decoration: none;
+}
+.info_vendeur h3 {
+  font-size: 1.5em;
+  margin-top: 2%;
 }/*# sourceMappingURL=style.css.map */
