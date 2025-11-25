@@ -308,7 +308,7 @@ hr {
         li {
             > img:first-child {
                 @include image_produit(10vw);
-                margin-left: 0;
+                margin-right: 2em;
             }
         }
     }
@@ -521,9 +521,15 @@ div:has(> aside) {
 .footer {
     background: #000;
     color: #fff;
-    padding: 40px 60px;
     font-family: sans-serif;
-    margin-top: 150px;
+    margin-top: 50px;
+    width: 100vw;
+    position: relative;
+    bottom: 0;
+
+    >div{
+        margin: 40px 60px;
+    }
 
     a {
         color: #dcdcdc;
@@ -1131,13 +1137,14 @@ aside {
     p { 
         border: none;
         border-radius: $angle_petit;
-        height: 2em;
+        height: auto;
         font-size: $font_size_normal;
         padding-left: 0.6em;
         padding-right: 0;
         width: 50%;
         border:rgba(0,0,0,0.25) 1px solid;
         box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+
     }
 
     .modif_info {
