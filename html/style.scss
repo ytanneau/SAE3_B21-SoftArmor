@@ -1020,8 +1020,7 @@ aside {
         justify-content: space-around;
     }
     #creerProduit{
-        @include bouton;
-        background-color: $focus;
+        @include bouton_new;
     }
 }
 
