@@ -20,11 +20,6 @@ main {
     @include image_produit($image_petit);
 }
 
-.formulaire_client {
-    @include contenu_centre_vertical;
-    @include formulaire();
-}
-
 h1, h2, h3, h4, h5, h6 {
     font-family: $font_title;
 }
@@ -99,6 +94,35 @@ hr {
     margin: 0 8px 0 0;
 }
 
+.toolbar {
+    background-color: $nuance;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    ul {
+        @include contenu_centre_horizontal();
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > li {
+            > a {
+                @include contenu_centre_horizontal();
+                margin: 0.25em 1em;
+
+                color: black;
+                text-decoration: none;
+                font-family: $font_title;
+                font-weight: bold;
+            }
+
+            &:hover {
+                background-color: adjust-color($color: $nuance, $lightness: 5%);
+            }
+        }
+    }
+}
 
 #header_client {
     @include header($couleur_primaire_client);
@@ -139,7 +163,7 @@ hr {
 #inscription_vendeur, #inscription_client{
     height: 100%;
     main{
-        margin: 15% 0;
+        margin: 5% 0;
     }
 }
 
@@ -591,18 +615,26 @@ div:has(> aside) {
             display: flex;
             flex-direction: row;
             > button {
-                width: 30px;
-                height: 25px;
-                border-radius: $angle_normal;
+                width: 40px;
+                height: 40px;
+                border-radius: $angle_grand;
                 align-self: center;
+                position: relative;
+                background-color: $couleur_primaire_client;
+                color:$couleur_background;
+            }
+            .gauche {
+                left: 50px;
+            }
+            .droite {
+                right: 50px;
             }
             > ul {
-                display: flex;
-                flex-direction: row;
+                @include contenu_centre_horizontal;
                 overflow: hidden;
                 list-style: none;
-                
-
+                padding: 0;
+                width:100%;
                 
                 > li {
                     width: 20vw;
@@ -613,11 +645,7 @@ div:has(> aside) {
                         text-decoration: none;
                         line-height: 1.5em;
                         > img {
-                            width: 15vw;
-                            height: 15vw;
-                            object-fit: contain;
-                            background-color: $nuance_primaire_client;
-                            border-radius: $angle_petit;
+                            @include image_produit(15vw);
                         }   
                         > div {
                             > img {
@@ -629,8 +657,7 @@ div:has(> aside) {
                                 margin: 5px 0 ;
                             }
                             height :2em;
-                            display: flex;
-                            align-items: center;
+                            @include contenu_centre_horizontal;
                         }
                         > p, > h3 {
                             margin: 5px 0 ;
@@ -649,10 +676,8 @@ div:has(> aside) {
     @media screen and (max-width: 1024px){
         nav {
             width: 100%;
-            display: flex;
-            flex-direction: row;
+            @include contenu_centre_horizontal;
             justify-content: space-evenly;
-            align-items: center;
             position: sticky;
             bottom: 0;
             background-color: $couleur_background;
@@ -670,9 +695,7 @@ div:has(> aside) {
                     justify-items:center;
                     padding: 0;
                     > li {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
+                        @include contenu_centre_vertical;
                         width: 100%;
                         margin: 20px;
                         > a {  
@@ -933,4 +956,8 @@ aside {
 
 .error{
         color: $rouge;
+}
+
+.bodyAjoutProduit{
+    @include contenu_centre_vertical;
 }
