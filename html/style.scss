@@ -1087,8 +1087,11 @@ aside {
     .divEnLigne{
         @include en_ligne;
     }
-    .idModifierProduit{
+    #idModifierProduit{
         @include bouton_new;
+    }
+    img{
+        @include image_produit;
     }
 }
 
