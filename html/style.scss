@@ -722,8 +722,7 @@ div:has(> aside) {
                         > a {  
                             display: flex;
                             flex-direction: column;
-                            max-width: fit-content;
-                            
+                            width: fit-content;
                             text-align: left;   
                             align-items: flex-start;
                             > img {
@@ -1000,7 +999,8 @@ aside {
     @include contenu_centre_vertical;
 
     p{
-        @include contenu_centre_vertical;
+        display: flex;
+        flex-direction: column;
     }
     #idDescDetaille,#idDescSimple{
         width: 400px;
@@ -1010,8 +1010,5 @@ aside {
     .divEnLigne{
         display: flex;
         flex-direction: row;
-    }
-    #idNomPrv, #idNomPblc{
-        width: fit-content;
     }
 }
