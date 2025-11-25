@@ -304,8 +304,6 @@ hr {
     }
 
     .liste_avis {
-        width: 100%;
-
         li > img:first-child {
             @include image_produit(10vw);
         }
@@ -376,7 +374,7 @@ a.bouton:has(+ .liste_avis) {
 
         // Avis
         > div:first-of-type {
-            flex-basis: 2;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
 
