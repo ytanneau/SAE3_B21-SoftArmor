@@ -103,9 +103,9 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?= HOME_SITE?>style.css">
     </head>
-    <body class="bodyAjoutProduit">
+    <body>
         <?php include "../../header.php" ?>
-        <main>
+        <main class="bodyAjoutProduit">
             <!-- Bouton de retour sur la page de gestion des stocks -->
             <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
             <h1>Ajouter un produit au stock</h1>
