@@ -1374,7 +1374,7 @@ aside input.bouton:hover {
   height: 200px;
   resize: vertical;
 }
-.bodyAjoutProduit .enLigne {
+.bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
 }/*# sourceMappingURL=style.css.map */
