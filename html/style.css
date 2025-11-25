@@ -329,11 +329,13 @@ hr {
   width: 100%;
 }
 #connect_vendeur main form label, #inscription_vendeur main form label {
-  /*margin-top: 2%;
-  @media (max-width: 1440px) {
-      margin-top: 5%;
-  }*/
+  margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main form label, #inscription_vendeur main form label {
+    margin-top: 5%;
+  }
 }
 #connect_vendeur main form .champ, #inscription_vendeur main form .champ {
   border: none;
@@ -433,11 +435,13 @@ hr {
   width: 100%;
 }
 #connect_client main form label, #inscription_client main form label {
-  /*margin-top: 2%;
-  @media (max-width: 1440px) {
-      margin-top: 5%;
-  }*/
+  margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  #connect_client main form label, #inscription_client main form label {
+    margin-top: 5%;
+  }
 }
 #connect_client main form .champ, #inscription_client main form .champ {
   border: none;
@@ -522,11 +526,13 @@ hr {
   font-size: 1em;
 }
 .form_client main form label {
-  /*margin-top: 2%;
-  @media (max-width: 1440px) {
-      margin-top: 5%;
-  }*/
+  margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  .form_client main form label {
+    margin-top: 5%;
+  }
 }
 .form_client main form .champ {
   border: none;
@@ -753,11 +759,13 @@ hr {
   width: 100%;
 }
 .infos form label {
-  /*margin-top: 2%;
-  @media (max-width: 1440px) {
-      margin-top: 5%;
-  }*/
+  margin-top: 2%;
   font-size: 1.5em;
+}
+@media (max-width: 1440px) {
+  .infos form label {
+    margin-top: 5%;
+  }
 }
 .infos form .champ {
   border: none;
