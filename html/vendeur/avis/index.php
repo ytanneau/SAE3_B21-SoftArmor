@@ -78,7 +78,7 @@
             afficher_moyenne_note($produit['note_moy']);
 
             } else {
-                echo "Il n'y a pas d'avis pour ce produit";
+                echo "<br>Il n'y a pas d'avis pour ce produit";
             }
 ?>
             <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
