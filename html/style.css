@@ -1399,12 +1399,12 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Inter";
-  padding: 0;
-  margin: 0;
 }
 .bodyAjoutProduit form {
   width: 600px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .bodyAjoutProduit p {
   display: flex;
