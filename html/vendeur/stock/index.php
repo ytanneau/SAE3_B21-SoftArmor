@@ -74,8 +74,8 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
         </main>
+        <?php include HOME_SITE . "vendeur/footer.php" ?>
     </body>
-    <?php include HOME_SITE . "vendeur/footer.php" ?>
 </html>
 
 

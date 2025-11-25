@@ -656,9 +656,6 @@ hr {
   font-family: "Inter";
 }
 
-.infos main {
-  display: flex;
-}
 .infos form {
   display: flex;
   flex-direction: row-reverse;
@@ -893,6 +890,7 @@ div:has(> aside) {
   color: #fff;
   padding: 40px 60px;
   font-family: sans-serif;
+  margin-top: 150px;
 }
 
 .footer a {

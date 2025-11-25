@@ -165,8 +165,9 @@ unset($pdo);
 <body class="infos">
     <?php include HOME_SITE . 'header.php'; ?>
 
-    <h1>Mon Profil</h1>
     <main>
+        <h1>Mon profil</h1>
+        
         <section>
             <?php
                 //affichage des info du compte
@@ -383,29 +384,37 @@ unset($pdo);
             
         <section>
             <h2>Vos Avis</h2>
-            <ul>
-                <?php
-                //boucle afficher les avis du comte dans un <li>
-                foreach ($avis as $row){  
-                ?>
-                <li class="avis">
-                    <a href="/produit/index.php?produit=<?= $row['id_produit']?>">
-                        <table>
-                            <tr>
-                            <td><img class="image_produit_petit" src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
-                            <p><?= htmlentities($row['pseudo'] ?? '')?></p></td>
-                            <td><?php afficher_moyenne_note($row['note']);?></td>
-                            <td><p><?= htmlentities($row['titre'] ?? '')?></p>  </td>
-                            <td colspan="2" rowspan="2"><img class="image_produit_moyen" src="<?= HOME_SITE.$row['url_img']?>" alt="<?= $row['alt_img']?>" title="<?= $row['titre_img']?>"></td>
-                            </tr>
+            <ul class="liste_avis">
+                <?php foreach ($avis as $row) { ?>
+                    <li>
+                        <!-- Image du produit -->
+                        <img class="image_produit_petit" src="<?= HOME_SITE.$row['url_pdp'];?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
 
-                            <tr>
-                            <td><p><?= "Avis publié le " .  date("m/d/Y", strtotime(htmlentities($row['date_avis'] )?? ''))?></p></td>
-                            <td colspan="2"><p><?= htmlentities($row['commentaire'] ?? '')?></p></td>
-                            </tr>
-                        </table>
-                    </a>
-                </li>
+                        <div>
+                            <div>
+                                <?php if (isset($_SESSION['profile'])) {?>
+                                    <img height="40px" width="40px" src="../ressources/27_1.png">
+                                <?php
+                                    } else {?>
+                                    <img height="40px" width="40px" src="<?=HOME_SITE . 'image/compte.svg'?>">
+                                <?php } ?>
+
+                                <div class="etoiles">
+                                    <?= afficher_moyenne_note(htmlentities($row['note'] ?? '')) ?>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
+                                <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
+                                <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($row['date_avis'] ?? ''))) ?></p>
+                            </div>
+                        </div>
+
+                        <?php if (isset($row['url_image'])) { ?>
+                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['alt_image'] ?>" alt="<?= $row['alt_image'] ?>">
+                        <?php } ?>
+                    </li>
                 <?php } ?>
             </ul>
         </section>
