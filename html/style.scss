@@ -995,6 +995,9 @@ aside {
 .bodyAjoutProduit{
     @include contenu_centre_vertical;
 
+    form{
+        width: 600px;
+    }
     p{
         display: flex;
         flex-direction: column;
@@ -1007,5 +1010,7 @@ aside {
     .divEnLigne{
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
     }
+
 }
