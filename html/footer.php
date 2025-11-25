@@ -12,7 +12,7 @@
           <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
         </a>
       </div>
-
+      <div class="footer-columns-all">
       <div class="footer-columns">
         <div class="footer-column">
           <h4>Connexion</h4>
@@ -29,13 +29,14 @@
           <a href=<?= HOME_SITE . 'vendeur/inscription' ?>>Compte vendeur</a>
           <a href=<?= HOME_SITE . 'compte/inscription' ?>>Compte client</a>
         </div>
-
+      </div>
+      <div class="footer-columns">
         <div class="footer-column">
           <h4>Des Questions ?</h4>
           <a href="#">Aide</a>
           <a href="#">Lien pratique</a>
         </div>
-
+      </div>
         <div class="footer-column">
           <h4>A propos d'Alizon</h4>
           <a href="#">Qui sommes nous ?</a>
