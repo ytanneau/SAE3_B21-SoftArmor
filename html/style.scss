@@ -635,6 +635,10 @@ div:has(> aside) {
                 > img {
                     width: 75%;
                 }
+
+                &:hover {
+                    background-color: adjust-color($color: $couleur_primaire_client, $lightness: 5%);
+                }
             }
             .gauche {
                 transform: rotate(180deg);
@@ -718,8 +722,7 @@ div:has(> aside) {
                         > a {  
                             display: flex;
                             flex-direction: column;
-                            max-width: fit-content;
-                            
+                            width: fit-content;
                             text-align: left;   
                             align-items: flex-start;
                             > img {
@@ -727,7 +730,7 @@ div:has(> aside) {
                                 width: 25vw;
                                 max-width: 300px;
                                 height: 25vw;
-                                border-radius: $angle;
+                                border-radius: $angle_petit;
                                 align-self: center;
                             }
                             > p {

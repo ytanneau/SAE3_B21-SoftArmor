@@ -1017,6 +1017,9 @@ div:has(> aside) {
 .accueil > main > div > button > img {
   width: 75%;
 }
+.accueil > main > div > button:hover {
+  background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
+}
 .accueil > main > div .gauche {
   transform: rotate(180deg);
   left: 50px;
