@@ -1057,9 +1057,7 @@ aside {
 
     
     .divEnLigne{
-        display: flex;
-        flex-direction: row;
-        gap: 70px;
+        @include en_ligne;
     }
     .divCreerProduit{
         @include contenu_centre_vertical;
@@ -1078,6 +1076,13 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
+
+    .divEnLigne{
+        @include en_ligne;
+    }
+    .idModifierProduit{
+        @include bouton_new;
+    }
 }
 
 

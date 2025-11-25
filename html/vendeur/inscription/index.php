@@ -228,8 +228,7 @@
 
             <input type="submit" value="S'inscrire" class="bouton">
         </form>
-        <p>Déjà inscrit ? <a href="../">Se connecter</a>
-        <br>
+        <p style="text-align:center;">Déjà inscrit ? <a href="../">Se connecter</a>
         <a href="../">Retourner au côté client</a></p>
 <?php
     }
