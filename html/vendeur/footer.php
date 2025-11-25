@@ -15,7 +15,7 @@
     <div class="footer-columns">
       <div class="footer-column">
         <h4>Connexion</h4>
-        <<?php if(isset($_SESSION['logged_in'])){?>
+        <?php if(isset($_SESSION['logged_in'])){?>
         <a href=<?= HOME_SITE . 'deconnexion/'?>>Se déconnecter</a>
         <?php } else {?>
         <a href=<?= HOME_SITE . 'vendeur/' ?>>Compte vendeur</a>
