@@ -54,6 +54,7 @@
     require_once HOME_SITE . 'vendeur/header.php';
 ?>
     <main>
+    <a href="../"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
 <?php
     if ($produit == NULL ){
 ?>
