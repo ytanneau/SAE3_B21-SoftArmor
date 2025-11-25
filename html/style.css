@@ -1772,6 +1772,9 @@ aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 .mainInfoVendeur #idDesactivationCompte {
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
   display: block;
   max-width: 100%;
   width: auto;
