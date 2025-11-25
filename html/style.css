@@ -1558,4 +1558,8 @@ aside input.bouton:hover {
     width: 70vw;
     padding: 0 1em 1em;
   }
+  #create_avis main article .image_bouton, #create_avis main form .image_bouton {
+    margin-top: 1em;
+    margin-bottom: 0;
+  }
 }/*# sourceMappingURL=style.css.map */
