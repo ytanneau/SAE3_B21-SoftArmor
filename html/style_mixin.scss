@@ -105,8 +105,8 @@
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
     background-color: $couleur_fond_produit;
-    min-width: 10vw;
-    max-width: 10vw;
+    min-width: $taille;
+    max-width: $taille;
     height: $taille;
     border-radius: $angle;
 }
