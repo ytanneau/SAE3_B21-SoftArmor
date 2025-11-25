@@ -999,7 +999,7 @@ aside {
 
     form{
         width: 600px;
-        @include contenu_centre_horizontal;
+        @include contenu_centre_vertical;
     }
     p{
         display: flex;

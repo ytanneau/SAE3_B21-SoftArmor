@@ -1401,7 +1401,7 @@ aside input.bouton:hover {
 .bodyAjoutProduit form {
   width: 600px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 .bodyAjoutProduit p {
