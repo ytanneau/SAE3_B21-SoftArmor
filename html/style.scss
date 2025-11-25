@@ -962,7 +962,8 @@ aside {
     @include contenu_centre_vertical;
 
     p{
-        @include contenu_centre_vertical;
+        display: flex;
+        flex-direction: column;
     }
     #idDescDetaille,#idDescSimple{
         width: 400px;
@@ -972,8 +973,5 @@ aside {
     .divEnLigne{
         display: flex;
         flex-direction: row;
-    }
-    #idNomPrv, #idNomPblc{
-        width: fit-content;
     }
 }

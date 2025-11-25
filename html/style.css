@@ -1367,7 +1367,6 @@ aside input.bouton:hover {
 .bodyAjoutProduit p {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .bodyAjoutProduit #idDescDetaille, .bodyAjoutProduit #idDescSimple {
   width: 400px;
@@ -1377,8 +1376,4 @@ aside input.bouton:hover {
 .bodyAjoutProduit .divEnLigne {
   display: flex;
   flex-direction: row;
-}
-.bodyAjoutProduit #idNomPrv, .bodyAjoutProduit #idNomPblc {
-  width: -moz-fit-content;
-  width: fit-content;
 }/*# sourceMappingURL=style.css.map */
