@@ -1012,7 +1012,7 @@ div:has(> aside) {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 10px black;
+  box-shadow: 0 0 20px black;
 }
 .accueil > main > div > button > img {
   width: 75%;

@@ -631,7 +631,7 @@ div:has(> aside) {
                 border: 5px $couleur_background;
                 @include contenu_centre_horizontal;
                 justify-content: center;
-                box-shadow: 2px 2px 10px black;
+                box-shadow: 0 0 20px black;
                     
                 > img {
                     width: 75%;
