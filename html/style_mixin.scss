@@ -118,8 +118,8 @@
     align-self: center;
 }
 
-@mixin bouton_new($background: $focus, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit) {
-    display: block;
+@mixin bouton_new($background: $focus, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit, $display: block) {
+    display: $display;
     max-width: 100%;
 
     width: $largeur;
