@@ -1586,6 +1586,7 @@ aside input.bouton:hover {
   justify-content: center;
   flex-direction: column;
   color: white;
+  font-style: "Inter";
 }
 
 .all_404 {
@@ -1605,6 +1606,7 @@ aside input.bouton:hover {
 
 .titre404 {
   font-size: 100px;
+  font-style: "Montserrat";
 }
 
 .bouton404 {

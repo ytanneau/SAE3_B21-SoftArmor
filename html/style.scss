@@ -1152,6 +1152,7 @@ aside {
     justify-content: center;
     flex-direction: column;
     color: white;
+    font-style: $font_text; 
 }
 .all_404{
     display: flex;
@@ -1167,6 +1168,7 @@ aside {
 }
 .titre404{
     font-size: 100px;
+    font-style: $font_title;
 }
 
 .bouton404{
