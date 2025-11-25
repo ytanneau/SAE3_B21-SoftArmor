@@ -186,17 +186,18 @@
                         <label for="categorie">Catégories*</label>
                         <select name="categorie" id="idCategorie" style="width: 175px;" required>
                             <option value="">-- Choisir une catégorie --</option>
+
                             <?php
                                 $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
-                                    $select = ($nomCat['nom_categorie'] == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
+                                    $cat = htmlspecialchars($nomCat['nom_categorie']);
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
                             ?>
-                            <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>" <?= $select ?>>
-                                <?= htmlspecialchars($nomCat['nom_categorie']) ?>
-                            </option>
+                                <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                             <?php } ?>
                         </select>
                     </p>
+
                     <p id="pSousCategorieAlimentaire" style="display:none;">
                         <label for="sous_categorie">Sous-catégories alimentaire*</label>
                         <select name="sous_categorie" id="sous_cate">
@@ -212,6 +213,7 @@
                         </select>
                     </p>
                 </div>
+
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
@@ -247,7 +249,7 @@
                     </p>
                 </div>
                 <h3>Photos du produit</h3>
-                <div>
+                <div class="blockImg">
                     <h4>Image principale</h4>
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                     <div>
@@ -341,6 +343,54 @@
                 if(chaineCodeBarre.length < 13) return true;
                 else return false;
             }
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+            const selectCat = document.getElementById("idCategorie");
+            const divSousCat = document.getElementById("pSousCategorieAlimentaire");
+
+            selectSousCategorieAlimentaire.addEventListener('change', () => {
+                if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
+                    uniteLiquide.style.display = "none";
+                    uniteVetement.style.display = "none";
+                    
+                    uniteMasse.style.display = "flex";
+                } else if (selectSousCategorieAlimentaire.value === "Boisson"){
+                    uniteMasse.style.display = "none";
+                    uniteVetement.style.display = "none";
+
+                    uniteLiquide.style.display = "flex";
+                } else {
+                    uniteMasse.style.display = "none";
+                    uniteVetement.style.display = "none";
+                    uniteLiquide.style.display = "none";
+                }
+            })
+
+            categorie.addEventListener('change', () => {
+                if(categorie.value === "Alimentaire"){
+                    pSousCategorie.style.display = "flex";
+                } 
+                else if(categorie.value === "Electroménager" || categorie.value === "Electronique" ||
+                categorie.value === "Soin & Hygiène"){
+                    uniteMasse.style.display = "flex";
+
+                    uniteVetement.style.display = "none";
+                    uniteLiquide.style.display = "none";
+                    
+                    selectSousCategorieAlimentaire.value = null;
+                    pSousCategorie.style.display = "none";
+                } else {
+                    uniteMasse.style.display = "none";
+                }
+            })
+
+            // Exécute au chargement (pour préremplissage)
+            majAffichage();
+
+            // Exécute lors du changement
+            selectCat.addEventListener("change", majAffichage);
+        });
 
             modifierProduit.addEventListener('click' , () =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
