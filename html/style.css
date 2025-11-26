@@ -2179,7 +2179,7 @@ aside input.bouton:hover {
 .produit-vendeur input[type=submit], .produit-vendeur a.bouton, .produit-vendeur button.bouton {
   display: block;
   max-width: 100%;
-  width: 30em;
+  width: 35em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
