@@ -1075,6 +1075,7 @@ a.bouton:has(+ .liste_avis):hover {
 }
 .liste_avis li > img:last-child {
   flex-basis: 20%;
+  max-width: 20%;
   margin-left: 2em;
 }
 .liste_avis li a {
