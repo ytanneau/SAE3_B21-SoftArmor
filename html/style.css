@@ -2199,10 +2199,10 @@ aside input.bouton:hover {
 
 .stock {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 .stock main {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex: 1;

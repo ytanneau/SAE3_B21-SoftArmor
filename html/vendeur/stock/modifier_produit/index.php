@@ -182,7 +182,7 @@
                     <label for="checkEnLigne">Produit en ligne</label>
                     <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
-                <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
+                <p>Categorie actuel : <?php if(isset($tabCategorieDuProduit['nom_categorie'])){ echo $tabCategorieDuProduit['nom_categorie'] ; } ?></p>
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
