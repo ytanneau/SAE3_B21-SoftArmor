@@ -26,10 +26,10 @@ function ecrire_nom($rows){
     ?>
         <table>
     <?php
-    if (is_null($rows['id_produit'])) {
-        ?>
-        <h1>Vous n'avez pas de produit</h1>
-        <?php
+    if (empty($rows)) {
+    ?>
+    <h1>Vous n'avez pas de produit</h1>
+    <?php
     } else {
         foreach ($rows as $row){
         ?>
