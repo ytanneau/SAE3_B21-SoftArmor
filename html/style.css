@@ -507,9 +507,12 @@ hr {
   color: white;
   border: none;
   border-radius: 50px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+#connect_vendeur main .bouton > a, #inscription_vendeur main .bouton > a {
+  text-decoration: none;
+  color: white;
 }
 #connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -608,9 +611,12 @@ hr {
   color: white;
   border: none;
   border-radius: 50px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+#connect_client main .bouton > a, #inscription_client main .bouton > a {
+  text-decoration: none;
+  color: white;
 }
 #connect_client main .bouton:hover, #inscription_client main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -802,9 +808,12 @@ hr {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.infos .modif > a {
+  text-decoration: none;
+  color: white;
 }
 .infos .modif:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -821,9 +830,12 @@ hr {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.infos .grave > a {
+  text-decoration: none;
+  color: white;
 }
 .infos .grave:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -840,7 +852,6 @@ hr {
   color: black;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
@@ -848,6 +859,10 @@ hr {
   margin-top: 2em;
   margin-bottom: 1em;
   font-size: 1.5em;
+}
+.infos .image_bouton > a {
+  text-decoration: none;
+  color: black;
 }
 .infos .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
@@ -1002,9 +1017,12 @@ a.bouton:has(+ .liste_avis) {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+a.bouton:has(+ .liste_avis) > a {
+  text-decoration: none;
+  color: white;
 }
 a.bouton:has(+ .liste_avis):hover {
   background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
@@ -1471,9 +1489,12 @@ h3 {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.liste main ul li article:last-child .bouton > a {
+  text-decoration: none;
+  color: white;
 }
 .liste main ul li article:last-child .bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -1539,9 +1560,12 @@ h3 {
     color: black;
     border: none;
     border-radius: 5px;
-    text-decoration: none;
     text-align: center;
     cursor: pointer;
+  }
+  .liste main ul li article:first-child form button > a {
+    text-decoration: none;
+    color: black;
   }
   .liste main ul li article:first-child form button:hover {
     background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -1617,9 +1641,12 @@ aside a.bouton {
   color: black;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+aside a.bouton > a {
+  text-decoration: none;
+  color: black;
 }
 aside a.bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
@@ -1636,9 +1663,12 @@ aside input.bouton {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+aside input.bouton > a {
+  text-decoration: none;
+  color: white;
 }
 aside input.bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -1772,9 +1802,12 @@ aside input.bouton:hover {
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.bodyAjoutProduit #creerProduit > a {
+  text-decoration: none;
+  color: #FFFFFF;
 }
 .bodyAjoutProduit #creerProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -1852,9 +1885,12 @@ aside input.bouton:hover {
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.bodyModifProduit #idModifierProduit > a {
+  text-decoration: none;
+  color: #FFFFFF;
 }
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -1912,9 +1948,12 @@ aside input.bouton:hover {
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.mainInfoVendeur #idValiderModifVendeur > a {
+  text-decoration: none;
+  color: #FFFFFF;
 }
 .mainInfoVendeur #idValiderModifVendeur:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -1931,12 +1970,15 @@ aside input.bouton:hover {
   color: #FFFFFF;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
   margin-top: 30px;
   padding: 0.6em;
   width: 577px;
+}
+.mainInfoVendeur #idDesactivationCompte > a {
+  text-decoration: none;
+  color: #FFFFFF;
 }
 .mainInfoVendeur #idDesactivationCompte:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -1963,7 +2005,6 @@ aside input.bouton:hover {
   color: black;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
   border-radius: 20px;
@@ -1971,6 +2012,10 @@ aside input.bouton:hover {
   margin-top: 2em;
   margin-bottom: 1em;
   font-size: 1.5em;
+}
+#create_avis main .image_bouton > a {
+  text-decoration: none;
+  color: black;
 }
 #create_avis main .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
@@ -2062,9 +2107,12 @@ aside input.bouton:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.bouton404 > a {
+  text-decoration: none;
+  color: white;
 }
 .bouton404:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -2190,10 +2238,13 @@ aside input.bouton:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
   height: 4em;
+}
+.produit-vendeur input[type=submit] > a, .produit-vendeur a.bouton > a, .produit-vendeur button.bouton > a {
+  text-decoration: none;
+  color: white;
 }
 .produit-vendeur input[type=submit]:hover, .produit-vendeur a.bouton:hover, .produit-vendeur button.bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
@@ -2210,9 +2261,12 @@ aside input.bouton:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.produit-vendeur .bouton_vendeur_produit > a {
+  text-decoration: none;
+  color: white;
 }
 .produit-vendeur .bouton_vendeur_produit:hover {
   background-color: rgb(210.5, 210.5, 223);
@@ -2229,9 +2283,12 @@ aside input.bouton:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.produit-vendeur .bouton_avis_vendeur_produit > a {
+  text-decoration: none;
+  color: white;
 }
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
@@ -2276,9 +2333,12 @@ aside input.bouton:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.stock main .bouton > a {
+  text-decoration: none;
+  color: white;
 }
 .stock main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
@@ -2304,9 +2364,12 @@ aside input.bouton:hover {
   color: black;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.stock main td a .bouton:nth-child(2) > a {
+  text-decoration: none;
+  color: black;
 }
 .stock main td a .bouton:nth-child(2):hover {
   background-color: hsl(0, 0%, 115%);
@@ -2323,9 +2386,12 @@ aside input.bouton:hover {
   color: black;
   border: none;
   border-radius: 5px;
-  text-decoration: none;
   text-align: center;
   cursor: pointer;
+}
+.stock main td a .bouton:first-child > a {
+  text-decoration: none;
+  color: black;
 }
 .stock main td a .bouton:first-child:hover {
   background-color: hsl(0, 0%, 115%);
