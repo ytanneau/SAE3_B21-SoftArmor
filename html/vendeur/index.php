@@ -47,7 +47,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
         <form action="" method="post">
                 <!-- Adresse e-mail -->
-            <br>
             <label for="email">Email</label>
             <input type="text"
                 name="email"
