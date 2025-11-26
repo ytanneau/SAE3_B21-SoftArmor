@@ -27,7 +27,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php'; ?>
-    <title>Alizon Vendeur - Connexion</title>
+    <title>Alizon - Connexion</title>
 </head>
 <body id="connect_vendeur">
     <main>

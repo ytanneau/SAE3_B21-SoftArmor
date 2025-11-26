@@ -158,7 +158,7 @@ unset($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informations Compte</title>
+    <title>Alizon - Mon Compte</title>
     <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>

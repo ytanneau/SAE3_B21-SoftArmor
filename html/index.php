@@ -41,7 +41,7 @@ unset($pdo);
     <meta charset="UTF-8">
     <meta name="Page accueil" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . "link_head.php"; ?>
-    <title>Accueil</title>
+    <title>Alizon - Accueil</title>
 </head>
 <body class="accueil">
     <?php include HOME_SITE . "header.php"; ?>

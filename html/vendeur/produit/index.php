@@ -67,7 +67,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Alizon</title>
+        <title>Alizon - <?= htmlentities($rows['nom_stock'] ?? 'Produit')?></title>
         <script src="confirmation.js"></script>
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>

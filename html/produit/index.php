@@ -68,7 +68,7 @@ if ($_POST != NULL) {
 <head>
     <meta charset="UTF-8">
     <?php include HOME_SITE . "link_head.php"; ?>
-    <title><?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
+    <title>Alizon - <?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
 <body>
     <?php include HOME_SITE . "header.php"; ?>
