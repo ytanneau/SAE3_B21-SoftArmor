@@ -125,10 +125,10 @@
                     <input type="submit" value="Supprimer">
                 </form>
                 
-                <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
             <?php } ?>
             
-            <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
+            <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
