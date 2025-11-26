@@ -53,11 +53,8 @@
 
             try{
                 if (!sql_check_email($pdo, $email)){
-                    echo "1";
                     if (sql_check_cle($pdo, $numCobrec)){
-                        echo "2";
                         sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec);
-                        echo "Réussi";
                     }
                     else{
                         $erreurs['numero_cobrec'] = EXISTE_PAS;
@@ -658,7 +655,7 @@
     }
 
     function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
-        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec");
+        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
         $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);
