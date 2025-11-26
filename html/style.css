@@ -2067,7 +2067,7 @@ aside input.bouton:hover {
 
 .stock {
   display: flex;
-  min-height: 100vh; /* Très important */
+  min-height: 100vh;
 }
 .stock main {
   display: flex;
