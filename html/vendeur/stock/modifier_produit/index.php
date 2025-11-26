@@ -408,7 +408,7 @@
             modifierProduit.addEventListener('click' , () =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
-                    categorie.value === "" ||
+                    (categorie.value === "" && selectSousCategorieAlimentaire === "")||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
