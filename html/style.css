@@ -1067,7 +1067,7 @@ a.bouton:has(+ .liste_avis):hover {
   font-weight: 100;
   font-size: 0.9em;
 }
-.liste_avis li > img:last-child {
+.liste_avis li > img:last-child, .liste_avis li a > img {
   width: 20%;
   margin-left: 2em;
 }
@@ -2266,7 +2266,7 @@ aside input.bouton:hover {
 }
 .produit-vendeur .bouton_vendeur_produit > a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 .produit-vendeur .bouton_vendeur_produit:hover {
   background-color: rgb(210.5, 210.5, 223);
@@ -2288,7 +2288,7 @@ aside input.bouton:hover {
 }
 .produit-vendeur .bouton_avis_vendeur_produit > a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
