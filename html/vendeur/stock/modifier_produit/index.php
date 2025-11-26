@@ -353,7 +353,7 @@
                 }
             })
             
-            codeBarre.addEventListener('input', () =>{
+            codeBarre.addEventListener('input', (event) =>{
                 codeBarre.value = codeBarre.value.replace(/\D/g,"");
                 if(codeBarre.value.length < 13){
                     messageErrCodeBarre.style.display = "block";
