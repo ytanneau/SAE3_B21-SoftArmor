@@ -219,7 +219,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="number" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
+                        <input type="number" name="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -297,11 +297,11 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="poidColis">Poid du colis</label>
-                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>">
+                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>" required>
                     </p>
                     <p>
                         <label for="volumeColis">Volume du colis</label>
-                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
+                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>" required>
                     </p>
                 </div>
                 <input type="submit" value="Valider les modifications" id="idModifierProduit">
