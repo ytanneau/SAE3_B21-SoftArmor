@@ -1420,8 +1420,57 @@ aside {
   }
 
   form#supprimer {
-    @include bouton_new($background:$nuance,$color: red, $largeur: 30em);
+    margin-top: 1.5rem;
   }
+
+  
+    /* ---- BOUTON MODIFIER ---- */
+    a.bouton_vendeur_produit {
+        @include bouton_new(
+            $background: $nuance,
+            $color: white,
+            $largeur: auto,
+            $padding: 0.8em 1.6em,
+            $size: 1rem,
+            $angle: $angle_petit,
+            $display: inline-block
+        );
+
+        margin-top: 1rem;
+    }
+
+
+    /* ---- BOUTON AVIS ---- */
+    a.bouton_avis_vendeur_produit {
+        @include bouton_new(
+            $background: $couleur_etoile, // #EAC452
+            $color: black,
+            $largeur: auto,
+            $padding: 0.8em 1.6em,
+            $size: 1rem,
+            $angle: $angle_petit,
+            $display: inline-block
+        );
+
+        margin-top: 1rem;
+    }
+
+
+    /* ---- BOUTON SUPPRIMER ---- */
+    form#supprimer input[type="submit"] {
+        @include bouton_new(
+            $background: $rouge, // #E43737
+            $color: white,
+            $largeur: auto,
+            $padding: 0.7em 1.4em,
+            $size: 1rem,
+            $angle: $angle_petit,
+            $display: inline-block
+        );
+
+        margin-top: 1.5rem;
+    }
+
 }
 
 
@@ -1491,10 +1540,3 @@ aside {
     }
 }
 
-.bouton_vendeur_produit{
-    @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
-}
-
-.bouton_avis_vendeur_produit{
-    @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
-}
