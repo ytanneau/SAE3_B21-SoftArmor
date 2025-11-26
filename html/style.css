@@ -2203,6 +2203,7 @@ aside input.bouton:hover {
   min-height: 100vh;
 }
 .stock main {
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex: 1;
