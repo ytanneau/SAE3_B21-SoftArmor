@@ -248,7 +248,7 @@ if ($numEtape == 1) {
 ?>
 
         <form action="" method="post">
-            <a href="../"><img src="../image/retour.svg"></a>
+            <a href="<?= HOME_SITE . 'produit/index.php?produit=' . urlencode($_GET['produit'] ?? '') ?>"><img src="../image/retour.svg"></a>
 
             <h2>Entrez votre adresse</h2>
 
