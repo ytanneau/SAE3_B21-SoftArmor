@@ -2177,9 +2177,6 @@ aside input.bouton:hover {
   color: #333;
 }
 .produit-vendeur form#supprimer {
-  margin-top: 1.5rem;
-}
-.produit-vendeur form#supprimer input[type=submit] {
   display: block;
   max-width: 100%;
   width: 30em;
@@ -2188,14 +2185,14 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #A6A6BF;
-  color: white;
+  color: red;
   border: none;
   border-radius: 5px;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
 }
-.produit-vendeur form#supprimer input[type=submit]:hover {
+.produit-vendeur form#supprimer:hover {
   background-color: rgb(210.5, 210.5, 223);
 }
 

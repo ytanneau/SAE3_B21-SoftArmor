@@ -1418,11 +1418,7 @@ aside {
   }
 
   form#supprimer {
-    margin-top: 1.5rem;
-  }
-
-  form#supprimer input[type="submit"] {
-    @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
+    @include bouton_new($background:$nuance,$color: red, $largeur: 30em);
   }
 }
 
