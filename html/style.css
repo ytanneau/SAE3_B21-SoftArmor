@@ -2190,7 +2190,7 @@ aside input.bouton:hover {
   width: auto;
   padding: 0.8em 1.6em;
   font-family: "Montserrat";
-  font-size: 1rem;
+  font-size: 2em;
   font-weight: bold;
   background-color: #A6A6BF;
   color: white;
@@ -2210,7 +2210,7 @@ aside input.bouton:hover {
   width: auto;
   padding: 0.8em 1.6em;
   font-family: "Montserrat";
-  font-size: 1rem;
+  font-size: 2em;
   font-weight: bold;
   background-color: #EAC452;
   color: black;
@@ -2230,7 +2230,7 @@ aside input.bouton:hover {
   width: auto;
   padding: 0.7em 1.4em;
   font-family: "Montserrat";
-  font-size: 1rem;
+  font-size: 2em;
   font-weight: bold;
   background-color: #E43737;
   color: white;
