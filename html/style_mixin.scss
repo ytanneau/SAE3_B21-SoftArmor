@@ -210,10 +210,14 @@
     border: none;
     border-radius: $angle;
 
-    text-decoration: none;
     text-align: center;
 
     cursor: pointer;
+
+    a {
+        text-decoration: none;
+        color: $color;
+    }
 
     &:hover {
         background-color: adjust-color($color: $background, $lightness: 15%);
