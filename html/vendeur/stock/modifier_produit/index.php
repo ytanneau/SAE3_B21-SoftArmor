@@ -186,7 +186,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
-                        <select name="categorie" id="idCategorie" style="width: 175px;" required>
+                        <select name="categorie" id="idCategorie" style="width: 175px;">
                             <option value="">-- Choisir une catégorie --</option>
 
                             <?php
@@ -200,17 +200,17 @@
                         </select>
                     </p>
 
-                    <p id="pSousCategorieAlimentaire" style="display:none;">
+                    <p id="pSousCategorieAlimentaire">
                         <label for="sous_categorie">Sous-catégories alimentaire*</label>
                         <select name="sous_categorie" id="sous_cate">
                             <option value="">-- Choisir une catégorie --</option>
                             <?php 
                                 $tabSousCategorie = get_sous_categorie("Alimentaire");
-                                foreach($tabSousCategorie as $sousCat){                  
+                                foreach($tabSousCategorie as $sousCat){
+                                    $cat = htmlspecialchars($sousCat['nom_categorie']);
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';             
                             ?>
-                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
-                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
-                            </option>
+                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>" <?= $selected?>><?= htmlspecialchars($sousCat['nom_categorie'])?></option>
                             <?php } ?>
                         </select>
                     </p>

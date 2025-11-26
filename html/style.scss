@@ -1419,9 +1419,16 @@ aside {
     color: #333;
   }
 
-  form#supprimer {
-    @include bouton_new($background:$nuance,$color: red, $largeur: 30em);
-  }
+    input[type="submit"], a.bouton, button.bouton {
+        @include bouton_new($background:$rouge ,$color: white, $largeur: 30em); 
+    }
+    .bouton_vendeur_produit{
+        @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
+    }
+
+    .bouton_avis_vendeur_produit{
+        @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
+    }
 }
 
 
@@ -1491,10 +1498,3 @@ aside {
     }
 }
 
-.bouton_vendeur_produit{
-    @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
-}
-
-.bouton_avis_vendeur_produit{
-    @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
-}
