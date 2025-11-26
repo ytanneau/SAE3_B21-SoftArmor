@@ -245,6 +245,7 @@
                         <label for="uniteMasse">Unités de masse</label>
                         <select name="unite" id="uniteMasse">
                             <option value="">-- Choisir une unitée --</option>
+                            <option value="mg">mg</option>
                             <option value="g">g</option>
                             <option value="kg">kg</option>
                         </select>
