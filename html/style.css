@@ -724,6 +724,7 @@ hr {
   height: 10vw;
   border-radius: 5px;
   margin-left: 0;
+  margin-right: 1em;
 }
 .infos form {
   display: flex;
