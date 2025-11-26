@@ -405,7 +405,7 @@
                 }
             })
 
-            modifierProduit.addEventListener('click' , () =>  {
+            modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
                     (categorie.value === "" && selectSousCategorieAlimentaire.value === "")||
