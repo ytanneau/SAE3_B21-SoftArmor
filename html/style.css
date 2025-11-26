@@ -2178,65 +2178,29 @@ aside input.bouton:hover {
   font-weight: bold;
   color: #333;
 }
-.produit-vendeur a.bouton_vendeur_produit {
-  display: inline-block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.8em 1.6em;
-  font-family: "Montserrat";
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #A6A6BF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-.produit-vendeur a.bouton_vendeur_produit:hover {
-  background-color: rgb(210.5, 210.5, 223);
-}
-.produit-vendeur a.bouton_avis_vendeur_produit {
-  display: inline-block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.8em 1.6em;
-  font-family: "Montserrat";
-  font-size: 2px;
-  font-weight: bold;
-  background-color: #EAC452;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-.produit-vendeur a.bouton_avis_vendeur_produit:hover {
-  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
-}
-.produit-vendeur form#supprimer input[type=submit] {
-  display: inline-block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.7em 1.4em;
-  font-family: "Montserrat";
-  font-size: 2px;
-  font-weight: bold;
-  background-color: #E43737;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
+.produit-vendeur form#supprimer {
   margin-top: 1.5rem;
 }
+.produit-vendeur form#supprimer input[type=submit] {
+  background: #d32f2f;
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
 .produit-vendeur form#supprimer input[type=submit]:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+  background: #b71c1c;
+}
+.produit-vendeur a {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
 }
 
 .fleche_produit_arriere {
@@ -2334,4 +2298,44 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
+}
+
+.bouton_vendeur_produit {
+  display: block;
+  max-width: 100%;
+  width: 30em;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #A6A6BF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bouton_vendeur_produit:hover {
+  background-color: rgb(210.5, 210.5, 223);
+}
+
+.bouton_avis_vendeur_produit {
+  display: block;
+  max-width: 100%;
+  width: 30em;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+.bouton_avis_vendeur_produit:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }/*# sourceMappingURL=style.css.map */
