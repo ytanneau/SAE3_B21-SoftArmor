@@ -121,7 +121,11 @@ if (isset($_POST['etape']) && $_POST['etape'] === 'etape_mdp') {
             }
 
             // Rediriger vers la page de connexion
-            header('location: ' . HOME_SITE . 'compte/connexion');
+            $redirection = HOME_SITE . 'compte/connexion';
+            if (isset($_GET['produit'])) {
+                $redirection .= "?produit=" . $_GET['produit'];
+            }
+            header('location: ' . HOME_SITE . $redirection);
         }
     } else {
         $etape = 3;

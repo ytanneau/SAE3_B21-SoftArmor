@@ -99,7 +99,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     } 
                 ?>
             </p>
-            <p><a href="../reinitialiser">Mot de passe oublié ?</a></p>
+            <p><a href="../reinitialiser<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Mot de passe oublié ?</a></p>
             
             <input type="submit" value="Se connecter" class="bouton">
         </form>
