@@ -2207,7 +2207,7 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #A6A6BF;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   text-decoration: none;
@@ -2226,7 +2226,7 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #EAC452;
-  color: white;
+  color: black;
   border: none;
   border-radius: 5px;
   text-decoration: none;

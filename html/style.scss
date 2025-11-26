@@ -1424,11 +1424,11 @@ aside {
         height: 4em;
     }
     .bouton_vendeur_produit{
-        @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
+        @include bouton_new($background:$nuance,$color: black, $largeur: 30em);
     }
 
     .bouton_avis_vendeur_produit{
-        @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
+        @include bouton_new($background:$couleur_etoile ,$color: black, $largeur: 30em); 
     }
 }
 
