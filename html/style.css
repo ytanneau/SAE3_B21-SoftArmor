@@ -2061,17 +2061,18 @@ aside input.bouton:hover {
   transition: opacity 0.2s ease;
 }
 
-.content_produit_vendeur {
-  flex: 1;
-}
-
 .fleche_produit_arriere {
   margin: 5px;
 }
 
+.stock {
+  display: flex;
+  min-height: 100vh; /* Très important */
+}
 .stock main {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .stock main tr {
   width: 50vw;
