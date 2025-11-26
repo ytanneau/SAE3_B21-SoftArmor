@@ -70,7 +70,7 @@ if ($_POST != NULL) {
     <?php include HOME_SITE . "link_head.php"; ?>
     <title>Alizon - <?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
-<body>
+<body class="produit">
     <?php include HOME_SITE . "header.php"; ?>
 
     <script>

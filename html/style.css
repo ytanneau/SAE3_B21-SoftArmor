@@ -928,6 +928,13 @@ div.gauche {
   flex-basis: 60%;
 }
 
+@media screen and (max-width: 1024px) {
+  .produit {
+    font-size: 1.4em;
+    line-height: 2em;
+  }
+}
+
 div:has(> aside) {
   flex-grow: 1;
 }
