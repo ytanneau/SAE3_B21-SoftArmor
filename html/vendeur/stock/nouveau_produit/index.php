@@ -286,15 +286,15 @@
 
                 poidColis.addEventListener('input', () => {
                     poidColis.value = poidColis.value.replace(",",".");
-                    poidColis.value = poidColis.value.replace(/\D/g,"");
+                    poidColis.value = poidColis.value.replace(/[^\d.,]/g,"");
                 })
                 volumeColis.addEventListener('input', () => {
                     volumeColis.value = volumeColis.value.replace(",",".");
-                    volumeColis.value = volumeColis.value.replace(/\D/g,"");
+                    volumeColis.value = volumeColis.value.replace(/[^\d.,]/g,"");
                 })
                 prix.addEventListener('input', () => {
                     prix.value = prix.value.replace(",",".");
-                    prix.value = prix.value.replace(/\D/g,"");
+                    prix.value = prix.value.replace(/[^\d.,]/g,"");
                 })
                 
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
