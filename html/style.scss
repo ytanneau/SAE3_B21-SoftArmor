@@ -298,10 +298,11 @@ hr {
     font-family: $font_text;
 }
 
-.infos{
-    #test1 {
-        width: 30em;
-    }
+#test1 {
+    width: 30em;
+}
+
+.infos {
 
     .modif{
         @include bouton_new($color: white, $largeur: 30em);
