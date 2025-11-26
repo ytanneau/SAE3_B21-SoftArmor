@@ -893,11 +893,13 @@ h3 {
 
             li > div {
                 display: flex;
+                flex-grow: 1;
             }
             
             // la partie description etc. du produit
             li article:first-child {
                 display: flex;
+                flex-grow: 1;
 
                 p {
                     width: 90%;

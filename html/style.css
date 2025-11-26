@@ -1427,9 +1427,11 @@ h3 {
 }
 .liste main ul li > div {
   display: flex;
+  flex-grow: 1;
 }
 .liste main ul li article:first-child {
   display: flex;
+  flex-grow: 1;
 }
 .liste main ul li article:first-child p {
   width: 90%;
