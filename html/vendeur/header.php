@@ -30,7 +30,7 @@
             <li class="hide-on-mobile">
                 <div class="dropdown">
                     <button onclick="ouvrirMenu()" class="dropdown-button">
-                        <img src="<?= $images . 'compte_vendeur.svg' ?>" class="icon">
+                        <img src="<?= $images . 'compte_vendeur_blanc.svg' ?>" class="icon">
                         Otterspace
                     </button>
 
