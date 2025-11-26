@@ -1417,7 +1417,6 @@ aside {
     color: #333;
   }
  
-    /* ---- BOUTON MODIFIER ---- */
     a.bouton_vendeur_produit {
         @include bouton_new(
             $background: $nuance,
@@ -1433,14 +1432,13 @@ aside {
     }
 
 
-    /* ---- BOUTON AVIS ---- */
     a.bouton_avis_vendeur_produit {
         @include bouton_new(
             $background: $couleur_etoile, // #EAC452
             $color: black,
             $largeur: auto,
             $padding: 0.8em 1.6em,
-            $size: 20px,
+            $size: 2px,
             $angle: $angle_petit,
             $display: inline-block
         );
@@ -1455,7 +1453,7 @@ aside {
             $color: white,
             $largeur: auto,
             $padding: 0.7em 1.4em,
-            $size: 20px,
+            $size: 2px,
             $angle: $angle_petit,
             $display: inline-block
         );
