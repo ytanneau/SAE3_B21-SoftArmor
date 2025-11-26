@@ -182,7 +182,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="">Quantité acheté</label>
-                        <input type="text" name="qtAchete" placeholder="500">
+                        <input type="number" name="qtAchete" placeholder="500">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -242,11 +242,11 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="poidColis">Poids* (Kg)</label>
-                        <input type="text" name="poidColis" id="poidColis" required>
+                        <input type="number" name="poidColis" id="poidColis" required>
                     </p>
                     <p>
                         <label for="volumeColis">Volume du colis* (L)</label>
-                        <input type="text" name="volumeColis" id="volumeColis" required>
+                        <input type="number" name="volumeColis" id="volumeColis" required>
                     </p>   
                 </div>
                 <input type="submit" value="Créer le produit" id="creerProduit">
@@ -283,6 +283,7 @@
                 const photo = document.getElementById("photo");
 
                 const creerProduit = document.getElementById("creerProduit");
+
                 prix.addEventListener('input', () => {
                     prix.value = prix.value.replace(",",".");
                 })
