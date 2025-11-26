@@ -299,15 +299,15 @@ hr {
 }
 
 .infos{
-    .bouton {
-        
-    }
     .modif{
         @include bouton_new($color: white);
+        width: 30em;
     }
     .grave {
         @include bouton_new($background:red,$color: white);
+        width: 30em;
     }
+
     .image_bouton{
         @include bouton_new($couleur_etoile);
         border-radius: $angle_normal;
