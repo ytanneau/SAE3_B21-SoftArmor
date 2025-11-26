@@ -2180,6 +2180,7 @@ aside input.bouton:hover {
 }
 .produit-vendeur form#supprimer {
   margin-top: 1.5rem;
+  width: 120px;
 }
 .produit-vendeur form#supprimer input[type=submit] {
   background: #d32f2f;
