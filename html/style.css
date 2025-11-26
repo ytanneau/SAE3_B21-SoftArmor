@@ -708,6 +708,14 @@ hr {
   background-color: white;
 }
 
+#avis_vendeur {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+#avis_vendeur main {
+  flex: 1;
+}
 #avis_vendeur article {
   display: flex;
   flex-direction: row;
