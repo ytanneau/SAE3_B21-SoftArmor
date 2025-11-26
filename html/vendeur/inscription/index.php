@@ -74,7 +74,7 @@
 <?php
     }
 ?>
-            <br>
+            
             <label for="numSiret">Numéro de SIRET</label>
             <input type="text" 
                 name="numSiret"
@@ -95,7 +95,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="numCobrec">Clé de la COBREC</label>
             <input type="text" 
                 name="numCobrec"
@@ -116,7 +116,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="email">Email</label>
             <input type="email"
                 name="email"
@@ -137,7 +137,7 @@
 ?>
 
 
-            <br>
+            
             <label for="adresse">Adresse</label>
             <input type="text"
                 name="adresse"
@@ -156,7 +156,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="compAdresse">Complément d'adresse</label>
             <textarea type="text"
                 name="compAdresse"
@@ -166,7 +166,7 @@
             </textarea>
             <p class="contrainte">Informations complémentaires</p>
 
-            <br>
+            
             <label for="codePostal">Code postal</label>
             <input type="number" 
                 name="codePostal"
@@ -186,7 +186,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="mdp">Mot de passe</label>
             <input type="password" 
                 name="mdp"
@@ -206,7 +206,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="mdpc">Mot de passe de confirmation</label>
             <input type="password" 
                 name="mdpc"
