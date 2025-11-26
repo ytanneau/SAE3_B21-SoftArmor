@@ -270,7 +270,7 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
                     <label for="code_postal">Code Postal</label>
                     <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
@@ -304,7 +304,7 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" placeholder="À renseigner" class="champ text">
 
                     <label for="code_postal">Code Postal</label>
                     <input type="text" name="code_postal" placeholder="À renseigner" class="petit champ">
