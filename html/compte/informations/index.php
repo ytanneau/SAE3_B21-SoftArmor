@@ -378,7 +378,7 @@ unset($pdo);
                         }
                     ?>
 
-                    <button type="submit" class="bouton modif">Modifier mes informations</button>
+                    <button style="width:30em;" type="submit" class="bouton modif">Modifier mes informations</button>
                     <button class="bouton grave" href="anonymisation_client/index.php">Désactiver mon compte</button>
                 </article>
             </form>
