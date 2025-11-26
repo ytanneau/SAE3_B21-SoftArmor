@@ -331,12 +331,15 @@
             
             poidColis.addEventListener('input', () => {
                 poidColis.value = poidColis.value.replace(",",".");
+                poidColis.value = poidColis.value.replace(/\D/g,"");
             })
             volumeColis.addEventListener('input', () => {
                 volumeColis.value = volumeColis.value.replace(",",".");
+                volumeColis.value = volumeColis.value.replace(/\D/g,"");
             })
             prix.addEventListener('input', () => {
                 prix.value = prix.value.replace(",",".");
+                prix.value = prix.value.replace(/\D/g,"");
             })
 
             descSimple.addEventListener('input', () => {
@@ -404,7 +407,8 @@
 
             modifierProduit.addEventListener('click' , () =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
-                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
+                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
+                    categorie.value === "" ||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();

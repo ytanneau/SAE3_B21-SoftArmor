@@ -284,15 +284,19 @@
 
                 const creerProduit = document.getElementById("creerProduit");
 
-                prix.addEventListener('input', () => {
-                    prix.value = prix.value.replace(",",".");
-                })
                 poidColis.addEventListener('input', () => {
                     poidColis.value = poidColis.value.replace(",",".");
+                    poidColis.value = poidColis.value.replace(/\D/g,"");
                 })
                 volumeColis.addEventListener('input', () => {
                     volumeColis.value = volumeColis.value.replace(",",".");
+                    volumeColis.value = volumeColis.value.replace(/\D/g,"");
                 })
+                prix.addEventListener('input', () => {
+                    prix.value = prix.value.replace(",",".");
+                    prix.value = prix.value.replace(/\D/g,"");
+                })
+                
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
                     if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
                         uniteLiquide.style.display = "none";
@@ -362,7 +366,7 @@
                         }
                     }
                 })
-
+                
                 creerProduit.addEventListener('click' , () =>  {
                     if(!checkMajeur.checked){
                         checkMajeur.checked = 0;
