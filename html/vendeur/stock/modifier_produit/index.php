@@ -44,7 +44,10 @@
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if(isset($_POST['sous_categorie'])){
+        if(isset($_POST['categorie']) && ($_POST['categorie'] != 'Alimentaire')){
+            update_categorie_produit($idProduit, $_POST['categorie']);
+        }
+        else if(isset($_POST['sous_categorie'])){
             update_categorie_produit($idProduit, $_POST['sous_categorie']);
         } else {
             update_categorie_produit($idProduit, $_POST['categorie']);
