@@ -38,16 +38,22 @@
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
         
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
-        if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
+        if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
         update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if(isset($_POST['sous_categorie'])){
-            update_categorie_produit($idProduit, $_POST['sous_categorie']);
-        } else {
-            update_categorie_produit($idProduit, $_POST['categorie']);
+        if(isset($_POST['categorie'])) {
+            if($_POST['categorie'] == 'Alimentaire') {
+                if(!empty($_POST['sous_categorie'])) {
+                    update_categorie_produit($idProduit, $_POST['sous_categorie']);
+                } else {
+                    update_categorie_produit($idProduit, $_POST['categorie']);
+                }
+            } else {
+                update_categorie_produit($idProduit, $_POST['categorie']);
+            }
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -193,7 +199,10 @@
                                 $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
                                     $cat = htmlspecialchars($nomCat['nom_categorie']);
-                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
+                                    if($cat == 'Alimentaire' && $tabCategorieDuProduit['nom_categorie'] == 'Boisson' || $tabCategorieDuProduit['nom_categorie'] == 'Salé' ||$tabCategorieDuProduit['nom_categorie'] == 'Sucré'){
+                                        $selected = 'selected';
+                                    } else {
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';}
                             ?>
                                 <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                             <?php } ?>
@@ -219,7 +228,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="number" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
+                        <input type="number" name="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -297,11 +306,11 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="poidColis">Poid du colis</label>
-                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>">
+                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>" required>
                     </p>
                     <p>
                         <label for="volumeColis">Volume du colis</label>
-                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
+                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>" required>
                     </p>
                 </div>
                 <input type="submit" value="Valider les modifications" id="idModifierProduit">
@@ -357,7 +366,6 @@
                 codeBarre.value = codeBarre.value.replace(/\D/g,"");
                 if(codeBarre.value.length < 13){
                     messageErrCodeBarre.style.display = "block";
-                    event.preventDefault();
                 } else {
                     messageErrCodeBarre.style.display = "none";
                 }
@@ -405,10 +413,10 @@
                 }
             })
 
-            modifierProduit.addEventListener('click' , () =>  {
+            modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
-                    (categorie.value === "" && selectSousCategorieAlimentaire === "")||
+                    categorie.value === ""  selectSousCategorieAlimentaire.value === ""||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
