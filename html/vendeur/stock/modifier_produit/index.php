@@ -206,9 +206,10 @@
                             <option value="">-- Choisir une catégorie --</option>
                             <?php 
                                 $tabSousCategorie = get_sous_categorie("Alimentaire");
-                                foreach($tabSousCategorie as $sousCat){                  
+                                foreach($tabSousCategorie as $sousCat){     
+                                    $selected = ($sousCat == $tabSousCategorie['nom_categorie']) ? 'selected' : '';             
                             ?>
-                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
+                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>" <?= $selected?>>
                                     <?= htmlspecialchars($sousCat['nom_categorie'])?>
                             </option>
                             <?php } ?>
