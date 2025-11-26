@@ -65,6 +65,7 @@
                 }
             }
             catch(PDOException $e){
+                echo $e->getMessage();
                 $erreurs['fatal'] = true;
                 $erreurs['correcte'] = false;
             }
