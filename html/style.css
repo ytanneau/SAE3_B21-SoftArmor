@@ -650,6 +650,9 @@ hr {
   font-family: "Inter";
 }
 
+.infos #test1 {
+  width: 30em;
+}
 .infos .modif {
   display: block;
   max-width: 100%;

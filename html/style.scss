@@ -299,6 +299,10 @@ hr {
 }
 
 .infos{
+    #test1 {
+        width: 30em;
+    }
+
     .modif{
         @include bouton_new($color: white, $largeur: 30em);
     }
