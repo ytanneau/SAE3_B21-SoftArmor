@@ -48,6 +48,8 @@
             if($_POST['categorie'] == 'Alimentaire') {
                 if(!empty($_POST['sous_categorie'])) {
                     update_categorie_produit($idProduit, $_POST['sous_categorie']);
+                } else {
+                    update_categorie_produit($idProduit, $_POST['categorie']);
                 }
             } else {
                 update_categorie_produit($idProduit, $_POST['categorie']);
