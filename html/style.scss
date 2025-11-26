@@ -487,9 +487,17 @@ a.bouton:has(+ .liste_avis) {
         }
 
         // Image de l'avis
-        > img:last-child, a { 
-            width: 20%;
+        > img:last-child { 
+            flex-basis: 20%;
             margin-left: 2em;
+        }
+
+        a {
+            flex-basis: 20%;
+            
+            img {
+                width: 100%;
+            }
         }
     }
 }
