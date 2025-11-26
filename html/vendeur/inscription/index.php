@@ -36,13 +36,13 @@
 <?php
     if (isset($erreurs) && $erreurs == []) {
 ?>
-        <h1>Félicitations vous avez crée votre compte</h1>
+        <h1>Félicitations, vous avez créé votre compte</h1>
         <a href="../">Connectez-vous</a>
 <?php
     }
     else if (isset($erreurs['fatal'])){
 ?>
-        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
+        <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 <?php
     }
     else{
