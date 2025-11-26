@@ -1419,25 +1419,9 @@ aside {
     color: #333;
   }
 
-  form#supprimer {
-    margin-top: 1.5rem;
-    width: 120px;
-  }
-
-  form#supprimer input[type="submit"] {
-    background: #d32f2f;
-    color: #fff;
-    padding: 0.7rem 1.4rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s ease;
-  }
-
-  form#supprimer input[type="submit"]:hover {
-    background: #b71c1c;
-  }
+    input[type="submit"], a.bouton, button.bouton {
+        @include bouton_new($background:$rouge ,$color: white, $largeur: 30em); 
+    }
 
   a {
     display: inline-block;
