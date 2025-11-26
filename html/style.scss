@@ -1442,10 +1442,6 @@ aside {
 }
 
 
-.content_produit_vendeur {
-  flex: 1; 
-}
-
 
 
 .fleche_produit_arriere{
@@ -1453,10 +1449,12 @@ aside {
 }
 
 .stock {
+    display: flex;
+    min-height: 100vh;
     main {
         display: flex;
         flex-direction: column;
-
+        flex: 1; 
         tr {
             width: 50vw;
             display: flex;

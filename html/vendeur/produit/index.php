@@ -78,16 +78,16 @@
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
                     <tr>
-                        <th>nom en stock </th>
+                        <th>Nom en stock </th>
                         <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
                     </tr>
-                        <th>nom public </th>
+                        <th>Nom public </th>
                         <td><?= htmlentities($rows['nom_public'] ?? '') ?>  </td>
                     </tr>
-                        <th>Prix actuelle </th>
+                        <th>Prix actuel </th>
                         <td><?= htmlentities($rows['prix'] ?? '') ?>  </td>
                     </tr>
-                        <th>taux TVA </th>
+                        <th>Taux TVA </th>
                         <td><?= htmlentities($rows['tva'] ?? '') ?>  </td>
                     </tr>
                         <th>Poids </th>
