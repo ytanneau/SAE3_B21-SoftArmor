@@ -1422,15 +1422,13 @@ aside {
     input[type="submit"], a.bouton, button.bouton {
         @include bouton_new($background:$rouge ,$color: white, $largeur: 30em); 
     }
+    .bouton_vendeur_produit{
+        @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
+    }
 
-  a {
-    display: inline-block;
-    margin-top: 0.8rem;
-    color: #0d47a1;
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s ease;
-  }
+    .bouton_avis_vendeur_produit{
+        @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
+    }
 }
 
 
@@ -1500,10 +1498,3 @@ aside {
     }
 }
 
-.bouton_vendeur_produit{
-    @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
-}
-
-.bouton_avis_vendeur_produit{
-    @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
-}
