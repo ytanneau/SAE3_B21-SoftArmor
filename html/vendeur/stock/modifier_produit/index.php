@@ -44,10 +44,10 @@
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if($_POST['sous_categorie'] == ""){
-            update_categorie_produit($idProduit, $_POST['categorie']);
-        } else {
+        if(isset($_POST['sous_categorie'])){
             update_categorie_produit($idProduit, $_POST['sous_categorie']);
+        } else {
+            update_categorie_produit($idProduit, $_POST['categorie']);
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -182,7 +182,7 @@
                     <label for="checkEnLigne">Produit en ligne</label>
                     <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
-                <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
+                <p>Categorie actuel : <?php if(isset($tabCategorieDuProduit['nom_categorie'])){ echo $tabCategorieDuProduit['nom_categorie'] ; } ?></p>
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
