@@ -178,7 +178,7 @@ unset($pdo);
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                    <img src="<?= htmlentities("../../". ($row['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
                     
                     <label for="pdp" class="image_bouton">Ajouter une image 
                             <p id="image-name">Aucun fichier choisi</p>
