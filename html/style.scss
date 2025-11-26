@@ -790,7 +790,7 @@ div:has(> aside) {
     }
     // format telephone
     @media screen and (max-width: 1024px){
-        nav {
+        nav:not(header nav) {
             width: 100%;
             @include contenu_centre_horizontal;
             justify-content: space-evenly;
