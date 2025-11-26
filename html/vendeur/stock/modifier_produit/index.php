@@ -38,7 +38,7 @@
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
         
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
-        if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
+        if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
         update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
@@ -193,7 +193,10 @@
                                 $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
                                     $cat = htmlspecialchars($nomCat['nom_categorie']);
-                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
+                                    if($cat == 'Alimentaire' && $tabCategorieDuProduit['nom_categorie'] == 'Boisson' || $tabCategorieDuProduit['nom_categorie'] == 'Salé' ||$tabCategorieDuProduit['nom_categorie'] == 'Sucré'){
+                                        $selected = 'selected';
+                                    } else {
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';}
                             ?>
                                 <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                             <?php } ?>
@@ -353,11 +356,10 @@
                 }
             })
             
-            codeBarre.addEventListener('input', (event) =>{
+            codeBarre.addEventListener('input', () =>{
                 codeBarre.value = codeBarre.value.replace(/\D/g,"");
                 if(codeBarre.value.length < 13){
                     messageErrCodeBarre.style.display = "block";
-                    event.preventDefault();
                 } else {
                     messageErrCodeBarre.style.display = "none";
                 }
@@ -408,7 +410,7 @@
             modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
                     prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
-                    (categorie.value === "" && selectSousCategorieAlimentaire.value === "")||
+                    categorie.value === ""  selectSousCategorieAlimentaire.value === ""||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
