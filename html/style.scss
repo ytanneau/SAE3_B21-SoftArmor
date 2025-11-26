@@ -1418,7 +1418,8 @@ aside {
   }
 
     input[type="submit"], a.bouton, button.bouton {
-        @include bouton_new($background:$rouge ,$color: white, $largeur: 35em); 
+        @include bouton_new($background:$rouge ,$color: white, $largeur: 32em); 
+        height: 4em;
     }
     .bouton_vendeur_produit{
         @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
