@@ -26,7 +26,12 @@ function ecrire_nom($rows){
     ?>
         <table>
     <?php
-    foreach ($rows as $row){
+    if ($rows['id_produit'] == NULL) {
+        ?>
+        <h1>Vous n'avez pas de produit</h1>
+        <?php
+    } else {
+        foreach ($rows as $row){
         ?>
         
             <tr id=<?= htmlentities($row['id_produit'] ?? '')?>>
@@ -56,6 +61,7 @@ function ecrire_nom($rows){
             </tr>
         
         <?php
+        }
     }
     ?>
         </table>
