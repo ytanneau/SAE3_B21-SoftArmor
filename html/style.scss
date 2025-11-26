@@ -500,6 +500,12 @@ main:has(.detail_produit) {
 
 div.gauche {
     flex-basis: 60%;
+
+    @media screen and (max-width: 1024px) {
+        font-size: 1.4em;
+        line-height: 2em;
+        
+    }
 }
 
 div:has(> aside) {
@@ -1071,6 +1077,7 @@ aside {
         position: static;
         order: -1;
         margin:0;
+        font-size: 2em;
 
         p {
             margin-bottom: 0;
