@@ -138,7 +138,7 @@
 
 
             
-            <label for="adresse">Adresse</label>
+            <label for="adresse">Adresse du siège</label>
             <input type="text"
                 name="adresse"
                 id="adresse"
@@ -164,7 +164,7 @@
                 class="champ text"><?php 
                 if (isset($_POST['compAdresse'])) echo trim(htmlentities($_POST['compAdresse']))
             ?></textarea>
-            
+
             <p class="contrainte">Informations complémentaires</p>
 
             
