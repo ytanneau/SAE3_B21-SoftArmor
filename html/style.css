@@ -653,7 +653,7 @@ hr {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: auto;
+  width: 30em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -672,7 +672,7 @@ hr {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: auto;
+  width: 30em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
