@@ -1418,12 +1418,7 @@ aside {
     font-weight: bold;
     color: #333;
   }
-
-  form#supprimer {
-    margin-top: 1.5rem;
-  }
-
-  
+ 
     /* ---- BOUTON MODIFIER ---- */
     a.bouton_vendeur_produit {
         @include bouton_new(
@@ -1431,7 +1426,7 @@ aside {
             $color: white,
             $largeur: auto,
             $padding: 0.8em 1.6em,
-            $size: 2em,
+            $size: 20px,
             $angle: $angle_petit,
             $display: inline-block
         );
@@ -1447,7 +1442,7 @@ aside {
             $color: black,
             $largeur: auto,
             $padding: 0.8em 1.6em,
-            $size: 2em,
+            $size: 20px,
             $angle: $angle_petit,
             $display: inline-block
         );
@@ -1456,14 +1451,13 @@ aside {
     }
 
 
-    /* ---- BOUTON SUPPRIMER ---- */
     form#supprimer input[type="submit"] {
         @include bouton_new(
             $background: $rouge, // #E43737
             $color: white,
             $largeur: auto,
             $padding: 0.7em 1.4em,
-            $size: 2em,
+            $size: 20px,
             $angle: $angle_petit,
             $display: inline-block
         );

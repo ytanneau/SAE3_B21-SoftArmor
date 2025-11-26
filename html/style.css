@@ -2139,7 +2139,6 @@ aside input.bouton:hover {
   gap: 2rem;
   /* ---- BOUTON MODIFIER ---- */
   /* ---- BOUTON AVIS ---- */
-  /* ---- BOUTON SUPPRIMER ---- */
 }
 .produit-vendeur table {
   width: 100%;
@@ -2181,16 +2180,13 @@ aside input.bouton:hover {
   font-weight: bold;
   color: #333;
 }
-.produit-vendeur form#supprimer {
-  margin-top: 1.5rem;
-}
 .produit-vendeur a.bouton_vendeur_produit {
   display: inline-block;
   max-width: 100%;
   width: auto;
   padding: 0.8em 1.6em;
   font-family: "Montserrat";
-  font-size: 2em;
+  font-size: 20px;
   font-weight: bold;
   background-color: #A6A6BF;
   color: white;
@@ -2210,7 +2206,7 @@ aside input.bouton:hover {
   width: auto;
   padding: 0.8em 1.6em;
   font-family: "Montserrat";
-  font-size: 2em;
+  font-size: 20px;
   font-weight: bold;
   background-color: #EAC452;
   color: black;
@@ -2230,7 +2226,7 @@ aside input.bouton:hover {
   width: auto;
   padding: 0.7em 1.4em;
   font-family: "Montserrat";
-  font-size: 2em;
+  font-size: 20px;
   font-weight: bold;
   background-color: #E43737;
   color: white;
