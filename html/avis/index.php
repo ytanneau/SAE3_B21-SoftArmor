@@ -118,7 +118,6 @@
     <?php include HOME_SITE . "header.php"; ?>
     <main class = "content_avis_client">
         <?php if ($succes == true) { ?>
-            <h1>Votre avis a été enregistré</h1>
             <div class="fini">
                 <h1>Votre avis a été enregistré</h1>                
                 <br>
