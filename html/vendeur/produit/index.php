@@ -96,6 +96,10 @@
                         <th>Volume </th>
                         <td><?= htmlentities($rows['volume'] ?? '')  ?></td>
                     </tr>
+                    <tr>
+                        <th>Quantité </th>
+                        <td><?= htmlentities($rows['quantite'] ?? '')  ?></td>
+                    </tr>
                 </table>
                 <div>
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
@@ -115,15 +119,6 @@
                 <!-- A mettre encore en dessous -->
                 <div>
                     <?= htmlentities($rows['description_detaillee'] ?? '') ?>
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td>
-                                <?= htmlentities($rows['quantite'] ?? '')  ?>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
                 <form id="supprimer" action="" method="post">
                     <input type="hidden" name="supprimer" value="true">
