@@ -75,13 +75,13 @@
                 $param = "";
                 if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit']; ?>
 
-                <li>
+                <li class="hide-on-mobile">
                     <a href="<?= HOME_SITE . 'compte/inscription' . $param?>"> 
                         <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">S'inscrire
                     </a> 
                 </li>
 
-                <li>
+                <li class="hide-on-mobile">
                     <a href="<?= HOME_SITE . 'compte/connexion' . $param?>">
                         <img src="<?= $images . 'connexion_blanc.svg' ?>" class="icon">Se connecter
                     </a> 
