@@ -300,12 +300,10 @@ hr {
 
 .infos{
     .modif{
-        @include bouton_new($color: white);
-        width: 30em;
+        @include bouton_new($color: white, $largeur: 30em);
     }
     .grave {
-        @include bouton_new($background:red,$color: white);
-        width: 30em;
+        @include bouton_new($background:red,$color: white, $largeur: 30em);
     }
 
     .image_bouton{
