@@ -161,8 +161,10 @@
             <textarea type="text"
                 name="compAdresse"
                 id="compAdresse"
-                class="champ text">
-                <?php if (isset($_POST['compAdresse'])) echo trim(htmlentities($_POST['compAdresse']))?></textarea>
+                class="champ text"><?php 
+                if (isset($_POST['compAdresse'])) echo trim(htmlentities($_POST['compAdresse']))
+            ?></textarea>
+            
             <p class="contrainte">Informations complémentaires</p>
 
             
