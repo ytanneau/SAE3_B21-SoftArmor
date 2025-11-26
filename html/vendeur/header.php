@@ -31,7 +31,7 @@
                 <div class="dropdown">
                     <button onclick="ouvrirMenu()" class="dropdown-button">
                         <img src="<?= $images . 'compte_vendeur_blanc.svg' ?>" class="icon">
-                        Otterspace
+                        <?= htmlentities($_SESSION['raison_sociale'] ?? '') ?>
                     </button>
 
                     <div id="dropdown-compte" class="dropdown-content">
