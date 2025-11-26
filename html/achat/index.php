@@ -270,7 +270,6 @@ if ($numEtape == 1) {
             <p class="contrainte">informations complémentaires</p>
 
 
-            <br>
             <label for="code_postal">Code postal</label>
             <input type="number" name="code_postal" id="code_postal" size="5" value="<?=htmlentities($adresse_client['code_postal'] ?? '')?>" required class="petit champ">
             <?php
