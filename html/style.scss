@@ -1416,51 +1416,34 @@ aside {
     font-weight: bold;
     color: #333;
   }
- 
-    a.bouton_vendeur_produit {
-        @include bouton_new(
-            $background: $nuance,
-            $color: white,
-            $largeur: auto,
-            $padding: 0.8em 1.6em,
-            $size: 20px,
-            $angle: $angle_petit,
-            $display: inline-block
-        );
 
-        margin-top: 1rem;
-    }
+  form#supprimer {
+    margin-top: 1.5rem;
+  }
 
+  form#supprimer input[type="submit"] {
+    background: #d32f2f;
+    color: #fff;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+  }
 
-    a.bouton_avis_vendeur_produit {
-        @include bouton_new(
-            $background: $couleur_etoile, // #EAC452
-            $color: black,
-            $largeur: auto,
-            $padding: 0.8em 1.6em,
-            $size: 2px,
-            $angle: $angle_petit,
-            $display: inline-block
-        );
+  form#supprimer input[type="submit"]:hover {
+    background: #b71c1c;
+  }
 
-        margin-top: 1rem;
-    }
-
-
-    form#supprimer input[type="submit"] {
-        @include bouton_new(
-            $background: $rouge, // #E43737
-            $color: white,
-            $largeur: auto,
-            $padding: 0.7em 1.4em,
-            $size: 2px,
-            $angle: $angle_petit,
-            $display: inline-block
-        );
-
-        margin-top: 1.5rem;
-    }
-
+  a {
+    display: inline-block;
+    margin-top: 0.8rem;
+    color: #0d47a1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
 }
 
 
@@ -1530,3 +1513,10 @@ aside {
     }
 }
 
+.bouton_vendeur_produit{
+    @include bouton_new($background:$nuance,$color: white, $largeur: 30em);
+}
+
+.bouton_avis_vendeur_produit{
+    @include bouton_new($background:$couleur_etoile ,$color: white, $largeur: 30em); 
+}
