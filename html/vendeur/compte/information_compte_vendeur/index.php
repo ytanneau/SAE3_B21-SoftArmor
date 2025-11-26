@@ -52,7 +52,7 @@
         update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
 
         // redirection vers la page precedente apres la validation du formulaire
-        header('Location: ../');
+        header('Location: ../../stock/');
         exit();
     }
 ?>
