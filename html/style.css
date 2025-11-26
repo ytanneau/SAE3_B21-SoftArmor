@@ -817,7 +817,7 @@ hr {
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: red;
+  background-color: #E43737;
   color: white;
   border: none;
   border-radius: 5px;
@@ -826,7 +826,7 @@ hr {
   cursor: pointer;
 }
 .infos .grave:hover {
-  background-color: rgb(255, 76.5, 76.5);
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
 .infos .image_bouton {
   display: block;
