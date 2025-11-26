@@ -226,7 +226,12 @@ hr {
 }
 
 #avis_vendeur{
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    main{
+        flex: 1;
+    }
     article{
         @include contenu_centre_horizontal();
         justify-content: center;
