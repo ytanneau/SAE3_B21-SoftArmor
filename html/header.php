@@ -5,9 +5,10 @@
         <ul class="sidebar">
             <li onclick=closeSidebar()> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
 
-            <li> <a href=""> <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier</a> </li>
-
+            
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
+                <li> <a href=""> <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier</a> </li>
+
                 <li> 
                     <a href="<?= HOME_SITE . 'compte/informations' ?>"> 
                         <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">Mon profil
