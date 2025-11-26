@@ -211,10 +211,11 @@
     border-radius: $angle;
 
     text-align: center;
+    text-decoration: none;
 
     cursor: pointer;
 
-    > a {
+    a {
         text-decoration: none;
         color: $color;
     }

@@ -508,9 +508,10 @@ hr {
   border: none;
   border-radius: 50px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-#connect_vendeur main .bouton > a, #inscription_vendeur main .bouton > a {
+#connect_vendeur main .bouton a, #inscription_vendeur main .bouton a {
   text-decoration: none;
   color: white;
 }
@@ -612,9 +613,10 @@ hr {
   border: none;
   border-radius: 50px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-#connect_client main .bouton > a, #inscription_client main .bouton > a {
+#connect_client main .bouton a, #inscription_client main .bouton a {
   text-decoration: none;
   color: white;
 }
@@ -809,9 +811,10 @@ hr {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.infos .modif > a {
+.infos .modif a {
   text-decoration: none;
   color: white;
 }
@@ -831,9 +834,10 @@ hr {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.infos .grave > a {
+.infos .grave a {
   text-decoration: none;
   color: white;
 }
@@ -853,6 +857,7 @@ hr {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   border-radius: 20px;
   padding: 0.5em;
@@ -860,7 +865,7 @@ hr {
   margin-bottom: 1em;
   font-size: 1.5em;
 }
-.infos .image_bouton > a {
+.infos .image_bouton a {
   text-decoration: none;
   color: black;
 }
@@ -1018,9 +1023,10 @@ a.bouton:has(+ .liste_avis) {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-a.bouton:has(+ .liste_avis) > a {
+a.bouton:has(+ .liste_avis) a {
   text-decoration: none;
   color: white;
 }
@@ -1496,9 +1502,10 @@ h3 {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.liste main ul li article:last-child .bouton > a {
+.liste main ul li article:last-child .bouton a {
   text-decoration: none;
   color: white;
 }
@@ -1567,9 +1574,10 @@ h3 {
     border: none;
     border-radius: 5px;
     text-align: center;
+    text-decoration: none;
     cursor: pointer;
   }
-  .liste main ul li article:first-child form button > a {
+  .liste main ul li article:first-child form button a {
     text-decoration: none;
     color: black;
   }
@@ -1648,9 +1656,10 @@ aside a.bouton {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-aside a.bouton > a {
+aside a.bouton a {
   text-decoration: none;
   color: black;
 }
@@ -1670,9 +1679,10 @@ aside input.bouton {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-aside input.bouton > a {
+aside input.bouton a {
   text-decoration: none;
   color: white;
 }
@@ -1809,9 +1819,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.bodyAjoutProduit #creerProduit > a {
+.bodyAjoutProduit #creerProduit a {
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -1892,9 +1903,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.bodyModifProduit #idModifierProduit > a {
+.bodyModifProduit #idModifierProduit a {
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -1955,9 +1967,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.mainInfoVendeur #idValiderModifVendeur > a {
+.mainInfoVendeur #idValiderModifVendeur a {
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -1977,12 +1990,13 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   margin-top: 30px;
   padding: 0.6em;
   width: 577px;
 }
-.mainInfoVendeur #idDesactivationCompte > a {
+.mainInfoVendeur #idDesactivationCompte a {
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -2012,6 +2026,7 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   border-radius: 20px;
   padding: 0.5em;
@@ -2019,7 +2034,7 @@ aside input.bouton:hover {
   margin-bottom: 1em;
   font-size: 1.5em;
 }
-#create_avis main .image_bouton > a {
+#create_avis main .image_bouton a {
   text-decoration: none;
   color: black;
 }
@@ -2114,9 +2129,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.bouton404 > a {
+.bouton404 a {
   text-decoration: none;
   color: white;
 }
@@ -2245,10 +2261,11 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
   height: 4em;
 }
-.produit-vendeur input[type=submit] > a, .produit-vendeur a.bouton > a, .produit-vendeur button.bouton > a {
+.produit-vendeur input[type=submit] a, .produit-vendeur a.bouton a, .produit-vendeur button.bouton a {
   text-decoration: none;
   color: white;
 }
@@ -2268,9 +2285,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.produit-vendeur .bouton_vendeur_produit > a {
+.produit-vendeur .bouton_vendeur_produit a {
   text-decoration: none;
   color: black;
 }
@@ -2290,9 +2308,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.produit-vendeur .bouton_avis_vendeur_produit > a {
+.produit-vendeur .bouton_avis_vendeur_produit a {
   text-decoration: none;
   color: black;
 }
@@ -2340,9 +2359,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.stock main .bouton > a {
+.stock main .bouton a {
   text-decoration: none;
   color: white;
 }
@@ -2371,9 +2391,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.stock main td a .bouton:nth-child(2) > a {
+.stock main td a .bouton:nth-child(2) a {
   text-decoration: none;
   color: black;
 }
@@ -2393,9 +2414,10 @@ aside input.bouton:hover {
   border: none;
   border-radius: 5px;
   text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
-.stock main td a .bouton:first-child > a {
+.stock main td a .bouton:first-child a {
   text-decoration: none;
   color: black;
 }
