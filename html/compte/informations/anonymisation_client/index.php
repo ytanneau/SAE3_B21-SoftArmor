@@ -37,6 +37,7 @@
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Confirmer la désactivation du compte">
             </form>
+            <button><a href="..">Annuler la désactivation</a></button>
             <?php
                 if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // récupération des données du formulaire de saisie
