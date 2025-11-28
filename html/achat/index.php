@@ -369,7 +369,7 @@ else if ($numEtape == 2) {
     else if ($numEtape == 3 && $achat_reussi) {
     ?>
         <div style="text-align: center;">
-            <h2>Bravo vous avez réussi à effectuer l'achat !</h2>
+            <h2>Votre achat a été effectué</h2>
             <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>
         </div>
     <?php
