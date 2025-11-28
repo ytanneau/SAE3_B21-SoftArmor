@@ -15,7 +15,7 @@ if (isset($_SESSION['raison_sociale'])) {
       <div class="footer-logos">
 
         <?php if (!$est_vendeur) { ?>
-          
+
         <a href= <?= HOME_SITE?> >
           <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
         </a>
@@ -26,7 +26,7 @@ if (isset($_SESSION['raison_sociale'])) {
           <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
         </a>
 
-        <?php ?>
+        <?php } ?>
 
       </div>
       <div class="footer-columns">
