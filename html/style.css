@@ -2426,4 +2426,28 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
+}
+
+a.bouton input.bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.bouton input.bouton a {
+  text-decoration: none;
+  color: black;
+}
+a.bouton input.bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */

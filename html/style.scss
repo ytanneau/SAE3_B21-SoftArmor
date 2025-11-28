@@ -1507,3 +1507,6 @@ aside {
     }
 }
 
+a.bouton input.bouton {
+    @include bouton_new();
+}
