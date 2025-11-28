@@ -251,7 +251,7 @@ if ($_POST != NULL) {
                         <p>Connectez-vous pour ajouter ce produit à votre panier</p>
                     <?php } ?>
 
-                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter</a>
+                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter cet article</a>
                 </form>
             </aside>
         </div>
