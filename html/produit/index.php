@@ -222,7 +222,7 @@ if ($_POST != NULL) {
             <aside>
                 <div>
                     <span>Prix HT</span> 
-                    <span class="prix">
+                    <span class="prix HT">
                         <?= $formatted_prix_ht ?>
                     </span>
                 </div>
