@@ -248,7 +248,14 @@ if ($numEtape == 1) {
 ?>
 
         <form action="" method="post">
-            <a href="<?= HOME_SITE . 'produit/index.php?produit=' . urlencode($_GET['produit'] ?? '') ?>"><img src="../image/retour.svg"></a>
+            <?php if ($_GET['produit'] == 'panier') {
+                $redirection = 'panier';
+            } else {
+                $redirection = 'produit/?produit=' . $_GET['produit'];
+            }
+            ?>
+            
+            <a href="<?= HOME_SITE . $redirection?>"><img src="../image/retour.svg"></a>
 
             <h2>Entrez votre adresse</h2>
 
