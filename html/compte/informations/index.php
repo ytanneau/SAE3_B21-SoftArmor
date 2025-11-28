@@ -180,7 +180,9 @@ unset($pdo);
                 <article>
                     <img src="<?= htmlentities("../../". ($row['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
                     
-                    <label for="pdp" class="image_bouton">Ajouter une image 
+
+
+                    <label for="pdp" class="image_bouton"><?php if (isset($row['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
                     <input id="pdp" type="file" name="pdp" accept=".png" hidden>
