@@ -2428,11 +2428,11 @@ aside input.bouton:hover {
   margin: auto 10px;
 }
 
-.liste_accueil_vendeur {
+article {
   display: flex;
   justify-content: center;
 }
-.liste_accueil_vendeur a {
+article a {
   display: block;
   width: 200px;
   height: 200px;
