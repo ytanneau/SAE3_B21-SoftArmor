@@ -39,5 +39,6 @@
             <a href="../commande">Commandes</a>
             <a href="../avis">Avis</a>
         </article>
+        <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>
