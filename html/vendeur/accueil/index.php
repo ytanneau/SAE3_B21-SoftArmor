@@ -32,6 +32,11 @@
         <title>Alizon - Accueil vendeur</title>
     </head>
     <body>
-        
+        <?php include "../../header.php" ?>
+        <a href="../stock">Gestion de stock</a>
+        <a href="../commande">Commandes</a>
+        <a href="">Avis</a>
+        <a href="">Livraisons</a>
+        <a href="">Statistiques</a>
     </body>
 </html>
