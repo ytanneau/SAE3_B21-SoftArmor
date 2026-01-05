@@ -33,10 +33,6 @@
     </head>
     <body>
         <?php include "../header.php" ?>
-        <a href="../compte">Mon compte</a>
-        <a href="../stock">Gestion de stock</a>
-        <a href="../commande">Commandes</a>
-        <a href="../avis">Avis</a>
-        
+        <h1>Page en cours de construction</h1>
     </body>
 </html>
