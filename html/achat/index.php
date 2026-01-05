@@ -15,6 +15,7 @@ if (!isset($_SESSION['logged_in'])) {
 require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
+require_once HOME_GIT . "fonction_commande.php";
 
 $numEtape = -1;
 
@@ -134,56 +135,45 @@ else if ($_POST['form'] == 'bancaire') {
 
 // si le client a bien répondu à tous les formulaire, alors une commande est créée et enregistrée
 if ($numEtape == 3) {
-    $CHEMIN_FACTURE = HOME_GIT . "html/ressources/facture/";
+    $liste_produits = [];
     $achat_reussi = true;
 
-    $requete = $pdo->prepare("INSERT INTO _commande (id_client, chemin_fichier) VALUES (:id_compte, 'ATTENTE')");
+    // Création commande
+    $requete = $pdo->prepare("INSERT INTO _commande (id_client) VALUES (:id_compte)");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->execute();
 
-    $requete = $pdo->prepare("SELECT id_commande FROM _commande WHERE id_client = :id_compte AND chemin_fichier = 'ATTENTE'");
-    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
-    $requete->execute();
-    $id_commande = $requete->fetch(PDO::FETCH_ASSOC)['id_commande'];
+    // Récupération de l'id de commande
+    $id_commande = $pdo->lastInsertId();
 
-    $nom_fichier = $_SESSION['id_compte'] . "_" . $id_commande;
-    $requete = $pdo->prepare("UPDATE _commande SET chemin_fichier = :chemin");
-    $requete->bindValue(":chemin", "$CHEMIN_FACTURE" . $nom_fichier);
-    $requete->execute();
-
-
-    $requete = $pdo->prepare("SELECT nom, prenom, pseudo FROM compte_client WHERE id_compte = :id_compte");
-    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
-    $requete->execute();
-    $client = $requete->fetch(PDO::FETCH_ASSOC);
-
-    
-    $contenu_fichier = $client['nom'] . " " . $client['prenom'] . "\n";
-
-    date_default_timezone_set('Europe/Paris'); // met la timezone à Paris pour récup la date
-    $contenu_fichier .= "Date d'achat : " . date("l d M Y, H:i:s\n");
-
+    // Si c'est un produit unique (pas un panier)
     if ($_POST['id_produit'] != 'panier') {
         $stock = detail_produit($_POST['id_produit'])['quantite'];
-        if ($stock >= 1) {
 
-            $requete = $pdo->prepare("SELECT nom_public, prix, tva FROM produit WHERE id_produit = :id_produit");
-            $requete->bindValue(":id_produit", $_POST['id_produit']);
-            $requete->execute();
-            $produit = $requete->fetch(PDO::FETCH_ASSOC);
-
-            $contenu_fichier .= "Produit acheté : " . $produit['nom_public'] . "\n";
-            $contenu_fichier .= "\tPrix HT \t: " . $produit['prix'] . "€\n";
-            $contenu_fichier .= "\tTaux de taxe\t : " . $produit['tva'] . "%\n";
-            $contenu_fichier .= "\tPrix TTC \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
-
-            update_stock($_POST['id_produit'], "-1");
-        } else {
+        if ($stock <= 0) {
             echo "Une erreur est survenue ! (le produit n'est plus en stock)";
             $achat_reussi = false;
+
+        } else {
+
+            $requete = $pdo->prepare("SELECT prix FROM produit WHERE id_produit = :id_produit");
+            $requete->bindValue(":id_produit", $_POST['id_produit']);
+            $requete->execute();
+            $prix = $requete->fetch(PDO::FETCH_ASSOC)["prix"];
+
+            $liste_produits[] = [
+                "id_produit" => $_POST["id_produit"],
+                "prix" => $prix,
+                "quantite" => 1
+            ];
+
+            update_stock($_POST['id_produit'], "-1");
+            ajout_commande($id_commande, $liste_produits);
         }
+
+    // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT id_produit, nom_public, prix, tva, quantite_panier FROM produit_panier WHERE id_client = :id_compte");
+        $requete = $pdo->prepare("SELECT nom_public AS nom, id_produit, prix, quantite_panier AS quantite FROM produit_panier WHERE id_client = :id_compte");
         $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
         $requete->execute();
         $liste_produits = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -191,33 +181,27 @@ if ($numEtape == 3) {
         $produits_plus_en_stock = [];
 
         foreach ($liste_produits as $produit) {
-            if (detail_produit($produit['id_produit'])['quantite'] < $produit['quantite_panier']) {
+            if (detail_produit($produit['id_produit'])['quantite'] < $produit['quantite']) {
                 array_push($produits_plus_en_stock, $produit);
+                $achat_reussi = false;
             }
         }
-        if ($produits_plus_en_stock == []) {
-            $contenu_fichier .= "Liste des produits achetés : \n";
-            foreach ($liste_produits as $produit) {
-                $contenu_fichier .= "-> " . $produit['nom_public'] . " (x" . $produit['quantite_panier'] . ")\n";
-                $contenu_fichier .= "\tPrix HT unitaire \t: " . $produit['prix'] . "€\n";
-                $contenu_fichier .= "\tTaux de taxe \t\t: " . $produit['tva'] . "%\n";
-                $contenu_fichier .= "\tPrix TTC unitaire \t: " . $produit['prix'] * $produit['tva'] / 100 . "€\n";
-                $contenu_fichier .= "\tPrix TTC total \t\t: " . ($produit['prix'] * $produit['tva'] / 100) * $produit['quantite_panier'] . "€\n\n";
 
-                update_stock($produit['id_produit'], '-' . $produit['quantite_panier']);
+        if ($achat_reussi) {
+            foreach ($liste_produits as $produit) {
+                update_stock($produit['id_produit'], '-' . $produit['quantite']);
             }
+
+            ajout_commande($id_commande, $liste_produits);
+
         } else {
-            $achat_reussi = false;
             echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
             foreach ($produits_plus_en_stock as $produit) {
-                echo "\n- " . $produit['nom_public'];
+                echo "\n- " . $produit['nom'];
             }
         }
     }
 
-    $fichier = fopen($CHEMIN_FACTURE . $nom_fichier, 'w');
-    fwrite($fichier, $contenu_fichier);
-    fclose($fichier);
     $_POST = [];
 }
 
