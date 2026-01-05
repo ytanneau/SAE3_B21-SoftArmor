@@ -33,10 +33,11 @@
     </head>
     <body>
         <?php include "../header.php" ?>
-        <a href="../compte">Mon compte</a>
-        <a href="../stock">Gestion de stock</a>
-        <a href="../commande">Commandes</a>
-        <a href="../avis">Avis</a>
-        
+        <article id="liste_accueil_vendeur">
+            <a href="../compte/information_compte_vendeur">Mon compte</a>
+            <a href="../stock">Gestion de stock</a>
+            <a href="../commande">Commandes</a>
+            <a href="../avis">Avis</a>
+        </article>
     </body>
 </html>
