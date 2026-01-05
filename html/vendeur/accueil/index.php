@@ -33,7 +33,7 @@
     </head>
     <body>
         <?php include "../header.php" ?>
-        <article id="liste_accueil_vendeur">
+        <article class="liste_accueil_vendeur">
             <a href="../compte/information_compte_vendeur">Mon compte</a>
             <a href="../stock">Gestion de stock</a>
             <a href="../commande">Commandes</a>
