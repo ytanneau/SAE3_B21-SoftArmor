@@ -1511,7 +1511,7 @@ aside {
 .liste_accueil_vendeur{
     display: flex;
     justify-content: center;
-    a{
+    .lien_accueil {
         display: block;
         width: 200px;
         height: 200px;
