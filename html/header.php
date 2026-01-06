@@ -52,7 +52,7 @@
             </li>
 
             <li class="hide-on-mobile searchbar">
-                <form action="" method="get">
+                <form action="<?= HOME_SITE . 'recherche/' ?>" method="get">
                     <input type="search" name="recherche" id="recherche" size="60" placeholder="Rechercher...">
                     <button type="submit"><img src="../image/loupe.svg"></button>
                 </form>
