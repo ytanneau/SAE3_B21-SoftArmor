@@ -19,8 +19,11 @@
     }
 
     //permet d'utiliser le fichier config.php
-    /*require_once HOME_GIT . '.config.php';
-    require_once HOME_GIT . 'fonction_produit.php';*/
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_commande.php';
+
+    $tableau_produit_commande = get_nom_fichier_commande($_SESSION['id_compte']);
+    print_r($tableau_produit_commande);
 ?>
 
 <!DOCTYPE html>
