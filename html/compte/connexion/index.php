@@ -105,7 +105,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </form>
         <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">S'inscrire</a> 
         <br>
-        Passez du coté vendeur : <a href="<?=HOME_SITE?>vendeur/">Connexion vendeur</a></p>
+        Passez du coté vendeur : <a href="<?=HOME_SITE?>vendeur/">Connexion vendeur</a>
+        
+        </p>
         </main>
     </body>
 </html>
