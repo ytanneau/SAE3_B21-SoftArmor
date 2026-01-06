@@ -65,14 +65,13 @@
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
-                cout.value = PRIX * (dateFin - dateDebut);
+                cout.value = PRIX * (dateFin.value - dateDebut.value);
             }   
         })
 
         dateFin.addEventListener('change', () => {
             if(dateDebut.value != ""){
-                cout.value = PRIX * (dateFin - dateDebut);
-                console.log(dateFin - dateDebut)
+                cout.value = PRIX * (dateFin.value - dateDebut.value);
             }
         })
 
