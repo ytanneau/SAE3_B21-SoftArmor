@@ -16,8 +16,6 @@ if (!isset($_SESSION)) {
         header('location: ' . HOME_SITE);
         die();
     }
-
-    echo $recherche;
 }
 
 require_once (HOME_GIT . '.config.php');
@@ -26,3 +24,18 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alizon - Recherche</title>
+</head>
+<body>
+    <?php include HOME_SITE . "header.php"; ?>
+
+    <h1>Résultats pour "<?= $recherche ?>"</h1>
+</body>
+</html>
