@@ -419,6 +419,8 @@ unset($pdo);
                         <?php if (isset($row['url_img_avis'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
                         <?php } ?>
+                    <button onclick="deleteReview(<?= $row['id_avis'] ?>)">Supprimer</button>
+                    <?php } ?>
                     </li>
                 <?php } ?>
             </ul>
