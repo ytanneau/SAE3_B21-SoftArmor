@@ -28,3 +28,33 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
 
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Alizon - Créer un produit</title>
+        <?php include HOME_SITE . 'link_head.php'; ?>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
+    </head>
+    <body>
+        <?php include "../../header.php" ?>
+        <h1>Démarer une promotion</h1>
+        <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
+        <label for="">Date de début</label>
+        <input type="date" id="dateDebut">
+        <label for="">Date de fin (incluse)</label>
+        <input type="date" id="dateFin">
+        <p>Coût final : </p>
+        <input type="text" value="" id="cout">
+        <?php include "../../../footer.php" ?>    
+    </body>
+    <script>
+        const cout = document.getElementById("cout");
+        const dateDebut = document.getElementById("dateDebut");
+        const dateFin = document.getElementById("dateFin");
+        dateDebut.addEventListener('change', () => {
+            console.log(dateDebut);   
+        })
+    </script>
+</html>
