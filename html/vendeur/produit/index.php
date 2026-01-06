@@ -3,18 +3,12 @@
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
 
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
+
     if (!isset($_SESSION)) {
         session_start();
     }
-    function renvoi(){
-        if (headers_sent()) {
-            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
-        }
-        else{
-            exit(header("Location: ../"));
-        }
-    }
-
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
@@ -33,9 +27,6 @@
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
-
-    require_once HOME_GIT . '.config.php';
-    require_once HOME_GIT . 'fonction_produit.php';
 
     //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
     $rows = detail_produit($_GET['produit']);
@@ -58,9 +49,6 @@
     if (isset($supprime) && $supprime === true) {
         renvoi();
     }
-
-
-    // Fonctions
 
 ?>   
 <!doctype html>
@@ -126,7 +114,7 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-                <a class="bouton_vendeur_produit" href="promotion/">Demarrer une promotion</a>
+                <a class="bouton_vendeur_produit" href="promotion/?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Demarrer une promotion</a>
             <?php } ?>
             
             <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>

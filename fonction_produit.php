@@ -428,3 +428,12 @@
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
+    function renvoi(){
+        if (headers_sent()) {
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
+        }
+        else{
+            exit(header("Location: ../"));
+        }
+    }
