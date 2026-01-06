@@ -4,7 +4,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT * FROM _elt_commande c INNER JOIN _produit p ON c.id_produit = p.id_produit WHERE id_vendeur = :id_vendeur");
+            $stmt = $pdo->prepare("SELECT c.* FROM _elt_commande c INNER JOIN _produit p ON c.id_produit = p.id_produit WHERE p.id_vendeur = :id_vendeur");
             $stmt->execute([
                 ':id_vendeur' => $id_vendeur
             ]);
