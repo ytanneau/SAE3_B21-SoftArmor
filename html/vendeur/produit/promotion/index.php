@@ -41,20 +41,48 @@
         <?php include "../../header.php" ?>
         <h1>Démarer une promotion</h1>
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
-        <label for="">Date de début</label>
-        <input type="date" id="dateDebut">
-        <label for="">Date de fin (incluse)</label>
-        <input type="date" id="dateFin">
-        <p>Coût final : </p>
-        <input type="text" value="" id="cout">
+        <form action="" method="post">
+            <label for="">Date de début</label>
+            <input type="date" id="dateDebut">
+            <label for="">Date de fin (incluse)</label>
+            <input type="date" id="dateFin">
+            <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
+            <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
+            <label for="">Coût final : </label>
+            <input type="text" value="" id="cout" disabled>
+            <input type="submit" id="valider" value="Valider">
+        </form>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>
+        const PRIX = 26;
         const cout = document.getElementById("cout");
         const dateDebut = document.getElementById("dateDebut");
         const dateFin = document.getElementById("dateFin");
+        const valider = document.getElementById("valider");
+        const warning1 = document.getElementById("warning1");
+        const warning2 = document.getElementById("warning2");
+
         dateDebut.addEventListener('change', () => {
-            console.log(dateDebut.value);   
+            if(dateFin.value != ""){
+                cout.value = PRIX * (dateFin - dateDebut);
+            }   
+        })
+
+        dateFin.addEventListener('change', () => {
+            if(dateDebut.value != ""){
+                cout.value = PRIX * (dateFin - dateDebut);
+            }
+        })
+
+        valider.addEventListener('click', () => {
+            if(dateDebut.value > dateFin){
+                warning1.style.display = "block";
+                event.preventDefault();
+            } else if (dateDebut.value == "" || dateFin.value == ""){
+                warning2.style.display = "block";
+                event.preventDefault();
+            }
         })
     </script>
 </html>
