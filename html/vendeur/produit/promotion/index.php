@@ -72,6 +72,7 @@
         dateFin.addEventListener('change', () => {
             if(dateDebut.value != ""){
                 cout.value = PRIX * (dateFin - dateDebut);
+                console.log(dateFin - dateDebut)
             }
         })
 
