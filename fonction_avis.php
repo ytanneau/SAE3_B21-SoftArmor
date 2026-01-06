@@ -110,3 +110,17 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    // fonction pour supprimer un avis
+    function supprimer_avis($id_avis, $id_client){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("DELETE FROM avis_client WHERE id_avis = :id_avis AND id_client = :id_client");
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
