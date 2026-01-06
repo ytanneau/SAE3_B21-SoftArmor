@@ -144,6 +144,7 @@ hr {
 }
 #header_client .menu-button {
   display: none;
+  margin-left: auto;
 }
 #header_client .menu-button img {
   height: 75px;
@@ -152,7 +153,6 @@ hr {
 @media screen and (max-width: 1024px) {
   #header_client .menu-button {
     display: block;
-    margin-left: auto;
   }
 }
 #header_client > nav {
@@ -165,6 +165,8 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   list-style: none;
   width: 100%;
   margin: 0;
@@ -173,6 +175,42 @@ hr {
 #header_client > nav > ul > li {
   margin: 0 1em;
 }
+#header_client > nav > ul > li.searchbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+#header_client > nav > ul > li.searchbar form {
+  display: flex;
+  flex-basis: 65%;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+#header_client > nav > ul > li.searchbar form input, #header_client > nav > ul > li.searchbar form button {
+  border: none;
+}
+#header_client > nav > ul > li.searchbar form input[type=search] {
+  padding: 0.5em 0.5em 0.5em 1.5em;
+  border-radius: 20px;
+  flex-grow: 1;
+  outline: none;
+  font-weight: 400;
+}
+@media screen and (max-width: 1024px) {
+  #header_client > nav > ul > li.searchbar form input[type=search] {
+    padding: 1.5em 0.5em 1.5em 1.5em;
+  }
+}
+#header_client > nav > ul > li.searchbar form button[type=submit] {
+  background-color: transparent;
+}
+@media screen and (max-width: 1024px) {
+  #header_client > nav > ul > li.searchbar {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
 #header_client > nav > ul > li:first-child img {
   height: 30px;
 }
@@ -180,9 +218,6 @@ hr {
   #header_client > nav > ul > li:first-child img {
     height: 50px;
   }
-}
-#header_client > nav > ul > li:nth-of-type(2) {
-  margin-left: auto;
 }
 #header_client > nav > ul > li > a {
   display: flex;
@@ -298,6 +333,7 @@ hr {
 }
 #header_vendeur .menu-button {
   display: none;
+  margin-left: auto;
 }
 #header_vendeur .menu-button img {
   height: 75px;
@@ -306,7 +342,6 @@ hr {
 @media screen and (max-width: 1024px) {
   #header_vendeur .menu-button {
     display: block;
-    margin-left: auto;
   }
 }
 #header_vendeur > nav {
@@ -319,6 +354,8 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   list-style: none;
   width: 100%;
   margin: 0;
@@ -327,6 +364,42 @@ hr {
 #header_vendeur > nav > ul > li {
   margin: 0 1em;
 }
+#header_vendeur > nav > ul > li.searchbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+#header_vendeur > nav > ul > li.searchbar form {
+  display: flex;
+  flex-basis: 65%;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+#header_vendeur > nav > ul > li.searchbar form input, #header_vendeur > nav > ul > li.searchbar form button {
+  border: none;
+}
+#header_vendeur > nav > ul > li.searchbar form input[type=search] {
+  padding: 0.5em 0.5em 0.5em 1.5em;
+  border-radius: 20px;
+  flex-grow: 1;
+  outline: none;
+  font-weight: 400;
+}
+@media screen and (max-width: 1024px) {
+  #header_vendeur > nav > ul > li.searchbar form input[type=search] {
+    padding: 1.5em 0.5em 1.5em 1.5em;
+  }
+}
+#header_vendeur > nav > ul > li.searchbar form button[type=submit] {
+  background-color: transparent;
+}
+@media screen and (max-width: 1024px) {
+  #header_vendeur > nav > ul > li.searchbar {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
 #header_vendeur > nav > ul > li:first-child img {
   height: 30px;
 }
@@ -334,9 +407,6 @@ hr {
   #header_vendeur > nav > ul > li:first-child img {
     height: 50px;
   }
-}
-#header_vendeur > nav > ul > li:nth-of-type(2) {
-  margin-left: auto;
 }
 #header_vendeur > nav > ul > li > a {
   display: flex;
@@ -2432,7 +2502,7 @@ aside input.bouton:hover {
   display: flex;
   justify-content: center;
 }
-.liste_accueil_vendeur > .lien_accueil {
+.liste_accueil_vendeur .lien_accueil {
   display: block;
   width: 200px;
   height: 200px;

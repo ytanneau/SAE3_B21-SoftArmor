@@ -50,6 +50,13 @@
                     <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" title="Logo Alizon"> 
                 </a> 
             </li>
+
+            <li class="hide-on-mobile searchbar">
+                <form action="" method="get">
+                    <input type="search" name="recherche" id="recherche" size="60" placeholder="Rechercher...">
+                    <button type="submit"><img src="../image/loupe.svg"></button>
+                </form>
+            </li>
             
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li class="hide-on-mobile">

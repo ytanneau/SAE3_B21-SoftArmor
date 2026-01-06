@@ -36,6 +36,7 @@
 
     .menu-button {
         display: none;
+        margin-left: auto;
 
         img {
             height: 75px;
@@ -44,7 +45,6 @@
 
         @media screen and (max-width: 1024px) {
             display: block;
-            margin-left: auto;
         }
     }
 
@@ -54,6 +54,8 @@
 
         > ul {
             @include contenu_centre_horizontal();
+            justify-content: space-between;
+            flex-wrap: wrap;
             list-style: none;
             width: 100%;
             margin: 0;
@@ -62,16 +64,54 @@
             > li {
                 margin: 0 1em;
 
+                &.searchbar {
+                    display: flex;
+                    flex-grow: 1;
+                    justify-content: center;
+
+                    form {
+                        display: flex;
+                        flex-basis: 65%;
+                        align-items: center;
+    
+                        background-color: white;
+                        border-radius: 20px;
+    
+                        input, button {
+                            border: none;
+                        }
+    
+                        input[type=search] {
+                            padding: 0.5em 0.5em 0.5em 1.5em;
+                            border-radius: 20px;
+                            
+                            flex-grow: 1;
+                            outline: none;
+                            font-weight: 400;
+
+                            @media screen and (max-width: 1024px) {
+                                padding: 1.5em 0.5em 1.5em 1.5em;
+                            }
+                        }
+    
+                        button[type=submit] {
+                            background-color: transparent;
+                        }
+                    }
+
+                    @media screen and (max-width: 1024px) {
+                        order: 3;
+                        flex-basis: 100%;
+                    }
+
+                }
+
                 &:first-child img {
                     height: 30px;
 
                     @media screen and (max-width: 1024px) {
                         height: 50px;
                     }
-                }
-
-                &:nth-of-type(2) {
-                    margin-left: auto;
                 }
 
                 > a {
