@@ -43,8 +43,8 @@ $adresse_compte = sql_get_adresse_compte($_SESSION['id_compte']);
 $avis = tout_avis_client($_SESSION['id_compte']);
 
 //traitement de la suppression d'un avis
-if (isset($_GET['supprimer_avis']) && isset($_GET['id_avis'])){
-    supprimer_avis($_GET['id_avis'], $_SESSION['id_compte']);
+if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit'])){
+    supprimer_avis($_GET['id_produit'], $_SESSION['id_compte']);
     header("Location: ./");
     exit;
 }
@@ -428,7 +428,7 @@ unset($pdo);
                         <?php } ?>
 
                         <!-- Bouton de suppression -->
-                        <a href="?supprimer_avis=1&id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
                     </li>
                 <?php } ?>
             </ul>
