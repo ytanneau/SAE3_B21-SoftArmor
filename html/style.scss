@@ -131,19 +131,6 @@ hr {
 
 #header_client {
     @include header($couleur_primaire_client);
-
-    form {
-        input[type=search] {
-            background-image: url(images/loupe.svg);
-            background-repeat: no-repeat;
-            background-position: left center;
-
-            height: 2.5em;
-            padding: 0.5em 0.5em 0.5em 2.5em;
-            border-radius: 20px;
-            border: none;
-        }
-    }
 }
 
 #header_vendeur {
