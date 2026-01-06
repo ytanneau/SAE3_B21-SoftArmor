@@ -3,7 +3,7 @@
     define("HOME_GIT", "../../../../");
     define("HOME_SITE", "../../../");
 
-    require_once HOME_GIT . "fonction_produit";
+    require_once HOME_GIT . 'fonction_produit.php';
 
     if (!isset($_SESSION)) {
         session_start();
