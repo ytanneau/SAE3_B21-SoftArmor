@@ -126,7 +126,7 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-                <a class="bouton_vendeur_produit" href="/promotion/">Demarrer une promotion</a>
+                <a class="bouton_vendeur_produit" href="promotion/">Demarrer une promotion</a>
             <?php } ?>
             
             <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
