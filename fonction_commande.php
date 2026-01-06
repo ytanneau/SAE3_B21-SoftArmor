@@ -1,6 +1,6 @@
 <?php
 
-    function get_nom_fichier_commande($id_vendeur){
+    function get_produit_commande($id_vendeur){
         global $pdo;
 
         try{
