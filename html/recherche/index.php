@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
     if (isset($_SESSION['raison_sociale'])){
         header('location: /vendeur/stock/');
         die();
-    } else if (!isset($recherche)) {
+    } else if (empty($recherche)) {
         header('location: ' . HOME_SITE);
         die();
     }
