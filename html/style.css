@@ -2432,7 +2432,7 @@ aside input.bouton:hover {
   display: flex;
   justify-content: center;
 }
-.liste_accueil_vendeur a {
+.liste_accueil_vendeur .lien_accueil {
   display: block;
   width: 200px;
   height: 200px;
