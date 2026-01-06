@@ -54,7 +54,7 @@
         const dateDebut = document.getElementById("dateDebut");
         const dateFin = document.getElementById("dateFin");
         dateDebut.addEventListener('change', () => {
-            console.log(dateDebut);   
+            console.log(dateDebut.value);   
         })
     </script>
 </html>
