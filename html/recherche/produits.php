@@ -1,4 +1,8 @@
 <?php
+    // Inclusion du fichier de configuration
+    define('HOME_GIT', '../../');
+    define('HOME_SITE', '../');
+    
     require_once (HOME_GIT . '.config.php');
     require_once (HOME_GIT . 'fonction_recherche.php');
 
