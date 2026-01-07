@@ -44,9 +44,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </body>
 
 <script type="text/javascript">
-    const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
-    const produits = await reponse.json();
-    console.log(produits);
+    async function getProduits() {
+        const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
+        const produits = await reponse.json();
+        console.log(produits);
+    }
+
+    getProduits();
 </script>
 
 </html>
