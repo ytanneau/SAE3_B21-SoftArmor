@@ -299,7 +299,7 @@
                         <textarea name="descSimple" id="idDescSimple" maxlength="200"><?= $tabInfoProduit['description'] ?></textarea>
                     </p>
                     <p>
-                        <label for="descDetaille">Description detaille (2000 caractères maximum)</label>
+                        <label for="descDetaille">Description détaillée (2000 caractères maximum)</label>
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"><?= $tabInfoProduit['description_detaillee']?></textarea>
                     </p>
                 </div>

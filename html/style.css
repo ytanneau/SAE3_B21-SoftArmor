@@ -2488,17 +2488,3 @@ aside input.bouton:hover {
 .stock main td form * {
   margin: auto 10px;
 }
-
-.liste_accueil_vendeur {
-  display: flex;
-  justify-content: center;
-}
-.liste_accueil_vendeur .lien_accueil {
-  display: block;
-  width: 200px;
-  height: 200px;
-  box-shadow: 0px 0px 10px 5px grey;
-  border-radius: 10px;
-  text-decoration: none;
-  color: black;
-}/*# sourceMappingURL=style.css.map */
