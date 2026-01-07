@@ -445,7 +445,7 @@
     function banniere_libre($date1,$date2){
         global $pdo;
         try{
-            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_free");
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
             $stmt->execute([
                 "date1" => $date1,
                 "date2" => $date2
