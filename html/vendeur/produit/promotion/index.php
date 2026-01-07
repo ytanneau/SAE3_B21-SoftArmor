@@ -57,40 +57,46 @@
     <script>
         const PRIX = 26;
         const cout = document.getElementById("cout");
-        const dateDebut = document.getElementById("dateDebut").value;
-        const dateFin = document.getElementById("dateFin").value;
+        const dateDebut = document.getElementById("dateDebut");
+        const dateFin = document.getElementById("dateFin");
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
 
-        dateDebut.addEventListener('change', () => {
-            if(dateFin.value != ""){
-                calcul();
-            }   
-        })
+        dateDebut.addEventListener('change', calcul);
+        dateFin.addEventListener('change', calcul);
 
-        dateFin.addEventListener('change', () => {
-            if(dateDebut.value != ""){
-                calcul();
-            }
-        })
-        
-        function calcul(){
-            const d1 = new Date(dateDebut + "T00:00:00");
-            const d2 = new Date(dateFin + "T00:00:00");
+        function calcul() {
+            if (!dateDebut.value || !dateFin.value) return;
+
+            const d1 = new Date(dateDebut.value + "T00:00:00");
+            const d2 = new Date(dateFin.value + "T00:00:00");
 
             const diffJours = (d2 - d1) / 86400000;
+
+            if (diffJours < 0) {
+                cout.value = "";
+                return;
+            }
+
             cout.value = PRIX * diffJours;
         }
 
-        valider.addEventListener('click', () => {
-            if(dateDebut > dateFin){
-                warning1.style.display = "block";
-                event.preventDefault();
-            } else if (dateDebut == "" || dateFin == ""){
+        valider.addEventListener('click', (event) => {
+            warning1.style.display = "none";
+            warning2.style.display = "none";
+
+            if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
                 event.preventDefault();
+                return;
             }
-        })
+
+            if (dateDebut.value > dateFin.value) {
+                warning1.style.display = "block";
+                event.preventDefault();
+            }
+        });
+
     </script>
 </html>
