@@ -114,11 +114,11 @@
     function supprimer_avis($id_produit, $id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("DELETE FROM avis_client WHERE id_produit = :id_produit AND id_client = :id_client");
+            $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
-            return true;
+            return 0;
         } catch (PDOException $e) {
             throw $e;
         }

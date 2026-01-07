@@ -422,13 +422,15 @@ unset($pdo);
                                 <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($row['date_avis'] ?? ''))) ?></p>
                             </div>
                         </div>
+
+                        <!-- Bouton de suppression -->
+                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
                         
                         <?php if (isset($row['url_img_avis'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
                         <?php } ?>
 
-                        <!-- Bouton de suppression -->
-                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        
                     </li>
                 <?php } ?>
             </ul>
