@@ -27,10 +27,6 @@ require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 require_once (HOME_GIT . 'fonction_recherche.php');
 
-// Récupérer dans un array tous les produits contenant la recherche
-$produits = get_produits_recherche($recherche);
-$produits_json = json_encode($produits);
-
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +44,8 @@ $produits_json = json_encode($produits);
 </body>
 
 <script type="text/javascript">
-    const produits = "<?= $produits_json ?>";
+    const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
+    const produits = await reponse.json();
     console.log(produits);
 </script>
 
