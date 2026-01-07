@@ -47,12 +47,17 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     async function getProduits() {
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
         const produits = await reponse.json();
-        console.log(produits);
-        produits.sort();
-        console.log(produits);
+        
+        produits.sort((a, b) => {
+            if (a.nom_public < b.nom_public) {
+                return -1;
+            }
+        });
+
+        return produits;
     }
 
-    getProduits();
+    console.log(getProduits());
 </script>
 
 </html>
