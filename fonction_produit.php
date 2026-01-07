@@ -437,3 +437,7 @@
             exit(header("Location: ../"));
         }
     }
+
+    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+
+    }

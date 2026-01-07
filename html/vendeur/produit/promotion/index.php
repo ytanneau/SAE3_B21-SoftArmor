@@ -29,6 +29,11 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
 
     $prix = detail_produit($_GET['produit'])['prix'];
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        print_r($_POST);
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +51,9 @@
         <form action="" method="post">
             <h3>Promotion</h3>
             <label for="dateDebutP">Date de début</label>
-            <input type="date" id="dateDebutP">
+            <input type="date" id="dateDebutP" required>
             <label for="dateFinP">Date de fin (incluse)</label>
-            <input type="date" id="dateFinP">
+            <input type="date" id="dateFinP" required>
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
@@ -62,6 +67,7 @@
             <input type="text" id="euro" disabled>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" disabled>
+            <input type="file" id="photoPromotion">
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
