@@ -178,7 +178,7 @@
                 euro.value = prixFinal.value - prixInitial;
                 parseFloat(euro.value);
                 console.log(euro.value);
-                euro.value = euro.value.toFixed(3);
+                euro.value = Number.parseFloat(euro.value).toFixed(3);
                 console.log(euro.value);
             } else {
                 euro.value = "";
