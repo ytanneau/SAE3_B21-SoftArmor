@@ -37,7 +37,7 @@
         $euro = $_POST['euro'];
         $euro = explode('-',$euro)[1];
 
-        if(isset($_POST['reustiliser'])){
+        if(isset($_POST['reutiliser'])){
             $id_image_principal = get_id_image_produit($id_produit);
         } else if (isset($_FILES['photoPromotion']) && banniere_libre($_POST['dateDebut'],$_POST['dateFin'])['is_active']){
             $nomImageTemp = $_FILES['photoPromotion'];
