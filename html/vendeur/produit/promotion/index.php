@@ -176,7 +176,7 @@
             if(pourcentage.value != ""){
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
                 euro.value = prixFinal.value - prixInitial;
-                euro.value = euro.value[0-3];
+                euro.value = euro.value.toFixed(3);
             } else {
                 euro.value = "";
             }
