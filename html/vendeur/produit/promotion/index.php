@@ -138,7 +138,7 @@
             if(pourcentage.value != ""){
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
                 euro.value = prixFinal.value - prixInitial;
-                prixFinal.value = Number.parseFloat(prixFinal).toFixed(2);
+                prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
                 euro.value = Number.parseFloat(euro.value).toFixed(2);
             } else {
                 euro.value = "";
