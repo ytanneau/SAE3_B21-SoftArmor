@@ -48,6 +48,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
         const produits = await reponse.json();
         console.log(produits);
+        produits.sort();
+        console.log(produits);
     }
 
     getProduits();
