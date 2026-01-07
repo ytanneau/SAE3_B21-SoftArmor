@@ -56,16 +56,10 @@
             
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?></p>
-            <label for="dateDebutR">Date de début</label>
-            <input type="date" id="dateDebutR">
-            <label for="dateFinR">Date de fin (incluse)</label>
-            <input type="date" id="dateFinR">
-            <p style="display:none; color:red;" id="warning3">Date de fin antérieur à la date de debut</p>
-            <p style="display:none; color:red;" id="warning4">Date(s) non selectionné(s)</p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro">
+            <input type="text" id="euro" disabled>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" disabled>
             <input type="submit" id="valider" value="Valider">
@@ -120,6 +114,32 @@
             cout.value = PRIX * diffJours + PRIX + "€";
         }
 
+        // REDUCTION //
+        const warning3 = document.getElementById("warning3");
+        const warning4 = document.getElementById("warning4");
+        const pourcentage = document.getElementById("pourcentage");
+        const euro = document.getElementById("euro");
+        const prixInitial = <?= json_encode($prix) ?>;
+        const prixFinal = document.getElementById("prixFinal");
+
+        pourcentage.addEventListener('input', () => {
+            pourcentage.value = pourcentage.value.replace(",",".");
+            pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
+            calculR();
+        })
+
+        function calculR(){
+            if(pourcentage.value != ""){
+                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
+                euro.value = prixFinal.value - prixInitial;
+                prixFinal = Number.parseFloat(prixFinal).toFixed(2);
+                euro.value = Number.parseFloat(euro.value).toFixed(2);
+            } else {
+                euro.value = "";
+            }
+        }
+        
+        // VALIDATION DU FORM //
         valider.addEventListener('click', (event) => {
             warning1.style.display = "none";
             warning2.style.display = "none";
@@ -135,54 +155,5 @@
                 event.preventDefault();
             }
         });
-
-        // REDUCTION //
-        const dateDebutR = document.getElementById("dateDebutR");
-        const dateFinR = document.getElementById("dateFinR");
-        const warning3 = document.getElementById("warning3");
-        const warning4 = document.getElementById("warning4");
-        const pourcentage = document.getElementById("pourcentage");
-        const euro = document.getElementById("euro");
-        const prixInitial = <?= json_encode($prix) ?>;
-        const prixFinal = document.getElementById("prixFinal");
-
-        dateDebutR.addEventListener('change', () => {
-            if(dateFinR.value != ""){
-                if(dateDebutR.value > dateFinR.value) {
-                    warning3.style.display = "block";
-                } else {
-                    warning3.style.display = "none";
-                }
-            }
-            
-        });
-        dateFinR.addEventListener('change', () => {
-            if(dateDebutR.value != ""){
-                if(dateDebutR.value > dateFinR.value) {
-                    warning3.style.display = "block";
-                } else {
-                    warning3.style.display = "none";
-                }
-            }
-        });
-
-        pourcentage.addEventListener('input', () => {
-            pourcentage.value = pourcentage.value.replace(",",".");
-            pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            calculR();
-        })
-
-        function calculR(){
-            if(pourcentage.value != ""){
-                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
-                euro.value = prixFinal.value - prixInitial;
-                parseFloat(euro.value);
-                console.log(euro.value);
-                euro.value = Number.parseFloat(euro.value).toFixed(3);
-                console.log(euro.value);
-            } else {
-                euro.value = "";
-            }
-        }
     </script>
 </html>
