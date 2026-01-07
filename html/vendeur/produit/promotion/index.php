@@ -30,14 +30,14 @@
     $id_produit = $_GET['produit'];
 
     $prix = detail_produit($_GET['produit'])['prix'];
-    $libre = (bool) banniere_libre()['is_active'];
+    
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         print_r($_POST);
         $euro = $_POST['euro'];
         if(isset($_POST['reustiliser'])){
             $id_image_principal = get_id_image_produit($id_produit);
-        } else if (isset($_FILES['photoPromotion'])){
+        } else if (isset($_FILES['photoPromotion']) && banniere_libre($_POST['dateDebut'],$_POST['dateFin'])['is_active']){
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
@@ -89,11 +89,9 @@
             <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
-            <?php if($libre){ ?>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <label for="reutiliser">Utiliser la photo principal ?</label>
             <input type="checkbox" name="reutiliser" id="reutiliser">
-            <?php } ?>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    

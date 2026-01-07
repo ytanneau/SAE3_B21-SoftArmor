@@ -442,11 +442,14 @@
 
     }
 
-    function banniere_libre(){
+    function banniere_libre($date1,$date2){
         global $pdo;
         try{
-            $stmt = $pdo->prepare("SELECT periode_banniere_libre AS is_free");
-            $stmt->execute();
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,date2) AS is_free");
+            $stmt->execute([
+                "date1" => $date1,
+                "date2" => $date2
+            ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e){
             throw $e;
