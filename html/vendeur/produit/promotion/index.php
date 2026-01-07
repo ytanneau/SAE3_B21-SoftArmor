@@ -169,20 +169,11 @@
         pourcentage.addEventListener('input', () => {
             calculR();
         })
-        euro.addEventListener('input', () => {
-            calculR();
-        })
 
         function calculR(){
             if(pourcentage.value != ""){
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
                 euro.value = prixFinal.value - prixInitial;
-            } else if (euro.value != ""){
-                prixFinal.value = prixInitial - euro.value;
-                pourcentage.value = (euro.value / prixInitial) * 100;
-            } else {
-                pourcentage.value = "";
-                euro.value = "";
             }
         }
     </script>
