@@ -180,6 +180,9 @@
             } else if (euro.value != ""){
                 prixFinal.value = prixInitial - euro.value;
                 pourcentage.value = (euro.value / prixInitial) * 100;
+            } else {
+                pourcentage.value = "";
+                euro.value = "";
             }
         }
     </script>
