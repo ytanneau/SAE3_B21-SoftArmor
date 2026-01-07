@@ -63,12 +63,30 @@
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
 
-        dateDebut.addEventListener('change', calcul);
-        dateFin.addEventListener('change', calcul);
+        dateDebut.addEventListener('change', () => {
+            if(dateFin.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning1.style.display = "block";
+                } else {
+                    warning1.style.display = "none";
+                    calcul();
+                }
+            }
+            
+        });
+        dateFin.addEventListener('change', () => {
+            if(dateDebut.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning1.style.display = "block";
+                } else {
+                    warning1.style.display = "none";
+                    calcul();
+                }
+            }
+            
+        });
 
         function calcul() {
-            if (!dateDebut.value || !dateFin.value) return;
-
             const d1 = new Date(dateDebut.value + "T00:00:00");
             const d2 = new Date(dateFin.value + "T00:00:00");
 
