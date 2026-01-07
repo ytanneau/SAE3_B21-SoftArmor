@@ -76,8 +76,8 @@
         })
         
         function calcul(){
-            const d1 = new Date(dateDebut.value + "T00:00:00");
-            const d2 = new Date(dateFin.value + "T00:00:00");
+            const d1 = new Date(dateDebut + "T00:00:00");
+            const d2 = new Date(dateFin + "T00:00:00");
 
             const diffJours = (d2 - d1) / 86400000;
             cout.value = PRIX * diffJours;
