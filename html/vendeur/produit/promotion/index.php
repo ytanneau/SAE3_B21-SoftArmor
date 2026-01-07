@@ -57,29 +57,37 @@
     <script>
         const PRIX = 26;
         const cout = document.getElementById("cout");
-        const dateDebut = document.getElementById("dateDebut");
-        const dateFin = document.getElementById("dateFin");
+        const dateDebut = document.getElementById("dateDebut").value;
+        const dateFin = document.getElementById("dateFin").value;
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
-                cout.value = PRIX * (dateFin.value - dateDebut.value);
+                calcul();
             }   
         })
 
         dateFin.addEventListener('change', () => {
             if(dateDebut.value != ""){
-                cout.value = PRIX * (dateFin.value - dateDebut.value);
+                calcul();
             }
         })
+        
+        function calcul(){
+            const d1 = new Date(dateDebut.value + "T00:00:00");
+            const d2 = new Date(dateFin.value + "T00:00:00");
+
+            const diffJours = (d2 - d1) / 86400000;
+            cout.value = PRIX * diffJours;
+        }
 
         valider.addEventListener('click', () => {
-            if(dateDebut.value > dateFin){
+            if(dateDebut > dateFin){
                 warning1.style.display = "block";
                 event.preventDefault();
-            } else if (dateDebut.value == "" || dateFin.value == ""){
+            } else if (dateDebut == "" || dateFin == ""){
                 warning2.style.display = "block";
                 event.preventDefault();
             }
