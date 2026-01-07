@@ -27,11 +27,33 @@
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
+    $id_produit = $_GET['produit'];
 
     $prix = detail_produit($_GET['produit'])['prix'];
+    $libre = (bool) banniere_libre()['is_active'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         print_r($_POST);
+        $euro = $_POST['euro'];
+        if(isset($_POST['reustiliser'])){
+            $id_image_principal = get_id_image_produit($id_produit);
+        } else if (isset($_FILES['photoPromotion'])){
+            $nomImageTemp = $_FILES['photoPromotion'];
+            // recupere le nom temporaire du fichier pour le deplacer
+            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+            
+            $nomImage = $idProduit . "_promotion.png";
+            
+            $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+            // definition des caractéristiques d'une image
+            $url = "ressources/produit/" . $nomImage;
+            $altDefault = "Image de promotion";
+            
+            $id_image_principal = add_image($url,$nomImage, $altDefault);
+        } else {
+            $id_image_principal = null;
+        }
+        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
     }
 
 ?>
@@ -50,10 +72,10 @@
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
         <form action="" method="post" enctype="multipart/form-data">
             <h3>Promotion</h3>
-            <label for="dateDebutP">Date de début</label>
-            <input type="date" id="dateDebutP" name="dateDebutP" required>
-            <label for="dateFinP">Date de fin (incluse)</label>
-            <input type="date" id="dateFinP" name="dateFinP" required>
+            <label for="dateDebut">Date de début</label>
+            <input type="date" id="dateDebut" name="dateDebut" required>
+            <label for="dateFin">Date de fin (incluse)</label>
+            <input type="date" id="dateFin" name="dateFin" required>
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
@@ -67,7 +89,11 @@
             <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
+            <?php if($libre){ ?>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+            <label for="reutiliser">Utiliser la photo principal ?</label>
+            <input type="checkbox" name="reutiliser" id="reutiliser">
+            <?php } ?>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
@@ -77,15 +103,15 @@
         // PROMOTION //
         const PRIX = 26;
         const cout = document.getElementById("cout");
-        const dateDebutP = document.getElementById("dateDebutP");
-        const dateFinP = document.getElementById("dateFinP");
+        const dateDebut = document.getElementById("dateDebut");
+        const dateFin = document.getElementById("dateFin");
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
 
-        dateDebutP.addEventListener('change', () => {
-            if(dateFinP.value != ""){
-                if(dateDebutP.value > dateFinP.value) {
+        dateDebut.addEventListener('change', () => {
+            if(dateFin.value != ""){
+                if(dateDebut.value > dateFin.value) {
                     warning1.style.display = "block";
                 } else {
                     warning1.style.display = "none";
@@ -94,9 +120,9 @@
             }
             
         });
-        dateFinP.addEventListener('change', () => {
-            if(dateDebutP.value != ""){
-                if(dateDebutP.value > dateFinP.value) {
+        dateFin.addEventListener('change', () => {
+            if(dateDebut.value != ""){
+                if(dateDebut.value > dateFin.value) {
                     warning1.style.display = "block";
                 } else {
                     warning1.style.display = "none";
