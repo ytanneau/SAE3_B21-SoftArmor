@@ -152,7 +152,6 @@
                     warning3.style.display = "block";
                 } else {
                     warning3.style.display = "none";
-                    calculR();
                 }
             }
             
@@ -163,11 +162,17 @@
                     warning3.style.display = "block";
                 } else {
                     warning3.style.display = "none";
-                    calculR();
                 }
             }
             
         });
+
+        pourcentage.addEventListener('input', () => {
+            calculR();
+        })
+        euro.addEventListener('input', () => {
+            calculR();
+        })
 
         function calculR(){
             if(pourcentage.value != ""){
