@@ -33,7 +33,6 @@
     
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        print_r($_POST);
         $euro = $_POST['euro'];
         $euro = explode('-',$euro)[1];
 
@@ -52,12 +51,15 @@
             // definition des caractéristiques d'une image
             $url = "ressources/produit/" . $nomImage;
             $altDefault = "Image de promotion";
-            
-            $id_image_principal = add_image($url,$nomImage, $altDefault);
+            if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                $id_image_principal = add_image($url,$nomImage, $altDefault);
+            }
         } else {
             $id_image_principal = null;
         }
         creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        header("Location : ../");
+        exit();
     }
 
 ?>
