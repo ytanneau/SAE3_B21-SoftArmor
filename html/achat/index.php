@@ -156,15 +156,20 @@ if ($numEtape == 3) {
 
         } else {
 
-            $requete = $pdo->prepare("SELECT prix FROM produit WHERE id_produit = :id_produit");
+            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
+            FROM produit
+            INNER JOIN vendeur ON _produit.id_vendeur = _vendeur.id_compte
+            WHERE id_produit = :id_produit");
             $requete->bindValue(":id_produit", $_POST['id_produit']);
             $requete->execute();
-            $prix = $requete->fetch(PDO::FETCH_ASSOC)["prix"];
+            $produit = $requete->fetch(PDO::FETCH_ASSOC);
 
             $liste_produits[] = [
                 "id_produit" => $_POST["id_produit"],
-                "prix" => $prix,
-                "quantite" => 1
+                "prix" => $produit["prix"],
+                "quantite" => 1,
+                "nom_produit" => $produit["nom_produit"],
+                "nom_vendeur" => $produit["nom_vendeur"]
             ];
 
             update_stock($_POST['id_produit'], "-1");
@@ -173,7 +178,10 @@ if ($numEtape == 3) {
 
     // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT nom_public AS nom, id_produit, prix, quantite_panier AS quantite FROM produit_panier WHERE id_client = :id_compte");
+        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix, quantite_panier AS quantite, raison_sociale AS nom_vendeur
+        FROM produit_panier
+        INNER JOIN _vendeur ON produit_panier.id_vendeur = _vendeur.id_compte
+        WHERE id_client = :id_compte");
         $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
         $requete->execute();
         $liste_produits = $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -197,7 +205,7 @@ if ($numEtape == 3) {
         } else {
             echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
             foreach ($produits_plus_en_stock as $produit) {
-                echo "\n- " . $produit['nom'];
+                echo "\n- " . $produit['nom_produit'];
             }
         }
     }
