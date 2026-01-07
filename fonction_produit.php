@@ -441,3 +441,15 @@
     function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
 
     }
+
+    function banniere_libre(){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre AS is_free");
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+         
+    }
