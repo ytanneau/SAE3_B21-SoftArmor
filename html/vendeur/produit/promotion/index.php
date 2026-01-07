@@ -167,6 +167,8 @@
         });
 
         pourcentage.addEventListener('input', () => {
+            pourcentage.value = pourcentage.value.replace(",",".");
+            pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
             calculR();
         })
 
