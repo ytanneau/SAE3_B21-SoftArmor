@@ -48,12 +48,12 @@
         <?php include "../../header.php" ?>
         <h1>Démarer une promotion</h1>
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <h3>Promotion</h3>
             <label for="dateDebutP">Date de début</label>
-            <input type="date" id="dateDebutP" required>
+            <input type="date" id="dateDebutP" name="dateDebutP" required>
             <label for="dateFinP">Date de fin (incluse)</label>
-            <input type="date" id="dateFinP" required>
+            <input type="date" id="dateFinP" name="dateFinP" required>
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
@@ -62,12 +62,12 @@
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?></p>
             <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage">
+            <input type="text" id="pourcentage" name="pourcentage">
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" disabled>
+            <input type="text" id="euro" name="euro" disabled>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" disabled>
-            <input type="file" id="photoPromotion">
+            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
