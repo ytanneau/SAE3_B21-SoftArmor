@@ -442,7 +442,8 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("INSERT INTO _promotion VALUES :id_produit, :date_debut, :date_fin, :reduction, :id_image");
+            $stmt = $pdo->prepare("INSERT INTO _promotion(produit_id, date_debut, date_fin, remise, image_id)
+             VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
             $stmt->execute([
                 "id_produit" => $id_produit,
                 "date_debut" => $date_debut,
