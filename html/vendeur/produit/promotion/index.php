@@ -62,7 +62,7 @@
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?></p>
             <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage" name="pourcentage">
+            <input type="text" id="pourcentage">
             <label for="euro">Remise appliquée</label>
             <input type="text" id="euro" name="euro" disabled>
             <label for="prixFinal">Prix final</label>
