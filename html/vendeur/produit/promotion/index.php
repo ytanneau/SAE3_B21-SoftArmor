@@ -79,7 +79,7 @@
                 return;
             }
 
-            cout.value = PRIX * diffJours;
+            cout.value = PRIX * diffJours + PRIX;
         }
 
         valider.addEventListener('click', (event) => {
