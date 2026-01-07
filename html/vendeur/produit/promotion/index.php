@@ -34,7 +34,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
-        $euro = explode('-',$euro)[1];
+        $euro = floatval(str_replace(',', '.', $euro));
 
         if(isset($_POST['reutiliser'])){
             $id_image_principal = get_id_image_produit($id_produit);
@@ -58,7 +58,7 @@
             $id_image_principal = null;
         }
         creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
-        header("Location : ../");
+        header("Location: ../");
         exit();
     }
 
