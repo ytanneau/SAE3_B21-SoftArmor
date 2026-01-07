@@ -139,7 +139,9 @@
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
                 euro.value = prixFinal.value - prixInitial;
                 prixFinal = Number.parseFloat(prixFinal).toFixed(2);
+                console.log(euro.value);
                 euro.value = Number.parseFloat(euro.value).toFixed(2);
+                console.log(euro.value);
             } else {
                 euro.value = "";
             }
