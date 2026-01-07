@@ -57,16 +57,16 @@
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
-            <input type="text" id="cout" disabled>
+            <input type="text" id="cout" readonly>
             
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?></p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" disabled>
+            <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
-            <input type="text" id="prixFinal" disabled>
+            <input type="text" id="prixFinal" readonly>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
