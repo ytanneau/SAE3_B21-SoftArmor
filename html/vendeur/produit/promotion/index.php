@@ -27,6 +27,7 @@
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
 
+    $prix = detail_produit($_GET['produit'])['prix'];
 ?>
 
 <!DOCTYPE html>
@@ -42,53 +43,71 @@
         <h1>Démarer une promotion</h1>
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
         <form action="" method="post">
-            <label for="">Date de début</label>
-            <input type="date" id="dateDebut">
-            <label for="">Date de fin (incluse)</label>
-            <input type="date" id="dateFin">
+            <h3>Promotion</h3>
+            <label for="dateDebutP">Date de début</label>
+            <input type="date" id="dateDebutP">
+            <label for="dateFinP">Date de fin (incluse)</label>
+            <input type="date" id="dateFinP">
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-            <label for="">Coût final : </label>
-            <input type="text" value="" id="cout" disabled>
+            <label for="cout">Coût final : </label>
+            <input type="text" id="cout" disabled>
+            
+            <h3>Réduction</h3>
+            <p>Prix actuel : <?=htmlentities($prix)?></p>
+            <label for="dateDebutR">Date de début</label>
+            <input type="date" id="dateDebutR">
+            <label for="dateFinR">Date de fin (incluse)</label>
+            <input type="date" id="dateFinR">
+            <p style="display:none; color:red;" id="warning3">Date de fin antérieur à la date de debut</p>
+            <p style="display:none; color:red;" id="warning4">Date(s) non selectionné(s)</p>
+            <label for="pourcentage">Pourcentage</label>
+            <input type="text" id="pourcentage">
+            <label for="euro">Remise appliquée</label>
+            <input type="text" id="euro">
+            <label for="prixFinal">Prix final</label>
+            <input type="text" id="prixFinal" disabled>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>
+
+        // PROMOTION //
         const PRIX = 26;
         const cout = document.getElementById("cout");
-        const dateDebut = document.getElementById("dateDebut");
-        const dateFin = document.getElementById("dateFin");
+        const dateDebutP = document.getElementById("dateDebutP");
+        const dateFinP = document.getElementById("dateFinP");
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
 
-        dateDebut.addEventListener('change', () => {
-            if(dateFin.value != ""){
-                if(dateDebut.value > dateFin.value) {
+        dateDebutP.addEventListener('change', () => {
+            if(dateFinP.value != ""){
+                if(dateDebutP.value > dateFinP.value) {
                     warning1.style.display = "block";
                 } else {
                     warning1.style.display = "none";
-                    calcul();
+                    calculP();
                 }
             }
             
         });
-        dateFin.addEventListener('change', () => {
-            if(dateDebut.value != ""){
-                if(dateDebut.value > dateFin.value) {
+        dateFinP.addEventListener('change', () => {
+            if(dateDebutP.value != ""){
+                if(dateDebutP.value > dateFinP.value) {
                     warning1.style.display = "block";
                 } else {
                     warning1.style.display = "none";
-                    calcul();
+                    calculP();
                 }
             }
             
         });
 
-        function calcul() {
-            const d1 = new Date(dateDebut.value + "T00:00:00");
-            const d2 = new Date(dateFin.value + "T00:00:00");
+        function calculP() {
+            const d1 = new Date(dateDebutP.value + "T00:00:00");
+            const d2 = new Date(dateFinP.value + "T00:00:00");
 
             const diffJours = (d2 - d1) / 86400000;
 
@@ -104,17 +123,59 @@
             warning1.style.display = "none";
             warning2.style.display = "none";
 
-            if (!dateDebut.value || !dateFin.value) {
+            if (!dateDebutP.value || !dateFinP.value) {
                 warning2.style.display = "block";
                 event.preventDefault();
                 return;
             }
 
-            if (dateDebut.value > dateFin.value) {
+            if (dateDebutP.value > dateFinP.value) {
                 warning1.style.display = "block";
                 event.preventDefault();
             }
         });
 
+        // REDUCTION //
+        const dateDebutR = document.getElementById("dateDebutR");
+        const dateFinR = document.getElementById("dateFinR");
+        const warning3 = document.getElementById("warning3");
+        const warning4 = document.getElementById("warning4");
+        const pourcentage = document.getElementById("pourcentage");
+        const euro = document.getElementById("euro");
+        const prixInitial = <?= json_encode($prix) ?>;
+        const prixFinal = document.getElementById("prixFinal");
+
+        dateDebutR.addEventListener('change', () => {
+            if(dateFinR.value != ""){
+                if(dateDebutR.value > dateFinR.value) {
+                    warning3.style.display = "block";
+                } else {
+                    warning3.style.display = "none";
+                    calculR();
+                }
+            }
+            
+        });
+        dateFinR.addEventListener('change', () => {
+            if(dateDebutR.value != ""){
+                if(dateDebutR.value > dateFinR.value) {
+                    warning3.style.display = "block";
+                } else {
+                    warning3.style.display = "none";
+                    calculR();
+                }
+            }
+            
+        });
+
+        function calculR(){
+            if(pourcentage.value != ""){
+                prixFinal.value = prixInitial * (pourcentage.value / 100);
+                euro.value = prixFinal.value - prixInitial;
+            } else if (euro.value != ""){
+                prixFinal.value = prixInitial - euro.value;
+                pourcentage.value = (euro.value / prixInitial) * 100;
+            }
+        }
     </script>
 </html>
