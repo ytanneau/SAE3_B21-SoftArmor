@@ -58,7 +58,7 @@
             $id_image_principal = null;
         }
         creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
-        header("Location: ../");
+        header("Location: ../?produit=" . $id_produit);
         exit();
     }
 
