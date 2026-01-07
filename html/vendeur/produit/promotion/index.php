@@ -164,7 +164,6 @@
                     warning3.style.display = "none";
                 }
             }
-            
         });
 
         pourcentage.addEventListener('input', () => {
@@ -176,7 +175,7 @@
 
         function calculR(){
             if(pourcentage.value != ""){
-                prixFinal.value = prixInitial * (pourcentage.value / 100);
+                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
                 euro.value = prixFinal.value - prixInitial;
             } else if (euro.value != ""){
                 prixFinal.value = prixInitial - euro.value;
