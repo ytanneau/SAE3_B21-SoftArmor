@@ -42,7 +42,7 @@
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
             
-            $nomImage = $idProduit . "_promotion.png";
+            $nomImage = $id_produit . "_promotion.png";
             
             $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
             // definition des caractéristiques d'une image
