@@ -90,6 +90,7 @@
             <p>Prix actuel : <?=htmlentities($prix)?></p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
+            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
             <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
             <label for="prixFinal">Prix final</label>
@@ -150,16 +151,21 @@
 
         // REDUCTION //
         const warning3 = document.getElementById("warning3");
-        const warning4 = document.getElementById("warning4");
         const pourcentage = document.getElementById("pourcentage");
         const euro = document.getElementById("euro");
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
+        pourcentage.value = ((prixInitial / euro.value) - 1) * 100;
+
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            calculR();
+            if(pourcentage.value <= 100){
+                calculR();
+            } else {
+                warning3.style.display = "block";
+            }
         })
 
         function calculR(){
@@ -177,6 +183,7 @@
         valider.addEventListener('click', (event) => {
             warning1.style.display = "none";
             warning2.style.display = "none";
+            warning3.style.display = "none";
 
             if (!dateDebutP.value || !dateFinP.value) {
                 warning2.style.display = "block";
@@ -186,6 +193,11 @@
 
             if (dateDebutP.value > dateFinP.value) {
                 warning1.style.display = "block";
+                event.preventDefault();
+            }
+
+            if (pourcentage.value >= 100){
+                warning3.style.display = "block";
                 event.preventDefault();
             }
         });
