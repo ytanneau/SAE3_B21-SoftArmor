@@ -55,10 +55,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     // }
 
     getProduits().then(produits => {
-        produits;
+        console.log(produits);
     });
-
-    console.log(produits);
 </script>
 
 </html>
