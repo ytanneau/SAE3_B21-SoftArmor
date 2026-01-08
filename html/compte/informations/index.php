@@ -423,8 +423,11 @@ unset($pdo);
                             </div>
                         </div>
 
-                        <!-- Bouton de suppression -->
+                        <!-- Boutons d'actions -->
                         <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        <?php if (isset($row['id_avis'])) { ?>
+                            <a href="modification_avis/?id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a>
+                        <?php } ?>
                         
                         <?php if (isset($row['url_img_avis'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">

@@ -101,6 +101,19 @@
         }
     }
 
+    // récupérer un avis par son identifiant
+    function obtenir_avis_par_id($id_avis){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_avis = :id_avis");
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     function avis_produit($id_produit, $id_vendeur){
         global $pdo;
         $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit AND id_vendeur=:id_vendeur");
