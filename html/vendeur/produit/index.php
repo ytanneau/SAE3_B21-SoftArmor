@@ -118,7 +118,8 @@
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
                 <?php if($tab_promo != null){
-                    foreach($tab_promo as $ligne){ 
+                    foreach($tab_promo as $ligne){
+                        print_r($ligne);
                     $id_promo = $ligne[$compteur]['id_promo'];
                     $date = $ligne[$compteur]['date_debut']?>
                     <a 
