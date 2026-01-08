@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
         mysql_close(conn); 
         exit(1); 
     }
-
+    printf("[RAPTOR] SUCCESS CONNECT MYSQL\n");
 
     // mise en place
     sock = socket(AF_INET, SOCK_STREAM, 0);

@@ -24,11 +24,11 @@
 #define DEBUG true
 
 
-#define BDD_HOST "localhost"
-#define BDD_USER "root"
-#define BDD_PASSWORD "motdepasse"
-#define BDD_NAME "ma_base"
-#define BDD_PORT 3306
+#define BDD_HOST "saedb"
+#define BDD_USER "saedb"
+#define BDD_PASSWORD "dbsae3dunyles"
+#define BDD_NAME "saedb"
+#define BDD_PORT 8080
 
 
 #define ERREUR_INSTRUCTION 0
