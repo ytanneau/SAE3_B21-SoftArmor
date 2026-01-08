@@ -116,7 +116,8 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-                <?php foreach($tab_promo as $ligne){ 
+                <?php if($tab_promo != null){
+                    foreach($tab_promo as $ligne){ 
                     $id_promo = $ligne[$compteur]['id_promo'];
                     $date = $ligne[$compteur]['date_debut']?>
                     <a 
@@ -125,7 +126,7 @@
                         Modifier la promotion du <?= htmlentities($date)?>
                     </a>
                     <?php $compteur++; 
-                } ?>
+                }} ?>
                 <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
                 <?php 
             } ?>
