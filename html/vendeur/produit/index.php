@@ -49,6 +49,8 @@
     if (isset($supprime) && $supprime === true) {
         renvoi();
     }
+    $id_produit = $_GET['produit'];
+    produit_est_en_promotion($id_produit);
 
 ?>
 <!doctype html>

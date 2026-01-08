@@ -472,3 +472,19 @@
         }
          
     }
+
+    function produit_est_en_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            print_r($resultat);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
