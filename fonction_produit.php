@@ -483,7 +483,11 @@
             ]);
 
             $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
-            print_r($resultat);
+            if($resultat != null){
+                return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $e){
             throw $e;
         }
