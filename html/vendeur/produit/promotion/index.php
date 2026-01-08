@@ -45,9 +45,9 @@
             
             $nomImage = $id_produit . "_promotion.png";
             
-            $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
             // definition des caractéristiques d'une image
-            $url = "ressources/produit/" . $nomImage;
+            $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 $id_image_principal = add_image($url,$nomImage, $altDefault);
@@ -94,7 +94,7 @@
             <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
-            <label for="photoPromotion">Choisir une banniere</label>
+            <label for="photoPromotion">Ajouter une banniere</label>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
