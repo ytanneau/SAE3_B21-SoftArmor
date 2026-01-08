@@ -497,6 +497,19 @@
                 "id_produit" => $id_produit
             ]);
 
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_info_promotion_unique($id_promo){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_produit" => $id_promo
+            ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
             throw $e;

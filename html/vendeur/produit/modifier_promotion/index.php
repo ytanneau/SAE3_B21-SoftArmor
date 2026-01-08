@@ -28,9 +28,10 @@
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
+    $id_promo = $_GET['idPromo'];
 
     $prix = detail_produit($_GET['produit'])['prix'];
-    $tab_info_promotion = get_info_promotion($id_produit);
+    $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -86,16 +87,6 @@
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
-            
-            <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?></p>
-            <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage">
-            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
-            <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
-            <label for="prixFinal">Prix final</label>
-            <input type="text" id="prixFinal" readonly>
             <?php if($tab_image_promotion != null){ ?>
                 <img src="<?=$tab_image_promotion['url']?>" alt="Banniere de promotion">
                 <label for="photoPromotion">Changer la banniere</label>
@@ -106,6 +97,16 @@
                 <label for="photoPromotion">Ajouter une bannière</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <?php } ?>
+            
+            <h3>Réduction</h3>
+            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
+            <label for="pourcentage">Pourcentage</label>
+            <input type="text" id="pourcentage">
+            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
+            <label for="euro">Remise appliquée</label>
+            <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
+            <label for="prixFinal">Prix final</label>
+            <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
