@@ -104,7 +104,7 @@ try {
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                                        <button onclick="actualiser()" type="submit" class="bouton">Supprimer</button>
+                                        <button onclick="actualiser()" type="submit" class="bouton grave">Supprimer</button>
                                     </form>
                                 </article>
                             </div>

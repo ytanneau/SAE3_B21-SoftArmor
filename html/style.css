@@ -1523,6 +1523,7 @@ h3 {
   margin-right: 3em;
 }
 .liste main ul {
+  list-style: none;
   width: 60vw;
   padding: 0;
 }
@@ -1552,29 +1553,6 @@ h3 {
   margin-bottom: 0;
   text-align: right;
 }
-.liste main ul li article:last-child .bouton {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.5em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #E43737;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.liste main ul li article:last-child .bouton a {
-  text-decoration: none;
-  color: white;
-}
-.liste main ul li article:last-child .bouton:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
-}
 .liste main .image_produit_moyen {
   margin-right: 3em;
 }
@@ -1591,6 +1569,37 @@ h3 {
 }
 .liste main aside {
   top: 8em;
+}
+.liste main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 0 0 2em;
+  min-width: 20%;
+}
+.liste main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+.liste main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.liste main .grave {
+  background-color: #E43737;
+}
+.liste main p {
+  width: 100%;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
