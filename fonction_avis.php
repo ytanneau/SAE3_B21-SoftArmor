@@ -131,6 +131,10 @@
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
+            $requete = $pdo->prepare("DELETE FROM _image WHERE id_produit = :id_produit AND id_client = :id_client;");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
             return 0;
         } catch (PDOException $e) {
             throw $e;
