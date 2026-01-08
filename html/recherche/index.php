@@ -56,7 +56,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     getProduits().then(produits => {
         console.log(
-            produits.filter(isOver10);
+            produits.filter(isOver10)
         );
     });
 </script>
