@@ -507,7 +507,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("UPDATE _pormotion 
+            $stmt = $pdo->prepare("UPDATE _promotion 
             SET id_produit = :id_produit,
                 date_debut = :date_debut,
                 date_fin = :date_fin,
