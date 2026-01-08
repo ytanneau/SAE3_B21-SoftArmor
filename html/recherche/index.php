@@ -48,13 +48,19 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
         const produits = await reponse.json();
         
+        /*
         produits.sort((a, b) => {
             if (a.nom_public < b.nom_public) {
                 return -1;
             }
         });
+        */
 
-        return produits;
+        return produits.filter(
+            function(produits) {
+                return produits.id_vendeur == 1;
+            }
+        );
     }
 
     console.log(getProduits());
