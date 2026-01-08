@@ -38,7 +38,7 @@
 
             if (isset($_FILES['photoPromotion']) &&
                     $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])['is_active']){
+                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
@@ -95,7 +95,6 @@
             <input type="text" id="prixFinal" readonly>
             <label for="photoPromotion">Choisir une banniere</label>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-            <label for="reutiliser">Utiliser la photo principal ?</label>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
