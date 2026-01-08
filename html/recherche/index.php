@@ -46,30 +46,19 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 <script type="text/javascript">
     async function getProduits() {
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
-        const produits = reponse.data;
-        
-        /*
-        produits.sort((a, b) => {
-            if (a.nom_public < b.nom_public) {
-                return -1;
-            }
-        });
-        
-        return produits.filter(
-            function(produits) {
-                return produits.id_vendeur == 1;
-            }
-        );
-        */
-
+        const produits_json = await reponse.json();
         return produits;
     }
 
-    const isOver10 = (produit) => {
-        return produit.prix >= 10;
-    }
+    // const isOver10 = (produit) => {
+    //     return produit.prix >= 10;
+    // }
 
-    console.log(getProduits());
+    getProduits().then(produits => {
+        produits;
+    });
+
+    console.log(produits);
 </script>
 
 </html>
