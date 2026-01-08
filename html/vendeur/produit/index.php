@@ -50,8 +50,8 @@
         renvoi();
     }
     $id_produit = $_GET['produit'];
-    $produit_en_promo = produit_est_en_promotion($id_produit);
-
+    $tab_promo = get_info_promotion($id_produit);
+    $compteur = 0
 ?>
 <!doctype html>
 <html lang="fr">
@@ -116,11 +116,18 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-                <?php if($produit_en_promo){ ?>
-                <a class="bouton_vendeur_produit" href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier la promotion</a>
-                <?php } else { ?>
+                <?php foreach($promo as $ligne){ 
+                    $id_promo = $ligne[$compteur]['id_promo'];
+                    $date = $ligne[$compteur]['date_debut']?>
+                    <a 
+                        class="bouton_vendeur_produit" 
+                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "idPromo=" . $id_promo)?>">
+                        Modifier la promotion du <?= htmlentities($date)?>
+                    </a>
+                    <?php $compteur++; 
+                } ?>
                 <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
-                <?php }
+                <?php 
             } ?>
             
             <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>

@@ -84,9 +84,11 @@
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
+            <label for="photoPromotion">Ajouter une banniere</label>
+            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             
             <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?></p>
+            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
@@ -94,8 +96,6 @@
             <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
-            <label for="photoPromotion">Ajouter une banniere</label>
-            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
