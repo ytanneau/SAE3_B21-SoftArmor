@@ -124,7 +124,7 @@
     }
 
     // fonction pour supprimer un avis d'un client sur un produit
-    function supprimer_avis($id_produit, $id_client, $url_image){
+    function supprimer_avis($id_produit, $url_image, $id_client){
         global $pdo;
         try {
             $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
