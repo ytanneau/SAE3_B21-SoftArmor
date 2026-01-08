@@ -95,7 +95,6 @@
             <input type="text" id="prixFinal" readonly>
             <label for="photoPromotion">Choisir une banniere</label>
             <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-            <label for="reutiliser">Utiliser la photo principal ?</label>
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    

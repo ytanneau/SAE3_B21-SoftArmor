@@ -464,7 +464,7 @@
                 "date1" => $date1,
                 "date2" => $date2
             ]);
-            echo $stmt->fetch(PDO::FETCH_ASSOC);
+            print_r($stmt->fetch(PDO::FETCH_ASSOC));
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e){
             throw $e;
