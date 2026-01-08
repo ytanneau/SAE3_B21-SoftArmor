@@ -63,11 +63,11 @@ int main(int argc, char const *argv[])
     conn = mysql_init(NULL); 
     if (conn == NULL) 
     { 
-        fprintf(stderr, "[FATAL] d'initialisation MySQL\n"); 
+        fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
         exit(EXIT_FAILURE); 
     }
     if (mysql_real_connect(conn, BDD_HOST, BDD_USER, BDD_PASSWORD, BDD_NAME, BDD_PORT, NULL, 0) == NULL) { 
-        fprintf(stderr, "[FATAL] Erreur de connexion MySQL : %s\n", mysql_error(conn)); 
+        fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
         mysql_close(conn); 
         exit(1); 
     }

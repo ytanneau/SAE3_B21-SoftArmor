@@ -16,7 +16,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include <time.h>
-#include <mysql/mysql.h>
+#include <mariadb/mysql.h>
 
 //-------------------------------------------------------
 
