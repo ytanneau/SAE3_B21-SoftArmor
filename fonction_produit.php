@@ -464,9 +464,27 @@
                 "date1" => $date1,
                 "date2" => $date2
             ]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
+            if($resultat === 1){ return true; }
+            else { return false; }
         } catch (PDOException $e){
             throw $e;
         }
          
+    }
+
+    function produit_est_en_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            print_r($resultat);
+        } catch (PDOException $e){
+            throw $e;
+        }
     }
