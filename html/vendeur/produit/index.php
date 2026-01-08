@@ -51,8 +51,6 @@
     }
     $id_produit = $_GET['produit'];
     $tab_promo = get_info_promotion($id_produit);
-    print_r($tab_promo);
-    $compteur = 0
 ?>
 <!doctype html>
 <html lang="fr">
@@ -119,16 +117,14 @@
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
                 <?php if($tab_promo != null){
                     foreach($tab_promo as $ligne){
-                        print_r($ligne);
-                    $id_promo = $ligne[$compteur]['id_promo'];
-                    $date = $ligne[$compteur]['date_debut']?>
+                        $id_promo = $ligne['id_promo'];
+                        $date = $ligne['date_debut']?>
                     <a 
                         class="bouton_vendeur_produit" 
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "idPromo=" . $id_promo)?>">
                         Modifier la promotion du <?= htmlentities($date)?>
                     </a>
-                    <?php $compteur++; 
-                }} ?>
+                    <?php }} ?>
                 <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
                 <?php 
             } ?>
