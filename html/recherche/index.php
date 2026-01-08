@@ -69,7 +69,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         return produit.prix >= 10;
     }
 
-    console.log(getProduits().filter(isOver10));
+    console.log(getProduits());
 </script>
 
 </html>
