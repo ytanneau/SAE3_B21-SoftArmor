@@ -51,6 +51,7 @@
     }
     $id_produit = $_GET['produit'];
     $tab_promo = get_info_promotion($id_produit);
+    print_r($tab_promo);
     $compteur = 0
 ?>
 <!doctype html>
