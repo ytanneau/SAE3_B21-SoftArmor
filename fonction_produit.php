@@ -464,7 +464,7 @@
                 "date1" => $date1,
                 "date2" => $date2
             ]);
-            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
             if($resultat === 1){ return true; }
             else { return false; }
         } catch (PDOException $e){

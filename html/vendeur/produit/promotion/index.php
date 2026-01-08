@@ -38,7 +38,7 @@
 
             if (isset($_FILES['photoPromotion']) &&
                     $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])['is_active']){
+                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
