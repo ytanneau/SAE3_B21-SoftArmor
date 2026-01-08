@@ -8,7 +8,7 @@
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li> 
                     <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>">
-                        <img src="<?= $images . 'compte_vendeur_blanc.svg' ?>" class="icon">Mon profil</a> 
+                        <img src="<?= $images . 'compte_vendeur_blanc.svg' ?>" class="icon">Mon profil
                     </a>
                 </li>
 
@@ -37,7 +37,8 @@
                     <div id="dropdown-compte" class="dropdown-content">
                         <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>"> <img src="<?= $images . 'compte_vendeur.svg' ?>" class="icon">Mon profil</a>
                         <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
-                        <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
+                        <a href="<?= HOME_SITE . 'vendeur/commande'?>"><img src="<?=$images?>panier.svg" class="icon">Lé komand</a>
+                        <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?=$images?>deconnexion.svg" class="icon">Déconnexion</a>
                     </div>
                 </div>
             </li>

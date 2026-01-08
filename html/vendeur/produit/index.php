@@ -3,18 +3,12 @@
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
 
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
+
     if (!isset($_SESSION)) {
         session_start();
     }
-    function renvoi(){
-        if (headers_sent()) {
-            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
-        }
-        else{
-            exit(header("Location: ../"));
-        }
-    }
-
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
@@ -33,9 +27,6 @@
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
-
-    require_once HOME_GIT . '.config.php';
-    require_once HOME_GIT . 'fonction_produit.php';
 
     //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
     $rows = detail_produit($_GET['produit']);
@@ -58,11 +49,10 @@
     if (isset($supprime) && $supprime === true) {
         renvoi();
     }
+    $id_produit = $_GET['produit'];
+    $produit_en_promo = produit_est_en_promotion($id_produit);
 
-
-    // Fonctions
-
-?>   
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -73,7 +63,7 @@
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
-        <a href="../"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+        <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="produit-vendeur">
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
@@ -126,7 +116,12 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-            <?php } ?>
+                <?php if($produit_en_promo){ ?>
+                <a class="bouton_vendeur_produit" href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier la promotion</a>
+                <?php } else { ?>
+                <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                <?php }
+            } ?>
             
             <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>

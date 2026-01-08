@@ -428,3 +428,67 @@
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
+    function renvoi(){
+        if (headers_sent()) {
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
+        }
+        else{
+            exit(header("Location: ../"));
+        }
+    }
+
+    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
+             VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "date_debut" => $date_debut,
+                "date_fin" => $date_fin,
+                "reduction" => $reduction,
+                "id_image" => $id_image_banniere
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function banniere_libre($date1,$date2){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
+            $stmt->execute([
+                "date1" => $date1,
+                "date2" => $date2
+            ]);
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
+            if($resultat === 1){ return true; }
+            else { return false; }
+        } catch (PDOException $e){
+            throw $e;
+        }
+         
+    }
+
+    function produit_est_en_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($resultat != null){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }

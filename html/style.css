@@ -144,6 +144,7 @@ hr {
 }
 #header_client .menu-button {
   display: none;
+  margin-left: auto;
 }
 #header_client .menu-button img {
   height: 75px;
@@ -152,7 +153,6 @@ hr {
 @media screen and (max-width: 1024px) {
   #header_client .menu-button {
     display: block;
-    margin-left: auto;
   }
 }
 #header_client > nav {
@@ -165,6 +165,8 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   list-style: none;
   width: 100%;
   margin: 0;
@@ -173,6 +175,42 @@ hr {
 #header_client > nav > ul > li {
   margin: 0 1em;
 }
+#header_client > nav > ul > li.searchbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+#header_client > nav > ul > li.searchbar form {
+  display: flex;
+  flex-basis: 65%;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+#header_client > nav > ul > li.searchbar form input, #header_client > nav > ul > li.searchbar form button {
+  border: none;
+}
+#header_client > nav > ul > li.searchbar form input[type=search] {
+  padding: 0.5em 0.5em 0.5em 1.5em;
+  border-radius: 20px;
+  flex-grow: 1;
+  outline: none;
+  font-weight: 400;
+}
+@media screen and (max-width: 1024px) {
+  #header_client > nav > ul > li.searchbar form input[type=search] {
+    padding: 1.5em 0.5em 1.5em 1.5em;
+  }
+}
+#header_client > nav > ul > li.searchbar form button[type=submit] {
+  background-color: transparent;
+}
+@media screen and (max-width: 1024px) {
+  #header_client > nav > ul > li.searchbar {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
 #header_client > nav > ul > li:first-child img {
   height: 30px;
 }
@@ -180,9 +218,6 @@ hr {
   #header_client > nav > ul > li:first-child img {
     height: 50px;
   }
-}
-#header_client > nav > ul > li:nth-of-type(2) {
-  margin-left: auto;
 }
 #header_client > nav > ul > li > a {
   display: flex;
@@ -265,15 +300,6 @@ hr {
   height: 60px;
   width: 60px;
 }
-#header_client form input[type=search] {
-  background-image: url(images/loupe.svg);
-  background-repeat: no-repeat;
-  background-position: left center;
-  height: 2.5em;
-  padding: 0.5em 0.5em 0.5em 2.5em;
-  border-radius: 20px;
-  border: none;
-}
 
 #header_vendeur {
   position: sticky;
@@ -298,6 +324,7 @@ hr {
 }
 #header_vendeur .menu-button {
   display: none;
+  margin-left: auto;
 }
 #header_vendeur .menu-button img {
   height: 75px;
@@ -306,7 +333,6 @@ hr {
 @media screen and (max-width: 1024px) {
   #header_vendeur .menu-button {
     display: block;
-    margin-left: auto;
   }
 }
 #header_vendeur > nav {
@@ -319,6 +345,8 @@ hr {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   list-style: none;
   width: 100%;
   margin: 0;
@@ -327,6 +355,42 @@ hr {
 #header_vendeur > nav > ul > li {
   margin: 0 1em;
 }
+#header_vendeur > nav > ul > li.searchbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+#header_vendeur > nav > ul > li.searchbar form {
+  display: flex;
+  flex-basis: 65%;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+#header_vendeur > nav > ul > li.searchbar form input, #header_vendeur > nav > ul > li.searchbar form button {
+  border: none;
+}
+#header_vendeur > nav > ul > li.searchbar form input[type=search] {
+  padding: 0.5em 0.5em 0.5em 1.5em;
+  border-radius: 20px;
+  flex-grow: 1;
+  outline: none;
+  font-weight: 400;
+}
+@media screen and (max-width: 1024px) {
+  #header_vendeur > nav > ul > li.searchbar form input[type=search] {
+    padding: 1.5em 0.5em 1.5em 1.5em;
+  }
+}
+#header_vendeur > nav > ul > li.searchbar form button[type=submit] {
+  background-color: transparent;
+}
+@media screen and (max-width: 1024px) {
+  #header_vendeur > nav > ul > li.searchbar {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
 #header_vendeur > nav > ul > li:first-child img {
   height: 30px;
 }
@@ -334,9 +398,6 @@ hr {
   #header_vendeur > nav > ul > li:first-child img {
     height: 50px;
   }
-}
-#header_vendeur > nav > ul > li:nth-of-type(2) {
-  margin-left: auto;
 }
 #header_vendeur > nav > ul > li > a {
   display: flex;
@@ -1462,6 +1523,7 @@ h3 {
   margin-right: 3em;
 }
 .liste main ul {
+  list-style: none;
   width: 60vw;
   padding: 0;
 }
@@ -1491,29 +1553,6 @@ h3 {
   margin-bottom: 0;
   text-align: right;
 }
-.liste main ul li article:last-child .bouton {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.5em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #E43737;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.liste main ul li article:last-child .bouton a {
-  text-decoration: none;
-  color: white;
-}
-.liste main ul li article:last-child .bouton:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
-}
 .liste main .image_produit_moyen {
   margin-right: 3em;
 }
@@ -1530,6 +1569,37 @@ h3 {
 }
 .liste main aside {
   top: 8em;
+}
+.liste main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 0 0 0 2em;
+  min-width: 20%;
+}
+.liste main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+.liste main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.liste main .grave {
+  background-color: #E43737;
+}
+.liste main p {
+  width: 100%;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
@@ -2426,4 +2496,4 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
-}/*# sourceMappingURL=style.css.map */
+}

@@ -131,19 +131,6 @@ hr {
 
 #header_client {
     @include header($couleur_primaire_client);
-
-    form {
-        input[type=search] {
-            background-image: url(images/loupe.svg);
-            background-repeat: no-repeat;
-            background-position: left center;
-
-            height: 2.5em;
-            padding: 0.5em 0.5em 0.5em 2.5em;
-            border-radius: 20px;
-            border: none;
-        }
-    }
 }
 
 #header_vendeur {
@@ -903,6 +890,7 @@ h3 {
 
 
         ul {
+            list-style: none;
             width: 60vw;
             padding: 0;
 
@@ -939,11 +927,8 @@ h3 {
                     margin-bottom: 0;
                     text-align: right;
                 }
-
-                .bouton {
-                    @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
-                }
             }
+
         }
 
         .image_produit_moyen {
@@ -966,6 +951,20 @@ h3 {
 
         aside {
             top: 8em;
+        }
+
+        .bouton {
+            @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
+            margin: 0 0 0 2em;
+            min-width: 20%;
+        }
+
+        .grave {
+            background-color: $rouge;
+        }
+
+        p {
+            width: 100%;
         }
 
         @media screen and (max-width: 1024px) {

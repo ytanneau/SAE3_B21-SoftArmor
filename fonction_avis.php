@@ -101,6 +101,19 @@
         }
     }
 
+    // récupérer un avis par son identifiant
+    function obtenir_avis_par_id($id_avis){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_avis = :id_avis");
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->execute();
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     function avis_produit($id_produit, $id_vendeur){
         global $pdo;
         $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit AND id_vendeur=:id_vendeur");
@@ -108,5 +121,23 @@
         $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // fonction pour supprimer un avis d'un client sur un produit
+    function supprimer_avis($id_produit, $id_client){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
+            $requete = $pdo->prepare("DELETE FROM _image WHERE id_produit = :id_produit AND id_client = :id_client;");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
+            return 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
 
