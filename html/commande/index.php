@@ -3,7 +3,7 @@ const HOME_GIT = "../../";
 const HOME_SITE = "../";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-$MOIS_ANNEE = ["décembre", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre"];
+$MOIS_ANNEE = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
 
 
@@ -93,7 +93,7 @@ if (isset($_GET["commande"])) {
                     foreach ($liste_commandes as $commande) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
-                    $mois = $MOIS_ANNEE[date("w", $d)];
+                    $mois = $MOIS_ANNEE[date((int)"m", $d)];
                     ?>
 
                     <li>

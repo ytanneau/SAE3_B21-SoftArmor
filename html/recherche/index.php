@@ -44,26 +44,36 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </body>
 
 <script type="text/javascript">
-    async function getProduits() {
+    // Liste des filtres existants
+
+    const isOver10 = (produit) => {
+        return produit.prix >= 10;
+    }
+
+    const isBelow20 = (produit) => {
+        return produit.prix <= 20;
+    }
+
+    // ...
+
+    // Récupérer tous les produits dans un objet JSON
+    async function getProduitsJSON() {
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
         const produits = await reponse.json();
-        
-        /*
-        produits.sort((a, b) => {
-            if (a.nom_public < b.nom_public) {
-                return -1;
-            }
-        });
-        */
+        return produits;
+    }
 
-        return produits.filter(
-            function(produits) {
-                return produits.id_vendeur == 1;
-            }
+    // Afficher la liste des produits filtrés
+    function filterAndShow(produits) {
+        console.log(
+            produits.filter(isOver10)
         );
     }
 
-    console.log(getProduits());
+
+    getProduitsJSON().then(produits => {
+        filterAndShow(produits);
+    });
 </script>
 
 </html>
