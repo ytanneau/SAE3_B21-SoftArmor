@@ -50,7 +50,7 @@
         renvoi();
     }
     $id_produit = $_GET['produit'];
-    produit_est_en_promotion($id_produit);
+    $produit_en_promo = produit_est_en_promotion($id_produit);
 
 ?>
 <!doctype html>
@@ -116,8 +116,12 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                <?php if($produit_en_promo){ ?>
+                <a class="bouton_vendeur_produit" href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier la promotion</a>
+                <?php } else { ?>
                 <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
-            <?php } ?>
+                <?php }
+            } ?>
             
             <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
