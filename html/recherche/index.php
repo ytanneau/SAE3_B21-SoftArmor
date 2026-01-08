@@ -50,12 +50,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         return produits;
     }
 
-    // const isOver10 = (produit) => {
-    //     return produit.prix >= 10;
-    // }
+    const isOver10 = (produit) => {
+        return produit.prix >= 10;
+    }
 
     getProduits().then(produits => {
-        console.log(produits);
+        console.log(
+            produits.filter(isOver10);
+        );
     });
 </script>
 
