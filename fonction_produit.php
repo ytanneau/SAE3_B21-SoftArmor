@@ -477,18 +477,53 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
-            $stmt->execute([
-                "id_produit" => $id_produit
-            ]);
-
-            $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultat = get_info_promotion($id_produit);
             if($resultat != null){
                 return true;
             } else {
                 return false;
             }
         } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_info_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _promotion 
+            SET id_produit = :id_produit,
+                date_debut = :date_debut,
+                date_fin = :date_fin,
+                reduction = :reduction,
+                id_image_banniere = :id_image_banniere 
+            WHERE id_promotion = :id_promotion");
+
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "date_debut" => $date_debut,
+                "date_fin" => $date_fin,
+                "reduction" => $reduction,
+                "id_image_banniere" => $id_image_banniere,
+                "id_promotion" => $id_promotion
+            ]);
+        } catch(PDOException $e){
             throw $e;
         }
     }

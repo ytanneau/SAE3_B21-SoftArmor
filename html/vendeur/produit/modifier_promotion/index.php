@@ -30,7 +30,7 @@
     $id_produit = $_GET['produit'];
 
     $prix = detail_produit($_GET['produit'])['prix'];
-    
+    $tab_info_promotion = get_info_promotion($id_produit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
@@ -55,7 +55,8 @@
         } else {
             $id_image_principal = null;
         }
-        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        
         header("Location: ../?produit=" . $id_produit);
         exit();
     }
@@ -65,21 +66,21 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Alizon - Démarrer une promotion</title>
+        <title>Alizon - Modifier la promo</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <h1>Démarrer une promotion</h1>
+        <h1>Modifier la promotion</h1>
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
         <form action="" method="post" enctype="multipart/form-data">
             <h3>Promotion</h3>
             <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut" required>
+            <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
             <label for="dateFin">Date de fin (incluse)</label>
-            <input type="date" id="dateFin" name="dateFin" required>
+            <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
@@ -91,7 +92,7 @@
             <input type="text" id="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" readonly>
+            <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
             <label for="photoPromotion">Choisir une banniere</label>
@@ -155,6 +156,8 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
+        pourcentage.value = ((prixInitial / euro.value) - 1) * 100;
+
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
@@ -163,7 +166,6 @@
             } else {
                 warning3.style.display = "block";
             }
-            
         })
 
         function calculR(){
@@ -193,7 +195,7 @@
                 warning1.style.display = "block";
                 event.preventDefault();
             }
-            
+
             if (pourcentage.value >= 100){
                 warning3.style.display = "block";
                 event.preventDefault();
