@@ -54,16 +54,22 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 return -1;
             }
         });
-        */
-
+        
         return produits.filter(
             function(produits) {
                 return produits.id_vendeur == 1;
             }
         );
+        */
+
+        return produits;
     }
 
-    console.log(getProduits());
+    const isOver10 = (produit) => {
+        return produit.prix >= 10;
+    }
+
+    console.log(getProduits().filter(isOver10));
 </script>
 
 </html>
