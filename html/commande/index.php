@@ -110,7 +110,9 @@ if (isset($_GET["commande"])) {
 
     </main>
         
-    <?php } ?>
-
+    <?php }
+    if (!isset($_GET["commande"])) {
+        include HOME_SITE . "footer.php";
+    }?>
 </body>
 </html>

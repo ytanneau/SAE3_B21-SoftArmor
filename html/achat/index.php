@@ -148,10 +148,10 @@ if ($numEtape == 3) {
 
     // Si c'est un produit unique (pas un panier)
     if ($_POST['id_produit'] != 'panier') {
-        $stock = detail_produit($_POST['id_produit'])['quantite'];
+        $produit = detail_produit($_POST['id_produit']);
 
-        if ($stock <= 0) {
-            echo "Une erreur est survenue ! (le produit n'est plus en stock)";
+        if ($produit["quantite"] <= 0) {
+            $produits_plus_en_stock = [$produit];
             $achat_reussi = false;
 
         } else {
@@ -201,12 +201,8 @@ if ($numEtape == 3) {
             }
 
             ajout_commande($id_commande, $liste_produits);
+            header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
 
-        } else {
-            echo "Une erreur est survenue ! (un ou plusieurs produits ne sont plus en stock)";
-            foreach ($produits_plus_en_stock as $produit) {
-                echo "\n- " . $produit['nom_produit'];
-            }
         }
     }
 
@@ -226,7 +222,7 @@ if ($numEtape == 3) {
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
 
-    <body class="form_client">
+    <body class="<?=($numEtape == 3 && !$achat_reussi) ? 'liste' : 'form_client'?>">
         <?php include HOME_SITE . 'header.php'; ?>
 
         <main>
@@ -358,15 +354,20 @@ else if ($numEtape == 2) {
 
 <?php
 }
-    else if ($numEtape == 3 && $achat_reussi) {
+    else if ($numEtape == 3 && !$achat_reussi) {
     ?>
-        <div style="text-align: center;">
-            <h2>Votre achat a été effectué</h2>
+        <div>
+            <h2>Une erreur est survenue ! Les produits suivants ne sont plus en stock (ou n'ont pas assez de stock) : </h2>
+
+            <ul>
+                <?php foreach ($produits_plus_en_stock as $produit) { ?>
+                    <li><?=$produit['nom_produit']?></li>
+                <?php } ?>
+            </ul>
             <a href="<?=HOME_SITE?>">Revenir à l'accueil</a>
         </div>
     <?php
     }
-
 ?>
         </main>
     </body>
