@@ -31,7 +31,6 @@
 
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion($id_produit);
-    print_r($tab_info_promotion);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
@@ -56,7 +55,7 @@
         } else {
             $id_image_principal = null;
         }
-        update_promotion($tab_info_promotion['id_promotion'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
         
         header("Location: ../?produit=" . $id_produit);
         exit();
