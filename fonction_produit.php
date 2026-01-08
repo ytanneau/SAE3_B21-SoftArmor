@@ -439,5 +439,34 @@
     }
 
     function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+        global $pdo;
 
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
+             VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "date_debut" => $date_debut,
+                "date_fin" => $date_fin,
+                "reduction" => $reduction,
+                "id_image" => $id_image_banniere
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function banniere_libre($date1,$date2){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
+            $stmt->execute([
+                "date1" => $date1,
+                "date2" => $date2
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+         
     }
