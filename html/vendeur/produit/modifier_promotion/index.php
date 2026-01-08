@@ -31,6 +31,7 @@
 
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion($id_produit);
+    print_r($tab_info_promotion);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
