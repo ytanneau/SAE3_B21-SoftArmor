@@ -32,12 +32,10 @@
 
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
-    if(get_image_promotion($tab_info_promotion['id_image_banniere']) !== 0){
-        $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
-        print_r($tab_image_promotion);
-        $id_image_initial = $tab_image_promotion['id_image'];
-    }
-    
+    $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+    print_r($tab_image_promotion);
+    $id_image_initial = $tab_image_promotion['id_image'];
+    print_r($id_image_initial);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
