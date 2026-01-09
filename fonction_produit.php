@@ -549,7 +549,11 @@
             $stmt->execute([
                 "id_image" => $id_image
             ]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            if($stmt != null){
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return 0;
+            }
         } catch(PDOException $e){
             throw $e;
         }
