@@ -487,25 +487,6 @@ a.bouton:has(+ .liste_avis) {
                 width: 100%;
             }
         }
-
-        // Conteneur pour les boutons d'actions
-        .actions-avis {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5em;
-            margin-left: 1em;
-
-            a.bouton {
-                @include bouton_new($couleur_primaire_client, $color: white, $largeur: 8em, $padding: 0.5em, $size: 0.9em);
-                text-align: center;
-                text-decoration: none;
-                white-space: nowrap;
-            }
-
-            a.bouton.grave {
-                background-color: $rouge;
-            }
-        }
     }
 }
 
