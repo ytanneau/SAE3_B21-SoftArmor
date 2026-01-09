@@ -133,6 +133,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         // monAdr.setAttributeNode(attribut);
         // monContact.appendChild(monAdr);
 
+        // Vider les produits déjà présents dans la grille
+        while (resultGrid.firstChild) {
+            parent.removeChild(resultGrid.firstChild);
+        }
+
         data.produits.forEach(produit => {
             let paragraphe = document.createElement("p");
             let texteNom = document.createTextNode(produit.nom_public);
