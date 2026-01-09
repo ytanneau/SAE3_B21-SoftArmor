@@ -40,7 +40,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 <body data-page="search">
     <?php include HOME_SITE . "header.php"; ?>
 
-    <aside class="filters">
+    <section class="filters">
         <form>
             <fieldset>
                 <legend>Filtrer par prix</legend>
@@ -61,7 +61,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <label for="over300">Plus de 300 €</label>
             </fieldset>
         </form>
-    </aside>
+</section>
 
     <h1>Résultats pour "<?= $recherche ?>"</h1>
 
@@ -147,5 +147,21 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         });
     }
 </script>
+
+<!--
+<a href="">
+    <img src="" title="" alt="">
+    <h3></h3>
+    <div>
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+    </div>
+    <p class="ancien_prix"></p> Si réduction
+    <p class="prix"></p>
+</a>
+-->
 
 </html>
