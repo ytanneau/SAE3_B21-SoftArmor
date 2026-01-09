@@ -135,7 +135,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         // Vider les produits déjà présents dans la grille
         while (resultGrid.firstChild) {
-            parent.removeChild(resultGrid.firstChild);
+            resultGrid.removeChild(resultGrid.firstChild);
         }
 
         data.produits.forEach(produit => {
