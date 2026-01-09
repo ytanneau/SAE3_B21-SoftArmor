@@ -37,7 +37,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "link_head.php" ?>
     <title>Alizon - Recherche</title>
 </head>
-<body>
+<body data-page="search">
     <?php include HOME_SITE . "header.php"; ?>
 
     <h1>Résultats pour "<?= $recherche ?>"</h1>
@@ -63,62 +63,62 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <label for="over300">Plus de 300 €</label>
             </fieldset>
         </form>
-            
     </div>
 </body>
 
 <script type="text/javascript">
-    // Liste des filtres existants
+    const searchState = {
+        search: <?= $recherche ?>,
+        filters: {
+            category: [],
+            price: {min: null, max: null},
+            sales: false
+        },
+        sort: {
+            field: "nom_public",
+            order: "asc"
+        }
+    };
 
-    const isBetween0And20 = (produit) => {
-        return produit.prix >= 0 && produit.prix <= 20;
+    // Est-on déjà sur la page de recherche ?
+    const isSearchPage = document.body.dataset.page === "search";
+    const form = document.querySelector("#form_recherche");
+    const input = document.querySelector("#recherche");
+
+    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchProduitsJSON();
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            if (isSearchPage) {
+                e.preventDefault();
+
+                searchState.search = input.value;
+                // searchState.page = 1;
+
+                fetchProduitsJSON();
+            }
+        });
     }
-
-    const isBetween20And50 = (produit) => {
-        return produit.prix >= 20 && produit.prix <= 50;
-    }
-
-    const isBetween50And100 = (produit) => {
-        return produit.prix >= 50 && produit.prix <= 100;
-    }
-
-    const isBetween100And300 = (produit) => {
-        return produit.prix >= 100 && produit.prix <= 300;
-    }
-
-    const isOver300 = (produit) => {
-        return produit.prix >= 300;
-    }
-
-    // ...
-
-
-
-    // Callable permettant de cumuler tous les filtres actifs
-    const combineFilters = (...filters) => (item) => {
-        return filters.map((filter) => filter(item)).every((x) => x === true);
-    }
-
-    // On met un Listener sur le div contenant toutes les checkbox pour détecter les changements
 
     // Récupérer tous les produits dans un objet JSON
-    async function getProduitsJSON() {
-        const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
-        const produits = await reponse.json();
-        return produits;
+    async function fetchProduitsJSON() {
+        fetch('/recherche/produits.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(searchState)
+        })
+        .then(res => res.json())
+        .then(data => {
+            afficherProduits(data.produits);
+        });
     }
 
-    // Afficher la liste des produits filtrés
-    function filterAndShow(produits) {
-        console.log(
-            produits.filter(isBetween0And20)
-        );
+    function afficherProduits(data) {
+        console.log(data.produits);
     }
-
-
-    getProduitsJSON().then(produits => {
-        filterAndShow(produits);
-    });
 </script>
 
 </html>
