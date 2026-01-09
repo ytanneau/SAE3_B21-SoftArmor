@@ -70,12 +70,24 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 <script type="text/javascript">
     // Liste des filtres existants
 
-    const isOver10 = (produit) => {
-        return produit.prix >= 10;
+    const isBetween0And20 = (produit) => {
+        return produit.prix >= 0 && produit.prix <= 20;
     }
 
-    const isBelow20 = (produit) => {
-        return produit.prix <= 20;
+    const isBetween20And50 = (produit) => {
+        return produit.prix >= 20 && produit.prix <= 50;
+    }
+
+    const isBetween50And100 = (produit) => {
+        return produit.prix >= 50 && produit.prix <= 100;
+    }
+
+    const isBetween100And300 = (produit) => {
+        return produit.prix >= 100 && produit.prix <= 300;
+    }
+
+    const isOver300 = (produit) => {
+        return produit.prix >= 300;
     }
 
     // ...
@@ -96,12 +108,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         return produits;
     }
 
-    console.log("Test");
-
     // Afficher la liste des produits filtrés
     function filterAndShow(produits) {
         console.log(
-            produits.filter(isOver10)
+            produits.filter(isBetween0And20);
         );
     }
 
