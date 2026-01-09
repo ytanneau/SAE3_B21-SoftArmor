@@ -46,7 +46,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         <form>
             <fieldset>
                 <legend>Filtrer par prix</legend>
-                
+
                 <label for="zeroTo20">0 € à 20 €</label>
                 <input type="checkbox" name="prix" id="zeroTo20" value="zeroTo20">
 
@@ -88,16 +88,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     };
 
     // On met un Listener sur le div contenant toutes les checkbox pour détecter les changements
-    const filters = document.querySelector('.filter');
-    filters.addEventListener('change', changeBox);
-
-    function changeBox() {
-        
-    }
 
     // Récupérer tous les produits dans un objet JSON
     async function getProduitsJSON() {
-        const reponse = await fetch("http://10.253.5.107/recherche/produits.php");
+        const reponse = await fetch("/recherche/produits.php");
         const produits = await reponse.json();
         return produits;
     }
