@@ -68,7 +68,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
 <script type="text/javascript">
     const searchState = {
-        search: <?= $recherche ?>,
+        search: "<?=$recherche?>",
         filters: {
             category: [],
             price: {min: null, max: null},
