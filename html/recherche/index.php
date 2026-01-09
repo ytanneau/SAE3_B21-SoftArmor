@@ -135,7 +135,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         data.produits.forEach(produit => {
             let paragraphe = document.createElement("p");
-            let nom = document.createTextNode(produit.nom_public);
+            let texteNom = document.createTextNode(produit.nom_public);
+            paragraphe.appendChild(texteNom);
     
             resultGrid.appendChild(paragraphe);
         });
