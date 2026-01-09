@@ -101,7 +101,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     // Afficher la liste des produits filtrés
     function filterAndShow(produits) {
         console.log(
-            produits.filter(isOver10);
+            produits.filter(isOver10)
         );
     }
 
