@@ -40,9 +40,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 <body data-page="search">
     <?php include HOME_SITE . "header.php"; ?>
 
-    <h1>Résultats pour "<?= $recherche ?>"</h1>
-
-    <div class="filter">
+    <aside class="filters">
         <form>
             <fieldset>
                 <legend>Filtrer par prix</legend>
@@ -63,7 +61,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <label for="over300">Plus de 300 €</label>
             </fieldset>
         </form>
-    </div>
+    </aside>
+
+    <h1>Résultats pour "<?= $recherche ?>"</h1>
+
+    <section class="results">
+        <!-- Grille des résultats -->
+        <div id="results"></div>
+    </section>
 </body>
 
 <script type="text/javascript">
@@ -117,7 +122,23 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     }
 
     function afficherProduits(data) {
-        console.log(data.produits);
+        const resultGrid = document.querySelector("#results");
+        // console.log(data.produits);
+
+        // Exemple pour créer une balise
+
+        // let monAdr = document.createElement("a");
+        // let attribut = document.createAttribute("href");
+        // attribut.value = "mailto:jbond@scot-yard.uk";
+        // monAdr.setAttributeNode(attribut);
+        // monContact.appendChild(monAdr);
+
+        data.produits.forEach(produit => {
+            let paragraphe = document.createElement("p");
+            let nom = document.createTextNode(produit.nom_public);
+    
+            resultGrid.appendChild(paragraphe);
+        });
     }
 </script>
 
