@@ -88,7 +88,7 @@
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
             <?php if($tab_image_promotion != null){ ?>
-                <img src="<?=$tab_image_promotion['url']?>" alt="Banniere de promotion">
+                <img src=<?=$tab_image_promotion['url']?> alt="Banniere de promotion">
                 <label for="photoPromotion">Changer la banniere</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 <label for="supp_image_promo">Supprimer la bannière</label>
