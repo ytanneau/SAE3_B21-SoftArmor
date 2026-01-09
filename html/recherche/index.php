@@ -112,7 +112,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         })
         .then(res => res.json())
         .then(data => {
-            afficherProduits(data.produits);
+            afficherProduits(data);
         });
     }
 
