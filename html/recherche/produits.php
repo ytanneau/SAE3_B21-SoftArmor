@@ -10,9 +10,9 @@
     $data = json_decode(file_get_contents('php://input'), true);
 
     // On récupère la recherche, les filtres et tris éventuels
-    $search   = htmlentities($data['search'] ?? '');
-    $filters = htmlentities($data['filters'] ?? []);
-    $sort    = htmlentities($data['sort'] ?? []);
+    $search  = $data['search'] ?? '';
+    $filters = $data['filters'] ?? [];
+    $sort    = $data['sort'] ?? [];
 
     // Construire la requête SQL à partir de la recherche
     $requete = "SELECT * FROM produit_visible WHERE 1 = 1";
