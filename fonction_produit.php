@@ -508,7 +508,7 @@
         try{
             $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
             $stmt->execute([
-                "id_produit" => $id_promo
+                "id_promo" => $id_promo
             ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
@@ -526,7 +526,7 @@
                 date_fin = :date_fin,
                 reduction = :reduction,
                 id_image_banniere = :id_image_banniere 
-            WHERE id_promotion = :id_promotion");
+            WHERE id_promo = :id_promotion");
 
             $stmt->execute([
                 "id_produit" => $id_produit,

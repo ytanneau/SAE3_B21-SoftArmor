@@ -121,7 +121,7 @@
                         $date = $ligne['date_debut']?>
                     <a 
                         class="bouton_vendeur_produit" 
-                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "idPromo=" . $id_promo)?>">
+                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
                         Modifier la promotion du <?= htmlentities($date)?>
                     </a>
                     <?php }} ?>

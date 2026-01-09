@@ -33,14 +33,16 @@
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+    print_r($tab_image_promotion);
+    $id_image_initial = $tab_image_promotion['id_image'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
-        $euro = explode('-', $euro)[1];
+        $euro = str_replace('-', "",$euro);
 
-            if (isset($_FILES['photoPromotion']) &&
-                    $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
+        if (isset($_FILES['photoPromotion']) &&
+            $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
+            banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
@@ -52,12 +54,12 @@
             $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                $id_image_principal = add_image($url,$nomImage, $altDefault);
+                $id_nouvelle_baniere = add_image($url,$nomImage, $altDefault);
             }
         } else {
-            $id_image_principal = null;
+            $id_nouvelle_baniere = $id_image_initial;
         }
-        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
         
         header("Location: ../?produit=" . $id_produit);
         exit();
@@ -88,7 +90,7 @@
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
             <?php if($tab_image_promotion != null){ ?>
-                <img src="<?=$tab_image_promotion['url']?>" alt="Banniere de promotion">
+                <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                 <label for="photoPromotion">Changer la banniere</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 <label for="supp_image_promo">Supprimer la bannière</label>
@@ -168,6 +170,7 @@
 
         pourcentage.value = (euro.value / prixInitial) * 100;
         prixFinal.value = prixInitial * pourcentage.value;
+        euro.value = "-" + euro.value;
 
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
