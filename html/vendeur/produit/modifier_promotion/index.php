@@ -36,7 +36,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
-        $euro = explode('-', $euro)[1];
+        $euro = str_replace('-', "",$euro);
 
             if (isset($_FILES['photoPromotion']) &&
                     $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
