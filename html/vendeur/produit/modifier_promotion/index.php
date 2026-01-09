@@ -33,6 +33,7 @@
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+    print_r($tab_image_promotion);
     $id_image_initial = $tab_image_promotion['id_image'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
