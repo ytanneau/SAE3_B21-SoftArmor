@@ -28,8 +28,8 @@
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode([
+    var_dump(json_encode([
         'produits' => $produits,
         'total' => count($produits)
-    ]);
+    ]));
 ?>
