@@ -22,7 +22,6 @@
     }
 
     if ($_GET == NULL || !isset($_GET['produit'])) {
-       echo "Produit non trouvé";
        renvoi();
     }
 
@@ -33,14 +32,11 @@
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
-    print_r($tab_image_promotion);
     if($tab_image_promotion != null){
         $id_image_initial = $tab_image_promotion['id_image'];
     } else {
         $id_image_initial = null;
     }
-    
-    print_r($id_image_initial);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
@@ -60,7 +56,12 @@
             $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                $id_nouvelle_baniere = add_image($url,$nomImage, $altDefault);
+                if ($tab_info_promotion['id_image_banniere']) {
+                    update_image_produit($tab_info_promotion['id_image_banniere'],$url,$nomImage,$altDefault);
+                    $id_nouvelle_baniere = $tab_info_promotion['id_image_banniere'];
+                } else {
+                    $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
+                }
             }
         } else {
             $id_nouvelle_baniere = $id_image_initial;
@@ -206,13 +207,13 @@
             warning2.style.display = "none";
             warning3.style.display = "none";
 
-            if (!dateDebutP.value || !dateFinP.value) {
+            if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
                 event.preventDefault();
                 return;
             }
 
-            if (dateDebutP.value > dateFinP.value) {
+            if (dateDebut.value > dateFin.value) {
                 warning1.style.display = "block";
                 event.preventDefault();
             }
