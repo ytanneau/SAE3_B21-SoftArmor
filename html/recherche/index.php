@@ -111,7 +111,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     // Afficher la liste des produits filtrés
     function filterAndShow(produits) {
         console.log(
-            produits.filter(isBetween0And20);
+            produits.filter(isBetween0And20)
         );
     }
 
