@@ -45,9 +45,9 @@
             
             $nomImage = $id_produit . "_promotion.png";
             
-            $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
             // definition des caractéristiques d'une image
-            $url = "ressources/produit/" . $nomImage;
+            $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 $id_image_principal = add_image($url,$nomImage, $altDefault);
@@ -84,17 +84,18 @@
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
+            <label for="photoPromotion">Ajouter une banniere</label>
+            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             
             <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?></p>
+            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
+            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
             <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
-            <label for="photoPromotion">Choisir une banniere</label>
-            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
@@ -149,7 +150,6 @@
 
         // REDUCTION //
         const warning3 = document.getElementById("warning3");
-        const warning4 = document.getElementById("warning4");
         const pourcentage = document.getElementById("pourcentage");
         const euro = document.getElementById("euro");
         const prixInitial = <?= json_encode($prix) ?>;
@@ -158,7 +158,12 @@
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            calculR();
+            if(pourcentage.value <= 100){
+                calculR();
+            } else {
+                warning3.style.display = "block";
+            }
+            
         })
 
         function calculR(){
@@ -176,6 +181,7 @@
         valider.addEventListener('click', (event) => {
             warning1.style.display = "none";
             warning2.style.display = "none";
+            warning3.style.display = "none";
 
             if (!dateDebutP.value || !dateFinP.value) {
                 warning2.style.display = "block";
@@ -185,6 +191,11 @@
 
             if (dateDebutP.value > dateFinP.value) {
                 warning1.style.display = "block";
+                event.preventDefault();
+            }
+            
+            if (pourcentage.value >= 100){
+                warning3.style.display = "block";
                 event.preventDefault();
             }
         });

@@ -56,6 +56,21 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     // ...
 
+
+
+    // Callable permettant de cumuler tous les filtres actifs
+    const combineFilters = (...filters) => (item) => {
+        return filters.map((filter) => filter(item)).every((x) => x === true)
+    };
+
+    // On met un Listener sur le div contenant toutes les checkbox pour détecter les changements
+    const _filter = document.querySelector('.filter');
+    _filter.addEventListener('change', changeBox);
+
+    function changeBox() {
+        
+    }
+
     // Récupérer tous les produits dans un objet JSON
     async function getProduitsJSON() {
         const reponse = await fetch("http://10.253.5.107/recherche/produits.php");

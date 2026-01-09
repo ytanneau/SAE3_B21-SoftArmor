@@ -124,16 +124,15 @@
     }
 
     // fonction pour supprimer un avis d'un client sur un produit
-    function supprimer_avis($id_produit, $id_client){
+    function supprimer_avis($id_produit, $url_image, $id_client){
         global $pdo;
         try {
             $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
-            $requete = $pdo->prepare("DELETE FROM _image WHERE id_produit = :id_produit AND id_client = :id_client;");
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
-            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_image ;");
+            $requete->bindValue(':url_image', $url_image, PDO::PARAM_STR);
             $requete->execute();
             return 0;
         } catch (PDOException $e) {

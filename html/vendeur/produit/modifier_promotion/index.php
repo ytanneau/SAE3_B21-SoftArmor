@@ -28,9 +28,11 @@
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
+    $id_promo = $_GET['idPromo'];
 
     $prix = detail_produit($_GET['produit'])['prix'];
-    $tab_info_promotion = get_info_promotion($id_produit);
+    $tab_info_promotion = get_info_promotion_unique($id_promo);
+    $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $euro = $_POST['euro'];
@@ -45,9 +47,9 @@
             
             $nomImage = $id_produit . "_promotion.png";
             
-            $cheminFinal = HOME_SITE . "ressources/produit/" . $nomImage;
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
             // definition des caractéristiques d'une image
-            $url = "ressources/produit/" . $nomImage;
+            $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 $id_image_principal = add_image($url,$nomImage, $altDefault);
@@ -85,17 +87,26 @@
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
+            <?php if($tab_image_promotion != null){ ?>
+                <img src="<?=$tab_image_promotion['url']?>" alt="Banniere de promotion">
+                <label for="photoPromotion">Changer la banniere</label>
+                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                <label for="supp_image_promo">Supprimer la bannière</label>
+                <input type="checkbox" id="supp_image_promo">
+            <?php } else { ?>
+                <label for="photoPromotion">Ajouter une bannière</label>
+                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+            <?php } ?>
             
             <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?></p>
+            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
             <input type="text" id="pourcentage">
+            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
             <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
-            <label for="photoPromotion">Choisir une banniere</label>
-            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <input type="submit" id="valider" value="Valider">
         </form>
         <?php include "../../../footer.php" ?>    
@@ -150,16 +161,22 @@
 
         // REDUCTION //
         const warning3 = document.getElementById("warning3");
-        const warning4 = document.getElementById("warning4");
         const pourcentage = document.getElementById("pourcentage");
         const euro = document.getElementById("euro");
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
+        pourcentage.value = (euro.value / prixInitial) * 100;
+        prixFinal.value = prixInitial * pourcentage.value;
+
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            calculR();
+            if(pourcentage.value <= 100){
+                calculR();
+            } else {
+                warning3.style.display = "block";
+            }
         })
 
         function calculR(){
@@ -170,6 +187,7 @@
                 euro.value = Number.parseFloat(euro.value).toFixed(2);
             } else {
                 euro.value = "";
+                prixFinal.value = "";
             }
         }
         
@@ -177,6 +195,7 @@
         valider.addEventListener('click', (event) => {
             warning1.style.display = "none";
             warning2.style.display = "none";
+            warning3.style.display = "none";
 
             if (!dateDebutP.value || !dateFinP.value) {
                 warning2.style.display = "block";
@@ -186,6 +205,11 @@
 
             if (dateDebutP.value > dateFinP.value) {
                 warning1.style.display = "block";
+                event.preventDefault();
+            }
+
+            if (pourcentage.value >= 100){
+                warning3.style.display = "block";
                 event.preventDefault();
             }
         });

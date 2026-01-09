@@ -370,7 +370,7 @@
         }
     }
 
-    function get_id_image_produit($idProduit){
+    function get_image_produit($idProduit){
         /**
          * Fonction get_id_image_produit prend en parametre l'id d'un produit
          * Renvoie un tableau avec l'id du produit et les id des images en lien avec celui-ci
@@ -497,6 +497,19 @@
                 "id_produit" => $id_produit
             ]);
 
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_info_promotion_unique($id_promo){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_produit" => $id_promo
+            ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
             throw $e;
@@ -507,7 +520,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("UPDATE _pormotion 
+            $stmt = $pdo->prepare("UPDATE _promotion 
             SET id_produit = :id_produit,
                 date_debut = :date_debut,
                 date_fin = :date_fin,
@@ -523,6 +536,20 @@
                 "id_image_banniere" => $id_image_banniere,
                 "id_promotion" => $id_promotion
             ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_image_promotion($id_image){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+            $stmt->execute([
+                "id_image" => $id_image
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
             throw $e;
         }

@@ -28,7 +28,7 @@
     // utilisation des fonctions de recuperation des données
     $tabInfoProduit = detail_produit($idProduit);
     $tabCategorieDuProduit = get_categorie_produit($idProduit);
-    $tabImageProduit = get_id_image_produit($idProduit);
+    $tabImageProduit = get_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nomPblc = $_POST['nomPblc'];
