@@ -41,6 +41,30 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "header.php"; ?>
 
     <h1>Résultats pour "<?= $recherche ?>"</h1>
+
+    <div class="filter">
+        <form>
+            <fieldset>
+                <legend>Filtrer par prix</legend>
+                
+                <label for="zeroTo20">0 € à 20 €</label>
+                <input type="checkbox" name="prix" id="zeroTo20" value="zeroTo20">
+
+                <label for="twentyTo50">20 € à 50 €</label>
+                <input type="checkbox" name="prix" id="twentyTo50" value="twentyTo50">
+
+                <label for="fiftyTo100">50 € à 100 €</label>
+                <input type="checkbox" name="prix" id="fiftyTo100" value="fiftyTo100">
+
+                <label for="hundredTo300">100 € à 300 €</label>
+                <input type="checkbox" name="prix" id="hundredTo300" value="hundredTo300">
+
+                <label for="over300">Plus de 300 €</label>
+                <input type="checkbox" name="prix" id="over300" value="over300">
+            </fieldset>
+        </form>
+            
+    </div>
 </body>
 
 <script type="text/javascript">
@@ -64,8 +88,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     };
 
     // On met un Listener sur le div contenant toutes les checkbox pour détecter les changements
-    const _filter = document.querySelector('.filter');
-    _filter.addEventListener('change', changeBox);
+    const filters = document.querySelector('.filter');
+    filters.addEventListener('change', changeBox);
 
     function changeBox() {
         
@@ -81,7 +105,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     // Afficher la liste des produits filtrés
     function filterAndShow(produits) {
         console.log(
-            produits.filter(isOver10)
+            produits.filter(isOver10);
         );
     }
 
