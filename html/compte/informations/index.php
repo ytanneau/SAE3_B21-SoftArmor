@@ -424,7 +424,7 @@ unset($pdo);
                         </div>
 
                         <!-- Boutons d'actions -->
-                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>&url_image=<?= htmlentities($row['url_img_avis']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>&url_image=<?= htmlentities($row['url_img_avis']) ?>&id_client=<?= htmlentities($_SESSION['id_client']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
                         
                         <a href="modification_avis/?id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a>
                         
