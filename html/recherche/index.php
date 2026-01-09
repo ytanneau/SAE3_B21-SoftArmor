@@ -47,20 +47,20 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <fieldset>
                 <legend>Filtrer par prix</legend>
 
-                <label for="zeroTo20">0 € à 20 €</label>
                 <input type="checkbox" name="prix" id="zeroTo20" value="zeroTo20">
+                <label for="zeroTo20">0 € à 20 €</label>
 
-                <label for="twentyTo50">20 € à 50 €</label>
                 <input type="checkbox" name="prix" id="twentyTo50" value="twentyTo50">
+                <label for="twentyTo50">20 € à 50 €</label>
 
-                <label for="fiftyTo100">50 € à 100 €</label>
                 <input type="checkbox" name="prix" id="fiftyTo100" value="fiftyTo100">
+                <label for="fiftyTo100">50 € à 100 €</label>
 
-                <label for="hundredTo300">100 € à 300 €</label>
                 <input type="checkbox" name="prix" id="hundredTo300" value="hundredTo300">
+                <label for="hundredTo300">100 € à 300 €</label>
 
-                <label for="over300">Plus de 300 €</label>
                 <input type="checkbox" name="prix" id="over300" value="over300">
+                <label for="over300">Plus de 300 €</label>
             </fieldset>
         </form>
             
