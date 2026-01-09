@@ -424,10 +424,10 @@ unset($pdo);
                         </div>
 
                         <!-- Boutons d'actions -->
-                        <a href="?supprimer_avis=1&id_produit=<?=$row['id_produit'] ?>&url_image=<?= $row['url_img_avis'] ?>&id_client=<?= $_SESSION['id_client'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
-                        
-                        <a href="modification_avis/?id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a>
-                        
+                        <div class="actions-avis">
+                            <a href="modification_avis/?id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a>
+                            <a href="?supprimer_avis=1&id_produit=<?=$row['id_produit'] ?>&url_image=<?= $row['url_img_avis'] ?>&id_client=<?= $_SESSION['id_client'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        </div>
                         
                         <?php if (isset($row['url_img_avis'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
@@ -442,7 +442,7 @@ unset($pdo);
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 <script>
-        const fileInput = document.getElementById("image");
+        const fileInput = document.getElementById("pdp");
         const fileName = document.getElementById("image-name");
 
         fileInput.addEventListener("change", () => {
