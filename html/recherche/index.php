@@ -68,6 +68,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </body>
 
 <script type="text/javascript">
+    console.log("Test");
     // Liste des filtres existants
 
     const isOver10 = (produit) => {
