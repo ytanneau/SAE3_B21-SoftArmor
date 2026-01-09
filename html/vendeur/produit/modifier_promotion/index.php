@@ -22,7 +22,6 @@
     }
 
     if ($_GET == NULL || !isset($_GET['produit'])) {
-       echo "Produit non trouvé";
        renvoi();
     }
 
