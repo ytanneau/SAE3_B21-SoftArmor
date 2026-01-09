@@ -305,3 +305,48 @@ int colis_encour()
 }
 
 //-------------------------------------------------------------------------------------------------------
+
+
+void info_colis(int cnx, char* code, MYSQL *conn)
+{
+    if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+    { 
+        fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
+        mysql_close(conn); 
+        return 1; 
+    } 
+    MYSQL_RES *res = mysql_store_result(conn); 
+    MYSQL_ROW row; while ((row = mysql_fetch_row(res))) 
+    { 
+        printf("ID: %s, Nom: %s\n", row[0], row[1]); 
+    } 
+    mysql_free_result(res); 
+    mysql_close(conn);
+}
+
+bool check_code(char* code)
+{
+    int x, y;
+    bool good;
+
+    for (x = 0; x < strlen(code); x++)
+    {
+        good = false;
+        y = 0;
+
+        while (!good && y<strlen(BORDEREAU_CARACTERE)-1)
+        {
+            if (code[x] == BORDEREAU_CARACTERE[y])
+            {
+                good = true;
+            }
+            y++;
+        }
+
+        if (!good)
+        {
+            return false;
+        }
+    }
+    return true;
+}

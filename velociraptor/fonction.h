@@ -26,5 +26,7 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax);
 void genere_code(char *code);
 int colis_encour();
 
+void info_colis(int cnx, char* code, MYSQL *conn);
+bool check_code(char* code);
 
 #endif
