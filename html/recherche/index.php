@@ -63,7 +63,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </form>
 </section>
 
-    <h1>Résultats pour "<?= $recherche ?>"</h1>
+    <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
     <section class="results">
         <!-- Grille des résultats -->
@@ -89,6 +89,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     const isSearchPage = document.body.dataset.page === "search";
     const form = document.querySelector("#form_recherche");
     const input = document.querySelector("#recherche");
+    const resultsFor = document.querySelector("#results_for");
 
     // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
     document.addEventListener("DOMContentLoaded", () => {
@@ -104,6 +105,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 // searchState.page = 1;
 
                 fetchProduitsJSON();
+                resultsFor.textContent = `Résultats pour "${input.value}"`;
             }
         });
     }
