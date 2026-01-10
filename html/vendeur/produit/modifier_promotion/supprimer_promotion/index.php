@@ -1,6 +1,6 @@
 <?php 
-    define("HOME_GIT", "../../../../");
-    define("HOME_SITE", "../../../");
+    define("HOME_GIT", "../../../../../");
+    define("HOME_SITE", "../../../../");
 
     require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . '.config.php';
