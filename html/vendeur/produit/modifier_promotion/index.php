@@ -85,7 +85,7 @@
     <body>
         <?php include "../../header.php" ?>
         <h1>Modifier la promotion</h1>
-        <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
+        <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
         <form action="" method="post" enctype="multipart/form-data">
             <h3>Promotion</h3>
             <label for="dateDebut">Date de début</label>
@@ -118,6 +118,8 @@
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
         </form>
+
+        <a href="../supprimer_promotion?idPorduit&idPromo=<?=htmlentities($id_promo)?>">Supprimer la promotion</a>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>

@@ -558,3 +558,53 @@
             throw $e;
         }
     }
+
+    function delete_promotion($id_promo){
+        global $pdo;
+
+        try{
+            $tab = get_info_promotion_unique($id_promo);
+            $id_image = $tab['id_image_banniere'];
+
+            $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_promo" => $id_promo
+            ]);
+            delete_image($id_image);
+
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function delete_image($id_image){
+        global $pdo;
+
+        try{
+            $tab_image = get_image($id_image);
+
+            $stmt = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
+            $stmt->execute([
+                "id_image" => $id_image
+            ]);
+
+            unlink($tab_image['url_image']);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_image($id_image){
+        global $pdo;
+        
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+            $stmt->execute([
+                "id_image" => $id_image
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
