@@ -33,7 +33,7 @@
     
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST['euro'])){
+        if(isset($_POST['euro']) && $_POST['euro'] !== ""){
             $euro = $_POST['euro'];
             $euro = str_replace('-', "",$euro);
         } else {
