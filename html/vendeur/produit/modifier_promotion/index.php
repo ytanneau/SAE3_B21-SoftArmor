@@ -152,11 +152,13 @@
             const difference = dateCourante.getTime() - dateCible.getTime();
             const vingtQuatreHeure = 86400000;
 
-            if(difference < 0 || difference > vingtQuatreHeure){
+            if (difference < 0) {
                 return true;
-            } else {
+            }
+            if (difference >= 0 && difference <= vingtQuatreHeure) {
                 return false;
             }
+            return true;
         }
 
         dateDebut.addEventListener('change', () => {
