@@ -37,7 +37,7 @@
             $euro = $_POST['euro'];
             $euro = str_replace('-', "",$euro);
         } else {
-            $euro = null;
+            $euro = 0;
         }
 
         if (isset($_FILES['photoPromotion']) &&
