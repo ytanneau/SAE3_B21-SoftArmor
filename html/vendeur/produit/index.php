@@ -111,7 +111,7 @@
                 </div>
                 <form id="supprimer" action="" method="post">
                     <input type="hidden" name="supprimer" value="true">
-                    <input type="submit" value="Supprimer">
+                    <input type="submit" value="Supprimer le produit">
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
