@@ -118,8 +118,12 @@
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
         </form>
-
-        <a href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>">Supprimer la promotion</a>
+        <a 
+            id="supprimer_promotion"
+            style="display:block; color:none;"
+            href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>">
+            Supprimer la promotion
+        </a>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>
@@ -132,6 +136,25 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
+        const btn_suppr = document.getElementById("supprimer_promotion");
+
+        if(verif_date_pour_suppression(dateDebut.value)){
+            btn_suppr.style.display = "none";
+        }
+
+        function verif_date_pour_suppression(date){
+            const dateCourante = new Date();
+            const dateCible = new Date(date.value);
+
+            const difference = dateCourante.getTime() - dateCible.getTime();
+            const vingtQuatreHeure = 86400000;
+
+            if(difference < 0 || difference > vingtQuatreHeure){
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
@@ -141,6 +164,9 @@
                     warning1.style.display = "none";
                     calculP();
                 }
+            }
+            if(verif_date_pour_suppression(dateDebut.value)){
+                btn_suppr.style.display = "none";
             }
             
         });

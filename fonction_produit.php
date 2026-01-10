@@ -609,3 +609,12 @@
             throw $e;
         }
     }
+
+    /*function date_banniere_occupe(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_promo, date_debut, date_fin FROM `_promotion` WHERE id_image_banniere <> NULL;");
+            $stmt->execute();
+        }
+    }*/
