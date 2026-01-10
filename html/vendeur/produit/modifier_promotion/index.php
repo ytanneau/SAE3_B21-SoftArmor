@@ -39,9 +39,10 @@
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $euro = $_POST['euro'];
-        $euro = str_replace('-', "",$euro);
-
+        if(isset($_POST['euro'])){
+            $euro = $_POST['euro'];
+            $euro = str_replace('-', "",$euro);
+        }
         if (isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
             banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
