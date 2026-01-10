@@ -33,25 +33,27 @@
     
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $euro = $_POST['euro'];
-        $euro = explode('-', $euro)[1];
+        if(isset($_POST['euro'])){
+            $euro = $_POST['euro'];
+            $euro = str_replace('-', "",$euro);
+        }
 
-            if (isset($_FILES['photoPromotion']) &&
-                    $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
-            $nomImageTemp = $_FILES['photoPromotion'];
-            // recupere le nom temporaire du fichier pour le deplacer
-            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-            
-            $nomImage = $id_produit . "_promotion.png";
-            
-            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
-            // definition des caractéristiques d'une image
-            $url = "ressources/promotion/" . $nomImage;
-            $altDefault = "Image de promotion";
-            if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                $id_image_principal = add_image($url,$nomImage, $altDefault);
-            }
+        if (isset($_FILES['photoPromotion']) &&
+                $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
+                banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
+        $nomImageTemp = $_FILES['photoPromotion'];
+        // recupere le nom temporaire du fichier pour le deplacer
+        $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+        
+        $nomImage = $id_produit . "_promotion.png";
+        
+        $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
+        // definition des caractéristiques d'une image
+        $url = "ressources/promotion/" . $nomImage;
+        $altDefault = "Image de promotion";
+        if(move_uploaded_file($cheminTemp,$cheminFinal)){
+            $id_image_principal = add_image($url,$nomImage, $altDefault);
+        }
         } else {
             $id_image_principal = null;
         }
