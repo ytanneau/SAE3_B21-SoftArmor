@@ -172,6 +172,8 @@
             }
             if(!verif_date_pour_suppression(dateDebut.value)){
                 btn_suppr.style.display = "none";
+            } else {
+                btn_suppr.style.display = "block";
             }
             
         });
