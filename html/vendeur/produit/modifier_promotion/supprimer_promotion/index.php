@@ -27,6 +27,6 @@
 
     delete_promotion($_GET['idPromo']);
 
-    header("Location: ../?produit=" . $_GET['idProduit']);
-    exit;
+    header("Location: ../../?produit=" . $_GET['idProduit']);
+    exit();
 ?>
