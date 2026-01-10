@@ -147,7 +147,7 @@
 
         function verif_date_pour_suppression(date){
             const dateCourante = new Date();
-            const dateCible = new Date(date.value);
+            const dateCible = new Date(date);
 
             const difference = dateCourante.getTime() - dateCible.getTime();
             const vingtQuatreHeure = 86400000;
