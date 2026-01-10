@@ -42,6 +42,8 @@
         if(isset($_POST['euro'])){
             $euro = $_POST['euro'];
             $euro = str_replace('-', "",$euro);
+        } else {
+            $euro = null;
         }
         if (isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
