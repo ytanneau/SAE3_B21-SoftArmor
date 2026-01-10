@@ -119,7 +119,7 @@
             <input type="submit" id="valider" value="Valider">
         </form>
 
-        <a href="../supprimer_promotion?idProduit&idPromo=<?=htmlentities($id_promo)?>">Supprimer la promotion</a>
+        <a href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>">Supprimer la promotion</a>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>
