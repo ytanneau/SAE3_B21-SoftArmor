@@ -141,7 +141,7 @@
         const warning2 = document.getElementById("warning2");
         const btn_suppr = document.getElementById("supprimer_promotion");
 
-        if(verif_date_pour_suppression(dateDebut.value)){
+        if(!verif_date_pour_suppression(dateDebut.value)){
             btn_suppr.style.display = "none";
         }
 
@@ -170,7 +170,7 @@
                     calculP();
                 }
             }
-            if(verif_date_pour_suppression(dateDebut.value)){
+            if(!verif_date_pour_suppression(dateDebut.value)){
                 btn_suppr.style.display = "none";
             }
             
