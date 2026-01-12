@@ -240,7 +240,7 @@
         global $pdo;
 
         try{ 
-            $requete = $pdo->prepare("INSERT INTO _produit 
+            $requete = $pdo->prepare("INSERT INTO _produit (id_vendeur, nom_stock, nom_public, description, description_detaillee, categorie, code_barre, quantite, prix, tva, seuil_alerte, poids, volume, plus_18, quantite_unite)
                                     VALUES(:id_vendeur,
                                             :nomPrv,
                                             :nomPblc,
