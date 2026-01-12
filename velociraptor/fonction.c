@@ -365,18 +365,17 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
         fin(cnx);
     }
     printf("test1.4\n");
-    MYSQL_RES *res = mysql_store_result(conn); 
-    MYSQL_ROW row;
-    row = mysql_fetch_row(res);
-
-    printf("test1.5\n");
-    
-    if (strcmp(row[0],"") == 0)
-    {
-        printf("test1.7\n");
+    MYSQL_RES *res = mysql_store_result(conn);
+    if (res == NULL){
+        printf("cc\n");
+    }
+    MYSQL_ROW row = mysql_fetch_row(res);
+    if (NULL == row){
+        printf("dd\n");
         return false;
     }
-    printf("test1.6\n");
+    
+    printf("test1.5\n");
     return true;
     //return true;
 }
