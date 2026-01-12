@@ -352,17 +352,21 @@ int colis_encour(MYSQL *conn, int cnx)
 
 bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
+    printf("test1.1\n");
     char sql[200];
     sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
-
+    printf("test1.2\n");
     if (mysql_query(conn, sql)) 
     { 
+        printf("test1.3\n");
         fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
         mysql_close(conn); 
         fin(cnx);
     }
+    printf("test1.4\n");
     MYSQL_RES *res = mysql_store_result(conn); 
     MYSQL_ROW row;
+    printf("test1.5\n");
     printf("test : %s\n", row[0]);
     if (row[0] == NULL){
         return false;
