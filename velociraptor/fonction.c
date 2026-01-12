@@ -284,20 +284,22 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
         genere_code(code);
         if (BDD)
         {
+            printf("test1\n");
             while (colis_existe(conn, cnx, code)){
                 genere_code(code);
             }
-        
+            printf("test2\n");
             char sql[200];
             sprintf(sql, "INSERT INTO _colis (bodereau) VALUES ('%s')", code);
 
+            printf("test3\n");
             if (mysql_query(conn, sql))
             { 
                 fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
                 mysql_close(conn); 
                 fin(cnx); 
             }
-
+            printf("test4\n");
             sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
             envoier_message(cnx, message);
         
