@@ -24,11 +24,11 @@
 #define DEBUG true
 
 #define BDD true
-#define BDD_HOST "mariadb"
+#define BDD_HOST "10.253.5.107"
 #define BDD_USER "sae"
 #define BDD_PASSWORD "dbsae3dunyles"
 #define BDD_NAME "saedb"
-#define BDD_PORT 8080
+#define BDD_PORT 3306
 
 
 #define ERREUR_INSTRUCTION 0

@@ -655,6 +655,8 @@
     }
 
     function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
+        $mdp = crypte_v2($mdp);
+        
         $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
@@ -758,7 +760,7 @@
     function sql_get_info_compte($id_compte){
         global $pdo;
     
-        $requete = $pdo->prepare('SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_compte;');
+        $requete = $pdo->prepare('SELECT * FROM client WHERE id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);

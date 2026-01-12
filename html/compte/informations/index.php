@@ -34,10 +34,7 @@ $mot_de_passe= sql_get_infos_randoms($_SESSION['id_compte']);
 
 $info_compte = sql_get_info_compte($_SESSION['id_compte']);
 
-//requete pour recuperer l'adresse du compte
-//$sql = "SELECT * FROM client_adresse WHERE client_adresse.id_compte = {$_SESSION['id_compte']};";
-
-$adresse_compte = sql_get_adresse_compte($_SESSION['id_compte']);
+// $image_profil = get_image($info_compte['id_image_profil']);
 
 //recuperer les avis du compte
 $avis = tout_avis_client($_SESSION['id_compte']);
