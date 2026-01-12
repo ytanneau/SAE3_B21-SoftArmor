@@ -7,7 +7,9 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
-    if (empty(trim($_GET['recherche']))) {
+    $recherche = trim($_GET['recherche']);
+
+    if (empty($recherche)) {
         header('location: ' . HOME_SITE);
         die();
     }
@@ -106,14 +108,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
-                searchState.search = input.value.trim();
-                // searchState.page = 1;
                 
                 // Rediriger si la recherche est vide
-                if (searchState.search === "") {
+                if (input.value.trim() === "") {
                     window.location.replace("..");
                 }
-
+                
+                searchState.search = input.value.trim();
+                // searchState.page = 1;
                 fetchProduitsJSON();
             }
         });
