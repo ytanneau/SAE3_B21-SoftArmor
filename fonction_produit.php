@@ -165,6 +165,8 @@
         global $pdo;
         $image = get_image_produit($id_produit);
         print_r($image);
+        delete_image_produit($id_produit);
+
         delete_image($image['id_image_principale']);
         if(!empty($image['id_image1'])){
             delete_image($image['id_image1']);
@@ -175,6 +177,18 @@
         $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
+    }
+
+    function delete_image_produit($id_produit){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("DELETE FROM _image_produit WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+        } catch (PDOException $e){
+            throw $e;
+        }
     }
 
     function supprimer_images_produit($id_produit) {
