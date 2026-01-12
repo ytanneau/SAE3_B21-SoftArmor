@@ -168,7 +168,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     }
 
     function listeEtoiles(moyenne) {
-        console.log(moyenne);
         let divEtoiles = document.createElement("div");
 
         if (moyenne == null || moyenne < 0 || moyenne > 5) {
@@ -186,6 +185,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         for (let i = 5; i > Math.round(moyenne); i--) {
             divEtoiles.appendChild(image('/image/etoile_vide.svg', 'étoile vide', 'étoile vide'));
         }
+
+        return divEtoiles;
     }
 
     function image(src, alt, title) {
