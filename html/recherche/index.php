@@ -189,7 +189,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         img.setAttributeNode(srcAtt);
         img.setAttributeNode(altAtt);
-        img.setAttribute(titleAtt);
+        img.setAttributeNode(titleAtt);
 
         return img;
     }
