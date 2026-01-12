@@ -365,8 +365,14 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
         fin(cnx);
     }
     printf("test1.4\n");
-    MYSQL_RES *res = mysql_store_result(conn); 
+    MYSQL_RES *res = mysql_store_result(conn);
+    if (res == NULL){
+        printf("cc\n");
+    }
     MYSQL_ROW row;
+    if (NULL == row){
+        printf("dd\n");
+    }
     row = mysql_fetch_row(res);
 
     printf("test1.5\n");
