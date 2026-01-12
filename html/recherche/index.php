@@ -149,6 +149,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             // Étoiles
             let divEtoiles = listeEtoiles(produit.note_moy);
 
+            // Si le produit n'est pas noté, l'indiquer
             if (divEtoiles == null) {
                 divEtoiles = document.createElement("div");
 
@@ -158,9 +159,30 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 pNonNote.appendChild(texteNonNote);
                 divEtoiles.appendChild(pNonNote);
             }
+            
+            // Prix du produit (ancien prix si réduction)
+            let pPrix = document.createElement("p");
+            let prix = document.createTextNode(produit.prix);
+            pPrix.appendChild(prix);
+
+            let pPrixReduit = null;
+
+            // Si le produit est en réduction, l'indiquer
+            if (produit.prix_actuel != null) {
+                pPrixReduit = document.createElement("p");
+                let prixReduit = document.createTextNode(produit.prix_actuel);
+                pPrixReduit.appendChild(prixReduit);
+                
+                pPrix.classList.add("ancien_prix");
+                pPrixReduit.classList.add("prix");
+            } else {
+                pPrix.classList.add("prix");
+            }
     
             lien.appendChild(photo);
             lien.appendChild(titreNomPublic);
+            lien.appendChild(pPrix);
+            lien.appendChild(pPrixReduit); // peut être inexistant
             lien.appendChild(divEtoiles);
 
             resultGrid.appendChild(lien);
