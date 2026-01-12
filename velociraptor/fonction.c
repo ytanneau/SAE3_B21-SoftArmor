@@ -354,7 +354,7 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     char sql[200];
     sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
-
+    printf("sql : %s\n", sql);
     if (mysql_query(conn, sql)) 
     { 
         fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
