@@ -290,7 +290,7 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
             }
             printf("test2\n");
             char sql[200];
-            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES ('%s')", code);
+            sprintf(sql, "INSERT INTO _colis (bordereau) VALUES ('%s')", code);
 
             printf("test3\n");
             if (mysql_query(conn, sql))
