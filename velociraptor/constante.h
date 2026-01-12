@@ -23,9 +23,9 @@
 #define SERVER "[RAPTOR]"
 #define DEBUG true
 
-
-#define BDD_HOST "saedb"
-#define BDD_USER "saedb"
+#define BDD false
+#define BDD_HOST "mariadb"
+#define BDD_USER "sae"
 #define BDD_PASSWORD "dbsae3dunyles"
 #define BDD_NAME "saedb"
 #define BDD_PORT 8080
@@ -52,7 +52,8 @@
 #define ETAPE "STAPE"
 #define MODE "REMISE"
 #define CAUSE "RAISON"
-
+#define VIDE "N/A"
+#define PHOTO "PHOTO"
 
 #define CHEMAIN 1
 #define NB_COLIS 2
@@ -70,5 +71,7 @@
 #define BORDEREAU_SIZE 13
 #define BORDEREAU_CARACTERE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+#define TAILLE_PHOTO 62
+#define FICHIER_PHOTO "carton_endommage.png"
 
 #endif

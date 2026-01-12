@@ -94,10 +94,127 @@ if (isset($_GET["commande"])) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
-                    ?>
+
+                    $fd = connexion_socket();
+                    $conn = connexion_delivraptor($fd,"root","root");
+                    if ($conn == "true"){
+                        $bordereau = $commande["bordereau"];
+                        $info_colis =get_info_colis($fd,$bordereau);
+                        $texte_img="";
+                        if ($info_colis["RENDU"] == "1") {
+                            $img = get_image_colis($fd,$bordereau);
+                            switch ($img) {
+                                case '3':
+                                    $texte_img="Colis inexistent";
+                                    break;
+                                case '4':
+                                    $texte_img="Photo inexistante";
+                                    break;
+                                
+                                default:
+                                    $fich = file_put_contents(HOME_SITE . "ressources/colis/test.png",$img);
+                                    break;
+                            }
+                        }   
+                    }
+                    deconnexion_socket($fd);
+                ?>
 
                     <li>
                         <div>
+                            <div>
+                                <?php
+
+                                if ($conn =="true" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
+
+                                    
+                                
+                                <p>Bordereau:<?php echo htmlentities($bordereau) ; ?></p>
+                                
+                                
+                                    
+                                <?php
+                                switch ($info_colis["REFUS"]) {
+                                    case '0':
+                                        $texte_refus = "Colis endommagé";
+                                        break;
+                                    case '1':
+                                        $texte_refus = "Ne correspond pas à la commande";
+                                        break;
+                                    case '2':
+                                        $texte_refus = "En retard";
+                                        break;
+                                    case '3':
+                                        $texte_refus = "Plus besoin du colis";
+                                        break;
+                                }
+
+                                switch ($info_colis["RENDU"]) {
+                                    case '0':
+                                        $texte_rendu = "Colis remis en main propre";
+                                        break;
+                                    case '1':
+                                        $texte_rendu ="Colis dans la boite au lettre";
+                                        break;
+                                    case '2':
+                                        $texte_rendu ="Colis refusé. cause : $texte_refus";
+                                        break;
+                                    
+                                    default:
+                                        $texte_rendu ="";
+                                        break;
+                                    }
+                                    
+                                    ?>
+                                    <p><?php echo htmlentities($texte_rendu) ;?></p>
+                                
+                                <?php
+                                    $livraison = "Colis en cours de livraison";
+                                    switch ($info_colis["ETAPE"]) {
+                                        case "1":
+                                            $texte_etape = "Création d’un bordereau de livraison";
+                                            break;
+                                        case "2":
+                                            $texte_etape = "Prise en charge du colis chez Alizon";
+                                            break;
+                                        case "3":
+                                            $texte_etape = "Arrivée chez le transporteur";
+                                            break;
+                                        case "4":
+                                            $texte_etape = "Départ vers la plateforme régionale";
+                                            break;
+                                        case "5":
+                                            $texte_etape = "Arrivée sur la plateforme régionale";
+                                            break;
+                                        case "6":
+                                            $texte_etape = "Départ vers le centre local";
+                                            break;
+                                        case "7":
+                                            $texte_etape = "Arrivée au centre local";
+                                            break;
+                                        case "8":
+                                            $texte_etape = "Départ pour la livraison finale";
+                                            break;
+                                        case "9":
+                                            $texte_etape = "Fin de livraison";
+                                            $livraison = "";
+                                            break;
+                                        
+                                    
+                                    }
+                                    ?>
+                                    <p><?php echo htmlentities($livraison);?></p>
+                                    <p><?php echo htmlentities($texte_etape);?></p>
+                                <?php
+                                elseif ($conn == "false") :?>
+                                <p>Connexion refusé</p>
+                                <?php elseif ($conn =="true" and $info_colis["ERROR"]!="N/A") :?>
+                                    <p>Erreur, le colis <?php echo htmlentities($bordereau)?> n'existe pas</p>
+                                <?php
+                                elseif  ($conn =="true" and $texte_img !="") :?>
+                                <p>Erreur, <?php echo htmlentities($texte_img)?></p>
+                                <?php endif; ?>
+                            </div>
                             <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
                             <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
                         </div>

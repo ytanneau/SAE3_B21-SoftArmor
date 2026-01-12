@@ -23,11 +23,13 @@
         $requete .= " AND (nom_public LIKE :search OR description LIKE :search OR description_detaillee LIKE :search)";
         $params[':search'] = "%$search%";
     }
-
-    // Rajouter les tris
-
-    // Rajouter les filtres
-
+    
+    if ($sort['order'] == 'asc') {
+        $requete .= " ORDER BY :field :order nom_public asc";
+        if ($sort = "prixAsc") {
+            
+        }
+    } 
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
