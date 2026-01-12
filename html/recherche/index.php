@@ -72,11 +72,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
 
 <script type="text/javascript">
-    let params = new URLSearchParams(document.location.search);
-    let query = params.get("recherche");
-
     const searchState = {
-        search: query,
+        search: "<?=$recherche?>",
         filters: {
             category: [],
             price: {min: null, max: null},
