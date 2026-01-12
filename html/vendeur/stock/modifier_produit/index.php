@@ -440,6 +440,7 @@
             modifierProduit.addEventListener('click', (event) => {
                 console.log('categorie = >' + categorie.value + '<');
                 console.log('sous categorie = >' + selectSousCategorieAlimentaire.value + '<');
+                event.preventDefault();
             });
             /*modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| 
