@@ -163,8 +163,8 @@
 
     function supprimer_produit_stock($id_produit) {
         global $pdo;
-        
-        supprimer_images_produit($id_produit);
+        $id_image = get_image_produit($id_produit);
+        delete_image($id_image);
 
         $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
