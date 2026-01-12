@@ -371,8 +371,9 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     printf("test1.5\n");
     
-    if (strcmp(row[0],""))
+    if (strcmp(row[0],"") == 0)
     {
+        printf("test1.7\n");
         return false;
     }
     printf("test1.6\n");
