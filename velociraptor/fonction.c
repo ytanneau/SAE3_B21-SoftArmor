@@ -284,20 +284,22 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
         genere_code(code);
         if (BDD)
         {
+            printf("test1\n");
             while (colis_existe(conn, cnx, code)){
                 genere_code(code);
             }
-        
+            printf("test2\n");
             char sql[200];
-            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES (%s)", code);
+            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES ('%s')", code);
 
+            printf("test3\n");
             if (mysql_query(conn, sql))
             { 
                 fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
                 mysql_close(conn); 
                 fin(cnx); 
             }
-
+            printf("test4\n");
             sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
             envoier_message(cnx, message);
         
@@ -350,22 +352,28 @@ int colis_encour(MYSQL *conn, int cnx)
 
 bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
+    printf("test1.1\n");
     char sql[200];
-    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = %s", code);
-
+    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+    printf("test1.2\n");
     if (mysql_query(conn, sql)) 
     { 
+        printf("test1.3\n");
         fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
         mysql_close(conn); 
         fin(cnx);
     }
+    printf("test1.4\n");
     MYSQL_RES *res = mysql_store_result(conn); 
     MYSQL_ROW row;
-
+    printf("test1.5\n");
+    printf("test : %s\n", row[0]);
     if (row[0] == NULL){
         return false;
     }
-    return true;
+
+    return false;
+    //return true;
 }
 
 
@@ -386,20 +394,18 @@ void info_colis(int cnx, char* code, MYSQL *conn)
 
         if (BDD)
         {
-            if (mysql_query(conn, "SELECT * FROM _colis")) 
+            char sql[200];
+            sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+
+            if (mysql_query(conn, sql)) 
             { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
-                //mysql_close(conn); 
-                fin(cnx); 
-            } 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                mysql_close(conn); 
+                fin(cnx);
+            }
             MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row; 
-            while ((row = mysql_fetch_row(res))) 
-            { 
-                printf("ID: %s, Nom: %s\n", row[0], row[1]); 
-            } 
-            mysql_free_result(res); 
-            mysql_close(conn);
+            MYSQL_ROW row;
+
         }
         else
         {

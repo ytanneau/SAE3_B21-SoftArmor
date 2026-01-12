@@ -196,7 +196,7 @@
                                     nom_public = :libelle_public,
                                     description = :desc_simple,
                                     description_detaillee = :desc_detaille,
-                                    categorie = :categorie
+                                    categorie = :categorie,
                                     code_barre = :code_barre,
                                     quantite = :quantite_stock,
                                     prix = :prix_ht,
