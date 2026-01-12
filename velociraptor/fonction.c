@@ -158,7 +158,7 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_PHOTO_COLIS:
                 if (connect)
                 {
-                    
+                    photo(cnx, strtok(NULL, INSTRUCTION_DELIMITER), conn);
                 }
                 else
                 {
@@ -209,6 +209,14 @@ void message_erreur(int cnx, int valeur)
     sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur); // formate le message
     envoier_message(cnx, message);
     
+}
+
+void envoier_code(int cnx, char *message){
+    if (write(cnx, message, strlen(message)) == -1)
+    {
+        printf("[ERROR] WRITE\n");
+        fin(cnx);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -425,28 +433,36 @@ void envoier_photo(int cnx, char *fichier)
 {
     char buff[TAILLE_PHOTO];
     char message[TAILLE_PHOTO*8];
-    
+    //printf("test fonction\n");
     sprintf(message, "%s%s", PHOTO, DELIMITER);
     envoier_message(cnx, message);
 
-    while (read(cnx, buff, TAILLE_PHOTO) != 0)
+    int fd = open(FICHIER_PHOTO, O_RDONLY);
+    while (read(fd, buff, TAILLE_PHOTO) != 0)
     {
+        //printf("testest\n");
         encode_photo(buff, message);
+        envoier_code(cnx, message);
     }
 }
 
 
 void encode_photo(char *src, char *des)
 {
-    while (*src) 
-    { 
-        unsigned char c = (unsigned char)*src; // Conversion en binaire sur 8 bits
-        for (int i = 7; i >= 0; i--) 
-        {
-            *des = (c & (1 << i)) ? '1' : '0'; des++; 
+    for (int i = 0; src[i] != '\0'; i++) 
+    {
+        unsigned char c = (unsigned char)src[i];
+        // Conversion du caractère en binaire (8 bits) 
+        for (int bit = 7; bit >= 0; bit--) 
+        { 
+            des[i * 8 + (7 - bit)] = (c & (1 << bit)) ? '1' : '0'; 
         } 
-        src++; 
-    } 
-    *des = '\0'; // Fin de chaîne 
-    printf("code photo : %s", des);
+    }
+    
+    // Ajout du terminateur 
+    int len = 0; 
+    for (; src[len] != '\0'; len++); 
+    des[len * 8] = '\0';
+
+    //printf("%s", des);
 }

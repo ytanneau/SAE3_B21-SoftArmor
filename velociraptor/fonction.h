@@ -18,6 +18,7 @@ void tombe(int sig);
 
 void envoier_message(int cnx, char *message);
 void message_erreur(int cnx, int valeur);
+void envoier_code(int cnx, char *message);
 
 bool authtification(compte* c, char buff[TAILLE]);
 void connection(int cnx, bool connect);
