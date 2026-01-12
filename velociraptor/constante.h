@@ -23,7 +23,7 @@
 #define SERVER "[RAPTOR]"
 #define DEBUG true
 
-#define BDD false
+#define BDD true
 #define BDD_HOST "mariadb"
 #define BDD_USER "sae"
 #define BDD_PASSWORD "dbsae3dunyles"
