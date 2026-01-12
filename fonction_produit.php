@@ -241,7 +241,7 @@
              */
             global $pdo;
             try{
-                $requete = $pdo->prepare("SELECT * FROM _produit_dans_categorie WHERE id_produit = :id_produit");
+                $requete = $pdo->prepare("SELECT categorie FROM _produit WHERE id_produit = :id_produit");
                 $requete->execute([":id_produit" => $id_produit]);
                 $tabCategorie = $requete->fetch(PDO::FETCH_ASSOC);
                 return $tabCategorie;
@@ -610,11 +610,20 @@
         }
     }
 
-    /*function date_banniere_occupe(){
+    function date_banniere_occupe(){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_promo, date_debut, date_fin FROM `_promotion` WHERE id_image_banniere <> NULL;");
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM `_promotion` WHERE id_image_banniere IS NOT NULL");
             $stmt->execute();
+
+            $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tab_final = array();
+            foreach($tab as $lignes){
+                array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
+            }
+            return $tab_final;
+        } catch (PDOException $e){
+            throw $e;
         }
-    }*/
+    }

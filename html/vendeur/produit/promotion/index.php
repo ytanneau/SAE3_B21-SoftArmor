@@ -88,9 +88,11 @@
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
             <label for="cout">Coût final : </label>
             <input type="text" id="cout" readonly>
-            <label for="photoPromotion">Ajouter une banniere</label>
-            <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-            
+            <div id="divPhoto" style="display:block;">
+                <label for="photoPromotion">Ajouter une banniere</label>
+                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+            </div>
+
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
@@ -114,6 +116,9 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
+        const divPhoto = document.getElementById("divPhoto");
+
+        const tab_date_occupe = <?= json_encode($tab_date) ?>;
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
@@ -123,6 +128,11 @@
                     warning1.style.display = "none";
                     calculP();
                 }
+            } 
+            if (check_date(dateDebut.value)){
+                divPhoto.style.display = "block";
+            } else {
+                divPhoto.style.display = "none";
             }
             
         });
@@ -135,7 +145,11 @@
                     calculP();
                 }
             }
-            
+            if (check_date(dateFin.value)){
+                divPhoto.style.display = "block";
+            } else {
+                divPhoto.style.display = "none";
+            }
         });
 
         function calculP() {
@@ -152,6 +166,9 @@
             cout.value = PRIX * diffJours + PRIX + "€";
         }
 
+        /*function check_date(date){
+            for()
+        }*/
         // REDUCTION //
         const warning3 = document.getElementById("warning3");
         const pourcentage = document.getElementById("pourcentage");
