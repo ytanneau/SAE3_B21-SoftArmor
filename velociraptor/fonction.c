@@ -372,17 +372,10 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
     MYSQL_ROW row = mysql_fetch_row(res);
     if (NULL == row){
         printf("dd\n");
-    }
-    
-
-    printf("test1.5\n");
-    
-    if (strcmp(row[0],"") == 0)
-    {
-        printf("test1.7\n");
         return false;
     }
-    printf("test1.6\n");
+    
+    printf("test1.5\n");
     return true;
     //return true;
 }
