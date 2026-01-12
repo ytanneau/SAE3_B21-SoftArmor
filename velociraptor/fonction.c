@@ -333,7 +333,7 @@ int colis_encour(MYSQL *conn, int cnx)
 {
     if (BDD)
     {
-        if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+        if (mysql_query(conn, "SELECT * FROM nb_colis_non_livres")) 
         { 
             fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
             //mysql_close(conn); 
