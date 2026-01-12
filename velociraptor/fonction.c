@@ -133,7 +133,7 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_NEW_COLIS:
                 if (connect)
                 {
-                    new_colis(cnx, colisInfinit, nbColisMax);
+                    new_colis(cnx, colisInfinit, nbColisMax, conn);
                 }
                 else
                 {
@@ -146,7 +146,7 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_INFO_COLIS:
                 if (connect)
                 {
-                    
+                    info_colis(cnx, strtok(NULL, INSTRUCTION_DELIMITER), conn);
                 }
                 else
                 {
@@ -206,7 +206,7 @@ void envoier_message(int cnx, char *message)
 void message_erreur(int cnx, int valeur)
 {
     char message[TAILLE];
-    sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur);
+    sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur); // formate le message
     envoier_message(cnx, message);
     
 }
@@ -267,10 +267,10 @@ void connection(int cnx, bool connect)
 
 //-------------------------------------------------------------------------------------------------------
 
-void new_colis(int cnx, bool colisInfinit, int nbColisMax)
+void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
 {
     char message[TAILLE];
-    if (colisInfinit || nbColisMax > colis_encour())
+    if (colisInfinit || nbColisMax > colis_encour(conn, cnx))
     {
         char code[BORDEREAU_SIZE];
         genere_code(code);
@@ -299,8 +299,22 @@ void genere_code(char *code)
     }
 }
 
-int colis_encour()
+int colis_encour(MYSQL *conn, int cnx)
 {
+    if (BDD)
+    {
+        if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+        { 
+            fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
+            //mysql_close(conn); 
+            fin(cnx); 
+        }
+        MYSQL_RES *res = mysql_store_result(conn); 
+        MYSQL_ROW row;
+        row = mysql_fetch_row(res);
+        return atoi(row[1]);
+    }
+    
     return 1;
 }
 
@@ -309,44 +323,130 @@ int colis_encour()
 
 void info_colis(int cnx, char* code, MYSQL *conn)
 {
-    if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
-    { 
-        fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
-        mysql_close(conn); 
-        return 1; 
-    } 
-    MYSQL_RES *res = mysql_store_result(conn); 
-    MYSQL_ROW row; while ((row = mysql_fetch_row(res))) 
-    { 
-        printf("ID: %s, Nom: %s\n", row[0], row[1]); 
-    } 
-    mysql_free_result(res); 
-    mysql_close(conn);
+
+    if (check_code(code))
+    {
+        if (DEBUG)
+        {
+            printf("[DEBUG] CODE : TRUE\n");
+        }
+        
+        char message[TAILLE];
+
+        if (BDD)
+        {
+            if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+            { 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
+                //mysql_close(conn); 
+                fin(cnx); 
+            } 
+            MYSQL_RES *res = mysql_store_result(conn); 
+            MYSQL_ROW row; 
+            while ((row = mysql_fetch_row(res))) 
+            { 
+                printf("ID: %s, Nom: %s\n", row[0], row[1]); 
+            } 
+            mysql_free_result(res); 
+            mysql_close(conn);
+        }
+        else
+        {
+            sprintf(message, "%s%s1\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE);
+            envoier_message(cnx, message);
+        }
+    }
+    else
+    {
+        if (DEBUG)
+        {
+            printf("[DEBUG] CODE : FALSE\n");
+        }
+        message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+        fin(cnx);
+    }
 }
 
 bool check_code(char* code)
 {
     int x, y;
     bool good;
+    code[BORDEREAU_SIZE] = '\0';
+    //printf("code : %s\n", code);
+    //printf("size : %ld\n", strlen(code));
 
-    for (x = 0; x < strlen(code); x++)
+    for (x = 0; x < BORDEREAU_SIZE-1; x++)
     {
         good = false;
         y = 0;
-
-        while (!good && y<strlen(BORDEREAU_CARACTERE)-1)
+        //printf("x : %c\n", code[x]);
+        while (!good && y<strlen(BORDEREAU_CARACTERE))
         {
+            //printf("y : %c\n", BORDEREAU_CARACTERE[y]);
             if (code[x] == BORDEREAU_CARACTERE[y])
             {
                 good = true;
+                //printf("test %c\n", code[x]);
             }
             y++;
         }
 
         if (!good)
         {
+            //printf("raison : %c\n", code[x]);
             return false;
         }
     }
     return true;
+}
+
+//----------------------------------------------------------------------
+
+void photo(int cnx, char* code, MYSQL* conn)
+{
+    if (check_code(code))
+    {
+        if (BDD)
+        {
+            
+        }
+        else
+        {
+            envoier_photo(cnx, FICHIER_PHOTO);
+        }
+    }
+    else
+    {
+        message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+    }
+}
+
+void envoier_photo(int cnx, char *fichier)
+{
+    char buff[TAILLE_PHOTO];
+    char message[TAILLE_PHOTO*8];
+    
+    sprintf(message, "%s%s", PHOTO, DELIMITER);
+    envoier_message(cnx, message);
+
+    while (read(cnx, buff, TAILLE_PHOTO) != 0)
+    {
+        encode_photo(buff, message);
+    }
+}
+
+
+void encode_photo(char *src, char *des)
+{
+    while (*src) 
+    { 
+        unsigned char c = (unsigned char)*src; // Conversion en binaire sur 8 bits
+        for (int i = 7; i >= 0; i--) 
+        {
+            *des = (c & (1 << i)) ? '1' : '0'; des++; 
+        } 
+        src++; 
+    } 
+    *des = '\0'; // Fin de chaîne 
+    printf("code photo : %s", des);
 }
