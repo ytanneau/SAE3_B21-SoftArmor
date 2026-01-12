@@ -106,14 +106,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
-                searchState.search = input.value.trim();
-                // searchState.page = 1;
                 
                 // Rediriger si la recherche est vide
-                if (searchState.search === "") {
+                if (input.value.trim() === "") {
                     window.location.replace("..");
                 }
-
+                
+                searchState.search = input.value.trim();
+                // searchState.page = 1;
                 fetchProduitsJSON();
             }
         });
