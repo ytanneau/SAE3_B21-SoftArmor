@@ -182,7 +182,7 @@
     function delete_image_produit($id_produit){
         global $pdo;
         try{
-            $stmt = $pdo->prepare("DELETE FROM _image_produit WHERE id_produit = :id_produit");
+            $stmt = $pdo->prepare("DELETE FROM _images_produit WHERE id_produit = :id_produit");
             $stmt->execute([
                 "id_produit" => $id_produit
             ]);
