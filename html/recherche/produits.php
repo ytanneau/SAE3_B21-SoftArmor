@@ -32,10 +32,12 @@
         }
     }
     */
-    
+
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+    var_dump($produits);
 
     echo json_encode([
         'produits' => $produits,
