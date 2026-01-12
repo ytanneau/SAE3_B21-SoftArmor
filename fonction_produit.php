@@ -609,21 +609,6 @@
         }
     }
 
-    function get_image($id_image){
-        global $pdo;
-        
-        try{
-            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
-            $stmt->execute([
-                "id_image" => $id_image
-            ]);
-
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e){
-            throw $e;
-        }
-    }
-
     /*function date_banniere_occupe(){
         global $pdo;
 
