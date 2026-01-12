@@ -168,6 +168,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     }
 
     function listeEtoiles(moyenne) {
+        console.log(moyenne);
         let divEtoiles = document.createElement("div");
 
         if (moyenne == null || moyenne < 0 || moyenne > 5) {
