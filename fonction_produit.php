@@ -166,9 +166,9 @@
         $image = get_image_produit($id_produit);
         print_r($image);
         delete_image($image['id_image_principale']);
-        if(empty($image['id_image1'])){
+        if(!empty($image['id_image1'])){
             delete_image($image['id_image1']);
-        } else if (empty($image['id_image2'])) {
+        } else if (!empty($image['id_image2'])) {
             delete_image($image['id_image2']);
         }
 
