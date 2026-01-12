@@ -24,20 +24,19 @@ require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 
-//requete pour recuperer mot de passe cryptée et id adresse
-//$sql = "SELECT mdp,id_adresse FROM compte_client WHERE id_compte = {$_SESSION['id_compte']};";
-
-$mot_de_passe= sql_get_infos_randoms($_SESSION['id_compte']);
-
 //requete pour recuperer informations du compte sans l'adresse
 //$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
 
 $info_compte = sql_get_info_compte($_SESSION['id_compte']);
 
-// $image_profil = get_image($info_compte['id_image_profil']);
+if (isset($info_compte['id_image_profil'])) {
+    $image_profil = get_image($info_compte['id_image_profil']);
+} else {
+    $image_profil = null;
+}
 
 //recuperer les avis du compte
-$avis = tout_avis_client($_SESSION['id_compte']);
+$avis = get_avis_client($_SESSION['id_compte']);
 
 //traitement de la suppression d'un avis
 if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['url_image']) && isset($_GET['id_client'])){
@@ -48,15 +47,9 @@ if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET[
 
 
 //recupere le mdp crypté et l'id de l'adresse du client
-foreach ($mot_de_passe as $row){
-    $mdp_cryptee = $row['mdp'];
-    $id_adresse = $row['id_adresse'];
-}
+$mdp_cryptee = $info_compte['mdp'];
+$adresse = isset($info_compte['id_adresse_fac']) ? sql_get_adresse($info_compte['id_adresse_fac']) : null;
 
-//requete pour savoir si il y a une image de profil
-//$sql ="SELECT * FROM _image inner join _compte on _image.id_image = _compte.id_image_profil where _compte.id_compte = {$_SESSION['id_compte']};";
-
-$possede_image = sql_get_img_profil($_SESSION['id_compte']);
 
 //traitement de la modification des informations
 if ($_POST != NULL){
@@ -80,7 +73,7 @@ if ($_POST != NULL){
     $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$date, $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
     
     //verifie si email n'est pas changé
-    $ancien_mail=sql_get_email($_SESSION['id_compte']);
+    $ancien_mail= $info_compte['email'];
 
     if($_POST['email'] == $ancien_mail[0]['email']){
         $erreur['email']=NULL;
@@ -103,14 +96,14 @@ if ($_POST != NULL){
         $id=$_SESSION['id_compte'];
         $ext=".png";
         $dossier= "../../ressources/client/";
-        $chemin = "'ressources/client/".$id.$ext."'";
-        $file_name = $dossier.$id . $ext;
+        $chemin = "'ressources/client/$id$ext'";
+        $file_name = "$dossier$id$ext";
         $titre="'Image de Profil'";
         $alt="'Image de Profil'";
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
                 if ($_FILES["pdp"]["size"] < MAX_SIZE) {
-                    move_uploaded_file($_FILES["pdp"]["tmp_name"],$dossier.$id.$ext);
+                    move_uploaded_file($_FILES["pdp"]["tmp_name"],"$dossier$id$ext");
 
                     $est_entre_img= false;
                     
@@ -175,18 +168,17 @@ unset($pdo);
         <section>
             <?php
                 //affichage des info du compte
-                foreach ($info_compte as $row){  
             ?>
 
 
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img src="<?= htmlentities("../../". ($row['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                    <img src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                     
 
 
-                    <label for="pdp" class="image_bouton"><?php if (isset($row['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
+                    <label for="pdp" class="image_bouton"><?php if (isset($info_compte['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
                     <input id="pdp" type="file" name="pdp" accept=".png" hidden>
@@ -194,7 +186,7 @@ unset($pdo);
 
                 <article>
                     <label for="pseudo">Pseudonyme</label>
-                    <input type="text" name="pseudo" value="<?= htmlentities($row['pseudo'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input type="text" name="pseudo" value="<?= htmlentities($info_compte['pseudo'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur pseudo-->
                     <?php
@@ -208,7 +200,7 @@ unset($pdo);
                     ?>
 
                     <label for="nom">Nom</label>
-                    <input required type="text" name="nom" value="<?= htmlentities($row['nom'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input required type="text" name="nom" value="<?= htmlentities($info_compte['nom'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur nom-->
                     <?php
@@ -222,7 +214,7 @@ unset($pdo);
                     ?>
 
                     <label for="prenom">Prenom</label>
-                    <input required type="text" name="prenom" value="<?= htmlentities($row['prenom'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input required type="text" name="prenom" value="<?= htmlentities($info_compte['prenom'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur prenom-->
                     <?php
@@ -236,10 +228,10 @@ unset($pdo);
                     ?>
 
                     <label for="date">Date de Naissance</label>
-                    <label name="date"><?= date("d/m/Y", strtotime(htmlentities($row['date_naissance'] )?? ''))?></label>
+                    <label name="date"><?= date("d/m/Y", strtotime(htmlentities($info_compte['date_naissance'] )?? ''))?></label>
 
                     <label for="mail">Mail</label>
-                    <input required type="email" name="email" value="<?= htmlentities($row['email'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input required type="email" name="email" value="<?= htmlentities($info_compte['email'] ?? '')?>" placeholder="À renseigner" class="champ">
                     
                     <!--Erreur mail-->
                     <?php
@@ -250,7 +242,6 @@ unset($pdo);
                         </p>
                     <?php
                         }
-                    }
                     ?>
 
                     <label for="adresse">Adresse</label>
@@ -258,11 +249,10 @@ unset($pdo);
                     <?php
                     //affichage des info du compte
                     $est_entre = false;
-                    foreach ($adresse_compte as $row){  
                         $est_entre = true;
                     ?>
                     
-                    <input type="text" name="adresse" value="<?= htmlentities($row['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input type="text" name="adresse" value="<?= htmlentities($addresse_compte['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur adresse-->
                     <?php
@@ -276,10 +266,10 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($addresse_compte['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
                     <label for="code_postal">Code Postal</label>
-                    <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
+                    <input type="text" name="code_postal" value="<?= htmlentities($addresse_compte['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
                     
                     <!--Erreur code postal-->
                     <?php
@@ -290,7 +280,7 @@ unset($pdo);
                         </p>
                     <?php
                         }
-                    }
+                        
                     if (!$est_entre) {
                         ?>
                     

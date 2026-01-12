@@ -54,10 +54,10 @@
     }
 
     //requete pour recuperer les avis du compte
-    function tout_avis_client($id_client){
+    function get_avis_client($id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT * FROM tout_avis_client WHERE id_compte = :id_client;");
+            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_client = :id_client;");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -90,19 +90,17 @@
     // verifie si un avis existe déjà
     function check_avis_existe($id_produit, $id_client){
         global $pdo;
-        try {
-            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
-            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
-            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
-            $requete->execute();
-            return $requete->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            throw $e;
-        }
+        
+        $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
+        $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+        $requete->execute();
+        
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
     // récupérer un avis par son identifiant
-    function obtenir_avis_par_id($id_avis){
+    function get_avis($id_avis){
         global $pdo;
         try {
             $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_avis = :id_avis");
@@ -114,11 +112,10 @@
         }
     }
 
-    function avis_produit($id_produit, $id_vendeur){
+    function avis_produit($id_produit){
         global $pdo;
-        $requete = $pdo->prepare("SELECT * FROM avis_produit WHERE id_produit=:id_produit AND id_vendeur=:id_vendeur");
+        $requete = $pdo->prepare("SELECT * FROM _avis WHERE id_produit=:id_produit");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
-        $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }

@@ -40,7 +40,7 @@
         $_GET['id_avis'] = intval($_GET['id_avis']);
         if ($_GET['id_avis'] > 0) {
             try {
-                $avis_actuel = obtenir_avis_par_id($_GET['id_avis']);
+                $avis_actuel = get_avis($_GET['id_avis']);
             } catch (PDOException $e) {
                 $erreur['fatal'] = true;
             }
