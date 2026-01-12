@@ -125,15 +125,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     function afficherProduits(data) {
         const resultGrid = document.querySelector("#results");
-        // console.log(data.produits);
-
-        // Exemple pour créer une balise
-
-        // let monAdr = document.createElement("a");
-        // let attribut = document.createAttribute("href");
-        // attribut.value = "mailto:jbond@scot-yard.uk";
-        // monAdr.setAttributeNode(attribut);
-        // monContact.appendChild(monAdr);
 
         // Vider les produits déjà présents dans la grille
         while (resultGrid.firstChild) {
@@ -141,14 +132,95 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         }
 
         data.produits.forEach(produit => {
-            let paragraphe = document.createElement("p");
-            let texteNom = document.createTextNode(produit.nom_public);
-            paragraphe.appendChild(texteNom);
+            // Lien vers la page produit
+            let lien = document.createElement("a");
+            let ref = document.createAttribute("href");
+            ref.value = `/produit/?produit=${produit.id_produit}`;
+            lien.setAttributeNode(ref);
+
+            // Image du produit
+            let photo = image(`../${produit.url_image}`, produit.alt, produit.titre);
+
+            // Titre du produit
+            let titreNomPublic = document.createElement("h3");
+            let nomPublic = document.createTextNode(produit.nom_public);
+            titreNomPublic.appendChild(nomPublic);
+
+            // Étoiles
+            let divEtoiles = listeEtoiles(produit.note_moy);
+
+            if (divEtoiles == null) {
+                divEtoiles = document.createElement("div");
+                pNonNote = document.createElement("p");
+            }
     
-            resultGrid.appendChild(paragraphe);
+            lien.appendChild(photo);
+            lien.appendChild(titreNomPublic);
+            lien.appendChild(divEtoiles);
+
+            resultGrid.appendChild(lien);
         });
     }
+
+    function listeEtoiles(moyenne) {
+        let divEtoiles = document.createElement("div");
+
+        if (moyenne == null || moyenne < 0 || moyenne > 5) {
+            return null;
+        }
+
+        for (let i = 0; i < Math.floor(moyenne); i++) {
+            divEtoiles.appendChild(image('/image/etoile_pleine.svg', 'étoile pleine', 'étoile pleine'));
+        }
+
+        if (floor(Math.floor(moyenne * 2) % 2) != 0) {
+            divEtoiles.appendChild(image('/image/etoile_demi.svg', 'étoile à moitié pleine', 'étoile à moitié pleine'));
+        }
+
+        for (let i = 5; i > Math.round(moyenne); i--) {
+            divEtoiles.appendChild(image('/image/etoile_vide.svg', 'étoile vide', 'étoile vide'));
+        }
+    }
+
+    function image(src, alt, title) {
+        let img = document.createElement("img");
+
+        let srcAtt = document.createAttribute("src");
+        let altAtt = document.createAttribute("alt");
+        let titleAtt = document.createAttribute("title");
+
+        srcAtt.value = src;
+        altAtt.value = alt;
+        titleAtt.value = title;
+
+        img.setAttributeNode(srcAtt);
+        img.setAttributeNode(altAtt);
+        img.setAttribute(titleAtt);
+
+        return img;
+    }
 </script>
+
+<!--
+function afficher_moyenne_note($moyenne){
+        if(is_null($moyenne)){
+            return null;
+        }
+        if($moyenne > 5 || $moyenne < 0){
+            return null;
+        }
+        // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
+        for ($i =1; $i <= floor($moyenne); $i++){
+            ?> <img src="/image/etoile_pleine.svg" alt="étoile pleine" title="étoile pleine" class="etoile"><php
+        }
+        if(fmod(floor($moyenne*2),2)){
+            ?> <img src="/image/etoile_demi.svg" alt="étoile à moitié pleine"  title="étoile à moitié pleine" class="etoile"> <php 
+        }
+        for ($i =5; $i > round($moyenne); $i--){
+            ?> <img src="/image/etoile_vide.svg" alt="étoile vide"  title="étoile vide" class="etoile"><php
+        }
+    }
+-->
 
 <!--
 <a href="">
@@ -165,5 +237,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <p class="prix"></p>
 </a>
 -->
+
+
 
 </html>

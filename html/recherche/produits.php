@@ -24,6 +24,10 @@
         $params[':search'] = "%$search%";
     }
 
+    // Rajouter les tris
+
+    // Rajouter les filtres
+
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
