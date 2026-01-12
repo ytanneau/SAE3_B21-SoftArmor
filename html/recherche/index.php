@@ -7,8 +7,13 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
+    if (empty(trim($_GET['recherche']))) {
+        header('location: ' . HOME_SITE);
+        die();
+    }
+
     if (isset($_SESSION['raison_sociale'])){
-        header('location: /vendeur/stock/');
+        header('location: ' . HOME_SITE . '/vendeur/stock/');
         die();
     }
 }
@@ -89,6 +94,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
     document.addEventListener("DOMContentLoaded", () => {
+        // Rediriger si la recherche est vide
+        if (searchState.search === "") {
+            window.location.replace("..");
+        }
+        
         fetchProduitsJSON();
     });
 
@@ -98,7 +108,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 e.preventDefault();
                 searchState.search = input.value.trim();
                 // searchState.page = 1;
-
+                
+                // Rediriger si la recherche est vide
                 if (searchState.search === "") {
                     window.location.replace("..");
                 }
