@@ -342,7 +342,7 @@ int colis_encour(MYSQL *conn, int cnx)
         MYSQL_RES *res = mysql_store_result(conn); 
         MYSQL_ROW row;
         row = mysql_fetch_row(res);
-        printf("test : %s\n", row[0]);
+        printf("[DEBUG] COLIS EN COUR : %s\n", row[0]);
         return atoi(row[1]);
     }
     
@@ -364,10 +364,12 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     MYSQL_RES *res = mysql_store_result(conn);
     MYSQL_ROW row = mysql_fetch_row(res);
-
+    
     if (NULL == row){
+        printf("cc\n");
         return false;
     }
+    printf("bb\n");
     return true;
 }
 
@@ -396,7 +398,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
                 char sql[200];
                 sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
                 printf("test 4\n");
-                
+
                 if (mysql_query(conn, sql)) 
                 { 
                     fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
