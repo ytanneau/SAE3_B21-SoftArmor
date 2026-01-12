@@ -116,7 +116,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             resultGrid.removeChild(resultGrid.firstChild);
         }
 
-        resultsFor.textContent = `${data.total} résultats pour "${searchState.search}"`;
+        resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
+
+        console.log(data.produits);
 
         data.produits.forEach(produit => {
             // Lien vers la page produit
