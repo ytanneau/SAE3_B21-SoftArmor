@@ -692,6 +692,13 @@ hr {
   margin: 5% 0;
 }
 
+section.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 #results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
