@@ -361,11 +361,11 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
     }
     MYSQL_RES *res = mysql_store_result(conn); 
     MYSQL_ROW row;
-
+    printf("test : %s\n", row[0]);
     if (row[0] == NULL){
         return false;
     }
-    printf("test : %s\n", row[0]);
+
     return false;
     //return true;
 }
