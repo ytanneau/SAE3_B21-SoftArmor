@@ -242,21 +242,21 @@
         try{ 
             $requete = $pdo->prepare("INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :categorie, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite)");
             $requete->execute([
-                ':id_vend' => $id_compte_vendeur,
-                ':nomPrv' => $libelle_prive,
-                ':nomPblc' => $libelle_public,
-                ':descSimple' => $desc_simple,
-                ':descDetaille' => $desc_detaille,
-                ':categorie' => $categorie,
-                ':codeBarre' => $code_barre,
-                ':qtStock' => $quantite_stock,
-                ':prixProd' => $prix_ht,
-                ':tva' => $tva,
-                ':seuilAlerte' => $seuil_alerte,
-                ':poidProd' => $poid, 
-                ':volumeProd' => $volume_colis,
-                ':checkMajeur' => $reserve_majeur,
-                ':qtunite' => $qt_achete
+                'id_vend' => $id_compte_vendeur,
+                'nomPrv' => $libelle_prive,
+                'nomPblc' => $libelle_public,
+                'descSimple' => $desc_simple,
+                'descDetaille' => $desc_detaille,
+                'categorie' => $categorie,
+                'codeBarre' => $code_barre,
+                'qtStock' => $quantite_stock,
+                'prixProd' => $prix_ht,
+                'tva' => $tva,
+                'seuilAlerte' => $seuil_alerte,
+                'poidProd' => $poid, 
+                'volumeProd' => $volume_colis,
+                'checkMajeur' => $reserve_majeur,
+                'qtunite' => $qt_achete
             ]);
 
             $id = $pdo->lastInsertId();
