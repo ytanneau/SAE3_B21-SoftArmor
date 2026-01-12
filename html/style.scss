@@ -159,6 +159,11 @@ hr {
     }
 }
 
+#results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;

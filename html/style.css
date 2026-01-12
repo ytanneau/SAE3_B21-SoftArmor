@@ -692,6 +692,11 @@ hr {
   margin: 5% 0;
 }
 
+#results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 .form_client {
   overflow-x: hidden;
 }
