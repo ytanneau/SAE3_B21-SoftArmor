@@ -15,7 +15,7 @@
     $sort    = $data['sort'] ?? [];
 
     // Construire la requête SQL à partir de la recherche
-    $requete = "SELECT * FROM produit_visible WHERE 1 = 1";
+    $requete = "SELECT * FROM produit_en_ligne WHERE 1 = 1";
     $params = [];
     
     // Filtre par recherche
@@ -36,8 +36,6 @@
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
-
-    var_dump($produits);
 
     echo json_encode([
         'produits' => $produits,
