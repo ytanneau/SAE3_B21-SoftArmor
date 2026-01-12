@@ -7,15 +7,6 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
-    $recherche = trim(htmlentities($_GET['recherche'] ?? ''));
-
-    echo "Recherche : $recherche";
-
-    if (empty($recherche)) {
-        header('location: ' . HOME_SITE);
-        die();
-    }
-
     if (isset($_SESSION['raison_sociale'])){
         header('location: /vendeur/stock/');
         die();
@@ -102,8 +93,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
-                searchState.search = input.value;
+                searchState.search = input.value.trim();
                 // searchState.page = 1;
+
+                if (searchState.search === "") {
+                    window.location.replace("..");
+                }
 
                 fetchProduitsJSON();
             }
