@@ -24,12 +24,15 @@
         $params[':search'] = "%$search%";
     }
     
+    /*
     if ($sort['order'] == 'asc') {
         $requete .= " ORDER BY :field :order nom_public asc";
         if ($sort = "prixAsc") {
             
         }
-    } 
+    }
+    */
+    
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);

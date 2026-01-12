@@ -104,7 +104,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 // searchState.page = 1;
 
                 fetchProduitsJSON();
-                resultsFor.textContent = `Résultats pour "${input.value}"`;
             }
         });
     }
@@ -116,6 +115,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         while (resultGrid.firstChild) {
             resultGrid.removeChild(resultGrid.firstChild);
         }
+
+        resultsFor.textContent = `${data.total} résultats pour "${searchState.search}"`;
 
         data.produits.forEach(produit => {
             // Lien vers la page produit
