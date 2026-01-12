@@ -59,10 +59,10 @@
                                 $prixProd, $tva, $codeBarre, $checkMajeur,
                                 $qtachete, $qtStock,$seuilAlerte,
                                 $descSimple,$descDetaille, $poidColis,
-                                    $volumeColis);
+                                    $volumeColis, $categorie);
 
         // mise en relation entre le produit et sa catégorie
-        add_produit_categorie($idProduit,$categorie);
+        // add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *

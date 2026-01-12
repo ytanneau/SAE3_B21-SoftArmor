@@ -184,7 +184,7 @@
     function update_info_produit($id_produit, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $en_ligne, $qt_achete,
     $quantite_stock, $seuil_alerte, $desc_simple, 
-    $desc_detaille, $poid, $volume_colis){
+    $desc_detaille, $poid, $volume_colis, $categorie){
         /**
          * Fonction set_info_produit() prend en parametre tout les informations d'un produit
          * Modifie les informations du produit la base de données
@@ -196,6 +196,7 @@
                                     nom_public = :libelle_public,
                                     description = :desc_simple,
                                     description_detaillee = :desc_detaille,
+                                    categorie = :categorie
                                     code_barre = :code_barre,
                                     quantite = :quantite_stock,
                                     prix = :prix_ht,
@@ -207,21 +208,22 @@
                                     plus_18 = :reserve_majeur,
                                     quantite_unite = :qt_achete
                                 WHERE id_produit = :id_produit");
-            $requete->execute([":id_produit" => $id_produit, 
-                            ":libelle_prive" => $libelle_prive, 
-                            ":libelle_public" => $libelle_public,
-                            ":desc_simple" => $desc_simple,
-                            ":desc_detaille" => $desc_detaille,
-                            ":code_barre" => $code_barre,
-                            ":quantite_stock" => $quantite_stock,
-                            ":prix_ht" => $prix_ht,
-                            ":tva" => $tva,
-                            ":en_ligne" => $en_ligne,
-                            ":seuil_alerte" => $seuil_alerte,
-                            ":poid" => $poid,
-                            ":volume_colis" => $volume_colis,
-                            ":reserve_majeur" => $reserve_majeur,
-                            ":qt_achete" => $qt_achete]);
+            $requete->execute(["id_produit" => $id_produit, 
+                            "libelle_prive" => $libelle_prive, 
+                            "libelle_public" => $libelle_public,
+                            "desc_simple" => $desc_simple,
+                            "desc_detaille" => $desc_detaille,
+                            "categorie" => $categorie,
+                            "code_barre" => $code_barre,
+                            "quantite_stock" => $quantite_stock,
+                            "prix_ht" => $prix_ht,
+                            "tva" => $tva,
+                            "en_ligne" => $en_ligne,
+                            "seuil_alerte" => $seuil_alerte,
+                            "poid" => $poid,
+                            "volume_colis" => $volume_colis,
+                            "reserve_majeur" => $reserve_majeur,
+                            "qt_achete" => $qt_achete]);
         } catch (PDOException $e) {
             throw $e;
         }
@@ -229,7 +231,7 @@
 
     function add_produit($id_compte_vendeur, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $qt_achete, $quantite_stock, $seuil_alerte,
-    $desc_simple, $desc_detaille, $poid, $volume_colis){
+    $desc_simple, $desc_detaille, $poid, $volume_colis, $categorie){
         /**
          * Fonction add_produit() prend en parametre toutes les informations du produit
          * Ajoute un nouveau produit dans la base de donnée
@@ -238,22 +240,39 @@
         global $pdo;
 
         try{ 
-            $requete = $pdo->prepare("INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite)");
+            $requete = $pdo->prepare("INSERT INTO _produit 
+                                    VALUES(:id_vendeur,
+                                            :nomPrv,
+                                            :nomPblc,
+                                            :descSimple,
+                                            :descDetaille,
+                                            :categorie,
+                                            :codeBarre,
+                                            :qtStock,
+                                            :prixProd,
+                                            :tva,
+                                            :seuilAlerte,
+                                            :poidProd,
+                                            :volumeProd,
+                                            :checkMajeur,
+                                            :qtunite)"
+            );
             $requete->execute([
-                ':id_vend' => $id_compte_vendeur,
-                ':nomPrv' => $libelle_prive,
-                ':nomPblc' => $libelle_public,
-                ':descSimple' => $desc_simple,
-                ':descDetaille' => $desc_detaille,
-                ':codeBarre' => $code_barre,
-                ':qtStock' => $quantite_stock,
-                ':prixProd' => $prix_ht,
-                ':tva' => $tva,
-                ':seuilAlerte' => $seuil_alerte,
-                ':poidProd' => $poid, 
-                ':volumeProd' => $volume_colis,
-                ':checkMajeur' => $reserve_majeur,
-                ':qtunite' => $qt_achete
+                'id_vendeur' => $id_compte_vendeur,
+                'nomPrv' => $libelle_prive,
+                'nomPblc' => $libelle_public,
+                'descSimple' => $desc_simple,
+                'descDetaille' => $desc_detaille,
+                'categorie' => $categorie,
+                'codeBarre' => $code_barre,
+                'qtStock' => $quantite_stock,
+                'prixProd' => $prix_ht,
+                'tva' => $tva,
+                'seuilAlerte' => $seuil_alerte,
+                'poidProd' => $poid, 
+                'volumeProd' => $volume_colis,
+                'checkMajeur' => $reserve_majeur,
+                'qtunite' => $qt_achete
             ]);
 
             $id = $pdo->lastInsertId();

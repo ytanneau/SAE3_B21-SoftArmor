@@ -40,19 +40,25 @@
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
-        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
-                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
-                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
-                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
+        
         if(isset($_POST['categorie'])) {
             if($_POST['categorie'] == 'Alimentaire') {
                 if(!empty($_POST['sous_categorie'])) {
-                    update_categorie_produit($idProduit, $_POST['sous_categorie']);
+                    update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
+                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
+                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
+                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis'], $_POST['sous_categorie']);
                 } else {
-                    update_categorie_produit($idProduit, $_POST['categorie']);
+                    update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
+                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
+                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
+                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis'], $_POST['categorie']);
                 }
             } else {
-                update_categorie_produit($idProduit, $_POST['categorie']);
+                update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
+                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
+                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
+                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis'], $_POST['categorie']);
             }
         }
         
