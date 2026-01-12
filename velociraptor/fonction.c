@@ -282,8 +282,30 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
     {
         char code[BORDEREAU_SIZE];
         genere_code(code);
-        sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
-        envoier_message(cnx, message);
+        if (BDD)
+        {
+            while (colis_existe(conn, cnx, code)){
+                genere_code(code);
+            }
+        
+            char sql[200];
+            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES (%s)", code);
+
+            if (mysql_query(conn, sql))
+            { 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                mysql_close(conn); 
+                fin(cnx); 
+            }
+
+            sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
+            envoier_message(cnx, message);
+        
+        }
+        else{
+            sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
+            envoier_message(cnx, message);
+        }
     }
     else
     {
@@ -326,6 +348,27 @@ int colis_encour(MYSQL *conn, int cnx)
     return 1;
 }
 
+bool colis_existe(MYSQL *conn, int cnx, char *code)
+{
+    char sql[200];
+    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = %s", code);
+
+    if (mysql_query(conn, sql)) 
+    { 
+        fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+        mysql_close(conn); 
+        fin(cnx);
+    }
+    MYSQL_RES *res = mysql_store_result(conn); 
+    MYSQL_ROW row;
+
+    if (row[0] == NULL){
+        return false;
+    }
+    return true;
+}
+
+
 //-------------------------------------------------------------------------------------------------------
 
 
@@ -343,7 +386,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
 
         if (BDD)
         {
-            if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+            if (mysql_query(conn, "SELECT * FROM _colis")) 
             { 
                 fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
                 //mysql_close(conn); 
