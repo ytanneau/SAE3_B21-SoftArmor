@@ -344,6 +344,7 @@ int colis_encour(MYSQL *conn, int cnx)
         MYSQL_RES *res = mysql_store_result(conn); 
         MYSQL_ROW row;
         row = mysql_fetch_row(res);
+        printf("test : %s\n", row[0]);
         return atoi(row[1]);
     }
     
@@ -369,12 +370,14 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
     row = mysql_fetch_row(res);
 
     printf("test1.5\n");
-    printf("test : %c\n", *(row[0]));
-    if (row[0] == NULL){
+    
+    if (strcmp(row[0],"") == 0)
+    {
+        printf("test1.7\n");
         return false;
     }
     printf("test1.6\n");
-    return false;
+    return true;
     //return true;
 }
 

@@ -436,13 +436,8 @@
                     uniteMasse.style.display = "none";
                 }
             })
-
-            modifierProduit.addEventListener('click', (event) => {
-                console.log('categorie = >' + categorie.value + '<');
-                console.log('sous categorie = >' + selectSousCategorieAlimentaire.value + '<');
-                event.preventDefault();
-            });
-            /*modifierProduit.addEventListener('click' , (event) =>  {
+            
+            modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| 
                     nomPblc.value === "" || 
                     tva.value === "" || 
@@ -459,7 +454,7 @@
                 } else {
                     event.preventDefault();
                 }
-            })*/
+            })
         </script>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
