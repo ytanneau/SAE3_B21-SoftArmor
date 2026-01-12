@@ -68,11 +68,11 @@ unset($pdo);
                         <div>
                             <?php 
 
-                                if($row['moyenne']==null){
+                                if(!isset($row['note_moy'])){
                                     ?><p>Produit Non Noté</p><?php
                                 }
                                 else{
-                                    $moy = $row['moyenne'];
+                                    $moy = $row['note_moy'];
                                     afficher_moyenne_note($moy);
                                 }
                             ?>
@@ -105,17 +105,17 @@ unset($pdo);
                     <div>
                         <?php 
 
-                            if($row['moyenne']==null){
+                            if(!isset($row['note_moy'])){
                                 ?><p>Produit Non Noté</p><?php
                             }
                             else{
-                                $moy = $row['moyenne'];
+                                $moy = $row['note_moy'];
                                 afficher_moyenne_note($moy);
                             }
                         ?>
                     </div>
                     <p class="ancien_prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
-                    <p class="prix"><?= number_format((float)$row['prix_reduit'], 2, ',', '');?> €</p>
+                    <p class="prix"><?= number_format((float)$row['prix_actuel'], 2, ',', '');?> €</p>
                 </a>
             </li>
             <?php
@@ -144,11 +144,11 @@ unset($pdo);
                         <div>
                             <?php 
 
-                                if($row['moyenne']==null){
+                                if(!isset($row['note_moy'])){
                                     ?><p>Produit Non Noté</p><?php
                                 }
                                 else{
-                                    $moy = $row['moyenne'];
+                                    $moy = $row['note_moy'];
                                     afficher_moyenne_note($moy);
                                 }
                             ?>
@@ -179,10 +179,10 @@ unset($pdo);
 
                         <div>
                             <?php 
-                                if($row['moyenne']==null) {
+                                if(!isset($row['note_moy'])) {
                                     ?><p>Produit Non Noté</p><?php
                                 } else {
-                                    $moy = $row['moyenne'];
+                                    $moy = $row['note_moy'];
                                     afficher_moyenne_note($moy);
                                 }
                             ?>
