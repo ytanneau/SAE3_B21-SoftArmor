@@ -371,11 +371,12 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     printf("test1.5\n");
     
-    if (row[0] == NULL){
+    if (strcmp(row[0],""))
+    {
         return false;
     }
     printf("test1.6\n");
-    return false;
+    return true;
     //return true;
 }
 
