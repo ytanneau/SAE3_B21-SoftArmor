@@ -289,7 +289,7 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
             }
         
             char sql[200];
-            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES (%s)", code);
+            sprintf(sql, "INSERT INTO _colis (bodereau) VALUES ('%s')", code);
 
             if (mysql_query(conn, sql))
             { 
@@ -351,7 +351,7 @@ int colis_encour(MYSQL *conn, int cnx)
 bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
     char sql[200];
-    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = %s", code);
+    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
 
     if (mysql_query(conn, sql)) 
     { 
@@ -386,20 +386,18 @@ void info_colis(int cnx, char* code, MYSQL *conn)
 
         if (BDD)
         {
-            if (mysql_query(conn, "SELECT * FROM _colis")) 
+            char sql[200];
+            sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+
+            if (mysql_query(conn, sql)) 
             { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
-                //mysql_close(conn); 
-                fin(cnx); 
-            } 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                mysql_close(conn); 
+                fin(cnx);
+            }
             MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row; 
-            while ((row = mysql_fetch_row(res))) 
-            { 
-                printf("ID: %s, Nom: %s\n", row[0], row[1]); 
-            } 
-            mysql_free_result(res); 
-            mysql_close(conn);
+            MYSQL_ROW row;
+
         }
         else
         {
