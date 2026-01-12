@@ -290,7 +290,7 @@
             global $pdo;
             try{
                 $requete = $pdo->prepare("SELECT categorie FROM _produit WHERE id_produit = :id_produit");
-                $requete->execute([":id_produit" => $id_produit]);
+                $requete->execute(["id_produit" => $id_produit]);
                 $tabCategorie = $requete->fetch(PDO::FETCH_ASSOC);
                 return $tabCategorie;
             } catch(PDOException $e){
