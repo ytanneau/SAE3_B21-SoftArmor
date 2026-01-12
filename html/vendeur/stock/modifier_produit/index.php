@@ -438,9 +438,14 @@
             })
 
             modifierProduit.addEventListener('click' , (event) =>  {
-                if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
-                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
-                    categorie.value === ""  || selectSousCategorieAlimentaire.value === ""||
+                if(nomPrv.value === ""|| 
+                    nomPblc.value === "" || 
+                    tva.value === "" || 
+                    prix.value === "" || 
+                    poidColis.value === "" || 
+                    volumeColis.value === "" ||
+                    (categorie.value === "Alimentaire" && 
+                    selectSousCategorieAlimentaire.value === "") ||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();
