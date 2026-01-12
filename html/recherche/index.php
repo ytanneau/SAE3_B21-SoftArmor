@@ -45,31 +45,31 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <fieldset>
                 <legend>Filtrer par prix</legend>
 
-                <input type="checkbox" name="prix" id="zeroTo20" value="zeroTo20">
+                <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
                 <label for="zeroTo20">0 € à 20 €</label>
 
-                <input type="checkbox" name="prix" id="twentyTo50" value="twentyTo50">
+                <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
                 <label for="twentyTo50">20 € à 50 €</label>
 
-                <input type="checkbox" name="prix" id="fiftyTo100" value="fiftyTo100">
+                <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
                 <label for="fiftyTo100">50 € à 100 €</label>
 
-                <input type="checkbox" name="prix" id="hundredTo300" value="hundredTo300">
+                <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
                 <label for="hundredTo300">100 € à 300 €</label>
 
-                <input type="checkbox" name="prix" id="over300" value="over300">
+                <input type="radio" name="prix" id="over300" value="over300">
                 <label for="over300">Plus de 300 €</label>
             </fieldset>
         </form>
 </section>
 
-    <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
+<h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
-    <section class="results">
-        <!-- Grille des résultats -->
-        <div id="results"></div>
-    </section>
-</body>
+<section class="results">
+    <!-- Grille des résultats -->
+    <div id="results"></div>
+</section>
+
 
 <script type="text/javascript">
     const searchState = {
@@ -100,26 +100,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
-
-                searchState.search = input.value;
-                // searchState.page = 1;
-
-                fetchProduitsJSON();
-                resultsFor.textContent = `Résultats pour "${input.value}"`;
             }
-        });
-    }
-
-    // Récupérer tous les produits dans un objet JSON
-    async function fetchProduitsJSON() {
-        fetch('/recherche/produits.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(searchState)
-        })
-        .then(res => res.json())
-        .then(data => {
-            afficherProduits(data);
         });
     }
 
@@ -200,44 +181,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         return img;
     }
 </script>
-
-<!--
-function afficher_moyenne_note($moyenne){
-        if(is_null($moyenne)){
-            return null;
-        }
-        if($moyenne > 5 || $moyenne < 0){
-            return null;
-        }
-        // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
-        for ($i =1; $i <= floor($moyenne); $i++){
-            ?> <img src="/image/etoile_pleine.svg" alt="étoile pleine" title="étoile pleine" class="etoile"><php
-        }
-        if(fmod(floor($moyenne*2),2)){
-            ?> <img src="/image/etoile_demi.svg" alt="étoile à moitié pleine"  title="étoile à moitié pleine" class="etoile"> <php 
-        }
-        for ($i =5; $i > round($moyenne); $i--){
-            ?> <img src="/image/etoile_vide.svg" alt="étoile vide"  title="étoile vide" class="etoile"><php
-        }
-    }
--->
-
-<!--
-<a href="">
-    <img src="" title="" alt="">
-    <h3></h3>
-    <div>
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-    </div>
-    <p class="ancien_prix"></p> Si réduction
-    <p class="prix"></p>
-</a>
--->
-
+</body>
 
 
 </html>
