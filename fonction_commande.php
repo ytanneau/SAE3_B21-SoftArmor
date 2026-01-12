@@ -66,3 +66,71 @@ function get_elements_commande_vendeur($id_commande, $id_vendeur) {
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function connexion_delivraptor($fd,$id,$mdp){
+    fwrite($fd,"1.$id.$mdp");
+    $buffer =fread($fd,200);
+    
+    $buffer = explode("=",$buffer);
+    return trim($buffer[1]);
+}
+
+function create_colis($fd){
+    fwrite($fd,"2");
+    $buffer = fread($fd,200);
+
+    $buffer = explode("=",$buffer);
+    return trim($buffer[1]);
+}
+
+function get_info_colis($fd,$bordereau){
+    fwrite($fd,"3.$bordereau");
+    $buffer = fread($fd,200);
+
+    $info = explode("\n",trim($buffer));
+    
+    if (count($info)>1) {
+        $etape = explode("=",$info[0])[1];
+        $rendu = explode("=",$info[1])[1];
+        $refus = explode("=",$info[2])[1];
+
+        $info_colis = [
+            "ETAPE" => $etape,
+            "RENDU" => $rendu,
+            "REFUS" => $refus,
+            "ERROR" => "N/A"
+        ];
+    }else{
+        $error = explode("=",$info[0])[1];
+        
+        $info_colis = [
+            "ETAPE" => "N/A",
+            "RENDU" => "N/A",
+            "REFUS" => "N/A",
+            "ERROR" => $error
+        ];
+    }
+   
+    return $info_colis;
+}
+
+function get_image_colis($fd,$bordereau){
+    fwrite($fd,"4.$bordereau");
+    $buffer = fread($fd,20000);
+
+    
+    $info = explode("IMG=",$buffer);
+    
+    if($info[0]!="ERROR"){
+        return $info[1];
+    }
+    return $info[0];
+}
+
+function connexion_socket(){
+    $fd =fsockopen("127.0.0.1",8080, $errno, $errstr);
+    return $fd;
+}
+function deconnexion_socket($fd){
+    fwrite($fd,"0");
+}
