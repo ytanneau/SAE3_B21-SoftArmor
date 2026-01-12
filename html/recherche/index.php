@@ -9,6 +9,8 @@ if (!isset($_SESSION)) {
 
     $recherche = trim(htmlentities($_GET['recherche'] ?? ''));
 
+    echo "Recherche : $recherche";
+
     if (empty($recherche)) {
         header('location: ' . HOME_SITE);
         die();
@@ -128,7 +130,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             lien.setAttributeNode(ref);
 
             // Image du produit
-            
+
             let photo = image(`../${produit.url_image}`, produit.alt, produit.titre);
 
             // Titre du produit
