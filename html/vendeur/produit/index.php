@@ -40,15 +40,15 @@
     // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
     if ($_POST != NULL && isset($rows)) {
         try {
-            $supprime = supprimer_produit_stock($_GET['produit']);
+            supprimer_produit_stock($_GET['produit']);
         } catch (PDOException $e) {
             die('Suppression du produit ' . $_GET['produit'] . ' impossible : ' . $e->getMessage());
         }
-    }
 
-    if (isset($supprime) && $supprime === true) {
-        renvoi();
+        header("Location: ../");
+        exit();
     }
+    
     $id_produit = $_GET['produit'];
     $tab_promo = get_info_promotion($id_produit);
 ?>
