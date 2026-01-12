@@ -353,7 +353,6 @@
                     codeBarre.value = codeBarre.value.replace(/\D/g,"");
                     if(codeBarre.value.length < 13){
                         messageErrCodeBarre.style.display = "block";
-                        event.preventDefault();
                     } else {
                         messageErrCodeBarre.style.display = "none";
                     }
