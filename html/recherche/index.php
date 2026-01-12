@@ -182,7 +182,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             lien.appendChild(photo);
             lien.appendChild(titreNomPublic);
             lien.appendChild(pPrix);
-            lien.appendChild(pPrixReduit); // peut être inexistant
+
+            if (produit.prix_actuel != null) {
+                lien.appendChild(pPrixReduit);
+            }
+
             lien.appendChild(divEtoiles);
 
             resultGrid.appendChild(lien);
