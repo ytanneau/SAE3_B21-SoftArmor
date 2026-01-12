@@ -131,9 +131,14 @@
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
-            $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_image ;");
-            $requete->bindValue(':url_image', $url_image, PDO::PARAM_STR);
-            $requete->execute();
+            
+            // Supprimer l'image seulement si elle existe
+            if (!empty($url_image)) {
+                $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_image ;");
+                $requete->bindValue(':url_image', $url_image, PDO::PARAM_STR);
+                $requete->execute();
+            }
+            
             return 0;
         } catch (PDOException $e) {
             throw $e;
