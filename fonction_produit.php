@@ -141,7 +141,7 @@
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function get_image($id_image) {
+    function get_url_image($id_image) {
         global $pdo;
 
         $requete = $pdo->prepare('SELECT url_image AS url, titre, alt FROM _image WHERE id_image = :id_image');
@@ -263,6 +263,21 @@
         }
     }
 
+    function get_categorie_produit($id_produit){
+            /**
+             * Fonction get_categorie_produit() prend en parametre l'id du produit
+             * Renvoie un tableau avec toute les informations d'un produit
+             */
+            global $pdo;
+            try{
+                $requete = $pdo->prepare("SELECT categorie FROM _produit WHERE id_produit = :id_produit");
+                $requete->execute([":id_produit" => $id_produit]);
+                $tabCategorie = $requete->fetch(PDO::FETCH_ASSOC);
+                return $tabCategorie;
+            } catch(PDOException $e){
+                throw $e;
+            }
+        }
     function add_produit_categorie($id_produit, $categorie){
         /**
          * Fonction add_produit_categorie() prend en parametre l'id d'un produit et une categorie
@@ -609,11 +624,35 @@
         }
     }
 
-    /*function date_banniere_occupe(){
+    function get_image($id_image){
+        global $pdo;
+        
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+            $stmt->execute([
+                "id_image" => $id_image
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function date_banniere_occupe(){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_promo, date_debut, date_fin FROM `_promotion` WHERE id_image_banniere <> NULL;");
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM `_promotion` WHERE id_image_banniere IS NOT NULL");
             $stmt->execute();
+
+            $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tab_final = array();
+            foreach($tab as $lignes){
+                array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
+            }
+            return $tab_final;
+        } catch (PDOException $e){
+            throw $e;
         }
-    }*/
+    }

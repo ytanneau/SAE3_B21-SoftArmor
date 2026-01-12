@@ -82,9 +82,9 @@ try {
                             $total_ttc += $prix_ttc * $elt['quantite_panier'];
 
                             // Récupération des images
-                            $image_p = get_image($elt['id_image_principale']);
-                            $image_1 = get_image($elt['id_image1']);
-                            $image_2 = get_image($elt['id_image2']);
+                            $image_p = get_url_image($elt['id_image_principale']);
+                            $image_1 = get_url_image($elt['id_image1']);
+                            $image_2 = get_url_image($elt['id_image2']);
                         ?>
         
                         <li class="produit_panier">
