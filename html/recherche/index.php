@@ -167,7 +167,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             divEtoiles.appendChild(image('/image/etoile_pleine.svg', 'étoile pleine', 'étoile pleine'));
         }
 
-        if (floor(Math.floor(moyenne * 2) % 2) != 0) {
+        if (Math.floor(moyenne * 2) % 2 != 0) {
             divEtoiles.appendChild(image('/image/etoile_demi.svg', 'étoile à moitié pleine', 'étoile à moitié pleine'));
         }
 
