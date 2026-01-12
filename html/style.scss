@@ -159,7 +159,14 @@ hr {
     }
 }
 
+section.results {
+    @include contenu_centre_vertical();
+    width: 100%;
+}
+
 #results {
+    
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
