@@ -100,6 +100,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
+                fetchProduitsJSON();
             }
         });
     }
