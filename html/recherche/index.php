@@ -100,7 +100,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
+                searchState.search = input.value;
+                // searchState.page = 1;
+
                 fetchProduitsJSON();
+                resultsFor.textContent = `Résultats pour "${input.value}"`;
             }
         });
     }
@@ -133,7 +137,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
             if (divEtoiles == null) {
                 divEtoiles = document.createElement("div");
-                pNonNote = document.createElement("p");
+
+                let pNonNote = document.createElement("p");
+                let texteNonNote = document.createTextNode("Produit Non Noté");
+
+                pNonNote.appendChild(texteNonNote);
+                divEtoiles.appendChild(pNonNote);
             }
     
             lien.appendChild(photo);
@@ -181,8 +190,39 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         return img;
     }
+                    
+
+    // Récupérer tous les produits dans un objet JSON
+    async function fetchProduitsJSON() {
+        fetch('/recherche/produits.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(searchState)
+        })
+        .then(res => res.json())
+        .then(data => {
+            afficherProduits(data);
+        });
+    }
 </script>
 </body>
+
+<!--
+<a href="">
+    <img src="" title="" alt="">
+    <h3></h3>
+    <div>
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+        <img src="" alt="" title="" class="etoile">
+    </div>
+    <p class="ancien_prix"></p> Si réduction
+    <p class="prix"></p>
+</a>
+-->
+
 
 
 </html>
