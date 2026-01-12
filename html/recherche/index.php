@@ -7,8 +7,13 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
+    if (empty(trim($_GET['recherche']))) {
+        header('location: ' . HOME_SITE);
+        die();
+    }
+
     if (isset($_SESSION['raison_sociale'])){
-        header('location: /vendeur/stock/');
+        header('location: ' . HOME_SITE . '/vendeur/stock/');
         die();
     }
 }
