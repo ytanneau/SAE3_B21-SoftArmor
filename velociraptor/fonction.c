@@ -284,22 +284,20 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
         genere_code(code);
         if (BDD)
         {
-            printf("test1\n");
             while (colis_existe(conn, cnx, code)){
                 genere_code(code);
             }
-            printf("test2\n");
+
             char sql[200];
             sprintf(sql, "INSERT INTO _colis (bordereau) VALUES ('%s')", code);
 
-            printf("test3\n");
             if (mysql_query(conn, sql))
             { 
                 fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
                 mysql_close(conn); 
                 fin(cnx); 
             }
-            printf("test4\n");
+
             sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
             envoier_message(cnx, message);
         
@@ -353,31 +351,24 @@ int colis_encour(MYSQL *conn, int cnx)
 
 bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
-    printf("test1.1\n");
+
     char sql[200];
     sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
-    printf("test1.2\n");
+
     if (mysql_query(conn, sql)) 
     { 
-        printf("test1.3\n");
         fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
         mysql_close(conn); 
         fin(cnx);
     }
-    printf("test1.4\n");
+
     MYSQL_RES *res = mysql_store_result(conn);
-    if (res == NULL){
-        printf("cc\n");
-    }
     MYSQL_ROW row = mysql_fetch_row(res);
+
     if (NULL == row){
-        printf("dd\n");
         return false;
     }
-    
-    printf("test1.5\n");
     return true;
-    //return true;
 }
 
 
@@ -394,22 +385,46 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             printf("[DEBUG] CODE : TRUE\n");
         }
         
-        char message[TAILLE];
-
+        char message[TAILLE*3];
+        printf("test 1\n");
         if (BDD)
         {
-            char sql[200];
-            sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+            printf("test 2\n");
+            if (colis_existe(conn, cnx, code))
+            {
+                printf("test 3\n");
+                char sql[200];
+                sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+                printf("test 4\n");
+                
+                if (mysql_query(conn, sql)) 
+                { 
+                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                    mysql_close(conn); 
+                    fin(cnx);
+                }
+                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_ROW row = mysql_fetch_row(res);
 
-            if (mysql_query(conn, sql)) 
-            { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                mysql_close(conn); 
-                fin(cnx);
+                if (atoi(row[0]) == 9)
+                {
+                    if (atoi(row[1]) == 2)
+                    {
+                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2]);
+                    }
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE);
+                }
+                else
+                {
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE);
+                }
+                envoier_message(cnx, message);
+                
             }
-            MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row;
-
+            else
+            {
+                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+            }
         }
         else
         {
