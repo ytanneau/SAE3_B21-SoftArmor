@@ -7,7 +7,9 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
-    if (empty(trim($_GET['recherche']))) {
+    $recherche = trim($_GET['recherche']);
+
+    if (empty($recherche)) {
         header('location: ' . HOME_SITE);
         die();
     }
