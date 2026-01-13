@@ -118,7 +118,7 @@
         const warning2 = document.getElementById("warning2");
         const divPhoto = document.getElementById("divPhoto");
 
-        const tab_date_occupe = <?= json_encode($tab_date) ?>;
+        // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
