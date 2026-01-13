@@ -75,22 +75,26 @@ try {
                     $total_ht = 0;
                     $total_ttc = 0;
         
-                    foreach ($elts_panier as $elt) { ?>
-                        <?php 
+                    foreach ($elts_panier as $elt) {
                             $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
         
                             $total_ht += $elt['prix'] * $elt['quantite_panier'];
                             $total_ttc += $prix_ttc * $elt['quantite_panier'];
+
+                            // Récupération des images
+                            $image_p = get_url_image($elt['id_image_principale']);
+                            $image_1 = get_url_image($elt['id_image1']);
+                            $image_2 = get_url_image($elt['id_image2']);
                         ?>
         
                         <li class="produit_panier">
-                            <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>"></a>
+                            <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $image_p['url'] ?>" title="<?= $image_p['titre'] ?>" alt="<?= $image_p['alt'] ?>"></a>
                             <div>
                                 <article>
                                     <div>
                                         <a href="../produit/?produit=<?=$elt['id_produit']?>"><h3><?= $elt['nom_public'] ?></h3></a>
                                         <p><?= $elt['description'] ?></p>
-                                        <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
+                                        <p>Vendeur : <?= $elt['raison_sociale'] ?></p>
                                     </div>
                 
                                     <form action="" method="post"> <!-- Bouton poubelle à droite pour format tel -->

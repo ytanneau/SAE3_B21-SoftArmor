@@ -574,7 +574,7 @@
     function sql_email_question($email) {
         global $pdo;
 
-        $requete = $pdo->prepare("SELECT q.question FROM compte_client c INNER JOIN _question_secu q ON c.question = q.mot_clef WHERE email = :email");
+        $requete = $pdo->prepare("SELECT q.question FROM client c INNER JOIN _question_secu q ON c.question = q.mot_clef WHERE email = :email");
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
         $requete->execute();
 
@@ -597,9 +597,9 @@
     // Return un e-mail et MDP hashé si le compte existe, ou null sinon (OU erreur)
     function sql_email_compte($pdo, $email, $typecompte){
         if ($typecompte == 'vendeur') {
-            $requete = $pdo->prepare("SELECT * FROM compte_vendeur WHERE email = :email");
+            $requete = $pdo->prepare("SELECT * FROM vendeur WHERE email = :email");
         } else {
-            $requete = $pdo->prepare("SELECT * FROM compte_client WHERE email = :email");
+            $requete = $pdo->prepare("SELECT * FROM client WHERE email = :email");
         }
 
         $requete->bindValue(':email', $email, PDO::PARAM_STR);
@@ -655,6 +655,8 @@
     }
 
     function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
+        $mdp = crypte_v2($mdp);
+        
         $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
@@ -695,7 +697,7 @@
         $requete->bindValue(':prenom', $prenom, PDO::PARAM_STR);
         $requete->execute();
         
-        $ancienne_adresse=sql_get_adresse_compte($id_compte);
+        $ancienne_adresse= sql_get_info_compte($id_compte)['email'];
         if($ancienne_adresse!=null){
             $requete = $pdo->prepare("UPDATE _adresse SET adresse = :adresse, code_postal = :code_postal, complement_adresse = :complement_adresse WHERE id_adresse = :id_adresse");
             $requete->bindValue(':id_adresse', $id_adresse, PDO::PARAM_INT);
@@ -744,52 +746,22 @@
         $requete->execute();
     }
 
-    //requete pour recuperer mot de passe cryptée et id adresse
-    function sql_get_infos_randoms($id_compte){
-        global $pdo;
-        
-        $requete = $pdo->prepare('SELECT mdp,id_adresse_fac AS id_adresse FROM compte_client WHERE id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
-        $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     //requete pour recuperer informations du compte sans l'adresse
     function sql_get_info_compte($id_compte){
         global $pdo;
     
-        $requete = $pdo->prepare('SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = :id_compte;');
+        $requete = $pdo->prepare('SELECT * FROM client WHERE id_compte = :id_compte;');
         $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    //requete pour recuperer l'adresse du compte
-    function sql_get_adresse_compte($id_compte){
+    //requete pour recuperer les infos d'une adresse
+    function sql_get_adresse($id_adresse){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT * FROM client_adresse WHERE client_adresse.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
+        $requete = $pdo->prepare('SELECT * FROM _adresse WHERE id_adresse = :id_adresse;');
+        $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_INT);
         $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    //requete pour savoir si il y a une image de profil
-    function sql_get_img_profil($id_compte){
-        global $pdo;
-        
-        $requete = $pdo->prepare('SELECT * FROM _image INNER JOIN _compte ON _image.id_image = _compte.id_image_profil WHERE _compte.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
-        $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    
-    //requete pour obtenir l'adresse email d'un compte
-    function sql_get_email($id_compte){
-        global $pdo;
-        $requete = $pdo->prepare('SELECT email FROM compte_actif WHERE compte_actif.id_compte = :id_compte;');
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
-        $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
+        return $requete->fetch(PDO::FETCH_ASSOC);
     }

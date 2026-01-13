@@ -158,7 +158,7 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_PHOTO_COLIS:
                 if (connect)
                 {
-                    
+                    photo(cnx, strtok(NULL, INSTRUCTION_DELIMITER), conn);
                 }
                 else
                 {
@@ -209,6 +209,14 @@ void message_erreur(int cnx, int valeur)
     sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur); // formate le message
     envoier_message(cnx, message);
     
+}
+
+void envoier_code(int cnx, char *message){
+    if (write(cnx, message, strlen(message)) == -1)
+    {
+        printf("[ERROR] WRITE\n");
+        fin(cnx);
+    }
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -274,8 +282,30 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
     {
         char code[BORDEREAU_SIZE];
         genere_code(code);
-        sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
-        envoier_message(cnx, message);
+        if (BDD)
+        {
+            while (colis_existe(conn, cnx, code)){
+                genere_code(code);
+            }
+
+            char sql[200];
+            sprintf(sql, "INSERT INTO _colis (bordereau) VALUES ('%s')", code);
+
+            if (mysql_query(conn, sql))
+            { 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                mysql_close(conn); 
+                fin(cnx); 
+            }
+
+            sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
+            envoier_message(cnx, message);
+        
+        }
+        else{
+            sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
+            envoier_message(cnx, message);
+        }
     }
     else
     {
@@ -303,7 +333,7 @@ int colis_encour(MYSQL *conn, int cnx)
 {
     if (BDD)
     {
-        if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
+        if (mysql_query(conn, "SELECT * FROM nb_colis_non_livres")) 
         { 
             fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
             //mysql_close(conn); 
@@ -312,11 +342,37 @@ int colis_encour(MYSQL *conn, int cnx)
         MYSQL_RES *res = mysql_store_result(conn); 
         MYSQL_ROW row;
         row = mysql_fetch_row(res);
+        printf("[DEBUG] COLIS EN COUR : %s\n", row[0]);
         return atoi(row[1]);
     }
     
     return 1;
 }
+
+bool colis_existe(MYSQL *conn, int cnx, char *code)
+{
+
+    char sql[200];
+    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+    printf("sql : %s\n", sql);
+    if (mysql_query(conn, sql)) 
+    { 
+        fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+        mysql_close(conn); 
+        fin(cnx);
+    }
+
+    MYSQL_RES *res = mysql_store_result(conn);
+    MYSQL_ROW row = mysql_fetch_row(res);
+    
+    if (NULL == row){
+        printf("cc\n");
+        return false;
+    }
+    printf("bb\n");
+    return true;
+}
+
 
 //-------------------------------------------------------------------------------------------------------
 
@@ -331,24 +387,46 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             printf("[DEBUG] CODE : TRUE\n");
         }
         
-        char message[TAILLE];
-
+        char message[TAILLE*3];
+        printf("test 1\n");
         if (BDD)
         {
-            if (mysql_query(conn, "SELECT id, nom FROM utilisateurs")) 
-            { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
-                //mysql_close(conn); 
-                fin(cnx); 
-            } 
-            MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row; 
-            while ((row = mysql_fetch_row(res))) 
-            { 
-                printf("ID: %s, Nom: %s\n", row[0], row[1]); 
-            } 
-            mysql_free_result(res); 
-            mysql_close(conn);
+            printf("test 2\n");
+            if (colis_existe(conn, cnx, code))
+            {
+                printf("test 3\n");
+                char sql[200];
+                sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+                printf("test 4\n");
+
+                if (mysql_query(conn, sql)) 
+                { 
+                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                    mysql_close(conn); 
+                    fin(cnx);
+                }
+                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_ROW row = mysql_fetch_row(res);
+
+                if (atoi(row[0]) == 9)
+                {
+                    if (atoi(row[1]) == 2)
+                    {
+                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2]);
+                    }
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE);
+                }
+                else
+                {
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE);
+                }
+                envoier_message(cnx, message);
+                
+            }
+            else
+            {
+                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+            }
         }
         else
         {
@@ -425,28 +503,36 @@ void envoier_photo(int cnx, char *fichier)
 {
     char buff[TAILLE_PHOTO];
     char message[TAILLE_PHOTO*8];
-    
+    //printf("test fonction\n");
     sprintf(message, "%s%s", PHOTO, DELIMITER);
     envoier_message(cnx, message);
 
-    while (read(cnx, buff, TAILLE_PHOTO) != 0)
+    int fd = open(FICHIER_PHOTO, O_RDONLY);
+    while (read(fd, buff, TAILLE_PHOTO) != 0)
     {
+        //printf("testest\n");
         encode_photo(buff, message);
+        envoier_code(cnx, message);
     }
 }
 
 
 void encode_photo(char *src, char *des)
 {
-    while (*src) 
-    { 
-        unsigned char c = (unsigned char)*src; // Conversion en binaire sur 8 bits
-        for (int i = 7; i >= 0; i--) 
-        {
-            *des = (c & (1 << i)) ? '1' : '0'; des++; 
+    for (int i = 0; src[i] != '\0'; i++) 
+    {
+        unsigned char c = (unsigned char)src[i];
+        // Conversion du caractère en binaire (8 bits) 
+        for (int bit = 7; bit >= 0; bit--) 
+        { 
+            des[i * 8 + (7 - bit)] = (c & (1 << bit)) ? '1' : '0'; 
         } 
-        src++; 
-    } 
-    *des = '\0'; // Fin de chaîne 
-    printf("code photo : %s", des);
+    }
+    
+    // Ajout du terminateur 
+    int len = 0; 
+    for (; src[len] != '\0'; len++); 
+    des[len * 8] = '\0';
+
+    //printf("%s", des);
 }

@@ -15,7 +15,13 @@
     $sort    = $data['sort'] ?? [];
 
     // Construire la requête SQL à partir de la recherche
-    $requete = "SELECT * FROM produit_visible WHERE 1 = 1";
+    $requete = 
+        "SELECT p.*, i.url_image, i.titre, i.alt 
+        FROM produit_en_ligne p
+        INNER JOIN _image i
+        ON p.id_image_principale = i.id_image
+        WHERE 1 = 1";
+    
     $params = [];
     
     // Filtre par recherche
@@ -24,13 +30,15 @@
         $params[':search'] = "%$search%";
     }
     
-    
+    /*
     if ($sort['order'] == 'asc') {
         $requete .= " ORDER BY :field :order nom_public asc";
         if ($sort = "prixAsc") {
             
         }
-    } 
+    }
+    */
+
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);

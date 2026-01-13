@@ -159,6 +159,22 @@ hr {
     }
 }
 
+section.results {
+    @include contenu_centre_vertical();
+    width: 100%;
+}
+
+#results {
+    
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    > a {
+        @include produit_catalogue();
+    }
+}
+
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
@@ -758,32 +774,7 @@ div:has(> aside) {
                     margin: 20px 40px 20px 20px;
 
                     > a {
-                        color : black;
-                        text-decoration: none;
-                        line-height: 1.5em; 
-                        > img {
-                            @include image_produit(15vw);
-                        }   
-                        > div {
-                            > img {
-                                width: 20px;
-                                height: 20px;
-                                background: none;
-                            }
-                            > p {
-                                margin: 5px 0 ;
-                            }
-                            height :2em;
-                            @include contenu_centre_horizontal;
-                        }
-                        > p, > h3 {
-                            margin: 5px 0 ;
-                            width: 100%;
-                        }
-                        > h3 {
-                            
-                            height :3em;
-                        }
+                        @include produit_catalogue();
                     }
                 }
             }

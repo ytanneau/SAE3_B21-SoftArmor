@@ -7,7 +7,7 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
-    $recherche = trim(htmlentities($_GET['recherche'] ?? ''));
+    $recherche = trim($_GET['recherche']);
 
     if (empty($recherche)) {
         header('location: ' . HOME_SITE);
@@ -15,7 +15,7 @@ if (!isset($_SESSION)) {
     }
 
     if (isset($_SESSION['raison_sociale'])){
-        header('location: /vendeur/stock/');
+        header('location: ' . HOME_SITE . '/vendeur/stock/');
         die();
     }
 }
@@ -70,12 +70,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <option value="triPrixCroi">Par prix réduction</option>
         </select>
 
-    <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
+<h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
-    <section class="results">
-        <!-- Grille des résultats -->
-        <div id="results"></div>
-    </section>
+<section class="results">
+    <!-- Grille des résultats -->
+    <div id="results"></div>
+</section>
 
 
     <script type="text/javascript">
@@ -130,18 +130,19 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 }
             });
         }
+    };
 
-        // Récupérer tous les produits dans un objet JSON
-        async function fetchProduitsJSON() {
-            fetch('/recherche/produits.php', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(searchState)
-            })
-            .then(res => res.json())
-            .then(data => {
-                afficherProduits(data);
-            });
+    // Est-on déjà sur la page de recherche ?
+    const isSearchPage = document.body.dataset.page === "search";
+    const form = document.querySelector("#form_recherche");
+    const input = document.querySelector("#recherche");
+    const resultsFor = document.querySelector("#results_for");
+
+    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+    document.addEventListener("DOMContentLoaded", () => {
+        // Rediriger si la recherche est vide
+        if (searchState.search === "") {
+            window.location.replace("..");
         }
 
         function afficherProduits(data) {
@@ -165,11 +166,157 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 let texteNom = document.createTextNode(produit.nom_public);
                 paragraphe.appendChild(texteNom);
         
-                resultGrid.appendChild(paragraphe);
-            });
+        fetchProduitsJSON();
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            if (isSearchPage) {
+                e.preventDefault();
+                
+                // Rediriger si la recherche est vide
+                if (input.value.trim() === "") {
+                    window.location.replace("..");
+                }
+                
+                searchState.search = input.value.trim();
+                // searchState.page = 1;
+                fetchProduitsJSON();
+            }
+        });
+    }
+
+    function afficherProduits(data) {
+        const resultGrid = document.querySelector("#results");
+
+        // Vider les produits déjà présents dans la grille
+        while (resultGrid.firstChild) {
+            resultGrid.removeChild(resultGrid.firstChild);
         }
-    </script>
+
+        resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
+
+        console.log(data.produits);
+
+        data.produits.forEach(produit => {
+            // Lien vers la page produit
+            let lien = document.createElement("a");
+            let ref = document.createAttribute("href");
+            ref.value = `/produit/?produit=${produit.id_produit}`;
+            lien.setAttributeNode(ref);
+
+            // Image du produit
+
+            let photo = image(`../${produit.url_image}`, produit.alt, produit.titre);
+
+            // Titre du produit
+            let titreNomPublic = document.createElement("h3");
+            let nomPublic = document.createTextNode(produit.nom_public);
+            titreNomPublic.appendChild(nomPublic);
+
+            // Étoiles
+            let divEtoiles = listeEtoiles(produit.note_moy);
+
+            // Si le produit n'est pas noté, l'indiquer
+            if (divEtoiles == null) {
+                divEtoiles = document.createElement("div");
+
+                let pNonNote = document.createElement("p");
+                let texteNonNote = document.createTextNode("Produit Non Noté");
+
+                pNonNote.appendChild(texteNonNote);
+                divEtoiles.appendChild(pNonNote);
+            }
+            
+            // Prix du produit (ancien prix si réduction)
+            let pPrix = document.createElement("p");
+            let prix = document.createTextNode(`${Number.parseFloat(produit.prix).toFixed(2)} €`);
+            pPrix.appendChild(prix);
+
+            let pPrixReduit = null;
+
+            // Si le produit est en réduction, l'indiquer
+            if (produit.prix_actuel != null) {
+                pPrixReduit = document.createElement("p");
+                let prixReduit = document.createTextNode(`${Number.parseFloat(produit.prix_actuel).toFixed(2)} €`);
+                pPrixReduit.appendChild(prixReduit);
+                
+                pPrix.classList.add("ancien_prix");
+                pPrixReduit.classList.add("prix");
+            } else {
+                pPrix.classList.add("prix");
+            }
+    
+            lien.appendChild(photo);
+            lien.appendChild(titreNomPublic);
+            lien.appendChild(pPrix);
+
+            if (produit.prix_actuel != null) {
+                lien.appendChild(pPrixReduit);
+            }
+
+            lien.appendChild(divEtoiles);
+
+            resultGrid.appendChild(lien);
+        });
+    }
+
+    function listeEtoiles(moyenne) {
+        let divEtoiles = document.createElement("div");
+
+        if (moyenne == null || moyenne < 0 || moyenne > 5) {
+            return null;
+        }
+
+        for (let i = 0; i < Math.floor(moyenne); i++) {
+            divEtoiles.appendChild(image('/image/etoile_pleine.svg', 'étoile pleine', 'étoile pleine'));
+        }
+
+        if (Math.floor(moyenne * 2) % 2 != 0) {
+            divEtoiles.appendChild(image('/image/etoile_demi.svg', 'étoile à moitié pleine', 'étoile à moitié pleine'));
+        }
+
+        for (let i = 5; i > Math.round(moyenne); i--) {
+            divEtoiles.appendChild(image('/image/etoile_vide.svg', 'étoile vide', 'étoile vide'));
+        }
+
+        return divEtoiles;
+    }
+
+    function image(src, alt, title) {
+        let img = document.createElement("img");
+
+        let srcAtt = document.createAttribute("src");
+        let altAtt = document.createAttribute("alt");
+        let titleAtt = document.createAttribute("title");
+
+        srcAtt.value = src;
+        altAtt.value = alt;
+        titleAtt.value = title;
+
+        img.setAttributeNode(srcAtt);
+        img.setAttributeNode(altAtt);
+        img.setAttributeNode(titleAtt);
+
+        return img;
+    }
+                    
+
+    // Récupérer tous les produits dans un objet JSON
+    async function fetchProduitsJSON() {
+        fetch('/recherche/produits.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(searchState)
+        })
+        .then(res => res.json())
+        .then(data => {
+            afficherProduits(data);
+        });
+    }
+</script>
 </body>
+
 <!--
 <a href="">
     <img src="" title="" alt="">
@@ -185,5 +332,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <p class="prix"></p>
 </a>
 -->
+
+
 
 </html>

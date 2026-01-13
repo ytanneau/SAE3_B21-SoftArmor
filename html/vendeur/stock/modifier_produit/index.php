@@ -40,20 +40,43 @@
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
-        update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
-                        $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
-                        $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
-                        $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if(isset($_POST['categorie'])) {
-            if($_POST['categorie'] == 'Alimentaire') {
-                if(!empty($_POST['sous_categorie'])) {
-                    update_categorie_produit($idProduit, $_POST['sous_categorie']);
+        
+        $categorieFinale = null;
+
+        if (!empty($_POST['categorie'])) {
+            if ($_POST['categorie'] === 'Alimentaire') {
+                if (!empty($_POST['sous_categorie'])) {
+                    $categorieFinale = $_POST['sous_categorie'];
                 } else {
-                    update_categorie_produit($idProduit, $_POST['categorie']);
+                    // Alimentaire sans sous-catégorie → ERREUR logique
+                    $_SESSION['error'] = "Veuillez choisir une sous-catégorie alimentaire.";
+                    header("Location: ".$_SERVER['REQUEST_URI']);
+                    exit;
                 }
             } else {
-                update_categorie_produit($idProduit, $_POST['categorie']);
+                $categorieFinale = $_POST['categorie'];
             }
+        }
+
+        if ($categorieFinale !== null) {
+            update_info_produit(
+                $idProduit,
+                $_POST['nomPrv'],
+                $nomPblc,
+                $_POST['prix'],
+                $_POST['tva'],
+                $_POST['codeBarre'],
+                $checkMajeur,
+                $checkEnLigne,
+                $_POST['qtAchete'],
+                $_POST['qtStock'],
+                $_POST['seuilAlerte'],
+                $_POST['descSimple'],
+                $_POST['descDetaille'],
+                $_POST['poidColis'],
+                $_POST['volumeColis'],
+                $categorieFinale
+            );
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -413,11 +436,16 @@
                     uniteMasse.style.display = "none";
                 }
             })
-
+            
             modifierProduit.addEventListener('click' , (event) =>  {
-                if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
-                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
-                    categorie.value === ""  selectSousCategorieAlimentaire.value === ""||
+                if(nomPrv.value === ""|| 
+                    nomPblc.value === "" || 
+                    tva.value === "" || 
+                    prix.value === "" || 
+                    poidColis.value === "" || 
+                    volumeColis.value === "" ||
+                    (categorie.value === "Alimentaire" && 
+                    selectSousCategorieAlimentaire.value === "") ||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();

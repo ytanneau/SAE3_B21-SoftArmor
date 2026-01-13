@@ -59,10 +59,10 @@
                                 $prixProd, $tva, $codeBarre, $checkMajeur,
                                 $qtachete, $qtStock,$seuilAlerte,
                                 $descSimple,$descDetaille, $poidColis,
-                                    $volumeColis);
+                                    $volumeColis, $categorie);
 
         // mise en relation entre le produit et sa catégorie
-        add_produit_categorie($idProduit,$categorie);
+        // add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
@@ -353,7 +353,6 @@
                     codeBarre.value = codeBarre.value.replace(/\D/g,"");
                     if(codeBarre.value.length < 13){
                         messageErrCodeBarre.style.display = "block";
-                        event.preventDefault();
                     } else {
                         messageErrCodeBarre.style.display = "none";
                     }

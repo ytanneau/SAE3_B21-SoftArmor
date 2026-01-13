@@ -22,7 +22,7 @@
     function detail_produit($id_produit){
         global $pdo;
         
-        $requete = $pdo->prepare("SELECT * from _produit where id_produit = :id_produit");
+        $requete = $pdo->prepare("SELECT * from produit where id_produit = :id_produit");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -40,7 +40,9 @@
     function detail_produit_image($id_produit) {
         global $pdo;
 
-        $sql = "SELECT * FROM produit_image WHERE id_produit = :id_produit";
+        $sql = "SELECT * FROM produit 
+        INNER JOIN _image ON id_image_principale = _image.id_image
+        WHERE id_produit = :id_produit";
 
         $requete = $pdo->prepare($sql);
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
@@ -52,7 +54,7 @@
     function vendeur_image_produit($id_produit){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT * FROM `_images_produit` WHERE  id_produit = :id_produit');
+        $requete = $pdo->prepare('SELECT * FROM _images_produit WHERE  id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -61,7 +63,7 @@
     function url_image_produit($id_image){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT * FROM _image WHERE  id_image = :id_image');
+        $requete = $pdo->prepare('SELECT * FROM _image WHERE id_image = :id_image');
         $requete->bindValue(':id_image', $id_image, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
@@ -70,7 +72,7 @@
     function vendeur_verif_produit($id_produit, $id_vendeur){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT id_produit from _produit where id_vendeur = :id_vendeur AND id_produit = :id_produit');
+        $requete = $pdo->prepare('SELECT id_produit from produit WHERE id_vendeur = :id_vendeur AND id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
@@ -80,7 +82,7 @@
     function vendeur_All_produit($id_vendeur){
         global $pdo;
         
-        $requete = $pdo->prepare('select id_produit, nom_stock, quantite from _produit where id_vendeur = :id_vendeur');
+        $requete = $pdo->prepare('select id_produit, nom_stock, quantite from produit where id_vendeur = :id_vendeur');
         $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -90,7 +92,10 @@
     function info_produit_accueil(){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,TRUNCATE(prix+prix*tva/100,2) as prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;');
+        $requete = $pdo->prepare('
+        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image');
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -99,7 +104,11 @@
     function info_produit_accueil_categorie($categorie){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,TRUNCATE(prix+prix*tva/100,2) as prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit AND _produit_dans_categorie.nom_categorie = :categorie;');
+        $requete = $pdo->prepare('
+        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image
+        WHERE p.categorie = :categorie');
         $requete->bindValue(':categorie', $categorie, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -109,7 +118,11 @@
     function info_produit_accueil_plus_recent(){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,TRUNCATE(prix+prix*tva/100,2) as prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit ORDER BY date_creation DESC;');
+        $requete = $pdo->prepare('
+        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image
+        ORDER BY date_creation DESC;');
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -118,10 +131,26 @@
     function info_produit_accueil_reduction(){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT produit_visible.id_produit,nom_public,TRUNCATE(prix+prix*tva/100,2) as prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((TRUNCATE(prix+prix*tva/100,2) - TRUNCATE(prix+prix*tva/100,2)*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN promo_jour ON produit_visible.id_produit = promo_jour.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;');
+        $requete = $pdo->prepare('
+        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image
+        WHERE en_promotion IS NOT NULL
+        ORDER BY date_creation DESC;');
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function get_url_image($id_image) {
+        global $pdo;
+
+        $requete = $pdo->prepare('SELECT url_image AS url, titre, alt FROM _image WHERE id_image = :id_image');
+        $requete->bindParam(":id_image", $id_image, PDO::PARAM_INT);
+        $requete->execute();
+
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     function supprimer_produit_panier($id_produit,$id_compte){
         global $pdo;
@@ -134,16 +163,32 @@
 
     function supprimer_produit_stock($id_produit) {
         global $pdo;
-        
+        $image = get_image_produit($id_produit);
+        print_r($image);
+        delete_image_produit($id_produit);
+
+        delete_image($image['id_image_principale']);
+        if(!empty($image['id_image1'])){
+            delete_image($image['id_image1']);
+        } else if (!empty($image['id_image2'])) {
+            delete_image($image['id_image2']);
+        }
+
         $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
+    }
 
-        if ($requete->rowCount() > 0) {
-            supprimer_images_produit($id_produit);
+    function delete_image_produit($id_produit){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("DELETE FROM _images_produit WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+        } catch (PDOException $e){
+            throw $e;
         }
-
-        return $requete->rowCount() > 0;
     }
 
     function supprimer_images_produit($id_produit) {
@@ -155,7 +200,7 @@
     function update_info_produit($id_produit, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $en_ligne, $qt_achete,
     $quantite_stock, $seuil_alerte, $desc_simple, 
-    $desc_detaille, $poid, $volume_colis){
+    $desc_detaille, $poid, $volume_colis, $categorie){
         /**
          * Fonction set_info_produit() prend en parametre tout les informations d'un produit
          * Modifie les informations du produit la base de données
@@ -167,6 +212,7 @@
                                     nom_public = :libelle_public,
                                     description = :desc_simple,
                                     description_detaillee = :desc_detaille,
+                                    categorie = :categorie,
                                     code_barre = :code_barre,
                                     quantite = :quantite_stock,
                                     prix = :prix_ht,
@@ -178,21 +224,22 @@
                                     plus_18 = :reserve_majeur,
                                     quantite_unite = :qt_achete
                                 WHERE id_produit = :id_produit");
-            $requete->execute([":id_produit" => $id_produit, 
-                            ":libelle_prive" => $libelle_prive, 
-                            ":libelle_public" => $libelle_public,
-                            ":desc_simple" => $desc_simple,
-                            ":desc_detaille" => $desc_detaille,
-                            ":code_barre" => $code_barre,
-                            ":quantite_stock" => $quantite_stock,
-                            ":prix_ht" => $prix_ht,
-                            ":tva" => $tva,
-                            ":en_ligne" => $en_ligne,
-                            ":seuil_alerte" => $seuil_alerte,
-                            ":poid" => $poid,
-                            ":volume_colis" => $volume_colis,
-                            ":reserve_majeur" => $reserve_majeur,
-                            ":qt_achete" => $qt_achete]);
+            $requete->execute(["id_produit" => $id_produit, 
+                            "libelle_prive" => $libelle_prive, 
+                            "libelle_public" => $libelle_public,
+                            "desc_simple" => $desc_simple,
+                            "desc_detaille" => $desc_detaille,
+                            "categorie" => $categorie,
+                            "code_barre" => $code_barre,
+                            "quantite_stock" => $quantite_stock,
+                            "prix_ht" => $prix_ht,
+                            "tva" => $tva,
+                            "en_ligne" => $en_ligne,
+                            "seuil_alerte" => $seuil_alerte,
+                            "poid" => $poid,
+                            "volume_colis" => $volume_colis,
+                            "reserve_majeur" => $reserve_majeur,
+                            "qt_achete" => $qt_achete]);
         } catch (PDOException $e) {
             throw $e;
         }
@@ -200,7 +247,7 @@
 
     function add_produit($id_compte_vendeur, $libelle_prive, $libelle_public, $prix_ht,
     $tva, $code_barre, $reserve_majeur, $qt_achete, $quantite_stock, $seuil_alerte,
-    $desc_simple, $desc_detaille, $poid, $volume_colis){
+    $desc_simple, $desc_detaille, $poid, $volume_colis, $categorie){
         /**
          * Fonction add_produit() prend en parametre toutes les informations du produit
          * Ajoute un nouveau produit dans la base de donnée
@@ -209,22 +256,39 @@
         global $pdo;
 
         try{ 
-            $requete = $pdo->prepare("INSERT INTO _produit(id_vendeur,nom_stock,nom_public,description,description_detaillee,code_barre,quantite,prix,tva,seuil_alerte,poids,volume,plus_18,quantite_unite) VALUES(:id_vend, :nomPrv, :nomPblc, :descSimple, :descDetaille, :codeBarre, :qtStock, :prixProd, :tva, :seuilAlerte, :poidProd, :volumeProd, :checkMajeur, :qtunite)");
+            $requete = $pdo->prepare("INSERT INTO _produit (id_vendeur, nom_stock, nom_public, description, description_detaillee, categorie, code_barre, quantite, prix, tva, seuil_alerte, poids, volume, plus_18, quantite_unite)
+                                    VALUES(:id_vendeur,
+                                            :nomPrv,
+                                            :nomPblc,
+                                            :descSimple,
+                                            :descDetaille,
+                                            :categorie,
+                                            :codeBarre,
+                                            :qtStock,
+                                            :prixProd,
+                                            :tva,
+                                            :seuilAlerte,
+                                            :poidProd,
+                                            :volumeProd,
+                                            :checkMajeur,
+                                            :qtunite)"
+            );
             $requete->execute([
-                ':id_vend' => $id_compte_vendeur,
-                ':nomPrv' => $libelle_prive,
-                ':nomPblc' => $libelle_public,
-                ':descSimple' => $desc_simple,
-                ':descDetaille' => $desc_detaille,
-                ':codeBarre' => $code_barre,
-                ':qtStock' => $quantite_stock,
-                ':prixProd' => $prix_ht,
-                ':tva' => $tva,
-                ':seuilAlerte' => $seuil_alerte,
-                ':poidProd' => $poid, 
-                ':volumeProd' => $volume_colis,
-                ':checkMajeur' => $reserve_majeur,
-                ':qtunite' => $qt_achete
+                'id_vendeur' => $id_compte_vendeur,
+                'nomPrv' => $libelle_prive,
+                'nomPblc' => $libelle_public,
+                'descSimple' => $desc_simple,
+                'descDetaille' => $desc_detaille,
+                'categorie' => $categorie,
+                'codeBarre' => $code_barre,
+                'qtStock' => $quantite_stock,
+                'prixProd' => $prix_ht,
+                'tva' => $tva,
+                'seuilAlerte' => $seuil_alerte,
+                'poidProd' => $poid, 
+                'volumeProd' => $volume_colis,
+                'checkMajeur' => $reserve_majeur,
+                'qtunite' => $qt_achete
             ]);
 
             $id = $pdo->lastInsertId();
@@ -241,8 +305,8 @@
              */
             global $pdo;
             try{
-                $requete = $pdo->prepare("SELECT * FROM _produit_dans_categorie WHERE id_produit = :id_produit");
-                $requete->execute([":id_produit" => $id_produit]);
+                $requete = $pdo->prepare("SELECT categorie FROM _produit WHERE id_produit = :id_produit");
+                $requete->execute(["id_produit" => $id_produit]);
                 $tabCategorie = $requete->fetch(PDO::FETCH_ASSOC);
                 return $tabCategorie;
             } catch(PDOException $e){
@@ -422,7 +486,7 @@
     function vendeur_possede_produit($id_vendeur, $id_produit){
         global $pdo;
         
-        $requete = $pdo->prepare('SELECT * FROM produit WHERE id_vendeur = :id_vendeur AND :id_produit');
+        $requete = $pdo->prepare('SELECT * FROM produit WHERE id_vendeur = :id_vendeur AND id_produit = :id_produit');
         $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
@@ -610,11 +674,20 @@
         }
     }
 
-    /*function date_banniere_occupe(){
+    function date_banniere_occupe(){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_promo, date_debut, date_fin FROM `_promotion` WHERE id_image_banniere <> NULL;");
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM `_promotion` WHERE id_image_banniere IS NOT NULL");
             $stmt->execute();
+
+            $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tab_final = array();
+            foreach($tab as $lignes){
+                array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
+            }
+            return $tab_final;
+        } catch (PDOException $e){
+            throw $e;
         }
-    }*/
+    }

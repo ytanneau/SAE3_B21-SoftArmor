@@ -692,6 +692,53 @@ hr {
   margin: 5% 0;
 }
 
+section.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#results > a {
+  color: black;
+  text-decoration: none;
+  line-height: 1.5em;
+}
+#results > a > img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-color: #f3f1fb;
+  min-width: 15vw;
+  max-width: 15vw;
+  height: 15vw;
+  border-radius: 5px;
+}
+#results > a > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 2em;
+}
+#results > a > div > img {
+  width: 20px;
+  height: 20px;
+  background: none;
+}
+#results > a > div > p {
+  margin: 5px 0;
+}
+#results > a > p, #results > a > h3 {
+  margin: 5px 0;
+  width: 100%;
+}
+#results > a > h3 {
+  height: 3em;
+}
+
 .form_client {
   overflow-x: hidden;
 }
@@ -1409,10 +1456,10 @@ div:has(> aside) {
   border-radius: 5px;
 }
 .accueil > main > div > ul > li > a > div {
-  height: 2em;
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 2em;
 }
 .accueil > main > div > ul > li > a > div > img {
   width: 20px;
@@ -2496,4 +2543,4 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
-}
+}/*# sourceMappingURL=style.css.map */

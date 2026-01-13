@@ -216,6 +216,41 @@
     }
 }
 
+@mixin produit_catalogue() {
+    color : black;
+    text-decoration: none;
+    line-height: 1.5em; 
+
+    > img {
+        @include image_produit(15vw);
+    }   
+
+    > div {
+        @include contenu_centre_horizontal;
+
+        > img {
+            width: 20px;
+            height: 20px;
+            background: none;
+        }
+
+        > p {
+            margin: 5px 0 ;
+        }
+
+        height :2em;
+    }
+
+    > p, > h3 {
+        margin: 5px 0 ;
+        width: 100%;
+    }
+
+    > h3 {
+        height :3em;
+    }
+}
+
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
     background-color: $couleur_fond_produit;

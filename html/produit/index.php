@@ -84,17 +84,9 @@ if ($_POST != NULL) {
     </script>
 
     <?php
-        $img_principale_url   = htmlentities($produit['image_principale_url'] ?? '');
-        $img_principale_title = htmlentities($produit['image_principale_titre'] ?? ($produit['nom_public'] ?? ''));
-        $img_principale_alt   = htmlentities($produit['image_principale_alt'] ?? ($produit['nom_public'] ?? ''));
-
-        $img1_url   = htmlentities($produit['image_1_url'] ?? '');
-        $img1_title = htmlentities($produit['image_1_titre'] ?? ($produit['nom_public'] ?? ''));
-        $img1_alt   = htmlentities($produit['image_1_alt'] ?? ($produit['nom_public'] ?? ''));
-
-        $img2_url   = htmlentities($produit['image_2_url'] ?? '');
-        $img2_title = htmlentities($produit['image_2_titre'] ?? ($produit['nom_public'] ?? ''));
-        $img2_alt   = htmlentities($produit['image_2_alt'] ?? ($produit['nom_public'] ?? ''));
+        $img_p = get_image($produit['id_image_principale']);
+        $img_1 = get_image($produit['id_image1']);
+        $img_2 = get_image($produit['id_image2']);
     ?>
     
     <main>
@@ -107,18 +99,18 @@ if ($_POST != NULL) {
                     <div>
                         <!-- Image principale -->
                         <div>
-                            <img src="<?= HOME_SITE . $img_principale_url ?>" title="<?= $img_principale_title ?>" alt="<?= $img_principale_alt ?>">
+                            <img src="<?= HOME_SITE . $img_p['url_image'] ?>" title="<?= $img_p['titre'] ?>" alt="<?= $img_p['alt'] ?>">
                         </div>
 
                         <!-- Images facultatives -->
                         <div>
                             <?php 
                                 if (!empty($img1_url)) { ?>
-                                    <img src="<?= HOME_SITE . $img1_url ?>" title="<?= $img1_title ?>" alt="<?= $img1_alt ?>">
+                                    <img src="<?= HOME_SITE . $img1['url_image'] ?>" title="<?= $img1['titre'] ?>" alt="<?= $img1['alt'] ?>">
                                 <?php }
 
                                 if (!empty($img2_url)) { ?>
-                                    <img src="<?= HOME_SITE . $img2_url ?>" title="<?= $img2_title ?>" alt="<?= $img2_alt ?>">
+                                    <img src="<?= HOME_SITE . $img2['url_image'] ?>" title="<?= $img2['titre'] ?>" alt="<?= $img2['alt'] ?>">
                                 <?php } 
                             ?>
                         </div>

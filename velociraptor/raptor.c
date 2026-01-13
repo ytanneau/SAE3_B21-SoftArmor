@@ -82,7 +82,7 @@ int main(int argc, char const *argv[])
     sock = socket(AF_INET, SOCK_STREAM, 0);
     addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(8080);
+    addr.sin_port = htons(9000);
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
 
