@@ -64,10 +64,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </section>
         <select id="tri" value ="triOption">
             <option></option>
-            <option value="triAvis">Par notes</option>
-            <option value="triPrixDecr">Par prix decroissant</option>
-            <option value="triPrixCroi">Par prix croissant</option>
-            <option value="triPrixCroi">Par prix réduction</option>
+            <option value="triAvis" data-name ="asc">Par notes</option>
+            <option value="triPrix" data-name ="asc">Par prix decroissant</option>
+            <option value="triPrixCroi" data-name ="desc">Par prix croissant</option>
+            <option value="triPrixCroi" data-name ="asc">Par prix réduction</option>
         </select>
 
 <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
