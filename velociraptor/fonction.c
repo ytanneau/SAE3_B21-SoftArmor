@@ -356,8 +356,7 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     char sql[200];
     sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
-    printf("taill sql : %ld\n", strlen(sql));
-    printf("sql : %s\n", sql);
+
     if (mysql_query(conn, sql)) 
     { 
         fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
@@ -398,17 +397,13 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         }
         
         char message[TAILLE*3];
-        printf("test 1\n");
         if (BDD)
         {
-            printf("test 2 %ld\n", strlen(code));
             printf("%s",code);
             
             if (colis_existe(conn, cnx, code))
             {
-                printf("test 3\n");
-                char sql[200];
-                
+                char sql[200];   
                 sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
 
                 if (mysql_query(conn, sql)) 
