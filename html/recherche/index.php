@@ -97,11 +97,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     const form = document.querySelector("#form_recherche");
     const input = document.querySelector("#recherche");
     const resultsFor = document.querySelector("#results_for");
-
+    
     //listener pour les tris et renvoi 
-    var s = document.getElementById("tri");
-    var selNum = s.options[s.selectedIndex].value;
-    var selName = s.options[s.selectedIndex].dataset.name;
+    let s = document.getElementById("tri");
+    let selNum = s.options[s.selectedIndex].value;
+    let selName = s.options[s.selectedIndex].dataset.name;
 
     s.addEventListener("change", (e) => {
         if (isSearchPage) {
