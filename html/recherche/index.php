@@ -165,7 +165,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 let paragraphe = document.createElement("p");
                 let texteNom = document.createTextNode(produit.nom_public);
                 paragraphe.appendChild(texteNom);
-        
+            }
         fetchProduitsJSON();
     });
 
