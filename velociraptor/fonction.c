@@ -318,7 +318,7 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
 void genere_code(char *code) 
 { 
     size_t charset_size = sizeof(BORDEREAU_CARACTERE) - 1; // -1 pour exclure '\0' 
-    for (size_t i = 0; i < BORDEREAU_SIZE-2; i++) 
+    for (size_t i = 0; i < BORDEREAU_SIZE-1; i++) 
     { 
         int key = rand() % charset_size;
         code[i] = BORDEREAU_CARACTERE[key]; 
@@ -355,8 +355,8 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
 
     char sql[200];
-    code[BORDEREAU_SIZE-1] = ' ';
-    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s';", code);
+    code[BORDEREAU_SIZE-1] = '\0';
+    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
     printf("taill sql : %ld\n", strlen(sql));
     printf("sql : %s\n", sql);
     if (mysql_query(conn, sql)) 
@@ -368,12 +368,19 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 
     MYSQL_RES *res = mysql_store_result(conn);
     MYSQL_ROW row = mysql_fetch_row(res);
-    
+
     if (NULL == row){
-        printf("cc\n");
+        if (DEBUG)
+        {
+            printf("[DEBUG] SQL ROW VIDE\n");
+        }
         return false;
     }
-    printf("bb\n");
+
+    if (DEBUG)
+    {
+        printf("[DEBUG] SQL ROW NON VIDE\n");
+    }
     return true;
 }
 
