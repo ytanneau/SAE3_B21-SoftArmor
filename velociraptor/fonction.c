@@ -399,6 +399,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             {
                 printf("test 3\n");
                 char sql[200];
+                printf("%s",code);
                 sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
                 printf("test 4\n");
 
