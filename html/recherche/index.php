@@ -317,22 +317,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </script>
 </body>
 
-<!--
-<a href="">
-    <img src="" title="" alt="">
-    <h3></h3>
-    <div>
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-        <img src="" alt="" title="" class="etoile">
-    </div>
-    <p class="ancien_prix"></p> Si réduction
-    <p class="prix"></p>
-</a>
--->
-
 
 
 </html>
