@@ -78,59 +78,58 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </section>
 
 
-    <script type="text/javascript">
-        const searchState = {
-            search: "<?=$recherche?>",
-            filters: {
-                category: [],
-                price: {min: null, max: null},
-                sales: false
-            },
-            sort: {
-                field: "nom_public",
-                order: "asc"
-            }
-        };
+<script type="text/javascript">
+    const searchState = {
+        search: "<?=$recherche?>",
+        filters: {
+            category: [],
+            price: {min: null, max: null},
+            sales: false
+        },
+        sort: {
+            field: "nom_public",
+            order: "asc"
+        }
+    };
 
-        // Est-on déjà sur la page de recherche ?
-        const isSearchPage = document.body.dataset.page === "search";
-        const form = document.querySelector("#form_recherche");
-        const input = document.querySelector("#recherche");
-        const resultsFor = document.querySelector("#results_for");
+    // Est-on déjà sur la page de recherche ?
+    const isSearchPage = document.body.dataset.page === "search";
+    const form = document.querySelector("#form_recherche");
+    const input = document.querySelector("#recherche");
+    const resultsFor = document.querySelector("#results_for");
 
-        // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
-        document.addEventListener("DOMContentLoaded", () => {
-            fetchProduitsJSON();
-        });
-        //listener pour les tris et renvoi 
-        var s = document.getElementById("tri");
-        var selNum = s.options[s.selectedIndex].value;
-        var selName = s.options[s.selectedIndex].dataset.name;
-        s.addEventListener("change", (e) => {
+    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchProduitsJSON();
+    });
+    //listener pour les tris et renvoi 
+    var s = document.getElementById("tri");
+    var selNum = s.options[s.selectedIndex].value;
+    var selName = s.options[s.selectedIndex].dataset.name;
+    s.addEventListener("change", (e) => {
+        if (isSearchPage) {
+            e.preventDefault();
+
+            searchState.sort.field = selNum;
+            searchState.sort.order = selName;
+            console.log(searchState.sort.order);
+            console.log(searchState.sort.field);
+        }
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
 
-                searchState.sort.field = selNum;
-                searchState.sort.order = selName;
-                console.log(searchState.sort.order);
-                console.log(searchState.sort.field);
+                searchState.search = input.value;
+                // searchState.page = 1;
+
+                fetchProduitsJSON();
+                resultsFor.textContent = `Résultats pour "${input.value}"`;
             }
         });
-
-        if (form) {
-            form.addEventListener("submit", (e) => {
-                if (isSearchPage) {
-                    e.preventDefault();
-
-                    searchState.search = input.value;
-                    // searchState.page = 1;
-
-                    fetchProduitsJSON();
-                    resultsFor.textContent = `Résultats pour "${input.value}"`;
-                }
-            });
-        }
-    };
+    }
 
     // Est-on déjà sur la page de recherche ?
     const isSearchPage = document.body.dataset.page === "search";
