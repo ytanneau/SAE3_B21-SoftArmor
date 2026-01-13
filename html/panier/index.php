@@ -83,8 +83,6 @@ try {
 
                             // Récupération des images
                             $image_p = get_url_image($elt['id_image_principale']);
-                            $image_1 = get_url_image($elt['id_image1']);
-                            $image_2 = get_url_image($elt['id_image2']);
                         ?>
         
                         <li class="produit_panier">
@@ -103,8 +101,10 @@ try {
                                     </form> 
                                 </article>
                                 <article>
-                                    <p class="prix"><?=number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
-                                    <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
+                                    <?php $prix_final = $elt['prix_actuel'] ?? $elt['prix'] * (($elt['tva'] / 100) + 1)?>
+                                    <p class="prix"><?=number_format($prix_final, 2, ',', ' ') . ' €' ?></p>
+                                    <p>Quantité : <?=$elt['quantite_panier'] ?></p>
+                                    <p class="prix">Sous total : <?=number_format($prix_final * $elt['quantite_panier'], 2, ',', ' ')?> €</p>
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
