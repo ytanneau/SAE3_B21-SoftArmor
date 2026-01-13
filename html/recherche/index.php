@@ -65,7 +65,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </section>
 
         <select id="tri" value ="triOption">
-            <option></option>
+            <option value="aToZ" data-name ="asc"></option>
             <option value="triAvis" data-name ="asc">Par notes</option>
             <option value="triPrix" data-name ="asc">Par prix decroissant</option>
             <option value="triPrixCroi" data-name ="desc">Par prix croissant</option>
@@ -101,21 +101,20 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const resultsFor = document.querySelector("#results_for");
 
         //listener pour les tris et renvoi 
-        var s = document.getElementById("tri");
-        var selNum = s.options[s.selectedIndex].value;
-        var selName = s.options[s.selectedIndex].dataset.name;
+        let s = document.getElementById("tri");
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
+                let selNum = s.options[s.selectedIndex].value;
+                let selName = s.options[s.selectedIndex].dataset.name;
+
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
-                console.log(selNum);
-                console.log(selName);
-                console.log(searchState.sort.order);
                 console.log(searchState.sort.field);
+                console.log(searchState.sort.order);
             }
         });
 
@@ -159,6 +158,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             console.log(data.produits);
 
             data.produits.forEach(produit => {
+                let li = document.createElement("li");
                 // Lien vers la page produit
                 let lien = document.createElement("a");
                 let ref = document.createAttribute("href");
@@ -217,7 +217,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 lien.appendChild(divEtoiles);
 
-                resultGrid.appendChild(lien);
+                li.appendChild(lien);
+                resultGrid.appendChild(li);
             });
         }
 

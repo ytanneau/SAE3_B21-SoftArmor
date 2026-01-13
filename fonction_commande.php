@@ -119,7 +119,7 @@ function get_image_colis($fd,$bordereau){
     $buffer = fread($fd,20000);
 
     
-    $info = explode("IMG=",$buffer);
+    $info = explode("=",$buffer);
     
     if($info[0]!="ERROR"){
         return $info[1];
@@ -128,8 +128,12 @@ function get_image_colis($fd,$bordereau){
 }
 
 function connexion_socket(){
-    $fd =fsockopen("127.0.0.1",8080, $errno, $errstr);
-    return $fd;
+
+    $fd =@fsockopen("127.0.0.1",8080, $errno, $errstr);
+    if ($fd === false) {
+    
+        echo "Connexion Delivraptor échouée ";
+    }
 }
 function deconnexion_socket($fd){
     fwrite($fd,"0");
