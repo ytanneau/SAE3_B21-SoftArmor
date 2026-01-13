@@ -703,12 +703,16 @@ section.results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-#results > a {
+#results > li {
+  width: 20vw;
+  margin: 20px 40px 20px 20px;
+}
+#results > li > a {
   color: black;
   text-decoration: none;
   line-height: 1.5em;
 }
-#results > a > img {
+#results > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
@@ -717,25 +721,25 @@ section.results {
   height: 15vw;
   border-radius: 5px;
 }
-#results > a > div {
+#results > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 2em;
 }
-#results > a > div > img {
+#results > li > a > div > img {
   width: 20px;
   height: 20px;
   background: none;
 }
-#results > a > div > p {
+#results > li > a > div > p {
   margin: 5px 0;
 }
-#results > a > p, #results > a > h3 {
+#results > li > a > p, #results > li > a > h3 {
   margin: 5px 0;
   width: 100%;
 }
-#results > a > h3 {
+#results > li > a > h3 {
   height: 3em;
 }
 

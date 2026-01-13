@@ -76,7 +76,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         <section class="results">
             <!-- Grille des résultats -->
-            <div id="results"></div>
+            <ul id="results"></ul>
         </section>
     </main>
 
