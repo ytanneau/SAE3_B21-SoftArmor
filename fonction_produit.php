@@ -651,7 +651,7 @@
             $stmt->execute([
                 "id_image" => $id_image
             ]);
-            unlink("/docker/data/web/html/" . $tab_image['url_image']);
+            unlink("html/" . $tab_image['url_image']);
         } catch(PDOException $e){
             throw $e;
         }
