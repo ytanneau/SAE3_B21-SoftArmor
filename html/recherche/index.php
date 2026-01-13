@@ -65,7 +65,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </section>
 
         <select id="tri" value ="triOption">
-            <option></option>
+            <option value="aToZ" data-name ="asc"></option>
             <option value="triAvis" data-name ="asc">Par notes</option>
             <option value="triPrix" data-name ="asc">Par prix decroissant</option>
             <option value="triPrixCroi" data-name ="desc">Par prix croissant</option>
@@ -102,20 +102,19 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         //listener pour les tris et renvoi 
         let s = document.getElementById("tri");
-        let selNum = s.options[s.selectedIndex].value;
-        let selName = s.options[s.selectedIndex].dataset.name;
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
+                let selNum = s.options[s.selectedIndex].value;
+                let selName = s.options[s.selectedIndex].dataset.name;
+
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
-                console.log(selNum);
-                console.log(selName);
-                console.log(searchState.sort.order);
                 console.log(searchState.sort.field);
+                console.log(searchState.sort.order);
             }
         });
 

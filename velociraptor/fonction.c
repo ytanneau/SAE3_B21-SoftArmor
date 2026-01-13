@@ -399,12 +399,11 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         char message[TAILLE*3];
         if (BDD)
         {
-            printf("%s",code);
             
             if (colis_existe(conn, cnx, code))
             {
                 char sql[200];   
-                sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+                sprintf(sql, "SELECT etape, mode, raison_refus FROM _colis WHERE bordereau = '%s'", code);
 
                 if (mysql_query(conn, sql)) 
                 { 
@@ -493,7 +492,25 @@ void photo(int cnx, char* code, MYSQL* conn)
     {
         if (BDD)
         {
-            
+            char sql[200];   
+            sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+
+            if (mysql_query(conn, sql)) 
+            { 
+                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                mysql_close(conn); 
+                fin(cnx);
+            }
+            MYSQL_RES *res = mysql_store_result(conn); 
+            MYSQL_ROW row = mysql_fetch_row(res);
+            if (atoi(row[1]) == 1)
+            {
+                envoier_photo(cnx, FICHIER_PHOTO);
+            }
+            else
+            {
+                message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+            }
         }
         else
         {
