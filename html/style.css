@@ -702,6 +702,10 @@ section.results {
 ul#results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  list-style: none;
 }
 ul#results > li {
   width: 20vw;
