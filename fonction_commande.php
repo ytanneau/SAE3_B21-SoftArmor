@@ -88,7 +88,6 @@ function get_info_colis($fd,$bordereau){
     $buffer = fread($fd,200);
 
     $info = explode("\n",trim($buffer));
-    
     if (count($info)>1) {
         $etape = explode("=",$info[0])[1];
         $rendu = explode("=",$info[1])[1];
@@ -134,6 +133,7 @@ function connexion_socket(){
     
         echo "Connexion Delivraptor échouée ";
     }
+    return $fd;
 }
 function deconnexion_socket($fd){
     fwrite($fd,"0");
