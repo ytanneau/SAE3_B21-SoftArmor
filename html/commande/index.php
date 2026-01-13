@@ -96,7 +96,9 @@ if (isset($_GET["commande"])) {
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
                     //connexion delivraptor
                     $conn =false;
+                    
                     $fd = connexion_socket();
+                    
                     if($fd){
                     $conn = connexion_delivraptor($fd,"root","root");
                     
