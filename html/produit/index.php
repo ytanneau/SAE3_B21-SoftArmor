@@ -99,18 +99,18 @@ if ($_POST != NULL) {
                     <div>
                         <!-- Image principale -->
                         <div>
-                            <img src="<?= HOME_SITE . $img_p['url'] ?>" title="<?= $img_p['title'] ?>" alt="<?= $img_p['alt'] ?>">
+                            <img src="<?= HOME_SITE . $img_p['url_image'] ?>" title="<?= $img_p['titre'] ?>" alt="<?= $img_p['alt'] ?>">
                         </div>
 
                         <!-- Images facultatives -->
                         <div>
                             <?php 
                                 if (!empty($img1_url)) { ?>
-                                    <img src="<?= HOME_SITE . $img1['url'] ?>" title="<?= $img1['title'] ?>" alt="<?= $img1['alt'] ?>">
+                                    <img src="<?= HOME_SITE . $img1['url_image'] ?>" title="<?= $img1['titre'] ?>" alt="<?= $img1['alt'] ?>">
                                 <?php }
 
                                 if (!empty($img2_url)) { ?>
-                                    <img src="<?= HOME_SITE . $img2['url'] ?>" title="<?= $img2['title'] ?>" alt="<?= $img2['alt'] ?>">
+                                    <img src="<?= HOME_SITE . $img2['url_image'] ?>" title="<?= $img2['titre'] ?>" alt="<?= $img2['alt'] ?>">
                                 <?php } 
                             ?>
                         </div>
