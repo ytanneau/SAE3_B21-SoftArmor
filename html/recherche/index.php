@@ -111,6 +111,30 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
+                console.log(selNum);
+                console.log(selName);
+                console.log(searchState.sort.order);
+                console.log(searchState.sort.field);
+            }
+        });
+
+    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+    document.addEventListener("DOMContentLoaded", () => {
+        // Rediriger si la recherche est vide
+        if (searchState.search === "") {
+            window.location.replace("..");
+        }
+
+        fetchProduitsJSON();
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            if (isSearchPage) {
+                e.preventDefault();
+
+                searchState.sort.field = selNum;
+                searchState.sort.order = selName;
                 console.log(searchState.sort.order);
                 console.log(searchState.sort.field);
             }
