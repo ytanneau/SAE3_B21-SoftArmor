@@ -112,37 +112,50 @@ if (isset($_GET["commande"])) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
-
+                    //connexion delivraptor
+                    $conn =false;
                     $fd = connexion_socket();
+                    if($fd){
                     $conn = connexion_delivraptor($fd,"root","root");
+                    
+                    //si connexion
                     if ($conn == "true"){
                         $bordereau = $commande["bordereau"];
+                        //recuperation des données du colis
                         $info_colis =get_info_colis($fd,$bordereau);
                         $texte_img="";
+                        //si le colis est rendu dans la boite au lettre
                         if ($info_colis["RENDU"] == "1") {
+                            //recuperation de l'image
                             $img = get_image_colis($fd,$bordereau);
                             switch ($img) {
+                                //cas erreur pas de colis
                                 case '3':
                                     $texte_img="Colis inexistent";
                                     break;
+                                //cas d'erreur pas de photo
                                 case '4':
                                     $texte_img="Photo inexistante";
                                     break;
-                                
+                                //cas image a mettre dans le fichier ressources
                                 default:
-                                    $fich = file_put_contents(HOME_SITE . "ressources/colis/test.png",$img);
+                                    $fich = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
+                                    fwrite($fich, $img);
+                                    fclose($fich);
                                     break;
                             }
                         }   
                     }
+                    //deconnexion
                     deconnexion_socket($fd);
+                    }
                 ?>
 
                     <li>
                         <div>
                             <div>
                                 <?php
-
+                                //si il y a eu connexion delivraptor et que il ny a pas d'erreur
                                 if ($conn =="true" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
 
                                     
@@ -152,6 +165,7 @@ if (isset($_GET["commande"])) {
                                 
                                     
                                 <?php
+                                //affichage du refsu de colis
                                 switch ($info_colis["REFUS"]) {
                                     case '0':
                                         $texte_refus = "Colis endommagé";
@@ -166,7 +180,7 @@ if (isset($_GET["commande"])) {
                                         $texte_refus = "Plus besoin du colis";
                                         break;
                                 }
-
+                                //affichage rendu du colis
                                 switch ($info_colis["RENDU"]) {
                                     case '0':
                                         $texte_rendu = "Colis remis en main propre";
@@ -187,6 +201,7 @@ if (isset($_GET["commande"])) {
                                     <p><?php echo htmlentities($texte_rendu) ;?></p>
                                 
                                 <?php
+                                    //affichage des etapes
                                     $livraison = "Colis en cours de livraison";
                                     switch ($info_colis["ETAPE"]) {
                                         case "1":
@@ -224,13 +239,17 @@ if (isset($_GET["commande"])) {
                                     <p><?php echo htmlentities($livraison);?></p>
                                     <p><?php echo htmlentities($texte_etape);?></p>
                                 <?php
+                                //si la connexion est refusé
                                 elseif ($conn == "false") :?>
-                                <p>Connexion refusé</p>
-                                <?php elseif ($conn =="true" and $info_colis["ERROR"]!="N/A") :?>
+                                    <p>Connexion refusé</p>
+                                <?php 
+                                    //si la connexion est accepté mais il y a une erreur sur le colis 
+                                    elseif ($conn =="true" and $info_colis["ERROR"]!="N/A") :?>
                                     <p>Erreur, le colis <?php echo htmlentities($bordereau)?> n'existe pas</p>
-                                <?php
-                                elseif  ($conn =="true" and $texte_img !="") :?>
-                                <p>Erreur, <?php echo htmlentities($texte_img)?></p>
+                                <?php 
+                                    //si la connexion est accepté mais il y a une erreur sur l'image
+                                    elseif  ($conn =="true" and $texte_img !="") :?>
+                                    <p>Erreur, <?php echo htmlentities($texte_img)?></p>
                                 <?php endif; ?>
                             </div>
                             <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
