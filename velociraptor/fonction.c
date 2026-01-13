@@ -318,12 +318,12 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
 void genere_code(char *code) 
 { 
     size_t charset_size = sizeof(BORDEREAU_CARACTERE) - 1; // -1 pour exclure '\0' 
-    for (size_t i = 0; i < BORDEREAU_SIZE-1; i++) 
+    for (size_t i = 0; i < BORDEREAU_SIZE-2; i++) 
     { 
         int key = rand() % charset_size;
         code[i] = BORDEREAU_CARACTERE[key]; 
     } 
-    code[BORDEREAU_SIZE] = '\0'; // fin de chaîne
+    code[BORDEREAU_SIZE-1] = '\0'; // fin de chaîne
 
     if (DEBUG)
     {
