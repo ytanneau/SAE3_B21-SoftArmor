@@ -290,7 +290,7 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
                 genere_code(code);
             }
 
-            char sql[200];
+            char sql[TAILLE_SQL];
             sprintf(sql, "INSERT INTO _colis (bordereau) VALUES ('%s')", code);
 
             if (mysql_query(conn, sql))
@@ -335,15 +335,18 @@ int colis_encour(MYSQL *conn, int cnx)
 {
     if (BDD)
     {
-        if (mysql_query(conn, "SELECT * FROM nb_colis_non_livres")) 
+        char sql[TAILLE_SQL];
+        sprintf(sql, "SELECT * FROM %s", VIEW);
+
+        if (mysql_query(conn, sql)) 
         { 
             fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
             //mysql_close(conn); 
             fin(cnx); 
         }
+
         MYSQL_RES *res = mysql_store_result(conn); 
-        MYSQL_ROW row;
-        row = mysql_fetch_row(res);
+        MYSQL_ROW row = mysql_fetch_row(res);
         printf("[DEBUG] COLIS EN COUR : %s\n", row[0]);
         return atoi(row[1]);
     }
@@ -354,8 +357,8 @@ int colis_encour(MYSQL *conn, int cnx)
 bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
 
-    char sql[200];
-    sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
+    char sql[TAILLE_SQL];
+    sprintf(sql, "SELECT * FROM %s WHERE bordereau = '%s'", TABLE, code);
 
     if (mysql_query(conn, sql)) 
     { 
@@ -402,8 +405,8 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             
             if (colis_existe(conn, cnx, code))
             {
-                char sql[200];   
-                sprintf(sql, "SELECT etape, mode, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+                char sql[TAILLE_SQL];   
+                sprintf(sql, "SELECT %s, %s, %s FROM %s WHERE bordereau = '%s'", COLON_ETAPE, COLON_MODE, COLON_RAISON, TABLE, code);
 
                 if (mysql_query(conn, sql)) 
                 { 
@@ -414,9 +417,9 @@ void info_colis(int cnx, char* code, MYSQL *conn)
                 MYSQL_RES *res = mysql_store_result(conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
 
-                if (atoi(row[0]) == 9)
+                if (atoi(row[0]) == VALUE_ETAPE_FIN)
                 {
-                    if (atoi(row[1]) == 2)
+                    if (atoi(row[1]) == VALUE_MODE_REFU)
                     {
                         sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2]);
                     }
@@ -492,8 +495,8 @@ void photo(int cnx, char* code, MYSQL* conn)
     {
         if (BDD)
         {
-            char sql[200];   
-            sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+            char sql[TAILLE_SQL];   
+            sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
 
             if (mysql_query(conn, sql)) 
             { 
@@ -501,9 +504,11 @@ void photo(int cnx, char* code, MYSQL* conn)
                 mysql_close(conn); 
                 fin(cnx);
             }
+
             MYSQL_RES *res = mysql_store_result(conn); 
             MYSQL_ROW row = mysql_fetch_row(res);
-            if (atoi(row[1]) == 1)
+
+            if (atoi(row[0]) == VALUE_MODE_ABSENT)
             {
                 envoier_photo(cnx, FICHIER_PHOTO);
             }

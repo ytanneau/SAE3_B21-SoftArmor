@@ -31,6 +31,18 @@
 #define BDD_PORT 3306
 
 
+#define TABLE "_colis"
+#define VIEW "nb_colis_non_livres"
+#define COLON_ETAPE "etape"
+#define COLON_MODE "mode"
+#define COLON_RAISON "raison_refus"
+
+
+#define VALUE_ETAPE_FIN 9
+#define VALUE_MODE_ABSENT 1
+#define VALUE_MODE_REFU 2
+
+
 #define ERREUR_INSTRUCTION 0
 #define ERREUR_ACCES 1
 #define ERREUR_NEW_COLIS 2
@@ -49,7 +61,7 @@
 #define ERREUR "ERROR"
 #define CONNECTION "CONNECT"
 #define COLIS "COLIS"
-#define ETAPE "STAPE"
+#define ETAPE "ETAPE"
 #define MODE "REMISE"
 #define CAUSE "RAISON"
 #define VIDE "N/A"
@@ -61,6 +73,7 @@
 
 
 #define TAILLE 100
+#define TAILLE_SQL 200
 #define TRAME_TAILLE 400
 
 
