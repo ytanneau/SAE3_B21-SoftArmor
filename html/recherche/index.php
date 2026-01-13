@@ -113,10 +113,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
-                console.log(selNum);
-                console.log(selName);
-                console.log(searchState.sort.order);
                 console.log(searchState.sort.field);
+                console.log(searchState.sort.sort);
             }
         });
 
