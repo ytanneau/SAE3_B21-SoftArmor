@@ -353,6 +353,7 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 {
 
     char sql[200];
+    code[BORDEREAU_SIZE-1] = ' ';
     sprintf(sql, "SELECT * FROM _colis WHERE bordereau = '%s'", code);
     printf("sql : %s\n", sql);
     if (mysql_query(conn, sql)) 
@@ -449,7 +450,7 @@ bool check_code(char* code)
 {
     int x, y;
     bool good;
-    code[BORDEREAU_SIZE] = '\0';
+    code[BORDEREAU_SIZE-1] = '\0';
     //printf("code : %s\n", code);
     //printf("size : %ld\n", strlen(code));
 
