@@ -403,7 +403,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             if (colis_existe(conn, cnx, code))
             {
                 char sql[200];   
-                sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
+                sprintf(sql, "SELECT etape, mode, raison_refus FROM _colis WHERE bordereau = '%s'", code);
 
                 if (mysql_query(conn, sql)) 
                 { 
