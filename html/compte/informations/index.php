@@ -39,8 +39,8 @@ if (isset($info_compte['id_image_profil'])) {
 $avis = get_avis_client($_SESSION['id_compte']);
 
 //traitement de la suppression d'un avis
-if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['url_image']) && isset($_GET['id_client'])){
-    supprimer_avis($_GET['id_produit'], $_GET['url_image'], $_GET['id_client']);
+if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['url_img_avis']) && isset($_GET['id_client'])){
+    supprimer_avis($_GET['id_produit'], $_GET['url_img_avis'], $_GET['id_client']);
     header("Location: ./");
     exit;
 }
@@ -413,7 +413,7 @@ unset($pdo);
                         <!-- Boutons d'actions -->
                         <div>
                             <!-- <a href="modification_avis/?id_avis= <= // htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a> -->
-                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_image=<?= $row['url_img_avis'] ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_img_avis']) ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
                         </div>
                         
                         <?php if (isset($row['url_img_avis'])) { ?>
