@@ -105,43 +105,46 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         var selNum = s.options[s.selectedIndex].value;
         var selName = s.options[s.selectedIndex].dataset.name;
 
+        // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
+                console.log(selNum);
+                console.log(selName);
                 console.log(searchState.sort.order);
                 console.log(searchState.sort.field);
             }
         });
 
-        // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
-        document.addEventListener("DOMContentLoaded", () => {
-            // Rediriger si la recherche est vide
-            if (searchState.search === "") {
-                window.location.replace("..");
-            }
-
-            fetchProduitsJSON();
-        });
-
-        if (form) {
-            form.addEventListener("submit", (e) => {
-                if (isSearchPage) {
-                    e.preventDefault();
-                    
-                    // Rediriger si la recherche est vide
-                    if (input.value.trim() === "") {
-                        window.location.replace("..");
-                    }
-                    
-                    searchState.search = input.value.trim();
-                    // searchState.page = 1;
-                    fetchProduitsJSON();
-                }
-            });
+    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+    document.addEventListener("DOMContentLoaded", () => {
+        // Rediriger si la recherche est vide
+        if (searchState.search === "") {
+            window.location.replace("..");
         }
+
+        fetchProduitsJSON();
+    });
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            if (isSearchPage) {
+                e.preventDefault();
+                
+                // Rediriger si la recherche est vide
+                if (input.value.trim() === "") {
+                    window.location.replace("..");
+                }
+                
+                searchState.search = input.value.trim();
+                // searchState.page = 1;
+                fetchProduitsJSON();
+            }
+        });
+    }
 
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");

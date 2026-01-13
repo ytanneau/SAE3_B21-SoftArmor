@@ -651,9 +651,7 @@
             $stmt->execute([
                 "id_image" => $id_image
             ]);
-            if(!empty($tab_image)){
-                unlink("/" . $tab_image['url_image']);
-            }
+            unlink("var/www/html/" . $tab_image['url_image']);
         } catch(PDOException $e){
             throw $e;
         }
