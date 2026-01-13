@@ -394,12 +394,14 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         printf("test 1\n");
         if (BDD)
         {
-            printf("test 2\n");
+            printf("test 2 %ld\n", strlen(code));
+            printf("%s",code);
+            
             if (colis_existe(conn, cnx, code))
             {
                 printf("test 3\n");
                 char sql[200];
-                printf("%s",code);
+                
                 sprintf(sql, "SELECT etape, absent, raison_refus FROM _colis WHERE bordereau = '%s'", code);
                 printf("test 4\n");
 
