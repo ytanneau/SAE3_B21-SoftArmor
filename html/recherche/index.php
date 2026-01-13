@@ -101,9 +101,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const resultsFor = document.querySelector("#results_for");
 
         //listener pour les tris et renvoi 
-        var s = document.getElementById("tri");
-        var selNum = s.options[s.selectedIndex].value;
-        var selName = s.options[s.selectedIndex].dataset.name;
+        let s = document.getElementById("tri");
+        let selNum = s.options[s.selectedIndex].value;
+        let selName = s.options[s.selectedIndex].dataset.name;
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
