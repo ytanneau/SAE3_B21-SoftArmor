@@ -102,13 +102,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         //listener pour les tris et renvoi 
         let s = document.getElementById("tri");
-        let selNum = s.options[s.selectedIndex].value;
-        let selName = s.options[s.selectedIndex].dataset.name;
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
             if (isSearchPage) {
                 e.preventDefault();
+                let selNum = s.options[s.selectedIndex].value;
+                let selName = s.options[s.selectedIndex].dataset.name;
+
 
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
