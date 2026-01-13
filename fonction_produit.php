@@ -651,7 +651,7 @@
             $stmt->execute([
                 "id_image" => $id_image
             ]);
-            unlink($_SERVER['DOCUMENT_ROOT'] . "/var/www/html/" . $tab_image['url_image']);
+            unlink($_SERVER['DOCUMENT_ROOT'] . $tab_image['url_image']);
         } catch(PDOException $e){
             throw $e;
         }
