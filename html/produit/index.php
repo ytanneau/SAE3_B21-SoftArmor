@@ -53,6 +53,10 @@ if (isset($produit['prix'])) {
     }
 }
 
+if (isset($produit['prix_actuel'])) {
+    $formatted_prix_bas = number_format($produit['prix_actuel'], 2, ',', ' ') . '€';
+}
+
 if ($_POST != NULL) {
     $qte= $_POST['quantite'];
     $id_prod = $_GET['produit'];
@@ -121,7 +125,7 @@ if ($_POST != NULL) {
                         <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
                         <p>
-                            <em>par <?= htmlentities($produit['nom_vendeur'] ?? '') ?></em>
+                            <em>par <?= htmlentities($produit['raison_sociale'] ?? '') ?></em>
                         </p>
 
                         <div>
@@ -221,10 +225,19 @@ if ($_POST != NULL) {
 
                 <div>
                     <span>Prix TTC</span> 
-                    <span class="prix">
+                    <span class="prix <?=isset($formatted_prix_bas) ? 'HT ancien_prix' : ''?>">
                         <?= $formatted_prix_ttc ?>
                     </span>
                 </div>
+
+                <?php if (isset($formatted_prix_bas)) { ?>
+                    <div>
+                        <span>Prix réduit actuel</span> 
+                        <span class="prix">
+                            <?= $formatted_prix_bas ?>
+                        </span>
+                    </div>
+                <?php } ?>
 
                 <form action="" method="post">
                     <div>

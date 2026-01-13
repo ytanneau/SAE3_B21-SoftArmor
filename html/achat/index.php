@@ -16,6 +16,7 @@ require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_GIT . "fonction_commande.php";
+require_once HOME_GIT . "fonction_compte.php";
 
 $numEtape = -1;
 
@@ -31,14 +32,8 @@ if (!isset($_POST['form'])) {
     
     // récup les données adresse préenregistrées dans la base de données
     
-    $requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
-    $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
-    $requete->execute();
-    
-    $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
-    if ($adresse_client == false) {
-        $adresse_client = [];
-    }
+    $infos_client = sql_get_info_compte($_SESSION['id_compte']);
+    $adresse_client = isset($info_compte['id_adresse']) ? sql_get_adresse($info_compte['id_adresse']) : [];
 }
 
 
