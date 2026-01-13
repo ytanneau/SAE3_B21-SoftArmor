@@ -98,7 +98,9 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
 
     while (true)
     {
-        if (read(cnx, buff, TRAME_TAILLE) == -1)
+        readNb = read(cnx, buff, TRAME_TAILLE);
+        buff[readNb] = '\0';
+        if (readNb == -1)
         {
             printf("[ERROR] READ\n");
             fin(cnx);
