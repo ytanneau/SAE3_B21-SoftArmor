@@ -217,37 +217,42 @@
 }
 
 @mixin produit_catalogue() {
-    color : black;
-    text-decoration: none;
-    line-height: 1.5em; 
+    width: 20vw;
+    margin: 20px 40px 20px 20px;
 
-    > img {
-        @include image_produit(15vw);
-    }   
-
-    > div {
-        @include contenu_centre_horizontal;
-
+    > a {
+        color : black;
+        text-decoration: none;
+        line-height: 1.5em; 
+    
         > img {
-            width: 20px;
-            height: 20px;
-            background: none;
+            @include image_produit(15vw);
+        }   
+    
+        > div {
+            @include contenu_centre_horizontal;
+    
+            > img {
+                width: 20px;
+                height: 20px;
+                background: none;
+            }
+    
+            > p {
+                margin: 5px 0 ;
+            }
+    
+            height :2em;
         }
-
-        > p {
+    
+        > p, > h3 {
             margin: 5px 0 ;
+            width: 100%;
         }
-
-        height :2em;
-    }
-
-    > p, > h3 {
-        margin: 5px 0 ;
-        width: 100%;
-    }
-
-    > h3 {
-        height :3em;
+    
+        > h3 {
+            height :3em;
+        }
     }
 }
 
