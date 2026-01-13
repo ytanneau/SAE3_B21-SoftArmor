@@ -125,7 +125,7 @@ if ($_POST != NULL) {
                         <h1><?= htmlentities($produit['nom_public'] ?? '') ?></h1>
 
                         <p>
-                            <em>par <?= htmlentities($produit['nom_vendeur'] ?? '') ?></em>
+                            <em>par <?= htmlentities($produit['raison_sociale'] ?? '') ?></em>
                         </p>
 
                         <div>
