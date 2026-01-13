@@ -98,14 +98,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     const input = document.querySelector("#recherche");
     const resultsFor = document.querySelector("#results_for");
 
-    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
-    document.addEventListener("DOMContentLoaded", () => {
-        fetchProduitsJSON();
-    });
     //listener pour les tris et renvoi 
     var s = document.getElementById("tri");
     var selNum = s.options[s.selectedIndex].value;
     var selName = s.options[s.selectedIndex].dataset.name;
+
     s.addEventListener("change", (e) => {
         if (isSearchPage) {
             e.preventDefault();
@@ -122,11 +119,16 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             if (isSearchPage) {
                 e.preventDefault();
 
+                // Rediriger si la recherche est vide
+                if (searchState.search === "") {
+                    window.location.replace("..");
+                }
+
                 searchState.search = input.value;
                 // searchState.page = 1;
 
                 fetchProduitsJSON();
-                resultsFor.textContent = `Résultats pour "${input.value}"`;
+                resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
             }
         });
     }
