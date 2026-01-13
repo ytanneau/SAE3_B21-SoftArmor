@@ -651,11 +651,7 @@
             $stmt->execute([
                 "id_image" => $id_image
             ]);
-            if(file_exists("html/" . $tab_image['url_image']) && !empty($tab_image)){
-                unlink("html/" . $tab_image['url_image']);
-            } else {
-                echo "Mauvais chemin";
-            }
+            unlink("/html/" . $tab_image['url_image']);
         } catch(PDOException $e){
             throw $e;
         }
