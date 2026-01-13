@@ -118,32 +118,32 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             }
         });
 
-    // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
-    document.addEventListener("DOMContentLoaded", () => {
-        // Rediriger si la recherche est vide
-        if (searchState.search === "") {
-            window.location.replace("..");
-        }
-
-        fetchProduitsJSON();
-    });
-
-    if (form) {
-        form.addEventListener("submit", (e) => {
-            if (isSearchPage) {
-                e.preventDefault();
-                
-                // Rediriger si la recherche est vide
-                if (input.value.trim() === "") {
-                    window.location.replace("..");
-                }
-                
-                searchState.search = input.value.trim();
-                // searchState.page = 1;
-                fetchProduitsJSON();
+        // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
+        document.addEventListener("DOMContentLoaded", () => {
+            // Rediriger si la recherche est vide
+            if (searchState.search === "") {
+                window.location.replace("..");
             }
+
+            fetchProduitsJSON();
         });
-    }
+
+        if (form) {
+            form.addEventListener("submit", (e) => {
+                if (isSearchPage) {
+                    e.preventDefault();
+                    
+                    // Rediriger si la recherche est vide
+                    if (input.value.trim() === "") {
+                        window.location.replace("..");
+                    }
+                    
+                    searchState.search = input.value.trim();
+                    // searchState.page = 1;
+                    fetchProduitsJSON();
+                }
+            });
+        }
 
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
@@ -158,7 +158,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             console.log(data.produits);
 
             data.produits.forEach(produit => {
-                let li = document.createElement("li");
+                let listItem = document.createElement("li");
+                
                 // Lien vers la page produit
                 let lien = document.createElement("a");
                 let ref = document.createAttribute("href");
@@ -217,8 +218,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 lien.appendChild(divEtoiles);
 
-                li.appendChild(lien);
-                resultGrid.appendChild(li);
+                listItem.appendChild(lien);
+                resultGrid.appendChild(listItem);
             });
         }
 

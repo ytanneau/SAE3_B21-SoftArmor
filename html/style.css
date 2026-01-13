@@ -699,20 +699,20 @@ section.results {
   width: 100%;
 }
 
-#results {
+ul#results {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-#results > li {
+ul#results > li {
   width: 20vw;
   margin: 20px 40px 20px 20px;
 }
-#results > li > a {
+ul#results > li > a {
   color: black;
   text-decoration: none;
   line-height: 1.5em;
 }
-#results > li > a > img {
+ul#results > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
   background-color: #f3f1fb;
@@ -721,25 +721,25 @@ section.results {
   height: 15vw;
   border-radius: 5px;
 }
-#results > li > a > div {
+ul#results > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
   height: 2em;
 }
-#results > li > a > div > img {
+ul#results > li > a > div > img {
   width: 20px;
   height: 20px;
   background: none;
 }
-#results > li > a > div > p {
+ul#results > li > a > div > p {
   margin: 5px 0;
 }
-#results > li > a > p, #results > li > a > h3 {
+ul#results > li > a > p, ul#results > li > a > h3 {
   margin: 5px 0;
   width: 100%;
 }
-#results > li > a > h3 {
+ul#results > li > a > h3 {
   height: 3em;
 }
 
