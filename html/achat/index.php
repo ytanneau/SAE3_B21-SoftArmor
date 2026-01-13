@@ -138,9 +138,20 @@ if ($numEtape == 3) {
     $liste_produits = [];
     $achat_reussi = true;
 
+    //connexion au delivraptor
+    $conn =false;
+    $fd = connexion_socket();
+    if($fd){
+        $conn = connexion_delivraptor($fd,"root","root");
+        //creer bordereau colis
+        $bordereau = create_colis($fd);
+        deconnexion_socket($fd);
+    }
+
     // Création commande
-    $requete = $pdo->prepare("INSERT INTO _commande (id_client) VALUES (:id_compte)");
+    $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau) VALUES (:id_compte,:bordereau)");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_INT);
     $requete->execute();
 
     // Récupération de l'id de commande
