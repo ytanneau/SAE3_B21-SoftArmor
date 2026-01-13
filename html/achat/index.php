@@ -33,7 +33,7 @@ if (!isset($_POST['form'])) {
     // récup les données adresse préenregistrées dans la base de données
     
     $infos_client = sql_get_info_compte($_SESSION['id_compte']);
-    $adresse_client = isset($info_compte['id_adresse']) ? sql_get_adresse($info_compte['id_adresse']) : [];
+    $adresse_client = isset($infos_client['id_adresse_fac']) ? sql_get_adresse($infos_client['id_adresse_fac']) : [];
 }
 
 
