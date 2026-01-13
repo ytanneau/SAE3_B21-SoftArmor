@@ -62,6 +62,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             </fieldset>
         </form>
 </section>
+        <select id="tri" value ="triOption">
+            <option></option>
+            <option value="triAvis">Par notes</option>
+            <option value="triPrixDecr">Par prix decroissant</option>
+            <option value="triPrixCroi">Par prix croissant</option>
+            <option value="triPrixCroi">Par prix réduction</option>
+        </select>
 
     <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
@@ -94,6 +101,20 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
         document.addEventListener("DOMContentLoaded", () => {
             fetchProduitsJSON();
+        });
+        //listener pour les tris et renvoi 
+        var s = document.getElementById("tri");
+        var selNum = s.options[s.selectedIndex].value;
+        var selName = s.options[s.selectedIndex].dataset.name;
+        s.addEventListener("change", (e) => {
+            if (isSearchPage) {
+                e.preventDefault();
+
+                searchState.sort.field = selNum;
+                searchState.sort.order = selName;
+                console.log(searchState.sort.order);
+                console.log(searchState.sort.field);
+            }
         });
 
         if (form) {
@@ -128,7 +149,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             // console.log(data.produits);
 
             // Exemple pour créer une balise
-
             // let monAdr = document.createElement("a");
             // let attribut = document.createAttribute("href");
             // attribut.value = "mailto:jbond@scot-yard.uk";

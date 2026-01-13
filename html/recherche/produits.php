@@ -24,6 +24,7 @@
         $params[':search'] = "%$search%";
     }
     
+    
     if ($sort['order'] == 'asc') {
         $requete .= " ORDER BY :field :order nom_public asc";
         if ($sort = "prixAsc") {
