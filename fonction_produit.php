@@ -93,7 +93,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image');
         $requete->execute();
@@ -105,7 +105,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
         WHERE p.categorie = :categorie');
@@ -119,7 +119,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
         ORDER BY date_creation DESC;');
@@ -132,10 +132,10 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 1) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
-        WHERE en_promotion IS NOT NULL
+        WHERE en_promotion IS != 0
         ORDER BY date_creation DESC;');
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
