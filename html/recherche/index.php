@@ -162,7 +162,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             
             // Prix du produit (ancien prix si réduction)
             let pPrix = document.createElement("p");
-            let prix = document.createTextNode(produit.prix);
+            let prix = document.createTextNode(`${Number.parseFloat(produit.prix).toFixed(2)} €`);
             pPrix.appendChild(prix);
 
             let pPrixReduit = null;
@@ -170,7 +170,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             // Si le produit est en réduction, l'indiquer
             if (produit.prix_actuel != null) {
                 pPrixReduit = document.createElement("p");
-                let prixReduit = document.createTextNode(produit.prix_actuel);
+                let prixReduit = document.createTextNode(`${Number.parseFloat(produit.prix_actuel).toFixed(2)} €`);
                 pPrixReduit.appendChild(prixReduit);
                 
                 pPrix.classList.add("ancien_prix");
