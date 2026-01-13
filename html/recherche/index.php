@@ -114,31 +114,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         }
     });
 
-    if (form) {
-        form.addEventListener("submit", (e) => {
-            if (isSearchPage) {
-                e.preventDefault();
-
-                // Rediriger si la recherche est vide
-                if (searchState.search === "") {
-                    window.location.replace("..");
-                }
-
-                searchState.search = input.value;
-                // searchState.page = 1;
-
-                fetchProduitsJSON();
-                resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
-            }
-        });
-    }
-
-    // Est-on déjà sur la page de recherche ?
-    const isSearchPage = document.body.dataset.page === "search";
-    const form = document.querySelector("#form_recherche");
-    const input = document.querySelector("#recherche");
-    const resultsFor = document.querySelector("#results_for");
-
     // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
     document.addEventListener("DOMContentLoaded", () => {
         // Rediriger si la recherche est vide
