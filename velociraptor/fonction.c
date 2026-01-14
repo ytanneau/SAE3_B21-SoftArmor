@@ -511,7 +511,7 @@ void photo(int cnx, char* code, MYSQL* conn)
                 MYSQL_RES *res = mysql_store_result(conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
                 printf("test 4\n");
-                if (row[0] == NULL)
+                if (row[0] != NULL)
                 {
                     printf("test 5\n");
                     if (atoi(row[0]) == VALUE_MODE_ABSENT)
