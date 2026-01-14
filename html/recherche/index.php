@@ -192,17 +192,14 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 // Prix du produit (ancien prix si réduction)
                 let pPrix = document.createElement("p");
                 let prix = Number.parseFloat(produit.prix * (1 + produit.tva / 100)).toFixed(2);
-                console.log(prix);
                 let textePrix = document.createTextNode(`${prix} €`);
                 pPrix.appendChild(textePrix);
 
-
                 let pPrixReduit = null;
-
-                console.log(`${produit.nom_public} réduit ? ${produit.prix_actuel != produit.prix}`);
 
                 // Si le produit est en réduction, l'indiquer
                 if (produit.prix_actuel != produit.prix) {
+                    console.log("test 1");
                     pPrixReduit = document.createElement("p");
                     let prixReduit = Number.parseFloat(produit.prix_actuel * (1 + produit.tva / 100)).toFixed(2);
                     let textePrixReduit = document.createTextNode(`${prixReduit} €`);
@@ -211,6 +208,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     pPrix.classList.add("ancien_prix");
                     pPrixReduit.classList.add("prix");
                 } else {
+                    console.log("test 2");
                     pPrix.classList.add("prix");
                 }
         
@@ -218,7 +216,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 lien.appendChild(titreNomPublic);
                 lien.appendChild(pPrix);
 
-                if (produit.prix_actuel != null) {
+                if (produit.prix_actuel != produit.prix) {
                     lien.appendChild(pPrixReduit);
                 }
 
