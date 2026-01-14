@@ -174,7 +174,7 @@
             delete_image($image['id_image2']);
         }
 
-        $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
+        $requete = $pdo->prepare('UPDATE _produit SET est_supprime = 1 WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
     }
@@ -182,7 +182,7 @@
     function delete_image_produit($id_produit){
         global $pdo;
         try{
-            $stmt = $pdo->prepare("DELETE FROM _images_produit WHERE id_produit = :id_produit");
+            $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = NULL, id_image2 = NULL WHERE id_produit = :id_produit");
             $stmt->execute([
                 "id_produit" => $id_produit
             ]);
@@ -599,14 +599,19 @@
     function delete_promotion($id_promo){
         global $pdo;
         
-        $tab = get_info_promotion_unique($id_promo);
-        $id_image = $tab['id_image_banniere'];
+        try{
+            $tab = get_info_promotion_unique($id_promo);
 
-        $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
-        $stmt->execute([
-            "id_promo" => $id_promo
-        ]);
-        delete_image($id_image);
+            $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_promo" => $id_promo
+            ]);
+            if($tab['id_image_banniere'] != null){
+                delete_image($tab['id_image_banniere']);
+            }
+        } catch(PDOException $e){
+            throw $e;
+        }
     }
 
     function delete_image($id_image){

@@ -65,11 +65,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </section>
 
         <select id="tri" value ="triOption">
-            <option value="aToZ" data-name ="asc">choisissez un tri :</option>
-            <option value="triAvis" data-name ="asc">Par notes</option>
+            <option value="nom_public" data-name ="asc">choisissez un tri :</option>
+            <option value="note_moy" data-name ="asc">Par notes</option>
             <option value="triPrix" data-name ="asc">Par prix decroissant</option>
             <option value="triPrixCroi" data-name ="desc">Par prix croissant</option>
-            <option value="triPrixCroi" data-name ="asc">Par prix réduction</option>
+            <option value="triReduc" data-name ="asc">Par prix réduction</option>
         </select>
 
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
@@ -198,14 +198,17 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 let pPrixReduit = null;
 
                 // Si le produit est en réduction, l'indiquer
-                if (produit.prix_actuel != null) {
+                if (produit.prix_actuel != produit.prix) {
+                    console.log("test 1");
                     pPrixReduit = document.createElement("p");
-                    let prixReduit = document.createTextNode(`${Number.parseFloat(produit.prix_actuel).toFixed(2)} €`);
-                    pPrixReduit.appendChild(prixReduit);
+                    let prixReduit = Number.parseFloat(produit.prix_actuel * (1 + produit.tva / 100)).toFixed(2);
+                    let textePrixReduit = document.createTextNode(`${prixReduit} €`);
+                    pPrixReduit.appendChild(textePrixReduit);
                     
                     pPrix.classList.add("ancien_prix");
                     pPrixReduit.classList.add("prix");
                 } else {
+                    console.log("test 2");
                     pPrix.classList.add("prix");
                 }
         
@@ -213,7 +216,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 lien.appendChild(titreNomPublic);
                 lien.appendChild(pPrix);
 
-                if (produit.prix_actuel != null) {
+                if (produit.prix_actuel != produit.prix) {
                     lien.appendChild(pPrixReduit);
                 }
 

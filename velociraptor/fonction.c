@@ -140,7 +140,6 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
                 else
                 {
                     message_erreur(cnx, ERREUR_ACCES);
-                    fin(cnx);
                 }
                 break;
 
@@ -153,7 +152,6 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
                 else
                 {
                     message_erreur(cnx, ERREUR_ACCES);
-                    fin(cnx);
                 }
                 break;
 
@@ -165,13 +163,11 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
                 else
                 {
                     message_erreur(cnx, ERREUR_ACCES);
-                    fin(cnx);
                 }
                 break;
 
             default:
                 message_erreur(cnx, ERREUR_INSTRUCTION);
-                fin(cnx);
                 break;
         }
     }
@@ -210,7 +206,7 @@ void message_erreur(int cnx, int valeur)
     char message[TAILLE];
     sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur); // formate le message
     envoier_message(cnx, message);
-    
+    fin(cnx);
 }
 
 void envoier_code(int cnx, char *message){
@@ -282,6 +278,12 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
     char message[TAILLE];
     if (colisInfinit || nbColisMax > colis_encour(conn, cnx))
     {
+        if (colisInfinit)
+        {
+            printf("colis infini\n");
+        }
+        
+        printf("test : %d > %d\n",nbColisMax,colis_encour(conn, cnx));
         char code[BORDEREAU_SIZE];
         genere_code(code);
         if (BDD)
@@ -495,26 +497,41 @@ void photo(int cnx, char* code, MYSQL* conn)
     {
         if (BDD)
         {
-            char sql[TAILLE_SQL];   
-            sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
-
-            if (mysql_query(conn, sql)) 
-            { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                mysql_close(conn); 
-                fin(cnx);
-            }
-
-            MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row = mysql_fetch_row(res);
-
-            if (atoi(row[0]) == VALUE_MODE_ABSENT)
+            if (colis_existe(conn, cnx, code))
             {
-                envoier_photo(cnx, FICHIER_PHOTO);
+
+                char sql[TAILLE_SQL];   
+                sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
+
+                if (mysql_query(conn, sql)) 
+                { 
+                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                    mysql_close(conn); 
+                    fin(cnx);
+                }
+
+                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_ROW row = mysql_fetch_row(res);
+
+                if (row[0] != NULL)
+                {
+                    if (atoi(row[0]) == VALUE_MODE_ABSENT)
+                    {
+                        envoier_photo(cnx, FICHIER_PHOTO);
+                    }
+                    else
+                    {
+                        message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                    }
+                }
+                else
+                {
+                    message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                }
             }
             else
             {
-                message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
             }
         }
         else
