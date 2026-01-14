@@ -1,6 +1,8 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+const IP = "127.0.0.1";
+const PORT = "9000";
 
 if (!isset($_SESSION)) {
     session_start();
@@ -135,18 +137,18 @@ if ($numEtape == 3) {
 
     //connexion au delivraptor
     $conn =false;
-    $fd = connexion_socket();
+    $fd = connexion_socket(IP,PORT);
     if($fd){
         $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
         //creer bordereau colis
         $bordereau = create_colis($fd);
         deconnexion_socket($fd);
     }
-
+    
     // Création commande
     $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
-    $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_INT);
+    $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_STR);
     $requete->execute();
 
     // Récupération de l'id de commande
