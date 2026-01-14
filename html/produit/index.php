@@ -24,7 +24,10 @@ if (!isset($_GET['produit']) || !is_numeric($_GET['produit'])) {
 $id_produit = htmlentities($_GET['produit']);
 $recherche = trim(htmlentities($_GET['recherche'] ?? ''));
 
-$lien_retour = empty($recherche) ? HOME_SITE : HOME_SITE . 'recherche/?recherche=' . urlencode($recherche);
+
+$lien_retour = empty($recherche) ? HOME_SITE : (HOME_SITE . 'recherche/?recherche=' . urlencode($recherche));
+var_dump($recherche);
+var_dump($lien_retour);
 
 try {
     $produit = detail_produit_image($id_produit);
