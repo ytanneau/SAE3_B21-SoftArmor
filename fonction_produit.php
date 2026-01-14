@@ -601,7 +601,7 @@
         
         try{
             $tab = get_info_promotion_unique($id_promo);
-
+            print_r($tab);
             $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
             $stmt->execute([
                 "id_promo" => $id_promo
