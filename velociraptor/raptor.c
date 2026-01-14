@@ -18,7 +18,9 @@ int main(int argc, char const *argv[])
     int cnx; // le file descriptor du sock
     MYSQL *conn;
 
-    LOG = fopen("log.txt", "w");
+    
+    close(open(LOG_FILE, O_CREAT , S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH));
+    LOG = fopen(LOG_FILE, "w");
     if (LOG == NULL)
     {
         printf("erreur log\n");
