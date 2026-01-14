@@ -150,7 +150,7 @@ void init_bdd(MYSQL *conn)
         printf("bdd_user %s\n", bdd_user);
         printf("bdd_password %s\n", bdd_password);
         printf("bdd_name %s\n", bdd_name);
-        printf("bdd_port %s\n", bdd_port);
+        printf("bdd_port %d\n", atoi(bdd_port));
     }
 
     if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) { 
