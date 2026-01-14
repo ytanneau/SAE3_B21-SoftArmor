@@ -1,7 +1,7 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
-const IP = "127.0.0.1";
+const IP = "0.0.0.0";
 const PORT = "9000";
 
 if (!isset($_SESSION)) {
@@ -143,7 +143,7 @@ if ($numEtape == 3) {
         //creer bordereau colis
         $bordereau = create_colis($fd);
         deconnexion_socket($fd);
-    }
+    }x
     
     // Création commande
     $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
