@@ -57,8 +57,8 @@
             ){
             if(
                 banniere_libre($_POST['dateDebut'],$_POST['dateFin']) &&
-                $date_debut_initial != $_POST['dateFin'] &&
-                $date_fin_initial != $_POST['dateDebut']
+                $date_debut_initial != $_POST['dateDebut'] &&
+                $date_fin_initial != $_POST['dateFin']
             ){
                 $nomImageTemp = $_FILES['photoPromotion'];
                 // recupere le nom temporaire du fichier pour le deplacer
