@@ -57,8 +57,8 @@ if (isset($produit['prix'])) {
     }
 }
 
-if (isset($produit['prix_actuel'])) {
-    $formatted_prix_bas = number_format($produit['prix_actuel'], 2, ',', ' ') . '€';
+if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix'])) {
+    $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
 if ($_POST != NULL) {
