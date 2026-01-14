@@ -130,7 +130,7 @@
             $requete->execute();
             
             // Supprimer l'image seulement si elle existe
-            if (!empty($url_img_avis)) {
+            if ($url_img_avis == 1) {
                 $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_img_avis ;");
                 $requete->bindValue(':url_img_avis', $url_img_avis, PDO::PARAM_STR);
                 $requete->execute();
