@@ -191,8 +191,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 
                 // Prix du produit (ancien prix si réduction)
                 let pPrix = document.createElement("p");
-                let prix = document.createTextNode(`${Number.parseFloat(produit.prix).toFixed(2)} €`);
-                pPrix.appendChild(prix);
+                let prix = Number.parseFloat(produit.prix * (1 + produit.tva / 100)).toFixed(2);
+                let textePrix = document.createTextNode(`${prix} €`);
+                pPrix.appendChild(textePrix);
 
                 let pPrixReduit = null;
 
