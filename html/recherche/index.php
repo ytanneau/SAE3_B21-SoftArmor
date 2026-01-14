@@ -199,6 +199,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 let pPrixReduit = null;
 
+                console.log(`${produit.nom_public} réduit ? ${produit.prix_actuel != produit.prix}`);
+
                 // Si le produit est en réduction, l'indiquer
                 if (produit.prix_actuel != produit.prix) {
                     pPrixReduit = document.createElement("p");
