@@ -32,6 +32,8 @@
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+    $date_debut_initial = $tab_info_promotion['date_debut'];
+    $date_fin_initial = $tab_info_promotion['date_fin'];
 
     if($tab_image_promotion != null){
         $id_image_initial = $tab_image_promotion['id_image'];
@@ -47,32 +49,41 @@
             $euro = null;
         }
 
-        $id_nouvelle_baniere = $id_image_initial;
+        $id_nouvelle_banniere = $id_image_initial;
 
-        if (isset($_FILES['photoPromotion']) &&
-            $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-            banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
-            $nomImageTemp = $_FILES['photoPromotion'];
-            // recupere le nom temporaire du fichier pour le deplacer
-            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-            
-            $nomImage = $id_produit . "_promotion.png";
-            
-            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
-            // definition des caractéristiques d'une image
-            $url = "ressources/promotion/" . $nomImage;
-            $altDefault = "Image de promotion";
+        if (
+            isset($_FILES['photoPromotion']) &&
+            $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK
+            ){
+            if(
+                banniere_libre($_POST['dateDebut'],$_POST['dateFin']) &&
+                $date_debut_initial != $_POST['dateFin'] &&
+                $date_fin_initial != $_POST['dateDebut']
+            ){
+                $nomImageTemp = $_FILES['photoPromotion'];
+                // recupere le nom temporaire du fichier pour le deplacer
+                $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+                
+                $nomImage = $id_produit . "_promotion.png";
+                
+                $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
+                // definition des caractéristiques d'une image
+                $url = "ressources/promotion/" . $nomImage;
+                $altDefault = "Image de promotion";
 
-            if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
-                update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
-                // if($id_nouvelle_baniere){
-                //     update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
-                //     delete_image($id_image_initial);
-                // }
+                if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+
+                    if($id_nouvelle_banniere){
+                        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
+                    }
+                    if($id_image_initial){
+                        delete_image($id_image_initial);
+                    }
+                }
             }
         } else {
-            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
         }
         
         
