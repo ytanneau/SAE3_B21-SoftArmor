@@ -163,7 +163,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 // Lien vers la page produit
                 let lien = document.createElement("a");
                 let ref = document.createAttribute("href");
-                ref.value = `/produit/?produit=${produit.id_produit}`;
+                ref.value = encodeURI(`/produit/?produit=${produit.id_produit}&recherche=${searchState.search}`);
                 lien.setAttributeNode(ref);
 
                 // Image du produit
