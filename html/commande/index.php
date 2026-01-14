@@ -118,7 +118,7 @@ if (isset($_GET["commande"])) {
                     $fd = connexion_socket();
                     
                     if($fd){
-                    $conn = connexion_delivraptor($fd,"root","root");
+                    $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
                     
                     //si connexion
                     if ($conn == "true"){
