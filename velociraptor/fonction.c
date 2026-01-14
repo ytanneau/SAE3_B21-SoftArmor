@@ -497,32 +497,37 @@ void photo(int cnx, char* code, MYSQL* conn)
         {
             if (colis_existe(conn, cnx, code))
             {
+                printf("test 1\n");
                 char sql[TAILLE_SQL];   
                 sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
-
+                printf("test 2\n");
                 if (mysql_query(conn, sql)) 
                 { 
                     fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
                     mysql_close(conn); 
                     fin(cnx);
                 }
-
+                printf("test 3\n");
                 MYSQL_RES *res = mysql_store_result(conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
-
+                printf("test 4\n");
                 if (row[0] == NULL)
                 {
+                    printf("test 5\n");
                     if (atoi(row[0]) == VALUE_MODE_ABSENT)
                     {
+                        printf("test 6\n");
                         envoier_photo(cnx, FICHIER_PHOTO);
                     }
                     else
                     {
+                        printf("test 7\n");
                         message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
                     }
                 }
                 else
                 {
+                    printf("test 8\n");
                     message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
                 }
             }
