@@ -19,6 +19,11 @@ int main(int argc, char const *argv[])
     MYSQL *conn;
 
     LOG = fopen("log.txt", "w");
+    if (LOG == NULL)
+    {
+        printf("erreur log\n");
+    }
+    
 
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
