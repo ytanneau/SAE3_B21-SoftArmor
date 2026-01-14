@@ -105,8 +105,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
-            if (isSearchPage) {
-                e.preventDefault();
                 let selNum = s.options[s.selectedIndex].value;
                 let selName = s.options[s.selectedIndex].dataset.name;
 
@@ -116,7 +114,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 console.log(searchState.sort.field);
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
-            }
         });
 
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
