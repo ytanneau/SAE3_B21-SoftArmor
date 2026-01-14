@@ -210,8 +210,7 @@
         const prixFinal = document.getElementById("prixFinal");
 
         let temp = prixInitial - euro.value;
-        pourcentage.value = (temp / prixInitial * 100);
-        pourcentage.value = 100 - pourcentage.value;
+        pourcentage.value = 100 - (temp / prixInitial * 100);
         prixFinal.value = prixInitial * pourcentage.value;
 
         pourcentage.addEventListener('input', () => {
