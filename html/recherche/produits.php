@@ -30,14 +30,9 @@
         $params[':search'] = "%$search%";
     }
     
-    if ($sort['field'] == 'nom_public') {
-        $requete .= " ORDER BY nom_public ASC";
-    }
-    else {
-        $requete .= " ORDER BY :field :order, nom_public ASC";
-        $params[':field'] = $sort['field'];
-        $params[':order'] = $sort['order'];
-    }
+    $requete .= " ORDER BY :field :order, nom_public ASC";
+    $params[':field'] = $sort['field'];
+    $params[':order'] = $sort['order'];
     
 
     $requete = $pdo->prepare($requete);
