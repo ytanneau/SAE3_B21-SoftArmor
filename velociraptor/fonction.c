@@ -495,26 +495,40 @@ void photo(int cnx, char* code, MYSQL* conn)
     {
         if (BDD)
         {
-            char sql[TAILLE_SQL];   
-            sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
-
-            if (mysql_query(conn, sql)) 
-            { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                mysql_close(conn); 
-                fin(cnx);
-            }
-
-            MYSQL_RES *res = mysql_store_result(conn); 
-            MYSQL_ROW row = mysql_fetch_row(res);
-
-            if (atoi(row[0]) == VALUE_MODE_ABSENT)
+            if (colis_existe(conn, cnx, code))
             {
-                envoier_photo(cnx, FICHIER_PHOTO);
+                char sql[TAILLE_SQL];   
+                sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
+
+                if (mysql_query(conn, sql)) 
+                { 
+                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
+                    mysql_close(conn); 
+                    fin(cnx);
+                }
+
+                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_ROW row = mysql_fetch_row(res);
+
+                if (row[0] == NULL)
+                {
+                    if (atoi(row[0]) == VALUE_MODE_ABSENT)
+                    {
+                        envoier_photo(cnx, FICHIER_PHOTO);
+                    }
+                    else
+                    {
+                        message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                    }
+                }
+                else
+                {
+                    message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                }
             }
             else
             {
-                message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
             }
         }
         else
