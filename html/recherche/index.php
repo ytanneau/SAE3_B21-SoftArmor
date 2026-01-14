@@ -66,7 +66,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         <select id="tri" value ="triOption">
             <option value="nom_public" data-name ="ASC">choisissez un tri :</option>
-            <option value="note_moy" data-name ="ASC">Par notes</option>
+            <option value="note_moy" data-name ="DESC">Par notes</option>
             <option value="triPrix" data-name ="ASC">Par prix decroissant</option>
             <option value="triPrixCroi" data-name ="DESC">Par prix croissant</option>
             <option value="triReduc" data-name ="ASC">Par prix réduction</option>
