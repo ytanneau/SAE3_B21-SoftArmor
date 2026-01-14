@@ -198,7 +198,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 let pPrixReduit = null;
 
                 // Si le produit est en réduction, l'indiquer
-                if (produit.prix_actuel != null) {
+                if (produit.prix_actuel != produit.prix) {
                     pPrixReduit = document.createElement("p");
                     let prixReduit = document.createTextNode(`${Number.parseFloat(produit.prix_actuel).toFixed(2)} €`);
                     pPrixReduit.appendChild(prixReduit);
