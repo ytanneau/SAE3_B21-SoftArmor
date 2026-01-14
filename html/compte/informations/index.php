@@ -412,9 +412,11 @@ if ($_POST != NULL){
 
                         <!-- Boutons d'actions -->
                         <div>
-                            <?= print_r($row['url_image']) ?>
+                            <?= print_r($row['url_image']);
+                            print_r(urlencode($row['url_image'])); ?>
                             <!-- <a href="modification_avis/?id_avis= <= // htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a> -->
-                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image']) ?? '' ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+
                         </div>
                         
                         <?php if (isset($row['url_image'])) { ?>
