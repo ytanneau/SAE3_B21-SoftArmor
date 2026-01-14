@@ -2,13 +2,14 @@
 #include "fonction.h"
 
 
-
+// permet de recupérer les compte dans le fichier
 compte* init_compte(const char* chemain){
     compte* res = NULL;
     //ouverture du fichier des compte
     FILE *file = fopen( chemain, "r");
     // si le fichier na pas pu etre ouver on ferme le programe
     if (file == NULL) {
+        printf("[FATAL] fichier non trouver\n");
         exit(EXIT_FAILURE);
     }
 
@@ -36,7 +37,7 @@ compte* init_compte(const char* chemain){
             strcpy(nouv->mdp,mdp);
             nouv->next = NULL;
 
-
+            // place le compte dans ma liste
             if (res == NULL){
                 res = nouv;
             }
@@ -84,6 +85,74 @@ void affiche_compte(compte* c)
             nav = nav->next;
         }
     }
+}
+
+void init_bdd(MYSQL *conn)
+{
+    if (conn == NULL) 
+    { 
+        fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
+        exit(EXIT_FAILURE); 
+    }
+
+    compte* res = NULL;
+    //ouverture du fichier des compte
+    FILE *file = fopen(".env", "r");
+    // si le fichier na pas pu etre ouver on ferme le programe
+    if (file == NULL) {
+        printf("[FATAL] fichier non trouver\n");
+        exit(EXIT_FAILURE);
+    }
+    // obliger déclaré une ligne pour chaque info, car sinon perte dinformation
+
+    char *bdd_host;
+    char *bdd_user;
+    char *bdd_password;
+    char *bdd_name;
+    char *bdd_port;
+    
+    char ligne1[TAILLE];
+    fgets(ligne1, sizeof(ligne1), file);
+    strtok(ligne1, DELIMITER);
+    bdd_host = strtok(NULL, DELIMITER);
+    bdd_host[strlen(bdd_host)-1] = '\0';
+
+    char ligne2[TAILLE];
+    fgets(ligne2, sizeof(ligne2), file);
+    strtok(ligne2, DELIMITER);
+    bdd_user = strtok(NULL, DELIMITER);
+    bdd_user[strlen(bdd_user)-1] = '\0';
+
+    char ligne3[TAILLE];
+    fgets(ligne3, sizeof(ligne3), file);
+    strtok(ligne3, DELIMITER);
+    bdd_password = strtok(NULL, DELIMITER);
+    bdd_password[strlen(bdd_password)-1] = '\0';
+
+    char ligne4[TAILLE];
+    fgets(ligne4, sizeof(ligne4), file);
+    strtok(ligne4, DELIMITER);
+    bdd_name = strtok(NULL, DELIMITER);
+    bdd_name[strlen(bdd_name)-1] = '\0';
+
+    char ligne5[TAILLE];
+    fgets(ligne5, sizeof(ligne5), file);
+    strtok(ligne5, DELIMITER);
+    bdd_port = strtok(NULL, DELIMITER);
+    bdd_port[strlen(bdd_port)-1] = '\0';
+
+    printf("bdd_host %s\n", bdd_host);
+    printf("bdd_user %s\n", bdd_user);
+    printf("bdd_password %s\n", bdd_password);
+    printf("bdd_name %s\n", bdd_name);
+    printf("bdd_port %s\n", bdd_port);
+
+    if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) { 
+        fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
+        mysql_close(conn); 
+        exit(1); 
+    }
+    printf("%s SUCCESS CONNECT MYSQL\n", SERVER);
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -278,14 +347,9 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
     char message[TAILLE];
     if (colisInfinit || nbColisMax > colis_encour(conn, cnx))
     {
-        if (colisInfinit)
-        {
-            printf("colis infini\n");
-        }
-        
-        printf("test : %d > %d\n",nbColisMax,colis_encour(conn, cnx));
         char code[BORDEREAU_SIZE];
         genere_code(code);
+
         if (BDD)
         {
             while (colis_existe(conn, cnx, code)){
@@ -313,7 +377,8 @@ void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
     }
     else
     {
-        sprintf(message, "%s%s%d", ERREUR, DELIMITER, ERREUR_NEW_COLIS);   
+        // envoier une erreur nouveau colis
+        message_erreur(cnx, ERREUR_NEW_COLIS);  
     }
 }
 
@@ -349,6 +414,7 @@ int colis_encour(MYSQL *conn, int cnx)
 
         MYSQL_RES *res = mysql_store_result(conn); 
         MYSQL_ROW row = mysql_fetch_row(res);
+
         printf("[DEBUG] COLIS EN COUR : %s\n", row[0]);
         return atoi(row[0]);
     }
@@ -416,6 +482,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
                     mysql_close(conn); 
                     fin(cnx);
                 }
+
                 MYSQL_RES *res = mysql_store_result(conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
 

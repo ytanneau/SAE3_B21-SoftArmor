@@ -1,8 +1,6 @@
 #include "constante.h"
 #include "fonction.h"
 
-
-
 int main(int argc, char const *argv[])
 {
     // initalisation des variable
@@ -20,8 +18,16 @@ int main(int argc, char const *argv[])
 
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
-    printf("[RAPTOR] START\n");
-    
+    printf("%s START\n", SERVER);
+
+
+    // verifie que le nombre de parametre est se lui attendu
+    if (argc != OPTION)
+    {
+        fprintf(stderr, "[FATAL] Pas le bon nombre d'option.\n");
+        exit(EXIT_FAILURE);
+    }
+
 
     // recupération des compte
     c = init_compte(argv[CHEMAIN]);
@@ -30,15 +36,6 @@ int main(int argc, char const *argv[])
     {
         printf("[DEBUG] COMPTE :\n");
         affiche_compte(c);
-    }
-    
-
-
-    // verifie que le nombre de parametre est se lui attendu
-    if (argc != OPTION)
-    {
-        fprintf(stderr, "[FATAL] Pas le bon nombre d'option.\n");
-        exit(EXIT_FAILURE);
     }
 
 
@@ -52,37 +49,30 @@ int main(int argc, char const *argv[])
     else if (nbColisMax == -1)
     {
         colisInfinit = true;
-        printf("[RAPTOR] SUCCESS COLIS SET INFINIT\n");
+        printf("%s SUCCESS COLIS SET INFINIT\n", SERVER);
     }
     else
     {
-        printf("[RAPTOR] SUCCESS COLIS SET %d\n", nbColisMax);
+        printf("%s SUCCESS COLIS SET %d\n", SERVER, nbColisMax);
     }
 
     // inisalisation avec la bdd
     conn = mysql_init(NULL);
-    if (BDD)
+    if(BDD)
     {
-        if (conn == NULL) 
-        { 
-            fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
-            exit(EXIT_FAILURE); 
-        }
-        if (mysql_real_connect(conn, BDD_HOST, BDD_USER, BDD_PASSWORD, BDD_NAME, BDD_PORT, NULL, 0) == NULL) { 
-            fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
-            mysql_close(conn); 
-            exit(1); 
-        }
-        printf("[RAPTOR] SUCCESS CONNECT MYSQL\n");
+        init_bdd(conn);
     }
+    
+
+    
     
     
 
-    // mise en place
+    // mise en place du socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
     addr.sin_addr.s_addr = inet_addr("127.0.0.1");
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(9000);
+    addr.sin_port = htons(atoi(argv[PORT]));
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
 
