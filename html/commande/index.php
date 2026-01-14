@@ -1,6 +1,8 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+const IP = "127.0.0.1";
+const PORT = "9000";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
 $MOIS_ANNEE = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
@@ -115,14 +117,14 @@ if (isset($_GET["commande"])) {
                     //connexion delivraptor
                     $conn =false;
                     
-                    $fd = connexion_socket();
+                    $fd = connexion_socket(IP,PORT);
                     
                     if($fd){
                     $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
                     
                     //si connexion
                     if ($conn == "true"){
-                        $bordereau = $commande["bordereau"];
+                        $bordereau = $commande["bordereau_colis"];
                         //recuperation des données du colis
                         $info_colis =get_info_colis($fd,$bordereau);
                         $texte_img="";

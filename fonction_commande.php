@@ -78,7 +78,7 @@ function connexion_delivraptor($fd,$id,$mdp){
 function create_colis($fd){
     fwrite($fd,"2");
     $buffer = fread($fd,200);
-
+    
     $buffer = explode("=",$buffer);
     return trim($buffer[1]);
 }
@@ -126,11 +126,9 @@ function get_image_colis($fd,$bordereau){
     return $info[0];
 }
 
-function connexion_socket(){
-
-    $fd =fsockopen("127.0.0.1",9000, $errno, $errstr);
+function connexion_socket($ip,$port){
+    $fd =@fsockopen($ip,$port, $errno, $errstr);
     if ($fd === false) {
-    
         echo "Connexion Delivraptor échouée ";
     }
     return $fd;
