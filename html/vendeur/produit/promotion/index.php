@@ -170,6 +170,7 @@
             for()
         }*/
         // REDUCTION //
+
         const warning3 = document.getElementById("warning3");
         const pourcentage = document.getElementById("pourcentage");
         const euro = document.getElementById("euro");

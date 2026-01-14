@@ -209,11 +209,21 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
-        let temp = prixInitial - euro.value;
-        pourcentage.value = 100 - (temp / prixInitial * 100);
-        prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
-        prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
+        function fill_form_with_data(){
+            const d1 = new Date(dateDebut.value + "T00:00:00");
+            const d2 = new Date(dateFin.value + "T00:00:00");
 
+            const diffJours = (d2 - d1) / 86400000;
+            cout.value = PRIX * diffJours + PRIX + "€";
+
+            let temp = prixInitial - euro.value;
+            pourcentage.value = 100 - (temp / prixInitial * 100);
+            prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
+            prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
+        }
+        
+        fill_form_with_data();
+        
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
