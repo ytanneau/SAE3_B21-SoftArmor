@@ -211,7 +211,7 @@
 
         let temp = prixInitial - euro.value;
         pourcentage.value = 100 - (temp / prixInitial * 100);
-        prixFinal.value = prixInitial * (pourcentage.value / 100);
+        prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
 
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
