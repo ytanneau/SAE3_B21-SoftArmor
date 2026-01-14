@@ -38,9 +38,15 @@ if (isset($info_compte['id_image_profil'])) {
 //recuperer les avis du compte
 $avis = get_avis_client($_SESSION['id_compte']);
 
-//traitement de la suppression d'un avis
-if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['url_img_avis']) && isset($_GET['id_client'])){
-    supprimer_avis($_GET['id_produit'], $_GET['url_img_avis'], $_GET['id_client']);
+//traitement de la suppression d'un avis avec image
+if (isset($_GET['supprimer_avis_image']) && isset($_GET['id_produit']) && isset($_GET['url_img_avis']) && isset($_GET['id_client'])){
+    supprimer_avis_image($_GET['id_produit'], $_GET['url_img_avis'], $_GET['id_client']);
+    header("Location: ./");
+    exit;
+}
+//traitement de la suppression d'un avis sans image
+if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['id_client'])){
+    supprimer_avis($_GET['id_produit'], $_GET['id_client']);
     header("Location: ./");
     exit;
 }
@@ -415,8 +421,12 @@ if ($_POST != NULL){
                             <?= print_r($row['url_image']);
                             print_r(urlencode($row['url_image'])); ?>
                             <!-- <a href="modification_avis/?id_avis= <= // htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a> -->
-                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
-
+                            <?php if (isset($row['url_image'])) { ?>
+                                <a href="?supprimer_avis_image=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis et son image associée ?')">Supprimer</a>
+                            <?php }  else { ?>
+                            
+                                <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                            <?php } ?>
                         </div>
                         
                         <?php if (isset($row['url_image'])) { ?>
