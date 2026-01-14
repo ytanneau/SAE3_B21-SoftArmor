@@ -32,6 +32,7 @@
     $prix = detail_produit($_GET['produit'])['prix'];
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+
     if($tab_image_promotion != null){
         $id_image_initial = $tab_image_promotion['id_image'];
     } else {
@@ -45,6 +46,9 @@
         } else {
             $euro = null;
         }
+
+        $id_nouvelle_baniere = $id_image_initial;
+
         if (isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
             banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
@@ -58,19 +62,14 @@
             // definition des caractéristiques d'une image
             $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
+
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                if ($tab_info_promotion['id_image_banniere']) {
-                    update_image_produit($tab_info_promotion['id_image_banniere'],$url,$nomImage,$altDefault);
-                    $id_nouvelle_baniere = $tab_info_promotion['id_image_banniere'];
-                } else {
-                    $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
-                }
+                $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
             }
-        } else {
-            $id_nouvelle_baniere = $id_image_initial;
         }
         update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
-        
+        delete_image($id_image_initial);
+
         header("Location: ../?produit=" . $id_produit);
         exit();
     }

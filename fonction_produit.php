@@ -635,7 +635,7 @@
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    
     function date_banniere_occupe(){
         global $pdo;
 
