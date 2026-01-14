@@ -174,7 +174,7 @@
             delete_image($image['id_image2']);
         }
 
-        $requete = $pdo->prepare('DELETE FROM _produit WHERE id_produit = :id_produit');
+        $requete = $pdo->prepare('UPDATE _produit SET est_supprime = 1 WHERE id_produit = :id_produit');
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
     }
@@ -182,7 +182,7 @@
     function delete_image_produit($id_produit){
         global $pdo;
         try{
-            $stmt = $pdo->prepare("DELETE FROM _images_produit WHERE id_produit = :id_produit");
+            $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = NULL, id_image2 = NULL WHERE id_produit = :id_produit");
             $stmt->execute([
                 "id_produit" => $id_produit
             ]);
