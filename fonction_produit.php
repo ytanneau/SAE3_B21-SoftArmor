@@ -606,7 +606,7 @@
             $stmt->execute([
                 "id_promo" => $id_promo
             ]);
-            if(!empty($tab)){
+            if($tab['id_image_banniere'] != null){
                 delete_image($tab['id_image_banniere']);
             }
         } catch(PDOException $e){
