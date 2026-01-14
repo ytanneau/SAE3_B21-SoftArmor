@@ -74,7 +74,6 @@
         header("Location: ../?produit=" . $id_produit);
         exit();
     }
-    print_r($tab_info_promotion['reduction']);
 ?>
 
 <!DOCTYPE html>
