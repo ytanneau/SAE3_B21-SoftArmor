@@ -117,7 +117,7 @@
             try {
                 if ($editMode) {
                     // Remplacer l'avis: suppression puis recréation avec les nouvelles valeurs
-                    supprimer_avis($_GET['produit'], $_SESSION['id_compte']);
+                    //supprimer_avis($_GET['produit'], $_SESSION['id_compte']);
                     cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 } else {
                     cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
