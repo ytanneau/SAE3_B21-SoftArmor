@@ -210,7 +210,7 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
-        let temp = prixInitial - euro;
+        let temp = prixInitial - euro.value;
         pourcentage.value = 100 - ((temp / prixInitial) * 100);
         prixFinal.value = prixInitial * pourcentage.value;
 
