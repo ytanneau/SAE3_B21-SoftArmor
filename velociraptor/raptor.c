@@ -1,6 +1,8 @@
 #include "constante.h"
 #include "fonction.h"
 
+FILE* LOG;
+
 int main(int argc, char const *argv[])
 {
     // initalisation des variable
@@ -16,25 +18,27 @@ int main(int argc, char const *argv[])
     int cnx; // le file descriptor du sock
     MYSQL *conn;
 
+    LOG = fopen("log.txt", "w");
+
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
-    printf("%s START\n", SERVER);
+    fprintf(LOG, "%s START\n", SERVER);
 
 
     // verifie que le nombre de parametre est se lui attendu
     if (argc != OPTION)
     {
-        fprintf(stderr, "[FATAL] Pas le bon nombre d'option.\n");
+        fprintf(LOG, "[FATAL] Pas le bon nombre d'option.\n");
         exit(EXIT_FAILURE);
     }
 
 
     // recupération des compte
     c = init_compte(argv[CHEMAIN]);
-    printf("%s SUCCESS INIT COMPTE\n", SERVER);
+    fprintf(LOG ,"%s SUCCESS INIT COMPTE\n", SERVER);
     if (DEBUG)
     {
-        printf("[DEBUG] COMPTE :\n");
+        fprintf(LOG, "[DEBUG] COMPTE :\n");
         affiche_compte(c);
     }
 
@@ -43,17 +47,17 @@ int main(int argc, char const *argv[])
     int nbColisMax = atoi(argv[NB_COLIS]);
     if (nbColisMax == 0 || nbColisMax < -1)
     {
-        fprintf(stderr, "[FATAL] Nombre de colis incorecte.\n");
+        fprintf(LOG, "[FATAL] Nombre de colis incorecte.\n");
         exit(EXIT_FAILURE);
     }
     else if (nbColisMax == -1)
     {
         colisInfinit = true;
-        printf("%s SUCCESS COLIS SET INFINIT\n", SERVER);
+        fprintf(LOG,"%s SUCCESS COLIS SET INFINIT\n", SERVER);
     }
     else
     {
-        printf("%s SUCCESS COLIS SET %d\n", SERVER, nbColisMax);
+        fprintf(LOG,"%s SUCCESS COLIS SET %d\n", SERVER, nbColisMax);
     }
 
     // inisalisation avec la bdd
@@ -77,10 +81,10 @@ int main(int argc, char const *argv[])
 
 
     if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
-        fprintf(stderr, "[ERROR] setsockopt.\n");
+        fprintf(LOG, "[ERROR] setsockopt.\n");
         exit(EXIT_FAILURE);
     }
-    printf("[RAPTOR] SUCCESS INIT SOCKET\n");
+    fprintf(LOG,"%s SUCCESS INIT SOCKET\n", SERVER);
 
 
     // boucle que mode server
