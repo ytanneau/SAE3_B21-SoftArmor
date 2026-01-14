@@ -129,12 +129,12 @@
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             
-            // Supprimer l'image seulement si elle existe
-            if ($url_img_avis != 1) {
-                $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_img_avis ;");
-                $requete->bindValue(':url_img_avis', $url_img_avis, PDO::PARAM_STR);
-                $requete->execute();
-            }
+            
+            
+            $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_img_avis ;");
+            $requete->bindValue(':url_img_avis', $url_img_avis, PDO::PARAM_STR);
+            $requete->execute();
+            
             
             return 0;
         } catch (PDOException $e) {
