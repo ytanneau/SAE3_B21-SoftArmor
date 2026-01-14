@@ -8,25 +8,6 @@ $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", 
 $MOIS_ANNEE = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
 
-// require("fpdf/fpdf.php");
-
-// // Instantiate and use the FPDF class 
-// $pdf = new FPDF();
-
-// //Add a new page
-// $pdf->AddPage();
-
-// // Set the font for the text
-// $pdf->SetFont('Arial', 'B', 18);
-
-// // Prints a cell with given text 
-// $pdf->Cell(60,20,'Hello GeeksforGeeks!');
-
-// // return the generated output
-// $pdf->Output();
-
-
-
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -56,10 +37,17 @@ if (isset($_GET["commande"])) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alizon - Vos commandes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alizon - Vos commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        function generePDF() {
+            window.print();
+        }
+    </script>
 </head>
 
 <body class="liste">
@@ -102,6 +90,8 @@ if (isset($_GET["commande"])) {
                 </ul>
                 
                 <p>Somme totale de la commande : <?=number_format($somme_totale, 2, ',', ' ')?> €</p>
+
+                <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
             <?php } ?>
         </div>
 
