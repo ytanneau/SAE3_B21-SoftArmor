@@ -599,14 +599,19 @@
     function delete_promotion($id_promo){
         global $pdo;
         
-        $tab = get_info_promotion_unique($id_promo);
-        $id_image = $tab['id_image_banniere'];
+        try{
+            $tab = get_info_promotion_unique($id_promo);
 
-        $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
-        $stmt->execute([
-            "id_promo" => $id_promo
-        ]);
-        delete_image($id_image);
+            $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_promo" => $id_promo
+            ]);
+            if(!empty($tab)){
+                delete_image($tab['id_image_banniere']);
+            }
+        } catch(PDOException $e){
+            throw $e;
+        }
     }
 
     function delete_image($id_image){
