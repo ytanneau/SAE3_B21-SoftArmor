@@ -66,7 +66,7 @@
                 $url = "ressources/promotion/" . $nomImage;
                 $altDefault = "Image de promotion";
             if(
-                $date_debut_initial != $_POST['dateDebut'] &&
+                $date_debut_initial != $_POST['dateDebut'] ||
                 $date_fin_initial != $_POST['dateFin']
             ){
                 if(banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
