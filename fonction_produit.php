@@ -505,187 +505,142 @@
     function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
         global $pdo;
 
-        try{
-            $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
-             VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
-            $stmt->execute([
-                "id_produit" => $id_produit,
-                "date_debut" => $date_debut,
-                "date_fin" => $date_fin,
-                "reduction" => $reduction,
-                "id_image" => $id_image_banniere
-            ]);
-        } catch(PDOException $e){
-            throw $e;
-        }
+        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
+            VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+        $stmt->execute([
+            "id_produit" => $id_produit,
+            "date_debut" => $date_debut,
+            "date_fin" => $date_fin,
+            "reduction" => $reduction,
+            "id_image" => $id_image_banniere
+        ]);
     }
 
     function banniere_libre($date1,$date2){
         global $pdo;
-        try{
-            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
-            $stmt->execute([
-                "date1" => $date1,
-                "date2" => $date2
-            ]);
-            $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
-            if($resultat === 1){ return true; }
-            else { return false; }
-        } catch (PDOException $e){
-            throw $e;
-        }
+        
+        $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
+        $stmt->execute([
+            "date1" => $date1,
+            "date2" => $date2
+        ]);
+        $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
+        if($resultat === 1){ return true; }
+        else { return false; }
          
     }
 
     function produit_est_en_promotion($id_produit){
-        global $pdo;
 
-        try{
-            $resultat = get_info_promotion($id_produit);
-            if($resultat != null){
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e){
-            throw $e;
+        $resultat = get_info_promotion($id_produit);
+        if($resultat != null){
+            return true;
+        } else {
+            return false;
         }
     }
 
     function get_info_promotion($id_produit){
         global $pdo;
 
-        try{
-            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
-            $stmt->execute([
-                "id_produit" => $id_produit
-            ]);
+        $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+        $stmt->execute([
+            "id_produit" => $id_produit
+        ]);
 
-            return $stmt->fetchall(PDO::FETCH_ASSOC);
-        } catch(PDOException $e){
-            throw $e;
-        }
+        return $stmt->fetchall(PDO::FETCH_ASSOC);
     }
 
     function get_info_promotion_unique($id_promo){
         global $pdo;
-        try{
-            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
-            $stmt->execute([
-                "id_promo" => $id_promo
-            ]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch(PDOException $e){
-            throw $e;
-        }
+        
+        $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
+        $stmt->execute([
+            "id_promo" => $id_promo
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
         global $pdo;
 
-        try{
-            $stmt = $pdo->prepare("UPDATE _promotion 
-            SET id_produit = :id_produit,
-                date_debut = :date_debut,
-                date_fin = :date_fin,
-                reduction = :reduction,
-                id_image_banniere = :id_image_banniere 
-            WHERE id_promo = :id_promotion");
+        $stmt = $pdo->prepare("UPDATE _promotion 
+        SET id_produit = :id_produit,
+            date_debut = :date_debut,
+            date_fin = :date_fin,
+            reduction = :reduction,
+            id_image_banniere = :id_image_banniere 
+        WHERE id_promo = :id_promotion");
 
-            $stmt->execute([
-                "id_produit" => $id_produit,
-                "date_debut" => $date_debut,
-                "date_fin" => $date_fin,
-                "reduction" => $reduction,
-                "id_image_banniere" => $id_image_banniere,
-                "id_promotion" => $id_promotion
-            ]);
-        } catch(PDOException $e){
-            throw $e;
-        }
+        $stmt->execute([
+            "id_produit" => $id_produit,
+            "date_debut" => $date_debut,
+            "date_fin" => $date_fin,
+            "reduction" => $reduction,
+            "id_image_banniere" => $id_image_banniere,
+            "id_promotion" => $id_promotion
+        ]);
     }
 
     function get_image_promotion($id_image){
         global $pdo;
 
-        try{
-            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
-            $stmt->execute([
-                "id_image" => $id_image
-            ]);
-            if($stmt != null){
-                return $stmt->fetch(PDO::FETCH_ASSOC);
-            } else {
-                return 0;
-            }
-        } catch(PDOException $e){
-            throw $e;
+        $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+        $stmt->execute([
+            "id_image" => $id_image
+        ]);
+        if($stmt != null){
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return 0;
         }
     }
 
     function delete_promotion($id_promo){
         global $pdo;
+        
+        $tab = get_info_promotion_unique($id_promo);
+        $id_image = $tab['id_image_banniere'];
 
-        try{
-            $tab = get_info_promotion_unique($id_promo);
-            $id_image = $tab['id_image_banniere'];
-
-            $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
-            $stmt->execute([
-                "id_promo" => $id_promo
-            ]);
-            delete_image($id_image);
-
-        } catch(PDOException $e){
-            throw $e;
-        }
+        $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
+        $stmt->execute([
+            "id_promo" => $id_promo
+        ]);
+        delete_image($id_image);
     }
 
     function delete_image($id_image){
         global $pdo;
+        
+        $tab_image = get_image($id_image);
 
-        try{
-            $tab_image = get_image($id_image);
-
-            $stmt = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
-            $stmt->execute([
-                "id_image" => $id_image
-            ]);
-            unlink($_SERVER['DOCUMENT_ROOT'] . "/" . $tab_image['url_image']);
-        } catch(PDOException $e){
-            throw $e;
-        }
+        $stmt = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
+        $stmt->execute([
+            "id_image" => $id_image
+        ]);
+        unlink($_SERVER['DOCUMENT_ROOT'] . "/" . $tab_image['url_image']);
     }
 
     function get_image($id_image){
         global $pdo;
-        
-        try{
-            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
-            $stmt->execute([
-                "id_image" => $id_image
-            ]);
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e){
-            throw $e;
-        }
+        $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+        $stmt->bindValue(":id_image", $id_image, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     function date_banniere_occupe(){
         global $pdo;
 
-        try{
-            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM `_promotion` WHERE id_image_banniere IS NOT NULL");
-            $stmt->execute();
+        $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM `_promotion` WHERE id_image_banniere IS NOT NULL");
+        $stmt->execute();
 
-            $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $tab_final = array();
-            foreach($tab as $lignes){
-                array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
-            }
-            return $tab_final;
-        } catch (PDOException $e){
-            throw $e;
+        $tab = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $tab_final = array();
+        foreach($tab as $lignes){
+            array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
         }
+        return $tab_final;
     }

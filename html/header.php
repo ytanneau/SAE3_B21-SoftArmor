@@ -19,6 +19,12 @@
                     </a> 
                 </li>
 
+                <li> 
+                    <a href="<?= HOME_SITE . 'compte/informations' ?>"> 
+                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mes commandes
+                    </a> 
+                </li>
+
                 <li>
                     <a href="<?= HOME_SITE . 'deconnexion' ?>">
                         <img src="<?= $images . 'deconnexion_blanc.svg' ?>" class="icon">Déconnexion
@@ -77,7 +83,7 @@
                         <div id="dropdown-compte" class="dropdown-content">
                             <a href="<?= HOME_SITE . 'compte/informations' ?>"> <img src="<?= $images . 'compte.svg' ?>" class="icon">Mon profil</a>
                             <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
-                            <a href="<?= HOME_SITE . 'commande' ?>"> <img src="<?= $images . 'panier.svg' ?>" class="icon">Mé comand</a>
+                            <a href="<?= HOME_SITE . 'commande' ?>"> <img src="<?= $images . 'panier.svg' ?>" class="icon">Mes commandes</a>
                             <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
                         </div>
                     </div>

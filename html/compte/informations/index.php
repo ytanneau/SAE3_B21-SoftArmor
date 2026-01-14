@@ -48,7 +48,7 @@ if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET[
 
 //recupere le mdp crypté et l'id de l'adresse du client
 $mdp_cryptee = $info_compte['mdp'];
-$adresse = isset($info_compte['id_adresse_fac']) ? sql_get_adresse($info_compte['id_adresse_fac']) : null;
+$adresse_compte = isset($info_compte['id_adresse_fac']) ? sql_get_adresse($info_compte['id_adresse_fac']) : null;
 
 
 //traitement de la modification des informations
@@ -146,8 +146,6 @@ if ($_POST != NULL){
     
     }
 }
-// Fermer la connexion
-unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -252,7 +250,7 @@ unset($pdo);
                         $est_entre = true;
                     ?>
                     
-                    <input type="text" name="adresse" value="<?= htmlentities($addresse_compte['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
+                    <input type="text" name="adresse" value="<?= htmlentities($adresse_compte['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur adresse-->
                     <?php
@@ -266,10 +264,10 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($addresse_compte['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($adresse_compte['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
                     <label for="code_postal">Code Postal</label>
-                    <input type="text" name="code_postal" value="<?= htmlentities($addresse_compte['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
+                    <input type="text" name="code_postal" value="<?= htmlentities($adresse_compte['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
                     
                     <!--Erreur code postal-->
                     <?php
@@ -384,15 +382,17 @@ unset($pdo);
         <section>
             <h2>Vos Avis</h2>
             <ul class="liste_avis">
-                <?php foreach ($avis as $row) { ?>
+                <?php foreach ($avis as $row) {
+                    $image_profil = isset($row['id_image_profil']) ? get_image($row['id_image_profil']) : null;
+                    $image_produit = isset($row['id_image_produit']) ? get_image($row['id_image_produit']) : null?>
                     <li>
                         <!-- Image du produit -->
-                        <img src="<?= HOME_SITE.$row['url_img'];?>" alt="<?= htmlentities($row['alt_img'] ?? '')?>" title="<?= htmlentities($row['titre_img'] ?? '')?>">
+                        <img src="<?= HOME_SITE.$image_produit['url_image'];?>" alt="<?= htmlentities($image_produit['alt_image'] ?? '')?>" title="<?= htmlentities($image_produit['titre_image'] ?? '')?>">
 
                         <div>
                             <div>
-                                <?php if (isset($row['url_pdp'])) {?>
-                                    <img src="<?= HOME_SITE . $row['url_pdp'] ?>" alt="<?= htmlentities($row['alt_pdp'] ?? '')?>" title="<?= htmlentities($row['titre_pdp'] ?? '')?>">
+                                <?php if (isset($image_profil)) {?>
+                                    <img src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt_image'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
                                 <?php
                                     } else {?>
                                     <img src="<?= HOME_SITE . 'image/compte.svg'?>">
@@ -413,11 +413,11 @@ unset($pdo);
                         <!-- Boutons d'actions -->
                         <div>
                             <!-- <a href="modification_avis/?id_avis= <= // htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a> -->
-                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_img_avis']) ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                            <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image']) ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
                         </div>
                         
-                        <?php if (isset($row['url_img_avis'])) { ?>
-                            <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
+                        <?php if (isset($row['url_image'])) { ?>
+                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt_image'] ?>">
                         <?php } ?>
 
                         

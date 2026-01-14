@@ -22,6 +22,10 @@ if (!isset($_GET['produit']) || !is_numeric($_GET['produit'])) {
 }
 
 $id_produit = htmlentities($_GET['produit']);
+$recherche = trim(htmlentities($_GET['recherche'] ?? ''));
+
+// La flèche de retour redirige le client vers la page de recherche s'il vient de là
+$lien_retour = empty($recherche) ? HOME_SITE : (HOME_SITE . 'recherche/?recherche=' . urlencode($recherche));
 
 try {
     $produit = detail_produit_image($id_produit);
@@ -95,7 +99,7 @@ if ($_POST != NULL) {
     
     <main>
         <div class="gauche">
-            <a href="../"><img src="../image/retour.svg"></a>
+            <a href="<?= $lien_retour ?>"><img src="../image/retour.svg"></a>
 
             <section class="detail_produit">
                 <!-- Présentation du produit -->
