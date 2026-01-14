@@ -33,8 +33,8 @@
     $sortableFields = [
         'nom_public' => 'nom_public',
         'note_moy'   => 'note_moy',
-        'triPrix'    => 'prix',
-        'triPrixCroi'=> 'prix',
+        'triPrix'    => 'prix_actuel',
+        'triPrixCroi'=> 'prix_actuel',
         'triReduc'   => 'prix_actuel'
     ];
 
