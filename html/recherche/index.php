@@ -114,6 +114,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 console.log(searchState.sort.field);
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
+                window.location = window.location
+
         });
 
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
