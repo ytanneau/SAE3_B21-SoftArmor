@@ -65,13 +65,11 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
-                if($id_nouvelle_baniere){
-                    update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
-                }
-
-                if($id_image_initial){
-                    delete_image($id_image_initial);
-                }
+                update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
+                // if($id_nouvelle_baniere){
+                //     update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
+                //     delete_image($id_image_initial);
+                // }
             }
         } else {
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
