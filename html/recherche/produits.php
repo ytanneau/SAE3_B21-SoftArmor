@@ -43,7 +43,6 @@
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
-    print_r($produit);
     echo json_encode([
         'produits' => $produits,
         'total' => count($produits)
