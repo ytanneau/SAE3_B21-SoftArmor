@@ -153,9 +153,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
-            resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
-
-            console.log(data.produits);
+            resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`
 
             data.produits.forEach(produit => {
                 let listItem = document.createElement("li");
