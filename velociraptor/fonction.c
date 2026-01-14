@@ -146,6 +146,7 @@ void init_bdd(MYSQL *conn)
 
     if (DEBUG)
     {
+        printf("[DEBUG] BDD : \n");
         printf("bdd_host %s\n", bdd_host);
         printf("bdd_user %s\n", bdd_user);
         printf("bdd_password %s\n", bdd_password);
@@ -473,14 +474,14 @@ void info_colis(int cnx, char* code, MYSQL *conn)
             printf("[DEBUG] CODE : TRUE\n");
         }
         
-        char message[TAILLE*3];
+        char message[TAILLE*4];
         if (BDD)
         {
             
             if (colis_existe(conn, cnx, code))
             {
                 char sql[TAILLE_SQL];   
-                sprintf(sql, "SELECT %s, %s, %s FROM %s WHERE bordereau = '%s'", COLON_ETAPE, COLON_MODE, COLON_RAISON, TABLE, code);
+                sprintf(sql, "SELECT %s, %s, %s, %s FROM %s WHERE bordereau = '%s'", COLON_ETAPE, COLON_MODE, COLON_RAISON, COLON_DATE, TABLE, code);
 
                 if (mysql_query(conn, sql)) 
                 { 
@@ -496,13 +497,13 @@ void info_colis(int cnx, char* code, MYSQL *conn)
                 {
                     if (atoi(row[1]) == VALUE_MODE_REFU)
                     {
-                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2]);
+                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2], DATE, DELIMITER, row[3]);
                     }
-                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE);
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
                 }
                 else
                 {
-                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE);
+                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
                 }
                 envoier_message(cnx, message);
                 
@@ -514,7 +515,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         }
         else
         {
-            sprintf(message, "%s%s1\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE);
+            sprintf(message, "%s%s1\n%s%s%s\n%s%s%s\n%s%s854894", ETAPE, DELIMITER, MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE, DATE, DELIMITER);
             envoier_message(cnx, message);
         }
     }

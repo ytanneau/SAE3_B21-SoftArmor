@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
 
     // mise en place du socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    addr.sin_addr.s_addr = inet_addr("0.0.0.0"); //"127.0.0.1"
     addr.sin_family = AF_INET;
     addr.sin_port = htons(atoi(argv[PORT]));
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));

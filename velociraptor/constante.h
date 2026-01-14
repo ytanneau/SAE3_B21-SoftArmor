@@ -33,6 +33,7 @@
 #define COLON_ETAPE "etape"
 #define COLON_MODE "mode"
 #define COLON_RAISON "raison_refus"
+#define COLON_DATE "date_update"
 
 // valeur clé
 #define VALUE_ETAPE_FIN 9
@@ -63,6 +64,7 @@
 #define CAUSE "RAISON"
 #define VIDE "N/A"
 #define PHOTO "PHOTO"
+#define DATE "DATE"
 
 // parametre / option
 #define CHEMAIN 1
