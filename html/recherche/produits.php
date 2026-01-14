@@ -31,19 +31,14 @@
     }
     
     if ($sort['field'] == 'nom_public') {
-        $requete .= " ORDER BY nom_public asc";
+        $requete .= " ORDER BY nom_public ASC";
     }
     else {
-        $requete .= " ORDER BY :field :order nom_public asc";
-        $params['field'] = $sort['field'];
-        $params['order'] = $sort['order'];
+        $requete .= " ORDER BY :field :order nom_public ASC";
+        $params[':field'] = $sort['field'];
+        $params[':order'] = $sort['order'];
     }
     
-    // <option value="aToZ" data-name ="asc">choisissez un tri :</option>
-    //         <option value="triAvis" data-name ="asc">Par notes</option>
-    //         <option value="triPrix" data-name ="asc">Par prix decroissant</option>
-    //         <option value="triPrixCroi" data-name ="desc">Par prix croissant</option>
-    //         <option value="triPrixCroi" data-name ="asc">Par prix réduction</option>
 
     $requete = $pdo->prepare($requete);
     $requete->execute($params);

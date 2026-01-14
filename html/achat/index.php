@@ -137,14 +137,14 @@ if ($numEtape == 3) {
     $conn =false;
     $fd = connexion_socket();
     if($fd){
-        $conn = connexion_delivraptor($fd,"root","root");
+        $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
         //creer bordereau colis
         $bordereau = create_colis($fd);
         deconnexion_socket($fd);
     }
 
     // Création commande
-    $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau) VALUES (:id_compte,:bordereau)");
+    $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
     $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_INT);
     $requete->execute();

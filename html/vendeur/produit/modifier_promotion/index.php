@@ -74,7 +74,6 @@
         header("Location: ../?produit=" . $id_produit);
         exit();
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -210,9 +209,9 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
-        let temp = prixInitial - euro;
-        pourcentage.value = 100 - ((temp / prixInitial) * 100);
-        prixFinal.value = prixInitial * pourcentage.value;
+        let temp = prixInitial - euro.value;
+        pourcentage.value = 100 - (temp / prixInitial * 100);
+        prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
 
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
