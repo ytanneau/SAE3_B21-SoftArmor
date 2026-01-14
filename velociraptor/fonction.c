@@ -139,13 +139,19 @@ void init_bdd(MYSQL *conn)
     fgets(ligne5, sizeof(ligne5), file);
     strtok(ligne5, DELIMITER);
     bdd_port = strtok(NULL, DELIMITER);
-    bdd_port[strlen(bdd_port)-1] = '\0';
+    if (bdd_port[strlen(bdd_port)-1] == '\n')
+    {
+        bdd_port[strlen(bdd_port)-1] = '\0';
+    }
 
-    printf("bdd_host %s\n", bdd_host);
-    printf("bdd_user %s\n", bdd_user);
-    printf("bdd_password %s\n", bdd_password);
-    printf("bdd_name %s\n", bdd_name);
-    printf("bdd_port %s\n", bdd_port);
+    if (DEBUG)
+    {
+        printf("bdd_host %s\n", bdd_host);
+        printf("bdd_user %s\n", bdd_user);
+        printf("bdd_password %s\n", bdd_password);
+        printf("bdd_name %s\n", bdd_name);
+        printf("bdd_port %s\n", bdd_port);
+    }
 
     if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) { 
         fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
