@@ -624,6 +624,17 @@
         unlink($_SERVER['DOCUMENT_ROOT'] . "/" . $tab_image['url_image']);
     }
 
+    function delete_image_bdd($id_image){
+        global $pdo;
+        
+        $tab_image = get_image($id_image);
+
+        $stmt = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
+        $stmt->execute([
+            "id_image" => $id_image
+        ]);
+    }
+
     function get_image($id_image){
         global $pdo;
 
