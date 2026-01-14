@@ -65,6 +65,8 @@
 
             if(move_uploaded_file($cheminTemp,$cheminFinal)){
                 $id_nouvelle_baniere = add_image($url, $nomImage, $altDefault);
+            } else {
+                echo "bug de chemin";
             }
         }
         update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_baniere);
