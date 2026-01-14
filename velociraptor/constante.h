@@ -23,6 +23,7 @@
 // base
 #define SERVER "[RAPTOR]"
 #define DEBUG true
+#define LOG_FILE "log.txt"
 
 // bdd
 #define BDD true
@@ -88,5 +89,7 @@
 // element de photo
 #define TAILLE_PHOTO 62
 #define FICHIER_PHOTO "carton_endommage.png"
+
+
 
 #endif

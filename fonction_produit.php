@@ -357,9 +357,7 @@
          */
         global $pdo;
         try{
-            $sqlImage = "INSERT INTO _image(url_image,titre,alt)
-                        VALUES(:url_img, :titre_img, :alt_img);";
-            $requete = $pdo->prepare($sqlImage);
+            $requete = $pdo->prepare("INSERT INTO _image(url_image,titre,alt)VALUES(:url_img, :titre_img, :alt_img);");
             $requete->execute([
                 ':url_img' => $url, 
                 ':titre_img' => $titre_img, 
