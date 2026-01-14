@@ -201,7 +201,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 if (produit.prix_actuel != produit.prix) {
                     pPrixReduit = document.createElement("p");
                     let prixReduit = Number.parseFloat(produit.prix_actuel * (1 + produit.tva / 100)).toFixed(2);
-                    let textePrixReduit = document.createTextNode(`${} €`);
+                    let textePrixReduit = document.createTextNode(`${prixReduit} €`);
                     pPrixReduit.appendChild(textePrixReduit);
                     
                     pPrix.classList.add("ancien_prix");
