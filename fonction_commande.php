@@ -128,7 +128,7 @@ function get_image_colis($fd,$bordereau){
 
 function connexion_socket(){
 
-    $fd =@fsockopen("127.0.0.1",9000, $errno, $errstr);
+    $fd =fsockopen("127.0.0.1",9000, $errno, $errstr);
     if ($fd === false) {
     
         echo "Connexion Delivraptor échouée ";
@@ -137,4 +137,5 @@ function connexion_socket(){
 }
 function deconnexion_socket($fd){
     fwrite($fd,"0");
+    fclose($fd);
 }
