@@ -628,14 +628,14 @@
 
         try{
             $tab = get_info_promotion_unique($id_promo);
-            $id_image = $tab['id_image_banniere'];
 
             $stmt = $pdo->prepare("DELETE FROM _promotion WHERE id_promo = :id_promo");
             $stmt->execute([
                 "id_promo" => $id_promo
             ]);
-            delete_image($id_image);
-
+            if(!empty($tab)){
+                delete_image($tab['id_image_banniere']);
+            }
         } catch(PDOException $e){
             throw $e;
         }
