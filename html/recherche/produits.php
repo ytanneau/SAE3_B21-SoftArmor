@@ -30,10 +30,24 @@
         $params[':search'] = "%$search%";
     }
     
-    $requete .= " ORDER BY :field :order, nom_public ASC";
-    $params[':field'] = $sort['field'];
-    $params[':order'] = $sort['order'];
-    
+    $sortableFields = [
+        'nom_public' => 'nom_public',
+        'note_moy'   => 'note_moy',
+        'triPrix'    => 'prix',
+        'triPrixCroi'=> 'prix',
+        'triReduc'   => 'prix_actuel'
+    ];
+
+    $fieldKey = $sort['field'] ?? 'nom_public';
+    $order = strtoupper($sort['order'] ?? 'ASC');
+
+    $field = $sortableFields[$fieldKey] ?? 'nom_public';
+    if (!in_array($order, ['ASC','DESC'])) {
+        $order = 'ASC';
+    }
+
+    $requete .= " ORDER BY $field $order, nom_public ASC";
+
 
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
