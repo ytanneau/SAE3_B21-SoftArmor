@@ -39,7 +39,7 @@
         $params[':order'] = $sort['order'];
     }
     
-    echo $requete;
+
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
