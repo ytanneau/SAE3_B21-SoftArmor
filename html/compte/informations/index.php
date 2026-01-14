@@ -146,8 +146,6 @@ if ($_POST != NULL){
     
     }
 }
-// Fermer la connexion
-unset($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -385,10 +383,11 @@ unset($pdo);
             <h2>Vos Avis</h2>
             <ul class="liste_avis">
                 <?php foreach ($avis as $row) {
-                    $image_profil = isset($row['id_image_profil']) ? get_image($row['id_image_profil']) : null?>
+                    $image_profil = isset($row['id_image_profil']) ? get_image($row['id_image_profil']) : null;
+                    $image_produit = isset($row['id_image_produit']) ? get_image($row['id_image_produit']) : null?>
                     <li>
                         <!-- Image du produit -->
-                        <img src="<?= HOME_SITE.$row['url_image'];?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                        <img src="<?= HOME_SITE.$image_produit['url_image'];?>" alt="<?= htmlentities($image_produit['alt_image'] ?? '')?>" title="<?= htmlentities($image_produit['titre_image'] ?? '')?>">
 
                         <div>
                             <div>
