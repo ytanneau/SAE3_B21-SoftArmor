@@ -105,10 +105,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
+                e.preventDefault();
                 let selNum = s.options[s.selectedIndex].value;
                 let selName = s.options[s.selectedIndex].dataset.name;
-
-
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
                 console.log(searchState.sort.field);
