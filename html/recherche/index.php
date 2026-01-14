@@ -115,6 +115,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 searchState.sort.order = selName;
                 console.log(searchState.sort.field);
                 console.log(searchState.sort.order);
+                fetchProduitsJSON();
             }
         });
 
