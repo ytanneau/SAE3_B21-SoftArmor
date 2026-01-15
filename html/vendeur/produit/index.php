@@ -119,11 +119,14 @@
                 <?php if($tab_promo != null){
                     foreach($tab_promo as $ligne){
                         $id_promo = $ligne['id_promo'];
-                        $date = $ligne['date_debut']?>
+                        $date = $ligne['date_debut'];
+                        $temp_date = explode("-",$date);  
+                        $new_date = $temp_date[2] . $temp_date[1] . $temp_date[0];
+                        ?>
                     <a 
                         class="bouton_vendeur_produit" 
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                        Modifier la promotion du <?= htmlentities($date)?>
+                        Modifier la promotion du <?= htmlentities($new_date)?>
                     </a>
                     <?php }} ?>
                 <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
