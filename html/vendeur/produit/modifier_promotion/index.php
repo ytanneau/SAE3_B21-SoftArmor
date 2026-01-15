@@ -28,7 +28,7 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
     $id_promo = $_GET['idPromo'];
-    if(!empty(detail_produit($_GET['produit'])['prix'])){
+    if(detail_produit($_GET['produit'])['prix'] != null){
         $prix = detail_produit($_GET['produit'])['prix'];
     } else {
         $prix = "";
