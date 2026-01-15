@@ -255,6 +255,7 @@
             cout.value = PRIX * diffJours + PRIX + "€";
             
             euro.value = prixInitial * (pourcentage.value / 100);
+            euro.value = Number.parseFloat(euro.value).toFixed(2);
             prixFinal.value = prixInitial - euro.value;
             prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
         }
