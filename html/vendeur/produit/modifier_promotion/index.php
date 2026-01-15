@@ -253,7 +253,7 @@
 
             let temp = prixInitial - euro.value;
             pourcentage.value = 100 - (temp / prixInitial * 100);
-            Math.round(pourcentage.value);
+            pourcentage.value = Math.ceil(pourcentage.value);
             prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
             prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
         }
