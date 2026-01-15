@@ -58,7 +58,7 @@
         }
 
         $id_nouvelle_banniere = $id_image_initial;
-        if($_POST['supp_image_promo'] == 'on'){
+        if(isset($_POST['supp_image_promo']) && $_POST['supp_image_promo'] == 'on'){
             $id_nouvelle_banniere = null;
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
             delete_image($id_image_initial);
@@ -253,8 +253,8 @@
 
             const diffJours = (d2 - d1) / 86400000;
             cout.value = PRIX * diffJours + PRIX + "€";
-
-            euro.value = prixInitial * (100 - pourcentage.value) / 100;
+            
+            euro.value = prixInitial * (100 - (pourcentage.value / 100));
             euro.value = Math.ceil(euro.value);
             prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
             prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
