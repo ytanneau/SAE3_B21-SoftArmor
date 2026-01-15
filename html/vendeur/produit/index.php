@@ -121,7 +121,7 @@
                         $id_promo = $ligne['id_promo'];
                         $date = $ligne['date_debut'];
                         $temp_date = explode("-",$date);  
-                        $new_date = $temp_date[2] . $temp_date[1] . $temp_date[0];
+                        $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                         ?>
                     <a 
                         class="bouton_vendeur_produit" 
