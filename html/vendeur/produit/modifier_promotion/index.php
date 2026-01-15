@@ -28,13 +28,17 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
     $id_promo = $_GET['idPromo'];
-    if(detail_produit($_GET['produit'])['prix'] != null){
-        $prix = detail_produit($_GET['produit'])['prix'];
+    $prix = detail_produit($_GET['produit'])['prix'];
+
+    
+
+    $tab_info_promotion = get_info_promotion_unique($id_promo);
+    if($tab_info_promotion['reduction'] != null){
+        $euro = $tab_info_promotion['reduction'];
     } else {
-        $prix = "";
+        $euro = "";
     }
     
-    $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
     $date_debut_initial = $tab_info_promotion['date_debut'];
     $date_fin_initial = $tab_info_promotion['date_fin'];
@@ -146,7 +150,7 @@
             <input type="text" id="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
+            <input type="text" id="euro" name="euro" value=<?= htmlentities($euro)?> readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
