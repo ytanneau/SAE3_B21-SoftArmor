@@ -29,8 +29,15 @@
         $requete .= " AND (nom_public LIKE :search OR description LIKE :search OR description_detaillee LIKE :search)";
         $params[':search'] = "%$search%";
     }
-    if (!empty($filters.$prix)){
-        $requete .=" AND prix_actuel > :prixmin AND prix_actuel < :prixmin";
+
+    if (!empty($prixmin)) {
+        $requete .= " AND prix > :prixmin";
+        $filter[':prixmin'] = $prixmin;
+    }
+
+    if (!empty($prixmax)) {
+        $requete .= " AND prix < :prixmax";
+        $params[':prixmax'] = $prixmax;
     }
     
     $sortableFields = [
