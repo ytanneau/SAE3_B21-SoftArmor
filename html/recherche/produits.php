@@ -32,12 +32,12 @@
     }
 
     if ($prixmin !== null) {
-        $requete .= " AND prix >= :prixmin";
+        $requete .= " AND prix_actuel >= :prixmin";
         $params[':prixmin'] = $prixmin;
     }
 
     if ($prixmax !== null) {
-        $requete .= " AND prix <= :prixmax";
+        $requete .= " AND prix_actuel <= :prixmax";
         $params[':prixmax'] = $prixmax;
     }
     
