@@ -1,6 +1,6 @@
 <?php
-    define('HOME_GIT', '../../');
-    define('HOME_SITE', '../');
+    define('HOME_GIT', '../../../../');
+    define('HOME_SITE', '../../../');
 
     define('EXISTE', 'Existe déjà');
     define('EXISTE_PAS', 'Existe pas');
