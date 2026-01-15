@@ -21,7 +21,7 @@
         exit;
     }
 
-    if ($_GET == NULL || !isset($_GET['produit'])) {
+    if ($_GET == NULL || !isset($_GET['produit']) || !isset($_GET['idPromo'])) {
        renvoi();
     }
 
