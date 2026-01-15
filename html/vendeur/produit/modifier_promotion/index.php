@@ -36,7 +36,7 @@
     if($tab_info_promotion['reduction'] != null){
         $euro = $tab_info_promotion['reduction'];
     } else {
-        $euro = null;
+        $euro = '';
     }
     
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
