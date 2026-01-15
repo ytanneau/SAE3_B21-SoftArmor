@@ -28,8 +28,12 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
     $id_promo = $_GET['idPromo'];
-
-    $prix = detail_produit($_GET['produit'])['prix'];
+    if(!empty(detail_produit($_GET['produit'])['prix'])){
+        $prix = detail_produit($_GET['produit'])['prix'];
+    } else {
+        $prix = null;
+    }
+    
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
     $date_debut_initial = $tab_info_promotion['date_debut'];
@@ -46,7 +50,7 @@
             $euro = $_POST['euro'];
             $euro = str_replace('-', "",$euro);
         } else {
-            $euro = null;
+            $euro = "";
         }
 
         $id_nouvelle_banniere = $id_image_initial;
