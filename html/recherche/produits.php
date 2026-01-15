@@ -13,7 +13,7 @@
     $search  = $data['search'] ?? '';
     $filters = $data['filters'] ?? [];
     $sort    = $data['sort'] ?? [];
-
+    $prixF = $filters['prix'] ?? [];
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt 
@@ -32,12 +32,12 @@
 
     if (!empty($prixmin)) {
         $requete .= " AND prix > :prixmin";
-        $filter[':prixmin'] = $prixmin;
+        $params[':prixmin'] = $prixF['min'];
     }
 
     if (!empty($prixmax)) {
         $requete .= " AND prix < :prixmax";
-        $params[':prixmax'] = $prixmax;
+        $params[':prixmax'] = $prixF['min'];
     }
     
     $sortableFields = [
