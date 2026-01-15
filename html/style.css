@@ -53,7 +53,7 @@ hr {
   font-weight: bold;
   font-size: 0.75em;
 }
-.input_quantite input[type=button], .input_quantite input[type=number] {
+.input_quantite input[type=button], .input_quantite input[type=number], .input_quantite input[type=text] {
   height: 2em;
   margin: 0;
   padding: 0;
@@ -74,7 +74,7 @@ hr {
 .input_quantite input[type=button]:hover {
   background-color: #d5d5d5;
 }
-.input_quantite input[type=number] {
+.input_quantite input[type=number], .input_quantite input[type=text] {
   width: 3em;
   box-sizing: border-box;
   border-left: 0;
@@ -84,7 +84,7 @@ hr {
   -moz-appearance: textfield;
   appearance: textfield;
 }
-.input_quantite input[type=number]::-webkit-inner-spin-button, .input_quantite input[type=number]::-webkit-outer-spin-button {
+.input_quantite input[type=number]::-webkit-inner-spin-button, .input_quantite input[type=number]::-webkit-outer-spin-button, .input_quantite input[type=text]::-webkit-inner-spin-button, .input_quantite input[type=text]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
@@ -1640,8 +1640,6 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  margin: 0 0 0 2em;
-  min-width: 20%;
 }
 .liste main .bouton a {
   text-decoration: none;
@@ -1651,7 +1649,50 @@ h3 {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 .liste main .grave {
+  display: default;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
   background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.liste main .grave a {
+  text-decoration: none;
+  color: white;
+}
+.liste main .grave:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.liste main .valider {
+  display: inline;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #2E7A30;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.liste main .valider a {
+  text-decoration: none;
+  color: white;
+}
+.liste main .valider:hover {
+  background-color: rgb(66.9464285714, 177.5535714286, 69.8571428571);
 }
 .liste main p {
   width: 100%;
@@ -2551,4 +2592,13 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
+}
+
+@media print {
+  h1 {
+    font-size: 8mm;
+  }
+  header, button, footer, a {
+    display: none !important;
+  }
 }/*# sourceMappingURL=style.css.map */

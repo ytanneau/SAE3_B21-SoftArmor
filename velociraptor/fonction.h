@@ -11,6 +11,7 @@ typedef struct compte
 
 compte* init_compte(const char* chemain);
 void affiche_compte(compte* c);
+void init_bdd(MYSQL *conn);
 
 void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL* conn);
 void fin(int cnx);

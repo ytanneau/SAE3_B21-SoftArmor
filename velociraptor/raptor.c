@@ -1,7 +1,7 @@
 #include "constante.h"
 #include "fonction.h"
 
-
+FILE* LOG;
 
 int main(int argc, char const *argv[])
 {
@@ -18,27 +18,35 @@ int main(int argc, char const *argv[])
     int cnx; // le file descriptor du sock
     MYSQL *conn;
 
-    srand(time(NULL)); // aléatoire du borderau
-    signal(SIGCHLD, tombe); // eviter les enfant zombie
-    printf("[RAPTOR] START\n");
     
-
-    // recupération des compte
-    c = init_compte(argv[CHEMAIN]);
-    printf("%s SUCCESS INIT COMPTE\n", SERVER);
-    if (DEBUG)
+    close(open(LOG_FILE, O_CREAT , S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IWGRP | S_IXGRP | S_IROTH | S_IWOTH | S_IXOTH));
+    LOG = fopen(LOG_FILE, "w");
+    if (LOG == NULL)
     {
-        printf("[DEBUG] COMPTE :\n");
-        affiche_compte(c);
+        printf("erreur log\n");
     }
     
+
+    srand(time(NULL)); // aléatoire du borderau
+    signal(SIGCHLD, tombe); // eviter les enfant zombie
+    fprintf(LOG, "%s START\n", SERVER);
 
 
     // verifie que le nombre de parametre est se lui attendu
     if (argc != OPTION)
     {
-        fprintf(stderr, "[FATAL] Pas le bon nombre d'option.\n");
+        fprintf(LOG, "[FATAL] Pas le bon nombre d'option.\n");
         exit(EXIT_FAILURE);
+    }
+
+
+    // recupération des compte
+    c = init_compte(argv[CHEMAIN]);
+    fprintf(LOG ,"%s SUCCESS INIT COMPTE\n", SERVER);
+    if (DEBUG)
+    {
+        fprintf(LOG, "[DEBUG] COMPTE :\n");
+        affiche_compte(c);
     }
 
 
@@ -46,51 +54,44 @@ int main(int argc, char const *argv[])
     int nbColisMax = atoi(argv[NB_COLIS]);
     if (nbColisMax == 0 || nbColisMax < -1)
     {
-        fprintf(stderr, "[FATAL] Nombre de colis incorecte.\n");
+        fprintf(LOG, "[FATAL] Nombre de colis incorecte.\n");
         exit(EXIT_FAILURE);
     }
     else if (nbColisMax == -1)
     {
         colisInfinit = true;
-        printf("[RAPTOR] SUCCESS COLIS SET INFINIT\n");
+        fprintf(LOG,"%s SUCCESS COLIS SET INFINIT\n", SERVER);
     }
     else
     {
-        printf("[RAPTOR] SUCCESS COLIS SET %d\n", nbColisMax);
+        fprintf(LOG,"%s SUCCESS COLIS SET %d\n", SERVER, nbColisMax);
     }
 
     // inisalisation avec la bdd
     conn = mysql_init(NULL);
-    if (BDD)
+    if(BDD)
     {
-        if (conn == NULL) 
-        { 
-            fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
-            exit(EXIT_FAILURE); 
-        }
-        if (mysql_real_connect(conn, BDD_HOST, BDD_USER, BDD_PASSWORD, BDD_NAME, BDD_PORT, NULL, 0) == NULL) { 
-            fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
-            mysql_close(conn); 
-            exit(1); 
-        }
-        printf("[RAPTOR] SUCCESS CONNECT MYSQL\n");
+        init_bdd(conn);
     }
+    
+
+    
     
     
 
-    // mise en place
+    // mise en place du socket
     sock = socket(AF_INET, SOCK_STREAM, 0);
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    addr.sin_addr.s_addr = inet_addr("0.0.0.0"); //"127.0.0.1"
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(9000);
+    addr.sin_port = htons(atoi(argv[PORT]));
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
 
     if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
-        fprintf(stderr, "[ERROR] setsockopt.\n");
+        fprintf(LOG, "[ERROR] setsockopt.\n");
         exit(EXIT_FAILURE);
     }
-    printf("[RAPTOR] SUCCESS INIT SOCKET\n");
+    fprintf(LOG,"%s SUCCESS INIT SOCKET\n", SERVER);
 
 
     // boucle que mode server

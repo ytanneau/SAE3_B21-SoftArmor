@@ -19,7 +19,7 @@ function ajout_commande($id_commande, $liste_produits) {
 function get_commandes($id_client) {
     global $pdo;
     
-    $stmt = $pdo->prepare("SELECT * FROM _commande WHERE id_client = :id_client ORDER BY date_commande");
+    $stmt = $pdo->prepare("SELECT * FROM _commande WHERE id_client = :id_client ORDER BY date_commande DESC");
     $stmt->bindValue(":id_client", $id_client, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -34,12 +34,33 @@ function get_commandes_vendeur($id_vendeur) {
     INNER JOIN _produit ON _elt_commande.id_produit = _produit.id_produit
     INNER JOIN _client ON _commande.id_client = _client.id_compte
     WHERE id_vendeur = :id_vendeur
-    ORDER BY date_commande");
+    ORDER BY date_commande DESC");
 
     $stmt->bindValue(":id_vendeur", $id_vendeur, PDO::PARAM_INT);
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_date_commande($id_commande) {
+    global $pdo;
+
+    $stmt =  $pdo->prepare("SELECT date_commande FROM _commande WHERE id_commande = :id_commande");
+    $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['date_commande'];
+}
+
+function get_pseudo_commande($id_commande) {
+    global $pdo;
+
+    $stmt =  $pdo->prepare("SELECT pseudo 
+    FROM _commande 
+    INNER JOIN client ON id_client = id_compte
+    WHERE id_commande = :id_commande");
+    $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['pseudo'];
 }
 
 function get_elements_commande($id_commande) {
@@ -78,7 +99,7 @@ function connexion_delivraptor($fd,$id,$mdp){
 function create_colis($fd){
     fwrite($fd,"2");
     $buffer = fread($fd,200);
-
+    
     $buffer = explode("=",$buffer);
     return trim($buffer[1]);
 }
@@ -126,11 +147,9 @@ function get_image_colis($fd,$bordereau){
     return $info[0];
 }
 
-function connexion_socket(){
-
-    $fd =fsockopen("127.0.0.1",9000, $errno, $errstr);
+function connexion_socket($ip,$port){
+    $fd =@fsockopen($ip,$port, $errno, $errstr);
     if ($fd === false) {
-    
         echo "Connexion Delivraptor échouée ";
     }
     return $fd;

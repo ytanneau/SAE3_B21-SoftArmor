@@ -43,7 +43,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <main>
         <section class="filters">
             <form>
-                <fieldset>
+                <fieldset id = "prixF">
                     <legend>Filtrer par prix</legend>
 
                     <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
@@ -63,13 +63,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 </fieldset>
             </form>
         </section>
-
+        <label for="tri">Trier par </label>
         <select id="tri" value ="triOption">
-            <option value="nom_public" data-name ="ASC">choisissez un tri :</option>
-            <option value="note_moy" data-name ="ASC">Par notes</option>
-            <option value="triPrix" data-name ="ASC">Par prix decroissant</option>
-            <option value="triPrixCroi" data-name ="DESC">Par prix croissant</option>
-            <option value="triReduc" data-name ="ASC">Par prix réduction</option>
+            <option value="nom_public" data-name ="ASC">ordre alphabtique</option>
+            <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
+            <option value="triPrix" data-name ="ASC">Prix croissants</option>
+            <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
+            <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
 
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
@@ -105,17 +105,48 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         // Actualiser le tri à chaque nouvelle sélection
         s.addEventListener("change", (e) => {
-            if (isSearchPage) {
                 e.preventDefault();
                 let selNum = s.options[s.selectedIndex].value;
                 let selName = s.options[s.selectedIndex].dataset.name;
-
-
                 searchState.sort.field = selNum;
                 searchState.sort.order = selName;
                 console.log(searchState.sort.field);
                 console.log(searchState.sort.order);
-            }
+                fetchProduitsJSON();
+        });
+
+        var radios = document.querySelectorAll("input[name=\"prix\"]");
+
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                let valueName = document.querySelector('input[name="prix"]:checked').value;
+                console.log(valueName);
+                if (valueName === "zeroTo20") {
+                    searchState.filters.price.min = 0;
+                    searchState.filters.price.max = 20;
+                }
+                else if (valueName === "twentyTo50") {
+                    searchState.filters.price.min = 20;
+                    searchState.filters.price.max = 50;
+                }
+                else if (valueName === "fiftyTo100") {
+                    searchState.filters.price.min = 50;
+                    searchState.filters.price.max = 100;
+                }
+                else if (valueName === "hundredTo300") {
+                    searchState.filters.price.min = 100;
+                    searchState.filters.price.max = 300;
+                }
+                else if (valueName === "over300") {
+                    searchState.filters.price.min = 300;
+                    searchState.filters.price.max = null;
+                }
+                else {
+                    searchState.filters.price.min = null;
+                    searchState.filters.price.max = null;
+                }
+                fetchProduitsJSON();
+            })    
         });
 
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
@@ -147,7 +178,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
-
+            console.log(resultGrid);
             // Vider les produits déjà présents dans la grille
             while (resultGrid.firstChild) {
                 resultGrid.removeChild(resultGrid.firstChild);
@@ -197,7 +228,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 // Si le produit est en réduction, l'indiquer
                 if (produit.prix_actuel != produit.prix) {
-                    console.log("test 1");
                     pPrixReduit = document.createElement("p");
                     let prixReduit = Number.parseFloat(produit.prix_actuel * (1 + produit.tva / 100)).toFixed(2);
                     let textePrixReduit = document.createTextNode(`${prixReduit} €`);

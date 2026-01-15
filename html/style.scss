@@ -46,7 +46,7 @@ hr {
     
 
     // Champ et boutons - et +
-    input[type="button"], input[type="number"] {
+    input[type="button"], input[type="number"], input[type="text"] {
         height: 2em;
         margin: 0;
         padding: 0;
@@ -75,7 +75,7 @@ hr {
     }
 
     // Champ
-    input[type="number"] {
+    input[type="number"], input[type="text"] {
         width: 3em;
         box-sizing: border-box;
         border-left: 0;
@@ -944,12 +944,14 @@ h3 {
 
         .bouton {
             @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
-            margin: 0 0 0 2em;
-            min-width: 20%;
         }
 
         .grave {
-            background-color: $rouge;
+            @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit, $display: default);
+        }
+
+        .valider {
+            @include bouton_new($couleur_prix, $color: white, $padding: 0.5em, $size: 1em, $angle: $angle_petit, $display: inline);
         }
 
         p {
@@ -1492,5 +1494,15 @@ aside {
                 }
             }
         }
+    }
+}
+
+// Pages à imprimer (récap de commandes)
+@media print {
+    h1 {
+        font-size: 8mm;
+    }
+    header, button, footer, a {
+        display:none !important;
     }
 }

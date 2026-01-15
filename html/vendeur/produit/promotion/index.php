@@ -33,11 +33,12 @@
     
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST['euro']) && $_POST['euro'] !== ""){
-            $euro = $_POST['euro'];
-            $euro = str_replace('-', "",$euro);
+
+        if(isset($_POST['pourcentage']) && $_POST['pourcentage'] !== ""){
+            $pourcentage = $_POST['pourcentage'];
+            $pourcentage = str_replace('-', "",$pourcentage);
         } else {
-            $euro = 0;
+            $pourcentage = 0;
         }
 
         if (isset($_FILES['photoPromotion']) &&
@@ -59,7 +60,7 @@
         } else {
             $id_image_principal = null;
         }
-        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
+        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_image_principal);
         header("Location: ../?produit=" . $id_produit);
         exit();
     }
@@ -96,7 +97,7 @@
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage">
+            <input type="text" id="pourcentage" name="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
             <input type="text" id="euro" name="euro" readonly>
@@ -170,6 +171,7 @@
             for()
         }*/
         // REDUCTION //
+
         const warning3 = document.getElementById("warning3");
         const pourcentage = document.getElementById("pourcentage");
         const euro = document.getElementById("euro");

@@ -13,7 +13,8 @@
     $search  = $data['search'] ?? '';
     $filters = $data['filters'] ?? [];
     $sort    = $data['sort'] ?? [];
-
+    $prixmin = $filters['price']['min'] ?? null;
+    $prixmax = $filters['price']['max'] ?? null;
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt 
@@ -29,21 +30,39 @@
         $requete .= " AND (nom_public LIKE :search OR description LIKE :search OR description_detaillee LIKE :search)";
         $params[':search'] = "%$search%";
     }
-    
-    if ($sort['field'] == 'nom_public') {
-        $requete .= " ORDER BY nom_public ASC";
+
+    if ($prixmin !== null) {
+        $requete .= " AND  (prix_actuel * (1 + tva / 100)) >= :prixmin";
+        $params[':prixmin'] = $prixmin;
     }
-    else {
-        $requete .= " ORDER BY :field :order nom_public ASC";
-        $params[':field'] = $sort['field'];
-        $params[':order'] = $sort['order'];
+
+    if ($prixmax !== null) {
+        $requete .= " AND  (prix_actuel * (1 + tva / 100)) <= :prixmax";
+        $params[':prixmax'] = $prixmax;
     }
     
+    $sortableFields = [
+        'nom_public' => 'nom_public',
+        'note_moy'   => 'note_moy',
+        'triPrix'    => 'prix_actuel',
+        'triPrixCroi'=> 'prix_actuel',
+        'triReduc'   => 'prix_actuel'
+    ];
+
+    $fieldKey = $sort['field'] ?? 'nom_public';
+    $order = strtoupper($sort['order'] ?? 'ASC');
+
+    $field = $sortableFields[$fieldKey] ?? 'nom_public';
+    if (!in_array($order, ['ASC','DESC'])) {
+        $order = 'ASC';
+    }
+
+    $requete .= " ORDER BY $field $order, nom_public ASC";
+
 
     $requete = $pdo->prepare($requete);
     $requete->execute($params);
     $produits = $requete->fetchAll(PDO::FETCH_ASSOC);
-
     echo json_encode([
         'produits' => $produits,
         'total' => count($produits)

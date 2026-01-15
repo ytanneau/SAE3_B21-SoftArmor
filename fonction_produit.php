@@ -93,7 +93,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image');
         $requete->execute();
@@ -105,7 +105,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
         WHERE p.categorie = :categorie');
@@ -119,7 +119,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
         ORDER BY date_creation DESC;');
@@ -132,7 +132,7 @@
         global $pdo;
         
         $requete = $pdo->prepare('
-        SELECT p.*, (prix * (tva + 100) / 100) AS prix, url_image, alt, _image.titre
+        SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
         WHERE en_promotion <> 0
@@ -357,9 +357,7 @@
          */
         global $pdo;
         try{
-            $sqlImage = "INSERT INTO _image(url_image,titre,alt)
-                        VALUES(:url_img, :titre_img, :alt_img);";
-            $requete = $pdo->prepare($sqlImage);
+            $requete = $pdo->prepare("INSERT INTO _image(url_image,titre,alt)VALUES(:url_img, :titre_img, :alt_img);");
             $requete->execute([
                 ':url_img' => $url, 
                 ':titre_img' => $titre_img, 
@@ -626,6 +624,17 @@
         unlink($_SERVER['DOCUMENT_ROOT'] . "/" . $tab_image['url_image']);
     }
 
+    function delete_image_bdd($id_image){
+        global $pdo;
+        
+        $tab_image = get_image($id_image);
+
+        $stmt = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
+        $stmt->execute([
+            "id_image" => $id_image
+        ]);
+    }
+
     function get_image($id_image){
         global $pdo;
 
@@ -635,7 +644,7 @@
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    
     function date_banniere_occupe(){
         global $pdo;
 
@@ -648,4 +657,28 @@
             array_push($tab_final, $lignes['date_debut'], $lignes['date_fin']);
         }
         return $tab_final;
+    }
+
+    function unlink_image_produit($id_image, $id_produit){
+        global $pdo;
+
+        try{
+            $tab = get_image_produit($id_produit);
+
+            if($tab['id_image1'] == $id_image){
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = NULL WHERE id_produit = :id_produit");
+            } else if ($tab['id_image2'] == $id_image) {
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = NULL WHERE id_produit = :id_produit");
+            } else {
+                $stmt = null;
+            }
+
+            if($stmt != null){
+                $stmt->execute([
+                    "id_produit" => $id_produit
+                ]);
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
     }

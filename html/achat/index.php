@@ -1,6 +1,8 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+const IP = "host.docker.internal";
+const PORT = "9000";
 
 if (!isset($_SESSION)) {
     session_start();
@@ -135,7 +137,7 @@ if ($numEtape == 3) {
 
     //connexion au delivraptor
     $conn =false;
-    $fd = connexion_socket();
+    $fd = connexion_socket(IP,PORT);
     if($fd){
         $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
         //creer bordereau colis
@@ -143,15 +145,7 @@ if ($numEtape == 3) {
         deconnexion_socket($fd);
     }
 
-    // Création commande
-    $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
-    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
-    $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_INT);
-    $requete->execute();
-
-    // Récupération de l'id de commande
-    $id_commande = $pdo->lastInsertId();
-
+    
     // Si c'est un produit unique (pas un panier)
     if ($_POST['id_produit'] != 'panier') {
         $produit = detail_produit($_POST['id_produit']);
@@ -159,27 +153,6 @@ if ($numEtape == 3) {
         if ($produit["quantite"] <= 0) {
             $produits_plus_en_stock = [$produit];
             $achat_reussi = false;
-
-        } else {
-
-            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
-            FROM produit
-            INNER JOIN vendeur ON _produit.id_vendeur = _vendeur.id_compte
-            WHERE id_produit = :id_produit");
-            $requete->bindValue(":id_produit", $_POST['id_produit']);
-            $requete->execute();
-            $produit = $requete->fetch(PDO::FETCH_ASSOC);
-
-            $liste_produits[] = [
-                "id_produit" => $_POST["id_produit"],
-                "prix" => $produit["prix"],
-                "quantite" => 1,
-                "nom_produit" => $produit["nom_produit"],
-                "nom_vendeur" => $produit["nom_vendeur"]
-            ];
-
-            update_stock($_POST['id_produit'], "-1");
-            ajout_commande($id_commande, $liste_produits);
         }
 
     // Sinon si c'est un panier
@@ -200,15 +173,48 @@ if ($numEtape == 3) {
                 $achat_reussi = false;
             }
         }
+    }
+    
+    
+    if ($achat_reussi) {
+        // Création commande
+        $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
+        $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+        $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_STR);
+        $requete->execute();
+        
+        // Récupération de l'id de commande
+        $id_commande = $pdo->lastInsertId();
+        
+        // Si c'est un produit unique (pas un panier)
+        if ($_POST['id_produit'] != 'panier') {
 
-        if ($achat_reussi) {
+            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
+            FROM produit
+            WHERE id_produit = :id_produit");
+            $requete->bindValue(":id_produit", $_POST['id_produit']);
+            $requete->execute();
+            $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+            $liste_produits[] = [
+                "id_produit" => $_POST["id_produit"],
+                "prix" => $produit["prix"],
+                "quantite" => 1,
+                "nom_produit" => $produit["nom_produit"],
+                "nom_vendeur" => $produit["nom_vendeur"]
+            ];
+
+            update_stock($_POST['id_produit'], "-1");
+            ajout_commande($id_commande, $liste_produits);
+
+        // Sinon si c'est un panier
+        } else {
             foreach ($liste_produits as $produit) {
                 update_stock($produit['id_produit'], '-' . $produit['quantite']);
             }
 
             ajout_commande($id_commande, $liste_produits);
             header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
-
         }
     }
 

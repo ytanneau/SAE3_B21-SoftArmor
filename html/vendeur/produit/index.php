@@ -50,8 +50,11 @@
         exit();
     }
     
-    
+    $compteur = 0;
     $tab_promo = get_info_promotion($id_produit);
+    foreach($tab_promo as $ligne){
+        $compteur++;
+    }
 ?>
 <!doctype html>
 <html lang="fr">
@@ -63,7 +66,7 @@
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
-        <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+        <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="produit-vendeur">
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
@@ -116,17 +119,25 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                <?php if($compteur === 2){ ?>
+                    <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>Promotion/Reduction <br> (Maximum de deux promotions par vendeur)</button>
+                <?php } else {?>
+                    <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                <?php } ?>
                 <?php if($tab_promo != null){
                     foreach($tab_promo as $ligne){
                         $id_promo = $ligne['id_promo'];
-                        $date = $ligne['date_debut']?>
+                        $date = $ligne['date_debut'];
+                        $temp_date = explode("-",$date);  
+                        $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
+                        ?>
                     <a 
                         class="bouton_vendeur_produit" 
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                        Modifier la promotion du <?= htmlentities($date)?>
+                        Modifier la promotion du <?= htmlentities($new_date)?>
                     </a>
                     <?php }} ?>
-                <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                
                 <?php 
             } ?>
             

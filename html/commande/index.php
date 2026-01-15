@@ -1,28 +1,11 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+const IP = "host.docker.internal";
+const PORT = "9000";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
 $MOIS_ANNEE = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-
-
-// require("fpdf/fpdf.php");
-
-// // Instantiate and use the FPDF class 
-// $pdf = new FPDF();
-
-// //Add a new page
-// $pdf->AddPage();
-
-// // Set the font for the text
-// $pdf->SetFont('Arial', 'B', 18);
-
-// // Prints a cell with given text 
-// $pdf->Cell(60,20,'Hello GeeksforGeeks!');
-
-// // return the generated output
-// $pdf->Output();
-
 
 
 if (!isset($_SESSION)) {
@@ -44,6 +27,7 @@ require_once HOME_GIT . "/fonction_commande.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
+    $date_commande = get_date_commande($_GET['commande']);
 } else {
     $liste_commandes = get_commandes($_SESSION["id_compte"]);
 
@@ -54,10 +38,16 @@ if (isset($_GET["commande"])) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alizon - Vos commandes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alizon - Vos commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
+
+    <script>
+        function generePDF() {
+            window.print();
+        }
+    </script>
 </head>
 
 <body class="liste">
@@ -75,8 +65,13 @@ if (isset($_GET["commande"])) {
             <?php } else { 
                 $somme_totale = 0;
                 $vendeur_prec = "";
+                
+                $d = strtotime($date_commande);
+                $jour = $JOUR_SEMAINE[date("w", $d)];
+                $mois = $MOIS_ANNEE[date((int)"m", $d)];
                 ?>
                 
+                <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
                 <h1>Liste des éléments de la commande : </h1>
                 <ul>
                     <hr>
@@ -100,6 +95,8 @@ if (isset($_GET["commande"])) {
                 </ul>
                 
                 <p>Somme totale de la commande : <?=number_format($somme_totale, 2, ',', ' ')?> €</p>
+
+                <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
             <?php } ?>
         </div>
 
@@ -115,14 +112,14 @@ if (isset($_GET["commande"])) {
                     //connexion delivraptor
                     $conn =false;
                     
-                    $fd = connexion_socket();
+                    $fd = connexion_socket(IP,PORT);
                     
                     if($fd){
                     $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
                     
                     //si connexion
                     if ($conn == "true"){
-                        $bordereau = $commande["bordereau"];
+                        $bordereau = $commande["bordereau_colis"];
                         //recuperation des données du colis
                         $info_colis =get_info_colis($fd,$bordereau);
                         $texte_img="";

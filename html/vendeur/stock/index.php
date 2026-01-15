@@ -85,7 +85,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     <body class="stock">
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
         <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
-        <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+        <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="content_produit_vendeur">
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
