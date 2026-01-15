@@ -64,7 +64,7 @@
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
-        if (!isset($_POST['description'])) $_POST['description'] = null;
+        if (!isset($_POST['commentaire'])) $_POST['commentaire'] = null;
 
         if ($_FILES['image']['size'] == 0){
             $image = null;
@@ -80,7 +80,7 @@
             }
             
             try {
-                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
+                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['commentaire'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
@@ -189,7 +189,7 @@
 
                     <label for="description">Description</label>
                     <textarea class="champ text" name="description" id="description" class="champ text"><?php
-                        echo trim($_POST['description'] ?? $avis_existant['commentaire'] ?? '');
+                        echo trim($_POST['commentaire'] ?? $avis_existant['commentaire'] ?? '');
                     ?></textarea>
 
                     <?php if (isset($erreur['description'])) { ?>
