@@ -30,11 +30,10 @@ $lien_retour = empty($recherche) ? HOME_SITE : (HOME_SITE . 'recherche/?recherch
 try {
     $produit = detail_produit_image($id_produit);
     
-
     if (!$produit) {
-
         die("Produit introuvable.");
     }
+
     $note = note_produit($id_produit)['note_moy'];
 
     // Récupérer les avis
@@ -204,9 +203,23 @@ if ($_POST != NULL) {
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                             <?php } ?>
+
+                            <button class="btn-report" data-review="<?=$avis['id_avis']?>">
+                                Signaler <?= $avis['id_avis'] ?>
+                            </button>
                         </li>
                     <?php } ?>
                 </ul>
+
+                <div id="modal_signalement" class="modal">
+                    <div class="modal_content">
+                        <h3>Signaler cet avis</h3>
+                        
+                        <form id="form_signalement" action="" method="post">
+                            
+                        </form>
+                    </div>
+                </div>
             </section>
         </div>
                     
