@@ -21,7 +21,7 @@
         exit;
     }
 
-    if ($_GET == NULL || !isset($_GET['produit'])) {
+    if ($_GET == NULL || !isset($_GET['produit']) || !isset($_GET['idPromo'])) {
        renvoi();
     }
 
@@ -144,7 +144,7 @@
                 <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
             <?php } else { ?>
                 <label for="photoPromotion">Ajouter une bannière</label>
-                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">p ??
+                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <?php } ?>
             
             <h3>Réduction</h3>
