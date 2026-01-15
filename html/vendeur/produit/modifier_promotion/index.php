@@ -34,9 +34,9 @@
 
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     if($tab_info_promotion['reduction'] != null){
-        $euro = $tab_info_promotion['reduction'];
+        $pourcentage = $tab_info_promotion['reduction'];
     } else {
-        $euro = null;
+        $pourcentage = null;
     }
     
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
@@ -50,11 +50,11 @@
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST['euro']) && !empty($_POST['euro'])){
-            $euro = $_POST['euro'];
-            $euro = str_replace('-', "",$euro);
+        if(isset($_POST['pourcentage']) && !empty($_POST['pourcentage'])){
+            $pourcentage = $_POST['pourcentage'];
+            $pourcentage = str_replace('-', "",$pourcentage);
         } else {
-            $euro = null;
+            $pourcentage = null;
         }
 
         $id_nouvelle_banniere = $id_image_initial;
@@ -85,17 +85,17 @@
                     if(move_uploaded_file($cheminTemp,$cheminFinal)){
                         $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
 
-                        if($id_nouvelle_banniere){
-                            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
-                        }
-                        if($id_image_initial){
-                            delete_image($id_image_initial);
+                            if($id_nouvelle_banniere){
+                                update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                            }
+                            if($id_image_initial){
+                                delete_image($id_image_initial);
+                            }
                         }
                     }
-                }
-            } else {
-                if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+                } else {
+                    if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                        $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
 
                     if($id_nouvelle_banniere){
                         update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
@@ -106,7 +106,7 @@
                 }
             }
         } else {
-            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
         }
         
         header("Location: ../?produit=" . $id_produit);
@@ -144,16 +144,16 @@
                 <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
             <?php } else { ?>
                 <label for="photoPromotion">Ajouter une bannière</label>
-                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">p ??
             <?php } ?>
             
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage">
+            <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value="<?= htmlentities($euro ?? '')?>" readonly>
+            <input type="text" id="euro" name="euro" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
@@ -254,9 +254,8 @@
             const diffJours = (d2 - d1) / 86400000;
             cout.value = PRIX * diffJours + PRIX + "€";
 
-            let temp = prixInitial - euro.value;
-            pourcentage.value = 100 - (temp / prixInitial * 100);
-            pourcentage.value = Math.ceil(pourcentage.value);
+            euro.value = prixInitial * (100 - pourcentage.value) / 100;
+            euro.value = Math.ceil(euro.value);
             prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
             prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
         }
