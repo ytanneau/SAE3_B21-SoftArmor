@@ -418,7 +418,7 @@ if ($_POST != NULL){
 
                         <!-- Boutons d'actions -->
                         <div>
-                            <a href="modification_avis/?produit=<?= htmlentities($row['id_produit']) ?>" class="bouton">Modifier</a>
+                            <a href="modification_avis/?produit=<?= htmlentities($row['id_produit']) ?>" class="bouton modif">Modifier</a>
                             <?php if (isset($row['url_image'])) { ?>
                                 <a href="?supprimer_avis_image=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis et son image associée ?')">Supprimer</a>
                             <?php }  else { ?>

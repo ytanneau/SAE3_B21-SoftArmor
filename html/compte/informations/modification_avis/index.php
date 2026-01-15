@@ -53,16 +53,14 @@
     }
 
     //met le limage avec les autre pour éviter de la perdre
+    $succes = false;
+
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
     }
 
-    
-    
-    $succes = false;
-
-    else if ($_POST != null){
+    if ($_POST != null){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
