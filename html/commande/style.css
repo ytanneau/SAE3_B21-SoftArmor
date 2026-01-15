@@ -1,9 +1,0 @@
-@media print {
-    body {
-        margin: 20mm;
-    }
-
-    header, button, footer, a {
-        display:none !important;
-    }
-}

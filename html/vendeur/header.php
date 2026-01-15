@@ -22,7 +22,7 @@
             
         <ul>
             <li>
-                <a href="<?= HOME_SITE . 'vendeur/stock' ?>">
+                <a href="<?= HOME_SITE . 'vendeur/accueil' ?>">
                     <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon Vendeur" title="Logo Alizon Vendeur"> 
                 </a> 
             </li>
