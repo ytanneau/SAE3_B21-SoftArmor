@@ -58,39 +58,29 @@
         }
 
         $id_nouvelle_banniere = $id_image_initial;
-
-        if (
+        if($_POST['supp_image_promo'] == 'on'){
+            delete_image($id_image_initial);
+            $id_nouvelle_banniere = null;
+        } else if (
             isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK
+        ){
+            $nomImageTemp = $_FILES['photoPromotion'];
+            // recupere le nom temporaire du fichier pour le deplacer
+            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+            
+            $nomImage = $id_produit . "_promotion.png";
+            
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
+            // definition des caractéristiques d'une image
+            $url = "ressources/promotion/" . $nomImage;
+            $altDefault = "Image de promotion";
+            if(
+                $date_debut_initial != $_POST['dateDebut'] ||
+                $date_fin_initial != $_POST['dateFin']
             ){
-                $nomImageTemp = $_FILES['photoPromotion'];
-                // recupere le nom temporaire du fichier pour le deplacer
-                $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-                
-                $nomImage = $id_produit . "_promotion.png";
-                
-                $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
-                // definition des caractéristiques d'une image
-                $url = "ressources/promotion/" . $nomImage;
-                $altDefault = "Image de promotion";
-                if(
-                    $date_debut_initial != $_POST['dateDebut'] ||
-                    $date_fin_initial != $_POST['dateFin']
-                ){
-                    if(banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
-                        
-                        if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                            $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
-
-                            if($id_nouvelle_banniere){
-                                update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
-                            }
-                            if($id_image_initial){
-                                delete_image($id_image_initial);
-                            }
-                        }
-                    }
-                } else {
+                if(banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
+                    
                     if(move_uploaded_file($cheminTemp,$cheminFinal)){
                         $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
 
@@ -98,10 +88,22 @@
                             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
                         }
                         if($id_image_initial){
-                            delete_image_bdd($id_image_initial);
+                            delete_image($id_image_initial);
                         }
                     }
                 }
+            } else {
+                if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+
+                    if($id_nouvelle_banniere){
+                        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
+                    }
+                    if($id_image_initial){
+                        delete_image_bdd($id_image_initial);
+                    }
+                }
+            }
         } else {
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
         }
@@ -138,7 +140,7 @@
                 <label for="photoPromotion">Changer la banniere</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 <label for="supp_image_promo">Supprimer la bannière</label>
-                <input type="checkbox" id="supp_image_promo">
+                <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
             <?php } else { ?>
                 <label for="photoPromotion">Ajouter une bannière</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
