@@ -28,8 +28,12 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
     $id_promo = $_GET['idPromo'];
-
-    $prix = detail_produit($_GET['produit'])['prix'];
+    if(!empty(detail_produit($_GET['produit'])['prix'])){
+        $prix = detail_produit($_GET['produit'])['prix'];
+    } else {
+        $prix = "";
+    }
+    
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
     $date_debut_initial = $tab_info_promotion['date_debut'];
