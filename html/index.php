@@ -32,6 +32,9 @@ unset($pdo);
 
 
 // fonction d'affichage de produits
+// $liste_produits est une liste avec des produits dedans
+// $nom_classe_js est une chaine de car qui permet au script JS de fonctionner
+// pour rajouter une nouvelle liste => penser à changer le script et ajouter des trucs
 function afficher_produits($liste_produits, $nom_classe_js = "") {?>
     
     <div>
