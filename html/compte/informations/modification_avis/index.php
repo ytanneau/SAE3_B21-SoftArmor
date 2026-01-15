@@ -32,32 +32,6 @@
     require_once HOME_GIT . 'fonction_produit.php';
 
     $erreur = [];
-    $editMode = false;
-    $avis_actuel = null;
-
-    // Si un id_avis est fourni, on passe en mode modification
-    if (isset($_GET['id_avis'])) {
-        $_GET['id_avis'] = intval($_GET['id_avis']);
-        if ($_GET['id_avis'] > 0) {
-            try {
-                $avis_actuel = get_avis($_GET['id_avis']);
-            } catch (PDOException $e) {
-                $erreur['fatal'] = true;
-            }
-
-            if (!$avis_actuel) {
-                $erreur['avis_introuvable'] = true;
-            } else if (!isset($_SESSION['id_compte']) || intval($avis_actuel['id_client']) !== intval($_SESSION['id_compte'])) {
-                $erreur['non_autorise'] = true;
-            } else {
-                $editMode = true;
-                // Uniformiser: réutiliser la logique existante basée sur $_GET['produit']
-                $_GET['produit'] = $avis_actuel['id_produit'];
-            }
-        } else {
-            $erreur['avis_introuvable'] = true;
-        }
-    }
 
     if (isset($_GET['produit'])) {
         $_GET['produit'] = htmlentities(trim($_GET['produit']));
@@ -71,6 +45,13 @@
         }
     }
 
+    // Récupérer l'avis existant
+    $avis_existant = check_avis_existe($_GET['produit'], $_SESSION['id_compte']);
+    
+    if (!$avis_existant){
+        $erreur['avis'] = EXISTE_PAS;
+    }
+
     //met le limage avec les autre pour éviter de la perdre
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $_SESSION['id_compte'] . '_'. time();
@@ -80,10 +61,6 @@
     
     
     $succes = false;
-    // En création uniquement: empêcher un doublon
-    if (!$editMode && check_avis_existe($_GET['produit'], $_SESSION['id_compte'])){
-        $erreur['avis'] = EXISTE;
-    }
 
     else if ($_POST != null){
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
@@ -92,17 +69,7 @@
         if (!isset($_POST['description'])) $_POST['description'] = null;
 
         if ($_FILES['image']['size'] == 0){
-            // Pas de nouvelle image: en modification on tente de conserver l'existante
-            if ($editMode) {
-                $chemin_existant = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'.png';
-                if (file_exists('../' . $chemin_existant)) {
-                    $image = $chemin_existant;
-                } else {
-                    $image = null;
-                }
-            } else {
-                $image = null;
-            }
+            $image = null;
         }
         else{
             $image = 'ressources/avis/'.$_GET['produit'].'_'.$_SESSION['id_compte'].'.png';
@@ -115,13 +82,7 @@
             }
             
             try {
-                if ($editMode) {
-                    // Remplacer l'avis: suppression puis recréation avec les nouvelles valeurs
-                    //supprimer_avis($_GET['produit'], $_SESSION['id_compte']);
-                    cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
-                } else {
-                    cree_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
-                }
+                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
@@ -162,7 +123,7 @@
     <main class = "content_avis_client">
         <?php if ($succes == true) { ?>
             <div class="fini">
-                <h1><?= $editMode ? 'Votre avis a été modifié' : 'Votre avis a été enregistré' ?></h1>                
+                <h1>Votre avis a été modifié</h1>                
                 <br>
                 <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
@@ -172,15 +133,9 @@
                 <br>
                 <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
-        <?php } else if (isset($erreur['avis_introuvable']) || isset($erreur['non_autorise'])) { ?>
-            <div class="fini">
-                <h1><?= isset($erreur['non_autorise']) ? "Vous n'êtes pas autorisé à modifier cet avis" : "L'avis demandé est introuvable" ?></h1>
-                <br>
-                <a href="../">Retour à mon compte</a>
-            </div>
         <?php } else if (isset($erreur['avis'])) { ?>
             <div class="fini">
-                <h1>Vous avez déjà donné votre avis sur ce produit</h1>
+                <h1>Aucun avis trouvé pour ce produit</h1>
                 <br>
                 <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
@@ -201,13 +156,8 @@
                         value="<?=htmlentities(trim($_GET['produit'] ?? ''))?>"
                         name="produit"
                         id="produit">
-                    <?php 
-                        $pref_note = isset($_POST['note']) ? $_POST['note'] : ($editMode ? ($avis_actuel['note'] ?? 5) : 5);
-                        $pref_titre = isset($_POST['titre']) ? $_POST['titre'] : ($editMode ? ($avis_actuel['titre'] ?? '') : '');
-                        $pref_desc = isset($_POST['description']) ? $_POST['description'] : ($editMode ? ($avis_actuel['commentaire'] ?? ($avis_actuel['description'] ?? '')) : '');
-                    ?>
 
-                    <label for="note">Note : <output id="output"><?= htmlentities($pref_note) ?></output></label>
+                    <label for="note">Note : <output id="output"><?= $_POST['note'] ?? $avis_existant['note'] ?? 5 ?></output></label>
                     
                     <input type="range" 
                         name="note" 
@@ -215,7 +165,7 @@
                         min="1"
                         max="5"
                         step="1"
-                        value="<?= htmlentities($pref_note) ?>"
+                        value="<?= $_POST['note'] ?? $avis_existant['note'] ?? 5 ?>"
                         oninput="output.value = this.value"
                         required
                         class="champ">
@@ -230,7 +180,7 @@
                     <input type="text" 
                         name="titre" 
                         id="titre"
-                        value="<?= htmlentities($pref_titre) ?>"
+                        value="<?= $_POST['titre'] ?? $avis_existant['titre'] ?? '' ?>"
                         class="champ">
 
                     <?php if (isset($erreur['titre'])) { ?>
@@ -241,7 +191,7 @@
 
                     <label for="description">Description</label>
                     <textarea class="champ text" name="description" id="description" class="champ text"><?php
-                        echo trim($pref_desc);
+                        echo trim($_POST['description'] ?? $avis_existant['description'] ?? '');
                     ?></textarea>
 
                     <?php if (isset($erreur['description'])) { ?>
@@ -266,7 +216,7 @@
                         </p>
                     <?php } ?>
 
-                    <input type="submit" value="<?= $editMode ? "Modifier l'avis" : "Créer l'avis" ?>" class="bouton">
+                    <input type="submit" value="Modifier l'avis" class="bouton">
                 </form>
             </section>
         <?php } ?>
