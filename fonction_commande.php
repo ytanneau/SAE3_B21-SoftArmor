@@ -19,7 +19,7 @@ function ajout_commande($id_commande, $liste_produits) {
 function get_commandes($id_client) {
     global $pdo;
     
-    $stmt = $pdo->prepare("SELECT * FROM _commande WHERE id_client = :id_client ORDER BY date_commande");
+    $stmt = $pdo->prepare("SELECT * FROM _commande WHERE id_client = :id_client ORDER BY date_commande DESC");
     $stmt->bindValue(":id_client", $id_client, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -34,7 +34,7 @@ function get_commandes_vendeur($id_vendeur) {
     INNER JOIN _produit ON _elt_commande.id_produit = _produit.id_produit
     INNER JOIN _client ON _commande.id_client = _client.id_compte
     WHERE id_vendeur = :id_vendeur
-    ORDER BY date_commande");
+    ORDER BY date_commande DESC");
 
     $stmt->bindValue(":id_vendeur", $id_vendeur, PDO::PARAM_INT);
     $stmt->execute();
@@ -49,6 +49,18 @@ function get_date_commande($id_commande) {
     $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC)['date_commande'];
+}
+
+function get_pseudo_commande($id_commande) {
+    global $pdo;
+
+    $stmt =  $pdo->prepare("SELECT pseudo 
+    FROM _commande 
+    INNER JOIN client ON id_client = id_compte
+    WHERE id_commande = :id_commande");
+    $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['pseudo'];
 }
 
 function get_elements_commande($id_commande) {

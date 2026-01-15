@@ -1494,3 +1494,13 @@ aside {
         }
     }
 }
+
+// Pages à imprimer (récap de commandes)
+@media print {
+    h1 {
+        font-size: 8mm;
+    }
+    header, button, footer, a {
+        display:none !important;
+    }
+}

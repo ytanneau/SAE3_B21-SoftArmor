@@ -2551,4 +2551,13 @@ aside input.bouton:hover {
 }
 .stock main td form * {
   margin: auto 10px;
+}
+
+@media print {
+  h1 {
+    font-size: 8mm;
+  }
+  header, button, footer, a {
+    display: none !important;
+  }
 }/*# sourceMappingURL=style.css.map */

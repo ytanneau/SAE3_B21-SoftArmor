@@ -42,7 +42,6 @@ if (isset($_GET["commande"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Vos commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
-    <link rel="stylesheet" href="style.css">
 
     <script>
         function generePDF() {
