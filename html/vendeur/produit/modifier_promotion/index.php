@@ -36,7 +36,7 @@
     if($tab_info_promotion['reduction'] != null){
         $euro = $tab_info_promotion['reduction'];
     } else {
-        $euro = '';
+        $euro = null;
     }
     
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
@@ -150,7 +150,7 @@
             <input type="text" id="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value=<?= htmlentities($euro)?> readonly>
+            <input type="text" id="euro" name="euro" value=<?= htmlentities($euro ?? '')?> readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
