@@ -658,3 +658,28 @@
         }
         return $tab_final;
     }
+
+    function unlink_image_produit($id_image, $id_produit){
+        global $pdo;
+
+        try{
+            $tab = get_image_produit($id_produit);
+
+            if($tab['id_image1'] == $id_image){
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
+            } else if ($tab['id_image2'] == $id_image) {
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+            } else {
+                $stmt = null;
+            }
+
+            if($stmt != null){
+                $stmt->execute([
+                    "id_produit" => $id_produit,
+                    "id_image" => $id_image
+                ]);
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
