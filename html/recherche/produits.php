@@ -13,7 +13,7 @@
     $search  = $data['search'] ?? '';
     $filters = $data['filters'] ?? [];
     $sort    = $data['sort'] ?? [];
-
+    $prixF = $filters['prix'] ?? [];
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt 
@@ -29,8 +29,15 @@
         $requete .= " AND (nom_public LIKE :search OR description LIKE :search OR description_detaillee LIKE :search)";
         $params[':search'] = "%$search%";
     }
-    if (!empty($filters.$prix)){
-        $requete .=" AND prix_actuel > :prixmin AND prix_actuel < :prixmin";
+
+    if (!empty($prixmin)) {
+        $requete .= " AND prix > :prixmin";
+        $params[':prixmin'] = $prixF['min'];
+    }
+
+    if (!empty($prixmax)) {
+        $requete .= " AND prix < :prixmax";
+        $params[':prixmax'] = $prixF['min'];
     }
     
     $sortableFields = [
