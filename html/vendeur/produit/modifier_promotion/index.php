@@ -59,8 +59,9 @@
 
         $id_nouvelle_banniere = $id_image_initial;
         if($_POST['supp_image_promo'] == 'on'){
-            delete_image($id_image_initial);
             $id_nouvelle_banniere = null;
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
+            delete_image($id_image_initial);
         } else if (
             isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK
