@@ -1,8 +1,7 @@
 @media print {
-    body {
-        margin: 20mm;
+    h1 {
+        font-size: 8mm;
     }
-
     header, button, footer, a {
         display:none !important;
     }

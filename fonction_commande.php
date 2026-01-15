@@ -42,6 +42,15 @@ function get_commandes_vendeur($id_vendeur) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function get_date_commande($id_commande) {
+    global $pdo;
+
+    $stmt =  $pdo->prepare("SELECT date_commande FROM _commande WHERE id_commande = :id_commande");
+    $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['date_commande'];
+}
+
 function get_elements_commande($id_commande) {
     global $pdo;
 

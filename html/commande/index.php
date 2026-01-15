@@ -27,6 +27,7 @@ require_once HOME_GIT . "/fonction_commande.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
+    $date_commande = get_date_commande($_GET['commande']);
 } else {
     $liste_commandes = get_commandes($_SESSION["id_compte"]);
 
@@ -65,8 +66,13 @@ if (isset($_GET["commande"])) {
             <?php } else { 
                 $somme_totale = 0;
                 $vendeur_prec = "";
+                
+                $d = strtotime($date_commande);
+                $jour = $JOUR_SEMAINE[date("w", $d)];
+                $mois = $MOIS_ANNEE[date((int)"m", $d)];
                 ?>
                 
+                <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
                 <h1>Liste des éléments de la commande : </h1>
                 <ul>
                     <hr>
