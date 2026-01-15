@@ -69,7 +69,7 @@
         <?php include "../../header.php"?>
         <main class="mainInfoVendeur">
             <div class="entete">
-                <!-- Bouton de retour sur la page de gestion des stocks -->
+                <!-- Bouton de retour sur la page d'accueil -->
                 <a href="../../accueil"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Mes informations</h1>
             </div>

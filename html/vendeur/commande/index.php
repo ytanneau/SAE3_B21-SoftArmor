@@ -72,30 +72,32 @@ if (isset($_GET["commande"])) {
         </div>
 
     <?php } else { ?>
-        <?php if (count($liste_commandes) == 0) { ?>
-            <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
-        <?php } else {?> 
-            <ul>
-            <?php foreach ($liste_commandes as $commande) {
-                $d = strtotime($commande["date_commande"]);
-                $jour = $JOUR_SEMAINE[date("w", $d)];
-                $mois = $MOIS_ANNEE[date((int)"m", $d)];
-                ?>
+        <div>
+            <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+            <?php if (count($liste_commandes) == 0) { ?>
+                <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
+            <?php } else {?> 
+                <ul>
+                <?php foreach ($liste_commandes as $commande) {
+                    $d = strtotime($commande["date_commande"]);
+                    $jour = $JOUR_SEMAINE[date("w", $d)];
+                    $mois = $MOIS_ANNEE[date((int)"m", $d)];
+                    ?>
 
-                <li>
-                    <div>
-                        <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
-                        <p>Effectuée par <?=$commande["pseudo_client"]?></p>
-                        <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
-                    </div>
-                </li>
-                <hr>
+                    <li>
+                        <div>
+                            <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
+                            <p>Effectuée par <?=$commande["pseudo_client"]?></p>
+                            <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
+                        </div>
+                    </li>
+                    <hr>
 
+                <?php } ?>
+
+                </ul>
             <?php } ?>
-
-            </ul>
-        <?php } ?>
-
+        </div>
         
     <?php } ?>
     </main>
