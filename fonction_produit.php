@@ -666,9 +666,9 @@
             $tab = get_image_produit($id_produit);
 
             if($tab['id_image1'] == $id_image){
-                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = :id_image WHERE id_produit = :id_produit");
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image1 = NULL WHERE id_produit = :id_produit");
             } else if ($tab['id_image2'] == $id_image) {
-                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = :id_image WHERE id_produit = :id_produit");
+                $stmt = $pdo->prepare("UPDATE _images_produit SET id_image2 = NULL WHERE id_produit = :id_produit");
             } else {
                 $stmt = null;
             }
