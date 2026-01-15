@@ -121,29 +121,29 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             radio.addEventListener('change', function() {
                 let valueName = document.querySelector('input[name="prix"]:checked').value;
                 console.log(valueName);
-                if (valueName = "zeroTo20") {
+                if (valueName === "zeroTo20") {
                     searchState.filters.price.min = 0;
                     searchState.filters.price.max = 20;
                 }
-                if (valueName = "twentyTo50") {
+                else if (valueName === "twentyTo50") {
                     searchState.filters.price.min = 20;
                     searchState.filters.price.max = 50;
                 }
-                if (valueName = "fiftyTo100") {
+                else if (valueName === "fiftyTo100") {
                     searchState.filters.price.min = 50;
                     searchState.filters.price.max = 100;
                 }
-                if (valueName = "hundredTo300") {
+                else if (valueName === "hundredTo300") {
                     searchState.filters.price.min = 100;
                     searchState.filters.price.max = 300;
                 }
-                if (valueName = "over300") {
+                else if (valueName === "over300") {
                     searchState.filters.price.min = 300;
-                    searchState.filters.price.max = NULL;
+                    searchState.filters.price.max = null;
                 }
                 else {
-                    searchState.filters.price.min = NULL;
-                    searchState.filters.price.max = NULL;
+                    searchState.filters.price.min = null;
+                    searchState.filters.price.max = null;
                 }
                 fetchProduitsJSON();
             })    
