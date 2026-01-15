@@ -120,8 +120,7 @@
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
                 <?php if($compteur === 2){ ?>
-                    <button class="bouton_vendeur_produit" disabled>Promotion/Reduction</button>
-                    <p>Maximum de deux promotions par vendeur</p>
+                    <button style="color:grey;" class="bouton_vendeur_produit" disabled>Promotion/Reduction <br> (Maximum de deux promotions par vendeur)</button>
                 <?php } else {?>
                     <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
                 <?php } ?>
