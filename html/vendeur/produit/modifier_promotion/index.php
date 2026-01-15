@@ -254,9 +254,8 @@
             const diffJours = (d2 - d1) / 86400000;
             cout.value = PRIX * diffJours + PRIX + "€";
             
-            euro.value = prixInitial * (100 - (pourcentage.value / 100));
-            euro.value = Math.ceil(euro.value);
-            prixFinal.value = prixInitial * (1- (pourcentage.value / 100));
+            euro.value = prixInitial * (pourcentage.value / 100);
+            prixFinal.value = prixInitial - euro.value;
             prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
         }
         
