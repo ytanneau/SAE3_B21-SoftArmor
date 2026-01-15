@@ -50,8 +50,11 @@
         exit();
     }
     
-    
+    $compteur = 0;
     $tab_promo = get_info_promotion($id_produit);
+    foreach($tab_promo as $ligne){
+        $compteur++;
+    }
 ?>
 <!doctype html>
 <html lang="fr">
@@ -116,6 +119,12 @@
                 </form>
                 
                 <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                <?php if($compteur === 2){ ?>
+                    <button class="bouton_vendeur_produit" disabled>Promotion/Reduction</button>
+                    <p>Maximum de deux promotions par vendeur</p>
+                <?php } else {?>
+                    <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                <?php } ?>
                 <?php if($tab_promo != null){
                     foreach($tab_promo as $ligne){
                         $id_promo = $ligne['id_promo'];
@@ -129,7 +138,7 @@
                         Modifier la promotion du <?= htmlentities($new_date)?>
                     </a>
                     <?php }} ?>
-                <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                
                 <?php 
             } ?>
             
