@@ -27,6 +27,6 @@
     unlink_image_produit($id_image,$id_produit);
     delete_image($id_image);
 
-    header("Location:index.php");
+    header("Location:index.php?produit=" . $id_produit);
     exit();
 ?>
