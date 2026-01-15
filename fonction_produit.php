@@ -675,8 +675,7 @@
 
             if($stmt != null){
                 $stmt->execute([
-                    "id_produit" => $id_produit,
-                    "id_image" => $id_image
+                    "id_produit" => $id_produit
                 ]);
             }
         } catch (PDOException $e){
