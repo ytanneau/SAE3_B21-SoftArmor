@@ -1,7 +1,7 @@
 <?php
 define('HOME_SITE', 'html/');
 
-$fd = fsockopen("127.0.0.1",8080, $errno, $errstr);
+$fd = fsockopen("0.0.0.0",9000, $errno, $errstr);
 
 function connexion_delivraptor($fd,$id,$mdp){
     fwrite($fd,"1.$id.$mdp");
@@ -66,11 +66,11 @@ function get_image_colis($fd,$bordereau){
 $conn = connexion_delivraptor($fd,"root","root");
     if ($conn == "true"){
         $bordereau = create_colis($fd);
-        $bordereau = "FR1002";
+        
         $info_colis =get_info_colis($fd,$bordereau);
         $texte_img="";
         if ($info_colis["RENDU"] == "1") {
-            $img = get_image_colis($fd,"FR1002");
+            $img = get_image_colis($fd,$bordereau);
             switch ($img) {
                 case '3':
                     $texte_img="Colis inexistent";
