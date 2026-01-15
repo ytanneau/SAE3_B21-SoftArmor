@@ -30,7 +30,9 @@
     $id_promo = $_GET['idPromo'];
     $prix = detail_produit($_GET['produit'])['prix'];
 
-    
+    if(get_info_promotion_unique($id_promo) == null){
+        renvoi();
+    }
 
     $tab_info_promotion = get_info_promotion_unique($id_promo);
     if($tab_info_promotion['reduction'] != null){
