@@ -41,7 +41,6 @@ try {
     die("Erreur lors de la récupération du panier : " . $e->getMessage());
 }
 
- 
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +50,14 @@ try {
     <?php include HOME_SITE . 'link_head.php' ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Mon panier</title>
+
+    <script>
+        function change(n, id) {
+            let valeur = parseInt(document.getElementById("input_quantite" + id).value) + parseInt(n);
+
+            document.location.href = "update_quantite.php?produit=" + id + "&nb=" + valeur;
+        }
+    </script>
 </head>
 <body class="liste">
     <?php include HOME_SITE . 'header.php' ?>
@@ -75,10 +82,10 @@ try {
                     $total_ht = 0;
                     $total_ttc = 0;
         
-                    foreach ($elts_panier as $elt) {
-                            $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
+                    foreach ($elts_panier as $elt) {                            
+                            $prix_ttc =  $elt['prix_actuel'] * (1 + $elt['tva'] / 100);
         
-                            $total_ht += $elt['prix'] * $elt['quantite_panier'];
+                            $total_ht += $elt['prix_actuel'] * $elt['quantite_panier'];
                             $total_ttc += $prix_ttc * $elt['quantite_panier'];
 
                             // Récupération des images
@@ -94,17 +101,27 @@ try {
                                         <p><?= $elt['description'] ?></p>
                                         <p>Vendeur : <?= $elt['raison_sociale'] ?></p>
                                     </div>
-                
+
                                     <form action="" method="post"> <!-- Bouton poubelle à droite pour format tel -->
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
                                         <button onclick="actualiser()" type="submit"><img class="icon" src="<?=HOME_SITE?>image/supprimer_blanc.svg"></button>
                                     </form> 
                                 </article>
                                 <article>
-                                    <?php $prix_final = $elt['prix_actuel'] ?? $elt['prix'] * (($elt['tva'] / 100) + 1)?>
-                                    <p class="prix"><?=number_format($prix_final, 2, ',', ' ') . ' €' ?></p>
-                                    <p>Quantité : <?=$elt['quantite_panier'] ?></p>
-                                    <p class="prix">Sous total : <?=number_format($prix_final * $elt['quantite_panier'], 2, ',', ' ')?> €</p>
+                                    <p class="prix"><?=number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
+                                    
+                                    <form action="update_quantite.php">
+
+                                        <div>
+                                            <label for="nb">Quantité</label>
+                                            <input type="hidden" name="produit" value="<?=$elt['id_produit']?>">
+                                                <span class="input_quantite">
+                                                    <input type="button" value="-" onclick="change(-1, <?=$elt['id_produit']?>)"><input id="input_quantite<?=$elt['id_produit']?>" type="text" size="4" name="nb" value=<?=$elt['quantite_panier']?> required><input type="button" value="+" onclick="change('+1', <?=$elt['id_produit']?>)">
+                                                </span>
+                                        </div> 
+                                    </form>
+
+                                    <p class="prix">Sous total : <?=number_format($prix_ttc * $elt['quantite_panier'], 2, ',', ' ')?> €</p>
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
