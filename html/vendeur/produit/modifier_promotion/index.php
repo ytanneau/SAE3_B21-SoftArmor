@@ -31,7 +31,7 @@
     if(!empty(detail_produit($_GET['produit'])['prix'])){
         $prix = detail_produit($_GET['produit'])['prix'];
     } else {
-        $prix = null;
+        $prix = "";
     }
     
     $tab_info_promotion = get_info_promotion_unique($id_promo);
@@ -50,7 +50,7 @@
             $euro = $_POST['euro'];
             $euro = str_replace('-', "",$euro);
         } else {
-            $euro = "";
+            $euro = null;
         }
 
         $id_nouvelle_banniere = $id_image_initial;
