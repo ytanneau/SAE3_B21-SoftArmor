@@ -15,24 +15,69 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 
 // Nom public, prix, moyenne des notes et informations de l'image de chaque produit
-//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
 $produit_catalogue = info_produit_accueil();
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits alimentaires
-//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit AND _produit_dans_categorie.nom_categorie = \"Alimentaire\";";
 $cat='Alimentaire';
 $produit_alimentaire = info_produit_accueil_categorie($cat);
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits les plus récents
-//$query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit WHERE produit_note.id_produit = produit_visible.id_produit ORDER BY date_creation DESC;";
 $produit_recent = info_produit_accueil_plus_recent();
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits en réduction
-// $query= "SELECT produit_visible.id_produit,nom_public,prix,url_image,alt,_image.titre,note_moy AS moyenne,TRUNCATE((prix - prix*reduction*0.01),2) AS prix_reduit FROM produit_visible INNER JOIN _images_produit ON produit_visible.id_produit = _images_produit.id_produit INNER JOIN _image ON _images_produit.id_image_principale = _image.id_image INNER JOIN produit_note ON produit_note.id_produit = produit_visible.id_produit INNER JOIN _produit_dans_categorie ON produit_visible.id_produit = _produit_dans_categorie.id_produit INNER JOIN _promotion ON produit_visible.id_produit = _promotion.id_produit WHERE produit_note.id_produit = produit_visible.id_produit;";
 $produit_reduit = info_produit_accueil_reduction();
 
 // Fermer la connexion
 unset($pdo);
+
+
+// fonction d'affichage de produits
+function afficher_produits($liste_produits, $nom_classe_js = "") {?>
+    
+    <div>
+        <button class="fleche gauche <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
+        <ul class="container <?=$nom_classe_js?>">
+            <?php
+            // Boucle pour ajouter un produit dans un <li> 
+            foreach ($liste_produits as $row) { ?>
+                <li>
+                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
+                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+                        
+                        <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
+
+                        <div>
+                            <?php 
+
+                                if(!isset($row['note_moy'])){
+                                    ?><p>Produit Non Noté</p><?php
+                                }
+                                else{
+                                    $moy = $row['note_moy'];
+                                    afficher_moyenne_note($moy);
+                                }
+                            ?>
+                        </div>
+
+                        <?php
+                        $prix_normal = $row['prix'] * ($row['tva'] + 100) / 100;
+                        $prix_reduit = $row['prix_actuel'] * ($row['tva'] + 100) / 100;
+                        $reduction = $prix_normal != $prix_reduit;
+                        ?>
+
+                        <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
+                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($row['prix'], 2, ',', '');?> €</p>
+                        
+                        <?php if ($reduction) { ?>
+                            <p class="prix"><?= number_format((float)$row['prix_actuel'], 2, ',', '');?> €</p>
+                        <?php } ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
+        <button class="fleche droite <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
+    </div>
+<?php }
 ?>
 
 <!DOCTYPE html>
@@ -53,148 +98,25 @@ unset($pdo);
 
     <!--Produit Ajoutés Récemment-->
     <h1>Produits ajoutés récemment</h1>
-    <div>
-        <button class="fleche gauche recent"><img src="image/fleche_droite_blanc.svg"></button>
-        <ul class="container recent">
-            <?php
-            // Boucle pour ajouter un produit dans un <li> 
-            foreach ($produit_recent as $row) { ?>
-                <li>
-                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
-                        
-                        <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
-
-                        <div>
-                            <?php 
-
-                                if(!isset($row['note_moy'])){
-                                    ?><p>Produit Non Noté</p><?php
-                                }
-                                else{
-                                    $moy = $row['note_moy'];
-                                    afficher_moyenne_note($moy);
-                                }
-                            ?>
-                        </div>
-                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
-                    </a>
-                </li>
-            <?php } ?>
-        </ul>
-        <button class="fleche droite recent"><img src="image/fleche_droite_blanc.svg"></button>
-    </div>    
+    <?php afficher_produits($produit_recent, "recent")?>
     <hr>
 
 
     <!-- Produits en réduction -->
     <h1>Produits en réduction</h1>
-    <div>  
-        <button class="fleche gauche reduction"><img src="image/fleche_droite_blanc.svg"></button>
-        <ul class="container reduction">
-            <?php
-            //boucle pour ajouter un produit dans un <li> 
-            foreach ($produit_reduit as $row){  
-            ?>
-            <li>
-                <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                    <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
-                    
-                    <h3><?= $row['nom_public']; ?></h3>
-
-                    <div>
-                        <?php 
-
-                            if(!isset($row['note_moy'])){
-                                ?><p>Produit Non Noté</p><?php
-                            }
-                            else{
-                                $moy = $row['note_moy'];
-                                afficher_moyenne_note($moy);
-                            }
-                        ?>
-                    </div>
-                    <p class="ancien_prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
-                    <p class="prix"><?= number_format((float)$row['prix_actuel'], 2, ',', '');?> €</p>
-                </a>
-            </li>
-            <?php
-            }
-            ?>
-        </ul>
-        <button class="fleche droite reduction"><img src="image/fleche_droite_blanc.svg"></button>
-    </div>
+    <?php afficher_produits($produit_reduit, "reduction")?>
+    
     <hr>
     
 
     <!-- Produits alimentaires -->
     <h1>Produits alimentaires</h1>
-    <div>
-        <button class="fleche gauche alimentaire"><img src="image/fleche_droite_blanc.svg"></button>
-        <ul class="container alimentaire">
-            <?php
-            // Boucle pour ajouter un produit dans un <li> 
-            foreach ($produit_alimentaire as $row) { ?>
-                <li>
-                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
-                        
-                        <h3><?= $row['nom_public']; ?></h3>
-
-                        <div>
-                            <?php 
-
-                                if(!isset($row['note_moy'])){
-                                    ?><p>Produit Non Noté</p><?php
-                                }
-                                else{
-                                    $moy = $row['note_moy'];
-                                    afficher_moyenne_note($moy);
-                                }
-                            ?>
-                        </div>
-                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
-                    </a>
-                </li>
-            <?php } ?>
-        </ul>
-        <button class="fleche droite alimentaire"><img src="image/fleche_droite_blanc.svg"></button>
-    </div>
+    <?php afficher_produits($produit_alimentaire, "alimentaire")?>
     <hr>
 
     <!-- Tous les produits du catalogue -->
     <h1>Produits du catalogue</h1>
-    <div>
-
-        <button class="fleche gauche catalogue"><img src="image/fleche_droite_blanc.svg"></button>
-        <ul class="container catalogue">
-            <?php
-            // Boucle pour ajouter un produit dans un <li> 
-            foreach ($produit_catalogue as $row) { ?>
-                <li>
-                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <img  src="<?= $row['url_image'];?>" title="<?= $row['titre'];?>" alt="<?= $row['alt'];?>">
-                        
-                        <h3><?= $row['nom_public']; ?></h3>
-
-                        <div>
-                            <?php 
-                                if(!isset($row['note_moy'])) {
-                                    ?><p>Produit Non Noté</p><?php
-                                } else {
-                                    $moy = $row['note_moy'];
-                                    afficher_moyenne_note($moy);
-                                }
-                            ?>
-                        </div>
-
-                        <p class="prix"><?= number_format((float)$row['prix'], 2, ',', '');?> €</p>
-                    </a>
-                </li>
-            <?php } ?>
-        </ul>
-        <button class="fleche droite catalogue"><img src="image/fleche_droite_blanc.svg"></button>
-    </div>
+    <?php afficher_produits($produit_catalogue, "catalogue")?>
 
     <!-- Navigation (pour teléphone) -->
     <nav>
