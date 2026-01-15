@@ -150,7 +150,7 @@
             <input type="text" id="pourcentage">
             <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
             <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value=<?= htmlentities($euro ?? '')?> readonly>
+            <input type="text" id="euro" name="euro" value="<?= htmlentities($euro ?? '')?>" readonly>
             <label for="prixFinal">Prix final</label>
             <input type="text" id="prixFinal" readonly>
             <input type="submit" id="valider" value="Valider">
