@@ -43,7 +43,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <main>
         <section class="filters">
             <form>
-                <fieldset>
+                <fieldset id = "prixF">
                     <legend>Filtrer par prix</legend>
 
                     <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
@@ -69,7 +69,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
             <option value="triPrix" data-name ="ASC">Prix croissants</option>
             <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-            <option value="triReduc" data-name ="ASC">Réduction</option>
+            <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
 
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
@@ -113,6 +113,15 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 console.log(searchState.sort.field);
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
+        });
+
+        const getValue = () => document.querySelector('input[name="prix"]:checked').value;
+        console.log(getValue())
+        
+        document.querySelectorAll('input[name="prix"]').forEach(prixF => {
+            prixF.addEventListener("input", () => {
+                console.log(getValue())
+            });
         });
 
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
