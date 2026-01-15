@@ -115,13 +115,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 fetchProduitsJSON();
         });
 
-        const getValue = () => document.querySelector('input[name="prix"]:checked').value;
-        console.log(getValue())
-        
-        document.querySelectorAll('input[name="prix"]').forEach(prixF => {
-            prixF.addEventListener("input", () => {
-                console.log(getValue())
-            });
+        var radios = document.querySelectorAll("input[name=\"prix\"]");
+
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                let valueName = document.querySelector('input[name="prix"]:checked').value;
+                console.log(valueName)
+            })
         });
 
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
