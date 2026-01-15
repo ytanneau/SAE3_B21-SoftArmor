@@ -294,7 +294,7 @@
                     <h4>Image secondaire</h4>
                     <?php if($tabImageProduit['id_image1'] != null){?> 
                         <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt="">
-                        <a href="delete_photo.php?idImage=<?=$tabImageProduit['id_image1']?>&idProduit=<?=$id_produit?>">Supprimer la photo</a> 
+                        <a href="delete_photo.php?idImage=<?=$tabImageProduit['id_image1']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
                     <?php }?>
                     <div>
                         <label for="photo2">Ajouter/Modifier la seconde image</label>
@@ -303,7 +303,7 @@
                     <h4>Troisième image</h4>
                     <?php if($tabImageProduit['id_image2'] != null){?> 
                         <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt="">
-                        <a href="delete_photo.php?idImage=<?=$tabImageProduit['id_image2']?>&idProduit=<?=$id_produit?>">Supprimer la photo</a> 
+                        <a href="delete_photo.php?idImage=<?=$tabImageProduit['id_image2']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
                     <?php }?>
                     <div>
                         <label for="photo3">Ajouter/Modifier la troisième image</label>
