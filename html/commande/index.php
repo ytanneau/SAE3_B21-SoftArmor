@@ -1,7 +1,7 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
-const IP = "host.docker.internal";
+const IP = "127.0.0.1";
 const PORT = "9000";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
@@ -133,12 +133,11 @@ if (isset($_GET["commande"])) {
                                     break;
                                 //cas image a mettre dans le fichier ressources
                                 default:
-                                    $fich = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
-                                    fwrite($fich, $img);
-                                    fclose($fich);
+                                    $octets = binaireEnOctets($img);
+                                    $fich = file_put_contents(HOME_SITE . "ressources/colis/$bordereau.png",$octets);
                                     break;
                             }
-                        }   
+                        }
                     }
                     //deconnexion
                     deconnexion_socket($fd);

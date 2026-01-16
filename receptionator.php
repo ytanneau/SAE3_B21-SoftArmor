@@ -52,20 +52,38 @@ function get_info_colis($fd,$bordereau){
 
 function get_image_colis($fd,$bordereau){
     fwrite($fd,"4.$bordereau");
-    $buffer = fread($fd,20000);
-
-    
-    $info = explode("IMG=",$buffer);
-    
-    if($info[0]!="ERROR"){
-        return $info[1];
+    $photo = '';
+    while (!feof($fd)) {
+        $chunk = fread($fd, 4096);
+        
+        if (($pos = strpos($chunk, "#")) !== false) {
+            $photo .= substr($chunk, 0, $pos);
+            break;
+        }
+        $photo .= $chunk;
+        
     }
-    return $info[0];
+    
+    $a = explode("=",$photo);
+    
+    return $a[1];
+
+}
+function binaireEnOctets($binString) {
+    $result = '';
+    $length = strlen($binString);
+    for ($i = 0; $i < $length; $i += 8) {
+        $byte = substr($binString, $i, 8);
+        if (strlen($byte) < 8) break; // ignore le reste incomplet
+        $result .= chr(bindec($byte));
+    }
+    return $result;
 }
 
-$conn = connexion_delivraptor($fd,"root","root");
+
+$conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
     if ($conn == "true"){
-        $bordereau = create_colis($fd);
+        $bordereau = "FR1002";
         
         $info_colis =get_info_colis($fd,$bordereau);
         $texte_img="";
@@ -75,12 +93,14 @@ $conn = connexion_delivraptor($fd,"root","root");
                 case '3':
                     $texte_img="Colis inexistent";
                     break;
+                    
                 case '4':
                     $texte_img="Photo inexistante";
                     break;
                 
                 default:
-                    $fich = file_put_contents(HOME_SITE . "ressources/colis/test.png",$img);
+                    $octets = binaireEnOctets($img);
+                    $fich = file_put_contents(HOME_SITE . "ressources/colis/test.png",$octets);
                     break;
             }
         }   
