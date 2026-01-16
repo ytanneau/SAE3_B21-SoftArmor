@@ -117,7 +117,7 @@
                 <h3>Informations produit</h3>
                 <div>
                     <p>
-                        <label for="nomPrv">Libellé privé*</label>
+                        <label for="nomPrv">Référence*</label>
                         <input required type="text" name="nomPrv" id="idNomPrv" placeholder="Oignon rosé / 500g">
                     </p>
                     <p>
