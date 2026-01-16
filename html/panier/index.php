@@ -12,12 +12,9 @@ if (!isset($_SESSION)) {
         exit;
     }
 
-    if (!isset($_SESSION['logged_in'])) {
-        header('location: ' . HOME_SITE);
-        exit;
+    if (isset($_SESSION) && isset($_SESSION['id_compte'])) {
+        $id_client = $_SESSION['id_compte'];
     }
-
-    $id_client = $_SESSION['id_compte'];
 }
 
 require_once (HOME_GIT . '.config.php');
@@ -29,16 +26,30 @@ if ($_POST != NULL) {
     supprimer_produit_panier($id_prod,$id_client);
 }
 
-// Récupération des éléments du panier
-$sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
+if (isset($_SESSION['logged_in'])) {
+    // Récupération des éléments du panier
+    $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
 
-try {
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
-    $stmt->execute();
-    $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Erreur lors de la récupération du panier : " . $e->getMessage());
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+        $stmt->execute();
+        $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération du panier : " . $e->getMessage());
+    }
+} elseif (isset($_COOKIE['panier'])) {
+    $ids_panier = unserialize($_COOKIE['panier']);
+    $elts_panier = [];
+
+    foreach($ids_panier as $elt_panier) {
+        $produit = detail_produit($elt_panier['id_produit']);
+        $produit['quantite_panier'] = $elt_panier['quantite'];
+        array_push($elts_panier, $produit);
+    }
+
+} else {
+    $elts_panier = [];
 }
 
 ?>

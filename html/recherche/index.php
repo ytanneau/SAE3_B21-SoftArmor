@@ -60,12 +60,15 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                     <input type="radio" name="prix" id="over300" value="over300">
                     <label for="over300">Plus de 300 €</label>
+
+                    <input type="checkbox" name="prom" id="prom" value="prom">
+                    <label for="prom">Promotion</label>
                 </fieldset>
             </form>
         </section>
         <label for="tri">Trier par </label>
         <select id="tri" value ="triOption">
-            <option value="nom_public" data-name ="ASC">ordre alphabtique</option>
+            <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
             <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
             <option value="triPrix" data-name ="ASC">Prix croissants</option>
             <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
@@ -99,7 +102,20 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const form = document.querySelector("#form_recherche");
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
+        
+        let promCheck = document.getElementById("prom");
 
+        promCheck.addEventListener('change', (e) => {
+            let isChecked = e.target.checked;
+            if (isChecked) {
+                console.log(e.target.value);
+                searchState.filters.sales = true;
+                console.log(searchState.filters.sales);
+            } else {
+                console.log("Unchecked");
+                searchState.filters.sales = false;
+            }
+        });
         //listener pour les tris et renvoi 
         let s = document.getElementById("tri");
 
@@ -115,7 +131,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 fetchProduitsJSON();
         });
 
-        var radios = document.querySelectorAll("input[name=\"prix\"]");
+        let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
             radio.addEventListener('change', function() {

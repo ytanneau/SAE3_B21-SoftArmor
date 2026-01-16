@@ -136,15 +136,32 @@ function get_info_colis($fd,$bordereau){
 
 function get_image_colis($fd,$bordereau){
     fwrite($fd,"4.$bordereau");
-    $buffer = fread($fd,20000);
-    
-    
-    $info = explode("=",$buffer);
-    
-    if($info[0]!="ERROR"){
-        return $info[1];
+    $photo = '';
+    while (!feof($fd)) {
+        $buffer = fread($fd, 4096);
+        
+        if (($pos = strpos($buffer, "#")) != false) {
+            $photo .= substr($buffer, 0, $pos);
+            break;
+        }
+        $photo .= $buffer;
+        
     }
-    return $info[0];
+    
+    $ret = explode("=",$photo);
+    
+    return $ret[1];
+
+}
+function binaireEnOctets($binString) {
+    $ret = '';
+    $length = strlen($binString);
+    for ($i = 0; $i < $length; $i += 8) {
+        $byte = substr($binString, $i, 8);
+        if (strlen($byte) < 8) break; // ignore le reste incomplet
+        $ret .= chr(bindec($byte));
+    }
+    return $ret;
 }
 
 function connexion_socket($ip,$port){
