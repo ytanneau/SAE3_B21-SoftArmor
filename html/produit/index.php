@@ -5,7 +5,7 @@ define('HOME_SITE', '../');
 
 if (!isset($_SESSION)) {
     session_start();
-
+    
     if(isset($_SESSION['raison_sociale'])){
         header('location: /vendeur/stock/');
     }
@@ -64,8 +64,18 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
 if ($_POST != NULL) {
     $qte= $_POST['quantite'];
     $id_prod = $_GET['produit'];
-    $id_cli = $_SESSION['id_compte'];
-    ajouter_panier($id_prod,$id_cli,$qte);
+
+    if (isset($_SESSION['id_compte'])) {
+        $id_cli = $_SESSION['id_compte'];
+        ajouter_panier($id_prod,$id_cli,$qte);
+    } elseif (isset($_COOKIE['panier'])) {
+        $panier = unserialize($_COOKIE['panier']);
+        array_push($panier, ['id_produit' => $id_prod, 'quantite' => $qte]);
+
+        setcookie('panier', serialize($panier), path: '/');
+    } else {
+        setcookie('panier', serialize([['id_produit' => $id_prod, 'quantite' => $qte]]), path: '/');
+    }
 }
 
 ?>
@@ -245,20 +255,13 @@ if ($_POST != NULL) {
 
                 <form action="" method="post">
                     <div>
-                        <?php if (isset($_SESSION['logged_in'])) { ?>
-                            <label for="quantite">Quantité</label>
-                
-                            <span class="input_quantite">
-                                <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
-                            </span>
-                        <?php } ?>
+                        <label for="quantite">Quantité</label>
+            
+                        <span class="input_quantite">
+                            <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
+                        </span>
                     </div> 
-                    
-                    <?php if (isset($_SESSION['logged_in'])) { ?>
-                        <input class="bouton" type="submit" value="Ajouter au panier">
-                    <?php } else { ?>
-                        <p>Connectez-vous pour ajouter ce produit à votre panier</p>
-                    <?php } ?>
+                    <input class="bouton" type="submit" value="Ajouter au panier">
 
                     <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter cet article</a>
                 </form>

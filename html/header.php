@@ -65,14 +65,14 @@
                 </form>
             </li>
             
+            <li class="hide-on-mobile">
+                <a href="<?= HOME_SITE . 'panier/' ?>">
+                    <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
+                </a> 
+            </li>
+            
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-                <li class="hide-on-mobile">
-                    <a href="<?= HOME_SITE . 'panier/' ?>">
-                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
-                    </a> 
-                </li>
-
                 <li class="hide-on-mobile">
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
