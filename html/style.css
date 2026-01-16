@@ -2611,6 +2611,17 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
 }
+.main_promo .entete {
+  display: flex;
+  align-items: center;
+}
+.main_promo .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.main_promo .entete h1 {
+  margin-right: 30px;
+}
 .main_promo .form_promo {
   display: flex;
   flex-direction: column;
