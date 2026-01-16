@@ -73,7 +73,7 @@
         <title>Alizon - Démarrer une promotion</title>
         <?php include HOME_SITE . 'link_head.php'; ?>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
+        <link rel="stylesheet" href="<?=HOME_SITE?>../html/style.css">
     </head>
     <body>
         <?php include "../../header.php" ?>
