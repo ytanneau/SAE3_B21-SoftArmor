@@ -2630,6 +2630,14 @@ aside input.bouton:hover {
 .main_promo .entete h1 {
   margin-right: 30px;
 }
+.main_promo .en_ligne {
+  display: flex;
+  flex-direction: row;
+}
+.main_promo .en_colonne {
+  display: flex;
+  flex-direction: column;
+}
 .main_promo #valider {
   display: block;
   max-width: 100%;
@@ -2645,6 +2653,8 @@ aside input.bouton:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
 }
 .main_promo #valider a {
   text-decoration: none;
