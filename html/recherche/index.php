@@ -107,7 +107,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         promCheck.addEventListener('change', (e) => {
             e.preventDefault();
-            let selProm = p.querySelector('input[name="prom"]:checked').value;
+            let selProm = promCheck.querySelector('input[name="prom"]:checked').value;
             console.log(selProm);
         });
         //listener pour les tris et renvoi 
