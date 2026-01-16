@@ -1506,10 +1506,12 @@ aside {
         display:none !important;
     }
 }
-
-.form_promo{
+.main_promo{
     @include contenu_centre_vertical;
-    input[type="submit"]{
-        @include bouton_new();
+    .form_promo{
+        @include contenu_centre_vertical;
+        input[type="submit"]{
+            @include bouton_new();
+        }
     }
 }
