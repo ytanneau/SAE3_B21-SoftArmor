@@ -110,6 +110,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             if (isChecked) {
                 console.log(e.target.value);
                 searchState.filters.sales = true;
+                console.log(searchState.filters.sales);
             } else {
                 console.log("Unchecked");
                 searchState.filters.sales = false;
