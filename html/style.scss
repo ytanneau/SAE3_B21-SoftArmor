@@ -1497,6 +1497,18 @@ aside {
     }
 }
 
+#snackbar {
+    visibility: hidden;
+}
+
+#snackbar.show {
+    visibility: visible;
+}
+
+.modal {
+    display: none;
+}
+
 // Pages à imprimer (récap de commandes)
 @media print {
     h1 {
@@ -1506,8 +1518,11 @@ aside {
         display:none !important;
     }
 }
-
-.form_promo{
+.main_promo{
     @include contenu_centre_vertical;
-     
+    @include entete_page_vendeur;
+
+    input[type="submit"]{
+        @include bouton_new();
+    }
 }

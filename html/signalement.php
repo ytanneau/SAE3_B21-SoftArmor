@@ -24,10 +24,12 @@
     $raison  = $_POST['raison'] ?? '';
 
     // Si il manque des informations, erreur
-    echo json_encode([
-        'success' => false,
-        'message' => "L'avis n'a pas pu être signalé. Veuillez réessayer plus tard."
-    ]);
+    if (empty($id_avis) || empty($id_compte) || empty($raison)) {
+        echo json_encode([
+            'success' => false,
+            'message' => "L'avis n'a pas pu être signalé. Veuillez réessayer plus tard."
+        ]);
+    }
 
     try {
         // Si déjà signalé par l'utilisateur, erreur
@@ -48,7 +50,7 @@
     } catch (PDOException $e) {
         echo json_encode([
             'success' => false,
-            'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard."
+            'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard. " . $e->getMessage()
         ]);
     }
 

@@ -237,7 +237,7 @@ if (isset($_POST['quantite'])) {
                             </select>
 
                             <button type="submit">Envoyer</button>
-                            <button type="cancel" id="fermer_modal">Annuler</button>
+                            <button type="reset" id="fermer_modal">Annuler</button>
                         </form>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ if (isset($_POST['quantite'])) {
     <script>
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
-        const snackbar = document.getElementById("form_signalement");
+        const snackbar = document.getElementById("snackbar");
         const inputId = document.getElementById("id_avis");
 
         // Afficher le modal en cliquant sur l'icône signaler
@@ -322,7 +322,6 @@ if (isset($_POST['quantite'])) {
 
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
-            console.log(data);
 
             // Envoyer les données du formulaire en JSON à une autre page
             const res = await fetch("../signalement.php", {
@@ -332,11 +331,10 @@ if (isset($_POST['quantite'])) {
 
             const json = await res.json();
 
+            modal.style.display = "none";
+            showSnackbar(json.message);
 
             if (json.success) {
-                modal.style.display = "none";
-                showSnackbar(json.message);
-
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
@@ -345,8 +343,6 @@ if (isset($_POST['quantite'])) {
                 btn.textContent = "Signalé";
                 btn.disabled = true;
             }
-
-            
         });
 
         // Montrer la snackbar
