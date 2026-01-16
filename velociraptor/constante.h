@@ -33,7 +33,7 @@
 #define TIME 60
 
 // bdd
-#define BDD false
+#define BDD true
 
 // element bdd
 #define TABLE "_colis"
