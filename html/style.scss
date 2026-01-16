@@ -1521,10 +1521,8 @@ aside {
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-    .form_promo{
-        @include contenu_centre_vertical;
-        input[type="submit"]{
-            @include bouton_new();
-        }
+
+    #valider{
+        @include bouton_new($color: $couleur_background);
     }
 }

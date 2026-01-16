@@ -2630,12 +2630,7 @@ aside input.bouton:hover {
 .main_promo .entete h1 {
   margin-right: 30px;
 }
-.main_promo .form_promo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.main_promo .form_promo input[type=submit] {
+.main_promo #valider {
   display: block;
   max-width: 100%;
   width: auto;
@@ -2644,17 +2639,17 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo .form_promo input[type=submit] a {
+.main_promo #valider a {
   text-decoration: none;
-  color: black;
+  color: #FFFFFF;
 }
-.main_promo .form_promo input[type=submit]:hover {
+.main_promo #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */
