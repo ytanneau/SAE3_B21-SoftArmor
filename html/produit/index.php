@@ -200,13 +200,14 @@ if ($_POST != NULL) {
                                 </div>
                             </div>
 
+                            <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                Signaler
+                            </button>
+
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                             <?php } ?>
 
-                            <button class="btn-report" data-review="<?=$avis['id_avis']?>">
-                                Signaler <?= $avis['id_avis'] ?>
-                            </button>
                         </li>
                     <?php } ?>
                 </ul>
@@ -216,10 +217,22 @@ if ($_POST != NULL) {
                         <h3>Signaler cet avis</h3>
                         
                         <form id="form_signalement" action="" method="post">
-                            
+                            <input type="hidden" name="id_avis" id="id_avis">
+
+                            <label for="select_raison">Raison :</label>
+                            <select name="raison" id="select_raison">
+                                <option value="Contenu offensant">Contenu offensant</option>
+                                <option value="Contenu mensonger">Contenu mensonger</option>
+                                <option value="Contenu illicite">Contenu illicite</option>
+                            </select>
+
+                            <button type="submit">Envoyer</button>
+                            <button type="cancel" id="fermer_modal">Annuler</button>
                         </form>
                     </div>
                 </div>
+
+                <div id="snackbar" class="snackbar"></div>
             </section>
         </div>
                     
@@ -279,6 +292,67 @@ if ($_POST != NULL) {
         </div>
         
     </main>
-        <?php include HOME_SITE . "footer.php" ?>
+    
+    <?php include HOME_SITE . "footer.php" ?>
+
+    <script>
+        const modal = document.getElementById("modal_signalement");
+        const formSignalement = document.getElementById("form_signalement");
+        const snackbar = document.getElementById("form_signalement");
+
+        // Afficher le modal en cliquant sur l'icône signaler
+        document.querySelectorAll(".bouton_signalement").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.getElementById("id_avis").value = btn.dataset.avis;
+                modal.style.display = "block";
+            });
+        });
+
+        // Fermer le modal
+        document.getElementById("fermer_modal").onclick = () => {
+            modal.style.display = "none";
+        };
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Récupérer les données du formulaire
+            const data = new FormData(form);
+
+            // Envoyer les données du formulaire en JSON à une autre page
+            const res = await fetch("../signalement.php", {
+                method: "POST",
+                body: data
+            });
+
+            const json = await res.json();
+
+            if (json.success) {
+                modal.style.display = "none";
+                showSnackbar("L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais.");
+
+                // Désactiver le bouton de signalement
+                const btn = document.querySelector(
+                    `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
+                );
+
+                btn.textContent = "Signalé";
+                btn.disabled = true;
+            } else {
+                showSnackbar("L'avis n'a pas pu être signalé. Veuillez réessayer plus tard");
+            }
+        });
+
+        // Montrer la snackbar
+        function showSnackbar(msg) {
+            snackbar.textContent = msg;
+            snackbar.className = "show";
+
+            setTimeout(() => {
+                snackbar.className = "";
+            }, 3000);
+        }
+
+    </script>
 </body>
 </html>
