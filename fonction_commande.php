@@ -171,7 +171,8 @@ function connexion_socket($ip,$port){
     }
     return $fd;
 }
+
 function deconnexion_socket($fd){
-    fwrite($fd,"0");
+    fwrite($fd,"-1");
     fclose($fd);
 }
