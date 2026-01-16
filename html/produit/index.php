@@ -69,7 +69,20 @@ if (isset($_POST['quantite'])) {
         ajouter_panier($id_prod,$id_cli,$qte);
     } elseif (isset($_COOKIE['panier'])) {
         $panier = unserialize($_COOKIE['panier']);
-        array_push($panier, ['id_produit' => $id_prod, 'quantite' => $qte]);
+        $trouve = false;
+
+        for ($i = 0; $i < count($panier); $i++) {
+            if ($panier[$i]['id_produit'] == $id_prod) {
+                $trouve = true;
+                $panier[$i]['quantite'] += $qte;
+
+                break;
+            }
+        }
+
+        if (!$trouve) {
+            array_push($panier, ['id_produit' => $id_prod, 'quantite' => $qte]);
+        }
 
         setcookie('panier', serialize($panier), path: '/');
     } else {
