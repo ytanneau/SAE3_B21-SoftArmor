@@ -1521,9 +1521,17 @@ aside {
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-
+    .en_ligne{
+        display: flex;
+        flex-direction: row;
+    }
+    .en_colonne{
+        display: flex;
+        flex-direction: column;
+    }
     #valider{
         @include bouton_new($color: $couleur_background);
+        margin-top: 20px;
         width: 100%;
     }
 }
