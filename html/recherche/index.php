@@ -440,7 +440,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             }
 
                 .sliders_control {
-                    position: relative;
+                    position: aboslute;
                     min-height: 50px;
                 }
 
