@@ -62,7 +62,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     <label for="over300">Plus de 300 €</label>
 
                     <input type="checkbox" name="prom" id="prom" value="prom">
-                    <label for="over300">Promotion</label>
+                    <label for="prom">Promotion</label>
                 </fieldset>
             </form>
         </section>
@@ -103,9 +103,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
         
-        let p = document.querySelector("input[name=\"prom\"]");
+        let promCheck = document.getElementById("prom");
 
-        p.addEventListener('checked', (e) => {
+        promCheck.addEventListener('change', (e) => {
             e.preventDefault();
             let selProm = p.querySelector('input[name="prom"]:checked').value;
             console.log(selProm);
