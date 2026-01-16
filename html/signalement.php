@@ -1,7 +1,7 @@
 <?php
     // Inclusion du fichier de configuration
-    define('HOME_GIT', '../../');
-    define('HOME_SITE', '../');
+    define('HOME_GIT', '../');
+    define('HOME_SITE', '.');
 
     // Redirige les utilisateurs non connectés
     if (!isset($_SESSION)) {
