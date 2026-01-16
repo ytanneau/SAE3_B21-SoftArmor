@@ -75,11 +75,11 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
         <style>
-            form{
+            /* form{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-            }
+            } */
         </style>
     </head>
     <body>

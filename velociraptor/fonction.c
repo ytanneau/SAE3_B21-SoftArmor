@@ -2,14 +2,15 @@
 #include "fonction.h"
 
 
-// permet de recupérer les compte dans le fichier
-compte* init_compte(const char* chemain){
-    compte* res = NULL;
-    //ouverture du fichier des compte
+
+// permet de recupérer les COMPTE dans le fichier
+COMPTE* init_compte(const char* chemain, FILE *logI){
+    COMPTE* res = NULL;
+    //ouverture du fichier des COMPTE
     FILE *file = fopen( chemain, "r");
     // si le fichier na pas pu etre ouver on ferme le programe
     if (file == NULL) {
-        printf("[FATAL] fichier non trouver\n");
+        fprintf(logI, "[FATAL] ACOUNT FILE NOT FIND\n");
         exit(EXIT_FAILURE);
     }
 
@@ -31,18 +32,18 @@ compte* init_compte(const char* chemain){
         // si les champ ne son pas vide et que le mode passe, que l'id est superier a 0 caractère et que le mode passe mesure 32 caractere ou 33 si le dernié est un retout a la ligne
         if(id != NULL && mdp != NULL && strlen(id) > 0 && (strlen(mdp) == MDP_TAILLE-1 || (strlen(mdp) == MDP_TAILLE && mdp[MDP_TAILLE-1] == '\n')))
         {
-            // inisalisation du nouveau compte
-            compte* nouv = (compte*)malloc(sizeof(compte));
+            // inisalisation du nouveau COMPTE
+            COMPTE* nouv = (COMPTE*)malloc(sizeof(COMPTE));
             strcpy(nouv->id,id);
             strcpy(nouv->mdp,mdp);
             nouv->next = NULL;
 
-            // place le compte dans ma liste
+            // place le COMPTE dans ma liste
             if (res == NULL){
                 res = nouv;
             }
             else{
-                compte* nav = res;
+                COMPTE* nav = res;
                 while (nav->next != NULL)
                 {
                     nav = nav->next;
@@ -52,55 +53,55 @@ compte* init_compte(const char* chemain){
         }
     }
 
-    // fermeture du fichier des compte
+    // fermeture du fichier des COMPTE
     fclose(file);
-    // si il y a pas des compte son on arrète le programme
+    // si il y a pas des COMPTE son on arrète le programme
     if (res == NULL)
     {
-        fprintf(stderr, "[FATAL] pas de compte trouver\n");
+        fprintf(logI, "[FATAL] NO ACOUNT FIND\n");
         exit(EXIT_FAILURE);
     }
     
     return res;
 }
 
-// affiche la liste des compte
-void affiche_compte(compte* c)
+// affiche la liste des COMPTE
+void affiche_compte(COMPTE* c, FILE *logI)
 {
-    compte* nav = c;
+    COMPTE* nav = c;
     if (nav == NULL)
     {
-        printf("pas de compte trouver\n");
+        fprintf(logI,"pas de COMPTE trouver\n");
     }
     else
     {
-        printf("ID : %s\n", nav->id);
-        printf("MDP : %s\n", nav->mdp);
+        fprintf(logI, "ID : %s\n", nav->id);
+        fprintf(logI, "MDP : %s\n", nav->mdp);
         nav = nav->next;
 
         while (nav != NULL)
         {
-            printf("ID : %s\n", nav->id);
-            printf("MDP : %s\n", nav->mdp);
+            fprintf(logI, "ID : %s\n", nav->id);
+            fprintf(logI, "MDP : %s\n", nav->mdp);
             nav = nav->next;
         }
     }
 }
 
-void init_bdd(MYSQL *conn)
+void init_bdd(MYSQL *conn, FILE *logI)
 {
     if (conn == NULL) 
     { 
-        fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
+        fprintf(logI, "[FATAL] logI MYSQL\n"); 
         exit(EXIT_FAILURE); 
     }
 
-    compte* res = NULL;
-    //ouverture du fichier des compte
+    COMPTE* res = NULL;
+    //ouverture du fichier des COMPTE
     FILE *file = fopen(".env", "r");
     // si le fichier na pas pu etre ouver on ferme le programe
     if (file == NULL) {
-        printf("[FATAL] fichier non trouver\n");
+        fprintf(logI, "[FATAL] .env NOT FIND\n");
         exit(EXIT_FAILURE);
     }
     // obliger déclaré une ligne pour chaque info, car sinon perte dinformation
@@ -144,45 +145,50 @@ void init_bdd(MYSQL *conn)
         bdd_port[strlen(bdd_port)-1] = '\0';
     }
 
-    if (DEBUG)
-    {
-        printf("[DEBUG] BDD : \n");
-        printf("bdd_host %s\n", bdd_host);
-        printf("bdd_user %s\n", bdd_user);
-        printf("bdd_password %s\n", bdd_password);
-        printf("bdd_name %s\n", bdd_name);
-        printf("bdd_port %d\n", atoi(bdd_port));
-    }
+    fprintf(logI, "%s BDD : \n", SERVER);
+    fprintf(logI, "BDD_HOST %s\n", bdd_host);
+    fprintf(logI, "BDD_USER %s\n", bdd_user);
+    //fprintf(logI, "BDD_PASSWORD %s\n", bdd_password);
+    fprintf(logI, "BDD_NAME %s\n", bdd_name);
+    fprintf(logI, "BDD_PORT %d\n", atoi(bdd_port));
 
     if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) { 
-        fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
-        mysql_close(conn); 
-        exit(1); 
+        fprintf(logI, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
+        exit(EXIT_FAILURE); 
     }
-    printf("%s SUCCESS CONNECT MYSQL\n", SERVER);
+    fprintf(logI, "%s SUCCESS CONNECT MYSQL\n", SERVER);
 }
 
 //-------------------------------------------------------------------------------------------------------
 
 
-void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL *conn)
+void comminication(SESSION *data, COMPTE* c, bool colisInfinit, int nbColisMax)
 {
+    log_line(data, "connect open");
     bool connect = false;
     int instruction;
     int readNb;
-    char buff[TRAME_TAILLE];
+    char buff[TAILLE_GRAND];
+    char message[TAILLE];
 
-    while (true)
+    struct pollfd pfd; 
+    pfd.fd = data->cnx; 
+    pfd.events = POLLIN;
+
+    while (true && poll(&pfd, 1, TIME*1000) !=0)
     {
-        readNb = read(cnx, buff, TRAME_TAILLE);
-        buff[readNb] = '\0';
+        readNb = read(data->cnx, buff, TAILLE_GRAND);
         if (readNb == -1)
         {
-            printf("[ERROR] READ\n");
-            fin(cnx);
+            log_line(data, "[ERROR] READ");
+            fin(data);
         }
-         
+        buff[readNb] = '\0';
+
         instruction = atoi(strtok(buff, INSTRUCTION_DELIMITER));
+        sprintf(message, "instruction : %d", instruction);
+        log_line(data, message);
+
         if (DEBUG)
         {
             printf("[DEBUG] INSTRUCTION : %d\n", instruction);
@@ -191,19 +197,20 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
         switch (instruction)
         {
             case INSTRUCTION_FIN:
-                fin(cnx);
+                log_line(data, "connect close");
+                fin(data);
                 break;
             
 
             case INSTRUCTION_CONNECTION:
                 if (!connect)
                 {
-                    connect = authtification( c, buff);
-                    connection(cnx, connect);                
+                    connect = authtification(data, c);
+                    connection(data, connect);                
                 }
                 else
                 {
-                    message_erreur(cnx, ERREUR_INSTRUCTION);
+                    message_erreur(data, ERREUR_INSTRUCTION);
                 }
                 break;
 
@@ -211,11 +218,11 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_NEW_COLIS:
                 if (connect)
                 {
-                    new_colis(cnx, colisInfinit, nbColisMax, conn);
+                    new_colis(data, colisInfinit, nbColisMax);
                 }
                 else
                 {
-                    message_erreur(cnx, ERREUR_ACCES);
+                    message_erreur(data, ERREUR_ACCES);
                 }
                 break;
 
@@ -223,36 +230,37 @@ void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL 
             case INSTRUCTION_INFO_COLIS:
                 if (connect)
                 {
-                    info_colis(cnx, strtok(NULL, INSTRUCTION_DELIMITER), conn);
+                    info_colis(data);
                 }
                 else
                 {
-                    message_erreur(cnx, ERREUR_ACCES);
+                    message_erreur(data, ERREUR_ACCES);
                 }
                 break;
 
             case INSTRUCTION_PHOTO_COLIS:
                 if (connect)
                 {
-                    photo(cnx, strtok(NULL, INSTRUCTION_DELIMITER), conn);
+                    photo(data);
                 }
                 else
                 {
-                    message_erreur(cnx, ERREUR_ACCES);
+                    message_erreur(data, ERREUR_ACCES);
                 }
                 break;
 
             default:
-                message_erreur(cnx, ERREUR_INSTRUCTION);
+                message_erreur(data, ERREUR_INSTRUCTION);
                 break;
         }
     }
+    message_erreur(data, ERREUR_TIME_OUT);
 }
 
-void fin(int cnx)
+void fin(SESSION *data)
 {
-    shutdown(cnx,SHUT_RDWR);
-    close(cnx);
+    shutdown(data->cnx, SHUT_RDWR);
+    close(data->cnx);
     _exit(EXIT_SUCCESS);
 }
 
@@ -263,13 +271,17 @@ void tombe(int sig)
 
 //-------------------------------------------------------------------------------------------------------
 
-void envoier_message(int cnx, char *message)
+void envoier_message(SESSION *data, char *message)
 {
-    if (write(cnx, message, strlen(message)) == -1)
+    if (write(data->cnx, message, strlen(message)) == -1)
     {
-        printf("[ERROR] WRITE\n");
-        fin(cnx);
+        log_line(data, "[ERROR] WRITE");
+        fin(data);
     }
+    char res[TAILLE_GRAND];
+    log_transforme(message);
+    sprintf(res, "reponce : %s", message);
+    log_line(data, res);
     if (DEBUG)
     {
         printf("[DEBUG] SEND : %s\n",message);
@@ -277,30 +289,45 @@ void envoier_message(int cnx, char *message)
 }
 
 
-void message_erreur(int cnx, int valeur)
+void message_erreur(SESSION *data, int valeur)
 {
     char message[TAILLE];
     sprintf(message, "%s%s%d", ERREUR, DELIMITER, valeur); // formate le message
-    envoier_message(cnx, message);
-    fin(cnx);
+    envoier_message(data, message);
+    fin(data);
 }
 
-void envoier_code(int cnx, char *message){
-    if (write(cnx, message, strlen(message)) == -1)
+void envoier_code(SESSION *data, char *message){
+    if (write(data->cnx, message, strlen(message)) == -1)
     {
-        printf("[ERROR] WRITE\n");
-        fin(cnx);
+        log_line(data, "[ERROR] WRITE PHOTO");
+        fin(data);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------
 
 
-bool authtification(compte* c, char buff[TAILLE])
+bool authtification(SESSION *data, COMPTE* c)
 {
     bool connect = false;
+
     char *id = strtok(NULL, INSTRUCTION_DELIMITER);
-    char *mdp = strtok(NULL, "\n");
+    if (id == NULL)
+    {
+        message_erreur(data, ERREUR_INSTRUCTION);
+    }
+    
+    char *mdp = strtok(NULL, DELIMITER);
+    if (mdp == NULL)
+    {
+        message_erreur(data, ERREUR_INSTRUCTION);
+    }
+    if (mdp[strlen(mdp)-1] == '\n')
+    {
+        mdp[strlen(mdp)-1] == '\0';
+    }
+    
 
     if (DEBUG)
     {
@@ -309,8 +336,8 @@ bool authtification(compte* c, char buff[TAILLE])
         printf("MDP : %s\n", mdp);
     }
 
-    compte* i = c;
-    // boucle pour comparé avec chaque compte
+    COMPTE* i = c;
+    // boucle pour comparé avec chaque COMPTE
     while (i != NULL)
     {
         if (strcmp(id,i->id) == 0 && strncmp(mdp,i->mdp, MDP_TAILLE-1) == 0)
@@ -323,7 +350,7 @@ bool authtification(compte* c, char buff[TAILLE])
 }
 
 
-void connection(int cnx, bool connect)
+void connection(SESSION *data, bool connect)
 {
     char message[TAILLE];
     if (connect)
@@ -332,8 +359,8 @@ void connection(int cnx, bool connect)
         if (DEBUG)
         {
             printf("[DEBUG] CONNECT : TRUE\n");
-            envoier_message(cnx, message);
         }
+        envoier_message(data, message);
     }
     else
     {
@@ -341,51 +368,51 @@ void connection(int cnx, bool connect)
         if (DEBUG)
         {
             printf("[DEBUG] CONNECT : FALSE\n");
-            envoier_message(cnx, message);
-            fin(cnx);
         }
+        envoier_message(data, message);
+        fin(data);
     }
 }
 
 //-------------------------------------------------------------------------------------------------------
 
-void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL *conn)
+void new_colis(SESSION *data, bool colisInfinit, int nbColisMax)
 {
     char message[TAILLE];
-    if (colisInfinit || nbColisMax > colis_encour(conn, cnx))
+    if (colisInfinit || nbColisMax > colis_encour(data))
     {
         char code[BORDEREAU_SIZE];
         genere_code(code);
 
         if (BDD)
         {
-            while (colis_existe(conn, cnx, code)){
+            while (colis_existe(data, code)){
                 genere_code(code);
             }
 
             char sql[TAILLE_SQL];
             sprintf(sql, "INSERT INTO _colis (bordereau) VALUES ('%s')", code);
 
-            if (mysql_query(conn, sql))
+            if (mysql_query(data->conn, sql))
             { 
-                fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                mysql_close(conn); 
-                fin(cnx); 
+                sprintf(message, "Erreur requête : %s\n", mysql_error(data->conn)); 
+                log_line(data, message);
+                message_erreur(data, ERREUR_INTERNE);
             }
 
             sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
-            envoier_message(cnx, message);
+            envoier_message(data, message);
         
         }
         else{
             sprintf(message, "%s%s%s", COLIS, DELIMITER, code);
-            envoier_message(cnx, message);
+            envoier_message(data, message);
         }
     }
     else
     {
         // envoier une erreur nouveau colis
-        message_erreur(cnx, ERREUR_NEW_COLIS);  
+        message_erreur(data, ERREUR_NEW_COLIS);  
     }
 }
 
@@ -405,44 +432,50 @@ void genere_code(char *code)
     }
 }
 
-int colis_encour(MYSQL *conn, int cnx)
+int colis_encour(SESSION *data)
 {
+    char message[TAILLE_GRAND];
     if (BDD)
     {
         char sql[TAILLE_SQL];
         sprintf(sql, "SELECT * FROM %s", VIEW);
 
-        if (mysql_query(conn, sql)) 
+        if (mysql_query(data->conn, sql)) 
         { 
-            fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn));
-            //mysql_close(conn); 
-            fin(cnx); 
+            sprintf(message, "Erreur requête : %s\n", mysql_error(data->conn));
+            log_line(data, message);
+            message_erreur(data, ERREUR_INTERNE);
         }
 
-        MYSQL_RES *res = mysql_store_result(conn); 
+        MYSQL_RES *res = mysql_store_result(data->conn); 
         MYSQL_ROW row = mysql_fetch_row(res);
 
-        printf("[DEBUG] COLIS EN COUR : %s\n", row[0]);
+        if (DEBUG)
+        {
+           printf("[DEBUG] COLIS EN COUR : %s\n", row[0]); 
+        }
+        
+        
         return atoi(row[0]);
     }
     
     return 1;
 }
 
-bool colis_existe(MYSQL *conn, int cnx, char *code)
+bool colis_existe(SESSION *data, char *code)
 {
-
+    char message[TAILLE_GRAND];
     char sql[TAILLE_SQL];
-    sprintf(sql, "SELECT * FROM %s WHERE bordereau = '%s'", TABLE, code);
+    sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_ETAPE, TABLE, code);
 
-    if (mysql_query(conn, sql)) 
+    if (mysql_query(data->conn, sql)) 
     { 
-        fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-        mysql_close(conn); 
-        fin(cnx);
+        sprintf(message, "Erreur requête : %s\n", mysql_error(data->conn));
+        log_line(data, message);
+        message_erreur(data, ERREUR_INTERNE);
     }
 
-    MYSQL_RES *res = mysql_store_result(conn);
+    MYSQL_RES *res = mysql_store_result(data->conn);
     MYSQL_ROW row = mysql_fetch_row(res);
 
     if (NULL == row){
@@ -464,9 +497,14 @@ bool colis_existe(MYSQL *conn, int cnx, char *code)
 //-------------------------------------------------------------------------------------------------------
 
 
-void info_colis(int cnx, char* code, MYSQL *conn)
+void info_colis(SESSION *data)
 {
-
+    char *code = strtok(NULL, INSTRUCTION_DELIMITER);
+    if (code == NULL)
+    {
+        message_erreur(data, ERREUR_INSTRUCTION);
+    }
+    
     if (check_code(code))
     {
         if (DEBUG)
@@ -478,19 +516,19 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         if (BDD)
         {
             
-            if (colis_existe(conn, cnx, code))
+            if (colis_existe(data, code))
             {
                 char sql[TAILLE_SQL];   
                 sprintf(sql, "SELECT %s, %s, %s, %s FROM %s WHERE bordereau = '%s'", COLON_ETAPE, COLON_MODE, COLON_RAISON, COLON_DATE, TABLE, code);
 
-                if (mysql_query(conn, sql)) 
+                if (mysql_query(data->conn, sql)) 
                 { 
-                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                    mysql_close(conn); 
-                    fin(cnx);
+                    sprintf(message, "Erreur requête : %s\n", mysql_error(data->conn));
+                    log_line(data, message);
+                    message_erreur(data, ERREUR_INTERNE);
                 }
 
-                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_RES *res = mysql_store_result(data->conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
 
                 if (atoi(row[0]) == VALUE_ETAPE_FIN)
@@ -505,18 +543,18 @@ void info_colis(int cnx, char* code, MYSQL *conn)
                 {
                     sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
                 }
-                envoier_message(cnx, message);
+                envoier_message(data, message);
                 
             }
             else
             {
-                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+                message_erreur(data, ERREUR_COLIS_INEXISTENT);
             }
         }
         else
         {
             sprintf(message, "%s%s1\n%s%s%s\n%s%s%s\n%s%s854894", ETAPE, DELIMITER, MODE, DELIMITER, VIDE, CAUSE, DELIMITER, VIDE, DATE, DELIMITER);
-            envoier_message(cnx, message);
+            envoier_message(data, message);
         }
     }
     else
@@ -525,8 +563,7 @@ void info_colis(int cnx, char* code, MYSQL *conn)
         {
             printf("[DEBUG] CODE : FALSE\n");
         }
-        message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
-        fin(cnx);
+        message_erreur(data, ERREUR_INSTRUCTION);
     }
 }
 
@@ -537,6 +574,12 @@ bool check_code(char* code)
     code[BORDEREAU_SIZE-1] = '\0';
     //printf("code : %s\n", code);
     //printf("size : %ld\n", strlen(code));
+
+    if (code == NULL)
+    {
+        return false;
+    }
+    
 
     for (x = 0; x < BORDEREAU_SIZE-1; x++)
     {
@@ -565,78 +608,89 @@ bool check_code(char* code)
 
 //----------------------------------------------------------------------
 
-void photo(int cnx, char* code, MYSQL* conn)
+// verifie que le colis posède une photo
+void photo(SESSION *data)
 {
-    if (check_code(code))
+    char *code = strtok(NULL, INSTRUCTION_DELIMITER);
+    if (code == NULL)
     {
-        if (BDD)
+        message_erreur(data, ERREUR_INSTRUCTION);
+    }
+
+    char message[TAILLE_GRAND];
+    if (check_code(code)) // verifie la forme du code
+    {
+        if (BDD) // si utilisation de la bdd
         {
-            if (colis_existe(conn, cnx, code))
+            if (colis_existe(data, code))// verifi si le colis existe
             {
 
                 char sql[TAILLE_SQL];   
                 sprintf(sql, "SELECT %s FROM %s WHERE bordereau = '%s'", COLON_MODE, TABLE, code);
 
-                if (mysql_query(conn, sql)) 
+                if (mysql_query(data->conn, sql)) 
                 { 
-                    fprintf(stderr, "Erreur requête : %s\n", mysql_error(conn)); 
-                    mysql_close(conn); 
-                    fin(cnx);
+                    sprintf(message, "Erreur requête : %s\n", mysql_error(data->conn));
+                    log_line(data, message);
+                    message_erreur(data, ERREUR_INTERNE);
                 }
 
-                MYSQL_RES *res = mysql_store_result(conn); 
+                MYSQL_RES *res = mysql_store_result(data->conn); 
                 MYSQL_ROW row = mysql_fetch_row(res);
 
-                if (row[0] != NULL)
+                if (row[0] != NULL) // si ligne pas vide
                 {
                     if (atoi(row[0]) == VALUE_MODE_ABSENT)
                     {
-                        envoier_photo(cnx, FICHIER_PHOTO);
+                        envoier_photo(data, FICHIER_PHOTO);
                     }
                     else
                     {
-                        message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                        message_erreur(data, ERREUR_PHOTO_INEXISTENT);
                     }
                 }
                 else
                 {
-                    message_erreur(cnx, ERREUR_PHOTO_INEXISTENT);
+                    message_erreur(data, ERREUR_PHOTO_INEXISTENT);
                 }
             }
             else
             {
-                message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+                message_erreur(data, ERREUR_COLIS_INEXISTENT);
             }
         }
         else
         {
-            envoier_photo(cnx, FICHIER_PHOTO);
+            envoier_photo(data, FICHIER_PHOTO);
         }
     }
     else
     {
-        message_erreur(cnx, ERREUR_COLIS_INEXISTENT);
+        message_erreur(data, ERREUR_COLIS_INEXISTENT);
     }
 }
 
-void envoier_photo(int cnx, char *fichier)
+// socupe d'envoier la photo
+void envoier_photo(SESSION *data, char *fichier)
 {
     char buff[TAILLE_PHOTO];
     char message[TAILLE_PHOTO*8];
-    //printf("test fonction\n");
+
     sprintf(message, "%s%s", PHOTO, DELIMITER);
-    envoier_message(cnx, message);
+    envoier_message(data, message);
 
     int fd = open(FICHIER_PHOTO, O_RDONLY);
+    // boucle de lecture
     while (read(fd, buff, TAILLE_PHOTO) != 0)
     {
-        //printf("testest\n");
         encode_photo(buff, message);
-        envoier_code(cnx, message);
+        envoier_code(data, message);
     }
+    envoier_message(data, "#"); // fin de limage
 }
 
 
+// transforme le code de l'image en binaire
 void encode_photo(char *src, char *des)
 {
     for (int i = 0; src[i] != '\0'; i++) 
@@ -649,10 +703,41 @@ void encode_photo(char *src, char *des)
         } 
     }
     
-    // Ajout du terminateur 
+    // Ajout de la fin de chaine
     int len = 0; 
     for (; src[len] != '\0'; len++); 
     des[len * 8] = '\0';
+}
 
-    //printf("%s", des);
+//------------------------------------------------------------------
+
+// permet decrire les log
+void log_line(SESSION *data, char *msg) 
+{
+    char timestamp[64];
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", t);
+
+    fprintf(data->log, "[%s] [%s] %s\n", timestamp, data->client_ip, msg);
+    //fflush(data->logf);  // pour écrire immédiatement
+}
+
+// permet de retiré les retout a la ligne et mettre des espace
+void log_transforme(char *str) 
+{
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == '\n')
+            str[i] = ' ';
+    }
+}
+
+
+// affiche le resultat de la commende help
+void help() 
+{
+    printf("help/n");
+    exit(EXIT_SUCCESS);
 }
