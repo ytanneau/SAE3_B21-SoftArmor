@@ -83,8 +83,8 @@
         </style>
     </head>
     <body>
+        <?php include "../../header.php" ?>
         <main>
-            <?php include "../../header.php" ?>
             <h1>Démarrer une promotion</h1>
             <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
