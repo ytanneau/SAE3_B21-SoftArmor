@@ -300,13 +300,13 @@ if (isset($_POST['quantite'])) {
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
         const snackbar = document.getElementById("form_signalement");
+        const inputId = document.getElementById("id_avis");
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
-                document.getElementById("id_avis").value = btn.dataset.avis;
+                inputId.value = btn.dataset.avis;
                 modal.style.display = "block";
-                console.log("Affichage du modal");
             });
         });
 
