@@ -60,12 +60,15 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
+if (isset($_SESSION['id_compte'])) {
+    $id_cli = $_SESSION['id_compte'];
+}
+
 if (isset($_POST['quantite'])) {
     $qte = $_POST['quantite'];
     $id_prod = $_GET['produit'];
 
     if (isset($_SESSION['id_compte'])) {
-        $id_cli = $_SESSION['id_compte'];
         ajouter_panier($id_prod,$id_cli,$qte);
     } elseif (isset($_COOKIE['panier'])) {
         $panier = unserialize($_COOKIE['panier']);
