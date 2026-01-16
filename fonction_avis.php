@@ -207,4 +207,48 @@
             throw $e;
         }
     }
+
+    function signaler_avis($id_compte, $id_avis, $raison) {
+        global $pdo;
+
+        try {
+            // Enregistrer l'avis dans la BDD
+            $requete = $pdo->prepare(
+                "INSERT INTO _signalement (id_compte, id_avis, raison)
+                VALUES (:id_compte, :id_avis, :raison)"
+            );
+
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->bindValue(':raison', $raison, PDO::PARAM_STR);
+            $requete->execute();
+
+            // Marquer l'avis comme signalé
+
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    // Retourne true si le compte en paramètre a signalé l'avis, false sinon
+    function avis_est_signale($id_avis, $id_compte) {
+        global $pdo;
+
+        try {
+            $requete = $pdo->prepare(
+                "SELECT 1 
+                FROM _signalement
+                WHERE id_compte = :id_compte
+                AND id_avis = :id_avis"
+            );
+
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->execute();
+
+            return $requete->rowCount() > 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
     

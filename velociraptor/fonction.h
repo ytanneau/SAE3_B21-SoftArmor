@@ -2,38 +2,54 @@
 #ifndef FONCTION_H
 #define FONCTION_H
 
-typedef struct compte
+typedef struct COMPTE
 {
     char id[TAILLE];
     char mdp[TAILLE];
-    struct compte *next;
-} compte;
+    struct COMPTE *next;
+} COMPTE;
 
-compte* init_compte(const char* chemain);
-void affiche_compte(compte* c);
-void init_bdd(MYSQL *conn);
+typedef struct SESSION
+{
+    MYSQL *conn;
+    FILE *log;
+    char client_ip[INET_ADDRSTRLEN];
+    int cnx;
+    char *login;
+    bool debug;
+    bool bdd;
+} SESSION;
 
-void comminication(int cnx, compte* c, bool colisInfinit, int nbColisMax, MYSQL* conn);
-void fin(int cnx);
+
+COMPTE* init_compte(const char* chemain, FILE *logI);
+void affiche_compte(COMPTE* c, FILE *logI);
+void init_bdd(MYSQL *conn, FILE *logI);
+
+void comminication(SESSION *data, COMPTE* c, bool colisInfinit, int nbColisMax);
+void fin(SESSION *data);
 void tombe(int sig);
 
-void envoier_message(int cnx, char *message);
-void message_erreur(int cnx, int valeur);
-void envoier_code(int cnx, char *message);
+void envoier_message(SESSION *data, char *message);
+void message_erreur(SESSION *data, int valeur);
+void envoier_code(SESSION *data, char *message);
 
-bool authtification(compte* c, char buff[TAILLE]);
-void connection(int cnx, bool connect);
+bool authtification(SESSION *data,COMPTE* c);
+void connection(SESSION *data, bool connect);
 
-void new_colis(int cnx, bool colisInfinit, int nbColisMax, MYSQL* conn);
-void genere_code(char *code);
-int colis_encour(MYSQL* conn,int cnx);
-bool colis_existe(MYSQL *conn, int cnx, char *code);
+void new_colis(SESSION *data, bool colisInfinit, int nbColisMax);
+void genere_code(SESSION *data, char *code);
+int colis_encour(SESSION *data);
+bool colis_existe(SESSION *data, char *code);
 
-void info_colis(int cnx, char* code, MYSQL* conn);
+void info_colis(SESSION *data);
 bool check_code(char* code);
 
-void photo(int cnx, char* code, MYSQL* conn);
-void envoier_photo(int cnx, char *fichier);
+void photo(SESSION *data);
+void envoier_photo(SESSION *data, char *fichier);
 void encode_photo(char *src, char *des);
+
+void log_line(SESSION *data, char *msg);
+void log_transforme(char *str) ;
+void help();
 
 #endif

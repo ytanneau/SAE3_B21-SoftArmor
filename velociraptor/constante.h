@@ -17,13 +17,20 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <mariadb/mysql.h>
+#include <getopt.h> 
+#include <poll.h>
 
 //-------------------------------------------------------
 
 // base
 #define SERVER "[RAPTOR]"
-#define DEBUG true
-#define LOG_FILE "log.txt"
+#define DEBUG false
+#define INIT_FILE "init.log"
+#define LOG_FILE "connect.log"
+
+// socket
+#define IP "0.0.0.0" //"127.0.0.1" pour localhost et "0.0.0.0" pour tout les ip
+#define TIME 60
 
 // bdd
 #define BDD true
@@ -42,6 +49,8 @@
 #define VALUE_MODE_REFU 2
 
 // valeur erreur
+#define ERREUR_INTERNE -2
+#define ERREUR_TIME_OUT -1
 #define ERREUR_INSTRUCTION 0
 #define ERREUR_ACCES 1
 #define ERREUR_NEW_COLIS 2
@@ -67,16 +76,10 @@
 #define PHOTO "PHOTO"
 #define DATE "DATE"
 
-// parametre / option
-#define CHEMAIN 1
-#define NB_COLIS 2
-#define PORT 3
-#define OPTION 4
-
 // taille des chaine
 #define TAILLE 100
 #define TAILLE_SQL 200
-#define TRAME_TAILLE 400
+#define TAILLE_GRAND 400
 
 // element du login
 #define DELIMITER "="
@@ -90,6 +93,10 @@
 #define TAILLE_PHOTO 62
 #define FICHIER_PHOTO "carton_endommage.png"
 
+#define HELP_FILE "hepl.txt"
+#define DEFAULT_COLIS -1
+#define DEFAULT_PORT 9000
+#define DEFAULT_LOGIN "login.txt"
 
 
 #endif

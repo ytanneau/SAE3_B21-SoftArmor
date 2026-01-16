@@ -1497,6 +1497,18 @@ aside {
     }
 }
 
+#snackbar {
+    visibility: hidden;
+}
+
+#snackbar.show {
+    visibility: visible;
+}
+
+.modal {
+    display: none;
+}
+
 // Pages à imprimer (récap de commandes)
 @media print {
     h1 {
@@ -1504,5 +1516,22 @@ aside {
     }
     header, button, footer, a {
         display:none !important;
+    }
+}
+.main_promo{
+    @include contenu_centre_vertical;
+    @include entete_page_vendeur;
+    .en_ligne{
+        display: flex;
+        flex-direction: row;
+    }
+    .en_colonne{
+        display: flex;
+        flex-direction: column;
+    }
+    #valider{
+        @include bouton_new($color: $couleur_background);
+        margin-top: 20px;
+        width: 100%;
     }
 }

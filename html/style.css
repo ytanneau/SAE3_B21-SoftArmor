@@ -2594,6 +2594,18 @@ aside input.bouton:hover {
   margin: auto 10px;
 }
 
+#snackbar {
+  visibility: hidden;
+}
+
+#snackbar.show {
+  visibility: visible;
+}
+
+.modal {
+  display: none;
+}
+
 @media print {
   h1 {
     font-size: 8mm;
@@ -2601,4 +2613,53 @@ aside input.bouton:hover {
   header, button, footer, a {
     display: none !important;
   }
+}
+.main_promo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main_promo .entete {
+  display: flex;
+  align-items: center;
+}
+.main_promo .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.main_promo .entete h1 {
+  margin-right: 30px;
+}
+.main_promo .en_ligne {
+  display: flex;
+  flex-direction: row;
+}
+.main_promo .en_colonne {
+  display: flex;
+  flex-direction: column;
+}
+.main_promo #valider {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+.main_promo #valider a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.main_promo #valider:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */

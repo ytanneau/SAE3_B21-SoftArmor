@@ -77,34 +77,53 @@
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <h1>Démarrer une promotion</h1>
-        <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
-        <form action="" method="post" enctype="multipart/form-data">
-            <h3>Promotion</h3>
-            <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut" required>
-            <label for="dateFin">Date de fin (incluse)</label>
-            <input type="date" id="dateFin" name="dateFin" required>
-            <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
-            <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-            <label for="cout">Coût final : </label>
-            <input type="text" id="cout" readonly>
-            <div id="divPhoto" style="display:block;">
-                <label for="photoPromotion">Ajouter une banniere</label>
-                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+        <main class="main_promo">
+            <div class="entete">
+                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <h1>Démarrer une promotion</h1>
             </div>
+            <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
+            <form action="" method="post" enctype="multipart/form-data" class="form_promo">
+                <h3>Promotion</h3>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="dateDebut">Date de début : </label>
+                        <input type="date" id="dateDebut" name="dateDebut" required>
+                    </div>
+                    <div>
+                        <label for="dateFin">Date de fin (incluse) : </label>
+                        <input type="date" id="dateFin" name="dateFin" required>
+                    </div>
+                </div>
+                <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
+                <label for="cout">Coût final : </label>
+                <input type="text" id="cout" readonly>
+                <div id="divPhoto" style="display:block;">
+                    <label for="photoPromotion">Ajouter une banniere</label>
+                    <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                </div>
 
-            <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-            <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage" name="pourcentage">
-            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
-            <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" readonly>
-            <label for="prixFinal">Prix final</label>
-            <input type="text" id="prixFinal" readonly>
-            <input type="submit" id="valider" value="Valider">
-        </form>
+                <h3>Réduction</h3>
+                <p>Prix actuel : <?=htmlentities($prix)?>€</p>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="pourcentage">Pourcentage : </label>
+                        <input type="text" id="pourcentage" name="pourcentage">
+                        <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="euro">Remise appliquée : </label>
+                        <input type="text" id="euro" name="euro" readonly>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="prixFinal">Prix final : </label>
+                        <input type="text" id="prixFinal" readonly>
+                    </div>
+                </div>
+                <input type="submit" id="valider" value="Valider">
+            </form>
+        </main>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>

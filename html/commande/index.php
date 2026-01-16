@@ -1,7 +1,7 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
-const IP = "127.0.0.1";
+const IP = "host.docker.internal";
 const PORT = "9000";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
@@ -118,10 +118,12 @@ if (isset($_GET["commande"])) {
                     $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
                     
                     //si connexion
-                    if ($conn == "true"){
+                    if ($conn == "1"){
                         $bordereau = $commande["bordereau_colis"];
+                        
                         //recuperation des données du colis
-                        $info_colis =get_info_colis($fd,$bordereau);
+                        $info_colis = get_info_colis($fd,$bordereau);
+                        
                         $texte_img="";
                         //si le colis est rendu dans la boite au lettre
                         if ($info_colis["RENDU"] == "1") {
@@ -154,7 +156,7 @@ if (isset($_GET["commande"])) {
                             <div>
                                 <?php
                                 //si il y a eu connexion delivraptor et que il ny a pas d'erreur
-                                if ($conn =="true" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
+                                if ($conn =="1" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
 
                                     
                                 
@@ -203,6 +205,7 @@ if (isset($_GET["commande"])) {
                                     $livraison = "Colis en cours de livraison";
                                     switch ($info_colis["ETAPE"]) {
                                         case "1":
+                                            $livraison = "Colis en cours de traitement";
                                             $texte_etape = "Création d’un bordereau de livraison";
                                             break;
                                         case "2":
@@ -238,15 +241,15 @@ if (isset($_GET["commande"])) {
                                     <p><?php echo htmlentities($texte_etape);?></p>
                                 <?php
                                 //si la connexion est refusé
-                                elseif ($conn == "false") :?>
+                                elseif ($conn == "0") :?>
                                     <p>Connexion refusé</p>
                                 <?php 
                                     //si la connexion est accepté mais il y a une erreur sur le colis 
-                                    elseif ($conn =="true" and $info_colis["ERROR"]!="N/A") :?>
+                                    elseif ($conn =="1" and $info_colis["ERROR"]!="N/A") :?>
                                     <p>Erreur, le colis <?php echo htmlentities($bordereau)?> n'existe pas</p>
                                 <?php 
                                     //si la connexion est accepté mais il y a une erreur sur l'image
-                                    elseif  ($conn =="true" and $texte_img !="") :?>
+                                    elseif  ($conn =="1" and $texte_img !="") :?>
                                     <p>Erreur, <?php echo htmlentities($texte_img)?></p>
                                 <?php endif; ?>
                             </div>
