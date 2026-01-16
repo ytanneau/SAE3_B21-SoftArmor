@@ -1524,5 +1524,6 @@ aside {
 
     #valider{
         @include bouton_new($color: $couleur_background);
+        width: 100%;
     }
 }
