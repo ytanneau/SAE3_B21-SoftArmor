@@ -314,7 +314,7 @@ if (isset($_POST['quantite'])) {
             modal.style.display = "none";
         };
 
-        form.addEventListener("submit", async (e) => {
+        formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             // Récupérer les données du formulaire
