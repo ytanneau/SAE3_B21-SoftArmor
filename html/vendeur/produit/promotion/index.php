@@ -88,6 +88,8 @@
                 <div>
                     <label for="dateDebut">Date de début</label>
                     <input type="date" id="dateDebut" name="dateDebut" required>
+                </div>
+                <div>
                     <label for="dateFin">Date de fin (incluse)</label>
                     <input type="date" id="dateFin" name="dateFin" required>
                 </div>
