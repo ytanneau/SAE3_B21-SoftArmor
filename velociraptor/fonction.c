@@ -189,7 +189,7 @@ void comminication(SESSION *data, COMPTE* c, bool colisInfinit, int nbColisMax)
         sprintf(message, "instruction : %d", instruction);
         log_line(data, message);
 
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] INSTRUCTION : %d\n", instruction);
         }
@@ -280,9 +280,9 @@ void envoier_message(SESSION *data, char *message)
     }
     char res[TAILLE_GRAND];
     log_transforme(message);
-    sprintf(res, "reponce : %s", message);
+    sprintf(res, "reponse : %s", message);
     log_line(data, res);
-    if (DEBUG)
+    if (data->debug)
     {
         printf("[DEBUG] SEND : %s\n",message);
     }
@@ -315,6 +315,7 @@ bool authtification(SESSION *data, COMPTE* c)
     char *id = strtok(NULL, INSTRUCTION_DELIMITER);
     if (id == NULL)
     {
+        data->login = id;
         message_erreur(data, ERREUR_INSTRUCTION);
     }
     
@@ -329,7 +330,7 @@ bool authtification(SESSION *data, COMPTE* c)
     }
     
 
-    if (DEBUG)
+    if (data->debug)
     {
         printf("[DEBUG] CONNECT : \n");
         printf("ID : %s\n", id);
@@ -356,7 +357,7 @@ void connection(SESSION *data, bool connect)
     if (connect)
     {
         sprintf(message,"%s%s1",CONNECTION,DELIMITER);
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] CONNECT : TRUE\n");
         }
@@ -365,7 +366,7 @@ void connection(SESSION *data, bool connect)
     else
     {
         sprintf(message,"%s%s0",CONNECTION,DELIMITER);
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] CONNECT : FALSE\n");
         }
@@ -382,12 +383,12 @@ void new_colis(SESSION *data, bool colisInfinit, int nbColisMax)
     if (colisInfinit || nbColisMax > colis_encour(data))
     {
         char code[BORDEREAU_SIZE];
-        genere_code(code);
+        genere_code(data, code);
 
-        if (BDD)
+        if (data->bdd)
         {
             while (colis_existe(data, code)){
-                genere_code(code);
+                genere_code(data, code);
             }
 
             char sql[TAILLE_SQL];
@@ -416,7 +417,7 @@ void new_colis(SESSION *data, bool colisInfinit, int nbColisMax)
     }
 }
 
-void genere_code(char *code) 
+void genere_code(SESSION *data, char *code) 
 { 
     size_t charset_size = sizeof(BORDEREAU_CARACTERE) - 1; // -1 pour exclure '\0' 
     for (size_t i = 0; i < BORDEREAU_SIZE-1; i++) 
@@ -426,7 +427,7 @@ void genere_code(char *code)
     } 
     code[BORDEREAU_SIZE-1] = '\0'; // fin de chaîne
 
-    if (DEBUG)
+    if (data->debug)
     {
         printf("[DEBUG] CODE GENERATE : %s\n",code);
     }
@@ -435,7 +436,7 @@ void genere_code(char *code)
 int colis_encour(SESSION *data)
 {
     char message[TAILLE_GRAND];
-    if (BDD)
+    if (data->bdd)
     {
         char sql[TAILLE_SQL];
         sprintf(sql, "SELECT * FROM %s", VIEW);
@@ -450,7 +451,7 @@ int colis_encour(SESSION *data)
         MYSQL_RES *res = mysql_store_result(data->conn); 
         MYSQL_ROW row = mysql_fetch_row(res);
 
-        if (DEBUG)
+        if (data->debug)
         {
            printf("[DEBUG] COLIS EN COUR : %s\n", row[0]); 
         }
@@ -479,14 +480,14 @@ bool colis_existe(SESSION *data, char *code)
     MYSQL_ROW row = mysql_fetch_row(res);
 
     if (NULL == row){
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] SQL ROW VIDE\n");
         }
         return false;
     }
 
-    if (DEBUG)
+    if (data->debug)
     {
         printf("[DEBUG] SQL ROW NON VIDE\n");
     }
@@ -507,13 +508,13 @@ void info_colis(SESSION *data)
     
     if (check_code(code))
     {
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] CODE : TRUE\n");
         }
         
         char message[TAILLE*4];
-        if (BDD)
+        if (data->bdd)
         {
             
             if (colis_existe(data, code))
@@ -559,7 +560,7 @@ void info_colis(SESSION *data)
     }
     else
     {
-        if (DEBUG)
+        if (data->debug)
         {
             printf("[DEBUG] CODE : FALSE\n");
         }
@@ -620,7 +621,7 @@ void photo(SESSION *data)
     char message[TAILLE_GRAND];
     if (check_code(code)) // verifie la forme du code
     {
-        if (BDD) // si utilisation de la bdd
+        if (data->bdd) // si utilisation de la bdd
         {
             if (colis_existe(data, code))// verifi si le colis existe
             {
@@ -738,6 +739,12 @@ void log_transforme(char *str)
 // affiche le resultat de la commende help
 void help() 
 {
-    printf("help/n");
+    printf("%s Option ...\n\n", SERVER);
+    printf("-h --help \tDisplay this information.\n");
+    printf("-a --account \tNeed the name of the file of account, Defautl value : %s.\n", DEFAULT_LOGIN);
+    printf("-n --nbcolis \tNeed the number of colis, set -1 for infinit, Defautl value : %d.\n", DEFAULT_COLIS);
+    printf("-p --port \tNeed the number of the port for the socket, Defautl value : %d.\n", DEFAULT_PORT);
+    printf("-b --bdd \tFor dont use a bdd.\n");
+    printf("-d --debug \tDisplay information of the processe.\n");
     exit(EXIT_SUCCESS);
 }
