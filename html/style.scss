@@ -1506,3 +1506,7 @@ aside {
         display:none !important;
     }
 }
+
+.form_promo{
+    @include contenu_centre_vertical; 
+}

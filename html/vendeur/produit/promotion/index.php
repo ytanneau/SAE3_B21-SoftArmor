@@ -79,7 +79,7 @@
         <?php include "../../header.php" ?>
         <h1>Démarrer une promotion</h1>
         <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" class="form_promo">
             <h3>Promotion</h3>
             <label for="dateDebut">Date de début</label>
             <input type="date" id="dateDebut" name="dateDebut" required>
