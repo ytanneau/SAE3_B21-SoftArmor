@@ -1508,5 +1508,6 @@ aside {
 }
 
 .form_promo{
-    @include contenu_centre_vertical; 
+    @include contenu_centre_vertical;
+    color:red; 
 }
