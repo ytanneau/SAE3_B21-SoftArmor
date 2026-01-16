@@ -333,7 +333,7 @@ if (isset($_POST['quantite'])) {
 
             if (json.success) {
                 modal.style.display = "none";
-                showSnackbar("L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais.");
+                showSnackbar(json.message);
 
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
@@ -342,9 +342,9 @@ if (isset($_POST['quantite'])) {
 
                 btn.textContent = "Signalé";
                 btn.disabled = true;
-            } else {
-                showSnackbar("L'avis n'a pas pu être signalé. Veuillez réessayer plus tard");
             }
+
+            
         });
 
         // Montrer la snackbar
