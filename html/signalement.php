@@ -50,7 +50,7 @@
     } catch (PDOException $e) {
         echo json_encode([
             'success' => false,
-            'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard."
+            'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard. " . $e->getMessage()
         ]);
     }
 
