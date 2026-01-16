@@ -120,10 +120,10 @@ if (isset($_GET["commande"])) {
                     //si connexion
                     if ($conn == "1"){
                         $bordereau = $commande["bordereau_colis"];
-                        echo $bordereau;
+                        
                         //recuperation des données du colis
                         $info_colis = get_info_colis($fd,$bordereau);
-                        print_r($info_colis);
+                        
                         $texte_img="";
                         //si le colis est rendu dans la boite au lettre
                         if ($info_colis["RENDU"] == "1") {
