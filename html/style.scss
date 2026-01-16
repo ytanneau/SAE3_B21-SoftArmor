@@ -1510,7 +1510,7 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
 
-    input[type="submit"]{
-        @include bouton_new();
+    #valider{
+        @include bouton_new($color: $couleur_background);
     }
 }
