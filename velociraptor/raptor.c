@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     char *chemain = DEFAULT_LOGIN;
     bool colisInfinit = false;
     int port, nbColisMax;
-    char *portC, *nbColisMaxC;
+    char *portC = NULL, *nbColisMaxC = NULL;
 
     int pid;
     int sock;
@@ -120,12 +120,16 @@ int main(int argc, char *argv[])
         init_bdd(conn, logI);
         data.conn = conn;
     }
+    printf("test2\n");
 
 //-------------------------------------------------------
 
 
     // verifie que le nombre de colie est bon
-    nbColisMax = atoi(nbColisMaxC);
+    if (nbColisMaxC != NULL)
+    {
+        nbColisMax = atoi(nbColisMaxC);
+    }
     if (nbColisMax == 0 || nbColisMax < -1)
     {
         fprintf(logI, "[FATAL] Nombre de colis incorecte.\n");
@@ -142,7 +146,10 @@ int main(int argc, char *argv[])
     }
     
     // verifie que port est bon
-    port = atoi(portC);
+    if (portC != NULL)
+    {
+        port = atoi(portC);
+    }
     if (port <= 0)
     {
         fprintf(logI, "[FATAL] Port incorecte.\n");
