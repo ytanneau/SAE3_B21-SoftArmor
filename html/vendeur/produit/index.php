@@ -71,7 +71,7 @@
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
                     <tr>
-                        <th>Nom en stock </th>
+                        <th>Référence</th>
                         <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
                     </tr>
                         <th>Nom public </th>
