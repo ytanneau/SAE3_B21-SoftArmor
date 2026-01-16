@@ -30,11 +30,10 @@ $lien_retour = empty($recherche) ? HOME_SITE : (HOME_SITE . 'recherche/?recherch
 try {
     $produit = detail_produit_image($id_produit);
     
-
     if (!$produit) {
-
         die("Produit introuvable.");
     }
+
     $note = note_produit($id_produit)['note_moy'];
 
     // Récupérer les avis
@@ -61,8 +60,8 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
-if ($_POST != NULL) {
-    $qte= $_POST['quantite'];
+if (isset($_POST['quantite'])) {
+    $qte = $_POST['quantite'];
     $id_prod = $_GET['produit'];
 
     if (isset($_SESSION['id_compte'])) {
@@ -211,12 +210,39 @@ if ($_POST != NULL) {
                                 </div>
                             </div>
 
+                            <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                Signaler
+                            </button>
+
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                             <?php } ?>
+
                         </li>
                     <?php } ?>
                 </ul>
+
+                <div id="modal_signalement" class="modal">
+                    <div class="modal_content">
+                        <h3>Signaler cet avis</h3>
+                        
+                        <form id="form_signalement" action="" method="post">
+                            <input type="hidden" name="id_avis" id="id_avis">
+
+                            <label for="select_raison">Raison :</label>
+                            <select name="raison" id="select_raison">
+                                <option value="Contenu offensant">Contenu offensant</option>
+                                <option value="Contenu mensonger">Contenu mensonger</option>
+                                <option value="Contenu illicite">Contenu illicite</option>
+                            </select>
+
+                            <button type="submit">Envoyer</button>
+                            <button type="cancel" id="fermer_modal">Annuler</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="snackbar" class="snackbar"></div>
             </section>
         </div>
                     
@@ -269,6 +295,70 @@ if ($_POST != NULL) {
         </div>
         
     </main>
-        <?php include HOME_SITE . "footer.php" ?>
+    
+    <?php include HOME_SITE . "footer.php" ?>
+
+    <script>
+        const modal = document.getElementById("modal_signalement");
+        const formSignalement = document.getElementById("form_signalement");
+        const snackbar = document.getElementById("form_signalement");
+        const inputId = document.getElementById("id_avis");
+
+        // Afficher le modal en cliquant sur l'icône signaler
+        document.querySelectorAll(".bouton_signalement").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputId.value = btn.dataset.avis;
+                modal.style.display = "block";
+            });
+        });
+
+        // Fermer le modal
+        document.getElementById("fermer_modal").onclick = () => {
+            modal.style.display = "none";
+        };
+
+        formSignalement.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Récupérer les données du formulaire
+            const data = new FormData(formSignalement);
+
+            // Envoyer les données du formulaire en JSON à une autre page
+            const res = await fetch("../signalement.php", {
+                method: "POST",
+                body: data
+            });
+
+            const json = await res.json();
+
+            console.log(json);
+
+            if (json.success) {
+                modal.style.display = "none";
+                showSnackbar("L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais.");
+
+                // Désactiver le bouton de signalement
+                const btn = document.querySelector(
+                    `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
+                );
+
+                btn.textContent = "Signalé";
+                btn.disabled = true;
+            } else {
+                showSnackbar("L'avis n'a pas pu être signalé. Veuillez réessayer plus tard");
+            }
+        });
+
+        // Montrer la snackbar
+        function showSnackbar(msg) {
+            snackbar.textContent = msg;
+            snackbar.className = "show";
+
+            setTimeout(() => {
+                snackbar.className = "";
+            }, 3000);
+        }
+
+    </script>
 </body>
 </html>
