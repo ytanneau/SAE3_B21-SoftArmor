@@ -329,9 +329,9 @@ if (isset($_POST['quantite'])) {
                 body: data
             });
 
+            console.log(res);
             const json = await res.json();
 
-            console.log(json);
 
             if (json.success) {
                 modal.style.display = "none";
