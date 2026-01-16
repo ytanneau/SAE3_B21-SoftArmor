@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     // initalisation des variable
     char *chemain = DEFAULT_LOGIN;
     bool colisInfinit = false;
-    int port, nbColisMax;
+    int port = DEFAULT_PORT, nbColisMax = DEFAULT_COLIS;
     char *portC = NULL, *nbColisMaxC = NULL;
 
     int pid;
@@ -120,7 +120,6 @@ int main(int argc, char *argv[])
         init_bdd(conn, logI);
         data.conn = conn;
     }
-    printf("test2\n");
 
 //-------------------------------------------------------
 
