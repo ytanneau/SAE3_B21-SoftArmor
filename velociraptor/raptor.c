@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
     // initalisation des variable
     char *chemain = DEFAULT_LOGIN;
     bool colisInfinit = false;
-    int port, nbColisMax;
-    char *portC, *nbColisMaxC;
+    int port = DEFAULT_PORT, nbColisMax = DEFAULT_COLIS;
+    char *portC = NULL, *nbColisMaxC = NULL;
 
     int pid;
     int sock;
@@ -125,7 +125,10 @@ int main(int argc, char *argv[])
 
 
     // verifie que le nombre de colie est bon
-    nbColisMax = atoi(nbColisMaxC);
+    if (nbColisMaxC != NULL)
+    {
+        nbColisMax = atoi(nbColisMaxC);
+    }
     if (nbColisMax == 0 || nbColisMax < -1)
     {
         fprintf(logI, "[FATAL] Nombre de colis incorecte.\n");
@@ -142,7 +145,10 @@ int main(int argc, char *argv[])
     }
     
     // verifie que port est bon
-    port = atoi(portC);
+    if (portC != NULL)
+    {
+        port = atoi(portC);
+    }
     if (port <= 0)
     {
         fprintf(logI, "[FATAL] Port incorecte.\n");

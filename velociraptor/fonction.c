@@ -739,12 +739,13 @@ void log_transforme(char *str)
 // affiche le resultat de la commende help
 void help() 
 {
+    printf("%s is a service for given the information of a colis for external clients.\n", SERVER);
     printf("%s Option ...\n\n", SERVER);
-    printf("-h --help \tDisplay this information.\n");
-    printf("-a --account \tNeed the name of the file of account, Defautl value : %s.\n", DEFAULT_LOGIN);
-    printf("-n --nbcolis \tNeed the number of colis, set -1 for infinit, Defautl value : %d.\n", DEFAULT_COLIS);
-    printf("-p --port \tNeed the number of the port for the socket, Defautl value : %d.\n", DEFAULT_PORT);
-    printf("-b --bdd \tFor dont use a bdd.\n");
-    printf("-d --debug \tDisplay information of the processe.\n");
+    printf("-h --help \t\tDisplay this information.\n");
+    printf("-a --account [file] \tNeed the name of the file of account, Defautl value : %s.\n", DEFAULT_LOGIN);
+    printf("-n --nbcolis [int] \tNeed the number of colis, set -1 for infinit, Defautl value : %d.\n", DEFAULT_COLIS);
+    printf("-p --port [int] \tNeed the number of the port for the socket, Defautl value : %d.\n", DEFAULT_PORT);
+    printf("-b --bdd \t\tFor dont use a bdd.\n");
+    printf("-d --debug \t\tDisplay information of the processe.\n");
     exit(EXIT_SUCCESS);
 }

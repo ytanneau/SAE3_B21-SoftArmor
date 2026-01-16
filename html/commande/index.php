@@ -120,10 +120,10 @@ if (isset($_GET["commande"])) {
                     //si connexion
                     if ($conn == "1"){
                         $bordereau = $commande["bordereau_colis"];
-                        echo $bordereau;
+                        
                         //recuperation des données du colis
                         $info_colis = get_info_colis($fd,$bordereau);
-                        print_r($info_colis);
+                        
                         $texte_img="";
                         //si le colis est rendu dans la boite au lettre
                         if ($info_colis["RENDU"] == "1") {
@@ -205,7 +205,8 @@ if (isset($_GET["commande"])) {
                                     $livraison = "Colis en cours de livraison";
                                     switch ($info_colis["ETAPE"]) {
                                         case "1":
-                                            $texte_etape = "Création d’un bordereau de livraison";
+                                            $livraison = "Colis en cours de traitement";
+                                            $texte_etape = "";
                                             break;
                                         case "2":
                                             $texte_etape = "Prise en charge du colis chez Alizon";

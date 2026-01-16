@@ -214,8 +214,8 @@ if ($numEtape == 3) {
             }
 
             ajout_commande($id_commande, $liste_produits);
-            header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
         }
+        header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
     }
 
     $_POST = [];
