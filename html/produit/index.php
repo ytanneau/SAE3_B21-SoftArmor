@@ -88,6 +88,8 @@ if (isset($_POST['quantite'])) {
     } else {
         setcookie('panier', serialize([['id_produit' => $id_prod, 'quantite' => $qte]]), path: '/');
     }
+
+    header('Location:' . HOME_SITE . 'panier');
 }
 
 ?>
