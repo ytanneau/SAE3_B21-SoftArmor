@@ -120,7 +120,6 @@ int main(int argc, char *argv[])
         init_bdd(conn, logI);
         data.conn = conn;
     }
-    printf("test2\n");
 
 //-------------------------------------------------------
 
