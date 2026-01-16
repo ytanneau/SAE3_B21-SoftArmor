@@ -77,7 +77,7 @@
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <main>
+        <main class="main_promo">
             <div class="entete">
                 <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une promotion</h1>
