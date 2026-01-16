@@ -1509,5 +1509,7 @@ aside {
 
 .form_promo{
     @include contenu_centre_vertical;
-     
+    input[type="submit"]{
+        @include bouton_new();
+    }
 }

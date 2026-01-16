@@ -78,7 +78,10 @@
     <body>
         <?php include "../../header.php" ?>
         <main>
-            <h1>Démarrer une promotion</h1>
+            <div class="entete">
+                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <h1>Démarrer une promotion</h1>
+            </div>
             <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
