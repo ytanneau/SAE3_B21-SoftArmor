@@ -331,12 +331,10 @@ if (isset($_POST['quantite'])) {
 
             const json = await res.json();
 
-            console.log(json);
+            modal.style.display = "none";
+            showSnackbar(json.message);
 
             if (json.success) {
-                modal.style.display = "none";
-                showSnackbar(json.message);
-
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
@@ -345,8 +343,6 @@ if (isset($_POST['quantite'])) {
                 btn.textContent = "Signalé";
                 btn.disabled = true;
             }
-
-            
         });
 
         // Montrer la snackbar
