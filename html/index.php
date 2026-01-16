@@ -25,7 +25,7 @@ $produit_alimentaire = info_produit_accueil_categorie($cat);
 $produit_recent = info_produit_accueil_plus_recent();
 
 // Nom public, prix, moyenne des notes et informations de l'image des produits en réduction
-$produit_reduit = info_produit_accueil_reduction();
+$produit_promotion = info_produit_accueil_promotion();
 
 // Fermer la connexion
 unset($pdo);
@@ -106,8 +106,8 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
 
 
     <!-- Produits en réduction -->
-    <h1>Produits en réduction</h1>
-    <?php afficher_produits($produit_reduit, "reduction")?>
+    <h1>Produits en promotion</h1>
+    <?php afficher_produits($produit_promotion, "promotion")?>
     
     <hr>
     

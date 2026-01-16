@@ -128,7 +128,7 @@
     }
     
     // Nom public, prix, moyenne des notes et informations de l'image des produits en réduction
-    function info_produit_accueil_reduction(){
+    function info_produit_accueil_promotion(){
         global $pdo;
         
         $requete = $pdo->prepare('
