@@ -107,7 +107,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         p.addEventListener("checked", (e) => {
             e.preventDefault();
-            let selProm = p.querySelector('messageCheckbox:checked').value;
+            let selProm = p.querySelector('input[name="prom"]:checked').value;
             console.log(selProm);
         });
         //listener pour les tris et renvoi 
@@ -125,7 +125,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 fetchProduitsJSON();
         });
 
-        var radios = document.querySelectorAll("input[name=\"prix\"]");
+        let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
             radio.addEventListener('change', function() {
