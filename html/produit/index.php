@@ -322,6 +322,7 @@ if (isset($_POST['quantite'])) {
 
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
+            console.log(data);
 
             // Envoyer les données du formulaire en JSON à une autre page
             const res = await fetch("../signalement.php", {
@@ -329,7 +330,6 @@ if (isset($_POST['quantite'])) {
                 body: data
             });
 
-            console.log(res);
             const json = await res.json();
 
 
