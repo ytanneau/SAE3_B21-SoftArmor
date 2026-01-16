@@ -109,8 +109,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             let isChecked = e.target.checked;
             if (isChecked) {
                 console.log(e.target.value);
+                searchState.filters.sales = true;
             } else {
                 console.log("Unchecked");
+                searchState.filters.sales = false;
             }
         });
         //listener pour les tris et renvoi 
