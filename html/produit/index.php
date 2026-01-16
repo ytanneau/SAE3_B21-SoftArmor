@@ -70,14 +70,13 @@ if (isset($_POST['quantite'])) {
 
     if (isset($_SESSION['id_compte'])) {
         ajouter_panier($id_prod,$id_cli,$qte);
-    } elseif (isset($_COOKIE['panier'])) {
-        $panier = unserialize($_COOKIE['panier']);
-        array_push($panier, ['id_produit' => $id_prod, 'quantite' => $qte]);
 
-        setcookie('panier', serialize($panier), path: '/');
     } else {
-        setcookie('panier', serialize([['id_produit' => $id_prod, 'quantite' => $qte]]), path: '/');
+        ajouter_panier_visiteur($id_prod, $qte);
+
     }
+
+    header('Location:' . HOME_SITE . 'panier');
 }
 
 ?>

@@ -31,8 +31,16 @@
     
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $param = "";
-        if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit'];
-        header('location: ' . HOME_SITE . "compte/connexion" . $param);
+        if (isset($_GET['produit'])) {
+            if ($_GET['produit']) {
+                $page = '../../panier';
+            } else {
+                $page = '../../produit?produit=' . $_GET['produit'];
+            }
+        }
+        
+        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
+        header('Location: ' . HOME_SITE . $page ?? '');
         exit;
     }
 ?>
