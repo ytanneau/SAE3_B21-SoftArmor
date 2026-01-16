@@ -2594,6 +2594,14 @@ aside input.bouton:hover {
   margin: auto 10px;
 }
 
+#snackbar {
+  visibility: hidden;
+}
+
+#snackbar.show {
+  visibility: visible;
+}
+
 .modal {
   display: none;
 }

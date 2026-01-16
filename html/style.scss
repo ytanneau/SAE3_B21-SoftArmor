@@ -1497,6 +1497,14 @@ aside {
     }
 }
 
+#snackbar {
+    visibility: hidden;
+}
+
+#snackbar.show {
+    visibility: visible;
+}
+
 .modal {
     display: none;
 }
