@@ -191,6 +191,7 @@ if (isset($_POST['quantite'])) {
                 <ul class="liste_avis">
                     <?php foreach ($liste_avis as $avis) { ?>
                         <li>
+                            <!-- Informations du produit -->
                             <div>
                                 <div>
                                     <?php if (isset($avis['profile'])) {?>
@@ -212,16 +213,18 @@ if (isset($_POST['quantite'])) {
                                 </div>
                             </div>
 
+                            <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
                             <?php if (!avis_est_signale($avis['id_avis'], $id_cli)) { ?>
                                 <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                     Signaler
                                 </button>
-                            <?php } else { ?>
+                            <?php } else if (!avis_fait_par($avis['id_avis'], $id_cli)) { ?>
                                 <button class="bouton_signalement" disabled>
                                     Signalé
                                 </button>
                             <?php } ?>
 
+                            <!-- Afficher l'image de l'avis si elle existe -->
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                             <?php } ?>
