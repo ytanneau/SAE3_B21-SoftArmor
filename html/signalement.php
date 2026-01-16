@@ -4,7 +4,7 @@
     define('HOME_SITE', '../');
 
     // Redirige les utilisateurs non connectés
-    if (!isset($_SESSION)) {
+    /*if (!isset($_SESSION)) {
         session_start();
 
         if (!isset($_SESSION['logged_in'])) {
@@ -13,9 +13,9 @@
         }
 
         $id_compte = $_SESSION['id_compte'];
-    }
+    }*/
 
-    var_dump($_POST);
+    echo json_encode($_POST);
 
     /*
     require_once (HOME_GIT . '.config.php');

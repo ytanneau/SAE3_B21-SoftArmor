@@ -60,10 +60,11 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
-if ($_POST != NULL) {
-    $qte= $_POST['quantite'];
+if ($_POST['quantite'] != null) {
+    $qte = $_POST['quantite'];
     $id_prod = $_GET['produit'];
     $id_cli = $_SESSION['id_compte'];
+
     ajouter_panier($id_prod,$id_cli,$qte);
 }
 
@@ -326,6 +327,8 @@ if ($_POST != NULL) {
             });
 
             const json = await res.json();
+
+            console.log(json);
 
             if (json.success) {
                 modal.style.display = "none";
