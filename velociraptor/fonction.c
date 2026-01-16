@@ -315,9 +315,9 @@ bool authtification(SESSION *data, COMPTE* c)
     char *id = strtok(NULL, INSTRUCTION_DELIMITER);
     if (id == NULL)
     {
-        data->login = id;
         message_erreur(data, ERREUR_INSTRUCTION);
     }
+    strcpy(data->login, id);
     
     char *mdp = strtok(NULL, DELIMITER);
     if (mdp == NULL)
@@ -721,7 +721,7 @@ void log_line(SESSION *data, char *msg)
 
     strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", t);
 
-    fprintf(data->log, "[%s] [%s] %s\n", timestamp, data->client_ip, msg);
+    fprintf(data->log, "[%s] [%s] [%s] %s\n", timestamp, data->client_ip, data->login, msg);
     //fflush(data->logf);  // pour écrire immédiatement
 }
 
