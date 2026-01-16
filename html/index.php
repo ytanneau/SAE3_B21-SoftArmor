@@ -66,12 +66,16 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
                         $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
                         $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
                         $reduction = $prix_normal != $prix_reduit;
+                        $pourcentage = ($prix_normal-$prix_reduit / $prix_normal);
+                        
+                        
                         ?>
 
                         <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
                         <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '');?> €</p>
                         
                         <?php if ($reduction) { ?>
+                            <p class="pourcent"><?php "-$pourcentage%"?></p>
                             <p class="prix"><?= number_format($prix_reduit, 2, ',', '');?> €</p>
                         <?php } ?>
                     </a>

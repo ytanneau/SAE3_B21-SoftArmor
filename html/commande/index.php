@@ -206,7 +206,7 @@ if (isset($_GET["commande"])) {
                                     switch ($info_colis["ETAPE"]) {
                                         case "1":
                                             $livraison = "Colis en cours de traitement";
-                                            $texte_etape = "Création d’un bordereau de livraison";
+                                            $texte_etape = "";
                                             break;
                                         case "2":
                                             $texte_etape = "Prise en charge du colis chez Alizon";
