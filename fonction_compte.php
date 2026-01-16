@@ -155,6 +155,9 @@
                             $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
+
+                            require "fonction_panier.php";
+                            transferer_panier_visiteur_compte($resSQL['id_compte']);
                         }
                     }
                     else {

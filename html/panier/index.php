@@ -19,6 +19,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
 if ($_POST != NULL) {
@@ -26,21 +27,9 @@ if ($_POST != NULL) {
 
     if (isset($_SESSION['id_compte'])) {
         supprimer_produit_panier($id_prod,$id_client);
+
     } else {
-        $panier = unserialize($_COOKIE['panier']);
-
-        for ($i = 0; $i < count($panier); $i++) {
-            if ($panier[$i]['id_produit'] == $id_prod) {
-                unset($panier[$i]);
-                $panier = array_values($panier);
-                break;
-            }
-        }
-
-        $panier_seria = serialize($panier);
-
-        $_COOKIE['panier'] = $panier_seria;
-        setcookie('panier', $panier_seria, path:'/');
+        retirer_panier_visiteur($id_prod);
     }
 }
 
