@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     // initalisation des variable
-    char *chemain = NULL;
+    char *chemain = DEFAULT_LOGIN;
     bool colisInfinit = false;
     int port, nbColisMax;
     char *portC, *nbColisMaxC;
@@ -23,6 +23,9 @@ int main(int argc, char *argv[])
     int cnx; // le file descriptor du sock
     MYSQL *conn;
     SESSION data;
+    data.login = NULL;
+    data.bdd = BDD;
+    data.debug = DEBUG;
 
 //-------------------------------------------------------
 
@@ -43,12 +46,14 @@ int main(int argc, char *argv[])
         {"help", no_argument, 0, 'h'}, 
         {"account", required_argument, 0, 'a'}, 
         {"nbcolis", required_argument, 0, 'n'}, 
-        {"port", required_argument, 0, 'p'}, 
+        {"port", required_argument, 0, 'p'},
+        {"bdd", no_argument, 0, 'b'}, 
+        {"debug", no_argument, 0, 'd'}, 
         {0, 0, 0, 0} 
     };
 
     // recupération des parametre
-    while ((opt = getopt_long(argc, argv, "ha:n:p:", long_options, NULL)) != -1)
+    while ((opt = getopt_long(argc, argv, "ha:n:p:bd", long_options, NULL)) != -1)
     { 
         switch (opt) 
         { 
@@ -71,7 +76,17 @@ int main(int argc, char *argv[])
 
             case 'p':
                 portC = optarg;
-                fprintf(logI, "[PARAMETRE] -n : %s\n", portC);
+                fprintf(logI, "[PARAMETRE] -p : %s\n", portC);
+                break;
+
+            case 'b':
+                data.bdd = false;
+                fprintf(logI, "[PARAMETRE] -b\n");
+                break; 
+
+            case 'd':
+                data.debug = true;
+                fprintf(logI, "[PARAMETRE] -d\n");
                 break; 
                 
             case '?': 
@@ -92,7 +107,7 @@ int main(int argc, char *argv[])
     // recupération des compte
     c = init_compte(chemain, logI);
     fprintf(logI ,"%s SUCCESS INIT COMPTE\n", SERVER);
-    if (DEBUG)
+    if (data.debug)
     {
         fprintf(logI, "[DEBUG] COMPTE :\n");
         affiche_compte(c, logI);
@@ -100,7 +115,7 @@ int main(int argc, char *argv[])
 
     // inisalisation avec la bdd
     conn = mysql_init(NULL);
-    if(BDD)
+    if(data.bdd)
     {
         init_bdd(conn, logI);
         data.conn = conn;

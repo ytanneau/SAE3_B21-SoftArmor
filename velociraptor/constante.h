@@ -94,5 +94,9 @@
 #define FICHIER_PHOTO "carton_endommage.png"
 
 #define HELP_FILE "hepl.txt"
+#define DEFAULT_COLIS -1
+#define DEFAULT_PORT 9000
+#define DEFAULT_LOGIN "login.txt"
+
 
 #endif

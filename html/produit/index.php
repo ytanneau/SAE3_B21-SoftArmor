@@ -210,9 +210,15 @@ if (isset($_POST['quantite'])) {
                                 </div>
                             </div>
 
-                            <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                Signaler
-                            </button>
+                            <?php if (!avis_est_signale($avis['id_avis'], $id_cli)) { ?>
+                                <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                    Signaler
+                                </button>
+                            <?php } else { ?>
+                                <button class="bouton_signalement" disabled>
+                                    Signalé
+                                </button>
+                            <?php } ?>
 
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
