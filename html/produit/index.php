@@ -301,7 +301,7 @@ if (isset($_POST['quantite'])) {
     <script>
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
-        const snackbar = document.getElementById("form_signalement");
+        const snackbar = document.getElementById("snackbar");
         const inputId = document.getElementById("id_avis");
 
         // Afficher le modal en cliquant sur l'icône signaler
