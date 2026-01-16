@@ -103,7 +103,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
         
-        let p = document.getElementById("prom");
+        let p = document.querySelectorAll("input[name=\"prom\"]");
 
         p.addEventListener("checked", (e) => {
             e.preventDefault();
