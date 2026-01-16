@@ -106,9 +106,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         let promCheck = document.getElementById("prom");
 
         promCheck.addEventListener('change', (e) => {
-            e.preventDefault();
-            let selProm = promCheck.querySelector('input[name="prom"]:checked').value;
-            console.log(selProm);
+            let isChecked = e.target.checked;
+            if (isChecked) {
+                console.log(e.target.value);
+            } else {
+                console.log("Unchecked");
+            }
         });
         //listener pour les tris et renvoi 
         let s = document.getElementById("tri");
