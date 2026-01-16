@@ -2594,6 +2594,10 @@ aside input.bouton:hover {
   margin: auto 10px;
 }
 
+.modal {
+  display: none;
+}
+
 @media print {
   h1 {
     font-size: 8mm;

@@ -1497,6 +1497,10 @@ aside {
     }
 }
 
+.modal {
+    display: none;
+}
+
 // Pages à imprimer (récap de commandes)
 @media print {
     h1 {
