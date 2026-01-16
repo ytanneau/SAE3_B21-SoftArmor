@@ -306,6 +306,7 @@ if (isset($_POST['quantite'])) {
             btn.addEventListener("click", () => {
                 document.getElementById("id_avis").value = btn.dataset.avis;
                 modal.style.display = "block";
+                console.log("Affichage du modal");
             });
         });
 
