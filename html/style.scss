@@ -1509,5 +1509,8 @@ aside {
 
 .form_promo{
     @include contenu_centre_vertical;
-    color:red; 
+    label{
+        color:red;
+    }
+     
 }
