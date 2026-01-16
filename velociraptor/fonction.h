@@ -15,6 +15,9 @@ typedef struct SESSION
     FILE *log;
     char client_ip[INET_ADDRSTRLEN];
     int cnx;
+    char *login;
+    bool debug;
+    bool bdd;
 } SESSION;
 
 
@@ -34,7 +37,7 @@ bool authtification(SESSION *data,COMPTE* c);
 void connection(SESSION *data, bool connect);
 
 void new_colis(SESSION *data, bool colisInfinit, int nbColisMax);
-void genere_code(char *code);
+void genere_code(SESSION *data, char *code);
 int colis_encour(SESSION *data);
 bool colis_existe(SESSION *data, char *code);
 
