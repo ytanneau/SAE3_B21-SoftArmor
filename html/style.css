@@ -2633,6 +2633,7 @@ aside input.bouton:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  width: 100%;
 }
 .main_promo #valider a {
   text-decoration: none;
