@@ -115,6 +115,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 console.log("Unchecked");
                 searchState.filters.sales = false;
             }
+            fetchProduitsJSON();
         });
         //listener pour les tris et renvoi 
         let s = document.getElementById("tri");
