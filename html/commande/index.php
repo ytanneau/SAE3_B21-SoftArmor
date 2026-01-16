@@ -1,7 +1,7 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
-const IP = "127.0.0.1";
+const IP = "host.docker.internal";
 const PORT = "9000";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
