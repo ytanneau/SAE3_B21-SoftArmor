@@ -103,9 +103,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
         
-        let p = document.querySelectorAll("input[name=\"prom\"]");
+        let p = document.querySelector("input[name=\"prom\"]");
 
-        p.addEventListener("checked", (e) => {
+        p.addEventListener('checked', (e) => {
             e.preventDefault();
             let selProm = p.querySelector('input[name="prom"]:checked').value;
             console.log(selProm);
