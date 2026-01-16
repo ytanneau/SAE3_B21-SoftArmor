@@ -60,7 +60,7 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
-if ($_POST['quantite'] != null) {
+if (isset($_POST['quantite'])) {
     $qte = $_POST['quantite'];
     $id_prod = $_GET['produit'];
     $id_cli = $_SESSION['id_compte'];
