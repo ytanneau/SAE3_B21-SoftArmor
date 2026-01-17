@@ -255,8 +255,10 @@ if (isset($_POST['quantite'])) {
                             </select>
                             <p class="error"></p>
 
-                            <button type="submit">Envoyer</button>
-                            <button type="reset" class="fermer_modal">Annuler</button>
+                            <div class="boutons">
+                                <button type="submit">Envoyer</button>
+                                <button type="reset" class="fermer_modal">Annuler</button>
+                            </div>
                         </form>
                     </div>
                 </div>
