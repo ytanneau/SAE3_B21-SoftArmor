@@ -352,6 +352,7 @@ if (isset($_POST['quantite'])) {
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
+                document.body.style.overflowY = "auto";
             }
         }
 
