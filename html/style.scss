@@ -1532,20 +1532,20 @@ aside {
     z-index: 10;
 
     &.success {
-        background-color: #c7f9d0;
-        border-color: adjust-color($color: #c7f9d0, $lightness: -30%);
+        background-color: #d7f9dd;
+        border-color: adjust-color($color: #c7f9d0, $lightness: -50%);
     }
 
     &.error {
-        background-color: #fdd2cf; 
-        border-color: adjust-color($color: #fdd2cf, $lightness: -30%);
+        background-color: #fedcd9; 
+        border-color: adjust-color($color: #fdd2cf, $lightness: -50%);
     }
 }
 
 #snackbar.show {
     visibility: visible;
     
-    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.6s;
+    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 4.6s;
 }
 
 @keyframes montrer_snackbar {

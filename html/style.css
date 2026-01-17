@@ -2623,17 +2623,17 @@ aside input.bouton:hover {
   z-index: 10;
 }
 #snackbar.success {
-  background-color: #c7f9d0;
-  border-color: rgb(60.8064516129, 234.1935483871, 92.0161290323);
+  background-color: #d7f9dd;
+  border-color: rgb(18.6774193548, 174.3225806452, 46.6935483871);
 }
 #snackbar.error {
-  background-color: #fdd2cf;
-  border-color: rgb(246.88, 72.3, 60.12);
+  background-color: #fedcd9;
+  border-color: rgb(196.8, 20.5, 8.2);
 }
 
 #snackbar.show {
   visibility: visible;
-  animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.6s;
+  animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 4.6s;
 }
 
 @keyframes montrer_snackbar {
