@@ -1521,7 +1521,8 @@ aside {
 
     .modal_content {
         margin: 15% auto;
-        padding: 20px;
+        padding: $padding_normal;
+        border-radius: $angle_normal;
         width: 40%;
         
         background-color: $couleur_background;
