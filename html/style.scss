@@ -1579,11 +1579,19 @@ aside {
             }
 
             select, input[type="text"] {
-                width: 50%;
                 padding: 0.5em;
 
                 border-radius: 5px;
+                border: solid 1px $nuance_primaire_client;
                 font-size: $font_size_normal;
+            }
+
+            input[type="text"] {
+                width: 70%;
+            }
+
+            select {
+                width: 60%;
             }
         }
     }
