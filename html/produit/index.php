@@ -378,9 +378,12 @@ if (isset($_POST['quantite'])) {
                 pErrorRaison.style.visibility = "hidden";
             }
 
-            if (data.get("email") == null && estVisiteur) {
-                // Erreur
+            if (estVisiteur && !emailValide(data.get("email"))) {
+                pErrorEmail.textContent = (data.get("email").trim() == "") ? "Veuillez renseigner ce champ" : "Le format est invalide";
+                pErrorEmail.style.visibility = "visible";
                 return;
+            } else {
+                pErrorEmail.style.visibility = "hidden";
             }
 
             // Envoyer les données du formulaire en JSON à une autre page
@@ -412,6 +415,12 @@ if (isset($_POST['quantite'])) {
                 img.src = "../image/reported_rouge.svg";
             }
         });
+
+        function emailValide(email) {
+            let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return email != null && regex.test(email);
+        }
 
         // Montrer la snackbar pendant 5 secondes
         function showSnackbar(msg, mode) {
