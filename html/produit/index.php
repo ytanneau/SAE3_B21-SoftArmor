@@ -216,7 +216,7 @@ if (isset($_POST['quantite'])) {
                             <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
                             <?php 
                             $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
-                            
+
                             if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
                                 <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                     Signaler
@@ -239,6 +239,7 @@ if (isset($_POST['quantite'])) {
                 <div id="modal_signalement" class="modal">
                     <div class="modal_content">
                         <h3>Signaler cet avis</h3>
+                        <span class="close">&times;</span>
                         
                         <form id="form_signalement" action="" method="post">
                             <input type="hidden" name="id_avis" id="id_avis">
