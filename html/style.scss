@@ -1,12 +1,15 @@
 @use "style_const.scss" as *;
 @use "style_mixin.scss" as *;
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: $font_text;
     padding: 0;
     margin: 0;
     min-height: 100vh;
-    scroll-behavior: smooth;
 }
 
 main {
