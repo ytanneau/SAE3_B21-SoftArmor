@@ -2646,6 +2646,7 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 20px;
   width: 100%;
   justify-content: end;
 }
@@ -2676,7 +2677,7 @@ aside input.bouton:hover {
   display: block;
   max-width: 100%;
   width: auto;
-  padding: 1em;
+  padding: 0.5em;
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;

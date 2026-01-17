@@ -1555,6 +1555,7 @@ aside {
 
         .boutons {
             @include contenu_centre_horizontal;
+            gap: 20px;
 
             width: 100%;
             justify-content: end;
@@ -1564,7 +1565,7 @@ aside {
             }
 
             button[type="submit"] {
-                @include bouton_new($color: white);
+                @include bouton_new($color: white, $padding: 0.5em);
             }
         }
 
