@@ -337,6 +337,13 @@ if (isset($_POST['quantite'])) {
             });
         });
 
+        // Fermer le modal si on clique ailleurs
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
 
