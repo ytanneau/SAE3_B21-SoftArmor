@@ -2713,13 +2713,13 @@ aside input.bouton:hover {
   font-weight: bold;
   margin-top: 0.5em;
 }
-.modal .modal_content form select, .modal .modal_content form input[type=text] {
+.modal .modal_content form select, .modal .modal_content form input[type=email] {
   padding: 0.5em;
   border-radius: 5px;
   border: solid 1px #CBCCEA;
   font-size: 1em;
 }
-.modal .modal_content form input[type=text] {
+.modal .modal_content form input[type=email] {
   width: 70%;
 }
 .modal .modal_content form select {

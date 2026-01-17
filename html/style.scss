@@ -1590,7 +1590,7 @@ aside {
                 margin-top: 0.5em;
             }
 
-            select, input[type="text"] {
+            select, input[type="email"] {
                 padding: 0.5em;
 
                 border-radius: 5px;
@@ -1598,7 +1598,7 @@ aside {
                 font-size: $font_size_normal;
             }
 
-            input[type="text"] {
+            input[type="email"] {
                 width: 70%;
             }
 
