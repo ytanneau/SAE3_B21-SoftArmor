@@ -1523,7 +1523,7 @@ aside {
 
     .modal_content {
         position: relative;
-        
+
         margin: 15% auto;
         padding: $padding_normal;
         width: 40%;
@@ -1557,7 +1557,7 @@ aside {
 
 @keyframes ouvrir_modal {
     from {
-        top: -300px; 
+        top: -200px; 
         opacity: 0;
     }
 
