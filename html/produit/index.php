@@ -216,7 +216,6 @@ if (isset($_POST['quantite'])) {
                                         <?php } else if (!$est_mon_avis) { ?>
                                             <button class="bouton_signalement" disabled>
                                                 <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>">
-                                                Signalé
                                             </button>
                                         <?php } ?>
                                     <?php } ?>
