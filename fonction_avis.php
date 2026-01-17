@@ -230,20 +230,30 @@
         }
     }
 
-    // Retourne true si le compte en paramètre a signalé l'avis, false sinon
-    function avis_est_signale($id_avis, $id_compte) {
+    // Retourne true si le compte (ou l'email) en paramètre a signalé l'avis, false sinon
+    function avis_est_signale($id_avis, $id_compte = null, $email = null) {
         global $pdo;
 
-        try {
-            $requete = $pdo->prepare(
-                "SELECT 1 
-                FROM _signalement
-                WHERE id_compte = :id_compte
-                AND id_avis = :id_avis"
-            );
+        if (!isset($id_compte) && !isset($email)) {
+            return false;
+        }
 
-            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
-            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+        try {
+            $sql = "SELECT 1 
+                    FROM _signalement
+                    WHERE 1 = 1
+                    AND id_compte = :id_compte
+                    AND id_avis = :id_avis";
+
+            if (isset($id_compte)) {
+                $sql .= " AND id_compte = :id_compte";
+                $params[':id_compte'] = $id_compte;
+            } else if (isset($email)) {
+                $sql .= " AND email = :email";
+                $params[':email'] = $email;
+            }
+
+            $requete = $pdo->prepare($sql);
             $requete->execute();
 
             return $requete->rowCount() > 0;
@@ -254,6 +264,10 @@
 
     // Renvoie true si le compte en paramètre a rédigé l'avis, false sinon
     function avis_fait_par($id_avis, $id_compte) {
+        if (!isset($id_compte)) {
+            return false;
+        }
+    
         global $pdo;
 
         try {

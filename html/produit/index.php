@@ -206,18 +206,17 @@ if (isset($_POST['quantite'])) {
                                     </div>
 
                                     <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
-                                    <?php if (isset($id_cli)) {
-                                        $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
-        
-                                        if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
-                                            <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                                <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
-                                            </button>
-                                        <?php } else if (!$est_mon_avis) { ?>
-                                            <button class="bouton_signalement" disabled>
-                                                <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>">
-                                            </button>
-                                        <?php } ?>
+                                    <?php
+                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
+    
+                                    if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
+                                        </button>
+                                    <?php } else if (!$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" disabled>
+                                            <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
+                                        </button>
                                     <?php } ?>
                                 </div>
 
