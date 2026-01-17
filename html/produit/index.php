@@ -249,6 +249,7 @@ if (isset($_POST['quantite'])) {
 
                             <label for="input_email">Adresse e-mail (facultative)</label>
                             <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
+                            <p class="error" id="error_email"></p>
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
@@ -257,7 +258,7 @@ if (isset($_POST['quantite'])) {
                                 <option value="hors-sujet">Contenu hors-sujet</option>
                                 <option value="illicite">Contenu illicite</option>
                             </select>
-                            <p class="error"></p>
+                            <p class="error" id="error_raison"></p>
 
                             <div class="boutons">
                                 <button type="reset" class="fermer_modal">Annuler</button>
@@ -327,7 +328,11 @@ if (isset($_POST['quantite'])) {
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
         const snackbar = document.getElementById("snackbar");
+
         const inputId = document.getElementById("id_avis");
+        const inputEmail = document.getElementById("error_email");
+        const selectRaison = document.getElementById("error_raison");
+
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
@@ -363,6 +368,8 @@ if (isset($_POST['quantite'])) {
 
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
+
+            console.log(data);
 
             // Envoyer les données du formulaire en JSON à une autre page
             const res = await fetch("../signalement.php", {
