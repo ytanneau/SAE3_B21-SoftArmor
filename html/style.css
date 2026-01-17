@@ -2700,6 +2700,11 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
 }
+.modal .modal_content form select {
+  width: 50%;
+  padding: 1em;
+  font-size: 1em;
+}
 
 @keyframes ouvrir_modal {
   from {

@@ -1572,6 +1572,12 @@ aside {
         form {
             display: flex;
             flex-direction: column;
+
+            select {
+                width: 50%;
+                padding: 1em;
+                font-size: $font_size_normal;
+            }
         }
     }
 }
