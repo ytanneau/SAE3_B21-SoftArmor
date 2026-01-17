@@ -380,7 +380,7 @@ if (isset($_POST['quantite'])) {
 
             if (json.success) {
                 console.log(json.success);
-                
+
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
@@ -388,7 +388,7 @@ if (isset($_POST['quantite'])) {
                 btn.disabled = true;
                 
                 // Changer l'image du bouton
-                const img = document.querySelector(`.bouton_signalement[data-avis="${data.get('id_avis')} img`);
+                const img = document.querySelector(`.bouton_signalement[data-avis="${data.get('id_avis')}] img`);
                 img.src = "../image/reported_rouge.svg";
             }
         });
