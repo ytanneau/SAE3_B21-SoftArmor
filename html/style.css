@@ -2614,13 +2614,12 @@ aside input.bouton:hover {
   position: fixed;
   left: 50%;
   bottom: 30px;
-  min-width: 250px;
-  margin-left: -125px;
+  transform: translate(-50%, 0);
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 5px;
-  padding: 2em;
+  padding: 1em;
   z-index: 10;
 }
 
