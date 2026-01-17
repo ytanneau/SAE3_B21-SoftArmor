@@ -248,11 +248,12 @@ if (isset($_POST['quantite'])) {
                             <input type="hidden" name="id_avis" id="id_avis">
 
                             <label for="select_raison">Raison :</label>
-                            <select name="raison" id="select_raison">
+                            <select name="raison" id="select_raison" class="champ">
                                 <option value="Contenu offensant">Contenu offensant</option>
                                 <option value="Contenu mensonger">Contenu mensonger</option>
                                 <option value="Contenu illicite">Contenu illicite</option>
                             </select>
+                            <p class="error"></p>
 
                             <button type="submit">Envoyer</button>
                             <button type="reset" class="fermer_modal">Annuler</button>

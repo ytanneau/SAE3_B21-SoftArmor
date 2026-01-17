@@ -2642,6 +2642,44 @@ aside input.bouton:hover {
   cursor: pointer;
   text-decoration: none;
 }
+.modal .modal_content form {
+  align-items: normal;
+  width: 100%;
+}
+.modal .modal_content form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+.modal .modal_content form .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.modal .modal_content form .text {
+  height: 10em;
+  text-align: start;
+}
+.modal .modal_content form .petit {
+  width: 30%;
+}
+.modal .modal_content form input[type=number]::-webkit-inner-spin-button,
+.modal .modal_content form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.modal .modal_content form input[type=number] {
+  -moz-appearance: textfield;
+}
+.modal .modal_content form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+.modal .modal_content form .error {
+  color: #E43737;
+}
 
 @keyframes ouvrir_modal {
   from {
