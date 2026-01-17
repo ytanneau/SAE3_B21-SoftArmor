@@ -247,9 +247,11 @@ if (isset($_POST['quantite'])) {
                         <form id="form_signalement" action="" method="post">
                             <input type="hidden" name="id_avis" id="id_avis">
 
-                            <label for="input_email">Adresse e-mail (facultative)</label>
-                            <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
-                            <p class="error" id="error_email">Le format est invalide</p>
+                            <?php if (!isset($id_cli)) { ?>
+                                <label for="input_email">Adresse e-mail</label>
+                                <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
+                                <p class="error" id="error_email">Le format est invalide</p>
+                            <?php } ?>
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
@@ -372,6 +374,8 @@ if (isset($_POST['quantite'])) {
             if (data.get("raison") == "" || data.get("raison") == null) {
                 pErrorRaison.style.visibility = "visible";
                 return;
+            } else {
+                pErrorRaison.style.visibility = "hidden";
             }
 
             // Envoyer les données du formulaire en JSON à une autre page
