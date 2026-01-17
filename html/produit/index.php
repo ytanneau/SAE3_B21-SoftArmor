@@ -252,9 +252,9 @@ if (isset($_POST['quantite'])) {
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
-                                <option value="Contenu offensant">Contenu offensant</option>
-                                <option value="Contenu mensonger">Contenu mensonger</option>
-                                <option value="Contenu illicite">Contenu illicite</option>
+                                <option value="offensant">Contenu offensant</option>
+                                <option value="hors-sujet">Contenu hors-sujet</option>
+                                <option value="illicite">Contenu illicite</option>
                             </select>
                             <p class="error"></p>
 
