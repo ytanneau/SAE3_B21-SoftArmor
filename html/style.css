@@ -1933,6 +1933,8 @@ aside input.bouton:hover {
 }
 
 .error {
+  font-size: 0.75em;
+  margin: 0.4% 0;
   color: #E43737;
 }
 

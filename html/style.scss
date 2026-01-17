@@ -1157,7 +1157,9 @@ aside {
 }
 
 .error{
-        color: $rouge;
+    font-size: $font_size_petit;
+    margin: 0.4% 0;
+    color: $rouge;
 }
 
 .bodyAjoutProduit{
