@@ -1522,10 +1522,10 @@ aside {
     .modal_content {
         margin: 15% auto;
         padding: $padding_normal;
-        border-radius: $angle_normal;
         width: 40%;
         
         background-color: $couleur_background;
+        border-radius: $angle_petit;
 
         .titre {
             @include contenu_centre_horizontal();
@@ -1539,9 +1539,9 @@ aside {
                 font-size: 24px;
                 font-weight: bold;
 
-                :hover {
+                &:hover, &:focus {
                     cursor: pointer;
-                    user-select: none;
+                    text-decoration: none;
                 }
             }
         }

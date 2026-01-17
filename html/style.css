@@ -2616,9 +2616,9 @@ aside input.bouton:hover {
 .modal .modal_content {
   margin: 15% auto;
   padding: 2em;
-  border-radius: 20px;
   width: 40%;
   background-color: #FFFFFF;
+  border-radius: 5px;
 }
 .modal .modal_content .titre {
   display: flex;
@@ -2633,11 +2633,9 @@ aside input.bouton:hover {
   font-size: 24px;
   font-weight: bold;
 }
-.modal .modal_content .titre span.fermer_modal :hover {
+.modal .modal_content .titre span.fermer_modal:hover, .modal .modal_content .titre span.fermer_modal:focus {
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  text-decoration: none;
 }
 
 @media print {
