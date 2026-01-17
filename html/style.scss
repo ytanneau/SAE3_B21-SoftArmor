@@ -1517,10 +1517,51 @@ aside {
 
 #snackbar {
     visibility: hidden;
+    
+    position: fixed; 
+    left: 50%; 
+    bottom: 30px;
+    
+    min-width: 250px;
+    margin-left: -125px;
+
+    background-color: black; 
+    color: #fff;
+
+    text-align: center;
+    border-radius: $angle_petit; 
+    padding: $padding_normal; 
+    z-index: 10; 
 }
 
 #snackbar.show {
     visibility: visible;
+    
+    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.5s;
+}
+
+@keyframes montrer_snackbar {
+    from {
+        bottom: 0; 
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px; 
+        opacity: 1;
+    }
+}
+
+@keyframes cacher_snackbar {
+    from {
+        bottom: 30px; 
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0; 
+        opacity: 0;
+    }
 }
 
 .modal {
