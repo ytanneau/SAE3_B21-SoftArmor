@@ -29,6 +29,7 @@
             'success' => false,
             'message' => "L'avis n'a pas pu être signalé. Veuillez réessayer plus tard."
         ]);
+        die();
     }
 
     try {
@@ -38,6 +39,7 @@
                 'success' => false,
                 'message' => "Vous avez déjà signalé cet avis."
             ]);
+            die();
         }
 
         // Marquer l'avis comme signalé
@@ -47,10 +49,12 @@
             'success' => true,
             'message' => "L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais."
         ]);
+        die();
     } catch (PDOException $e) {
         echo json_encode([
             'success' => false,
             'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard."
         ]);
+        die();
     }
 ?>
