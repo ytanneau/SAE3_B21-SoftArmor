@@ -1524,8 +1524,8 @@ aside {
     
     transform: translate(-50%, 0);
 
-    background-color: black; 
-    color: #fff;
+    background-color: #b7f2c2; 
+    color: black;
 
     text-align: center;
     border-radius: $angle_petit; 
@@ -1536,7 +1536,7 @@ aside {
 #snackbar.show {
     visibility: visible;
     
-    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 3s;
+    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.6s;
 }
 
 @keyframes montrer_snackbar {
