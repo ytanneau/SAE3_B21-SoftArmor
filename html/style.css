@@ -2609,15 +2609,20 @@ aside input.bouton:hover {
   height: 100%;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 10;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .modal .modal_content {
   margin: 15% auto;
   padding: 20px;
-  width: 60%;
+  width: 40%;
   background-color: #FFFFFF;
+}
+.modal .modal_content .titre {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media print {

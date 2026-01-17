@@ -1514,17 +1514,21 @@ aside {
     left: 0;
     top: 0;
 
-    z-index: 1;
+    z-index: 10;
     overflow: auto;
 
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.6);
 
     .modal_content {
         margin: 15% auto;
         padding: 20px;
-        width: 60%;
+        width: 40%;
         
         background-color: $couleur_background;
+
+        .titre {
+            @include contenu_centre_horizontal();
+        }
     }
 }
 
