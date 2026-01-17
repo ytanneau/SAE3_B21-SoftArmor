@@ -331,9 +331,11 @@ if (isset($_POST['quantite'])) {
         });
 
         // Fermer le modal
-        document.getElementsByClassName("fermer_modal").onclick = () => {
-            modal.style.display = "none";
-        };
+        document.querySelectorAll(".fermer_modal").forEach(element => {
+            element.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+        });
 
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
