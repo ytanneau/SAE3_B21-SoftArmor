@@ -330,6 +330,8 @@ if (isset($_POST['quantite'])) {
         const snackbar = document.getElementById("snackbar");
 
         const inputId = document.getElementById("id_avis");
+        const estVisiteur = (inputId == null);
+
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
 
@@ -374,6 +376,11 @@ if (isset($_POST['quantite'])) {
                 return;
             } else {
                 pErrorRaison.style.visibility = "hidden";
+            }
+
+            if (data.get("email") == null && estVisiteur) {
+                // Erreur
+                return;
             }
 
             // Envoyer les données du formulaire en JSON à une autre page
