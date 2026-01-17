@@ -249,7 +249,7 @@ if (isset($_POST['quantite'])) {
 
                             <label for="input_email">Adresse e-mail (facultative)</label>
                             <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
-                            <p class="error" id="error_email"></p>
+                            <p class="error" id="error_email">Le format est invalide</p>
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
@@ -258,7 +258,7 @@ if (isset($_POST['quantite'])) {
                                 <option value="hors-sujet">Contenu hors-sujet</option>
                                 <option value="illicite">Contenu illicite</option>
                             </select>
-                            <p class="error" id="error_raison"></p>
+                            <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
 
                             <div class="boutons">
                                 <button type="reset" class="fermer_modal">Annuler</button>
@@ -370,7 +370,7 @@ if (isset($_POST['quantite'])) {
             const data = new FormData(formSignalement);
 
             if (data.get("raison") == "" || data.get("raison") == null) {
-                pErrorRaison.textContent = "Veuillez indiquer la raison du signalement";
+                pErrorRaison.style.visibility = "visible";
                 return;
             }
 
