@@ -2653,11 +2653,11 @@ aside input.bouton:hover {
   display: block;
   max-width: 100%;
   width: auto;
-  padding: 1em;
+  padding: 0.5em;
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: #A6A6BF;
+  background-color: #CBCCEA;
   color: black;
   border: none;
   border-radius: 5px;
@@ -2670,7 +2670,7 @@ aside input.bouton:hover {
   color: black;
 }
 .modal .modal_content .boutons button[type=reset]:hover {
-  background-color: rgb(210.5, 210.5, 223);
+  background-color: hsl(238.064516129, 42.4657534247%, 100.6862745098%);
 }
 .modal .modal_content .boutons button[type=submit] {
   display: block;
@@ -2681,7 +2681,7 @@ aside input.bouton:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: white;
   border: none;
   border-radius: 5px;
   text-align: center;
@@ -2690,7 +2690,7 @@ aside input.bouton:hover {
 }
 .modal .modal_content .boutons button[type=submit] a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
 .modal .modal_content .boutons button[type=submit]:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);

@@ -1560,11 +1560,11 @@ aside {
             justify-content: end;
 
             button[type="reset"] {
-                @include bouton_new($nuance);
+                @include bouton_new($nuance_primaire_client, $padding: 0.5em);
             }
 
             button[type="submit"] {
-                @include bouton_new();
+                @include bouton_new($color: white);
             }
         }
 
