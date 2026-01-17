@@ -2634,6 +2634,9 @@ aside input.bouton:hover {
 }
 .modal .modal_content .titre span.fermer_modal :hover {
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 @media print {
