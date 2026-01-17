@@ -1551,6 +1551,11 @@ aside {
     }
 }
 
+@-webkit-keyframes montrer_snackbar {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
 @keyframes cacher_snackbar {
     from {
         bottom: 30px; 
@@ -1561,6 +1566,11 @@ aside {
         bottom: 0; 
         opacity: 0;
     }
+}
+
+@-webkit-keyframes cacher_snackbar {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
 
 .modal {
