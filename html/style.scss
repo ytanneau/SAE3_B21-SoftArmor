@@ -473,7 +473,19 @@ a.bouton:has(+ .liste_avis) {
                 > img:not(.etoiles) {
                     @include image_pp(40px);
                     margin-right: 0.5em;
-                } 
+                }
+                
+                // Bouton signaler
+                button {
+                    border: none;
+                    background: none;
+                    line-height: 0;
+
+                    > img {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
             }
 
             // Reste de l'avis

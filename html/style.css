@@ -1179,6 +1179,15 @@ a.bouton:has(+ .liste_avis):hover {
      object-fit: cover;
   margin-right: 0.5em;
 }
+.liste_avis li > div:first-of-type > div:first-child button {
+  border: none;
+  background: none;
+  line-height: 0;
+}
+.liste_avis li > div:first-of-type > div:first-child button > img {
+  width: 30px;
+  height: 30px;
+}
 .liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
   margin-top: 0.5em;
   margin-bottom: 0;
