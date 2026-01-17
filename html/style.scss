@@ -1573,6 +1573,11 @@ aside {
             display: flex;
             flex-direction: column;
 
+            label {
+                font-weight: bold;
+                margin-top: 0.5em;
+            }
+
             select {
                 width: 50%;
                 padding: 0.5em;
