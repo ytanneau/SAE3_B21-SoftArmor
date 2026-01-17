@@ -215,7 +215,7 @@ if (isset($_POST['quantite'])) {
                                             </button>
                                         <?php } else if (!$est_mon_avis) { ?>
                                             <button class="bouton_signalement" disabled>
-                                                <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
+                                                <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>">
                                                 Signalé
                                             </button>
                                         <?php } ?>
@@ -381,7 +381,12 @@ if (isset($_POST['quantite'])) {
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
                 );
 
-                btn.textContent = "Signalé";
+                let img = document.createElement("img");
+                let src = document.createAttribute("src");
+                src.value = "../image/reported_rouge.svg";
+                img.appendChild(src);
+
+                btn.appendChild(img);
                 btn.disabled = true;
             }
         });
