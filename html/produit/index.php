@@ -241,7 +241,7 @@ if (isset($_POST['quantite'])) {
                     <div class="modal_content">
                         <div class="titre">
                             <h3>Signaler cet avis</h3>
-                            <span class="close">&times;</span>
+                            <span class="fermer_modal">&times;</span>
                         </div>
                         
                         <form id="form_signalement" action="" method="post">
@@ -255,7 +255,7 @@ if (isset($_POST['quantite'])) {
                             </select>
 
                             <button type="submit">Envoyer</button>
-                            <button type="reset" id="fermer_modal">Annuler</button>
+                            <button type="reset" class="fermer_modal">Annuler</button>
                         </form>
                     </div>
                 </div>
@@ -331,7 +331,7 @@ if (isset($_POST['quantite'])) {
         });
 
         // Fermer le modal
-        document.getElementById("fermer_modal").onclick = () => {
+        document.getElementsByClassName("fermer_modal").onclick = () => {
             modal.style.display = "none";
         };
 

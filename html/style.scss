@@ -1534,9 +1534,13 @@ aside {
                 margin: 0;
             }
 
-            .close {
-                font-size: 28px;
+            span.fermer_modal {
+                font-size: 24px;
                 font-weight: bold;
+
+                :hover {
+                    cursor: pointer;
+                }
             }
         }
     }
