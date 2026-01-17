@@ -2615,12 +2615,17 @@ aside input.bouton:hover {
   left: 50%;
   bottom: 30px;
   transform: translate(-50%, 0);
-  background-color: #b7f2c2;
   color: black;
   text-align: center;
   border-radius: 5px;
   padding: 1em;
   z-index: 10;
+}
+#snackbar.success {
+  background-color: #c7f9d0;
+}
+#snackbar.error {
+  background-color: #fdd2cf;
 }
 
 #snackbar.show {

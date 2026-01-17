@@ -376,7 +376,7 @@ if (isset($_POST['quantite'])) {
             document.body.style.overflowY = "auto";
 
             // Afficher la snackbar
-            showSnackbar(json.message);
+            showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
                 console.log(json.success);
@@ -393,14 +393,14 @@ if (isset($_POST['quantite'])) {
             }
         });
 
-        // Montrer la snackbar pendant 3 secondes
-        function showSnackbar(msg) {
+        // Montrer la snackbar pendant 5 secondes
+        function showSnackbar(msg, mode) {
             snackbar.textContent = msg;
-            snackbar.className = "show";
+            snackbar.className = `show ${mode}`;
 
             setTimeout(() => {
                 snackbar.className = "";
-            }, 3000);
+            }, 5000);
         }
 
     </script>

@@ -1523,14 +1523,20 @@ aside {
     bottom: 30px;
     
     transform: translate(-50%, 0);
-
-    background-color: #b7f2c2; 
     color: black;
 
     text-align: center;
     border-radius: $angle_petit; 
     padding: 1em; 
-    z-index: 10; 
+    z-index: 10;
+
+    &.success {
+        background-color: #c7f9d0; 
+    }
+
+    &.error {
+        background-color: #fdd2cf; 
+    }
 }
 
 #snackbar.show {
