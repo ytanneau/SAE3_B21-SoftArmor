@@ -2625,7 +2625,7 @@ aside input.bouton:hover {
 
 #snackbar.show {
   visibility: visible;
-  animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2s;
+  animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 3s;
 }
 
 @keyframes montrer_snackbar {
