@@ -1575,7 +1575,9 @@ aside {
 
             select {
                 width: 50%;
-                padding: 1em;
+                padding: 0.5em;
+
+                border-radius: 5px;
                 font-size: $font_size_normal;
             }
         }
