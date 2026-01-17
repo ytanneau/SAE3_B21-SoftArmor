@@ -1528,6 +1528,11 @@ aside {
 
         .titre {
             @include contenu_centre_horizontal();
+            justify-content: space-between;
+
+            * {
+                margin-top: 0;
+            }
         }
     }
 }

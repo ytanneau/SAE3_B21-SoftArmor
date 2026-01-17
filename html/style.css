@@ -2623,6 +2623,10 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+}
+.modal .modal_content .titre * {
+  margin-top: 0;
 }
 
 @media print {
