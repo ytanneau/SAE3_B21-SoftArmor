@@ -330,8 +330,8 @@ if (isset($_POST['quantite'])) {
         const snackbar = document.getElementById("snackbar");
 
         const inputId = document.getElementById("id_avis");
-        const inputEmail = document.getElementById("error_email");
-        const selectRaison = document.getElementById("error_raison");
+        const pErrorEmail = document.getElementById("error_email");
+        const pErrorRaison = document.getElementById("error_raison");
 
 
         // Afficher le modal en cliquant sur l'icône signaler
@@ -369,7 +369,10 @@ if (isset($_POST['quantite'])) {
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
 
-            console.log(data);
+            if (data.get("raison") == "" || data.get("raison") == null) {
+                pErrorRaison.textContent = "Veuillez indiquer la raison du signalement";
+                return;
+            }
 
             // Envoyer les données du formulaire en JSON à une autre page
             const res = await fetch("../signalement.php", {
