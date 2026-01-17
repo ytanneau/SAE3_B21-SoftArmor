@@ -238,6 +238,8 @@
             return false;
         }
 
+        $params = [];
+
         try {
             $sql = "SELECT 1 
                     FROM _signalement
@@ -252,7 +254,7 @@
             }
 
             $requete = $pdo->prepare($sql);
-            $requete->execute();
+            $requete->execute($params);
 
             return $requete->rowCount() > 0;
         } catch (PDOException $e) {
