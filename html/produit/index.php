@@ -204,6 +204,22 @@ if (isset($_POST['quantite'])) {
                                     <div class="etoiles">
                                         <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                     </div>
+
+                                    <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
+                                    <?php if (isset($id_cli)) {
+                                        $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
+        
+                                        if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
+                                            <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                                <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
+                                            </button>
+                                        <?php } else if (!$est_mon_avis) { ?>
+                                            <button class="bouton_signalement" disabled>
+                                                <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
+                                                Signalé
+                                            </button>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </div>
 
                                 <div>
@@ -211,22 +227,6 @@ if (isset($_POST['quantite'])) {
                                     <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
                                     <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
                                 </div>
-
-                                <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
-                                <?php if (isset($id_cli)) {
-                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
-    
-                                    if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
-                                        <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
-                                        </button>
-                                    <?php } else if (!$est_mon_avis) { ?>
-                                        <button class="bouton_signalement" disabled>
-                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
-                                            Signalé
-                                        </button>
-                                    <?php } ?>
-                                <?php } ?>
                             </div>
 
                             <!-- Afficher l'image de l'avis si elle existe -->
