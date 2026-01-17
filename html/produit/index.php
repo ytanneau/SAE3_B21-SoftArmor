@@ -247,8 +247,11 @@ if (isset($_POST['quantite'])) {
                         <form id="form_signalement" action="" method="post">
                             <input type="hidden" name="id_avis" id="id_avis">
 
+                            <label for="input_email">Adresse e-mail (facultative)</label>
+                            <input type="text" name="email" id="input_email" placeholder="xyz@domaine.fr">
+
                             <label for="select_raison">Raison</label>
-                            <select name="raison" id="select_raison" class="champ">
+                            <select name="raison" id="select_raison">
                                 <option value="Contenu offensant">Contenu offensant</option>
                                 <option value="Contenu mensonger">Contenu mensonger</option>
                                 <option value="Contenu illicite">Contenu illicite</option>

@@ -1526,7 +1526,7 @@ aside {
 
         margin: 15% auto;
         padding: $padding_normal;
-        width: 40%;
+        width: 30%;
         
         background-color: $couleur_background;
         border-radius: $angle_petit;
@@ -1578,7 +1578,7 @@ aside {
                 margin-top: 0.5em;
             }
 
-            select {
+            select, input[type="text"] {
                 width: 50%;
                 padding: 0.5em;
 
