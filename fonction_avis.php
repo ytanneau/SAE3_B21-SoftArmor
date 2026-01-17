@@ -260,7 +260,7 @@
             $requete = $pdo->prepare(
                 "SELECT 1 
                 FROM avis_client
-                WHERE id_compte = :id_compte
+                WHERE id_client = :id_compte
                 AND id_avis = :id_avis"
             );
 
