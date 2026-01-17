@@ -334,6 +334,9 @@ if (isset($_POST['quantite'])) {
             btn.addEventListener("click", () => {
                 inputId.value = btn.dataset.avis;
                 modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
             });
         });
 
@@ -341,6 +344,7 @@ if (isset($_POST['quantite'])) {
         document.querySelectorAll(".fermer_modal").forEach(element => {
             element.addEventListener("click", () => {
                 modal.style.display = "none";
+                document.body.style.overflowY = "auto";
             });
         });
 
@@ -350,6 +354,8 @@ if (isset($_POST['quantite'])) {
                 modal.style.display = "none";
             }
         }
+
+        
 
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
