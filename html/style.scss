@@ -1524,6 +1524,7 @@ aside {
     
     transform: translate(-50%, 0);
     color: black;
+    border: solid 1px;
 
     text-align: center;
     border-radius: $angle_petit; 
@@ -1531,13 +1532,13 @@ aside {
     z-index: 10;
 
     &.success {
-        background-color: adjust-color($color: $couleur_prix, $saturation: -75%, $lightness: 75%);
-        border-color: $couleur_prix; 
+        background-color: #c7f9d0;
+        border-color: adjust-color($color: #c7f9d0, $lightness: -30%);
     }
 
     &.error {
-        background-color: adjust-color($color: $rouge, $saturation: -75%, $lightness: 75%);
-        border-color: $rouge; 
+        background-color: #fdd2cf; 
+        border-color: adjust-color($color: #fdd2cf, $lightness: -30%);
     }
 }
 

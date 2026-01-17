@@ -2616,18 +2616,19 @@ aside input.bouton:hover {
   bottom: 30px;
   transform: translate(-50%, 0);
   color: black;
+  border: solid 1px;
   text-align: center;
   border-radius: 5px;
   padding: 1em;
   z-index: 10;
 }
 #snackbar.success {
-  background-color: hsl(0, 0%, 107.9411764706%);
-  border-color: #2E7A30;
+  background-color: #c7f9d0;
+  border-color: rgb(60.8064516129, 234.1935483871, 92.0161290323);
 }
 #snackbar.error {
-  background-color: hsl(0, 1.2114537445%, 130.4901960784%);
-  border-color: #E43737;
+  background-color: #fdd2cf;
+  border-color: rgb(246.88, 72.3, 60.12);
 }
 
 #snackbar.show {
