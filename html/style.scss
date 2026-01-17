@@ -1529,6 +1529,9 @@ aside {
         background-color: $couleur_background;
         border-radius: $angle_petit;
 
+        animation-name: ouvrir_modal;
+        animation-duration: 0.4s;
+
         .titre {
             @include contenu_centre_horizontal();
             justify-content: space-between;
@@ -1547,6 +1550,18 @@ aside {
                 }
             }
         }
+    }
+}
+
+@keyframes ouvrir_modal {
+    from {
+        top: -300px; 
+        opacity: 0;
+    }
+
+    to {
+        top: 0; 
+        opacity: 1
     }
 }
 

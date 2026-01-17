@@ -2621,6 +2621,8 @@ aside input.bouton:hover {
   width: 40%;
   background-color: #FFFFFF;
   border-radius: 5px;
+  animation-name: ouvrir_modal;
+  animation-duration: 0.4s;
 }
 .modal .modal_content .titre {
   display: flex;
@@ -2640,6 +2642,16 @@ aside input.bouton:hover {
   text-decoration: none;
 }
 
+@keyframes ouvrir_modal {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
 @media print {
   h1 {
     font-size: 8mm;
