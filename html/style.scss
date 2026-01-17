@@ -1531,11 +1531,13 @@ aside {
     z-index: 10;
 
     &.success {
-        background-color: #c7f9d0; 
+        background-color: adjust-color($color: $couleur_prix, $saturation: -75%, $lightness: 75%);
+        border-color: $couleur_prix; 
     }
 
     &.error {
-        background-color: #fdd2cf; 
+        background-color: adjust-color($color: $rouge, $saturation: -75%, $lightness: 75%);
+        border-color: $rouge; 
     }
 }
 

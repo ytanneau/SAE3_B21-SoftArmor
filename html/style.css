@@ -2622,10 +2622,12 @@ aside input.bouton:hover {
   z-index: 10;
 }
 #snackbar.success {
-  background-color: #c7f9d0;
+  background-color: hsl(0, 0%, 107.9411764706%);
+  border-color: #2E7A30;
 }
 #snackbar.error {
-  background-color: #fdd2cf;
+  background-color: hsl(0, 1.2114537445%, 130.4901960784%);
+  border-color: #E43737;
 }
 
 #snackbar.show {
