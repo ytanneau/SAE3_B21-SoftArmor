@@ -2642,43 +2642,62 @@ aside input.bouton:hover {
   cursor: pointer;
   text-decoration: none;
 }
-.modal .modal_content form {
-  align-items: normal;
+.modal .modal_content .boutons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
+  justify-content: end;
 }
-.modal .modal_content form label {
-  margin-top: 5%;
-  font-size: 1.5em;
-}
-.modal .modal_content form .champ {
+.modal .modal_content .boutons button[type=reset] {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #A6A6BF;
+  color: black;
   border: none;
   border-radius: 5px;
-  height: 2em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal .modal_content .boutons button[type=reset] a {
+  text-decoration: none;
+  color: black;
+}
+.modal .modal_content .boutons button[type=reset]:hover {
+  background-color: rgb(210.5, 210.5, 223);
+}
+.modal .modal_content .boutons button[type=submit] {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
   font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
 }
-.modal .modal_content form .text {
-  height: 10em;
-  text-align: start;
+.modal .modal_content .boutons button[type=submit] a {
+  text-decoration: none;
+  color: black;
 }
-.modal .modal_content form .petit {
-  width: 30%;
+.modal .modal_content .boutons button[type=submit]:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.modal .modal_content form input[type=number]::-webkit-inner-spin-button,
-.modal .modal_content form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.modal .modal_content form input[type=number] {
-  -moz-appearance: textfield;
-}
-.modal .modal_content form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-.modal .modal_content form .error {
-  color: #E43737;
+.modal .modal_content form {
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes ouvrir_modal {

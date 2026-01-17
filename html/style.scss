@@ -1553,8 +1553,24 @@ aside {
             }
         }
 
+        .boutons {
+            @include contenu_centre_horizontal;
+
+            width: 100%;
+            justify-content: end;
+
+            button[type="reset"] {
+                @include bouton_new($nuance);
+            }
+
+            button[type="submit"] {
+                @include bouton_new();
+            }
+        }
+
         form {
-            @include formulaire;
+            display: flex;
+            flex-direction: column;
         }
     }
 }
