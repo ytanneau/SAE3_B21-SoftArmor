@@ -378,11 +378,12 @@ if (isset($_POST['quantite'])) {
                 pErrorRaison.style.visibility = "hidden";
             }
 
+            // Si l'utilisateur n'est pas connecté, on vérifie l'adresse e-mail donnée
             if (estVisiteur && !emailValide(data.get("email"))) {
                 pErrorEmail.textContent = (data.get("email").trim() == "") ? "Veuillez renseigner ce champ" : "Le format est invalide";
                 pErrorEmail.style.visibility = "visible";
                 return;
-            } else {
+            } else if (estVisiteur) {
                 pErrorEmail.style.visibility = "hidden";
             }
 
