@@ -252,6 +252,7 @@ if (isset($_POST['quantite'])) {
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
+                                <option value="">Sélectionnez une raison</option>
                                 <option value="offensant">Contenu offensant</option>
                                 <option value="hors-sujet">Contenu hors-sujet</option>
                                 <option value="illicite">Contenu illicite</option>
@@ -356,7 +357,7 @@ if (isset($_POST['quantite'])) {
         }
 
         
-
+        // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
 
