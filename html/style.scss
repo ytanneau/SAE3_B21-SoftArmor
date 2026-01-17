@@ -1522,6 +1522,8 @@ aside {
     background-color: rgba(0, 0, 0, 0.6);
 
     .modal_content {
+        position: relative;
+        
         margin: 15% auto;
         padding: $padding_normal;
         width: 40%;

@@ -2616,6 +2616,7 @@ aside input.bouton:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .modal .modal_content {
+  position: relative;
   margin: 15% auto;
   padding: 2em;
   width: 40%;
