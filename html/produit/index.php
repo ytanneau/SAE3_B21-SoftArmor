@@ -379,14 +379,11 @@ if (isset($_POST['quantite'])) {
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
                 );
-
-                let img = document.createElement("img");
-                let src = document.createAttribute("src");
-                src.value = "../image/reported_rouge.svg";
-                img.appendChild(src);
-
-                btn.appendChild(img);
                 btn.disabled = true;
+                
+                // Changer l'image du bouton
+                const img = document.querySelector(".bouton_signalement img");
+                img.src = "../image/reported_rouge.svg";
             }
         });
 
