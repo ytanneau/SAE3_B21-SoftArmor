@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     int cnx; // le file descriptor du sock
     MYSQL *conn;
     SESSION data;
-    data.login = NULL;
+    strcpy(data.login, VIDE);
     data.bdd = BDD;
     data.debug = DEBUG;
 
@@ -206,15 +206,16 @@ int main(int argc, char *argv[])
                 }
                 else if (pid == 0) // fils
                 {
+                    SESSION encour = data; //data est la structure de base, et son crée en cour pour évier des problème avec pointeur
                     char client_ip[INET_ADDRSTRLEN]; 
                     inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip));
-                    data.cnx = cnx;
-                    strcpy(data.client_ip , client_ip);
+                    encour.cnx = cnx;
+                    strcpy(encour.client_ip , client_ip);
 
                     close(sock);
                     
-                    comminication(&data, c, colisInfinit, nbColisMax);
-                    fin(&data);
+                    comminication(&encour, c, colisInfinit, nbColisMax);
+                    fin(&encour);
                 }
             }
             

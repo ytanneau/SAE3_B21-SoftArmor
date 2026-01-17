@@ -14,12 +14,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && isset($_
     
     header('location: ' . HOME_SITE);
     exit;
-    
-// Sinon si je ne suis pas connecté, retour à la page connexion
-} else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-    echo 2;
-    header('location: ../connexion');
-    exit;
 }
 
 //permet d'utiliser le fichier config.php
@@ -33,8 +27,13 @@ if (!(isset($_GET['produit']) && isset($_GET['nb']))){
     header('location: .');
 }
 
+if (isset($_SESSION['id_compte'])) {
+    update_quantite($_GET['produit'], $_GET['nb'], $_SESSION['id_compte']);
 
-update_quantite($_GET['produit'], $_GET['nb'], $_SESSION['id_compte']);
+} else {
+    update_quantite_panier_visiteur($_GET['produit'], $_GET['nb']);
+}
+
 header('location: .');
 
 

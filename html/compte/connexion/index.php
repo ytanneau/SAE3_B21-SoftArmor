@@ -16,8 +16,13 @@ if ($_POST != null){
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['produit'])) {
+        if ($_GET['produit']) {
+            $page = '../../panier';
+        } else {
+            $page = '../../produit?produit=' . $_GET['produit'];
+        }
         // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . "produit/index.php?produit=" . htmlentities($_GET['produit']));
+        header('Location: ' . HOME_SITE . $page);
     } else {
         // Sinon, retour accueil
         header('location: ' . HOME_SITE);
@@ -103,7 +108,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             
             <input type="submit" value="Se connecter" class="bouton">
         </form>
-        <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">S'inscrire</a> 
+        <p>Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription?produit=<?=$_GET['produit'] ?? ''?>">S'inscrire</a> 
         <br>
         Passez du coté vendeur : <a href="<?=HOME_SITE?>vendeur/">Connexion vendeur</a>
         

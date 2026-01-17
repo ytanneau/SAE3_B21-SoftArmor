@@ -15,7 +15,7 @@ typedef struct SESSION
     FILE *log;
     char client_ip[INET_ADDRSTRLEN];
     int cnx;
-    char *login;
+    char login[TAILLE];
     bool debug;
     bool bdd;
 } SESSION;

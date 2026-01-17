@@ -19,11 +19,18 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
 if ($_POST != NULL) {
     $id_prod = $_POST['id_produit'];
-    supprimer_produit_panier($id_prod,$id_client);
+
+    if (isset($_SESSION['id_compte'])) {
+        supprimer_produit_panier($id_prod,$id_client);
+
+    } else {
+        retirer_panier_visiteur($id_prod);
+    }
 }
 
 if (isset($_SESSION['logged_in'])) {
@@ -162,7 +169,7 @@ if (isset($_SESSION['logged_in'])) {
                     </div>
                 <?php } ?>
                 
-                <form action="../achat" method="get">
+                <form action="<?= isset($_POST['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
                     <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
