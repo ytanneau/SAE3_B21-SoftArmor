@@ -211,22 +211,23 @@ if (isset($_POST['quantite'])) {
                                     <p><?= htmlentities($avis['commentaire'] ?? '') ?></p>
                                     <p><?= 'Avis rédigé par ' . htmlentities($avis['pseudo'] ?? '') .  ' le ' . date('d/m/Y', strtotime(htmlentities($avis['date_avis'] ?? ''))) ?></p>
                                 </div>
-                            </div>
 
-                            <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
-                            <?php if (isset($id_cli)) {
-                                $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
-
-                                if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
-                                    <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                        Signaler
-                                    </button>
-                                <?php } else if (!$est_mon_avis) { ?>
-                                    <button class="bouton_signalement" disabled>
-                                        Signalé
-                                    </button>
+                                <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
+                                <?php if (isset($id_cli)) {
+                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
+    
+                                    if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
+                                        </button>
+                                    <?php } else if (!$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" disabled>
+                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>">
+                                            Signalé
+                                        </button>
+                                    <?php } ?>
                                 <?php } ?>
-                            <?php } ?>
+                            </div>
 
                             <!-- Afficher l'image de l'avis si elle existe -->
                             <?php if (isset($avis['url_image'])) { ?>
@@ -248,7 +249,7 @@ if (isset($_POST['quantite'])) {
                             <input type="hidden" name="id_avis" id="id_avis">
 
                             <label for="input_email">Adresse e-mail (facultative)</label>
-                            <input type="text" name="email" id="input_email" placeholder="xyz@domaine.fr">
+                            <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
 
                             <label for="select_raison">Raison</label>
                             <select name="raison" id="select_raison">
