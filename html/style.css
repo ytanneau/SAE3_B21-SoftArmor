@@ -1301,7 +1301,9 @@ div:has(> aside) {
   color: #fff;
   font-family: sans-serif;
   margin-top: 50px;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   position: relative;
   bottom: 0;
 }
