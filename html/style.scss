@@ -1536,7 +1536,7 @@ aside {
 #snackbar.show {
     visibility: visible;
     
-    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.5s;
+    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 2.0s;
 }
 
 @keyframes montrer_snackbar {

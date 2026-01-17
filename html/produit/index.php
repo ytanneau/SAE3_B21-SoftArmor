@@ -393,7 +393,7 @@ if (isset($_POST['quantite'])) {
             }
         });
 
-        // Montrer la snackbar
+        // Montrer la snackbar pendant 3 secondes
         function showSnackbar(msg) {
             snackbar.textContent = msg;
             snackbar.className = "show";
