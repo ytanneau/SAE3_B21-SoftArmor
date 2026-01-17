@@ -371,10 +371,16 @@ if (isset($_POST['quantite'])) {
 
             const json = await res.json();
 
+            // Fermer le modal
             modal.style.display = "none";
+            document.body.style.overflowY = "auto";
+
+            // Afficher la snackbar
             showSnackbar(json.message);
 
             if (json.success) {
+                console.log(json.success);
+                
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
