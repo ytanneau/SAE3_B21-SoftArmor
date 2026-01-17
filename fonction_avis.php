@@ -241,9 +241,7 @@
         try {
             $sql = "SELECT 1 
                     FROM _signalement
-                    WHERE 1 = 1
-                    AND id_compte = :id_compte
-                    AND id_avis = :id_avis";
+                    WHERE 1 = 1";
 
             if (isset($id_compte)) {
                 $sql .= " AND id_compte = :id_compte";
