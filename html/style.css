@@ -2684,6 +2684,7 @@ aside input.bouton:hover {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1em;
 }
 .modal .modal_content .titre h3 {
   margin: 0;
@@ -2703,6 +2704,7 @@ aside input.bouton:hover {
   gap: 10px;
   width: 100%;
   justify-content: end;
+  margin-top: 1em;
 }
 .modal .modal_content .boutons button[type=reset] {
   display: block;
@@ -2769,6 +2771,9 @@ aside input.bouton:hover {
 }
 .modal .modal_content form select {
   width: 60%;
+}
+.modal .modal_content form .error {
+  visibility: hidden;
 }
 
 @keyframes ouvrir_modal {

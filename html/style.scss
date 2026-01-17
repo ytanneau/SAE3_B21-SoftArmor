@@ -1156,7 +1156,7 @@ aside {
     }
 }
 
-.error{
+.error {
     font-size: $font_size_petit;
     margin: 0.4% 0;
     color: $rouge;
@@ -1614,6 +1614,7 @@ aside {
         .titre {
             @include contenu_centre_horizontal();
             justify-content: space-between;
+            margin-bottom: 1em;
 
             h3 {
                 margin: 0;
@@ -1636,6 +1637,7 @@ aside {
 
             width: 100%;
             justify-content: end;
+            margin-top: 1em;
 
             button[type="reset"] {
                 @include bouton_new($nuance_primaire_client, $padding: 0.5em);
@@ -1669,6 +1671,10 @@ aside {
 
             select {
                 width: 60%;
+            }
+
+            .error {
+                visibility: hidden;
             }
         }
     }
