@@ -1530,8 +1530,13 @@ aside {
             @include contenu_centre_horizontal();
             justify-content: space-between;
 
-            * {
-                margin-top: 0;
+            h3 {
+                margin: 0;
+            }
+
+            .close {
+                font-size: 28px;
+                font-weight: bold;
             }
         }
     }

@@ -2625,8 +2625,12 @@ aside input.bouton:hover {
   align-items: center;
   justify-content: space-between;
 }
-.modal .modal_content .titre * {
-  margin-top: 0;
+.modal .modal_content .titre h3 {
+  margin: 0;
+}
+.modal .modal_content .titre .close {
+  font-size: 28px;
+  font-weight: bold;
 }
 
 @media print {
