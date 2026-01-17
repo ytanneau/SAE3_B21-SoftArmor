@@ -1565,7 +1565,7 @@ aside {
             }
 
             button[type="submit"] {
-                @include bouton_new($color: white, $padding: 0.5em);
+                @include bouton_new($rouge, $color: white, $padding: 0.5em);
             }
         }
 
