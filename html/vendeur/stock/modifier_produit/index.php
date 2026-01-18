@@ -175,7 +175,7 @@
                 <h3>Informations produit</h3>
                 <div>
                     <p>
-                        <label for="nomPrv">Libellé privé*</label>
+                        <label for="nomPrv">Référence*</label>
                         <input type="text" name="nomPrv" id="idNomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
                     </p>
                     <p>

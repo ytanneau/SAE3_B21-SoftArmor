@@ -7,6 +7,5 @@ html/connexion_vend.php
 velociraptor/raptor
 test*
 log*
-*.svg
 *.png
 *.log

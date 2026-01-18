@@ -60,9 +60,8 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
-if (isset($_SESSION['id_compte'])) {
-    $id_cli = $_SESSION['id_compte'];
-}
+$id_cli = $_SESSION['id_compte'] ?? null;
+
 
 if (isset($_POST['quantite'])) {
     $qte = $_POST['quantite'];
@@ -70,14 +69,13 @@ if (isset($_POST['quantite'])) {
 
     if (isset($_SESSION['id_compte'])) {
         ajouter_panier($id_prod,$id_cli,$qte);
-    } elseif (isset($_COOKIE['panier'])) {
-        $panier = unserialize($_COOKIE['panier']);
-        array_push($panier, ['id_produit' => $id_prod, 'quantite' => $qte]);
 
-        setcookie('panier', serialize($panier), path: '/');
     } else {
-        setcookie('panier', serialize([['id_produit' => $id_prod, 'quantite' => $qte]]), path: '/');
+        ajouter_panier_visiteur($id_prod, $qte);
+
     }
+
+    header('Location:' . HOME_SITE . 'panier');
 }
 
 ?>
@@ -192,6 +190,7 @@ if (isset($_POST['quantite'])) {
                 <ul class="liste_avis">
                     <?php foreach ($liste_avis as $avis) { ?>
                         <li>
+                            <!-- Informations du produit -->
                             <div>
                                 <div>
                                     <?php if (isset($avis['profile'])) {?>
@@ -204,6 +203,20 @@ if (isset($_POST['quantite'])) {
                                     <div class="etoiles">
                                         <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                     </div>
+
+                                    <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
+                                    <?php
+                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
+    
+                                    if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
+                                        </button>
+                                    <?php } else if (!$est_mon_avis) { ?>
+                                        <button class="bouton_signalement" disabled>
+                                            <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
+                                        </button>
+                                    <?php } ?>
                                 </div>
 
                                 <div>
@@ -213,16 +226,7 @@ if (isset($_POST['quantite'])) {
                                 </div>
                             </div>
 
-                            <?php if (!avis_est_signale($avis['id_avis'], $id_cli)) { ?>
-                                <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                    Signaler
-                                </button>
-                            <?php } else { ?>
-                                <button class="bouton_signalement" disabled>
-                                    Signalé
-                                </button>
-                            <?php } ?>
-
+                            <!-- Afficher l'image de l'avis si elle existe -->
                             <?php if (isset($avis['url_image'])) { ?>
                                 <img src="<?= HOME_SITE . $avis['url_image'] ?>" title="<?= $avis['alt_image'] ?>" alt="<?= $avis['alt_image'] ?>">
                             <?php } ?>
@@ -233,20 +237,33 @@ if (isset($_POST['quantite'])) {
 
                 <div id="modal_signalement" class="modal">
                     <div class="modal_content">
-                        <h3>Signaler cet avis</h3>
+                        <div class="titre">
+                            <h3>Signaler cet avis</h3>
+                            <span class="fermer_modal">&times;</span>
+                        </div>
                         
                         <form id="form_signalement" action="" method="post">
                             <input type="hidden" name="id_avis" id="id_avis">
 
-                            <label for="select_raison">Raison :</label>
-                            <select name="raison" id="select_raison">
-                                <option value="Contenu offensant">Contenu offensant</option>
-                                <option value="Contenu mensonger">Contenu mensonger</option>
-                                <option value="Contenu illicite">Contenu illicite</option>
-                            </select>
+                            <?php if (!isset($id_cli)) { ?>
+                                <label for="input_email">Adresse e-mail</label>
+                                <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
+                                <p class="error" id="error_email">Le format est invalide</p>
+                            <?php } ?>
 
-                            <button type="submit">Envoyer</button>
-                            <button type="reset" id="fermer_modal">Annuler</button>
+                            <label for="select_raison">Raison</label>
+                            <select name="raison" id="select_raison">
+                                <option value="">Sélectionnez une raison</option>
+                                <option value="offensant">Contenu offensant</option>
+                                <option value="hors-sujet">Contenu hors-sujet</option>
+                                <option value="illicite">Contenu illicite</option>
+                            </select>
+                            <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
+
+                            <div class="boutons">
+                                <button type="reset" class="fermer_modal">Annuler</button>
+                                <button type="submit">Signaler</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -311,26 +328,64 @@ if (isset($_POST['quantite'])) {
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
         const snackbar = document.getElementById("snackbar");
+
         const inputId = document.getElementById("id_avis");
+        const estVisiteur = (inputId == null);
+
+        const pErrorEmail = document.getElementById("error_email");
+        const pErrorRaison = document.getElementById("error_raison");
+
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
                 inputId.value = btn.dataset.avis;
                 modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
             });
         });
 
         // Fermer le modal
-        document.getElementById("fermer_modal").onclick = () => {
-            modal.style.display = "none";
-        };
+        document.querySelectorAll(".fermer_modal").forEach(element => {
+            element.addEventListener("click", () => {
+                modal.style.display = "none";
+                document.body.style.overflowY = "auto";
+            });
+        });
 
+        // Fermer le modal si on clique ailleurs
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflowY = "auto";
+            }
+        }
+
+        
+        // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
+
+            if (data.get("raison") == "" || data.get("raison") == null) {
+                pErrorRaison.style.visibility = "visible";
+                return;
+            } else {
+                pErrorRaison.style.visibility = "hidden";
+            }
+
+            // Si l'utilisateur n'est pas connecté, on vérifie l'adresse e-mail donnée
+            if (estVisiteur && !emailValide(data.get("email"))) {
+                pErrorEmail.textContent = (data.get("email").trim() == "") ? "Veuillez renseigner ce champ" : "Le format est invalide";
+                pErrorEmail.style.visibility = "visible";
+                return;
+            } else if (estVisiteur) {
+                pErrorEmail.style.visibility = "hidden";
+            }
 
             // Envoyer les données du formulaire en JSON à une autre page
             const res = await fetch("../signalement.php", {
@@ -340,28 +395,42 @@ if (isset($_POST['quantite'])) {
 
             const json = await res.json();
 
+            // Fermer le modal
             modal.style.display = "none";
-            showSnackbar(json.message);
+            document.body.style.overflowY = "auto";
+
+            // Afficher la snackbar
+            showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
+                console.log(json.success);
+
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
                 );
-
-                btn.textContent = "Signalé";
                 btn.disabled = true;
+                
+                // Changer l'image du bouton
+                const img = document.querySelector(`.bouton_signalement[data-avis="${data.get('id_avis')}"] img`);
+                img.src = "../image/reported_rouge.svg";
             }
         });
 
-        // Montrer la snackbar
-        function showSnackbar(msg) {
+        function emailValide(email) {
+            let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return email != null && regex.test(email);
+        }
+
+        // Montrer la snackbar pendant 5 secondes
+        function showSnackbar(msg, mode) {
             snackbar.textContent = msg;
-            snackbar.className = "show";
+            snackbar.className = `show ${mode}`;
 
             setTimeout(() => {
                 snackbar.className = "";
-            }, 3000);
+            }, 5000);
         }
 
     </script>
