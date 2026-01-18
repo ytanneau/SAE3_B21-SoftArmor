@@ -1,4 +1,3 @@
-
 <?php 
     //les raisons de refus
     //["colis endommagé","ne correspond pas a la commande","en retard","plus besoin du _colis"];
@@ -27,22 +26,22 @@
         //on augmente l'etape de 1
         else if($tab['etape'] < 8){
             $etape=$tab['etape']+1;
-            $sql = "UPDATE _colis SET etape= :etape where bordereau = :bordereau";
+            $sql = "UPDATE _colis SET etape= :etape, date_update = :date_update where bordereau = :bordereau";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([':etape' => $etape,':bordereau' => $tab['bordereau']]);
+            $stmt->execute([':etape' => $etape, ':date_update' => time(),':bordereau' => $tab['bordereau']]);
         }//derniere etape on choisi comment la livraison se termine
         else if ($tab['etape'] == 8){
             $etape=$tab['etape']+1; 
             $est_livre= rand(0,2);
-            $sql = "UPDATE _colis SET etape= :etape where bordereau = :bordereau";
+            $sql = "UPDATE _colis SET etape= :etape, date_update = :date_update ,mode=:mode where bordereau = :bordereau";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([':etape' => $etape,':bordereau' => $tab['bordereau']]);
+            $stmt->execute([':etape' => $etape,':mode' => $est_livre, ':date_update' => time(),':bordereau' => $tab['bordereau']]);
             //s'il il est pas livré choisir raison de refus
             if($est_livre == 2){
                 $raison_refus = rand(0,3);
-                $sql = "UPDATE _colis SET raison_refus= :raison_refus where bordereau = :bordereau";
+                $sql = "UPDATE _colis SET raison_refus= :raison_refus, date_update = :date_update where bordereau = :bordereau";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([':raison_refus' => $raison_refus,':bordereau' => $tab['bordereau']]);
+                $stmt->execute([':raison_refus' => $raison_refus, ':date_update' => time(),':bordereau' => $tab['bordereau']]);
             }
         }
         
