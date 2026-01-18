@@ -1,0 +1,457 @@
+@use "style_const.scss" as *;
+
+@mixin contenu_centre_vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@mixin contenu_centre_horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@mixin header($background) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 0.5em 1em;
+    background-color: $background;
+    
+    * {
+        font-family: $font_title;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 1024px) {
+        padding: 1.5em 1em;
+    }
+
+    .hide-on-mobile {
+        @media screen and (max-width: 1024px) {
+            display: none;
+        }
+    }
+
+    .menu-button {
+        display: none;
+        margin-left: auto;
+
+        img {
+            height: 75px;
+            width: 75px;
+        }
+
+        @media screen and (max-width: 1024px) {
+            display: block;
+        }
+    }
+
+    > nav {
+        @include contenu_centre_horizontal();
+        justify-content: space-between;
+
+        > ul {
+            @include contenu_centre_horizontal();
+            justify-content: space-between;
+            flex-wrap: wrap;
+            list-style: none;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+
+            > li {
+                margin: 0 1em;
+
+                &.searchbar {
+                    display: flex;
+                    flex-grow: 1;
+                    justify-content: center;
+
+                    form {
+                        display: flex;
+                        flex-basis: 65%;
+                        align-items: center;
+    
+                        background-color: white;
+                        border-radius: 20px;
+    
+                        input, button {
+                            border: none;
+                        }
+    
+                        input[type=search] {
+                            padding: 0.5em 0.5em 0.5em 1.5em;
+                            border-radius: 20px;
+                            
+                            flex-grow: 1;
+                            outline: none;
+                            font-weight: 400;
+
+                            @media screen and (max-width: 1024px) {
+                                padding: 1.5em 0.5em 1.5em 1.5em;
+                            }
+                        }
+    
+                        button[type=submit] {
+                            background-color: transparent;
+                        }
+                    }
+
+                    @media screen and (max-width: 1024px) {
+                        order: 3;
+                        flex-basis: 100%;
+                    }
+
+                }
+
+                &:first-child img {
+                    height: 30px;
+
+                    @media screen and (max-width: 1024px) {
+                        height: 50px;
+                    }
+                }
+
+                > a {
+                    @include contenu_centre_horizontal();
+
+                    color: white;
+                    text-decoration: none;
+                }
+
+                > .dropdown {
+                    position: relative;
+                    display: inline-block;
+
+                    font-size: $font_size_normal;
+
+                    > .dropdown-button {
+                        @include contenu_centre_horizontal();
+                        
+                        font-size: $font_size_normal;
+                        background-color: $background;
+                        color: white;
+                        border: none;
+                        padding-left: 0;
+                        padding-right: 0;
+                        cursor: pointer;
+                    }
+
+                    > .dropdown-content {
+                        display: none;
+
+                        position: absolute;
+                        top: 2.5em;
+                        right: 0;
+
+                        min-width: 200px;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.25);
+                        z-index: 1;
+
+                        background-color: #ffffff;
+                        border-radius: 5px;
+
+                        > a {
+                            @include contenu_centre_horizontal();
+
+                            padding: 0.25em 0.5em;
+                            text-decoration: none;
+                            color: black;
+                            font-weight: bold;
+
+                            border-radius: 5px;
+
+                            &:hover {
+                                background-color: #ECEDF9;
+                            }
+                        }
+                    }
+
+                    > .show {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        > ul.sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            max-width: 400px;
+            height: 100vh;
+            padding: 1em;
+
+            font-size: 2.25em;
+
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            z-index: 5;
+
+            li {
+                margin: 0 0 1em 0;
+
+                &:first-of-type {
+                    margin-bottom: 2em;
+                }
+
+                &:nth-of-type(2) {
+                    margin-left: 0;
+                }
+            }
+
+            img {
+                height: 60px;
+                width: 60px;
+            }
+        }
+    }
+}
+
+@mixin produit_catalogue() {
+    width: 20vw;
+    margin: 20px 40px 20px 20px;
+
+    > a {
+        color : black;
+        text-decoration: none;
+        line-height: 1.5em; 
+    
+        > img {
+            @include image_produit(15vw);
+        }   
+    
+        > div {
+            @include contenu_centre_horizontal;
+    
+            > img {
+                width: 20px;
+                height: 20px;
+                background: none;
+            }
+    
+            > p {
+                margin: 5px 0 ;
+            }
+    
+            height :2em;
+        }
+    
+        > p, > h3 {
+            margin: 5px 0 ;
+            width: 100%;
+        }
+    
+        > h3 {
+            height :3em;
+        }
+    }
+}
+
+@mixin image_produit($taille, $angle: $angle_petit) {
+    object-fit: contain;
+    background-color: $couleur_fond_produit;
+    min-width: $taille;
+    max-width: $taille;
+    height: $taille;
+    border-radius: $angle;
+}
+
+@mixin bouton {
+    border: none;
+    border-radius: $angle_grand;
+    padding: 0.5em 2em;
+    font-weight: bold;
+    align-self: center;
+}
+
+@mixin bouton_new($background: $focus, $color: black, $largeur: auto, $padding: 1em, $size: 1em, $angle: $angle_petit, $display: block) {
+    display: $display;
+    max-width: 100%;
+
+    width: $largeur;
+    padding: $padding;
+
+    font-family: $font_title;
+    font-size: $size;
+    font-weight: bold;
+    
+    background-color: $background;
+    color: $color;
+
+    border: none;
+    border-radius: $angle;
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    a {
+        text-decoration: none;
+        color: $color;
+    }
+
+    &:hover {
+        background-color: adjust-color($color: $background, $lightness: 15%);
+    }
+}
+
+@mixin image_pp($taille) {
+    height: $taille;
+    width: $taille;
+    border-radius: $taille;
+    object-fit: cover;
+}
+
+// mixin pour les formulaire, donc qui contient des labels, des champs, et un bouton (eventuellement des erreurs / contraintes)
+@mixin formulaire {
+    align-items: normal;
+    width: 100%;
+
+    label {
+        margin-top: 5%;
+        font-size: $font_size_sup;
+    }
+
+    .champ {
+        border: none;
+        border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+    }
+    
+    // pour les champs avec beaucoup de texte (ex : description)
+    .text {
+        height: 10em;
+        text-align: start;
+    }
+
+    .petit {
+        width: 30%;
+    }
+
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    
+
+    // généralement contraintes et erreurs
+    p {
+        font-size: $font_size_petit;
+        margin: 0.4% 0;
+    }
+
+    .error{
+        color: $rouge;
+    }
+}
+
+@mixin page_connect_inscription($background, $nuance) {
+    background-color: $background;
+
+    @include contenu_centre_vertical;
+
+    main {
+        @include contenu_centre_vertical;
+
+        background-color: $nuance;
+        row-gap: 1em;
+        border-radius: $angle_normal; 
+        padding: $padding_normal;
+        width: 30vw;
+        @media (max-width: 1440px) {
+            width: 60vw;
+        }
+        
+
+        img {
+            width: 18vw;
+            @media (max-width: 1440px) {
+                width: 50vw;
+            }
+        }
+
+        h2 {
+            font-size: $font_size_grand;
+            margin: 0
+        }
+
+        form {
+            @include contenu_centre_vertical;
+            @include formulaire;
+        }
+
+        .bouton {
+            @include bouton_new($focus, $color: white, $padding: 0.75em 1em, $size: 1em, $angle: $angle_grand);
+        }
+    }
+}
+
+@mixin entete_page_vendeur{
+    .entete{
+        display: flex;
+        align-items: center;
+        a{
+            height: 24px;
+            margin-right: 50px;
+        }
+        h1{
+            margin-right: 30px;
+        }
+    }
+}
+
+@mixin format_textarea_p_select_input_form{
+    #idDescDetaille,#idDescSimple{
+        width: 600px;
+        height: 200px;
+        resize: vertical;
+        font-family: $font_text;
+    }
+    p{
+        display: flex;
+        flex-direction: column;
+    }
+    select{
+        height: 32px;
+        width: fit-content;
+    }
+    input[type="text"], input[type="number"]{
+        height: 25px;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+    }
+}
+
+@mixin en_ligne{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
+
+@mixin code_barre{
+    #idCodeBarre{
+        width: 150px;
+    }
+}

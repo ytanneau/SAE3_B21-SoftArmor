@@ -1,8 +1,8 @@
-#!/usr/bin/php
+
 <?php 
     //les raisons de refus
     //["colis endommagé","ne correspond pas a la commande","en retard","plus besoin du _colis"];
-    require_once '../.config.php';
+    require_once __DIR__ . '../.config.php';
 
     //recuperer les colis
     $sql = "SELECT * FROM _colis";
