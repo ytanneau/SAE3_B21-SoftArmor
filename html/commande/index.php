@@ -255,6 +255,9 @@ if (isset($_GET["commande"])) {
                             </div>
                             <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
                             <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
+                            <?php if ($info_colis["RENDU"] == "1") {?>
+                            <img src="<?= htmlentities($bordereau)?>.png" alt="image colis">
+                            <?php }?>
                         </div>
                         <hr>
                     </li>
