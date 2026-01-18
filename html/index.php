@@ -45,6 +45,16 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
             foreach ($liste_produits as $row) { ?>
                 <li>
                     <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
+                        <?php
+                        $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
+                        $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
+                        $reduction = $prix_normal != $prix_reduit;
+                        $pourcentage = round((1 - ($prix_reduit / $prix_normal) )*100);
+
+                        if($reduction){?>
+                        <span class="reduction">%</span>
+                        <?php }?>
+
                         <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
                         
                         <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
@@ -62,21 +72,14 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
                             ?>
                         </div>
 
-                        <?php
-                        $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
-                        $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
-                        $reduction = $prix_normal != $prix_reduit;
-                        $pourcentage = ($prix_normal-$prix_reduit / $prix_normal);
                         
-                        
-                        ?>
 
                         <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
-                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '');?> €</p>
+                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
+                        <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
                         
                         <?php if ($reduction) { ?>
-                            <p class="pourcent"><?php "-$pourcentage%"?></p>
-                            <p class="prix"><?= number_format($prix_reduit, 2, ',', '');?> €</p>
+                            <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
                         <?php } ?>
                     </a>
                 </li>
@@ -125,15 +128,15 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
     <h1>Produits du catalogue</h1>
     <?php afficher_produits($produit_catalogue, "catalogue")?>
 
-    <!-- Navigation (pour teléphone) -->
+    <!-- Navigation (pour teléphone)
     <nav>
         <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
         <a href="/panier"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
-        <!--
+       
         <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
         <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
-        --->
-    </nav>
+    </nav>  
+    -->
 
     </main>
 
