@@ -33,23 +33,16 @@
         }//derniere etape on choisi comment la livraison se termine
         else if ($tab['etape'] == 8){
             $etape=$tab['etape']+1; 
-            $est_livre= rand(0,1);
+            $est_livre= rand(0,2);
             $sql = "UPDATE _colis SET etape= :etape where bordereau = :bordereau";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':etape' => $etape,':bordereau' => $tab['bordereau']]);
             //s'il il est pas livré choisir raison de refus
-            if(!$est_livre){
+            if($est_livre == 2){
                 $raison_refus = rand(0,3);
                 $sql = "UPDATE _colis SET raison_refus= :raison_refus where bordereau = :bordereau";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([':raison_refus' => $raison_refus,':bordereau' => $tab['bordereau']]);
-            }
-            //sinon choisir si absent ou non
-            else {
-                $absent= rand(0,1);
-                $sql = "UPDATE _colis SET absent= :absent where bordereau = :bordereau";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([':absent' => $absent,':bordereau' => $tab['bordereau']]);
             }
         }
         
