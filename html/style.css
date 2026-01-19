@@ -2819,6 +2819,9 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
 }
+.main_promo .cout_final {
+  width: 50%;
+}
 .main_promo p + div div input {
   width: 50%;
 }
