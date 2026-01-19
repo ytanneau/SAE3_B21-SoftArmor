@@ -163,10 +163,10 @@ if ($_POST != NULL){
     <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
-<body class="infos">
+<body>
     <?php include HOME_SITE . 'header.php'; ?>
 
-    <main>
+    <main class="infos">
         <h1>Mon profil</h1>
         
         <section>
