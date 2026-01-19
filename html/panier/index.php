@@ -1,4 +1,5 @@
 <?php
+
 // Constantes
 define('HOME_GIT', "../../");
 define('HOME_SITE', '../');
@@ -39,7 +40,7 @@ if (isset($_POST['sup_panier'])) {
         vider_panier($_SESSION['id_compte']);
     } else {
         vider_panier_visiteur();
-        $_COOKIE['panier'] = '';
+        $_COOKIE['panier'] = serialize([]);
     }
 }
 
@@ -104,7 +105,8 @@ if (isset($_SESSION['logged_in'])) {
             <article class="entete">
                 <h1>Mon panier</h1>
                 <form action="" method="post">
-                    <input class="bouton grave" type="submit" name="sup_panier" value="Vider le panier">
+                    <input type="hidden" name="sup_panier" value="1">
+                    <input class="bouton grave" type="submit" value="Vider le panier">
                 </form>
             </article>
 
@@ -156,7 +158,7 @@ if (isset($_SESSION['logged_in'])) {
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                                        <button onclick="actualiser()" type="submit" class="bouton grave">Supprimer</button>
+                                        <input type="submit" class="bouton grave" value="Supprimer">
                                     </form>
                                 </article>
                             </div>
@@ -197,6 +199,26 @@ if (isset($_SESSION['logged_in'])) {
     <script>
         function actualiser() {
             window.location.reload();
+        }
+
+        elements = document.getElementsByClassName("grave");
+
+        for (let i = 0; i < elements.length; i++) {
+            const bouton_suppr = elements[i];
+            
+            
+            bouton_suppr.addEventListener("click", (event) => {
+                // Empêche l'envoi immédiat
+                event.preventDefault();
+                
+                // Fenêtre de confirmation
+                const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce produit du panier ?");
+                
+                if (confirmation) {
+                    // L'utilisateur confirme, on envoie le formulaire
+                    bouton_suppr.parentElement.submit();
+                }
+            })
         }
     </script>
 </html>
