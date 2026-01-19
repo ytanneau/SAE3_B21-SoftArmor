@@ -1708,12 +1708,12 @@ aside {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-    }
-    .en_colonne{
-        display: flex;
-        flex-direction: column;
-        input{
-            width: 50%;
+        div{
+            display: flex;
+            flex-direction: column;
+            .div_reduc{
+                width: 50%;
+            }
         }
     }
     #valider{
