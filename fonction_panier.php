@@ -208,3 +208,8 @@ function vider_panier($id_compte) {
     $req->bindValue(":id_client", $id_compte, PDO::PARAM_INT);
     $req->execute();
 }
+
+// fonction permettanat de vider le panier visiteur (bouton vider)
+function vider_panier_visiteur() {
+    setcookie('panier', '', path:'/');
+}

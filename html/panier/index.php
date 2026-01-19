@@ -22,7 +22,7 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
-if ($_POST != NULL) {
+if (isset($_POST['id_produit'])) {
     $id_prod = $_POST['id_produit'];
 
     if (isset($_SESSION['id_compte'])) {
@@ -30,6 +30,16 @@ if ($_POST != NULL) {
 
     } else {
         retirer_panier_visiteur($id_prod);
+    }
+}
+
+// supprime le panier entier
+if (isset($_POST['sup_panier'])) {
+    if (isset($_SESSION['id_compte'])) {
+        vider_panier($_SESSION['id_compte']);
+    } else {
+        vider_panier_visiteur();
+        $_COOKIE['panier'] = '';
     }
 }
 
@@ -93,6 +103,9 @@ if (isset($_SESSION['logged_in'])) {
         <div class="gauche">
             <article class="entete">
                 <h1>Mon panier</h1>
+                <form action="" method="post">
+                    <input class="bouton grave" type="submit" name="sup_panier" value="Vider le panier">
+                </form>
             </article>
 
             <ul>
