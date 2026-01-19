@@ -2813,11 +2813,14 @@ aside input.bouton:hover {
 .main_promo .en_ligne {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .main_promo .en_colonne {
   display: flex;
   flex-direction: column;
+}
+.main_promo h3 + div div input[type=text] {
+  width: 50%;
 }
 .main_promo p + div div input {
   width: 50%;
