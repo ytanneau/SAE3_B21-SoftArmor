@@ -86,15 +86,15 @@
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
                 <div class="en_ligne">
-                    <div class="en_colonne">
+                    <div>
                         <label for="dateDebut">Date de début : </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
-                    <div class="en_colonne">
+                    <div>
                         <label for="dateFin">Date de fin : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
-                    <div class="en_colonne">
+                    <div>
                         <label for="cout">Coût final : </label>
                         <input type="text" id="cout" readonly>
                     </div>
@@ -109,16 +109,16 @@
                 <h3>Réduction</h3>
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
                 <div class="en_ligne">
-                    <div class="en_colonne">
+                    <div class="div_reduc">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
                         <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
                     </div>
-                    <div class="en_colonne">
+                    <div class="div_reduc">
                         <label for="euro">Remise appliquée : </label>
                         <input type="text" id="euro" name="euro" readonly>
                     </div>
-                    <div class="en_colonne">
+                    <div class="div_reduc">
                         <label for="prixFinal">Prix final : </label>
                         <input type="text" id="prixFinal" readonly>
                     </div>
