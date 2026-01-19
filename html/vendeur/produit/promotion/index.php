@@ -91,7 +91,7 @@
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin (incluse) : </label>
+                        <label for="dateFin">Date de fin : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
 
                 <h3>Réduction</h3>
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-                <div class="div_reduc">
+                <div class="en_ligne">
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
