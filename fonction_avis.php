@@ -208,19 +208,20 @@
         }
     }
 
-    function signaler_avis($id_compte, $id_avis, $raison) {
+    function signaler_avis($id_compte, $id_avis, $raison, $email) {
         global $pdo;
 
         try {
             // Enregistrer l'avis dans la BDD
             $requete = $pdo->prepare(
-                "INSERT INTO _signalement (id_compte, id_avis, raison)
-                VALUES (:id_compte, :id_avis, :raison)"
+                "INSERT INTO _signalement (id_compte, id_avis, raison, email)
+                VALUES (:id_compte, :id_avis, :raison, :email)"
             );
 
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
             $requete->bindValue(':raison', $raison, PDO::PARAM_STR);
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
             $requete->execute();
 
             // Marquer l'avis comme signalé

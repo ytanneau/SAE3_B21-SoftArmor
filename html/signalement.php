@@ -37,7 +37,7 @@
         }
 
         // Marquer l'avis comme signalé
-        signaler_avis($id_compte, $id_avis, $raison);
+        signaler_avis($id_compte, $id_avis, $raison, $email);
 
         echo json_encode([
             'success' => true,
