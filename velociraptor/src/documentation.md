@@ -4,10 +4,10 @@
 
 ## Prérequie
 
-### La librairie mariadb
+- ### La librairie mariadb
 ```text sudo apt install libmariadb3 libmariadb-dev ```
 
-### Un fichier .env avec les donnée pour la bdd
+- ### Un fichier .env avec les donnée pour la bdd
 
 Exemple :
 ```text
@@ -18,7 +18,7 @@ BDD_NAME=nom
 BDD_PORT=3306
 ```
 
-### Un fichier avec les login et mode passe
+- ### Un fichier avec les login et mode passe
 
 
 Exemple (mdp en MD5)
