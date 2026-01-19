@@ -20,7 +20,7 @@ markdown_content = """# Raptor Protocol — Spécification technique
 **Topologie**: Client‑Server
 
 **Acteurs**:
-- **Client** : envoie les instructions et les données du colis.
+- **Client** : envoie les instructions.
 - **Serveur** : valide, traite et répond aux instructions.
 
 **Diagramme**:  
@@ -34,7 +34,7 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 
 ### Handshake
 
-- Le client initie la connexion sur le transport choisi (TCP recommandé).
+- Le client initie la connexion sur le socket du serveur
 - Objectif : établir le canal et vérifier la disponibilité du serveur.
 
 ### Authentification
@@ -78,9 +78,27 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
   - 3 : colis existe pas
   - 4 : photo existe pas
 
+- **Etape du colis**
+  - 1 : Création d’un bordereau de livraison
+  - 2 : Prise en charge du colis chez le vendeur
+  - 3 : arrivée chez le transporteur.
+  - 4 : départ vers la plateforme régionale.
+  - 5 : arrivée sur la plateforme régionale.
+  - 6 : départ vers le centre local.
+  - 7 : arrivée au centre local.
+  - 8 : départ pour la livraison finale.
+  - 9 : Livré ou refusé
 
+- **Mode de remise**
+  - 0 : Main propre
+  - 1 : Absent (photo disponible)
+  - 2 : refusé (donc cause)
 
-
+- **Cause**
+  - 0 : Colis endomagé
+  - 1 : ne correspond pas à la commande 
+  - 2 : en retard
+  - 3 : plus besoin du colis
 ---
 
 ## Format des messages et framing
@@ -105,11 +123,15 @@ CONNECT=1
 CONNECT=0
 ```
 
+#### Nouveau colis
 
+```text
+# Client demande la prise en charge un nouveau colis
+2
 
+# Serveur accepte ne nouveau colis
+COLIS=7A74KHYV33SM
 
-# Client envoi info colis
-PKG id:PKG0001 loc:FR-35000 wt:2.5kg.
-
-# Serveur accusé réception
-PKG_ACK id:PKG0001 status:received=
+# Server refuse le nouveau colis
+ERROR=2
+```
