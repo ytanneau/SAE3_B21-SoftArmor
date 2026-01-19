@@ -2810,23 +2810,16 @@ aside input.bouton:hover {
 .main_promo .entete h1 {
   margin-right: 30px;
 }
-.main_promo .form_promo .en_ligne {
+.main_promo .en_ligne {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.main_promo .form_promo .en_ligne .div_promo {
+.main_promo .en_colonne {
   display: flex;
   flex-direction: column;
 }
-.main_promo .form_promo .en_ligne .div_reduc {
-  display: flex;
-  flex-direction: column;
-}
-.main_promo .form_promo .en_ligne .div_reduc input {
-  width: 50%;
-}
-.main_promo .form_promo #valider {
+.main_promo #valider {
   display: block;
   max-width: 100%;
   width: auto;
@@ -2844,10 +2837,10 @@ aside input.bouton:hover {
   margin-top: 20px;
   width: 100%;
 }
-.main_promo .form_promo #valider a {
+.main_promo #valider a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo .form_promo #valider:hover {
+.main_promo #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */
