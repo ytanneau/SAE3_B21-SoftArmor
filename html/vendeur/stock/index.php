@@ -41,10 +41,13 @@ function ecrire_nom($rows){
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
                 </td>
-                <!-- <td><img src="eyeclose.png" alt=""> </td>
-                <td><img src="promotion.png" alt=""> </td>
-                <td><img src="Fleche.png" alt=""> </td> -->
                 <td>
+                    <?php if ($row['en_reduction']) {?>
+                        <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/reduction.svg" title="Ce produit est en réduction" alt=""></button></a>
+                    <?php } if ($row['en_promotion']) { ?>
+                        <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/promo.svg" title="Ce produit est en promotion" alt=""></button></a>
+                    <?php } ?>
+                    
 
                     <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button></a>
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
