@@ -2622,18 +2622,6 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: row;
 }
-.main_promo .date {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 10px 0 10px;
-}
-.main_promo .div_reduc {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-}
 .main_promo .en_colonne {
   display: flex;
   flex-direction: column;
