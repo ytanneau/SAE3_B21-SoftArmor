@@ -39,7 +39,7 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 
 ### Authentification
 
-- **Mécanisme** : `id + MD5`
+- **Mécanisme** : `1.id.MD5`
 - Le client envoie son **id** et un **hash MD5** calculé selon la méthode convenue.
 - Le serveur vérifie l’id et le MD5 ; en cas d’échec la connexion est **fermée immédiatement**.
 - **Recommandation** : utiliser un **nonce** côté serveur pour éviter les replays ; calculer MD5 sur `nonce + secret_partagé` ou `secret_partagé + nonce`.
@@ -55,8 +55,31 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 
 ### Terminaison
 
-- Une instruction `TERM` peut être envoyée par l’une ou l’autre partie.
-- La partie destinataire confirme la terminaison puis la connexion est fermée.
+- Une instruction `-1` peut être envoyée par le client.
+- Le server ferme la connexion est fermée.
+
+---
+
+## Glosaire
+
+- **Instruction**
+  - -1 : Fin de connection
+  - 1 : Authentification
+  - 2 : Nouveau colis
+  - 3 : Info colis
+  - 4 : Get image
+
+- **Erreur**
+  - -2 : Interne
+  - -1 : Time out
+  - 0 : instruction inconu
+  - 1 : acces (pas identifier)
+  - 2 : pas de nouveau colis
+  - 3 : colis existe pas
+  - 4 : photo existe pas
+
+
+
 
 ---
 
@@ -66,14 +89,24 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 - **Framing** : chaque instruction est transmise comme une séquence d’octets se terminant par le délimiteur. Le transport doit préserver l’ordre et l’intégrité jusqu’au délimiteur.
 - **Taille maximale** : 100 caractères par instruction
 
+
 ### Exemples
+
+#### Authentification
 
 ```text
 # Client vers Serveur
-AUTH id:client123 md5:5d41402abc4b2a76b9719d911017c592.
+1.alizon.5d41402abc4b2a76b9719d911017c592.
 
-# Serveur vers Client
-AUTH_OK id:client123 status:accepted=
+# Serveur vers Client si accepter
+CONNECT=1
+
+# Serveur vers Client si refuser 
+CONNECT=0
+```
+
+
+
 
 # Client envoi info colis
 PKG id:PKG0001 loc:FR-35000 wt:2.5kg.
