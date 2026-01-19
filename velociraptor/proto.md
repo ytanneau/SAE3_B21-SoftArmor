@@ -1,8 +1,6 @@
-# Génération du fichier Markdown complet pour la spécification technique du protocole Raptor v1.0
-import os
+# La spécification technique du protocole Raptor v1.0
 
-markdown_content = """# Raptor Protocol — Spécification technique
-
+**Equipe B2.1**
 **Version**: 1.0  
 **Langue**: Français  
 **Public cible**: Développeurs backend
@@ -42,7 +40,6 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 - **Mécanisme** : `1.id.MD5`
 - Le client envoie son **id** et un **hash MD5** calculé selon la méthode convenue.
 - Le serveur vérifie l’id et le MD5 ; en cas d’échec la connexion est **fermée immédiatement**.
-- **Recommandation** : utiliser un **nonce** côté serveur pour éviter les replays ; calculer MD5 sur `nonce + secret_partagé` ou `secret_partagé + nonce`.
 
 ### Échange de données
 
@@ -134,4 +131,34 @@ COLIS=7A74KHYV33SM
 
 # Server refuse le nouveau colis
 ERROR=2
+```
+
+#### Info colis
+
+```text
+# Client demande la prise en charge un nouveau colis
+3.7A74KHYV33SM
+
+# Serveur si le colis existe
+ETAPE=1
+REMISE=N/A
+RAISON=N/A
+DATE=854894
+
+# Server existe pas colis
+ERROR=3
+```
+
+#### Photo colis
+
+```text
+# Client demande la prise en charge un nouveau colis
+2
+
+# Serveur envois la photo (# pour signifer la fin de l'image)
+PHOTO=01010110110101010100...
+...1011110# 
+
+# Server photo existe pas
+ERROR=4
 ```
