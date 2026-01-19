@@ -4,6 +4,7 @@
     define('HOME_SITE', '.');
 
     // Redirige les utilisateurs non connectés
+    /*
     if (!isset($_SESSION)) {
         session_start();
 
@@ -14,6 +15,7 @@
 
         $id_compte = $_SESSION['id_compte'];
     }
+    */
 
     require_once (HOME_GIT . '.config.php');
     require_once (HOME_GIT . 'fonction_avis.php');
@@ -21,7 +23,7 @@
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
     $id_compte = $_SESSION['id_compte'] ?? '';
-    $email = $_SESSION['email'] ?? '';
+    $email = $_POST['email'] ?? '';
     $raison  = $_POST['raison'] ?? '';
 
     // Si il manque des informations, erreur
