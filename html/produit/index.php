@@ -399,7 +399,7 @@ if (isset($_POST['quantite'])) {
                 body: data
             });
 
-            console.log(res);
+            console.log(res.body);
 
             const json = await res.json();
 
