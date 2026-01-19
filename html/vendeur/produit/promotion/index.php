@@ -85,7 +85,7 @@
             <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
-                <div class="date">
+                <div class="en_ligne">
                     <div class="en_colonne">
                         <label for="dateDebut">Date de début : </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
@@ -108,7 +108,7 @@
 
                 <h3>Réduction</h3>
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-                <div class="div_reduc">
+                <div class="en_ligne">
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
