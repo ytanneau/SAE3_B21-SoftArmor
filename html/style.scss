@@ -1513,9 +1513,16 @@ aside {
         display: flex;
         flex-direction: row;
     }
+    .date{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 10px 0 10px;
+    }
     .div_reduc{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         gap: 10px;
     }
     .en_colonne{
