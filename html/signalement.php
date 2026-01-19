@@ -14,7 +14,6 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
-    $id_compte = $_SESSION['id_compte'] ?? '';
     $email = $_POST['email'] ?? '';
     $raison  = $_POST['raison'] ?? '';
 
