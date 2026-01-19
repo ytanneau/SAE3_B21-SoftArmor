@@ -114,7 +114,7 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
 
     <!-- Produits en réduction -->
     <h1>Produits en promotion</h1>
-    <?php afficher_produits($produit_promotion, "promotion")?>
+    <?php afficher_produits($produit_promotion, "reduction")?>
     
     <hr>
     
