@@ -379,8 +379,9 @@ if (isset($_POST['quantite'])) {
             }
 
             // Si l'utilisateur n'est pas connecté, on vérifie l'adresse e-mail donnée
+            echo emailValide(data.get("email"));
             if (estVisiteur && !emailValide(data.get("email"))) {
-                pErrorEmail.textContent = (data.get("email") == null || data.get("email").trim() == "") ? 
+                pErrorEmail.textContent = (data.get("email").trim() == "") ? 
                     "Veuillez renseigner ce champ" : 
                     "Le format est invalide";
                 pErrorEmail.style.visibility = "visible";
