@@ -5,7 +5,7 @@
 ## Prérequie
 
 ### La librairie mariadb
-```text
+```
 sudo apt install libmariadb3 libmariadb-dev 
 ```
 
@@ -32,7 +32,7 @@ alizon=098f6bcd4621du73cade4e832627b4f6
 
 ---
 
-## Compilation, Execution et verification du démarage
+## Compilation, Execution et Verification du démarage
 
 
 ### Compilation
@@ -50,9 +50,28 @@ Avec les paramètre par defaut :
 
 Avec les paramètre personaliser :
 ```
-./prog -a login.txt -n 50 -p 9000
+./prog -a compte.txt -n 50 -p 9500
 ```
 
 - a : fichier des compte, defaut = login.txt
 - n : capaciter du nombre de colis, defaut = -1 donc infini
 - p : port du socket, defaut = 9000
+
+
+### Verification du démarage
+
+Pour ouvire les log de l'inisalisation :
+```
+less init.log
+```
+
+Si la dernière ligne est ``` [RAPTOR] READY ``` alors votre serveur est près, sinon voici un exemple de liste des élément attendue dans le init.log.
+```
+[PARAMETRE] ... // si il y a des paramètre
+[RAPTOR] START // tout les paramère son bien passsé
+[RAPTOR] SUCCESS INIT COMPTE // le fichier et un au moins un compte a été touver 
+[RAPTOR] SUCCESS COLIS SET INFINIT // le nombre de colis est correcte
+[RAPTOR] SUCCESS PORT SET 9000 // le numero du port a pu etre définie
+[RAPTOR] SUCCESS INIT SOCKET // le socket est en place
+[RAPTOR] READY // le serveur est prêt
+```
