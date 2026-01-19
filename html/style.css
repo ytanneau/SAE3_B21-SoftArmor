@@ -2819,7 +2819,7 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: column;
 }
-.main_promo .en_ligne div .div_reduc {
+.main_promo .en_ligne div .div_reduc input {
   width: 50%;
 }
 .main_promo #valider {

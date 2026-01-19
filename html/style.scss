@@ -1712,7 +1712,9 @@ aside {
             display: flex;
             flex-direction: column;
             .div_reduc{
-                width: 50%;
+                input{
+                    width: 50%;
+                }
             }
         }
     }
