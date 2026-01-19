@@ -32,7 +32,7 @@
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         $param = "";
         if (isset($_GET['produit'])) {
-            if ($_GET['produit']) {
+            if ($_GET['produit'] == 'panier') {
                 $page = '../../panier';
             } else {
                 $page = '../../produit?produit=' . $_GET['produit'];

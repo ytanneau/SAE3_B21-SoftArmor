@@ -149,8 +149,9 @@ if ($numEtape == 3) {
     // Si c'est un produit unique (pas un panier)
     if ($_POST['id_produit'] != 'panier') {
         $produit = detail_produit($_POST['id_produit']);
+        $quantite_achetee = $_POST['quantite'] ?? 1;
 
-        if ($produit["quantite"] <= 0) {
+        if ($produit["quantite"] < $quantite_achetee) {
             $produits_plus_en_stock = [$produit];
             $achat_reussi = false;
         }
@@ -199,12 +200,12 @@ if ($numEtape == 3) {
             $liste_produits[] = [
                 "id_produit" => $_POST["id_produit"],
                 "prix" => $produit["prix"],
-                "quantite" => 1,
+                "quantite" => $quantite_achetee,
                 "nom_produit" => $produit["nom_produit"],
                 "nom_vendeur" => $produit["nom_vendeur"]
             ];
 
-            update_stock($_POST['id_produit'], "-1");
+            update_stock($_POST['id_produit'], "-$quantite_achetee");
             ajout_commande($id_commande, $liste_produits);
 
         // Sinon si c'est un panier
@@ -295,8 +296,9 @@ if ($numEtape == 1) {
             <input type="checkbox" id="enregistrer" name="enregistrer" ></label>
             <?php } ?>
 
-
-            <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['produit'])) {echo htmlentities($_GET['produit']);} else {echo "panier";}?>">
+            
+            <input type="hidden" name="id_produit" id="id_produit" required value="<?= isset($_GET['produit']) ? htmlentities($_GET['produit']) : "panier"?>">
+            <input type="hidden" name="quantite" id="quantite" required value="<?= isset($_GET['nb']) ? htmlentities($_GET['nb']) : "1"?>">
             <input type="hidden" name="form" id="form" required value="adresse">
             
             <input type="submit" value="Continuer l'achat" class="bouton">
@@ -358,6 +360,7 @@ else if ($numEtape == 2) {
             <p class="contrainte">Nombre à 3 chiffres</p>
 
             <input type="hidden" type="number" name="id_produit" id="id_produit" required value="<?=$_POST['id_produit']?>">
+            <input type="hidden" type="number" name="quantite" id="quantite" required value="<?=$_POST['quantite']?>">
             <input type="hidden" name="form" id="form" required value="bancaire">
             
             <input type="submit" value="Effectuer l'achat" class="bouton">

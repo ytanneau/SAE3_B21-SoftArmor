@@ -67,15 +67,28 @@ if (isset($_POST['quantite'])) {
     $qte = $_POST['quantite'];
     $id_prod = $_GET['produit'];
 
-    if (isset($_SESSION['id_compte'])) {
-        ajouter_panier($id_prod,$id_cli,$qte);
+    // Si le client a fait "Ajouter au panier"
+    if (isset($_POST['panier'])) {
 
-    } else {
-        ajouter_panier_visiteur($id_prod, $qte);
+        if (isset($_SESSION['id_compte'])) {
+            ajouter_panier($id_prod,$id_cli,$qte);
 
+        } else {
+            ajouter_panier_visiteur($id_prod, $qte);
+
+            }
+        header('Location:' . HOME_SITE . 'panier');
+
+    // Sinon, s'il a fait "acheter le produit"
+    } elseif (isset($_POST['achat'])) {
+        if (isset($_SESSION['id_compte'])) {
+            header("Location: ../achat/?produit=$id_prod&nb=$qte");
+
+        } else {
+            header("Location:../compte/connexion?produit=$id_prod");
+        }
     }
 
-    header('Location:' . HOME_SITE . 'panier');
 }
 
 ?>
@@ -313,9 +326,9 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input class="bouton" type="submit" value="Ajouter au panier">
+                    <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
 
-                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter cet article</a>
+                    <input class="bouton" type="submit" name="achat" value="Acheter cet article">
                 </form>
             </aside>
         </div>

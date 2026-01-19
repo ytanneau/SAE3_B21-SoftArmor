@@ -169,7 +169,7 @@ if (isset($_SESSION['logged_in'])) {
                     </div>
                 <?php } ?>
                 
-                <form action="<?= isset($_POST['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
+                <form action="<?= isset($_SESSION['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
                     <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
