@@ -1707,11 +1707,18 @@ aside {
     .en_ligne{
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
     }
     .en_colonne{
         display: flex;
         flex-direction: column;
+    }
+    h3 + div{
+        div{
+            input[type="text"]{
+                width: 50%;
+            }
+        }
     }
     p + div{
         div{
