@@ -1704,27 +1704,19 @@ aside {
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-    .form_promo{
-        .en_ligne{
+    .en_ligne{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+    }
+    .en_colonne{
             display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            .div_promo{
-                display: flex;
-                flex-direction: column;    
-            }
-            .div_reduc{
-                display: flex;
-                flex-direction: column;
-                input{
-                    width: 50%;
-                }
-            }
+            flex-direction: column;    
         }
-        #valider{
-            @include bouton_new($color: $couleur_background);
-            margin-top: 20px;
-            width: 100%;
-        }
+    #valider{
+        @include bouton_new($color: $couleur_background);
+        margin-top: 20px;
+        width: 100%;
     }
 }
