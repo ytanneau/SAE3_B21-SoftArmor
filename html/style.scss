@@ -1710,10 +1710,14 @@ aside {
         justify-content: space-around;
         
     }
-    .en_colonne{
-            display: flex;
-            flex-direction: column;    
-        }
+    .div_promo{
+        display: flex;
+        flex-direction: column;    
+    }
+    .div_reduc{
+        display: flex;
+        flex-direction: column;
+    }
     #valider{
         @include bouton_new($color: $couleur_background);
         margin-top: 20px;
