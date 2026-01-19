@@ -1713,12 +1713,8 @@ aside {
         display: flex;
         flex-direction: column;
     }
-    h3 + div{
-        div{
-            input[type="text"]{
-                width: 50%;
-            }
-        }
+    .cout_final{
+        width: 50%;
     }
     p + div{
         div{
