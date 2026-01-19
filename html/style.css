@@ -2621,10 +2621,14 @@ aside input.bouton:hover {
 .main_promo .en_ligne {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 .main_promo .en_colonne {
   display: flex;
   flex-direction: column;
+}
+.main_promo .en_colonne input {
+  width: 50%;
 }
 .main_promo #valider {
   display: block;

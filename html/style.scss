@@ -1512,10 +1512,14 @@ aside {
     .en_ligne{
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
     }
     .en_colonne{
         display: flex;
         flex-direction: column;
+        input{
+            width: 50%;
+        }
     }
     #valider{
         @include bouton_new($color: $couleur_background);
