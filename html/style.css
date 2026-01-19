@@ -1588,6 +1588,7 @@ h3 {
 }
 .liste main .entete {
   display: flex;
+  align-items: center;
 }
 .liste main .entete > * {
   margin-right: 3em;

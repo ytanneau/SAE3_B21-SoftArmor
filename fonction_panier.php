@@ -198,3 +198,18 @@ function transferer_panier_visiteur_compte($id_compte) {
 
     setcookie('panier', '', path:'/');
 }
+
+
+// fonction permettant de vider le panier client (après achat par exemple)
+function vider_panier($id_compte) {
+    global $pdo;
+
+    $req = $pdo->prepare("DELETE FROM _elt_panier WHERE id_client = :id_client");
+    $req->bindValue(":id_client", $id_compte, PDO::PARAM_INT);
+    $req->execute();
+}
+
+// fonction permettanat de vider le panier visiteur (bouton vider)
+function vider_panier_visiteur() {
+    setcookie('panier', '', path:'/');
+}

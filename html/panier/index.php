@@ -1,4 +1,5 @@
 <?php
+
 // Constantes
 define('HOME_GIT', "../../");
 define('HOME_SITE', '../');
@@ -22,7 +23,7 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
-if ($_POST != NULL) {
+if (isset($_POST['id_produit'])) {
     $id_prod = $_POST['id_produit'];
 
     if (isset($_SESSION['id_compte'])) {
@@ -30,6 +31,16 @@ if ($_POST != NULL) {
 
     } else {
         retirer_panier_visiteur($id_prod);
+    }
+}
+
+// supprime le panier entier
+if (isset($_POST['sup_panier'])) {
+    if (isset($_SESSION['id_compte'])) {
+        vider_panier($_SESSION['id_compte']);
+    } else {
+        vider_panier_visiteur();
+        $_COOKIE['panier'] = serialize([]);
     }
 }
 
@@ -93,6 +104,10 @@ if (isset($_SESSION['logged_in'])) {
         <div class="gauche">
             <article class="entete">
                 <h1>Mon panier</h1>
+                <form action="" method="post">
+                    <input type="hidden" name="sup_panier" value="1">
+                    <input class="bouton grave" type="submit" value="Vider le panier">
+                </form>
             </article>
 
             <ul>
@@ -143,7 +158,7 @@ if (isset($_SESSION['logged_in'])) {
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                                        <button onclick="actualiser()" type="submit" class="bouton grave">Supprimer</button>
+                                        <input type="submit" class="bouton grave" value="Supprimer">
                                     </form>
                                 </article>
                             </div>
@@ -169,7 +184,7 @@ if (isset($_SESSION['logged_in'])) {
                     </div>
                 <?php } ?>
                 
-                <form action="<?= isset($_POST['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
+                <form action="<?= isset($_SESSION['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
                     <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
@@ -184,6 +199,26 @@ if (isset($_SESSION['logged_in'])) {
     <script>
         function actualiser() {
             window.location.reload();
+        }
+
+        elements = document.getElementsByClassName("grave");
+
+        for (let i = 0; i < elements.length; i++) {
+            const bouton_suppr = elements[i];
+            
+            
+            bouton_suppr.addEventListener("click", (event) => {
+                // Empêche l'envoi immédiat
+                event.preventDefault();
+                
+                // Fenêtre de confirmation
+                const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce produit du panier ?");
+                
+                if (confirmation) {
+                    // L'utilisateur confirme, on envoie le formulaire
+                    bouton_suppr.parentElement.submit();
+                }
+            })
         }
     </script>
 </html>

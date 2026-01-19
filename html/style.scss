@@ -888,6 +888,8 @@ h3 {
         // l'entête, le truc au dessus de la liste
         .entete {
             display: flex;
+            align-items: center;
+            
             // tous les enfants de l'entête
             >* {
                 margin-right: 3em;
