@@ -5,13 +5,17 @@
 ## Prérequie
 
 ### La librairie mariadb
-``` sudo apt install libmariadb3 libmariadb-dev ```
+```text sudo apt install libmariadb3 libmariadb-dev ```
 
 ### Un fichier .env avec les donnée pour la bdd
 
 Exemple :
 ```text
-
+BDD_HOST=10.253.5.107
+BDD_USER=user
+BDD_PASSWORD=mdp
+BDD_NAME=nom
+BDD_PORT=3306
 ```
 
 ### Un fichier avec les login et mode passe
