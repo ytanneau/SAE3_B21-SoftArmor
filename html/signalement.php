@@ -6,7 +6,7 @@
     // Démarrer la session
     if (!isset($_SESSION)) {
         session_start();
-        $id_compte = $_SESSION['id_compte'];
+        $id_compte = $_SESSION['id_compte'] ?? '';
     }
 
     require_once (HOME_GIT . '.config.php');
