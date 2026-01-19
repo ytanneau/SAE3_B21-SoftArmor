@@ -19,6 +19,7 @@ require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_GIT . "fonction_commande.php";
 require_once HOME_GIT . "fonction_compte.php";
+require_once HOME_GIT . "fonction_panier.php";
 
 $numEtape = -1;
 
@@ -215,6 +216,7 @@ if ($numEtape == 3) {
             }
 
             ajout_commande($id_commande, $liste_produits);
+            vider_panier($_SESSION['id_compte']);
         }
         header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
     }
