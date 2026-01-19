@@ -435,12 +435,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             .range_container {
                 display: flex;
                 flex-direction: column;
-                width: 80%;
-                margin: 35% auto;
+                width: 10%;
+                margin-right: 80%;
+                margin-top: 20%;
             }
 
                 .sliders_control {
-                    position: aboslute;
+                    position: relative;
                     min-height: 50px;
                 }
 
@@ -448,15 +449,16 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     position: relative;
                     display: flex;
                     justify-content: space-between;
-                    font-size: 24px;
+                    font-size: 16px;
+                    font-family: "Inter";
                     color: #635a5a;
                 }
 
                 input[type=range]::-webkit-slider-thumb {
                     -webkit-appearance: none;
                     pointer-events: all;
-                    width: 24px;
-                    height: 24px;
+                    width: 16px;
+                    height: 16px;
                     background-color: #fff;
                     border-radius: 50%;
                     box-shadow: 0 0 0 1px #C6C6C6;
@@ -466,8 +468,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 input[type=range]::-moz-range-thumb {
                     -webkit-appearance: none;
                     pointer-events: all;
-                    width: 24px;
-                    height: 24px;
+                    width: 16px;
+                    height: 16px;
                     background-color: #fff;
                     border-radius: 50%;
                     box-shadow: 0 0 0 1px #C6C6C6;
