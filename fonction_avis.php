@@ -227,6 +227,7 @@
             // Marquer l'avis comme signalé
 
         } catch (PDOException $e) {
+            echo $e->getMessage();
             throw $e;
         }
     }
