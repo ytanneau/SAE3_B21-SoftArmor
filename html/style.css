@@ -2815,15 +2815,15 @@ aside input.bouton:hover {
   flex-direction: row;
   justify-content: space-around;
 }
-.main_promo .div_promo {
+.main_promo .en_ligne .div_promo {
   display: flex;
   flex-direction: column;
 }
-.main_promo .div_reduc {
+.main_promo .en_ligne .div_reduc {
   display: flex;
   flex-direction: column;
 }
-.main_promo .div_reduc input {
+.main_promo .en_ligne .div_reduc input {
   width: 50%;
 }
 .main_promo #valider {

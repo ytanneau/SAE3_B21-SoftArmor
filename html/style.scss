@@ -1708,16 +1708,16 @@ aside {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-    }
-    .div_promo{
-        display: flex;
-        flex-direction: column;    
-    }
-    .div_reduc{
-        display: flex;
-        flex-direction: column;
-        input{
-            width: 50%;
+        .div_promo{
+            display: flex;
+            flex-direction: column;    
+        }
+        .div_reduc{
+            display: flex;
+            flex-direction: column;
+            input{
+                width: 50%;
+            }
         }
     }
     #valider{
