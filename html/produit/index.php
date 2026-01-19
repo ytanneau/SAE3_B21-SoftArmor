@@ -331,7 +331,7 @@ if (isset($_POST['quantite'])) {
 
         const inputId = document.getElementById("id_avis");
         const inputEmail = document.getElementById("input_email");
-        const estVisiteur = (inputEmail == null);
+        const estVisiteur = (inputEmail != null);
 
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
