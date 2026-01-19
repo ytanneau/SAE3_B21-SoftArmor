@@ -1,6 +1,6 @@
 # La spécification technique du protocole Raptor v1.0
 
-**Equipe B2.1**
+**Equipe B2.1** : SoftArmor
 **Version**: 1.0  
 **Langue**: Français  
 **Public cible**: Développeurs backend
@@ -9,7 +9,7 @@
 
 ## Résumé technique
 
-**Raptor** est un protocole **client‑serveur** conçu pour **transmettre les informations d’un colis**. Il utilise un **format de message personnalisé** avec une **taille maximale de 100 caractères par instruction**, des **délimiteurs distincts** selon le sens du flux et une **authentification simple id + MD5**. Aucun chiffrement n’est défini dans la version 1.0. Ce document contient le résumé technique, la spécification complète et des annexes d’exemples.
+**Raptor** est un protocole **client‑serveur** conçu pour **transmettre les informations d’un colis**. Il utilise un **format de message personnalisé** avec une **taille maximale de 100 caractères par instruction**, des **délimiteurs distincts** selon le sens du flux. Aucun chiffrement n’est défini dans la version 1.0. Ce document contient le résumé technique, la spécification complète et des annexes d’exemples.
 
 ---
 
@@ -48,12 +48,12 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 - **Délimiteurs** :
   - `.` pour client → serveur
   - `=` pour serveur → client
-- Chaque instruction est une unité logique terminée par le délimiteur approprié.
+
 
 ### Terminaison
 
 - Une instruction `-1` peut être envoyée par le client.
-- Le server ferme la connexion est fermée.
+- Le server ferme la connexion.
 
 ---
 
@@ -96,14 +96,14 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
   - 1 : ne correspond pas à la commande 
   - 2 : en retard
   - 3 : plus besoin du colis
+
 ---
 
-## Format des messages et framing
+## Format des messages
 
 - **Encodage** : UTF‑8
-- **Framing** : chaque instruction est transmise comme une séquence d’octets se terminant par le délimiteur. Le transport doit préserver l’ordre et l’intégrité jusqu’au délimiteur.
-- **Taille maximale** : 100 caractères par instruction
-
+- **Taille instruction maximale** : 100 caractères
+- **Taille reponse maximale** : 400 caractères (la taille varie leson les instruction)
 
 ### Exemples
 
@@ -155,7 +155,7 @@ ERROR=3
 # Client demande la prise en charge un nouveau colis
 2
 
-# Serveur envois la photo (# pour signifer la fin de l'image)
+# Serveur envois la photo en binaire(# pour signifer la fin de l'image)
 PHOTO=01010110110101010100...
 ...1011110# 
 
