@@ -82,7 +82,7 @@
     function vendeur_All_produit($id_vendeur){
         global $pdo;
         
-        $requete = $pdo->prepare('select id_produit, nom_stock, quantite from produit where id_vendeur = :id_vendeur');
+        $requete = $pdo->prepare('select id_produit, nom_stock, quantite, en_promotion, (ROUND(prix_actuel, 2) <> ROUND(prix, 2)) AS en_reduction from produit where id_vendeur = :id_vendeur');
         $requete->bindValue(':id_vendeur', $id_vendeur, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
