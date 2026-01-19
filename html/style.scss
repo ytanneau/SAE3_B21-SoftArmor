@@ -1708,6 +1708,11 @@ aside {
         display: flex;
         flex-direction: row;
     }
+    .div_reduc{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
     .en_colonne{
         display: flex;
         flex-direction: column;

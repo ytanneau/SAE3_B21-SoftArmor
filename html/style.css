@@ -2814,6 +2814,11 @@ aside input.bouton:hover {
   display: flex;
   flex-direction: row;
 }
+.main_promo .div_reduc {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 .main_promo .en_colonne {
   display: flex;
   flex-direction: column;

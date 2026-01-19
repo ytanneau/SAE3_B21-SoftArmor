@@ -90,15 +90,17 @@
                         <label for="dateDebut">Date de début : </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
-                    <div>
+                    <div class="en_colonne">
                         <label for="dateFin">Date de fin (incluse) : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
                 </div>
                 <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-                <label for="cout">Coût final : </label>
-                <input type="text" id="cout" readonly>
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input type="text" id="cout" readonly>
+                </div>
                 <div id="divPhoto" style="display:block;">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
@@ -106,7 +108,7 @@
 
                 <h3>Réduction</h3>
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-                <div class="en_ligne">
+                <div class="div_reduc">
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
