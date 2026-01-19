@@ -139,7 +139,6 @@
         const divPhoto = document.getElementById("divPhoto");
 
         // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
-
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
