@@ -1,6 +1,7 @@
 # La spécification technique du protocole Raptor v1.0
 
-**Equipe B2.1** : SoftArmor
+**Equipe B2.1**: SoftArmor
+
 **Version**: 1.0  
 **Langue**: Français  
 **Public cible**: Développeurs backend
