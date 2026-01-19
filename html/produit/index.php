@@ -330,7 +330,8 @@ if (isset($_POST['quantite'])) {
         const snackbar = document.getElementById("snackbar");
 
         const inputId = document.getElementById("id_avis");
-        const estVisiteur = (inputId == null);
+        const inputEmail = document.getElementById("input_email");
+        const estVisiteur = (inputEmail == null);
 
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");

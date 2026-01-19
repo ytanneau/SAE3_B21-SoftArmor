@@ -3,19 +3,11 @@
     define('HOME_GIT', '../');
     define('HOME_SITE', '.');
 
-    // Redirige les utilisateurs non connectés
-    /*
+    // Démarrer la session
     if (!isset($_SESSION)) {
         session_start();
-
-        if (!isset($_SESSION['logged_in'])) {
-            header('location: ' . HOME_SITE);
-            exit;
-        }
-
         $id_compte = $_SESSION['id_compte'];
     }
-    */
 
     require_once (HOME_GIT . '.config.php');
     require_once (HOME_GIT . 'fonction_avis.php');
