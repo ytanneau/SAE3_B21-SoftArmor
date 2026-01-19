@@ -371,23 +371,24 @@ if (isset($_POST['quantite'])) {
             // Récupérer les données du formulaire
             const data = new FormData(formSignalement);
 
-            if (data.get("raison") == "" || data.get("raison") == null) {
-                pErrorRaison.style.visibility = "visible";
-                return;
-            } else {
-                pErrorRaison.style.visibility = "hidden";
+            let raisonInvalide = data.get("raison") == "" || data.get("raison") == null;
+            let emailInvalide = estVisiteur && !emailValide(data.get("email"));
+
+            pErrorRaison.style.visibility = raisonInvalide ? "visible" : "hidden";
+
+            if (estVisiteur) {
+                pErrorEmail.style.visibility = emailInvalide ? "visible" : "hidden";
+
+                if (emailInvalide) {
+                    pErrorEmail.textContent = (data.get("email").trim() == "") ? 
+                        "Veuillez renseigner ce champ" : 
+                        "Le format est invalide";
+                }
             }
 
-            // Si l'utilisateur n'est pas connecté, on vérifie l'adresse e-mail donnée
-            console.log(emailValide(data.get("email")));
-            if (estVisiteur && !emailValide(data.get("email"))) {
-                pErrorEmail.textContent = (data.get("email").trim() == "") ? 
-                    "Veuillez renseigner ce champ" : 
-                    "Le format est invalide";
-                pErrorEmail.style.visibility = "visible";
+            if (raisonInvalide || emailInvalide) {
+                // On ne continue pas le traitement s'il manque des informations
                 return;
-            } else if (estVisiteur) {
-                pErrorEmail.style.visibility = "hidden";
             }
 
             // Envoyer les données du formulaire en JSON à une autre page
