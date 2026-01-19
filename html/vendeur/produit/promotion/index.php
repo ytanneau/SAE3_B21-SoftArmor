@@ -86,15 +86,15 @@
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
                 <div class="en_ligne">
-                    <div class="div_promo">
+                    <div class="en_colonne">
                         <label for="dateDebut">Date de début : </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
-                    <div class="div_promo">
+                    <div class="en_colonne">
                         <label for="dateFin">Date de fin : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
-                    <div class="div_promo">
+                    <div class="en_colonne">
                         <label for="cout">Coût final : </label>
                         <input type="text" id="cout" readonly>
                     </div>
