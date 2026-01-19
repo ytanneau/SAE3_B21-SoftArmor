@@ -376,14 +376,18 @@ if (isset($_POST['quantite'])) {
 
             pErrorRaison.style.visibility = raisonInvalide ? "visible" : "hidden";
 
+            console.log("je suis pas visiteur");
             if (estVisiteur) {
-                pErrorEmail.style.visibility = emailInvalide ? "visible" : "hidden";
-
+                console.log("je suis visiteur");
+                
                 if (emailInvalide) {
+                    console.log("email invalide");
                     pErrorEmail.textContent = (data.get("email").trim() == "") ? 
                         "Veuillez renseigner ce champ" : 
                         "Le format est invalide";
                 }
+
+                pErrorEmail.style.visibility = emailInvalide ? "visible" : "hidden";
             }
 
             if (raisonInvalide || emailInvalide) {
