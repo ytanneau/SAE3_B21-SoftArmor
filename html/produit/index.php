@@ -377,10 +377,7 @@ if (isset($_POST['quantite'])) {
 
             pErrorRaison.style.visibility = raisonInvalide ? "visible" : "hidden";
 
-            console.log("je suis pas visiteur");
             if (estVisiteur) {
-                console.log("je suis visiteur");
-                
                 if (emailInvalide) {
                     console.log("email invalide");
                     pErrorEmail.textContent = (data.get("email").trim() == "") ? 
