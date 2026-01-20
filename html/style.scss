@@ -747,14 +747,14 @@ div:has(> aside) {
     .prix{
         font-size: $font_size_grand;
     }
-    p.ancien_prix {
+    .ancien_prix {
         display: inline-block;
         margin-right: 6px;
 
         width: auto;
     }
 
-    p.pourcentage {
+    .pourcentage {
         display: inline-block;
         padding: 2px 6px;
         
@@ -819,7 +819,7 @@ div:has(> aside) {
                     > a {
                         position: relative;
 
-                        > span.reduction {
+                        > .reduction {
                             position: absolute;
 
                             width: 32px;

@@ -1416,12 +1416,12 @@ div:has(> aside) {
 .accueil .prix {
   font-size: 2em;
 }
-.accueil p.ancien_prix {
+.accueil .ancien_prix {
   display: inline-block;
   margin-right: 6px;
   width: auto;
 }
-.accueil p.pourcentage {
+.accueil .pourcentage {
   display: inline-block;
   padding: 2px 6px;
   width: auto;
@@ -1521,7 +1521,7 @@ div:has(> aside) {
 .accueil > main > div > ul > li > a {
   position: relative;
 }
-.accueil > main > div > ul > li > a > span.reduction {
+.accueil > main > div > ul > li > a > .reduction {
   position: absolute;
   width: 32px;
   height: 32px;
