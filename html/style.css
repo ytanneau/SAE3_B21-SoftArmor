@@ -696,6 +696,20 @@ hr {
   margin: 5% 0;
 }
 
+.pageRecherche {
+  display: flex;
+  flex-direction: row;
+}
+
+.TriEtFiltre div div {
+  flex-direction: column;
+}
+
+.TriEtFiltre {
+  display: flex;
+  flex-direction: column;
+}
+
 section.results {
   display: flex;
   flex-direction: column;
