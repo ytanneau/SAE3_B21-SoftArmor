@@ -62,7 +62,7 @@
         $id_nouvelle_banniere = $id_image_initial;
         if(isset($_POST['supp_image_promo']) && $_POST['supp_image_promo'] == 'on'){
             $id_nouvelle_banniere = null;
-            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
             delete_image($id_image_initial);
         } else if (
             isset($_FILES['photoPromotion']) &&
@@ -87,25 +87,25 @@
                     if(move_uploaded_file($cheminTemp,$cheminFinal)){
                         $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
 
-                            if($id_nouvelle_banniere){
-                                update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
-                            }
-                            if($id_image_initial){
-                                delete_image($id_image_initial);
-                            }
+                        if($id_nouvelle_banniere){
+                            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                        }
+                        if($id_image_initial){
+                            delete_image($id_image_initial);
                         }
                     }
-                } else {
-                    if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                        $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
-
-                    if($id_nouvelle_banniere){
-                        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_nouvelle_banniere);
-                    }
-                    if($id_image_initial){
-                        delete_image_bdd($id_image_initial);
-                    }
                 }
+            } else {
+                if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+
+                if($id_nouvelle_banniere){
+                    update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                }
+                if($id_image_initial){
+                    delete_image_bdd($id_image_initial);
+                }
+            }
             }
         } else {
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
@@ -128,7 +128,7 @@
         <?php include "../../header.php" ?>
         <main class="main_promo">
             <div class="entete">
-                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <a href="../index.php?<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Modifier la promotion</h1>
             </div>
             <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
