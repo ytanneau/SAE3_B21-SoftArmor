@@ -426,8 +426,6 @@
         padding: 0;
 
         > li {
-            
-
             &:hover {
                 background-color: adjust-color($color: $background, $lightness: 5%);
             }
