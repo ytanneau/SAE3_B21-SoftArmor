@@ -102,10 +102,10 @@
 
                                 <!-- Afficher le bouton signaler seulement si je ne l'ai pas déjà signalé -->
                                 <?php 
-                                echo $avis['id_avis'];
-                                echo $id_vendeur;
+                                echo $avis['id_avis'] . "/";
+                                echo $id_vendeur . "/";
                                 echo avis_est_signale($avis['id_avis'], $id_vendeur);
-                                
+
                                 if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
                                     <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                         <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
