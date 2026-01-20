@@ -1621,6 +1621,7 @@ h3 {
 .liste main ul li > div {
   display: flex;
   flex-grow: 1;
+  align-items: center;
 }
 .liste main ul li article:first-child {
   display: flex;
@@ -1643,6 +1644,9 @@ h3 {
   margin-top: 0;
   margin-bottom: 0;
   text-align: right;
+}
+.liste main ul .bouton {
+  margin-top: 0;
 }
 .liste main .image_produit_moyen {
   margin-right: 3em;
@@ -1731,7 +1735,7 @@ h3 {
   background-color: rgb(66.9464285714, 177.5535714286, 69.8571428571);
 }
 .liste main p {
-  width: 100%;
+  width: 40%;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
@@ -2118,46 +2122,46 @@ aside .achat:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
-.mainInfoVendeur {
+.mainInfoVendeur div {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.mainInfoVendeur .entete {
+.mainInfoVendeur div .entete {
   display: flex;
   align-items: center;
 }
-.mainInfoVendeur .entete a {
+.mainInfoVendeur div .entete a {
   height: 24px;
   margin-right: 50px;
 }
-.mainInfoVendeur .entete h1 {
+.mainInfoVendeur div .entete h1 {
   margin-right: 30px;
 }
-.mainInfoVendeur #idDescDetaille, .mainInfoVendeur #idDescSimple {
+.mainInfoVendeur div #idDescDetaille, .mainInfoVendeur div #idDescSimple {
   width: 600px;
   height: 200px;
   resize: vertical;
   font-family: "Inter";
 }
-.mainInfoVendeur p {
+.mainInfoVendeur div p {
   display: flex;
   flex-direction: column;
 }
-.mainInfoVendeur select {
+.mainInfoVendeur div select {
   height: 32px;
   width: -moz-fit-content;
   width: fit-content;
 }
-.mainInfoVendeur input[type=text], .mainInfoVendeur input[type=number] {
+.mainInfoVendeur div input[type=text], .mainInfoVendeur div input[type=number] {
   height: 25px;
 }
-.mainInfoVendeur form {
+.mainInfoVendeur div form {
   display: flex;
   flex-direction: column;
   width: 600px;
 }
-.mainInfoVendeur #idValiderModifVendeur {
+.mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;
   display: block;
   max-width: 100%;
@@ -2174,14 +2178,14 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.mainInfoVendeur #idValiderModifVendeur a {
+.mainInfoVendeur div #idValiderModifVendeur a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.mainInfoVendeur #idValiderModifVendeur:hover {
+.mainInfoVendeur div #idValiderModifVendeur:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.mainInfoVendeur #idDesactivationCompte {
+.mainInfoVendeur div #idDesactivationCompte {
   display: block;
   max-width: 100%;
   width: auto;
@@ -2200,11 +2204,11 @@ aside .achat:hover {
   padding: 0.6em;
   width: 577px;
 }
-.mainInfoVendeur #idDesactivationCompte a {
+.mainInfoVendeur div #idDesactivationCompte a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.mainInfoVendeur #idDesactivationCompte:hover {
+.mainInfoVendeur div #idDesactivationCompte:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
 
@@ -2528,12 +2532,12 @@ aside .achat:hover {
 }
 
 .stock {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 .stock main {
   align-items: center;
+}
+.stock main table {
   display: flex;
   flex-direction: column;
   flex: 1;

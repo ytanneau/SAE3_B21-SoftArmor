@@ -54,7 +54,7 @@
     
     <main>
 
-    <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+    <a href="../produit?produit=<?=$_GET['produit']?>"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
 
     <?php if ($produit == NULL) { ?>
         <h1>Désolé, ce produit n'existe pas</h1>
