@@ -227,7 +227,6 @@
             // Marquer l'avis comme signalé
 
         } catch (PDOException $e) {
-            file_put_contents("test_avis.log", $e->getMessage());
             throw $e;
         }
     }
