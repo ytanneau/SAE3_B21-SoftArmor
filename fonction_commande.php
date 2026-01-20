@@ -133,28 +133,32 @@ function get_info_colis($fd,$bordereau){
    
     return $info_colis;
 }
-
 function get_image_colis($fd,$bordereau){
+    $fin = false;
     fwrite($fd,"4.$bordereau");
     $photo = '';
-    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","w");
+    $file = fopen(HOME_SITE ."ressources/colis/$bordereau.png","w");
     $buffer = fread($fd, 6);
-    if ($buffer !=="PHOTO="){
 
-        while (!) {
+    if ($buffer === "PHOTO="){
+    
+        while (!$fin) {
             $buffer = fread($fd, 4096);
+
             
+
             if ($pos = strpos($buffer,"#") !== false) {
-                $buffer = substr($buffer,0,-1);
+                $buffer = substr($buffer,0,-1); 
+                $fin = true;
             }
-                
-            fwrite($file,binaireEnOctets($buffer));
-                
-                
+            
+            fwrite($file, binaire_to_octet($buffer));
+            
         }
                 
     }
     else{
+        
         fclose($file);
         return false;
     }
@@ -163,26 +167,14 @@ function get_image_colis($fd,$bordereau){
     return true;
 
 }
-function binaireEnOctets($binString) {
-    $ret = '';
+
+function binaire_to_octet($binString) {
+    $result = '';
     $length = strlen($binString);
     for ($i = 0; $i < $length; $i += 8) {
         $byte = substr($binString, $i, 8);
         if (strlen($byte) < 8) break; // ignore le reste incomplet
-        $ret .= chr(bindec($byte));
+        $result .= chr(bindec($byte));
     }
-    return $ret;
-}
-
-function connexion_socket($ip,$port){
-    $fd =@fsockopen($ip,$port, $errno, $errstr);
-    if ($fd === false) {
-        echo "Connexion Delivraptor échouée ";
-    }
-    return $fd;
-}
-
-function deconnexion_socket($fd){
-    fwrite($fd,"-1");
-    fclose($fd);
+    return $result;
 }
