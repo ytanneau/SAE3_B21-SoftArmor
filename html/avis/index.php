@@ -12,19 +12,17 @@
     define('TAILLE_DESCRIPTION', '1000');
     define('TAILLE_IMAGE', '5000000');
 
-    //ob_start();
 
     // verifie qu'il est connecter et est un compte client
     if (!isset($_SESSION)) {
         session_start();
 
         if(isset($_SESSION['raison_sociale'])){
-            //ob_end_flush();
             header('location: '. HOME_SITE .'/vendeur/stock/');
         }
         else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
-            //ob_end_flush();
-            header('location: '. HOME_SITE . 'compte/connexion');
+            // rajoute l'id du produit dans le lien avant d'envoyer à la page de connexion (pour revenir sur le produit après connexion)
+            header('location: '. HOME_SITE . 'compte/connexion' . (isset($_GET['produit']) ? '?produit=' . $_GET['produit'] : ''));
         }
     }
 
