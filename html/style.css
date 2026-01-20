@@ -3038,11 +3038,12 @@ aside input.bouton:hover {
 .main_accueil .liste_accueil_vendeur {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-gap: 20px;
-  align-items: center;
+  grid-gap: 50px;
 }
 .main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 20em;
   height: 20em;
   border-radius: 20px;
@@ -3052,7 +3053,7 @@ aside input.bouton:hover {
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   color: #666666;
-  width: 21em;
+  transform: scale(1.2);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
