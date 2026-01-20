@@ -250,8 +250,8 @@
                 warning3.style.display = "block";
                 event.preventDefault();
             }
-            if (dateDebut.value < dateCourante.getTime()){
-                warning4.style.display ="block";
+            if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                warning4.style.display = "block";
                 event.preventDefault();
             }
         });
