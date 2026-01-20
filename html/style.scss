@@ -107,6 +107,11 @@ hr {
     &#categories {
         @include toolbar($couleur_primaire_client, $color: white);
 
+        ul {
+            justify-content: center;
+            gap: 1em;
+        }
+
         .dropdown {
             @include dropdown($couleur_primaire_client, white, 1.7em, 0, 0, 100%);
 

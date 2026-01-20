@@ -124,6 +124,10 @@ hr {
 .toolbar#categories ul > li:hover {
   background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
 }
+.toolbar#categories ul {
+  justify-content: center;
+  gap: 1em;
+}
 .toolbar#categories .dropdown {
   position: relative;
   display: inline-block;
