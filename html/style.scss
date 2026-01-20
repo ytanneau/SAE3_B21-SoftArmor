@@ -212,6 +212,7 @@ ul#results {
     padding: 0;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
     list-style: none;
     
     > li {
@@ -219,6 +220,11 @@ ul#results {
     }
 }
 
+#results_for{
+    justify-content: space-around;
+    display: flex;
+    margin-right: 60%;
+}
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
