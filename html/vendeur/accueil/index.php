@@ -35,10 +35,22 @@
         <?php include "../header.php" ?>
         <main class="main_accueil">
             <article class="liste_accueil_vendeur">
-                <a class="lien1" class="lien_accueil" href="../compte/information_compte_vendeur">Mon compte</a>
-                <a class="lien2" class="lien_accueil" href="../stock">Gestion de stock</a>
-                <a class="lien3" class="lien_accueil" href="../commande">Commandes</a>
-                <a class="lien4" class="lien_accueil" href="../avis">Avis</a>
+                <div>
+                    <img src="" alt="icone de ">
+                    <a class="lien1" href="../compte/information_compte_vendeur">Mon compte</a>
+                </div>
+                <div>
+                    <img src="" alt="icone de ">
+                    <a class="lien2" href="../stock">Gestion de stock</a>
+                </div>
+                <div>
+                    <img src="" alt="icone de ">
+                    <a class="lien3" href="../commande">Commandes</a>
+                </div>
+                <div>
+                    <img src="" alt="icone de ">
+                    <a class="lien4" href="../avis">Avis</a>
+                </div>
             </article>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
