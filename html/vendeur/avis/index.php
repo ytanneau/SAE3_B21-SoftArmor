@@ -86,7 +86,7 @@
                     if (!$image_pp) {
                         $image_pp = [
                             "url" => "image/compte.svg",
-                            "title" => "Photo de profil",
+                            "titre" => "Photo de profil",
                             "alt" => "Photo de profil"
                         ];
                     }
@@ -94,7 +94,7 @@
                     <li>
                         <div>
                             <div>
-                                <img class="image_pp" src="<?= HOME_SITE . $image_pp['url'] ?>" title="<?= HOME_SITE . $image_pp['title'] ?>" alt="<?= HOME_SITE . $image_pp['alt'] ?>">
+                                <img class="image_pp" src="<?= HOME_SITE . $image_pp['url'] ?>" title="<?= HOME_SITE . $image_pp['titre'] ?>" alt="<?= HOME_SITE . $image_pp['alt'] ?>">
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                 </div>
