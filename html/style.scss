@@ -1835,10 +1835,11 @@ aside {
     .liste_accueil_vendeur{
         display: grid;
         grid-template-columns: 2fr 2fr;
-        grid-gap: 20px;
-        align-items: center;
+        grid-gap: 50px;
         .lien1, .lien2, .lien3, .lien4{
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 20em;
             height: 20em;
             border-radius: $angle_normal;
@@ -1847,7 +1848,7 @@ aside {
             background-color: $nuance_primaire_client;
             &:hover{
                 color: adjust-color($color: black, $lightness: 40%,);
-                width: 21em;
+                transform: scale(1.2);
             }
             &:visited{
                 color: black;
