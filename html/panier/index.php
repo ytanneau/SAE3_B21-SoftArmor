@@ -141,21 +141,22 @@ if (isset($_SESSION['logged_in'])) {
                                     </form> 
                                 </article>
                                 <article>
-                                    <p class="prix"><?=number_format($prix_ttc, 2, ',', ' ') . ' €' ?></p>
-                                    
                                     <form action="update_quantite.php">
-
-                                        <div>
-                                            <label for="nb">Quantité</label>
-                                            <input type="hidden" name="produit" value="<?=$elt['id_produit']?>">
-                                                <span class="input_quantite">
-                                                    <input type="button" value="-" onclick="change(-1, <?=$elt['id_produit']?>)"><input id="input_quantite<?=$elt['id_produit']?>" type="text" size="4" name="nb" value=<?=$elt['quantite_panier']?> required><input type="button" value="+" onclick="change('+1', <?=$elt['id_produit']?>)">
-                                                </span>
-                                        </div> 
+                                        <label for="nb">Quantité</label>
+                                        <br>
+                                        <input type="hidden" name="produit" value="<?=$elt['id_produit']?>">
+                                        <span class="input_quantite">
+                                            <input type="button" value="-" onclick="change(-1, <?=$elt['id_produit']?>)"><input id="input_quantite<?=$elt['id_produit']?>" type="text" size="4" name="nb" value=<?=$elt['quantite_panier']?> required><input type="button" value="+" onclick="change('+1', <?=$elt['id_produit']?>)">
+                                        </span>
                                     </form>
-
-                                    <p class="prix">Sous total : <?=number_format($prix_ttc * $elt['quantite_panier'], 2, ',', ' ')?> €</p>
-            
+                                    
+                                    <div style="margin: 1em 0;">
+                                        <span>Sous total</span>
+                                        <p class="prix">
+                                            <?=number_format($prix_ttc * $elt['quantite_panier'], 2, ',', ' ')?> €
+                                        </p>
+                                    </div>
+                                    
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
                                         <input type="submit" class="bouton grave" value="Supprimer">

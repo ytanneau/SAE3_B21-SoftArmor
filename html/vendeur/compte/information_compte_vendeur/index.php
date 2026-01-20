@@ -75,7 +75,7 @@
                     <!-- Bouton de retour sur la page d'accueil -->
                     <h1>Mes informations</h1>
                 </div>
-                <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
+                <em>Pour des raisons de securité, le numéro de SIRET ne peut être modifié</em>
 
                 <!-- formulaire de saisie des modifications des informations d'un vendeur -->
                 <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
