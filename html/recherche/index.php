@@ -80,7 +80,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         <div class="resultat">
             <div>
                 <div>
-                    <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
+                    <h1 id="results_for"><!--Résultats pour <= $recherche >--></h1>
                 </div>
                 <div>
                     <div class="labelBendeau">
