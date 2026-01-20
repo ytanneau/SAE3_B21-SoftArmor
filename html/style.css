@@ -2921,9 +2921,6 @@ aside input.bouton:hover {
 .main_promo h3 + p + div div input {
   width: 50%;
 }
-.main_promo #div_photo {
-  padding-top: 5px;
-}
 .main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
   color: red;
   font-style: italic;
@@ -2982,6 +2979,7 @@ aside input.bouton:hover {
 .main_promo .block_banniere {
   display: flex;
   flex-direction: column;
+  margin-top: 40px;
 }
 .main_promo .block_banniere img {
   -o-object-fit: contain;
@@ -2990,5 +2988,12 @@ aside input.bouton:hover {
   min-width: 250px;
   max-width: 250px;
   height: 250px;
+  border-radius: 5px;
+}
+.main_promo .hide_input {
+  background-color: #EAC452;
+  padding: 10px 16px 10px 16px;
+  width: -moz-fit-content;
+  width: fit-content;
   border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */
