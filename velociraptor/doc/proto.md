@@ -22,14 +22,11 @@
 - **Client** : envoie les instructions.
 - **Serveur** : valide, traite et répond aux instructions.
 
-**Diagramme**:  
-![Diagramme d'architecture Raptor](URL_DE_L_IMAGE)
-
 ---
 
 ## Cycle d’échange de données
 
-Les échanges suivent quatre étapes principales : **handshake**, **authentification**, **échange de données**, **terminaison**.
+Les échanges suivent quatre étapes principales : **handshake**, **authentification**, **échange de données**, **fermeture**.
 
 ### Handshake
 
@@ -51,7 +48,7 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
   - `=` pour serveur → client
 
 
-### Terminaison
+### Fermeture
 
 - Une instruction `-1` peut être envoyée par le client.
 - Le server ferme la connexion.
