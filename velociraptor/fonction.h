@@ -49,7 +49,8 @@ void envoier_photo(SESSION *data, char *fichier);
 void encode_photo(char *src, char *des);
 
 void log_line(SESSION *data, char *msg);
-void log_transforme(char *str) ;
+void log_transforme(char *str);
+void log_init(FILE *fd, char *message);
 void help();
 
 #endif

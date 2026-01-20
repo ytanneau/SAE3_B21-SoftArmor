@@ -65,6 +65,7 @@ if ($_POST != NULL){
     if (!isset($_POST['nom'])) $_POST['nom'] = "";
     if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
     if (!isset($_POST['email'])) $_POST['email'] = "";
+    if (!isset($_POST['ville'])) $_POST['ville'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
@@ -76,19 +77,40 @@ if ($_POST != NULL){
     $date='01-01-2000';
     
     //check les erreur de saisies
-    $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$date, $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['adresse'], $_POST['code_postal']);
-    
+    $erreur = check_erreur_client($_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['email'],$date, $_POST['n_mdp'], $_POST['n_mdpc'], $_POST['ville'], $_POST['adresse'], $_POST['code_postal']);
+    if (isset($erreur['mdp'])) {
+        $erreur['n_mdp'] = $erreur['mdp'];
+        $erreur['mdp'] = null;
+    }
+
+    if (isset($erreur['mdpc'])) {
+        $erreur['n_mdpc'] = $erreur['mdpc'];
+        $erreur['mdpc'] = null;
+    }
+
+
     //verifie si email n'est pas changé
     $ancien_mail= $info_compte['email'];
 
-    if($_POST['email'] == $ancien_mail[0]['email']){
-        $erreur['email']=NULL;
+    if($_POST['email'] == $ancien_mail){
+        $erreur['email'] = NULL;
     }
 
+    // Soit les 3 sont vides, soit ils sont tous pleins
+    $adresse_correcte = (
+            empty($erreur['code_postal']) &&
+            empty($erreur['adresse']) &&
+            empty($erreur['ville'])
+        ) || (
+            !empty($erreur['code_postal']) &&
+            !empty($erreur['adresse']) &&
+            !empty($erreur['ville'])
+        );
+
     //verifie que les condition de l'insertin sont remplies
-    if((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) 
+    if ((check_crypte_MDP($_POST['mdp'] ,$mdp_cryptee) 
         && !check_vide($_POST['mdp'])) 
-        && !(empty($erreur['code_postal']) xor empty($erreur['adresse'])) 
+        && $adresse_correcte
         && !(empty($erreur['mdp']) xor empty($erreur['mdpc'])) 
         && (!isset($erreur['nom'])) 
         && (!isset($erreur['prenom']))
@@ -96,7 +118,7 @@ if ($_POST != NULL){
         && (!isset($erreur['pseudo']))){
 
         //update la BDD
-        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$id_adresse);
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['ville'], $_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$adresse_compte['id_adresse']);
         
         //modifie la photo de profil
         $id=$_SESSION['id_compte'];
@@ -248,12 +270,31 @@ if ($_POST != NULL){
                         }
                     ?>
 
+                    <label for="ville">Ville</label>
+
+                    <?php
+                    //affichage des info du compte
+                        $est_entre = true;
+                    ?>
+                    
+                    <input type="text" name="ville" value="<?= htmlentities($adresse_compte['ville'] ?? '')?>" placeholder="À renseigner" class="champ">
+
+                    <!--Erreur ville-->
+                    <?php
+                        if (isset($erreur['ville']) && $erreur['ville'] != "Veuillez renseigner ce champ"){
+                    ?>
+                        <p class="error">
+                            <?="Erreur : ".$erreur['ville']?>
+                        </p>
+                    <?php
+                        }
+                    ?>
+
                     <label for="adresse">Adresse</label>
 
                     <?php
                     //affichage des info du compte
-                    $est_entre = false;
-                        $est_entre = true;
+                    $est_entre = true;
                     ?>
                     
                     <input type="text" name="adresse" value="<?= htmlentities($adresse_compte['adresse'] ?? '')?>" placeholder="À renseigner" class="champ">
@@ -319,11 +360,9 @@ if ($_POST != NULL){
                     <?php
                         }
                     }
-                    if (empty($erreur['code_postal']) xor empty($erreur['adresse'])){
+                    if (isset($adresse_correcte) && !$adresse_correcte){
                     ?>
-                        <p class="error">
-                            <?= "Les deux champs Adresse et Code Postal doivent être valides" ?>
-                        </p>
+                        <p class="error">Les trois champs Ville, Adresse et Code Postal doivent être valides</p>
                     <?php
                         }
                     ?>

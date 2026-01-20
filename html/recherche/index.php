@@ -41,6 +41,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "header.php"; ?>
 
     <main>
+        <aside>
         <section class="filters">
             <form>
                 <fieldset id = "prixF">
@@ -74,23 +75,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
             <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
-
-        <div class="range_container">
-            <div class="sliders_control">
-                <input id="fromSlider" type="range" value="10" min="0" max="100"/>
-                <input id="toSlider" type="range" value="40" min="0" max="100"/>
-            </div>
-            <div class="form_control">
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Min</div>
-                    <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
-                </div>
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Max</div>
-                    <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
-                </div>
-            </div>
-        </div>
+    </aside>
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
         <section class="results">
@@ -345,6 +330,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
+        aside {
+            margin-right: 80%;
+        }
         .filters {
             background: white;
             padding: 1.5rem;

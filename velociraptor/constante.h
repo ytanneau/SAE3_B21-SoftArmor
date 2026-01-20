@@ -98,5 +98,11 @@
 #define DEFAULT_PORT 9000
 #define DEFAULT_LOGIN "login.txt"
 
+#define BDD_HOST "BDD_HOST"
+#define BDD_USER "BDD_USER"
+#define BDD_PASSWORD "BDD_PASSWORD"
+#define BDD_NAME "BDD_NAME"
+#define BDD_PORT "BDD_PORT"
+
 
 #endif
