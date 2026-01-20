@@ -2,7 +2,7 @@
     $categories = get_categorie_parent();
 ?>
 
-<div class="toolbar">
+<div class="toolbar" id="categories">
     <?php foreach ($categories as $cat) { 
         $sous_cats = get_sous_categorie($cat['nom_categorie']);
         $chemin = HOME_SITE . 'recherche/?categorie=' . urlencode($cat['nom_categorie']);
