@@ -137,7 +137,7 @@
                 <div class="en_ligne">
                     <div class="en_colonne">
                         <label for="dateDebut">Date de début :</label>
-                        <input class="cout_final" type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
+                        <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
                     </div>
                     <div class="en_colonne">
                         <label for="dateFin">Date de fin :</label>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="en_colonne">
                         <label for="cout">Coût final : </label>
-                        <input type="text" id="cout" readonly>
+                        <input class="cout_final" type="text" id="cout" readonly>
                     </div>
                 </div>
                 <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
@@ -167,16 +167,16 @@
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="pourcentage">Pourcentage</label>
+                        <label for="pourcentage">Pourcentage :</label>
                         <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
                         <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
-                        <label for="euro">Remise appliquée</label>
+                        <label for="euro">Remise appliquée :</label>
                         <input type="text" id="euro" name="euro" readonly>
                     </div>
                     <div class="en_colonne">
-                        <label for="prixFinal">Prix final</label>
+                        <label for="prixFinal">Prix final :</label>
                         <input type="text" id="prixFinal" readonly>
                     </div>
                 </div>

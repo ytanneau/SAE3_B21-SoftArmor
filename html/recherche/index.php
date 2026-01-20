@@ -446,6 +446,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         .form_control {
             position: relative;
             display: flex;
+            justify-content: space-between;
             font-size: 16px;
             font-family: "Inter";
             color: #635a5a;
@@ -514,7 +515,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             display: flex;
             flex-direction: column;
             width: 80%;
-            margin: 35% auto;
+            margin-top: 2em;
         }
 
         .sliders_control {
