@@ -97,7 +97,6 @@ void init_bdd(MYSQL *conn, FILE *logI)
         exit(EXIT_FAILURE); 
     }
 
-    COMPTE* res = NULL;
     //ouverture du fichier des COMPTE
     FILE *file = fopen(".env", "r");
     // si le fichier na pas pu etre ouver on ferme le programe
@@ -124,11 +123,7 @@ void init_bdd(MYSQL *conn, FILE *logI)
     char *key;
     char *value;
 
-/*
-    if (bdd_port[strlen(bdd_port)-1] == '\n')
-    {
-        bdd_port[strlen(bdd_port)-1] = '\0';
-    }*/
+    log_init(logI, "BDD : ");
 
     while (!fin && (!host || !user || !password || !name || !port))
     {
@@ -176,6 +171,34 @@ void init_bdd(MYSQL *conn, FILE *logI)
             fprintf(logI, "BDD_USER %s\n", bdd_user);
         }
     }
+
+    if (!host)
+    {
+        fprintf(logI, "[FATAL] host not find\n"); 
+        exit(EXIT_FAILURE);
+    }
+    if (!user)
+    {
+        fprintf(logI, "[FATAL] user not find\n"); 
+        exit(EXIT_FAILURE);
+    }
+    if (!password)
+    {
+        fprintf(logI, "[FATAL] password not find\n"); 
+        exit(EXIT_FAILURE);
+    }
+    if (!name)
+    {
+        fprintf(logI, "[FATAL] name not find\n"); 
+        exit(EXIT_FAILURE);
+    }
+    if (!port)
+    {
+        fprintf(logI, "[FATAL] port not find\n"); 
+        exit(EXIT_FAILURE);
+    }
+    
+    
 
     if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) {
         sprintf(message, "[FATAL] CONNECT MYSQL : %s", mysql_error(conn));
