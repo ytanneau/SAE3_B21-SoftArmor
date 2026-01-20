@@ -94,7 +94,7 @@
                     <li>
                         <div>
                             <div>
-                                <img class="image_pp" src="<?= HOME_SITE . $image_pp['url'] ?>" title="<?= HOME_SITE . $image_pp['titre'] ?>" alt="<?= HOME_SITE . $image_pp['alt'] ?>">
+                                <img class="image_pp" src="<?= HOME_SITE . $image_pp['url'] ?>" title="<?= $image_pp['titre'] ?>" alt="<?= $image_pp['alt'] ?>">
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                 </div>
