@@ -704,11 +704,10 @@ section.results {
 }
 
 ul#results {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  list-style: none;
+  display: flex;
   padding: 0;
   width: 100%;
+  flex-wrap: wrap;
   list-style: none;
 }
 ul#results > li {
@@ -1613,6 +1612,9 @@ h3 {
   font-weight: bold;
 }
 
+.liste .input_quantite {
+  font-size: 1.4em;
+}
 .liste main {
   display: flex;
 }
@@ -2922,19 +2924,4 @@ aside .achat:hover {
 }
 .main_promo #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
-}
-.main_promo .hide_input {
-  background-color: #EAC452;
-  padding: 10px 16px 10px 16px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 5px;
-}
-.main_promo div > img {
-  height: 15%;
-  width: 15%;
-}
-.main_promo .zone_sup {
-  width: -moz-fit-content;
-  width: fit-content;
 }/*# sourceMappingURL=style.css.map */

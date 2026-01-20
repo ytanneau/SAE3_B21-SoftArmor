@@ -35,6 +35,7 @@
 
     if (isset($_GET['produit'])) {
         $_GET['produit'] = htmlentities(trim($_GET['produit']));
+        $_GET['produit'] = htmlentities(trim($_GET['produit']));
         $sql_produit = detail_produit_image($_GET['produit']);
 
         if ($sql_produit == null){
@@ -42,6 +43,10 @@
 
             //ob_end_flush();
             header('location: '. HOME_SITE);
+        }
+        else {
+            // Récupère les infos de l'image principale (url, alt, titre)
+            $image_produit = get_image($sql_produit['id_image_principale']);
         }
     }
 
@@ -123,28 +128,28 @@
             <div class="fini">
                 <h1>Votre avis a été modifié</h1>                
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+                <a href="<?=HOME_SITE?>/produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['fatal'])) { ?>
             <div class="fini">
                 <h1>Désolé, nous rencontrons des problèmes serveur</h1>
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+                <a href="<?=HOME_SITE?>/produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['avis'])) { ?>
             <div class="fini">
                 <h1>Aucun avis trouvé pour ce produit</h1>
                 <br>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
+                <a href="<?=HOME_SITE?>/produit?produit=<?=htmlentities($_GET['produit'])?>">Retour au produit</a>
             </div>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
             <section>
-                <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">
+                <a href="<?=HOME_SITE?>produit?produit=<?=htmlentities($_GET['produit'])?>">
                     <article>
                         <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
-                        <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'] ?? '')?>" alt="<?=htmlentities($sql_produit['image_principale_alt'] ?? '')?>" title="<?=htmlentities($sql_produit['image_principale_titre'] ?? '')?>">
+                        <img src="<?= HOME_SITE . htmlentities($image_produit['url_image']) ?>" alt="<?= htmlentities($image_produit['alt'] ?? '') ?>" title="<?= htmlentities($image_produit['titre'] ?? '') ?>">
                     </article>
                 </a>
             </section>

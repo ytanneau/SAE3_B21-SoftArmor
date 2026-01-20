@@ -169,12 +169,10 @@ section.results {
 }
 
 ul#results {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    list-style: none;
+    display: flex;
     padding: 0;
     width: 100%;
-    
+    flex-wrap: wrap;
     list-style: none;
 
     > li {
@@ -923,6 +921,10 @@ h3 {
 }
 
 .liste {
+    .input_quantite {
+        font-size:1.4em;
+    }
+
     main {
         display: flex;
 
@@ -1789,25 +1791,23 @@ aside {
         margin-top: 20px;
         width: 100%;
     }
-<<<<<<< HEAD
-=======
     #supprimer_promotion{
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
-    .hide_input{
-        background-color: $couleur_etoile;
-        padding: 10px 16px 10px 16px;
-        width: fit-content;
-        border-radius: $angle_petit;
-    }
-    div > img{
-        height: 15%;
-        width: 15%;
-    }
-    .zone_sup{
-        width: fit-content;
-    }
->>>>>>> 95390dafd034e9c323d127ce0ec324ea921a59fa
+
+    // .hide_input{
+    //     background-color: $couleur_etoile;
+    //     padding: 10px 16px 10px 16px;
+    //     width: fit-content;
+    //     border-radius: $angle_petit;
+    // }
+    // div > img{
+    //     height: 15%;
+    //     width: 15%;
+    // }
+    // .zone_sup{
+    //     width: fit-content;
+    // }
 }
