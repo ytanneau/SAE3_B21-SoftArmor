@@ -2876,7 +2876,7 @@ aside input.bouton:hover {
   text-decoration: none;
   cursor: pointer;
   margin-top: 10px;
-  width: 100%;
+  padding: 10px 16px 10px 16px;
 }
 .main_promo #supprimer_promotion a {
   text-decoration: none;
