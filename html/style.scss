@@ -1740,7 +1740,7 @@ aside {
         width: 100%;
     }
     #supprimer_promotion{
-        @include bouton_new($color: $rouge);
+        @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
     }
 }
