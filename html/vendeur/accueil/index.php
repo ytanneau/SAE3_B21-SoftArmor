@@ -34,10 +34,10 @@
     <body>
         <?php include "../header.php" ?>
         <article class="liste_accueil_vendeur">
-            <a class="lien_accueil" href="../compte/information_compte_vendeur">Mon compte</a>
-            <a class="lien_accueil" href="../stock">Gestion de stock</a>
-            <a class="lien_accueil" href="../commande">Commandes</a>
-            <a class="lien_accueil" href="../avis">Avis</a>
+            <a class="lien1" class="lien_accueil" href="../compte/information_compte_vendeur">Mon compte</a>
+            <a class="lien2" class="lien_accueil" href="../stock">Gestion de stock</a>
+            <a class="lien3" class="lien_accueil" href="../commande">Commandes</a>
+            <a class="lien4" class="lien_accueil" href="../avis">Avis</a>
         </article>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
