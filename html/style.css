@@ -1588,6 +1588,7 @@ h3 {
 }
 .liste main .entete {
   display: flex;
+  align-items: center;
 }
 .liste main .entete > * {
   margin-right: 3em;
@@ -2824,6 +2825,14 @@ aside input.bouton:hover {
 }
 .main_promo p + div div input {
   width: 50%;
+}
+.main_promo #div_photo {
+  padding-top: 5px;
+}
+.main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
+  color: red;
+  font-style: italic;
+  font-size: 75%;
 }
 .main_promo #valider {
   display: block;
