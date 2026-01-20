@@ -1844,8 +1844,7 @@ aside {
         padding: 10px 16px 10px 16px;
     }
     .banniere{
-        height: 15%;
-        width: 15%;
+        @include image_produit(250px);
     }
     // .hide_input{
     //     background-color: $couleur_etoile;
