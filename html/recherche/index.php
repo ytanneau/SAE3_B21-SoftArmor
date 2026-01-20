@@ -75,18 +75,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
 
-        <div class="range_container">
-            <div class="form_control">
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Min</div>
-                    <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
-                </div>
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Max</div>
-                    <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
-                </div>
-            </div>
-        </div>
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
         <section class="results">
