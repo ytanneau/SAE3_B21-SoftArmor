@@ -2826,6 +2826,14 @@ aside input.bouton:hover {
 .main_promo p + div div input {
   width: 50%;
 }
+.main_promo #div_photo {
+  margin-top: 5px;
+}
+.main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
+  color: red;
+  font-style: italic;
+  size: 75%;
+}
 .main_promo #valider {
   display: block;
   max-width: 100%;
