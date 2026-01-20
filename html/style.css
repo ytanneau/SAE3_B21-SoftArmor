@@ -833,11 +833,11 @@ section.results {
   width: 100%;
 }
 
-.resultat div {
+.resultat > div {
   display: flex;
   justify-content: space-between;
 }
-.resultat div > div:first-child {
+.resultat > div > div:first-child {
   flex-direction: column;
 }
 

@@ -175,12 +175,14 @@ section.results {
     @include contenu_centre_vertical();
     width: 100%;
 }
-.resultat div {
-    display: flex;
-    justify-content: space-between;
-
-    > div:first-child {
-        flex-direction: column;
+.resultat { 
+    > div {
+        display: flex;
+        justify-content: space-between;
+        
+        > div:first-child {
+            flex-direction: column;
+        }
     }
 }
 
