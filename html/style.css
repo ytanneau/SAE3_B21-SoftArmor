@@ -2900,6 +2900,19 @@ aside input.bouton:hover {
     display: none !important;
   }
 }
+.hide_input_file {
+  background-color: #EAC452;
+  padding: 10px 16px 10px 16px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+}
+.hide_input_file:hover {
+  background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+
 .main_promo {
   display: flex;
   flex-direction: column;
@@ -3000,7 +3013,7 @@ aside input.bouton:hover {
   height: 250px;
   border-radius: 5px;
 }
-.main_promo .hide_input {
+.main_promo .hide_input_file {
   margin-top: 20px;
   background-color: #EAC452;
   padding: 10px 16px 10px 16px;
@@ -3010,7 +3023,7 @@ aside input.bouton:hover {
   color: black;
   font-weight: bold;
 }
-.main_promo .hide_input:hover {
+.main_promo .hide_input_file:hover {
   background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
 .main_promo .ajout_banniere {
