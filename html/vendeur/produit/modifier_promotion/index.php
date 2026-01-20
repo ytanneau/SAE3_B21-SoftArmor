@@ -103,7 +103,7 @@
                     update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
                 }
                 if($id_image_initial){
-                    delete_image($id_image_initial);
+                    delete_image_bdd($id_image_initial);
                 }
             }
             }
