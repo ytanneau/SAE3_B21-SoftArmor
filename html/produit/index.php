@@ -399,8 +399,6 @@ if (isset($_POST['quantite'])) {
                 body: data
             });
 
-            console.log(res.body);
-
             const json = await res.json();
 
             // Fermer le modal
