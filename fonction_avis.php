@@ -218,6 +218,9 @@
                 VALUES (:id_compte, :id_avis, :raison, :email)"
             );
 
+            $test = $id_compte === NULL;
+            $test2 = $id_compte === '';
+
             echo json_encode([
                 'success' => false,
                 'message' => "$id_compte $id_avis $raison $email"
