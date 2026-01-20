@@ -150,7 +150,7 @@
                     warning1.style.display = "block";
                 } else if (dateFin == ""){
                     dateFin.value = dateDebut.value;
-                } else if(dateDebut.value < dateCourante.getTime()){
+                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
                     warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
