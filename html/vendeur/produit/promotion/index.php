@@ -112,7 +112,7 @@
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
-                        <p style="display:none;" id="warning3">Le pourcentage ne <br>peut être supérieur<br> à 100</p>
+                        <p style="display:none;" id="warning3">Le pourcentage ne peut <br>être supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
                         <label for="euro">Remise appliquée : </label>
