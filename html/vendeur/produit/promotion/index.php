@@ -154,6 +154,7 @@
                     warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
+                    warning4.style.display = "none";
                     calculP();
                 }
                 
