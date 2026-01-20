@@ -128,16 +128,25 @@
         <?php include "../../header.php" ?>
         <h1>Modifier la promotion</h1>
         <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" class="main_promo">
             <h3>Promotion</h3>
-            <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
-            <label for="dateFin">Date de fin (incluse)</label>
-            <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
+            <div class="en_ligne">
+                <div class="en_colonne">
+                    <label for="dateDebut">Date de début</label>
+                    <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
+                </div>
+                <div class="en_colonne">
+                    <label for="dateFin">Date de fin (incluse)</label>
+                    <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
+                </div>
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input type="text" id="cout" readonly>
+                </div>
+            </div>
             <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
             <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-            <label for="cout">Coût final : </label>
-            <input type="text" id="cout" readonly>
+            
             <?php if($tab_image_promotion != null){ ?>
                 <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                 <label for="photoPromotion">Changer la banniere</label>
@@ -148,23 +157,30 @@
                 <label for="photoPromotion">Ajouter une bannière</label>
                 <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
             <?php } ?>
-            
             <h3>Réduction</h3>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-            <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
-            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
-            <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" readonly>
-            <label for="prixFinal">Prix final</label>
-            <input type="text" id="prixFinal" readonly>
+            <div class="en_ligne">
+                <div class="en_colonne">
+                    <label for="pourcentage">Pourcentage</label>
+                    <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
+                    <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
+                </div>
+                <div class="en_colonne">
+                    <label for="euro">Remise appliquée</label>
+                    <input type="text" id="euro" name="euro" readonly>
+                </div>
+                <div class="en_colonne">
+                    <label for="prixFinal">Prix final</label>
+                    <input type="text" id="prixFinal" readonly>
+                </div>
+            </div>
             <input type="submit" id="valider" value="Valider">
         </form>
         <a 
             id="supprimer_promotion"
             style="display:block; color:none;"
-            href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>">
-            Supprimer la promotion
+            href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
+        >Supprimer la promotion
         </a>
         <?php include "../../../footer.php" ?>    
     </body>
