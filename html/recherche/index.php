@@ -41,6 +41,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "header.php"; ?>
 
     <main>
+        <aside>
         <section class="filters">
             <form>
                 <fieldset id = "prixF">
@@ -74,7 +75,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
             <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
-
+    </aside>
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
         <section class="results">
