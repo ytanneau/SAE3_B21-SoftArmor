@@ -24,6 +24,7 @@ if (isset($_SESSION["raison_sociale"])) {
 require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_commande.php";
+require_once HOME_GIT . "fonction_categorie.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
@@ -51,7 +52,11 @@ if (isset($_GET["commande"])) {
 </head>
 
 <body class="liste">
-    <?php include HOME_SITE . 'header.php'?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
+
     <main>
 
     <?php if (isset($_GET["commande"])) {?>

@@ -23,6 +23,7 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 
 //requete pour recuperer informations du compte sans l'adresse
 //$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
@@ -186,7 +187,10 @@ if ($_POST != NULL){
     <script src="confirmation.js"></script>
 </head>
 <body class="infos">
-    <?php include HOME_SITE . 'header.php'; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <main>
         <h1>Mon profil</h1>

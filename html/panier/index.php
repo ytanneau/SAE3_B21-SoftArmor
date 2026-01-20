@@ -20,6 +20,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
@@ -89,7 +90,10 @@ if (isset($_SESSION['logged_in'])) {
     </script>
 </head>
 <body class="liste">
-    <?php include HOME_SITE . 'header.php' ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <main>
 

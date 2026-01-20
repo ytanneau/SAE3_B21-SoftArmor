@@ -20,6 +20,7 @@ require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_GIT . "fonction_commande.php";
 require_once HOME_GIT . "fonction_compte.php";
+require_once HOME_GIT . "fonction_categorie.php";
 require_once HOME_GIT . "fonction_panier.php";
 
 $numEtape = -1;
@@ -241,7 +242,10 @@ if ($numEtape == 3) {
     </head>
 
     <body class="<?=($numEtape == 3 && !$achat_reussi) ? 'liste' : 'form_client'?>">
-        <?php include HOME_SITE . 'header.php'; ?>
+        <?php 
+            include HOME_SITE . "header.php";
+            include HOME_SITE . "toolbar_categories.php";
+        ?>
 
         <main>
             

@@ -26,6 +26,7 @@ require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_panier.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_recherche.php');
 
 ?>
@@ -39,7 +40,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <title>Alizon - Recherche</title>
 </head>
 <body data-page="search">
-    <?php include HOME_SITE . "header.php"; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <main class ="pageRecherche">
         <div class="TriEtFiltre">
