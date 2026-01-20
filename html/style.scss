@@ -190,6 +190,18 @@ hr {
     }
 }
 
+.pageRecherche{
+    display: flex;
+    flex-direction: row;
+}
+.TriEtFiltre div div{
+    flex-direction: column;
+}
+.TriEtFiltre{
+    display: flex;
+    flex-direction: column;
+}
+
 section.results {
     @include contenu_centre_vertical();
     width: 100%;
@@ -201,7 +213,7 @@ ul#results {
     width: 100%;
     flex-wrap: wrap;
     list-style: none;
-
+    
     > li {
         @include produit_catalogue();
     }
@@ -771,18 +783,17 @@ div:has(> aside) {
 }
 
 .accueil {
-    p.prix {
+    .prix{
         font-size: $font_size_grand;
     }
-    
-    p.ancien_prix {
+    .ancien_prix {
         display: inline-block;
         margin-right: 6px;
 
         width: auto;
     }
 
-    p.pourcentage {
+    .pourcentage {
         display: inline-block;
         padding: 2px 6px;
         
@@ -847,7 +858,7 @@ div:has(> aside) {
                     > a {
                         position: relative;
 
-                        > span.reduction {
+                        > .reduction {
                             position: absolute;
 
                             width: 32px;

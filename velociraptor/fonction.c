@@ -723,19 +723,26 @@ void photo(SESSION *data)
 // socupe d'envoier la photo
 void envoier_photo(SESSION *data, char *fichier)
 {
-    char buff[TAILLE_PHOTO];
-    char message[TAILLE_PHOTO*8];
+    int size;
+    char buff;
+    char message[TAILLE_PHOTO*9];
 
     sprintf(message, "%s%s", PHOTO, DELIMITER);
     envoier_message(data, message);
 
     int fd = open(FICHIER_PHOTO, O_RDONLY);
     // boucle de lecture
-    while (read(fd, buff, TAILLE_PHOTO) != 0)
+    while (size = read(fd, &buff, 1) != 0)
     {
-        encode_photo(buff, message);
+        //printf("read\n");
+        //printf("%c", buff);
+        chaine_en_binaire(buff, message);
+        //printf("encode\n");
+        //printf("%s", message);
         envoier_code(data, message);
+        //printf("envoie\n");
     }
+    printf("fin\n");
     envoier_message(data, "#"); // fin de limage
 }
 
@@ -758,6 +765,21 @@ void encode_photo(char *src, char *des)
     for (; src[len] != '\0'; len++); 
     des[len * 8] = '\0';
 }
+
+
+void chaine_en_binaire(const char src, char *dest)
+{
+    int i, bit;
+
+    for (bit = 7; bit >= 0; bit--)
+    {
+        *dest = ((src >> bit) & 1) + '0';
+        dest++;
+    }
+    *dest = '\0'; // fin de chaîne
+}
+
+
 
 //------------------------------------------------------------------
 

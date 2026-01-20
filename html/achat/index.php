@@ -14,7 +14,7 @@ if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_SITE . "compte/connexion");
 }
 
-
+require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
@@ -143,7 +143,7 @@ if ($numEtape == 3) {
     $conn =false;
     $fd = connexion_socket(IP,PORT);
     if($fd){
-        $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
+        $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
         //creer bordereau colis
         $bordereau = create_colis($fd);
         deconnexion_socket($fd);

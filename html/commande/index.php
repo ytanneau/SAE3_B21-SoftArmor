@@ -23,7 +23,7 @@ if (isset($_SESSION["raison_sociale"])) {
 }
 require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . ".config.php";
-require_once HOME_GIT . "/fonction_commande.php";
+require_once HOME_GIT . "fonction_commande.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
@@ -105,17 +105,20 @@ if (isset($_GET["commande"])) {
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
             <?php } else {
+                    $conn =false;
+                    $fd = connexion_socket(IP,PORT);
+                    $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
                     foreach ($liste_commandes as $commande) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
                     //connexion delivraptor
-                    $conn =false;
                     
-                    $fd = connexion_socket(IP,PORT);
+                    
+                    
                     
                     if($fd){
-                    $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
+                    
                     
                     //si connexion
                     if ($conn == "1"){
@@ -138,20 +141,12 @@ if (isset($_GET["commande"])) {
                                 case '4':
                                     $texte_img="Photo inexistante";
                                     break;
-                                //cas image a mettre dans le fichier ressources
-                                default:
-                                    // $octets = binaireEnOctets($img);
-                                    // echo $octets;
-                                    // $fich = file_put_contents(HOME_SITE . "ressources/colis/$bordereau.png",$octets);
-                                    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
-                                    fwrite($file,$img);
-                                    fclose($file);
-                                    break;
+                                
+                                
                             }
                         }
                     }
-                    //deconnexion
-                    deconnexion_socket($fd);
+                    
                     }
                 ?>
 
@@ -266,7 +261,10 @@ if (isset($_GET["commande"])) {
                         <hr>
                     </li>
 
-            <?php } } ?>
+            <?php } 
+            //deconnexion
+            deconnexion_socket($fd);
+            } ?>
 
         </ul>
 
