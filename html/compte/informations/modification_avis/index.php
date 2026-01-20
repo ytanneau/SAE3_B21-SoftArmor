@@ -146,10 +146,10 @@
             <h1>Le produit n'existe pas</h1>
         <?php } else{ ?>
             <section>
-                <a href="<?=HOME_SITE?>/produit?produit=<?=htmlentities($_GET['produit'])?>">
+                <a href="<?=HOME_SITE?>produit?produit=<?=htmlentities($_GET['produit'])?>">
                     <article>
                         <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
-                        <img src="<?= htmlentities($image_produit['url_image'] ?? '') ?>" alt="<?= htmlentities($image_produit['alt'] ?? '') ?>" title="<?= htmlentities($image_produit['titre'] ?? '') ?>">
+                        <img src="<?= HOME_SITE . htmlentities($image_produit['url_image']) ?>" alt="<?= htmlentities($image_produit['alt'] ?? '') ?>" title="<?= htmlentities($image_produit['titre'] ?? '') ?>">
                     </article>
                 </a>
             </section>
