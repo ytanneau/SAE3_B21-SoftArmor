@@ -1613,6 +1613,9 @@ h3 {
   font-weight: bold;
 }
 
+.liste .input_quantite {
+  font-size: 1.4em;
+}
 .liste main {
   display: flex;
 }
