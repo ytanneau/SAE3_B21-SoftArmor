@@ -66,8 +66,8 @@
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
-        <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="produit-vendeur">
+            <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
                     <tr>
