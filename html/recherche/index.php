@@ -432,165 +432,106 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
-        .range_container {
-            display: flex;
-            flex-direction: column;
-            width: 10%;
-            margin-right: 80%;
-            margin-top: 20%;
-        }
+          
+            .filters {
+                display : flex;
+                flex-direction: column;
+                margin-right: 88%;
+                margin-top: 5%;
+                margin-bottom: 4%;
+            }
 
-        .sliders_control {
-            position: relative;
-            min-height: 50px;
-        }
+            .filters form{
+                display : flex;
+                flex-direction: column;
+            }
 
-        .form_control {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            font-size: 16px;
-            font-family: "Inter";
-            color: #635a5a;
-        }
 
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 16px;
-            height: 16px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;
-        }
+            .prixF{
+                display: flex;
+                flex-direction: column;
+            }
 
-        input[type=range]::-moz-range-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 16px;
-            height: 16px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;  
-        }
+            .range_container {
+                display: flex;
+                flex-direction: column;
+                width: 10%;
+                margin-right: 80%;
+                margin-top: 5%;
+            }
 
-        input[type=range]::-webkit-slider-thumb:hover {
-            background: #f7f7f7;
-        }
+                .sliders_control {
+                    position: relative;
+                    min-height: 50px;
+                }
 
-        input[type=range]::-webkit-slider-thumb:active {
-            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-        }
+                .form_control {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 16px;
+                    font-family: "Inter";
+                    color: #635a5a;
+                }
 
-        input[type="number"] {
-            color: #8a8383;
-            width: 50px;
-            height: 30px;
-            font-size: 20px;
-            border: none;
-        }
+                input[type=range]::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    pointer-events: all;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #fff;
+                    border-radius: 50%;
+                    box-shadow: 0 0 0 1px #C6C6C6;
+                    cursor: pointer;
+                }
 
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button {  
-            opacity: 1;
-        }
+                input[type=range]::-moz-range-thumb {
+                    -webkit-appearance: none;
+                    pointer-events: all;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #fff;
+                    border-radius: 50%;
+                    box-shadow: 0 0 0 1px #C6C6C6;
+                    cursor: pointer;  
+                }
 
-        input[type="range"] {
-            -webkit-appearance: none; 
-            appearance: none;
-            height: 2px;
-            width: 100%;
-            position: absolute;
-            background-color: #C6C6C6;
-            pointer-events: none;
-        }
+                input[type=range]::-webkit-slider-thumb:hover {
+                    background: #f7f7f7;
+                }
 
-        #fromSlider {
-            height: 0;
-            z-index: 1;
-        }
+                input[type=range]::-webkit-slider-thumb:active {
+                    box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+                    -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+                }
 
-        .range_container {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            margin: 35% auto;
-        }
+                input[type="number"] {
+                    color: #8a8383;
+                    width: 50px;
+                    height: 30px;
+                    font-size: 20px;
+                    border: none;
+                }
 
-        .sliders_control {
-            position: aboslute;
-            min-height: 50px;
-        }
+                input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button {  
+                    opacity: 1;
+                }
 
-        .form_control {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            font-size: 24px;
-            color: #635a5a;
-        }
+                input[type="range"] {
+                    -webkit-appearance: none; 
+                    appearance: none;
+                    height: 2px;
+                    width: 100%;
+                    position: absolute;
+                    background-color: #C6C6C6;
+                    pointer-events: none;
+                }
 
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 24px;
-            height: 24px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;
-        }
-
-        input[type=range]::-moz-range-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 24px;
-            height: 24px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;  
-        }
-
-        input[type=range]::-webkit-slider-thumb:hover {
-            background: #f7f7f7;
-        }
-
-        input[type=range]::-webkit-slider-thumb:active {
-            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-        }
-
-        input[type="number"] {
-            color: #8a8383;
-            width: 50px;
-            height: 30px;
-            font-size: 20px;
-            border: none;
-        }
-
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button {  
-            opacity: 1;
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none; 
-            appearance: none;
-            height: 2px;
-            width: 100%;
-            position: absolute;
-            background-color: #C6C6C6;
-            pointer-events: none;
-        }
-
-        #fromSlider {
-            height: 0;
-            z-index: 1;
-        }
+                #fromSlider {
+                    height: 0;
+                    z-index: 1;
+                }
     </style>
 </body>
 
