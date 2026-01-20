@@ -152,8 +152,8 @@
                 <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
                 
                 <?php if($tab_image_promotion != null){ ?>
-                    <div>
-                        <img class="banniere" src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
+                    <div class="block_banniere">
+                        <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                         <label class="hide_input" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                         <label for="supp_image_promo">Supprimer la bannière</label>
