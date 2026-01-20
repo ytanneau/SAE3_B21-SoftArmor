@@ -178,6 +178,10 @@ section.results {
 .resultat div{
     display: flex;
     justify-content: space-between;
+
+    &:first-child {
+        flex-direction: column;
+    }
 }
 
 ul#results {
