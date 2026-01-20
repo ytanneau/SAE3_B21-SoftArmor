@@ -1005,7 +1005,7 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos main form#donnee {
+.infos form {
   display: flex;
   flex-direction: row-reverse;
   align-items: normal;
@@ -1014,19 +1014,19 @@ ul#results > li > a > h3 {
   border-radius: 20px;
   padding: 3em 3em;
 }
-.infos main form#donnee article {
+.infos form article {
   display: flex;
   flex-direction: column;
   padding: 0 2em;
 }
-.infos main form#donnee > :last-child {
+.infos form > :last-child {
   width: 100%;
 }
-.infos main form#donnee label {
+.infos form label {
   margin-top: 5%;
   font-size: 1.5em;
 }
-.infos main form#donnee .champ {
+.infos form .champ {
   border: none;
   border-radius: 5px;
   height: 2em;
@@ -1034,33 +1034,33 @@ ul#results > li > a > h3 {
   padding-left: 0.6em;
   padding-right: 0;
 }
-.infos main form#donnee .text {
+.infos form .text {
   height: 10em;
   text-align: start;
 }
-.infos main form#donnee .petit {
+.infos form .petit {
   width: 30%;
 }
-.infos main form#donnee input[type=number]::-webkit-inner-spin-button,
-.infos main form#donnee input[type=number]::-webkit-outer-spin-button {
+.infos form input[type=number]::-webkit-inner-spin-button,
+.infos form input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.infos main form#donnee input[type=number] {
+.infos form input[type=number] {
   -moz-appearance: textfield;
 }
-.infos main form#donnee p {
+.infos form p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-.infos main form#donnee .error {
+.infos form .error {
   color: #E43737;
 }
-.infos main form#donnee .champ {
+.infos form .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos main form#donnee .image_pp {
+.infos form img {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1076,38 +1076,38 @@ ul#results > li > a > h3 {
     flex-direction: column;
     align-items: center;
   }
-  .infos section form#donnee {
+  .infos section form {
     flex-direction: column;
     align-items: center;
     padding: 0;
     margin: 1em;
     gap: 2em;
   }
-  .infos section form#donnee article {
+  .infos section form article {
     padding: 0;
     display: flex;
     flex-direction: column;
   }
-  .infos section form#donnee article:first-child {
+  .infos section form article:first-child {
     align-items: center;
   }
-  .infos section form#donnee article:first-child .image_pp {
+  .infos section form article:first-child img {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
-  .infos section form#donnee article:first-child label {
+  .infos section form article:first-child label {
     margin-top: 1em;
     font-size: 1rem;
     text-align: center;
   }
-  .infos section form#donnee article:last-child input,
-  .infos section form#donnee article:last-child button, .infos section form#donnee article:last-child a {
+  .infos section form article:last-child input,
+  .infos section form article:last-child button, .infos section form article:last-child a {
     width: 100%;
   }
-  .infos section form#donnee article:last-child .champ {
+  .infos section form article:last-child .champ {
     margin-bottom: 1em;
   }
-  .infos section form#donnee article:last-child .bouton {
+  .infos section form article:last-child .bouton {
     margin-top: 1.2em;
   }
 }
@@ -1413,6 +1413,9 @@ div:has(> aside) {
   color: white;
 }
 
+.accueil .prix {
+  font-size: 2em;
+}
 .accueil p.ancien_prix {
   display: inline-block;
   margin-right: 6px;
@@ -1451,7 +1454,6 @@ div:has(> aside) {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 20px black;
-  z-index: 1;
 }
 .accueil > main > div > button > img {
   width: 75%;
@@ -1586,7 +1588,7 @@ div:has(> aside) {
 
 .prix {
   color: #2E7A30;
-  font-size: 2em;
+  font-size: 1.2em;
   font-family: "Montserrat";
   font-weight: bold;
 }
@@ -1865,30 +1867,7 @@ aside > div:first-child {
 aside .bouton {
   margin: 0.5em 0;
 }
-aside .bouton {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  padding: 0.5em;
-  font-family: "Montserrat";
-  font-size: 0.8em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-aside .bouton a {
-  text-decoration: none;
-  color: white;
-}
-aside .bouton:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-aside .achat {
+aside a.bouton {
   display: block;
   max-width: 100%;
   width: 100%;
@@ -1904,12 +1883,35 @@ aside .achat {
   text-decoration: none;
   cursor: pointer;
 }
-aside .achat a {
+aside a.bouton a {
   text-decoration: none;
   color: black;
 }
-aside .achat:hover {
+aside a.bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+aside input.bouton {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  padding: 0.5em;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+aside input.bouton a {
+  text-decoration: none;
+  color: white;
+}
+aside input.bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 @media screen and (max-width: 1024px) {
   aside {
@@ -2866,14 +2868,13 @@ aside .achat:hover {
 .main_promo h3 + p + div div input {
   width: 50%;
 }
-.main_promo .ajout_banniere {
-  padding-top: 10px;
+.main_promo #div_photo {
+  padding-top: 5px;
 }
 .main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
   color: red;
   font-style: italic;
-  font-size: 85%;
-  margin-bottom: 0;
+  font-size: 75%;
 }
 .main_promo #valider {
   display: block;

@@ -744,7 +744,9 @@ div:has(> aside) {
 }
 
 .accueil {
-    $font_size_grand
+    .prix{
+        font-size: $font_size_grand;
+    }
     p.ancien_prix {
         display: inline-block;
         margin-right: 6px;
