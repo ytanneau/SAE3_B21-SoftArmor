@@ -7,17 +7,18 @@ define('HOME_SITE', '../');
 if (!isset($_SESSION)) {
     session_start();
 
-    $recherche = trim($_GET['recherche']);
-
-    if (empty($recherche)) {
-        header('location: ' . HOME_SITE);
-        die();
-    }
-
     if (isset($_SESSION['raison_sociale'])){
         header('location: ' . HOME_SITE . '/vendeur/stock/');
         die();
     }
+}
+
+$recherche = htmlentities(trim($_GET['recherche'] ?? ''));
+$categorie = htmlentities(trim($_GET['categorie'] ?? ''));
+
+if (empty($recherche) && empty($categorie)) {
+    header('location: ' . HOME_SITE);
+    die();
 }
 
 require_once (HOME_GIT . '.config.php');
@@ -103,12 +104,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const searchState = {
             search: "<?=$recherche?>",
             filters: {
-                category: [],
+                category: "<?=$categorie?>",
                 price: {min: null, max: null},
                 sales: false
             },
             sort: {
-                field: "nom_public",
+                field: "nom_public", 
                 order: "asc"
             }
         };
@@ -117,7 +118,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const isSearchPage = document.body.dataset.page === "search";
         const form = document.querySelector("#form_recherche");
         const input = document.querySelector("#recherche");
-        const resultsFor = document.querySelector("#results_for");
+        const resultsFor = document.querySelector("#results_for"); 
         
         let promCheck = document.getElementById("prom");
 
@@ -185,7 +186,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
         document.addEventListener("DOMContentLoaded", () => {
             // Rediriger si la recherche est vide
-            if (searchState.search === "") {
+            if (searchState.search === "" && searchState.category === "") {
                 window.location.replace("..");
             }
 
@@ -198,7 +199,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     e.preventDefault();
                     
                     // Rediriger si la recherche est vide
-                    if (input.value.trim() === "") {
+                    if (input.value.trim() === "" && searchState.category === "") {
                         window.location.replace("..");
                     }
                     
@@ -217,7 +218,11 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
-            resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`
+            if (searchState.search !== "") {
+                resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
+            } else {
+                resultsFor.textContent = `Produits de la catégorie "${searchState.category}"`;
+            }
 
             data.produits.forEach(produit => {
                 let listItem = document.createElement("li");
