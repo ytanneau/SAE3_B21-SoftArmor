@@ -45,12 +45,12 @@ gcc raptor.c fonction.c -o prog `mariadb_config --cflags --libs`
 
 Avec les paramètre par defaut :
 ```
-./prog
+./prog &
 ```
 
 Avec les paramètre personaliser :
 ```
-./prog -a compte.txt -n 50 -p 9500
+./prog -a compte.txt -n 50 -p 9500 &
 ```
 
 - a : fichier des compte, defaut = login.txt
@@ -73,6 +73,7 @@ Si la dernière ligne est ``` [RAPTOR] READY ``` alors votre serveur est près, 
 [RAPTOR] BDD : 
 BDD_HOST 10.253.5.107
 BDD_USER sae
+BDD_PASSWORD dbs*******
 BDD_NAME saedb
 BDD_PORT 3306
 [RAPTOR] SUCCESS CONNECT MYSQL // la connection a la base de donnée est bon

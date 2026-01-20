@@ -24,6 +24,13 @@
 
 ---
 
+### Format des messages
+- **Encodage** : UTF‑8
+- **Taille instruction maximale** : 100 caractères
+- **Taille reponse maximale** : 100-400 caractères (la taille varie selon les instructions)
+
+---
+
 ## Cycle d’échange de données
 
 Les échanges suivent quatre étapes principales : **handshake**, **authentification**, **échange de données**, **fermeture**.
@@ -33,6 +40,11 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 - Le client initie la connexion sur le socket du serveur
 - Objectif : établir le canal et vérifier la disponibilité du serveur.
 
+- **Délimiteurs** :
+  - `.` pour client → serveur
+  - `=` pour serveur → client
+
+
 ### Authentification
 
 - **Mécanisme** : `1.id.MD5`
@@ -41,11 +53,8 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
 
 ### Échange de données
 
-- **Format** : personnalisé
-- **Taille maximale** : 100 caractères par instruction (UTF‑8)
-- **Délimiteurs** :
-  - `.` pour client → serveur
-  - `=` pour serveur → client
+- **Client** : Donne les instruction.
+- **Server** : Repond au client.
 
 
 ### Fermeture
@@ -95,68 +104,4 @@ Les échanges suivent quatre étapes principales : **handshake**, **authentifica
   - 2 : en retard
   - 3 : plus besoin du colis
 
----
 
-## Format des messages
-
-- **Encodage** : UTF‑8
-- **Taille instruction maximale** : 100 caractères
-- **Taille reponse maximale** : 400 caractères (la taille varie leson les instruction)
-
-### Exemples
-
-#### Authentification
-
-```text
-# Client vers Serveur
-1.alizon.5d41402abc4b2a76b9719d911017c592.
-
-# Serveur vers Client si accepter
-CONNECT=1
-
-# Serveur vers Client si refuser 
-CONNECT=0
-```
-
-#### Nouveau colis
-
-```text
-# Client demande la prise en charge un nouveau colis
-2
-
-# Serveur accepte ne nouveau colis
-COLIS=7A74KHYV33SM
-
-# Server refuse le nouveau colis
-ERROR=2
-```
-
-#### Info colis
-
-```text
-# Client demande la prise en charge un nouveau colis
-3.7A74KHYV33SM
-
-# Serveur si le colis existe
-ETAPE=1
-REMISE=N/A
-RAISON=N/A
-DATE=2026-01-18 21:43:39
-
-# Server existe pas colis
-ERROR=3
-```
-
-#### Photo colis
-
-```text
-# Client demande la prise en charge un nouveau colis
-2
-
-# Serveur envois la photo en binaire(# pour signifer la fin de l'image)
-PHOTO=01010110110101010100...
-...1011110# 
-
-# Server photo existe pas
-ERROR=4
-```
