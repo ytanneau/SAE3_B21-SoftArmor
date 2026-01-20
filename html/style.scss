@@ -1814,6 +1814,7 @@ aside {
         }
     }
     .hide_input{
+        margin-top: 20px;
         @include hide_input_file();
     }
 }
