@@ -533,8 +533,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 #fromSlider {
                     height: 0;
                     z-index: 1;
-                }
-    </style>
+                }    
+        </style>
 </body>
 
 </html>
