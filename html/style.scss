@@ -1767,12 +1767,19 @@ aside {
         margin-top: 20px;
         width: 100%;
     }
-    #supprimer_promotion, #supp_image_promo{
+    #supprimer_promotion{
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
-    input[type="checkbox"]{
+    input[type=checkbox]{
         display: none;
+    }
+    #supp_image_promo{
+        background-color: $rouge;
+        padding: 10px 16px 10px 16px;;
+    }
+    img{
+        height: 250px;
     }
 }
