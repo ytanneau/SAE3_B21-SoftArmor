@@ -454,8 +454,6 @@
     #idCodeBarre{
         width: 150px;
     }
-<<<<<<< Updated upstream
-=======
 }
 
 @mixin toolbar($background: $nuance_primaire_client, $color: black) {
@@ -551,5 +549,4 @@
     &:hover{
         background: adjust-color($color: $background, $lightness: 15%);
     }
->>>>>>> Stashed changes
 }
