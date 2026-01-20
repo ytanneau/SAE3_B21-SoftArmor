@@ -1844,30 +1844,7 @@ aside > div:first-child {
 aside .bouton {
   margin: 0.5em 0;
 }
-aside a.bouton {
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  padding: 0.3em 0;
-  font-family: "Montserrat";
-  font-size: 0.8em;
-  font-weight: bold;
-  background-color: #EAC452;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-aside a.bouton a {
-  text-decoration: none;
-  color: black;
-}
-aside a.bouton:hover {
-  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
-}
-aside input.bouton {
+aside .bouton {
   display: block;
   max-width: 100%;
   width: 100%;
@@ -1883,12 +1860,35 @@ aside input.bouton {
   text-decoration: none;
   cursor: pointer;
 }
-aside input.bouton a {
+aside .bouton a {
   text-decoration: none;
   color: white;
 }
-aside input.bouton:hover {
+aside .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+aside .achat {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  padding: 0.3em 0;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: #EAC452;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+aside .achat a {
+  text-decoration: none;
+  color: black;
+}
+aside .achat:hover {
+  background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
 @media screen and (max-width: 1024px) {
   aside {
