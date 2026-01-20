@@ -2912,6 +2912,7 @@ aside .achat:hover {
   background-color: #E43737;
   padding: 10px 16px 10px 16px;
 }
-.main_promo img {
-  height: 250px;
+.main_promo div > img {
+  height: 50%;
+  width: 50%;
 }/*# sourceMappingURL=style.css.map */
