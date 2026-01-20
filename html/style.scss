@@ -1801,6 +1801,8 @@ aside {
         padding: 10px 16px 10px 16px;
     }
     .block_banniere{
+        display: flex;
+        flex-direction: column;
         img{
            @include image_produit(250px);
         }
