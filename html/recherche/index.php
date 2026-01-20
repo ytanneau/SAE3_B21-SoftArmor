@@ -224,7 +224,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
-            forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
+            if (searchState.filters.category !== "") {
+                forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
+            } else {
+                forCategory.textContent = "";
+            }
+
 
             if (searchState.search !== "") {
                 resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
