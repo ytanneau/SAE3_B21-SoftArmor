@@ -350,7 +350,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         .TriEtFiltre{
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
     </style>
 </body>
