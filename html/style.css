@@ -736,6 +736,44 @@ hr {
   display: flex;
   flex-direction: column;
 }
+.TriEtFiltre form {
+  align-items: normal;
+  width: 100%;
+}
+.TriEtFiltre form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+.TriEtFiltre form .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.TriEtFiltre form .text {
+  height: 10em;
+  text-align: start;
+}
+.TriEtFiltre form .petit {
+  width: 30%;
+}
+.TriEtFiltre form input[type=number]::-webkit-inner-spin-button,
+.TriEtFiltre form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.TriEtFiltre form input[type=number] {
+  -moz-appearance: textfield;
+}
+.TriEtFiltre form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+.TriEtFiltre form .error {
+  color: #E43737;
+}
 
 section.results {
   display: flex;
