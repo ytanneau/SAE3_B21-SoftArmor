@@ -809,6 +809,10 @@ ul#results > li > a > h3 {
   margin-right: 60%;
 }
 
+.deroulant {
+  height: 2em;
+}
+
 .form_client {
   overflow-x: hidden;
 }

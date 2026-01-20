@@ -186,6 +186,10 @@ ul#results {
     display: flex;
     margin-right: 60%;
 }
+
+.deroulant{
+    height: 2em;
+}
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
