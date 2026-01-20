@@ -163,10 +163,10 @@ if ($_POST != NULL){
     <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
-<body>
+<body class="infos">
     <?php include HOME_SITE . 'header.php'; ?>
 
-    <main class="infos">
+    <main>
         <h1>Mon profil</h1>
         
         <section>
@@ -178,7 +178,7 @@ if ($_POST != NULL){
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
+                    <img class="image_pp" src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                     
 
 
