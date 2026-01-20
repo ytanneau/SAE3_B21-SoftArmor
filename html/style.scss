@@ -1779,7 +1779,8 @@ aside {
         background-color: $rouge;
         padding: 10px 16px 10px 16px;;
     }
-    img{
-        height: 250px;
+    div > img{
+        height: 50%;
+        width: 50%;
     }
 }

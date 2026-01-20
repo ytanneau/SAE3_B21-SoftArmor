@@ -155,7 +155,7 @@
                     <div class="en_colonne">
                         <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                         <label for="photoPromotion">Changer la banniere</label>
-                        <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                         <label for="supp_image_promo">Supprimer la bannière</label>
                         <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
                     </div>
