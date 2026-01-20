@@ -1793,6 +1793,7 @@ aside {
         padding: 10px 16px 10px 16px;
     }
     .block_banniere{
+        @include contenu_centre_vertical;
         img{
            @include image_produit(250px);
         }

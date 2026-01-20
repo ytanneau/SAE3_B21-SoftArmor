@@ -2919,6 +2919,11 @@ aside input.bouton:hover {
 .main_promo #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
+.main_promo .block_banniere {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
