@@ -951,6 +951,7 @@ h3 {
             li > div {
                 display: flex;
                 flex-grow: 1;
+                align-items: center;
             }
             
             // la partie description etc. du produit
@@ -981,6 +982,10 @@ h3 {
                     margin-bottom: 0;
                     text-align: right;
                 }
+            }
+
+            .bouton {
+                margin-top: 0;
             }
 
         }
@@ -1020,7 +1025,7 @@ h3 {
         }
 
         p {
-            width: 100%;
+            width: 40%;
         }
 
         @media screen and (max-width: 1024px) {
@@ -1230,7 +1235,7 @@ aside {
     }
 }
 
-.bodyModifProduit{
+.bodyModifProduit {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
@@ -1254,7 +1259,7 @@ aside {
     }
 }
 
-.mainInfoVendeur{
+.mainInfoVendeur div{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
@@ -1505,14 +1510,15 @@ aside {
 }
 
 .stock {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     main {
+        
         align-items: center;
-        display: flex;
-        flex-direction: column;
-        flex: 1; 
+        table {
+            display: flex;
+            flex-direction: column;
+            flex: 1; 
+        }
         tr {
             width: 50vw;
             display: flex;
@@ -1763,7 +1769,7 @@ aside {
     .cout_final{
         width: 50%;
     }
-    p + div{
+    h3 + p + div{
         div{
             input{
                 width: 50%;
@@ -1783,4 +1789,25 @@ aside {
         margin-top: 20px;
         width: 100%;
     }
+<<<<<<< HEAD
+=======
+    #supprimer_promotion{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        margin-top: 10px;
+        padding: 10px 16px 10px 16px;
+    }
+    .hide_input{
+        background-color: $couleur_etoile;
+        padding: 10px 16px 10px 16px;
+        width: fit-content;
+        border-radius: $angle_petit;
+    }
+    div > img{
+        height: 15%;
+        width: 15%;
+    }
+    .zone_sup{
+        width: fit-content;
+    }
+>>>>>>> 95390dafd034e9c323d127ce0ec324ea921a59fa
 }

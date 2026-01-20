@@ -69,32 +69,34 @@
         <!-- inclusion du header -->
         <?php include "../../header.php"?>
         <main class="mainInfoVendeur">
-            <div class="entete">
-                <!-- Bouton de retour sur la page d'accueil -->
-                <a href="../../accueil"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-                <h1>Mes informations</h1>
-            </div>
-            <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
+            <a href="../../accueil"><img src="<?=HOME_SITE?>image/retour.svg" alt="bouton retour en arrière"></a>
+            <div>
+                <div class="entete">
+                    <!-- Bouton de retour sur la page d'accueil -->
+                    <h1>Mes informations</h1>
+                </div>
+                <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>
 
-            <!-- formulaire de saisie des modifications des informations d'un vendeur -->
-            <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
-                <p>
-                    <label for="raison_sociale">Raison sociale</label>
-                    <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
-                    <label for="ville">Ville</label>
-                    <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
-                    <label for="adresse">Adresse</label>
-                    <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
-                    <label for="code_postal">Code postal</label>
-                    <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
-                    <label for="complementAdr">Complement d'adresse</label>
-                    <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
-                    <label for="description">Description</label>
-                    <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
-                </p>
-                <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
-            </form>
-            <a href="desactivation/desactivation.php" id="idDesactivationCompte">Desactiver le compte</a>
+                <!-- formulaire de saisie des modifications des informations d'un vendeur -->
+                <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
+                    <p>
+                        <label for="raison_sociale">Raison sociale</label>
+                        <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
+                        <label for="ville">Ville</label>
+                        <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
+                        <label for="adresse">Adresse</label>
+                        <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
+                        <label for="code_postal">Code postal</label>
+                        <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
+                        <label for="complementAdr">Complement d'adresse</label>
+                        <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
+                        <label for="description">Description</label>
+                        <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
+                    </p>
+                    <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
+                </form>
+                <a href="desactivation/desactivation.php" id="idDesactivationCompte">Desactiver le compte</a>
+            </div>
         </main>
         <footer>
 

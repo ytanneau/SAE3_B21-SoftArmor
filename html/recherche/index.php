@@ -41,47 +41,57 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "header.php"; ?>
 
     <main>
-        <aside>
-        <section class="filters">
-            <form>
-                <fieldset id = "prixF">
-                    <legend>Filtrer par prix</legend>
+        <div class="TriEtFiltre">
+            <div>
+                <form>
+                    <fieldset id = "prixF">
+                        <legend>Filtrer par prix</legend>
+                        <div class="sousFiltre">
+                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
+                        <label for="zeroTo20">0 € à 20 €</label>
+                        </div>
+                        <div class="sousFiltre">
+                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
+                        <label for="twentyTo50">20 € à 50 €</label>
+                        </div>
+                        <div class="sousFiltre">
+                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
+                        <label for="fiftyTo100">50 € à 100 €</label>
+                        </div>
+                        <div class="sousFiltre">
+                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
+                        <label for="hundredTo300">100 € à 300 €</label>
+                        </div>
+                        <div class="sousFiltre">
+                        <input type="radio" name="prix" id="over300" value="over300">
+                        <label for="over300">Plus de 300 €</label>
+                        </div>
+                        <div class="sousFiltre">
+                        <input type="checkbox" name="prom" id="prom" value="prom">
+                        <label for="prom">Promotion</label>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div>
+                <label for="tri">Trier par </label>
+                <select id="tri" value ="triOption">
+                <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
+                <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
+                <option value="triPrix" data-name ="ASC">Prix croissants</option>
+                <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
+                <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
+                </select>
+            </div>
+        </div>
+        <div class="resultat">
+            <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
 
-                    <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                    <label for="zeroTo20">0 € à 20 €</label>
-
-                    <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                    <label for="twentyTo50">20 € à 50 €</label>
-
-                    <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                    <label for="fiftyTo100">50 € à 100 €</label>
-
-                    <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                    <label for="hundredTo300">100 € à 300 €</label>
-
-                    <input type="radio" name="prix" id="over300" value="over300">
-                    <label for="over300">Plus de 300 €</label>
-
-                    <input type="checkbox" name="prom" id="prom" value="prom">
-                    <label for="prom">Promotion</label>
-                </fieldset>
-            </form>
-        </section>
-        <label for="tri">Trier par </label>
-        <select id="tri" value ="triOption">
-            <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
-            <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
-            <option value="triPrix" data-name ="ASC">Prix croissants</option>
-            <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-            <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
-        </select>
-    </aside>
-        <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
-
-        <section class="results">
-            <!-- Grille des résultats -->
-            <ul id="results"></ul>
-        </section>
+            <section class="results">
+                <!-- Grille des résultats -->
+                <ul id="results"></ul>
+            </section>
+        </div>
     </main>
 
     <script type="text/javascript">
@@ -330,72 +340,17 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
-        aside {
-            margin-right: 80%;
-        }
-        .filters {
-            background: white;
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .filters fieldset {
-            border: none;
-            padding: 0;
-            margin-bottom: 1.5rem;
-        }
-
-        .filters legend {
-            font-weight: 600;
-            margin-bottom: .75rem;
-        }
-
-        .filters label {
-            display: block;
-            margin-bottom: .5rem;
-            cursor: pointer;
-        }
-        .range_container {
-            margin-top: 1.5rem;
-        }
-
-        .sliders_control {
-            position: relative;
-            height: 32px;
-        }
-
-        input[type="range"] {
-            position: absolute;
-            width: 100%;
-            height: 4px;
-            appearance: none;
-            background: var(--gray-300);
-            pointer-events: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-            pointer-events: auto;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: white;
-            border: 1px solid var(--gray-300);
-            cursor: pointer;
-        }
-
-        .form_control {
+        main{
             display: flex;
-            justify-content: space-between;
-            margin-top: .75rem;
+            flex-direction: row;
         }
-
-        .form_control input {
-            width: 70px;
-            text-align: center;
+        .TriEtFiltre div div{
+            flex-direction: column;
         }
-
+        .TriEtFiltre{
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </body>
 

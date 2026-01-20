@@ -243,7 +243,9 @@
         try {
             $sql = "SELECT 1 
                     FROM _signalement
-                    WHERE 1 = 1";
+                    WHERE id_avis = :id_avis";
+            
+            $params[':id_avis'] = $id_avis;
 
             if (isset($id_compte)) {
                 $sql .= " AND id_compte = :id_compte";
