@@ -1802,10 +1802,13 @@ aside {
         background-color: $couleur_etoile;
         padding: 10px 16px 10px 16px;
         width: fit-content;
-        border-radius: $angle_normal;
+        border-radius: $angle_petit;
     }
     div > img{
         height: 15%;
         width: 15%;
+    }
+    .zone_sup{
+        width: fit-content;
     }
 }
