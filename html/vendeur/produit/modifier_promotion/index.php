@@ -136,11 +136,11 @@
                 <h3>Promotion</h3>
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début</label>
-                        <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
+                        <label for="dateDebut">Date de début :</label>
+                        <input class="cout_final" type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin (incluse)</label>
+                        <label for="dateFin">Date de fin :</label>
                         <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
                     </div>
                     <div class="en_colonne">
@@ -158,8 +158,10 @@
                     <label for="supp_image_promo">Supprimer la bannière</label>
                     <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
                 <?php } else { ?>
-                    <label for="photoPromotion">Ajouter une bannière</label>
-                    <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                    <div class="ajout_banniere">
+                        <label for="photoPromotion">Ajouter une bannière</label>
+                        <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                    </div>
                 <?php } ?>
                 <h3>Réduction</h3>
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
