@@ -722,6 +722,7 @@ ul#results {
   padding: 0;
   width: 100%;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
 }
 ul#results > li {
@@ -762,6 +763,12 @@ ul#results > li > a > p, ul#results > li > a > h3 {
 }
 ul#results > li > a > h3 {
   height: 3em;
+}
+
+#results_for {
+  justify-content: space-around;
+  display: flex;
+  margin-right: 60%;
 }
 
 .form_client {
