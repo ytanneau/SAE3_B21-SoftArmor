@@ -1843,8 +1843,10 @@ aside {
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
-    .banniere{
-        @include image_produit(250px);
+    .block_banniere{
+        img{
+           @include image_produit(250px);
+        }
     }
     // .hide_input{
     //     background-color: $couleur_etoile;
