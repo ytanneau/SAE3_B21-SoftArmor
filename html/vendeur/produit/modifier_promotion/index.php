@@ -209,8 +209,7 @@
         const warning4 = document.getElementById("warning4");
         const btn_suppr = document.getElementById("supprimer_promotion");
         const dateCourante = new Date();
-        console.log(dateCourante.getDay());
-        console.log(dateCourante.getTime()); 
+        dateCourante.setHours(0, 0, 0, 0);
 
         if(!verif_date_pour_suppression(dateDebut.value)){
             btn_suppr.style.display = "none";
