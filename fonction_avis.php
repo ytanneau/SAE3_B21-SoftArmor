@@ -223,7 +223,7 @@
 
             echo json_encode([
                 'success' => false,
-                'message' => "$id_compte $id_avis $raison $email"
+                'message' => "$test $test2 $id_compte $id_avis $raison $email"
             ]);
             return;
 
