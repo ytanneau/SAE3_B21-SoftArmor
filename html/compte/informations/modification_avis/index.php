@@ -45,7 +45,8 @@
             header('location: '. HOME_SITE);
         }
         else {
-            $image = get_image($sql_produit['id_image_principale']);
+            // Récupère les infos de l'image principale (url, alt, titre)
+            $image_produit = get_image($sql_produit['id_image_principale']);
         }
     }
 
@@ -148,7 +149,7 @@
                 <a href="<?=HOME_SITE?>/produit?produit=<?=htmlentities($_GET['produit'])?>">
                     <article>
                         <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
-                        <img src="<?=HOME_SITE . htmlentities($image['chemin'] ?? '')?>" alt="<?=htmlentities($image['texte_alternatif'] ?? '')?>" title="<?=htmlentities($image['titre'] ?? '')?>">
+                        <img src="<?= htmlentities($image_produit['url_image'] ?? '') ?>" alt="<?= htmlentities($image_produit['alt'] ?? '') ?>" title="<?= htmlentities($image_produit['titre'] ?? '') ?>">
                     </article>
                 </a>
             </section>
