@@ -38,6 +38,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
+        $modifVille = $_POST['ville'];
         $modifAdresse = $_POST['adresse'];
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
@@ -49,10 +50,10 @@
         update_informations_vendeur($modifRaisonSociale, $modifDescription, $id_compte);
 
         // mise à jour de l'adresse du vendeur
-        update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
+        update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
 
         // redirection vers la page precedente apres la validation du formulaire
-        header('Location: ../../stock/');
+        header('Location: ../../accueil/');
         exit();
     }
 ?>
@@ -80,6 +81,8 @@
                 <p>
                     <label for="raison_sociale">Raison sociale</label>
                     <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
+                    <label for="ville">Ville</label>
+                    <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
                     <label for="adresse">Adresse</label>
                     <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
                     <label for="code_postal">Code postal</label>

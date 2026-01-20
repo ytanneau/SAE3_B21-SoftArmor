@@ -348,7 +348,7 @@ ul#results {
         }
     }
 
-    form {
+    main form#donnee {
         display: flex;
         flex-direction: row-reverse;
 
@@ -383,7 +383,7 @@ ul#results {
         }
         section {
                 @include contenu_centre_vertical;
-            form {
+            form#donnee {
                 flex-direction: column;        
                 align-items: center; 
                 padding: 0;
@@ -1726,16 +1726,22 @@ aside {
         }
     }
     .ajout_banniere{
-        padding-top: 5px;
+        padding-top: 10px;
     }
     #warning1, #warning2, #warning3{
         color:red;
         font-style: italic;
         font-size: 85%;
+        margin-bottom: 0;
     }
     #valider{
         @include bouton_new($color: $couleur_background);
         margin-top: 20px;
         width: 100%;
+    }
+    #supprimer_promotion{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        margin-top: 10px;
+        padding: 10px 16px 10px 16px;
     }
 }

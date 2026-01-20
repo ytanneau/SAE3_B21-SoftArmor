@@ -167,27 +167,28 @@
                 <p>Prix actuel : <?=htmlentities($prix)?>€</p>
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="pourcentage">Pourcentage</label>
+                        <label for="pourcentage">Pourcentage :</label>
                         <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
                         <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
-                        <label for="euro">Remise appliquée</label>
+                        <label for="euro">Remise appliquée :</label>
                         <input type="text" id="euro" name="euro" readonly>
                     </div>
                     <div class="en_colonne">
-                        <label for="prixFinal">Prix final</label>
+                        <label for="prixFinal">Prix final :</label>
                         <input type="text" id="prixFinal" readonly>
                     </div>
                 </div>
                 <input type="submit" id="valider" value="Valider">
+                <a 
+                    id="supprimer_promotion"
+                    style="display:block; color:none;"
+                    href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
+                    >Supprimer la promotion
+                </a>
             </form>
-            <a 
-                id="supprimer_promotion"
-                style="display:block; color:none;"
-                href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
-            >Supprimer la promotion
-            </a>
+            
         </main>
         <?php include "../../../footer.php" ?>    
     </body>

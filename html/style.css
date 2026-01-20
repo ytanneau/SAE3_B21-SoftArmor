@@ -1006,7 +1006,7 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos form {
+.infos main form#donnee {
   display: flex;
   flex-direction: row-reverse;
   align-items: normal;
@@ -1015,19 +1015,19 @@ ul#results > li > a > h3 {
   border-radius: 20px;
   padding: 3em 3em;
 }
-.infos form article {
+.infos main form#donnee article {
   display: flex;
   flex-direction: column;
   padding: 0 2em;
 }
-.infos form > :last-child {
+.infos main form#donnee > :last-child {
   width: 100%;
 }
-.infos form label {
+.infos main form#donnee label {
   margin-top: 5%;
   font-size: 1.5em;
 }
-.infos form .champ {
+.infos main form#donnee .champ {
   border: none;
   border-radius: 5px;
   height: 2em;
@@ -1035,33 +1035,33 @@ ul#results > li > a > h3 {
   padding-left: 0.6em;
   padding-right: 0;
 }
-.infos form .text {
+.infos main form#donnee .text {
   height: 10em;
   text-align: start;
 }
-.infos form .petit {
+.infos main form#donnee .petit {
   width: 30%;
 }
-.infos form input[type=number]::-webkit-inner-spin-button,
-.infos form input[type=number]::-webkit-outer-spin-button {
+.infos main form#donnee input[type=number]::-webkit-inner-spin-button,
+.infos main form#donnee input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.infos form input[type=number] {
+.infos main form#donnee input[type=number] {
   -moz-appearance: textfield;
 }
-.infos form p {
+.infos main form#donnee p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-.infos form .error {
+.infos main form#donnee .error {
   color: #E43737;
 }
-.infos form .champ {
+.infos main form#donnee .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos form .image_pp {
+.infos main form#donnee .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1077,38 +1077,38 @@ ul#results > li > a > h3 {
     flex-direction: column;
     align-items: center;
   }
-  .infos section form {
+  .infos section form#donnee {
     flex-direction: column;
     align-items: center;
     padding: 0;
     margin: 1em;
     gap: 2em;
   }
-  .infos section form article {
+  .infos section form#donnee article {
     padding: 0;
     display: flex;
     flex-direction: column;
   }
-  .infos section form article:first-child {
+  .infos section form#donnee article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child .image_pp {
+  .infos section form#donnee article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
-  .infos section form article:first-child label {
+  .infos section form#donnee article:first-child label {
     margin-top: 1em;
     font-size: 1rem;
     text-align: center;
   }
-  .infos section form article:last-child input,
-  .infos section form article:last-child button, .infos section form article:last-child a {
+  .infos section form#donnee article:last-child input,
+  .infos section form#donnee article:last-child button, .infos section form#donnee article:last-child a {
     width: 100%;
   }
-  .infos section form article:last-child .champ {
+  .infos section form#donnee article:last-child .champ {
     margin-bottom: 1em;
   }
-  .infos section form article:last-child .bouton {
+  .infos section form#donnee article:last-child .bouton {
     margin-top: 1.2em;
   }
 }
@@ -2827,12 +2827,13 @@ aside input.bouton:hover {
   width: 50%;
 }
 .main_promo .ajout_banniere {
-  padding-top: 5px;
+  padding-top: 10px;
 }
 .main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
   color: red;
   font-style: italic;
   font-size: 85%;
+  margin-bottom: 0;
 }
 .main_promo #valider {
   display: block;
@@ -2858,4 +2859,29 @@ aside input.bouton:hover {
 }
 .main_promo #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.main_promo #supprimer_promotion {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 10px 16px 10px 16px;
+}
+.main_promo #supprimer_promotion a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.main_promo #supprimer_promotion:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
