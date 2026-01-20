@@ -1798,10 +1798,6 @@ aside {
         }
     }
     .hide_input{
-        background-color: $couleur_etoile;
-        padding: 10px 16px 10px 16px;
-        width: fit-content;
-        border-radius: $angle_petit;
-        
+        @include hide_input_file();
     }
 }

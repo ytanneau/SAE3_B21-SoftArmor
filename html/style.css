@@ -2936,4 +2936,8 @@ aside input.bouton:hover {
   width: -moz-fit-content;
   width: fit-content;
   border-radius: 5px;
+  color: black;
+}
+.main_promo .hide_input:hover {
+  background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }/*# sourceMappingURL=style.css.map */
