@@ -152,11 +152,11 @@
                 <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
                 
                 <?php if($tab_image_promotion != null){ ?>
-                    <div class="en_colonne">
+                    <div class="en_colonne" style="width:fit-content;">
                         <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                         <label class="hide_input" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-                        <div>
+                        <div class="zone_supp">
                             <label for="supp_image_promo">Supprimer la bannière</label>
                             <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
                         </div>
