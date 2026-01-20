@@ -11,9 +11,9 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $search     = $data['search'] ?? '';
-    $category   = $data['category'] ?? '';
     $filters    = $data['filters'] ?? [];
     $sort       = $data['sort'] ?? [];
+    $category   = $filters['category'] ?? '';
     $prixmin    = $filters['price']['min'] ?? null;
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
