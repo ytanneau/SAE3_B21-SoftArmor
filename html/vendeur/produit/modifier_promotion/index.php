@@ -181,13 +181,14 @@
                     </div>
                 </div>
                 <input type="submit" id="valider" value="Valider">
+                <a 
+                    id="supprimer_promotion"
+                    style="display:block; color:none;"
+                    href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
+                    >Supprimer la promotion
+                </a>
             </form>
-            <a 
-                id="supprimer_promotion"
-                style="display:block; color:none;"
-                href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
-            >Supprimer la promotion
-            </a>
+            
         </main>
         <?php include "../../../footer.php" ?>    
     </body>
