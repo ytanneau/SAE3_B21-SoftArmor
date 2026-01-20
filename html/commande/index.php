@@ -140,15 +140,8 @@ if (isset($_GET["commande"])) {
                                 case '4':
                                     $texte_img="Photo inexistante";
                                     break;
-                                //cas image a mettre dans le fichier ressources
-                                default:
-                                    // $octets = binaireEnOctets($img);
-                                    // echo $octets;
-                                    // $fich = file_put_contents(HOME_SITE . "ressources/colis/$bordereau.png",$octets);
-                                    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
-                                    fwrite($file,$img);
-                                    fclose($file);
-                                    break;
+                                
+                                
                             }
                         }
                     }
