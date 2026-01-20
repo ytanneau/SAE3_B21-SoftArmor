@@ -744,7 +744,7 @@ div:has(> aside) {
 }
 
 .accueil {
-    $font_size_grand
+    //$font_size_grand
     p.ancien_prix {
         display: inline-block;
         margin-right: 6px;
@@ -1792,8 +1792,10 @@ aside {
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
-    .banniere{
-        @include image_produit(250px);
+    .block_banniere{
+        img{
+           @include image_produit(250px);
+        }
     }
     // .hide_input{
     //     background-color: $couleur_etoile;
