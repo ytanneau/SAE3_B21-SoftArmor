@@ -76,6 +76,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <div>
                 <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
                 <label for="tri">Trier par </label>
+                <div class="deroulant">
                 <select id="tri" value ="triOption">
                 <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
                 <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
@@ -83,6 +84,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
                 <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
                 </select>
+                </div>
             </div>
             <section class="results">
                 <!-- Grille des résultats -->
