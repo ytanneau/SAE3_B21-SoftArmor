@@ -49,7 +49,7 @@
     }
 
     .dropdown {
-        @include dropdown($couleur_primaire_client, white, 2.5em, 0, 0, 200px);
+        @include dropdown($background, white, 2.5em, 0, 0, 200px);
     }
 
     > nav {
