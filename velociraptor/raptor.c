@@ -102,11 +102,13 @@ int main(int argc, char *argv[])
     }
 
 //---------------------------------------------------------------------------------------------
-
     
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
     log_init(logI, "START");
+
+//---------
+
 
     // recupération des compte
     c = init_compte(chemain, logI);
@@ -116,6 +118,8 @@ int main(int argc, char *argv[])
         printf("[DEBUG] COMPTE :\n");
         affiche_compte(c, logI);
     }
+
+//---------
 
     // inisalisation avec la bdd
     conn = mysql_init(NULL);
@@ -128,11 +132,13 @@ int main(int argc, char *argv[])
 //-------------------------------------------------------
 
 
-    // verifie que le nombre de colie est bon
+    // recupère la valeur en paramètre
     if (nbColisMaxC != NULL)
     {
         nbColisMax = atoi(nbColisMaxC);
     }
+
+    // verifie que le nombre de colie est bon
     if (nbColisMax == 0 || nbColisMax < -1)
     {
         log_init(logI, "[FATAL] Nombre de colis incorecte.");
@@ -148,12 +154,16 @@ int main(int argc, char *argv[])
         sprintf(message, "SUCCESS COLIS SET %d", nbColisMax);
         log_init(logI, message);
     }
+
+//---------
     
-    // verifie que port est bon
+    //recupère la valeur en paramètre
     if (portC != NULL)
     {
         port = atoi(portC);
     }
+
+    // verifie que port est bon
     if (port <= 0)
     {
         log_init(logI, "[FATAL] Port incorecte.");
@@ -176,7 +186,8 @@ int main(int argc, char *argv[])
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
     opt = 1;
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) 
+    {
         log_init(logI, "[ERROR] setsockopt.");
         exit(EXIT_FAILURE);
     }
@@ -187,7 +198,7 @@ int main(int argc, char *argv[])
 
 //---------------------------------------------------------------------------------------------
 
-    // boucle que mode server
+    // boucle mode server
     while (true)
     {
         // a temps une demande
@@ -214,14 +225,14 @@ int main(int argc, char *argv[])
                 {
                     SESSION encour = data; //data est la structure de base, et son crée en cour pour évier des problème avec pointeur
                     char client_ip[INET_ADDRSTRLEN]; 
-                    inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip));
-                    encour.cnx = cnx;
+                    inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip)); //recupération de ip
                     strcpy(encour.client_ip , client_ip);
+                    encour.cnx = cnx;
 
                     close(sock);
                     
                     comminication(&encour, c, colisInfinit, nbColisMax);
-                    fin(&encour);
+                    fin(&encour); // est pas sortitre de comminication, mais au cas ou
                 }
             }
             

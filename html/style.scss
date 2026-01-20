@@ -796,6 +796,8 @@ div:has(> aside) {
                 &:hover {
                     background-color: adjust-color($color: $couleur_primaire_client, $lightness: 5%);
                 }
+
+                z-index: 1;
             }
             .gauche {
                 transform: rotate(180deg);
@@ -1136,12 +1138,14 @@ aside {
         margin: 0.5em 0;
     }
 
-    a.bouton {
-        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
+
+    .bouton {
+        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
     }
 
-    input.bouton {
-        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    .achat {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
+
     }
 
     @media screen and (max-width : 1024px){
@@ -1787,5 +1791,16 @@ aside {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
+    }
+    input[type=checkbox]{
+        display: none;
+    }
+    #supp_image_promo{
+        background-color: $rouge;
+        padding: 10px 16px 10px 16px;;
+    }
+    div > img{
+        height: 50%;
+        width: 50%;
     }
 }

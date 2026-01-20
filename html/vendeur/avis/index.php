@@ -17,6 +17,7 @@
         exit;
     }
 
+    $id_vendeur = $_SESSION['id_compte'];
     $id_produit = htmlentities(trim($_GET['produit'] ?? ''));
 
     // Rediriger à la page de stock
@@ -98,6 +99,17 @@
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                 </div>
+
+                                <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
+                                <?php if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
+                                    <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                        <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
+                                    </button>
+                                <?php } else { ?>
+                                    <button class="bouton_signalement" disabled>
+                                        <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
+                                    </button>
+                                <?php } ?>
                             </div>
 
                             <div>
@@ -115,11 +127,145 @@
                     </li>
                 <?php } ?>
             </ul>
+
+            <div id="modal_signalement" class="modal">
+                <div class="modal_content">
+                    <div class="titre">
+                        <h3>Signaler cet avis</h3>
+                        <span class="fermer_modal">&times;</span>
+                    </div>
+                    
+                    <form id="form_signalement" action="" method="post">
+                        <input type="hidden" name="id_avis" id="id_avis">
+
+                        <label for="select_raison">Raison</label>
+                        <select name="raison" id="select_raison">
+                            <option value="">Sélectionnez une raison</option>
+                            <option value="offensant">Contenu offensant</option>
+                            <option value="hors-sujet">Contenu hors-sujet</option>
+                            <option value="illicite">Contenu illicite</option>
+                        </select>
+                        <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
+
+                        <div class="boutons">
+                            <button type="reset" class="fermer_modal">Annuler</button>
+                            <button type="submit">Signaler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="snackbar" class="snackbar"></div>
         <?php } ?>
     </section>
 
     </main>
 
     <?php include HOME_SITE . "footer.php" ?>
+
+    <script>
+        const modal = document.getElementById("modal_signalement");
+        const formSignalement = document.getElementById("form_signalement");
+        const snackbar = document.getElementById("snackbar");
+
+        const inputId = document.getElementById("id_avis");
+        const inputEmail = document.getElementById("input_email");
+        const estVisiteur = (inputEmail != null);
+
+        const pErrorEmail = document.getElementById("error_email");
+        const pErrorRaison = document.getElementById("error_raison");
+
+
+        // Afficher le modal en cliquant sur l'icône signaler
+        document.querySelectorAll(".bouton_signalement").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputId.value = btn.dataset.avis;
+                modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
+            });
+        });
+
+        // Fermer le modal
+        document.querySelectorAll(".fermer_modal").forEach(element => {
+            element.addEventListener("click", () => {
+                modal.style.display = "none";
+                document.body.style.overflowY = "auto";
+            });
+        });
+
+        // Fermer le modal si on clique ailleurs
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflowY = "auto";
+            }
+        }
+
+        
+        // Confirmation du signalement
+        formSignalement.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Récupérer les données du formulaire
+            const data = new FormData(formSignalement);
+
+            let raisonInvalide = data.get("raison") == "" || data.get("raison") == null;
+
+            pErrorRaison.style.visibility = raisonInvalide ? "visible" : "hidden";
+
+            if (raisonInvalide) {
+                // On ne continue pas le traitement s'il manque des informations
+                return;
+            }
+
+            // Envoyer les données du formulaire en JSON à une autre page
+            const res = await fetch("../../signalement.php", {
+                method: "POST",
+                body: data
+            });
+
+            const json = await res.json();
+
+            // Fermer le modal
+            modal.style.display = "none";
+            document.body.style.overflowY = "auto";
+
+            // Afficher la snackbar
+            showSnackbar(json.message, json.success ? "success" : "error");
+
+            if (json.success) {
+                console.log(json.success);
+
+                // Désactiver le bouton de signalement
+                const btn = document.querySelector(
+                    `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
+                );
+                btn.disabled = true;
+                
+                // Changer l'image du bouton
+                const img = document.querySelector(`.bouton_signalement[data-avis="${data.get('id_avis')}"] img`);
+                img.src = "../../image/reported_rouge.svg";
+            }
+        });
+
+        function emailValide(email) {
+            let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            return email != null && regex.test(email);
+        }
+
+        // Montrer la snackbar pendant 5 secondes
+        function showSnackbar(msg, mode) {
+            snackbar.textContent = msg;
+            snackbar.className = `show ${mode}`;
+
+            setTimeout(() => {
+                snackbar.className = "";
+            }, 5000);
+        }
+
+    </script>
 </body>
 </html>
