@@ -149,36 +149,33 @@ void init_bdd(MYSQL *conn, FILE *logI)
         {
             host = true;
             strcpy(bdd_host, value);
+            fprintf(logI, "BDD_HOST %s\n", bdd_host);
         }
         else if (strcmp(BDD_NAME ,key) == 0 && value != NULL)
         {
             name = true;
             strcpy(bdd_name, value);
+            fprintf(logI, "BDD_NAME %s\n", bdd_name);
         }
         else if (strcmp(BDD_PASSWORD ,key) == 0 && value != NULL)
         {
             password = true;
             strcpy(bdd_password, value);
+            fprintf(logI, "BDD_PASSWORD %.3s*******\n", bdd_password);
         }
         else if (strcmp(BDD_PORT ,key) == 0 && value != NULL)
         {
             port = true;
             strcpy(bdd_port, value);
+            fprintf(logI, "BDD_PORT %d\n", atoi(bdd_port));
         }
         else if (strcmp(BDD_USER ,key) == 0 && value != NULL)
         {
             user = true;
             strcpy(bdd_user, value);
+            fprintf(logI, "BDD_USER %s\n", bdd_user);
         }
     }
-    
-
-    fprintf(logI, "%s BDD : \n", SERVER);
-    fprintf(logI, "BDD_HOST %s\n", bdd_host);
-    fprintf(logI, "BDD_USER %s\n", bdd_user);
-    //fprintf(logI, "BDD_PASSWORD %s\n", bdd_password);
-    fprintf(logI, "BDD_NAME %s\n", bdd_name);
-    fprintf(logI, "BDD_PORT %d\n", atoi(bdd_port));
 
     if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) {
         sprintf(message, "[FATAL] CONNECT MYSQL : %s", mysql_error(conn));
