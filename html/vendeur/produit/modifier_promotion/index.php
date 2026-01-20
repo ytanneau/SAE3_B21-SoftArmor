@@ -236,7 +236,7 @@
                     warning1.style.display = "block";
                 } else if (dateFin == ""){
                     dateFin.value = dateDebut.value;
-                } else if(dateDebut.value < dateCourante){
+                } else if(dateDebut.value < dateCourante.getTime()){
                     warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
@@ -343,7 +343,7 @@
                 warning3.style.display = "block";
                 event.preventDefault();
             }
-            if (dateDebut.value < dateCourante){
+            if (dateDebut.value < dateCourante.getTime()){
                 warning4.style.display ="block";
                 event.preventDefault();
             }
