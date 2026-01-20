@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_global.php');
 
 // Nom public, prix, moyenne des notes et informations de l'image de chaque produit
