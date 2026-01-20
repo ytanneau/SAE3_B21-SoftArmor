@@ -109,6 +109,10 @@ hr {
 
         .dropdown {
             @include dropdown($couleur_primaire_client, white, 2.5em, 200px);
+
+            &:hover .dropdown-content {
+                display: block;
+            }
         }
     }
 

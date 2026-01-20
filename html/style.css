@@ -168,6 +168,9 @@ hr {
 .toolbar#categories .dropdown > .show {
   display: block;
 }
+.toolbar#categories .dropdown:hover .dropdown-content {
+  display: block;
+}
 .toolbar#stock {
   background-color: #A6A6BF;
   width: 100%;

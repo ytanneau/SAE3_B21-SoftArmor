@@ -32,7 +32,3 @@
         <?php } ?>
     </ul>
 </div>
-
-<script>
-    const dropdownCategorie = document.getElementById
-</script>
