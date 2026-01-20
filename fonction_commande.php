@@ -137,7 +137,7 @@ function get_info_colis($fd,$bordereau){
 function get_image_colis($fd,$bordereau){
     fwrite($fd,"4.$bordereau");
     $photo = '';
-    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
+    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","c");
     $buffer = fread($fd, 6);
     if ($buffer !=="PHOTO="){
 
@@ -156,7 +156,7 @@ function get_image_colis($fd,$bordereau){
     }
     else{
         fclose($file);
-        return false
+        return false;
     }
     
     fclose($file);
