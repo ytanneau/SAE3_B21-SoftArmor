@@ -178,3 +178,16 @@ function binaire_to_octet($binString) {
     }
     return $result;
 }
+
+function connexion_socket($ip,$port){
+    $fd =@fsockopen($ip,$port, $errno, $errstr);
+    if ($fd === false) {
+        echo "Connexion Delivraptor échouée ";
+    }
+    return $fd;
+}
+
+function deconnexion_socket($fd){
+    fwrite($fd,"-1");
+    fclose($fd);
+}

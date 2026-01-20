@@ -23,7 +23,7 @@ if (isset($_SESSION["raison_sociale"])) {
 }
 require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . ".config.php";
-require_once HOME_GIT . "/fonction_commande.php";
+require_once HOME_GIT . "fonction_commande.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
