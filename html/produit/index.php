@@ -328,7 +328,7 @@ if (isset($_POST['quantite'])) {
                     </div> 
                     <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
 
-                    <input class="bouton" type="submit" name="achat" value="Acheter cet article">
+                    <input class="bouton achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
             </aside>
         </div>
