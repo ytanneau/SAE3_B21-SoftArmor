@@ -39,10 +39,12 @@
         // Marquer l'avis comme signalé
         signaler_avis($id_compte, $id_avis, $raison, $email);
 
+        /*
         echo json_encode([
             'success' => true,
             'message' => "L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais."
         ]);
+        */
         die();
     } catch (PDOException $e) {
         echo json_encode([

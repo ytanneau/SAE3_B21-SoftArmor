@@ -225,6 +225,10 @@
             $requete->execute();
 
             // Marquer l'avis comme signalé
+            echo json_encode([
+                'success' => false,
+                'message' => "$id_compte $id_avis $raison $email"
+            ]);
 
         } catch (PDOException $e) {
             throw $e;
