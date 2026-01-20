@@ -39,14 +39,13 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 </head>
 <body data-page="search">
     <?php include HOME_SITE . "header.php"; ?>
+     <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
+    <section class="results">
+        <!-- Grille des résultats -->
+        <ul id="results"></ul>
+    </section>
     <main>
-         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
-
-        <section class="results">
-            <!-- Grille des résultats -->
-            <ul id="results"></ul>
-        </section>
         <aside>
         <section class="filters">
             <form>
@@ -439,7 +438,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             .filters {
                 display : flex;
                 flex-direction: column;
-                margin-right: 80%;
+                margin-right: 88%;
                 margin-top: 5%;
                 margin-bottom: 4%;
             }
