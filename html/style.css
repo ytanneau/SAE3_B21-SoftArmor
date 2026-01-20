@@ -1061,7 +1061,7 @@ ul#results > li > a > h3 {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos form img {
+.infos form .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1092,7 +1092,7 @@ ul#results > li > a > h3 {
   .infos section form article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child img {
+  .infos section form article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
