@@ -717,6 +717,10 @@ section.results {
   width: 100%;
 }
 
+.resultat {
+  display: flex;
+}
+
 ul#results {
   display: flex;
   padding: 0;
