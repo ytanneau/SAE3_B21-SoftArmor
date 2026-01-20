@@ -211,6 +211,7 @@
         const dateCourante = new Date();
         console.log(dateCourante.getDay());
         console.log(dateCourante.getTime()); 
+
         if(!verif_date_pour_suppression(dateDebut.value)){
             btn_suppr.style.display = "none";
         }
@@ -236,7 +237,7 @@
                     warning1.style.display = "block";
                 } else if (dateFin == ""){
                     dateFin.value = dateDebut.value;
-                } else if(dateDebut.value < dateCourante.getTime()){
+                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
                     warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
