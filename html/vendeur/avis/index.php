@@ -99,20 +99,18 @@
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($avis['note'] ?? '')) ?>
                                 </div>
+
+                                <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
+                                <?php if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
+                                    <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
+                                        <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
+                                    </button>
+                                <?php } else { ?>
+                                    <button class="bouton_signalement" disabled>
+                                        <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
+                                    </button>
+                                <?php } ?>
                             </div>
-
-                            <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
-                            <?php
-
-                            if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
-                                <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
-                                    <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
-                                </button>
-                            <?php } else { ?>
-                                <button class="bouton_signalement" disabled>
-                                    <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
-                                </button>
-                            <?php } ?>
 
                             <div>
                                 <h3><?= htmlentities($avis['titre'] ?? '') ?></h3>
@@ -214,22 +212,10 @@
             const data = new FormData(formSignalement);
 
             let raisonInvalide = data.get("raison") == "" || data.get("raison") == null;
-            let emailInvalide = estVisiteur && !emailValide(data.get("email"));
 
             pErrorRaison.style.visibility = raisonInvalide ? "visible" : "hidden";
 
-            if (estVisiteur) {
-                if (emailInvalide) {
-                    console.log("email invalide");
-                    pErrorEmail.textContent = (data.get("email").trim() == "") ? 
-                        "Veuillez renseigner ce champ" : 
-                        "Le format est invalide";
-                }
-
-                pErrorEmail.style.visibility = emailInvalide ? "visible" : "hidden";
-            }
-
-            if (raisonInvalide || emailInvalide) {
+            if (raisonInvalide) {
                 // On ne continue pas le traitement s'il manque des informations
                 return;
             }
@@ -260,7 +246,7 @@
                 
                 // Changer l'image du bouton
                 const img = document.querySelector(`.bouton_signalement[data-avis="${data.get('id_avis')}"] img`);
-                img.src = "../image/reported_rouge.svg";
+                img.src = "../../image/reported_rouge.svg";
             }
         });
 
