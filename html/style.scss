@@ -1873,7 +1873,7 @@ aside {
             background-color: $nuance_primaire_client;
             &:hover{
                 color: adjust-color($color: black, $lightness: 40%,);
-                transform: scale(1.2);
+                transform: scale(1.1);
             }
             &:visited{
                 color: black;
