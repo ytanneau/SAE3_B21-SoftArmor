@@ -101,7 +101,7 @@
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <div id="divPhoto" style="display:block;">
+                <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 </div>

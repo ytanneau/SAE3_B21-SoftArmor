@@ -2826,7 +2826,7 @@ aside input.bouton:hover {
 .main_promo p + div div input {
   width: 50%;
 }
-.main_promo #divPhoto {
+.main_promo .ajout_banniere {
   padding-top: 5px;
 }
 .main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
