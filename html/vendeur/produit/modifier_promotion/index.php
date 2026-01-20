@@ -103,7 +103,7 @@
                     update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
                 }
                 if($id_image_initial){
-                    delete_image_bdd($id_image_initial);
+                    delete_image($id_image_initial);
                 }
             }
             }
@@ -128,7 +128,7 @@
         <?php include "../../header.php" ?>
         <main class="main_promo">
             <div class="entete">
-                <a href="../index.php?<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <a href="../index.php?produit=<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Modifier la promotion</h1>
             </div>
             <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
