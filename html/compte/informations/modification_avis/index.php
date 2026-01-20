@@ -35,6 +35,7 @@
 
     if (isset($_GET['produit'])) {
         $_GET['produit'] = htmlentities(trim($_GET['produit']));
+        $_GET['produit'] = htmlentities(trim($_GET['produit']));
         $sql_produit = detail_produit_image($_GET['produit']);
 
         if ($sql_produit == null){
