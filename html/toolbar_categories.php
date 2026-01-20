@@ -26,9 +26,13 @@
                 
                 <!-- Si pas de sous-catégorie, simple lien -->
                 <?php } else { ?>
-                    <a href="#" href="<?= $chemin ?>"><?= $cat['nom_categorie'] ?></a>
+                    <a href="<?= $chemin ?>"><?= $cat['nom_categorie'] ?></a>
                 <?php } ?>
             </li>
         <?php } ?>
     </ul>
 </div>
+
+<script>
+    const dropdownCategorie = document.getElementById
+</script>

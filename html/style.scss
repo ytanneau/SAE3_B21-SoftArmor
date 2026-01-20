@@ -106,6 +106,10 @@ hr {
 .toolbar {
     &#categories {
         @include toolbar($couleur_primaire_client, $color: white);
+
+        .dropdown {
+            @include dropdown($couleur_primaire_client, white, 2.5em, 200px);
+        }
     }
 
     &#stock {
