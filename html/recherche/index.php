@@ -439,7 +439,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             .filters {
                 display : flex;
                 flex-direction: column;
-                margin-right: 88%;
+                margin-right: 80%;
                 margin-top: 5%;
                 margin-bottom: 4%;
             }
