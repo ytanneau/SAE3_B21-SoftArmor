@@ -21,7 +21,7 @@ if (!isset($_SESSION['logged_in'])) {
 if (isset($_SESSION["raison_sociale"])) {
     header("location: " . HOME_SITE . "vendeur/stock");
 }
-
+require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "/fonction_commande.php";
 
@@ -115,7 +115,7 @@ if (isset($_GET["commande"])) {
                     $fd = connexion_socket(IP,PORT);
                     
                     if($fd){
-                    $conn = connexion_delivraptor($fd,"alizon","098f6bcd4621d373cade4e832627b4f6");
+                    $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
                     
                     //si connexion
                     if ($conn == "1"){
@@ -141,6 +141,7 @@ if (isset($_GET["commande"])) {
                                 //cas image a mettre dans le fichier ressources
                                 default:
                                     $octets = binaireEnOctets($img);
+                                    echo $octets;
                                     $fich = file_put_contents(HOME_SITE . "ressources/colis/$bordereau.png",$octets);
                                     break;
                             }
@@ -155,7 +156,7 @@ if (isset($_GET["commande"])) {
                         <div>
                             <div>
                                 <?php
-                                //si il y a eu connexion delivraptor et que il ny a pas d'erreur
+                                //si il y a eu connexion delivraptor et que il n'y a pas d'erreur
                                 if ($conn =="1" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
 
                                     
@@ -256,7 +257,7 @@ if (isset($_GET["commande"])) {
                             <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
                             <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
                             <?php if ($info_colis["RENDU"] == "1") {?>
-                            <img src="../ressources/colis/<?= htmlentities($bordereau)?>.png" alt="image colis">
+                            <img src="<?= HOME_SITE?>ressources/colis/<?= htmlentities($bordereau)?>.png" alt="image colis">
                             <?php }?>
                         </div>
                         <hr>

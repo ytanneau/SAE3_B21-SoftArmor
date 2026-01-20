@@ -37,67 +37,72 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "link_head.php" ?>
     <title>Alizon - Recherche</title>
 </head>
-<body data-page="search">
-    <?php include HOME_SITE . "header.php"; ?>
-     <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
-
-    <section class="results">
-        <!-- Grille des résultats -->
-        <ul id="results"></ul>
-    </section>
+<body data-page="search"> 
     <main>
-        <aside>
-        <section class="filters">
-            <form>
-                <fieldset id = "prixF">
-                    <legend>Filtrer par prix</legend>
+        <?php include HOME_SITE . "header.php"; ?>
+        <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
-                    <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                    <label for="zeroTo20">0 € à 20 €</label>
-
-                    <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                    <label for="twentyTo50">20 € à 50 €</label>
-
-                    <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                    <label for="fiftyTo100">50 € à 100 €</label>
-
-                    <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                    <label for="hundredTo300">100 € à 300 €</label>
-
-                    <input type="radio" name="prix" id="over300" value="over300">
-                    <label for="over300">Plus de 300 €</label>
-
-                    <input type="checkbox" name="prom" id="prom" value="prom">
-                    <label for="prom">Promotion</label>
-                </fieldset>
-            </form>
+        <section class="results">
+            <!-- Grille des résultats -->
+            <ul id="results"></ul>
         </section>
-        <label for="tri">Trier par </label>
-        <select id="tri" value ="triOption">
-            <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
-            <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
-            <option value="triPrix" data-name ="ASC">Prix croissants</option>
-            <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-            <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
-        </select>
-
-       
-        <div class="range_container">
-            <div class="sliders_control">
-                <input id="fromSlider" type="range" value="10" min="0" max="100"/>
-                <input id="toSlider" type="range" value="40" min="0" max="100"/>
-            </div>
-            <div class="form_control">
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Min</div>
-                    <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
+        <aside class="triEtFiltre">
+            <section class="filters">
+                <form>
+                    <fieldset id = "prixF">
+                        <div>
+                            <legend>Filtrer par prix</legend>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
+                        <label for="zeroTo20">0 € à 20 €</label>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
+                        <label for="twentyTo50">20 € à 50 €</label>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
+                        <label for="fiftyTo100">50 € à 100 €</label>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
+                        <label for="hundredTo300">100 € à 300 €</label>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="radio" name="prix" id="over300" value="over300">
+                        <label for="over300">Plus de 300 €</label>
+                        </div>
+                        <div class="filtreSection">
+                        <input type="checkbox" name="prom" id="prom" value="prom">
+                        <label for="prom">Promotion</label>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+            <label for="tri">Trier par </label>
+            <select id="tri" value ="triOption">
+                <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
+                <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
+                <option value="triPrix" data-name ="ASC">Prix croissants</option>
+                <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
+            </select>
+            <div class="range_container">
+                <div class="sliders_control">
+                    <input id="fromSlider" type="range" value="10" min="0" max="100"/>
+                    <input id="toSlider" type="range" value="40" min="0" max="100"/>
                 </div>
-                <div class="form_control_container">
-                    <div class="form_control_container__time">Max</div>
-                    <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
+                <div class="form_control">
+                    <div class="form_control_container">
+                        <div class="form_control_container__time">Min</div>
+                        <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
+                    </div>
+                    <div class="form_control_container">
+                        <div class="form_control_container__time">Max</div>
+                        <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
+                    </div>
                 </div>
             </div>
-        </div>
         </aside>
     </main>
 
