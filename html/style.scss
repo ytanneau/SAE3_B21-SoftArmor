@@ -776,6 +776,7 @@ div:has(> aside) {
         > div {
             display: flex;
             flex-direction: row;
+            
             > button {
                 z-index: 10;
                 width: 40px;
@@ -809,6 +810,7 @@ div:has(> aside) {
             }
             > ul {
                 @include contenu_centre_horizontal;
+                align-items: start;
                 overflow: hidden;
                 list-style: none;
                 padding: 0;

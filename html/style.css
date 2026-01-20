@@ -1474,6 +1474,7 @@ div:has(> aside) {
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-items: start;
   overflow: hidden;
   list-style: none;
   padding: 0;
