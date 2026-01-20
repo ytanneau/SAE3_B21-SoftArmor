@@ -840,6 +840,9 @@ section.results {
 .resultat > div > div:first-child {
   flex-direction: column;
 }
+.resultat > div > div:first-child h1 {
+  margin-top: 0;
+}
 
 ul#results {
   display: flex;
