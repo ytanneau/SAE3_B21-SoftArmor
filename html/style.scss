@@ -179,6 +179,9 @@ section.results {
     @include contenu_centre_vertical();
     width: 100%;
 }
+.resultat{
+    display: flex;
+}
 
 ul#results {
     display: flex;
