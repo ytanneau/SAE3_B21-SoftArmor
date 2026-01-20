@@ -159,9 +159,8 @@ section.results {
     @include contenu_centre_vertical();
     width: 100%;
 }
-.resultat{
+.resultat div{
     display: flex;
-    flex-direction: row;
 }
 
 ul#results {
@@ -181,6 +180,12 @@ ul#results {
     justify-content: space-around;
     display: flex;
     margin-right: 60%;
+    label{
+        width: 10em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
