@@ -74,7 +74,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </div>
         <div class="resultat">
             <div>
-                <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
+                <div>
+                    <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
+                </div>
                 <div>
                     <div class="labelBendeau">
                         <label for="tri">Trier par </label>
