@@ -105,6 +105,7 @@ if (isset($_GET["commande"])) {
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
             <?php } else {
+                    $conn =false;
                     $fd = connexion_socket(IP,PORT);
                     $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
                     foreach ($liste_commandes as $commande) {
@@ -112,7 +113,7 @@ if (isset($_GET["commande"])) {
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
                     //connexion delivraptor
-                    $conn =false;
+                    
                     
                     
                     
