@@ -2833,6 +2833,7 @@ aside input.bouton:hover {
   color: red;
   font-style: italic;
   font-size: 85%;
+  margin-bottom: 0;
 }
 .main_promo #valider {
   display: block;
@@ -2857,5 +2858,29 @@ aside input.bouton:hover {
   color: #FFFFFF;
 }
 .main_promo #valider:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.main_promo #supprimer_promotion {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #E43737;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.main_promo #supprimer_promotion a {
+  text-decoration: none;
+  color: #E43737;
+}
+.main_promo #supprimer_promotion:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */
