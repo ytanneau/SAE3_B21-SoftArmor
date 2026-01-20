@@ -148,9 +148,9 @@ function get_image_colis($fd,$bordereau){
         
     }
     
-    $ret = explode("=",$photo);
+    $ret = substr($buffer, 6);
     
-    return $ret[1];
+    return $ret;
 
 }
 function binaireEnOctets($binString) {
