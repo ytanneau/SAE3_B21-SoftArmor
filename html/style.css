@@ -2904,4 +2904,14 @@ aside .achat:hover {
 }
 .main_promo #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.main_promo input[type=checkbox] {
+  display: none;
+}
+.main_promo #supp_image_promo {
+  background-color: #E43737;
+  padding: 10px 16px 10px 16px;
+}
+.main_promo img {
+  height: 250px;
 }/*# sourceMappingURL=style.css.map */
