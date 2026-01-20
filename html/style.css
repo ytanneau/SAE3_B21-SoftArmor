@@ -3030,23 +3030,31 @@ aside input.bouton:hover {
   margin-top: 20px;
 }
 
-.liste_accueil_vendeur {
+.main_accueil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main_accueil .liste_accueil_vendeur {
   display: grid;
   grid-template-columns: 2fr 2fr;
   grid-gap: 20px;
+  align-items: center;
 }
-.liste_accueil_vendeur .lien1, .liste_accueil_vendeur .lien2, .liste_accueil_vendeur .lien3, .liste_accueil_vendeur .lien4 {
+.main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
   display: block;
   width: 20em;
+  height: 20em;
+  border-radius: 20px;
   color: black;
   text-decoration: none;
   background-color: #CBCCEA;
 }
-.liste_accueil_vendeur .lien1:hover, .liste_accueil_vendeur .lien2:hover, .liste_accueil_vendeur .lien3:hover, .liste_accueil_vendeur .lien4:hover {
+.main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   color: #666666;
   width: 21em;
 }
-.liste_accueil_vendeur .lien1:visited, .liste_accueil_vendeur .lien2:visited, .liste_accueil_vendeur .lien3:visited, .liste_accueil_vendeur .lien4:visited {
+.main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
   text-decoration: none;
 }/*# sourceMappingURL=style.css.map */
