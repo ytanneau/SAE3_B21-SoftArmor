@@ -147,8 +147,8 @@ function get_image_colis($fd,$bordereau){
         $photo .= $buffer;
         
     }
-    echo substr($photo,0,15);
-    $ret = substr($photo, 6,-1);
+    
+    $ret = substr($photo, 6);
     
     return $ret;
 
