@@ -69,7 +69,13 @@ Si la dernière ligne est ``` [RAPTOR] READY ``` alors votre serveur est près, 
 ```
 [PARAMETRE] ... // si il y a des paramètre
 [RAPTOR] START // tout les paramère son bien passsé
-[RAPTOR] SUCCESS INIT COMPTE // le fichier et un au moins un compte a été touver 
+[RAPTOR] SUCCESS INIT COMPTE // le fichier et un au moins un compte a été touver
+[RAPTOR] BDD : 
+BDD_HOST 10.253.5.107
+BDD_USER sae
+BDD_NAME saedb
+BDD_PORT 3306
+[RAPTOR] SUCCESS CONNECT MYSQL // la connection a la base de donnée est bon
 [RAPTOR] SUCCESS COLIS SET INFINIT // le nombre de colis est correcte
 [RAPTOR] SUCCESS PORT SET 9000 // le numero du port a pu etre définie
 [RAPTOR] SUCCESS INIT SOCKET // le socket est en place
