@@ -37,73 +37,66 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     <?php include HOME_SITE . "link_head.php" ?>
     <title>Alizon - Recherche</title>
 </head>
-<body data-page="search"> 
+<body data-page="search">
+    <?php include HOME_SITE . "header.php"; ?>
+
     <main>
-        <?php include HOME_SITE . "header.php"; ?>
+        <section class="filters">
+            <form>
+                <fieldset id = "prixF">
+                    <legend>Filtrer par prix</legend>
+
+                    <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
+                    <label for="zeroTo20">0 € à 20 €</label>
+
+                    <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
+                    <label for="twentyTo50">20 € à 50 €</label>
+
+                    <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
+                    <label for="fiftyTo100">50 € à 100 €</label>
+
+                    <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
+                    <label for="hundredTo300">100 € à 300 €</label>
+
+                    <input type="radio" name="prix" id="over300" value="over300">
+                    <label for="over300">Plus de 300 €</label>
+
+                    <input type="checkbox" name="prom" id="prom" value="prom">
+                    <label for="prom">Promotion</label>
+                </fieldset>
+            </form>
+        </section>
+        <label for="tri">Trier par </label>
+        <select id="tri" value ="triOption">
+            <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
+            <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
+            <option value="triPrix" data-name ="ASC">Prix croissants</option>
+            <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
+            <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
+        </select>
+
+        <div class="range_container">
+            <div class="sliders_control">
+                <input id="fromSlider" type="range" value="10" min="0" max="100"/>
+                <input id="toSlider" type="range" value="40" min="0" max="100"/>
+            </div>
+            <div class="form_control">
+                <div class="form_control_container">
+                    <div class="form_control_container__time">Min</div>
+                    <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
+                </div>
+                <div class="form_control_container">
+                    <div class="form_control_container__time">Max</div>
+                    <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
+                </div>
+            </div>
+        </div>
         <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
 
         <section class="results">
             <!-- Grille des résultats -->
             <ul id="results"></ul>
         </section>
-        <aside class="triEtFiltre">
-            <section class="filters">
-                <form>
-                    <fieldset id = "prixF">
-                        <div>
-                            <legend>Filtrer par prix</legend>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                        <label for="zeroTo20">0 € à 20 €</label>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                        <label for="twentyTo50">20 € à 50 €</label>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                        <label for="fiftyTo100">50 € à 100 €</label>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                        <label for="hundredTo300">100 € à 300 €</label>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="radio" name="prix" id="over300" value="over300">
-                        <label for="over300">Plus de 300 €</label>
-                        </div>
-                        <div class="filtreSection">
-                        <input type="checkbox" name="prom" id="prom" value="prom">
-                        <label for="prom">Promotion</label>
-                        </div>
-                    </fieldset>
-                </form>
-            </section>
-            <label for="tri">Trier par </label>
-            <select id="tri" value ="triOption">
-                <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
-                <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
-                <option value="triPrix" data-name ="ASC">Prix croissants</option>
-                <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-            </select>
-            <div class="range_container">
-                <div class="sliders_control">
-                    <input id="fromSlider" type="range" value="10" min="0" max="100"/>
-                    <input id="toSlider" type="range" value="40" min="0" max="100"/>
-                </div>
-                <div class="form_control">
-                    <div class="form_control_container">
-                        <div class="form_control_container__time">Min</div>
-                        <input class="form_control_container__time__input" type="number" id="fromInput" value="10" min="0" max="100"/>
-                    </div>
-                    <div class="form_control_container">
-                        <div class="form_control_container__time">Max</div>
-                        <input class="form_control_container__time__input" type="number" id="toInput" value="40" min="0" max="100"/>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </main>
 
     <script type="text/javascript">
@@ -439,104 +432,163 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
-        .filters {
-            display : flex;
-            flex-direction: column;
-            margin-right: 88%;
-            margin-top: 5%;
-            margin-bottom: 4%;
-        }
-
-        .filters form{
-            display : flex;
-            flex-direction: column;
-        }
-
-
-        .prixF{
+        .range_container {
             display: flex;
             flex-direction: column;
+            width: 10%;
+        }
+
+        .sliders_control {
+            position: relative;
+            min-height: 50px;
+        }
+
+        .form_control {
+            position: relative;
+            display: flex;
+            font-size: 16px;
+            font-family: "Inter";
+            color: #635a5a;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            pointer-events: all;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            -webkit-appearance: none;
+            pointer-events: all;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;  
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            background: #f7f7f7;
+        }
+
+        input[type=range]::-webkit-slider-thumb:active {
+            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+        }
+
+        input[type="number"] {
+            color: #8a8383;
+            width: 50px;
+            height: 30px;
+            font-size: 20px;
+            border: none;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
+            opacity: 1;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none; 
+            appearance: none;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            background-color: #C6C6C6;
+            pointer-events: none;
+        }
+
+        #fromSlider {
+            height: 0;
+            z-index: 1;
         }
 
         .range_container {
-display: flex;
-flex-direction: column;
-width: 80%;
-margin: 35% auto;
-}
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            margin-top: 2em;
+        }
 
-.sliders_control {
-position: relative;
-min-height: 50px;
-}
+        .sliders_control {
+            position: aboslute;
+            min-height: 50px;
+        }
 
-.form_control {
-position: relative;
-display: flex;
-justify-content: space-between;
-font-size: 24px;
-color: #635a5a;
-}
+        .form_control {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            font-size: 24px;
+            color: #635a5a;
+        }
 
-input[type=range]::-webkit-slider-thumb {
--webkit-appearance: none;
-pointer-events: all;
-width: 24px;
-height: 24px;
-background-color: #fff;
-border-radius: 50%;
-box-shadow: 0 0 0 1px #C6C6C6;
-cursor: pointer;
-}
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            pointer-events: all;
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;
+        }
 
-input[type=range]::-moz-range-thumb {
--webkit-appearance: none;
-pointer-events: all;
-width: 24px;
-height: 24px;
-background-color: #fff;
-border-radius: 50%;
-box-shadow: 0 0 0 1px #C6C6C6;
-cursor: pointer;  
-}
+        input[type=range]::-moz-range-thumb {
+            -webkit-appearance: none;
+            pointer-events: all;
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;  
+        }
 
-input[type=range]::-webkit-slider-thumb:hover {
-background: #f7f7f7;
-}
+        input[type=range]::-webkit-slider-thumb:hover {
+            background: #f7f7f7;
+        }
 
-input[type=range]::-webkit-slider-thumb:active {
-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
--webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-}
+        input[type=range]::-webkit-slider-thumb:active {
+            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+        }
 
-input[type="number"] {
-color: #8a8383;
-width: 50px;
-height: 30px;
-font-size: 20px;
-border: none;
-}
+        input[type="number"] {
+            color: #8a8383;
+            width: 50px;
+            height: 30px;
+            font-size: 20px;
+            border: none;
+        }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-opacity: 1;
-}
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
+            opacity: 1;
+        }
 
-input[type="range"] {
--webkit-appearance: none; 
-appearance: none;
-height: 2px;
-width: 100%;
-position: absolute;
-background-color: #C6C6C6;
-pointer-events: none;
-}
+        input[type="range"] {
+            -webkit-appearance: none; 
+            appearance: none;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            background-color: #C6C6C6;
+            pointer-events: none;
+        }
 
-#fromSlider {
-height: 0;
-z-index: 1;
-}    
-        </style>
+        #fromSlider {
+            height: 0;
+            z-index: 1;
+        }
+    </style>
 </body>
 
 </html>

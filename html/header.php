@@ -61,7 +61,7 @@
             <li class="hide-on-mobile searchbar">
                 <form action="<?= HOME_SITE . 'recherche/' ?>" id="form_recherche" method="get">
                     <input type="search" name="recherche" id="recherche" size="60" placeholder="Rechercher...">
-                    <button type="submit"><img src="../image/loupe.svg"></button>
+                    <button type="submit"><img src="<?= $images . 'loupe.svg' ?>"></button>
                 </form>
             </li>
             

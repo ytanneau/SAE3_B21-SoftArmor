@@ -82,7 +82,7 @@
                 <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une promotion</h1>
             </div>
-            <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
+            <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
                 <div class="en_ligne">
@@ -101,7 +101,7 @@
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <div id="divPhoto" style="display:block;">
+                <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 </div>
