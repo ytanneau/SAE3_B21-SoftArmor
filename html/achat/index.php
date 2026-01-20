@@ -1,6 +1,7 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+// DELIVRAPTOR
 const IP = "host.docker.internal";
 const PORT = "9000";
 
@@ -49,6 +50,7 @@ else if ($_POST['form'] == 'adresse') {
     // gestion du POST des données adresse 
 
     // met chaînes vides aux colonnes au lieu de null pour éviter erreurs
+    if (!isset($_POST['ville'])) $_POST['ville'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
@@ -56,12 +58,12 @@ else if ($_POST['form'] == 'adresse') {
     $fichier = HOME_GIT . 'fonction_compte.php';
     if (file_exists($fichier)) {
         require_once $fichier;
-        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
+        $erreurs = check_coordonnees($_POST['ville'], $_POST['adresse'], $_POST['code_postal']);
 
 
         // enregistrer
         if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
-            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
+            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['ville'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
         }
 
     } else {
@@ -83,6 +85,7 @@ else if ($_POST['form'] == 'adresse') {
         $numEtape = 1;
 
         // récup les anciennes valeurs remplies pour préremplir les champs d'adresse
+        $adresse_client['ville'] = $_POST['ville'];
         $adresse_client['adresse'] = $_POST['adresse'];
         $adresse_client['complement_adresse'] = $_POST['complement_adresse'];
         $adresse_client['code_postal'] = $_POST['code_postal'];
@@ -262,6 +265,21 @@ if ($numEtape == 1) {
 
             <h2>Entrez votre adresse</h2>
 
+            
+            <label for="ville">Ville</label>
+            <input type="text" name="ville" id="ville" value="<?=htmlentities($adresse_client['ville'] ?? '')?>" required class="champ">
+            <?php
+            if (isset($erreurs['ville'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['ville']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">ex: Paris</p>
+
+
             <label for="adresse">Adresse</label>
             <input type="text" name="adresse" id="adresse" value="<?=htmlentities($adresse_client['adresse'] ?? '')?>" required class="champ">
             <?php
@@ -273,7 +291,7 @@ if ($numEtape == 1) {
             <?php
             }
             ?>
-            <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
+            <p class="contrainte">ex: 12 rue de la Gare</p>
 
             <label for="complement_adresse">Complément adresse</label>
             <textarea type="text" name="complement_adresse" id="complement_adresse" class="champ text"><?=htmlentities($adresse_client['complement_adresse'] ?? '')?></textarea>
