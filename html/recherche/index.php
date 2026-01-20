@@ -330,6 +330,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
+        aside {
+            margin-right: 80%;
+        }
         .filters {
             background: white;
             padding: 1.5rem;
