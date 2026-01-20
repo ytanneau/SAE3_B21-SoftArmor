@@ -1414,6 +1414,22 @@ div:has(> aside) {
   color: white;
 }
 
+.accueil p.ancien_prix {
+  display: inline-block;
+  margin-right: 6px;
+  width: auto;
+}
+.accueil p.pourcentage {
+  display: inline-block;
+  padding: 2px 6px;
+  width: auto;
+  background-color: #6B31D0;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  vertical-align: middle;
+}
 .accueil nav {
   display: none;
 }
@@ -1422,6 +1438,7 @@ div:has(> aside) {
   flex-direction: row;
 }
 .accueil > main > div > button {
+  z-index: 10;
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -1504,8 +1521,6 @@ div:has(> aside) {
 }
 .accueil > main > div > ul > li > a > span.reduction {
   position: absolute;
-  top: 8px;
-  right: 8px;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -1515,7 +1530,6 @@ div:has(> aside) {
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 0.75em;
   z-index: 2;
 }
 @media screen and (max-width: 1024px) {
@@ -1572,7 +1586,7 @@ div:has(> aside) {
 
 .prix {
   color: #2E7A30;
-  font-size: 1.2em;
+  font-size: 2em;
   font-family: "Montserrat";
   font-weight: bold;
 }

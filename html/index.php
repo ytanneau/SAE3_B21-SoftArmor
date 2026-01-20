@@ -76,9 +76,11 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
 
                         <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
                         <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
-                        <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
+                        
+                        
                         
                         <?php if ($reduction) { ?>
+                            <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
                             <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
                         <?php } ?>
                     </a>
