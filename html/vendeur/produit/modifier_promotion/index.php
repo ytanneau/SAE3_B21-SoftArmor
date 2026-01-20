@@ -154,7 +154,7 @@
                 <?php if($tab_image_promotion != null){ ?>
                     <div class="block_banniere">
                         <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
-                        <label class="hide_input" for="photoPromotion">Changer la banniere</label>
+                        <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                         <div>
                             <label for="supp_image_promo">Supprimer la bannière</label>
@@ -163,7 +163,7 @@
                     </div>
                 <?php } else { ?>
                     <div class="ajout_banniere">
-                        <label class="hide_input" for="photoPromotion">Ajouter une bannière</label>
+                        <label class="hide_input_file" for="photoPromotion">Ajouter une bannière</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                     </div>
                 <?php } ?>

@@ -1771,6 +1771,11 @@ aside {
         display:none !important;
     }
 }
+
+.hide_input_file{
+    @include hide_input_file();
+}
+
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
@@ -1816,7 +1821,7 @@ aside {
            @include image_produit(250px);
         }
     }
-    .hide_input{
+    .hide_input_file{
         margin-top: 20px;
         @include hide_input_file();
     }

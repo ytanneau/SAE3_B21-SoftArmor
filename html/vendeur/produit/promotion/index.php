@@ -103,7 +103,7 @@
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
-                    <label class="hide_input" for="photoPromotion">Ajouter une banniere</label>
+                    <label class="hide_input_file" for="photoPromotion">Ajouter une banniere</label>
                     <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 </div>
 
