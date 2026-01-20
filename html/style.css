@@ -717,9 +717,8 @@ section.results {
   width: 100%;
 }
 
-.resultat {
+.resultat div {
   display: flex;
-  flex-direction: row;
 }
 
 ul#results {
@@ -774,6 +773,12 @@ ul#results > li > a > h3 {
   justify-content: space-around;
   display: flex;
   margin-right: 60%;
+}
+#results_for label {
+  width: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form_client {
