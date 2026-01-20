@@ -218,15 +218,6 @@
                 VALUES (:id_compte, :id_avis, :raison, :email)"
             );
 
-            $test = $id_compte === NULL;
-            $test2 = $id_compte === '';
-
-            echo json_encode([
-                'success' => false,
-                'message' => "test 1 = $test test 2 = $test2 $id_compte $id_avis $raison $email"
-            ]);
-            return;
-
             $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
             $requete->bindValue(':raison', $raison, PDO::PARAM_STR);
@@ -234,8 +225,6 @@
             $requete->execute();
 
             // Marquer l'avis comme signalé
-            
-
         } catch (PDOException $e) {
             throw $e;
         }

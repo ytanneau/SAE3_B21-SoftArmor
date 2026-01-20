@@ -6,7 +6,7 @@
     // Démarrer la session
     if (!isset($_SESSION)) {
         session_start();
-        $id_compte = $_SESSION['id_compte'] ?? '';
+        $id_compte = $_SESSION['id_compte'] ?? null;
     }
 
     require_once (HOME_GIT . '.config.php');
@@ -14,11 +14,11 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $email = $_POST['email'] ?? null;
     $raison  = $_POST['raison'] ?? '';
 
     // Si il manque des informations, erreur
-    if (empty($id_avis) || empty($raison) || (empty($id_compte) && empty($email))) {
+    if (empty($id_avis) || empty($raison) || (!isset($id_compte) && !isset($email))) {
         echo json_encode([
             'success' => false,
             'message' => "L'avis n'a pas pu être signalé. Veuillez réessayer plus tard."
@@ -39,12 +39,10 @@
         // Marquer l'avis comme signalé
         signaler_avis($id_compte, $id_avis, $raison, $email);
 
-        /*
         echo json_encode([
             'success' => true,
             'message' => "L'avis a été signalé à Alizon. Nous le vérifierons dans les plus brefs délais."
         ]);
-        */
         die();
     } catch (PDOException $e) {
         echo json_encode([
