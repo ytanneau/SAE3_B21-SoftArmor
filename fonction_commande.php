@@ -156,7 +156,7 @@ function get_image_colis($fd,$bordereau){
     }
     else{
         fclose($file);
-        return false
+        return false;
     }
     
     fclose($file);
