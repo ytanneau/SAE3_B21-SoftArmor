@@ -75,12 +75,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
         </select>
 
-        <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
-
-        <section class="results">
-            <!-- Grille des résultats -->
-            <ul id="results"></ul>
-        </section>
         <div class="range_container">
             <div class="sliders_control">
                 <input id="fromSlider" type="range" value="10" min="0" max="100"/>
@@ -97,6 +91,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 </div>
             </div>
         </div>
+        <h1 id="results_for">Résultats pour "<?= $recherche ?>"</h1>
+
+        <section class="results">
+            <!-- Grille des résultats -->
+            <ul id="results"></ul>
+        </section>
     </main>
 
     <script type="text/javascript">
