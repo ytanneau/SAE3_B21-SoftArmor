@@ -108,6 +108,7 @@ if (isset($_GET["commande"])) {
                     $conn =false;
                     $fd = connexion_socket(IP,PORT);
                     $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
+                    
                     foreach ($liste_commandes as $commande) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
@@ -131,19 +132,8 @@ if (isset($_GET["commande"])) {
                         //si le colis est rendu dans la boite au lettre
                         if ($info_colis["RENDU"] == "1") {
                             //recuperation de l'image
-                            $img = get_image_colis($fd,$bordereau);
-                            switch ($img) {
-                                //cas erreur pas de colis
-                                case '3':
-                                    $texte_img="Colis inexistent";
-                                    break;
-                                //cas d'erreur pas de photo
-                                case '4':
-                                    $texte_img="Photo inexistante";
-                                    break;
-                                
-                                
-                            }
+                            $texte_img = get_image_colis($fd,$bordereau);
+                            
                         }
                     }
                     

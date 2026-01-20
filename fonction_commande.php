@@ -157,15 +157,29 @@ function get_image_colis($fd,$bordereau){
         }
                 
     }
+    //sinon recuperer numero de l'erreur
     else{
-        
+        $buffer = fread($fd, 1);
+        switch ($buffer) {
+            //cas erreur pas de colis
+            case '3':
+                $texte_img="Colis inexistent";
+                break;
+            //cas d'erreur pas de photo
+            case '4':
+                $texte_img="Photo inexistante";
+                break;
+            
+            default:
+                $texte_img="Erreur";
+                break;
+        }
         fclose($file);
-        return false;
+        return $texte_img;
     }
     
     fclose($file);
-    return true;
-
+    return "";
 }
 
 function binaire_to_octet($binString) {
