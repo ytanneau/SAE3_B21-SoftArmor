@@ -769,16 +769,17 @@ ul#results > li > a > h3 {
   height: 3em;
 }
 
-#results_for {
-  justify-content: space-around;
-  display: flex;
-  margin-right: 60%;
-}
-#results_for label {
+.labelBendeau {
   width: 10em;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#results_for {
+  justify-content: space-around;
+  display: flex;
+  margin-right: 60%;
 }
 
 .form_client {
