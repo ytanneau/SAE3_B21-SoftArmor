@@ -1742,5 +1742,6 @@ aside {
     #supprimer_promotion{
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
+        width: 100%;
     }
 }
