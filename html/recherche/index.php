@@ -42,38 +42,39 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <main class ="pageRecherche">
         <div class="TriEtFiltre">
+            <form>
+                <fieldset id = "prixF">
+                    <legend>Filtrer par prix</legend>
+                    <div class="sousFiltre">
+                    <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
+                    <label for="zeroTo20">0 € à 20 €</label>
+                    </div>
+                    <div class="sousFiltre">
+                    <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
+                    <label for="twentyTo50">20 € à 50 €</label>
+                    </div>
+                    <div class="sousFiltre">
+                    <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
+                    <label for="fiftyTo100">50 € à 100 €</label>
+                    </div>
+                    <div class="sousFiltre">
+                    <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
+                    <label for="hundredTo300">100 € à 300 €</label>
+                    </div>
+                    <div class="sousFiltre">
+                    <input type="radio" name="prix" id="over300" value="over300">
+                    <label for="over300">Plus de 300 €</label>
+                    </div>
+                    <div class="sousFiltre">
+                    <input type="checkbox" name="prom" id="prom" value="prom">
+                    <label for="prom">Promotion</label>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="resultat">
             <div>
-                <form>
-                    <fieldset id = "prixF">
-                        <legend>Filtrer par prix</legend>
-                        <div class="sousFiltre">
-                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                        <label for="zeroTo20">0 € à 20 €</label>
-                        </div>
-                        <div class="sousFiltre">
-                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                        <label for="twentyTo50">20 € à 50 €</label>
-                        </div>
-                        <div class="sousFiltre">
-                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                        <label for="fiftyTo100">50 € à 100 €</label>
-                        </div>
-                        <div class="sousFiltre">
-                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                        <label for="hundredTo300">100 € à 300 €</label>
-                        </div>
-                        <div class="sousFiltre">
-                        <input type="radio" name="prix" id="over300" value="over300">
-                        <label for="over300">Plus de 300 €</label>
-                        </div>
-                        <div class="sousFiltre">
-                        <input type="checkbox" name="prom" id="prom" value="prom">
-                        <label for="prom">Promotion</label>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div>
+                <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
                 <label for="tri">Trier par </label>
                 <select id="tri" value ="triOption">
                 <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
@@ -83,10 +84,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
                 </select>
             </div>
-        </div>
-        <div class="resultat">
-            <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
-
             <section class="results">
                 <!-- Grille des résultats -->
                 <ul id="results"></ul>
