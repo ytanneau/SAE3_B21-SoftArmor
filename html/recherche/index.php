@@ -79,9 +79,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         </div>
         <div class="resultat">
             <div>
-                <div>
-                    <span id="for_category">Catégorie "<?=$categorie?>"</span>
-                    <h1 id="results_for"><!--Résultats pour <= $recherche >--></h1>
+                <div class="">
+                    <span id="for_category"></span>
+                    <h1 id="results_for"></h1>
                 </div>
                 <div>
                     <div class="labelBendeau">
