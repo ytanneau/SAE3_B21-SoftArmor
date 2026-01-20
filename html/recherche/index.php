@@ -80,9 +80,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         <div class="resultat">
             <div>
                 <div>
-                    <?php if (!empty($categorie) && !empty($recherche)) { ?>
-                        <span>Catégorie "<?=$categorie?>"</span>
-                    <?php } ?>
+                    <span id="for_category">Catégorie "<?=$categorie?>"</span>
                     <h1 id="results_for"><!--Résultats pour <= $recherche >--></h1>
                 </div>
                 <div>
@@ -125,7 +123,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const isSearchPage = document.body.dataset.page === "search";
         const form = document.querySelector("#form_recherche");
         const input = document.querySelector("#recherche");
-        const resultsFor = document.querySelector("#results_for"); 
+        const resultsFor = document.querySelector("#results_for");
+        const forCategory = document.querySelector("#forCategory");
         
         let promCheck = document.getElementById("prom");
 
@@ -195,6 +194,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             // Rediriger si la recherche est vide
             if (searchState.search === "" && searchState.filters.category === "") {
                 window.location.replace("..");
+            }
+
+            if (searchState.filters.category !== "") {
+                forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
             }
 
             fetchProduitsJSON();
