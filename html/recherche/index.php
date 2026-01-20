@@ -14,7 +14,7 @@ if (!isset($_SESSION)) {
 }
 
 $recherche = htmlentities(trim($_GET['recherche'] ?? ''));
-$categorie = htmlentities(trim($_GET['categorie'] ?? ''));
+$categorie = trim($_GET['categorie'] ?? '');
 
 if (empty($recherche) && empty($categorie)) {
     header('location: ' . HOME_SITE);
