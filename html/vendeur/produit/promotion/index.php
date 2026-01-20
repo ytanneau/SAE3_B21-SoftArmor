@@ -79,7 +79,7 @@
         <?php include "../../header.php" ?>
         <main class="main_promo">
             <div class="entete">
-                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <a href="../index.php?produit=<?=$id_produit?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une promotion</h1>
             </div>
             <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
