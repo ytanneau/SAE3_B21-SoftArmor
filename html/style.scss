@@ -1774,9 +1774,6 @@ aside {
             }
         }
     }
-    #div_photo{
-        padding-top: 5px;
-    }
     #warning1, #warning2, #warning3{
         color:red;
         font-style: italic;
@@ -1795,21 +1792,16 @@ aside {
     .block_banniere{
         display: flex;
         flex-direction: column;
+        margin-top: 40px;
         img{
            @include image_produit(250px);
         }
     }
-    // .hide_input{
-    //     background-color: $couleur_etoile;
-    //     padding: 10px 16px 10px 16px;
-    //     width: fit-content;
-    //     border-radius: $angle_petit;
-    // }
-    // div > img{
-    //     height: 15%;
-    //     width: 15%;
-    // }
-    // .zone_sup{
-    //     width: fit-content;
-    // }
+    .hide_input{
+        background-color: $couleur_etoile;
+        padding: 10px 16px 10px 16px;
+        width: fit-content;
+        border-radius: $angle_petit;
+        
+    }
 }
