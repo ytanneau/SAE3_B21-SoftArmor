@@ -163,8 +163,8 @@
                     </div>
                 <?php } else { ?>
                     <div class="ajout_banniere">
-                        <label style="margin-top: 50px;" class="hide_input" for="photoPromotion">Ajouter une bannière</label>
-                        <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                        <label class="hide_input" for="photoPromotion">Ajouter une bannière</label>
+                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                     </div>
                 <?php } ?>
                 <h3>Réduction</h3>
