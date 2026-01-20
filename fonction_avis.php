@@ -159,15 +159,15 @@
     }
 
     // fonction pour modifier un avis existant
-    function modifier_avis($id_client, $id_produit, $note, $titre, $description, $image){
+    function modifier_avis($id_client, $id_produit, $note, $titre, $commentaire, $image){
         global $pdo;
         try {
-            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :description, date_publication = NOW() WHERE id_client = :id_client AND id_produit = :id_produit");
+            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :commentaire, date_avis = NOW() WHERE id_client = :id_client AND id_produit = :id_produit");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':note', $note, PDO::PARAM_INT);
             $requete->bindValue(':titre', $titre, PDO::PARAM_STR);
-            $requete->bindValue(':description', $description, PDO::PARAM_STR);
+            $requete->bindValue(':commentaire', $commentaire, PDO::PARAM_STR);
             $requete->execute();
 
             // Gérer l'image si elle existe
