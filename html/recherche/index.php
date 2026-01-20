@@ -124,7 +124,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         const form = document.querySelector("#form_recherche");
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
-        const forCategory = document.querySelector("#forCategory");
+        const forCategory = document.querySelector("#for_category");
         
         let promCheck = document.getElementById("prom");
 
