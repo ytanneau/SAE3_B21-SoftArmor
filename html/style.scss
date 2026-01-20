@@ -1826,3 +1826,25 @@ aside {
         margin-top: 20px;
     }
 }
+
+
+.liste_accueil_vendeur{
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 20px;
+    .lien1, .lien2, .lien3, .lien4{
+        display: block;
+        width: 20em;
+        color: black;
+        text-decoration: none;
+        background-color: $nuance_primaire_client;
+        &:hover{
+            color: adjust-color($color: black, $lightness: 40%,);
+            width: 21em;
+        }
+        &:visited{
+            color: black;
+            text-decoration: none;
+        }
+    }
+}
