@@ -186,7 +186,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         // Une fois la page chargée, récupérer une première fois les produits avec la recherche initiale
         document.addEventListener("DOMContentLoaded", () => {
             // Rediriger si la recherche est vide
-            if (searchState.search === "" && searchState.category === "") {
+            if (searchState.search === "" && searchState.filters.category === "") {
                 window.location.replace("..");
             }
 
@@ -199,7 +199,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     e.preventDefault();
                     
                     // Rediriger si la recherche est vide
-                    if (input.value.trim() === "" && searchState.category === "") {
+                    if (input.value.trim() === "" && searchState.filters.category === "") {
                         window.location.replace("..");
                     }
                     
@@ -221,7 +221,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             if (searchState.search !== "") {
                 resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
             } else {
-                resultsFor.textContent = `Produits de la catégorie "${searchState.category}"`;
+                resultsFor.textContent = `Produits de la catégorie "${searchState.filters.category}"`;
             }
 
             data.produits.forEach(produit => {
