@@ -99,8 +99,8 @@
                         <input type="text" id="cout" readonly class="cout_final">
                     </div>
                 </div>
-                <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
-                <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <div id="divPhoto" style="display:block;">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
@@ -112,7 +112,7 @@
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
-                        <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
+                        <p style="display:none;" id="warning3">Le pourcentage ne <br>peut être supérieur<br> à 100</p>
                     </div>
                     <div class="en_colonne">
                         <label for="euro">Remise appliquée : </label>
