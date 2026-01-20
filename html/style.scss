@@ -346,7 +346,7 @@ ul#results {
         }
     }
 
-    main form#donnee {
+    form {
         display: flex;
         flex-direction: row-reverse;
 
@@ -370,7 +370,7 @@ ul#results {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        .image_pp {
+        img {
             @include image_pp(200px);
         }
 
@@ -381,7 +381,7 @@ ul#results {
         }
         section {
                 @include contenu_centre_vertical;
-            form#donnee {
+            form {
                 flex-direction: column;        
                 align-items: center; 
                 padding: 0;
@@ -397,7 +397,7 @@ ul#results {
                     &:first-child {
                         align-items: center;
 
-                        .image_pp {
+                        img {
                             width: clamp(140px, 40vw, 240px);  
                             border-radius: 8px;
                         }
@@ -744,6 +744,7 @@ div:has(> aside) {
 }
 
 .accueil {
+    $font_size_grand
     p.ancien_prix {
         display: inline-block;
         margin-right: 6px;
@@ -794,8 +795,6 @@ div:has(> aside) {
                 &:hover {
                     background-color: adjust-color($color: $couleur_primaire_client, $lightness: 5%);
                 }
-
-                z-index: 1;
             }
             .gauche {
                 transform: rotate(180deg);
@@ -895,7 +894,7 @@ div:has(> aside) {
 
 .prix {
     color: $couleur_prix;
-    font-size: $font_size_grand;
+    font-size: 1.2em;
     font-family: $font_title;
     font-weight: bold;
 }
@@ -1141,14 +1140,12 @@ aside {
         margin: 0.5em 0;
     }
 
-
-    .bouton {
-        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    a.bouton {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
     }
 
-    .achat {
-        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
-
+    input.bouton {
+        @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
     }
 
     @media screen and (max-width : 1024px){
@@ -1777,20 +1774,21 @@ aside {
             }
         }
     }
-    .ajout_banniere{
-        padding-top: 10px;
+    #div_photo{
+        padding-top: 5px;
     }
     #warning1, #warning2, #warning3{
         color:red;
         font-style: italic;
-        font-size: 85%;
-        margin-bottom: 0;
+        font-size: 75%;
     }
     #valider{
         @include bouton_new($color: $couleur_background);
         margin-top: 20px;
         width: 100%;
     }
+<<<<<<< HEAD
+=======
     #supprimer_promotion{
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
@@ -1809,4 +1807,5 @@ aside {
     .zone_sup{
         width: fit-content;
     }
+>>>>>>> 95390dafd034e9c323d127ce0ec324ea921a59fa
 }
