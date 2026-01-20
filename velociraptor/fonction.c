@@ -89,10 +89,11 @@ void affiche_compte(COMPTE* c, FILE *logI)
 }
 
 void init_bdd(MYSQL *conn, FILE *logI)
-{
+{   
+    char message[TAILLE_GRAND];
     if (conn == NULL) 
     { 
-        fprintf(logI, "[FATAL] logI MYSQL\n"); 
+        log_init(logI, "[FATAL] logI MYSQL"); 
         exit(EXIT_FAILURE); 
     }
 
@@ -101,49 +102,76 @@ void init_bdd(MYSQL *conn, FILE *logI)
     FILE *file = fopen(".env", "r");
     // si le fichier na pas pu etre ouver on ferme le programe
     if (file == NULL) {
-        fprintf(logI, "[FATAL] .env NOT FIND\n");
+        fprintf(logI, "[FATAL] .env NOT FIND");
         exit(EXIT_FAILURE);
     }
     // obliger déclaré une ligne pour chaque info, car sinon perte dinformation
+    bool fin = false;
 
-    char *bdd_host;
-    char *bdd_user;
-    char *bdd_password;
-    char *bdd_name;
-    char *bdd_port;
+    bool host = false;
+    bool user = false;
+    bool password = false;
+    bool name = false;
+    bool port = false;
+
+    char bdd_host[TAILLE];
+    char bdd_user[TAILLE];
+    char bdd_password[TAILLE];
+    char bdd_name[TAILLE];
+    char bdd_port[TAILLE];
     
-    char ligne1[TAILLE];
-    fgets(ligne1, sizeof(ligne1), file);
-    strtok(ligne1, DELIMITER);
-    bdd_host = strtok(NULL, DELIMITER);
-    bdd_host[strlen(bdd_host)-1] = '\0';
+    char ligne[TAILLE];
+    char *key;
+    char *value;
 
-    char ligne2[TAILLE];
-    fgets(ligne2, sizeof(ligne2), file);
-    strtok(ligne2, DELIMITER);
-    bdd_user = strtok(NULL, DELIMITER);
-    bdd_user[strlen(bdd_user)-1] = '\0';
-
-    char ligne3[TAILLE];
-    fgets(ligne3, sizeof(ligne3), file);
-    strtok(ligne3, DELIMITER);
-    bdd_password = strtok(NULL, DELIMITER);
-    bdd_password[strlen(bdd_password)-1] = '\0';
-
-    char ligne4[TAILLE];
-    fgets(ligne4, sizeof(ligne4), file);
-    strtok(ligne4, DELIMITER);
-    bdd_name = strtok(NULL, DELIMITER);
-    bdd_name[strlen(bdd_name)-1] = '\0';
-
-    char ligne5[TAILLE];
-    fgets(ligne5, sizeof(ligne5), file);
-    strtok(ligne5, DELIMITER);
-    bdd_port = strtok(NULL, DELIMITER);
+/*
     if (bdd_port[strlen(bdd_port)-1] == '\n')
     {
         bdd_port[strlen(bdd_port)-1] = '\0';
+    }*/
+
+    while (!fin && (!host || !user || !password || !name || !port))
+    {
+        fgets(ligne, sizeof(ligne), file);
+        if (ligne == NULL)
+        {
+            fin = true;
+        }
+        
+        key = strtok(ligne, DELIMITER);
+        value = strtok(NULL, DELIMITER);
+        if (value[strlen(value)-1] == '\n')
+        {
+            value[strlen(value)-1] = '\0';
+        }
+
+        if (strcmp(BDD_HOST ,key) == 0 && value != NULL)
+        {
+            host = true;
+            strcpy(bdd_host, value);
+        }
+        else if (strcmp(BDD_NAME ,key) == 0 && value != NULL)
+        {
+            name = true;
+            strcpy(bdd_name, value);
+        }
+        else if (strcmp(BDD_PASSWORD ,key) == 0 && value != NULL)
+        {
+            password = true;
+            strcpy(bdd_password, value);
+        }
+        else if (strcmp(BDD_PORT ,key) == 0 && value != NULL)
+        {
+            port = true;
+            strcpy(bdd_port, value);
+        }
+        else if (strcmp(BDD_USER ,key) == 0 && value != NULL)
+        {
+            user = true;
+            strcpy(bdd_user, value);
+        }
     }
+    
 
     fprintf(logI, "%s BDD : \n", SERVER);
     fprintf(logI, "BDD_HOST %s\n", bdd_host);
@@ -152,11 +180,12 @@ void init_bdd(MYSQL *conn, FILE *logI)
     fprintf(logI, "BDD_NAME %s\n", bdd_name);
     fprintf(logI, "BDD_PORT %d\n", atoi(bdd_port));
 
-    if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) { 
-        fprintf(logI, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
+    if (mysql_real_connect(conn, bdd_host, bdd_user, bdd_password, bdd_name, atoi(bdd_port), NULL, 0) == NULL) {
+        sprintf(message, "[FATAL] CONNECT MYSQL : %s", mysql_error(conn));
+        log_init(logI, message); 
         exit(EXIT_FAILURE); 
     }
-    fprintf(logI, "%s SUCCESS CONNECT MYSQL\n", SERVER);
+    log_init(logI, "SUCCESS CONNECT MYSQL");
 }
 
 //-------------------------------------------------------------------------------------------------------
@@ -733,6 +762,17 @@ void log_transforme(char *str)
         if (str[i] == '\n')
             str[i] = ' ';
     }
+}
+
+void log_init(FILE *fd, char *message)
+{
+
+    char timestamp[64];
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", t);
+
+    fprintf(fd, "%s [%s] %s\n", SERVER, timestamp, message);
 }
 
 
