@@ -196,10 +196,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 window.location.replace("..");
             }
 
-            if (searchState.filters.category !== "") {
-                forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
-            }
-
             fetchProduitsJSON();
         });
 
@@ -229,6 +225,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             }
 
             if (searchState.search !== "") {
+                forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
                 resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
             } else {
                 resultsFor.textContent = `Produits de la catégorie "${searchState.filters.category}"`;
