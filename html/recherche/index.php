@@ -432,163 +432,69 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <?php include HOME_SITE . "footer.php" ?>
     <style>
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .filters fieldset {
+            border: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .filters legend {
+            font-weight: 600;
+            margin-bottom: .75rem;
+        }
+
+        .filters label {
+            display: block;
+            margin-bottom: .5rem;
+            cursor: pointer;
+        }
         .range_container {
-            display: flex;
-            flex-direction: column;
-            width: 10%;
+            margin-top: 1.5rem;
         }
 
         .sliders_control {
             position: relative;
-            min-height: 50px;
-        }
-
-        .form_control {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            font-size: 16px;
-            font-family: "Inter";
-            color: #635a5a;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 16px;
-            height: 16px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;
-        }
-
-        input[type=range]::-moz-range-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 16px;
-            height: 16px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;  
-        }
-
-        input[type=range]::-webkit-slider-thumb:hover {
-            background: #f7f7f7;
-        }
-
-        input[type=range]::-webkit-slider-thumb:active {
-            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-        }
-
-        input[type="number"] {
-            color: #8a8383;
-            width: 50px;
-            height: 30px;
-            font-size: 20px;
-            border: none;
-        }
-
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button {  
-            opacity: 1;
+            height: 32px;
         }
 
         input[type="range"] {
-            -webkit-appearance: none; 
-            appearance: none;
-            height: 2px;
-            width: 100%;
             position: absolute;
-            background-color: #C6C6C6;
+            width: 100%;
+            height: 4px;
+            appearance: none;
+            background: var(--gray-300);
             pointer-events: none;
         }
 
-        #fromSlider {
-            height: 0;
-            z-index: 1;
-        }
-
-        .range_container {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            margin-top: 2em;
-        }
-
-        .sliders_control {
-            position: aboslute;
-            min-height: 50px;
-        }
-
-        .form_control {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            font-size: 24px;
-            color: #635a5a;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 24px;
-            height: 24px;
-            background-color: #fff;
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            pointer-events: auto;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
+            background: white;
+            border: 1px solid var(--gray-300);
             cursor: pointer;
         }
 
-        input[type=range]::-moz-range-thumb {
-            -webkit-appearance: none;
-            pointer-events: all;
-            width: 24px;
-            height: 24px;
-            background-color: #fff;
-            border-radius: 50%;
-            box-shadow: 0 0 0 1px #C6C6C6;
-            cursor: pointer;  
+        .form_control {
+            display: flex;
+            justify-content: space-between;
+            margin-top: .75rem;
         }
 
-        input[type=range]::-webkit-slider-thumb:hover {
-            background: #f7f7f7;
+        .form_control input {
+            width: 70px;
+            text-align: center;
         }
 
-        input[type=range]::-webkit-slider-thumb:active {
-            box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-            -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
-        }
-
-        input[type="number"] {
-            color: #8a8383;
-            width: 50px;
-            height: 30px;
-            font-size: 20px;
-            border: none;
-        }
-
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button {  
-            opacity: 1;
-        }
-
-        input[type="range"] {
-            -webkit-appearance: none; 
-            appearance: none;
-            height: 2px;
-            width: 100%;
-            position: absolute;
-            background-color: #C6C6C6;
-            pointer-events: none;
-        }
-
-        #fromSlider {
-            height: 0;
-            z-index: 1;
-        }
     </style>
 </body>
 
