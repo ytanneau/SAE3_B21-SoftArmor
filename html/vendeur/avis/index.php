@@ -235,7 +235,7 @@
             }
 
             // Envoyer les données du formulaire en JSON à une autre page
-            const res = await fetch("../signalement.php", {
+            const res = await fetch("../../signalement.php", {
                 method: "POST",
                 body: data
             });
