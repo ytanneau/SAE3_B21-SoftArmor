@@ -101,6 +101,7 @@
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
+                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
@@ -138,22 +139,29 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
+        const warning4 = document.getElementById("warning4");
         const divPhoto = document.getElementById("divPhoto");
+        const dateCourante = new Date();
 
         // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
                     warning1.style.display = "block";
+                } else if (dateFin == ""){
+                    dateFin.value = dateDebut.value;
+                } else if(dateDebut.value < dateCourante){
+                    warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
                     calculP();
                 }
-            } 
-            if (check_date(dateDebut.value)){
-                divPhoto.style.display = "block";
+                
+            }
+            if(!verif_date_pour_suppression(dateDebut.value)){
+                btn_suppr.style.display = "none";
             } else {
-                divPhoto.style.display = "none";
+                btn_suppr.style.display = "block";
             }
             
         });
@@ -225,6 +233,7 @@
             warning1.style.display = "none";
             warning2.style.display = "none";
             warning3.style.display = "none";
+            warning4.style.display = "none";
 
             if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
@@ -239,6 +248,10 @@
             
             if (pourcentage.value >= 100){
                 warning3.style.display = "block";
+                event.preventDefault();
+            }
+            if (dateDebut.value < dateCourante){
+                warning4.style.display ="block";
                 event.preventDefault();
             }
         });

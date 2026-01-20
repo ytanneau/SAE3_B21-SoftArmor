@@ -492,7 +492,7 @@
     width: fit-content;
     border-radius: $angle_petit;
     color: black;
-
+    font-weight: bold;
     &:hover{
         background: adjust-color($color: $background, $lightness: 15%);
     }
