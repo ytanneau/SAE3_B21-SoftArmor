@@ -157,15 +157,18 @@ hr {
 .TriEtFiltre{
     display: flex;
     flex-direction: column;
+    form{
+        @include formulaire();
+    }
 }
 
 section.results {
     @include contenu_centre_vertical();
     width: 100%;
 }
-.resultat{
+.resultat div{
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
 }
 
 ul#results {
@@ -180,11 +183,19 @@ ul#results {
         @include produit_catalogue();
     }
 }
-
+.labelBendeau{
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #results_for{
     justify-content: space-around;
     display: flex;
-    margin-right: 60%;
+}
+
+.deroulant{
+    align-self: center;
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
@@ -1764,6 +1775,11 @@ aside {
         display:none !important;
     }
 }
+
+.hide_input_file{
+    @include hide_input_file();
+}
+
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
@@ -1786,10 +1802,7 @@ aside {
             }
         }
     }
-    #div_photo{
-        padding-top: 5px;
-    }
-    #warning1, #warning2, #warning3{
+    #warning1, #warning2, #warning3, #warning4{
         color:red;
         font-style: italic;
         font-size: 75%;
@@ -1807,21 +1820,44 @@ aside {
     .block_banniere{
         display: flex;
         flex-direction: column;
+        margin-top: 40px;
         img{
            @include image_produit(250px);
         }
     }
-    // .hide_input{
-    //     background-color: $couleur_etoile;
-    //     padding: 10px 16px 10px 16px;
-    //     width: fit-content;
-    //     border-radius: $angle_petit;
-    // }
-    // div > img{
-    //     height: 15%;
-    //     width: 15%;
-    // }
-    // .zone_sup{
-    //     width: fit-content;
-    // }
+    .hide_input_file{
+        margin-top: 20px;
+        @include hide_input_file();
+    }
+    .ajout_banniere{
+        margin-top: 20px;
+    }
+}
+
+.main_accueil{
+    @include contenu_centre_vertical;
+    .liste_accueil_vendeur{
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-gap: 50px;
+        .lien1, .lien2, .lien3, .lien4{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20em;
+            height: 20em;
+            border-radius: $angle_normal;
+            color: black;
+            text-decoration: none;
+            background-color: $nuance_primaire_client;
+            &:hover{
+                color: adjust-color($color: black, $lightness: 40%,);
+                transform: scale(1.2);
+            }
+            &:visited{
+                color: black;
+                text-decoration: none;
+            }
+        }
+    }
 }
