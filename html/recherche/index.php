@@ -437,7 +437,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             flex-direction: column;
             width: 10%;
             margin-right: 80%;
-            margin-top: 20%;
         }
 
         .sliders_control {
