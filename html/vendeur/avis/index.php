@@ -50,44 +50,35 @@
 </head>
 
 <body id="avis_vendeur">
-<?php
-    require_once HOME_SITE . 'vendeur/header.php';
-?>
+    <?php require_once HOME_SITE . 'vendeur/header.php'; ?>
+    
     <main>
+
     <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
-<?php
-    if ($produit == NULL ){
-?>
-        <h1>Désoler se produit existe pas</h1>
-<?php        
-    }
-    else{
-        //print_r($data);
-?>
+
+    <?php if ($produit == NULL) { ?>
+        <h1>Désolé, ce produit n'existe pas</h1>
+    <?php } ?>
+
     <article>
         <div>
             <img src="<?=HOME_SITE . htmlentities($produit['image_principale_url'])?>" alt="<?=htmlentities($produit['image_principale_alt'])?>" title="<?=htmlentities($produit['image_principale_titre'])?>">
         </div>
         <div>
             <?=htmlentities($produit['nom_public'])?>
-<?php
-            if ($data != null) {
-?>
-            <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
-<?php
-            afficher_moyenne_note($produit['note_moy']);
-
+            
+            <?php if ($data != null) { ?>
+                <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
+                <?php afficher_moyenne_note($produit['note_moy']);
             } else {
                 echo "<br>Il n'y a pas d'avis pour ce produit";
-            }
-?>
+            } ?>
+
             <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
     </article>
     <section>
-<?php
-    if ($data != null){
-?>
+        <?php if ($data != null) { ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { ?>
                     <li>
@@ -118,17 +109,13 @@
                             </a>
                         <?php } ?>
                     </li>
-
                 <?php } ?>
             </ul>
-<?php 
-    }
-?>
+        <?php } ?>
     </section>
-<?php
-    }
-?>
+
     </main>
+
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>
