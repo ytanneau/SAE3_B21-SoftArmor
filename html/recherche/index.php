@@ -224,11 +224,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
+            forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
+
             if (searchState.search !== "") {
-                forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
                 resultsFor.textContent = `${data.total} résultat${data.total > 1 ? 's' : ''} pour "${searchState.search}"`;
             } else {
-                resultsFor.textContent = `Produits de la catégorie "${searchState.filters.category}"`;
+                resultsFor.textContent = "";
             }
 
             data.produits.forEach(produit => {
