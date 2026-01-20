@@ -2928,9 +2928,13 @@ aside .achat:hover {
   padding: 10px 16px 10px 16px;
   width: -moz-fit-content;
   width: fit-content;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .main_promo div > img {
   height: 15%;
   width: 15%;
+}
+.main_promo .zone_sup {
+  width: -moz-fit-content;
+  width: fit-content;
 }/*# sourceMappingURL=style.css.map */
