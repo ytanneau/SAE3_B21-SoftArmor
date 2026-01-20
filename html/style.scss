@@ -179,7 +179,7 @@ section.results {
     display: flex;
     justify-content: space-between;
 
-    &:first-child {
+    > div > div:first-child {
         flex-direction: column;
     }
 }
