@@ -137,20 +137,30 @@ function get_info_colis($fd,$bordereau){
 function get_image_colis($fd,$bordereau){
     fwrite($fd,"4.$bordereau");
     $photo = '';
-    while (!feof($fd)) {
-        $buffer = fread($fd, 4096);
-        
-        if ($pos = strpos($buffer,"#") !== false) {
-            $photo .= substr($buffer, 0, $pos);
-            break;
+    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
+    $buffer = fread($fd, 6);
+    if ($buffer !=="PHOTO="){
+
+        while (!feof($fd)) {
+            $buffer = fread($fd, 4096);
+            
+            if ($pos = strpos($buffer,"#") !== false) {
+                $buffer = substr($buffer,0,-1);
+            }
+                
+            fwrite($file,binaireEnOctets($buffer));
+                
+                
         }
-        $photo .= $buffer;
-        
+                
+    }
+    else{
+        fclose($file);
+        return false
     }
     
-    $ret = substr($photo, 6);
-    
-    return $ret;
+    fclose($file);
+    return true;
 
 }
 function binaireEnOctets($binString) {
