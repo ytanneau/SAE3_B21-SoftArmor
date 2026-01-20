@@ -164,6 +164,7 @@ section.results {
 }
 .resultat div{
     display: flex;
+    justify-content: space-between;
 }
 
 ul#results {
@@ -187,7 +188,6 @@ ul#results {
 #results_for{
     justify-content: space-around;
     display: flex;
-    margin-right: 60%;
 }
 
 .deroulant{
