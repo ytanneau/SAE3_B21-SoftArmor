@@ -704,9 +704,7 @@ section.results {
 }
 
 ul#results {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  list-style: none;
+  display: flex;
   padding: 0;
   width: 100%;
   list-style: none;
