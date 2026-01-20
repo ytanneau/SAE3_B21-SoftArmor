@@ -2827,7 +2827,7 @@ aside input.bouton:hover {
   width: 50%;
 }
 .main_promo .ajout_banniere {
-  padding-top: 5px;
+  padding-top: 10px;
 }
 .main_promo #warning1, .main_promo #warning2, .main_promo #warning3 {
   color: red;
