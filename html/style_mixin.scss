@@ -47,9 +47,9 @@
             display: block;
         }
     }
-    
+
     .dropdown {
-        @include dropdown($couleur_primaire_client, white, 2.5em, 200px);
+        @include dropdown($couleur_primaire_client, white, 2.5em, 0, 0, 200px);
     }
 
     > nav {
@@ -407,7 +407,7 @@
     }
 }
 
-@mixin dropdown($background, $color, $top, $width) {
+@mixin dropdown($background, $color, $top, $left, $right, $width) {
     position: relative;
     display: inline-block;
 
@@ -429,10 +429,10 @@
         display: none;
 
         position: absolute;
-        top: 2.5em;
-        right: 0;
+        top: $top;
+        right: $right;
 
-        min-width: 200px;
+        min-width: $width;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.25);
         z-index: 1;
 
@@ -487,10 +487,6 @@
                 background-color: adjust-color($color: $background, $lightness: 5%);
             }
         }
-    }
-
-    .dropdown {
-        
     }
 }
 
