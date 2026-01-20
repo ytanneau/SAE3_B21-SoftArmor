@@ -34,6 +34,7 @@
     if (isset($_GET['produit'])) {
         $_GET['produit'] = htmlentities(trim($_GET['produit']));
         $sql_produit = detail_produit_image($_GET['produit']);
+        $image = get_image($sql_produit['id_image_principale']);
 
         if ($sql_produit == null){
             $erreur['produit'] = EXISTE_PAS;
@@ -135,12 +136,12 @@
             </div>
         <?php } else if (isset($erreur['produit'])) { ?>
             <h1>Le produit n'existe pas</h1>
-        <?php } else{ ?>
+        <?php } else{?>
             <section>
                 <a href="../produit?produit=<?=htmlentities($_GET['produit'])?>">
                     <article>
                         <h3><?= htmlentities($sql_produit['nom_public'] ?? '') ?></h3>
-                        <img src="<?=HOME_SITE . htmlentities($sql_produit['image_principale_url'] ?? '')?>" alt="<?=htmlentities($sql_produit['image_principale_alt'] ?? '')?>" title="<?=htmlentities($sql_produit['image_principale_titre'] ?? '')?>">
+                        <img src="<?=HOME_SITE . htmlentities($image['url_image'] ?? '')?>" alt="<?=htmlentities($image['alt'] ?? '')?>" title="<?=htmlentities($image['titre'] ?? '')?>">
                     </article>
                 </a>
             </section>
