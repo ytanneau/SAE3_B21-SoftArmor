@@ -216,7 +216,7 @@
                     </div>
                     <h3>Image principale</h3>
                     <div class="divEnLigne">
-                        <label class="hide_input_file" for="photo">Importer des images du produit*</label>
+                        <label class="hide_input_file" for="photo">Importer une image du produit*</label>
                         <input style="display:none;" type="file" name="photo" id="photo" accept=".png" required>
                     </div>
                     <h3>Gestion de stock</h3>
