@@ -8,7 +8,7 @@
         $chemin = HOME_SITE . 'recherche/?categorie=' . urlencode($cat['nom_categorie']);
 
         // Si sous-catégories, menu déroulant
-        if (!empty($sous_cat)) { ?>
+        if (!empty($sous_cats)) { ?>
             <div class="dropdown">
                 <a class="dropbown-button" href="<?= $chemin ?>"><?= $cat['nom_categorie'] ?></a>
 
