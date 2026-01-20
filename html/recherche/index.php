@@ -75,7 +75,9 @@ require_once (HOME_GIT . 'fonction_recherche.php');
         <div class="resultat">
             <div>
                 <h1 id="results_for">Résultats pour <?= $recherche ?></h1>
-                <label for="tri">Trier par </label>
+                <div class="labelBendeau">
+                    <label for="tri">Trier par </label>
+                </div>
                 <div class="deroulant">
                 <select id="tri" value ="triOption">
                 <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
