@@ -163,6 +163,18 @@ hr {
     }
 }
 
+.pageRecherche{
+    display: flex;
+    flex-direction: row;
+}
+.TriEtFiltre div div{
+    flex-direction: column;
+}
+.TriEtFiltre{
+    display: flex;
+    flex-direction: column;
+}
+
 section.results {
     @include contenu_centre_vertical();
     width: 100%;
@@ -174,7 +186,7 @@ ul#results {
     width: 100%;
     flex-wrap: wrap;
     list-style: none;
-
+    
     > li {
         @include produit_catalogue();
     }

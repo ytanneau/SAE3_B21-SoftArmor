@@ -40,7 +40,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 <body data-page="search">
     <?php include HOME_SITE . "header.php"; ?>
 
-    <main>
+    <main class ="pageRecherche">
         <div class="TriEtFiltre">
             <div>
                 <form>
@@ -339,19 +339,6 @@ require_once (HOME_GIT . 'fonction_recherche.php');
     </script>
 
     <?php include HOME_SITE . "footer.php" ?>
-    <style>
-        main{
-            display: flex;
-            flex-direction: row;
-        }
-        .TriEtFiltre div div{
-            flex-direction: column;
-        }
-        .TriEtFiltre{
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </body>
 
 </html>
