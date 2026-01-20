@@ -189,6 +189,9 @@ ul#results {
 
 .deroulant{
     height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {

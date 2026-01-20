@@ -811,6 +811,9 @@ ul#results > li > a > h3 {
 
 .deroulant {
   height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form_client {
