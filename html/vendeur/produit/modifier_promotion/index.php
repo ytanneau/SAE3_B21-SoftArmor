@@ -153,7 +153,7 @@
                 
                 <?php if($tab_image_promotion != null){ ?>
                     <div>
-                        <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
+                        <img class="banniere" src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
                         <label class="hide_input" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                         <label for="supp_image_promo">Supprimer la bannière</label>
