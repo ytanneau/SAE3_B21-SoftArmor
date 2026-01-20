@@ -140,7 +140,7 @@ function get_image_colis($fd,$bordereau){
     while (!feof($fd)) {
         $buffer = fread($fd, 4096);
         
-        if (($pos = strpos($buffer, "#")) != false) {
+        if (($pos = strpos($buffer, "#")) !== false) {
             $photo .= substr($buffer, 0, $pos);
             break;
         }
