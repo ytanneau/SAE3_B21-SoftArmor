@@ -101,7 +101,10 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
     <title>Alizon - Accueil</title>
 </head>
 <body class="accueil">
-    <?php include HOME_SITE . "header.php"; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <main>
     
