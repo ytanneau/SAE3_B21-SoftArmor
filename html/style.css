@@ -1435,6 +1435,7 @@ div:has(> aside) {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 20px black;
+  z-index: 1;
 }
 .accueil > main > div > button > img {
   width: 75%;
