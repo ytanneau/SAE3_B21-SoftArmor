@@ -210,7 +210,7 @@
         const btn_suppr = document.getElementById("supprimer_promotion");
         const dateCourante = new Date();
         console.log(dateCourante);
-        
+
         if(!verif_date_pour_suppression(dateDebut.value)){
             btn_suppr.style.display = "none";
         }
