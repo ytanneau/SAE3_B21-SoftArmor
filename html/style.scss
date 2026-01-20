@@ -792,6 +792,30 @@ div:has(> aside) {
                 
                 > li {
                     @include produit_catalogue();
+                    > a {
+                        position: relative;
+
+                        > span.reduction {
+                            position: absolute;
+                            top: 8px;
+                            right: 8px;
+
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+
+                            background-color: $rouge;
+                            color: white;
+
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            font-weight: bold;
+                            font-size: $font_size_petit;
+                            z-index: 2;
+                        }
+                    }
                 }
             }
         }

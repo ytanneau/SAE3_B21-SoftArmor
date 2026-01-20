@@ -1499,6 +1499,25 @@ div:has(> aside) {
 .accueil > main > div > ul > li > a > h3 {
   height: 3em;
 }
+.accueil > main > div > ul > li > a {
+  position: relative;
+}
+.accueil > main > div > ul > li > a > span.reduction {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #E43737;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.75em;
+  z-index: 2;
+}
 @media screen and (max-width: 1024px) {
   .accueil nav:not(header nav) {
     width: 100%;
