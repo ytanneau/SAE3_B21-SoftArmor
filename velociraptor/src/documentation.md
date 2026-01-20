@@ -2,14 +2,15 @@
 
 ---
 
-## Prérequie
+## Prérequis
 
 ### La librairie mariadb
+
 ```
 sudo apt install libmariadb3 libmariadb-dev 
 ```
 
-### Un fichier .env avec les donnée pour la bdd
+### Un fichier .env avec les données pour la bdd
 
 Exemple :
 ```text
@@ -20,8 +21,7 @@ BDD_NAME=nom
 BDD_PORT=3306
 ```
 
-### Un fichier avec les login et mode passe
-
+### Un fichier avec les login et mode passe
 
 Exemple (mdp en MD5)
 ```text
@@ -45,12 +45,12 @@ gcc raptor.c fonction.c -o prog `mariadb_config --cflags --libs`
 
 Avec les paramètre par defaut :
 ```
-./prog
+./prog &
 ```
 
 Avec les paramètre personaliser :
 ```
-./prog -a compte.txt -n 50 -p 9500
+./prog -a compte.txt -n 50 -p 9500 &
 ```
 
 - a : fichier des compte, defaut = login.txt
@@ -69,7 +69,14 @@ Si la dernière ligne est ``` [RAPTOR] READY ``` alors votre serveur est près, 
 ```
 [PARAMETRE] ... // si il y a des paramètre
 [RAPTOR] START // tout les paramère son bien passsé
-[RAPTOR] SUCCESS INIT COMPTE // le fichier et un au moins un compte a été touver 
+[RAPTOR] SUCCESS INIT COMPTE // le fichier et un au moins un compte a été touver
+[RAPTOR] BDD : 
+BDD_HOST 10.253.5.107
+BDD_USER sae
+BDD_PASSWORD dbs*******
+BDD_NAME saedb
+BDD_PORT 3306
+[RAPTOR] SUCCESS CONNECT MYSQL // la connection a la base de donnée est bon
 [RAPTOR] SUCCESS COLIS SET INFINIT // le nombre de colis est correcte
 [RAPTOR] SUCCESS PORT SET 9000 // le numero du port a pu etre définie
 [RAPTOR] SUCCESS INIT SOCKET // le socket est en place

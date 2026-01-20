@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     int port = DEFAULT_PORT, nbColisMax = DEFAULT_COLIS;
     char *portC = NULL, *nbColisMaxC = NULL;
 
+    char message[TAILLE];
     int pid;
     int sock;
     int opt;
@@ -58,7 +59,7 @@ int main(int argc, char *argv[])
         switch (opt) 
         { 
             case 'h': 
-                fprintf(logI, "[PARAMETRE] -h\n");
+                log_init(logI, "[PARAMETRE] -h");
                 fclose(logI);
                 fclose(logC);
                 help();
@@ -66,52 +67,59 @@ int main(int argc, char *argv[])
                 
             case 'a': 
                 chemain = optarg;
-                fprintf(logI, "[PARAMETRE] -a : %s\n", chemain);
+                sprintf(message, "[PARAMETRE] -a : %s", chemain);
+                log_init(logI, message);
                 break; 
             
             case 'n':
                 nbColisMaxC = optarg;
-                fprintf(logI, "[PARAMETRE] -n : %s\n", nbColisMaxC);
+                sprintf(message, "[PARAMETRE] -n : %s\n", nbColisMaxC);
+                log_init(logI, message);
                 break;
 
             case 'p':
                 portC = optarg;
-                fprintf(logI, "[PARAMETRE] -p : %s\n", portC);
+                sprintf(message, "[PARAMETRE] -p : %s\n", portC);
+                log_init(logI, message);
                 break;
 
             case 'b':
                 data.bdd = false;
-                fprintf(logI, "[PARAMETRE] -b\n");
+                log_init(logI, "[PARAMETRE] -b");
                 break; 
 
             case 'd':
                 data.debug = true;
-                fprintf(logI, "[PARAMETRE] -d\n");
+                log_init(logI, "[PARAMETRE] -d");
                 break; 
                 
-            case '?': 
-                fprintf(logI, "[FATAL] Option inconnue: -%c\n", optopt); 
+            case '?':
+                sprintf(message, "[FATAL] Option inconnue: -%c", optopt);
+                log_init(logI, message); 
                 exit(EXIT_FAILURE);
                 break;
         } 
     }
 
 //---------------------------------------------------------------------------------------------
-
     
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
-    fprintf(logI, "%s START\n", SERVER);
+    log_init(logI, "START");
+
+//---------
 
 
     // recupération des compte
     c = init_compte(chemain, logI);
-    fprintf(logI ,"%s SUCCESS INIT COMPTE\n", SERVER);
+    log_init(logI, "SUCCESS INIT COMPTE");
     if (data.debug)
     {
-        fprintf(logI, "[DEBUG] COMPTE :\n");
+        printf("[DEBUG] COMPTE :\n");
         affiche_compte(c, logI);
     }
+
+//---------
 
     // inisalisation avec la bdd
     conn = mysql_init(NULL);
@@ -124,39 +132,47 @@ int main(int argc, char *argv[])
 //-------------------------------------------------------
 
 
-    // verifie que le nombre de colie est bon
+    // recupère la valeur en paramètre
     if (nbColisMaxC != NULL)
     {
         nbColisMax = atoi(nbColisMaxC);
     }
+
+    // verifie que le nombre de colie est bon
     if (nbColisMax == 0 || nbColisMax < -1)
     {
-        fprintf(logI, "[FATAL] Nombre de colis incorecte.\n");
+        log_init(logI, "[FATAL] Nombre de colis incorecte.");
         exit(EXIT_FAILURE);
     }
     else if (nbColisMax == -1)
     {
         colisInfinit = true;
-        fprintf(logI,"%s SUCCESS COLIS SET INFINIT\n", SERVER);
+        log_init(logI, "SUCCESS COLIS SET INFINIT");
     }
     else
     {
-        fprintf(logI,"%s SUCCESS COLIS SET %d\n", SERVER, nbColisMax);
+        sprintf(message, "SUCCESS COLIS SET %d", nbColisMax);
+        log_init(logI, message);
     }
+
+//---------
     
-    // verifie que port est bon
+    //recupère la valeur en paramètre
     if (portC != NULL)
     {
         port = atoi(portC);
     }
+
+    // verifie que port est bon
     if (port <= 0)
     {
-        fprintf(logI, "[FATAL] Port incorecte.\n");
+        log_init(logI, "[FATAL] Port incorecte.");
         exit(EXIT_FAILURE);
     }
     else
     {
-        fprintf(logI,"%s SUCCESS PORT SET %d\n", SERVER, port);
+        sprintf(message, "SUCCESS PORT SET %d", port);
+        log_init(logI, message);
     }
 
 //-------------------------------------------------------
@@ -170,18 +186,19 @@ int main(int argc, char *argv[])
     ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
 
     opt = 1;
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
-        fprintf(logI, "[ERROR] setsockopt.\n");
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) 
+    {
+        log_init(logI, "[ERROR] setsockopt.");
         exit(EXIT_FAILURE);
     }
-    fprintf(logI,"%s SUCCESS INIT SOCKET\n", SERVER);
+    log_init(logI,"SUCCESS INIT SOCKET");
 
-    fprintf(logI,"%s READY\n", SERVER);
+    log_init(logI, "READY");
     fclose(logI);
 
 //---------------------------------------------------------------------------------------------
 
-    // boucle que mode server
+    // boucle mode server
     while (true)
     {
         // a temps une demande
@@ -208,14 +225,14 @@ int main(int argc, char *argv[])
                 {
                     SESSION encour = data; //data est la structure de base, et son crée en cour pour évier des problème avec pointeur
                     char client_ip[INET_ADDRSTRLEN]; 
-                    inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip));
-                    encour.cnx = cnx;
+                    inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip)); //recupération de ip
                     strcpy(encour.client_ip , client_ip);
+                    encour.cnx = cnx;
 
                     close(sock);
                     
                     comminication(&encour, c, colisInfinit, nbColisMax);
-                    fin(&encour);
+                    fin(&encour); // est pas sortitre de comminication, mais au cas ou
                 }
             }
             

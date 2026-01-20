@@ -82,7 +82,7 @@
                 <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une promotion</h1>
             </div>
-            <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
+            <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data" class="form_promo">
                 <h3>Promotion</h3>
                 <div class="en_ligne">
@@ -99,9 +99,9 @@
                         <input type="text" id="cout" readonly class="cout_final">
                     </div>
                 </div>
-                <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
-                <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-                <div id="divPhoto" style="display:block;">
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
+                <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                 </div>
@@ -112,7 +112,7 @@
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage">
-                        <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
+                        <p style="display:none;" id="warning3">Le pourcentage ne peut <br>être supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
                         <label for="euro">Remise appliquée : </label>
