@@ -28,7 +28,7 @@
     // utilisation des fonctions de recuperation des données
     $tabInfoProduit = detail_produit($idProduit);
     $tabCategorieDuProduit = get_categorie_produit($idProduit);
-    $tabImageProduit = get_id_image_produit($idProduit);
+    $tabImageProduit = get_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nomPblc = $_POST['nomPblc'];
@@ -38,16 +38,22 @@
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
         
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
-        if($_POST['qtStock'] === ""){ $_POST['qtSock'] = 0;}
+        if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
         update_info_produit( $idProduit,$_POST['nomPrv'],$nomPblc,$_POST['prix'],$_POST['tva'],
                         $_POST['codeBarre'],$checkMajeur,$checkEnLigne,$_POST['qtAchete'],
                         $_POST['qtStock'],$_POST['seuilAlerte'],$_POST['descSimple'],
                         $_POST['descDetaille'],$_POST['poidColis'],$_POST['volumeColis']);
-        if($_POST['sous_categorie'] == ""){
-            update_categorie_produit($idProduit, $_POST['categorie']);
-        } else {
-            update_categorie_produit($idProduit, $_POST['sous_categorie']);
+        if(isset($_POST['categorie'])) {
+            if($_POST['categorie'] == 'Alimentaire') {
+                if(!empty($_POST['sous_categorie'])) {
+                    update_categorie_produit($idProduit, $_POST['sous_categorie']);
+                } else {
+                    update_categorie_produit($idProduit, $_POST['categorie']);
+                }
+            } else {
+                update_categorie_produit($idProduit, $_POST['categorie']);
+            }
         }
         
         if (isset($_FILES['photoPrincipale'])){
@@ -130,7 +136,7 @@
 <html>
     <head>
         <?php include HOME_SITE . 'link_head.php'; ?>
-        <title>Alizon Vendeur - Modifier un produit</title>
+        <title>Alizon - Modifier un produit</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="style.css">
     </head>
@@ -182,35 +188,38 @@
                     <label for="checkEnLigne">Produit en ligne</label>
                     <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                 </div>
-                <p>Categorie actuel : <?= $tabCategorieDuProduit['nom_categorie'] ?></p>
+                <p>Categorie actuel : <?php if(isset($tabCategorieDuProduit['nom_categorie'])){ echo $tabCategorieDuProduit['nom_categorie'] ; } ?></p>
                 <div class="divEnLigne">
                     <p>
                         <label for="categorie">Catégories*</label>
-                        <select name="categorie" id="idCategorie" style="width: 175px;" required>
+                        <select name="categorie" id="idCategorie" style="width: 175px;">
                             <option value="">-- Choisir une catégorie --</option>
 
                             <?php
                                 $tabCategorie = get_categorie_parent();
                                 foreach($tabCategorie as $nomCat){
                                     $cat = htmlspecialchars($nomCat['nom_categorie']);
-                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';
+                                    if($cat == 'Alimentaire' && $tabCategorieDuProduit['nom_categorie'] == 'Boisson' || $tabCategorieDuProduit['nom_categorie'] == 'Salé' ||$tabCategorieDuProduit['nom_categorie'] == 'Sucré'){
+                                        $selected = 'selected';
+                                    } else {
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';}
                             ?>
                                 <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                             <?php } ?>
                         </select>
                     </p>
 
-                    <p id="pSousCategorieAlimentaire" style="display:none;">
+                    <p id="pSousCategorieAlimentaire">
                         <label for="sous_categorie">Sous-catégories alimentaire*</label>
                         <select name="sous_categorie" id="sous_cate">
                             <option value="">-- Choisir une catégorie --</option>
                             <?php 
                                 $tabSousCategorie = get_sous_categorie("Alimentaire");
-                                foreach($tabSousCategorie as $sousCat){                  
+                                foreach($tabSousCategorie as $sousCat){
+                                    $cat = htmlspecialchars($sousCat['nom_categorie']);
+                                    $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';             
                             ?>
-                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
-                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
-                            </option>
+                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>" <?= $selected?>><?= htmlspecialchars($sousCat['nom_categorie'])?></option>
                             <?php } ?>
                         </select>
                     </p>
@@ -219,7 +228,7 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="qtAchete">Quantité acheté</label>
-                        <input type="number" name="qtAchete" value="<?= $tabInfoProduit['quantite_unite']?>">
+                        <input type="number" name="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
                     </p>
                     <p id="blockUniteVetement" style="display:none;">
                         <label for="uniteVetement">Unités de Masse</label>
@@ -236,6 +245,7 @@
                         <label for="uniteMasse">Unités de masse</label>
                         <select name="unite" id="uniteMasse">
                             <option value="">-- Choisir une unitée --</option>
+                            <option value="mg">mg</option>
                             <option value="g">g</option>
                             <option value="kg">kg</option>
                         </select>
@@ -289,7 +299,7 @@
                         <textarea name="descSimple" id="idDescSimple" maxlength="200"><?= $tabInfoProduit['description'] ?></textarea>
                     </p>
                     <p>
-                        <label for="descDetaille">Description detaille (2000 caractères maximum)</label>
+                        <label for="descDetaille">Description détaillée (2000 caractères maximum)</label>
                         <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"><?= $tabInfoProduit['description_detaillee']?></textarea>
                     </p>
                 </div>
@@ -297,11 +307,11 @@
                 <div class="divEnLigne">
                     <p>
                         <label for="poidColis">Poid du colis</label>
-                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>">
+                        <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>" required>
                     </p>
                     <p>
                         <label for="volumeColis">Volume du colis</label>
-                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>">
+                        <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>" required>
                     </p>
                 </div>
                 <input type="submit" value="Valider les modifications" id="idModifierProduit">
@@ -331,12 +341,15 @@
             
             poidColis.addEventListener('input', () => {
                 poidColis.value = poidColis.value.replace(",",".");
+                poidColis.value = poidColis.value.replace(/[^\d.,]/g,"");
             })
             volumeColis.addEventListener('input', () => {
                 volumeColis.value = volumeColis.value.replace(",",".");
+                volumeColis.value = volumeColis.value.replace(/[^\d.,]/g,"");
             })
             prix.addEventListener('input', () => {
                 prix.value = prix.value.replace(",",".");
+                prix.value = prix.value.replace(/[^\d.,]/g,"");
             })
 
             descSimple.addEventListener('input', () => {
@@ -354,7 +367,6 @@
                 codeBarre.value = codeBarre.value.replace(/\D/g,"");
                 if(codeBarre.value.length < 13){
                     messageErrCodeBarre.style.display = "block";
-                    event.preventDefault();
                 } else {
                     messageErrCodeBarre.style.display = "none";
                 }
@@ -402,9 +414,10 @@
                 }
             })
 
-            modifierProduit.addEventListener('click' , () =>  {
+            modifierProduit.addEventListener('click' , (event) =>  {
                 if(nomPrv.value === ""|| nomPblc.value === "" || tva.value === "" || 
-                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" || 
+                    prix.value === "" || poidColis.value === "" || volumeColis.value === "" ||
+                    categorie.value === ""  selectSousCategorieAlimentaire.value === ""||
                     checkCodeBarre(codeBarre.value)){
                     alert("Les champs obligatoires ne sont pas tous remplis");
                     event.preventDefault();

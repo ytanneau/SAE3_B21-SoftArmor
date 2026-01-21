@@ -42,6 +42,13 @@ $adresse_compte = sql_get_adresse_compte($_SESSION['id_compte']);
 //recuperer les avis du compte
 $avis = tout_avis_client($_SESSION['id_compte']);
 
+//traitement de la suppression d'un avis
+if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit'])){
+    supprimer_avis($_GET['id_produit'], $_SESSION['id_compte']);
+    header("Location: ./");
+    exit;
+}
+
 
 //recupere le mdp crypté et l'id de l'adresse du client
 foreach ($mot_de_passe as $row){
@@ -158,7 +165,7 @@ unset($pdo);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informations Compte</title>
+    <title>Alizon - Mon Compte</title>
     <?php include HOME_SITE . 'link_head.php'; ?>
     <script src="confirmation.js"></script>
 </head>
@@ -178,9 +185,11 @@ unset($pdo);
             <form action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img src="<?= htmlentities("../../".$row['url_image'] ?? 'url')?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
+                    <img src="<?= htmlentities("../../". ($row['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($row['alt_image'] ?? '')?>" title="<?= htmlentities($row['titre_image'] ?? '')?>">
                     
-                    <label for="pdp" class="image_bouton">Ajouter une image 
+
+
+                    <label for="pdp" class="image_bouton"><?php if (isset($row['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
                     <input id="pdp" type="file" name="pdp" accept=".png" hidden>
@@ -270,7 +279,7 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" value="<?= htmlentities($row['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
                     <label for="code_postal">Code Postal</label>
                     <input type="text" name="code_postal" value="<?= htmlentities($row['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
@@ -304,7 +313,7 @@ unset($pdo);
                     ?>
 
                     <label for="complement_adresse">Complement Adresse</label>
-                    <input type="text" name="complement_adresse" placeholder="À renseigner" class="champ text">
+                    <input type="textarea" name="complement_adresse" placeholder="À renseigner" class="champ text">
 
                     <label for="code_postal">Code Postal</label>
                     <input type="text" name="code_postal" placeholder="À renseigner" class="petit champ">
@@ -378,8 +387,8 @@ unset($pdo);
                         }
                     ?>
 
-                    <button type="submit" class="bouton modif">Modifier mes informations</button>
-                    <a class="bouton grave" href="anonymisation_client/index.php">Désactiver mon compte</a>
+                    <button id="test1" type="submit" class="bouton modif">Modifier mes informations</button>
+                    <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
                 </article>
             </form>
 
@@ -413,10 +422,18 @@ unset($pdo);
                                 <p><?= 'Avis rédigé le ' . date('d/m/Y', strtotime(htmlentities($row['date_avis'] ?? ''))) ?></p>
                             </div>
                         </div>
+
+                        <!-- Boutons d'actions -->
+                        <a href="?supprimer_avis=1&id_produit=<?= htmlentities($row['id_produit']) ?>&url_image=<?= htmlentities($row['url_img_avis']) ?>&id_client=<?= htmlentities($_SESSION['id_client']) ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
+                        
+                        <a href="modification_avis/?id_avis=<?= htmlentities($row['id_avis']) ?>" class="bouton">Modifier</a>
+                        
                         
                         <?php if (isset($row['url_img_avis'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_img_avis'] ?>" title="<?= $row['titre_img_avis'] ?>" alt="<?= $row['alt_img_avis'] ?>">
                         <?php } ?>
+
+                        
                     </li>
                 <?php } ?>
             </ul>

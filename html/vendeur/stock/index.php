@@ -26,7 +26,12 @@ function ecrire_nom($rows){
     ?>
         <table>
     <?php
-    foreach ($rows as $row){
+    if (empty($rows)) {
+    ?>
+    <h1>Vous n'avez pas de produit</h1>
+    <?php
+    } else {
+        foreach ($rows as $row){
         ?>
         
             <tr id=<?= htmlentities($row['id_produit'] ?? '')?>>
@@ -56,6 +61,7 @@ function ecrire_nom($rows){
             </tr>
         
         <?php
+        }
     }
     ?>
         </table>
@@ -74,12 +80,12 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     <head>
         <meta charset="utf-8">
         <?php include HOME_SITE . 'link_head.php' ?>
-        <title>Alizon Vendeur - Stock</title>
+        <title>Alizon - Mon Stock</title>
     </head>
     <body class="stock">
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
         <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
-
+        <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="content_produit_vendeur">
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>

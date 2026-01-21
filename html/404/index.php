@@ -10,7 +10,7 @@ $images = HOME_SITE . "image/"
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Alizon</title>
+        <title>Alizon - Page non trouvée</title>
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body id = "body404">

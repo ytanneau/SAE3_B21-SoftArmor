@@ -43,7 +43,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alizon avis</title>
+    <title>Alizon - avis</title>
 <?php
     require_once HOME_SITE . 'link_head.php';
 ?>
@@ -54,7 +54,7 @@
     require_once HOME_SITE . 'vendeur/header.php';
 ?>
     <main>
-    <a href="../"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+    <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
 <?php
     if ($produit == NULL ){
 ?>

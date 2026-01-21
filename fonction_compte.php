@@ -65,6 +65,7 @@
                 }
             }
             catch(PDOException $e){
+                echo $e->getMessage();
                 $erreurs['fatal'] = true;
                 $erreurs['correcte'] = false;
             }
@@ -611,7 +612,7 @@
     // Return true si existe, false sinon
     function sql_check_cle($pdo, $cle){
         $requete = $pdo->prepare("SELECT 1 FROM _cle_vendeur WHERE cle_cobrec = :cle");
-        $requete->bindValue(':cle', $cle, PDO::PARAM_STR);
+        $requete->bindValue(':cle', $cle, PDO::PARAM_INT);
         $requete->execute();
 
         return ($requete->fetch(PDO::FETCH_ASSOC) != null);
@@ -654,7 +655,7 @@
     }
 
     function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
-        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec");
+        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
         $requete->bindValue(":adresse", $adresse, PDO::PARAM_STR);

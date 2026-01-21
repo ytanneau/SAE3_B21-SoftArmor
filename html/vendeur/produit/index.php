@@ -3,18 +3,12 @@
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
 
+    require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
+
     if (!isset($_SESSION)) {
         session_start();
     }
-    function renvoi(){
-        if (headers_sent()) {
-            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
-        }
-        else{
-            exit(header("Location: ../"));
-        }
-    }
-
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
@@ -33,9 +27,6 @@
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
-
-    require_once HOME_GIT . '.config.php';
-    require_once HOME_GIT . 'fonction_produit.php';
 
     //commande qui permet de séléctionner les caractéristiques du produit pour les réutiliser dans le document
     $rows = detail_produit($_GET['produit']);
@@ -58,36 +49,34 @@
     if (isset($supprime) && $supprime === true) {
         renvoi();
     }
-
-
-    // Fonctions
-
-?>   
+    $id_produit = $_GET['produit'];
+    $tab_promo = get_info_promotion($id_produit);
+?>
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Alizon</title>
+        <title>Alizon - <?= htmlentities($rows['nom_stock'] ?? 'Produit')?></title>
         <script src="confirmation.js"></script>
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
-        <a href="../"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+        <a href="../stock"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
         <main class="produit-vendeur">
             <?php if (!isset($supprime) || $supprime === false) {?>
                 <table>
                     <tr>
-                        <th>nom en stock </th>
+                        <th>Nom en stock </th>
                         <td><?= htmlentities($rows['nom_stock'] ?? '')?> </td>
                     </tr>
-                        <th>nom public </th>
+                        <th>Nom public </th>
                         <td><?= htmlentities($rows['nom_public'] ?? '') ?>  </td>
                     </tr>
-                        <th>Prix actuelle </th>
+                        <th>Prix actuel </th>
                         <td><?= htmlentities($rows['prix'] ?? '') ?>  </td>
                     </tr>
-                        <th>taux TVA </th>
+                        <th>Taux TVA </th>
                         <td><?= htmlentities($rows['tva'] ?? '') ?>  </td>
                     </tr>
                         <th>Poids </th>
@@ -95,6 +84,10 @@
                     </tr>
                         <th>Volume </th>
                         <td><?= htmlentities($rows['volume'] ?? '')  ?></td>
+                    </tr>
+                    <tr>
+                        <th>Quantité </th>
+                        <td><?= htmlentities($rows['quantite'] ?? '')  ?></td>
                     </tr>
                 </table>
                 <div>
@@ -116,24 +109,27 @@
                 <div>
                     <?= htmlentities($rows['description_detaillee'] ?? '') ?>
                 </div>
-                <div>
-                    <table>
-                        <tr>
-                            <td>
-                                <?= htmlentities($rows['quantite'] ?? '')  ?>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
                 <form id="supprimer" action="" method="post">
                     <input type="hidden" name="supprimer" value="true">
                     <input type="submit" value="Supprimer">
                 </form>
                 
-                <a href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-            <?php } ?>
+                <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                <?php if($tab_promo != null){
+                    foreach($tab_promo as $ligne){
+                        $id_promo = $ligne['id_promo'];
+                        $date = $ligne['date_debut']?>
+                    <a 
+                        class="bouton_vendeur_produit" 
+                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "idPromo=" . $id_promo)?>">
+                        Modifier la promotion du <?= htmlentities($date)?>
+                    </a>
+                    <?php }} ?>
+                <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                <?php 
+            } ?>
             
-            <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
+            <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>

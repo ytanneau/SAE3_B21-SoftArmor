@@ -29,20 +29,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php'; ?>
-    <title>Alizon Vendeur - Inscription</title>
+    <title>Alizon - Inscription</title>
 </head>
 <body id="inscription_vendeur">
     <main>
 <?php
     if (isset($erreurs) && $erreurs == []) {
 ?>
-        <h1>Félicitations vous avez crée votre compte</h1>
+        <h1>Félicitations, vous avez créé votre compte</h1>
         <a href="../">Connectez-vous</a>
 <?php
     }
     else if (isset($erreurs['fatal'])){
 ?>
-        <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
+        <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 <?php
     }
     else{
@@ -74,7 +74,7 @@
 <?php
     }
 ?>
-            <br>
+            
             <label for="numSiret">Numéro de SIRET</label>
             <input type="text" 
                 name="numSiret"
@@ -95,7 +95,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="numCobrec">Clé de la COBREC</label>
             <input type="text" 
                 name="numCobrec"
@@ -116,7 +116,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="email">Email</label>
             <input type="email"
                 name="email"
@@ -137,8 +137,8 @@
 ?>
 
 
-            <br>
-            <label for="adresse">Adresse</label>
+            
+            <label for="adresse">Adresse du siège</label>
             <input type="text"
                 name="adresse"
                 id="adresse"
@@ -156,17 +156,18 @@
     }
 ?>
 
-            <br>
+            
             <label for="compAdresse">Complément d'adresse</label>
             <textarea type="text"
                 name="compAdresse"
                 id="compAdresse"
-                class="champ text">
-                <?php if (isset($_POST['compAdresse'])) echo htmlentities($_POST['compAdresse'])?>
-            </textarea>
+                class="champ text"><?php 
+                if (isset($_POST['compAdresse'])) echo trim(htmlentities($_POST['compAdresse']))
+            ?></textarea>
+
             <p class="contrainte">Informations complémentaires</p>
 
-            <br>
+            
             <label for="codePostal">Code postal</label>
             <input type="number" 
                 name="codePostal"
@@ -186,7 +187,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="mdp">Mot de passe</label>
             <input type="password" 
                 name="mdp"
@@ -206,7 +207,7 @@
     }
 ?>
 
-            <br>
+            
             <label for="mdpc">Mot de passe de confirmation</label>
             <input type="password" 
                 name="mdpc"
@@ -235,6 +236,5 @@
     }
 ?>
     </main>
-    <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>

@@ -52,7 +52,7 @@
         update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
 
         // redirection vers la page precedente apres la validation du formulaire
-        header('Location: ../');
+        header('Location: ../../stock/');
         exit();
     }
 ?>
@@ -62,7 +62,7 @@
     <head>
         <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
-        <title>Alizon Vendeur - Mes informations</title>
+        <title>Alizon - Mes informations</title>
     </head>
     <body>
         <!-- inclusion du header -->
@@ -70,7 +70,7 @@
         <main class="mainInfoVendeur">
             <div class="entete">
                 <!-- Bouton de retour sur la page de gestion des stocks -->
-                <a href="../../stock/"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <a href="../../accueil"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Mes informations</h1>
             </div>
             <em>Pour des raisons de securité, le numero de siret ne peut etre modifé</em>

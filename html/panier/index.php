@@ -50,7 +50,7 @@ try {
     <meta charset="UTF-8">
     <?php include HOME_SITE . 'link_head.php' ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon panier</title>
+    <title>Alizon - Mon panier</title>
 </head>
 <body class="liste">
     <?php include HOME_SITE . 'header.php' ?>
@@ -104,7 +104,7 @@ try {
             
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                                        <button onclick="actualiser()" type="submit" class="bouton">Supprimer</button>
+                                        <button onclick="actualiser()" type="submit" class="bouton grave">Supprimer</button>
                                     </form>
                                 </article>
                             </div>

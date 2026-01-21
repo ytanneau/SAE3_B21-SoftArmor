@@ -68,9 +68,9 @@ if ($_POST != NULL) {
 <head>
     <meta charset="UTF-8">
     <?php include HOME_SITE . "link_head.php"; ?>
-    <title><?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
+    <title>Alizon - <?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
-<body>
+<body class="produit">
     <?php include HOME_SITE . "header.php"; ?>
 
     <script>
@@ -222,7 +222,7 @@ if ($_POST != NULL) {
             <aside>
                 <div>
                     <span>Prix HT</span> 
-                    <span class="prix">
+                    <span class="prix HT">
                         <?= $formatted_prix_ht ?>
                     </span>
                 </div>
@@ -251,7 +251,7 @@ if ($_POST != NULL) {
                         <p>Connectez-vous pour ajouter ce produit à votre panier</p>
                     <?php } ?>
 
-                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter</a>
+                    <a class="bouton" href="<?=$page?>/index.php?produit=<?= urlencode($produit['id_produit']) ?>">Acheter cet article</a>
                 </form>
             </aside>
         </div>

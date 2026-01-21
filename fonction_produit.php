@@ -370,7 +370,7 @@
         }
     }
 
-    function get_id_image_produit($idProduit){
+    function get_image_produit($idProduit){
         /**
          * Fonction get_id_image_produit prend en parametre l'id d'un produit
          * Renvoie un tableau avec l'id du produit et les id des images en lien avec celui-ci
@@ -427,4 +427,130 @@
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function renvoi(){
+        if (headers_sent()) {
+            die('Échec de redirection. Cliquez sur ce lien svp : <a href="../">Ici</a>');
+        }
+        else{
+            exit(header("Location: ../"));
+        }
+    }
+
+    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
+             VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "date_debut" => $date_debut,
+                "date_fin" => $date_fin,
+                "reduction" => $reduction,
+                "id_image" => $id_image_banniere
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function banniere_libre($date1,$date2){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
+            $stmt->execute([
+                "date1" => $date1,
+                "date2" => $date2
+            ]);
+            $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
+            if($resultat === 1){ return true; }
+            else { return false; }
+        } catch (PDOException $e){
+            throw $e;
+        }
+         
+    }
+
+    function produit_est_en_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $resultat = get_info_promotion($id_produit);
+            if($resultat != null){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_info_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_produit = :id_produit");
+            $stmt->execute([
+                "id_produit" => $id_produit
+            ]);
+
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_info_promotion_unique($id_promo){
+        global $pdo;
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _promotion WHERE id_promo = :id_promo");
+            $stmt->execute([
+                "id_produit" => $id_promo
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _promotion 
+            SET id_produit = :id_produit,
+                date_debut = :date_debut,
+                date_fin = :date_fin,
+                reduction = :reduction,
+                id_image_banniere = :id_image_banniere 
+            WHERE id_promotion = :id_promotion");
+
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "date_debut" => $date_debut,
+                "date_fin" => $date_fin,
+                "reduction" => $reduction,
+                "id_image_banniere" => $id_image_banniere,
+                "id_promotion" => $id_promotion
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_image_promotion($id_image){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+            $stmt->execute([
+                "id_image" => $id_image
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
     }

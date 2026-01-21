@@ -1,16 +1,33 @@
-<?php $images = HOME_SITE . "image/" ?>
+<?php
+$images = HOME_SITE . "image/";
+
+$est_vendeur = false;
+if (isset($_SESSION['raison_sociale'])) {
+  $est_vendeur = true;
+}
+
+?>
 
 <footer id="footer_client" class="footer">
   <div>
     <div class="footer-top">
 
       <div class="footer-logos">
+
+        <?php if (!$est_vendeur) { ?>
+
         <a href= <?= HOME_SITE?> >
           <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
         </a>
+
+          <?php } else { ?>
+
         <a href= <?= HOME_SITE . "vendeur/"?> >
           <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
         </a>
+
+        <?php } ?>
+
       </div>
       <div class="footer-columns">
         <div class="footer-column">
