@@ -826,6 +826,10 @@ hr {
   cursor: pointer;
 }
 
+.resultat {
+  width: 100%;
+}
+
 .resultat > div {
   align-items: center;
   margin-bottom: 1.5em;
@@ -1261,7 +1265,7 @@ ul#results > li > a > h3 {
   .infos section form article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child img {
+  .infos section form article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
