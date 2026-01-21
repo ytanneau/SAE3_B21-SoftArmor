@@ -1183,6 +1183,10 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
+.infos .liste_avis li.reponse {
+  margin-left: 4em;
+  border-left: solid 2px #A6A6BF;
+}
 .infos form {
   display: flex;
   flex-direction: row-reverse;
@@ -3165,6 +3169,7 @@ aside .achat:hover {
   width: 17em;
   height: 17em;
   border-radius: 5px;
+  background-color: #fedcd9;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   transform: ease scale(1.1);
