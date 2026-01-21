@@ -382,7 +382,7 @@ ul#results {
         }
     }
 
-    form {
+    .form_infos {
         display: flex;
         flex-direction: row-reverse;
 
@@ -417,7 +417,7 @@ ul#results {
         }
         section {
                 @include contenu_centre_vertical;
-            form {
+            .form_infos {
                 flex-direction: column;        
                 align-items: center; 
                 padding: 0;
