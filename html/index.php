@@ -39,8 +39,8 @@ function afficher_un_produit($row){?>
                         <?php }?>
 
                         <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
-                        
                         <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
+                        
 
                         <div>
                             <?php 
