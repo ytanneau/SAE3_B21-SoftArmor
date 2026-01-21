@@ -36,7 +36,7 @@
         <main class="main_accueil">
             <article class="liste_accueil_vendeur">
                 <div class="lien1">
-                    <img src="" alt="icone de ">
+                    <img src="<?=HOME_SITE. "image/compte_vendeur.svg"?>" alt="icone de ">
                     <a href="../compte/information_compte_vendeur">Mon compte</a>
                 </div>
                 <div class="lien2">
