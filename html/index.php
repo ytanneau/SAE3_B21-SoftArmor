@@ -18,10 +18,6 @@ require_once (HOME_GIT . 'fonction_global.php');
 // Nom public, prix, moyenne des notes et informations de l'image de chaque produit
 $produit_catalogue = info_produit_accueil();
 
-// Nom public, prix, moyenne des notes et informations de l'image des produits alimentaires
-$cat='Alimentaire';
-$produit_alimentaire = info_produit_accueil_categorie($cat);
-
 // Nom public, prix, moyenne des notes et informations de l'image des produits les plus récents
 $produit_recent = info_produit_accueil_plus_recent();
 
@@ -38,58 +34,62 @@ function afficher_un_produit($row){?>
             $reduction = $prix_normal != $prix_reduit;
             $pourcentage = round((1 - ($prix_reduit / $prix_normal) )*100);
 
-            if($reduction){?>
-            <span class="reduction">%</span>
-            <?php }?>
+                        if($reduction){?>
+                        <span class="reduction">%</span>
+                        <?php }?>
 
-            <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
-            
-            <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
+                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+                        
+                        <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
 
-            <div>
-                <?php 
+                        <div>
+                            <?php 
 
-                    if(!isset($row['note_moy'])){
-                        ?><p>Produit Non Noté</p><?php
-                    }
-                    else{
-                        $moy = $row['note_moy'];
-                        afficher_moyenne_note($moy);
-                    }
-                ?>
-            </div>
+                                if(!isset($row['note_moy'])){
+                                    ?><p>Produit Non Noté</p><?php
+                                }
+                                else{
+                                    $moy = $row['note_moy'];
+                                    afficher_moyenne_note($moy);
+                                }
+                            ?>
+                        </div>
 
-            
+                        
 
-            <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
-            <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
-            
-            
-            
-            <?php if ($reduction) { ?>
-                <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
-                <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
-            <?php } ?>
-        </a>
-    </li>
-<?php
-}
+                        <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
+                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
+                        
+                        
+                        
+                        <?php if ($reduction) { ?>
+                            <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
+                            <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
+                        <?php } ?>
+                    </a>
+                </li>
+    <?php }
 
 
 // fonction d'affichage de produits
 // $liste_produits est une liste avec des produits dedans
 // $nom_classe_js est une chaine de car qui permet au script JS de fonctionner
 // pour rajouter une nouvelle liste => penser à changer le script et ajouter des trucs
-function afficher_produits($liste_produits, $nom_classe_js = "") {?>
+function afficher_produits($liste_produits, $nom_classe_js = "") {
+    $nom_classe_js = strtr($nom_classe_js, ' ', '_');
+    $nom_classe_js = strtr($nom_classe_js, 'É', 'é');
+    $nom_classe_js = strtr($nom_classe_js, ' ', '_');
+    $nom_classe_js = strtr($nom_classe_js, '&', 'et');
+    ?>
     
     <div>
         <button class="fleche gauche <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
         <ul class="container <?=$nom_classe_js?>">
             <?php
-            // Boucle pour ajouter un produit dans un <li> 
+            // Boucle pour ajouter un produit dans un <li>
             foreach ($liste_produits as $row) {
                 afficher_un_produit($row);
-            } ?>
+            }?>
         </ul>
         <button class="fleche droite <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
@@ -128,10 +128,21 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
     <hr>
     
 
-    <!-- Produits alimentaires -->
-    <h1>Produits alimentaires</h1>
-    <?php afficher_produits($produit_alimentaire, "alimentaire")?>
-    <hr>
+    <!-- Produits de catégories -->
+    <?php
+    $categories = get_categorie();
+
+    foreach($categories as $cat) {
+        $cat = $cat['nom_categorie'];
+        $produits_cat = info_produit_accueil_categorie($cat);
+
+        if (count($produits_cat) != 0) {
+            ?>
+            <h1>Produits <?=strtolower($cat)?></h1>
+            <?php afficher_produits($produits_cat, strtolower($cat))?>
+            <hr>
+        <?php }
+    } ?>
 
     <!-- Tous les produits du catalogue -->
     <h1>Produits du catalogue</h1>
@@ -153,6 +164,27 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
     <script src="script.js"></script>
+
+    <script>
+        
+
+        <?php
+
+        foreach($categories as $cat) {
+            $cat = strtolower($cat['nom_categorie']);
+            $cat = strtr($cat, 'É', 'é');
+            $produits_cat = info_produit_accueil_categorie($cat);
+            $cat = strtr($cat, ' ', '_');
+            $cat = strtr($cat, '&', 'et');
+            
+            
+            if (count($produits_cat) != 0) {
+                echo "setCaroussel('$cat');\n";
+            }
+        }
+    ?>
+    </script>
+
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 </html>
