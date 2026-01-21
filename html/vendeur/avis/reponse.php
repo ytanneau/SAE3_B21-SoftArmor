@@ -14,7 +14,7 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
-    $id_reponse = $_POST['id_reponse'] ?? '';
+    $id_reponse = $_POST['id_reponse_modif'] ?? '';
     $reponse  = $_POST['reponse'] ?? '';
 
     // Si il manque des informations, erreur

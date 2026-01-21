@@ -212,7 +212,7 @@
 
         const inputIdAvisSignalement = document.getElementById("id_avis_signalement");
         const inputIdAvisReponse = document.getElementById("id_avis_reponse");
-        const inputIdAvisReponse = document.getElementById("id_avis_reponse");
+        const inputIdReponse = document.getElementById("id_reponse");
 
         const textareaReponse = document.getElementById("reponse");
 
