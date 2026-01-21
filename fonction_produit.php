@@ -108,7 +108,15 @@
         SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
         INNER JOIN _image ON id_image_principale = _image.id_image
-        WHERE p.categorie = :categorie');
+        WHERE p.categorie = :categorie
+        
+        UNION
+        
+        SELECT p.*, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image
+        INNER JOIN _categorie ON nom_categorie = categorie
+        WHERE nom_categorie_sup = :categorie');
         $requete->bindValue(':categorie', $categorie, PDO::PARAM_STR);
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
