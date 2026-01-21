@@ -2617,11 +2617,6 @@ aside .achat:hover {
   align-items: center;
 }
 
-.content_produit_vendeur {
-  display: flex;
-  justify-content: center;
-}
-
 .produit-vendeur {
   padding: 2rem;
   display: flex;
@@ -2747,6 +2742,8 @@ aside .achat:hover {
   min-height: 100vh;
 }
 .stock main {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 .stock main table {

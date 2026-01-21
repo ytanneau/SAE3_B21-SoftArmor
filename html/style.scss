@@ -1547,10 +1547,6 @@ aside {
     @include contenu_centre_vertical();
 }
 
-.content_produit_vendeur{
-    display: flex;
-    justify-content: center;
-}
 .produit-vendeur {
   padding: 2rem;
   display: flex;
@@ -1621,7 +1617,8 @@ aside {
 .stock {
     min-height: 100vh;
     main {
-        
+        display: flex;
+        justify-content: center;
         align-items: center;
         table {
             display: flex;
