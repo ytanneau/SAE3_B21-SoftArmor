@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     log_init(logI, "SUCCESS INIT COMPTE");
     if (data.debug)
     {
-        printf("[DEBUG] COMPTE :\n");
+        fprintf(logI, "[DEBUG] COMPTE :\n");
         affiche_compte(c, logI);
     }
 
