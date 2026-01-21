@@ -39,7 +39,7 @@
                                 <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cette réponse">
                             </button>
                         <?php } else { ?>
-                            <button class="bouton_signalement" disabled>
+                            <button class="bouton_signalement_reponse" disabled>
                                 <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
                             </button>
                         <?php } ?>
