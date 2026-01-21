@@ -17,6 +17,7 @@
 
         ?>
             <div class="alarme">
+                <h3>Alerte</h3>
                 <ul>
                 <?php foreach ($data as $key => $value) { ?>
                     <li>
