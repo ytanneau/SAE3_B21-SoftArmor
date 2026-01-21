@@ -1887,6 +1887,9 @@ h3 {
 .liste main aside {
   top: 8em;
 }
+.liste main div > .bouton {
+  min-width: auto;
+}
 .liste main .bouton {
   display: block;
   max-width: 100%;
@@ -1958,7 +1961,7 @@ h3 {
   background-color: rgb(66.9464285714, 177.5535714286, 69.8571428571);
 }
 .liste main p {
-  width: 40%;
+  padding: 1em;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
