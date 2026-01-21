@@ -67,23 +67,22 @@
     <?php } ?>
 
     <article>
+        <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
+
         <div>
-            <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
-        </div>
-        <div>
-            <?=htmlentities($produit['nom_public'])?>
+            <h1><?=htmlentities($produit['nom_public'])?></h1>
             
             <?php if ($data != null) { ?>
-                <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
+                Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?>
+                <br>
                 <?php afficher_moyenne_note($produit['note_moy']);
             } else {
                 echo "<br>Il n'y a pas d'avis pour ce produit";
             } ?>
-
-            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
-    </article>
-    <section>
+</article>
+<section>
+        <h2>Avis (<?=htmlentities($produit['nb_avis'] ?? "0")?>)</h2>
         <?php if ($data != null) { ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { 
