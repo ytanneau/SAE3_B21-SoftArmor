@@ -36,11 +36,10 @@
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
-        print_r($_POST['seuilAlerte']);
+
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
-        print_r($_POST['seuilAlerte']);
         $categorieFinale = null;
 
         if (!empty($_POST['categorie'])) {
@@ -48,9 +47,7 @@
                 if (!empty($_POST['sous_categorie'])) {
                     $categorieFinale = $_POST['sous_categorie'];
                 } else {
-                    $_SESSION['error'] = "Veuillez choisir une sous-catégorie alimentaire.";
-                    header("Location: ".$_SERVER['REQUEST_URI']);
-                    exit;
+                    $categorieFinale = $_POST['categorie'];
                 }
             } else {
                 $categorieFinale = $_POST['categorie'];
@@ -58,7 +55,6 @@
         }
 
         if ($categorieFinale !== null) {
-            print_r($_POST['seuilAlerte']);
             update_info_produit(
                 $idProduit,
                 $_POST['nomPrv'],
