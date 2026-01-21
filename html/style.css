@@ -1282,7 +1282,7 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child input,
   .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
-    width: 100%;
+    width: 50%;
   }
   .infos section .form_infos article:last-child .champ {
     margin-bottom: 1em;
