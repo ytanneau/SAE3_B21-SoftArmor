@@ -479,7 +479,7 @@ ul#results {
                     &:first-child {
                         align-items: center;
 
-                        img {
+                        .image_pp {
                             width: clamp(140px, 40vw, 240px);  
                             border-radius: 8px;
                         }
