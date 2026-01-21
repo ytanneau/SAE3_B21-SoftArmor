@@ -30,6 +30,10 @@ dede=098f6bcd4621d373aade4e832627b4f6
 alizon=098f6bcd4621du73cade4e832627b4f6
 ```
 
+### Un fichier image
+
+Un fichier nommé ```image.png``` qui sera envoier si la photo du colis est demander.
+
 ---
 
 ## Compilation, Execution et Verification du démarage

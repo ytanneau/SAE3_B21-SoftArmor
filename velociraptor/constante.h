@@ -91,9 +91,9 @@
 
 // element de photo
 #define TAILLE_PHOTO 62
-#define FICHIER_PHOTO "carton_endommage.png"
+#define FICHIER_PHOTO "image.png"
+//#define FICHIER_PHOTO "fonction.h"
 
-#define HELP_FILE "hepl.txt"
 #define DEFAULT_COLIS -1
 #define DEFAULT_PORT 9000
 #define DEFAULT_LOGIN "login.txt"
