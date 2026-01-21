@@ -1189,7 +1189,11 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos form {
+.infos .liste_avis li.reponse {
+  margin-left: 4em;
+  border-left: solid 2px #A6A6BF;
+}
+.infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
   align-items: normal;
@@ -1198,19 +1202,19 @@ ul#results > li > a > h3 {
   border-radius: 20px;
   padding: 3em 3em;
 }
-.infos form article {
+.infos .form_infos article {
   display: flex;
   flex-direction: column;
   padding: 0 2em;
 }
-.infos form > :last-child {
+.infos .form_infos > :last-child {
   width: 100%;
 }
-.infos form label {
+.infos .form_infos label {
   margin-top: 5%;
   font-size: 1.5em;
 }
-.infos form .champ {
+.infos .form_infos .champ {
   border: none;
   border-radius: 5px;
   height: 2em;
@@ -1218,33 +1222,33 @@ ul#results > li > a > h3 {
   padding-left: 0.6em;
   padding-right: 0;
 }
-.infos form .text {
+.infos .form_infos .text {
   height: 10em;
   text-align: start;
 }
-.infos form .petit {
+.infos .form_infos .petit {
   width: 30%;
 }
-.infos form input[type=number]::-webkit-inner-spin-button,
-.infos form input[type=number]::-webkit-outer-spin-button {
+.infos .form_infos input[type=number]::-webkit-inner-spin-button,
+.infos .form_infos input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.infos form input[type=number] {
+.infos .form_infos input[type=number] {
   -moz-appearance: textfield;
 }
-.infos form p {
+.infos .form_infos p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-.infos form .error {
+.infos .form_infos .error {
   color: #E43737;
 }
-.infos form .champ {
+.infos .form_infos .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos form .image_pp {
+.infos .form_infos .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1260,38 +1264,38 @@ ul#results > li > a > h3 {
     flex-direction: column;
     align-items: center;
   }
-  .infos section form {
+  .infos section .form_infos {
     flex-direction: column;
     align-items: center;
     padding: 0;
     margin: 1em;
     gap: 2em;
   }
-  .infos section form article {
+  .infos section .form_infos article {
     padding: 0;
     display: flex;
     flex-direction: column;
   }
-  .infos section form article:first-child {
+  .infos section .form_infos article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child .image_pp {
+  .infos section .form_infos article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
-  .infos section form article:first-child label {
+  .infos section .form_infos article:first-child label {
     margin-top: 1em;
     font-size: 1rem;
     text-align: center;
   }
-  .infos section form article:last-child input,
-  .infos section form article:last-child button, .infos section form article:last-child a {
+  .infos section .form_infos article:last-child input,
+  .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
     width: 100%;
   }
-  .infos section form article:last-child .champ {
+  .infos section .form_infos article:last-child .champ {
     margin-bottom: 1em;
   }
-  .infos section form article:last-child .bouton {
+  .infos section .form_infos article:last-child .bouton {
     margin-top: 1.2em;
   }
 }

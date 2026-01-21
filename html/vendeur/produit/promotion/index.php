@@ -104,7 +104,7 @@
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
                     <label class="hide_input_file" for="photoPromotion">Ajouter une banniere</label>
-                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg">
                 </div>
 
                 <h3>Réduction</h3>
@@ -142,6 +142,7 @@
         const warning4 = document.getElementById("warning4");
         const divPhoto = document.getElementById("divPhoto");
         const dateCourante = new Date();
+        dateCourante.setHours(0, 0, 0, 0);
 
         // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
         dateDebut.addEventListener('change', () => {
