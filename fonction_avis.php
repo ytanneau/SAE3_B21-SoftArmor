@@ -340,6 +340,29 @@
         }
     }
 
+    function modifier_reponse($id_reponse, $reponse) {
+        global $pdo;
+
+        if (empty($reponse ?? '')) {
+            return false;
+        }
+
+        try {
+            $sql = "UPDATE _reponse
+                    SET reponse = :reponse
+                    WHERE id_reponse = :id_reponse";
+
+            $requete = $pdo->prepare($sql);
+            $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+            $requete->bindValue(':id_reponse', $id_reponse, PDO::PARAM_INT);
+            $requete->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     function supprimer_reponse($id_reponse) {
         global $pdo;
 

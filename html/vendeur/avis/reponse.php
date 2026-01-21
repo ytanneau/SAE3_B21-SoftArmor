@@ -14,6 +14,7 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
+    $id_reponse = $_POST['id_reponse_modif'] ?? '';
     $reponse  = $_POST['reponse'] ?? '';
 
     // Si il manque des informations, erreur
@@ -26,6 +27,17 @@
     }
 
     try {
+        // Si on modifie une réponse déjà existante
+        if (!empty($id_reponse)) {
+            modifier_reponse($id_reponse, $reponse);
+
+            echo json_encode([
+                'success' => true,
+                'message' => "Votre réponse a été modifiée."
+            ]);
+            die();
+        }
+
         // Si le vendeur a déjà répondu, erreur
         if (avis_est_repondu($id_avis)) {
             echo json_encode([
