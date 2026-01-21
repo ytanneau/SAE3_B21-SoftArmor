@@ -1796,11 +1796,17 @@ h3 {
   font-weight: bold;
 }
 
+.liste {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .liste .input_quantite {
   font-size: 1.4em;
 }
 .liste main {
   display: flex;
+  flex: 1;
 }
 .liste main img {
   -o-object-fit: contain;
