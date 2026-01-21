@@ -1025,12 +1025,15 @@ h3 {
 }
 
 .liste {
+    display: flex;
+    flex-direction: column;
     .input_quantite {
         font-size:1.4em;
     }
 
     main {
         display: flex;
+        flex: 1;
 
         img {
             object-fit: contain;
