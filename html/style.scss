@@ -176,10 +176,6 @@ hr {
     @media (max-width: 1024px) {
         width: 100%;
     }
-
-    form{
-        @include formulaire();
-    }
 }
 
 .TriEtFiltre fieldset {
