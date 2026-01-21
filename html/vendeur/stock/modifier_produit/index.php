@@ -40,7 +40,7 @@
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
-        
+        print_r($_POST['seuilAlerte']);
         $categorieFinale = null;
 
         if (!empty($_POST['categorie'])) {
@@ -58,6 +58,7 @@
         }
 
         if ($categorieFinale !== null) {
+            print_r($_POST['seuilAlerte']);
             update_info_produit(
                 $idProduit,
                 $_POST['nomPrv'],
