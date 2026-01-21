@@ -20,7 +20,7 @@
                 <ul>
                 <?php foreach ($data as $key => $value) { ?>
                     <li>
-                        <a href="../produit/?produit=<?=urldecode($data['id_produit'])?>">
+                        <a href="../produit/?produit=<?=htmlentities($data['id_produit'])?>">
                             <?=htmlentities($data['nom_stock'])?>
                             <div>
                                 il reste <?=htmlentities($data['quantite'])?>
