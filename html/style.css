@@ -1637,6 +1637,17 @@ div:has(> aside) {
   display: flex;
   flex-direction: row;
 }
+.accueil > main > div .banniere {
+  justify-content: center;
+}
+.accueil > main > div .banniere a {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.accueil > main > div .banniere a img {
+  width: 100%;
+}
 .accueil > main > div > button {
   z-index: 10;
   width: 40px;
