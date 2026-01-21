@@ -318,7 +318,25 @@
         }
     }
 
-    function repondre_avis($id_compte, $id_avis, $reponse) {
-        return;
+    function repondre_avis($id_avis, $reponse) {
+        global $pdo;
+
+        if (empty($reponse ?? '')) {
+            return false;
+        }
+
+        try {
+            $sql = "INSERT INTO _reponse (id_avis, reponse)
+                    VALUES (:id_avis, :reponse)";
+
+            $requete = $pdo->prepare($sql);
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+            $requete->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
     }
     
