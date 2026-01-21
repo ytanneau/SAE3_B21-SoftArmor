@@ -138,7 +138,7 @@
                     $reponse = get_reponse($avis['id_avis']);
 
                     // Si l'avis a une réponse, l'afficher
-                    if (isset($reponse)) { ?>
+                    if (!empty($reponse)) { ?>
                         <li class="reponse">
                             <?php var_dump($reponse); ?>
                         </li>
