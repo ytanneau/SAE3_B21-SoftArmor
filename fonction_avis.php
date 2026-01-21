@@ -339,4 +339,25 @@
             throw $e;
         }
     }
+
+    function supprimer_reponse($id_reponse) {
+        global $pdo;
+
+        if (empty($id_reponse)) {
+            return false;
+        }
+
+        try {
+            $sql = "DELETE FROM _reponse
+                    WHERE id_reponse = :id_reponse";
+
+            $requete = $pdo->prepare($sql);
+            $requete->bindValue(':id_reponse', $id_reponse, PDO::PARAM_INT);
+            $requete->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
     
