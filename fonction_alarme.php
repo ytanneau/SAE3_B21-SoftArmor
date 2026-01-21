@@ -12,3 +12,24 @@
 
 
 
+    function affiche_alarme($id_vendeur){
+        $data = get_alarme($id_vendeur);
+
+        ?>
+            <div>
+                <ul>
+                <?php foreach ($data as $key => $value) { ?>
+                    <li>
+                        <a href="../produit/?produit=<?=urldecode($data['id_produit'])?>">
+                            <?=htmlentities($data['nom_stock'])?>
+                            <div>
+                                il reste <?=htmlentities($data['quantite'])?>
+                            </div>
+                        </a>
+                    </li>
+                <?php }?>
+                </ul>
+            </div>
+
+        <?php
+    }
