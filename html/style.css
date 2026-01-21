@@ -23,7 +23,6 @@ main {
 .image_produit_moyen {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 200px;
   max-width: 200px;
   height: 200px;
@@ -33,7 +32,6 @@ main {
 .image_produit_petit {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 25px;
   max-width: 25px;
   height: 25px;
@@ -869,8 +867,9 @@ ul#results {
   padding: 0;
   width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
   list-style: none;
+  justify-content: left;
+  margin-left: 10%;
 }
 ul#results > li {
   width: 20vw;
@@ -884,7 +883,6 @@ ul#results > li > a {
 ul#results > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 15vw;
   max-width: 15vw;
   height: 15vw;
@@ -1037,7 +1035,6 @@ ul#results > li > a > h3 {
 #avis_vendeur article div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 10vw;
   max-width: 10vw;
   height: 10vw;
@@ -1181,7 +1178,6 @@ ul#results > li > a > h3 {
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 10vw;
   max-width: 10vw;
   height: 10vw;
@@ -1447,7 +1443,6 @@ div:has(> aside) {
 .detail_produit > article:first-child > div:first-child > div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 300px;
   max-width: 300px;
   height: 300px;
@@ -1456,7 +1451,6 @@ div:has(> aside) {
 .detail_produit > article:first-child > div:first-child > div:nth-child(2) img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 100px;
   max-width: 100px;
   height: 100px;
@@ -1680,7 +1674,6 @@ div:has(> aside) {
 .accueil > main > div > ul > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 15vw;
   max-width: 15vw;
   height: 15vw;
@@ -2295,7 +2288,6 @@ aside .achat:hover {
 .bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 250px;
   max-width: 250px;
   height: 250px;
@@ -2643,7 +2635,6 @@ aside .achat:hover {
 .produit-vendeur > div img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 200px;
   max-width: 200px;
   height: 200px;
@@ -3133,7 +3124,6 @@ aside .achat:hover {
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 250px;
   max-width: 250px;
   height: 250px;
