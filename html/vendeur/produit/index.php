@@ -165,10 +165,12 @@
                 </div>
                 <!-- div a mettre en dessous du tableau -->
                 <div>
+                    <h3>Description simple</h3>
                     <?= htmlentities($rows['description'] ?? '') ?>
                 </div>
                 <!-- A mettre encore en dessous -->
                 <div>
+                    <h3>Description detaillée</h3>
                     <?= htmlentities($rows['description_detaillee'] ?? '') ?>
                 </div>
                 
