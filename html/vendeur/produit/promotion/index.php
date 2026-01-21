@@ -50,7 +50,7 @@
         
         $extension = strtolower(pathinfo($_FILES['photoPromotion']['name'], PATHINFO_EXTENSION));
 
-        $nomImage = $id_produit . "_promotion" . $extension;
+        $nomImage = $id_produit . "_promotion" . "." . $extension;
         
         $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
         // definition des caractéristiques d'une image
