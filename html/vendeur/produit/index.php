@@ -99,16 +99,11 @@
                     <?php }
                         } 
                     ?>
-                <li>
+                <li class="supprimer_produit">
                     <a href="supprimer_produit.php?produit=<?=$id_produit?>" id="supprimer_produit">
                         <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
                         Supprimer le produit
                     </a>
-                    <!-- <form id="supprimer" action="" method="post">
-                        <input type="hidden" name="supprimer" value="true">
-                        <input type="submit" value="Supprimer le produit">
-                    </form> -->
-                   
                 </li>
             </ul>
         </div>
