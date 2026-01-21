@@ -790,6 +790,7 @@ hr {
 .TriEtFiltre form {
   align-items: normal;
   width: 100%;
+  width: 15em;
 }
 .TriEtFiltre form label {
   margin-top: 5%;
