@@ -359,14 +359,14 @@
 
 
         // Suppression des réponses
-        document.querySelectorAll(".form_supprimer").forEach(formSupprimer => {
-            formSupprimer.addEventListener("submit", (e) => {
+        document.querySelectorAll(".bouton_supprimer").forEach(btn => {
+            btn.addEventListener("click", (e) => {
                 e.preventDefault();
 
                 const confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette réponse ?");
 
                 if (confirmation) {
-                    this.submit();
+                    btn.parentElement.submit();
                 }
             });
         });
