@@ -359,7 +359,7 @@ ul#results {
         justify-content: center;
         gap: 20px;
 
-        img{
+        img:not(.etoile) {
             @include image_produit(10vw);
             background-color: white;
         }
