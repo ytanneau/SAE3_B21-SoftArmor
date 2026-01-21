@@ -693,7 +693,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_produit FROM produit_banniere_ajourd");
+            $stmt = $pdo->prepare("SELECT id_produit FROM produit_banniere_aujourd");
             $stmt->execute();
             $id = $stmt->fetch(PDO::FETCH_ASSOC);
             $stmt = $pdo->prepare("SELECT id_produit, id_image_banniere FROM _promotion WHERE id_produit = :id");
