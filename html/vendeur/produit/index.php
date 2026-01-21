@@ -38,18 +38,6 @@
         renvoi();
     }
 
-    // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    if ($_POST != NULL && isset($rows)) {
-        try {
-            supprimer_produit_stock($id_produit);
-        } catch (PDOException $e) {
-            die('Suppression du produit ' . $id_produit . ' impossible : ' . $e->getMessage());
-        }
-
-        header("Location: ../");
-        exit();
-    }
-    
     $compteur = 0;
     $tab_promo = get_info_promotion($id_produit);
     foreach($tab_promo as $ligne){
@@ -61,13 +49,7 @@
     <head>
         <meta charset="utf-8">
         <title>Alizon - <?= htmlentities($rows['nom_stock'] ?? 'Produit')?></title>
-        <script src="confirmation.js">
-            document.getElementById("supprimer_produit").addEventListener('click', () =>{
-                if(!confirm("Etes-vous sur de vouloir supprimer le produit ?")){
-                    event.preventdefault();
-                }
-            })
-        </script>
+        
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
@@ -118,7 +100,7 @@
                         } 
                     ?>
                 <li>
-                    <a href="" id="supprimer_produit">
+                    <a href="supprimer_produit.php?produit=<?=$id_produit?>" id="supprimer_produit">
                         <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
                         Supprimer le produit
                     </a>
@@ -185,6 +167,15 @@
             
         </main>
         <?php include HOME_SITE . "footer.php" ?>
+
+        <script>
+            const btn_supp = document.getElementById("supprimer_produit")
+            btn_supp.addEventListener('click', (event) =>{
+                if(!confirm("Etes-vous sur de vouloir supprimer le produit ?")){
+                    event.preventDefault();
+                }
+            })
+        </script>
     </body>
 </html>
 
