@@ -130,7 +130,6 @@ hr {
             .bouton_avis_vendeur_produit{
                 background-color: $couleur_etoile;
                 &:hover{
-                    background-color: $couleur_etoile;
                     background-color: adjust-color($couleur_etoile,$lightness: 10%);
                 }
             }
@@ -143,12 +142,13 @@ hr {
                     color: black;
                     font-family: $font_title;
                     font-weight: bold;
-                    background-color: $nuance_primaire_vendeur;
+                    background-color: $nuance;
                 }
-                form{
-                    input{
-                        
-                    }
+            }
+            .supprimer_produit{
+                background-color: $rouge;
+                &:hover{
+                    background-color: adjust-color($rouge,$lightness: 10%);
                 }
             }
         }
