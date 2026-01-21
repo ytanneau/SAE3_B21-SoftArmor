@@ -354,6 +354,14 @@ void envoier_code(SESSION *data, char *message){
     }
 }
 
+void envoier_codeV2(SESSION *data, char *message, size_t size){
+    if (write(data->cnx, message, size) == -1)
+    {
+        log_line(data, "[ERROR] WRITE PHOTO");
+        fin(data);
+    }
+}
+
 //-------------------------------------------------------------------------------------------------------
 
 
@@ -720,64 +728,58 @@ void photo(SESSION *data)
     }
 }
 
-// socupe d'envoier la photo
-void envoier_photo(SESSION *data, char *fichier)
-{
-    int size;
-    char buff;
-    char message[TAILLE_PHOTO*9];
-
-    sprintf(message, "%s%s", PHOTO, DELIMITER);
-    envoier_message(data, message);
-
-    int fd = open(FICHIER_PHOTO, O_RDONLY);
-    // boucle de lecture
-    while (size = read(fd, &buff, 1) != 0)
-    {
-        //printf("read\n");
-        //printf("%c", buff);
-        chaine_en_binaire(buff, message);
-        //printf("encode\n");
-        //printf("%s", message);
-        envoier_code(data, message);
-        //printf("envoie\n");
-    }
-    printf("fin\n");
-    envoier_message(data, "#"); // fin de limage
-}
-
-
 // transforme le code de l'image en binaire
-void encode_photo(char *src, char *des)
-{
-    for (int i = 0; src[i] != '\0'; i++) 
-    {
-        unsigned char c = (unsigned char)src[i];
-        // Conversion du caractère en binaire (8 bits) 
-        for (int bit = 7; bit >= 0; bit--) 
-        { 
-            des[i * 8 + (7 - bit)] = (c & (1 << bit)) ? '1' : '0'; 
-        } 
-    }
-    
-    // Ajout de la fin de chaine
-    int len = 0; 
-    for (; src[len] != '\0'; len++); 
-    des[len * 8] = '\0';
-}
-
-
-void chaine_en_binaire(const char src, char *dest)
+void encode_photo(char *src, char *des, ssize_t size)
 {
     int i, bit;
 
-    for (bit = 7; bit >= 0; bit--)
+    for (i = 0; i < size; i++)
     {
-        *dest = ((src >> bit) & 1) + '0';
-        dest++;
+        for (bit = 7; bit >= 0; bit--)
+        {
+            *des = (((unsigned char)src[i] >> bit) & 1) + '0';
+            des++;
+        }
     }
-    *dest = '\0'; // fin de chaîne
+
+    //*des = '\0';
 }
+
+void envoier_photo(SESSION *data, char *fichier)
+{
+    char message[TAILLE];
+    sprintf(message, "%s%s", PHOTO, DELIMITER);
+    envoier_message(data, message);
+
+    char buffer[TAILLE_GRAND];
+    char code[TAILLE_GRAND*8];
+    size_t bytes_read;
+    
+    // Open image file in binary mode
+    FILE *file = fopen(fichier, "r");
+    if (file == NULL) {
+        message_erreur(data, ERREUR_PHOTO_INEXISTENT);
+    }
+
+    // Read file into buffer
+    bytes_read = fread(buffer, 1, sizeof(buffer), file);
+    while (bytes_read != 0)
+    {
+        printf("read = %ld\n",bytes_read);
+        encode_photo(buffer, code ,bytes_read);
+
+        if (write(data->cnx, code, bytes_read*8) == -1)
+        {
+            log_line(data, "[ERROR] WRITE PHOTO");
+            fin(data);
+        }
+        bytes_read = fread(buffer, 1, sizeof(buffer), file);
+    }
+    envoier_message(data, "#"); // fin de limage
+
+    fclose(file);
+}
+
 
 
 
