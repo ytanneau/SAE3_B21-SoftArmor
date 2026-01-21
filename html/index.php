@@ -131,7 +131,6 @@ if($tabPromotion != null){
         </div>
         <?php } ?>
         <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
-        <div>
             <!--Produit Ajoutés Récemment-->
             <h1>Produits ajoutés récemment</h1>
             <?php afficher_produits($produit_recent, "recent")?>
@@ -171,7 +170,6 @@ if($tabPromotion != null){
                 <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
             </nav>  
             -->
-        </div>
     </main>
 
     <footer>
