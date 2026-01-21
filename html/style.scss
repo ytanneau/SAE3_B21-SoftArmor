@@ -2019,3 +2019,7 @@ aside {
         }
     }
 }
+
+.delete_picture{
+    @include bouton_new();
+}

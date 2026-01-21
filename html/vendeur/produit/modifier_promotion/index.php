@@ -166,7 +166,7 @@
                         <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                         <div>
-                            <a href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
+                            <a class="delete_picture" href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
                         </div>
                     </div>
                 <?php } else { ?>

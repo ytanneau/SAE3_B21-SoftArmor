@@ -3261,4 +3261,28 @@ aside .achat:hover {
 .main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
   width: 4em;
   height: 4em;
+}
+
+.delete_picture {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.delete_picture a {
+  text-decoration: none;
+  color: black;
+}
+.delete_picture:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */
