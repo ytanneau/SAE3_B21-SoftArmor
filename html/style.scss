@@ -868,20 +868,21 @@ div:has(> aside) {
         display: none;
     }
     > main {
+        .banniere{
+            display: flex;
+            justify-content: center;
+            a{
+                display: flex;
+                justify-content: center;
+                width: 50%;
+                img{
+                    width: 100%;
+                }
+            }
+        }
         > div {
             display: flex;
             flex-direction: row;
-            .banniere{
-                justify-content: center;
-                a{
-                    display: flex;
-                    justify-content: center;
-                    width: 50%;
-                    img{
-                        width: 100%;
-                    }
-                }
-            }
             > button {
                 z-index: 10;
                 width: 40px;
