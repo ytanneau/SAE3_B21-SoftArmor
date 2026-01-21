@@ -92,6 +92,7 @@
                         ];
                     }
                     ?>
+
                     <li>
                         <div>
                             <div>
@@ -132,6 +133,8 @@
                             </a>
                         <?php } ?>
                     </li>
+
+                    <?php include 'reponse_vendeur.php' ?>
                 <?php } ?>
             </ul>
 

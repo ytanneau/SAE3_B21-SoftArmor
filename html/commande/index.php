@@ -110,6 +110,8 @@ if (isset($_GET["commande"])) {
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
             <?php } else {
+
+                    //connexion delivraptor
                     $conn =false;
                     $fd = connexion_socket(IP,PORT);
                     $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
@@ -118,30 +120,25 @@ if (isset($_GET["commande"])) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
-                    //connexion delivraptor
                     
-                    
-                    
-                    
+                    //si connexion socket
                     if($fd){
-                    
-                    
-                    //si connexion
-                    if ($conn == "1"){
-                        $bordereau = $commande["bordereau_colis"];
-                        
-                        //recuperation des données du colis
-                        $info_colis = get_info_colis($fd,$bordereau);
-                        
-                        $texte_img="";
-                        //si le colis est rendu dans la boite au lettre
-                        if ($info_colis["RENDU"] == "1") {
-                            //recuperation de l'image
-                            $texte_img = get_image_colis($fd,$bordereau);
+                        //si connexion delivraptor
+                        if ($conn == "1"){
+                            $bordereau = $commande["bordereau_colis"];
                             
+                            //recuperation des données du colis
+                            $info_colis = get_info_colis($fd,$bordereau);
+                            
+                            $texte_img="";
+                            //si le colis est rendu dans la boite au lettre et si l'image n'existe pas
+                            if ($info_colis["RENDU"] == "1" && !file_exists(HOME_SITE."ressources/colis/$bordereau.png")) {
+                                                                
+                                //recuperation de l'image
+                                $texte_img = get_image_colis($fd,$bordereau);    
+                            }
                         }
-                    }
-                    
+                        
                     }
                 ?>
 
@@ -257,7 +254,7 @@ if (isset($_GET["commande"])) {
                     </li>
 
             <?php } 
-            //deconnexion
+            //deconnexion socket et delivraptor
             deconnexion_socket($fd);
             } ?>
 

@@ -291,7 +291,7 @@
                         <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                         <div>
                             <label class="hide_input_file" for="photoPrincipale">Modifier l'image principale</label>
-                            <input style="display:none;" type="file" name="photoPrincipale">
+                            <input style="display:none;" type="file" name="photoPrincipale" id="photoPrincipale">
                         </div>
                         <h4>Image secondaire</h4>
                         <?php if($tabImageProduit['id_image1'] != null){?> 
@@ -300,7 +300,7 @@
                         <?php }?>
                         <div>
                             <label class="hide_input_file" for="photo2">Ajouter/Modifier la seconde image</label>
-                            <input style="display:none;" type="file" name="photo2" accept="image/png">
+                            <input style="display:none;" type="file" name="photo2" accept="image/png" id="photo2">
                         </div>
                         <h4>Troisième image</h4>
                         <?php if($tabImageProduit['id_image2'] != null){?> 
@@ -309,7 +309,7 @@
                         <?php }?>
                         <div>
                             <label class="hide_input_file" for="photo3">Ajouter/Modifier la troisième image</label>
-                            <input style="display:none;" type="file" name="photo3" accept="image/png">
+                            <input style="display:none;" type="file" name="photo3" accept="image/png" id="photo3">
                         </div>
                     </div>
                     <h3>Gestion du stock</h3>

@@ -47,7 +47,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
     <main class ="pageRecherche">
         <div class="TriEtFiltre">
-            <form>
+            <form class="formTri">
                 <fieldset id = "prixF">
                     <legend>Filtrer par prix</legend>
                     <div class="sousFiltre">
@@ -83,7 +83,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     <span id="for_category"></span>
                     <h1 id="results_for"></h1>
                 </div>
-                <div>
+                <div class="labelEtBandeau">
                     <div class="labelBendeau">
                         <label for="tri">Trier par </label>
                     </div>

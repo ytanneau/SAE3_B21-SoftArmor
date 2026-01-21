@@ -776,7 +776,16 @@ hr {
 
 .pageRecherche {
   display: flex;
-  flex-direction: row;
+  gap: 2em;
+}
+@media (max-width: 1024px) {
+  .pageRecherche {
+    flex-direction: column;
+  }
+}
+
+.labelEtBandeau {
+  display: flex;
 }
 
 .TriEtFiltre div div {
@@ -784,46 +793,57 @@ hr {
 }
 
 .TriEtFiltre {
-  display: flex;
-  flex-direction: column;
+  width: 260px;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 1.2em;
 }
-.TriEtFiltre form {
-  align-items: normal;
+@media (max-width: 1024px) {
+  .TriEtFiltre {
+    width: 100%;
+  }
+}
+
+.TriEtFiltre fieldset {
+  border: none;
+  padding: 0;
+}
+
+.TriEtFiltre legend {
+  font-family: "Montserrat";
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.sousFiltre {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+  cursor: pointer;
+}
+.sousFiltre label {
+  cursor: pointer;
+}
+.sousFiltre input {
+  accent-color: #3157A3;
+  cursor: pointer;
+}
+
+.resultat {
   width: 100%;
 }
-.TriEtFiltre form label {
-  margin-top: 5%;
-  font-size: 1.5em;
+
+.resultat > div {
+  align-items: center;
+  margin-bottom: 1.5em;
+  gap: 1em;
 }
-.TriEtFiltre form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-.TriEtFiltre form .text {
-  height: 10em;
-  text-align: start;
-}
-.TriEtFiltre form .petit {
-  width: 30%;
-}
-.TriEtFiltre form input[type=number]::-webkit-inner-spin-button,
-.TriEtFiltre form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.TriEtFiltre form input[type=number] {
-  -moz-appearance: textfield;
-}
-.TriEtFiltre form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-.TriEtFiltre form .error {
-  color: #E43737;
+@media (max-width: 768px) {
+  .resultat > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 section.results {
@@ -1163,7 +1183,11 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .form_infos {
+.infos .liste_avis li.reponse {
+  margin-left: 4em;
+  border-left: solid 2px #A6A6BF;
+}
+.infos form {
   display: flex;
   flex-direction: row-reverse;
   align-items: normal;
@@ -1218,7 +1242,7 @@ ul#results > li > a > h3 {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos .form_infos .image_pp {
+.infos form .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1249,7 +1273,7 @@ ul#results > li > a > h3 {
   .infos section .form_infos article:first-child {
     align-items: center;
   }
-  .infos section .form_infos article:first-child .image_pp {
+  .infos section form article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
@@ -3136,22 +3160,28 @@ aside .achat:hover {
   grid-template-columns: 2fr 2fr;
   grid-gap: 50px;
 }
-.main_accueil .liste_accueil_vendeur div .lien1, .main_accueil .liste_accueil_vendeur div .lien2, .main_accueil .liste_accueil_vendeur div .lien3, .main_accueil .liste_accueil_vendeur div .lien4 {
+.main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   font-weight: bold;
+  font-size: 150%;
   width: 17em;
   height: 17em;
-  border-radius: 20px;
+  border-radius: 5px;
   color: black;
   text-decoration: none;
-  background-color: #CBCCEA;
+  background-color: #f3f1fb;
 }
-.main_accueil .liste_accueil_vendeur div .lien1:hover, .main_accueil .liste_accueil_vendeur div .lien2:hover, .main_accueil .liste_accueil_vendeur div .lien3:hover, .main_accueil .liste_accueil_vendeur div .lien4:hover {
-  transform: scale(1.1);
+.main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
+  transform: ease scale(1.1);
 }
-.main_accueil .liste_accueil_vendeur div .lien1:visited, .main_accueil .liste_accueil_vendeur div .lien2:visited, .main_accueil .liste_accueil_vendeur div .lien3:visited, .main_accueil .liste_accueil_vendeur div .lien4:visited {
+.main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
   text-decoration: none;
+}
+.main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
+  width: 125%;
+  height: 125%;
 }/*# sourceMappingURL=style.css.map */
