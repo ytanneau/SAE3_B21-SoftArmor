@@ -1185,10 +1185,6 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis li.reponse {
-  margin-left: 4em;
-  border-left: solid 2px #A6A6BF;
-}
 .infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
@@ -1286,7 +1282,7 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child input,
   .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
-    width: 100%;
+    width: 50%;
   }
   .infos section .form_infos article:last-child .champ {
     margin-bottom: 1em;
@@ -1800,11 +1796,17 @@ h3 {
   font-weight: bold;
 }
 
+.liste {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .liste .input_quantite {
   font-size: 1.4em;
 }
 .liste main {
   display: flex;
+  flex: 1;
 }
 .liste main img {
   -o-object-fit: contain;
