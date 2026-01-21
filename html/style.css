@@ -1193,7 +1193,7 @@ ul#results > li > a > h3 {
   margin-left: 4em;
   border-left: solid 2px #A6A6BF;
 }
-.infos form {
+.infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
   align-items: normal;
@@ -1248,7 +1248,7 @@ ul#results > li > a > h3 {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos form .image_pp {
+.infos .form_infos .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1279,7 +1279,7 @@ ul#results > li > a > h3 {
   .infos section .form_infos article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child .image_pp {
+  .infos section .form_infos article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }
