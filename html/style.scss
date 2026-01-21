@@ -1117,6 +1117,10 @@ h3 {
             top: 8em;
         }
 
+        div>.bouton {
+            min-width: auto;
+        }
+
         .bouton {
             @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
             min-width: 100%;
@@ -1131,7 +1135,7 @@ h3 {
         }
 
         p {
-            width: 40%;
+            padding: 1em;
         }
 
         @media screen and (max-width: 1024px) {
@@ -1934,7 +1938,32 @@ aside {
 }
 
 .main_accueil{
-    @include contenu_centre_vertical;
+    @include contenu_centre_horizontal;
+    justify-content: center;
+    gap: 10%;
+
+    >div{
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 0;
+        }
+
+        li{
+            border: solid 1 black;
+            background-color: #9C9C9C;
+            border-radius: 5px;
+            padding: 1em;
+        }
+
+        a{
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
     .liste_accueil_vendeur{
         display: grid;
         grid-template-columns: 2fr 2fr;

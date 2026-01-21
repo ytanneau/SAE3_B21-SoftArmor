@@ -14,22 +14,21 @@
 
     function affiche_alarme($id_vendeur){
         $data = get_alarme($id_vendeur);
-
+        if($data != null){
         ?>
-            <div>
-                <ul>
-                <?php foreach ($data as $key => $value) { ?>
-                    <li>
-                        <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
-                            <?=htmlentities($value['nom_stock'])?>
-                            <div>
-                                il reste <?=htmlentities($value['quantite'])?>
-                            </div>
-                        </a>
-                    </li>
-                <?php }?>
+            <div class="alarme">
+                <?php  ?>
+                    <h3>Alerte :</h3>
+                    <ul>
+                    <?php foreach ($data as $key => $value) { ?>
+                        <li>
+                            <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
+                                <?=htmlentities($value['nom_stock'])?> | il reste <?=htmlentities($value['quantite'])?>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </div>
-
         <?php
+        } 
     }

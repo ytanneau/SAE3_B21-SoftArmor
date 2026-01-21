@@ -164,6 +164,7 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
     <script src="script.js?t=2"></script>
+    <!-- t=2 -> actualise le fichier js (en faisant croire au cache qu'il ne l'a pas) -->
 
     <script>
         

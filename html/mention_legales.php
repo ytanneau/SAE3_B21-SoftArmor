@@ -24,21 +24,21 @@ define('HOME_SITE', "./" );
         </p>
         <h2>Coordonnées du vendeur</h2>
         <p>
-            Dénomination : COBREC
-            Siège : 7 rue Edouard Branly, 22300 Lannion
-            Téléphone : +33 2 96 06 06 06
-            Adresse électronique : cobrec@cobrec.fr
-            N° TVA intracommunautaire : 2468573192
+            Dénomination : COBREC <br>
+            Siège : 7 rue Edouard Branly, 22300 Lannion <br>
+            Téléphone : +33 2 96 06 06 06 <br>
+            Adresse électronique : cobrec@cobrec.fr <br>
+            N° TVA intracommunautaire : 2468573192 <br>
         </p>
         <h2>Réalisateur du site</h2>
         <p>
-            Éditeur : SoftAmor, SARL au capital social de 1 euro, RCS Lannion 1234567989
-            Siège : 7 Rue Édouard Branly, 22300 Lannion
-            Tél : +33 1 23 45 67 89
-            Adresse électronique : soft.amor@softarmor.bzh
-            Directeur de la publication : Tottereau Benoit
-            N° TVA intracommunautaire : 9876543210
-            Hébergeur : IUT Lannion, 7 Rue Édouard Branly, 22300 Lannion
+            Éditeur : SoftAmor, SARL au capital social de 1 euro, RCS Lannion 1234567989 <br>
+            Siège : 7 Rue Édouard Branly, 22300 Lannion <br>
+            Tél : +33 1 23 45 67 89 <br>
+            Adresse électronique : soft.amor@softarmor.bzh <br>
+            Directeur de la publication : Tottereau Benoit <br>
+            N° TVA intracommunautaire : 9876543210 <br>
+            Hébergeur : IUT Lannion, 7 Rue Édouard Branly, 22300 Lannion <br>
         </p>
         <h2>Accès au site</h2>
 

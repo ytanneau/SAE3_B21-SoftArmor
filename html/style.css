@@ -1887,6 +1887,9 @@ h3 {
 .liste main aside {
   top: 8em;
 }
+.liste main div > .bouton {
+  min-width: auto;
+}
 .liste main .bouton {
   display: block;
   max-width: 100%;
@@ -1958,7 +1961,7 @@ h3 {
   background-color: rgb(66.9464285714, 177.5535714286, 69.8571428571);
 }
 .liste main p {
-  width: 40%;
+  padding: 1em;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
@@ -3183,8 +3186,27 @@ aside .achat:hover {
 
 .main_accueil {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+.main_accueil > div ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0;
+}
+.main_accueil > div li {
+  border: solid 1 black;
+  background-color: #9C9C9C;
+  border-radius: 5px;
+  padding: 1em;
+}
+.main_accueil > div a {
+  color: #000;
+  text-decoration: none;
 }
 .main_accueil .liste_accueil_vendeur {
   display: grid;

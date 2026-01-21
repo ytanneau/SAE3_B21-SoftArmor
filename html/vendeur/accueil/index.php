@@ -18,6 +18,9 @@
         exit;
     }
 
+    require_once HOME_GIT .".config.php";
+    require_once(HOME_GIT . 'fonction_alarme.php');
+
     //permet d'utiliser le fichier config.php
     /*require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';*/
@@ -52,6 +55,7 @@
                     Avis
                 </a>
             </article>
+            <?php affiche_alarme($_SESSION['id_compte']); ?>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
