@@ -110,6 +110,13 @@
                                         <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
                                     </button>
                                 <?php } ?>
+
+                                <!-- Afficher le bouton répondre seulement si je n'y ai pas déjà répondu -->
+                                <?php if (!avis_est_repondu($avis['id_avis'], $id_vendeur)) { ?>
+                                    <button class="bouton_reponse" data-avis="<?=$avis['id_avis']?>">
+                                        <img class="icon" src="<?= HOME_SITE . "image/reponse.svg" ?>" title="Répondre à cet avis">
+                                    </button>
+                                <?php } ?>
                             </div>
 
                             <div>
@@ -136,7 +143,7 @@
                     </div>
                     
                     <form id="form_signalement" action="" method="post">
-                        <input type="hidden" name="id_avis" id="id_avis">
+                        <input type="hidden" name="id_avis" id="id_avis_signalement">
 
                         <label for="select_raison">Raison</label>
                         <select name="raison" id="select_raison">
@@ -153,6 +160,27 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- Autre div modal-content caché pour la réponse -->
+                <div class="modal_content">
+                    <div class="titre">
+                        <h3>Répondre à cet avis</h3>
+                        <span class="fermer_modal">&times;</span>
+                    </div>
+
+                    <form id="form_reponse" action="" method="post">
+                        <input type="hidden" name="id_avis" id="id_avis_reponse">
+
+                        <label for="reponse">Réponse</label>
+                        <textarea name="reponse" id="reponse" placeholder="Votre réponse ici..."></textarea>
+                        <p class="error" id="error_reponse">Veuillez remplir ce champ</p>
+
+                        <div class="boutons">
+                            <button type="reset" class="fermer_modal">Annuler</button>
+                            <button type="submit">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             <div id="snackbar" class="snackbar"></div>
@@ -166,20 +194,46 @@
     <script>
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
+        const formReponse = document.getElementById("form_reponse");
         const snackbar = document.getElementById("snackbar");
 
-        const inputId = document.getElementById("id_avis");
+        const inputIdSignalement = document.getElementById("id_avis_signalement");
+        const inputIdReponse = document.getElementById("id_avis_reponse");
         const inputEmail = document.getElementById("input_email");
         const estVisiteur = (inputEmail != null);
 
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
+        const pErrorReponse = document.getElementById("error_reponse");
 
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
-                inputId.value = btn.dataset.avis;
+                inputIdSignalement.value = btn.dataset.avis;
+
+                // Afficher le bon formulaire
+                formSignalement.style.display = "block";
+                formReponse.style.display = "none";
+
+                // Afficher le modal
+                modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
+            });
+        });
+
+        // Afficher le modal en cliquant sur l'icône répondre
+        document.querySelectorAll(".bouton_reponse").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputIdReponse.value = btn.dataset.avis;
+                
+                // Afficher le bon formulaire
+                formReponse.style.display = "block";
+                formSignalement.style.display = "none";
+                
+                // Afficher le modal
                 modal.style.display = "block";
 
                 // Empêcher le scroll tant que le modal est ouvert
@@ -203,7 +257,6 @@
             }
         }
 
-        
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -250,6 +303,47 @@
             }
         });
 
+        // Confirmation de la réponse
+        formReponse.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Récupérer les données du formulaire
+            const data = new FormData(formReponse);
+
+            let reponseInvalide = data.get("reponse") == "" || data.get("reponse") == null;
+            pErrorReponse.style.visibility = reponseInvalide ? "visible" : "hidden";
+
+            if (reponseInvalide) {
+                // On ne continue pas le traitement s'il manque des informations
+                return;
+            }
+
+            // Envoyer les données du formulaire en JSON à une autre page
+            const res = await fetch("./reponse.php", {
+                method: "POST",
+                body: data
+            });
+
+            const json = await res.json();
+
+            // Fermer le modal
+            modal.style.display = "none";
+            document.body.style.overflowY = "auto";
+
+            // Afficher la snackbar
+            showSnackbar(json.message, json.success ? "success" : "error");
+
+            if (json.success) {
+                console.log(json.success);
+
+                // Désactiver le bouton de signalement
+                const btn = document.querySelector(
+                    `.bouton_reponse[data-avis="${data.get('id_avis')}"]`
+                );
+                btn.disabled = true;
+            }
+        });
+        
         function emailValide(email) {
             let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

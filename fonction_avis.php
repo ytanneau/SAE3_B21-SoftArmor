@@ -289,4 +289,12 @@
             throw $e;
         }
     }
+
+    function avis_est_repondu($id_avis, $id_compte) {
+        return false;
+    }
+
+    function repondre_avis($id_compte, $id_avis, $reponse) {
+        return;
+    }
     
