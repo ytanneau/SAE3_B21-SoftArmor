@@ -1948,11 +1948,18 @@ aside {
             display: flex;
             flex-direction: column;
             gap: 1em;
+            padding: 0;
         }
 
         li{
+            border: solid 1 black;
             background-color: #9C9C9C;
-            border-radius: 10%;
+            border-radius: 5px;
+            padding: 1em;
+        }
+
+        a{
+            color: #000;
         }
     }
 

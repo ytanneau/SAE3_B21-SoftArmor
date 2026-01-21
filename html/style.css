@@ -3196,10 +3196,16 @@ aside .achat:hover {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding: 0;
 }
 .main_accueil > div li {
+  border: solid 1 black;
   background-color: #9C9C9C;
-  border-radius: 10%;
+  border-radius: 5px;
+  padding: 1em;
+}
+.main_accueil > div a {
+  color: #000;
 }
 .main_accueil .liste_accueil_vendeur {
   display: grid;
