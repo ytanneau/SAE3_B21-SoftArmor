@@ -53,7 +53,7 @@
                 $categorieFinale = $_POST['categorie'];
             }
         } else {
-            $categorieFinale = $tabCategorieDuProduit['nom_categorie'];
+            $categorieFinale = $tabInfoProduit['categorie'];
         }
 
         if ($categorieFinale !== null) {
