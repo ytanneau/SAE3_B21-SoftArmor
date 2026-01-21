@@ -129,6 +129,10 @@ hr {
         ul{
             .bouton_avis_vendeur_produit{
                 background-color: $couleur_etoile;
+                &:hover{
+                    background-color: $couleur_etoile;
+                    background-color: adjust-color($couleur_etoile,$lightness: 10%);
+                }
             }
             li{
                 button{
@@ -139,6 +143,7 @@ hr {
                     color: black;
                     font-family: $font_title;
                     font-weight: bold;
+                    background-color: $nuance_primaire_vendeur;
                 }
                 form{
                     input{

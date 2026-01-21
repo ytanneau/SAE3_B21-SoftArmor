@@ -230,6 +230,10 @@ hr {
 .toolbar#produit ul .bouton_avis_vendeur_produit {
   background-color: #EAC452;
 }
+.toolbar#produit ul .bouton_avis_vendeur_produit:hover {
+  background-color: #EAC452;
+  background-color: rgb(239.5206185567, 211.5103092784, 127.4793814433);
+}
 .toolbar#produit ul li button {
   display: flex;
   flex-direction: row;
@@ -238,6 +242,7 @@ hr {
   color: black;
   font-family: "Montserrat";
   font-weight: bold;
+  background-color: #C3C1F5;
 }
 #header_client {
   position: sticky;
