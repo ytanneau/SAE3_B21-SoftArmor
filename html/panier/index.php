@@ -199,8 +199,8 @@ if (isset($_SESSION['logged_in'])) {
         <?php } ?>
 
     </main>
-</body>
     <?php include HOME_SITE . "footer.php" ?>
+</body>
     <script>
         function actualiser() {
             window.location.reload();
