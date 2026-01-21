@@ -1014,7 +1014,7 @@ function i_produit() {
 		add_image_produit($id_produit, $id_image);
 
 		// Copie l'image du produit (qu'est dans le dossier ressources du peuplement) dans le vrai dossier ressources du site
-		$i1 = fopen(__DIR__ . "/ressources/produit/{$p['num_image']}.png", 'r');
+		$i1 = fopen(__DIR__ . "/ressources_temp/produit/{$p['num_image']}.png", 'r');
 		$i2 = fopen(__DIR__ . "/../html/ressources/produit/{$id_produit}_1.png", 'c');
 
 		while (fwrite($i2, fread($i1, 1000)));
