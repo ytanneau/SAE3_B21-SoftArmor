@@ -179,7 +179,7 @@
                     <form id="form_reponse" action="" method="post">
                         <input type="hidden" name="id_avis" id="id_avis_reponse">
 
-                        <label for="reponse">Réponse</label>
+                        <label for="reponse">Réponse (1000 caractères max.)</label>
                         <textarea name="reponse" id="reponse" placeholder="Votre réponse ici..."></textarea>
                         <p class="error" id="error_reponse">Veuillez remplir ce champ</p>
 
