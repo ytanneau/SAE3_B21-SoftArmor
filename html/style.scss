@@ -1807,6 +1807,13 @@ aside {
             }
         }
 
+        textarea {
+            resize: none;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter';
+        }
+
         .boutons {
             @include contenu_centre_horizontal;
             gap: 10px;
