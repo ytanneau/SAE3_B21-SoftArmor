@@ -232,6 +232,7 @@ hr {
 }
 .toolbar#produit ul .bouton_avis_vendeur_produit:hover {
   background-color: #EAC452;
+  background-color: rgb(239.5206185567, 211.5103092784, 127.4793814433);
 }
 .toolbar#produit ul li button {
   display: flex;

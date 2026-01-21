@@ -131,7 +131,7 @@ hr {
                 background-color: $couleur_etoile;
                 &:hover{
                     background-color: $couleur_etoile;
-                    background-color: adjust-color($lightness: 10%);
+                    background-color: adjust-color($couleur_etoile,$lightness: 10%);
                 }
             }
             li{
