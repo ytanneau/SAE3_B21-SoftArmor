@@ -134,9 +134,6 @@ hr {
                 }
             }
             li{
-                &:hover{
-                    background-color: adjust-color($nuance, $lightness: 5%);
-                }
                 button{
                     display: flex;
                     flex-direction: row;
@@ -1956,7 +1953,8 @@ aside {
             text-decoration: none;
             background-color: $couleur_fond_produit;
             &:hover{
-                transform: scale(1);
+                transform: scale(1.02);
+                background-color: adjust-color($color: $couleur_fond_produit, $lightness: 5%);
             }
             
             &:visited{

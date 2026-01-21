@@ -233,9 +233,6 @@ hr {
 .toolbar#produit ul .bouton_avis_vendeur_produit:hover {
   background-color: rgb(236.7603092784, 203.7551546392, 104.7396907216);
 }
-.toolbar#produit ul li:hover {
-  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
-}
 .toolbar#produit ul li button {
   display: flex;
   flex-direction: row;
@@ -3209,7 +3206,8 @@ aside .achat:hover {
   background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
-  transform: scale(1);
+  transform: scale(1.02);
+  background-color: hsl(252, 55.5555555556%, 101.4705882353%);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
