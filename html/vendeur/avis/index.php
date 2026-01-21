@@ -112,7 +112,7 @@
                                 <?php } ?>
 
                                 <!-- Afficher le bouton répondre seulement si je n'y ai pas déjà répondu -->
-                                <?php if (!avis_est_repondu($avis['id_avis'], $id_vendeur)) { ?>
+                                <?php if (!avis_est_repondu($avis['id_avis'])) { ?>
                                     <button class="bouton_reponse" data-avis="<?=$avis['id_avis']?>">
                                         <img class="icon" src="<?= HOME_SITE . "image/reponse.svg" ?>" title="Répondre à cet avis">
                                     </button>
