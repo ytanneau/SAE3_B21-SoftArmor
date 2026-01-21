@@ -249,6 +249,8 @@ if (isset($_POST['quantite'])) {
                             <?php } ?>
 
                         </li>
+
+                        <?php include HOME_SITE . 'vendeur/avis/reponse_vendeur.php'; ?>
                     <?php } ?>
                 </ul>
 
