@@ -120,8 +120,8 @@ if($tabPromotion != false){
     <main>
         <!--Produit Banniere au jour (possiblement a faire)-->
         <?php if($pub){?>
-        <div>
-            <div class="banniere">
+        <div class="banniere">
+            <div>
                 <h3>Mettre en avant</h3>
                 <p>Cette espace est dedié à la mise en avant d'un produit. Profitez-en au plus vite !!!</p>
             </div>
