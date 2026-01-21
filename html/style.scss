@@ -130,8 +130,7 @@ hr {
             .bouton_avis_vendeur_produit{
                 background-color: $couleur_etoile;
                 &:hover{
-                    background-color: $couleur_etoile;
-                    background-color: adjust-color($couleur_etoile,$lightness: 10%);
+                    background-color: adjust-color($couleur_etoile,$lightness: 5%);
                 }
             }
             li{
@@ -143,12 +142,20 @@ hr {
                     color: black;
                     font-family: $font_title;
                     font-weight: bold;
-                    background-color: $nuance_primaire_vendeur;
-                }
-                form{
-                    input{
-                        
+                    background-color: $nuance;
+                    border: none;
+                    &:hover{
+                        background-color: adjust-color($nuance, $lightness: 5%);
                     }
+                }
+            }
+            .supprimer_produit{
+                background-color: $rouge;
+                &:hover{
+                    background-color: adjust-color($rouge,$lightness: 5%);
+                }
+                a{
+                    color: $couleur_background;
                 }
             }
         }
@@ -1946,7 +1953,7 @@ aside {
             text-decoration: none;
             background-color: $couleur_fond_produit;
             &:hover{
-                transform: scale(1);
+                transform: scale(1.02);
             }
             
             &:visited{

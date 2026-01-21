@@ -231,8 +231,7 @@ hr {
   background-color: #EAC452;
 }
 .toolbar#produit ul .bouton_avis_vendeur_produit:hover {
-  background-color: #EAC452;
-  background-color: rgb(239.5206185567, 211.5103092784, 127.4793814433);
+  background-color: rgb(236.7603092784, 203.7551546392, 104.7396907216);
 }
 .toolbar#produit ul li button {
   display: flex;
@@ -242,8 +241,22 @@ hr {
   color: black;
   font-family: "Montserrat";
   font-weight: bold;
-  background-color: #C3C1F5;
+  background-color: #A6A6BF;
+  border: none;
 }
+.toolbar#produit ul li button:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
+.toolbar#produit ul .supprimer_produit {
+  background-color: #E43737;
+}
+.toolbar#produit ul .supprimer_produit:hover {
+  background-color: rgb(231.0330396476, 77.4669603524, 77.4669603524);
+}
+.toolbar#produit ul .supprimer_produit a {
+  color: #FFFFFF;
+}
+
 #header_client {
   position: sticky;
   top: 0;
@@ -3193,7 +3206,7 @@ aside .achat:hover {
   background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
-  transform: scale(1);
+  transform: scale(1.02);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
