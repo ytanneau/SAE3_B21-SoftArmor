@@ -94,6 +94,9 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {
         <button class="fleche droite <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
 <?php }
+
+$tabPromotion = get_promotion_banniere();
+$url_banniere = get_url_image($tabPromotion['id_image_banniere']);
 ?>
 
 <!DOCTYPE html>
@@ -113,6 +116,10 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {
     <main>
     
     <!--Produit Banniere au jour (possiblement a faire)-->
+    <a href="produit/?produit=<?=$tabPromotion['id_produit']?>">
+        <img src="<?=HOME_GIT . $url_banniere?>" alt="Banniere de promotion du produit">
+    </a>
+
     <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
 
     <!--Produit Ajoutés Récemment-->
