@@ -359,6 +359,10 @@ ul#results {
         justify-content: center;
         gap: 20px;
 
+        h1 {
+            margin-top: 0;
+        }
+
         img:not(.etoile) {
             @include image_produit(10vw);
             background-color: white;

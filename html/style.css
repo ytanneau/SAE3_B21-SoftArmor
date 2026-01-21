@@ -1071,6 +1071,9 @@ ul#results > li > a > h3 {
   justify-content: center;
   gap: 20px;
 }
+#avis_vendeur article h1 {
+  margin-top: 0;
+}
 #avis_vendeur article img:not(.etoile) {
   -o-object-fit: contain;
      object-fit: contain;
