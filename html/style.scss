@@ -158,18 +158,66 @@ hr {
 
 .pageRecherche{
     display: flex;
-    flex-direction: row;
+    gap: 2em;
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
 }
+
 .TriEtFiltre div div{
     flex-direction: column;
 }
 .TriEtFiltre{
-    display: flex;
-    flex-direction: column;
-    width: 15em;
+    width: 260px;
+    background-color: #fafafa;
+    border-radius: $angle_normal;
+    padding: 1.2em;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
 
     form{
         @include formulaire();
+    }
+}
+
+.TriEtFiltre fieldset {
+    border: none;
+    padding: 0;
+}
+
+.TriEtFiltre legend {
+    font-family: $font_title;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.sousFiltre {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 0.6em;
+    cursor: pointer;
+
+    label {
+        cursor: pointer;
+    }
+
+    input {
+        accent-color: $couleur_primaire_client;
+        cursor: pointer;
+    }
+}
+
+.resultat > div {
+    align-items: center;
+    margin-bottom: 1.5em;
+    gap: 1em;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
@@ -408,7 +456,7 @@ ul#results {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        img {
+        .image_pp {
             @include image_pp(200px);
         }
 
@@ -1864,25 +1912,23 @@ aside {
         display: grid;
         grid-template-columns: 2fr 2fr;
         grid-gap: 50px;
-        div{
-            .lien1, .lien2, .lien3, .lien4{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: bold;
-                width: 17em;
-                height: 17em;
-                border-radius: $angle_normal;
+        .lien1, .lien2, .lien3, .lien4{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            width: 17em;
+            height: 17em;
+            border-radius: $angle_normal;
+            color: black;
+            text-decoration: none;
+            background-color: $nuance_primaire_client;
+            &:hover{
+                transform: scale(1.1);
+            }
+            &:visited{
                 color: black;
                 text-decoration: none;
-                background-color: $nuance_primaire_client;
-                &:hover{
-                    transform: scale(1.1);
-                }
-                &:visited{
-                    color: black;
-                    text-decoration: none;
-                }
             }
         }
     }
