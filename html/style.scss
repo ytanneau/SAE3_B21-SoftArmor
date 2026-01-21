@@ -168,8 +168,11 @@ hr {
     flex-direction: column;
     form{
         @include formulaire();
-        width: 15em;
     }
+}
+
+.formTri{
+    width: 15em;
 }
 
 section.results {
