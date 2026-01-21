@@ -163,7 +163,7 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {
     <footer>
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?t=2"></script>
 
     <script>
         
