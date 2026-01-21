@@ -344,11 +344,13 @@
             if (json.success) {
                 console.log(json.success);
 
-                // Désactiver le bouton de signalement
+                // Désactiver le bouton de réponse
                 const btn = document.querySelector(
                     `.bouton_reponse[data-avis="${data.get('id_avis')}"]`
                 );
                 btn.disabled = true;
+
+                window.location.reload();
             }
         });
         
