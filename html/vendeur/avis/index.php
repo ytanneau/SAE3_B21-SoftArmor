@@ -67,9 +67,8 @@
     <?php } ?>
 
     <article>
-        <div>
-            <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
-        </div>
+        <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
+
         <div>
             <h1><?=htmlentities($produit['nom_public'])?></h1>
             
