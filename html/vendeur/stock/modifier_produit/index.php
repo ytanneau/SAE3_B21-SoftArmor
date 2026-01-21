@@ -27,7 +27,6 @@
 
     // utilisation des fonctions de recuperation des données
     $tabInfoProduit = detail_produit($idProduit);
-    $tabCategorieDuProduit = get_categorie_produit($idProduit);
     $tabImageProduit = get_image_produit($idProduit);
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -211,7 +210,7 @@
                         <label for="checkEnLigne">Produit en ligne</label>
                         <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                     </div>
-                    <p>Categorie actuel : <?php if(isset($tabCategorieDuProduit['nom_categorie'])){ echo $tabCategorieDuProduit['nom_categorie'] ; } ?></p>
+                    <p>Categorie actuel : <?php if(isset($tabInfoProduit['categorie'])){ echo $tabInfoProduit['categorie'] ; } ?></p>
                     <div class="divEnLigne">
                         <p>
                             <label for="categorie">Catégories*</label>
@@ -222,10 +221,10 @@
                                     $tabCategorie = get_categorie_parent();
                                     foreach($tabCategorie as $nomCat){
                                         $cat = htmlspecialchars($nomCat['nom_categorie']);
-                                        if($cat == 'Alimentaire' && $tabCategorieDuProduit['nom_categorie'] == 'Boisson' || $tabCategorieDuProduit['nom_categorie'] == 'Salé' ||$tabCategorieDuProduit['nom_categorie'] == 'Sucré'){
+                                        if($cat == 'Alimentaire' && $tabInfoProduit['categorie'] == 'Boisson' || $tabInfoProduit['categorie'] == 'Salé' || $tabInfoProduit['categorie'] == 'Sucré'){
                                             $selected = 'selected';
                                         } else {
-                                        $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';}
+                                        $selected = ($cat == $tabInfoProduit['categorie']) ? 'selected' : '';}
                                 ?>
                                     <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                                 <?php } ?>
@@ -240,7 +239,7 @@
                                     $tabSousCategorie = get_sous_categorie("Alimentaire");
                                     foreach($tabSousCategorie as $sousCat){
                                         $cat = htmlspecialchars($sousCat['nom_categorie']);
-                                        $selected = ($cat == $tabCategorieDuProduit['nom_categorie']) ? 'selected' : '';             
+                                        $selected = ($cat == $tabInfoProduit['categorie']) ? 'selected' : '';             
                                 ?>
                                 <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>" <?= $selected?>><?= htmlspecialchars($sousCat['nom_categorie'])?></option>
                                 <?php } ?>
