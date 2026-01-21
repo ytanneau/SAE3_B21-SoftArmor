@@ -80,10 +80,10 @@
                 echo "<br>Il n'y a pas d'avis pour ce produit";
             } ?>
 
-            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
-        </div>
-    </article>
-    <section>
+</div>
+</article>
+<section>
+        <h3>Avis (<?=htmlentities($produit['nb_avis'] ?? "0")?>)</h3>
         <?php if ($data != null) { ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { 

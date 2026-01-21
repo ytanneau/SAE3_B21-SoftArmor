@@ -1073,7 +1073,6 @@ ul#results > li > a > h3 {
 }
 #avis_vendeur section {
   display: flex;
-  justify-content: center;
   /*
   ul{
       @include contenu_centre_vertical();
