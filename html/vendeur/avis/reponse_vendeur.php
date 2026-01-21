@@ -21,6 +21,10 @@
                     <button class="bouton_supprimer" data-reponse="<?=$reponse['id_reponse']?>">
                         <img class="icon" src="<?= HOME_SITE . "image/supprimer.svg" ?>" title="Supprimer cette réponse">
                     </button>
+
+                    <button class="bouton_modifier" data-reponse="<?=$reponse['id_reponse']?>">
+                        <img class="icon" src="<?= HOME_SITE . "image/modifier.svg" ?>" title="Modifier cette réponse">
+                    </button>
                 </div>
 
                 <div>
