@@ -1391,6 +1391,11 @@ aside {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
     }
+    .delete_picture{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        width: 17.45em;
+        padding: 6px;
+    }
 }
 
 .mainInfoVendeur div{
@@ -1958,6 +1963,11 @@ aside {
     .ajout_banniere{
         margin-top: 20px;
     }
+    .delete_picture{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        width: 17.45em;
+        padding: 6px;
+    }
 }
 
 .main_accueil{
@@ -2020,6 +2030,3 @@ aside {
     }
 }
 
-.delete_picture{
-    @include bouton_new($background: $rouge, $color: $couleur_background);
-}

@@ -2370,6 +2370,31 @@ aside .achat:hover {
 .bodyModifProduit #idModifierProduit:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+.bodyModifProduit .delete_picture {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  width: 17.45em;
+  padding: 6px;
+}
+.bodyModifProduit .delete_picture a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.bodyModifProduit .delete_picture:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
 
 .mainInfoVendeur div {
   display: flex;
@@ -3207,6 +3232,31 @@ aside .achat:hover {
 .main_promo .ajout_banniere {
   margin-top: 20px;
 }
+.main_promo .delete_picture {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  width: 17.45em;
+  padding: 6px;
+}
+.main_promo .delete_picture a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.main_promo .delete_picture:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
 
 .main_accueil {
   display: flex;
@@ -3261,28 +3311,4 @@ aside .achat:hover {
 .main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
   width: 4em;
   height: 4em;
-}
-
-.delete_picture {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #E43737;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.delete_picture a {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-.delete_picture:hover {
-  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }/*# sourceMappingURL=style.css.map */
