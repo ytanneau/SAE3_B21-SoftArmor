@@ -2738,13 +2738,13 @@ aside .achat:hover {
 }
 .stock main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .stock main table {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  align-self: center;
 }
 .stock main tr {
   width: 50vw;
