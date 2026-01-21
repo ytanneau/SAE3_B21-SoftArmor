@@ -2933,6 +2933,7 @@ aside .achat:hover {
   width: 100%;
   height: 200px;
   font-family: "Inter";
+  font-size: 1em;
 }
 .modal .modal_content .boutons {
   display: flex;
