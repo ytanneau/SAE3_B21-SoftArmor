@@ -3207,7 +3207,6 @@ aside .achat:hover {
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   transform: scale(1.02);
-  background-color: hsl(252, 55.5555555556%, 101.4705882353%);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;

@@ -1954,7 +1954,6 @@ aside {
             background-color: $couleur_fond_produit;
             &:hover{
                 transform: scale(1.02);
-                background-color: adjust-color($color: $couleur_fond_produit, $lightness: 5%);
             }
             
             &:visited{
