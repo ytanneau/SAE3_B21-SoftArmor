@@ -452,13 +452,16 @@ if (isset($_POST['quantite'])) {
                 let selector;
 
                 if (data.get('id_avis') != null) {
-                    selector = `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
+                    selector = `.bouton_signalement[data-avis="${data.get('id_avis')}"]`;
                 } else {
-                    selector = `.bouton_signalement_reponse[data-reponse="${data.get('id_reponse')}"]`
+                    selector = `.bouton_signalement_reponse[data-reponse="${data.get('id_reponse')}"]`;
                 }
+
+                console.log(selector);
 
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(selector);
+                btn.disabled = true;
                 
                 // Changer l'image du bouton
                 const img = document.querySelector(`${selector} img`);
