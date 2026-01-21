@@ -167,8 +167,6 @@
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                         <div>
                             <a href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
-                            <label for="supp_image_promo">Supprimer la bannière</label>
-                            <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
                         </div>
                     </div>
                 <?php } else { ?>
