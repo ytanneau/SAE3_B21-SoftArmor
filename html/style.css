@@ -231,7 +231,7 @@ hr {
   background-color: #EAC452;
 }
 .toolbar#produit ul .bouton_avis_vendeur_produit:hover {
-  background-color: rgb(239.5206185567, 211.5103092784, 127.4793814433);
+  background-color: rgb(236.7603092784, 203.7551546392, 104.7396907216);
 }
 .toolbar#produit ul li button {
   display: flex;
@@ -242,12 +242,17 @@ hr {
   font-family: "Montserrat";
   font-weight: bold;
   background-color: #A6A6BF;
+  border: none;
+}
+.toolbar#produit ul li button:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
 .toolbar#produit ul .supprimer_produit {
+  color: #FFFFFF;
   background-color: #E43737;
 }
 .toolbar#produit ul .supprimer_produit:hover {
-  background-color: rgb(234.0660792952, 99.9339207048, 99.9339207048);
+  background-color: rgb(231.0330396476, 77.4669603524, 77.4669603524);
 }
 
 #header_client {
