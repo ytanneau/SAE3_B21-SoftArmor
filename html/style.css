@@ -1424,6 +1424,13 @@ a.bouton:has(+ .liste_avis):hover {
   border-left: solid 4px #A6A6BF;
 }
 
+form:has(.bouton_supprimer) {
+  display: flex;
+}
+form:has(.bouton_supprimer) .bouton_supprimer {
+  margin-right: 0;
+}
+
 main:has(.detail_produit) {
   display: flex;
   justify-content: space-between;

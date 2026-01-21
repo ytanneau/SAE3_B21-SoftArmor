@@ -20,7 +20,7 @@
 
                     <!-- Boutons spécifiques aux vendeurs -->
                     <?php if (isset($id_vendeur)) { ?>
-                        <form action="" method="post">
+                        <form action="" method="post" style="display: flex">
                             <input type="hidden" name="id_reponse" value="<?=$reponse['id_reponse']?>">
 
                             <button class="bouton_supprimer">

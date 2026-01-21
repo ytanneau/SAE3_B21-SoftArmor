@@ -626,6 +626,14 @@ a.bouton:has(+ .liste_avis) {
     }
 }
 
+form:has(.bouton_supprimer) {
+    display: flex;
+
+    .bouton_supprimer {
+        margin-right: 0;
+    }
+}
+
 main:has(.detail_produit) {
     display: flex;
     justify-content: space-between;
