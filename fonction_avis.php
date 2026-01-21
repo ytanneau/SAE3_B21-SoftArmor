@@ -187,7 +187,7 @@
                     $update_img->execute();
                 } else {
                     // Insérer une nouvelle image et la lier à l'avis
-                    $insert_img = $pdo->prepare("INSERT INTO _image (url_image, titre_image, alt_image) VALUES (:url, :img_titre, :alt)");
+                    $insert_img = $pdo->prepare("INSERT INTO _image (url_image, titre, alt) VALUES (:url, :img_titre, :alt)");
                     $insert_img->bindValue(':url', $image, PDO::PARAM_STR);
                     $insert_img->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
                     $insert_img->bindValue(':alt', 'image avis', PDO::PARAM_STR);
