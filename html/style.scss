@@ -412,10 +412,10 @@ ul#results {
 .infos {
 
     .modif{
-        @include bouton_new($color: white, $largeur: 10em);
+        @include bouton_new($color: white, $largeur: 15em);
     }
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 30em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
 
     .image_bouton{
