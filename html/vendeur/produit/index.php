@@ -113,7 +113,7 @@
                 <div>
                     <?= htmlentities($rows['description_detaillee'] ?? '') ?>
                 </div>
-                <div class="toolbar">
+                <div class="toolbar" id="produit">
                     <ul>
                         <li>
                             <form id="supprimer" action="" method="post">
@@ -138,13 +138,13 @@
                                     $temp_date = explode("-",$date);  
                                     $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                                     ?>
-                                <li>
-                                    <a 
-                                        class="bouton_vendeur_produit" 
-                                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                                        Modifier la promotion du <?= htmlentities($new_date)?>
-                                    </a>
-                                </li>
+                        <li>
+                            <a 
+                                class="bouton_vendeur_produit" 
+                                href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
+                                Modifier la promotion du <?= htmlentities($new_date)?>
+                            </a>
+                        </li>
                             <?php }
                                 } 
                             ?>
