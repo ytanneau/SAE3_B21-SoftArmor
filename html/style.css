@@ -23,7 +23,6 @@ main {
 .image_produit_moyen {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 200px;
   max-width: 200px;
   height: 200px;
@@ -33,7 +32,6 @@ main {
 .image_produit_petit {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 25px;
   max-width: 25px;
   height: 25px;
@@ -869,8 +867,9 @@ ul#results {
   padding: 0;
   width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
   list-style: none;
+  justify-content: left;
+  margin-left: 10%;
 }
 ul#results > li {
   width: 20vw;
@@ -884,7 +883,6 @@ ul#results > li > a {
 ul#results > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 15vw;
   max-width: 15vw;
   height: 15vw;
@@ -1037,7 +1035,6 @@ ul#results > li > a > h3 {
 #avis_vendeur article div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 10vw;
   max-width: 10vw;
   height: 10vw;
@@ -1181,17 +1178,12 @@ ul#results > li > a > h3 {
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 10vw;
   max-width: 10vw;
   height: 10vw;
   border-radius: 5px;
   margin-left: 0;
   margin-right: 1em;
-}
-.infos .liste_avis li.reponse {
-  margin-left: 4em;
-  border-left: solid 2px #A6A6BF;
 }
 .infos .form_infos {
   display: flex;
@@ -1451,7 +1443,6 @@ div:has(> aside) {
 .detail_produit > article:first-child > div:first-child > div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 300px;
   max-width: 300px;
   height: 300px;
@@ -1460,7 +1451,6 @@ div:has(> aside) {
 .detail_produit > article:first-child > div:first-child > div:nth-child(2) img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 100px;
   max-width: 100px;
   height: 100px;
@@ -1684,7 +1674,6 @@ div:has(> aside) {
 .accueil > main > div > ul > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 15vw;
   max-width: 15vw;
   height: 15vw;
@@ -1807,11 +1796,17 @@ h3 {
   font-weight: bold;
 }
 
+.liste {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .liste .input_quantite {
   font-size: 1.4em;
 }
 .liste main {
   display: flex;
+  flex: 1;
 }
 .liste main img {
   -o-object-fit: contain;
@@ -1891,6 +1886,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  min-width: 100%;
 }
 .liste main .bouton a {
   text-decoration: none;
@@ -2299,7 +2295,6 @@ aside .achat:hover {
 .bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 250px;
   max-width: 250px;
   height: 250px;
@@ -2647,7 +2642,6 @@ aside .achat:hover {
 .produit-vendeur > div img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 200px;
   max-width: 200px;
   height: 200px;
@@ -2746,12 +2740,14 @@ aside .achat:hover {
   min-height: 100vh;
 }
 .stock main {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .stock main table {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  align-self: center;
 }
 .stock main tr {
   width: 50vw;
@@ -3137,7 +3133,6 @@ aside .achat:hover {
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
-  background-color: #f3f1fb;
   min-width: 250px;
   max-width: 250px;
   height: 250px;
@@ -3168,7 +3163,7 @@ aside .achat:hover {
 .main_accueil .liste_accueil_vendeur {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-gap: 50px;
+  grid-gap: 35px;
 }
 .main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
   display: flex;
@@ -3185,7 +3180,7 @@ aside .achat:hover {
   background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
-  transform: ease scale(1.1);
+  transform: scale(1);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
