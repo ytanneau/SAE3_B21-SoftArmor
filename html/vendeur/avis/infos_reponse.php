@@ -4,7 +4,7 @@
     define('HOME_SITE', '../../');
 
     require_once (HOME_GIT . '.config.php');
-    require_once (HOME_SITE . 'fonction_avis.php');
+    require_once (HOME_GIT . 'fonction_avis.php');
 
     // On récupère le corps de la requête HTTP (au format JSON) dans un tableau associatif
     $data = json_decode(file_get_contents('php://input'), true);
