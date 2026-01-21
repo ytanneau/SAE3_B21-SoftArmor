@@ -35,22 +35,22 @@
         <?php include "../header.php" ?>
         <main class="main_accueil">
             <article class="liste_accueil_vendeur">
-                <div class="lien1">
-                    <img src="<?=HOME_SITE. "image/compte_vendeur.svg"?>" alt="icone de ">
-                    <a href="../compte/information_compte_vendeur">Mon compte</a>
-                </div>
-                <div class="lien2">
-                    <img src="" alt="icone de ">
-                    <a href="../stock">Gestion de stock</a>
-                </div>
-                <div class="lien3">
-                    <img src="" alt="icone de ">
-                    <a href="../commande">Commandes</a>
-                </div>
-                <div class="lien4">
-                    <img src="" alt="icone de ">
-                    <a href="../avis">Avis</a>
-                </div>
+                <a class="lien1" href="../compte/information_compte_vendeur">
+                    <img src="<?=HOME_SITE . "image/compte_vendeur.svg"?>" alt="icone de compte">
+                    Mon compte
+                </a>
+                <a class="lien2" href="../stock">
+                    <img src="<?=HOME_SITE . "image/stocks.svg"?>" alt="icone de stock">
+                    Gestion de stock
+                </a>
+                <a class="lien3" href="../commande">
+                    <img src="<?=HOME_SITE . "image/panier.svg"?>" alt="icone des commandes ">
+                    Commandes
+                </a>
+                <a class="lien4" href="../avis">
+                    <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="icone des avis">
+                    Avis
+                </a>
             </article>
         </main>
         <?php include HOME_SITE . "footer.php" ?>

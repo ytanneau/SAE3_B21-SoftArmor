@@ -230,7 +230,7 @@ section.results {
 .resultat { 
     > div {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         
         > div:first-child {
             flex-direction: column;
@@ -267,6 +267,12 @@ ul#results {
 
 .deroulant{
     align-self: center;
+    select {
+        padding: 0.5em;
+        border-radius: 5px;
+        border: solid 1px $nuance_primaire_client;
+        font-size: $font_size_normal;
+    }
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
@@ -1925,19 +1931,24 @@ aside {
             flex-direction: column;
             align-items: center;
             font-weight: bold;
-            width: 17em;
-            height: 17em;
+            font-size: 150%;
+            width: 12em;
+            height: 12em;
             border-radius: $angle_petit;
+            color: black;
+            text-decoration: none;
+            background-color: $couleur_fond_produit;
             &:hover{
                 transform: ease scale(1.1);
             }
-            a{
+            
+            &:visited{
                 color: black;
                 text-decoration: none;
-                &:visited{
-                    color: black;
-                    text-decoration: none;
-                }
+            }
+            img{
+                width: 4em;
+                height: 4em;
             }
         }
     }

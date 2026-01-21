@@ -46,12 +46,17 @@ bool check_code(char* code);
 
 void photo(SESSION *data);
 void envoier_photo(SESSION *data, char *fichier);
-void encode_photo(char *src, char *des);
-void chaine_en_binaire(const char src, char *dest);
+void encode_photo(char *src, char *des, ssize_t size);
+
+
 
 void log_line(SESSION *data, char *msg);
 void log_transforme(char *str);
 void log_init(FILE *fd, char *message);
 void help();
+
+
+
+
 
 #endif
