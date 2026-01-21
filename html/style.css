@@ -247,12 +247,17 @@ hr {
 .toolbar#produit ul li button:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
+.toolbar#produit ul li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
 .toolbar#produit ul .supprimer_produit {
-  color: #FFFFFF;
   background-color: #E43737;
 }
 .toolbar#produit ul .supprimer_produit:hover {
   background-color: rgb(231.0330396476, 77.4669603524, 77.4669603524);
+}
+.toolbar#produit ul .supprimer_produit a {
+  color: #FFFFFF;
 }
 
 #header_client {
