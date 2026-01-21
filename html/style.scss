@@ -126,6 +126,11 @@ hr {
     }
     &#produit{
         @include toolbar($nuance, $color: black);
+        ul{
+            .bouton_avis_vendeur_produit{
+                background-color: $couleur_etoile;
+            }
+        }
     }
 }
 
