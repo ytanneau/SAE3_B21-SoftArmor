@@ -18,7 +18,7 @@
         
                         <div class="dropdown-content">
                             <?php foreach ($sous_cats as $sous_cat) { 
-                                $chemin_sous_cat = "recherche/?categorie=" . urlencode($sous_cat['nom_categorie']); ?>
+                                $chemin_sous_cat = HOME_SITE . "recherche/?categorie=" . urlencode($sous_cat['nom_categorie']); ?>
                             
                                 <a href="<?= $chemin_sous_cat ?>"><?= $sous_cat['nom_categorie'] ?></a>
                             <?php } ?>
