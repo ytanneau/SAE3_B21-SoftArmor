@@ -359,11 +359,9 @@ ul#results {
         justify-content: center;
         gap: 20px;
 
-        div:first-child{
-            img{
-                @include image_produit(10vw);
-                background-color: white;
-            }
+        img{
+            @include image_produit(10vw);
+            background-color: white;
         }
     }
 }
