@@ -200,6 +200,36 @@ hr {
 .toolbar#stock ul > li:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
+.toolbar#produit {
+  background-color: #A6A6BF;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25em 1em;
+  color: black;
+  text-decoration: none;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+.toolbar#produit ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit ul > li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
+.toolbar#produit ul .bouton_avis_vendeur_produit {
+  background-color: #EAC452;
+}
 
 #header_client {
   position: sticky;
@@ -1101,7 +1131,7 @@ ul#results > li > a > h3 {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: 30em;
+  width: 15em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1124,7 +1154,7 @@ ul#results > li > a > h3 {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: 30em;
+  width: 15em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1282,7 +1312,7 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child input,
   .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
-    width: 100%;
+    width: 50%;
   }
   .infos section .form_infos article:last-child .champ {
     margin-bottom: 1em;
@@ -1395,6 +1425,13 @@ a.bouton:has(+ .liste_avis):hover {
 .liste_avis li.reponse {
   padding-left: 3em;
   border-left: solid 4px #A6A6BF;
+}
+
+form:has(.bouton_supprimer) {
+  display: flex;
+}
+form:has(.bouton_supprimer) .bouton_supprimer {
+  margin-right: 0;
 }
 
 main:has(.detail_produit) {
@@ -1886,6 +1923,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  min-width: 100%;
 }
 .liste main .bouton a {
   text-decoration: none;
@@ -2927,6 +2965,12 @@ aside .achat:hover {
 .modal .modal_content .titre span.fermer_modal:hover, .modal .modal_content .titre span.fermer_modal:focus {
   cursor: pointer;
   text-decoration: none;
+}
+.modal .modal_content textarea {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  font-family: "Inter";
 }
 .modal .modal_content .boutons {
   display: flex;

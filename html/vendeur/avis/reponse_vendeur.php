@@ -20,9 +20,13 @@
 
                     <!-- Boutons spécifiques aux vendeurs -->
                     <?php if (isset($id_vendeur)) { ?>
-                        <button class="bouton_supprimer" data-reponse="<?=$reponse['id_reponse']?>">
-                            <img class="icon" src="<?= HOME_SITE . "image/supprimer.svg" ?>" title="Supprimer cette réponse">
-                        </button>
+                        <form action="" method="post" style="display: flex">
+                            <input type="hidden" name="id_reponse" value="<?=$reponse['id_reponse']?>">
+
+                            <button class="bouton_supprimer">
+                                <img class="icon" src="<?= HOME_SITE . "image/supprimer.svg" ?>" title="Supprimer cette réponse">
+                            </button>
+                        </form>
 
                         <button class="bouton_modifier" data-reponse="<?=$reponse['id_reponse']?>">
                             <img class="icon" src="<?= HOME_SITE . "image/modifier.svg" ?>" title="Modifier cette réponse">

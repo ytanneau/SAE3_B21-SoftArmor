@@ -18,6 +18,7 @@
     }
 
     $id_vendeur = $_SESSION['id_compte'];
+    $id_reponse = $_POST['id_reponse'] ?? '';
     $id_produit = htmlentities(trim($_GET['produit'] ?? ''));
 
     // Rediriger à la page de stock
@@ -28,6 +29,10 @@
 
     require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . 'fonction_avis.php';
+
+    if (!empty($id_reponse)) {
+        supprimer_reponse($id_reponse);
+    }
 
 
     $data = avis_client_produit($_GET['produit']);
@@ -351,6 +356,21 @@
                 btn.disabled = true;
             }
         });
+
+
+        // Suppression des réponses
+        document.querySelectorAll(".bouton_supprimer").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette réponse ?");
+
+                if (confirmation) {
+                    btn.parentElement.submit();
+                }
+            });
+        });
+
         
         function emailValide(email) {
             let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -366,7 +386,7 @@
             setTimeout(() => {
                 snackbar.className = "";
                 window.location.reload();
-            }, 5000);
+            }, 3000);
         }
 
     </script>

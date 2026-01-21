@@ -124,6 +124,14 @@ hr {
     &#stock {
         @include toolbar($nuance, $color: black);
     }
+    &#produit{
+        @include toolbar($nuance, $color: black);
+        ul{
+            .bouton_avis_vendeur_produit{
+                background-color: $couleur_etoile;
+            }
+        }
+    }
 }
 
 #header_client {
@@ -409,10 +417,10 @@ ul#results {
 .infos {
 
     .modif{
-        @include bouton_new($color: white, $largeur: 30em);
+        @include bouton_new($color: white, $largeur: 15em);
     }
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 30em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
 
     .image_bouton{
@@ -508,7 +516,7 @@ ul#results {
                     &:last-child {
                         input,
                         button,a {
-                            width: 100%;
+                            width: 50%;
                         }
 
                         .champ {
@@ -620,6 +628,14 @@ a.bouton:has(+ .liste_avis) {
             padding-left: 3em;
             border-left: solid 4px $nuance;
         }
+    }
+}
+
+form:has(.bouton_supprimer) {
+    display: flex;
+
+    .bouton_supprimer {
+        margin-right: 0;
     }
 }
 
@@ -1124,6 +1140,7 @@ h3 {
 
         .bouton {
             @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
+            min-width: 100%;
         }
 
         .grave {
@@ -1793,6 +1810,13 @@ aside {
                     text-decoration: none;
                 }
             }
+        }
+
+        textarea {
+            resize: none;
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter';
         }
 
         .boutons {

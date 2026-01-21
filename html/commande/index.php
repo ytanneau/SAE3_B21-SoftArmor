@@ -147,8 +147,13 @@ if (isset($_GET["commande"])) {
                             <div>
                                 <?php
                                 //si il y a eu connexion delivraptor et que il n'y a pas d'erreur
-                                if ($conn =="1" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :?>
-
+                                if ($conn =="1" and $info_colis["ERROR"]=="N/A" and $texte_img =="") :
+                                    //initialisation de tout les variables
+                                    $texte_refus="";
+                                    $texte_rendu="";
+                                    $texte_etape="";
+                                    $livraison="";
+                                ?>
                                     
                                 
                                 <p>Bordereau:<?php echo htmlentities($bordereau) ; ?></p>
@@ -237,7 +242,7 @@ if (isset($_GET["commande"])) {
                                 <?php 
                                     //si la connexion est accepté mais il y a une erreur sur le colis 
                                     elseif ($conn =="1" and $info_colis["ERROR"]!="N/A") :?>
-                                    <p>Erreur, le colis <?php echo htmlentities($bordereau)?> n'existe pas</p>
+                                    <p>Erreur, le colis n'existe pas</p>
                                 <?php 
                                     //si la connexion est accepté mais il y a une erreur sur l'image
                                     elseif  ($conn =="1" and $texte_img !="") :?>
