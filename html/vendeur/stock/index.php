@@ -50,7 +50,7 @@ function ecrire_nom($rows){
                     
 
                     <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button></a>
-                    <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
+                    <a href= "../produit/modifier_produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
 
                     <span> | </span>
 
