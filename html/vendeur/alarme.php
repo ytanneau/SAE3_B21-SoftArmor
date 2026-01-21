@@ -11,4 +11,4 @@ define('HOME_SITE', '../');
 require_once HOME_GIT .".config.php";
 require_once(HOME_GIT . 'fonction_alarme.php');
 
-function affiche_alarme($_SESSION['id_compte'])
+affiche_alarme($_SESSION['id_compte']);
