@@ -92,6 +92,7 @@
                         ];
                     }
                     ?>
+
                     <li>
                         <div>
                             <div>
@@ -132,6 +133,16 @@
                             </a>
                         <?php } ?>
                     </li>
+
+                    <?php 
+                    $reponse = get_reponse($avis['id_avis']);
+
+                    // Si l'avis a une réponse, l'afficher
+                    if (isset($reponse)) { ?>
+                        <li class="reponse">
+                            <?= $reponse['reponse'] ?>
+                        </li>
+                    <?php } ?>
                 <?php } ?>
             </ul>
 
