@@ -70,7 +70,7 @@
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
-        if (!isset($_POST['commentaire'])) $_POST['commentaire'] = null;
+        if (!isset($_POST['description'])) $_POST['description'] = null;
 
         if ($_FILES['image']['size'] == 0){
             $image = null;
@@ -86,7 +86,7 @@
             }
             
             try {
-                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['commentaire'], $image);
+                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
