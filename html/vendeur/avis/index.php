@@ -339,7 +339,6 @@
             document.body.style.overflowY = "auto";
 
             // Afficher la snackbar
-            window.location.reload();
             showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
@@ -366,6 +365,7 @@
 
             setTimeout(() => {
                 snackbar.className = "";
+                window.location.reload();
             }, 5000);
         }
 
