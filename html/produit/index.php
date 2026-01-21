@@ -378,10 +378,6 @@ if (isset($_POST['quantite'])) {
                 inputIdReponseSignalement.value = btn.dataset.reponse;
                 inputId.value = "";
 
-                // Afficher le bon formulaire
-                contentSignalement.style.display = "block";
-                contentReponse.style.display = "none";
-
                 // Afficher le modal
                 modal.style.display = "block";
 
