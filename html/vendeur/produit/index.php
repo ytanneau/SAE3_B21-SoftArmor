@@ -69,19 +69,27 @@
         <div class="toolbar" id="produit">
             <ul>
                 <li>
-                    <form id="supprimer" action="" method="post">
-                        <input type="hidden" name="supprimer" value="true">
-                        <input type="submit" value="Supprimer le produit">
-                    </form>
+                    <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                        <img src="<?HOME_SITE . "image/etoile.svg"?>" alt="etoile d'avis">
+                        Voir les avis
+                    </a>
                 </li>
                 <li>
-                    <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
+                    <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                        <img src="<?HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        Modifier ce produit
+                    </a>
                 </li>
                 <li>
                     <?php if($compteur === 2){ ?>
-                        <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>Promotion/Reduction <br> (Maximum de deux promotions par vendeur)</button>
+                        <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>
+                            Promotion/Reduction <br> (Maximum de deux promotions par vendeur)
+                        </button>
                     <?php } else {?>
-                        <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
+                        <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?HOME_SITE . "image/promo.svg"?>" alt="promotion">
+                            Promotion/Reduction
+                        </a>
                     <?php } ?>
                 </li>
                     <?php if($tab_promo != null){
@@ -90,11 +98,12 @@
                             $date = $ligne['date_debut'];
                             $temp_date = explode("-",$date);  
                             $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
-                            ?>
+                    ?>
                 <li>
                     <a 
                         class="bouton_vendeur_produit" 
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
+                        <img src="<?HOME_SITE . "image/modifier.svg"?>" alt="modification">
                         Modifier la promotion du <?= htmlentities($new_date)?>
                     </a>
                 </li>
@@ -102,7 +111,14 @@
                         } 
                     ?>
                 <li>
-                    <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
+                    <a href="">
+                        <img src="<?HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
+                        Supprimer le produit
+                    </a>
+                    <form id="supprimer" action="" method="post">
+                        <input type="hidden" name="supprimer" value="true">
+                        <input type="submit" value="Supprimer le produit">
+                    </form>
                 </li>
             </ul>
         </div>

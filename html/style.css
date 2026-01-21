@@ -229,6 +229,9 @@ hr {
 .toolbar#produit ul > li:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
+.toolbar#produit ul .bouton_avis_vendeur_produit {
+  background-color: #EAC452;
+}
 
 #header_client {
   position: sticky;
