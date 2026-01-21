@@ -230,7 +230,7 @@ section.results {
 .resultat { 
     > div {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         
         > div:first-child {
             flex-direction: column;
