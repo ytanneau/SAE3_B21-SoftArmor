@@ -339,6 +339,7 @@
             document.body.style.overflowY = "auto";
 
             // Afficher la snackbar
+            window.location.reload();
             showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
@@ -349,8 +350,6 @@
                     `.bouton_reponse[data-avis="${data.get('id_avis')}"]`
                 );
                 btn.disabled = true;
-
-                window.location.reload();
             }
         });
         
