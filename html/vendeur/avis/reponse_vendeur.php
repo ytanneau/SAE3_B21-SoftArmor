@@ -1,17 +1,19 @@
 <?php 
     $reponse = get_reponse($avis['id_avis']);
-    $image_pp = get_url_image($reponse['id_image_profil']);
-
-    if (!$image_pp) {
-        $image_pp = [
-            "url" => "image/compte_vendeur.svg",
-            "titre" => "Photo de profil",
-            "alt" => "Photo de profil"
-        ];
-    }
+    
 
     // Si l'avis a une réponse, l'afficher
-    if (!empty($reponse)) { ?>
+    if (!empty($reponse)) { 
+        $image_pp = get_url_image($reponse['id_image_profil']);
+
+        if (!$image_pp) {
+            $image_pp = [
+                "url" => "image/compte_vendeur.svg",
+                "titre" => "Photo de profil",
+                "alt" => "Photo de profil"
+            ];
+        } ?>
+        
         <li class="reponse">
             <div>
                 <div>
