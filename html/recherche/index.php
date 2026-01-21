@@ -74,6 +74,10 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                     <input type="checkbox" name="prom" id="prom" value="prom">
                     <label for="prom">Promotion</label>
                     </div>
+                    <div class="sousFiltre">
+                    <input type="checkbox" name="reduc" id="reduc" value="reduc">
+                    <label for="reduc">Réduction</label>
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -111,7 +115,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             filters: {
                 category: "<?=$categorie?>",
                 price: {min: null, max: null},
-                sales: false
+                sales: false,
+                reduc: false
             },
             sort: {
                 field: "nom_public", 
@@ -137,6 +142,21 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             } else {
                 console.log("Unchecked");
                 searchState.filters.sales = false;
+            }
+            fetchProduitsJSON();
+        });
+
+        let reducCheck = document.getElementById("reduc");
+
+        reducCheck.addEventListener('change', (e) => {
+            let isChecked = e.target.checked;
+            if (isChecked) {
+                console.log(e.target.value);
+                searchState.filters.reduc = true;
+                console.log(searchState.filters.reduc);
+            } else {
+                console.log("Unchecked");
+                searchState.filters.reduc = false;
             }
             fetchProduitsJSON();
         });
