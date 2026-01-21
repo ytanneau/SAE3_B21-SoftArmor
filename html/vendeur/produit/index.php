@@ -70,13 +70,13 @@
             <ul>
                 <li>
                     <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                        <img src="<?HOME_SITE . "image/etoile.svg"?>" alt="etoile d'avis">
+                        <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="etoile d'avis">
                         Voir les avis
                     </a>
                 </li>
                 <li>
                     <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                        <img src="<?HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
                         Modifier ce produit
                     </a>
                 </li>
@@ -87,7 +87,7 @@
                         </button>
                     <?php } else {?>
                         <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                            <img src="<?HOME_SITE . "image/promo.svg"?>" alt="promotion">
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
                             Promotion/Reduction
                         </a>
                     <?php } ?>
@@ -103,7 +103,7 @@
                     <a 
                         class="bouton_vendeur_produit" 
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                        <img src="<?HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
                         Modifier la promotion du <?= htmlentities($new_date)?>
                     </a>
                 </li>
@@ -112,7 +112,7 @@
                     ?>
                 <li>
                     <a href="">
-                        <img src="<?HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
+                        <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
                         Supprimer le produit
                     </a>
                     <form id="supprimer" action="" method="post">
