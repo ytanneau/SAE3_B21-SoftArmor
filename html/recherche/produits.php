@@ -37,7 +37,7 @@
         $requete .= " AND en_promotion = 1";
     }
     if ($reduc == true) {
-        $requete .= " AND pj.reduction <> NULL";
+        $requete .= " AND pj.reduction > 0";
     }
 
     // Filtre par recherche
