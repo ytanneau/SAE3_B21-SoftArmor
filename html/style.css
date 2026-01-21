@@ -2940,7 +2940,7 @@ aside .achat:hover {
 }
 .modal .modal_content {
   position: relative;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 2em;
   width: 30%;
   background-color: #FFFFFF;
@@ -2969,7 +2969,7 @@ aside .achat:hover {
 .modal .modal_content textarea {
   resize: none;
   width: 100%;
-  height: 100%;
+  height: 200px;
   font-family: "Inter";
 }
 .modal .modal_content .boutons {

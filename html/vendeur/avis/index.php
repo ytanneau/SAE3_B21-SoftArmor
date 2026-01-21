@@ -179,7 +179,7 @@
                     <form id="form_reponse" action="" method="post">
                         <input type="hidden" name="id_avis" id="id_avis_reponse">
 
-                        <label for="reponse">Réponse</label>
+                        <label for="reponse">Réponse (1000 caractères max.)</label>
                         <textarea name="reponse" id="reponse" placeholder="Votre réponse ici..."></textarea>
                         <p class="error" id="error_reponse">Veuillez remplir ce champ</p>
 
@@ -302,8 +302,6 @@
             showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
-                console.log(json.success);
-
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
@@ -343,12 +341,10 @@
             modal.style.display = "none";
             document.body.style.overflowY = "auto";
 
-            // Afficher la snackbar
-            showSnackbar(json.message, json.success ? "success" : "error");
+            // Recharger la page
+            window.location.reload();
 
             if (json.success) {
-                console.log(json.success);
-
                 // Désactiver le bouton de réponse
                 const btn = document.querySelector(
                     `.bouton_reponse[data-avis="${data.get('id_avis')}"]`
@@ -385,7 +381,6 @@
 
             setTimeout(() => {
                 snackbar.className = "";
-                window.location.reload();
             }, 3000);
         }
 
