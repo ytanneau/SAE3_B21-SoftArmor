@@ -393,7 +393,7 @@
             fetch('./infos_reponse.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(selection);
+                body: JSON.stringify(selection)
             })
             .then(res => res.json())
             .then(data => {
