@@ -206,7 +206,7 @@ hr {
 #header_client {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 11;
   padding: 0.5em 1em;
   background-color: #3157A3;
 }
@@ -386,7 +386,7 @@ hr {
 #header_vendeur {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 11;
   padding: 0.5em 1em;
   background-color: #6B31D0;
 }
