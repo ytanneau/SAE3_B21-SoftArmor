@@ -40,7 +40,7 @@
 
         echo json_encode([
             'success' => true,
-            'message' => "Votre réponse a été publiée."
+            'message' => "Votre réponse a été publiée pour l'avis $id_avis"
         ]);
         die();
     } catch (PDOException $e) {
