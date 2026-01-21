@@ -2617,6 +2617,11 @@ aside .achat:hover {
   align-items: center;
 }
 
+.content_produit_vendeur {
+  display: flex;
+  justify-content: center;
+}
+
 .produit-vendeur {
   padding: 2rem;
   display: flex;
