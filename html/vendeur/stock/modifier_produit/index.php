@@ -221,10 +221,11 @@
                                     $tabCategorie = get_categorie_parent();
                                     foreach($tabCategorie as $nomCat){
                                         $cat = htmlspecialchars($nomCat['nom_categorie']);
-                                        if($cat == 'Alimentaire' && $tabInfoProduit['categorie'] == 'Boisson' || $tabInfoProduit['categorie'] == 'Salé' || $tabInfoProduit['categorie'] == 'Sucré'){
+                                        if($cat == 'Alimentaire' && ($tabInfoProduit['categorie'] == 'Boisson' || $tabInfoProduit['categorie'] == 'Salé' || $tabInfoProduit['categorie'] == 'Sucré')){
                                             $selected = 'selected';
                                         } else {
-                                        $selected = ($cat == $tabInfoProduit['categorie']) ? 'selected' : '';}
+                                            $selected = ($cat == $tabInfoProduit['categorie']) ? 'selected' : '';
+                                        }
                                 ?>
                                     <option value="<?= $cat ?>" <?= $selected ?>><?= $cat ?></option>
                                 <?php } ?>
