@@ -142,6 +142,7 @@
         const warning4 = document.getElementById("warning4");
         const divPhoto = document.getElementById("divPhoto");
         const dateCourante = new Date();
+        dateCourante.setHours(0, 0, 0, 0);
 
         // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
         dateDebut.addEventListener('change', () => {
