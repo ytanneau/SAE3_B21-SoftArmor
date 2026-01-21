@@ -195,9 +195,6 @@ function binaire_to_octet($binString) {
 
 function connexion_socket($ip,$port){
     $fd =@fsockopen($ip,$port, $errno, $errstr);
-    if ($fd === false) {
-        echo "Connexion Delivraptor échouée ";
-    }
     return $fd;
 }
 
