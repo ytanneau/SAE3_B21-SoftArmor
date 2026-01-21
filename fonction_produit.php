@@ -287,7 +287,7 @@
                 'seuilAlerte' => $seuil_alerte,
                 'poidProd' => $poid, 
                 'volumeProd' => $volume_colis,
-                'checkMajeur' => $reserve_majeur,
+                'checkMajeur' => $reserve_majeur ? 1 : 0,
                 'qtunite' => $qt_achete
             ]);
 
