@@ -26,8 +26,8 @@
     }
 
     try {
-        // Si déjà signalé par l'utilisateur, erreur
-        if (avis_est_repondu($id_avis, $id_compte)) {
+        // Si le vendeur a déjà répondu, erreur
+        if (avis_est_repondu($id_avis)) {
             echo json_encode([
                 'success' => false,
                 'message' => "Vous avez déjà répondu à cet avis."
@@ -40,7 +40,7 @@
 
         echo json_encode([
             'success' => true,
-            'message' => "Votre réponse a été publiée pour l'avis $id_avis"
+            'message' => "Votre réponse a été publiée."
         ]);
         die();
     } catch (PDOException $e) {
