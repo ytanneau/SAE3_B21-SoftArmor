@@ -84,7 +84,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
                 <option value="triPrix" data-name ="ASC">Prix croissants</option>
                 <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-                <!-- <option value="triReduc" data-name ="ASC">Réduction</option> -->
+                <option value="triReduc" data-name ="ASC">Réduction</option>
                 </select>
                 </div>
             </div>
