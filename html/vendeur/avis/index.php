@@ -140,7 +140,7 @@
                     // Si l'avis a une réponse, l'afficher
                     if (isset($reponse)) { ?>
                         <li class="reponse">
-                            <?= $reponse['reponse'] ?>
+                            <?php var_dump($reponse); ?>
                         </li>
                     <?php } ?>
                 <?php } ?>
