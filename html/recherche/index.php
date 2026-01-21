@@ -51,32 +51,37 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <fieldset id = "prixF">
                     <legend>Filtrer par prix</legend>
                     <div class="sousFiltre">
-                    <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                    <label for="zeroTo20">0 € à 20 €</label>
+                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
+                        <label for="zeroTo20">0 € à 20 €</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                    <label for="twentyTo50">20 € à 50 €</label>
+                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
+                        <label for="twentyTo50">20 € à 50 €</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                    <label for="fiftyTo100">50 € à 100 €</label>
+                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
+                        <label for="fiftyTo100">50 € à 100 €</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                    <label for="hundredTo300">100 € à 300 €</label>
+                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
+                        <label for="hundredTo300">100 € à 300 €</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="radio" name="prix" id="over300" value="over300">
-                    <label for="over300">Plus de 300 €</label>
+                        <input type="radio" name="prix" id="over300" value="over300">
+                        <label for="over300">Plus de 300 €</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="checkbox" name="prom" id="prom" value="prom">
-                    <label for="prom">Promotion</label>
+                        <input type="checkbox" name="prom" id="prom" value="prom">
+                        <label for="prom">Promotion</label>
                     </div>
                     <div class="sousFiltre">
-                    <input type="checkbox" name="reduc" id="reduc" value="reduc">
-                    <label for="reduc">Réduction</label>
+                        <input type="checkbox" name="reduc" id="reduc" value="reduc">
+                        <label for="reduc">Réduction</label>
+                    </div>
+                    <div class="sousFiltre">
+                        <button type="button" id="resetFilters">
+                            Supprimer les filtres
+                        </button>
                     </div>
                 </fieldset>
             </form>
@@ -235,6 +240,30 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 }
             });
         }
+
+        const resetBtn = document.getElementById("resetFilters");
+
+        resetBtn.addEventListener("click", () => {
+            // 1. Reset de l’état des filtres
+            searchState.filters.price.min = null;
+            searchState.filters.price.max = null;
+            searchState.filters.sales = false;
+            searchState.filters.reduc = false;
+
+            document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
+
+            document.getElementById("prom").checked = false;
+            document.getElementById("reduc").checked = false;
+
+            const selectTri = document.getElementById("tri");
+            selectTri.selectedIndex = 0;
+
+            searchState.sort.field = "nom_public";
+            searchState.sort.order = "ASC";
+
+            fetchProduitsJSON();
+        });
+
 
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");

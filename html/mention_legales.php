@@ -14,7 +14,7 @@ define('HOME_SITE', "./" );
 </head>
 <body>
     <?php include HOME_SITE . "header.php"; ?>
-    <main>
+    <main style="width: 40%; left: 30%; position: relative;">
 
         <h1>Mentions légales</h1>
         <h3>En vigueur au 03/12/2025</h3>
