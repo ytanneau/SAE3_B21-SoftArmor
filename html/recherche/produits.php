@@ -17,6 +17,8 @@
     $prixmin    = $filters['price']['min'] ?? null;
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
+    $reduc       = $filters['reduc'] ?? null;
+
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction
@@ -33,6 +35,9 @@
     
     if ($prom == true) {
         $requete .= " AND en_promotion = 1";
+    }
+    if ($reduc == true) {
+        $requete .= " AND pj.reduction <> NULL";
     }
 
     // Filtre par recherche
