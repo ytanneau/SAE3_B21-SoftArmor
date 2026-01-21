@@ -52,6 +52,8 @@
             } else {
                 $categorieFinale = $_POST['categorie'];
             }
+        } else {
+            $categorieFinale = $tabCategorieDuProduit['nom_categorie'];
         }
 
         if ($categorieFinale !== null) {
