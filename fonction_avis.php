@@ -306,7 +306,7 @@
                     FROM _reponse r
                     INNER JOIN avis_vendeur av
                     ON av.id_avis = r.id_avis
-                    WHERE id_avis = :id_avis";
+                    WHERE r.id_avis = :id_avis";
 
             $requete = $pdo->prepare($sql);
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
