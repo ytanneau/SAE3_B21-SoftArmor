@@ -60,11 +60,7 @@
         }
 
         $id_nouvelle_banniere = $id_image_initial;
-        if(isset($_POST['supp_image_promo']) && $_POST['supp_image_promo'] == 'on'){
-            $id_nouvelle_banniere = null;
-            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
-            delete_image($id_image_initial);
-        } else if (
+        if (
             isset($_FILES['photoPromotion']) &&
             $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK
         ){
@@ -170,6 +166,7 @@
                         <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                         <div>
+                            <a href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
                             <label for="supp_image_promo">Supprimer la bannière</label>
                             <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
                         </div>

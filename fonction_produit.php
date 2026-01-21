@@ -664,7 +664,18 @@
         }
         return $tab_final;
     }
+    function unlink_image_promotion($id_promotion){
+        global $pdo;
 
+        try{
+            $stmt = $pdo->prepare("UPDATE _promotion SET id_image_banniere = NULL WHERE id_promotion = :id");
+            $stmt->execute([
+                "id" => $id_promotion
+            ]);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
     function unlink_image_produit($id_image, $id_produit){
         global $pdo;
 
