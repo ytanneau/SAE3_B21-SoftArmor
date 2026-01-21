@@ -1185,10 +1185,6 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis li.reponse {
-  margin-left: 4em;
-  border-left: solid 2px #A6A6BF;
-}
 .infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
@@ -1884,6 +1880,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  min-width: 100%;
 }
 .liste main .bouton a {
   text-decoration: none;
