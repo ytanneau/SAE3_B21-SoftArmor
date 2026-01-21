@@ -233,6 +233,9 @@ hr {
 .toolbar#produit ul .bouton_avis_vendeur_produit:hover {
   background-color: rgb(236.7603092784, 203.7551546392, 104.7396907216);
 }
+.toolbar#produit ul li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
 .toolbar#produit ul li button {
   display: flex;
   flex-direction: row;
@@ -245,9 +248,6 @@ hr {
   border: none;
 }
 .toolbar#produit ul li button:hover {
-  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
-}
-.toolbar#produit ul li:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
 .toolbar#produit ul .supprimer_produit {

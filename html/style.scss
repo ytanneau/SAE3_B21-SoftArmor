@@ -134,6 +134,9 @@ hr {
                 }
             }
             li{
+                &:hover{
+                    background-color: adjust-color($nuance, $lightness: 5%);
+                }
                 button{
                     display: flex;
                     flex-direction: row;
@@ -147,9 +150,6 @@ hr {
                     &:hover{
                         background-color: adjust-color($nuance, $lightness: 5%);
                     }
-                }
-                &:hover{
-                    background-color: adjust-color($nuance, $lightness: 5%);
                 }
             }
             .supprimer_produit{
