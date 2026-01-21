@@ -2021,5 +2021,5 @@ aside {
 }
 
 .delete_picture{
-    @include bouton_new();
+    @include bouton_new($background: $rouge, $color: $couleur_background);
 }
