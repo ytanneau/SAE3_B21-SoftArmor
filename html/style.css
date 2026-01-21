@@ -851,7 +851,7 @@ section.results {
 
 .resultat > div {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .resultat > div > div:first-child {
   flex-direction: column;
