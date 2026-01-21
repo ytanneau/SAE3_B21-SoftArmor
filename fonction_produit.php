@@ -668,7 +668,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("UPDATE _promotion SET id_image_banniere = NULL WHERE id_promotion = :id");
+            $stmt = $pdo->prepare("UPDATE _promotion SET id_image_banniere = NULL WHERE id_promo = :id");
             $stmt->execute([
                 "id" => $id_promotion
             ]);
