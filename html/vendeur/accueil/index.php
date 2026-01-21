@@ -20,7 +20,7 @@
 
     require_once HOME_GIT .".config.php";
     require_once(HOME_GIT . 'fonction_alarme.php');
-    
+
     //permet d'utiliser le fichier config.php
     /*require_once HOME_GIT . '.config.php';
     require_once HOME_GIT . 'fonction_produit.php';*/
@@ -37,7 +37,6 @@
     <body>
         <?php include "../header.php" ?>
         <main class="main_accueil">
-            <?php affiche_alarme($_SESSION['id_compte']); ?>
             <article class="liste_accueil_vendeur">
                 <a class="lien1" href="../compte/information_compte_vendeur">
                     <img src="<?=HOME_SITE . "image/compte_vendeur.svg"?>" alt="icone de compte">
@@ -56,6 +55,7 @@
                     Avis
                 </a>
             </article>
+            <?php affiche_alarme($_SESSION['id_compte']); ?>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>

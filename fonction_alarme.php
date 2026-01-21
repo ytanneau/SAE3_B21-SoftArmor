@@ -17,15 +17,17 @@
 
         ?>
             <div class="alarme">
-                <h3>Alerte</h3>
-                <ul>
-                <?php foreach ($data as $key => $value) { ?>
-                    <li>
-                        <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
-                            <?=htmlentities($value['nom_stock'])?> | il reste <?=htmlentities($value['quantite'])?>
-                        </a>
-                    </li>
-                <?php }?>
+                <?php if($data != null){ ?>
+                    <h3>Alerte :</h3>
+                    <ul>
+                    <?php foreach ($data as $key => $value) { ?>
+                        <li>
+                            <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
+                                <?=htmlentities($value['nom_stock'])?> | il reste <?=htmlentities($value['quantite'])?>
+                            </a>
+                        </li>
+                    <?php }
+                    } ?>
                 </ul>
             </div>
 
