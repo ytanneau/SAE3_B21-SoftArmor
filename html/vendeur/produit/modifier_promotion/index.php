@@ -71,8 +71,21 @@
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-            
-            $nomImage = $id_produit . "_promotion.png";
+            switch($_FILES['type']){
+                case 'image/jpeg' : 
+                    $extension = '.jpeg';
+                    break;
+                case 'image/webp' :
+                    $extension = '.webp';
+                    break;
+                case 'image/jpg' :
+                    $extension = '.jpg';
+                    break;
+                default :
+                    $extension = '.png';
+                    break;
+            }
+            $nomImage = $id_produit . "_promotion" . $extension;
             
             $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
             // definition des caractéristiques d'une image
