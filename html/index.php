@@ -96,7 +96,7 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {
 <?php }
 $pub = false;
 $tabPromotion = get_promotion_banniere();
-if($tabPromotion != null){
+if($tabPromotion != false){
     $url_banniere = get_url_image($tabPromotion['id_image_banniere'])['url'];
 } else {
     $pub = true;
