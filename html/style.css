@@ -786,6 +786,7 @@ hr {
 .TriEtFiltre {
   display: flex;
   flex-direction: column;
+  width: 15em;
 }
 .TriEtFiltre form {
   align-items: normal;
@@ -824,10 +825,6 @@ hr {
 }
 .TriEtFiltre form .error {
   color: #E43737;
-}
-
-.formTri {
-  width: 15em;
 }
 
 section.results {

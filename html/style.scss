@@ -166,13 +166,11 @@ hr {
 .TriEtFiltre{
     display: flex;
     flex-direction: column;
+    width: 15em;
+
     form{
         @include formulaire();
     }
-}
-
-.formTri{
-    width: 15em;
 }
 
 section.results {
