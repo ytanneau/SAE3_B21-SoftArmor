@@ -302,7 +302,7 @@
         }
 
         try {
-            $sql = "SELECT r.id_reponse, id_avis, r.reponse, r.date_reponse, av.raison_sociale, av.id_image_profil
+            $sql = "SELECT r.id_reponse, r.id_avis, r.reponse, r.date_reponse, av.raison_sociale, av.id_image_profil
                     FROM _reponse r
                     INNER JOIN avis_vendeur av
                     ON av.id_avis = r.id_avis
