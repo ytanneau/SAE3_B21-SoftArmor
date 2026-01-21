@@ -267,6 +267,12 @@ ul#results {
 
 .deroulant{
     align-self: center;
+    select {
+        padding: 0.5em;
+        border-radius: 5px;
+        border: solid 1px $nuance_primaire_client;
+        font-size: $font_size_normal;
+    }
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {

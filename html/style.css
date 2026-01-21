@@ -927,6 +927,12 @@ ul#results > li > a > h3 {
 .deroulant {
   align-self: center;
 }
+.deroulant select {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: solid 1px #CBCCEA;
+  font-size: 1em;
+}
 
 .form_client {
   overflow-x: hidden;
