@@ -48,7 +48,7 @@
         // recupere le nom temporaire du fichier pour le deplacer
         $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
         
-        switch($_FILES['type']){
+        switch($_FILES['photoPromotion']['type']){
             case 'image/jpeg' : 
                 $extension = '.jpeg';
                 break;
