@@ -67,10 +67,8 @@ if (isset($_SESSION['raison_sociale'])) {
 
     <div class="footer-bottom">
       <div class="footer-links">
-        <a href="#">Vos données personnelles</a>
         <a href="#">Cookies</a>
-        <a href="#">Mentions légales</a>
-        <a href="#">Conditions générales de vente</a>
+        <a href="<?=HOME_SITE?>mention_legales.php">Mentions légales</a>
       </div>
 
       <p>© 2025, alizon.com</p>
