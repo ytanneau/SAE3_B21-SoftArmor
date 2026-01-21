@@ -33,10 +33,16 @@
                         </button>
 
                     <!-- Boutons spécifiques aux clients et visiteurs -->
-                    <?php } else { ?>
-                        <button class="bouton_signalement_reponse" data-reponse="<?=$reponse['id_reponse']?>">
-                            <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cette réponse">
-                        </button>
+                    <?php } else { 
+                        if (!reponse_est_signalee($reponse['id_reponse'], $id_compte)) { ?>
+                            <button class="bouton_signalement_reponse" data-reponse="<?=$reponse['id_reponse']?>">
+                                <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cette réponse">
+                            </button>
+                        <?php } else { ?>
+                            <button class="bouton_signalement" disabled>
+                                <img class="icon" src="<?= HOME_SITE . "image/reported_rouge.svg" ?>" title="Avis signalé">
+                            </button>
+                        <?php } ?>
                     <?php } ?>
                 </div>
 

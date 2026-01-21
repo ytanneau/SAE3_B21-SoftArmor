@@ -61,7 +61,7 @@ if (isset($produit['prix_actuel']) && ($produit['prix_actuel'] != $produit['prix
     $formatted_prix_bas = number_format($produit['prix_actuel'] * (1 + $produit['tva'] / 100), 2, ',', ' ') . '€';
 }
 
-$id_cli = $_SESSION['id_compte'] ?? null;
+$id_compte = $_SESSION['id_compte'] ?? null;
 
 
 if (isset($_POST['quantite'])) {
@@ -72,7 +72,7 @@ if (isset($_POST['quantite'])) {
     if (isset($_POST['panier'])) {
 
         if (isset($_SESSION['id_compte'])) {
-            ajouter_panier($id_prod,$id_cli,$qte);
+            ajouter_panier($id_prod,$id_compte,$qte);
 
         } else {
             ajouter_panier_visiteur($id_prod, $qte);
@@ -223,9 +223,9 @@ if (isset($_POST['quantite'])) {
 
                                     <!-- Afficher le bouton signaler seulement si l'avis n'est pas à moi, et que je ne l'ai pas déjà signalé -->
                                     <?php
-                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_cli);
+                                    $est_mon_avis = avis_fait_par($avis['id_avis'], $id_compte);
     
-                                    if (!avis_est_signale($avis['id_avis'], $id_cli) && !$est_mon_avis) { ?>
+                                    if (!avis_est_signale($avis['id_avis'], $id_compte) && !$est_mon_avis) { ?>
                                         <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                             <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
                                         </button>
@@ -265,7 +265,7 @@ if (isset($_POST['quantite'])) {
                             <input type="hidden" name="id_avis" id="id_avis">
                             <input type="hidden" name="id_reponse" id="id_reponse">
 
-                            <?php if (!isset($id_cli)) { ?>
+                            <?php if (!isset($id_compte)) { ?>
                                 <label for="input_email">Adresse e-mail</label>
                                 <input type="email" name="email" id="input_email" placeholder="xyz@domaine.fr">
                                 <p class="error" id="error_email">Le format est invalide</p>

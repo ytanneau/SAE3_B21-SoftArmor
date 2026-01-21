@@ -17,7 +17,7 @@
         exit;
     }
 
-    $id_vendeur = $_SESSION['id_compte'];
+    $id_compte = $_SESSION['id_compte'];
     $id_reponse = $_POST['id_reponse'] ?? '';
     $id_produit = htmlentities(trim($_GET['produit'] ?? ''));
 
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <!-- Afficher le bouton signaler seulement si je ne l'ai pas déjà signalé -->
-                                <?php if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
+                                <?php if (!avis_est_signale($avis['id_avis'], $id_compte)) { ?>
                                     <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                         <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
                                     </button>
