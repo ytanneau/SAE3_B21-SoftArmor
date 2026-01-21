@@ -136,7 +136,7 @@
             </ul>
 
             <div id="modal_signalement" class="modal">
-                <div class="modal_content">
+                <div class="modal_content" id="content_signalement">
                     <div class="titre">
                         <h3>Signaler cet avis</h3>
                         <span class="fermer_modal">&times;</span>
@@ -162,7 +162,7 @@
                 </div>
 
                 <!-- Autre div modal-content caché pour la réponse -->
-                <div class="modal_content">
+                <div class="modal_content" id="content_reponse">
                     <div class="titre">
                         <h3>Répondre à cet avis</h3>
                         <span class="fermer_modal">&times;</span>
@@ -193,8 +193,13 @@
 
     <script>
         const modal = document.getElementById("modal_signalement");
+
         const formSignalement = document.getElementById("form_signalement");
         const formReponse = document.getElementById("form_reponse");
+
+        const contentSignalement = document.getElementById("content_signalement");
+        const contentReponse = document.getElementById("content_reponse");
+
         const snackbar = document.getElementById("snackbar");
 
         const inputIdSignalement = document.getElementById("id_avis_signalement");
@@ -213,8 +218,8 @@
                 inputIdSignalement.value = btn.dataset.avis;
 
                 // Afficher le bon formulaire
-                formSignalement.style.display = "block";
-                formReponse.style.display = "none";
+                contentSignalement.style.display = "block";
+                contentReponse.style.display = "none";
 
                 // Afficher le modal
                 modal.style.display = "block";
@@ -230,8 +235,8 @@
                 inputIdReponse.value = btn.dataset.avis;
                 
                 // Afficher le bon formulaire
-                formReponse.style.display = "block";
-                formSignalement.style.display = "none";
+                contentReponse.style.display = "block";
+                contentSignalement.style.display = "none";
                 
                 // Afficher le modal
                 modal.style.display = "block";
