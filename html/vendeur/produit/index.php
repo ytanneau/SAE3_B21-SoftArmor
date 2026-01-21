@@ -101,7 +101,7 @@
                     ?>
                 <li class="supprimer_produit">
                     <a href="supprimer_produit.php?produit=<?=$id_produit?>" id="supprimer_produit">
-                        <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
+                        <img src="<?=HOME_SITE . "image/supprimer_blanc.svg"?>" alt="Supprimer">
                         Supprimer le produit
                     </a>
                 </li>
