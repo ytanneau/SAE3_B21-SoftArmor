@@ -1633,20 +1633,21 @@ div:has(> aside) {
 .accueil nav {
   display: none;
 }
-.accueil > main > div {
+.accueil > main .banniere {
   display: flex;
-  flex-direction: row;
-}
-.accueil > main > div .banniere {
   justify-content: center;
 }
-.accueil > main > div .banniere a {
+.accueil > main .banniere a {
   display: flex;
   justify-content: center;
   width: 50%;
 }
-.accueil > main > div .banniere a img {
+.accueil > main .banniere a img {
   width: 100%;
+}
+.accueil > main > div {
+  display: flex;
+  flex-direction: row;
 }
 .accueil > main > div > button {
   z-index: 10;
