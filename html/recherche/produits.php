@@ -26,6 +26,7 @@
         INNER JOIN _categorie c
         ON p.categorie = c.nom_categorie
         LEFT JOIN promo_jour pj
+        ON pj.id_produit = p.id_produit
         WHERE 1 = 1";
     
     $params = [];
