@@ -14,11 +14,12 @@
 
     // On récupère la recherche, les filtres et tris éventuels
     $id_avis = $_POST['id_avis'] ?? '';
+    $id_reponse = $_POST['id_reponse'] ?? '';
     $email = $_POST['email'] ?? null;
     $raison  = $_POST['raison'] ?? '';
 
     // Si il manque des informations, erreur
-    if (empty($id_avis) || empty($raison) || (!isset($id_compte) && !isset($email))) {
+    if ((empty($id_avis) && empty($id_reponse)) || empty($raison) || (!isset($id_compte) && !isset($email))) {
         echo json_encode([
             'success' => false,
             'message' => "L'avis n'a pas pu être signalé. Veuillez réessayer plus tard."
@@ -34,10 +35,21 @@
                 'message' => "Vous avez déjà signalé cet avis."
             ]);
             die();
+        } else if (reponse_est_signalee($id_reponse, $id_compte, $email)) {
+            echo json_encode([
+                'success' => false,
+                'message' => "Vous avez déjà signalé cette réponse."
+            ]);
+            die();
         }
 
         // Marquer l'avis comme signalé
-        signaler_avis($id_compte, $id_avis, $raison, $email);
+        if (!empty($id_avis)) {
+            signaler_avis($id_compte, $id_avis, $raison, $email);
+        } else {
+            signaler_reponse($id_compte, $id_reponse, $raison, $email);
+        }
+        
 
         echo json_encode([
             'success' => true,

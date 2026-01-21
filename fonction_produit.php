@@ -172,10 +172,8 @@
     function supprimer_produit_stock($id_produit) {
         global $pdo;
         $image = get_image_produit($id_produit);
-        print_r($image);
         delete_image_produit($id_produit);
 
-        delete_image($image['id_image_principale']);
         if(!empty($image['id_image1'])){
             delete_image($image['id_image1']);
         } else if (!empty($image['id_image2'])) {
@@ -687,6 +685,30 @@
                 ]);
             }
         } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_promotion_banniere(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_produit FROM produit_banniere_aujourd");
+            $stmt->execute();
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($res != false){
+                $id = $res['id_produit'];
+                $stmt = $pdo->prepare("SELECT id_produit, id_image_banniere FROM _promotion WHERE id_produit = :id");
+                $stmt->execute([
+                    "id" => $id
+                ]);
+
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            else {
+                return false;
+            }
+        } catch(PDOException $e){
             throw $e;
         }
     }

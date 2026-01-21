@@ -200,6 +200,62 @@ hr {
 .toolbar#stock ul > li:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
+.toolbar#produit {
+  background-color: #A6A6BF;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25em 1em;
+  color: black;
+  text-decoration: none;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+.toolbar#produit ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit ul > li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
+.toolbar#produit ul .bouton_avis_vendeur_produit {
+  background-color: #EAC452;
+}
+.toolbar#produit ul .bouton_avis_vendeur_produit:hover {
+  background-color: rgb(236.7603092784, 203.7551546392, 104.7396907216);
+}
+.toolbar#produit ul li button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-family: "Montserrat";
+  font-weight: bold;
+  background-color: #A6A6BF;
+  border: none;
+}
+.toolbar#produit ul li button:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
+.toolbar#produit ul .supprimer_produit {
+  background-color: #E43737;
+}
+.toolbar#produit ul .supprimer_produit:hover {
+  background-color: rgb(231.0330396476, 77.4669603524, 77.4669603524);
+}
+.toolbar#produit ul .supprimer_produit a {
+  color: #FFFFFF;
+}
 
 #header_client {
   position: sticky;
@@ -1032,7 +1088,10 @@ ul#results > li > a > h3 {
   justify-content: center;
   gap: 20px;
 }
-#avis_vendeur article div:first-child img {
+#avis_vendeur article h1 {
+  margin-top: 0;
+}
+#avis_vendeur article img:not(.etoile) {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 10vw;
@@ -1040,56 +1099,6 @@ ul#results > li > a > h3 {
   height: 10vw;
   border-radius: 5px;
   background-color: white;
-}
-#avis_vendeur section {
-  display: flex;
-  justify-content: center;
-  /*
-  ul{
-      @include contenu_centre_vertical();
-      gap: 10px;
-
-      hr{
-          width: 50%;
-          color: $nuance_primaire_vendeur;
-      }
-
-      li{
-          @include contenu_centre_horizontal();
-          list-style: none;
-
-          >div:first-child{
-              @include contenu_centre_vertical();
-              width: 40vw;
-              align-items: start;
-
-              .info{
-                  color: $nuance_primaire_vendeur;
-              }
-
-              >div{
-                  @include contenu_centre_horizontal();
-                  img{
-                      width: 20px;
-                      height: 20px;
-                  }
-              }
-          }
-
-          >div:last-child{
-              width: 5vw;
-              height: 5vw;
-
-              img{
-                  width: 5vw;
-                  height: 5vw;
-                  object-fit: contain;
-                  background-color: white;
-              }
-          }
-
-      }
-  }*/
 }
 
 .text {
@@ -1101,7 +1110,7 @@ ul#results > li > a > h3 {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: 30em;
+  width: 15em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1124,7 +1133,7 @@ ul#results > li > a > h3 {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: 30em;
+  width: 15em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1282,7 +1291,7 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child input,
   .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
-    width: 100%;
+    width: 50%;
   }
   .infos section .form_infos article:last-child .champ {
     margin-bottom: 1em;
@@ -1395,6 +1404,13 @@ a.bouton:has(+ .liste_avis):hover {
 .liste_avis li.reponse {
   padding-left: 3em;
   border-left: solid 4px #A6A6BF;
+}
+
+form:has(.bouton_supprimer) {
+  display: flex;
+}
+form:has(.bouton_supprimer) .bouton_supprimer {
+  margin-right: 0;
 }
 
 main:has(.detail_produit) {
@@ -1616,6 +1632,18 @@ div:has(> aside) {
 }
 .accueil nav {
   display: none;
+}
+.accueil > main .banniere {
+  display: flex;
+  justify-content: center;
+}
+.accueil > main .banniere a {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.accueil > main .banniere a img {
+  width: 100%;
 }
 .accueil > main > div {
   display: flex;
@@ -1871,6 +1899,9 @@ h3 {
 .liste main aside {
   top: 8em;
 }
+.liste main div > .bouton {
+  min-width: auto;
+}
 .liste main .bouton {
   display: block;
   max-width: 100%;
@@ -1942,7 +1973,7 @@ h3 {
   background-color: rgb(66.9464285714, 177.5535714286, 69.8571428571);
 }
 .liste main p {
-  width: 40%;
+  padding: 1em;
 }
 @media screen and (max-width: 1024px) {
   .liste main {
@@ -2903,7 +2934,7 @@ aside .achat:hover {
 }
 .modal .modal_content {
   position: relative;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 2em;
   width: 30%;
   background-color: #FFFFFF;
@@ -2928,6 +2959,16 @@ aside .achat:hover {
 .modal .modal_content .titre span.fermer_modal:hover, .modal .modal_content .titre span.fermer_modal:focus {
   cursor: pointer;
   text-decoration: none;
+}
+.modal .modal_content textarea {
+  width: 100%;
+  height: 200px;
+  padding: 0.5em;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  resize: none;
+  font-family: "Inter";
+  font-size: 1em;
 }
 .modal .modal_content .boutons {
   display: flex;
@@ -3157,8 +3198,27 @@ aside .achat:hover {
 
 .main_accueil {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+.main_accueil > div ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 0;
+}
+.main_accueil > div li {
+  border: solid 1 black;
+  background-color: #9C9C9C;
+  border-radius: 5px;
+  padding: 1em;
+}
+.main_accueil > div a {
+  color: #000;
+  text-decoration: none;
 }
 .main_accueil .liste_accueil_vendeur {
   display: grid;
@@ -3180,7 +3240,7 @@ aside .achat:hover {
   background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
-  transform: scale(1);
+  transform: scale(1.02);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
