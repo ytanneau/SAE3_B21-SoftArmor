@@ -19,7 +19,7 @@
                     <img class="image_pp" src="<?= HOME_SITE . $image_pp['url'] ?>" title="<?= $image_pp['titre'] ?>" alt="<?= $image_pp['alt'] ?>">
 
                     <!-- Boutons spécifiques aux vendeurs -->
-                    <?php if (isset($id_vendeur)) { ?>
+                    <?php if (isset($_SESSION['raison_sociale'])) { ?>
                         <form action="" method="post" style="display: flex">
                             <input type="hidden" name="id_reponse" value="<?=$reponse['id_reponse']?>">
 
