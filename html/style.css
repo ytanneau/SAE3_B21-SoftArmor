@@ -3186,7 +3186,7 @@ aside .achat:hover {
   grid-template-columns: 2fr 2fr;
   grid-gap: 50px;
 }
-.main_accueil .liste_accueil_vendeur div .lien1, .main_accueil .liste_accueil_vendeur div .lien2, .main_accueil .liste_accueil_vendeur div .lien3, .main_accueil .liste_accueil_vendeur div .lien4 {
+.main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -3198,10 +3198,10 @@ aside .achat:hover {
   text-decoration: none;
   background-color: #CBCCEA;
 }
-.main_accueil .liste_accueil_vendeur div .lien1:hover, .main_accueil .liste_accueil_vendeur div .lien2:hover, .main_accueil .liste_accueil_vendeur div .lien3:hover, .main_accueil .liste_accueil_vendeur div .lien4:hover {
+.main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   transform: scale(1.1);
 }
-.main_accueil .liste_accueil_vendeur div .lien1:visited, .main_accueil .liste_accueil_vendeur div .lien2:visited, .main_accueil .liste_accueil_vendeur div .lien3:visited, .main_accueil .liste_accueil_vendeur div .lien4:visited {
+.main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
   text-decoration: none;
 }/*# sourceMappingURL=style.css.map */

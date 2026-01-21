@@ -35,21 +35,21 @@
         <?php include "../header.php" ?>
         <main class="main_accueil">
             <article class="liste_accueil_vendeur">
-                <div>
+                <div class="lien1">
                     <img src="" alt="icone de ">
-                    <a class="lien1" href="../compte/information_compte_vendeur">Mon compte</a>
+                    <a href="../compte/information_compte_vendeur">Mon compte</a>
                 </div>
-                <div>
+                <div class="lien2">
                     <img src="" alt="icone de ">
-                    <a class="lien2" href="../stock">Gestion de stock</a>
+                    <a href="../stock">Gestion de stock</a>
                 </div>
-                <div>
+                <div class="lien3">
                     <img src="" alt="icone de ">
-                    <a class="lien3" href="../commande">Commandes</a>
+                    <a href="../commande">Commandes</a>
                 </div>
-                <div>
+                <div class="lien4">
                     <img src="" alt="icone de ">
-                    <a class="lien4" href="../avis">Avis</a>
+                    <a href="../avis">Avis</a>
                 </div>
             </article>
         </main>
