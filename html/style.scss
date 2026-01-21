@@ -124,6 +124,9 @@ hr {
     &#stock {
         @include toolbar($nuance, $color: black);
     }
+    &#produit{
+        @include toolbar($nuance, $color: black);
+    }
 }
 
 #header_client {
@@ -508,7 +511,7 @@ ul#results {
                     &:last-child {
                         input,
                         button,a {
-                            width: 100%;
+                            width: 50%;
                         }
 
                         .champ {
