@@ -3183,8 +3183,20 @@ aside .achat:hover {
 
 .main_accueil {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+.main_accueil > div ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.main_accueil > div li {
+  background-color: #9C9C9C;
+  border-radius: 10%;
 }
 .main_accueil .liste_accueil_vendeur {
   display: grid;

@@ -1934,7 +1934,24 @@ aside {
 }
 
 .main_accueil{
-    @include contenu_centre_vertical;
+    @include contenu_centre_horizontal;
+    justify-content: center;
+    gap: 10%;
+
+    >div{
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        li{
+            background-color: #9C9C9C;
+            border-radius: 10%;
+        }
+    }
+
     .liste_accueil_vendeur{
         display: grid;
         grid-template-columns: 2fr 2fr;
