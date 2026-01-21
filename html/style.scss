@@ -1839,20 +1839,24 @@ aside {
             flex-direction: column;
             align-items: center;
             font-weight: bold;
+            font-size: 150%;
             width: 17em;
             height: 17em;
             border-radius: $angle_petit;
-            background-color: #fedcd9;
+            color: black;
+            text-decoration: none;
+            background-color: $couleur_fond_produit;
             &:hover{
                 transform: ease scale(1.1);
             }
-            a{
+            
+            &:visited{
                 color: black;
                 text-decoration: none;
-                &:visited{
-                    color: black;
-                    text-decoration: none;
-                }
+            }
+            img{
+                width: 125%;
+                height: 125%;
             }
         }
     }

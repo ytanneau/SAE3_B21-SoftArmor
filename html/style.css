@@ -3046,19 +3046,22 @@ aside input.bouton:hover {
   flex-direction: column;
   align-items: center;
   font-weight: bold;
+  font-size: 150%;
   width: 17em;
   height: 17em;
   border-radius: 5px;
-  background-color: #fedcd9;
+  color: black;
+  text-decoration: none;
+  background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
   transform: ease scale(1.1);
 }
-.main_accueil .liste_accueil_vendeur .lien1 a, .main_accueil .liste_accueil_vendeur .lien2 a, .main_accueil .liste_accueil_vendeur .lien3 a, .main_accueil .liste_accueil_vendeur .lien4 a {
+.main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
   text-decoration: none;
 }
-.main_accueil .liste_accueil_vendeur .lien1 a:visited, .main_accueil .liste_accueil_vendeur .lien2 a:visited, .main_accueil .liste_accueil_vendeur .lien3 a:visited, .main_accueil .liste_accueil_vendeur .lien4 a:visited {
-  color: black;
-  text-decoration: none;
+.main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
+  width: 125%;
+  height: 125%;
 }/*# sourceMappingURL=style.css.map */
