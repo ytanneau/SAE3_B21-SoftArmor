@@ -68,8 +68,8 @@
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
         <div class="toolbar" id="produit">
             <ul>
-                <li>
-                    <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                <li class="bouton_avis_vendeur_produit">
+                    <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
                         <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="etoile d'avis">
                         Voir les avis
                     </a>
@@ -83,7 +83,8 @@
                 <li>
                     <?php if($compteur === 2){ ?>
                         <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>
-                            Promotion/Reduction <br> (Maximum de deux promotions par vendeur)
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
+                            Promotion/Reduction (Maximum de deux promotions par vendeur)
                         </button>
                     <?php } else {?>
                         <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
@@ -101,7 +102,7 @@
                     ?>
                 <li>
                     <a 
-                        class="bouton_vendeur_produit" 
+                         
                         href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
                         <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
                         Modifier la promotion du <?= htmlentities($new_date)?>
