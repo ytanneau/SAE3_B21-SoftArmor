@@ -428,6 +428,11 @@ ul#results {
                     margin-right: 1em;
                 }
             }
+
+            &.reponse {
+                margin-left: 4em;
+                border-left: solid 2px $nuance;
+            }
         }
     }
 
