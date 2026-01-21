@@ -1618,12 +1618,12 @@ aside {
     min-height: 100vh;
     main {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
         table {
             display: flex;
             flex-direction: column;
-            flex: 1; 
+            align-self: center;
         }
         tr {
             width: 50vw;
