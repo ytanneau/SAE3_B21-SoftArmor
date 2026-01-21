@@ -20,10 +20,10 @@
                 <ul>
                 <?php foreach ($data as $key => $value) { ?>
                     <li>
-                        <a href="../produit/?produit=<?=htmlentities($data['id_produit'])?>">
-                            <?=htmlentities($data['nom_stock'])?>
+                        <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
+                            <?=htmlentities($value['nom_stock'])?>
                             <div>
-                                il reste <?=htmlentities($data['quantite'])?>
+                                il reste <?=htmlentities($value['quantite'])?>
                             </div>
                         </a>
                     </li>
