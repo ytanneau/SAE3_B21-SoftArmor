@@ -1,0 +1,79 @@
+<?php
+$images = HOME_SITE . "image/";
+
+$est_vendeur = false;
+if (isset($_SESSION['raison_sociale'])) {
+  $est_vendeur = true;
+}
+
+?>
+
+<footer id="footer_client" class="footer">
+  <div>
+    <div class="footer-top">
+
+      <div class="footer-logos">
+
+        <?php if (!$est_vendeur) { ?>
+
+        <a href= <?= HOME_SITE?> >
+          <img src="<?= $images . 'Alizon_blanc.png' ?>" alt="Logo Alizon" class="logo">
+        </a>
+
+          <?php } else { ?>
+
+        <a href= <?= HOME_SITE . "vendeur/"?> >
+          <img src="<?= $images ?>Alizon_vendeur_blanc.png" alt="Alizon vendeur" class="logo">
+        </a>
+
+        <?php } ?>
+
+      </div>
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h4>Connexion</h4>
+          <?php if(isset($_SESSION['logged_in'])){?>
+          <a href=<?= HOME_SITE . 'deconnexion/'?>>Se déconnecter</a>
+          <?php } else {?>
+          <a href=<?= HOME_SITE . 'vendeur/' ?>>Compte vendeur</a>
+          <a href=<?= HOME_SITE . 'compte/connexion' ?>>Compte client</a>
+          <?php } ?>
+        </div>
+
+        <div class="footer-column">
+          <h4>Inscription</h4>
+          <a href=<?= HOME_SITE . 'vendeur/inscription' ?>>Compte vendeur</a>
+          <a href=<?= HOME_SITE . 'compte/inscription' ?>>Compte client</a>
+        </div>
+        <div class="footer-column">
+          <h4>Des Questions ?</h4>
+          <a href="#">Aide</a>
+          <a href="#">Lien pratique</a>
+        </div>
+        <div class="footer-column">
+          <h4>A propos d'Alizon</h4>
+          <a href="#">Qui sommes nous ?</a>
+          <a href="#">Plan du site</a>
+        </div>
+      </div>
+
+      <div class="footer-socials">
+        <a href="#"><img src="<?= $images ?>x_blanc.png" alt="X"></a>
+        <a href="#"><img src="<?= $images ?>instagram-blanc.png" alt="Instagram"></a>
+        <a href="#"><img src="<?= $images ?>linkedin-blanc.png" alt="LinkedIn"></a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a href="#">Vos données personnelles</a>
+        <a href="#">Cookies</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Conditions générales de vente</a>
+      </div>
+
+      <p>© 2025, alizon.com</p>
+    </div>
+  </div>
+</footer>
