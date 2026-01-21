@@ -799,44 +799,6 @@ hr {
     width: 100%;
   }
 }
-.TriEtFiltre form {
-  align-items: normal;
-  width: 100%;
-}
-.TriEtFiltre form label {
-  margin-top: 5%;
-  font-size: 1.5em;
-}
-.TriEtFiltre form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-.TriEtFiltre form .text {
-  height: 10em;
-  text-align: start;
-}
-.TriEtFiltre form .petit {
-  width: 30%;
-}
-.TriEtFiltre form input[type=number]::-webkit-inner-spin-button,
-.TriEtFiltre form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.TriEtFiltre form input[type=number] {
-  -moz-appearance: textfield;
-}
-.TriEtFiltre form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-.TriEtFiltre form .error {
-  color: #E43737;
-}
 
 .TriEtFiltre fieldset {
   border: none;
@@ -864,6 +826,10 @@ hr {
   cursor: pointer;
 }
 
+.resultat {
+  width: 100%;
+}
+
 .resultat > div {
   align-items: center;
   margin-bottom: 1.5em;
@@ -885,7 +851,7 @@ section.results {
 
 .resultat > div {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .resultat > div > div:first-child {
   flex-direction: column;
@@ -1268,7 +1234,7 @@ ul#results > li > a > h3 {
   border: rgba(0, 0, 0, 0.25) 1px solid;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
-.infos form img {
+.infos form .image_pp {
   height: 200px;
   width: 200px;
   border-radius: 200px;
@@ -1299,7 +1265,7 @@ ul#results > li > a > h3 {
   .infos section form article:first-child {
     align-items: center;
   }
-  .infos section form article:first-child img {
+  .infos section form article:first-child .image_pp {
     width: clamp(140px, 40vw, 240px);
     border-radius: 8px;
   }

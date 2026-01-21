@@ -176,10 +176,6 @@ hr {
     @media (max-width: 1024px) {
         width: 100%;
     }
-
-    form{
-        @include formulaire();
-    }
 }
 
 .TriEtFiltre fieldset {
@@ -210,6 +206,9 @@ hr {
     }
 }
 
+.resultat{
+    width: 100%;
+}
 .resultat > div {
     align-items: center;
     margin-bottom: 1.5em;
@@ -228,7 +227,7 @@ section.results {
 .resultat { 
     > div {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         
         > div:first-child {
             flex-direction: column;
