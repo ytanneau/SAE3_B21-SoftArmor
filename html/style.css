@@ -1185,10 +1185,6 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis li.reponse {
-  margin-left: 4em;
-  border-left: solid 2px #A6A6BF;
-}
 .infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
@@ -1800,11 +1796,17 @@ h3 {
   font-weight: bold;
 }
 
+.liste {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .liste .input_quantite {
   font-size: 1.4em;
 }
 .liste main {
   display: flex;
+  flex: 1;
 }
 .liste main img {
   -o-object-fit: contain;
@@ -1884,6 +1886,7 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  min-width: 100%;
 }
 .liste main .bouton a {
   text-decoration: none;
@@ -2737,12 +2740,14 @@ aside .achat:hover {
   min-height: 100vh;
 }
 .stock main {
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .stock main table {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  align-self: center;
 }
 .stock main tr {
   width: 50vw;
@@ -3158,7 +3163,7 @@ aside .achat:hover {
 .main_accueil .liste_accueil_vendeur {
   display: grid;
   grid-template-columns: 2fr 2fr;
-  grid-gap: 50px;
+  grid-gap: 35px;
 }
 .main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
   display: flex;
@@ -3175,7 +3180,7 @@ aside .achat:hover {
   background-color: #f3f1fb;
 }
 .main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
-  transform: ease scale(1.1);
+  transform: scale(1);
 }
 .main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;

@@ -70,7 +70,7 @@
         if (!isset($_POST['produit'])) $_POST['produit'] = null;
         if (!isset($_POST['note'])) $_POST['note'] = null;
         if (!isset($_POST['titre'])) $_POST['titre'] = null;
-        if (!isset($_POST['commentaire'])) $_POST['commentaire'] = null;
+        if (!isset($_POST['description'])) $_POST['description'] = null;
 
         if ($_FILES['image']['size'] == 0){
             $image = null;
@@ -82,11 +82,11 @@
         $erreur = condition_avis();
         if ($erreur === []) {
             if ($image != null){
-                rename('../ressources/avis/' . $fichier, '../' . $image);
+                rename(HOME_SITE . "ressources/avis/" . $fichier, HOME_SITE . $image);
             }
             
             try {
-                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['commentaire'], $image);
+                modifier_avis($_SESSION['id_compte'], $_GET['produit'], $_POST['note'], $_POST['titre'], $_POST['description'], $image);
                 $succes = true;
             }
             catch (PDOException $e){
@@ -104,10 +104,10 @@
     // Supprimer l'image si la sauvegarde ne s'est pas passée
     
     if ($succes !== true && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
-        if (file_exists('../ressources/avis/' . $fichier)){
-            unlink('../ressources/avis/' . $fichier);
+        if (isset($fichier) && file_exists(HOME_SITE . "ressources/avis/" . $fichier)){
+            unlink(HOME_SITE . "ressources/avis/" . $fichier);
         }
-        else if (file_exists(HOME_SITE . $image)){
+        else if (isset($image) && file_exists(HOME_SITE . $image)){
             unlink(HOME_SITE . $image);
         }
         

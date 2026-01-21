@@ -95,7 +95,7 @@ if (isset($_SESSION['logged_in'])) {
         include HOME_SITE . "toolbar_categories.php";
     ?>
 
-    <main>
+    <main class = "mainPanier">
 
     <?php if (!$elts_panier) { ?>
         <div id="panier_vide">
@@ -199,8 +199,8 @@ if (isset($_SESSION['logged_in'])) {
         <?php } ?>
 
     </main>
-</body>
     <?php include HOME_SITE . "footer.php" ?>
+</body>
     <script>
         function actualiser() {
             window.location.reload();
