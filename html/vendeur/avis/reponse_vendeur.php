@@ -28,7 +28,7 @@
                             </button>
                         </form>
 
-                        <button class="bouton_modifier" data-reponse="<?=$reponse['id_reponse']?>">
+                        <button class="bouton_modifier" data-avis="<?=$avis['id_avis']?>" data-reponse="<?=$reponse['id_reponse']?>">
                             <img class="icon" src="<?= HOME_SITE . "image/modifier.svg" ?>" title="Modifier cette réponse">
                         </button>
 

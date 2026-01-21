@@ -177,6 +177,7 @@
 
                     <form id="form_reponse" action="" method="post">
                         <input type="hidden" name="id_avis" id="id_avis_reponse">
+                        <input type="hidden" name="id_reponse_modif" id="id_reponse">
 
                         <label for="reponse">Réponse (1000 caractères max.)</label>
                         <textarea name="reponse" id="reponse" placeholder="Votre réponse ici..."></textarea>
@@ -209,8 +210,12 @@
 
         const snackbar = document.getElementById("snackbar");
 
-        const inputIdSignalement = document.getElementById("id_avis_signalement");
-        const inputIdReponse = document.getElementById("id_avis_reponse");
+        const inputIdAvisSignalement = document.getElementById("id_avis_signalement");
+        const inputIdAvisReponse = document.getElementById("id_avis_reponse");
+        const inputIdAvisReponse = document.getElementById("id_avis_reponse");
+
+        const textareaReponse = document.getElementById("reponse");
+
         const inputEmail = document.getElementById("input_email");
         const estVisiteur = (inputEmail != null);
 
@@ -218,11 +223,15 @@
         const pErrorRaison = document.getElementById("error_raison");
         const pErrorReponse = document.getElementById("error_reponse");
 
+        const selection = {
+            id_avis: null
+        };
+
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
-                inputIdSignalement.value = btn.dataset.avis;
+                inputIdAvisSignalement.value = btn.dataset.avis;
 
                 // Afficher le bon formulaire
                 contentSignalement.style.display = "block";
@@ -239,7 +248,7 @@
         // Afficher le modal en cliquant sur l'icône répondre
         document.querySelectorAll(".bouton_reponse").forEach(btn => {
             btn.addEventListener("click", () => {
-                inputIdReponse.value = btn.dataset.avis;
+                inputIdAvisReponse.value = btn.dataset.avis;
                 
                 // Afficher le bon formulaire
                 contentReponse.style.display = "block";
@@ -250,6 +259,18 @@
 
                 // Empêcher le scroll tant que le modal est ouvert
                 document.body.style.overflowY = "hidden";
+            });
+        });
+
+        // Afficher le modal en cliquant sur l'icône modifier
+        document.querySelectorAll(".bouton_modifier").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputIdAvisReponse.value = btn.dataset.avis;
+                inputIdReponse.value = btn.dataset.reponse;
+
+                // Récupérer les informations de la réponse et pré-remplir le champ réponse
+                selection.id_avis = inputIdAvisReponse.value;
+                preremplirChamps();
             });
         });
 
@@ -352,6 +373,7 @@
             }
         });
 
+        // Confirmation de la modification
 
         // Suppression des réponses
         document.querySelectorAll(".bouton_supprimer").forEach(btn => {
@@ -367,6 +389,29 @@
         });
 
         
+        async function preremplirChamps() {
+            fetch('./infos_reponse.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(selection);
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Préremplir le champ réponse
+                textareaReponse.value = data.reponse;
+
+                // Afficher le bon formulaire
+                contentReponse.style.display = "block";
+                contentSignalement.style.display = "none";
+                
+                // Afficher le modal
+                modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
+            });
+        }
+
         function emailValide(email) {
             let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
