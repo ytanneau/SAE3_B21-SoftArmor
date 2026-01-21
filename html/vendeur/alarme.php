@@ -14,6 +14,6 @@ require_once(HOME_GIT . 'fonction_alarme.php');
 
 print_r($_SESSION);
 
-$data = get_alarme($_SESSION['raison_sociale']);
+$data = get_alarme($_SESSION['id_compte']);
 
 print_r($data);
