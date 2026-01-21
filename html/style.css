@@ -1633,6 +1633,13 @@ div:has(> aside) {
 .accueil nav {
   display: none;
 }
+.accueil > main .pub_promotion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #CBCCEA;
+  border-radius: 20px;
+}
 .accueil > main .banniere {
   display: flex;
   justify-content: center;

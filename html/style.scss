@@ -868,6 +868,13 @@ div:has(> aside) {
         display: none;
     }
     > main {
+        .pub_promotion{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: $nuance_primaire_client;
+            border-radius: $angle_normal;
+        }
         .banniere{
             display: flex;
             justify-content: center;
