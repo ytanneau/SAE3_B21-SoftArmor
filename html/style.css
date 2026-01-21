@@ -1647,9 +1647,15 @@ div:has(> aside) {
 }
 .accueil > main .banniere div {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 50%;
   background-color: #CBCCEA;
+  border-radius: 20px;
+}
+.accueil > main .banniere div p {
+  margin-bottom: 21em;
 }
 .accueil > main > div {
   display: flex;

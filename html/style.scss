@@ -881,9 +881,15 @@ div:has(> aside) {
             }
             div{
                 display: flex;
+                flex-direction: column;
+                align-items: center;
                 justify-content: center;
                 width: 50%;
                 background-color: $nuance_primaire_client;
+                border-radius: $angle_normal;
+                p{
+                    margin-bottom: 21em;
+                }
             }
         }
         > div {
