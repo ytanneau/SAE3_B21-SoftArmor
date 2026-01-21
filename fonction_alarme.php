@@ -16,15 +16,12 @@
         $data = get_alarme($id_vendeur);
 
         ?>
-            <div>
+            <div class="alarme">
                 <ul>
                 <?php foreach ($data as $key => $value) { ?>
                     <li>
                         <a href="../produit/?produit=<?=htmlentities($value['id_produit'])?>">
-                            <?=htmlentities($value['nom_stock'])?>
-                            <div>
-                                il reste <?=htmlentities($value['quantite'])?>
-                            </div>
+                            <?=htmlentities($value['nom_stock'])?> | il reste <?=htmlentities($value['quantite'])?>
                         </a>
                     </li>
                 <?php }?>
