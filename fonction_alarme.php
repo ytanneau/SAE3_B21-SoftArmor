@@ -14,10 +14,10 @@
 
     function affiche_alarme($id_vendeur){
         $data = get_alarme($id_vendeur);
-
+        if($data != null){
         ?>
             <div class="alarme">
-                <?php if($data != null){ ?>
+                <?php  ?>
                     <h3>Alerte :</h3>
                     <ul>
                     <?php foreach ($data as $key => $value) { ?>
@@ -26,10 +26,9 @@
                                 <?=htmlentities($value['nom_stock'])?> | il reste <?=htmlentities($value['quantite'])?>
                             </a>
                         </li>
-                    <?php }
-                    } ?>
+                    <?php } ?>
                 </ul>
             </div>
-
         <?php
+        } 
     }
