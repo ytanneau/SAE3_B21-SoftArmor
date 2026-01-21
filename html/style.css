@@ -3218,6 +3218,7 @@ aside .achat:hover {
 }
 .main_promo .hide_input_file {
   margin-top: 20px;
+  margin-bottom: 7px;
   background-color: #EAC452;
   padding: 10px 16px 10px 16px;
   width: -moz-fit-content;
@@ -3225,6 +3226,9 @@ aside .achat:hover {
   border-radius: 5px;
   color: black;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  width: 16.2em;
 }
 .main_promo .hide_input_file:hover {
   background: rgb(242.2809278351, 219.2654639175, 150.2190721649);

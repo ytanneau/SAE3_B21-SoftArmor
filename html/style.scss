@@ -1958,7 +1958,11 @@ aside {
     }
     .hide_input_file{
         margin-top: 20px;
+        margin-bottom: 7px;
         @include hide_input_file();
+        display: flex;
+        justify-content: center;
+        width: 16.2em;
     }
     .ajout_banniere{
         margin-top: 20px;
