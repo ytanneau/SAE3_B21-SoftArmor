@@ -1025,12 +1025,16 @@ h3 {
 }
 
 .liste {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     .input_quantite {
         font-size:1.4em;
     }
 
     main {
         display: flex;
+        flex: 1;
 
         img {
             object-fit: contain;
@@ -1549,7 +1553,6 @@ aside {
     @include contenu_centre_vertical();
 }
 
-
 .produit-vendeur {
   padding: 2rem;
   display: flex;
@@ -1620,12 +1623,13 @@ aside {
 .stock {
     min-height: 100vh;
     main {
-        
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         table {
             display: flex;
             flex-direction: column;
-            flex: 1; 
+            align-self: center;
         }
         tr {
             width: 50vw;
@@ -1926,7 +1930,7 @@ aside {
     .liste_accueil_vendeur{
         display: grid;
         grid-template-columns: 2fr 2fr;
-        grid-gap: 50px;
+        grid-gap: 35px;
         .lien1, .lien2, .lien3, .lien4{
             display: flex;
             justify-content: center;
@@ -1941,7 +1945,7 @@ aside {
             text-decoration: none;
             background-color: $couleur_fond_produit;
             &:hover{
-                transform: ease scale(1.1);
+                transform: scale(1);
             }
             
             &:visited{

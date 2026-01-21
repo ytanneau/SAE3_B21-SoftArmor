@@ -19,12 +19,14 @@
     $prom       = $filters['sales'] ?? null;
     // Construire la requête SQL à partir de la recherche
     $requete = 
-        "SELECT p.*, i.url_image, i.titre, i.alt 
+        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction
         FROM produit_en_ligne p
         INNER JOIN _image i
         ON p.id_image_principale = i.id_image
         INNER JOIN _categorie c
         ON p.categorie = c.nom_categorie
+        LEFT JOIN promo_jour pj
+        ON pj.id_produit = p.id_produit
         WHERE 1 = 1";
     
     $params = [];
@@ -59,7 +61,7 @@
         'note_moy'   => 'note_moy',
         'triPrix'    => 'prix_actuel',
         'triPrixCroi'=> 'prix_actuel',
-        'triReduc'   => 'prix_actuel'
+        'triReduc'   => 'reduction'
     ];
 
     $fieldKey = $sort['field'] ?? 'nom_public';
