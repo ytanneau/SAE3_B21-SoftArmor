@@ -82,7 +82,7 @@
                 </li>
                 <li>
                     <?php if($compteur === 2){ ?>
-                        <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>
+                        <button class="bouton_vendeur_produit" disabled>
                             <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
                             Promotion/Reduction (2 promotions par produit)
                         </button>
@@ -112,15 +112,15 @@
                         } 
                     ?>
                 <li>
-                    <a href="">
+                    <!-- <a href="">
                         <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
                         Supprimer le produit
-                    </a>
-                    <!--<form id="supprimer" action="" method="post">
+                    </a> -->
+                    <form id="supprimer" action="" method="post">
                         <input type="hidden" name="supprimer" value="true">
                         <input type="submit" value="Supprimer le produit">
                     </form>
-                    -->
+                   
                 </li>
             </ul>
         </div>
