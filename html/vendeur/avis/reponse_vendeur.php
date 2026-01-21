@@ -49,7 +49,7 @@
                         
                         echo 'Réponse de ' . $reponse['raison_sociale'] . 
                             ' le ' . $date_reponse . 
-                            isset($reponse['date_modification']) ? " (modifiée le $date_modification)" : "" ?></p>
+                            (isset($reponse['date_modification']) ? " (modifiée le $date_modification)" : "") ?></p>
                 </div>
             </div>
         </li>
