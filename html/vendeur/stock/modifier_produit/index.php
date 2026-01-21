@@ -36,7 +36,7 @@
         // permet de verifier si les checkbox sont definis et/ou selectionné
         $checkMajeur = isset($_POST['checkMajeur']) ? 1 : 0;
         $checkEnLigne = isset($_POST['checkEnLigne']) ? 1 : 0;
-        
+        print_r($_POST['seuilAlerte']);
         if($_POST['seuilAlerte'] === ""){ $_POST['seuilAlerte'] = 0; }
         if($_POST['qtStock'] === ""){ $_POST['qtStock'] = 0;}
 
@@ -48,7 +48,6 @@
                 if (!empty($_POST['sous_categorie'])) {
                     $categorieFinale = $_POST['sous_categorie'];
                 } else {
-                    // Alimentaire sans sous-catégorie → ERREUR logique
                     $_SESSION['error'] = "Veuillez choisir une sous-catégorie alimentaire.";
                     header("Location: ".$_SERVER['REQUEST_URI']);
                     exit;
@@ -319,7 +318,7 @@
                             <input type="number" name="qtStock" id="idQtStock" value="<?= $tabInfoProduit['quantite'] ?>">
                         </p>
                         <p>
-                            <label for="seuilAlerte">Seuil d'alerte</label>
+                            <label for="idSeuilAlerte">Seuil d'alerte</label>
                             <input type="number" name="seuilAlerte" id="idSeuilAlerte" value="<?= $tabInfoProduit['seuil_alerte']?>">
                         </p>
                     </div>

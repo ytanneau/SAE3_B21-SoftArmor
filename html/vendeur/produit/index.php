@@ -61,7 +61,13 @@
     <head>
         <meta charset="utf-8">
         <title>Alizon - <?= htmlentities($rows['nom_stock'] ?? 'Produit')?></title>
-        <script src="confirmation.js"></script>
+        <script src="confirmation.js">
+            document.getElementById("supprimer_produit").addEventListener('click', () =>{
+                if(!confirm("Etes-vous sur de vouloir supprimer le produit ?")){
+                    event.preventdefault();
+                }
+            })
+        </script>
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
@@ -112,14 +118,14 @@
                         } 
                     ?>
                 <li>
-                    <!-- <a href="">
+                    <a href="" id="supprimer_produit">
                         <img src="<?=HOME_SITE . "image/supprimer.svg"?>" alt="Supprimer">
                         Supprimer le produit
-                    </a> -->
-                    <form id="supprimer" action="" method="post">
+                    </a>
+                    <!-- <form id="supprimer" action="" method="post">
                         <input type="hidden" name="supprimer" value="true">
                         <input type="submit" value="Supprimer le produit">
-                    </form>
+                    </form> -->
                    
                 </li>
             </ul>

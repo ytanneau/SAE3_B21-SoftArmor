@@ -242,6 +242,7 @@ hr {
   color: black;
   font-family: "Montserrat";
   font-weight: bold;
+  background-color: #CBCCEA;
 }
 #header_client {
   position: sticky;
