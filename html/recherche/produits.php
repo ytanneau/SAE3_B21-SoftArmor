@@ -61,7 +61,7 @@
         'note_moy'   => 'note_moy',
         'triPrix'    => 'prix_actuel',
         'triPrixCroi'=> 'prix_actuel',
-        'triReduc'   => 'prix_actuel'
+        'triReduc'   => 'reduction'
     ];
 
     $fieldKey = $sort['field'] ?? 'nom_public';
