@@ -695,9 +695,9 @@
         try{
             $stmt = $pdo->prepare("SELECT id_produit FROM produit_banniere_aujourd");
             $stmt->execute();
-            print_r($stmt->fetch(PDO::FETCH_ASSOC));
-            if($stmt->fetch(PDO::FETCH_ASSOC) != null){
-                $id = $stmt->fetch(PDO::FETCH_ASSOC)['id_produit'];
+            $res = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($res != false){
+                $id = $res['id_produit'];
                 $stmt = $pdo->prepare("SELECT id_produit, id_image_banniere FROM _promotion WHERE id_produit = :id");
                 $stmt->execute([
                     "id" => $id
