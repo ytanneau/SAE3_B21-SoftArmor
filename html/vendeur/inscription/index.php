@@ -119,18 +119,18 @@
 
 
 
-        <label for="adresse">Adresse du siège</label>
+        <label for="ville">Ville du siège</label>
         <input type="text"
-            name="adresse"
-            id="adresse"
-            value="<?php if (isset($_POST['adresse'])) echo htmlentities($_POST['adresse'])?>"
+            name="ville"
+            id="ville"
+            value="<?php if (isset($_POST['ville'])) echo htmlentities($_POST['ville'])?>"
             required
             class="champ">
-        <p class="contrainte">Numéro, nom de la voie, commune</p>
+        <p class="contrainte">ex : Paris</p>
     
-        <?php if (isset($erreurs['adresse'])){ ?>
+        <?php if (isset($erreurs['ville'])){ ?>
             <p class="error">
-                <?="Erreur : ".$erreurs['adresse']?>
+                <?="Erreur : ".$erreurs['ville']?>
             </p>
         <?php } ?>
 
