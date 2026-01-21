@@ -168,6 +168,7 @@ hr {
     flex-direction: column;
     form{
         @include formulaire();
+        width: 15em;
     }
 }
 
