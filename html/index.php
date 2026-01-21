@@ -124,8 +124,8 @@ if($tabPromotion != null){
         
         </div>
         <?php } else {?>
-        <div>
-            <a class="banniere" href="produit/?produit=<?=$tabPromotion['id_produit']?>">
+        <div class="banniere">
+            <a href="produit/?produit=<?=$tabPromotion['id_produit']?>">
                 <img src="<?=HOME_GIT . $url_banniere?>" alt="Banniere de promotion du produit">
             </a>
         </div>
