@@ -71,7 +71,7 @@
             <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
         </div>
         <div>
-            <?=htmlentities($produit['nom_public'])?>
+            <h1><?=htmlentities($produit['nom_public'])?></h1>
             
             <?php if ($data != null) { ?>
                 <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
