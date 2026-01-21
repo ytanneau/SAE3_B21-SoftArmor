@@ -42,7 +42,14 @@
 
                 <div>
                     <p><?= htmlentities($reponse['reponse'] ?? '') ?></p>
-                    <p><?= 'Réponse de ' . $reponse['raison_sociale'] . ' le ' . date('d/m/Y', strtotime(htmlentities($reponse['date_reponse'] ?? ''))) ?></p>
+                    <p>
+                        <?php 
+                        $date_reponse = date('d/m/Y', strtotime(htmlentities($reponse['date_reponse'] ?? '')));
+                        $date_modification = date('d/m/Y', strtotime(htmlentities($reponse['date_modification'] ?? '')));
+                        
+                        echo 'Réponse de ' . $reponse['raison_sociale'] . 
+                            ' le ' . $date_reponse . 
+                            isset($reponse['date_modification']) ? " (modifiée le $date_modification)" : "" ?></p>
                 </div>
             </div>
         </li>

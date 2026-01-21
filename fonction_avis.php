@@ -302,7 +302,7 @@
         }
 
         try {
-            $sql = "SELECT r.id_reponse, r.id_avis, r.reponse, r.date_reponse, av.raison_sociale, av.id_image_profil
+            $sql = "SELECT r.id_reponse, r.id_avis, r.reponse, r.date_reponse, r.date_modification, av.raison_sociale, av.id_image_profil
                     FROM _reponse r
                     INNER JOIN avis_vendeur av
                     ON av.id_avis = r.id_avis
@@ -349,7 +349,8 @@
 
         try {
             $sql = "UPDATE _reponse
-                    SET reponse = :reponse
+                    SET reponse = :reponse,
+                    date_modification = CURRENT_DATE
                     WHERE id_reponse = :id_reponse";
 
             $requete = $pdo->prepare($sql);
