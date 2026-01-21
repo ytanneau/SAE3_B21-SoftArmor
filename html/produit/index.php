@@ -351,6 +351,8 @@ if (isset($_POST['quantite'])) {
 
         const inputId = document.getElementById("id_avis");
         const inputEmail = document.getElementById("input_email");
+        const inputIdReponseSignalement = document.getElementById("id_reponse");
+
         const estVisiteur = (inputEmail != null);
 
         const pErrorEmail = document.getElementById("error_email");
@@ -361,6 +363,8 @@ if (isset($_POST['quantite'])) {
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
                 inputId.value = btn.dataset.avis;
+                inputIdReponseSignalement.value = "";
+
                 modal.style.display = "block";
 
                 // Empêcher le scroll tant que le modal est ouvert
@@ -372,6 +376,7 @@ if (isset($_POST['quantite'])) {
         document.querySelectorAll(".bouton_signalement_reponse").forEach(btn => {
             btn.addEventListener("click", () => {
                 inputIdReponseSignalement.value = btn.dataset.reponse;
+                inputId.value = "";
 
                 // Afficher le bon formulaire
                 contentSignalement.style.display = "block";
