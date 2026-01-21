@@ -8,12 +8,7 @@ define('HOME_GIT', '../../');
 define('HOME_SITE', '../');
 
 
-
 require_once HOME_GIT .".config.php";
 require_once(HOME_GIT . 'fonction_alarme.php');
 
-print_r($_SESSION);
-
-$data = get_alarme($_SESSION['id_compte']);
-
-print_r($data);
+function affiche_alarme($_SESSION['id_compte'])
