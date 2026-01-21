@@ -83,7 +83,7 @@
 </div>
 </article>
 <section>
-        <h3>Avis (<?=htmlentities($produit['nb_avis'] ?? "0")?>)</h3>
+        <h2>Avis (<?=htmlentities($produit['nb_avis'] ?? "0")?>)</h2>
         <?php if ($data != null) { ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { 
