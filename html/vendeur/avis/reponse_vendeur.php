@@ -34,7 +34,7 @@
 
                     <!-- Boutons spécifiques aux clients et visiteurs -->
                     <?php } else { ?>
-                        <button class="bouton_signalement" data-reponse="<?=$reponse['id_reponse']?>">
+                        <button class="bouton_signalement_reponse" data-reponse="<?=$reponse['id_reponse']?>">
                             <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cette réponse">
                         </button>
                     <?php } ?>

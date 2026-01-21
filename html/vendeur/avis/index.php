@@ -373,8 +373,6 @@
             }
         });
 
-        // Confirmation de la modification
-
         // Suppression des réponses
         document.querySelectorAll(".bouton_supprimer").forEach(btn => {
             btn.addEventListener("click", (e) => {

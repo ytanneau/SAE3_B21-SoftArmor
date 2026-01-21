@@ -263,6 +263,7 @@ if (isset($_POST['quantite'])) {
                         
                         <form id="form_signalement" action="" method="post">
                             <input type="hidden" name="id_avis" id="id_avis">
+                            <input type="hidden" name="id_reponse" id="id_reponse">
 
                             <?php if (!isset($id_cli)) { ?>
                                 <label for="input_email">Adresse e-mail</label>
@@ -360,6 +361,23 @@ if (isset($_POST['quantite'])) {
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
                 inputId.value = btn.dataset.avis;
+                modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
+            });
+        });
+
+        // Afficher le modal en cliquant sur l'icône signaler réponse
+        document.querySelectorAll(".bouton_signalement_reponse").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputIdReponseSignalement.value = btn.dataset.reponse;
+
+                // Afficher le bon formulaire
+                contentSignalement.style.display = "block";
+                contentReponse.style.display = "none";
+
+                // Afficher le modal
                 modal.style.display = "block";
 
                 // Empêcher le scroll tant que le modal est ouvert

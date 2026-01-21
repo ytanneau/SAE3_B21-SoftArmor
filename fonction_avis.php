@@ -230,11 +230,33 @@
         }
     }
 
+    function signaler_reponse($id_compte, $id_reponse, $raison, $email) {
+        global $pdo;
+
+        try {
+            // Enregistrer l'avis dans la BDD
+            $requete = $pdo->prepare(
+                "INSERT INTO _signalement (id_compte, id_reponse, raison, email)
+                VALUES (:id_compte, :id_reponse, :raison, :email)"
+            );
+
+            $requete->bindValue(':id_compte', $id_compte, PDO::PARAM_INT);
+            $requete->bindValue(':id_reponse', $id_reponse, PDO::PARAM_INT);
+            $requete->bindValue(':raison', $raison, PDO::PARAM_STR);
+            $requete->bindValue(':email', $email, PDO::PARAM_STR);
+            $requete->execute();
+
+            // Marquer l'avis comme signalé
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     // Retourne true si le compte (ou l'email) en paramètre a signalé l'avis, false sinon
     function avis_est_signale($id_avis, $id_compte = null, $email = null) {
         global $pdo;
 
-        if (!isset($id_compte) && !isset($email)) {
+        if (!isset($id_compte) && !isset($email) || empty($id_avis)) {
             return false;
         }
 
@@ -246,6 +268,39 @@
                     WHERE id_avis = :id_avis";
             
             $params[':id_avis'] = $id_avis;
+
+            if (isset($id_compte)) {
+                $sql .= " AND id_compte = :id_compte";
+                $params[':id_compte'] = $id_compte;
+            } else if (isset($email)) {
+                $sql .= " AND email = :email";
+                $params[':email'] = $email;
+            }
+
+            $requete = $pdo->prepare($sql);
+            $requete->execute($params);
+
+            return $requete->rowCount() > 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    function reponse_est_signalee($id_reponse, $id_compte = null, $email = null) {
+        global $pdo;
+
+        if (!isset($id_compte) && !isset($email) || empty($id_reponse)) {
+            return false;
+        }
+
+        $params = [];
+
+        try {
+            $sql = "SELECT 1 
+                    FROM _signalement
+                    WHERE id_reponse = :id_reponse";
+            
+            $params[':id_reponse'] = $id_reponse;
 
             if (isset($id_compte)) {
                 $sql .= " AND id_compte = :id_compte";
