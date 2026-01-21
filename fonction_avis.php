@@ -289,4 +289,54 @@
             throw $e;
         }
     }
+
+    function avis_est_repondu($id_avis) {
+        return get_reponse($id_avis) != null;
+    }
+
+    function get_reponse($id_avis) {
+        global $pdo;
+
+        if (!isset($id_avis)) {
+            return null;
+        }
+
+        try {
+            $sql = "SELECT r.id_reponse, r.id_avis, r.reponse, r.date_reponse, av.raison_sociale, av.id_image_profil
+                    FROM _reponse r
+                    INNER JOIN avis_vendeur av
+                    ON av.id_avis = r.id_avis
+                    WHERE r.id_avis = :id_avis";
+
+            $requete = $pdo->prepare($sql);
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->execute();
+
+            return $requete->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
+    function repondre_avis($id_avis, $reponse) {
+        global $pdo;
+
+        if (empty($reponse ?? '')) {
+            return false;
+        }
+
+        try {
+            $sql = "INSERT INTO _reponse (id_avis, reponse)
+                    VALUES (:id_avis, :reponse)";
+
+            $requete = $pdo->prepare($sql);
+            $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
+            $requete->bindValue(':reponse', $reponse, PDO::PARAM_STR);
+            $requete->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
     

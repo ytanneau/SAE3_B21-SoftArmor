@@ -148,21 +148,23 @@
                         <input class="cout_final" type="text" id="cout" readonly>
                     </div>
                 </div>
-                <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
-                <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-                
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionné(s)</p>
+                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <?php if($tab_image_promotion != null){ ?>
-                    <div>
+                    <div class="block_banniere">
                         <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
-                        <label class="hide_input" for="photoPromotion">Changer la banniere</label>
+                        <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
                         <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-                        <label for="supp_image_promo">Supprimer la bannière</label>
-                        <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
+                        <div>
+                            <label for="supp_image_promo">Supprimer la bannière</label>
+                            <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
+                        </div>
                     </div>
                 <?php } else { ?>
                     <div class="ajout_banniere">
-                        <label class="hide_input" for="photoPromotion">Ajouter une bannière</label>
-                        <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                        <label class="hide_input_file" for="photoPromotion">Ajouter une bannière</label>
+                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept=".png">
                     </div>
                 <?php } ?>
                 <h3>Réduction</h3>
@@ -171,7 +173,7 @@
                     <div class="en_colonne">
                         <label for="pourcentage">Pourcentage :</label>
                         <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
-                        <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
+                        <p style="display:none;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
                         <label for="euro">Remise appliquée :</label>
@@ -204,14 +206,16 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
+        const warning4 = document.getElementById("warning4");
         const btn_suppr = document.getElementById("supprimer_promotion");
+        const dateCourante = new Date();
+        dateCourante.setHours(0, 0, 0, 0);
 
         if(!verif_date_pour_suppression(dateDebut.value)){
             btn_suppr.style.display = "none";
         }
 
         function verif_date_pour_suppression(date){
-            const dateCourante = new Date();
             const dateCible = new Date(date);
 
             const difference = dateCourante.getTime() - dateCible.getTime();
@@ -230,10 +234,16 @@
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
                     warning1.style.display = "block";
+                } else if (dateFin == ""){
+                    dateFin.value = dateDebut.value;
+                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                    warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
+                    warning4.style.display = "none";
                     calculP();
                 }
+                
             }
             if(!verif_date_pour_suppression(dateDebut.value)){
                 btn_suppr.style.display = "none";
@@ -317,6 +327,7 @@
             warning1.style.display = "none";
             warning2.style.display = "none";
             warning3.style.display = "none";
+            warning4.style.display = "none";
 
             if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
@@ -331,6 +342,10 @@
 
             if (pourcentage.value >= 100){
                 warning3.style.display = "block";
+                event.preventDefault();
+            }
+            if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                warning4.style.display = "block";
                 event.preventDefault();
             }
         });

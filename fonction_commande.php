@@ -133,45 +133,64 @@ function get_info_colis($fd,$bordereau){
    
     return $info_colis;
 }
-
 function get_image_colis($fd,$bordereau){
+    $fin = false;
     fwrite($fd,"4.$bordereau");
     $photo = '';
-    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","c");
+    $file = fopen(HOME_SITE ."ressources/colis/$bordereau.png","w");
     $buffer = fread($fd, 6);
-    if ($buffer !=="PHOTO="){
 
-        while (!feof($fd)) {
+    if ($buffer === "PHOTO="){
+    
+        while (!$fin) {
             $buffer = fread($fd, 4096);
+
             
+
             if ($pos = strpos($buffer,"#") !== false) {
-                $buffer = substr($buffer,0,-1);
+                $buffer = substr($buffer,0,-1); 
+                $fin = true;
             }
-                
-            fwrite($file,binaireEnOctets($buffer));
-                
-                
+            
+            fwrite($file, binaire_to_octet($buffer));
+            
         }
                 
     }
+    //sinon recuperer numero de l'erreur
     else{
+        $buffer = fread($fd, 1);
+        switch ($buffer) {
+            //cas erreur pas de colis
+            case '3':
+                $texte_img="Colis inexistent";
+                break;
+            //cas d'erreur pas de photo
+            case '4':
+                $texte_img="Photo inexistante";
+                break;
+            
+            default:
+                $texte_img="Erreur";
+                break;
+        }
         fclose($file);
-        return false;
+        return $texte_img;
     }
     
     fclose($file);
-    return true;
-
+    return "";
 }
-function binaireEnOctets($binString) {
-    $ret = '';
+
+function binaire_to_octet($binString) {
+    $result = '';
     $length = strlen($binString);
     for ($i = 0; $i < $length; $i += 8) {
         $byte = substr($binString, $i, 8);
         if (strlen($byte) < 8) break; // ignore le reste incomplet
-        $ret .= chr(bindec($byte));
+        $result .= chr(bindec($byte));
     }
-    return $ret;
+    return $result;
 }
 
 function connexion_socket($ip,$port){

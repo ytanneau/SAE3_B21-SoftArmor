@@ -30,6 +30,7 @@
 
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
+    require_once HOME_GIT . 'fonction_categorie.php';
 
     $erreur = [];
 
@@ -122,7 +123,10 @@
     <?php include HOME_SITE . "link_head.php"; ?>
 </head>
 <body class="form_client" id="create_avis">
-    <?php include HOME_SITE . "header.php"; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
     <main class = "content_avis_client">
         <?php if ($succes == true) { ?>
             <div class="fini">

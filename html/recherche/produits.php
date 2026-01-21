@@ -13,6 +13,7 @@
     $search     = $data['search'] ?? '';
     $filters    = $data['filters'] ?? [];
     $sort       = $data['sort'] ?? [];
+    $category   = $filters['category'] ?? '';
     $prixmin    = $filters['price']['min'] ?? null;
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
@@ -22,6 +23,8 @@
         FROM produit_en_ligne p
         INNER JOIN _image i
         ON p.id_image_principale = i.id_image
+        INNER JOIN _categorie c
+        ON p.categorie = c.nom_categorie
         WHERE 1 = 1";
     
     $params = [];
@@ -34,6 +37,11 @@
     if (!empty($search)) {
         $requete .= " AND (nom_public LIKE :search OR description LIKE :search OR description_detaillee LIKE :search)";
         $params[':search'] = "%$search%";
+    }
+
+    if (!empty($category)) {
+        $requete .= " AND (categorie = :categorie OR c.nom_categorie_sup = :categorie)";
+        $params[':categorie'] = $category;
     }
 
     if ($prixmin !== null) {

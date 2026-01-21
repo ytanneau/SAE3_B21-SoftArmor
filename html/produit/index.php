@@ -15,6 +15,7 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 
 if (!isset($_GET['produit']) || !is_numeric($_GET['produit'])) {
@@ -102,7 +103,10 @@ if (isset($_POST['quantite'])) {
     <title>Alizon - <?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
 <body class="produit">
-    <?php include HOME_SITE . "header.php"; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <script>
         function changer(val) {
@@ -328,7 +332,7 @@ if (isset($_POST['quantite'])) {
                     </div> 
                     <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
 
-                    <input class="bouton achat" type="submit" name="achat" value="Acheter cet article">
+                    <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
             </aside>
         </div>

@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_global.php');
 
 // Nom public, prix, moyenne des notes et informations de l'image de chaque produit
@@ -27,8 +28,52 @@ $produit_recent = info_produit_accueil_plus_recent();
 // Nom public, prix, moyenne des notes et informations de l'image des produits en réduction
 $produit_promotion = info_produit_accueil_promotion();
 
-// Fermer la connexion
-unset($pdo);
+
+function afficher_un_produit($row){?>
+    <li>
+        <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
+            <?php
+            $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
+            $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
+            $reduction = $prix_normal != $prix_reduit;
+            $pourcentage = round((1 - ($prix_reduit / $prix_normal) )*100);
+
+            if($reduction){?>
+            <span class="reduction">%</span>
+            <?php }?>
+
+            <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
+            
+            <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
+
+            <div>
+                <?php 
+
+                    if(!isset($row['note_moy'])){
+                        ?><p>Produit Non Noté</p><?php
+                    }
+                    else{
+                        $moy = $row['note_moy'];
+                        afficher_moyenne_note($moy);
+                    }
+                ?>
+            </div>
+
+            
+
+            <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
+            <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
+            
+            
+            
+            <?php if ($reduction) { ?>
+                <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
+                <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
+            <?php } ?>
+        </a>
+    </li>
+<?php
+}
 
 
 // fonction d'affichage de produits
@@ -42,50 +87,9 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
         <ul class="container <?=$nom_classe_js?>">
             <?php
             // Boucle pour ajouter un produit dans un <li> 
-            foreach ($liste_produits as $row) { ?>
-                <li>
-                    <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
-                        <?php
-                        $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
-                        $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
-                        $reduction = $prix_normal != $prix_reduit;
-                        $pourcentage = round((1 - ($prix_reduit / $prix_normal) )*100);
-
-                        if($reduction){?>
-                        <span class="reduction">%</span>
-                        <?php }?>
-
-                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
-                        
-                        <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
-
-                        <div>
-                            <?php 
-
-                                if(!isset($row['note_moy'])){
-                                    ?><p>Produit Non Noté</p><?php
-                                }
-                                else{
-                                    $moy = $row['note_moy'];
-                                    afficher_moyenne_note($moy);
-                                }
-                            ?>
-                        </div>
-
-                        
-
-                        <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
-                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
-                        
-                        
-                        
-                        <?php if ($reduction) { ?>
-                            <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
-                            <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
-                        <?php } ?>
-                    </a>
-                </li>
-            <?php } ?>
+            foreach ($liste_produits as $row) {
+                afficher_un_produit($row);
+            } ?>
         </ul>
         <button class="fleche droite <?=$nom_classe_js?>"><img src="image/fleche_droite_blanc.svg"></button>
     </div>
@@ -101,7 +105,10 @@ function afficher_produits($liste_produits, $nom_classe_js = "") {?>
     <title>Alizon - Accueil</title>
 </head>
 <body class="accueil">
-    <?php include HOME_SITE . "header.php"; ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
     <main>
     

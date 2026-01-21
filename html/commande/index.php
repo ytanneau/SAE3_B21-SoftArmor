@@ -23,7 +23,8 @@ if (isset($_SESSION["raison_sociale"])) {
 }
 require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . ".config.php";
-require_once HOME_GIT . "/fonction_commande.php";
+require_once HOME_GIT . "fonction_commande.php";
+require_once HOME_GIT . "fonction_categorie.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
@@ -51,7 +52,11 @@ if (isset($_GET["commande"])) {
 </head>
 
 <body class="liste">
-    <?php include HOME_SITE . 'header.php'?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
+
     <main>
 
     <?php if (isset($_GET["commande"])) {?>
@@ -105,53 +110,35 @@ if (isset($_GET["commande"])) {
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
             <?php } else {
+
+                    //connexion delivraptor
+                    $conn =false;
+                    $fd = connexion_socket(IP,PORT);
+                    $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
+                    
                     foreach ($liste_commandes as $commande) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
                     $mois = $MOIS_ANNEE[date((int)"m", $d)];
-                    //connexion delivraptor
-                    $conn =false;
                     
-                    $fd = connexion_socket(IP,PORT);
-                    
+                    //si connexion socket
                     if($fd){
-                    $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
-                    
-                    //si connexion
-                    if ($conn == "1"){
-                        $bordereau = $commande["bordereau_colis"];
-                        
-                        //recuperation des données du colis
-                        $info_colis = get_info_colis($fd,$bordereau);
-                        
-                        $texte_img="";
-                        //si le colis est rendu dans la boite au lettre
-                        if ($info_colis["RENDU"] == "1") {
-                            //recuperation de l'image
-                            $img = get_image_colis($fd,$bordereau);
-                            switch ($img) {
-                                //cas erreur pas de colis
-                                case '3':
-                                    $texte_img="Colis inexistent";
-                                    break;
-                                //cas d'erreur pas de photo
-                                case '4':
-                                    $texte_img="Photo inexistante";
-                                    break;
-                                //cas image a mettre dans le fichier ressources
-                                default:
-                                    // $octets = binaireEnOctets($img);
-                                    // echo $octets;
-                                    // $fich = file_put_contents(HOME_SITE . "ressources/colis/$bordereau.png",$octets);
-                                    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png","wb");
-                                    fwrite($file,$img);
-                                    fclose($file);
-                                    break;
+                        //si connexion delivraptor
+                        if ($conn == "1"){
+                            $bordereau = $commande["bordereau_colis"];
+                            
+                            //recuperation des données du colis
+                            $info_colis = get_info_colis($fd,$bordereau);
+                            
+                            $texte_img="";
+                            //si le colis est rendu dans la boite au lettre et si l'image n'existe pas
+                            if ($info_colis["RENDU"] == "1" && !file_exists(HOME_SITE."ressources/colis/$bordereau.png")) {
+                                                                
+                                //recuperation de l'image
+                                $texte_img = get_image_colis($fd,$bordereau);    
                             }
                         }
-                    }
-                    //deconnexion
-                    deconnexion_socket($fd);
+                        
                     }
                 ?>
 
@@ -266,7 +253,10 @@ if (isset($_GET["commande"])) {
                         <hr>
                     </li>
 
-            <?php } } ?>
+            <?php } 
+            //deconnexion socket et delivraptor
+            deconnexion_socket($fd);
+            } ?>
 
         </ul>
 

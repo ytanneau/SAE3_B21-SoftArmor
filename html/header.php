@@ -38,6 +38,12 @@
                 if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit']; ?>
 
                 <li>
+                    <a href="<?= HOME_SITE . 'panier/' . $param?>"> 
+                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
+                    </a> 
+                </li>
+
+                <li>
                     <a href="<?= HOME_SITE . 'compte/inscription' . $param?>"> 
                         <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">S'inscrire
                     </a> 

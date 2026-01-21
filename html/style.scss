@@ -104,32 +104,25 @@ hr {
 }
 
 .toolbar {
-    background-color: $nuance;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    &#categories {
+        @include toolbar($couleur_primaire_client, $color: white);
 
-    ul {
-        @include contenu_centre_horizontal();
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        ul {
+            justify-content: center;
+            gap: 1em;
+        }
 
-        > li {
-            > a {
-                @include contenu_centre_horizontal();
-                margin: 0.25em 1em;
+        .dropdown {
+            @include dropdown($couleur_primaire_client, white, 1.7em, 0, 0, 100%);
 
-                color: black;
-                text-decoration: none;
-                font-family: $font_title;
-                font-weight: bold;
-            }
-
-            &:hover {
-                background-color: adjust-color($color: $nuance, $lightness: 5%);
+            &:hover .dropdown-content {
+                display: block;
             }
         }
+    }
+
+    &#stock {
+        @include toolbar($nuance, $color: black);
     }
 }
 
@@ -163,9 +156,90 @@ hr {
     }
 }
 
+.pageRecherche{
+    display: flex;
+    gap: 2em;
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
+}
+
+.labelEtBandeau{
+    display: flex;
+}
+.TriEtFiltre div div{
+    flex-direction: column;
+}
+.TriEtFiltre{
+    width: 260px;
+    background-color: #fafafa;
+    border-radius: $angle_normal;
+    padding: 1.2em;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+}
+
+.TriEtFiltre fieldset {
+    border: none;
+    padding: 0;
+}
+
+.TriEtFiltre legend {
+    font-family: $font_title;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.sousFiltre {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 0.6em;
+    cursor: pointer;
+
+    label {
+        cursor: pointer;
+    }
+
+    input {
+        accent-color: $couleur_primaire_client;
+        cursor: pointer;
+    }
+}
+
+.resultat{
+    width: 100%;
+}
+.resultat > div {
+    align-items: center;
+    margin-bottom: 1.5em;
+    gap: 1em;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 section.results {
     @include contenu_centre_vertical();
     width: 100%;
+}
+.resultat { 
+    > div {
+        display: flex;
+        justify-content: space-around;
+        
+        > div:first-child {
+            flex-direction: column;
+
+            h1 {
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 ul#results {
@@ -173,13 +247,27 @@ ul#results {
     padding: 0;
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
     list-style: none;
-
+    
     > li {
         @include produit_catalogue();
     }
 }
+.labelBendeau{
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#results_for{
+    justify-content: space-around;
+    display: flex;
+}
 
+.deroulant{
+    align-self: center;
+}
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
@@ -343,6 +431,11 @@ ul#results {
                     margin-right: 1em;
                 }
             }
+
+            &.reponse {
+                margin-left: 4em;
+                border-left: solid 2px $nuance;
+            }
         }
     }
 
@@ -370,7 +463,7 @@ ul#results {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        img {
+        .image_pp {
             @include image_pp(200px);
         }
 
@@ -397,7 +490,7 @@ ul#results {
                     &:first-child {
                         align-items: center;
 
-                        img {
+                        .image_pp {
                             width: clamp(140px, 40vw, 240px);  
                             border-radius: 8px;
                         }
@@ -776,6 +869,7 @@ div:has(> aside) {
         > div {
             display: flex;
             flex-direction: row;
+            
             > button {
                 z-index: 10;
                 width: 40px;
@@ -809,6 +903,7 @@ div:has(> aside) {
             }
             > ul {
                 @include contenu_centre_horizontal;
+                align-items: start;
                 overflow: hidden;
                 list-style: none;
                 padding: 0;
@@ -1146,12 +1241,13 @@ aside {
         margin: 0.5em 0;
     }
 
-    a.bouton {
-        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
-    }
-
+    
     input.bouton {
         @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    }
+    
+    .achat {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.5em 0, $size: 0.8em);
     }
 
     @media screen and (max-width : 1024px){
@@ -1758,6 +1854,11 @@ aside {
         display:none !important;
     }
 }
+
+.hide_input_file{
+    @include hide_input_file();
+}
+
 .main_promo{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
@@ -1780,10 +1881,7 @@ aside {
             }
         }
     }
-    #div_photo{
-        padding-top: 5px;
-    }
-    #warning1, #warning2, #warning3{
+    #warning1, #warning2, #warning3, #warning4{
         color:red;
         font-style: italic;
         font-size: 75%;
@@ -1798,18 +1896,50 @@ aside {
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
+    .block_banniere{
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+        img{
+           @include image_produit(250px);
+        }
+    }
+    .hide_input_file{
+        margin-top: 20px;
+        @include hide_input_file();
+    }
+    .ajout_banniere{
+        margin-top: 20px;
+    }
+}
 
-    // .hide_input{
-    //     background-color: $couleur_etoile;
-    //     padding: 10px 16px 10px 16px;
-    //     width: fit-content;
-    //     border-radius: $angle_petit;
-    // }
-    // div > img{
-    //     height: 15%;
-    //     width: 15%;
-    // }
-    // .zone_sup{
-    //     width: fit-content;
-    // }
+.main_accueil{
+    @include contenu_centre_vertical;
+    .liste_accueil_vendeur{
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-gap: 50px;
+        .lien1, .lien2, .lien3, .lien4{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            width: 17em;
+            height: 17em;
+            border-radius: $angle_petit;
+            background-color: #fedcd9;
+            &:hover{
+                transform: ease scale(1.1);
+            }
+            a{
+                color: black;
+                text-decoration: none;
+                &:visited{
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
 }
