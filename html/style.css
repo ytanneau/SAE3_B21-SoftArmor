@@ -1189,10 +1189,6 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis li.reponse {
-  margin-left: 4em;
-  border-left: solid 2px #A6A6BF;
-}
 .infos form {
   display: flex;
   flex-direction: row-reverse;
@@ -1399,6 +1395,10 @@ a.bouton:has(+ .liste_avis):hover {
 }
 .liste_avis li a img {
   width: 100%;
+}
+.liste_avis li.reponse {
+  padding-left: 3em;
+  border-left: solid 4px #A6A6BF;
 }
 
 main:has(.detail_produit) {
