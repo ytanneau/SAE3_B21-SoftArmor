@@ -22,7 +22,7 @@
             
         <ul>
             <li>
-                <a href="<?= HOME_SITE . 'vendeur/stock' ?>">
+                <a href="<?= HOME_SITE . 'vendeur/accueil' ?>">
                     <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon Vendeur" title="Logo Alizon Vendeur"> 
                 </a> 
             </li>
@@ -37,7 +37,7 @@
                     <div id="dropdown-compte" class="dropdown-content">
                         <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>"> <img src="<?= $images . 'compte_vendeur.svg' ?>" class="icon">Mon profil</a>
                         <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
-                        <a href="<?= HOME_SITE . 'vendeur/commande'?>"><img src="<?=$images?>panier.svg" class="icon">Lé komand</a>
+                        <a href="<?= HOME_SITE . 'vendeur/commande'?>"><img src="<?=$images?>panier.svg" class="icon">Commandes</a>
                         <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?=$images?>deconnexion.svg" class="icon">Déconnexion</a>
                     </div>
                 </div>

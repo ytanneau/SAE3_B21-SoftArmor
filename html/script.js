@@ -1,33 +1,40 @@
-const recent = document.querySelector('.container.recent');
-document.querySelector('.fleche.gauche.recent').onclick = () => {
-    recent.scrollBy({ left: -700, behavior: 'smooth' });
-};
-document.querySelector('.fleche.droite.recent').onclick = () => {
-    recent.scrollBy({ left: 700, behavior: 'smooth' });
-};
+function verif_fleches(element, nom_element) {
+    if (element.scrollLeft == 0) {
+        document.querySelector('.fleche.gauche.' + nom_element).style.visibility = "hidden";
+        
+    } else {
+        document.querySelector('.fleche.gauche.' + nom_element).style.visibility = "visible";
+    }
+    
+    if (element.scrollLeft == element.scrollWidth - element.offsetWidth) {
+        document.querySelector('.fleche.droite.' + nom_element).style.visibility = "hidden";
+        
+    } else {
+        document.querySelector('.fleche.droite.' + nom_element).style.visibility = "visible";
+    }
+}
 
+function setCaroussel(nomCat) {
+    console.log(nomCat);
+    const cat = document.querySelector('.container.' + nomCat);
+    
+    console.log(nomCat);
+    console.log(cat);
+    document.querySelector('.fleche.gauche.' + nomCat).onclick = () => {
+        cat.scrollBy({ left: -700, behavior: 'smooth' });
+    };
+    document.querySelector('.fleche.droite.' + nomCat).onclick = () => {
+        cat.scrollBy({ left: 700, behavior: 'smooth' });
+    };
+    
+    console.log(nomCat);
+    console.log(cat);
+    
+    cat.addEventListener("scroll", () => {verif_fleches(cat, nomCat)});
+    verif_fleches(cat, nomCat);
 
-const reduction = document.querySelector('.container.reduction');
-document.querySelector('.fleche.gauche.reduction').onclick = () => {
-    reduction.scrollBy({ left: -700, behavior: 'smooth' });
-};
-document.querySelector('.fleche.droite.reduction').onclick = () => {
-    reduction.scrollBy({ left: 700, behavior: 'smooth' });
-};
+}
 
-
-const alimentaire = document.querySelector('.container.alimentaire');
-document.querySelector('.fleche.gauche.alimentaire').onclick = () => {
-    alimentaire.scrollBy({ left: -700, behavior: 'smooth' });
-};
-document.querySelector('.fleche.droite.alimentaire').onclick = () => {
-    alimentaire.scrollBy({ left: 700, behavior: 'smooth' });
-};
-
-const catalogue = document.querySelector('.container.catalogue');
-document.querySelector('.fleche.gauche.catalogue').onclick = () => {
-    catalogue.scrollBy({ left: -700, behavior: 'smooth' });
-};
-document.querySelector('.fleche.droite.catalogue').onclick = () => {
-    catalogue.scrollBy({ left: 700, behavior: 'smooth' });
-};
+setCaroussel("recent");
+setCaroussel("reduction");
+setCaroussel("catalogue");

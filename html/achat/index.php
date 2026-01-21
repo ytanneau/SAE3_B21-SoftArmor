@@ -1,6 +1,9 @@
 <?php
 const HOME_GIT = "../../";
 const HOME_SITE = "../";
+// DELIVRAPTOR
+const IP = "host.docker.internal";
+const PORT = "9000";
 
 if (!isset($_SESSION)) {
     session_start();
@@ -11,11 +14,14 @@ if (!isset($_SESSION['logged_in'])) {
     header("location: " . HOME_SITE . "compte/connexion");
 }
 
-
+require_once HOME_GIT . ".connexion_delivraptor.php";
 require_once HOME_GIT . "fonction_produit.php";
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "fonction_global.php";
 require_once HOME_GIT . "fonction_commande.php";
+require_once HOME_GIT . "fonction_compte.php";
+require_once HOME_GIT . "fonction_categorie.php";
+require_once HOME_GIT . "fonction_panier.php";
 
 $numEtape = -1;
 
@@ -31,14 +37,8 @@ if (!isset($_POST['form'])) {
     
     // récup les données adresse préenregistrées dans la base de données
     
-    $requete = $pdo->prepare("SELECT adresse, code_postal, complement_adresse FROM client_adresse WHERE id_compte = :id_client");
-    $requete->bindValue(":id_client", $_SESSION['id_compte'], PDO::PARAM_STR);
-    $requete->execute();
-    
-    $adresse_client = $requete->fetch(PDO::FETCH_ASSOC);
-    if ($adresse_client == false) {
-        $adresse_client = [];
-    }
+    $infos_client = sql_get_info_compte($_SESSION['id_compte']);
+    $adresse_client = isset($infos_client['id_adresse_fac']) ? sql_get_adresse($infos_client['id_adresse_fac']) : [];
 }
 
 
@@ -51,6 +51,7 @@ else if ($_POST['form'] == 'adresse') {
     // gestion du POST des données adresse 
 
     // met chaînes vides aux colonnes au lieu de null pour éviter erreurs
+    if (!isset($_POST['ville'])) $_POST['ville'] = "";
     if (!isset($_POST['adresse'])) $_POST['adresse'] = "";
     if (!isset($_POST['complement_adresse'])) $_POST['complement_adresse'] = "";
     if (!isset($_POST['code_postal'])) $_POST['code_postal'] = "";
@@ -58,12 +59,12 @@ else if ($_POST['form'] == 'adresse') {
     $fichier = HOME_GIT . 'fonction_compte.php';
     if (file_exists($fichier)) {
         require_once $fichier;
-        $erreurs = check_coordonnees($_POST['adresse'], $_POST['code_postal']);
+        $erreurs = check_coordonnees($_POST['ville'], $_POST['adresse'], $_POST['code_postal']);
 
 
         // enregistrer
         if ($erreurs == [] && isset($_POST['enregistrer']) && $_POST['enregistrer']) {
-            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
+            sql_insert_adresse_client($pdo, $_SESSION['id_compte'], $_POST['ville'], $_POST['adresse'], $_POST['complement_adresse'], $_POST['code_postal']);
         }
 
     } else {
@@ -85,6 +86,7 @@ else if ($_POST['form'] == 'adresse') {
         $numEtape = 1;
 
         // récup les anciennes valeurs remplies pour préremplir les champs d'adresse
+        $adresse_client['ville'] = $_POST['ville'];
         $adresse_client['adresse'] = $_POST['adresse'];
         $adresse_client['complement_adresse'] = $_POST['complement_adresse'];
         $adresse_client['code_postal'] = $_POST['code_postal'];
@@ -138,47 +140,30 @@ if ($numEtape == 3) {
     $liste_produits = [];
     $achat_reussi = true;
 
-    // Création commande
-    $requete = $pdo->prepare("INSERT INTO _commande (id_client) VALUES (:id_compte)");
-    $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
-    $requete->execute();
+    //connexion au delivraptor
+    $conn =false;
+    $fd = connexion_socket(IP,PORT);
+    if($fd){
+        $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
+        //creer bordereau colis
+        $bordereau = create_colis($fd);
+        deconnexion_socket($fd);
+    }
 
-    // Récupération de l'id de commande
-    $id_commande = $pdo->lastInsertId();
-
+    
     // Si c'est un produit unique (pas un panier)
     if ($_POST['id_produit'] != 'panier') {
         $produit = detail_produit($_POST['id_produit']);
+        $quantite_achetee = $_POST['quantite'] ?? 1;
 
-        if ($produit["quantite"] <= 0) {
+        if ($produit["quantite"] < $quantite_achetee) {
             $produits_plus_en_stock = [$produit];
             $achat_reussi = false;
-
-        } else {
-
-            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
-            FROM produit
-            INNER JOIN vendeur ON _produit.id_vendeur = _vendeur.id_compte
-            WHERE id_produit = :id_produit");
-            $requete->bindValue(":id_produit", $_POST['id_produit']);
-            $requete->execute();
-            $produit = $requete->fetch(PDO::FETCH_ASSOC);
-
-            $liste_produits[] = [
-                "id_produit" => $_POST["id_produit"],
-                "prix" => $produit["prix"],
-                "quantite" => 1,
-                "nom_produit" => $produit["nom_produit"],
-                "nom_vendeur" => $produit["nom_vendeur"]
-            ];
-
-            update_stock($_POST['id_produit'], "-1");
-            ajout_commande($id_commande, $liste_produits);
         }
 
     // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix, quantite_panier AS quantite, raison_sociale AS nom_vendeur
+        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
         FROM produit_panier
         INNER JOIN _vendeur ON produit_panier.id_vendeur = _vendeur.id_compte
         WHERE id_client = :id_compte");
@@ -194,16 +179,50 @@ if ($numEtape == 3) {
                 $achat_reussi = false;
             }
         }
+    }
+    
+    
+    if ($achat_reussi) {
+        // Création commande
+        $requete = $pdo->prepare("INSERT INTO _commande (id_client,bordereau_colis) VALUES (:id_compte,:bordereau)");
+        $requete->bindValue(":id_compte", $_SESSION['id_compte'], PDO::PARAM_INT);
+        $requete->bindValue(":bordereau", $bordereau, PDO::PARAM_STR);
+        $requete->execute();
+        
+        // Récupération de l'id de commande
+        $id_commande = $pdo->lastInsertId();
+        
+        // Si c'est un produit unique (pas un panier)
+        if ($_POST['id_produit'] != 'panier') {
 
-        if ($achat_reussi) {
+            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
+            FROM produit
+            WHERE id_produit = :id_produit");
+            $requete->bindValue(":id_produit", $_POST['id_produit']);
+            $requete->execute();
+            $produit = $requete->fetch(PDO::FETCH_ASSOC);
+
+            $liste_produits[] = [
+                "id_produit" => $_POST["id_produit"],
+                "prix" => $produit["prix"],
+                "quantite" => $quantite_achetee,
+                "nom_produit" => $produit["nom_produit"],
+                "nom_vendeur" => $produit["nom_vendeur"]
+            ];
+
+            update_stock($_POST['id_produit'], "-$quantite_achetee");
+            ajout_commande($id_commande, $liste_produits);
+
+        // Sinon si c'est un panier
+        } else {
             foreach ($liste_produits as $produit) {
                 update_stock($produit['id_produit'], '-' . $produit['quantite']);
             }
 
             ajout_commande($id_commande, $liste_produits);
-            header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
-
+            vider_panier($_SESSION['id_compte']);
         }
+        header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
     }
 
     $_POST = [];
@@ -223,7 +242,10 @@ if ($numEtape == 3) {
     </head>
 
     <body class="<?=($numEtape == 3 && !$achat_reussi) ? 'liste' : 'form_client'?>">
-        <?php include HOME_SITE . 'header.php'; ?>
+        <?php 
+            include HOME_SITE . "header.php";
+            include HOME_SITE . "toolbar_categories.php";
+        ?>
 
         <main>
             
@@ -247,6 +269,21 @@ if ($numEtape == 1) {
 
             <h2>Entrez votre adresse</h2>
 
+            
+            <label for="ville">Ville</label>
+            <input type="text" name="ville" id="ville" value="<?=htmlentities($adresse_client['ville'] ?? '')?>" required class="champ">
+            <?php
+            if (isset($erreurs['ville'])){
+                ?>
+            <p class="error">
+                <?="Erreur : ".$erreurs['ville']?>
+            </p>
+            <?php
+            }
+            ?>
+            <p class="contrainte">ex: Paris</p>
+
+
             <label for="adresse">Adresse</label>
             <input type="text" name="adresse" id="adresse" value="<?=htmlentities($adresse_client['adresse'] ?? '')?>" required class="champ">
             <?php
@@ -258,7 +295,7 @@ if ($numEtape == 1) {
             <?php
             }
             ?>
-            <p class="contrainte">ex: 12 rue de la Gare, Paris</p>
+            <p class="contrainte">ex: 12 rue de la Gare</p>
 
             <label for="complement_adresse">Complément adresse</label>
             <textarea type="text" name="complement_adresse" id="complement_adresse" class="champ text"><?=htmlentities($adresse_client['complement_adresse'] ?? '')?></textarea>
@@ -283,8 +320,9 @@ if ($numEtape == 1) {
             <input type="checkbox" id="enregistrer" name="enregistrer" ></label>
             <?php } ?>
 
-
-            <input type="hidden" name="id_produit" id="id_produit" required value="<?php if (isset($_GET['produit'])) {echo htmlentities($_GET['produit']);} else {echo "panier";}?>">
+            
+            <input type="hidden" name="id_produit" id="id_produit" required value="<?= isset($_GET['produit']) ? htmlentities($_GET['produit']) : "panier"?>">
+            <input type="hidden" name="quantite" id="quantite" required value="<?= isset($_GET['nb']) ? htmlentities($_GET['nb']) : "1"?>">
             <input type="hidden" name="form" id="form" required value="adresse">
             
             <input type="submit" value="Continuer l'achat" class="bouton">
@@ -346,6 +384,7 @@ else if ($numEtape == 2) {
             <p class="contrainte">Nombre à 3 chiffres</p>
 
             <input type="hidden" type="number" name="id_produit" id="id_produit" required value="<?=$_POST['id_produit']?>">
+            <input type="hidden" type="number" name="quantite" id="quantite" required value="<?=$_POST['quantite']?>">
             <input type="hidden" name="form" id="form" required value="bancaire">
             
             <input type="submit" value="Effectuer l'achat" class="bouton">

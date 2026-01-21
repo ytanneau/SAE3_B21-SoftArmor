@@ -19,6 +19,12 @@
                     </a> 
                 </li>
 
+                <li> 
+                    <a href="<?= HOME_SITE . 'compte/informations' ?>"> 
+                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mes commandes
+                    </a> 
+                </li>
+
                 <li>
                     <a href="<?= HOME_SITE . 'deconnexion' ?>">
                         <img src="<?= $images . 'deconnexion_blanc.svg' ?>" class="icon">Déconnexion
@@ -30,6 +36,12 @@
             <?php } else {
                 $param = "";
                 if (isset($_GET['produit'])) $param = "?produit=" . $_GET['produit']; ?>
+
+                <li>
+                    <a href="<?= HOME_SITE . 'panier/' . $param?>"> 
+                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
+                    </a> 
+                </li>
 
                 <li>
                     <a href="<?= HOME_SITE . 'compte/inscription' . $param?>"> 
@@ -53,20 +65,20 @@
             </li>
 
             <li class="hide-on-mobile searchbar">
-                <form action="<?= HOME_SITE . 'recherche/' ?>" method="get">
+                <form action="<?= HOME_SITE . 'recherche/' ?>" id="form_recherche" method="get">
                     <input type="search" name="recherche" id="recherche" size="60" placeholder="Rechercher...">
-                    <button type="submit"><img src="../image/loupe.svg"></button>
+                    <button type="submit"><img src="<?= $images . 'loupe.svg' ?>"></button>
                 </form>
+            </li>
+            
+            <li class="hide-on-mobile">
+                <a href="<?= HOME_SITE . 'panier/' ?>">
+                    <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
+                </a> 
             </li>
             
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-                <li class="hide-on-mobile">
-                    <a href="<?= HOME_SITE . 'panier/' ?>">
-                        <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
-                    </a> 
-                </li>
-
                 <li class="hide-on-mobile">
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
@@ -77,7 +89,7 @@
                         <div id="dropdown-compte" class="dropdown-content">
                             <a href="<?= HOME_SITE . 'compte/informations' ?>"> <img src="<?= $images . 'compte.svg' ?>" class="icon">Mon profil</a>
                             <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
-                            <a href="<?= HOME_SITE . 'commande' ?>"> <img src="<?= $images . 'panier.svg' ?>" class="icon">Mé comand</a>
+                            <a href="<?= HOME_SITE . 'commande' ?>"> <img src="<?= $images . 'panier.svg' ?>" class="icon">Mes commandes</a>
                             <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
                         </div>
                     </div>

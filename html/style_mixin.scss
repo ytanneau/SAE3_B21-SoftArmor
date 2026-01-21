@@ -15,7 +15,7 @@
 @mixin header($background) {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 11;
     padding: 0.5em 1em;
     background-color: $background;
     
@@ -46,6 +46,10 @@
         @media screen and (max-width: 1024px) {
             display: block;
         }
+    }
+
+    .dropdown {
+        @include dropdown($background, white, 2.5em, 0, 0, 200px);
     }
 
     > nav {
@@ -120,59 +124,6 @@
                     color: white;
                     text-decoration: none;
                 }
-
-                > .dropdown {
-                    position: relative;
-                    display: inline-block;
-
-                    font-size: $font_size_normal;
-
-                    > .dropdown-button {
-                        @include contenu_centre_horizontal();
-                        
-                        font-size: $font_size_normal;
-                        background-color: $background;
-                        color: white;
-                        border: none;
-                        padding-left: 0;
-                        padding-right: 0;
-                        cursor: pointer;
-                    }
-
-                    > .dropdown-content {
-                        display: none;
-
-                        position: absolute;
-                        top: 2.5em;
-                        right: 0;
-
-                        min-width: 160px;
-                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.25);
-                        z-index: 1;
-
-                        background-color: #ffffff;
-                        border-radius: 5px;
-
-                        > a {
-                            @include contenu_centre_horizontal();
-
-                            padding: 0.25em 0.5em;
-                            text-decoration: none;
-                            color: black;
-                            font-weight: bold;
-
-                            border-radius: 5px;
-
-                            &:hover {
-                                background-color: #ECEDF9;
-                            }
-                        }
-                    }
-
-                    > .show {
-                        display: block;
-                    }
-                }
             }
         }
 
@@ -216,9 +167,48 @@
     }
 }
 
+@mixin produit_catalogue() {
+    width: 20vw;
+    margin: 20px 40px 20px 20px;
+
+    > a {
+        color : black;
+        text-decoration: none;
+        line-height: 1.5em; 
+    
+        > img {
+            @include image_produit(15vw);
+        }   
+    
+        > div {
+            @include contenu_centre_horizontal;
+    
+            > img {
+                width: 20px;
+                height: 20px;
+                background: none;
+            }
+    
+            > p {
+                margin: 5px 0 ;
+            }
+    
+            height :2em;
+        }
+    
+        > p, > h3 {
+            margin: 5px 0 ;
+            width: 100%;
+        }
+    
+        > h3 {
+            height :3em;
+        }
+    }
+}
+
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
-    background-color: $couleur_fond_produit;
     min-width: $taille;
     max-width: $taille;
     height: $taille;
@@ -413,5 +403,100 @@
 @mixin code_barre{
     #idCodeBarre{
         width: 150px;
+    }
+}
+
+@mixin dropdown($background, $color, $top, $left, $right, $width) {
+    position: relative;
+    display: inline-block;
+
+    font-size: $font_size_normal;
+
+    > .dropdown-button {
+        @include contenu_centre_horizontal();
+        
+        font-size: $font_size_normal;
+        background-color: $background;
+        color: white;
+        border: none;
+        padding-left: 0;
+        padding-right: 0;
+        cursor: pointer;
+    }
+
+    > .dropdown-content {
+        display: none;
+
+        position: absolute;
+        top: $top;
+        right: $right;
+
+        min-width: $width;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.35);
+        z-index: 1;
+
+        background-color: #ffffff;
+        border-radius: 5px;
+
+        > a {
+            @include contenu_centre_horizontal();
+
+            padding: 0.25em 0.5em;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+
+            border-radius: 5px;
+
+            &:hover {
+                background-color: #ECEDF9;
+            }
+        }
+    }
+
+    > .show {
+        display: block;
+    }
+}
+
+@mixin toolbar($background: $nuance_primaire_client, $color: black) {
+    background-color: $background;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    a {
+        @include contenu_centre_horizontal();
+        margin: 0.25em 1em;
+
+        color: $color;
+        text-decoration: none;
+        font-family: $font_title;
+        font-weight: bold;
+    }
+
+    ul {
+        @include contenu_centre_horizontal();
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > li {
+            &:hover {
+                background-color: adjust-color($color: $background, $lightness: 5%);
+            }
+        }
+    }
+}
+
+@mixin hide_input_file($background: $couleur_etoile){
+    background-color: $background;
+    padding: 10px 16px 10px 16px;
+    width: fit-content;
+    border-radius: $angle_petit;
+    color: black;
+    font-weight: bold;
+    &:hover{
+        background: adjust-color($color: $background, $lightness: 15%);
     }
 }

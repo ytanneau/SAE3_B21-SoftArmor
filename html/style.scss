@@ -1,6 +1,10 @@
 @use "style_const.scss" as *;
 @use "style_mixin.scss" as *;
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: $font_text;
     padding: 0;
@@ -46,7 +50,7 @@ hr {
     
 
     // Champ et boutons - et +
-    input[type="button"], input[type="number"] {
+    input[type="button"], input[type="number"], input[type="text"] {
         height: 2em;
         margin: 0;
         padding: 0;
@@ -75,7 +79,7 @@ hr {
     }
 
     // Champ
-    input[type="number"] {
+    input[type="number"], input[type="text"] {
         width: 3em;
         box-sizing: border-box;
         border-left: 0;
@@ -100,32 +104,28 @@ hr {
 }
 
 .toolbar {
-    background-color: $nuance;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    &#categories {
+        @include toolbar($couleur_primaire_client, $color: white);
 
-    ul {
-        @include contenu_centre_horizontal();
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        ul {
+            justify-content: center;
+            gap: 1em;
+        }
 
-        > li {
-            > a {
-                @include contenu_centre_horizontal();
-                margin: 0.25em 1em;
+        .dropdown {
+            @include dropdown($couleur_primaire_client, white, 1.7em, 0, 0, 100%);
 
-                color: black;
-                text-decoration: none;
-                font-family: $font_title;
-                font-weight: bold;
-            }
-
-            &:hover {
-                background-color: adjust-color($color: $nuance, $lightness: 5%);
+            &:hover .dropdown-content {
+                display: block;
             }
         }
+    }
+
+    &#stock {
+        @include toolbar($nuance, $color: black);
+    }
+    &#produit{
+        @include toolbar($nuance, $color: black);
     }
 }
 
@@ -159,6 +159,125 @@ hr {
     }
 }
 
+.pageRecherche{
+    display: flex;
+    gap: 2em;
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
+}
+
+.labelEtBandeau{
+    display: flex;
+}
+.TriEtFiltre div div{
+    flex-direction: column;
+}
+.TriEtFiltre{
+    width: 260px;
+    background-color: #fafafa;
+    border-radius: $angle_normal;
+    padding: 1.2em;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+}
+
+.TriEtFiltre fieldset {
+    border: none;
+    padding: 0;
+}
+
+.TriEtFiltre legend {
+    font-family: $font_title;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.sousFiltre {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 0.6em;
+    cursor: pointer;
+
+    label {
+        cursor: pointer;
+    }
+
+    input {
+        accent-color: $couleur_primaire_client;
+        cursor: pointer;
+    }
+}
+
+.resultat{
+    width: 100%;
+}
+.resultat > div {
+    align-items: center;
+    margin-bottom: 1.5em;
+    gap: 1em;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+section.results {
+    @include contenu_centre_vertical();
+    width: 100%;
+}
+.resultat { 
+    > div {
+        display: flex;
+        justify-content: space-between;
+        
+        > div:first-child {
+            flex-direction: column;
+
+            h1 {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+ul#results {
+    display: flex;
+    padding: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: left;
+    margin-left: 10%;
+    
+    > li {
+        @include produit_catalogue();
+    }
+}
+.labelBendeau{
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#results_for{
+    justify-content: space-around;
+    display: flex;
+}
+
+.deroulant{
+    align-self: center;
+    select {
+        padding: 0.5em;
+        border-radius: 5px;
+        border: solid 1px $nuance_primaire_client;
+        font-size: $font_size_normal;
+    }
+}
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
@@ -293,10 +412,10 @@ hr {
 .infos {
 
     .modif{
-        @include bouton_new($color: white, $largeur: 30em);
+        @include bouton_new($color: white, $largeur: 15em);
     }
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 30em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
 
     .image_bouton{
@@ -325,7 +444,7 @@ hr {
         }
     }
 
-    form {
+    .form_infos {
         display: flex;
         flex-direction: row-reverse;
 
@@ -349,7 +468,7 @@ hr {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        img {
+        .image_pp {
             @include image_pp(200px);
         }
 
@@ -360,7 +479,7 @@ hr {
         }
         section {
                 @include contenu_centre_vertical;
-            form {
+            .form_infos {
                 flex-direction: column;        
                 align-items: center; 
                 padding: 0;
@@ -376,7 +495,7 @@ hr {
                     &:first-child {
                         align-items: center;
 
-                        img {
+                        .image_pp {
                             width: clamp(140px, 40vw, 240px);  
                             border-radius: 8px;
                         }
@@ -392,7 +511,7 @@ hr {
                     &:last-child {
                         input,
                         button,a {
-                            width: 100%;
+                            width: 50%;
                         }
 
                         .champ {
@@ -454,7 +573,19 @@ a.bouton:has(+ .liste_avis) {
                 > img:not(.etoiles) {
                     @include image_pp(40px);
                     margin-right: 0.5em;
-                } 
+                }
+                
+                // Bouton signaler
+                button {
+                    border: none;
+                    background: none;
+                    line-height: 0;
+
+                    > img {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
             }
 
             // Reste de l'avis
@@ -486,6 +617,11 @@ a.bouton:has(+ .liste_avis) {
             img {
                 width: 100%;
             }
+        }
+
+        &.reponse {
+            padding-left: 3em;
+            border-left: solid 4px $nuance;
         }
     }
 }
@@ -604,7 +740,9 @@ div:has(> aside) {
     color: #fff;
     font-family: sans-serif;
     margin-top: 50px;
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     position: relative;
     bottom: 0;
 
@@ -709,6 +847,31 @@ div:has(> aside) {
 }
 
 .accueil {
+    .prix{
+        font-size: $font_size_grand;
+    }
+    .ancien_prix {
+        display: inline-block;
+        margin-right: 6px;
+
+        width: auto;
+    }
+
+    .pourcentage {
+        display: inline-block;
+        padding: 2px 6px;
+        
+        width: auto;
+
+        background-color: $couleur_primaire_vendeur;
+        color: white;
+
+        border-radius: $angle_petit;
+        font-size: $font_size_petit;
+        font-weight: bold;
+
+        vertical-align: middle;
+    }
     nav {
         display: none;
     }
@@ -716,7 +879,9 @@ div:has(> aside) {
         > div {
             display: flex;
             flex-direction: row;
+            
             > button {
+                z-index: 10;
                 width: 40px;
                 height: 40px;
                 border-radius: $angle_grand;
@@ -748,41 +913,33 @@ div:has(> aside) {
             }
             > ul {
                 @include contenu_centre_horizontal;
+                align-items: start;
                 overflow: hidden;
                 list-style: none;
                 padding: 0;
                 width:100%;
                 
                 > li {
-                    width: 20vw;
-                    margin: 20px 40px 20px 20px;
-
+                    @include produit_catalogue();
                     > a {
-                        color : black;
-                        text-decoration: none;
-                        line-height: 1.5em; 
-                        > img {
-                            @include image_produit(15vw);
-                        }   
-                        > div {
-                            > img {
-                                width: 20px;
-                                height: 20px;
-                                background: none;
-                            }
-                            > p {
-                                margin: 5px 0 ;
-                            }
-                            height :2em;
-                            @include contenu_centre_horizontal;
-                        }
-                        > p, > h3 {
-                            margin: 5px 0 ;
-                            width: 100%;
-                        }
-                        > h3 {
-                            
-                            height :3em;
+                        position: relative;
+
+                        > .reduction {
+                            position: absolute;
+
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+
+                            background-color: $rouge;
+                            color: white;
+
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            font-weight: bold;
+                            z-index: 2;
                         }
                     }
                 }
@@ -871,8 +1028,16 @@ h3 {
 }
 
 .liste {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    .input_quantite {
+        font-size:1.4em;
+    }
+
     main {
         display: flex;
+        flex: 1;
 
         img {
             object-fit: contain;
@@ -881,6 +1046,8 @@ h3 {
         // l'entête, le truc au dessus de la liste
         .entete {
             display: flex;
+            align-items: center;
+            
             // tous les enfants de l'entête
             >* {
                 margin-right: 3em;
@@ -897,6 +1064,7 @@ h3 {
             li > div {
                 display: flex;
                 flex-grow: 1;
+                align-items: center;
             }
             
             // la partie description etc. du produit
@@ -929,6 +1097,10 @@ h3 {
                 }
             }
 
+            .bouton {
+                margin-top: 0;
+            }
+
         }
 
         .image_produit_moyen {
@@ -955,16 +1127,19 @@ h3 {
 
         .bouton {
             @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
-            margin: 0 0 0 2em;
-            min-width: 20%;
+            min-width: 100%;
         }
 
         .grave {
-            background-color: $rouge;
+            @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit, $display: default);
+        }
+
+        .valider {
+            @include bouton_new($couleur_prix, $color: white, $padding: 0.5em, $size: 1em, $angle: $angle_petit, $display: inline);
         }
 
         p {
-            width: 100%;
+            width: 40%;
         }
 
         @media screen and (max-width: 1024px) {
@@ -1081,12 +1256,13 @@ aside {
         margin: 0.5em 0;
     }
 
-    a.bouton {
-        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.3em 0, $size: 0.8em);
-    }
-
+    
     input.bouton {
         @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
+    }
+    
+    .achat {
+        @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.5em 0, $size: 0.8em);
     }
 
     @media screen and (max-width : 1024px){
@@ -1147,8 +1323,10 @@ aside {
     }
 }
 
-.error{
-        color: $rouge;
+.error {
+    font-size: $font_size_petit;
+    margin: 0.4% 0;
+    color: $rouge;
 }
 
 .bodyAjoutProduit{
@@ -1172,7 +1350,7 @@ aside {
     }
 }
 
-.bodyModifProduit{
+.bodyModifProduit {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
@@ -1196,7 +1374,7 @@ aside {
     }
 }
 
-.mainInfoVendeur{
+.mainInfoVendeur div{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
@@ -1378,7 +1556,6 @@ aside {
     @include contenu_centre_vertical();
 }
 
-
 .produit-vendeur {
   padding: 2rem;
   display: flex;
@@ -1447,14 +1624,16 @@ aside {
 }
 
 .stock {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     main {
-        align-items: center;
         display: flex;
         flex-direction: column;
-        flex: 1; 
+        justify-content: center;
+        table {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+        }
         tr {
             width: 50vw;
             display: flex;
@@ -1501,6 +1680,284 @@ aside {
                 * {
                     margin: auto 10px;
                 }
+            }
+        }
+    }
+}
+
+#snackbar {
+    visibility: hidden;
+    
+    position: fixed; 
+    left: 50%; 
+    bottom: 30px;
+    
+    transform: translate(-50%, 0);
+    color: black;
+    border: solid 1px;
+
+    text-align: center;
+    border-radius: $angle_petit; 
+    padding: 1em; 
+    z-index: 10;
+
+    &.success {
+        background-color: #d7f9dd;
+        border-color: adjust-color($color: #c7f9d0, $lightness: -50%);
+    }
+
+    &.error {
+        background-color: #fedcd9; 
+        border-color: adjust-color($color: #fdd2cf, $lightness: -50%);
+    }
+}
+
+#snackbar.show {
+    visibility: visible;
+    
+    animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 4.6s;
+}
+
+@keyframes montrer_snackbar {
+    from {
+        bottom: 0; 
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px; 
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes montrer_snackbar {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes cacher_snackbar {
+    from {
+        bottom: 30px; 
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0; 
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes cacher_snackbar {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    width: 100%; 
+    height: 100%;
+    
+    left: 0;
+    top: 0;
+
+    z-index: 10;
+    overflow: hidden;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    .modal_content {
+        position: relative;
+
+        margin: 15% auto;
+        padding: $padding_normal;
+        width: 30%;
+        
+        background-color: $couleur_background;
+        border-radius: $angle_petit;
+
+        animation-name: ouvrir_modal;
+        animation-duration: 0.4s;
+
+        .titre {
+            @include contenu_centre_horizontal();
+            justify-content: space-between;
+            margin-bottom: 1em;
+
+            h3 {
+                margin: 0;
+            }
+
+            span.fermer_modal {
+                font-size: 24px;
+                font-weight: bold;
+
+                &:hover, &:focus {
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .boutons {
+            @include contenu_centre_horizontal;
+            gap: 10px;
+
+            width: 100%;
+            justify-content: end;
+            margin-top: 1em;
+
+            button[type="reset"] {
+                @include bouton_new($nuance_primaire_client, $padding: 0.5em);
+            }
+
+            button[type="submit"] {
+                @include bouton_new($rouge, $color: white, $padding: 0.5em);
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-weight: bold;
+                margin-top: 0.5em;
+            }
+
+            select, input[type="email"] {
+                padding: 0.5em;
+
+                border-radius: 5px;
+                border: solid 1px $nuance_primaire_client;
+                font-size: $font_size_normal;
+            }
+
+            input[type="email"] {
+                width: 70%;
+            }
+
+            select {
+                width: 60%;
+            }
+
+            .error {
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+@keyframes ouvrir_modal {
+    from {
+        top: -200px; 
+        opacity: 0;
+    }
+
+    to {
+        top: 0; 
+        opacity: 1
+    }
+}
+
+// Pages à imprimer (récap de commandes)
+@media print {
+    h1 {
+        font-size: 8mm;
+    }
+    header, button, footer, a {
+        display:none !important;
+    }
+}
+
+.hide_input_file{
+    @include hide_input_file();
+}
+
+.main_promo{
+    @include contenu_centre_vertical;
+    @include entete_page_vendeur;
+    .en_ligne{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .en_colonne{
+        display: flex;
+        flex-direction: column;
+    }
+    .cout_final{
+        width: 50%;
+    }
+    h3 + p + div{
+        div{
+            input{
+                width: 50%;
+            }
+        }
+    }
+    #warning1, #warning2, #warning3, #warning4{
+        color:red;
+        font-style: italic;
+        font-size: 75%;
+    }
+    #valider{
+        @include bouton_new($color: $couleur_background);
+        margin-top: 20px;
+        width: 100%;
+    }
+    #supprimer_promotion{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        margin-top: 10px;
+        padding: 10px 16px 10px 16px;
+    }
+    .block_banniere{
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+        img{
+           @include image_produit(250px);
+        }
+    }
+    .hide_input_file{
+        margin-top: 20px;
+        @include hide_input_file();
+    }
+    .ajout_banniere{
+        margin-top: 20px;
+    }
+}
+
+.main_accueil{
+    @include contenu_centre_vertical;
+    .liste_accueil_vendeur{
+        display: grid;
+        grid-template-columns: 2fr 2fr;
+        grid-gap: 35px;
+        .lien1, .lien2, .lien3, .lien4{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            font-weight: bold;
+            font-size: 150%;
+            width: 12em;
+            height: 12em;
+            border-radius: $angle_petit;
+            color: black;
+            text-decoration: none;
+            background-color: $couleur_fond_produit;
+            &:hover{
+                transform: scale(1);
+            }
+            
+            &:visited{
+                color: black;
+                text-decoration: none;
+            }
+            img{
+                width: 4em;
+                height: 4em;
             }
         }
     }

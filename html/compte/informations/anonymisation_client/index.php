@@ -4,6 +4,7 @@
     define('HOME_SITE', '../../../');
 
     require_once HOME_GIT . ".config.php";
+    require_once HOME_GIT . "fonction_categorie.php";
 
     define('ANONYMISATION_INT', 0);
     define('ANONYMISATION_STRING', 'xxxxxxxxx');
@@ -32,7 +33,10 @@
         <?php include HOME_SITE . 'link_head.php'; ?>
     </head>
     <body class="anonymisation-client">
-        <?php include HOME_SITE . "header.php"?>
+        <?php 
+            include HOME_SITE . "header.php";
+            include HOME_SITE . "toolbar_categories.php";
+        ?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Confirmer la désactivation du compte">

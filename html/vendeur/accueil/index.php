@@ -33,12 +33,26 @@
     </head>
     <body>
         <?php include "../header.php" ?>
-        <article class="liste_accueil_vendeur">
-            <a class="lien_accueil" href="../compte/information_compte_vendeur">Mon compte</a>
-            <a class="lien_accueil" href="../stock">Gestion de stock</a>
-            <a class="lien_accueil" href="../commande">Commandes</a>
-            <a class="lien_accueil" href="../avis">Avis</a>
-        </article>
+        <main class="main_accueil">
+            <article class="liste_accueil_vendeur">
+                <a class="lien1" href="../compte/information_compte_vendeur">
+                    <img src="<?=HOME_SITE . "image/compte_vendeur.svg"?>" alt="icone de compte">
+                    Mon compte
+                </a>
+                <a class="lien2" href="../stock">
+                    <img src="<?=HOME_SITE . "image/stocks.svg"?>" alt="icone de stock">
+                    Gestion de stock
+                </a>
+                <a class="lien3" href="../commande">
+                    <img src="<?=HOME_SITE . "image/panier.svg"?>" alt="icone des commandes ">
+                    Commandes
+                </a>
+                <a class="lien4" href="../avis">
+                    <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="icone des avis">
+                    Avis
+                </a>
+            </article>
+        </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
 </html>

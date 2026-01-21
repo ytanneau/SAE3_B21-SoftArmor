@@ -1,4 +1,5 @@
 <?php
+
 // Constantes
 define('HOME_GIT', "../../");
 define('HOME_SITE', '../');
@@ -12,36 +13,64 @@ if (!isset($_SESSION)) {
         exit;
     }
 
-    if (!isset($_SESSION['logged_in'])) {
-        header('location: ' . HOME_SITE);
-        exit;
+    if (isset($_SESSION) && isset($_SESSION['id_compte'])) {
+        $id_client = $_SESSION['id_compte'];
     }
-
-    $id_client = $_SESSION['id_compte'];
 }
 
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
+require_once (HOME_GIT . 'fonction_panier.php');
 
 //supprime le produit selectionné
-if ($_POST != NULL) {
+if (isset($_POST['id_produit'])) {
     $id_prod = $_POST['id_produit'];
-    supprimer_produit_panier($id_prod,$id_client);
+
+    if (isset($_SESSION['id_compte'])) {
+        supprimer_produit_panier($id_prod,$id_client);
+
+    } else {
+        retirer_panier_visiteur($id_prod);
+    }
 }
 
-// Récupération des éléments du panier
-$sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
-
-try {
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
-    $stmt->execute();
-    $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Erreur lors de la récupération du panier : " . $e->getMessage());
+// supprime le panier entier
+if (isset($_POST['sup_panier'])) {
+    if (isset($_SESSION['id_compte'])) {
+        vider_panier($_SESSION['id_compte']);
+    } else {
+        vider_panier_visiteur();
+        $_COOKIE['panier'] = serialize([]);
+    }
 }
 
- 
+if (isset($_SESSION['logged_in'])) {
+    // Récupération des éléments du panier
+    $sql = "SELECT * FROM produit_panier WHERE id_client = :id_client";
+
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+        $stmt->execute();
+        $elts_panier = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération du panier : " . $e->getMessage());
+    }
+} elseif (isset($_COOKIE['panier'])) {
+    $ids_panier = unserialize($_COOKIE['panier']);
+    $elts_panier = [];
+
+    foreach($ids_panier as $elt_panier) {
+        $produit = detail_produit($elt_panier['id_produit']);
+        $produit['quantite_panier'] = $elt_panier['quantite'];
+        array_push($elts_panier, $produit);
+    }
+
+} else {
+    $elts_panier = [];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +80,22 @@ try {
     <?php include HOME_SITE . 'link_head.php' ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Mon panier</title>
+
+    <script>
+        function change(n, id) {
+            let valeur = parseInt(document.getElementById("input_quantite" + id).value) + parseInt(n);
+
+            document.location.href = "update_quantite.php?produit=" + id + "&nb=" + valeur;
+        }
+    </script>
 </head>
 <body class="liste">
-    <?php include HOME_SITE . 'header.php' ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php";
+    ?>
 
-    <main>
+    <main class = "mainPanier">
 
     <?php if (!$elts_panier) { ?>
         <div id="panier_vide">
@@ -68,6 +108,10 @@ try {
         <div class="gauche">
             <article class="entete">
                 <h1>Mon panier</h1>
+                <form action="" method="post">
+                    <input type="hidden" name="sup_panier" value="1">
+                    <input class="bouton grave" type="submit" value="Vider le panier">
+                </form>
             </article>
 
             <ul>
@@ -75,36 +119,51 @@ try {
                     $total_ht = 0;
                     $total_ttc = 0;
         
-                    foreach ($elts_panier as $elt) { ?>
-                        <?php 
-                            $prix_ttc =  $elt['prix'] * (1 + $elt['tva'] / 100);
+                    foreach ($elts_panier as $elt) {                            
+                            $prix_ttc =  $elt['prix_actuel'] * (1 + $elt['tva'] / 100);
         
-                            $total_ht += $elt['prix'] * $elt['quantite_panier'];
+                            $total_ht += $elt['prix_actuel'] * $elt['quantite_panier'];
                             $total_ttc += $prix_ttc * $elt['quantite_panier'];
+
+                            // Récupération des images
+                            $image_p = get_url_image($elt['id_image_principale']);
                         ?>
         
                         <li class="produit_panier">
-                            <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $elt['image_principale_url'] ?>" title="<?= $elt['image_principale_titre'] ?>" alt="<?= $elt['image_principale_alt'] ?>"></a>
+                            <a href="../produit/?produit=<?=$elt['id_produit']?>"><img class="image_produit_moyen" src="<?= HOME_SITE . $image_p['url'] ?>" title="<?= $image_p['titre'] ?>" alt="<?= $image_p['alt'] ?>"></a>
                             <div>
                                 <article>
                                     <div>
                                         <a href="../produit/?produit=<?=$elt['id_produit']?>"><h3><?= $elt['nom_public'] ?></h3></a>
                                         <p><?= $elt['description'] ?></p>
-                                        <p>Vendeur : <?= $elt['nom_vendeur'] ?></p>
+                                        <p>Vendeur : <?= $elt['raison_sociale'] ?></p>
                                     </div>
-                
+
                                     <form action="" method="post"> <!-- Bouton poubelle à droite pour format tel -->
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
                                         <button onclick="actualiser()" type="submit"><img class="icon" src="<?=HOME_SITE?>image/supprimer_blanc.svg"></button>
                                     </form> 
                                 </article>
                                 <article>
-                                    <p class="prix"><?=number_format($elt['prix'], 2, ',', ' ') . ' €' ?></p>
-                                    <p><?= 'Quantité : ' . $elt['quantite_panier'] ?></p>
-            
+                                    <form action="update_quantite.php">
+                                        <label for="nb">Quantité</label>
+                                        <br>
+                                        <input type="hidden" name="produit" value="<?=$elt['id_produit']?>">
+                                        <span class="input_quantite">
+                                            <input type="button" value="-" onclick="change(-1, <?=$elt['id_produit']?>)"><input id="input_quantite<?=$elt['id_produit']?>" type="text" size="4" name="nb" value=<?=$elt['quantite_panier']?> required><input type="button" value="+" onclick="change('+1', <?=$elt['id_produit']?>)">
+                                        </span>
+                                    </form>
+                                    
+                                    <div style="margin: 1em 0;">
+                                        <span>Sous total</span>
+                                        <p class="prix">
+                                            <?=number_format($prix_ttc * $elt['quantite_panier'], 2, ',', ' ')?> €
+                                        </p>
+                                    </div>
+                                    
                                     <form action="" method="post">
                                         <input type="hidden" name="id_produit" value="<?= $elt['id_produit'] ?>">
-                                        <button onclick="actualiser()" type="submit" class="bouton grave">Supprimer</button>
+                                        <input type="submit" class="bouton grave" value="Supprimer">
                                     </form>
                                 </article>
                             </div>
@@ -130,7 +189,7 @@ try {
                     </div>
                 <?php } ?>
                 
-                <form action="../achat" method="get">
+                <form action="<?= isset($_SESSION['id_compte']) ? '../achat' : '../compte/connexion'?>" method="get">
                     <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
@@ -140,11 +199,31 @@ try {
         <?php } ?>
 
     </main>
-</body>
     <?php include HOME_SITE . "footer.php" ?>
+</body>
     <script>
         function actualiser() {
             window.location.reload();
+        }
+
+        elements = document.getElementsByClassName("grave");
+
+        for (let i = 0; i < elements.length; i++) {
+            const bouton_suppr = elements[i];
+            
+            
+            bouton_suppr.addEventListener("click", (event) => {
+                // Empêche l'envoi immédiat
+                event.preventDefault();
+                
+                // Fenêtre de confirmation
+                const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce produit du panier ?");
+                
+                if (confirmation) {
+                    // L'utilisateur confirme, on envoie le formulaire
+                    bouton_suppr.parentElement.submit();
+                }
+            })
         }
     </script>
 </html>

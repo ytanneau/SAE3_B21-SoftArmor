@@ -3,98 +3,208 @@
 
 
 
-int main(int argc, char const *argv[])
+
+int main(int argc, char *argv[])
 {
     // initalisation des variable
+    char *chemain = DEFAULT_LOGIN;
     bool colisInfinit = false;
+    int port = DEFAULT_PORT, nbColisMax = DEFAULT_COLIS;
+    char *portC = NULL, *nbColisMaxC = NULL;
+
+    char message[TAILLE];
     int pid;
     int sock;
-    int opt = 1;
+    int opt;
     int ret;
     struct sockaddr_in addr;
     struct sockaddr_in conn_addr;
-    compte *c = NULL;
+    COMPTE *c = NULL;
     int size = sizeof(conn_addr);
     int cnx; // le file descriptor du sock
     MYSQL *conn;
+    SESSION data;
+    strcpy(data.login, VIDE);
+    data.bdd = BDD;
+    data.debug = DEBUG;
 
+//-------------------------------------------------------
+
+    //oberture des fichier
+    FILE *logI = fopen(INIT_FILE, "w");
+    FILE *logC = fopen(LOG_FILE, "w");
+
+    // permer lécriture en directre
+    setvbuf(logI, NULL, _IONBF, 0);
+    setvbuf(logC, NULL, _IONBF, 0);
+    data.log = logC;
+    
+//-------------------------------------------------------
+
+    //defénition des parametre attendu
+    struct option long_options[] = 
+    { 
+        {"help", no_argument, 0, 'h'}, 
+        {"account", required_argument, 0, 'a'}, 
+        {"nbcolis", required_argument, 0, 'n'}, 
+        {"port", required_argument, 0, 'p'},
+        {"bdd", no_argument, 0, 'b'}, 
+        {"debug", no_argument, 0, 'd'}, 
+        {0, 0, 0, 0} 
+    };
+
+    // recupération des parametre
+    while ((opt = getopt_long(argc, argv, "ha:n:p:bd", long_options, NULL)) != -1)
+    { 
+        switch (opt) 
+        { 
+            case 'h': 
+                log_init(logI, "[PARAMETRE] -h");
+                fclose(logI);
+                fclose(logC);
+                help();
+                break; 
+                
+            case 'a': 
+                chemain = optarg;
+                sprintf(message, "[PARAMETRE] -a : %s", chemain);
+                log_init(logI, message);
+                break; 
+            
+            case 'n':
+                nbColisMaxC = optarg;
+                sprintf(message, "[PARAMETRE] -n : %s\n", nbColisMaxC);
+                log_init(logI, message);
+                break;
+
+            case 'p':
+                portC = optarg;
+                sprintf(message, "[PARAMETRE] -p : %s\n", portC);
+                log_init(logI, message);
+                break;
+
+            case 'b':
+                data.bdd = false;
+                log_init(logI, "[PARAMETRE] -b");
+                break; 
+
+            case 'd':
+                data.debug = true;
+                log_init(logI, "[PARAMETRE] -d");
+                break; 
+                
+            case '?':
+                sprintf(message, "[FATAL] Option inconnue: -%c", optopt);
+                log_init(logI, message); 
+                exit(EXIT_FAILURE);
+                break;
+        } 
+    }
+
+//---------------------------------------------------------------------------------------------
+    
     srand(time(NULL)); // aléatoire du borderau
     signal(SIGCHLD, tombe); // eviter les enfant zombie
-    printf("[RAPTOR] START\n");
-    
+    log_init(logI, "START");
+
+//---------
+
 
     // recupération des compte
-    c = init_compte(argv[CHEMAIN]);
-    printf("%s SUCCESS INIT COMPTE\n", SERVER);
-    if (DEBUG)
+    c = init_compte(chemain, logI);
+    log_init(logI, "SUCCESS INIT COMPTE");
+    if (data.debug)
     {
-        printf("[DEBUG] COMPTE :\n");
-        affiche_compte(c);
-    }
-    
-
-
-    // verifie que le nombre de parametre est se lui attendu
-    if (argc != OPTION)
-    {
-        fprintf(stderr, "[FATAL] Pas le bon nombre d'option.\n");
-        exit(EXIT_FAILURE);
+        fprintf(logI, "[DEBUG] COMPTE :\n");
+        affiche_compte(c, logI);
     }
 
+//---------
+
+    // inisalisation avec la bdd
+    conn = mysql_init(NULL);
+    if(data.bdd)
+    {
+        init_bdd(conn, logI);
+        data.conn = conn;
+    }
+
+//-------------------------------------------------------
+
+
+    // recupère la valeur en paramètre
+    if (nbColisMaxC != NULL)
+    {
+        nbColisMax = atoi(nbColisMaxC);
+    }
 
     // verifie que le nombre de colie est bon
-    int nbColisMax = atoi(argv[NB_COLIS]);
     if (nbColisMax == 0 || nbColisMax < -1)
     {
-        fprintf(stderr, "[FATAL] Nombre de colis incorecte.\n");
+        log_init(logI, "[FATAL] Nombre de colis incorecte.");
         exit(EXIT_FAILURE);
     }
     else if (nbColisMax == -1)
     {
         colisInfinit = true;
-        printf("[RAPTOR] SUCCESS COLIS SET INFINIT\n");
+        log_init(logI, "SUCCESS COLIS SET INFINIT");
     }
     else
     {
-        printf("[RAPTOR] SUCCESS COLIS SET %d\n", nbColisMax);
+        sprintf(message, "SUCCESS COLIS SET %d", nbColisMax);
+        log_init(logI, message);
     }
 
-    // inisalisation avec la bdd
-    conn = mysql_init(NULL); 
-    if (conn == NULL) 
-    { 
-        fprintf(stderr, "[FATAL] INIT MYSQL\n"); 
-        exit(EXIT_FAILURE); 
+//---------
+    
+    //recupère la valeur en paramètre
+    if (portC != NULL)
+    {
+        port = atoi(portC);
     }
-    if (mysql_real_connect(conn, BDD_HOST, BDD_USER, BDD_PASSWORD, BDD_NAME, BDD_PORT, NULL, 0) == NULL) { 
-        fprintf(stderr, "[FATAL] CONNECT MYSQL : %s\n", mysql_error(conn)); 
-        mysql_close(conn); 
-        exit(1); 
-    }
-    printf("[RAPTOR] SUCCESS CONNECT MYSQL\n");
 
-    // mise en place
-    sock = socket(AF_INET, SOCK_STREAM, 0);
-    addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(8080);
-    ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
-
-
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) {
-        fprintf(stderr, "[ERROR] setsockopt.\n");
+    // verifie que port est bon
+    if (port <= 0)
+    {
+        log_init(logI, "[FATAL] Port incorecte.");
         exit(EXIT_FAILURE);
     }
-    printf("[RAPTOR] SUCCESS INIT SOCKET\n");
+    else
+    {
+        sprintf(message, "SUCCESS PORT SET %d", port);
+        log_init(logI, message);
+    }
+
+//-------------------------------------------------------
 
 
-    // boucle que mode server
+    // mise en place du socket
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+    addr.sin_addr.s_addr = inet_addr(IP); 
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    ret = bind(sock, (struct sockaddr *)&addr, sizeof(addr));
+
+    opt = 1;
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) == -1) 
+    {
+        log_init(logI, "[ERROR] setsockopt.");
+        exit(EXIT_FAILURE);
+    }
+    log_init(logI,"SUCCESS INIT SOCKET");
+
+    log_init(logI, "READY");
+    fclose(logI);
+
+//---------------------------------------------------------------------------------------------
+
+    // boucle mode server
     while (true)
     {
         // a temps une demande
         if(listen(sock, 1) == -1)
         {
-            printf("%s ERROR : %d", SERVER, errno);
+            fprintf(data.log, "[ERROR] : %d", errno);
         }
         else
         {
@@ -102,19 +212,27 @@ int main(int argc, char const *argv[])
             cnx = accept(sock, (struct sockaddr *)&conn_addr, (socklen_t *)&size);
             if (cnx == -1)
             {
-                printf("%s ERROR : %d", SERVER, errno);
+                fprintf(data.log, "[ERROR] : %d", errno);
             }
             else
             {
                 pid = fork();
                 if (pid == -1)
                 {
-                    printf("%s ERROR : %d", SERVER, errno);
+                    fprintf(data.log, "[ERROR] : %d", errno);
                 }
                 else if (pid == 0) // fils
                 {
+                    SESSION encour = data; //data est la structure de base, et son crée en cour pour évier des problème avec pointeur
+                    char client_ip[INET_ADDRSTRLEN]; 
+                    inet_ntop(AF_INET, &conn_addr.sin_addr, client_ip, sizeof(client_ip)); //recupération de ip
+                    strcpy(encour.client_ip , client_ip);
+                    encour.cnx = cnx;
+
                     close(sock);
-                    comminication(cnx, c, colisInfinit, nbColisMax, conn);
+                    
+                    comminication(&encour, c, colisInfinit, nbColisMax);
+                    fin(&encour); // est pas sortitre de comminication, mais au cas ou
                 }
             }
             

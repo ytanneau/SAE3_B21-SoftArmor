@@ -21,26 +21,53 @@
         exit;
     }
 
-    if ($_GET == NULL || !isset($_GET['produit'])) {
-       echo "Produit non trouvé";
+    if ($_GET == NULL || !isset($_GET['produit']) || !isset($_GET['idPromo'])) {
        renvoi();
     }
 
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
     $id_promo = $_GET['idPromo'];
-
     $prix = detail_produit($_GET['produit'])['prix'];
+
+    if(get_info_promotion_unique($id_promo) == null){
+        renvoi();
+    }
+
     $tab_info_promotion = get_info_promotion_unique($id_promo);
+    if($tab_info_promotion['reduction'] != null){
+        $pourcentage = $tab_info_promotion['reduction'];
+    } else {
+        $pourcentage = null;
+    }
+    
     $tab_image_promotion = get_image_promotion($tab_info_promotion['id_image_banniere']);
+    $date_debut_initial = $tab_info_promotion['date_debut'];
+    $date_fin_initial = $tab_info_promotion['date_fin'];
+
+    if($tab_image_promotion != null){
+        $id_image_initial = $tab_image_promotion['id_image'];
+    } else {
+        $id_image_initial = null;
+    }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $euro = $_POST['euro'];
-        $euro = explode('-', $euro)[1];
+        if(isset($_POST['pourcentage']) && !empty($_POST['pourcentage'])){
+            $pourcentage = $_POST['pourcentage'];
+            $pourcentage = str_replace('-', "",$pourcentage);
+        } else {
+            $pourcentage = null;
+        }
 
-            if (isset($_FILES['photoPromotion']) &&
-                    $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                    banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
+        $id_nouvelle_banniere = $id_image_initial;
+        if(isset($_POST['supp_image_promo']) && $_POST['supp_image_promo'] == 'on'){
+            $id_nouvelle_banniere = null;
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+            delete_image($id_image_initial);
+        } else if (
+            isset($_FILES['photoPromotion']) &&
+            $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK
+        ){
             $nomImageTemp = $_FILES['photoPromotion'];
             // recupere le nom temporaire du fichier pour le deplacer
             $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
@@ -51,18 +78,42 @@
             // definition des caractéristiques d'une image
             $url = "ressources/promotion/" . $nomImage;
             $altDefault = "Image de promotion";
-            if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                $id_image_principal = add_image($url,$nomImage, $altDefault);
+            if(
+                $date_debut_initial != $_POST['dateDebut'] ||
+                $date_fin_initial != $_POST['dateFin']
+            ){
+                if(banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
+                    
+                    if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                        $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+
+                        if($id_nouvelle_banniere){
+                            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                        }
+                        if($id_image_initial){
+                            delete_image($id_image_initial);
+                        }
+                    }
+                }
+            } else {
+                if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+
+                if($id_nouvelle_banniere){
+                    update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                }
+                if($id_image_initial){
+                    delete_image_bdd($id_image_initial);
+                }
+            }
             }
         } else {
-            $id_image_principal = null;
+            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
         }
-        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$euro,$id_image_principal);
         
         header("Location: ../?produit=" . $id_produit);
         exit();
-    }
-
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -75,40 +126,74 @@
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <h1>Modifier la promotion</h1>
-        <p style="color:red;">Une promotion à un coûp journalier de 26€ par jour</p>
-        <form action="" method="post" enctype="multipart/form-data">
-            <h3>Promotion</h3>
-            <label for="dateDebut">Date de début</label>
-            <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
-            <label for="dateFin">Date de fin (incluse)</label>
-            <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
-            <p style="display:none; color:red;" id="warning1">Date de fin antérieur à la date de debut</p>
-            <p style="display:none; color:red;" id="warning2">Date(s) non selectionné(s)</p>
-            <label for="cout">Coût final : </label>
-            <input type="text" id="cout" readonly>
-            <?php if($tab_image_promotion != null){ ?>
-                <img src="<?=$tab_image_promotion['url']?>" alt="Banniere de promotion">
-                <label for="photoPromotion">Changer la banniere</label>
-                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-                <label for="supp_image_promo">Supprimer la bannière</label>
-                <input type="checkbox" id="supp_image_promo">
-            <?php } else { ?>
-                <label for="photoPromotion">Ajouter une bannière</label>
-                <input type="file" id="photoPromotion" name="photoPromotion" accept=".png">
-            <?php } ?>
+        <main class="main_promo">
+            <div class="entete">
+                <a href="../index.php?produit=<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <h1>Modifier la promotion</h1>
+            </div>
+            <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
+            <form action="" method="post" enctype="multipart/form-data" class="form_promo">
+                <h3>Promotion</h3>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="dateDebut">Date de début :</label>
+                        <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="dateFin">Date de fin :</label>
+                        <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="cout">Coût final : </label>
+                        <input class="cout_final" type="text" id="cout" readonly>
+                    </div>
+                </div>
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionné(s)</p>
+                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
+                <?php if($tab_image_promotion != null){ ?>
+                    <div class="block_banniere">
+                        <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
+                        <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
+                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg">
+                        <div>
+                            <label for="supp_image_promo">Supprimer la bannière</label>
+                            <input type="checkbox" id="supp_image_promo" name="supp_image_promo">
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="ajout_banniere">
+                        <label class="hide_input_file" for="photoPromotion">Ajouter une bannière</label>
+                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg">
+                    </div>
+                <?php } ?>
+                <h3>Réduction</h3>
+                <p>Prix actuel : <?=htmlentities($prix)?>€</p>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="pourcentage">Pourcentage :</label>
+                        <input type="text" id="pourcentage" name="pourcentage" value="<?= htmlentities($pourcentage ?? '')?>">
+                        <p style="display:none;" id="warning3">Le pourcentage ne peut <br>etre supérieur à 100</p>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="euro">Remise appliquée :</label>
+                        <input type="text" id="euro" name="euro" readonly>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="prixFinal">Prix final :</label>
+                        <input type="text" id="prixFinal" readonly>
+                    </div>
+                </div>
+                <input type="submit" id="valider" value="Valider">
+                <a 
+                    id="supprimer_promotion"
+                    style="display:block; color:none;"
+                    href="supprimer_promotion?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
+                    >Supprimer la promotion
+                </a>
+            </form>
             
-            <h3>Réduction</h3>
-            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-            <label for="pourcentage">Pourcentage</label>
-            <input type="text" id="pourcentage">
-            <p style="display:none; color:red;" id="warning3">Le pourcentage ne peut etre supérieur à 100</p>
-            <label for="euro">Remise appliquée</label>
-            <input type="text" id="euro" name="euro" value=<?= htmlentities($tab_info_promotion['reduction'])?> readonly>
-            <label for="prixFinal">Prix final</label>
-            <input type="text" id="prixFinal" readonly>
-            <input type="submit" id="valider" value="Valider">
-        </form>
+        </main>
         <?php include "../../../footer.php" ?>    
     </body>
     <script>
@@ -121,15 +206,49 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
+        const warning4 = document.getElementById("warning4");
+        const btn_suppr = document.getElementById("supprimer_promotion");
+        const dateCourante = new Date();
+        dateCourante.setHours(0, 0, 0, 0);
+
+        if(!verif_date_pour_suppression(dateDebut.value)){
+            btn_suppr.style.display = "none";
+        }
+
+        function verif_date_pour_suppression(date){
+            const dateCible = new Date(date);
+
+            const difference = dateCourante.getTime() - dateCible.getTime();
+            const vingtQuatreHeure = 86400000;
+
+            if (difference < 0) {
+                return true;
+            }
+            if (difference >= 0 && difference <= vingtQuatreHeure) {
+                return false;
+            }
+            return true;
+        }
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
                     warning1.style.display = "block";
+                } else if (dateFin == ""){
+                    dateFin.value = dateDebut.value;
+                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                    warning4.style.display = "block";
                 } else {
                     warning1.style.display = "none";
+                    warning4.style.display = "none";
                     calculP();
                 }
+                
+            }
+            if(!verif_date_pour_suppression(dateDebut.value)){
+                btn_suppr.style.display = "none";
+            } else {
+                btn_suppr.style.display = "block";
             }
             
         });
@@ -166,9 +285,21 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal");
 
-        pourcentage.value = (euro.value / prixInitial) * 100;
-        prixFinal.value = prixInitial * pourcentage.value;
+        function fill_form_with_data(){
+            const d1 = new Date(dateDebut.value + "T00:00:00");
+            const d2 = new Date(dateFin.value + "T00:00:00");
 
+            const diffJours = (d2 - d1) / 86400000;
+            cout.value = PRIX * diffJours + PRIX + "€";
+            
+            euro.value = prixInitial * (pourcentage.value / 100);
+            euro.value = Number.parseFloat(euro.value).toFixed(2);
+            prixFinal.value = prixInitial - euro.value;
+            prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
+        }
+        
+        fill_form_with_data();
+        
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
@@ -182,7 +313,7 @@
         function calculR(){
             if(pourcentage.value != ""){
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
-                euro.value = prixFinal.value - prixInitial;
+                euro.value = prixInitial - prixFinal.value;
                 prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
                 euro.value = Number.parseFloat(euro.value).toFixed(2);
             } else {
@@ -196,20 +327,25 @@
             warning1.style.display = "none";
             warning2.style.display = "none";
             warning3.style.display = "none";
+            warning4.style.display = "none";
 
-            if (!dateDebutP.value || !dateFinP.value) {
+            if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
                 event.preventDefault();
                 return;
             }
 
-            if (dateDebutP.value > dateFinP.value) {
+            if (dateDebut.value > dateFin.value) {
                 warning1.style.display = "block";
                 event.preventDefault();
             }
 
             if (pourcentage.value >= 100){
                 warning3.style.display = "block";
+                event.preventDefault();
+            }
+            if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                warning4.style.display = "block";
                 event.preventDefault();
             }
         });

@@ -59,10 +59,10 @@
                                 $prixProd, $tva, $codeBarre, $checkMajeur,
                                 $qtachete, $qtStock,$seuilAlerte,
                                 $descSimple,$descDetaille, $poidColis,
-                                    $volumeColis);
+                                    $volumeColis, $categorie);
 
         // mise en relation entre le produit et sa catégorie
-        add_produit_categorie($idProduit,$categorie);
+        // add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
@@ -105,152 +105,154 @@
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <main class="bodyAjoutProduit">
-            <div class="entete">
-                <!-- Bouton de retour sur la page de gestion des stocks -->
-                <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-                <h1>Ajouter un produit au stock</h1>
-            </div>
+        <main>
+            <a href="../index.php"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+            <div class="bodyAjoutProduit">
+                <div class="entete">
+                    <!-- Bouton de retour sur la page de gestion des stocks -->
+                    <h1>Ajouter un produit au stock</h1>
+                </div>
 
-            <!-- Formulaire de saisie des informations du produit -->
-            <form action="" name="formulaire" method="post" enctype="multipart/form-data">
-                <h3>Informations produit</h3>
-                <div>
-                    <p>
-                        <label for="nomPrv">Libellé privé*</label>
-                        <input required type="text" name="nomPrv" id="idNomPrv" placeholder="Oignon rosé / 500g">
-                    </p>
-                    <p>
-                        <label for="nomPblc">Libellé public*</label>
-                        <input required type="text" name="nomPblc" id="idNomPblc" placeholder="Oignon rosé de Roscoff - 500g">
-                    </p>
-                </div>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="prixProd">Prix* hors taxe (€)</label>
-                        <input required type="text" name="prixProd" id="idPrixProd" placeholder="4.50">
-                    </p>
-                    <p>
-                        <label for="idtva">TVA*</label>
-                        <select name="tva" id="idtva" required>
-                            <option value="">-- Taux de TVA --</option>
-                            <option value="5">5%</option>
-                            <option value="10">10%</option>
-                            <option value="20">20%</option>
-                        </select>
-                    </p>
-                    <p>
-                        <label for="idCodeBarre">Code barre*</label>
-                        <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" placeholder="1234512345123">
-                        <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
-                    </p>
-                </div>
-                <div>
-                    <label for="idcheckMajeur">Réservé aux majeurs</label>
-                    <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
-                </div>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="categorie">Catégories*</label>
-                        <select name="categorie" id="idCategorie" style="width: 175px;" required>
-                            <option value="">-- Choisir une catégorie --</option>
-                            <?php
-                                $tabCategorie = get_categorie_parent();
-                                foreach($tabCategorie as $nomCat){
-                            ?>
-                            <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
-                                <?= htmlspecialchars($nomCat['nom_categorie']) ?>
-                            </option>
-                            <?php } ?>
-                        </select>
-                    </p>
-                    <p id="pSousCategorieAlimentaire" style="display:none;">
-                        <label for="sous_categorie">Sous-catégories alimentaire*</label>
-                        <select name="sous_categorie" id="sous_cate">
-                            <option value="">-- Choisir une catégorie --</option>
-                            <?php 
-                                $tabSousCategorie = get_sous_categorie("Alimentaire");
-                                foreach($tabSousCategorie as $sousCat){                  
-                            ?>
-                            <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
-                                    <?= htmlspecialchars($sousCat['nom_categorie'])?>
-                            </option>
-                            <?php } ?>
-                        </select>
-                    </p>
-                </div>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="">Quantité acheté</label>
-                        <input type="text" name="qtAchete" placeholder="500">
-                    </p>
-                    <p id="blockUniteVetement" style="display:none;">
-                        <label for="uniteVetement">Unités de Masse</label>
-                        <select name="unite" id="uniteVetement">
-                            <option value="">-- Choisir une unitée --</option>
-                            <option value="xs">XS</option>
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                            <option value="xl">XL</option>
-                        </select>
-                    </p>
-                    <p id="blockUniteMasse" style="display:none;">
-                        <label for="uniteMasse">Unités de masse</label>
-                        <select name="unite" id="uniteMasse">
-                            <option value="">-- Choisir une unitée --</option>
-                            <option value="g">g</option>
-                            <option value="kg">kg</option>
-                        </select>
-                    </p>
-                    <p id="blockUniteLiquide" style="display:none;">
-                        <label for="uniteLiquide">Unités de liquide</label>
-                        <select name="unite" id="uniteLiquide">
-                            <option value="">-- Choisir une unitée --</option>
-                            <option value="ml">ml</option>
-                            <option value="cl">cl</option>
-                            <option value="l">l</option>
-                        </select>
-                    </p>
-                </div>
-                <h3>Image principale</h3>
-                <div class="divEnLigne">
-                    <label for="photo">Importer des images du produit*</label>
-                    <input type="file" name="photo" id="photo" accept=".png" required>
-                </div>
-                <h3>Gestion de stock</h3>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="qtStock">Quantité en stock</label>
-                        <input type="number" name="qtStock" id="qtStock" placeholder="100">
-                    </p>
-                    <p>
-                        <label for="seuilAlerte">Seuil d'alerte</label>
-                        <input type="number" name="seuilAlerte" id="seuilAlerte" placeholder="10">
-                    </p>
-                </div>
-                <h3>Description</h3>
-                <div>
-                    <p class="blockDescription">
-                        <label for="descSimple">Description simple (200 caractéres max)</label>
-                        <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
-                        <label for="descDetaille">Description détaillé (2000 caractéres max)</label>
-                        <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
-                    </p>
-                </div>
-                <h3>Livraison</h3>
-                <div class="divEnLigne">
-                    <p>
-                        <label for="poidColis">Poids* (Kg)</label>
-                        <input type="text" name="poidColis" id="poidColis" required>
-                    </p>
-                    <p>
-                        <label for="volumeColis">Volume du colis* (L)</label>
-                        <input type="text" name="volumeColis" id="volumeColis" required>
-                    </p>   
-                </div>
-                <input type="submit" value="Créer le produit" id="creerProduit">
-            </form>
+                <!-- Formulaire de saisie des informations du produit -->
+                <form action="" name="formulaire" method="post" enctype="multipart/form-data">
+                    <h3>Informations produit</h3>
+                    <div>
+                        <p>
+                            <label for="nomPrv">Référence*</label>
+                            <input required type="text" name="nomPrv" id="idNomPrv" placeholder="Oignon rosé / 500g">
+                        </p>
+                        <p>
+                            <label for="nomPblc">Libellé public*</label>
+                            <input required type="text" name="nomPblc" id="idNomPblc" placeholder="Oignon rosé de Roscoff - 500g">
+                        </p>
+                    </div>
+                    <div class="divEnLigne">
+                        <p>
+                            <label for="prixProd">Prix* hors taxe (€)</label>
+                            <input required type="text" name="prixProd" id="idPrixProd" placeholder="4.50">
+                        </p>
+                        <p>
+                            <label for="idtva">TVA*</label>
+                            <select name="tva" id="idtva" required>
+                                <option value="">-- Taux de TVA --</option>
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="idCodeBarre">Code barre*</label>
+                            <input required type="text" name="codeBarre" id="idCodeBarre" maxlength="13" placeholder="1234512345123">
+                            <span id="idMessageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
+                        </p>
+                    </div>
+                    <div>
+                        <label for="idcheckMajeur">Réservé aux majeurs</label>
+                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur">
+                    </div>
+                    <div class="divEnLigne">
+                        <p>
+                            <label for="categorie">Catégories*</label>
+                            <select name="categorie" id="idCategorie" style="width: 175px;" required>
+                                <option value="">-- Choisir une catégorie --</option>
+                                <?php
+                                    $tabCategorie = get_categorie_parent();
+                                    foreach($tabCategorie as $nomCat){
+                                ?>
+                                <option value="<?= htmlspecialchars($nomCat['nom_categorie']) ?>">
+                                    <?= htmlspecialchars($nomCat['nom_categorie']) ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </p>
+                        <p id="pSousCategorieAlimentaire" style="display:none;">
+                            <label for="sous_categorie">Sous-catégories alimentaire*</label>
+                            <select name="sous_categorie" id="sous_cate">
+                                <option value="">-- Choisir une catégorie --</option>
+                                <?php 
+                                    $tabSousCategorie = get_sous_categorie("Alimentaire");
+                                    foreach($tabSousCategorie as $sousCat){                  
+                                ?>
+                                <option value="<?= htmlspecialchars($sousCat['nom_categorie']) ?>">
+                                        <?= htmlspecialchars($sousCat['nom_categorie'])?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </p>
+                    </div>
+                    <div class="divEnLigne">
+                        <p>
+                            <label for="">Quantité acheté</label>
+                            <input type="text" name="qtAchete" placeholder="500">
+                        </p>
+                        <p id="blockUniteVetement" style="display:none;">
+                            <label for="uniteVetement">Unités de Masse</label>
+                            <select name="unite" id="uniteVetement">
+                                <option value="">-- Choisir une unitée --</option>
+                                <option value="xs">XS</option>
+                                <option value="s">S</option>
+                                <option value="m">M</option>
+                                <option value="l">L</option>
+                                <option value="xl">XL</option>
+                            </select>
+                        </p>
+                        <p id="blockUniteMasse" style="display:none;">
+                            <label for="uniteMasse">Unités de masse</label>
+                            <select name="unite" id="uniteMasse">
+                                <option value="">-- Choisir une unitée --</option>
+                                <option value="g">g</option>
+                                <option value="kg">kg</option>
+                            </select>
+                        </p>
+                        <p id="blockUniteLiquide" style="display:none;">
+                            <label for="uniteLiquide">Unités de liquide</label>
+                            <select name="unite" id="uniteLiquide">
+                                <option value="">-- Choisir une unitée --</option>
+                                <option value="ml">ml</option>
+                                <option value="cl">cl</option>
+                                <option value="l">l</option>
+                            </select>
+                        </p>
+                    </div>
+                    <h3>Image principale</h3>
+                    <div class="divEnLigne">
+                        <label class="hide_input_file" for="photo">Importer une image du produit*</label>
+                        <input style="display:none;" type="file" name="photo" id="photo" accept=".png" required>
+                    </div>
+                    <h3>Gestion de stock</h3>
+                    <div class="divEnLigne">
+                        <p>
+                            <label for="qtStock">Quantité en stock</label>
+                            <input type="number" name="qtStock" id="qtStock" placeholder="100">
+                        </p>
+                        <p>
+                            <label for="seuilAlerte">Seuil d'alerte</label>
+                            <input type="number" name="seuilAlerte" id="seuilAlerte" placeholder="10">
+                        </p>
+                    </div>
+                    <h3>Description</h3>
+                    <div>
+                        <p class="blockDescription">
+                            <label for="descSimple">Description simple (200 caractéres max)</label>
+                            <textarea name="descSimple" id="idDescSimple" maxlength="200"></textarea>
+                            <label for="descDetaille">Description détaillé (2000 caractéres max)</label>
+                            <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"></textarea>
+                        </p>
+                    </div>
+                    <h3>Livraison</h3>
+                    <div class="divEnLigne">
+                        <p>
+                            <label for="poidColis">Poids* (Kg)</label>
+                            <input type="text" name="poidColis" id="poidColis" required>
+                        </p>
+                        <p>
+                            <label for="volumeColis">Volume du colis* (L)</label>
+                            <input type="text" name="volumeColis" id="volumeColis" required>
+                        </p>   
+                    </div>
+                    <input type="submit" value="Créer le produit" id="creerProduit">
+                </form>
+            </div>
             
             <script>
                 /*
@@ -353,7 +355,6 @@
                     codeBarre.value = codeBarre.value.replace(/\D/g,"");
                     if(codeBarre.value.length < 13){
                         messageErrCodeBarre.style.display = "block";
-                        event.preventDefault();
                     } else {
                         messageErrCodeBarre.style.display = "none";
                     }

@@ -14,7 +14,7 @@
         }
     }
 
-    function update_adresse_vendeur($id_compte, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
+    function update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
         /**
          * Fonction update_adresse_vendeur() prend en parametre les informations d'une adresse et l'id d'un vendeur
          * Met a jour les informations de l'adresse dans la base de données 
@@ -23,11 +23,12 @@
         try{
             $stmt = $pdo->prepare("UPDATE _adresse AS a JOIN _vendeur AS v 
                                 ON v.id_adresse = a.id_adresse 
-                                SET a.adresse = :adresse, 
+                                SET a.ville = :ville,
+                                    a.adresse = :adresse, 
                                     a.code_postal = :code_postal,
                                     a.complement_adresse = :complement_adresse 
                                 WHERE v.id_compte = $id_compte;");
-            $stmt->execute([':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
+            $stmt->execute([':ville' => $modifVille, ':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
         } catch(PDOException $e) {
             throw $e;
         }

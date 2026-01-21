@@ -17,27 +17,47 @@
 #include <sys/wait.h>
 #include <time.h>
 #include <mariadb/mysql.h>
+#include <getopt.h> 
+#include <poll.h>
 
 //-------------------------------------------------------
 
+// base
 #define SERVER "[RAPTOR]"
-#define DEBUG true
+#define DEBUG false
+#define INIT_FILE "init.log"
+#define LOG_FILE "connect.log"
 
+// socket
+#define IP "0.0.0.0" //"127.0.0.1" pour localhost et "0.0.0.0" pour tout les ip
+#define TIME 60
 
-#define BDD_HOST "saedb"
-#define BDD_USER "saedb"
-#define BDD_PASSWORD "dbsae3dunyles"
-#define BDD_NAME "saedb"
-#define BDD_PORT 8080
+// bdd
+#define BDD true
 
+// element bdd
+#define TABLE "_colis"
+#define VIEW "nb_colis_non_livres"
+#define COLON_ETAPE "etape"
+#define COLON_MODE "mode"
+#define COLON_RAISON "raison_refus"
+#define COLON_DATE "date_update"
 
+// valeur clé
+#define VALUE_ETAPE_FIN 9
+#define VALUE_MODE_ABSENT 1
+#define VALUE_MODE_REFU 2
+
+// valeur erreur
+#define ERREUR_INTERNE -2
+#define ERREUR_TIME_OUT -1
 #define ERREUR_INSTRUCTION 0
 #define ERREUR_ACCES 1
 #define ERREUR_NEW_COLIS 2
 #define ERREUR_COLIS_INEXISTENT 3
 #define ERREUR_PHOTO_INEXISTENT 4
 
-
+// valeur intruction
 #define INSTRUCTION_DELIMITER "."
 #define INSTRUCTION_FIN -1
 #define INSTRUCTION_CONNECTION 1
@@ -45,30 +65,44 @@
 #define INSTRUCTION_INFO_COLIS 3
 #define INSTRUCTION_PHOTO_COLIS 4
 
-
+// reponse mot clé
 #define ERREUR "ERROR"
 #define CONNECTION "CONNECT"
 #define COLIS "COLIS"
-#define ETAPE "STAPE"
+#define ETAPE "ETAPE"
 #define MODE "REMISE"
 #define CAUSE "RAISON"
+#define VIDE "N/A"
+#define PHOTO "PHOTO"
+#define DATE "DATE"
 
-
-#define CHEMAIN 1
-#define NB_COLIS 2
-#define OPTION 3
-
-
+// taille des chaine
 #define TAILLE 100
-#define TRAME_TAILLE 400
+#define TAILLE_SQL 200
+#define TAILLE_GRAND 400
 
-
+// element du login
 #define DELIMITER "="
 #define MDP_TAILLE 33
 
-
+// element du bordereau
 #define BORDEREAU_SIZE 13
 #define BORDEREAU_CARACTERE "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+// element de photo
+#define TAILLE_PHOTO 62
+#define FICHIER_PHOTO "image.png"
+//#define FICHIER_PHOTO "fonction.h"
+
+#define DEFAULT_COLIS -1
+#define DEFAULT_PORT 9000
+#define DEFAULT_LOGIN "login.txt"
+
+#define BDD_HOST "BDD_HOST"
+#define BDD_USER "BDD_USER"
+#define BDD_PASSWORD "BDD_PASSWORD"
+#define BDD_NAME "BDD_NAME"
+#define BDD_PORT "BDD_PORT"
 
 
 #endif
