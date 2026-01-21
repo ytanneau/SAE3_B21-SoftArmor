@@ -776,7 +776,12 @@ hr {
 
 .pageRecherche {
   display: flex;
-  flex-direction: row;
+  gap: 2em;
+}
+@media (max-width: 1024px) {
+  .pageRecherche {
+    flex-direction: column;
+  }
 }
 
 .TriEtFiltre div div {
@@ -784,9 +789,15 @@ hr {
 }
 
 .TriEtFiltre {
-  display: flex;
-  flex-direction: column;
-  width: 15em;
+  width: 260px;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 1.2em;
+}
+@media (max-width: 1024px) {
+  .TriEtFiltre {
+    width: 100%;
+  }
 }
 .TriEtFiltre form {
   align-items: normal;
@@ -825,6 +836,44 @@ hr {
 }
 .TriEtFiltre form .error {
   color: #E43737;
+}
+
+.TriEtFiltre fieldset {
+  border: none;
+  padding: 0;
+}
+
+.TriEtFiltre legend {
+  font-family: "Montserrat";
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.sousFiltre {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+  cursor: pointer;
+}
+.sousFiltre label {
+  cursor: pointer;
+}
+.sousFiltre input {
+  accent-color: #3157A3;
+  cursor: pointer;
+}
+
+.resultat > div {
+  align-items: center;
+  margin-bottom: 1.5em;
+  gap: 1em;
+}
+@media (max-width: 768px) {
+  .resultat > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 section.results {
