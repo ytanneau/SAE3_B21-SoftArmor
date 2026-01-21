@@ -173,6 +173,10 @@ hr {
 .TriEtFiltre{
     display: flex;
     flex-direction: column;
+    form{
+        @include formulaire();
+        width: 15em;
+    }
 }
 
 section.results {
