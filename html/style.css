@@ -1633,6 +1633,11 @@ div:has(> aside) {
 .accueil nav {
   display: none;
 }
+.accueil > main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .accueil > main > div {
   display: flex;
   flex-direction: row;

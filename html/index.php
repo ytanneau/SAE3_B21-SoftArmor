@@ -118,64 +118,60 @@ if($tabPromotion != null){
     ?>
 
     <main>
-    
-    <!--Produit Banniere au jour (possiblement a faire)-->
-    <?php if($pub){?>
-    <div>
-    
-    </div>
-    <?php } else {?>
-    <div>
-        <a class="banniere" href="produit/?produit=<?=$tabPromotion['id_produit']?>">
-            <img src="<?=HOME_GIT . $url_banniere?>" alt="Banniere de promotion du produit">
-        </a>
-    </div>
-    <?php } ?>
-    <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
-
-    <!--Produit Ajoutés Récemment-->
-    <h1>Produits ajoutés récemment</h1>
-    <?php afficher_produits($produit_recent, "recent")?>
-    <hr>
-
-
-    <!-- Produits en réduction -->
-    <h1>Produits en promotion</h1>
-    <?php afficher_produits($produit_promotion, "reduction")?>
-    
-    <hr>
-    
-
-    <!-- Produits de catégories -->
-    <?php
-    $categories = get_categorie();
-
-    foreach($categories as $cat) {
-        $cat = $cat['nom_categorie'];
-        $produits_cat = info_produit_accueil_categorie($cat);
-
-        if (count($produits_cat) != 0) {
-            ?>
-            <h1>Produits <?=strtolower($cat)?></h1>
-            <?php afficher_produits($produits_cat, strtolower($cat))?>
+        <!--Produit Banniere au jour (possiblement a faire)-->
+        <?php if($pub){?>
+        <div>
+        
+        </div>
+        <?php } else {?>
+        <div>
+            <a class="banniere" href="produit/?produit=<?=$tabPromotion['id_produit']?>">
+                <img src="<?=HOME_GIT . $url_banniere?>" alt="Banniere de promotion du produit">
+            </a>
+        </div>
+        <?php } ?>
+        <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
+        <div>
+            <!--Produit Ajoutés Récemment-->
+            <h1>Produits ajoutés récemment</h1>
+            <?php afficher_produits($produit_recent, "recent")?>
             <hr>
-        <?php }
-    } ?>
+            
+            <!-- Produits en réduction -->
+            <h1>Produits en promotion</h1>
+            <?php afficher_produits($produit_promotion, "reduction")?>
+            <hr>
 
-    <!-- Tous les produits du catalogue -->
-    <h1>Produits du catalogue</h1>
-    <?php afficher_produits($produit_catalogue, "catalogue")?>
+            <!-- Produits de catégories -->
+            <?php
+            $categories = get_categorie();
 
-    <!-- Navigation (pour teléphone)
-    <nav>
-        <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
-        <a href="/panier"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
-       
-        <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
-        <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
-    </nav>  
-    -->
+            foreach($categories as $cat) {
+                $cat = $cat['nom_categorie'];
+                $produits_cat = info_produit_accueil_categorie($cat);
 
+                if (count($produits_cat) != 0) {
+                    ?>
+                    <h1>Produits <?=strtolower($cat)?></h1>
+                    <?php afficher_produits($produits_cat, strtolower($cat))?>
+                    <hr>
+                <?php }
+            } ?>
+
+            <!-- Tous les produits du catalogue -->
+            <h1>Produits du catalogue</h1>
+            <?php afficher_produits($produit_catalogue, "catalogue")?>
+
+            <!-- Navigation (pour teléphone)
+            <nav>
+                <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
+                <a href="/panier"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
+            
+                <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
+                <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
+            </nav>  
+            -->
+        </div>
     </main>
 
     <footer>
