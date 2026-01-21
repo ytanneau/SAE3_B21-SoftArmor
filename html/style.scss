@@ -124,6 +124,9 @@ hr {
     &#stock {
         @include toolbar($nuance, $color: black);
     }
+    &#produit{
+        @include toolbar($nuance, $color: black);
+    }
 }
 
 #header_client {

@@ -202,6 +202,33 @@ hr {
 .toolbar#stock ul > li:hover {
   background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
 }
+.toolbar#produit {
+  background-color: #A6A6BF;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25em 1em;
+  color: black;
+  text-decoration: none;
+  font-family: "Montserrat";
+  font-weight: bold;
+}
+.toolbar#produit ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toolbar#produit ul > li:hover {
+  background-color: rgb(180.8333333333, 180.8333333333, 201.6666666667);
+}
 
 #header_client {
   position: sticky;
