@@ -408,7 +408,7 @@ ul#results {
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        img {
+        .image_pp {
             @include image_pp(200px);
         }
 
