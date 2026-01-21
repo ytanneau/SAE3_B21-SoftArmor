@@ -172,10 +172,8 @@
     function supprimer_produit_stock($id_produit) {
         global $pdo;
         $image = get_image_produit($id_produit);
-        print_r($image);
         delete_image_produit($id_produit);
 
-        //delete_image($image['id_image_principale']);
         if(!empty($image['id_image1'])){
             delete_image($image['id_image1']);
         } else if (!empty($image['id_image2'])) {
