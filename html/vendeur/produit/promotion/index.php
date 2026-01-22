@@ -48,7 +48,21 @@
         // recupere le nom temporaire du fichier pour le deplacer
         $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
         
-        $nomImage = $id_produit . "_promotion.png";
+        switch($_FILES['photoPromotion']['type']){
+            case 'image/jpeg' : 
+                $extension = '.jpeg';
+                break;
+            case 'image/webp' :
+                $extension = '.webp';
+                break;
+            case 'image/jpg' :
+                $extension = '.jpg';
+                break;
+            default :
+                $extension = '.png';
+                break;
+        }
+        $nomImage = $id_produit . "_promotion" . $extension;
         
         $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
         // definition des caractéristiques d'une image
@@ -104,7 +118,7 @@
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
                     <label class="hide_input_file" for="photoPromotion">Ajouter une banniere</label>
-                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept=".png">
+                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
 
                 <h3>Réduction</h3>
@@ -142,6 +156,7 @@
         const warning4 = document.getElementById("warning4");
         const divPhoto = document.getElementById("divPhoto");
         const dateCourante = new Date();
+        dateCourante.setHours(0, 0, 0, 0);
 
         // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
         dateDebut.addEventListener('change', () => {

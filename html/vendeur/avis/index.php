@@ -17,7 +17,8 @@
         exit;
     }
 
-    $id_vendeur = $_SESSION['id_compte'];
+    $id_compte = $_SESSION['id_compte'];
+    $id_reponse = $_POST['id_reponse'] ?? '';
     $id_produit = htmlentities(trim($_GET['produit'] ?? ''));
 
     // Rediriger à la page de stock
@@ -28,6 +29,10 @@
 
     require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . 'fonction_avis.php';
+
+    if (!empty($id_reponse)) {
+        supprimer_reponse($id_reponse);
+    }
 
 
     $data = avis_client_produit($_GET['produit']);
@@ -62,23 +67,22 @@
     <?php } ?>
 
     <article>
+        <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
+
         <div>
-            <img src="<?=HOME_SITE . htmlentities($image_principale['url'])?>" alt="<?=htmlentities($image_principale['alt'])?>" title="<?=htmlentities($image_principale['titre'])?>">
-        </div>
-        <div>
-            <?=htmlentities($produit['nom_public'])?>
+            <h1><?=htmlentities($produit['nom_public'])?></h1>
             
             <?php if ($data != null) { ?>
-                <br>Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?></br>
+                Note moyenne : <?=htmlentities(round($produit['note_moy'] ?? 0, 1))?>
+                <br>
                 <?php afficher_moyenne_note($produit['note_moy']);
             } else {
                 echo "<br>Il n'y a pas d'avis pour ce produit";
             } ?>
-
-            <br>Nombre d'avis : <?=htmlentities($produit['nb_avis'] ?? "0")?>
         </div>
-    </article>
-    <section>
+</article>
+<section>
+        <h2>Avis (<?=htmlentities($produit['nb_avis'] ?? "0")?>)</h2>
         <?php if ($data != null) { ?>
             <ul class="liste_avis">
                 <?php foreach ($data as $avis) { 
@@ -102,7 +106,7 @@
                                 </div>
 
                                 <!-- Afficher le bouton signaler seulement si je ne l'ai pas déjà signalé -->
-                                <?php if (!avis_est_signale($avis['id_avis'], $id_vendeur)) { ?>
+                                <?php if (!avis_est_signale($avis['id_avis'], $id_compte)) { ?>
                                     <button class="bouton_signalement" data-avis="<?=$avis['id_avis']?>">
                                         <img class="icon" src="<?= HOME_SITE . "image/reporter.svg" ?>" title="Signaler cet avis">
                                     </button>
@@ -173,8 +177,9 @@
 
                     <form id="form_reponse" action="" method="post">
                         <input type="hidden" name="id_avis" id="id_avis_reponse">
+                        <input type="hidden" name="id_reponse_modif" id="id_reponse">
 
-                        <label for="reponse">Réponse</label>
+                        <label for="reponse">Réponse (1000 caractères max.)</label>
                         <textarea name="reponse" id="reponse" placeholder="Votre réponse ici..."></textarea>
                         <p class="error" id="error_reponse">Veuillez remplir ce champ</p>
 
@@ -205,8 +210,12 @@
 
         const snackbar = document.getElementById("snackbar");
 
-        const inputIdSignalement = document.getElementById("id_avis_signalement");
-        const inputIdReponse = document.getElementById("id_avis_reponse");
+        const inputIdAvisSignalement = document.getElementById("id_avis_signalement");
+        const inputIdAvisReponse = document.getElementById("id_avis_reponse");
+        const inputIdReponse = document.getElementById("id_reponse");
+
+        const textareaReponse = document.getElementById("reponse");
+
         const inputEmail = document.getElementById("input_email");
         const estVisiteur = (inputEmail != null);
 
@@ -214,11 +223,15 @@
         const pErrorRaison = document.getElementById("error_raison");
         const pErrorReponse = document.getElementById("error_reponse");
 
+        const selection = {
+            id_avis: null
+        };
+
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {
-                inputIdSignalement.value = btn.dataset.avis;
+                inputIdAvisSignalement.value = btn.dataset.avis;
 
                 // Afficher le bon formulaire
                 contentSignalement.style.display = "block";
@@ -235,7 +248,7 @@
         // Afficher le modal en cliquant sur l'icône répondre
         document.querySelectorAll(".bouton_reponse").forEach(btn => {
             btn.addEventListener("click", () => {
-                inputIdReponse.value = btn.dataset.avis;
+                inputIdAvisReponse.value = btn.dataset.avis;
                 
                 // Afficher le bon formulaire
                 contentReponse.style.display = "block";
@@ -246,6 +259,18 @@
 
                 // Empêcher le scroll tant que le modal est ouvert
                 document.body.style.overflowY = "hidden";
+            });
+        });
+
+        // Afficher le modal en cliquant sur l'icône modifier
+        document.querySelectorAll(".bouton_modifier").forEach(btn => {
+            btn.addEventListener("click", () => {
+                inputIdAvisReponse.value = btn.dataset.avis;
+                inputIdReponse.value = btn.dataset.reponse;
+
+                // Récupérer les informations de la réponse et pré-remplir le champ réponse
+                selection.id_avis = inputIdAvisReponse.value;
+                preremplirChamps();
             });
         });
 
@@ -297,8 +322,6 @@
             showSnackbar(json.message, json.success ? "success" : "error");
 
             if (json.success) {
-                console.log(json.success);
-
                 // Désactiver le bouton de signalement
                 const btn = document.querySelector(
                     `.bouton_signalement[data-avis="${data.get('id_avis')}"]`
@@ -338,20 +361,55 @@
             modal.style.display = "none";
             document.body.style.overflowY = "auto";
 
-            // Afficher la snackbar
-            showSnackbar(json.message, json.success ? "success" : "error");
+            // Recharger la page
+            window.location.reload();
 
             if (json.success) {
-                console.log(json.success);
-
-                // Désactiver le bouton de signalement
+                // Désactiver le bouton de réponse
                 const btn = document.querySelector(
                     `.bouton_reponse[data-avis="${data.get('id_avis')}"]`
                 );
                 btn.disabled = true;
             }
         });
+
+        // Suppression des réponses
+        document.querySelectorAll(".bouton_supprimer").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const confirmation = confirm("Êtes-vous sûr de vouloir supprimer cette réponse ?");
+
+                if (confirmation) {
+                    btn.parentElement.submit();
+                }
+            });
+        });
+
         
+        async function preremplirChamps() {
+            fetch('./infos_reponse.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(selection)
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Préremplir le champ réponse
+                textareaReponse.value = data.reponse;
+
+                // Afficher le bon formulaire
+                contentReponse.style.display = "block";
+                contentSignalement.style.display = "none";
+                
+                // Afficher le modal
+                modal.style.display = "block";
+
+                // Empêcher le scroll tant que le modal est ouvert
+                document.body.style.overflowY = "hidden";
+            });
+        }
+
         function emailValide(email) {
             let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -365,7 +423,7 @@
 
             setTimeout(() => {
                 snackbar.className = "";
-            }, 5000);
+            }, 3000);
         }
 
     </script>

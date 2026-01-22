@@ -124,6 +124,42 @@ hr {
     &#stock {
         @include toolbar($nuance, $color: black);
     }
+    &#produit{
+        @include toolbar($nuance, $color: black);
+        ul{
+            .bouton_avis_vendeur_produit{
+                background-color: $couleur_etoile;
+                &:hover{
+                    background-color: adjust-color($couleur_etoile,$lightness: 5%);
+                }
+            }
+            li{
+                button{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: black;
+                    font-family: $font_title;
+                    font-weight: bold;
+                    background-color: $nuance;
+                    border: none;
+                    &:hover{
+                        background-color: adjust-color($nuance, $lightness: 5%);
+                    }
+                }
+            }
+            .supprimer_produit{
+                background-color: $rouge;
+                &:hover{
+                    background-color: adjust-color($rouge,$lightness: 5%);
+                }
+                a{
+                    color: $couleur_background;
+                }
+            }
+        }
+    }
 }
 
 #header_client {
@@ -247,8 +283,9 @@ ul#results {
     padding: 0;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: center;
     list-style: none;
+    justify-content: left;
+    margin-left: 10%;
     
     > li {
         @include produit_catalogue();
@@ -267,6 +304,12 @@ ul#results {
 
 .deroulant{
     align-self: center;
+    select {
+        padding: 0.5em;
+        border-radius: 5px;
+        border: solid 1px $nuance_primaire_client;
+        font-size: $font_size_normal;
+    }
 }
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
@@ -333,63 +376,14 @@ ul#results {
         justify-content: center;
         gap: 20px;
 
-        div:first-child{
-            img{
-                @include image_produit(10vw);
-                background-color: white;
-            }
+        h1 {
+            margin-top: 0;
         }
-    }
 
-    section{
-        display: flex;
-        justify-content: center;
-        /*
-        ul{
-            @include contenu_centre_vertical();
-            gap: 10px;
-
-            hr{
-                width: 50%;
-                color: $nuance_primaire_vendeur;
-            }
-            
-            li{
-                @include contenu_centre_horizontal();
-                list-style: none;
-                
-                >div:first-child{
-                    @include contenu_centre_vertical();
-                    width: 40vw;
-                    align-items: start;
-
-                    .info{
-                        color: $nuance_primaire_vendeur;
-                    }
-
-                    >div{
-                        @include contenu_centre_horizontal();
-                        img{
-                            width: 20px;
-                            height: 20px;
-                        }
-                    }
-                }
-
-                >div:last-child{
-                    width: 5vw;
-                    height: 5vw;
-
-                    img{
-                        width: 5vw;
-                        height: 5vw;
-                        object-fit: contain;
-                        background-color: white;
-                    }
-                }
-                
-            }
-        }*/
+        img:not(.etoile) {
+            @include image_produit(10vw);
+            background-color: white;
+        }
     }
 }
 
@@ -402,10 +396,10 @@ ul#results {
 .infos {
 
     .modif{
-        @include bouton_new($color: white, $largeur: 30em);
+        @include bouton_new($color: white, $largeur: 15em);
     }
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 30em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
 
     .image_bouton{
@@ -431,15 +425,10 @@ ul#results {
                     margin-right: 1em;
                 }
             }
-
-            &.reponse {
-                margin-left: 4em;
-                border-left: solid 2px $nuance;
-            }
         }
     }
 
-    form {
+    .form_infos {
         display: flex;
         flex-direction: row-reverse;
 
@@ -474,7 +463,7 @@ ul#results {
         }
         section {
                 @include contenu_centre_vertical;
-            form {
+            .form_infos {
                 flex-direction: column;        
                 align-items: center; 
                 padding: 0;
@@ -506,7 +495,7 @@ ul#results {
                     &:last-child {
                         input,
                         button,a {
-                            width: 100%;
+                            width: 50%;
                         }
 
                         .champ {
@@ -613,6 +602,19 @@ a.bouton:has(+ .liste_avis) {
                 width: 100%;
             }
         }
+
+        &.reponse {
+            padding-left: 3em;
+            border-left: solid 4px $nuance;
+        }
+    }
+}
+
+form:has(.bouton_supprimer) {
+    display: flex;
+
+    .bouton_supprimer {
+        margin-right: 0;
     }
 }
 
@@ -866,10 +868,33 @@ div:has(> aside) {
         display: none;
     }
     > main {
+        .banniere{
+            display: flex;
+            justify-content: center;
+            a{
+                display: flex;
+                justify-content: center;
+                width: 50%;
+                img{
+                    width: 100%;
+                }
+            }
+            div{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 50%;
+                background-color: $nuance_primaire_client;
+                border-radius: $angle_normal;
+                p{
+                    margin-bottom: 21em;
+                }
+            }
+        }
         > div {
             display: flex;
             flex-direction: row;
-            
             > button {
                 z-index: 10;
                 width: 40px;
@@ -1018,12 +1043,16 @@ h3 {
 }
 
 .liste {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     .input_quantite {
         font-size:1.4em;
     }
 
     main {
         display: flex;
+        flex: 1;
 
         img {
             object-fit: contain;
@@ -1111,8 +1140,13 @@ h3 {
             top: 8em;
         }
 
+        div>.bouton {
+            min-width: auto;
+        }
+
         .bouton {
             @include bouton_new($focus, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit);
+            min-width: 100%;
         }
 
         .grave {
@@ -1124,7 +1158,7 @@ h3 {
         }
 
         p {
-            width: 40%;
+            padding: 1em;
         }
 
         @media screen and (max-width: 1024px) {
@@ -1357,6 +1391,11 @@ aside {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
     }
+    .delete_picture{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        width: 17.45em;
+        padding: 6px;
+    }
 }
 
 .mainInfoVendeur div{
@@ -1541,7 +1580,6 @@ aside {
     @include contenu_centre_vertical();
 }
 
-
 .produit-vendeur {
   padding: 2rem;
   display: flex;
@@ -1612,12 +1650,13 @@ aside {
 .stock {
     min-height: 100vh;
     main {
-        
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         table {
             display: flex;
             flex-direction: column;
-            flex: 1; 
+            align-self: center;
         }
         tr {
             width: 50vw;
@@ -1754,7 +1793,7 @@ aside {
     .modal_content {
         position: relative;
 
-        margin: 15% auto;
+        margin: 10% auto;
         padding: $padding_normal;
         width: 30%;
         
@@ -1782,6 +1821,19 @@ aside {
                     text-decoration: none;
                 }
             }
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 0.5em;
+            box-sizing: border-box;
+            line-height: 1.25em;
+
+            resize: none;
+
+            font-family: 'Inter';
+            font-size: $font_size_normal;
         }
 
         .boutons {
@@ -1906,40 +1958,79 @@ aside {
     }
     .hide_input_file{
         margin-top: 20px;
+        margin-bottom: 7px;
         @include hide_input_file();
+        display: flex;
+        justify-content: center;
+        width: 16.2em;
     }
     .ajout_banniere{
         margin-top: 20px;
     }
+    .delete_picture{
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        width: 17.45em;
+        padding: 6px;
+    }
 }
 
 .main_accueil{
-    @include contenu_centre_vertical;
+    @include contenu_centre_horizontal;
+    justify-content: center;
+    gap: 10%;
+
+    >div{
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            padding: 0;
+        }
+
+        li{
+            border: solid 1 black;
+            background-color: #9C9C9C;
+            border-radius: 5px;
+            padding: 1em;
+        }
+
+        a{
+            color: #000;
+            text-decoration: none;
+        }
+    }
+
     .liste_accueil_vendeur{
         display: grid;
         grid-template-columns: 2fr 2fr;
-        grid-gap: 50px;
+        grid-gap: 35px;
         .lien1, .lien2, .lien3, .lien4{
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
             font-weight: bold;
-            width: 17em;
-            height: 17em;
+            font-size: 150%;
+            width: 12em;
+            height: 12em;
             border-radius: $angle_petit;
-            background-color: #fedcd9;
+            color: black;
+            text-decoration: none;
+            background-color: $couleur_fond_produit;
             &:hover{
-                transform: ease scale(1.1);
+                transform: scale(1.02);
             }
-            a{
+            
+            &:visited{
                 color: black;
                 text-decoration: none;
-                &:visited{
-                    color: black;
-                    text-decoration: none;
-                }
+            }
+            img{
+                width: 4em;
+                height: 4em;
             }
         }
     }
 }
+

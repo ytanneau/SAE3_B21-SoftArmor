@@ -38,18 +38,6 @@
         renvoi();
     }
 
-    // Si on a cliqué sur Supprimer et que le produit en paramètre GET existe bien
-    if ($_POST != NULL && isset($rows)) {
-        try {
-            supprimer_produit_stock($id_produit);
-        } catch (PDOException $e) {
-            die('Suppression du produit ' . $id_produit . ' impossible : ' . $e->getMessage());
-        }
-
-        header("Location: ../");
-        exit();
-    }
-    
     $compteur = 0;
     $tab_promo = get_info_promotion($id_produit);
     foreach($tab_promo as $ligne){
@@ -61,11 +49,64 @@
     <head>
         <meta charset="utf-8">
         <title>Alizon - <?= htmlentities($rows['nom_stock'] ?? 'Produit')?></title>
-        <script src="confirmation.js"></script>
+        
         <?php include HOME_SITE . 'link_head.php' ?>
     </head>
     <body>
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
+        <div class="toolbar" id="produit">
+            <ul>
+                <li class="bouton_avis_vendeur_produit">
+                    <a href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                        <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="etoile d'avis">
+                        Voir les avis
+                    </a>
+                </li>
+                <li>
+                    <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                        <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        Modifier ce produit
+                    </a>
+                </li>
+                <li>
+                    <?php if($compteur === 2){ ?>
+                        <button class="bouton_vendeur_produit" disabled>
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
+                            Promotion/Reduction (2 promotions par produit)
+                        </button>
+                    <?php } else {?>
+                        <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
+                            Promotion/Reduction
+                        </a>
+                    <?php } ?>
+                </li>
+                    <?php if($tab_promo != null){
+                        foreach($tab_promo as $ligne){
+                            $id_promo = $ligne['id_promo'];
+                            $date = $ligne['date_debut'];
+                            $temp_date = explode("-",$date);  
+                            $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
+                    ?>
+                <li>
+                    <a 
+                         
+                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
+                        <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        Modifier la promotion du <?= htmlentities($new_date)?>
+                    </a>
+                </li>
+                    <?php }
+                        } 
+                    ?>
+                <li class="supprimer_produit">
+                    <a href="supprimer_produit.php?produit=<?=$id_produit?>" id="supprimer_produit">
+                        <img src="<?=HOME_SITE . "image/supprimer_blanc.svg"?>" alt="Supprimer">
+                        Supprimer le produit
+                    </a>
+                </li>
+            </ul>
+        </div>
         <main class="produit-vendeur">
             <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
             <?php if (!isset($supprime) || $supprime === false) {?>
@@ -107,43 +148,29 @@
                 </div>
                 <!-- div a mettre en dessous du tableau -->
                 <div>
+                    <h3>Description simple</h3>
                     <?= htmlentities($rows['description'] ?? '') ?>
                 </div>
                 <!-- A mettre encore en dessous -->
                 <div>
+                    <h3>Description detaillée</h3>
                     <?= htmlentities($rows['description_detaillee'] ?? '') ?>
                 </div>
-                <form id="supprimer" action="" method="post">
-                    <input type="hidden" name="supprimer" value="true">
-                    <input type="submit" value="Supprimer le produit">
-                </form>
-                
-                <a class="bouton_vendeur_produit" href="../stock/modifier_produit?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Modifier ce produit</a>
-                <?php if($compteur === 2){ ?>
-                    <button style="color:grey; width:510px;" class="bouton_vendeur_produit" disabled>Promotion/Reduction <br> (Maximum de deux promotions par vendeur)</button>
-                <?php } else {?>
-                    <a class="bouton_vendeur_produit" href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Promotion/Reduction</a>
-                <?php } ?>
-                <?php if($tab_promo != null){
-                    foreach($tab_promo as $ligne){
-                        $id_promo = $ligne['id_promo'];
-                        $date = $ligne['date_debut'];
-                        $temp_date = explode("-",$date);  
-                        $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
-                        ?>
-                    <a 
-                        class="bouton_vendeur_produit" 
-                        href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                        Modifier la promotion du <?= htmlentities($new_date)?>
-                    </a>
-                    <?php }} ?>
                 
                 <?php 
             } ?>
             
-            <a class="bouton_avis_vendeur_produit" href="../avis?produit=<?= htmlentities($_GET['produit'] ?? '')?>">Voir les avis</a>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
+
+        <script>
+            const btn_supp = document.getElementById("supprimer_produit")
+            btn_supp.addEventListener('click', (event) =>{
+                if(!confirm("Etes-vous sur de vouloir supprimer le produit ?")){
+                    event.preventDefault();
+                }
+            })
+        </script>
     </body>
 </html>
 

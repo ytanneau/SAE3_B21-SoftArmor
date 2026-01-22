@@ -1,5 +1,4 @@
 .config.php
-ressources/
 html/style.css.map
 html/style_mixin.css.map
 html/style_const.css.map
@@ -9,3 +8,4 @@ test*
 log*
 *.png
 *.log
+*.map

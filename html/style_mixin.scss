@@ -15,7 +15,7 @@
 @mixin header($background) {
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 11;
     padding: 0.5em 1em;
     background-color: $background;
     
@@ -209,7 +209,6 @@
 
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
-    background-color: $couleur_fond_produit;
     min-width: $taille;
     max-width: $taille;
     height: $taille;
