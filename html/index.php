@@ -119,14 +119,7 @@ if($tabPromotion != false){
 
     <main>
         <!--Produit Banniere au jour (possiblement a faire)-->
-        <?php if($pub){?>
-        <div class="banniere">
-            <div>
-                <h3>Mettre en avant</h3>
-                <p>Cette espace est dedié à la mise en avant d'un produit. Profitez-en au plus vite !!!</p>
-            </div>
-        </div>
-        <?php } else {?>
+        <?php if(!$pub){?>
         <div class="banniere">
             <a href="produit/?produit=<?=$tabPromotion['id_produit']?>">
                 <img src="<?=HOME_GIT . $url_banniere?>" alt="Banniere de promotion du produit">
