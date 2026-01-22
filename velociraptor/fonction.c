@@ -592,12 +592,14 @@ void info_colis(SESSION *data)
 
                 if (atoi(row[0]) == VALUE_ETAPE_FIN)
                 {
-                    printf("cause : %s\n", row[2]);
                     if (atoi(row[1]) == VALUE_MODE_REFU)
                     {
                         sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2], DATE, DELIMITER, row[3]);
                     }
-                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
+                    else
+                    {
+                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
+                    }
                 }
                 else
                 {
