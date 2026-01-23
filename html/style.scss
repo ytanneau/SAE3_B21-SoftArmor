@@ -376,6 +376,7 @@ ul#results {
         justify-content: center;
         gap: 20px;
 
+<<<<<<< Updated upstream
         h1 {
             margin-top: 0;
         }
@@ -424,6 +425,12 @@ ul#results {
                     margin-left: 0;
                     margin-right: 1em;
                 }
+=======
+        div:first-child{
+            img{
+                @include image_produit(10vw);
+                background-color: white;
+>>>>>>> Stashed changes
             }
         }
     }
