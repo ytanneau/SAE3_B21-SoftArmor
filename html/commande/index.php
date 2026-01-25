@@ -51,7 +51,7 @@ if (isset($_GET["commande"])) {
     </script>
 </head>
 
-<body class="commandes">
+<body class="liste">
     <?php 
         include HOME_SITE . "header.php";
         include HOME_SITE . "toolbar_categories.php";
