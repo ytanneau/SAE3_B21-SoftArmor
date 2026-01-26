@@ -1,4 +1,43 @@
 <?php
+/*
+Fichier générant les données dans la base de données
+
+Le fichier doit être executé dans le containeur web (avec 'docker exec web php ../peuplement/jeu_données.php' par exemple)
+
+Le fichier doit se trouver dans un dossier à côté de html (obligatoire)
+
+Le fichier doit (si possible) se trouver au dessus d'un dossier "ressources_temp",
+avec dedans un dossier "produit",
+avec dedans toutes les images nommées "id_image.png"
+avec id_image mise dans l'array du produit
+
+exemple d'archi :
+
+|
+|
+|- html
+|
+|- peuplement
+	|
+	|- jeu_données.php
+	|
+	|- ressources_temp
+		|
+		|- produit
+			|
+			|- 1.png
+			|
+			|- 2.png
+|
+|- .config.php
+|
+.
+.
+.
+
+*/
+
+
 define("HOME_GIT", '../');
 
 require __DIR__ . "/../.config.php";
@@ -1017,7 +1056,11 @@ function i_produit() {
 		$i1 = fopen(__DIR__ . "/ressources_temp/produit/{$p['num_image']}.png", 'r');
 		$i2 = fopen(__DIR__ . "/../html/ressources/produit/{$id_produit}_1.png", 'c');
 
-		while (fwrite($i2, fread($i1, 1000)));
+		if (($i1 ?? false) !== false && ($i2 ?? false) !== false) {
+			while (fwrite($i2, fread($i1, 1000)));
+		} else {
+			echo "Erreur de chargement de l'image du produit " . $p['nom_public'] . "\n";
+		}
 	}
 }
 
