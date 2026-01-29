@@ -43,7 +43,7 @@
 
         $qtachete = $quantite . ";" . $unite;
 
-        if(isset($_POST['sous_categorie']) && $_POST['sous_categorie'] == null){ $categorie = $_POST["sous_categorie"]; } 
+        if(isset($_POST['sous_categorie']) && $_POST['sous_categorie'] != null){ $categorie = $_POST["sous_categorie"]; } 
         else { $categorie = $_POST["categorie"]; }
 
         // redefinition des variables de type checkbox pour l'insertion MySql
