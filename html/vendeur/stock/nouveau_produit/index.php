@@ -61,9 +61,6 @@
                                 $descSimple,$descDetaille, $poidColis,
                                     $volumeColis, $categorie);
 
-        // mise en relation entre le produit et sa catégorie
-        add_produit_categorie($idProduit,$categorie);
-
         /**********************
         *   Image du produit  *
         ***********************/
