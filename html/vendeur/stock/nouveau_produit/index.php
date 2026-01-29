@@ -25,6 +25,8 @@
     $id_compte = $_SESSION['id_compte'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+        print_r($_POST);
+
         // recupération des données du formulaire
         $nomPrv = $_POST["nomPrv"];
         $nomPblc = $_POST["nomPblc"];
