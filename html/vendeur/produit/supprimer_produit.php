@@ -33,6 +33,6 @@
         die('Suppression du produit ' . $id_produit . ' impossible : ' . $e->getMessage());
     }
 
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 ?>
