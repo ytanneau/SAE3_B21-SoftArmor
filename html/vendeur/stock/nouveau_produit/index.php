@@ -62,7 +62,7 @@
                                     $volumeColis, $categorie);
 
         // mise en relation entre le produit et sa catégorie
-        // add_produit_categorie($idProduit,$categorie);
+        add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
@@ -300,6 +300,7 @@
                 })
                 
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
+                    console.log(selectSousCategorieAlimentaire.value)
                     if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
                         uniteLiquide.style.display = "none";
                         uniteVetement.style.display = "none";
@@ -318,6 +319,7 @@
                 })
 
                 categorie.addEventListener('change', () => {
+                    console.log(categorie.value)
                     if(categorie.value === "Alimentaire"){
                         pSousCategorie.style.display = "flex";
                     } 
