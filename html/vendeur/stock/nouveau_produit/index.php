@@ -25,7 +25,6 @@
     $id_compte = $_SESSION['id_compte'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        print_r($_POST);
 
         // recupération des données du formulaire
         $nomPrv = $_POST["nomPrv"];
@@ -44,7 +43,7 @@
 
         $qtachete = $quantite . ";" . $unite;
 
-        if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
+        if(isset($_POST['sous_categorie']) && $_POST['sous_categorie'] == null){ $categorie = $_POST["sous_categorie"]; } 
         else { $categorie = $_POST["categorie"]; }
 
         // redefinition des variables de type checkbox pour l'insertion MySql
