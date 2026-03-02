@@ -70,4 +70,16 @@
             throw $e;
         }   
     }
+
+    function get_coor_id_vendeur(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_compte,coor_x,coor_y FROM _vendeur");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
 ?>

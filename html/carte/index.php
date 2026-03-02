@@ -1,19 +1,22 @@
 <?php
-define('HOME_GIT', "../../" );
-define('HOME_SITE', "../" );
+    define('HOME_GIT', "../../" );
+    define('HOME_SITE', "../" );
 
-if (!isset($_SESSION)) {
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
 
-    if(isset($_SESSION['raison_sociale'])){
-        header('location: /vendeur/stock/');
+        if(isset($_SESSION['raison_sociale'])){
+            header('location: /vendeur/stock/');
+        }
     }
-}
 
-require_once (HOME_GIT . '.config.php');
-require_once (HOME_GIT . 'fonction_produit.php');
-require_once (HOME_GIT . 'fonction_categorie.php');
-require_once (HOME_GIT . 'fonction_global.php');
+    require_once (HOME_GIT . '.config.php');
+    require_once (HOME_GIT . 'fonction_produit.php');
+    require_once (HOME_GIT . 'fonction_categorie.php');
+    require_once (HOME_GIT . 'fonction_global.php');
+    require_once (HOME_GIT . 'fonction_vendeur.php');
+    
+    $tab_vendeurs = get_coor_id_vendeur();
 
 ?>
 
@@ -76,15 +79,17 @@ require_once (HOME_GIT . 'fonction_global.php');
         let illeetvilaine = document.getElementById("illeetvilaine")
         let morbihan = document.getElementById("morbihan")
 
+        let tab_vendeurs = <?= json_encode($tab_vendeurs)?>
+        console.log(tab_vendeurs)
+
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
-            console.log(cotedarmor.checked)
             cotedarmor.checked = false
-            finistere.value = 'off'
-            illeetvilaine.value = 'off'
-            morbihan.value = 'off'
-
+            finistere.checked = false
+            illeetvilaine.checked = false
+            morbihan.checked = false
         })
+
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
 
