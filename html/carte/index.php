@@ -9,6 +9,11 @@ if (!isset($_SESSION)) {
         header('location: /vendeur/stock/');
     }
 }
+
+require_once (HOME_GIT . '.config.php');
+require_once (HOME_GIT . 'fonction_produit.php');
+require_once (HOME_GIT . 'fonction_categorie.php');
+require_once (HOME_GIT . 'fonction_global.php');
 ?>
 
 <!DOCTYPE html>
