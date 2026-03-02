@@ -4,7 +4,7 @@
     <nav>
         <ul class="sidebar">
             <li onclick=closeSidebar()> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
-            <li><a href="carte/">Carte</a></li>
+            <li><a href="<?= HOME_SITE . 'carte/'?>">Carte</a></li>
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li> 
@@ -71,7 +71,7 @@
                 </form>
             </li>
             <li>
-                <a href="carte/">Carte</a>
+                <a href="<?= HOME_SITE . 'carte/'?>">Carte</a>
             </li>
             <li class="hide-on-mobile">
                 <a href="<?= HOME_SITE . 'panier/' ?>">

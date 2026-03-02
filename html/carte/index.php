@@ -14,6 +14,7 @@ require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_global.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -41,21 +42,27 @@ require_once (HOME_GIT . 'fonction_global.php');
                 <div id="tri_departement">
                     <h2>Departement</h2>
                     <div>
-                        <label for="finistere">Finistere - 29</label>
-                        <input type="checkbox" id="finistere">
-                    </div>
-                    <div>
                         <label for="cotedarmor">Cote d'armor - 22</label>
                         <input type="checkbox" id="cotedarmor">
                     </div>
                     <div>
-                        <label for="morbihan">Morbihan - 56</label>
-                        <input type="checkbox" id="morbihan">
+                        <label for="finistere">Finistere - 29</label>
+                        <input type="checkbox" id="finistere">
                     </div>
                     <div>
                         <label for="ileetvillaine">Ile et villaine - 35</label>
                         <input type="checkbox" id="ileetvillaine">
                     </div>
+                    <div>
+                        <label for="morbihan">Morbihan - 56</label>
+                        <input type="checkbox" id="morbihan">
+                    </div>
+                    <button></button>
+                    <button>Tout selectionner</button>
+                </div>
+                <div>
+                    <h2>Les vendeurs</h2>
+
                 </div>
             </section>
             <div id="map"></div>
@@ -63,12 +70,11 @@ require_once (HOME_GIT . 'fonction_global.php');
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
-        let map = L.map('map').setView([48.003,-2.192],8)
+        let map = L.map('map').setView([48.113,-2.642],8)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
-
     </script>
 </html>
