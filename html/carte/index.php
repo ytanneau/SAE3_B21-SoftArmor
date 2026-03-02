@@ -37,19 +37,27 @@ require_once (HOME_GIT . 'fonction_global.php');
             include HOME_SITE . "toolbar_categories.php";
         ?>
         <main>
-            <div>
-                <div>
+            <section>
+                <div id="tri_departement">
                     <h2>Departement</h2>
-                    <label for="finistere">Finistere - 29</label>
-                    <input type="checkbox" id="finistere">
-                    <label for="cotedarmor">Cote d'armor - 22</label>
-                    <input type="checkbox" id="cotedarmor">
-                    <label for="morbihan">Morbihan - 56</label>
-                    <input type="checkbox" id="morbihan">
-                    <label for="ileetvillaine">Ile et villaine - 35</label>
-                    <input type="checkbox" id="ileetvillaine">
+                    <div>
+                        <label for="finistere">Finistere - 29</label>
+                        <input type="checkbox" id="finistere">
+                    </div>
+                    <div>
+                        <label for="cotedarmor">Cote d'armor - 22</label>
+                        <input type="checkbox" id="cotedarmor">
+                    </div>
+                    <div>
+                        <label for="morbihan">Morbihan - 56</label>
+                        <input type="checkbox" id="morbihan">
+                    </div>
+                    <div>
+                        <label for="ileetvillaine">Ile et villaine - 35</label>
+                        <input type="checkbox" id="ileetvillaine">
+                    </div>
                 </div>
-            </div>
+            </section>
             <div id="map"></div>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
