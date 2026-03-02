@@ -78,8 +78,8 @@ require_once (HOME_GIT . 'fonction_global.php');
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
-            console.log(cotedarmor.value)
-            cotedarmor.value = 'off'
+            console.log(cotedarmor.checked)
+            cotedarmor.checked = false
             finistere.value = 'off'
             illeetvilaine.value = 'off'
             morbihan.value = 'off'
