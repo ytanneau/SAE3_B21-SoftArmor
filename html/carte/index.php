@@ -37,12 +37,25 @@ require_once (HOME_GIT . 'fonction_global.php');
             include HOME_SITE . "toolbar_categories.php";
         ?>
         <main>
+            <div>
+                <div>
+                    <h2>Departement</h2>
+                    <label for="finistere">Finistere - 29</label>
+                    <input type="checkbox" id="finistere">
+                    <label for="cotedarmor">Cote d'armor - 22</label>
+                    <input type="checkbox" id="cotedarmor">
+                    <label for="morbihan">Morbihan - 56</label>
+                    <input type="checkbox" id="morbihan">
+                    <label for="ileetvillaine">Ile et villaine - 35</label>
+                    <input type="checkbox" id="ileetvillaine">
+                </div>
+            </div>
             <div id="map"></div>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
-        let map = L.map('map').setView([48.003,-2.192],7)
+        let map = L.map('map').setView([48.003,-2.192],8)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
