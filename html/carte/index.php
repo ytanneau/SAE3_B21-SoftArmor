@@ -95,8 +95,8 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
 
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>
-        const tab_adresse = <?= json_encode($tab_adresse)?>
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        const tab_adresse = <?= json_encode($tab_adresse)?>;
 
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
