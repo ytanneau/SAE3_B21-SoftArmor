@@ -199,7 +199,14 @@ if($tabPromotion != false){
                 echo "setCaroussel('$cat');\n";
             }
         }
-    ?>
+        ?>
+        // map
+        let map = L.map('map').setView([48.003,-2.192],8)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
     </script>
 
     <?php include HOME_SITE . "footer.php" ?>
