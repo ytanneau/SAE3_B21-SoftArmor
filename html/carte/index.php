@@ -101,7 +101,10 @@
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
             for(let info in vendeur){
+                console.log(info)
+                console.log(vendeur[info])
                 if(info != 'id_compte' && vendeur[info] != null){
+
                     tab_coor.push(vendeur[info])
                 }
                 console.log(tab_coor)
