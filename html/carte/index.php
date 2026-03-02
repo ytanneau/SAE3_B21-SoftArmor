@@ -79,10 +79,10 @@ require_once (HOME_GIT . 'fonction_global.php');
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             console.log(cotedarmor.value)
-            cotedarmor.value = 0
-            finistere.value = 0
-            illeetvilaine.value = 0
-            morbihan.value = 0
+            cotedarmor.value = 'off'
+            finistere.value = 'off'
+            illeetvilaine.value = 'off'
+            morbihan.value = 'off'
 
         })
         // Initialisation de la carte
