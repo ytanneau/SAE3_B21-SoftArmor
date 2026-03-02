@@ -39,6 +39,7 @@ require_once (HOME_GIT . 'fonction_global.php');
         ?>
         <main id="main_map">
             <section>
+                <button id="btn_reset_filter">Supprimer les filtres</button>
                 <div id="tri_departement">
                     <h2>Departement</h2>
                     <div>
@@ -50,15 +51,13 @@ require_once (HOME_GIT . 'fonction_global.php');
                         <input type="checkbox" id="finistere">
                     </div>
                     <div>
-                        <label for="ileetvillaine">Ile et villaine - 35</label>
-                        <input type="checkbox" id="ileetvillaine">
+                        <label for="illeetvilaine">Ille et vilaine - 35</label>
+                        <input type="checkbox" id="illeetvilaine">
                     </div>
                     <div>
                         <label for="morbihan">Morbihan - 56</label>
                         <input type="checkbox" id="morbihan">
                     </div>
-                    <button></button>
-                    <button>Tout selectionner</button>
                 </div>
                 <div>
                     <h2>Les vendeurs</h2>
@@ -70,6 +69,23 @@ require_once (HOME_GIT . 'fonction_global.php');
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        // Filtres 
+        let btn_reset_filter = document.getElementById("btn_reset_filter")
+        let cotedarmor = document.getElementById("cotedarmor")
+        let finistere = document.getElementById("finistere")
+        let illeetvilaine = document.getElementById("illeetvilaine")
+        let morbihan = document.getElementById("morbihan")
+
+        btn_reset_filter.addEventListener('click', (e) => {
+            e.preventDefault()
+
+            cotedarmor.value = 0
+            finistere.value = 0
+            illeetvilaine.value = 0
+            morbihan.value = 0
+
+        })
+        // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
