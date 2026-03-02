@@ -102,10 +102,11 @@
             let tab_coor = []
             for(let info in vendeur){
                 if(info != 'id_compte' && vendeur[info] != null){
-                    tab_coor.push(vendeur[info]);
+                    tab_coor.push(vendeur[info])
                 }
+                console.log(tab_coor)
             }
-            L.marker(tab_coor).addTo(map)
+            let marker = L.marker(tab_coor).addTo(map)
         });
     </script>
 </html>
