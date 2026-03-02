@@ -368,9 +368,11 @@ ul#results {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
     main{
         flex: 1;
     }
+    
     article{
         @include contenu_centre_horizontal();
         justify-content: center;
@@ -424,6 +426,13 @@ ul#results {
                     margin-left: 0;
                     margin-right: 1em;
                 }
+            }
+        }
+
+        div:first-child{
+            img{
+                @include image_produit(10vw);
+                background-color: white;
             }
         }
     }
@@ -1209,6 +1218,7 @@ h3 {
         }
     }
 }
+
 
 // la partie à droite d'une page (ex. avec récap dans page panier)
 /*

@@ -10,7 +10,7 @@
 sudo apt install libmariadb3 libmariadb-dev 
 ```
 
-### Un fichier .env avec les données pour la bdd
+### Un fichier .env avec les données pour la base de données
 
 Exemple :
 ```text
@@ -21,7 +21,7 @@ BDD_NAME=nom
 BDD_PORT=3306
 ```
 
-### Un fichier avec les login et mode passe
+### Un fichier avec les login et mots de passe
 
 Exemple (mdp en MD5)
 ```text
@@ -32,11 +32,11 @@ alizon=098f6bcd4621du73cade4e832627b4f6
 
 ### Un fichier image
 
-Un fichier nommé ```image.png``` qui sera envoier si la photo du colis est demander.
+Un fichier nommé ```image.png``` qui sera envoyé si la photo du colis est demandée.
 
 ---
 
-## Compilation, Execution et Verification du démarage
+## Compilation, exécution et vérification du démarage
 
 
 ### Compilation
@@ -47,12 +47,12 @@ gcc raptor.c fonction.c -o prog `mariadb_config --cflags --libs`
 
 ### Execution
 
-Avec les paramètre par defaut :
+Avec les paramètres par défaut :
 ```
 ./prog &
 ```
 
-Avec les paramètre personaliser :
+Avec les paramètres personnalisés :
 ```
 ./prog -a compte.txt -n 50 -p 9500 &
 ```
@@ -62,14 +62,14 @@ Avec les paramètre personaliser :
 - p : port du socket, defaut = 9000
 
 
-### Verification du démarage
+### Vérification du démarage
 
-Pour ouvire les log de l'inisalisation :
+Pour ouvrir les log de l'initialisation :
 ```
 less init.log
 ```
 
-Si la dernière ligne est ``` [RAPTOR] READY ``` alors votre serveur est près, sinon voici un exemple de liste des élément attendue dans le init.log.
+Si la dernière ligne est ``` [RAPTOR] READY ```, alors le serveur est prêt. Sinon, voici un exemple de liste des éléments attendus dans le init.log :
 ```
 [PARAMETRE] ... // si il y a des paramètre
 [RAPTOR] START // tout les paramère son bien passsé
