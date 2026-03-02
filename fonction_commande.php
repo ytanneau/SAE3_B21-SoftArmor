@@ -199,6 +199,8 @@ function connexion_socket($ip,$port){
 }
 
 function deconnexion_socket($fd){
-    fwrite($fd,"-1");
-    fclose($fd);
+    if($fd !== false){
+        fwrite($fd,"-1");
+        fclose($fd);
+    }
 }

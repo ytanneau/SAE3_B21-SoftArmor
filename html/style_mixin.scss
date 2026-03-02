@@ -211,6 +211,8 @@
     object-fit: contain;
     min-width: $taille;
     max-width: $taille;
+    background-color: $couleur_fond_produit;
+    width: $taille;
     height: $taille;
     border-radius: $angle;
 }

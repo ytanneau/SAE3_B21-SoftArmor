@@ -25,6 +25,7 @@
     $id_compte = $_SESSION['id_compte'];
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
+
         // recupération des données du formulaire
         $nomPrv = $_POST["nomPrv"];
         $nomPblc = $_POST["nomPblc"];
@@ -42,7 +43,7 @@
 
         $qtachete = $quantite . ";" . $unite;
 
-        if(isset($_POST['sous_categorie'])){ $categorie = $_POST["sous_categorie"]; } 
+        if(isset($_POST['sous_categorie']) && $_POST['sous_categorie'] != null){ $categorie = $_POST["sous_categorie"]; } 
         else { $categorie = $_POST["categorie"]; }
 
         // redefinition des variables de type checkbox pour l'insertion MySql
@@ -60,9 +61,6 @@
                                 $qtachete, $qtStock,$seuilAlerte,
                                 $descSimple,$descDetaille, $poidColis,
                                     $volumeColis, $categorie);
-
-        // mise en relation entre le produit et sa catégorie
-        // add_produit_categorie($idProduit,$categorie);
 
         /**********************
         *   Image du produit  *
@@ -300,6 +298,7 @@
                 })
                 
                 selectSousCategorieAlimentaire.addEventListener('change', () => {
+                    console.log(selectSousCategorieAlimentaire.value)
                     if(selectSousCategorieAlimentaire.value === "Sucré" || selectSousCategorieAlimentaire.value === "Salé"){
                         uniteLiquide.style.display = "none";
                         uniteVetement.style.display = "none";
@@ -318,6 +317,7 @@
                 })
 
                 categorie.addEventListener('change', () => {
+                    console.log(categorie.value)
                     if(categorie.value === "Alimentaire"){
                         pSousCategorie.style.display = "flex";
                     } 

@@ -88,12 +88,13 @@ void affiche_compte(COMPTE* c, FILE *logI)
     }
 }
 
+// initalisation de la bdd
 void init_bdd(MYSQL *conn, FILE *logI)
 {   
     char message[TAILLE_GRAND];
     if (conn == NULL) 
     { 
-        log_init(logI, "[FATAL] logI MYSQL"); 
+        log_init(logI, "[FATAL] INIT MYSQL"); 
         exit(EXIT_FAILURE); 
     }
 
@@ -595,7 +596,10 @@ void info_colis(SESSION *data)
                     {
                         sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, row[2], DATE, DELIMITER, row[3]);
                     }
-                    sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
+                    else
+                    {
+                        sprintf(message, "%s%s%s\n%s%s%s\n%s%s%s\n%s%s%s", ETAPE, DELIMITER, row[0], MODE, DELIMITER, row[1], CAUSE, DELIMITER, VIDE, DATE, DELIMITER, row[3]);
+                    }
                 }
                 else
                 {
@@ -765,7 +769,6 @@ void envoier_photo(SESSION *data, char *fichier)
     bytes_read = fread(buffer, 1, sizeof(buffer), file);
     while (bytes_read != 0)
     {
-        printf("read = %ld\n",bytes_read);
         encode_photo(buffer, code ,bytes_read);
 
         if (write(data->cnx, code, bytes_read*8) == -1)
