@@ -4,7 +4,7 @@
     <nav>
         <ul class="sidebar">
             <li onclick=closeSidebar()> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
-
+            <li><a href="carte/">Carte</a></li>
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li> 
