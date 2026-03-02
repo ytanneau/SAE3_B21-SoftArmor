@@ -3338,8 +3338,8 @@ aside .achat:hover {
   flex-direction: row;
 }
 #main_map #map {
-  height: 800px;
-  width: 650px;
+  height: 650px;
+  width: 1000px;
 }
 #main_map #tri_departement {
   display: flex;
