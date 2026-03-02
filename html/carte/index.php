@@ -97,7 +97,7 @@
 
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
-
+        console.log(tab_adresse)
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
             let popup = L.popup()
@@ -114,6 +114,7 @@
                                 }
                             } else if(adresse_valide){
                                 adresse = adresse + objet_adresse[cle]
+                                console.log(adresse)
                             }  
                         }
                     });
