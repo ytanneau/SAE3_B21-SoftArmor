@@ -2022,12 +2022,15 @@ aside {
     }
 }
 
-
-#map{
-    height: 800px;
-    width: 650px;
-}
-#tri_departement{
+#main_map{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    #map{
+        height: 800px;
+        width: 650px;
+    }
+    #tri_departement{
+        display: flex;
+        flex-direction: column;
+    }
 }

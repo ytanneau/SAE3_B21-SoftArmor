@@ -3333,12 +3333,15 @@ aside .achat:hover {
   height: 4em;
 }
 
-#map {
+#main_map {
+  display: flex;
+  flex-direction: row;
+}
+#main_map #map {
   height: 800px;
   width: 650px;
 }
-
-#tri_departement {
+#main_map #tri_departement {
   display: flex;
   flex-direction: column;
 }/*# sourceMappingURL=style.css.map */
