@@ -79,9 +79,6 @@
         let illeetvilaine = document.getElementById("illeetvilaine")
         let morbihan = document.getElementById("morbihan")
 
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-        console.log(tab_vendeurs)
-
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             cotedarmor.checked = false
@@ -97,5 +94,18 @@
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
+
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        console.log(tab_vendeurs)
+
+        tab_vendeurs.forEach(vendeur => {
+            let tab_coor = []
+            for(let info in vendeur){
+                if(info != 'id_compte' && vendeur[info] != null){
+                    tab_coor.push(vendeur[info]);
+                }
+            }
+            L.marker(tab_coor).addTo(map)
+        });
     </script>
 </html>
