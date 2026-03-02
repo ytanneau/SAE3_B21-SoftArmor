@@ -62,8 +62,8 @@
                         <input type="checkbox" id="morbihan">
                     </div>
                 </div>
-                <div>
-                    <h2>Les vendeurs</h2>
+                <div id="liste_vendeur">
+                    <h2 id="init">Les vendeurs</h2>
 
                 </div>
             </section>
@@ -72,12 +72,15 @@
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        const tab_adresse = <?= json_encode($tab_adresse)?>;
+
         // Filtres 
-        let btn_reset_filter = document.getElementById("btn_reset_filter")
-        let cotedarmor = document.getElementById("cotedarmor")
-        let finistere = document.getElementById("finistere")
-        let illeetvilaine = document.getElementById("illeetvilaine")
-        let morbihan = document.getElementById("morbihan")
+        const btn_reset_filter = document.getElementById("btn_reset_filter")
+        const cotedarmor = document.getElementById("cotedarmor")
+        const finistere = document.getElementById("finistere")
+        const illeetvilaine = document.getElementById("illeetvilaine")
+        const morbihan = document.getElementById("morbihan")
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
@@ -87,6 +90,26 @@
             morbihan.checked = false
         })
 
+        const liste_vendeur = document.getElementById("liste_vendeur")
+        const init = document.getElementById("init")
+
+        function afficher_listes_vendeur(){
+            tab_vendeurs.forEach(vendeur => {
+                let div = document.createElement("div")
+                let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
+                for(let cle in vendeur){
+                    if(cle == 'raison_sociale'){
+                        label.innerHTML = vendeur[cle]
+                    }
+                }
+                div.appendChild(label)
+                div.appendChild(input)
+                liste_vendeur.insertBefore(div, init)
+            });
+        }
+
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
 
@@ -95,10 +118,6 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
 
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-        const tab_adresse = <?= json_encode($tab_adresse)?>;
-        console.log(tab_vendeurs)
-        console.log(tab_adresse)
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
             let popup = L.popup()
