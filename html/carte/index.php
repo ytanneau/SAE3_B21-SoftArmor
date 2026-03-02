@@ -97,6 +97,7 @@
 
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
+        console.log(tab_vendeurs)
         console.log(tab_adresse)
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
