@@ -79,7 +79,7 @@
         let illeetvilaine = document.getElementById("illeetvilaine")
         let morbihan = document.getElementById("morbihan")
 
-        let tab_vendeurs = <?= json_encode($tab_vendeurs)?>
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         console.log(tab_vendeurs)
 
         btn_reset_filter.addEventListener('click', (e) => {
