@@ -90,6 +90,7 @@
             morbihan.checked = false
         })
 
+    
         const liste_vendeur = document.getElementById("liste_vendeur")
         const init = document.getElementById("init")
 
