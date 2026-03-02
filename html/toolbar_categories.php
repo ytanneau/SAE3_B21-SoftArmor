@@ -5,6 +5,7 @@
 
 <div class="toolbar" id="categories">
     <ul>
+        <li><a href="carte/">Carte</a></li>
         <?php foreach ($categories as $cat) { ?>
             <li>
                 <?php
