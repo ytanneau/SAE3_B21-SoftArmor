@@ -110,6 +110,13 @@ if($tabPromotion != false){
     <meta name="Page accueil" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . "link_head.php"; ?>
     <title>Alizon - Accueil</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 </head>
 <body class="accueil">
     <?php 
@@ -166,6 +173,7 @@ if($tabPromotion != false){
                 <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
             </nav>  
             -->
+            <div id="map"></div>
     </main>
 
     <footer>
@@ -191,7 +199,14 @@ if($tabPromotion != false){
                 echo "setCaroussel('$cat');\n";
             }
         }
-    ?>
+        ?>
+        // map
+        let map = L.map('map').setView([48.003,-2.192],8)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
     </script>
 
     <?php include HOME_SITE . "footer.php" ?>
