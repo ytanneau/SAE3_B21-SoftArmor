@@ -36,7 +36,7 @@ require_once (HOME_GIT . 'fonction_global.php');
             include HOME_SITE . "header.php";
             include HOME_SITE . "toolbar_categories.php";
         ?>
-        <main>
+        <main id="main_map">
             <section>
                 <div id="tri_departement">
                     <h2>Departement</h2>
