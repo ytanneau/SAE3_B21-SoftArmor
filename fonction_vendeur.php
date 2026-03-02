@@ -75,9 +75,21 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_compte,coor_x,coor_y FROM _vendeur");
+            $stmt = $pdo->prepare("SELECT id_compte,coor_x,coor_y,raison_sociale FROM _vendeur");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_adresse(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _adresse");
+            $stmt->execute();
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
             throw $e;
         }

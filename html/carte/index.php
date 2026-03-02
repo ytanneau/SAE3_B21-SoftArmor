@@ -17,7 +17,7 @@
     require_once (HOME_GIT . 'fonction_vendeur.php');
     
     $tab_vendeurs = get_coor_id_vendeur();
-
+    $tab_adresse = get_adresse();
 ?>
 
 <!DOCTYPE html>
@@ -95,18 +95,38 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
 
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-        console.log(tab_vendeurs)
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>:
+        const tab_adresse = <?= json_encode($tab_adresse)?>
 
         tab_vendeurs.forEach(vendeur => {
             let tab_coor = []
+            let popup = L.popup()
+            let adresse = ""
+            let raison_sociale = ""
             for(let info in vendeur){
-                if(info != 'id_compte' && vendeur[info] != null){
+                if(info == 'id_adresse'){
+                    tab_adresse.forEach(objet_adresse => {
+                        let adresse_valide = false
+                        for(let cle in objet_adresse){
+                            if(cle == 'id_adresse'){
+                                if(vendeur[info] == objet_adresse[cle]){
+                                    adresse_valide = true
+                                }
+                            } else if(adresse_valide){
+                                adresse = adresse + objet_adresse[cle]
+                            }  
+                        }
+                    });
+                }
+                if(info != 'id_compte' && info != 'raison_sociale' && vendeur[info] != null){
                     tab_coor.push(vendeur[info])
+                } else if (info == 'raison_sociale'){
+                    raison_sociale = vendeur[raison_sociale]
                 }
             }
             if(tab_coor.length == 2){
                 let marker = L.marker(tab_coor).addTo(map)
+                marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
             }
         });
     </script>
