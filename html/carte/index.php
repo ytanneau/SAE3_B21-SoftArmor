@@ -118,10 +118,10 @@
                         }
                     });
                 }
-                if(info != 'id_compte' && info != 'raison_sociale' && vendeur[info] != null){
+                if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
                     tab_coor.push(vendeur[info])
                 } else if (info == 'raison_sociale'){
-                    raison_sociale = vendeur[raison_sociale]
+                    raison_sociale = vendeur[info]
                 }
             }
             if(tab_coor.length == 2){
