@@ -75,7 +75,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_compte,coor_x,coor_y,raison_sociale FROM _vendeur");
+            $stmt = $pdo->prepare("SELECT id_compte,id_adresse,coor_x,coor_y,raison_sociale FROM _vendeur");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
