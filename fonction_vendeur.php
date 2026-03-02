@@ -70,4 +70,28 @@
             throw $e;
         }   
     }
+
+    function get_coor_id_vendeur(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_compte,id_adresse,coor_x,coor_y,raison_sociale FROM _vendeur");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_adresse(){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _adresse");
+            $stmt->execute();
+            return $stmt->fetchall(PDO::FETCH_ASSOC);
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
 ?>

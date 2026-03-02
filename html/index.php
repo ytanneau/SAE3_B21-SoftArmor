@@ -191,7 +191,7 @@ if($tabPromotion != false){
                 echo "setCaroussel('$cat');\n";
             }
         }
-    ?>
+        ?>
     </script>
 
     <?php include HOME_SITE . "footer.php" ?>
