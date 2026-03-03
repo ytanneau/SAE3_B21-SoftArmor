@@ -1269,11 +1269,11 @@ ul#results > li > a > h3 {
 .infos .liste_avis div:first-child img {
   -o-object-fit: contain;
      object-fit: contain;
-  min-width: 10vw;
-  max-width: 10vw;
+  min-width: 3vw;
+  max-width: 3vw;
   background-color: #f3f1fb;
-  width: 10vw;
-  height: 10vw;
+  width: 3vw;
+  height: 3vw;
   border-radius: 5px;
   background-color: white;
 }
