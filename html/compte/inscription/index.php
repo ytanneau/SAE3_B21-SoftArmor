@@ -20,6 +20,11 @@
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc'], $_POST['question'], $_POST['reponse']);
+
+            if (empty($erreurs)) {
+                // L'inscription est réussie, donc connexion directe
+                connect_compte($_POST['email'], $_POST['mdp'], "client", "");
+            }
         } else {
             $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -55,8 +60,8 @@
 <body id="inscription_client">
     <main>
         <?php if (isset($erreurs) && $erreurs == []) { ?>
-            <h1>Félicitations, vous avez créé votre compte</h1>
-            <p>Prochaine étape : <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
+            <h1>Votre compte a été créé</h1>
+            <p>Voulez-vous activer la double authentification ? <a href="../authentificator">Cliquez ici</a></p>
 
         <?php } else if (isset($erreurs['fatal'])) { ?>
             <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
