@@ -144,19 +144,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         <h2>Departement</h2>
                         <div>
                             <label for="cotedarmor">Cote d'armor - 22</label>
-                            <input type="checkbox" id="cotedarmor">
+                            <input type="checkbox" id="cotedarmor" value="departement">
                         </div>
                         <div>
                             <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere">
+                            <input type="checkbox" id="finistere" value="departement">
                         </div>
                         <div>
                             <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine">
+                            <input type="checkbox" id="illeetvilaine" value="departement">
                         </div>
                         <div>
                             <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan">
+                            <input type="checkbox" id="morbihan" value="departement">
                         </div>
                     </div>
                     <div id="liste_vendeur">
@@ -241,12 +241,15 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
         const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
-
+        const departement = document.querySelectorAll('input[value = "departement"]')
         console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             input_checkbox.forEach(input => {
+                input.checked = false
+            })
+            departement.forEach(input => {
                 input.checked = false
             })
         }) 
