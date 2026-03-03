@@ -3407,15 +3407,49 @@ aside .achat:hover {
   height: 4em;
 }
 
-#main_map {
+#div_map {
   display: flex;
   flex-direction: row;
 }
-#main_map #map {
+#div_map #map {
   height: 650px;
   width: 1000px;
 }
-#main_map #tri_departement {
+#div_map #tri_departement {
   display: flex;
   flex-direction: column;
+}
+
+#ombre {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+}
+
+/* Panneau */
+#panneauCarte {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 100vh;
+  background: white;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+/* Quand actif */
+#panneauCarte.active {
+  transform: translateX(0);
+}
+
+#ombre.active {
+  opacity: 1;
+  visibility: visible;
 }/*# sourceMappingURL=style.css.map */
