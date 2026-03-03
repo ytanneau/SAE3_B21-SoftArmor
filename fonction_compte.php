@@ -787,3 +787,33 @@
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
+    
+
+    function activer_2FA($id_compte, $clef) {
+        global $pdo;
+        
+        $requete = $pdo->prepare('UPDATE _compte SET clef = :clef WHERE id_compte = :id_compte');
+        $requete->bindValue(":clef", $clef, PDO::PARAM_INT);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->execute();
+    }
+
+    function desactiver_2FA($id_compte) {
+        global $pdo;
+
+        $requete = $pdo->prepare("UPDATE _compte SET clef = NULL WHERE id_compte = :id_compte");
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
+        $requete->execute();
+    }
+
+    // fonction qui teste si l'utilisateur a activé la double authentification
+    // renvoie true s'il l'a activée
+    function a_2FA($id_compte) {
+        global $pdo;
+
+        $requete = $pdo->prepare("SELECT clef FROM _compte WHERE id_compte = :id_compte AND clef IS NOT NULL");
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->rowCount() == 1;
+    }
