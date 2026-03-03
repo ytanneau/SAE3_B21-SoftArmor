@@ -191,6 +191,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 ombre.classList.add("active");
                 document.body.style.overflow = "hidden"; // bloque scroll
                 document.body.style.paddingRight = "15px";
+                document.header.style.paddingRight = "15px";
                 setTimeout(() => {
                     map.invalidateSize();
                 }, 300);
