@@ -3424,6 +3424,7 @@ aside .achat:hover {
 #ombre {
   position: fixed;
   inset: 0;
+  width: 16%;
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
@@ -3433,10 +3434,11 @@ aside .achat:hover {
 #ombre .fermerCarteDroite {
   height: 100px;
   width: 30px;
-  position: relative;
+  position: absolute;
   right: 0;
-  top: 50%;
+  top: 45%;
   background-color: white;
+  border-radius: 5px 0px 0px 5px;
   border: none;
   font-size: xx-large;
 }
@@ -3446,10 +3448,10 @@ aside .achat:hover {
   width: 30px;
   position: fixed;
   right: 0;
-  top: 50%;
+  top: 45%;
   background-color: white;
   border: none;
-  box-shadow: grey -5px 0px 10px;
+  box-shadow: grey -1px 0px 8px;
   border-radius: 5px 0px 0px 5px;
   font-size: xx-large;
 }
@@ -3476,6 +3478,9 @@ aside .achat:hover {
 #panneauCarte .enteteCarte #btnFermerCarte {
   height: -moz-fit-content;
   height: fit-content;
+  background-color: white;
+  font-size: xx-large;
+  border: none;
 }
 
 /* Quand actif */

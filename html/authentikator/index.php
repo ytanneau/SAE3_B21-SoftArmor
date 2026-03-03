@@ -51,8 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Rediriger par défaut à l'accueil client ou vendeur
         header('Location: ' . $accueil);
-    } else {
-        $erreur 
     }
 }
 

@@ -190,6 +190,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 carte.classList.add("active");
                 ombre.classList.add("active");
                 document.body.style.overflow = "hidden"; // bloque scroll
+                document.body.style.paddingRight = "15px";
+                document.header.style.paddingRight = "15px";
                 setTimeout(() => {
                     map.invalidateSize();
                 }, 300);
@@ -299,10 +301,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                seller: [
+                sellers: {
                     vendeur1 : "29",
                     vendeur2 : "30",
-                ]
+                }
             },
             sort: {
                 field: "nom_public", 
@@ -579,6 +581,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
+            console.log(searchState);
             fetch('/recherche/produits.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
