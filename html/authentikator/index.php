@@ -33,10 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             require "fonction_panier.php";
             transferer_panier_visiteur_compte($_SESSION['id_compte']);
         }
+
+        header('location: ' . $accueil);
     }
 }
 
-// Redirections
+//
+//
+// Redirections CLIENT (MANQUE VENDEUR)
+//
+//
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['produit'])) {
@@ -49,7 +55,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         header('Location: ' . HOME_SITE . $page);
     } else {
         // Sinon, retour accueil
-        header('location: ' . HOME_SITE);
+        header('location: ' . $accueil);
     }
     exit;
 }
@@ -64,36 +70,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <img src="<?=$grCodeUri?>">
-    <p>Clef: <?=$otp->getSecret()?></p>
-
-    <label for="codePIN">Entrez le code PIN pour activer la double authentification</label>
-    <input type="number" name="codePIN" id="codePIN">
-    <p id="erreur" class="erreur"></p>
-    <button id="valider">Valider</button>
+    <form action="" method="post">
+        <label for="codePIN">Code PIN</label>
+        <input type="number" id="codePIN" name="codePIN">
+    </form>
 </body>
-<script>
-    let nbTentative = 10;
-    document.getElementById("valider").onclick = function() {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            if (this.responseText == '0') {
-                nbTentative -= 1;
-                document.getElementById("erreur").innerHTML = "Code PIN incorrecte, " + nbTentative + " tentatives restantes";
-
-            } else {
-                document.getElementById("erreur").innerHTML = "Code PIN correcte";
-            }
-
-            if (nbTentative == 0) {
-                document.getElementById("erreur").innerHTML = "Erreur, ";
-            }
-        }
-
-        if (nbTentative > 0) {
-            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("codePIN").value + "&clef=<?=$otp->getSecret()?>");
-            xmlhttp.send();
-        }
-    };
-</script>
 </html>

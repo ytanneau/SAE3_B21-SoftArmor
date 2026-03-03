@@ -11,6 +11,7 @@ if (!isset($_SESSION)) {
 // Après envoi du formulaire, vérification des informations et connexion si valide
 if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
+    require_once (HOME_GIT . 'fonction_2FA.php');
     $resultat = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 
     // Toutes les informations sont correctes
