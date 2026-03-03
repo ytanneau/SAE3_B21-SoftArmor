@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <div id="liste_vendeur">
-                    <h2 id="init">Les vendeurs</h2>
-
+                    <h2>Les vendeurs</h2>
+                    <div id="init"></div>
                 </div>
             </section>
             <div id="map"></div>
