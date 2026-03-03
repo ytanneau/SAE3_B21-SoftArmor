@@ -286,7 +286,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                seller: [
+                sellers: [
                     vendeur1 : "29",
                     vendeur2 : "30",
                 ]
