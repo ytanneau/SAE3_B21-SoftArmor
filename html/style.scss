@@ -446,7 +446,7 @@ ul#results {
 
         div:first-child{
             img{
-                @include image_produit(10vw);
+                @include image_produit(2vw);
                 background-color: white;
             }
         }
