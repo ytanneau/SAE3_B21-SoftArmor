@@ -61,7 +61,7 @@
     }
 
     // if(!empty($seller)){
-        $requete .= " AND p.id_vendeur = 29";
+        $requete .= " AND p.id_vendeur = 29 OR p.id_vendeur = 30";
     // }
     // $params[':id_vendeur'] = "31";
     $sortableFields = [
