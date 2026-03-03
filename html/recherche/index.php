@@ -291,6 +291,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 field: "nom_public", 
                 order: "asc"
             }
+            seller: "31"
         };
 
         // Est-on déjà sur la page de recherche ?

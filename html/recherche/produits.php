@@ -17,11 +17,10 @@
     $prixmin    = $filters['price']['min'] ?? null;
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
-    $reduc       = $filters['reduc'] ?? null;
-
+    $reduc      = $filters['reduc'] ?? null;    
     // Construire la requête SQL à partir de la recherche
     $requete = 
-        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction
+        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
         FROM produit_en_ligne p
         INNER JOIN _image i
         ON p.id_image_principale = i.id_image
@@ -60,13 +59,18 @@
         $requete .= " AND  (prix_actuel * (1 + tva / 100)) <= :prixmax";
         $params[':prixmax'] = $prixmax;
     }
-    
+
+    if(!empty($seller)){
+        $requete .= " AND p.id_vendeur = :id_vendeur";
+    }
+    $params[':id_vendeur'] = $seller;
     $sortableFields = [
         'nom_public' => 'nom_public',
         'note_moy'   => 'note_moy',
         'triPrix'    => 'prix_actuel',
         'triPrixCroi'=> 'prix_actuel',
-        'triReduc'   => 'reduction'
+        'triReduc'   => 'reduction',
+        'id_vendeur' => 'id_vendeur'
     ];
 
     $fieldKey = $sort['field'] ?? 'nom_public';
