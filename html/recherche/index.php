@@ -227,6 +227,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
+                        input.value = "vendeur_check"
                     }
                 }
                 div.appendChild(label)
@@ -239,7 +240,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+        const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
 
         console.log(input_checkbox)
 

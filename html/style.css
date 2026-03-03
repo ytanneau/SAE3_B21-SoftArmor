@@ -2245,7 +2245,7 @@ aside .achat:hover {
   margin-top: 0;
 }
 
-.anonymisation-client main form input {
+.anonymisation-client main form button {
   border: none;
   border-radius: 50px;
   padding: 0.5em 2em;
