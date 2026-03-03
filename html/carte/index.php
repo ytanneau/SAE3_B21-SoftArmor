@@ -40,7 +40,7 @@
             include HOME_SITE . "header.php";
             include HOME_SITE . "toolbar_categories.php";
         ?>
-        <main id="main_map">
+        <main id="div_map">
             <section>
                 <button id="btn_reset_filter">Supprimer les filtres</button>
                 <div id="tri_departement">
