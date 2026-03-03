@@ -3451,7 +3451,7 @@ aside .achat:hover {
   top: 45%;
   background-color: white;
   border: none;
-  box-shadow: grey -5px 0px 10px;
+  box-shadow: grey -1px 0px 8px;
   border-radius: 5px 0px 0px 5px;
   font-size: xx-large;
 }
