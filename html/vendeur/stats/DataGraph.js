@@ -178,16 +178,13 @@ export default class DataGraph {
                 now.setTime(now.setDate(now.getDate()-1));
             };
         }
-        now.setDate(0);
+        now.setDate(1);
         if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
                 //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_MOIS * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
                 now.setTime(now.setMonth(now.getMonth()-1));
             };
-        }
-        else {
-            console.error("Fonc (createTemplete) parametre type");
         }
         return res;
     }
@@ -231,7 +228,7 @@ export default class DataGraph {
     static sommePrix(data) {
         let somme = 0;
         data.forEach(ele => {
-            somme += ele.prix;
+            somme += ele.prix*ele.quantite;
         });
         return somme;
     }
