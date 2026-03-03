@@ -296,16 +296,16 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 category: "<?=$categorie?>",
                 price: {min: null, max: null},
                 sales: false,
-                reduc: false
+                reduc: false,
+                seller: [
+                    vendeur1 : "29",
+                    vendeur2 : "30",
+                ]
             },
             sort: {
                 field: "nom_public", 
                 order: "asc"
             }
-            vendeur : [
-                vendeur1 : "29";
-                vendeur2 : "30";
-            ]
         };
 
         // Est-on déjà sur la page de recherche ?
