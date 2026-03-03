@@ -240,7 +240,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll('input[value:"vendeur_check"]')
+        const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
 
         console.log(input_checkbox)
 
