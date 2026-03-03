@@ -18,7 +18,7 @@
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
     foreach ($filters['sellers'] ?? [] as $seller) {
-        $seller[] = $seller;
+        $sellers[] = $seller;
     }
     print_r($seller);
     // Construire la requête SQL à partir de la recherche
