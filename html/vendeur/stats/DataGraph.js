@@ -1,17 +1,12 @@
-// valeur en millisegonde
-const UNE_SECONDE = 1000;
-const UNE_MINUTE = 60 * UNE_SECONDE;
-const UNE_HEURE = 60 * UNE_MINUTE;
-const UN_JOUR = 24 * UNE_HEURE;
-const UNE_SEMAINE = 7 * UN_JOUR;
-const UN_MOIS = 30* UN_JOUR;
-const UN_ANS = 12* UN_MOIS;
+import {TimeMilli, Compare} from "./DataTime";
+
+
 
 
 
 export default class DataGraph {
 
-    static formate(data){
+    static formate(data) {
         let res = [];
         data.forEach(ele => {
             let v = ele;
@@ -32,11 +27,11 @@ export default class DataGraph {
         }
     };
 
-    static filtreByCategorie(){
-        
+    static filtreByCategorie() {
+
     };
 
-    static groupByTime(type) {
+    static groupByTime(data, type, templete = createTemplete(type)) {
         let now = new Date();
         console.log(now.toLocaleString());
 
@@ -44,31 +39,65 @@ export default class DataGraph {
         console.log(now.getMonth());
         console.log(now.getFullYear());
 
-
-        if (type == 'm') {
-
-        }
-        else if (type == 'h') {
+        if (type == 'P') {
 
         }
-        else if (type == 'D') {
+        else {
 
-        }
-        else if (type == 'W') {
-
-        }
-        else if (type == 'M') {
-
-        }
-        else if (type == 'Y') {
-
-        }
-        else{
-            console.error("Fonc (group) parametre type");
+            if (type == 'm') {
+                templete.forEach(ele => {
+                    let liste = data.filter(ele => {
+                        return Compare.CompareMinute(ele.date, data.date);
+                    });
+                    ele.prix = this.sommePrix(liste);
+                    ele.quantite = this.sommeQuantiter(liste);
+                });
+            }
+            else if (type == 'h') {
+                templete.forEach(ele => {
+                    let liste = data.filter(ele => {
+                        return Compare.CompareHour(ele.date, data.date);
+                    });
+                    ele.prix = this.sommePrix(liste);
+                    ele.quantite = this.sommeQuantiter(liste);
+                });
+            }
+            else if (type == 'D') {
+                templete.forEach(ele => {
+                    let liste = data.filter(ele => {
+                        return Compare.compareMinute(ele.date, data.date);
+                    });
+                    ele.prix = this.sommePrix(liste);
+                    ele.quantite = this.sommeQuantiter(liste);
+                });
+            }
+            else if (type == 'W' || type == 'M') {
+                templete.forEach(ele => {
+                    let liste = data.filter(ele => {
+                        return Compare.CompareDate(ele.date, data.date);
+                    });
+                    ele.prix = this.sommePrix(liste);
+                    ele.quantite = this.sommeQuantiter(liste);
+                });
+            }
+            else if (type == 'Y') {
+                templete.forEach(ele => {
+                    let liste = data.filter(ele => {
+                        return Compare.CompareMonth(ele.date, data.date);
+                    });
+                    ele.prix = this.sommePrix(liste);
+                    ele.quantite = this.sommeQuantiter(liste);
+                });
+            }
+            else {
+                console.error("Fonc (group) parametre type");
+                return -1;
+            }
+            return templete;
         }
     };
 
-    static createTemplete(type){
+    static createTemplete(type) {
         let res = [];
         let now = new Date();
         //now.setMilliseconds(0);
@@ -83,36 +112,36 @@ export default class DataGraph {
             //now.setMinutes(0);
             for (let i = 0; i < 60; i++) {
                 //res.push({"date": now.valueOf()-(UNE_MINUTE*i),"quantite":0,"prix":0})
-                res.push({"date": new Date(now.valueOf()-(UNE_MINUTE*i)),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_MINUTE * i)), "quantite": 0, "prix": 0 })
             };
         }
         else if (type == 'D') {
             //now.setHours(0);
             for (let i = 0; i < 24; i++) {
                 //res.push({"date": now.valueOf()-(UNE_HEURE*i),"quantite":0,"prix":0})
-                res.push({"date": new Date(now.valueOf()-(UNE_HEURE*i)),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_HEURE * i)), "quantite": 0, "prix": 0 })
             };
         }
         else if (type == 'W') {
             //now.setDate(0);
             for (let i = 0; i < 7; i++) {
                 //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
-                res.push({"date": new Date(now.valueOf()-(UN_JOUR*i)),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0 })
             };
         }
         else if (type == 'M') {
             for (let i = 0; i < 30; i++) {
                 //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
-                res.push({"date": new Date(now.valueOf()-(UN_JOUR*i)),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0 })
             };
         }
         else if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
                 //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({"date": new Date(now.valueOf()-(UN_MOIS*i)),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_MOIS * i)), "quantite": 0, "prix": 0 })
             };
         }
-        else{
+        else {
             console.error("Fonc (createTemplete) parametre type");
         }
         return res;
@@ -121,13 +150,13 @@ export default class DataGraph {
 
     static createTempletePersonaliser(duree, uniter, fin, debut = undefined) {
         //tout en milliseconde
-        if (duree === undefined){
+        if (duree === undefined) {
             duree = fin - debut;
         }
-        else if (fin === undefined){
+        else if (fin === undefined) {
             fin = duree + debut;
         }
-        else if (debut === undefined){
+        else if (debut === undefined) {
             debut = fin - duree;
         }
 
@@ -149,9 +178,23 @@ export default class DataGraph {
 
         for (let index = fin; index > debut; index -= uniter) {
             //res.push({"date": index,"quantite":0,"prix":0});
-            res.push({"date": new Date(index),"quantite":0,"prix":0});
+            res.push({ "date": new Date(index), "quantite": 0, "prix": 0 });
         }
 
         return res;
+    }
+
+    static sommePrix(data) {
+        let somme = 0;
+        data.forEach(ele => {
+            somme += ele.prix;
+        });
+    }
+
+    static sommeQuantiter(data) {
+        let somme = 0;
+        data.forEach(ele => {
+            somme += ele.quantite;
+        });
     }
 };
