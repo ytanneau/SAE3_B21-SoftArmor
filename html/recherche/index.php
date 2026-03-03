@@ -128,7 +128,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         </div>
         <!-- Zone de la carte -->
         <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><</button>
-        <div id="ombre"></div>
+        <div id="ombre">
+            <button id="btnFermerCarte" class="ouvvrirCarteDroite">></button>
+        </div>
 
         <section id="panneauCarte">
             <div class="enteteCarte">
