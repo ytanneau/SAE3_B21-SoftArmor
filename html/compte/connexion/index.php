@@ -1,17 +1,31 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
 
 define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
-// Si l'utilisateur est déjà connecté
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-if ($_POST != null){
+// Après envoi du formulaire, vérification des informations et connexion si valide
+if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
-    $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+    require_once (HOME_GIT . 'fonction_2FA.php');
+    $resultat = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
+
+    // Toutes les informations sont correctes
+    if ($resultat === true) {
+
+        // Si pas de double authentification, connecter directement
+        if (!a_2FA($_SESSION['id_compte'])) {
+            $_SESSION['logged_in'] = true;
+
+            transferer_panier_visiteur_compte($_SESSION['id_compte']);
+        } else {
+            header('Location: ' . HOME_SITE . "authentikator/");
+        }
+    }
 }
 
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
@@ -62,10 +76,10 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <!-- Message d'erreur pour l'email -->
             <p class="error">
                 <?php
-                    if (isset($erreurs['email'])) {
-                        $message = $erreurs['email'];
+                    if (isset($resultat['email'])) {
+                        $message = $resultat['email'];
                         
-                        if ($erreurs['email'] === FORMAT) {
+                        if ($resultat['email'] === FORMAT) {
                             $message .= ". Exemple : xyz@domaine.fr"; 
                         }
 
@@ -85,8 +99,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <!-- Message d'erreur pour le MDP -->
             <p class="error">
                 <?php 
-                    if (isset($erreurs['mdp']) && $erreurs['mdp'] === VIDE) { 
-                        echo $erreurs['mdp']; 
+                    if (isset($resultat['mdp']) && $resultat['mdp'] === VIDE) { 
+                        echo $resultat['mdp']; 
                     } 
                 ?>
             </p>
@@ -94,9 +108,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
             <!-- Message d'erreur en cas d'identifiants invalides -->
             <p class="error">
                 <?php
-                    $pas_erreur_format = isset($erreurs['connecte']);
-                    $erreur_email = isset($erreurs['email']);
-                    $mdp_incorrect_non_vide = (isset($erreurs['mdp']) && $erreurs['mdp'] !== VIDE);
+                    $pas_erreur_format = isset($resultat['connecte']);
+                    $erreur_email = isset($resultat['email']);
+                    $mdp_incorrect_non_vide = (isset($resultat['mdp']) && $resultat['mdp'] !== VIDE);
 
                     // Si aucune erreur de format mais identifiants incorrects OU erreur de format de mot de passe (autre que vide)
                     if ($pas_erreur_format || (!$erreur_email && $mdp_incorrect_non_vide)) { 

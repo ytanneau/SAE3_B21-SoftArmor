@@ -60,3 +60,63 @@ export class SideMonth {
         return res;
     }
 }
+
+
+export class SideMonth {
+    // valeur en millisegonde
+    static lesMois = ["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"];
+
+    static next(mois){
+        for (let index = 0; index < this.lesMois.length; index++) {
+            if (mois == this.lesMois.at(index)){
+                if (index == 0){
+                    return this.lesMois.at(this.lesMois.length-1);
+                }
+                else{
+                    return this.lesMois.at(index-1);
+                }
+            }
+        }
+    }
+
+    static start(mois){
+        let res = [];
+        res.push(mois)
+        let m = mois
+        for (let index = 1; index < this.lesMois.length; index++) {
+            m = this.next(m);
+            res.push(m);
+        }
+        return res;
+    }
+}
+
+
+export class SideDay {
+    // valeur en millisegonde
+    static lesJour = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+
+    static next(jour){
+        for (let index = 0; index < this.lesJour.length; index++) {
+            if (jour == this.lesJour.at(index)){
+                if (index == 0){
+                    return this.lesJour.at(this.lesJour.length-1);
+                }
+                else{
+                    return this.lesJour.at(index-1);
+                }
+            }
+        }
+    }
+
+    static start(jour){
+        let res = [];
+        res.push(jour)
+        let j = jour
+        for (let index = 1; index < this.lesJour.length; index++) {
+            j = this.next(j);
+            res.push(j);
+        }
+        return res;
+    }
+}

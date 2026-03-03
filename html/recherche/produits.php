@@ -8,7 +8,6 @@
 
     // On récupère le corps de la requête HTTP (au format JSON) dans un tableau associatif
     $data = json_decode(file_get_contents('php://input'), true);
-
     // On récupère la recherche, les filtres et tris éventuels
     $search     = $data['search'] ?? '';
     $filters    = $data['filters'] ?? [];
@@ -17,11 +16,14 @@
     $prixmin    = $filters['price']['min'] ?? null;
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
-    $reduc       = $filters['reduc'] ?? null;
-
+    $reduc      = $filters['reduc'] ?? null;   
+    $sellers = [];
+    foreach ($filters['sellers'] as $seller) {
+        $sellers[] = $seller;
+    }
     // Construire la requête SQL à partir de la recherche
     $requete = 
-        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction
+        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
         FROM produit_en_ligne p
         INNER JOIN _image i
         ON p.id_image_principale = i.id_image
@@ -60,13 +62,17 @@
         $requete .= " AND  (prix_actuel * (1 + tva / 100)) <= :prixmax";
         $params[':prixmax'] = $prixmax;
     }
-    
+
+    // if(!empty($seller)){
+        $requete .= " AND p.id_vendeur IN (31,29)";
+    // }
+    // $params[':id_vendeur'] = "31";
     $sortableFields = [
         'nom_public' => 'nom_public',
         'note_moy'   => 'note_moy',
         'triPrix'    => 'prix_actuel',
         'triPrixCroi'=> 'prix_actuel',
-        'triReduc'   => 'reduction'
+        'triReduc'   => 'reduction',
     ];
 
     $fieldKey = $sort['field'] ?? 'nom_public';

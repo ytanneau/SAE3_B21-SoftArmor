@@ -40,7 +40,7 @@
             include HOME_SITE . "header.php";
             include HOME_SITE . "toolbar_categories.php";
         ?>
-        <main id="main_map">
+        <main id="div_map">
             <section>
                 <button id="btn_reset_filter">Supprimer les filtres</button>
                 <div id="tri_departement">
@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <div id="liste_vendeur">
-                    <h2 id="init">Les vendeurs</h2>
-
+                    <h2>Les vendeurs</h2>
+                    <div id="init"></div>
                 </div>
             </section>
             <div id="map"></div>
@@ -72,25 +72,9 @@
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        // AFFICHAGE DES FILTRES
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
-
-        // Filtres 
-        const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const cotedarmor = document.getElementById("cotedarmor")
-        const finistere = document.getElementById("finistere")
-        const illeetvilaine = document.getElementById("illeetvilaine")
-        const morbihan = document.getElementById("morbihan")
-
-        btn_reset_filter.addEventListener('click', (e) => {
-            e.preventDefault()
-            cotedarmor.checked = false
-            finistere.checked = false
-            illeetvilaine.checked = false
-            morbihan.checked = false
-        })
-
-    
         const liste_vendeur = document.getElementById("liste_vendeur")
         const init = document.getElementById("init")
 
@@ -102,7 +86,9 @@
                 let label = document.createElement("label")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
+                        input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
+                        label.htmlFor = vendeur[cle]
                     }
                 }
                 div.appendChild(label)
@@ -110,6 +96,25 @@
                 liste_vendeur.insertBefore(div, init)
             });
         }
+
+        afficher_listes_vendeur()
+
+        // GESTIONS DES FILTRES
+        const btn_reset_filter = document.getElementById("btn_reset_filter")
+        // const cotedarmor = document.getElementById("cotedarmor")
+        // const finistere = document.getElementById("finistere")
+        // const illeetvilaine = document.getElementById("illeetvilaine")
+        // const morbihan = document.getElementById("morbihan")
+        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+
+        console.log(input_checkbox)
+
+        btn_reset_filter.addEventListener('click', (e) => {
+            e.preventDefault()
+            input_checkbox.forEach(input => {
+                input.checked = false
+            })
+        })  
 
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
@@ -127,15 +132,15 @@
             for(let info in vendeur){
                 if(info == 'id_adresse'){
                     tab_adresse.forEach(objet_adresse => {
-                        let adresse_valide = false
                         for(let cle in objet_adresse){
                             if(cle == 'id_adresse'){
                                 if(vendeur[info] == objet_adresse[cle]){
-                                    adresse_valide = true
+                                    adresse = objet_adresse['adresse'] + 
+                                    objet_adresse['complement_adresse'] + ", " + 
+                                    objet_adresse['ville'] + ", " +
+                                    objet_adresse['code_postal']
                                 }
-                            } else if(adresse_valide){
-                                adresse = adresse + objet_adresse[cle]
-                            }  
+                            }
                         }
                     });
                 }

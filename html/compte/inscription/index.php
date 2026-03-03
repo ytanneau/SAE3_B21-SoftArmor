@@ -3,6 +3,10 @@
     define('HOME_SITE', '../../');
     define('HOME_GIT', '../../../');
     
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
         if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
@@ -20,6 +24,12 @@
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_client($_POST['email'], $_POST['nom'], $_POST['prenom'], $_POST['pseudo'], $_POST['date_naissance'], $_POST['mdp'], $_POST['mdpc'], $_POST['question'], $_POST['reponse']);
+
+            if (empty($erreurs)) {
+                // L'inscription est réussie, donc connexion directe
+                connect_compte($_POST['email'], $_POST['mdp'], "client", "");
+                $_SESSION['logged_in'] = true;
+            }
         } else {
             $erreurs['fatal'] = true;
             $fichierLog = __DIR__ . "/erreurs.log";
@@ -29,20 +39,6 @@
     }
 
     
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        $param = "";
-        if (isset($_GET['produit'])) {
-            if ($_GET['produit'] == 'panier') {
-                $page = '../../panier';
-            } else {
-                $page = '../../produit?produit=' . $_GET['produit'];
-            }
-        }
-        
-        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . $page ?? '');
-        exit;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,8 +51,9 @@
 <body id="inscription_client">
     <main>
         <?php if (isset($erreurs) && $erreurs == []) { ?>
-            <h1>Félicitations, vous avez créé votre compte</h1>
-            <p>Prochaine étape : <a href="<?=HOME_SITE?>compte/connexion<?php if (isset($_GET['produit'])) echo "?produit=" . $_GET['produit']?>">Se connecter</a></p>
+            <h1>Votre compte a été créé</h1>
+            <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
+            <p><a href=<?=HOME_SITE?>>Revenir à l'accueil</a></p>
 
         <?php } else if (isset($erreurs['fatal'])) { ?>
             <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
