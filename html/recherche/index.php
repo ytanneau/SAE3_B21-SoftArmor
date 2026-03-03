@@ -123,7 +123,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
                 btn_open.addEventListener("click", () => {
                     panel.classList.add("active");
-                    overlay.classList.add("active");
+                    //overlay.classList.add("active");
                 });
             </script>
         </div>
