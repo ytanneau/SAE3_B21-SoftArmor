@@ -111,6 +111,21 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <!-- Grille des résultats -->
                 <ul id="results"></ul>
             </section>
+
+            <!-- Zone de la carte -->
+            <button id="openPanel">Ouvrir la carte</button>
+            <section id="sidePanel">
+                <h2>Carte</h2>
+            </section>
+            <script>
+                const btn_open = document.getElementById("openPanel")
+                const panel = document.getElementById("sidePanel")
+
+                openBtn.addEventListener("click", () => {
+                    panel.classList.add("active");
+                    overlay.classList.add("active");
+                });
+            </script>
         </div>
     </main>
 
