@@ -27,6 +27,7 @@ require_once (HOME_GIT . 'fonction_compte.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_categorie.php');
+require_once (HOME_GIT . 'fonction_2FA.php');
 
 //requete pour recuperer informations du compte sans l'adresse
 //$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
