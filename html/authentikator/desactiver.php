@@ -2,6 +2,7 @@
 define('HOME_GIT', "../../../");
 define('HOME_SITE', '../../');
 
+
 // Rediriger l'utilisateur si la 2FA n'est pas activée sur son compte
 if (!isset($_SESSION)) {
     session_start();
