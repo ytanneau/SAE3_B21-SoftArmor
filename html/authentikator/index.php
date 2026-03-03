@@ -20,6 +20,7 @@ require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
 
 $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
+$erreur = "";
 
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
