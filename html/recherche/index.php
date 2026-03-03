@@ -114,16 +114,36 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
             <!-- Zone de la carte -->
             <button id="openPanel">Ouvrir la carte</button>
+
+            <div id="overlay"></div>
+
             <section id="sidePanel">
+                <button id="closePanel">✕</button>
                 <h2>Carte</h2>
             </section>
             <script>
-                const btn_open = document.getElementById("openPanel")
-                const panel = document.getElementById("sidePanel")
+                document.addEventListener("DOMContentLoaded", () => {
 
-                btn_open.addEventListener("click", () => {
-                    panel.classList.add("active");
-                    //overlay.classList.add("active");
+                    const openBtn = document.getElementById("openPanel");
+                    const closeBtn = document.getElementById("closePanel");
+                    const panel = document.getElementById("sidePanel");
+                    const overlay = document.getElementById("overlay");
+
+                    openBtn.addEventListener("click", () => {
+                        panel.classList.add("active");
+                        overlay.classList.add("active");
+                        document.body.style.overflow = "hidden"; // bloque scroll
+                    });
+
+                    function closePanel() {
+                        panel.classList.remove("active");
+                        overlay.classList.remove("active");
+                        document.body.style.overflow = "auto";
+                    }
+
+                    closeBtn.addEventListener("click", closePanel);
+                    overlay.addEventListener("click", closePanel);
+
                 });
             </script>
         </div>
