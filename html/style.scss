@@ -2118,3 +2118,8 @@ aside {
     opacity: 1;
     visibility: visible;
 }
+
+/* Page d'activation*/
+#activer_2FA {
+    @include page_connect_inscription($nuance, white);
+}

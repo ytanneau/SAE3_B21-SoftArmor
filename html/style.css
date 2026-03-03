@@ -3491,4 +3491,103 @@ aside .achat:hover {
 #ombre.active {
   opacity: 1;
   visibility: visible;
+}
+
+/* Page d'activation*/
+#activer_2FA {
+  background-color: #A6A6BF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#activer_2FA main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+@media (max-width: 1440px) {
+  #activer_2FA main {
+    width: 60vw;
+  }
+}
+#activer_2FA main img {
+  width: 18vw;
+}
+@media (max-width: 1440px) {
+  #activer_2FA main img {
+    width: 50vw;
+  }
+}
+#activer_2FA main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#activer_2FA main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  width: 100%;
+}
+#activer_2FA main form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+#activer_2FA main form .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+#activer_2FA main form .text {
+  height: 10em;
+  text-align: start;
+}
+#activer_2FA main form .petit {
+  width: 30%;
+}
+#activer_2FA main form input[type=number]::-webkit-inner-spin-button,
+#activer_2FA main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#activer_2FA main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#activer_2FA main form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+#activer_2FA main form .error {
+  color: #E43737;
+}
+#activer_2FA main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#activer_2FA main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+#activer_2FA main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */

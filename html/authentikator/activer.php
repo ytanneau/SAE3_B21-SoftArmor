@@ -55,15 +55,22 @@ $grCodeUri = $otp->getQrCodeUri(
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body id="inscription_client">
-    <img src="<?=$grCodeUri?>">
-    <p>Clef: <?=$otp->getSecret()?></p>
 
-    <label for="codePIN">Entrez le code PIN pour activer la double authentification</label>
-    <input type="number" name="codePIN" id="codePIN">
-    <p id="erreur" class="erreur"></p>
-    <button id="valider">Valider</button>
+<body id="activer_2FA">
+    <main>
+        <img src="<?=$grCodeUri?>">
+        <p>Clef: <?=$otp->getSecret()?></p>
+
+        <form>
+            <label for="codePIN">Entrez le code PIN pour activer la double authentification</label>
+            <input type="number" name="codePIN" id="codePIN">
+            <p id="erreur" class="erreur"></p>
+            
+            <button id="valider">Valider</button>
+        </form>
+    </main>
 </body>
+
 <script>
     let nbTentative = 10;
     document.getElementById("valider").onclick = function() {
