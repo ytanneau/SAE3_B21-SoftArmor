@@ -3430,6 +3430,16 @@ aside .achat:hover {
   transition: opacity 0.3s ease;
   z-index: 50;
 }
+#ombre .fermerCarteDroite {
+  height: 100px;
+  width: 30px;
+  position: relative;
+  right: 0;
+  top: 50%;
+  background-color: white;
+  border: none;
+  font-size: xx-large;
+}
 
 .ouvrirCarteDroite {
   height: 100px;
