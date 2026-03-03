@@ -3413,7 +3413,8 @@ aside .achat:hover {
 }
 #div_map #map {
   height: 650px;
-  width: 1000px;
+  width: 800px;
+  margin-left: 20px;
 }
 #div_map #tri_departement {
   display: flex;
