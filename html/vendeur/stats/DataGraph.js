@@ -139,6 +139,59 @@ export default class DataGraph {
     }
 
 
+    static createTempleteV2(type) {
+        let res = [];
+        let now = new Date();
+        now.setMilliseconds(0);
+        now.setSeconds(0);
+
+        if (type == 'h') {
+            //now.setMinutes(0);
+            for (let i = 0; i < 60; i++) {
+                //res.push({"date": now.valueOf()-(UNE_MINUTE*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                now.setTime(now.setMinutes(now.getMinutes()-1));
+            };
+        }
+        now.setMinutes(0);
+        if (type == 'D') {
+            //now.setHours(0);
+            for (let i = 0; i < 24; i++) {
+                //res.push({"date": now.valueOf()-(UNE_HEURE*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                now.setTime(now.setHours(now.getHours()-1));
+            };
+        }
+        now.setHours(0);
+        if (type == 'W') {
+            //now.setDate(0);
+            for (let i = 0; i < 7; i++) {
+                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                now.setTime(now.setDate(now.getDate()-1));
+            };
+        }
+        if (type == 'M') {
+            for (let i = 0; i < 30; i++) {
+                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                now.setTime(now.setDate(now.getDate()-1));
+            };
+        }
+        now.setDate(0);
+        if (type == 'Y') {
+            for (let i = 0; i < 12; i++) {
+                //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_MOIS * i)), "quantite": 0, "prix": 0 })
+                now.setTime(now.setMonth(now.getMonth()-1));
+            };
+        }
+        else {
+            console.error("Fonc (createTemplete) parametre type");
+        }
+        return res;
+    }
+
     static createTempletePersonaliser(duree, uniter, fin, debut = undefined) {
         //tout en milliseconde
         if (duree === undefined) {
