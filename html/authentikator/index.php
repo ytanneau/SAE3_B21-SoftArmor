@@ -32,18 +32,50 @@ if (!isset($_SESSION)) {
 
 require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
-use OTPHP\InternalClock;
 
-$clock = new InternalClock();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-$otp = TOTP::generate($clock);
-$otp = $otp->withPeriod(60);
+$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 
-$otp = $otp->withLabel('Alizon');
-$grCodeUri = $otp->getQrCodeUri(
-    'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
-    '[DATA]'
-);
+// Si on ne vient pas de la page de connexion, redirection vers l'accueil
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codePIN = htmlentities(trim($_POST['codePIN']));
+    $otp = TOTP::createFromSecret();
+}
+
+// $_SESSION['logged_in'] = true;
+$_SESSION['id_compte'] = $resSQL['id_compte'];
+$_SESSION['email'] = $email;
+
+if ($typeCompte == 'vendeur'){
+    $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
+} else {
+    $_SESSION['pseudo'] = $resSQL['pseudo'];
+}
+    
+require "fonction_panier.php";
+transferer_panier_visiteur_compte($resSQL['id_compte']);
+
+// Redirections
+/*
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    if (isset($_GET['produit'])) {
+        if ($_GET['produit'] == 'panier') {
+            $page = '../../panier';
+        } else {
+            $page = '../../produit?produit=' . $_GET['produit'];
+        }
+        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
+        header('Location: ' . HOME_SITE . $page);
+    } else {
+        // Sinon, retour accueil
+        header('location: ' . HOME_SITE);
+    }
+    exit;
+}
+*/
 
 ?>
 
@@ -52,8 +84,7 @@ $grCodeUri = $otp->getQrCodeUri(
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include HOME_SITE . 'link_head.php' ?>
-    <title>Alizon - Authentikator</title>
+    <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
     <img src="<?=$grCodeUri?>">

@@ -54,6 +54,41 @@ hr {
   margin: 2em 0;
 }
 
+.bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bouton a {
+  text-decoration: none;
+  color: black;
+}
+.bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.bouton {
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .input_quantite * {
   font-family: "Montserrat";
   font-weight: bold;
@@ -1117,6 +1152,29 @@ ul#results > li > a > h3 {
   font-family: "Inter";
 }
 
+.infos .bouton {
+  display: block;
+  max-width: 100%;
+  width: 15em;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos .bouton a {
+  text-decoration: none;
+  color: white;
+}
+.infos .bouton:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
 .infos .modif {
   display: block;
   max-width: 100%;
@@ -1327,23 +1385,6 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child .bouton {
     margin-top: 1.2em;
-  }
-}
-
-.bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
-  font-weight: bold;
-  align-self: center;
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .bouton {
-    margin-top: 5%;
   }
 }
 
@@ -3366,15 +3407,49 @@ aside .achat:hover {
   height: 4em;
 }
 
-#main_map {
+#div_map {
   display: flex;
   flex-direction: row;
 }
-#main_map #map {
+#div_map #map {
   height: 650px;
   width: 1000px;
 }
-#main_map #tri_departement {
+#div_map #tri_departement {
   display: flex;
   flex-direction: column;
+}
+
+#ombre {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+}
+
+/* Panneau */
+#panneauCarte {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 100vh;
+  background: white;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+/* Quand actif */
+#panneauCarte.active {
+  transform: translateX(0);
+}
+
+#ombre.active {
+  opacity: 1;
+  visibility: visible;
 }/*# sourceMappingURL=style.css.map */

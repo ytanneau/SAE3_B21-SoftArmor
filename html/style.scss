@@ -41,6 +41,17 @@ hr {
     margin: 2em 0;
 }
 
+.bouton {
+    @include bouton_new;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
 .input_quantite {
     * {
         font-family: $font_title;
@@ -396,10 +407,14 @@ ul#results {
 }
 
 .infos {
+    .bouton {
+        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 15em);
+    }
 
     .modif{
         @include bouton_new($color: white, $largeur: 15em);
     }
+
     .grave {
         @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
@@ -520,17 +535,6 @@ ul#results {
         }
     }
 
-}
-
-.bouton {
-    @include bouton;
-    background-color: $focus;
-    color: white;
-    font-size: $font_size_normal;
-    margin-top: 2%;
-    @media (max-width: 1440px) {
-        margin-top: 5%;
-    }
 }
 
 // Bouton Ajouter un avis
@@ -2032,7 +2036,7 @@ aside {
     }
 }
 
-#main_map{
+#div_map{
     display: flex;
     flex-direction: row;
     #map{
@@ -2043,4 +2047,38 @@ aside {
         display: flex;
         flex-direction: column;
     }
+}
+
+#ombre {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 50;
+}
+
+/* Panneau */
+#panneauCarte {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 100vh;
+    background: white;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+/* Quand actif */
+#panneauCarte.active {
+    transform: translateX(0);
+}
+
+#ombre.active {
+    opacity: 1;
+    visibility: visible;
 }
