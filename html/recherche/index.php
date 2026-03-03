@@ -127,7 +127,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             </section>
         </div>
         <!-- Zone de la carte -->
-        <button id="btnOuvrirCarte" class="ouvrirCarteDroite"><b><</b></button>
+        <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><b><</b></button>
 
         <div id="ombre"></div>
 
@@ -170,10 +170,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
+            const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
             const carte = document.getElementById("panneauCarte");
             const ombre = document.getElementById("ombre");
-
+            
+            btnOuvrirDroite.addEventListener("click", () => {
+                carte.classList.add("active");
+                ombre.classList.add("active");
+                document.body.style.overflow = "hidden"; // bloque scroll
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 300);
+            });
             btnOuvrir.addEventListener("click", () => {
                 carte.classList.add("active");
                 ombre.classList.add("active");
