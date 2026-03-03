@@ -11,6 +11,8 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+
+print_r($_SESSION);
 // Empêcher les visiteurs (non-connectés) d'accéder à la page
 if (!isset($_SESSION['logged_in'])) {
     header('location: ' . HOME_SITE);
@@ -39,7 +41,7 @@ $clock = new InternalClock();
 $otp = TOTP::generate($clock);
 $otp = $otp->withPeriod(60);
 
-$otp = $otp->withLabel('Alizon - ' . $_SESSION['pseudo'] ?? $_SESSION['raison_sociale']);
+$otp = $otp->withLabel('Alizon - ' . ($_SESSION['pseudo'] ?? $_SESSION['raison_sociale']));
 $grCodeUri = $otp->getQrCodeUri(
     'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
     '[DATA]'

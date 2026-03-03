@@ -18,6 +18,12 @@
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            
+            if (empty($erreurs)) {
+                // L'inscription est réussie, donc connexion directe
+                print_r(connect_compte($_POST['email'], $_POST['mdp'], "vendeur", ""));
+                $_SESSION['logged_in'] = true;
+            }
         } else {
             $erreurs['fatal'] = true;
         }
@@ -35,7 +41,8 @@
     <main>
 <?php if (isset($erreurs) && $erreurs == []) { ?>
         <h1>Votre compte a été créé</h1>
-        <a href="../">Connectez-vous</a>
+        <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
+        <p><a href="../stock">Aller à la page d'accueil</a></p>
 
 <?php } elseif (isset($erreurs['fatal'])){ ?>
         <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
