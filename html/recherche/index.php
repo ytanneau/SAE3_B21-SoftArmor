@@ -148,15 +148,15 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         </div>
                         <div>
                             <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere" value="departement>
+                            <input type="checkbox" id="finistere" value="departement">
                         </div>
                         <div>
                             <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine" value="departement>
+                            <input type="checkbox" id="illeetvilaine" value="departement">
                         </div>
                         <div>
                             <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan" value="departement>
+                            <input type="checkbox" id="morbihan" value="departement">
                         </div>
                     </div>
                     <div id="liste_vendeur">
@@ -228,7 +228,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
-                        value.innerHTML = "vendeur_check"
+                        input.value = "vendeur_check"
                     }
                 }
                 div.appendChild(label)
