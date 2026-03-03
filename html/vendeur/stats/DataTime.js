@@ -32,11 +32,31 @@ export class TimeMilli {
     static UN_ANS = 12 * this.UN_MOIS;
 }
 
-/*
-"UNE_SECONDE" : 1000,
-    "UNE_MINUTE" : 60 * TimeMilli.UNE_SECONDE,
-    "UNE_HEURE" : 60 * TimeMilli.UNE_MINUTE,
-    "UN_JOUR" : 24 * TimeMilli.UNE_HEURE,
-    "UNE_SEMAINE" : 7 * TimeMilli.UN_JOUR,
-    "UN_MOIS" : 30 * TimeMilli.UN_JOUR,
-    "UN_ANS" : 12 * TimeMilli.UN_MOIS*/
+export class SideMonth {
+    // valeur en millisegonde
+    static lesMois = ["Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"];
+
+    static next(mois){
+        for (let index = 0; index < this.lesMois.length; index++) {
+            if (mois == this.lesMois.at(index)){
+                if (index == 0){
+                    return this.lesMois.at(this.lesMois.length-1);
+                }
+                else{
+                    return this.lesMois.at(index-1);
+                }
+            }
+        }
+    }
+
+    static start(mois){
+        let res = [];
+        res.push(mois)
+        let m = mois
+        for (let index = 0; index < this.lesMois.length; index++) {
+            m = this.next(m);
+            res.push(m);
+        }
+        return res;
+    }
+}
