@@ -82,7 +82,7 @@
         // const illeetvilaine = document.getElementById("illeetvilaine")
         // const morbihan = document.getElementById("morbihan")
         const input_checkbox = document.querySelectorAll("input")
-
+        console.log(input_checkbox)
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             input_checkbox.forEach(input => {
