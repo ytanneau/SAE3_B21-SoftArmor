@@ -3411,10 +3411,6 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
 }
-#div_map .enteteCarte {
-  display: flex;
-  flex-direction: row;
-}
 #div_map #map {
   height: 650px;
   width: 1000px;
@@ -3446,6 +3442,10 @@ aside .achat:hover {
   transition: transform 0.4s ease;
   z-index: 1000;
   padding: 2rem;
+}
+#panneauCarte .enteteCarte {
+  display: flex;
+  flex-direction: row;
 }
 
 /* Quand actif */
