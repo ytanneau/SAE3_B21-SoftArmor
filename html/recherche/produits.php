@@ -70,7 +70,6 @@
         'triPrix'    => 'prix_actuel',
         'triPrixCroi'=> 'prix_actuel',
         'triReduc'   => 'reduction',
-        'id_vendeur' => 'id_vendeur'
     ];
 
     $fieldKey = $sort['field'] ?? 'nom_public';
