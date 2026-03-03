@@ -118,7 +118,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             <div id="ombre" class="ombre"></div>
 
             <section id="zoneCarte" class="zoneCarte">
-                <button id="fermerCarte" classe="fermerCarte">✕</button>
+                <button id="fermerCarte" class="fermerCarte">✕</button>
                 <h2>Carte</h2>
             </section>
             <script>
