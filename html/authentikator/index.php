@@ -42,7 +42,7 @@ $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : 
 // Si on ne vient pas de la page de connexion, redirection vers l'accueil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codePIN = htmlentities(trim($_POST['codePIN']));
-    $otp = TOTP::createFromSecret();
+    $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
 }
 
 // $_SESSION['logged_in'] = true;
