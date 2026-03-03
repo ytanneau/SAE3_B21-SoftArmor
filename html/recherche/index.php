@@ -228,7 +228,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
-                        value.innerHTML = "vendeur_check"
                     }
                 }
                 div.appendChild(label)
