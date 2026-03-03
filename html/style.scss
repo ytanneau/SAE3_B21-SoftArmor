@@ -2053,6 +2053,7 @@ aside {
 #ombre {
     position: fixed;
     inset: 0;
+    width: 16%;
     background: rgba(0,0,0,0.4);
     opacity: 0;
     visibility: hidden;
@@ -2061,10 +2062,11 @@ aside {
     .fermerCarteDroite{
         height: 100px;
         width: 30px;
-        position: relative;
+        position: absolute;
         right: 0;
-        top: 50%;
+        top: 45%;
         background-color: white;
+        border-radius: 5px 0px 0px 5px;
         border: none;
         font-size: xx-large;
     }
@@ -2074,7 +2076,7 @@ aside {
     width: 30px;
     position: fixed;
     right: 0;
-    top: 50%;
+    top: 45%;
     background-color: white;
     border: none;
     box-shadow: grey -5px 0px 10px;
@@ -2100,6 +2102,9 @@ aside {
         justify-content: space-between;
         #btnFermerCarte{
             height: fit-content;
+            background-color: white;
+            font-size: xx-large;
+            border: none;
         }
     }
 }
