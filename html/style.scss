@@ -2039,6 +2039,10 @@ aside {
 #div_map{
     display: flex;
     flex-direction: row;
+    .enteteCarte{
+        display:flex;
+        flex-direction: row;
+    }
     #map{
         height: 650px;
         width: 1000px;
