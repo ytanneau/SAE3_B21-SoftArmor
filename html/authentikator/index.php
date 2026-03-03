@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transferer_panier_visiteur_compte($_SESSION['id_compte']);
         }
 
-        header('location: ' . $accueil);
+        header('Location: ' . $accueil);
     }
 }
 

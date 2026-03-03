@@ -21,7 +21,7 @@ if ($_POST != null) {
         if (!a_2FA($_SESSION['id_compte'])) {
             $_SESSION['logged_in'] = true;
         } else {
-
+            header('Location: ' . HOME_SITE . "authentikator/");
         }
     }
 }
