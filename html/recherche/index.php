@@ -94,6 +94,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             Supprimer les filtres
                         </button>
                     </div>
+                    <div>
+                        <button id="btnOuvrirCarte">Ouvrir la carte</button>
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -124,7 +127,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             </section>
         </div>
         <!-- Zone de la carte -->
-        <button id="btnOuvrirCarte">Ouvrir la carte</button>
+        <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><b><</b></button>
 
         <div id="ombre"></div>
 
@@ -167,11 +170,21 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
+            const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
             const carte = document.getElementById("panneauCarte");
             const ombre = document.getElementById("ombre");
-
-            btnOuvrir.addEventListener("click", () => {
+            
+            btnOuvrirDroite.addEventListener("click", () => {
+                carte.classList.add("active");
+                ombre.classList.add("active");
+                document.body.style.overflow = "hidden"; // bloque scroll
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 300);
+            });
+            btnOuvrir.addEventListener("click", (e) => {
+                e.preventDefault();
                 carte.classList.add("active");
                 ombre.classList.add("active");
                 document.body.style.overflow = "hidden"; // bloque scroll
