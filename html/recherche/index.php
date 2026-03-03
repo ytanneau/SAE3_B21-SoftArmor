@@ -144,19 +144,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         <h2>Departement</h2>
                         <div>
                             <label for="cotedarmor">Cote d'armor - 22</label>
-                            <input type="checkbox" id="cotedarmor" value="departement">
+                            <input type="checkbox" id="cotedarmor">
                         </div>
                         <div>
                             <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere" value="departement">
+                            <input type="checkbox" id="finistere">
                         </div>
                         <div>
                             <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine" value="departement">
+                            <input type="checkbox" id="illeetvilaine">
                         </div>
                         <div>
                             <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan" value="departement">
+                            <input type="checkbox" id="morbihan">
                         </div>
                     </div>
                     <div id="liste_vendeur">
@@ -222,13 +222,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 let input = document.createElement("input")
                 input.type = "checkbox"
                 let label = document.createElement("label")
-                let value = document.createElement("value")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
-                        input.value = "vendeur_check"
                     }
                 }
                 div.appendChild(label)
@@ -241,260 +239,13 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll('input[value="vendeur_check"]')<?php
+        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
 
-// Inclusion du fichier de configuration
-define('HOME_GIT', '../../');
-define('HOME_SITE', '../');
-
-if (!isset($_SESSION)) {
-    session_start();
-
-    if (isset($_SESSION['raison_sociale'])){
-        header('location: ' . HOME_SITE . '/vendeur/stock/');
-        die();
-    }
-}
-
-$recherche = htmlentities(trim($_GET['recherche'] ?? ''));
-$categorie = trim($_GET['categorie'] ?? '');
-
-if (empty($recherche) && empty($categorie)) {
-    header('location: ' . HOME_SITE);
-    die();
-}
-
-require_once (HOME_GIT . '.config.php');
-require_once (HOME_GIT . 'fonction_avis.php');
-require_once (HOME_GIT . 'fonction_produit.php');
-require_once (HOME_GIT . 'fonction_global.php');
-require_once (HOME_GIT . 'fonction_panier.php');
-require_once (HOME_GIT . 'fonction_categorie.php');
-require_once (HOME_GIT . 'fonction_recherche.php');
-require_once (HOME_GIT . "fonction_vendeur.php");
-
-    $tab_vendeurs = get_coor_id_vendeur();
-    $tab_adresse = get_adresse();
-
-?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include HOME_SITE . "link_head.php" ?>
-    <title>Alizon - Recherche</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-</head>
-<body data-page="search">
-    <?php 
-        include HOME_SITE . "header.php";
-        include HOME_SITE . "toolbar_categories.php";
-    ?>
-
-    <main class ="pageRecherche">
-        <div class="TriEtFiltre">
-            <form class="formTri">
-                <fieldset id = "prixF">
-                    <legend>Filtrer par prix</legend>
-                    <div class="sousFiltre">
-                        <input type="radio" name="prix" id="zeroTo20" value="zeroTo20">
-                        <label for="zeroTo20">0 € à 20 €</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="radio" name="prix" id="twentyTo50" value="twentyTo50">
-                        <label for="twentyTo50">20 € à 50 €</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="radio" name="prix" id="fiftyTo100" value="fiftyTo100">
-                        <label for="fiftyTo100">50 € à 100 €</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="radio" name="prix" id="hundredTo300" value="hundredTo300">
-                        <label for="hundredTo300">100 € à 300 €</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="radio" name="prix" id="over300" value="over300">
-                        <label for="over300">Plus de 300 €</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="checkbox" name="prom" id="prom" value="prom">
-                        <label for="prom">Promotion</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <input type="checkbox" name="reduc" id="reduc" value="reduc">
-                        <label for="reduc">Réduction</label>
-                    </div>
-                    <div class="sousFiltre">
-                        <button type="button" id="resetFilters">
-                            Supprimer les filtres
-                        </button>
-                    </div>
-                    <div>
-                        <button id="btnOuvrirCarte">Ouvrir la carte</button>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="resultat">
-            <div>
-                <div class="">
-                    <span id="for_category"></span>
-                    <h1 id="results_for"></h1>
-                </div>
-                <div class="labelEtBandeau">
-                    <div class="labelBendeau">
-                        <label for="tri">Trier par </label>
-                    </div>
-                    <div class="deroulant">
-                        <select id="tri" value ="triOption">
-                            <option value="nom_public" data-name ="ASC">Ordre alphabétique</option>
-                            <option value="note_moy" data-name ="DESC">Meilleurs avis</option>
-                            <option value="triPrix" data-name ="ASC">Prix croissants</option>
-                            <option value="triPrixCroi" data-name ="DESC">Prix décroissants</option>
-                            <option value="triReduc" data-name ="DESC">Réduction</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <section class="results">
-                <!-- Grille des résultats -->
-                <ul id="results"></ul>
-            </section>
-        </div>
-        <!-- Zone de la carte -->
-        <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><</button>
-        <div id="ombre">
-            <button id="btnFermerCarteDroite" class="fermerCarteDroite">></button>
-        </div>
-
-        <section id="panneauCarte">
-            <div class="enteteCarte">
-                <h2>Carte</h2>
-                <button id="btnFermerCarte">✕</button>
-            </div>
-            <div id="div_map">
-                <section>
-                    <button id="btn_reset_filter">Supprimer les filtres</button>
-                    <div id="tri_departement">
-                        <h2>Departement</h2>
-                        <div>
-                            <label for="cotedarmor">Cote d'armor - 22</label>
-                            <input type="checkbox" id="cotedarmor" value="departement">
-                        </div>
-                        <div>
-                            <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere" value="departement">
-                        </div>
-                        <div>
-                            <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine" value="departement">
-                        </div>
-                        <div>
-                            <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan" value="departement">
-                        </div>
-                    </div>
-                    <div id="liste_vendeur">
-                        <h2>Les vendeurs</h2>
-                        <div id="init"></div>
-                    </div>
-                </section>
-                <div id="map"></div>
-            </div>
-        </section>
-    </main>
-    <script src="interaction_carte.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const btnOuvrir = document.getElementById("btnOuvrirCarte");
-            const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
-            const btnFermer = document.getElementById("btnFermerCarte");
-            const btnFermerDroite = document.getElementById("btnFermerCarteDroite");
-            const carte = document.getElementById("panneauCarte");
-            const ombre = document.getElementById("ombre");
-            
-            btnOuvrirDroite.addEventListener("click", () => {
-                carte.classList.add("active");
-                ombre.classList.add("active");
-                document.body.style.overflow = "hidden"; // bloque scroll
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 300);
-            });
-            btnOuvrir.addEventListener("click", (e) => {
-                e.preventDefault();
-                carte.classList.add("active");
-                ombre.classList.add("active");
-                document.body.style.overflow = "hidden"; // bloque scroll
-                document.body.style.paddingRight = "15px";
-                document.header.style.paddingRight = "15px";
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 300);
-            });
-
-            function closePanel() {
-                carte.classList.remove("active");
-                ombre.classList.remove("active");
-                document.body.style.overflow = "auto";
-            }
-
-            btnFermer.addEventListener("click", closePanel);
-            btnFermerDroite.addEventListener("click", closePanel);
-            ombre.addEventListener("click", closePanel);
-
-        });
-
-        // AFFICHAGE DES FILTRES
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-        const tab_adresse = <?= json_encode($tab_adresse)?>;
-        const liste_vendeur = document.getElementById("liste_vendeur")
-        const init = document.getElementById("init")
-
-        function afficher_listes_vendeur(){
-            tab_vendeurs.forEach(vendeur => {
-                let div = document.createElement("div")
-                let input = document.createElement("input")
-                input.type = "checkbox"
-                let label = document.createElement("label")
-                let value = document.createElement("value")
-                for(let cle in vendeur){
-                    if(cle == 'raison_sociale'){
-                        input.id = vendeur[cle]
-                        label.innerHTML = vendeur[cle]
-                        label.htmlFor = vendeur[cle]
-                        input.value = "vendeur_check"
-                    }
-                }
-                div.appendChild(label)
-                div.appendChild(input)
-                liste_vendeur.insertBefore(div, init)
-            });
-        }
-
-        afficher_listes_vendeur()
-
-        // GESTIONS DES FILTRES
-        const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll("input[value="vendeur_check"]")
-        const departement = document.querySelectorAll("input[value="departement"]")
-        
         console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             input_checkbox.forEach(input => {
-                input.checked = false
-            })
-            departement.forEach(input => {
                 input.checked = false
             })
         }) 
@@ -546,13 +297,16 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 category: "<?=$categorie?>",
                 price: {min: null, max: null},
                 sales: false,
-                reduc: false,
-                sellers: []
+                reduc: false
             },
             sort: {
                 field: "nom_public", 
                 order: "asc"
             }
+            vendeur : [
+                vendeur1 : "29";
+                vendeur2 : "30";
+            ]
         };
 
         // Est-on déjà sur la page de recherche ?
@@ -606,8 +360,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
 
-        
-        let radios = document.querySelectorAll('input[name=\"prix\"]');
+        let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
             radio.addEventListener('change', function() {
@@ -825,7 +578,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
-            console.log(searchState);
             fetch('/recherche/produits.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
