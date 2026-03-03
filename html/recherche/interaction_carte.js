@@ -22,9 +22,11 @@ finistere.addEventListener('click', () => {
         groupSelectionne.push(polygonFinistere)
         group = L.featureGroup(groupSelectionne)
         map.fitBounds(group.getBounds())
+        console.log(groupSelectionne)
     } else {
         map.removeLayer(polygonFinistere)
         groupSelectionne.pop(polygonFinistere)
+        console.log(groupSelectionne)
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
     }
@@ -34,11 +36,13 @@ cotedarmor.addEventListener('click', (e) => {
     if(cotedarmor.checked) {
         polygonCoteDarmor.addTo(map)
         groupSelectionne.push(polygonCoteDarmor)
+        console.log(groupSelectionne)
         group = L.featureGroup(groupSelectionne)
         map.fitBounds(group.getBounds())
     } else {
         map.removeLayer(polygonCoteDarmor)
         groupSelectionne.pop(polygonCoteDarmor)
+        console.log(groupSelectionne)
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
     }
