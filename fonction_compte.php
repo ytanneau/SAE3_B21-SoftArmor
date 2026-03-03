@@ -150,7 +150,7 @@
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         
-                        // $_SESSION['logged_in'] = true;
+                        $_SESSION['logged_in'] = false;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
                         $_SESSION['email'] = $email;
 
