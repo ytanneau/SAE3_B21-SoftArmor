@@ -7,7 +7,7 @@ define('HOME_GIT', '../../');
 
 $correcte = false;
 
-require HOME_GIT . 'fonction_2FA.php';
+require_once HOME_GIT . 'fonction_2FA.php';
 
 // Rediriger l'utilisateur si la 2FA est déjà activée sur son compte
 if (!isset($_SESSION)) {
@@ -27,7 +27,7 @@ if (!isset($_GET['codePIN']) || strlen($_GET['codePIN']) != 6) {
 }
 
 
-require HOME_GIT . 'vendor/autoload.php';
+require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
 
 $otp = TOTP::createFromSecret($_GET['clef']);

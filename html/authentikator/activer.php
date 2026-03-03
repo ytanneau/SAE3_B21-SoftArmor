@@ -3,7 +3,7 @@
 define('HOME_SITE', '../');
 define('HOME_GIT', '../../');
 
-require HOME_GIT . 'fonction_2FA.php';
+require_once HOME_GIT . 'fonction_2FA.php';
 
 
 // Rediriger l'utilisateur si la 2FA est déjà activée sur son compte
@@ -30,7 +30,7 @@ if (a_2FA($_SESSION['id_compte'])) {
     exit;
 }
 
-require HOME_GIT . 'vendor/autoload.php';
+require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
 use OTPHP\InternalClock;
 
