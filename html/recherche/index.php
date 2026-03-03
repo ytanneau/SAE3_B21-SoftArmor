@@ -144,19 +144,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         <h2>Departement</h2>
                         <div>
                             <label for="cotedarmor">Cote d'armor - 22</label>
-                            <input type="checkbox" id="cotedarmor" value="departement">
+                            <input type="checkbox" id="cotedarmor">
                         </div>
                         <div>
                             <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere" value="departement>
+                            <input type="checkbox" id="finistere">
                         </div>
                         <div>
                             <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine" value="departement>
+                            <input type="checkbox" id="illeetvilaine">
                         </div>
                         <div>
                             <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan" value="departement>
+                            <input type="checkbox" id="morbihan">
                         </div>
                     </div>
                     <div id="liste_vendeur">
@@ -222,13 +222,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 let input = document.createElement("input")
                 input.type = "checkbox"
                 let label = document.createElement("label")
-                let value = document.createElement("value")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
-                        value.innerHTML = "vendeur_check"
                     }
                 }
                 div.appendChild(label)
@@ -241,17 +239,13 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll("input[value="vendeur_check"]")
-        const departement = document.querySelectorAll("input[value="departement"]")
-        
+        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+
         console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
             input_checkbox.forEach(input => {
-                input.checked = false
-            })
-            departement.forEach(input => {
                 input.checked = false
             })
         }) 
@@ -303,13 +297,16 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 category: "<?=$categorie?>",
                 price: {min: null, max: null},
                 sales: false,
-                reduc: false,
-                sellers: []
+                reduc: false
             },
             sort: {
                 field: "nom_public", 
                 order: "asc"
             }
+            vendeur : [
+                vendeur1 : "29";
+                vendeur2 : "30";
+            ]
         };
 
         // Est-on déjà sur la page de recherche ?
@@ -363,7 +360,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
 
-        
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
@@ -582,7 +578,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
-            console.log(searchState);
             fetch('/recherche/produits.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
