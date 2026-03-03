@@ -1117,6 +1117,29 @@ ul#results > li > a > h3 {
   font-family: "Inter";
 }
 
+.infos .bouton {
+  display: block;
+  max-width: 100%;
+  width: 15em;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos .bouton a {
+  text-decoration: none;
+  color: white;
+}
+.infos .bouton:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
 .infos .modif {
   display: block;
   max-width: 100%;
@@ -1331,11 +1354,29 @@ ul#results > li > a > h3 {
 }
 
 .bouton {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
   font-weight: bold;
-  align-self: center;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bouton a {
+  text-decoration: none;
+  color: black;
+}
+.bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.bouton {
   background-color: #BB2BB2;
   color: white;
   font-size: 1em;

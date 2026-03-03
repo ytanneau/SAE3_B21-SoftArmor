@@ -433,7 +433,7 @@ if ($_POST != NULL){
                     <?php if (!$a_2FA) { ?>
                         <a class="bouton" href="<?= HOME_SITE . "authentikator" ?>">Activer la 2FA</a>
                     <?php } else { ?>
-                        <a class="bouton" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                        <a class="bouton grave" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
                     <?php } ?>
                 </article>
             </form>

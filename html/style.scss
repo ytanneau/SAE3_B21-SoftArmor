@@ -396,10 +396,14 @@ ul#results {
 }
 
 .infos {
+    .bouton {
+        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 15em);
+    }
 
     .modif{
         @include bouton_new($color: white, $largeur: 15em);
     }
+
     .grave {
         @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
     }
@@ -523,7 +527,7 @@ ul#results {
 }
 
 .bouton {
-    @include bouton;
+    @include bouton_new;
     background-color: $focus;
     color: white;
     font-size: $font_size_normal;
