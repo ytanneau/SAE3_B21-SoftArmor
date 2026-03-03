@@ -63,7 +63,7 @@
     }
 
     // if(!empty($seller)){
-        $requete .= " AND p.id_vendeur IN (:id_vendeur)";
+        $requete .= " AND p.id_vendeur IN (31,29)";
     // }
     // $params[':id_vendeur'] = "31";
     $sortableFields = [
