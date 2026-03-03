@@ -298,10 +298,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers: {
-                    vendeur1 : "29",
-                    vendeur2 : "30",
-                }
+                sellers: []
             },
             sort: {
                 field: "nom_public", 
@@ -360,6 +357,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
 
+        
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
