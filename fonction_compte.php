@@ -163,6 +163,8 @@
                             // transferer_panier_visiteur_compte($resSQL['id_compte']);
                         }
 
+                        print_r($_SESSION);
+
                         return true;
                     }
                     else {

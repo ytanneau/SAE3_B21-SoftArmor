@@ -5,30 +5,30 @@ define('HOME_GIT', '../../');
 
 require HOME_GIT . 'fonction_2FA.php';
 
+
 // Rediriger l'utilisateur si la 2FA est déjà activée sur son compte
 if (!isset($_SESSION)) {
     session_start();
-
-    // Empêcher les visiteurs (non-connectés) d'accéder à la page
-    if (!isset($_SESSION['logged_in'])) {
-        header('location: ' . HOME_SITE);
-        exit;
-    }
-
-    // Empêcher les comptes avec 2FA d'accéder à la page
-    if (a_2FA($_SESSION['id_compte'])) {
-        if (isset($_SESSION['raison_sociale'])){
-            header('location: '. HOME_SITE .'vendeur/stock/');
-
-        } else {
-            header('location: ' . HOME_SITE);
-
-        }
-
-        exit;
-    }
 }
 
+// Empêcher les visiteurs (non-connectés) d'accéder à la page
+if (!isset($_SESSION['logged_in'])) {
+    header('location: ' . HOME_SITE);
+    exit;
+}
+
+// Empêcher les comptes avec 2FA d'accéder à la page
+if (a_2FA($_SESSION['id_compte'])) {
+    if (isset($_SESSION['raison_sociale'])){
+        header('location: '. HOME_SITE .'vendeur/stock/');
+
+    } else {
+        header('location: ' . HOME_SITE);
+
+    }
+
+    exit;
+}
 
 require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
@@ -69,16 +69,17 @@ $grCodeUri = $otp->getQrCodeUri(
     document.getElementById("valider").onclick = function() {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
-            if (this.responseText == '0') {
+            if (this.responseText == '1') {
+                document.getElementById("erreur").innerHTML = "Code PIN correcte";
+                
+            } else {
                 nbTentative -= 1;
                 document.getElementById("erreur").innerHTML = "Code PIN incorrecte, " + nbTentative + " tentatives restantes";
-
-            } else {
-                document.getElementById("erreur").innerHTML = "Code PIN correcte";
             }
 
             if (nbTentative == 0) {
-                document.getElementById("erreur").innerHTML = "Erreur, ";
+                document.getElementById("erreur").innerHTML = "Erreur, activation de la double authentification refusée";
+                document.getElementById("valider").style.display = "none";
             }
         }
 

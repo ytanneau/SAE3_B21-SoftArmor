@@ -27,7 +27,6 @@ if (!isset($_GET['codePIN']) || strlen($_GET['codePIN']) != 6) {
 }
 
 
-
 require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
 
@@ -39,6 +38,7 @@ if (verify_2FA($otp, $_GET['codePIN'])) {
     echo '0';
     exit;
 }
+
 
 // si le code PIN est correcte, alors on enregistre dans la BDD
 if ($correcte) {
