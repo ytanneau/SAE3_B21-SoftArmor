@@ -39,7 +39,7 @@ $clock = new InternalClock();
 $otp = TOTP::generate($clock);
 $otp = $otp->withPeriod(60);
 
-$otp = $otp->withLabel('Alizon');
+$otp = $otp->withLabel('Alizon - ' . $_SESSION['pseudo'] ?? $_SESSION['raison_sociale']);
 $grCodeUri = $otp->getQrCodeUri(
     'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
     '[DATA]'
