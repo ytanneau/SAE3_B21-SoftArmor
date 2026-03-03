@@ -3478,6 +3478,9 @@ aside .achat:hover {
 #panneauCarte .enteteCarte #btnFermerCarte {
   height: -moz-fit-content;
   height: fit-content;
+  background-color: white;
+  font-size: xx-large;
+  border: none;
 }
 
 /* Quand actif */
