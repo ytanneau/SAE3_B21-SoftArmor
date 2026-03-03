@@ -3447,6 +3447,12 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
 }
+#panneauCarte .enteteCarte #btnFermerCarte {
+  height: 50px;
+  position: fixed;
+  right: 0;
+  top: 50%;
+}
 
 /* Quand actif */
 #panneauCarte.active {

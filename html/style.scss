@@ -2074,6 +2074,12 @@ aside {
     .enteteCarte{
         display:flex;
         flex-direction: row;
+        #btnFermerCarte{
+            height: 50px;
+            position: fixed;
+            right: 0;
+            top: 50%;
+        }
     }
 }
 
