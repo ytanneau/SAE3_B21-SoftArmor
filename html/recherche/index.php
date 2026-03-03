@@ -121,7 +121,7 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 const btn_open = document.getElementById("openPanel")
                 const panel = document.getElementById("sidePanel")
 
-                openBtn.addEventListener("click", () => {
+                btn_open.addEventListener("click", () => {
                     panel.classList.add("active");
                     overlay.classList.add("active");
                 });
