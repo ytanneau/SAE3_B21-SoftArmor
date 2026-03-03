@@ -1,7 +1,4 @@
-import {TimeMilli, Compare} from "./DataTime";
-
-
-
+import {TimeMilli, Compare} from "./DataTime.js";
 
 
 export default class DataGraph {
@@ -32,12 +29,6 @@ export default class DataGraph {
     };
 
     static groupByTime(data, type, templete = createTemplete(type)) {
-        let now = new Date();
-        console.log(now.toLocaleString());
-
-        console.log(now.getDate());
-        console.log(now.getMonth());
-        console.log(now.getFullYear());
 
         if (type == 'P') {
 
