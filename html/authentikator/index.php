@@ -1,9 +1,9 @@
 <?php
 
-define('HOME_SITE', '../../');
-define('HOME_GIT', '../../../');
+define('HOME_SITE', '../');
+define('HOME_GIT', '../../');
 
-require '../../../vendor/autoload.php';
+require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
 use OTPHP\InternalClock;
 
