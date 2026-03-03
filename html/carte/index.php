@@ -134,10 +134,12 @@
                             if(cle == 'id_adresse'){
                                 if(vendeur[info] == objet_adresse[cle]){
                                     adresse_valide = true
+                                    adresse = objet_adresse['adresse'] + 
+                                    objet_adresse['complement_adresse'] + 
+                                    objet_adresse['ville'] + 
+                                    objet_adresse['code_postal']
                                 }
-                            } else if(adresse_valide){
-                                adresse = adresse + objet_adresse[cle]
-                            }  
+                            }
                         }
                     });
                 }
