@@ -3,6 +3,10 @@
     define('HOME_SITE', '../../');
     define('HOME_GIT', '../../../');
     
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
     if ($_POST != null){
         if (!isset($_POST['nom'])) $_POST['nom'] = "";
         if (!isset($_POST['prenom'])) $_POST['prenom'] = "";
@@ -24,6 +28,7 @@
             if (empty($erreurs)) {
                 // L'inscription est réussie, donc connexion directe
                 connect_compte($_POST['email'], $_POST['mdp'], "client", "");
+                $_SESSION['logged_in'] = true;
             }
         } else {
             $erreurs['fatal'] = true;
@@ -35,7 +40,7 @@
 
     
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        $param = "";
+        $page = "";
         if (isset($_GET['produit'])) {
             if ($_GET['produit'] == 'panier') {
                 $page = '../../panier';
@@ -62,6 +67,7 @@
         <?php if (isset($erreurs) && $erreurs == []) { ?>
             <h1>Votre compte a été créé</h1>
             <p>Voulez-vous activer la double authentification ? <a href="../authentificator">Cliquez ici</a></p>
+            <p><a href=<?=HOME_SITE?>>Revenir à l'accueil</a></p>
 
         <?php } else if (isset($erreurs['fatal'])) { ?>
             <h1 class="fatale">Désolé nous rencontrons des problèmes serveur</h1>
