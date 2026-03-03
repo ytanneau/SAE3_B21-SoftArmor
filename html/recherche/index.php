@@ -302,8 +302,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
 
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
-            e.log(resultGrid);
-            // Vider les produits déjà préconsolsents dans la grille
+            // console.log(resultGrid);
+            // Vider les produits déjà présents dans la grille
             while (resultGrid.firstChild) {
                 resultGrid.removeChild(resultGrid.firstChild);
             }
