@@ -451,7 +451,7 @@ if ($_POST != NULL){
                         <img src="<?= HOME_SITE.$image_produit['url_image'];?>" alt="<?= htmlentities($image_produit['alt_image'] ?? '')?>" title="<?= htmlentities($image_produit['titre_image'] ?? '')?>">
 
                         <div>
-                            <div>
+                            <!-- <div> -->
                                 <?php if (isset($image_profil)) {?>
                                     <img src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt_image'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
                                 <?php
@@ -462,7 +462,7 @@ if ($_POST != NULL){
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($row['note'] ?? '')) ?>
                                 </div>
-                            </div>
+                            <!-- </div> -->
 
                             <div>
                                 <h3><?= htmlentities($row['titre'] ?? '') ?></h3>
