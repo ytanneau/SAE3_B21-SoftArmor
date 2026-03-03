@@ -37,16 +37,14 @@ finistere.addEventListener('click', () => {
 
         // affichage adapte au groupe
         map.fitBounds(group.getBounds())
-        console.log(groupSelectionne)
     } else {
         map.removeLayer(polygonFinistere)
 
-        groupSelectionne.pop(polygonFinistere)
+        groupSelectionne.pop()
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
-        console.log(groupSelectionne)
 
     }
 });
@@ -59,17 +57,15 @@ cotedarmor.addEventListener('click', (e) => {
         group = L.featureGroup(groupSelectionne)
 
         map.fitBounds(group.getBounds())
-        console.log(groupSelectionne)
 
     } else {
         map.removeLayer(polygonCoteDarmor)
 
-        groupSelectionne.pop(polygonCoteDarmor)
+        groupSelectionne.pop()
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
-        console.log(groupSelectionne)
 
     }
 })
@@ -81,19 +77,15 @@ illeetvilaine.addEventListener('click', (e) => {
         groupSelectionne.push(polygonIlleEtVilaine)
         group = L.featureGroup(groupSelectionne)
 
-        map.fitBounds(group.getBounds())
-                console.log(groupSelectionne)
-
+        map.fitBounds(group.getBounds())   
     } else {
         map.removeLayer(polygonIlleEtVilaine)
 
-        groupSelectionne.pop(polygonIlleEtVilaine)
+        groupSelectionne.pop()
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
-            console.log(groupSelectionne)
-
     }
 })
 
@@ -105,17 +97,13 @@ morbihan.addEventListener('click', (e) => {
         group = L.featureGroup(groupSelectionne)
         
         map.fitBounds(group.getBounds())
-                console.log(groupSelectionne)
-
     } else {
         map.removeLayer(polygonMorbihan)
 
-        groupSelectionne.pop(polygonMorbihan)
+        groupSelectionne.pop()
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
-            console.log(groupSelectionne)
-
     }
 })
