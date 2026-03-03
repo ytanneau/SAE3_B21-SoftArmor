@@ -14,7 +14,7 @@ if (!isset($_SESSION['logged_in'])) {
     header('location: ' . HOME_SITE);
     exit;
 }
-        
+
 require HOME_GIT . 'fonction_2FA.php';
 require HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;

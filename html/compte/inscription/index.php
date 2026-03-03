@@ -39,20 +39,6 @@
     }
 
     
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        $page = "";
-        if (isset($_GET['produit'])) {
-            if ($_GET['produit'] == 'panier') {
-                $page = '../../panier';
-            } else {
-                $page = '../../produit?produit=' . $_GET['produit'];
-            }
-        }
-        
-        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . $page ?? '');
-        exit;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -66,7 +52,7 @@
     <main>
         <?php if (isset($erreurs) && $erreurs == []) { ?>
             <h1>Votre compte a été créé</h1>
-            <p>Voulez-vous activer la double authentification ? <a href="../authentificator">Cliquez ici</a></p>
+            <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
             <p><a href=<?=HOME_SITE?>>Revenir à l'accueil</a></p>
 
         <?php } else if (isset($erreurs['fatal'])) { ?>
