@@ -3430,6 +3430,13 @@ aside .achat:hover {
   z-index: 50;
 }
 
+#btnOuvrirCarte #btnFermerCarte {
+  height: 50px;
+  position: fixed;
+  right: 0;
+  top: 50%;
+}
+
 /* Panneau */
 #panneauCarte {
   position: fixed;
@@ -3446,12 +3453,6 @@ aside .achat:hover {
 #panneauCarte .enteteCarte {
   display: flex;
   flex-direction: row;
-}
-#panneauCarte .enteteCarte #btnFermerCarte {
-  height: 50px;
-  position: fixed;
-  right: 0;
-  top: 50%;
 }
 
 /* Quand actif */

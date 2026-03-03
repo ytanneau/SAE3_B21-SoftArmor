@@ -2058,7 +2058,14 @@ aside {
     transition: opacity 0.3s ease;
     z-index: 50;
 }
-
+#btnOuvrirCarte{
+    #btnFermerCarte{
+        height: 50px;
+        position: fixed;
+        right: 0;
+        top: 50%;
+    }
+}   
 /* Panneau */
 #panneauCarte {
     position: fixed;
@@ -2074,12 +2081,6 @@ aside {
     .enteteCarte{
         display:flex;
         flex-direction: row;
-        #btnFermerCarte{
-            height: 50px;
-            position: fixed;
-            right: 0;
-            top: 50%;
-        }
     }
 }
 
