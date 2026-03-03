@@ -226,6 +226,41 @@ hr {
     @media (max-width: 1024px) {
         width: 100%;
     }
+    .zoneCarte {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100vh;
+        background: white;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+        z-index: 100;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    /* Etat actif */
+    .zoneCarte.active {
+        transform: translateX(0);
+    }
+
+    .ombre.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Bouton fermer */
+    .fermerCarte {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
 }
 
 .TriEtFiltre fieldset {
@@ -2051,8 +2086,7 @@ aside {
 
 
 
-/* Overlay sombre */
-#overlay {
+.ombre {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.4);
@@ -2063,38 +2097,3 @@ aside {
 }
 
 /* Panneau latéral */
-#sidePanel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 80%;
-    height: 100vh;
-    background: white;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-    z-index: 100;
-    padding: 2rem;
-    overflow-y: auto;
-}
-
-/* Etat actif */
-#sidePanel.active {
-    transform: translateX(0);
-}
-
-#overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Bouton fermer */
-#closePanel {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}

@@ -113,36 +113,35 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             </section>
 
             <!-- Zone de la carte -->
-            <button id="openPanel">Ouvrir la carte</button>
+            <button id="ourvirPanneau" class="ourvirPanneau">Ouvrir la carte</button>
 
-            <div id="overlay"></div>
+            <div id="ombre" class="ombre"></div>
 
-            <section id="sidePanel">
-                <button id="closePanel">✕</button>
+            <section id="zoneCarte" class="zoneCarte">
+                <button id="fermerCarte" classe="fermerCarte">✕</button>
                 <h2>Carte</h2>
             </section>
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
 
-                    const openBtn = document.getElementById("openPanel");
-                    const closeBtn = document.getElementById("closePanel");
-                    const panel = document.getElementById("sidePanel");
-                    const overlay = document.getElementById("overlay");
+                    const openBtn = document.getElementById("ourvirPanneau");
+                    const closeBtn = document.getElementById("fermerCarte");
+                    const panel = document.getElementById("zoneCarte");
+                    const ombre = document.getElementById("ombre");
 
                     openBtn.addEventListener("click", () => {
                         panel.classList.add("active");
-                        overlay.classList.add("active");
-                        document.body.style.overflow = "hidden"; // bloque scroll
+                        ombre.classList.add("active");
                     });
 
-                    function closePanel() {
+                    function fermerCarte() {
                         panel.classList.remove("active");
-                        overlay.classList.remove("active");
+                        ombre.classList.remove("active");
                         document.body.style.overflow = "auto";
                     }
 
-                    closeBtn.addEventListener("click", closePanel);
-                    overlay.addEventListener("click", closePanel);
+                    closeBtn.addEventListener("click", fermerCarte);
+                    ombre.addEventListener("click", fermerCarte);
 
                 });
             </script>
