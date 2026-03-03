@@ -70,7 +70,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <label for="codePIN">Code PIN</label>
-    <input type="number" id="codePIN" name="codePIN">
+    <form action="" method="post">
+        <label for="codePIN">Code PIN</label>
+        <input type="number" id="codePIN" name="codePIN">
+    </form>
 </body>
 </html>
