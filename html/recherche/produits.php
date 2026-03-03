@@ -17,6 +17,7 @@
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
+    $sellers = [];
     foreach ($filters['sellers'] ?? [] as $seller) {
         $sellers[] = $seller;
     }
