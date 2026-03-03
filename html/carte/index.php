@@ -85,7 +85,7 @@
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
-            input_checkbox.foreach(input => {
+            input_checkbox.forEach(input => {
                 input.checked = false
             })
         })
