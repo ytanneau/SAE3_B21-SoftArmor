@@ -61,9 +61,9 @@
     }
 
     if(!empty($seller)){
-        $requete .= " AND p.id_vendeur = :id_vendeur";
+        $requete .= " AND p.id_vendeur = 29";
     }
-    $params[':id_vendeur'] = "31";
+    // $params[':id_vendeur'] = "31";
     $sortableFields = [
         'nom_public' => 'nom_public',
         'note_moy'   => 'note_moy',
