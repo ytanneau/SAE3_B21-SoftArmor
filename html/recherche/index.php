@@ -364,7 +364,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         });
 
         
-        let radios = document.querySelectorAll("input[name=\"prix\"]");
+        let radios = document.querySelectorAll('input[name=\"prix\"]');
 
         radios.forEach(function(radio) {
             radio.addEventListener('change', function() {
