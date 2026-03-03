@@ -11,10 +11,6 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 // Empêcher les visiteurs (non-connectés) d'accéder à la page
 if (!isset($_SESSION['logged_in'])) {
     header('location: ' . HOME_SITE);
