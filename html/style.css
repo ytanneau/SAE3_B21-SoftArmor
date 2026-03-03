@@ -3411,6 +3411,10 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
 }
+#div_map .enteteCarte {
+  display: flex;
+  flex-direction: row;
+}
 #div_map #map {
   height: 650px;
   width: 1000px;
