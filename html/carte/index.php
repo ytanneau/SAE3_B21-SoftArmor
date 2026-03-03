@@ -77,17 +77,15 @@
 
         // Filtres 
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const cotedarmor = document.getElementById("cotedarmor")
-        const finistere = document.getElementById("finistere")
-        const illeetvilaine = document.getElementById("illeetvilaine")
-        const morbihan = document.getElementById("morbihan")
+        // const cotedarmor = document.getElementById("cotedarmor")
+        // const finistere = document.getElementById("finistere")
+        // const illeetvilaine = document.getElementById("illeetvilaine")
+        // const morbihan = document.getElementById("morbihan")
+        const input_checkbox = document.querySelectorAll("input")
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
-            cotedarmor.checked = false
-            finistere.checked = false
-            illeetvilaine.checked = false
-            morbihan.checked = false
+            input_checkbox.checked = false
         })
 
     
