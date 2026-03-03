@@ -72,24 +72,9 @@
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        // AFFICHAGE DES FILTRES
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
-
-        // Filtres 
-        const btn_reset_filter = document.getElementById("btn_reset_filter")
-        // const cotedarmor = document.getElementById("cotedarmor")
-        // const finistere = document.getElementById("finistere")
-        // const illeetvilaine = document.getElementById("illeetvilaine")
-        // const morbihan = document.getElementById("morbihan")
-        const input_checkbox = document.querySelectorAll("input")
-        console.log(input_checkbox)
-        btn_reset_filter.addEventListener('click', (e) => {
-            e.preventDefault()
-            input_checkbox.forEach(input => {
-                input.checked = false
-            })
-        })
-
         const liste_vendeur = document.getElementById("liste_vendeur")
         const init = document.getElementById("init")
 
@@ -113,6 +98,23 @@
         }
 
         afficher_listes_vendeur()
+
+        // GESTIONS DES FILTRES
+        const btn_reset_filter = document.getElementById("btn_reset_filter")
+        // const cotedarmor = document.getElementById("cotedarmor")
+        // const finistere = document.getElementById("finistere")
+        // const illeetvilaine = document.getElementById("illeetvilaine")
+        // const morbihan = document.getElementById("morbihan")
+        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+
+        console.log(input_checkbox)
+
+        btn_reset_filter.addEventListener('click', (e) => {
+            e.preventDefault()
+            input_checkbox.forEach(input => {
+                input.checked = false
+            })
+        })  
 
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
