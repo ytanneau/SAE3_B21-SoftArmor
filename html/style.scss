@@ -41,6 +41,17 @@ hr {
     margin: 2em 0;
 }
 
+.bouton {
+    @include bouton_new;
+    background-color: $focus;
+    color: white;
+    font-size: $font_size_normal;
+    margin-top: 2%;
+    @media (max-width: 1440px) {
+        margin-top: 5%;
+    }
+}
+
 .input_quantite {
     * {
         font-family: $font_title;
@@ -524,17 +535,6 @@ ul#results {
         }
     }
 
-}
-
-.bouton {
-    @include bouton_new;
-    background-color: $focus;
-    color: white;
-    font-size: $font_size_normal;
-    margin-top: 2%;
-    @media (max-width: 1440px) {
-        margin-top: 5%;
-    }
 }
 
 // Bouton Ajouter un avis

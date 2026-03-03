@@ -54,6 +54,41 @@ hr {
   margin: 2em 0;
 }
 
+.bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bouton a {
+  text-decoration: none;
+  color: black;
+}
+.bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.bouton {
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+}
+@media (max-width: 1440px) {
+  .bouton {
+    margin-top: 5%;
+  }
+}
+
 .input_quantite * {
   font-family: "Montserrat";
   font-weight: bold;
@@ -1350,41 +1385,6 @@ ul#results > li > a > h3 {
   }
   .infos section .form_infos article:last-child .bouton {
     margin-top: 1.2em;
-  }
-}
-
-.bouton {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.bouton a {
-  text-decoration: none;
-  color: black;
-}
-.bouton:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.bouton {
-  background-color: #BB2BB2;
-  color: white;
-  font-size: 1em;
-  margin-top: 2%;
-}
-@media (max-width: 1440px) {
-  .bouton {
-    margin-top: 5%;
   }
 }
 
