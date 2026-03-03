@@ -238,10 +238,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
-        // const cotedarmor = document.getElementById("cotedarmor")
-        // const finistere = document.getElementById("finistere")
-        // const illeetvilaine = document.getElementById("illeetvilaine")
-        // const morbihan = document.getElementById("morbihan")
         const input_checkbox = document.querySelectorAll("input[type=checkbox]")
 
         console.log(input_checkbox)
@@ -251,7 +247,31 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             input_checkbox.forEach(input => {
                 input.checked = false
             })
-        })  
+        }) 
+
+        const cotedarmor = document.getElementById("cotedarmor")
+        const finistere = document.getElementById("finistere")
+        const illeetvilaine = document.getElementById("illeetvilaine")
+        const morbihan = document.getElementById("morbihan")
+
+        cotedarmor.addEventListener('click', (e) => {
+            if(cotedarmor.checked && finistere.checked){
+                map.setView([48.321,-3.474],9)
+                let polygon = L.polygon([
+                    [48.3900, -4.7800],
+                    [48.5500, -4.6000],
+                    [48.6700, -4.2000],
+                    [48.7000, -3.8000],
+                    [48.5800, -3.6000],
+                    [48.4500, -3.5500],
+                    [48.3500, -3.7000],
+                    [48.2800, -3.9500],
+                    [48.2500, -4.3000],
+                    [48.3000, -4.6500],
+                    [48.3900, -4.7800] 
+                ])
+            }
+        })
 
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
