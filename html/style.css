@@ -25,6 +25,8 @@ main {
      object-fit: contain;
   min-width: 200px;
   max-width: 200px;
+  background-color: #f3f1fb;
+  width: 200px;
   height: 200px;
   border-radius: 5px;
 }
@@ -34,6 +36,8 @@ main {
      object-fit: contain;
   min-width: 25px;
   max-width: 25px;
+  background-color: #f3f1fb;
+  width: 25px;
   height: 25px;
   border-radius: 5px;
 }
@@ -416,8 +420,7 @@ hr {
   padding: 1em;
   font-size: 2.25em;
   background-color: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -596,8 +599,7 @@ hr {
   padding: 1em;
   font-size: 2.25em;
   background-color: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
@@ -941,6 +943,8 @@ ul#results > li > a > img {
      object-fit: contain;
   min-width: 15vw;
   max-width: 15vw;
+  background-color: #f3f1fb;
+  width: 15vw;
   height: 15vw;
   border-radius: 5px;
 }
@@ -948,7 +952,6 @@ ul#results > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 2em;
 }
 ul#results > li > a > div > img {
   width: 20px;
@@ -957,6 +960,9 @@ ul#results > li > a > div > img {
 }
 ul#results > li > a > div > p {
   margin: 5px 0;
+}
+ul#results > li > a > div {
+  height: 2em;
 }
 ul#results > li > a > p, ul#results > li > a > h3 {
   margin: 5px 0;
@@ -1006,11 +1012,6 @@ ul#results > li > a > h3 {
   align-items: center;
   align-items: normal;
   width: 100%;
-  background-color: #CBCCEA;
-  width: 30vw;
-  border-radius: 20px;
-  padding: 1em 3em 2em;
-  font-size: 1em;
 }
 .form_client main form label {
   margin-top: 5%;
@@ -1045,6 +1046,13 @@ ul#results > li > a > h3 {
 }
 .form_client main form .error {
   color: #E43737;
+}
+.form_client main form {
+  background-color: #CBCCEA;
+  width: 30vw;
+  border-radius: 20px;
+  padding: 1em 3em 2em;
+  font-size: 1em;
 }
 .form_client main a {
   color: black;
@@ -1088,7 +1096,6 @@ ul#results > li > a > h3 {
   justify-content: center;
   gap: 20px;
 }
-<<<<<<< Updated upstream
 #avis_vendeur article h1 {
   margin-top: 0;
 }
@@ -1097,13 +1104,8 @@ ul#results > li > a > h3 {
      object-fit: contain;
   min-width: 10vw;
   max-width: 10vw;
-=======
-#avis_vendeur article div:first-child img {
-  -o-object-fit: contain;
-     object-fit: contain;
   background-color: #f3f1fb;
   width: 10vw;
->>>>>>> Stashed changes
   height: 10vw;
   border-radius: 5px;
   background-color: white;
@@ -1176,11 +1178,6 @@ ul#results > li > a > h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 20px;
-  padding: 0.5em;
-  margin-top: 2em;
-  margin-bottom: 1em;
-  font-size: 1.5em;
 }
 .infos .image_bouton a {
   text-decoration: none;
@@ -1188,6 +1185,13 @@ ul#results > li > a > h3 {
 }
 .infos .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+.infos .image_bouton {
+  border-radius: 20px;
+  padding: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
 }
 .infos .image_bouton p {
   font-size: 10px;
@@ -1197,19 +1201,27 @@ ul#results > li > a > h3 {
      object-fit: contain;
   min-width: 10vw;
   max-width: 10vw;
+  background-color: #f3f1fb;
+  width: 10vw;
   height: 10vw;
   border-radius: 5px;
   margin-left: 0;
   margin-right: 1em;
 }
+.infos .liste_avis div:first-child img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  min-width: 10vw;
+  max-width: 10vw;
+  background-color: #f3f1fb;
+  width: 10vw;
+  height: 10vw;
+  border-radius: 5px;
+  background-color: white;
+}
 .infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
-  align-items: normal;
-  width: 100%;
-  width: 60vw;
-  border-radius: 20px;
-  padding: 3em 3em;
 }
 .infos .form_infos article {
   display: flex;
@@ -1217,6 +1229,10 @@ ul#results > li > a > h3 {
   padding: 0 2em;
 }
 .infos .form_infos > :last-child {
+  width: 100%;
+}
+.infos .form_infos {
+  align-items: normal;
   width: 100%;
 }
 .infos .form_infos label {
@@ -1252,6 +1268,11 @@ ul#results > li > a > h3 {
 }
 .infos .form_infos .error {
   color: #E43737;
+}
+.infos .form_infos {
+  width: 60vw;
+  border-radius: 20px;
+  padding: 3em 3em;
 }
 .infos .form_infos .champ {
   border: rgba(0, 0, 0, 0.25) 1px solid;
@@ -1469,6 +1490,8 @@ div:has(> aside) {
      object-fit: contain;
   min-width: 300px;
   max-width: 300px;
+  background-color: #f3f1fb;
+  width: 300px;
   height: 300px;
   border-radius: 5px;
 }
@@ -1477,6 +1500,8 @@ div:has(> aside) {
      object-fit: contain;
   min-width: 100px;
   max-width: 100px;
+  background-color: #f3f1fb;
+  width: 100px;
   height: 100px;
   border-radius: 5px;
 }
@@ -1486,12 +1511,12 @@ div:has(> aside) {
   font-family: "Montserrat";
   font-weight: 700;
 }
+.detail_produit > article:first-child > div:nth-child(2) > div .etoiles {
+  margin-right: 0.5em;
+}
 .detail_produit > article:first-child > div:nth-child(2) > div {
   display: flex;
   align-items: center;
-}
-.detail_produit > article:first-child > div:nth-child(2) > div .etoiles {
-  margin-right: 0.5em;
 }
 .detail_produit > article:first-child > div:nth-child(2) > p:last-child {
   margin-top: 2em;
@@ -1712,6 +1737,8 @@ div:has(> aside) {
      object-fit: contain;
   min-width: 15vw;
   max-width: 15vw;
+  background-color: #f3f1fb;
+  width: 15vw;
   height: 15vw;
   border-radius: 5px;
 }
@@ -1719,7 +1746,6 @@ div:has(> aside) {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 2em;
 }
 .accueil > main > div > ul > li > a > div > img {
   width: 20px;
@@ -1728,6 +1754,9 @@ div:has(> aside) {
 }
 .accueil > main > div > ul > li > a > div > p {
   margin: 5px 0;
+}
+.accueil > main > div > ul > li > a > div {
+  height: 2em;
 }
 .accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
   margin: 5px 0;
@@ -1925,7 +1954,6 @@ h3 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  min-width: 100%;
 }
 .liste main .bouton a {
   text-decoration: none;
@@ -1933,6 +1961,9 @@ h3 {
 }
 .liste main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.liste main .bouton {
+  min-width: 100%;
 }
 .liste main .grave {
   display: default;
@@ -2038,11 +2069,11 @@ h3 {
   .liste main ul li article:first-child form button:hover {
     background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
   }
-  .liste main ul li article:last-child {
-    flex-direction: column-reverse;
-  }
   .liste main ul li article:last-child form {
     display: none;
+  }
+  .liste main ul li article:last-child {
+    flex-direction: column-reverse;
   }
   .liste main ul .prix {
     text-align: left;
@@ -2336,6 +2367,8 @@ aside .achat:hover {
      object-fit: contain;
   min-width: 250px;
   max-width: 250px;
+  background-color: #f3f1fb;
+  width: 250px;
   height: 250px;
   border-radius: 5px;
 }
@@ -2381,8 +2414,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  width: 17.45em;
-  padding: 6px;
 }
 .bodyModifProduit .delete_picture a {
   text-decoration: none;
@@ -2390,6 +2421,10 @@ aside .achat:hover {
 }
 .bodyModifProduit .delete_picture:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.bodyModifProduit .delete_picture {
+  width: 17.45em;
+  padding: 6px;
 }
 
 .mainInfoVendeur div {
@@ -2470,9 +2505,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 30px;
-  padding: 0.6em;
-  width: 577px;
 }
 .mainInfoVendeur div #idDesactivationCompte a {
   text-decoration: none;
@@ -2480,6 +2512,11 @@ aside .achat:hover {
 }
 .mainInfoVendeur div #idDesactivationCompte:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.mainInfoVendeur div #idDesactivationCompte {
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
 }
 
 #create_avis {
@@ -2506,11 +2543,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 20px;
-  padding: 0.5em;
-  margin-top: 2em;
-  margin-bottom: 1em;
-  font-size: 1.5em;
 }
 #create_avis main .image_bouton a {
   text-decoration: none;
@@ -2518,6 +2550,13 @@ aside .achat:hover {
 }
 #create_avis main .image_bouton:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+#create_avis main .image_bouton {
+  border-radius: 20px;
+  padding: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
 }
 #create_avis main .image_bouton p {
   font-size: 10px;
@@ -2708,6 +2747,8 @@ aside .achat:hover {
      object-fit: contain;
   min-width: 200px;
   max-width: 200px;
+  background-color: #f3f1fb;
+  width: 200px;
   height: 200px;
   border-radius: 5px;
 }
@@ -2740,7 +2781,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  height: 4em;
 }
 .produit-vendeur input[type=submit] a, .produit-vendeur a.bouton a, .produit-vendeur button.bouton a {
   text-decoration: none;
@@ -2748,6 +2788,9 @@ aside .achat:hover {
 }
 .produit-vendeur input[type=submit]:hover, .produit-vendeur a.bouton:hover, .produit-vendeur button.bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.produit-vendeur input[type=submit], .produit-vendeur a.bouton, .produit-vendeur button.bouton {
+  height: 4em;
 }
 .produit-vendeur .bouton_vendeur_produit {
   display: block;
@@ -3164,8 +3207,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
 }
 .main_promo #valider a {
   text-decoration: none;
@@ -3173,6 +3214,10 @@ aside .achat:hover {
 }
 .main_promo #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.main_promo #valider {
+  margin-top: 20px;
+  width: 100%;
 }
 .main_promo #supprimer_promotion {
   display: block;
@@ -3189,8 +3234,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 10px;
-  padding: 10px 16px 10px 16px;
 }
 .main_promo #supprimer_promotion a {
   text-decoration: none;
@@ -3198,6 +3241,10 @@ aside .achat:hover {
 }
 .main_promo #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.main_promo #supprimer_promotion {
+  margin-top: 10px;
+  padding: 10px 16px 10px 16px;
 }
 .main_promo .block_banniere {
   display: flex;
@@ -3209,6 +3256,8 @@ aside .achat:hover {
      object-fit: contain;
   min-width: 250px;
   max-width: 250px;
+  background-color: #f3f1fb;
+  width: 250px;
   height: 250px;
   border-radius: 5px;
 }
@@ -3222,12 +3271,14 @@ aside .achat:hover {
   border-radius: 5px;
   color: black;
   font-weight: bold;
-  display: flex;
-  justify-content: center;
-  width: 16.2em;
 }
 .main_promo .hide_input_file:hover {
   background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
+}
+.main_promo .hide_input_file {
+  display: flex;
+  justify-content: center;
+  width: 16.2em;
 }
 .main_promo .ajout_banniere {
   margin-top: 20px;
@@ -3247,8 +3298,6 @@ aside .achat:hover {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  width: 17.45em;
-  padding: 6px;
 }
 .main_promo .delete_picture a {
   text-decoration: none;
@@ -3256,6 +3305,10 @@ aside .achat:hover {
 }
 .main_promo .delete_picture:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.main_promo .delete_picture {
+  width: 17.45em;
+  padding: 6px;
 }
 
 .main_accueil {
@@ -3311,4 +3364,17 @@ aside .achat:hover {
 .main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
   width: 4em;
   height: 4em;
+}
+
+#main_map {
+  display: flex;
+  flex-direction: row;
+}
+#main_map #map {
+  height: 650px;
+  width: 1000px;
+}
+#main_map #tri_departement {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=style.css.map */

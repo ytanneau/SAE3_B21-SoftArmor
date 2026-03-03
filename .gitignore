@@ -3,9 +3,13 @@ html/style.css.map
 html/style_mixin.css.map
 html/style_const.css.map
 html/connexion_vend.php
+html/ressources/
 velociraptor/raptor
 test*
 log*
 *.png
 *.log
 *.map
+package.json
+package-lock.json
+node_modules

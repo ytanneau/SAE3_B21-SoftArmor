@@ -1,4 +1,4 @@
-# Exemple de cas d'utilisation
+# Exemples de cas d'utilisation
 
 ## Authentification
 
@@ -6,10 +6,10 @@
 # Client vers Serveur
 1.alizon.5d41402abc4b2a76b9719d911017c592.
 
-# Serveur vers Client si accepter
+# Serveur vers Client si accepté
 CONNECT=1
 
-# Serveur vers Client si refuser 
+# Serveur vers Client si refusé 
 CONNECT=0
 ```
 
@@ -18,13 +18,13 @@ CONNECT=0
 ## Nouveau colis
 
 ```text
-# Client demande la prise en charge un nouveau colis
+# Client demande la prise en charge d'un nouveau colis
 2
 
-# Serveur accepte ne nouveau colis
+# Serveur accepte le nouveau colis
 COLIS=7A74KHYV33SM
 
-# Server refuse le nouveau colis
+# Serveur refuse le nouveau colis
 ERROR=2
 ```
 
@@ -33,7 +33,7 @@ ERROR=2
 ## Info colis
 
 ```text
-# Client demande la prise en charge un nouveau colis
+# Client demande la prise en charge d'un nouveau colis
 3.7A74KHYV33SM
 
 # Serveur si le colis existe
@@ -42,7 +42,7 @@ REMISE=N/A
 RAISON=N/A
 DATE=2026-01-18 21:43:39
 
-# Server existe pas colis
+# Serveur si le colis n'existe pas
 ERROR=3
 ```
 
@@ -51,14 +51,14 @@ ERROR=3
 ## Photo colis
 
 ```text
-# Client demande la prise en charge un nouveau colis
+# Client demande la prise en charge d'un nouveau colis
 2
 
-# Serveur envois la photo en binaire(# pour signifer la fin de l'image)
+# Serveur envoie la photo en binaire (# pour signifer la fin de l'image)
 PHOTO=01010110110101010100...
 ...1011110# 
 
-# Server photo existe pas
+# Serveur si la photo n'existe pas
 ERROR=4
 ```
 
@@ -67,8 +67,8 @@ ERROR=4
 ## Fin de communication
 
 ```
-# Client demande de fermé la communication
+# Client demande de fermer la communication
 -1
 
-# Le server la ferme
+# Serveur ferme la connexion
 ```

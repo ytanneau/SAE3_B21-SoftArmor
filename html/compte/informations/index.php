@@ -9,9 +9,12 @@ define('MAX_SIZE', 2 * 1024 * 1024);
 // lance la session et si il n'est pas connecté est renvoyé a la page d'accueil
 if (!isset($_SESSION)) {
     session_start();
-    if(isset($_SESSION['raison_sociale'])){
+
+    if (isset($_SESSION['raison_sociale'])){
         header('location: '.HOME_GIT.'vendeur/stock/');
+        exit;
     }
+
     if (!isset($_SESSION['logged_in'])) {
         header('location: ../../');
         exit;
@@ -38,6 +41,9 @@ if (isset($info_compte['id_image_profil'])) {
 
 //recuperer les avis du compte
 $avis = get_avis_client($_SESSION['id_compte']);
+
+// Savoir si le client a activé la double authentification (2FA)
+$a_2FA = a_2FA($_SESSION['id_compte']);
 
 //traitement de la suppression d'un avis avec image
 if (isset($_GET['supprimer_avis_image']) && isset($_GET['id_produit']) && isset($_GET['url_img_avis']) && isset($_GET['id_client'])){
@@ -423,6 +429,12 @@ if ($_POST != NULL){
 
                     <button id="test1" type="submit" class="bouton modif">Modifier mes informations</button>
                     <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
+
+                    <?php if (!$a_2FA) { ?>
+                        <a class="bouton" href="<?= HOME_SITE . "authentikator" ?>">Activer la 2FA</a>
+                    <?php } else { ?>
+                        <a class="bouton" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                    <?php } ?>
                 </article>
             </form>
 

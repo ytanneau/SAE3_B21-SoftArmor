@@ -209,13 +209,10 @@
 
 @mixin image_produit($taille, $angle: $angle_petit) {
     object-fit: contain;
-<<<<<<< Updated upstream
     min-width: $taille;
     max-width: $taille;
-=======
     background-color: $couleur_fond_produit;
     width: $taille;
->>>>>>> Stashed changes
     height: $taille;
     border-radius: $angle;
 }

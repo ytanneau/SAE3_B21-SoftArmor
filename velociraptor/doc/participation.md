@@ -1,17 +1,17 @@
-# La participation au projet raptor
+# La participation au projet Délivaptor
 
 ---
 
-## Dévelopement
+## Développement
 
 **Serveur Raptor**
  - Yann TANNEAU : 100%
 
-**Inrementator**
- - Edouare Le Laye : 100%
+**Incrementator (script simulant l'avancement du temps)**
+ - Edouard LE LAY : 100%
 
 **Client Alizon**
- - Edouare Le Laye : 100%
+ - Edouard LE LAY : 100%
 
 ---
 
@@ -19,13 +19,13 @@
 
 **Protocole**
  - Yann TANNEAU : 80%
- - Edouare Le Laye : 20%
+ - Edouard LE LAY : 20%
 
-**usecase**
+**Use cases**
  - Yann TANNEAU : 100%
 
 **video**
-
+ - Yann TANNEAU : 100%
 
 
 
