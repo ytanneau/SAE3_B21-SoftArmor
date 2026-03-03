@@ -20,6 +20,9 @@ if ($_POST != null) {
         // Si pas de double authentification, connecter directement
         if (!a_2FA($_SESSION['id_compte'])) {
             $_SESSION['logged_in'] = true;
+
+            require "fonction_panier.php";
+            transferer_panier_visiteur_compte($resSQL['id_compte']);
         } else {
             header('Location: ' . HOME_SITE . "authentikator/");
         }

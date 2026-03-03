@@ -149,7 +149,6 @@
                 if ($resSQL != null) {
 
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
-                        
                         $_SESSION['logged_in'] = false;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
                         $_SESSION['email'] = $email;
@@ -159,8 +158,8 @@
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
 
-                            // require "fonction_panier.php";
-                            // transferer_panier_visiteur_compte($resSQL['id_compte']);
+                            require "fonction_panier.php";
+                            transferer_panier_visiteur_compte($resSQL['id_compte']);
                         }
 
                         return true;
