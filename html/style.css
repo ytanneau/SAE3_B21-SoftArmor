@@ -3420,7 +3420,7 @@ aside .achat:hover {
   flex-direction: column;
 }
 
-.ombre {
+#ombre {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
@@ -3430,18 +3430,8 @@ aside .achat:hover {
   z-index: 50;
 }
 
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 999;
-}
-
 /* Panneau */
-#sidePanel {
+#panneauCarte {
   position: fixed;
   top: 0;
   right: 0;
@@ -3455,11 +3445,11 @@ aside .achat:hover {
 }
 
 /* Quand actif */
-#sidePanel.active {
+#panneauCarte.active {
   transform: translateX(0);
 }
 
-#overlay.active {
+#ombre.active {
   opacity: 1;
   visibility: visible;
 }/*# sourceMappingURL=style.css.map */
