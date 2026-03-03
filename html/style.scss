@@ -2053,17 +2053,16 @@ aside {
 #ombre {
     position: fixed;
     inset: 0;
-    width: 20%;
+    width: 16%;
     background: rgba(0,0,0,0.4);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
     z-index: 50;
-    
     .fermerCarteDroite{
         height: 100px;
         width: 30px;
-        position: relative;
+        position: absolute;
         right: 0;
         top: 50%;
         background-color: white;
