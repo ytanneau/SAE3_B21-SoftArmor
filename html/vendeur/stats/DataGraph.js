@@ -7,7 +7,7 @@ export default class DataGraph {
         let res = [];
         data.forEach(ele => {
             let v = ele;
-            v.date_commande = new Date(ele.date_commande);
+            v.date = new Date(ele.date_commande);
             res.push(v);
         });
         return res;
@@ -37,8 +37,8 @@ export default class DataGraph {
 
             if (type == 'm') {
                 templete.forEach(ele => {
-                    let liste = data.filter(ele => {
-                        return Compare.CompareMinute(ele.date, data.date);
+                    let liste = data.filter(ele2 => {
+                        return Compare.CompareMinute(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -46,8 +46,8 @@ export default class DataGraph {
             }
             else if (type == 'h') {
                 templete.forEach(ele => {
-                    let liste = data.filter(ele => {
-                        return Compare.CompareHour(ele.date, data.date);
+                    let liste = data.filter(ele2 => {
+                        return Compare.CompareHour(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -55,8 +55,8 @@ export default class DataGraph {
             }
             else if (type == 'D') {
                 templete.forEach(ele => {
-                    let liste = data.filter(ele => {
-                        return Compare.compareMinute(ele.date, data.date);
+                    let liste = data.filter(ele2 => {
+                        return Compare.compareMinute(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -64,8 +64,8 @@ export default class DataGraph {
             }
             else if (type == 'W' || type == 'M') {
                 templete.forEach(ele => {
-                    let liste = data.filter(ele => {
-                        return Compare.CompareDate(ele.date, data.date);
+                    let liste = data.filter(ele2 => {
+                        return Compare.CompareDate(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -73,8 +73,8 @@ export default class DataGraph {
             }
             else if (type == 'Y') {
                 templete.forEach(ele => {
-                    let liste = data.filter(ele => {
-                        return Compare.CompareMonth(ele.date, data.date);
+                    let liste = data.filter(ele2 => {
+                        return Compare.CompareMonth(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -180,6 +180,7 @@ export default class DataGraph {
         data.forEach(ele => {
             somme += ele.prix;
         });
+        return somme;
     }
 
     static sommeQuantiter(data) {
@@ -187,5 +188,6 @@ export default class DataGraph {
         data.forEach(ele => {
             somme += ele.quantite;
         });
+        return somme;
     }
 };

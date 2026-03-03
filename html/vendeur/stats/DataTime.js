@@ -21,13 +21,21 @@ export class Compare {
     }
 }
 
-export const TimeMilli = {
+export class TimeMilli {
     // valeur en millisegonde
-    "UNE_SECONDE" : 1000,
-    "UNE_MINUTE" : 60 * UNE_SECONDE,
-    "UNE_HEURE" : 60 * UNE_MINUTE,
-    "UN_JOUR" : 24 * UNE_HEURE,
-    "UNE_SEMAINE" : 7 * UN_JOUR,
-    "UN_MOIS" : 30 * UN_JOUR,
-    "UN_ANS" : 12 * UN_MOIS
+    static UNE_SECONDE = 1000;
+    static UNE_MINUTE = 1000;
+    static UNE_HEURE = 1000;
+    static UN_JOUR = 1000;
+    static UNE_SECONDE = 1000;
+    
 }
+
+/*
+"UNE_SECONDE" : 1000,
+    "UNE_MINUTE" : 60 * TimeMilli.UNE_SECONDE,
+    "UNE_HEURE" : 60 * TimeMilli.UNE_MINUTE,
+    "UN_JOUR" : 24 * TimeMilli.UNE_HEURE,
+    "UNE_SEMAINE" : 7 * TimeMilli.UN_JOUR,
+    "UN_MOIS" : 30 * TimeMilli.UN_JOUR,
+    "UN_ANS" : 12 * TimeMilli.UN_MOIS*/
