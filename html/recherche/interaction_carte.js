@@ -3,7 +3,7 @@ const finistere = document.getElementById("finistere")
 const illeetvilaine = document.getElementById("illeetvilaine")
 const morbihan = document.getElementById("morbihan")
 
-const polygonFinistere = [
+let polygonFinistere = [
     [-5.0725232805168,48.482730316788],
     [-5.056629077213,48.476824762454],
     [-5.0569734591597,48.468162401798],
