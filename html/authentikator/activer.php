@@ -53,7 +53,7 @@ $grCodeUri = $otp->getQrCodeUri(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php' ?>
-    <title>Alizon - Authentikator</title>
+    <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
     <img src="<?=$grCodeUri?>">

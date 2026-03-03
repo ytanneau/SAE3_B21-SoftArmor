@@ -1,23 +1,52 @@
 <?php
-define('HOME_GIT', "../../../");
-define('HOME_SITE', '../../');
+define('HOME_GIT', "../../");
+define('HOME_SITE', '../');
 
 
 // Rediriger l'utilisateur si la 2FA n'est pas activée sur son compte
 if (!isset($_SESSION)) {
     session_start();
+}
 
-    // Empêcher les visiteurs (non-connectés) d'accéder au site
-    if (!isset($_SESSION['logged_in'])) {
-        header('location: ../../');
-        exit;
-    }
+require_once(HOME_GIT . "fonction_2FA.php");
 
-    // Empêcher les comptes sans 2FA d'accéder à la page
-    if (isset($_SESSION['raison_sociale'])){
-        header('location: '.HOME_GIT.'vendeur/stock/');
-        exit;
+// Empêcher les visiteurs (non-connectés) d'accéder à la page
+// Empêcher les comptes sans 2FA d'accéder à la page
+if (!isset($_SESSION['logged_in']) || !a_2FA($_SESSION['id_compte'])) {
+    header('location:' . HOME_SITE);
+    exit;
+}
+
+require_once(HOME_GIT . 'vendor/autoload.php');
+use OTPHP\TOTP;
+
+$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
+
+// Après soumission du formulaire
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codePIN = htmlentities(trim($_POST['codePIN']));
+    $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
+
+    if ($otp->verify($codePIN)) {
+        desactiver_2FA($_SESSION['id_compte']);
+        header("Location:$accueil");
     }
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include HOME_SITE . 'link_head.php' ?>
+    <title>Alizon - 2FA</title>
+</head>
+<body id="inscription_client">
+    <form action="" method="post">
+        <label for="codePIN">Code PIN</label>
+        <input type="number" id="codePIN" name="codePIN">
+    </form>
+</body>
+</html>

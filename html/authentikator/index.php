@@ -47,9 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     if (isset($_GET['produit'])) {
         if ($_GET['produit'] == 'panier') {
-            $page = '../../panier';
+            $page = 'panier';
         } else {
-            $page = '../../produit?produit=' . $_GET['produit'];
+            $page = 'produit?produit=' . $_GET['produit'];
         }
         // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
         header('Location: ' . HOME_SITE . $page);

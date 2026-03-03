@@ -2,7 +2,7 @@
 
 
     require_once ".config.php";
-    require_once HOME_GIT . "vendor/autoload.php";
+    require_once __DIR__ . "/vendor/autoload.php";
     use OTPHP\TOTP;
 
     function activer_2FA($id_compte, $clef) {
