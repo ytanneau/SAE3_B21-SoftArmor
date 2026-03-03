@@ -21,8 +21,7 @@ if ($_POST != null) {
         if (!a_2FA($_SESSION['id_compte'])) {
             $_SESSION['logged_in'] = true;
 
-            require "fonction_panier.php";
-            transferer_panier_visiteur_compte($resSQL['id_compte']);
+            transferer_panier_visiteur_compte($_SESSION['id_compte']);
         } else {
             header('Location: ' . HOME_SITE . "authentikator/");
         }
