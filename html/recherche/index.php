@@ -129,8 +129,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         <div id="ombre"></div>
 
         <section id="panneauCarte">
-            <button id="btnFermerCarte">✕</button>
-            <h2>Carte</h2>
+            <div class="enteteCarte">
+                <h2>Carte</h2>
+                <button id="btnFermerCarte">✕</button>
+            </div>
             <div id="div_map">
                 <section>
                     <button id="btn_reset_filter">Supprimer les filtres</button>
