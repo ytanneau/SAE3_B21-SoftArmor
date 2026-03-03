@@ -174,6 +174,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             btnOuvrir.addEventListener("click", () => {
                 carte.classList.add("active");
                 ombre.classList.add("active");
+                document.body.style.overflow = "hidden"; // bloque scroll
                 setTimeout(() => {
                     map.invalidateSize();
                 }, 300);
