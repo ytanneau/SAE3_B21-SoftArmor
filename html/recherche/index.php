@@ -128,7 +128,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         </div>
         <!-- Zone de la carte -->
         <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><</button>
-        <div id="ombre"></div>
+        <div id="ombre">
+            <button id="btnFermerCarteDroite" class="fermerCarteDroite">></button>
+        </div>
 
         <section id="panneauCarte">
             <div class="enteteCarte">
@@ -171,6 +173,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
             const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
+            const btnFermerDroite = document.getElementById("btnFermerCarteDroite");
             const carte = document.getElementById("panneauCarte");
             const ombre = document.getElementById("ombre");
             
@@ -199,6 +202,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             }
 
             btnFermer.addEventListener("click", closePanel);
+            btnFermerDroite.addEventListener("click", closePanel);
             ombre.addEventListener("click", closePanel);
 
         });
@@ -294,16 +298,16 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 category: "<?=$categorie?>",
                 price: {min: null, max: null},
                 sales: false,
-                reduc: false
+                reduc: false,
+                seller: [
+                    vendeur1 : "29",
+                    vendeur2 : "30",
+                ]
             },
             sort: {
                 field: "nom_public", 
                 order: "asc"
             }
-            vendeur : [
-                vendeur1 : "29";
-                vendeur2 : "30";
-            ]
         };
 
         // Est-on déjà sur la page de recherche ?

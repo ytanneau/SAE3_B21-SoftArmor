@@ -3413,7 +3413,7 @@ aside .achat:hover {
 }
 #div_map #map {
   height: 650px;
-  width: 800px;
+  width: 1000px;
   margin-left: 20px;
 }
 #div_map #tri_departement {
@@ -3429,6 +3429,16 @@ aside .achat:hover {
   visibility: hidden;
   transition: opacity 0.3s ease;
   z-index: 50;
+}
+#ombre .fermerCarteDroite {
+  height: 100px;
+  width: 30px;
+  position: relative;
+  right: 0;
+  top: 50%;
+  background-color: white;
+  border: none;
+  font-size: xx-large;
 }
 
 .ouvrirCarteDroite {
