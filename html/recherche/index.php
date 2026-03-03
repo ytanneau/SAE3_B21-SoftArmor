@@ -270,6 +270,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     [48.3000, -4.6500],
                     [48.3900, -4.7800] 
                 ])
+                polygon.addTo(map)
             }
         })
 
