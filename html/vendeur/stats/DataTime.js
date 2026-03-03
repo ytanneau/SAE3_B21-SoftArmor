@@ -63,7 +63,7 @@ export class SideMonth {
 
 export class SideDay {
     // valeur en millisegonde
-    static lesJour = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+    static lesJour = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 
     static next(jour){
         for (let index = 0; index < this.lesJour.length; index++) {
