@@ -144,6 +144,8 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 ombre.addEventListener("click", closePanel);
 
             });
+            
+
         </script>
     </main>
 
