@@ -39,14 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transferer_panier_visiteur_compte($_SESSION['id_compte']);
 
             // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
-            if ($_GET['produit'] == 'panier') {
-                $page = HOME_SITE . 'panier';
-            } else {
-                $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+            if (isset($_GET['produit'])) {
+                if ($_GET['produit'] == 'panier') {
+                    $page = HOME_SITE . 'panier';
+                } else {
+                    $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+                }
+    
+                header('Location: ' . HOME_SITE . $page);
+                exit;
             }
-
-            header('Location: ' . HOME_SITE . $page);
-            exit;
         }
 
         // Rediriger par défaut à l'accueil client ou vendeur
