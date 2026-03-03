@@ -28,60 +28,94 @@ let group
 
 finistere.addEventListener('click', () => {
     if (finistere.checked) {
+        // Ajout du polygon
         polygonFinistere.addTo(map)
+
+        // Mise en place du groupe
         groupSelectionne.push(polygonFinistere)
         group = L.featureGroup(groupSelectionne)
+
+        // affichage adapte au groupe
         map.fitBounds(group.getBounds())
+        console.log(groupSelectionne)
     } else {
         map.removeLayer(polygonFinistere)
+
         groupSelectionne.pop(polygonFinistere)
         group = L.featureGroup(groupSelectionne)
+
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
+        console.log(groupSelectionne)
+
     }
 });
 
 cotedarmor.addEventListener('click', (e) => {
     if(cotedarmor.checked) {
         polygonCoteDarmor.addTo(map)
+
         groupSelectionne.push(polygonCoteDarmor)
         group = L.featureGroup(groupSelectionne)
+
         map.fitBounds(group.getBounds())
+        console.log(groupSelectionne)
+
     } else {
         map.removeLayer(polygonCoteDarmor)
+
         groupSelectionne.pop(polygonCoteDarmor)
         group = L.featureGroup(groupSelectionne)
+
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
+        console.log(groupSelectionne)
+
     }
 })
 
 illeetvilaine.addEventListener('click', (e) => {
     if(illeetvilaine.checked) {
         polygonIlleEtVilaine.addTo(map)
+
         groupSelectionne.push(polygonIlleEtVilaine)
         group = L.featureGroup(groupSelectionne)
+
         map.fitBounds(group.getBounds())
+                console.log(groupSelectionne)
+
     } else {
         map.removeLayer(polygonIlleEtVilaine)
+
         groupSelectionne.pop(polygonIlleEtVilaine)
         group = L.featureGroup(groupSelectionne)
+
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
+            console.log(groupSelectionne)
+
     }
 })
 
 morbihan.addEventListener('click', (e) => {
     if(morbihan.checked) {
         polygonMorbihan.addTo(map)
+
         groupSelectionne.push(polygonMorbihan)
         group = L.featureGroup(groupSelectionne)
+        
         map.fitBounds(group.getBounds())
+                console.log(groupSelectionne)
+
     } else {
         map.removeLayer(polygonMorbihan)
+
         groupSelectionne.pop(polygonMorbihan)
         group = L.featureGroup(groupSelectionne)
+
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
         else map.setView([48.113,-2.642],8)
+            console.log(groupSelectionne)
+
     }
 })
