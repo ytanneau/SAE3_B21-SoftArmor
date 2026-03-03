@@ -161,116 +161,118 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 <div id="map"></div>
             </div>
         </section>
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const btnOuvrir = document.getElementById("btnOuvrirCarte");
-                const btnFermer = document.getElementById("btnFermerCarte");
-                const carte = document.getElementById("panneauCarte");
-                const ombre = document.getElementById("ombre");
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnOuvrir = document.getElementById("btnOuvrirCarte");
+            const btnFermer = document.getElementById("btnFermerCarte");
+            const carte = document.getElementById("panneauCarte");
+            const ombre = document.getElementById("ombre");
 
-                btnOuvrir.addEventListener("click", () => {
-                    carte.classList.add("active");
-                    ombre.classList.add("active");
-                    document.body.style.overflow = "hidden"; // bloque scroll
-                });
-
-                function closePanel() {
-                    carte.classList.remove("active");
-                    ombre.classList.remove("active");
-                    document.body.style.overflow = "auto";
-                }
-
-                btnFermer.addEventListener("click", closePanel);
-                ombre.addEventListener("click", closePanel);
-
+            btnOuvrir.addEventListener("click", () => {
+                carte.classList.add("active");
+                ombre.classList.add("active");
+                document.body.style.overflow = "hidden"; // bloque scroll
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 300);
             });
 
-            // AFFICHAGE DES FILTRES
-            const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-            const tab_adresse = <?= json_encode($tab_adresse)?>;
-            const liste_vendeur = document.getElementById("liste_vendeur")
-            const init = document.getElementById("init")
-
-            function afficher_listes_vendeur(){
-                tab_vendeurs.forEach(vendeur => {
-                    let div = document.createElement("div")
-                    let input = document.createElement("input")
-                    input.type = "checkbox"
-                    let label = document.createElement("label")
-                    for(let cle in vendeur){
-                        if(cle == 'raison_sociale'){
-                            input.id = vendeur[cle]
-                            label.innerHTML = vendeur[cle]
-                            label.htmlFor = vendeur[cle]
-                        }
-                    }
-                    div.appendChild(label)
-                    div.appendChild(input)
-                    liste_vendeur.insertBefore(div, init)
-                });
+            function closePanel() {
+                carte.classList.remove("active");
+                ombre.classList.remove("active");
+                document.body.style.overflow = "auto";
             }
 
-            afficher_listes_vendeur()
+            btnFermer.addEventListener("click", closePanel);
+            ombre.addEventListener("click", closePanel);
 
-            // GESTIONS DES FILTRES
-            const btn_reset_filter = document.getElementById("btn_reset_filter")
-            // const cotedarmor = document.getElementById("cotedarmor")
-            // const finistere = document.getElementById("finistere")
-            // const illeetvilaine = document.getElementById("illeetvilaine")
-            // const morbihan = document.getElementById("morbihan")
-            const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+        });
 
-            console.log(input_checkbox)
+        // AFFICHAGE DES FILTRES
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        const tab_adresse = <?= json_encode($tab_adresse)?>;
+        const liste_vendeur = document.getElementById("liste_vendeur")
+        const init = document.getElementById("init")
 
-            btn_reset_filter.addEventListener('click', (e) => {
-                e.preventDefault()
-                input_checkbox.forEach(input => {
-                    input.checked = false
-                })
-            })  
-
-            // Initialisation de la carte
-            let map = L.map('map').setView([48.113,-2.642],8)
-
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map)
-
+        function afficher_listes_vendeur(){
             tab_vendeurs.forEach(vendeur => {
-                let tab_coor = []
-                let popup = L.popup()
-                let adresse = ""
-                let raison_sociale = ""
-                for(let info in vendeur){
-                    if(info == 'id_adresse'){
-                        tab_adresse.forEach(objet_adresse => {
-                            for(let cle in objet_adresse){
-                                if(cle == 'id_adresse'){
-                                    if(vendeur[info] == objet_adresse[cle]){
-                                        adresse = objet_adresse['adresse'] + 
-                                        objet_adresse['complement_adresse'] + ", " + 
-                                        objet_adresse['ville'] + ", " +
-                                        objet_adresse['code_postal']
-                                    }
+                let div = document.createElement("div")
+                let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
+                for(let cle in vendeur){
+                    if(cle == 'raison_sociale'){
+                        input.id = vendeur[cle]
+                        label.innerHTML = vendeur[cle]
+                        label.htmlFor = vendeur[cle]
+                    }
+                }
+                div.appendChild(label)
+                div.appendChild(input)
+                liste_vendeur.insertBefore(div, init)
+            });
+        }
+
+        afficher_listes_vendeur()
+
+        // GESTIONS DES FILTRES
+        const btn_reset_filter = document.getElementById("btn_reset_filter")
+        // const cotedarmor = document.getElementById("cotedarmor")
+        // const finistere = document.getElementById("finistere")
+        // const illeetvilaine = document.getElementById("illeetvilaine")
+        // const morbihan = document.getElementById("morbihan")
+        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
+
+        console.log(input_checkbox)
+
+        btn_reset_filter.addEventListener('click', (e) => {
+            e.preventDefault()
+            input_checkbox.forEach(input => {
+                input.checked = false
+            })
+        })  
+
+        // Initialisation de la carte
+        let map = L.map('map').setView([48.113,-2.642],8)
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map)
+
+        tab_vendeurs.forEach(vendeur => {
+            let tab_coor = []
+            let popup = L.popup()
+            let adresse = ""
+            let raison_sociale = ""
+            for(let info in vendeur){
+                if(info == 'id_adresse'){
+                    tab_adresse.forEach(objet_adresse => {
+                        for(let cle in objet_adresse){
+                            if(cle == 'id_adresse'){
+                                if(vendeur[info] == objet_adresse[cle]){
+                                    adresse = objet_adresse['adresse'] + 
+                                    objet_adresse['complement_adresse'] + ", " + 
+                                    objet_adresse['ville'] + ", " +
+                                    objet_adresse['code_postal']
                                 }
                             }
-                        });
-                    }
-                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
-                        tab_coor.push(vendeur[info])
-                    } else if (info == 'raison_sociale'){
-                        raison_sociale = vendeur[info]
-                    }
+                        }
+                    });
                 }
-                if(tab_coor.length == 2){
-                    let marker = L.marker(tab_coor).addTo(map)
-                    marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
+                if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                    tab_coor.push(vendeur[info])
+                } else if (info == 'raison_sociale'){
+                    raison_sociale = vendeur[info]
                 }
-            });
-        </script>
-    </main>
-
+            }
+            if(tab_coor.length == 2){
+                let marker = L.marker(tab_coor).addTo(map)
+                marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
+            }
+        });
+    </script>
     <script type="text/javascript">
         const searchState = {
             search: "<?=$recherche?>",
