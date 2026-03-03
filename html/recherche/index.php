@@ -94,6 +94,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             Supprimer les filtres
                         </button>
                     </div>
+                    <div>
+                        <button id="btnOuvrirCarte">Ouvrir la carte</button>
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -124,7 +127,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             </section>
         </div>
         <!-- Zone de la carte -->
-        <button id="btnOuvrirCarte">Ouvrir la carte</button>
+        <button id="btnOuvrirCarte" class="ouvrirCarteDroite"><b><</b></button>
 
         <div id="ombre"></div>
 
