@@ -90,7 +90,6 @@
             })
         })
 
-    
         const liste_vendeur = document.getElementById("liste_vendeur")
         const init = document.getElementById("init")
 
@@ -102,7 +101,9 @@
                 let label = document.createElement("label")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
+                        input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
+                        label.for = vendeur[cle]
                     }
                 }
                 div.appendChild(label)
