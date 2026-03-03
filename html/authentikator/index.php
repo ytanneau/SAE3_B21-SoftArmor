@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['logged_in'] = true;
 
         if (!isset($_SESSION['raison_sociale'])) {
-            require "fonction_panier.php";
+            require HOME_GIT . "fonction_panier.php";
             transferer_panier_visiteur_compte($_SESSION['id_compte']);
         }
 
