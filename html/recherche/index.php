@@ -131,33 +131,35 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         <section id="panneauCarte">
             <button id="btnFermerCarte">✕</button>
             <h2>Carte</h2>
-            <section>
-                <button id="btn_reset_filter">Supprimer les filtres</button>
-                <div id="tri_departement">
-                    <h2>Departement</h2>
-                    <div>
-                        <label for="cotedarmor">Cote d'armor - 22</label>
-                        <input type="checkbox" id="cotedarmor">
+            <div id="div_map">
+                <section>
+                    <button id="btn_reset_filter">Supprimer les filtres</button>
+                    <div id="tri_departement">
+                        <h2>Departement</h2>
+                        <div>
+                            <label for="cotedarmor">Cote d'armor - 22</label>
+                            <input type="checkbox" id="cotedarmor">
+                        </div>
+                        <div>
+                            <label for="finistere">Finistere - 29</label>
+                            <input type="checkbox" id="finistere">
+                        </div>
+                        <div>
+                            <label for="illeetvilaine">Ille et vilaine - 35</label>
+                            <input type="checkbox" id="illeetvilaine">
+                        </div>
+                        <div>
+                            <label for="morbihan">Morbihan - 56</label>
+                            <input type="checkbox" id="morbihan">
+                        </div>
                     </div>
-                    <div>
-                        <label for="finistere">Finistere - 29</label>
-                        <input type="checkbox" id="finistere">
+                    <div id="liste_vendeur">
+                        <h2>Les vendeurs</h2>
+                        <div id="init"></div>
                     </div>
-                    <div>
-                        <label for="illeetvilaine">Ille et vilaine - 35</label>
-                        <input type="checkbox" id="illeetvilaine">
-                    </div>
-                    <div>
-                        <label for="morbihan">Morbihan - 56</label>
-                        <input type="checkbox" id="morbihan">
-                    </div>
-                </div>
-                <div id="liste_vendeur">
-                    <h2>Les vendeurs</h2>
-                    <div id="init"></div>
-                </div>
-            </section>
-            <div id="map"></div>
+                </section>
+                <div id="map"></div>
+            </div>
         </section>
         <script>
             document.addEventListener("DOMContentLoaded", () => {

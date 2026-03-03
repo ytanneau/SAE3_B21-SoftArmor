@@ -3407,15 +3407,15 @@ aside .achat:hover {
   height: 4em;
 }
 
-#main_map {
+#div_map {
   display: flex;
   flex-direction: row;
 }
-#main_map #map {
+#div_map #map {
   height: 650px;
   width: 1000px;
 }
-#main_map #tri_departement {
+#div_map #tri_departement {
   display: flex;
   flex-direction: column;
 }
