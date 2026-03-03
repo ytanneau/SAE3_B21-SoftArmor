@@ -111,6 +111,8 @@
             });
         }
 
+        afficher_listes_vendeur()
+
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
 
