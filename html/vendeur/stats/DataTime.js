@@ -1,4 +1,4 @@
-export const Compare = class Compare {
+export class Compare {
     
     static CompareYear(date1, date2){
         return date1.getFullYear() == date2.getFullYear();
