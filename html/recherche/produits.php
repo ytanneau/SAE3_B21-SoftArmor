@@ -8,7 +8,7 @@
 
     // On récupère le corps de la requête HTTP (au format JSON) dans un tableau associatif
     $data = json_decode(file_get_contents('php://input'), true);
-
+    print_r($data);
     // On récupère la recherche, les filtres et tris éventuels
     $search     = $data['search'] ?? '';
     $filters    = $data['filters'] ?? [];
@@ -19,7 +19,7 @@
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
     $seller[]     = $filters['seller'] ?? null;
-    print_r($seller);
+    
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
