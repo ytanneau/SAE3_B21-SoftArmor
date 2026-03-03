@@ -894,43 +894,6 @@ hr {
     width: 100%;
   }
 }
-.TriEtFiltre {
-  /* Overlay */
-}
-.TriEtFiltre #overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 999;
-}
-.TriEtFiltre {
-  /* Panneau */
-}
-.TriEtFiltre #sidePanel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 80%;
-  height: 100vh;
-  background: white;
-  transform: translateX(100%);
-  transition: transform 0.4s ease;
-  z-index: 1000;
-  padding: 2rem;
-}
-.TriEtFiltre {
-  /* Quand actif */
-}
-.TriEtFiltre #sidePanel.active {
-  transform: translateX(0);
-}
-.TriEtFiltre #overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
 
 .TriEtFiltre fieldset {
   border: none;
@@ -3467,4 +3430,36 @@ aside .achat:hover {
   z-index: 50;
 }
 
-/* Panneau latéral *//*# sourceMappingURL=style.css.map */
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 999;
+}
+
+/* Panneau */
+#sidePanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  height: 100vh;
+  background: white;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+/* Quand actif */
+#sidePanel.active {
+  transform: translateX(0);
+}
+
+#overlay.active {
+  opacity: 1;
+  visibility: visible;
+}/*# sourceMappingURL=style.css.map */
