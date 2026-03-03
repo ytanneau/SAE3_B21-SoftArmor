@@ -3,7 +3,7 @@ const finistere = document.getElementById("finistere")
 const illeetvilaine = document.getElementById("illeetvilaine")
 const morbihan = document.getElementById("morbihan")
 
-const polygonFinistere = L.polygon([
+const polygonFinistere = [
     [-5.0725232805168,48.482730316788],
     [-5.056629077213,48.476824762454],
     [-5.0569734591597,48.468162401798],
@@ -581,27 +581,21 @@ const polygonFinistere = L.polygon([
     [-3.6427952345386,48.672116059351],
     [-3.6554581627922,48.664723869854],
     [-3.659150584255,48.65920940185]
-
-
-])
+]
 
 function invertPolygon(coords) {
   return coords.map(([lon, lat]) => [lat, lon]);
 }
 polygonFinistere = invertPolygon(polygonFinistere)
-
+polygonFinistere = L.polygon(polygonFinistere)
 finistere.addEventListener('click', (e) => {
     if(finistere.checked){
         map.setView([48.2443,-4.0279],9)
         polygonFinistere.addTo(map)
     }
 })
-// cotedarmor.addEventListener('click', (e) => {
-//     if(cotedarmor.checked && finistere.checked){
-//         map.setView([48.321,-3.474],9)
-//         let polygon = L.polygon([
-             
-//         ])
-//         polygon.addTo(map)
-//     }
-// })
+
+
+cotedarmor.addEventListener('click', (e) => {
+    
+})
