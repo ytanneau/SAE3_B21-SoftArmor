@@ -12,6 +12,7 @@ define('HOME_SITE', '../');
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
+    $_SESSION['logged_in'] = true;
 }
 
 // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil

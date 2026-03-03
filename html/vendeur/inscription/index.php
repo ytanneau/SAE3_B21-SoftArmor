@@ -21,7 +21,7 @@
             
             if (empty($erreurs)) {
                 // L'inscription est réussie, donc connexion directe
-                print_r(connect_compte($_POST['email'], $_POST['mdp'], "vendeur", ""));
+                connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
                 $_SESSION['logged_in'] = true;
             }
         } else {
