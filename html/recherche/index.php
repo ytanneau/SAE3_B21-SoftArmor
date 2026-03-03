@@ -111,41 +111,40 @@ require_once (HOME_GIT . 'fonction_recherche.php');
                 <!-- Grille des résultats -->
                 <ul id="results"></ul>
             </section>
-
-            <!-- Zone de la carte -->
-            <button id="ourvirPanneau" class="ourvirPanneau">Ouvrir la carte</button>
-
-            <div id="ombre" class="ombre"></div>
-
-            <section id="zoneCarte" class="zoneCarte">
-                <button id="fermerCarte" class="fermerCarte">✕</button>
-                <h2>Carte</h2>
-            </section>
-            <script>
-                document.addEventListener("DOMContentLoaded", () => {
-
-                    const openBtn = document.getElementById("ourvirPanneau");
-                    const closeBtn = document.getElementById("fermerCarte");
-                    const panel = document.getElementById("zoneCarte");
-                    const ombre = document.getElementById("ombre");
-
-                    openBtn.addEventListener("click", () => {
-                        panel.classList.add("active");
-                        ombre.classList.add("active");
-                    });
-
-                    function fermerCarte() {
-                        panel.classList.remove("active");
-                        ombre.classList.remove("active");
-                        document.body.style.overflow = "auto";
-                    }
-
-                    closeBtn.addEventListener("click", fermerCarte);
-                    ombre.addEventListener("click", fermerCarte);
-
-                });
-            </script>
         </div>
+        <!-- Zone de la carte -->
+        <button id="ourvirPanneau" class="ourvirPanneau">Ouvrir la carte</button>
+
+        <div id="ombre" class="ombre"></div>
+
+        <section id="zoneCarte" class="zoneCarte">
+            <button id="fermerCarte" class="fermerCarte">✕</button>
+            <h2>Carte</h2>
+        </section>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+
+                const openBtn = document.getElementById("ourvirPanneau");
+                const closeBtn = document.getElementById("fermerCarte");
+                const panel = document.getElementById("zoneCarte");
+                const ombre = document.getElementById("ombre");
+
+                openBtn.addEventListener("click", () => {
+                    panel.classList.add("active");
+                    ombre.classList.add("active");
+                });
+
+                function fermerCarte() {
+                    panel.classList.remove("active");
+                    ombre.classList.remove("active");
+                    document.body.style.overflow = "auto";
+                }
+
+                closeBtn.addEventListener("click", fermerCarte);
+                ombre.addEventListener("click", fermerCarte);
+
+            });
+        </script>
     </main>
 
     <script type="text/javascript">
