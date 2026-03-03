@@ -2059,10 +2059,16 @@ aside {
     z-index: 50;
 }
 .ouvrirCarteDroite{
-    height: 50px;
+    height: 100px;
+    width: 30px;
     position: fixed;
     right: 0;
     top: 50%;
+    background-color: white;
+    border: none;
+    box-shadow: grey -5px 0px 10px;
+    border-radius: 5px 0px 0px 5px;
+    font-size: xx-large;
 }   
 /* Panneau */
 #panneauCarte {
@@ -2079,6 +2085,11 @@ aside {
     .enteteCarte{
         display:flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        #btnFermerCarte{
+            height: fit-content;
+        }
     }
 }
 
