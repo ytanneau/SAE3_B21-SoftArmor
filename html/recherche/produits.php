@@ -19,7 +19,7 @@
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
     $seller[]     = $filters['seller'] ?? null;
-    print_r($seller);
+    print_r($filters);
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
@@ -63,7 +63,7 @@
     }
 
     // if(!empty($seller)){
-        $requete .= " AND p.id_vendeur IN (:id_vendeur)";
+        $requete .= " AND p.id_vendeur IN (31,29)";
     // }
     // $params[':id_vendeur'] = "31";
     $sortableFields = [
