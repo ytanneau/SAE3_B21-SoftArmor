@@ -859,7 +859,7 @@ hr {
     width: 100%;
   }
 }
-.TriEtFiltre .zoneCarte {
+.TriEtFiltre #zoneCarte {
   position: fixed;
   top: 0;
   right: 0;
@@ -876,17 +876,17 @@ hr {
 .TriEtFiltre {
   /* Etat actif */
 }
-.TriEtFiltre .zoneCarte.active {
+.TriEtFiltre #zoneCarte.active {
   transform: translateX(0);
 }
-.TriEtFiltre .ombre.active {
+.TriEtFiltre #ombre.active {
   opacity: 1;
   visibility: visible;
 }
 .TriEtFiltre {
   /* Bouton fermer */
 }
-.TriEtFiltre .fermerCarte {
+.TriEtFiltre #fermerCarte {
   position: absolute;
   top: 20px;
   right: 20px;

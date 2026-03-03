@@ -215,7 +215,7 @@ hr {
     @media (max-width: 1024px) {
         width: 100%;
     }
-    .zoneCarte {
+    #zoneCarte {
         position: fixed;
         top: 0;
         right: 0;
@@ -231,17 +231,17 @@ hr {
     }
 
     /* Etat actif */
-    .zoneCarte.active {
+    #zoneCarte.active {
         transform: translateX(0);
     }
 
-    .ombre.active {
+    #ombre.active {
         opacity: 1;
         visibility: visible;
     }
 
     /* Bouton fermer */
-    .fermerCarte {
+    #fermerCarte {
         position: absolute;
         top: 20px;
         right: 20px;
