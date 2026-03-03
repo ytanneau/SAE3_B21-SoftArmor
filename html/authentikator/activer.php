@@ -12,7 +12,6 @@ if (!isset($_SESSION)) {
 }
 
 
-print_r($_SESSION);
 // Empêcher les visiteurs (non-connectés) d'accéder à la page
 if (!isset($_SESSION['logged_in'])) {
     header('location: ' . HOME_SITE);
