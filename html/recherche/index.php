@@ -113,12 +113,12 @@ require_once (HOME_GIT . 'fonction_recherche.php');
             </section>
         </div>
         <!-- Zone de la carte -->
-        <button id="ourvirPanneau" class="ourvirPanneau">Ouvrir la carte</button>
+        <button id="ourvirPanneau">Ouvrir la carte</button>
 
-        <div id="ombre" class="ombre"></div>
+        <div id="ombre"></div>
 
-        <section id="zoneCarte" class="zoneCarte">
-            <button id="fermerCarte" class="fermerCarte">✕</button>
+        <section id="zoneCarte">
+            <button id="fermerCarte">✕</button>
             <h2>Carte</h2>
         </section>
         <script>
