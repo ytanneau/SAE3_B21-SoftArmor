@@ -1,22 +1,26 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
 
 define('HOME_GIT', '../../../');
 define('HOME_SITE', '../../');
 
-// Si l'utilisateur est déjà connecté
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-if ($_POST != null){
+// Après envoi du formulaire, vérification des informations et connexion si valide
+if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
     $resultat = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 
+    // Toutes les informations sont correctes
     if ($resultat === true) {
+
+        // Si pas de double authentification, connecter directement
         if (!a_2FA($_SESSION['id_compte'])) {
-            // Si pas de double authentification, connecter directement
             $_SESSION['logged_in'] = true;
+        } else {
+
         }
     }
 }
