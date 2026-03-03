@@ -11,7 +11,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 // Empêcher les visiteurs (non-connectés) d'accéder à la page
 if (!isset($_SESSION['logged_in'])) {
     header('location: ' . HOME_SITE);
@@ -22,14 +25,14 @@ if (!isset($_SESSION['logged_in'])) {
 if (a_2FA($_SESSION['id_compte'])) {
     if (isset($_SESSION['raison_sociale'])){
         header('location: '. HOME_SITE .'vendeur/stock/');
-
     } else {
         header('location: ' . HOME_SITE);
-
     }
 
     exit;
 }
+
+$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 
 require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
@@ -71,11 +74,12 @@ $grCodeUri = $otp->getQrCodeUri(
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correcte";
+                document.getElementById("erreur").innerHTML = "Code PIN correct";
+                window.location.replace("<?= $accueil ?>");
                 
             } else {
                 nbTentative -= 1;
-                document.getElementById("erreur").innerHTML = "Code PIN incorrecte, " + nbTentative + " tentatives restantes";
+                document.getElementById("erreur").innerHTML = "Code PIN incorrect, " + nbTentative + " tentatives restantes";
             }
 
             if (nbTentative == 0) {
