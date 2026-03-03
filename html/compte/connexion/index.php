@@ -14,7 +14,10 @@ if ($_POST != null){
     $resultat = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 
     if ($resultat === true) {
-        header()
+        if (!a_2FA($_SESSION['id_compte'])) {
+            // Si pas de double authentification, connecter directement
+            $_SESSION['logged_in'] = true;
+        }
     }
 }
 
