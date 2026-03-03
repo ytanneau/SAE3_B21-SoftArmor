@@ -9,8 +9,8 @@
         global $pdo;
         
         $requete = $pdo->prepare('UPDATE _compte SET clef = :clef WHERE id_compte = :id_compte');
-        $requete->bindValue(":clef", $clef, PDO::PARAM_INT);
-        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_STR);
+        $requete->bindValue(":clef", $clef, PDO::PARAM_STR);
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
 
         $requete->execute();
     }
