@@ -302,11 +302,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             sort: {
                 field: "nom_public", 
                 order: "asc"
-            }
-            vendeur : [
-                vendeur1 : "29";
-                vendeur2 : "30";
-            ]
+            },
+            vendeur : ["29", "30"]
         };
 
         // Est-on déjà sur la page de recherche ?
