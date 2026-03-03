@@ -183,7 +183,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     map.invalidateSize();
                 }, 300);
             });
-            btnOuvrir.addEventListener("click", () => {
+            btnOuvrir.addEventListener("click", (e) => {
+                e.preventDefault();
                 carte.classList.add("active");
                 ombre.classList.add("active");
                 document.body.style.overflow = "hidden"; // bloque scroll
