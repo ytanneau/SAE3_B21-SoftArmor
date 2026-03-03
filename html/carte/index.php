@@ -72,6 +72,12 @@
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        // AFFICHAGE DES FILTRES
+        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        const tab_adresse = <?= json_encode($tab_adresse)?>;
+        const liste_vendeur = document.getElementById("liste_vendeur")
+        const init = document.getElementById("init")
+
         function afficher_listes_vendeur(){
             tab_vendeurs.forEach(vendeur => {
                 let div = document.createElement("div")
@@ -93,12 +99,7 @@
 
         afficher_listes_vendeur()
 
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
-        const tab_adresse = <?= json_encode($tab_adresse)?>;
-
-        // Filtres 
-        const liste_vendeur = document.getElementById("liste_vendeur")
-        const init = document.getElementById("init")
+        // GESTIONS DES FILTRES
         const btn_reset_filter = document.getElementById("btn_reset_filter")
         // const cotedarmor = document.getElementById("cotedarmor")
         // const finistere = document.getElementById("finistere")
