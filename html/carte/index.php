@@ -129,11 +129,9 @@
             for(let info in vendeur){
                 if(info == 'id_adresse'){
                     tab_adresse.forEach(objet_adresse => {
-                        let adresse_valide = false
                         for(let cle in objet_adresse){
                             if(cle == 'id_adresse'){
                                 if(vendeur[info] == objet_adresse[cle]){
-                                    adresse_valide = true
                                     adresse = objet_adresse['adresse'] + 
                                     objet_adresse['complement_adresse'] + ", " + 
                                     objet_adresse['ville'] + ", " +
