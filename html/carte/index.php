@@ -72,6 +72,24 @@
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script>
+        function afficher_listes_vendeur(){
+            tab_vendeurs.forEach(vendeur => {
+                let div = document.createElement("div")
+                let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
+                for(let cle in vendeur){
+                    if(cle == 'raison_sociale'){
+                        input.id = vendeur[cle]
+                        label.innerHTML = vendeur[cle]
+                        label.htmlFor = vendeur[cle]
+                    }
+                }
+                div.appendChild(label)
+                div.appendChild(input)
+                liste_vendeur.insertBefore(div, init)
+            });
+        }
 
         afficher_listes_vendeur()
 
@@ -95,26 +113,7 @@
             input_checkbox.forEach(input => {
                 input.checked = false
             })
-        })
-
-        function afficher_listes_vendeur(){
-            tab_vendeurs.forEach(vendeur => {
-                let div = document.createElement("div")
-                let input = document.createElement("input")
-                input.type = "checkbox"
-                let label = document.createElement("label")
-                for(let cle in vendeur){
-                    if(cle == 'raison_sociale'){
-                        input.id = vendeur[cle]
-                        label.innerHTML = vendeur[cle]
-                        label.htmlFor = vendeur[cle]
-                    }
-                }
-                div.appendChild(label)
-                div.appendChild(input)
-                liste_vendeur.insertBefore(div, init)
-            });
-        }
+        })  
 
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
