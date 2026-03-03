@@ -23,41 +23,37 @@ $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : 
 
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $codePIN = htmlentities(trim($_POST['codePIN']));
+    $codePIN = htmlentities(trim($_POST['codePIN']) ?? '');
     $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
+
+    // Si le code PIN est valide
+    $erreur = check_code_PIN($codePIN);
 
     if ($otp->verify($codePIN)) {
         $_SESSION['logged_in'] = true;
 
+        // Si on se connecte à un compte client
         if (!isset($_SESSION['raison_sociale'])) {
+            // Transférer le panier visiteur
             require HOME_GIT . "fonction_panier.php";
             transferer_panier_visiteur_compte($_SESSION['id_compte']);
+
+            // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
+            if ($_GET['produit'] == 'panier') {
+                $page = HOME_SITE . 'panier';
+            } else {
+                $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+            }
+
+            header('Location: ' . HOME_SITE . $page);
+            exit;
         }
 
+        // Rediriger par défaut à l'accueil client ou vendeur
         header('Location: ' . $accueil);
-    }
-}
-
-//
-//
-// Redirections CLIENT (MANQUE VENDEUR)
-//
-//
-
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    if (isset($_GET['produit'])) {
-        if ($_GET['produit'] == 'panier') {
-            $page = '../../panier';
-        } else {
-            $page = '../../produit?produit=' . $_GET['produit'];
-        }
-        // Si l'utilisateur se connecte après avoir essayé d'acheter un produit sans se connecter, alors il est redirigé vers ce produit après connexion
-        header('Location: ' . HOME_SITE . $page);
     } else {
-        // Sinon, retour accueil
-        header('location: ' . $accueil);
+        $erreur 
     }
-    exit;
 }
 
 ?>
@@ -73,6 +69,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <form action="" method="post">
         <label for="codePIN">Code PIN</label>
         <input type="number" id="codePIN" name="codePIN">
+        <p type="error"><?= $erreur ?></p>
     </form>
 </body>
 </html>
