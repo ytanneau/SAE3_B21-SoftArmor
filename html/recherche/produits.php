@@ -18,7 +18,6 @@
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
     $sellers = [];
-    print_r($filters);
     foreach ($filters['sellers'] as $seller) {
         $sellers[] = $seller;
     }
