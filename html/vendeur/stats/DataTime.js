@@ -53,7 +53,7 @@ export class SideMonth {
         let res = [];
         res.push(mois)
         let m = mois
-        for (let index = 0; index < this.lesMois.length; index++) {
+        for (let index = 1; index < this.lesMois.length; index++) {
             m = this.next(m);
             res.push(m);
         }

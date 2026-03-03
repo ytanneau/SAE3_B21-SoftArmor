@@ -56,7 +56,7 @@ export default class DataGraph {
             else if (type == 'D') {
                 templete.forEach(ele => {
                     let liste = data.filter(ele2 => {
-                        return Compare.compareMinute(ele.date, ele2.date);
+                        return Compare.CompareDate(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -65,7 +65,7 @@ export default class DataGraph {
             else if (type == 'W' || type == 'M') {
                 templete.forEach(ele => {
                     let liste = data.filter(ele2 => {
-                        return Compare.CompareDate(ele.date, ele2.date);
+                        return Compare.CompareMonth(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
@@ -74,7 +74,7 @@ export default class DataGraph {
             else if (type == 'Y') {
                 templete.forEach(ele => {
                     let liste = data.filter(ele2 => {
-                        return Compare.CompareMonth(ele.date, ele2.date);
+                        return Compare.CompareYear(ele.date, ele2.date);
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
