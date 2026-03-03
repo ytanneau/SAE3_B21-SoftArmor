@@ -1319,7 +1319,7 @@ aside {
 }
 
 .anonymisation-client {
-    main form input{
+    main form button{
         @include bouton();
         background-color: $rouge;
         color: white;
