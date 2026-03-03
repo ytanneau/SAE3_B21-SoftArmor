@@ -579,6 +579,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
+            console.log(searchState);
             fetch('/recherche/produits.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
