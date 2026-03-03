@@ -13,23 +13,33 @@ fetch("cotes-d-armor.geojson").then(res => res.json()).then(data => {
     polygonCoteDarmor = L.geoJSON(data)
 })
 
+let groupSelectionne = []
+let group
 
 finistere.addEventListener('click', () => {
     if (finistere.checked) {
         polygonFinistere.addTo(map)
-        map.fitBounds(polygonFinistere.getBounds())
+        groupSelectionne.push(polygonFinistere)
+        group = L.featureGroup(groupSelectionne)
+        map.fitBounds(group.getBounds())
     } else {
         map.removeLayer(polygonFinistere)
-        map.setView([48.113,-2.642],8)
+        groupSelectionne.pop(polygonFinistere)
+        if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
+        else map.setView([48.113,-2.642],8)
     }
 });
 
 cotedarmor.addEventListener('click', (e) => {
     if(cotedarmor.checked) {
         polygonCoteDarmor.addTo(map)
-        map.fitBounds(polygonCoteDarmor.getBounds())
+        groupSelectionne.push(polygonCoteDarmor)
+        group = L.featureGroup(groupSelectionne)
+        map.fitBounds(group.getBounds())
     } else {
         map.removeLayer(polygonCoteDarmor)
-        map.setView([48.113,-2.642],8)
+        groupSelectionne.pop(polygonCoteDarmor)
+        if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
+        else map.setView([48.113,-2.642],8)
     }
 })
