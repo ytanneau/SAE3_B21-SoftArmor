@@ -22,7 +22,6 @@
     foreach ($filters['sellers'] as $seller) {
         $sellers[] = $seller;
     }
-    print_r($sellers);
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
