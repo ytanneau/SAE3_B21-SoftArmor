@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si le code PIN est valide
     $erreur = check_code_PIN($codePIN);
+    echo $erreur;
 
     if ($otp->verify($codePIN)) {
         $_SESSION['logged_in'] = true;
