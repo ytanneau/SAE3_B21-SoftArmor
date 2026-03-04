@@ -21,7 +21,22 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
-            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            
+            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($address);
+            $opts = [
+                "http" => [
+                    "header" => "User-Agent: MaMarketplace/1.0\r\n"
+                ]
+            ];
+
+            $context = stream_context_create($opts);
+            $response = file_get_contents($url, false, $context);
+
+            $data = json_decode($response, true);
+            $longitude = $data[0]["lon"];
+            $latitude = $data[0]["lat"];
+            
+            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
             array_pop($erreurs);
             if (empty($erreurs)) {
