@@ -1,5 +1,8 @@
 export default class MakeGraph {
 
+    static lesJour = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    static lesMois = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
+
     constructor(data) {
         this.data = this.formate(data)
         this.use = data;
@@ -104,17 +107,29 @@ export default class MakeGraph {
         let prix = [];
         let quantite = [];
         let nb = [];
+        let moyenPrix = [];
+        let moyenQuantie = [];
 
         data.forEach(ele => {
             prix.push(ele.prix);
             quantite.push(ele.quantite);
             nb.push(ele.nb_commande);
+            if (ele.nb_commande == 0){
+                moyenPrix.push(0);
+                moyenQuantie.push(0);
+            }
+            else{
+                moyenPrix.push(ele.prix/ele.nb_commande);
+                moyenQuantie.push(ele.quantite/ele.nb_commande);
+            }
         });
 
         return {
             prix: prix,
-            quantite, quantite,
-            nb_commande: nb
+            quantite: quantite,
+            nb_commande: nb,
+            moyenPrix: moyenPrix,
+            moyenQuantie: moyenQuantie
         }
     }
 
@@ -134,8 +149,6 @@ export default class MakeGraph {
         return somme;
     }
 
-    static lesJour = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-    static lesMois = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
 
     next(ele, eles) {
         for (let index = 0; index < eles.length; index++) {
