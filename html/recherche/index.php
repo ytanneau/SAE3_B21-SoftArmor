@@ -247,6 +247,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         inputRecherche.addEventListener('input', (e) => {
             liste_vendeur.replaceChildren()
             tab_vendeurs.forEach(vendeur =>{
+                let div = document.createElement("div")
+                let input = document.createElement("input")
                 if(vendeur['raison_sociale'].includes(inputRecherche)){
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
