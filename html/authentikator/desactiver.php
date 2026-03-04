@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['nb_tentatives_connexion']);
 
             desactiver_2FA($_SESSION['id_compte']);
-            header("Location:$accueil");
+            header("Location: " . HOME_SITE . $accueil);
 
         } else {
             // si l'user a lamentablement échoué pour le code PIN
