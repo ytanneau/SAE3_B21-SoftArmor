@@ -39,7 +39,7 @@
         ?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
-                <button class="bouton grave" type="submit">Confirmer la désactivation du compte</button>
+                <button type="submit">Confirmer la désactivation du compte</button>
             </form>
             <a class="bouton" href="..">Annuler</a>
             <?php
