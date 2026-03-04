@@ -17,7 +17,7 @@
     $prixmax    = $filters['price']['max'] ?? null;
     $prom       = $filters['sales'] ?? null;
     $reduc      = $filters['reduc'] ?? null;   
-    $sellers    = $filters['sellers'] ?? [];
+    $sellers    = $filters['sellers'] ?? null;
     // Construire la requête SQL à partir de la recherche
     $requete = 
         "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
@@ -60,13 +60,10 @@
         $params[':prixmax'] = $prixmax;
     }
 
-    // if(!empty($sellers)){
-    //     $sellers = array_map('intval', $sellers);
-
-    //     $in = implode(',',$sellers);
-
-    //     $requete .= " AND p.id_vendeur IN ($in)";
-    // }
+    if($sellers !== null){
+        $requete .= " AND p.id_vendeur = :id_compte";
+        $params[':id_compte'] = $sellers;
+    }
 
     $sortableFields = [
         'nom_public' => 'nom_public',
