@@ -325,11 +325,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
                 }
+                marker.on('click', function(e) {
+                    alert("Marker cliqué !");
+                });
             });
         }
-        marker.on('click', function(e) {
-            alert("Marker cliqué !");
-        });
+        
         afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
