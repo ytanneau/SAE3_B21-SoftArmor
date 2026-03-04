@@ -59,14 +59,23 @@ $grCodeUri = $otp->getQrCodeUri(
 <body id="activer_2FA">
     <?php include HOME_SITE . "header.php" ?>
     <main>
-        <h2>Scannez ce QRCode depuis une application de double authentification, ou entrez-y la clef</h2>
-        <p>La double authentification permet de sécuriser son compte. À chaque fois que vous vous connecterez à votre compte, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
-        <p>Veuillez garder cette clef enregistrée dans votre application.</p>
+        <h1>Activer la double authentification</h1>
+        <p>La double authentification permet de sécuriser votre compte. À chaque connexion, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
+        
+        <h3>Étape 1</h3>
+
+        <p><strong>Depuis votre application de double authentification, scannez ce QRCode ou saisissez la clé</strong></p>
+        <p><strong>Ce code ne sera affiché qu'une seule fois.</strong> Veuillez le conserver dans votre application, ou vous risquez de perdre votre compte.</p>
+        
         <img src="<?=$grCodeUri?>">
         <p>Clef: <?=$otp->getSecret()?></p>
 
+        <h3>Étape 2</h3>
+        
+        <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
+        
         <form>
-            <label for="codePIN">Entrez ensuite le code PIN affiché pour activer la double authentification</label>
+            <label for="codePIN">Code PIN</label>
             <input type="number" name="codePIN" id="codePIN">
             <p id="erreur" class="erreur"></p>
             
