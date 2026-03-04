@@ -328,9 +328,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 }
             });
         }
-        marker.addEventListener('change', (e) => {
-                        console.log("test marker");
-            });
         afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
