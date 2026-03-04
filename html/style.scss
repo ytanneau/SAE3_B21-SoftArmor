@@ -184,6 +184,13 @@ hr {
 // définition des pages inscriptions et connexions
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    .mainCarteInscription{
+        width: 1000px;
+        #map{
+            height: 800px;
+            width: 800px;
+        }
+    }
 }
 
 #connect_vendeur, #connect_client{
@@ -446,7 +453,7 @@ ul#results {
 
         div:first-child{
             img{
-                @include image_produit(3vw);
+                @include image_produit(2vw);
                 background-color: white;
             }
         }
@@ -1319,7 +1326,7 @@ aside {
 }
 
 .anonymisation-client {
-    main form input{
+    main form button{
         @include bouton();
         background-color: $rouge;
         color: white;
@@ -1328,6 +1335,12 @@ aside {
         border: none;
         border-radius: $angle_petit;
         cursor: pointer;
+        width: 17%;
+        height: 200%;
+    }
+    a{
+        width: 15%;
+        height: 10%;
     }
 }
 
@@ -2040,7 +2053,7 @@ aside {
     display: flex;
     flex-direction: row;
     #map{
-        height: 650px;
+        height: 600px;
         width: 1000px;
         margin-left: 20px;
     }
@@ -2117,4 +2130,9 @@ aside {
 #ombre.active {
     opacity: 1;
     visibility: visible;
+}
+
+/* Page d'activation*/
+#activer_2FA {
+    @include page_connect_inscription($nuance, white);
 }

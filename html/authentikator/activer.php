@@ -21,14 +21,14 @@ if (!isset($_SESSION['logged_in'])) {
 if (a_2FA($_SESSION['id_compte'])) {
     if (isset($_SESSION['raison_sociale'])){
         header('location: '. HOME_SITE .'vendeur/stock/');
-
     } else {
         header('location: ' . HOME_SITE);
-
     }
 
     exit;
 }
+
+$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 
 require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
@@ -39,7 +39,7 @@ $clock = new InternalClock();
 $otp = TOTP::generate($clock);
 $otp = $otp->withPeriod(60);
 
-$otp = $otp->withLabel('Alizon - ' . $_SESSION['pseudo'] ?? $_SESSION['raison_sociale']);
+$otp = $otp->withLabel('Alizon - ' . ($_SESSION['pseudo'] ?? $_SESSION['raison_sociale']));
 $grCodeUri = $otp->getQrCodeUri(
     'https://api.qrserver.com/v1/create-qr-code/?data=[DATA]&size=300x300&ecc=M',
     '[DATA]'
@@ -55,30 +55,74 @@ $grCodeUri = $otp->getQrCodeUri(
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body id="inscription_client">
-    <img src="<?=$grCodeUri?>">
-    <p>Clef: <?=$otp->getSecret()?></p>
 
-    <label for="codePIN">Entrez le code PIN pour activer la double authentification</label>
-    <input type="number" name="codePIN" id="codePIN">
-    <p id="erreur" class="erreur"></p>
-    <button id="valider">Valider</button>
+<body id="activer_2FA">
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php"; 
+    ?>
+
+    <main>
+        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations' ?>
+        <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
+
+        <h1>Activer la double authentification</h1>
+        <p>La double authentification permet de sécuriser votre compte. À chaque connexion, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
+        
+        <h2>Étape 1</h2>
+
+        <h3>Depuis votre application de double authentification, scannez ce QRCode ou saisissez la clé</h3>
+        <p><strong>Ce code ne sera affiché qu'une seule fois.</strong> Veuillez le conserver dans votre application, ou vous risquez de perdre votre compte.</p>
+        
+        <img src="<?=$grCodeUri?>">
+        <p>Clef: <?=$otp->getSecret()?></p>
+
+        <h2>Étape 2</h2>
+        
+        <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
+        
+            <label for="codePIN">Code PIN</label>
+            <input type="number" name="codePIN" id="codePIN">
+            <p id="erreur" class="erreur"></p>
+            
+            <button id="valider">Valider</button>
+    </main>
 </body>
+
 <script>
-    let nbTentative = 10;
+    const NB_TENTATIVES_DEPART = 10;
+    const TEMPS_INTERVALLE_ERREUR = 10; // temps en sec d'intervalle à attendre après trop de tentatives ratées
+
+    let nbTentative = NB_TENTATIVES_DEPART;
+    let tempsIntervalle = 0; 
     document.getElementById("valider").onclick = function() {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correcte";
+                document.getElementById("erreur").innerHTML = "Code PIN correct, vous pouvez aller à l'accueil";
+                window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
-                nbTentative -= 1;
-                document.getElementById("erreur").innerHTML = "Code PIN incorrecte, " + nbTentative + " tentatives restantes";
+                nbTentative--;
+                document.getElementById("erreur").innerHTML = "Code PIN incorrect, " + nbTentative + " tentatives restantes";
             }
 
             if (nbTentative == 0) {
-                document.getElementById("erreur").innerHTML = "Erreur, activation de la double authentification refusée";
+                tempsIntervalle = TEMPS_INTERVALLE_ERREUR;
+
+                let idInterval = setInterval(() => {
+                    tempsIntervalle--;
+                    document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez reessayer dans " + tempsIntervalle + " secondes";
+
+                    if (tempsIntervalle <= 0) {
+                        document.getElementById("valider").style.display = "";
+                        document.getElementById("erreur").innerHTML = "Veuillez réessayer";
+                        nbTentative = NB_TENTATIVES_DEPART;
+                        clearInterval(idInterval);
+                    }
+                }, 1000);
+
+                document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez réessayer dans " + tempsIntervalle + " secondes";
                 document.getElementById("valider").style.display = "none";
             }
         }
