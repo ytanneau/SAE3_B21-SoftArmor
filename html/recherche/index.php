@@ -330,6 +330,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         alert("coucou");
                     });
+                    marker.title(raison_sociale)
+                    marker.alt(vendeur['id_compte'])
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
                 }
