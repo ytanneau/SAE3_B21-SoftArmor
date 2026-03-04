@@ -247,17 +247,15 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         inputRecherche.addEventListener('input', (e) => {
             liste_vendeur.replaceChildren()
             tab_vendeurs.forEach(vendeur =>{
-                let div = document.createElement("div")
                 let input = document.createElement("input")
                 input.type = "checkbox"
                 let label = document.createElement("label")
-                if(vendeur['raison_sociale'].includes(inputRecherche)){
+                if(vendeur['raison_sociale'].includes(inputRecherche.value)){
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
                     label.htmlFor = vendeur['id_compte']
-                    div.appendChild(label)
-                    div.appendChild(input)
-                    liste_vendeur.insertBefore(div, init)
+                    init.appendChild(label)
+                    init.appendChild(input)
                 }
             })
         })
