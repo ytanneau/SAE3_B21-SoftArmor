@@ -22,6 +22,15 @@ use OTPHP\TOTP;
 $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 $erreur = "";
 
+$produit = "";
+if (isset($_GET['produit'])) {
+    if ($_GET['produit'] == 'panier') {
+        $produit = HOME_SITE . 'panier';
+    } else {
+        $produit = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+    }
+}
+
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Nettoyer le code PIN (retirer espaces)
@@ -44,13 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
             if (isset($_GET['produit'])) {
-                if ($_GET['produit'] == 'panier') {
-                    $page = HOME_SITE . 'panier';
-                } else {
-                    $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
-                }
-    
-                header('Location: ' . HOME_SITE . $page);
+                header('Location: ' . $produit);
                 exit;
             }
         }
@@ -77,6 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
 
     <main>
+        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/' : 'compte/connexion/' ?>
+        <a href="<?= HOME_SITE . $chemin . $produit ?>"><img src="../image/retour.svg"></a>
+
         <form action="" method="post">
             <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
             

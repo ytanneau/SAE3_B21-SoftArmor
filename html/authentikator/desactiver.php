@@ -50,6 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
 
     <main>
+        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/information' ?>
+        <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
+
         <h1>Désactiver la double authentification</h1>
 
         <form action="" method="post">
@@ -61,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="submit" value="Désactiver">
     
             <h3>Clé perdue ?</h3> 
-            
+
             <p>Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a></p>
         </form>
     </main>

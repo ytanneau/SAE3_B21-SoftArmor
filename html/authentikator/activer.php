@@ -63,6 +63,9 @@ $grCodeUri = $otp->getQrCodeUri(
     ?>
 
     <main>
+        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/information' ?>
+        <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
+
         <h1>Activer la double authentification</h1>
         <p>La double authentification permet de sécuriser votre compte. À chaque connexion, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
         
