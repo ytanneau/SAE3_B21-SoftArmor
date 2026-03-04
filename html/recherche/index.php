@@ -281,10 +281,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             departement.forEach(input => {
                 input.checked = false
             })
+            inputRecherche.value = ""
             map.setView([48.113,-2.642],8)
         }) 
 
-        // Initialisation de la carte
+        // INITILISATION DE LA CARTE
         let map = L.map('map').setView([48.113,-2.642],8)
         let groupMarker = L.layerGroup().addTo(map)
 
