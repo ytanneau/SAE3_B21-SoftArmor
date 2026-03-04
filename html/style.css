@@ -698,14 +698,6 @@ hr {
   margin-top: 5%;
   font-size: 1.5em;
 }
-#connect_vendeur main form .champ, #inscription_vendeur main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
 #connect_vendeur main form .text, #inscription_vendeur main form .text {
   height: 10em;
   text-align: start;
@@ -751,6 +743,14 @@ hr {
 }
 #connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_vendeur main .champ, #inscription_vendeur main .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
 }
 #connect_vendeur .mainCarteInscription, #inscription_vendeur .mainCarteInscription {
   width: 1000px;
@@ -810,14 +810,6 @@ hr {
   margin-top: 5%;
   font-size: 1.5em;
 }
-#connect_client main form .champ, #inscription_client main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
 #connect_client main form .text, #inscription_client main form .text {
   height: 10em;
   text-align: start;
@@ -863,6 +855,14 @@ hr {
 }
 #connect_client main .bouton:hover, #inscription_client main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_client main .champ, #inscription_client main .champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
 }
 
 #inscription_vendeur, #inscription_client {
@@ -1058,14 +1058,6 @@ ul#results > li > a > h3 {
 .form_client main form label {
   margin-top: 5%;
   font-size: 1.5em;
-}
-.form_client main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
 }
 .form_client main form .text {
   height: 10em;
@@ -1303,14 +1295,6 @@ ul#results > li > a > h3 {
 .infos .form_infos label {
   margin-top: 5%;
   font-size: 1.5em;
-}
-.infos .form_infos .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
 }
 .infos .form_infos .text {
   height: 10em;
@@ -3535,100 +3519,12 @@ aside .achat:hover {
 }
 
 /* Page d'activation*/
-#page_2FA {
-  background-color: #A6A6BF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#page_2FA main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  row-gap: 1em;
-  border-radius: 20px;
-  padding: 2em;
-  width: 30vw;
-}
-@media (max-width: 1440px) {
-  #page_2FA main {
-    width: 60vw;
-  }
-}
-#page_2FA main img {
-  width: 18vw;
-}
-@media (max-width: 1440px) {
-  #page_2FA main img {
-    width: 50vw;
-  }
-}
-#page_2FA main h2 {
-  font-size: 2em;
-  margin: 0;
-}
-#page_2FA main form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: normal;
-  width: 100%;
-}
-#page_2FA main form label {
-  margin-top: 5%;
-  font-size: 1.5em;
-}
-#page_2FA main form .champ {
+#page_2fa .champ {
+  display: block;
   border: none;
   border-radius: 5px;
   height: 2em;
   font-size: 1em;
   padding-left: 0.6em;
   padding-right: 0;
-}
-#page_2FA main form .text {
-  height: 10em;
-  text-align: start;
-}
-#page_2FA main form .petit {
-  width: 30%;
-}
-#page_2FA main form input[type=number]::-webkit-inner-spin-button,
-#page_2FA main form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-#page_2FA main form input[type=number] {
-  -moz-appearance: textfield;
-}
-#page_2FA main form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-#page_2FA main form .error {
-  color: #E43737;
-}
-#page_2FA main .bouton {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.75em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-#page_2FA main .bouton a {
-  text-decoration: none;
-  color: white;
-}
-#page_2FA main .bouton:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }/*# sourceMappingURL=style.css.map */

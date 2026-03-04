@@ -2142,6 +2142,14 @@ aside {
 }
 
 /* Page d'activation*/
-#page_2FA {
-    @include page_connect_inscription($nuance, white);
+#page_2fa {
+    .champ {
+        display: block;
+        border: none;
+        border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+    }
 }

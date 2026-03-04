@@ -273,16 +273,6 @@
         margin-top: 5%;
         font-size: $font_size_sup;
     }
-
-    .champ {
-        display: block;
-        border: none;
-        border-radius: $angle_petit;
-        height: 2em;
-        font-size: $font_size_normal;
-        padding-left: 0.6em;
-        padding-right: 0;
-    }
     
     // pour les champs avec beaucoup de texte (ex : description)
     .text {
