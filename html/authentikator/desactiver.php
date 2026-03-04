@@ -21,6 +21,7 @@ require_once(HOME_GIT . 'vendor/autoload.php');
 use OTPHP\TOTP;
 
 $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
+$erreur = "";
 
 // si l'user a attendu le temps qu'il fallait (après avoir lamentablement échoué plusieurs fois)
 // alors on reset le nombre de tentatives
@@ -34,12 +35,13 @@ if (!isset($_SESSION['nb_tentatives_connexion'])) $_SESSION['nb_tentatives_conne
 
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codePIN = htmlentities(trim($_POST['codePIN']));
+    $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
+    
+    $erreur = check_code_PIN($codePIN);
 
     // si le user a encore des tentatives
-    if ($_SESSION['nb_tentatives_connexion'] > 0) {
-
-        $codePIN = htmlentities(trim($_POST['codePIN']));
-        $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
+    if (empty($erreur) && $_SESSION['nb_tentatives_connexion'] > 0) {
 
         if ($otp->verify($codePIN)) {
             // Si le code PIN est valide, alors on retire notre variable temporaire
@@ -52,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // si l'user a lamentablement échoué pour le code PIN
             $_SESSION['nb_tentatives_connexion']--;
 
+            $erreur = "Code PIN incorrect";
         }
 
     } 
@@ -89,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="codePIN">Code PIN</label>
             <input type="number" id="codePIN" name="codePIN">
+            <p type="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
                 <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
