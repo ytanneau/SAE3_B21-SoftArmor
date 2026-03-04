@@ -252,10 +252,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             departement.forEach(input => {
                 input.checked = false
             })
-            map.remove(polygonFinistere)
-            map.remove(polygonCoteDarmor)
-            map.remove(polygonMorbihan)
-            map.remove(polygonIlleEtVilaine)
+            map.removeLayer(polygonFinistere)
+            map.removeLayer(polygonCoteDarmor)
+            map.removeLayer(polygonMorbihan)
+            map.removeLayer(polygonIlleEtVilaine)
             map.setView([48.113,-2.642],8)
         }) 
 
