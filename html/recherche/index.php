@@ -246,8 +246,23 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         inputRecherche.addEventListener('input', (e) => {
             liste_vendeur.replaceChildren()
+            listeVendeurAffiche = []
             groupMarker.clearLayers();
-            listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs)
+            tab_vendeurs.forEach(vendeur =>{
+                let div = document.createElement("div")
+                let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
+                if(vendeur['raison_sociale'].toLowerCase().includes(inputRecherche.value.toLowerCase())){
+                    input.id = vendeur['id_compte']
+                    label.innerHTML = vendeur['raison_sociale']
+                    label.htmlFor = vendeur['id_compte']
+                    div.appendChild(input)
+                    div.appendChild(label)
+                    liste_vendeur.appendChild(div)
+                    listeVendeurAffiche.push(vendeur)
+                }
+            })
             afficherMarker(listeVendeurAffiche)
         })
 
