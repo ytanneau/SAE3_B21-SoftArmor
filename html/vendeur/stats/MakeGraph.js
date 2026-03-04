@@ -96,23 +96,24 @@ export default class MakeGraph {
                 now.setTime(now.setMonth(now.getMonth() - 1));
             };
         }
+
         return this.formateValue(res.reverse());
     }
 
     formateValue(data) {
         let prix = [];
-        let quantiter = [];
+        let quantite = [];
         let nb = [];
 
         data.forEach(ele => {
             prix.push(ele.prix);
-            quantiter.push(ele.quantiter);
+            quantite.push(ele.quantite);
             nb.push(ele.nb_commande);
         });
 
         return {
             prix: prix,
-            quantiter, quantiter,
+            quantite, quantite,
             nb_commande: nb
         }
     }
@@ -181,16 +182,16 @@ export default class MakeGraph {
         return (date1.getMinutes() == date2.getMinutes() && this.CompareHour(date1, date2));
     }
 
-    getHours() {
+    getHour() {
         return {
-            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            label: this.labelHour(),
             value: this.createTempleteV2('h')
         }
     }
 
     getDay() {
         return {
-            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            label: this.labelDay(),
             value: this.createTempleteV2('D')
         }
     }
@@ -204,15 +205,45 @@ export default class MakeGraph {
 
     getMonth() {
         return {
-            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            label: this.labelMonth(),
             value: this.createTempleteV2('M')
         }
     }
 
     getYear() {
         return {
-            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            label: this.start(MakeGraph.lesMois.at(new Date().getMonth()), MakeGraph.lesMois),
             value: this.createTempleteV2('Y')
         }
+    }
+
+    labelHour(){
+        let now = new Date();
+        let res = [];
+        for (let index = 0; index < 60; index++) {
+            res.push(`${now.getHours()}h${now.getMinutes()}`);
+            now.setMinutes(now.getMinutes()-1);
+        }
+        return res.reverse();
+    }
+
+    labelDay(){
+        let now = new Date();
+        let res = [];
+        for (let index = 0; index < 60; index++) {
+            res.push(`${now.getHours()}h, (${MakeGraph.lesJour.at(now.getDay())})`);
+            now.setHours(now.getHours()-1);
+        }
+        return res.reverse();
+    }
+
+    labelMonth(){
+        let now = new Date();
+        let res = [];
+        for (let index = 0; index < 60; index++) {
+            res.push(`${now.getDate()}/${now.getMonth()+1}`);
+            now.setDate(now.getDate()-1);
+        }
+        return res.reverse();
     }
 }
