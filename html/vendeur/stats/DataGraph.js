@@ -1,4 +1,4 @@
-import {TimeMilli, Compare} from "./DataTime.js";
+import { TimeMilli, Compare } from "./DataTime.js";
 
 
 export default class DataGraph {
@@ -42,6 +42,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'h') {
@@ -51,6 +52,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'D') {
@@ -60,6 +62,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'W' || type == 'M') {
@@ -69,6 +72,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'Y') {
@@ -78,6 +82,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else {
@@ -103,33 +108,33 @@ export default class DataGraph {
             //now.setMinutes(0);
             for (let i = 0; i < 60; i++) {
                 //res.push({"date": now.valueOf()-(UNE_MINUTE*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_MINUTE * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_MINUTE * i)), "quantite": 0, "prix": 0, "nb_commande": 0 })
             };
         }
         else if (type == 'D') {
             //now.setHours(0);
             for (let i = 0; i < 24; i++) {
                 //res.push({"date": now.valueOf()-(UNE_HEURE*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_HEURE * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UNE_HEURE * i)), "quantite": 0, "prix": 0, "nb_commande": 0 })
             };
         }
         else if (type == 'W') {
             //now.setDate(0);
             for (let i = 0; i < 7; i++) {
                 //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0, "nb_commande": 0 })
             };
         }
         else if (type == 'M') {
             for (let i = 0; i < 30; i++) {
                 //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_JOUR * i)), "quantite": 0, "prix": 0, "nb_commande": 0 })
             };
         }
         else if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
                 //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_MOIS * i)), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf() - (TimeMilli.UN_MOIS * i)), "quantite": 0, "prix": 0, "nb_commande": 0 })
             };
         }
         else {
@@ -138,6 +143,56 @@ export default class DataGraph {
         return res;
     }
 
+
+    static createTempleteV2(type) {
+        let res = [];
+        let now = new Date();
+        now.setMilliseconds(0);
+        now.setSeconds(0);
+
+        if (type == 'h') {
+            //now.setMinutes(0);
+            for (let i = 0; i < 60; i++) {
+                //res.push({"date": now.valueOf()-(UNE_MINUTE*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0, "nb_commande": 0})
+                now.setTime(now.setMinutes(now.getMinutes() - 1));
+            };
+        }
+        now.setMinutes(0);
+        if (type == 'D') {
+            //now.setHours(0);
+            for (let i = 0; i < 24; i++) {
+                //res.push({"date": now.valueOf()-(UNE_HEURE*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0, "nb_commande": 0})
+                now.setTime(now.setHours(now.getHours() - 1));
+            };
+        }
+        now.setHours(0);
+        if (type == 'W') {
+            //now.setDate(0);
+            for (let i = 0; i < 7; i++) {
+                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
+                now.setTime(now.setDate(now.getDate() - 1));
+            };
+        }
+        if (type == 'M') {
+            for (let i = 0; i < 30; i++) {
+                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
+                now.setTime(now.setDate(now.getDate() - 1));
+            };
+        }
+        now.setDate(1);
+        if (type == 'Y') {
+            for (let i = 0; i < 12; i++) {
+                //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
+                now.setTime(now.setMonth(now.getMonth() - 1));
+            };
+        }
+        return res;
+    }
 
     static createTempletePersonaliser(duree, uniter, fin, debut = undefined) {
         //tout en milliseconde
@@ -169,7 +224,7 @@ export default class DataGraph {
 
         for (let index = fin; index > debut; index -= uniter) {
             //res.push({"date": index,"quantite":0,"prix":0});
-            res.push({ "date": new Date(index), "quantite": 0, "prix": 0 });
+            res.push({ "date": new Date(index), "quantite": 0, "prix": 0 , "nb_commande": 0});
         }
 
         return res;
@@ -178,7 +233,7 @@ export default class DataGraph {
     static sommePrix(data) {
         let somme = 0;
         data.forEach(ele => {
-            somme += ele.prix;
+            somme += ele.prix * ele.quantite;
         });
         return somme;
     }
