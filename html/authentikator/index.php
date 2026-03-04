@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $erreur = check_code_PIN($codePIN);
 
     // si le user a encore des tentatives
-    if ($_SESSION['nb_tentatives_connexion'] > 0) {
+    if (empty($erreur) && $_SESSION['nb_tentatives_connexion'] > 0) {
     
         if ($otp->verify($codePIN)) {
             // Si le code PIN est valide, alors on retire notre variable temporaire
@@ -74,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // si l'user a lamentablement échoué pour le code PIN
             $_SESSION['nb_tentatives_connexion']--;
+
+            $erreur = "Code PIN incorrect";
         }
 
     }
