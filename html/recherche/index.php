@@ -170,7 +170,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     </main>
     <script src="interaction_carte.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        // document.addEventListener("DOMContentLoaded", () => {
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
             const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
@@ -208,7 +208,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             btnFermerDroite.addEventListener("click", closePanel);
             ombre.addEventListener("click", closePanel);
 
-        });
+        // });
 
         // AFFICHAGE DES FILTRES
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
@@ -295,7 +295,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : []
+                sellers : null
             },
             sort: {
                 field: "nom_public", 
@@ -345,12 +345,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         alt : vendeur['id_compte']
                     }).addTo(map)
                     marker.on('click', function() {
-                        if (id_compte) {
-                            if(!searchState.filters.sellers.includes(id_compte)){
-                                searchState.filters.sellers.push(id_compte);
-                            }
-                            console.log(searchState.filters.sellers);
+                        if (vendeur['id_compte']) {
+                            searchState.filters.sellers = vendeur['id_compte'];
+                            console.log(searchState.filters.sellers);   
+                            fetchProduitsJSON();
                         }
+                        closePanel();
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
