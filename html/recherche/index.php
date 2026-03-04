@@ -323,11 +323,13 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 if(tab_coor.length == 2){
                     let marker = L.marker(tab_coor).addTo(map)
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
-                    marker.addEventListener()
                     groupMarker.addLayer(marker)
                 }
             });
         }
+        marker.addEventListener('change', (e) => {
+                        console.log("test marker");
+            });
         afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
