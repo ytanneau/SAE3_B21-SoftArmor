@@ -295,7 +295,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : []
+                sellers : ['29']
             },
             sort: {
                 field: "nom_public", 
@@ -345,9 +345,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         alt : vendeur['id_compte']
                     }).addTo(map)
                     marker.on('click', function() {
-                        searchState.filters.sellers.push({
-                            id = id_compte
-                        })
+
                     });
                     console.log(searchState.filters.sellers);
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
