@@ -249,6 +249,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             tab_vendeurs.forEach(vendeur =>{
                 let div = document.createElement("div")
                 let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
                 if(vendeur['raison_sociale'].includes(inputRecherche)){
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
