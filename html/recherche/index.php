@@ -160,7 +160,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     </div>
                     <div>
                         <h2>Les vendeurs</h2>
-                        <input type="text" placeholder="Vendeur" id="chercherVendeur">
+                        <input type="text" placeholder="Rechercher un vendeur" id="chercherVendeur">
                         <div id="liste_vendeur"></div>
                     </div>
                 </section>
@@ -288,6 +288,20 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             afficherMarker(listeVendeurAffiche)
             map.setView([48.113,-2.642],8)
         }) 
+        const searchState = {
+            search: "<?=$recherche?>",
+            filters: {
+                category: "<?=$categorie?>",
+                price: {min: null, max: null},
+                sales: false,
+                reduc: false,
+                sellers : []
+            },
+            sort: {
+                field: "nom_public", 
+                order: "asc"
+            }
+        };
 
         // INITILISATION DE LA CARTE
         let map = L.map('map').setView([48.113,-2.642],8)
@@ -331,32 +345,24 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         alt : vendeur['id_compte']
                     }).addTo(map)
                     marker.on('click', function() {
-                        alert("coucou");
+                        if (id_compte) {
+                            if(!searchState.filters.sellers.includes(id_compte)){
+                                searchState.filters.sellers.push(id_compte);
+                            }
+                            console.log(searchState.filters.sellers);
+                        }
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
                 }
-                
+            
             });
         }
         
         afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
-        const searchState = {
-            search: "<?=$recherche?>",
-            filters: {
-                category: "<?=$categorie?>",
-                price: {min: null, max: null},
-                sales: false,
-                reduc: false,
-                sellers : ["29", "30"]
-            },
-            sort: {
-                field: "nom_public", 
-                order: "asc"
-            }
-        };
+        
 
         // Est-on déjà sur la page de recherche ?
         const isSearchPage = document.body.dataset.page === "search";
