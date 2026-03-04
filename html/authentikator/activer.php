@@ -60,7 +60,7 @@ $grCodeUri = $otp->getQrCodeUri(
     <title>Alizon - 2FA</title>
 </head>
 
-<body id="activer_2FA">
+<body id="page_2FA">
     <?php 
         include HOME_SITE . $header;
         if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 

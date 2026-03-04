@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body>
+<body id="page_2fa">
     <?php 
         include HOME_SITE . $header;
         if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
@@ -103,9 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="submit" value="Désactiver">
             <?php } ?>
     
-            <h3>Clef perdue ?</h3> 
-
-            <p>Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a></p>
+            <p>Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
         </form>
     </main>
 
