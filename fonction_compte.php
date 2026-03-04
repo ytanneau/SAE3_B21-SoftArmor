@@ -77,6 +77,7 @@
             $erreurs = array_merge($erreurs, check_erreur_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $ville, $adresse, $codePostal, $mdp, $mdpc));
 
         }
+        $erreurs['id_compte'] = $pdo->lastInsertId();
         return $erreurs;
     }
 

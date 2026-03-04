@@ -20,7 +20,8 @@
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
-            
+            $id_compte = $erreurs['id_compte'];
+            array_pop($erreurs);
             if (empty($erreurs)) {
                 // L'inscription est réussie, donc connexion directe
                 connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
@@ -49,9 +50,24 @@
 </head>
 <body id="inscription_vendeur">
     <main>
-<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ ?>
+<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
+    $longitude = get_longitude($id_compte);    
+    $latitude = get_latitude($id_compte);
+?>
         
     <div id="map"></div>
+    <div id="formCoordonnee">
+        <div>
+            <label for="adresseSaisi">Adresse saisi : <?= $_POST['adresse'] . $_POST['compAdresse'] . "," . $_POST['ville'] . "," . $_POST['codePostal'] ?></label>
+            <input type="text" id="adresseSaisi">
+        </div>
+        <div>
+            <label for="longitude">Longitude</label>
+            <input type="text" id="longitude" value=<?= $longitude ?>>
+            <label for="latitude">Latitude</label>
+            <input type="text" id="latitude" value=<?= $latitude ?>>
+        </div>
+    </div>
 
 <?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
         <h1>Votre compte a été créé</h1>
