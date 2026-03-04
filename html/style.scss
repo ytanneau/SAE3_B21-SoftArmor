@@ -1318,7 +1318,7 @@ aside {
     }
 }
 
-/*.anonymisation-client {
+.anonymisation-client {
     main form button{
         @include bouton();
         background-color: $rouge;
@@ -1329,7 +1329,7 @@ aside {
         border-radius: $angle_petit;
         cursor: pointer;
     }
-}*/
+}
 
 .desactivation-vendeur {
     main form input{
