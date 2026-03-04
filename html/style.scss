@@ -184,9 +184,12 @@ hr {
 // définition des pages inscriptions et connexions
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
-    #map{
-        height: 800px;
-        width: 800px;
+    .mainCarteInscription{
+        width: 1000px;
+        #map{
+            height: 800px;
+            width: 800px;
+        }
     }
 }
 

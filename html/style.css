@@ -752,7 +752,10 @@ hr {
 #connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-#connect_vendeur #map, #inscription_vendeur #map {
+#connect_vendeur .mainCarteInscription, #inscription_vendeur .mainCarteInscription {
+  width: 1000px;
+}
+#connect_vendeur .mainCarteInscription #map, #inscription_vendeur .mainCarteInscription #map {
   height: 800px;
   width: 800px;
 }
