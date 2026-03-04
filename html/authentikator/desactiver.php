@@ -17,10 +17,13 @@ if (!isset($_SESSION['logged_in']) || !a_2FA($_SESSION['id_compte'])) {
     exit;
 }
 
+$vendeur = isset($_SESSION['raison_sociale']);
+$accueil = $vendeur ? 'vendeur/accueil' : '';
+$chemin = $vendeur ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations';
+$header = $vendeur ? 'vendeur/header.php' : 'header.php';
+
 require_once(HOME_GIT . 'vendor/autoload.php');
 use OTPHP\TOTP;
-
-$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 
 // si l'user a attendu le temps qu'il fallait (après avoir lamentablement échoué plusieurs fois)
 // alors on reset le nombre de tentatives
@@ -72,14 +75,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body id="inscription_client">
+<body>
     <?php 
-        include HOME_SITE . "header.php";
-        include HOME_SITE . "toolbar_categories.php"; 
+        include HOME_SITE . $header;
+        if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
     ?>
 
     <main>
-        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations' ?>
         <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
 
         <h1>Désactiver la double authentification</h1>

@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
+
 <body id="inscription_client">
     <form action="" method="post">
         <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>

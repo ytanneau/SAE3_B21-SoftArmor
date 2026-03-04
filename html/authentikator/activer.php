@@ -17,9 +17,11 @@ if (!isset($_SESSION['logged_in'])) {
     exit;
 }
 
+$vendeur = isset($_SESSION['raison_sociale']);
+
 // Empêcher les comptes avec 2FA d'accéder à la page
 if (a_2FA($_SESSION['id_compte'])) {
-    if (isset($_SESSION['raison_sociale'])){
+    if ($vendeur) {
         header('location: '. HOME_SITE .'vendeur/stock/');
     } else {
         header('location: ' . HOME_SITE);
@@ -28,7 +30,9 @@ if (a_2FA($_SESSION['id_compte'])) {
     exit;
 }
 
-$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
+$accueil = $vendeur ? 'vendeur/accueil' : '';
+$header = $vendeur ? 'vendeur/header.php' : 'header.php';
+$retour = $vendeur ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations';
 
 require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
@@ -58,13 +62,12 @@ $grCodeUri = $otp->getQrCodeUri(
 
 <body id="activer_2FA">
     <?php 
-        include HOME_SITE . "header.php";
-        include HOME_SITE . "toolbar_categories.php"; 
+        include HOME_SITE . $header;
+        if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
     ?>
 
     <main>
-        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations' ?>
-        <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
+        <a href="<?= HOME_SITE . $retour ?>"><img src="../image/retour.svg"></a>
 
         <h1>Activer la double authentification</h1>
         <p>La double authentification permet de sécuriser votre compte. À chaque connexion, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
