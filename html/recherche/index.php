@@ -313,7 +313,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 if(tab_coor.length == 2){
                     let marker = L.marker(tab_coor).addTo(map)
                     marker.on('click', function() {
-                        alert("Ville : " + ville.nom);
+                        alert("coucou");
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
