@@ -332,6 +332,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 }
             });
         }
+        marker.on('click', function(e) {
+            alert("Marker cliqué !");
+        });
         afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
