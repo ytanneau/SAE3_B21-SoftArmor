@@ -485,7 +485,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
             searchState.filters.category = null;
-            <?php $categorie = null?>
+            <?php $categorie = null;
+            $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
 
             document.getElementById("prom").checked = false;
