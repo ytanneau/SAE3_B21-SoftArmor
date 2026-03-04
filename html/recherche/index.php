@@ -328,7 +328,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 }
             });
         }
-        promCheck.addEventListener('change', (e) => {
+        marker.addEventListener('change', (e) => {
                         console.log("test marker");
             });
         afficherMarker(listeVendeurAffiche)
