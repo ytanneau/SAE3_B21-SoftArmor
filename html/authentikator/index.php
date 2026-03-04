@@ -71,7 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <?php include HOME_SITE . 'header.php' ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php"; 
+    ?>
 
     <main>
         <form action="" method="post">

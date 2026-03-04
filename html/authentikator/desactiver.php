@@ -44,17 +44,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <?php include HOME_SITE . 'header.php' ?>
+    <?php 
+        include HOME_SITE . "header.php";
+        include HOME_SITE . "toolbar_categories.php"; 
+    ?>
 
     <main>
+        <h1>Désactiver la double authentification</h1>
+
         <form action="" method="post">
-            <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour désactiver la double authentification</p>
+            <h3>Ouvrez votre application de double authentification, et entrez le code PIN enregistré pour votre compte</h3>
+
             <label for="codePIN">Code PIN</label>
             <input type="number" id="codePIN" name="codePIN">
     
             <input type="submit" value="Désactiver">
     
-            <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
+            <h3>Clé perdue ?</h3> 
+            
+            <p>Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a></p>
         </form>
     </main>
 </body>
