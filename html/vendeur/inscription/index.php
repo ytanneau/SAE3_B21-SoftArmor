@@ -82,6 +82,7 @@
         <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 
 <?php } else { ?>
+<main>
     <img src=""  alt="">
     <a href="../"><img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon"></a>
 
