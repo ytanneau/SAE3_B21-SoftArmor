@@ -71,7 +71,9 @@
             </div>
             <input type="submit">
         </form>
-
+    <script scr="script_map.js">
+        
+    </script>
 <?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
 <main>
         <h1>Votre compte a été créé</h1>
@@ -263,6 +265,5 @@
         <a href="../">Retourner au côté client</a></p>
 <?php } ?>
     </main>
-    <script scr="script_map.js"></script>
 </body>
 </html>
