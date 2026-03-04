@@ -22,44 +22,52 @@ use OTPHP\TOTP;
 $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 $erreur = "";
 
-$produit = "";
-if (isset($_GET['produit'])) {
-    if ($_GET['produit'] == 'panier') {
-        $produit = HOME_SITE . 'panier';
-    } else {
-        $produit = HOME_SITE . 'produit?produit=' . $_GET['produit'];
-    }
-}
-
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Nettoyer le code PIN (retirer espaces)
     $codePIN = htmlentities(trim($_POST['codePIN']) ?? '');
-    $codePIN = str_replace(" ", "", $codePIN);
-
     $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
 
-    // Si le code PIN est valide
-    $erreur = check_code_PIN($codePIN);
+        $erreur = check_code_PIN($codePIN);
+        
+        if ($otp->verify($codePIN)) {
+            // Si le code PIN est valide, alors on retire notre variable temporaire
+            unset($_SESSION['nb_tentatives_connexion']);
+            
+            // et il est login
+            $_SESSION['logged_in'] = true;
 
-    if ($otp->verify($codePIN)) {
-        $_SESSION['logged_in'] = true;
-
-        // Si on se connecte à un compte client
-        if (!isset($_SESSION['raison_sociale'])) {
-            // Transférer le panier visiteur
-            require HOME_GIT . "fonction_panier.php";
-            transferer_panier_visiteur_compte($_SESSION['id_compte']);
+            // Si on se connecte à un compte client
+            if (!isset($_SESSION['raison_sociale'])) {
+                // Transférer le panier visiteur
+                require HOME_GIT . "fonction_panier.php";
+                transferer_panier_visiteur_compte($_SESSION['id_compte']);
 
             // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
             if (isset($_GET['produit'])) {
-                header('Location: ' . $produit);
+                if ($_GET['produit'] == 'panier') {
+                    $page = HOME_SITE . 'panier';
+                } else {
+                    $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+                }
+    
+                header('Location: ' . HOME_SITE . $page);
                 exit;
             }
         }
 
-        // Rediriger par défaut à l'accueil client ou vendeur
-        header('Location: ' . $accueil);
+            // Rediriger par défaut à l'accueil client ou vendeur
+            header('Location: ' . $accueil);
+
+        } else {
+            // si l'user a lamentablement échoué pour le code PIN
+            $_SESSION['nb_tentatives_connexion']--;
+        }
+
+    } 
+    
+    // si l'user a lamentablement échou trop de fois, on le fait attendre quelques sec avant de réessayer (20 sec)
+    if ($_SESSION['nb_tentatives_connexion'] == 0 && (!isset($_SESSION['temps_attente_connexion']))) {
+        $_SESSION['temps_attente_connexion'] = time() + 20;
     }
 }
 
@@ -74,26 +82,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <?php 
-        include HOME_SITE . "header.php";
-        include HOME_SITE . "toolbar_categories.php"; 
-    ?>
+    <form action="" method="post">
+        <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
+        <label for="codePIN">Code PIN</label>
+        <input type="number" id="codePIN" name="codePIN">
+        <p type="error"><?= $erreur ?></p>
 
-    <main>
-        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/' : 'compte/connexion/' ?>
-        <a href="<?= HOME_SITE . $chemin . $produit ?>"><img src="../image/retour.svg"></a>
-
-        <form action="" method="post">
-            <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
-            
-            <label for="codePIN">Code PIN</label>
-            <input type="number" id="codePIN" name="codePIN">
-            <p type="error"><?= $erreur ?></p>
-    
-            <input type="submit" value="Se connecter">
-            
-            <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
-        </form>
-    </main>
+        <input type="submit" value="Se connecter">
+        
+        <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
+    </form>
 </body>
+<script>
+    <?php if (isset($_SESSION['temps_attente_connexion'])) { ?>
+        let tempsRestant = <?=$_SESSION['temps_attente_connexion'] - time()?>;
+        document.getElementById("temps").innerHTML = tempsRestant;
+
+        let idInterval = setInterval(() => {
+            tempsRestant--;
+            document.getElementById("temps").innerHTML = tempsRestant;
+
+            if (tempsRestant <= 0) {
+                clearInterval(idInterval);
+                window.location.href = "";
+            }
+        }, 1000);
+    <?php } ?>
+</script>
 </html>
