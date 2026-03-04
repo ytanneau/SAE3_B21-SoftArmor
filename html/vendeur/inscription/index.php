@@ -10,11 +10,13 @@
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
     }
+    
+    $etape = 0;
 
     if ($_POST != null) {
         $erreurs = [];
         $fichier = HOME_GIT . 'fonction_compte.php';
-        
+        $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
@@ -36,10 +38,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Inscription</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
 </head>
 <body id="inscription_vendeur">
     <main>
-<?php if (isset($erreurs) && $erreurs == []) { ?>
+<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ ?>
+        
+    <div id="map"></div>
+
+<?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
         <p><a href="../stock">Aller à la page d'accueil</a></p>
@@ -228,5 +242,6 @@
         <a href="../">Retourner au côté client</a></p>
 <?php } ?>
     </main>
+    <script scr="script_map.js"></script>
 </body>
 </html>
