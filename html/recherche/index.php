@@ -295,7 +295,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : ['29']
+                sellers : []
             },
             sort: {
                 field: "nom_public", 
