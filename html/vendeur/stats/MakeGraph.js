@@ -1,6 +1,11 @@
 export default class MakeGraph {
 
-    static formate(data) {
+    constructor(data) {
+        this.data = this.formate(data)
+        this.use = data;
+    }
+    
+    formate(data) {
         let res = [];
         data.forEach(ele => {
             let v = ele;
@@ -9,11 +14,6 @@ export default class MakeGraph {
         });
         return res;
     };
-
-    constructor(data) {
-        this.data = MakeGraph.formate(data)
-        this.use = data;
-    }
 
     resetData() {
         this.use = this.data;
@@ -39,38 +39,36 @@ export default class MakeGraph {
         return this;
     };
 
-    getWeek() {
-        return {
-            label: MakeGraph.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
-            value: this.createTempleteV2('W')
-        }
-    }
-
     createTempleteV2(type) {
         let res = [];
         let now = new Date();
+
         now.setMilliseconds(0);
         now.setSeconds(0);
-
         if (type == 'h') {
             for (let i = 0; i < 60; i++) {
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0, "nb_commande": 0 })
+                let liste = this.use.filter(ele => {
+                    return this.CompareMinute(now, ele.date);
+                });
+                res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setMinutes(now.getMinutes() - 1));
             };
         }
+
         now.setMinutes(0);
         if (type == 'D') {
             for (let i = 0; i < 24; i++) {
-                //res.push({"date": now.valueOf()-(UNE_HEURE*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0, "nb_commande": 0 })
+                let liste = this.use.filter(ele => {
+                    return this.CompareHour(now, ele.date);
+                });
+                res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setHours(now.getHours() - 1));
             };
         }
+
         now.setHours(0);
         if (type == 'W') {
-            //now.setDate(0);
             for (let i = 0; i < 7; i++) {
-                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
                 let liste = this.use.filter(ele => {
                     return this.CompareDate(now, ele.date);
                 });
@@ -80,23 +78,28 @@ export default class MakeGraph {
         }
         if (type == 'M') {
             for (let i = 0; i < 30; i++) {
-                //res.push({"date": now.valueOf()-(UN_JOUR*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
+                let liste = this.use.filter(ele => {
+                    return this.CompareDate(now, ele.date);
+                });
+                res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setDate(now.getDate() - 1));
             };
         }
+
         now.setDate(1);
         if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
-                //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
+                let liste = this.use.filter(ele => {
+                    return this.CompareMonth(now, ele.date);
+                });
+                res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setMonth(now.getMonth() - 1));
             };
         }
         return this.formateValue(res.reverse());
     }
 
-    formateValue(data){
+    formateValue(data) {
         let prix = [];
         let quantiter = [];
         let nb = [];
@@ -107,10 +110,10 @@ export default class MakeGraph {
             nb.push(ele.nb_commande);
         });
 
-        return{
+        return {
             prix: prix,
             quantiter, quantiter,
-            nb_commande : nb
+            nb_commande: nb
         }
     }
 
@@ -133,7 +136,7 @@ export default class MakeGraph {
     static lesJour = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
     static lesMois = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
 
-    static next(ele, eles) {
+    next(ele, eles) {
         for (let index = 0; index < eles.length; index++) {
             if (ele == eles.at(index)) {
 
@@ -147,7 +150,7 @@ export default class MakeGraph {
         }
     }
 
-    static start(ele, eles) {
+    start(ele, eles) {
         let res = [];
         res.push(ele);
         let e = ele;
@@ -158,23 +161,58 @@ export default class MakeGraph {
         return res.reverse();
     }
 
-    CompareYear(date1, date2){
+    CompareYear(date1, date2) {
         return (date1.getFullYear() == date2.getFullYear());
     }
 
-    CompareMonth(date1, date2){
+    CompareMonth(date1, date2) {
         return (date1.getMonth() == date2.getMonth() && this.CompareYear(date1, date2));
     }
 
-    CompareDate(date1, date2){
+    CompareDate(date1, date2) {
         return (date1.getDate() == date2.getDate() && this.CompareMonth(date1, date2));
     }
 
-    CompareHour(date1, date2){
+    CompareHour(date1, date2) {
         return (date1.getHours() == date2.getHours() && this.CompareDate(date1, date2));
     }
 
-    CompareMinute(date1, date2){
+    CompareMinute(date1, date2) {
         return (date1.getMinutes() == date2.getMinutes() && this.CompareHour(date1, date2));
+    }
+
+    getHours() {
+        return {
+            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            value: this.createTempleteV2('h')
+        }
+    }
+
+    getDay() {
+        return {
+            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            value: this.createTempleteV2('D')
+        }
+    }
+
+    getWeek() {
+        return {
+            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            value: this.createTempleteV2('W')
+        }
+    }
+
+    getMonth() {
+        return {
+            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            value: this.createTempleteV2('M')
+        }
+    }
+
+    getYear() {
+        return {
+            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
+            value: this.createTempleteV2('Y')
+        }
     }
 }
