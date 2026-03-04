@@ -282,6 +282,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 input.checked = false
             })
             inputRecherche.value = ""
+            liste_vendeur.replaceChildren()
+            listeVendeurAffiche = []
+            groupMarker.clearLayers();
             listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs)
             afficherMarker(listeVendeurAffiche)
             map.setView([48.113,-2.642],8)
