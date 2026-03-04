@@ -2258,10 +2258,12 @@ aside .achat:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 90%;
+  width: 30%;
+  height: 2em;
 }
 .anonymisation-client a {
   width: 20%;
+  height: 2em;
 }
 
 .desactivation-vendeur main form input {
