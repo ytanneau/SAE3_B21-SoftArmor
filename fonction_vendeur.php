@@ -94,4 +94,39 @@
             throw $e;
         }
     }
+
+    function get_longitude($id_compte){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT coor_x 
+                                    FROM _adresse as adr 
+                                    INNER JOIN _vendeur as vdr 
+                                    ON adr.id_adresse = vdr.id_adresse 
+                                    WHERE vdr.id_compte = :id_compte");
+            $stmt->execute([
+                'id_compte' => $id_compte
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+    function get_latitude($id_compte){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT coor_y 
+                                    FROM _adresse as adr 
+                                    INNER JOIN _vendeur as vdr 
+                                    ON adr.id_adresse = vdr.id_adresse 
+                                    WHERE vdr.id_compte = :id_compte");
+            $stmt->execute([
+                'id_compte' => $id_compte
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
 ?>
