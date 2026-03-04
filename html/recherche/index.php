@@ -143,20 +143,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     <div id="tri_departement">
                         <h2>Departement</h2>
                         <div>
-                            <label for="cotedarmor">Cote d'armor - 22</label>
                             <input type="checkbox" id="cotedarmor" value="departement">
+                            <label for="cotedarmor">Cote d'armor - 22</label>
                         </div>
                         <div>
-                            <label for="finistere">Finistere - 29</label>
                             <input type="checkbox" id="finistere" value="departement">
-                        </div>
+                            <label for="finistere">Finistere - 29</label>
                         <div>
-                            <label for="illeetvilaine">Ille et vilaine - 35</label>
                             <input type="checkbox" id="illeetvilaine" value="departement">
+                            <label for="illeetvilaine">Ille et vilaine - 35</label>
                         </div>
                         <div>
-                            <label for="morbihan">Morbihan - 56</label>
                             <input type="checkbox" id="morbihan" value="departement">
+                            <label for="morbihan">Morbihan - 56</label>
                         </div>
                     </div>
                     <div>
@@ -232,8 +231,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         input.value = "vendeur_check"
                     }
                 }
-                div.appendChild(label)
                 div.appendChild(input)
+                div.appendChild(label)
                 liste_vendeur.appendChild(div)
                 tab.push(vendeur)
             });
@@ -258,8 +257,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
                     label.htmlFor = vendeur['id_compte']
-                    div.appendChild(label)
                     div.appendChild(input)
+                    div.appendChild(label)
                     liste_vendeur.appendChild(div)
                     listeVendeurAffiche.push(vendeur)
                 }
