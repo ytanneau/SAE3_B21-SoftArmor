@@ -22,52 +22,66 @@ use OTPHP\TOTP;
 $accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 $erreur = "";
 
+// si l'user a attendu le temps qu'il fallait (après avoir lamentablement échoué plusieurs fois)
+// alors on reset le nombre de tentatives
+if (isset($_SESSION['temps_attente_connexion']) && $_SESSION['temps_attente_connexion'] <= time()) {
+    unset($_SESSION['temps_attente_connexion']);
+    unset($_SESSION['nb_tentatives_connexion']);
+}
+
+// s'il vient juste d'arriver sur la page, ou s'il vient 
+if (!isset($_SESSION['nb_tentatives_connexion'])) $_SESSION['nb_tentatives_connexion'] = 10;
+
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codePIN = htmlentities(trim($_POST['codePIN']) ?? '');
     $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
 
     $erreur = check_code_PIN($codePIN);
+
+    // si le user a encore des tentatives
+    if ($_SESSION['nb_tentatives_connexion'] > 0) {
     
-    if ($otp->verify($codePIN)) {
-        // Si le code PIN est valide, alors on retire notre variable temporaire
-        unset($_SESSION['nb_tentatives_connexion']);
+        if ($otp->verify($codePIN)) {
+            // Si le code PIN est valide, alors on retire notre variable temporaire
+            unset($_SESSION['nb_tentatives_connexion']);
+            
+            // et il est login
+            $_SESSION['logged_in'] = true;
+
+            // Si on se connecte à un compte client
+            if (!isset($_SESSION['raison_sociale'])) {
+                // Transférer le panier visiteur
+                require HOME_GIT . "fonction_panier.php";
+                transferer_panier_visiteur_compte($_SESSION['id_compte']);
+
+                // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
+                if (isset($_GET['produit'])) {
+                    if ($_GET['produit'] == 'panier') {
+                        $page = HOME_SITE . 'panier';
+                    } else {
+                        $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+                    }
         
-        // et il est login
-        $_SESSION['logged_in'] = true;
-
-        // Si on se connecte à un compte client
-        if (!isset($_SESSION['raison_sociale'])) {
-            // Transférer le panier visiteur
-            require HOME_GIT . "fonction_panier.php";
-            transferer_panier_visiteur_compte($_SESSION['id_compte']);
-
-            // Si le visiteur était en train de consulter le panier ou la page d'un produit, l'y rediriger
-            if (isset($_GET['produit'])) {
-                if ($_GET['produit'] == 'panier') {
-                    $page = HOME_SITE . 'panier';
-                } else {
-                    $page = HOME_SITE . 'produit?produit=' . $_GET['produit'];
+                    header('Location: ' . HOME_SITE . $page);
+                    exit;
                 }
-    
-                header('Location: ' . HOME_SITE . $page);
-                exit;
             }
+
+            // Rediriger par défaut à l'accueil client ou vendeur
+            header('Location: ' . $accueil);
+
+        } else {
+            // si l'user a lamentablement échoué pour le code PIN
+            $_SESSION['nb_tentatives_connexion']--;
         }
 
-        // Rediriger par défaut à l'accueil client ou vendeur
-        header('Location: ' . $accueil);
-
-    } else {
-        // si l'user a lamentablement échoué pour le code PIN
-        $_SESSION['nb_tentatives_connexion']--;
     }
 
-}
-
-// si l'user a lamentablement échoué trop de fois, on le fait attendre quelques sec avant de réessayer (20 sec)
-if ($_SESSION['nb_tentatives_connexion'] == 0 && (!isset($_SESSION['temps_attente_connexion']))) {
-    $_SESSION['temps_attente_connexion'] = time() + 20;
+    // si l'user a lamentablement échoué trop de fois, on le fait attendre quelques sec avant de réessayer (20 sec)
+    if ($_SESSION['nb_tentatives_connexion'] == 0 && (!isset($_SESSION['temps_attente_connexion']))) {
+        $_SESSION['temps_attente_connexion'] = time() + 20;
+    }
 }
 
 ?>
@@ -87,7 +101,11 @@ if ($_SESSION['nb_tentatives_connexion'] == 0 && (!isset($_SESSION['temps_attent
         <input type="number" id="codePIN" name="codePIN">
         <p type="error"><?= $erreur ?></p>
 
-        <input type="submit" value="Se connecter">
+        <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
+            <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
+        <?php } else { ?>
+            <input type="submit" value="Se connecter">
+        <?php } ?>
         
         <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
     </form>
