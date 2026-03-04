@@ -484,7 +484,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.price.max = null;
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
-
+            searchState.filters.category = null;
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
 
             document.getElementById("prom").checked = false;
