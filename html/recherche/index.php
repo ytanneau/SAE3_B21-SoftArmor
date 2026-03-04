@@ -239,7 +239,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         afficher_listes_vendeur()
 
         // GESTIONS DES FILTRES
-        const btn_reset_filter = document.getElementById("btn_reset_filter")
         const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
         const departement = document.querySelectorAll('input[value = "departement"]')
         //console.log(input_checkbox)
