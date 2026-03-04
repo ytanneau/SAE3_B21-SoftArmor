@@ -10,14 +10,25 @@
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
     }
+    
+    require_once HOME_GIT . 'fonction_vendeur.php';
+
+    $etape = 0;
 
     if ($_POST != null) {
         $erreurs = [];
         $fichier = HOME_GIT . 'fonction_compte.php';
-        
+        $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            $id_compte = $erreurs['id_compte'];
+            array_pop($erreurs);
+            if (empty($erreurs)) {
+                // L'inscription est réussie, donc connexion directe
+                connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
+                $_SESSION['logged_in'] = true;
+            }
         } else {
             $erreurs['fatal'] = true;
         }
@@ -30,17 +41,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Inscription</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
 </head>
 <body id="inscription_vendeur">
-    <main>
-<?php if (isset($erreurs) && $erreurs == []) { ?>
+<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
+    $longitude = get_longitude($id_compte);    
+    $latitude = get_latitude($id_compte);
+?>
+    <main class="mainCarteInscription">
+        <h1>Mon adresse</h1>
+        <div id="map"></div>
+        <form action="" id="formCoordonnee">
+            <div>
+                <label for="adresseSaisi">Adresse saisi : </label>
+                <input type="text" id="adresseSaisi" value=<?= $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] ?>>
+            </div>
+            <div>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value=<?= $longitude ?>>
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" value=<?= $latitude ?>>
+            </div>
+            <input type="submit">
+        </form>
+
+<?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
+<main>
         <h1>Votre compte a été créé</h1>
-        <a href="../">Connectez-vous</a>
+        <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
+        <p><a href="../stock">Aller à la page d'accueil</a></p>
 
 <?php } elseif (isset($erreurs['fatal'])){ ?>
         <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 
 <?php } else { ?>
+<main>
     <img src=""  alt="">
     <a href="../"><img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon"></a>
 
@@ -221,5 +263,6 @@
         <a href="../">Retourner au côté client</a></p>
 <?php } ?>
     </main>
+    <script scr="script_map.js"></script>
 </body>
 </html>

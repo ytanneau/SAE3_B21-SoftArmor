@@ -48,14 +48,13 @@ function verify_2FA($otp, $codePIN) {
 }
 
 function check_code_PIN($codePIN) {
-    $codePIN = str_replace(" ", "", $codePIN);
     $erreur = "";
 
-    if (!is_numeric($codePIN) || strlen($codePIN) != 6) {
-        $erreur = "Format invalide";
-    } else if (empty($codePIN)) {
+    if (empty($codePIN)) {
         $erreur = "Veuillez remplir ce champ";
-    }
+    } else if (!is_numeric($codePIN) || strlen($codePIN) != 6) {
+        $erreur = "Format invalide";
+    } 
 
     return $erreur;
 }

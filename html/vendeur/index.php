@@ -8,10 +8,21 @@ define('HOME_GIT', '../../');
 define('HOME_SITE', '../');
 
 // Si l'utilisateur est déjà connecté
+require_once HOME_GIT . "fonction_2FA.php";
 
 if ($_POST != null){
     require_once (HOME_GIT . 'fonction_compte.php');
     $erreurs = connect_compte($_POST['email'], $_POST['mdp'], 'vendeur', HOME_GIT);
+    
+    if ($erreurs === true) {
+        // Si pas de double authentification, connecter directement
+        if (!a_2FA($_SESSION['id_compte'])) {
+            $_SESSION['logged_in'] = true;
+
+        } else {
+            header('Location: ' . HOME_SITE . "authentikator/");
+        }
+    }
 }
 
 // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil

@@ -143,25 +143,25 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     <div id="tri_departement">
                         <h2>Departement</h2>
                         <div>
+                            <input type="checkbox" id="cotedarmor" value="departement">
                             <label for="cotedarmor">Cote d'armor - 22</label>
-                            <input type="checkbox" id="cotedarmor">
                         </div>
                         <div>
+                            <input type="checkbox" id="finistere" value="departement">
                             <label for="finistere">Finistere - 29</label>
-                            <input type="checkbox" id="finistere">
-                        </div>
                         <div>
+                            <input type="checkbox" id="illeetvilaine" value="departement">
                             <label for="illeetvilaine">Ille et vilaine - 35</label>
-                            <input type="checkbox" id="illeetvilaine">
                         </div>
                         <div>
+                            <input type="checkbox" id="morbihan" value="departement">
                             <label for="morbihan">Morbihan - 56</label>
-                            <input type="checkbox" id="morbihan">
                         </div>
                     </div>
-                    <div id="liste_vendeur">
+                    <div>
                         <h2>Les vendeurs</h2>
-                        <div id="init"></div>
+                        <input type="text" placeholder="Rechercher un vendeur" id="chercherVendeur">
+                        <div id="liste_vendeur"></div>
                     </div>
                 </section>
                 <div id="map"></div>
@@ -170,7 +170,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     </main>
     <script src="interaction_carte.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        // document.addEventListener("DOMContentLoaded", () => {
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
             const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
@@ -208,16 +208,17 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             btnFermerDroite.addEventListener("click", closePanel);
             ombre.addEventListener("click", closePanel);
 
-        });
+        // });
 
         // AFFICHAGE DES FILTRES
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
-        const init = document.getElementById("init")
+        let listeVendeurAffiche = []
 
-        function afficher_listes_vendeur(){
-            tab_vendeurs.forEach(vendeur => {
+        function afficher_listes_vendeur(tableau){
+            let tab = []
+            tableau.forEach(vendeur => {
                 let div = document.createElement("div")
                 let input = document.createElement("input")
                 input.type = "checkbox"
@@ -227,20 +228,48 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         input.id = vendeur[cle]
                         label.innerHTML = vendeur[cle]
                         label.htmlFor = vendeur[cle]
+                        input.value = "vendeur_check"
                     }
                 }
-                div.appendChild(label)
                 div.appendChild(input)
-                liste_vendeur.insertBefore(div, init)
+                div.appendChild(label)
+                liste_vendeur.appendChild(div)
+                tab.push(vendeur)
             });
+            return tab
         }
 
-        afficher_listes_vendeur()
+        listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs)
+
+        // RECHERCHE D'UN VENDEUR
+        const inputRecherche = document.getElementById("chercherVendeur")
+
+        inputRecherche.addEventListener('input', (e) => {
+            liste_vendeur.replaceChildren()
+            listeVendeurAffiche = []
+            groupMarker.clearLayers();
+            tab_vendeurs.forEach(vendeur =>{
+                let div = document.createElement("div")
+                let input = document.createElement("input")
+                input.type = "checkbox"
+                let label = document.createElement("label")
+                if(vendeur['raison_sociale'].toLowerCase().includes(inputRecherche.value.toLowerCase())){
+                    input.id = vendeur['id_compte']
+                    label.innerHTML = vendeur['raison_sociale']
+                    label.htmlFor = vendeur['id_compte']
+                    div.appendChild(input)
+                    div.appendChild(label)
+                    liste_vendeur.appendChild(div)
+                    listeVendeurAffiche.push(vendeur)
+                }
+            })
+            afficherMarker(listeVendeurAffiche)
+        })
+
 
         // GESTIONS DES FILTRES
-        const btn_reset_filter = document.getElementById("btn_reset_filter")
-        const input_checkbox = document.querySelectorAll("input[type=checkbox]")
-
+        const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
+        const departement = document.querySelectorAll('input[value = "departement"]')
         console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
@@ -248,49 +277,17 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             input_checkbox.forEach(input => {
                 input.checked = false
             })
+            departement.forEach(input => {
+                input.checked = false
+            })
+            inputRecherche.value = ""
+            liste_vendeur.replaceChildren()
+            listeVendeurAffiche = []
+            groupMarker.clearLayers();
+            listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs)
+            afficherMarker(listeVendeurAffiche)
+            map.setView([48.113,-2.642],8)
         }) 
-
-        // Initialisation de la carte
-        let map = L.map('map').setView([48.113,-2.642],8)
-
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map)
-
-        tab_vendeurs.forEach(vendeur => {
-            let tab_coor = []
-            let popup = L.popup()
-            let adresse = ""
-            let raison_sociale = ""
-            for(let info in vendeur){
-                if(info == 'id_adresse'){
-                    tab_adresse.forEach(objet_adresse => {
-                        for(let cle in objet_adresse){
-                            if(cle == 'id_adresse'){
-                                if(vendeur[info] == objet_adresse[cle]){
-                                    adresse = objet_adresse['adresse'] + 
-                                    objet_adresse['complement_adresse'] + ", " + 
-                                    objet_adresse['ville'] + ", " +
-                                    objet_adresse['code_postal']
-                                }
-                            }
-                        }
-                    });
-                }
-                if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
-                    tab_coor.push(vendeur[info])
-                } else if (info == 'raison_sociale'){
-                    raison_sociale = vendeur[info]
-                }
-            }
-            if(tab_coor.length == 2){
-                let marker = L.marker(tab_coor).addTo(map)
-                marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
-            }
-        });
-    </script>
-    <script type="text/javascript">
         const searchState = {
             search: "<?=$recherche?>",
             filters: {
@@ -298,13 +295,74 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers: []
+                sellers : null
             },
             sort: {
                 field: "nom_public", 
                 order: "asc"
             }
         };
+
+        // INITILISATION DE LA CARTE
+        let map = L.map('map').setView([48.113,-2.642],8)
+        let groupMarker = L.layerGroup().addTo(map)
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map)
+
+        function afficherMarker(tableau){
+            tableau.forEach(vendeur => {
+                let tab_coor = []
+                let popup = L.popup()
+                let adresse = ""
+                let raison_sociale = ""
+                for(let info in vendeur){
+                    if(info == 'id_adresse'){
+                        tab_adresse.forEach(objet_adresse => {
+                            for(let cle in objet_adresse){
+                                if(cle == 'id_adresse'){
+                                    if(vendeur[info] == objet_adresse[cle]){
+                                        adresse = objet_adresse['adresse'] + 
+                                        objet_adresse['complement_adresse'] + ", " + 
+                                        objet_adresse['ville'] + ", " +
+                                        objet_adresse['code_postal']
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                        tab_coor.push(vendeur[info])
+                    } else if (info == 'raison_sociale'){
+                        raison_sociale = vendeur[info]
+                    }
+                }
+                if(tab_coor.length == 2){
+                    let marker = L.marker(tab_coor,{
+                        title: raison_sociale,
+                        alt : vendeur['id_compte']
+                    }).addTo(map)
+                    marker.on('click', function() {
+                        if (vendeur['id_compte']) {
+                            searchState.filters.sellers = vendeur['id_compte'];
+                            console.log(searchState.filters.sellers);   
+                            fetchProduitsJSON();
+                        }
+                        closePanel();
+                    });
+                    marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
+                    groupMarker.addLayer(marker)
+                }
+            
+            });
+        }
+        
+        afficherMarker(listeVendeurAffiche)
+    </script>
+    <script type="text/javascript">
+        
 
         // Est-on déjà sur la page de recherche ?
         const isSearchPage = document.body.dataset.page === "search";
@@ -357,7 +415,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
 
-        
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
         radios.forEach(function(radio) {
@@ -427,7 +484,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.price.max = null;
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
-
+            searchState.filters.category = null;
+            <?php $categorie = null;
+            $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
 
             document.getElementById("prom").checked = false;
@@ -576,7 +635,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
-            console.log(searchState);
             fetch('/recherche/produits.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},

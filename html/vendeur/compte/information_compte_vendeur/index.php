@@ -21,6 +21,7 @@
     // appel des fichiers de configuration et fonctions
     require_once HOME_GIT . ".config.php";
     include HOME_GIT . "fonction_vendeur.php";
+    require_once HOME_GIT . "fonction_2FA.php";
 
     $id_compte = $_SESSION['id_compte'];
 
@@ -96,6 +97,14 @@
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
                 <a href="desactivation/desactivation.php" id="idDesactivationCompte">Desactiver le compte</a>
+
+
+                <!-- boutons en rapport avec la double authentification -->
+                <?php if (!a_2FA($_SESSION['id_compte'])) { ?>
+                    <a class="bouton" href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a>
+                <?php } else { ?>
+                    <a class="bouton grave" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                <?php } ?>
             </div>
         </main>
         <footer>
