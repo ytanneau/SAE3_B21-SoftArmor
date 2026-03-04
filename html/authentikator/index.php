@@ -24,12 +24,14 @@ $erreur = "";
 
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Nettoyer le code PIN (retirer espaces)
     $codePIN = htmlentities(trim($_POST['codePIN']) ?? '');
+    $codePIN = str_replace(" ", "", $codePIN);
+
     $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
 
     // Si le code PIN est valide
     $erreur = check_code_PIN($codePIN);
-    echo $erreur;
 
     if ($otp->verify($codePIN)) {
         $_SESSION['logged_in'] = true;
@@ -65,19 +67,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
-    <form action="" method="post">
-        <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
-        
-        <label for="codePIN">Code PIN</label>
-        <input type="number" id="codePIN" name="codePIN">
-        <p type="error"><?= $erreur ?></p>
+    <?php include HOME_SITE . 'header.php' ?>
 
-        <input type="submit" value="Se connecter">
-        
-        <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
-    </form>
+    <main>
+        <form action="" method="post">
+            <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
+            
+            <label for="codePIN">Code PIN</label>
+            <input type="number" id="codePIN" name="codePIN">
+            <p type="error"><?= $erreur ?></p>
+    
+            <input type="submit" value="Se connecter">
+            
+            <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
+        </form>
+    </main>
 </body>
 </html>

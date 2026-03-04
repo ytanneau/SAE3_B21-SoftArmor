@@ -57,6 +57,7 @@ $grCodeUri = $otp->getQrCodeUri(
 </head>
 
 <body id="activer_2FA">
+    <?php include HOME_SITE . "header.php" ?>
     <main>
         <h2>Scannez ce QRCode depuis une application de double authentification, ou entrez-y la clef</h2>
         <p>La double authentification permet de sécuriser son compte. À chaque fois que vous vous connecterez à votre compte, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
