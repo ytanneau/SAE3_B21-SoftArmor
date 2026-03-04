@@ -2246,18 +2246,22 @@ aside .achat:hover {
 }
 
 .anonymisation-client main form button {
-  /*@include bouton();
-  background-color: $rouge;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #E43737;
   color: white;
-  font-size: $font_size_normal;
+  font-size: 1em;
   padding: 0.5em 1em;
   border: none;
-  border-radius: $angle_petit;
-  cursor: pointer;*/
+  border-radius: 5px;
+  cursor: pointer;
   width: 90%;
 }
 .anonymisation-client a {
-  width: 50%;
+  width: 20%;
 }
 
 .desactivation-vendeur main form input {
