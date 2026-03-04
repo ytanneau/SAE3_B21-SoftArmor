@@ -81,13 +81,11 @@ $grCodeUri = $otp->getQrCodeUri(
         
         <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
         
-        <form>
             <label for="codePIN">Code PIN</label>
             <input type="number" name="codePIN" id="codePIN">
             <p id="erreur" class="erreur"></p>
             
             <button id="valider">Valider</button>
-        </form>
     </main>
 </body>
 
