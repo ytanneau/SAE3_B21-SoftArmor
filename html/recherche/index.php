@@ -349,7 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             searchState.filters.sellers = vendeur['id_compte'];
                             console.log(searchState.filters.sellers);
                             fetchProduitsJSON();
-
+                            closePanel();
                         }
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
