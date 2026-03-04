@@ -60,7 +60,7 @@ $grCodeUri = $otp->getQrCodeUri(
     <title>Alizon - 2FA</title>
 </head>
 
-<body id="page_2FA">
+<body id="page_2fa">
     <?php 
         include HOME_SITE . $header;
         if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
@@ -84,11 +84,11 @@ $grCodeUri = $otp->getQrCodeUri(
         
         <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
         
-            <label for="codePIN">Code PIN</label>
-            <input type="number" name="codePIN" id="codePIN" class="champ">
-            <p id="erreur" class="erreur"></p>
-            
-            <button id="valider" class="bouton">Valider</button>
+        <label for="codePIN">Code PIN</label>
+        <input type="number" name="codePIN" id="codePIN" class="champ">
+        <p id="erreur" class="erreur"></p>
+        
+        <button id="valider" class="bouton">Valider</button>
     </main>
 </body>
 
