@@ -60,13 +60,13 @@
         $params[':prixmax'] = $prixmax;
     }
 
-    if(!empty($sellers)){
-        $sellers = array_map('intval', $sellers);
+    // if(!empty($sellers)){
+    //     $sellers = array_map('intval', $sellers);
 
-        $in = implode(',',$sellers);
+    //     $in = implode(',',$sellers);
 
-        $requete .= " AND p.id_vendeur IN ($in)";
-    }
+    //     $requete .= " AND p.id_vendeur IN ($in)";
+    // }
 
     $sortableFields = [
         'nom_public' => 'nom_public',
