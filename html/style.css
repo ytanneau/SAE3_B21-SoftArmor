@@ -3412,7 +3412,7 @@ aside .achat:hover {
   flex-direction: row;
 }
 #div_map #map {
-  height: 650px;
+  height: 600px;
   width: 1000px;
   margin-left: 20px;
 }
