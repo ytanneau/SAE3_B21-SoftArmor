@@ -63,7 +63,7 @@ $grCodeUri = $otp->getQrCodeUri(
     ?>
 
     <main>
-        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/information' ?>
+        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations' ?>
         <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
 
         <h1>Activer la double authentification</h1>
