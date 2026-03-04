@@ -57,29 +57,51 @@ $grCodeUri = $otp->getQrCodeUri(
     <title>Alizon - 2FA</title>
 </head>
 <body id="inscription_client">
+    <h2>Scannez ce QRCode depuis une application de double authentification, ou entrez-y la clef</h2>
+    <p>La double authentification permet de sécuriser son compte. À chaque fois que vous vous connecterez à votre compte, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
+    <p>Veuillez garder cette clef enregistrée dans votre application.</p>
     <img src="<?=$grCodeUri?>">
     <p>Clef: <?=$otp->getSecret()?></p>
 
-    <label for="codePIN">Entrez le code PIN pour activer la double authentification</label>
+    <label for="codePIN">Entrez ensuite le code PIN affiché pour activer la double authentification</label>
     <input type="number" name="codePIN" id="codePIN">
     <p id="erreur" class="erreur"></p>
-    <button id="valider">Valider</button>
+    <button id="valider" type="submit">Valider</button>
 </body>
 <script>
-    let nbTentative = 10;
+    const NB_TENTATIVES_DEPART = 10;
+    const TEMPS_INTERVALLE_ERREUR = 10; // temps en sec d'intervalle à attendre après trop de tentatives ratées
+
+    let nbTentative = NB_TENTATIVES_DEPART;
+    let tempsIntervalle = 0; 
     document.getElementById("valider").onclick = function() {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correcte";
+                document.getElementById("erreur").innerHTML = "Code PIN correcte, vous pouvez aller à l'accueil";
+                window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
-                nbTentative -= 1;
+                nbTentative--;
                 document.getElementById("erreur").innerHTML = "Code PIN incorrecte, " + nbTentative + " tentatives restantes";
             }
 
             if (nbTentative == 0) {
-                document.getElementById("erreur").innerHTML = "Erreur, activation de la double authentification refusée";
+                tempsIntervalle = TEMPS_INTERVALLE_ERREUR;
+
+                let idInterval = setInterval(() => {
+                    tempsIntervalle--;
+                    document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez reessayer dans " + tempsIntervalle + " secondes";
+
+                    if (tempsIntervalle <= 0) {
+                        document.getElementById("valider").style.display = "";
+                        document.getElementById("erreur").innerHTML = "Veuillez réessayer";
+                        nbTentative = NB_TENTATIVES_DEPART;
+                        clearInterval(idInterval);
+                    }
+                }, 1000);
+
+                document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez réessayer dans " + tempsIntervalle + " secondes";
                 document.getElementById("valider").style.display = "none";
             }
         }
