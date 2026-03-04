@@ -21,8 +21,8 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
-            
-            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($address);
+            $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
+            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $opts = [
                 "http" => [
                     "header" => "User-Agent: MaMarketplace/1.0\r\n"
@@ -76,7 +76,7 @@
         <form action="" id="formCoordonnee">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
-                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] )?>">
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
             </div>
             <div>
                 <label for="longitude">Longitude</label>
