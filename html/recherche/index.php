@@ -215,9 +215,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
+        let listeVendeurAffiche = []
 
-        function afficher_listes_vendeur(tableau_de_vendeur){
-            tableau_de_vendeur.forEach(vendeur => {
+        function afficher_listes_vendeur(tableau){
+            let tab = []
+            tableau.forEach(vendeur => {
                 let div = document.createElement("div")
                 let input = document.createElement("input")
                 input.type = "checkbox"
@@ -233,16 +235,20 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 div.appendChild(label)
                 div.appendChild(input)
                 liste_vendeur.appendChild(div)
+                tab.push(vendeur)
             });
+            return tab
         }
 
-        afficher_listes_vendeur(tab_vendeurs)
+        listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs)
 
         // RECHERCHE D'UN VENDEUR
         const inputRecherche = document.getElementById("chercherVendeur")
 
         inputRecherche.addEventListener('input', (e) => {
             liste_vendeur.replaceChildren()
+            listeVendeurAffiche = []
+            groupMarker.clearLayers();
             tab_vendeurs.forEach(vendeur =>{
                 let div = document.createElement("div")
                 let input = document.createElement("input")
@@ -255,8 +261,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     div.appendChild(label)
                     div.appendChild(input)
                     liste_vendeur.appendChild(div)
+                    listeVendeurAffiche.push(vendeur)
                 }
             })
+            afficherMarker(listeVendeurAffiche)
         })
 
 
@@ -278,43 +286,49 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // Initialisation de la carte
         let map = L.map('map').setView([48.113,-2.642],8)
+        let groupMarker = L.layerGroup().addTo(map)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
 
-        tab_vendeurs.forEach(vendeur => {
-            let tab_coor = []
-            let popup = L.popup()
-            let adresse = ""
-            let raison_sociale = ""
-            for(let info in vendeur){
-                if(info == 'id_adresse'){
-                    tab_adresse.forEach(objet_adresse => {
-                        for(let cle in objet_adresse){
-                            if(cle == 'id_adresse'){
-                                if(vendeur[info] == objet_adresse[cle]){
-                                    adresse = objet_adresse['adresse'] + 
-                                    objet_adresse['complement_adresse'] + ", " + 
-                                    objet_adresse['ville'] + ", " +
-                                    objet_adresse['code_postal']
+        function afficherMarker(tableau){
+            tableau.forEach(vendeur => {
+                let tab_coor = []
+                let popup = L.popup()
+                let adresse = ""
+                let raison_sociale = ""
+                for(let info in vendeur){
+                    if(info == 'id_adresse'){
+                        tab_adresse.forEach(objet_adresse => {
+                            for(let cle in objet_adresse){
+                                if(cle == 'id_adresse'){
+                                    if(vendeur[info] == objet_adresse[cle]){
+                                        adresse = objet_adresse['adresse'] + 
+                                        objet_adresse['complement_adresse'] + ", " + 
+                                        objet_adresse['ville'] + ", " +
+                                        objet_adresse['code_postal']
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
+                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                        tab_coor.push(vendeur[info])
+                    } else if (info == 'raison_sociale'){
+                        raison_sociale = vendeur[info]
+                    }
                 }
-                if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
-                    tab_coor.push(vendeur[info])
-                } else if (info == 'raison_sociale'){
-                    raison_sociale = vendeur[info]
+                if(tab_coor.length == 2){
+                    let marker = L.marker(tab_coor).addTo(map)
+                    marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
+                    groupMarker.addLayer(marker)
                 }
-            }
-            if(tab_coor.length == 2){
-                let marker = L.marker(tab_coor).addTo(map)
-                marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
-            }
-        });
+            });
+        }
+
+        afficherMarker(listeVendeurAffiche)
     </script>
     <script type="text/javascript">
         const searchState = {
