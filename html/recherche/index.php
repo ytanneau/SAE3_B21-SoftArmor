@@ -326,12 +326,13 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     }
                 }
                 if(tab_coor.length == 2){
-                    let marker = L.marker(tab_coor).addTo(map)
+                    let marker = L.marker(tab_coor,{
+                        title: raison_sociale,
+                        alt : vendeur['id_compte']
+                    }).addTo(map)
                     marker.on('click', function() {
                         alert("coucou");
                     });
-                    marker.title(raison_sociale)
-                    marker.alt(vendeur['id_compte'])
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
                     groupMarker.addLayer(marker)
                 }
