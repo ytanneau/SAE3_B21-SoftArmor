@@ -51,27 +51,29 @@
     
 </head>
 <body id="inscription_vendeur">
-    <main>
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
     $longitude = get_longitude($id_compte);    
     $latitude = get_latitude($id_compte);
 ?>
-        
-    <div id="map"></div>
-    <div id="formCoordonnee">
-        <div>
-            <label for="adresseSaisi">Adresse saisi : <?= $_POST['adresse'] . $_POST['compAdresse'] . "," . $_POST['ville'] . "," . $_POST['codePostal'] ?></label>
-            <input type="text" id="adresseSaisi">
-        </div>
-        <div>
-            <label for="longitude">Longitude</label>
-            <input type="text" id="longitude" value=<?= $longitude ?>>
-            <label for="latitude">Latitude</label>
-            <input type="text" id="latitude" value=<?= $latitude ?>>
-        </div>
-    </div>
+    <main class="mainCarteInscription">
+        <h1>Mon adresse</h1>
+        <div id="map"></div>
+        <form action="" id="formCoordonnee">
+            <div>
+                <label for="adresseSaisi">Adresse saisi : </label>
+                <input type="text" id="adresseSaisi" value=<?= $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] ?>>
+            </div>
+            <div>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value=<?= $longitude ?>>
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" value=<?= $latitude ?>>
+            </div>
+            <input type="submit">
+        </form>
 
 <?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
+<main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
         <p><a href="../stock">Aller à la page d'accueil</a></p>

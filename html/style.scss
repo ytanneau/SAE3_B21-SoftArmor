@@ -184,9 +184,12 @@ hr {
 // définition des pages inscriptions et connexions
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
-    #map{
-        height: 800px;
-        width: 800px;
+    .mainCarteInscription{
+        width: 1000px;
+        #map{
+            height: 800px;
+            width: 800px;
+        }
     }
 }
 
@@ -1324,18 +1327,20 @@ aside {
 
 .anonymisation-client {
     main form button{
-        /*@include bouton();
+        @include bouton();
         background-color: $rouge;
         color: white;
         font-size: $font_size_normal;
         padding: 0.5em 1em;
         border: none;
         border-radius: $angle_petit;
-        cursor: pointer;*/
-        width: 90%;
+        cursor: pointer;
+        width: 17%;
+        height: 200%;
     }
     a{
-        width: 50%;
+        width: 15%;
+        height: 10%;
     }
 }
 
