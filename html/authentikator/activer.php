@@ -88,7 +88,7 @@ $grCodeUri = $otp->getQrCodeUri(
             <input type="number" name="codePIN" id="codePIN" class="champ">
             <p id="erreur" class="erreur"></p>
             
-            <button id="valider">Valider</button>
+            <button id="valider" class="bouton">Valider</button>
     </main>
 </body>
 

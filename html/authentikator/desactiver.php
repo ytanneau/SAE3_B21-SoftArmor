@@ -94,13 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>Ouvrez votre application de double authentification, et entrez le code PIN enregistré pour votre compte</h3>
 
             <label for="codePIN">Code PIN</label>
-            <input type="number" id="codePIN" name="codePIN">
+            <input type="number" id="codePIN" name="codePIN" class="champ">
             <p type="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
                 <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
             <?php } else { ?>
-                <input type="submit" value="Désactiver">
+                <input type="submit" value="Désactiver" class="bouton grave">
             <?php } ?>
     
             <p>Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
