@@ -161,6 +161,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     </div>
                     <div id="liste_vendeur">
                         <h2>Les vendeurs</h2>
+                        <input type="text" placeholder="Vendeur" id="chercherVendeur">
                         <div id="init"></div>
                     </div>
                 </section>
@@ -238,10 +239,28 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         afficher_listes_vendeur()
 
+        // RECHERCHE D'UN VENDEUR
+        const inputRecherche = document.getElementById("chercherVendeur")
+
+        inputRecherche.addEventListener('input', (e) => {
+            liste_vendeur.replaceChildren()
+            tab_vendeurs.forEach(vendeur =>{
+                if(vendeur['raison_sociale'].includes(inputRecherche)){
+                    input.id = vendeur['id_compte']
+                    label.innerHTML = vendeur['raison_sociale']
+                    label.htmlFor = vendeur['id_compte']
+                    div.appendChild(label)
+                    div.appendChild(input)
+                    liste_vendeur.insertBefore(div, init)
+                }
+            })
+        })
+
+
         // GESTIONS DES FILTRES
         const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
         const departement = document.querySelectorAll('input[value = "departement"]')
-        //console.log(input_checkbox)
+        console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
