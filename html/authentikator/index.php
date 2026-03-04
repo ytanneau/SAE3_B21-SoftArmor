@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body id="inscription_client">
     <form action="" method="post">
         <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
+        
         <label for="codePIN">Code PIN</label>
         <input type="number" id="codePIN" name="codePIN">
         <p type="error"><?= $erreur ?></p>
