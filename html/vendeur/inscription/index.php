@@ -61,7 +61,7 @@
         <form action="" id="formCoordonnee">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
-                <input type="text" id="adresseSaisi" value=<?= $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] ?>>
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] )?>">
             </div>
             <div>
                 <label for="longitude">Longitude</label>
