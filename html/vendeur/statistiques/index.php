@@ -46,6 +46,7 @@
                 <select id="filtreOrd">
                     <option value="qte">Quantité</option>
                     <option value="prix">Prix</option>
+                    <option value="nbAchat">Nombres D'achats</option>
                 </select>
                 <label>Sur Les</label>
                 <select id="filtreAbs">
@@ -57,8 +58,8 @@
                 </select>
                 <label>Diagramme en </label>
                 <select id="typeGraph">
-                    <option value="line">Ligne</option>
                     <option value="bar">Barre</option>
+                    <option value="line">Ligne</option>
                 </select>
                 <div id="a_container">
                     <canvas id="a"></canvas>
@@ -121,6 +122,7 @@
                 let myChart;
 
                 let typeG = 'bar';
+                let offsetG = true;
 
                 fetch('./json_prod.php?id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
@@ -135,6 +137,7 @@
                     dataH = DataGraph.groupByTime(data,"m",tempH);
 
                     datas = dataY;
+
                     typeG = 'bar';
 
                     abscisse = SideMonth.start(SideMonth.lesMois.at(datas.at(0).date.getMonth()));
@@ -150,6 +153,14 @@
                             datas.forEach(element => {
                                 tab.push(element.prix);
                             });
+                        break;
+
+                        case 'nbAchat':
+                            datas.forEach(element => {
+                                tab.push(element.nb_commande);
+                            });
+
+                            
                         break;
                         
                     }
@@ -172,6 +183,9 @@
                                 y: {
                                     suggestedMax: Math.max(...tab),
                                     suggestedMin: 0
+                                },
+                                x: {
+                                    offset : offsetG
                                 }
                             },
                             plugins: {
@@ -208,6 +222,11 @@
                             });
                         break;
                         
+                        case 'nbAchat':
+                            datas.forEach(element => {
+                                tab.push(element.nb_commande);
+                            });
+                        break;
                     }
 
                     //elenve lancien graphe et met un nouveau canvas
@@ -234,6 +253,9 @@
                                 y: {
                                     suggestedMax: Math.max(...tab),
                                     suggestedMin: 0
+                                },
+                                x: {
+                                    offset : offsetG
                                 }
                             },
                             plugins: {
@@ -271,8 +293,9 @@
                 
                         case "W":
                             typeG = 'line';
-                            for (let i = 1; i < 32; i++) {
-                                abscisse.push(i);   
+                            abscisse.push("Auj");
+                            for (let i = 1; i < 31; i++) {
+                                abscisse.push(`J -${i}`);   
                             }
                             datas = dataM;
                         break;
@@ -285,17 +308,19 @@
 
                         case "h":
                             datas = dataD;
+                            abscisse.push("Auj");
                             typeG = 'line';
                             for (let i = 1; i < 25; i++) {
-                                abscisse.push(i);   
+                                abscisse.push(`-${i}h`); 
                             }
                         break;
 
                         case "m":
                             typeG = 'line';
+                            abscisse.push("Auj");
                             datas = dataH;
                             for (let i = 1; i < 61; i++) {
-                                abscisse.push(i);   
+                                abscisse.push(`-${i}m`);   
                             }
                         break;
 
@@ -313,6 +338,12 @@
                         case 'prix':
                             datas.forEach(element => {
                                 tab.push(element.prix);
+                            });
+                        break;
+
+                        case 'nbAchat':
+                            datas.forEach(element => {
+                                tab.push(element.nb_commande);
                             });
                         break;
                         
@@ -343,6 +374,9 @@
                                 y: {
                                     suggestedMax: Math.max(...tab),
                                     suggestedMin: 0
+                                },
+                                x: {
+                                    offset : offsetG
                                 }
                             },
                             plugins: {
@@ -356,11 +390,44 @@
                     
                 
                 document.getElementById("typeGraph").addEventListener('change',()=>{
+                    //elenve lancien graphe et met un nouveau canvas
+                    myChart.destroy();
+                    let elm = document.createElement('canvas');
+                    elm.id="a";
+                    document.getElementById("a_container").append(elm);
+
+                    //recup le type de graphe
                     typeG = document.getElementById("typeGraph").value;
+                            
+                    //ajoute le graphe
+                    myChart = new Chart(document.getElementById("a"), {
+                        type: typeG,   // le type du graphique
+                        data: {        // les données
+                            labels: abscisse,
+                            datasets: [{
+                                        label: 'Ventes',
+                                        data: tab
+                                    }]
+                            }
+                        ,
+                        options: {
+                            scales: {
+                                y: {
+                                    suggestedMax: Math.max(...tab),
+                                    suggestedMin: 0
+                                },
+                                x: {
+                                    offset : offsetG
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                display: false
+                                }
+                            }
+                        }
+                    });
                     
-                    myChart.config.type = typeG;
-                    
-                    myChart.update();
                 });
                 
 

@@ -42,6 +42,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'h') {
@@ -51,6 +52,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'D') {
@@ -60,6 +62,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'W' || type == 'M') {
@@ -69,6 +72,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else if (type == 'Y') {
@@ -78,6 +82,7 @@ export default class DataGraph {
                     });
                     ele.prix = this.sommePrix(liste);
                     ele.quantite = this.sommeQuantiter(liste);
+                    ele.nb_commande = liste.length;
                 });
             }
             else {
@@ -182,7 +187,7 @@ export default class DataGraph {
         if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
                 //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0,"nb_commande" : 0 })
                 now.setTime(now.setMonth(now.getMonth()-1));
             };
         }
