@@ -135,5 +135,16 @@ $grCodeUri = $otp->getQrCodeUri(
             xmlhttp.send();
         }
     };
+
+    let inputHasFocus = false;
+    
+    document.getElementById("codePIN").addEventListener('focus', (e) => {inputHasFocus = true;});
+    document.getElementById('codePIN').addEventListener('blur', (e) => {inputHasFocus = false;});
+
+    document.addEventListener("keypress", function(e) {
+        if (e.keyCode == 13 && !e.repeat && inputHasFocus) {
+            document.getElementById("valider").click();
+        }
+    })
 </script>
 </html>
