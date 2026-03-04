@@ -1320,18 +1320,20 @@ aside {
 
 .anonymisation-client {
     main form button{
-        /*@include bouton();
+        @include bouton();
         background-color: $rouge;
         color: white;
         font-size: $font_size_normal;
         padding: 0.5em 1em;
         border: none;
         border-radius: $angle_petit;
-        cursor: pointer;*/
-        width: 90%;
+        cursor: pointer;
+        width: 20%;
+        height: 200%;
     }
     a{
-        width: 50%;
+        width: 15%;
+        height: 10%;
     }
 }
 
