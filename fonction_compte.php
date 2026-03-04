@@ -156,8 +156,10 @@
 
                         if ($typeCompte == 'vendeur'){
                             $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
+                            unset($_SESSION['pseudo']);
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
+                            unset($_SESSION['raison_sociale']);
 
                             require "fonction_panier.php";
                             transferer_panier_visiteur_compte($resSQL['id_compte']);
