@@ -2145,7 +2145,7 @@ aside {
 #page_2fa {
     .champ {
         display: block;
-        border: none;
+        border: solid 1px gray;
         border-radius: $angle_petit;
         height: 2em;
         font-size: $font_size_normal;

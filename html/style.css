@@ -3521,7 +3521,7 @@ aside .achat:hover {
 /* Page d'activation*/
 #page_2fa .champ {
   display: block;
-  border: none;
+  border: solid 1px gray;
   border-radius: 5px;
   height: 2em;
   font-size: 1em;
