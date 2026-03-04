@@ -160,7 +160,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     </div>
                     <div>
                         <h2>Les vendeurs</h2>
-                        <input type="text" placeholder="Vendeur" id="chercherVendeur">
+                        <input type="text" placeholder="Rechercher un vendeur" id="chercherVendeur">
                         <div id="liste_vendeur"></div>
                     </div>
                 </section>
