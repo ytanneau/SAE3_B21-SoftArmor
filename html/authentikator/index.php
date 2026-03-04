@@ -24,12 +24,14 @@ $erreur = "";
 
 // Après soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Nettoyer le code PIN (retirer espaces)
     $codePIN = htmlentities(trim($_POST['codePIN']) ?? '');
+    $codePIN = str_replace(" ", "", $codePIN);
+
     $otp = TOTP::createFromSecret(get_clef_2FA($_SESSION['id_compte']));
 
     // Si le code PIN est valide
     $erreur = check_code_PIN($codePIN);
-    echo $erreur;
 
     if ($otp->verify($codePIN)) {
         $_SESSION['logged_in'] = true;
