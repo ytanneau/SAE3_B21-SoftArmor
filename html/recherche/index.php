@@ -162,9 +162,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     <div>
                         <h2>Les vendeurs</h2>
                         <input type="text" placeholder="Vendeur" id="chercherVendeur">
-                        <div id="liste_vendeur">
-                            <div id="init"></div>
-                        </div>
+                        <div id="liste_vendeur"></div>
                     </div>
                 </section>
                 <div id="map"></div>
@@ -217,10 +215,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
-        const init = document.getElementById("init")
 
-        function afficher_listes_vendeur(){
-            tab_vendeurs.forEach(vendeur => {
+        function afficher_listes_vendeur(tableau_de_vendeur){
+            tableau_de_vendeur.forEach(vendeur => {
                 let div = document.createElement("div")
                 let input = document.createElement("input")
                 input.type = "checkbox"
@@ -235,11 +232,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 }
                 div.appendChild(label)
                 div.appendChild(input)
-                liste_vendeur.insertBefore(div, init)
+                liste_vendeur.appendChild(div)
             });
         }
 
-        afficher_listes_vendeur()
+        afficher_listes_vendeur(tab_vendeurs)
 
         // RECHERCHE D'UN VENDEUR
         const inputRecherche = document.getElementById("chercherVendeur")
@@ -247,15 +244,17 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         inputRecherche.addEventListener('input', (e) => {
             liste_vendeur.replaceChildren()
             tab_vendeurs.forEach(vendeur =>{
+                let div = document.createElement("div")
                 let input = document.createElement("input")
                 input.type = "checkbox"
                 let label = document.createElement("label")
-                if(vendeur['raison_sociale'].includes(inputRecherche.value)){
+                if(vendeur['raison_sociale'].toLowerCase().includes(inputRecherche.value.toLowerCase())){
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
                     label.htmlFor = vendeur['id_compte']
-                    liste_vendeur.appendChild(label)
-                    liste_vendeur.appendChild(input)
+                    div.appendChild(label)
+                    div.appendChild(input)
+                    liste_vendeur.appendChild(div)
                 }
             })
         })
