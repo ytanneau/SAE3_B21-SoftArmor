@@ -252,6 +252,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             departement.forEach(input => {
                 input.checked = false
             })
+            map.clearLayers()
+            map.setView([48.113,-2.642],8)
         }) 
 
         // Initialisation de la carte
