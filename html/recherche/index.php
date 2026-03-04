@@ -242,7 +242,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         const btn_reset_filter = document.getElementById("btn_reset_filter")
         const input_checkbox = document.querySelectorAll('input[value = "vendeur_check"]')
         const departement = document.querySelectorAll('input[value = "departement"]')
-        console.log(input_checkbox)
+        //console.log(input_checkbox)
 
         btn_reset_filter.addEventListener('click', (e) => {
             e.preventDefault()
@@ -252,10 +252,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             departement.forEach(input => {
                 input.checked = false
             })
-            map.removeLayer(polygonFinistere)
-            map.removeLayer(polygonCoteDarmor)
-            map.removeLayer(polygonMorbihan)
-            map.removeLayer(polygonIlleEtVilaine)
             map.setView([48.113,-2.642],8)
         }) 
 
