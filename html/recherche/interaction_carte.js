@@ -40,7 +40,7 @@ finistere.addEventListener('click', () => {
     } else {
         map.removeLayer(polygonFinistere)
 
-        groupSelectionne.pop()
+        groupSelectionne = groupSelectionne.filter(dept => dept !== polygonFinistere)
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
@@ -61,7 +61,7 @@ cotedarmor.addEventListener('click', (e) => {
     } else {
         map.removeLayer(polygonCoteDarmor)
 
-        groupSelectionne.pop()
+        groupSelectionne = groupSelectionne.filter(dept => dept !== polygonCoteDarmor)
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
@@ -81,7 +81,7 @@ illeetvilaine.addEventListener('click', (e) => {
     } else {
         map.removeLayer(polygonIlleEtVilaine)
 
-        groupSelectionne.pop()
+        groupSelectionne = groupSelectionne.filter(dept => dept !== polygonIlleEtVilaine)
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
@@ -100,7 +100,7 @@ morbihan.addEventListener('click', (e) => {
     } else {
         map.removeLayer(polygonMorbihan)
 
-        groupSelectionne.pop()
+        groupSelectionne = groupSelectionne.filter(dept => dept !== polygonMorbihan)
         group = L.featureGroup(groupSelectionne)
 
         if(groupSelectionne.length > 0) map.fitBounds(group.getBounds())
