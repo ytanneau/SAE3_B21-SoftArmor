@@ -348,8 +348,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
                             console.log(searchState.filters.sellers);
-                            fetchProduitsJSON();
                             closePanel();
+                            fetchProduitsJSON();
                         }
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
