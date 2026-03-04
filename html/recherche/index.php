@@ -345,11 +345,13 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         alt : vendeur['id_compte']
                     }).addTo(map)
                     marker.on('click', function() {
-                        if (id_compte) {
-                            if(!searchState.filters.sellers.includes(id_compte)){
-                                searchState.filters.sellers.push(id_compte);
+                        if (vendeur['id_compte']) {
+                            if(!searchState.filters.sellers.includes(vendeur['id_compte'])){
+                                searchState.filters.sellers.push(vendeur['id_compte']);
                             }
                             console.log(searchState.filters.sellers);
+                            fetchProduitsJSON();
+
                         }
                     });
                     marker.bindPopup("<b>" + raison_sociale + "</b><br> Adresse : <br>" + adresse)
