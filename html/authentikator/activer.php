@@ -64,13 +64,11 @@ $grCodeUri = $otp->getQrCodeUri(
         <img src="<?=$grCodeUri?>">
         <p>Clef: <?=$otp->getSecret()?></p>
 
-        <form>
-            <label for="codePIN">Entrez ensuite le code PIN affiché pour activer la double authentification</label>
-            <input type="number" name="codePIN" id="codePIN">
-            <p id="erreur" class="erreur"></p>
-            
-            <button id="valider">Valider</button>
-        </form>
+        <label for="codePIN">Entrez ensuite le code PIN affiché pour activer la double authentification</label>
+        <input type="number" name="codePIN" id="codePIN">
+        <p id="erreur" class="erreur"></p>
+        
+        <button id="valider">Valider</button>
     </main>
 </body>
 
