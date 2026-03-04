@@ -11,6 +11,8 @@
         header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
     }
     
+    require_once HOME_GIT . 'fonction_vendeur.php';
+
     $etape = 0;
 
     if ($_POST != null) {
