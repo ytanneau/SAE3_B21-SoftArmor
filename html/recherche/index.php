@@ -254,8 +254,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     input.id = vendeur['id_compte']
                     label.innerHTML = vendeur['raison_sociale']
                     label.htmlFor = vendeur['id_compte']
-                    init.appendChild(label)
-                    init.appendChild(input)
+                    liste_vendeur.appendChild(label)
+                    liste_vendeur.appendChild(input)
                 }
             })
         })
