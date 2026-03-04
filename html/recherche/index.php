@@ -159,10 +159,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             <input type="checkbox" id="morbihan" value="departement">
                         </div>
                     </div>
-                    <div id="liste_vendeur">
+                    <div>
                         <h2>Les vendeurs</h2>
                         <input type="text" placeholder="Vendeur" id="chercherVendeur">
-                        <div id="init"></div>
+                        <div id="liste_vendeur">
+                            <div id="init"></div>
+                        </div>
                     </div>
                 </section>
                 <div id="map"></div>
