@@ -60,7 +60,7 @@
         $params[':prixmax'] = $prixmax;
     }
 
-    if($sellers !== null){
+    if($sellers !== ""){
         $requete .= " AND p.id_vendeur = :id_compte";
         $params[':id_compte'] = $sellers;
     }

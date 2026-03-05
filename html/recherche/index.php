@@ -296,7 +296,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : null
+                sellers : ""
             },
             sort: {
                 field: "nom_public", 
@@ -487,7 +487,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
             searchState.filters.category = "";
-            searchState.filters.sellers = null;
+            searchState.filters.sellers = "";
             <?php $categorie = null;
             $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
