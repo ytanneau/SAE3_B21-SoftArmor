@@ -296,7 +296,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : ""
+                sellers : "",
+                raison_sociale : ""
             },
             sort: {
                 field: "nom_public", 
@@ -348,6 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
+                            searchState.filters.raison_sociale = raison_sociale;
                             console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
@@ -519,7 +521,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = "";
             }
             if (searchState.filters.sellers !== "") {
-                forSellers.textContent = `Vendeur "${vendeur[cle]}"`;
+                forSellers.textContent = `Vendeur "${}"`;
             } else {
                 forSellers.textContent = "";
             }
