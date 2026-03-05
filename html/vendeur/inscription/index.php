@@ -51,8 +51,8 @@
 
             $data = json_decode($response, true);
 
-            $data = $data[0];
             if(!empty($data)){
+                $data = $data[0];
                 $longitude = $data["lat"];
                 $latitude = $data["lon"];
             }
@@ -88,10 +88,6 @@
 </head>
 <body id="inscription_vendeur">
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
-    $longitude = get_longitude($id_compte);
-    $latitude = get_latitude($id_compte);
-    print_r($longitude);
-    print_r($latitude);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
@@ -149,7 +145,7 @@
         <input type="text" 
             name="numSiret"
             id="numSiret"
-            minlenght="14"
+            minlength="14"
             placeholder="362 521 879 00034"
             value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
             required
