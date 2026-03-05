@@ -106,8 +106,7 @@ $grCodeUri = $otp->getQrCodeUri(
     document.getElementById("valider").onclick = function() {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
-            if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correct, vous pouvez aller à l'accueil";
+            if (this.responseText == '1') {l";
                 window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
@@ -120,7 +119,7 @@ $grCodeUri = $otp->getQrCodeUri(
 
                 let idInterval = setInterval(() => {
                     tempsIntervalle--;
-                    document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez reessayer dans " + tempsIntervalle + " secondes";
+                    document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
 
                     if (tempsIntervalle <= 0) {
                         document.getElementById("valider").style.display = "";
@@ -130,7 +129,7 @@ $grCodeUri = $otp->getQrCodeUri(
                     }
                 }, 1000);
 
-                document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez réessayer dans " + tempsIntervalle + " secondes";
+                document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
                 document.getElementById("valider").style.display = "none";
             }
         }
