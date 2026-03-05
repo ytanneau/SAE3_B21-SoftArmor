@@ -99,7 +99,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT latitude
+            $stmt = $pdo->prepare("SELECT lat
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
@@ -116,7 +116,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT longitude 
+            $stmt = $pdo->prepare("SELECT lon
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
