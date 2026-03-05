@@ -50,9 +50,8 @@
             }
 
             $data = json_decode($response, true);
-            print_r($data);
+
             $data = $data[0];
-            print_r($data);
             if(!empty($data)){
                 $longitude = $data["lat"];
                 $latitude = $data["lon"];
