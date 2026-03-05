@@ -25,14 +25,19 @@
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $ch = curl_init();
 
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_USERAGENT => "marketplace-test",
 
-            curl_setopt($ch, CURLOPT_PROXY, "10.253.5.107:8080"); // ton proxy
-            curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true); // important pour HTTPS
+                CURLOPT_PROXY => "10.253.5.107:8080",
+                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
 
-            curl_setopt($ch, CURLOPT_USERAGENT, "marketplace-test");
+                CURLOPT_HTTPPROXYTUNNEL => true,
 
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false
+            ]);
             $response = curl_exec($ch);
 
             if(curl_errno($ch)){
@@ -40,8 +45,8 @@
             }
 
             echo $response;
-            // $longitude = $data[0]["lon"];
-            // $latitude = $data[0]["lat"];
+            $longitude = $data[0]["lon"];
+            $latitude = $data[0]["lat"];
             
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
