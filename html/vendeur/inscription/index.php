@@ -21,6 +21,9 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
+            if($etape == 1){
+                
+            }
             $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $ch = curl_init();
@@ -86,8 +89,8 @@
 </head>
 <body id="inscription_vendeur">
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
-    $longitude = get_latitude($id_compte);
-    $latitude = get_longitude($id_compte);
+    $longitude = get_longitude($id_compte);
+    $latitude = get_latitude($id_compte);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
@@ -99,9 +102,9 @@
             </div>
             <div>
                 <label for="latitude">Latitude</label>
-                <input type="text" id="latitude" value=<?= $latitude ?>>
+                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>">
                 <label for="longitude">Longitude</label>
-                <input type="text" id="longitude" value=<?= $longitude ?>>
+                <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>">
             </div>
             <input type="submit">
         </form>
