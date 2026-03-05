@@ -187,8 +187,8 @@ hr {
     .mainCarteInscription{
         width: 1000px;
         #map{
-            height: 100px;
-            width: 100px;
+            height: 800px;
+            width: 800px;
         }
     }
 }
@@ -2154,7 +2154,17 @@ aside {
     }
 
     #cle_2fa {
-        font-weight: bolder;
-        font-size: 1.25em;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    #qrCode {
+        margin: 2em;
+        border: solid 1px gray;
+        border-radius: $angle_grand;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

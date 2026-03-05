@@ -46,7 +46,7 @@
                 if($_SERVER["REQUEST_METHOD"] == "POST"){
                     // récupération des données du formulaire de saisie
                     // _client
-                    $modifPseudo = ANONYMISATION_STRING;
+                    $modifPseudo = "Compte supprimé";
                     $modifNom = ANONYMISATION_STRING;
                     $modifPrenom = ANONYMISATION_STRING;
                     $modifDateNaissance = date('0-0-0 0:0:0');
@@ -81,6 +81,8 @@
                     $stmt = $pdo->prepare("UPDATE _compte SET email = :modifEmail, mdp = :modifMdp, supprime = :modifBoolSupprime, id_image_profil = :modifIdImageProfil, date_creation = :modifDateCreation WHERE id_compte = :id_compte");
                     $stmt->execute([':modifEmail' => $modifEmail, ':modifMdp' => $modifMdp, ':modifBoolSupprime' => $modifBoolSupprime, ':modifIdImageProfil' => $modifIdImageProfil, ':modifDateCreation' => $modifDateCreation, ':id_compte' => $id_compte]);
                     session_destroy();
+                    header('location: ' . HOME_SITE);
+                    exit;
                 }
             ?>
         </main>

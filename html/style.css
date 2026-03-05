@@ -756,8 +756,8 @@ hr {
   width: 1000px;
 }
 #connect_vendeur .mainCarteInscription #map, #inscription_vendeur .mainCarteInscription #map {
-  height: 100px;
-  width: 100px;
+  height: 800px;
+  width: 800px;
 }
 
 #connect_vendeur, #connect_client {
@@ -3529,6 +3529,15 @@ aside .achat:hover {
   padding-right: 0;
 }
 #page_2fa #cle_2fa {
-  font-weight: bolder;
-  font-size: 1.25em;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#page_2fa #qrCode {
+  margin: 2em;
+  border: solid 1px gray;
+  border-radius: 50px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */
