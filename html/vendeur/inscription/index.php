@@ -90,6 +90,8 @@
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
     $longitude = get_longitude($id_compte);
     $latitude = get_latitude($id_compte);
+    print_r($longitude);
+    print_r($latitude);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
