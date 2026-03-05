@@ -100,10 +100,10 @@
                 <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
             </div>
             <div>
-                <label for="latitude">Latitude</label>
-                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>">
                 <label for="longitude">Longitude</label>
                 <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>">
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>">
             </div>
             <input type="submit">
         </form>
