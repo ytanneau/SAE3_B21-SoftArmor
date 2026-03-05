@@ -156,10 +156,9 @@ $grCodeUri = $otp->getQrCodeUri(
 
     function copier() {
         let texteCle = document.getElementById("cle_2fa");
-        texteCle.select();
 
         // Copier la clé dans le presse-papier
-        navigator.clipboard.writeText(textCle.value);
+        navigator.clipboard.writeText(texteCle.textContent);
     }
 </script>
 </html>
