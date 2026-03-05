@@ -47,9 +47,11 @@
             }
 
             $data = json_decode($response, true);
-
-            $longitude = $data[0]["lon"];
-            $latitude = $data[0]["lat"];
+            print_r($data);
+            if(!empty($data)){
+                $longitude = $data[0]["lon"];
+                $latitude = $data[0]["lat"];
+            }
             
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
