@@ -680,7 +680,7 @@
     function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec, $lon, $lat) {
         $mdp = crypte_v2($mdp);
         
-        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :ville, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec, :lon, lat)");
+        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :ville, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec, :lon, :lat)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
         $requete->bindValue(":ville", $ville, PDO::PARAM_STR);
