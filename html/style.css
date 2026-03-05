@@ -3529,6 +3529,7 @@ aside .achat:hover {
   padding-right: 0;
 }
 #page_2fa #cle_2fa {
+  margin-top: 2em;
   padding: 1em;
   font-weight: bold;
   font-size: 1.1em;
