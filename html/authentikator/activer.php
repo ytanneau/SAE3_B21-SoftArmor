@@ -77,8 +77,15 @@ $grCodeUri = $otp->getQrCodeUri(
         <h3>Depuis votre application de double authentification, scannez ce QRCode ou saisissez la clé</h3>
         <p><strong>Ce code ne sera affiché qu'une seule fois.</strong> Veuillez le conserver dans votre application, ou vous risquez de perdre votre compte.</p>
         
-        <img src="<?=$grCodeUri?>">
-        <p>Clef: <?=$otp->getSecret()?></p>
+        <div id="qrCode">
+            <img src="<?=$grCodeUri?>">
+
+            <p id="cle_2fa">
+                <?=$otp->getSecret()?>
+            </p>
+
+            <button onclick="copier">Copier</button>
+        </div>
 
         <h2>Étape 2</h2>
         
@@ -146,5 +153,13 @@ $grCodeUri = $otp->getQrCodeUri(
             document.getElementById("valider").click();
         }
     })
+
+    function copier() {
+        let text = document.getElementById("cle_2fa");
+        text.select();
+
+        // Copier la clé dans le presse-papier
+        navigator.clipboard.writeText(text.value);
+    }
 </script>
 </html>
