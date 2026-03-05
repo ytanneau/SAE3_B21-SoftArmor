@@ -9,5 +9,5 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const longitude = document.getElementById("longitude")
 const latitude = document.getElementById("latitude")
 
-let marker = L.marker([longitude.value, latitude.value])
+let marker = L.marker([longitude.value, latitude.value]).addTo(map)
 map.setView([longitude.value, latitude.value], 10)
