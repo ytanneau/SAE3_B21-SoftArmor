@@ -83,8 +83,6 @@ $grCodeUri = $otp->getQrCodeUri(
             <p id="cle_2fa">
                 <?=$otp->getSecret()?>
             </p>
-
-            <button onclick="copier()">Copier</button>
         </div>
 
         <h2>Étape 2</h2>
@@ -153,12 +151,5 @@ $grCodeUri = $otp->getQrCodeUri(
             document.getElementById("valider").click();
         }
     })
-
-    function copier() {
-        let texteCle = document.getElementById("cle_2fa");
-
-        // Copier la clé dans le presse-papier
-        navigator.clipboard.writeText(texteCle.textContent);
-    }
 </script>
 </html>
