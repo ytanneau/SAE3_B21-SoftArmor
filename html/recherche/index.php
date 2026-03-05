@@ -484,7 +484,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.price.max = null;
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
-            searchState.filters.category = null;
+            searchState.filters.category = "";
             <?php $categorie = null;
             $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
@@ -510,7 +510,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
-            if (searchState.filters.category !== "" AND $categorie != null) {
+            if (searchState.filters.category !== "") {
                 forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
             } else {
                 forCategory.textContent = "";
