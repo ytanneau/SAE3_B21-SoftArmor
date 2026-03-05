@@ -3529,10 +3529,11 @@ aside .achat:hover {
   padding-right: 0;
 }
 #page_2fa #cle_2fa {
-  font-weight: 500;
-  font-size: 1.25em;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 #page_2fa #qrCode {
+  margin: 2em;
   border: solid 1px gray;
   border-radius: 50px;
   padding: 2em;

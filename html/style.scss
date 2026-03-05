@@ -2154,11 +2154,12 @@ aside {
     }
 
     #cle_2fa {
-        font-weight: 500;
-        font-size: 1.25em;
+        font-weight: bold;
+        font-size: 1.1em;
     }
 
     #qrCode {
+        margin: 2em;
         border: solid 1px gray;
         border-radius: $angle_grand;
         padding: 2em;
