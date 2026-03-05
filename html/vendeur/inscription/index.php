@@ -25,7 +25,7 @@
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $opts = [
                 "http" => [
-                    "proxy" => "tcp://10.253.5.107",
+                    "proxy" => "tcp://10.253.5.107:8080",
                     "request_fulluri" => true,
                     "header" => "Proxy-Authorization: Basic " . base64_encode("sae301_b21:a9ntNhsglad)") . "\r\n" . "User-Agent: MaMarketplace/1.0\r\n"
                 ]
