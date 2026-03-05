@@ -104,7 +104,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             <div>
                 <div class="">
                     <span id="for_category"></span><br>
-                    <span id="for_sellers"></span>
+                    <b><span id="for_sellers"></span></b>
                     <h1 id="results_for"></h1>
                 </div>
                 <div class="labelEtBandeau">
