@@ -105,13 +105,13 @@ $vendeur = isset($_SESSION['raison_sociale']);
         </a>
         <h2>S'identifier</h2>
         <form action="" method="post">
-            <label>Ouvrez votre application de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</label>
+            <label>Ouvrez votre application de double authentification, puis entrez le code PIN affiché pour vous connecter</label>
             <label for="codePIN">Code PIN</label>
             <input type="number" id="codePIN" name="codePIN" class="champ">
-            <p type="error"><?= $erreur ?></p>
+            <p class="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
-                <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
+                <p class="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
             <?php } else { ?>
                 <input type="submit" value="Se connecter" class="bouton">
             <?php } ?>

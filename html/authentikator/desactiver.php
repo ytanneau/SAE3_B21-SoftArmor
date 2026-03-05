@@ -95,10 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <label for="codePIN">Code PIN</label>
             <input type="number" id="codePIN" name="codePIN" class="champ">
-            <p type="error"><?= $erreur ?></p>
+            <p class="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
-                <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
+                <p class="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
             <?php } else { ?>
                 <input type="submit" value="Désactiver" class="bouton grave">
             <?php } ?>
