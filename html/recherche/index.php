@@ -349,7 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
-                            searchState.filters.seller_name = vendeur[cle];
+                            //searchState.filters.seller_name = vendeur[cle];
                             console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
