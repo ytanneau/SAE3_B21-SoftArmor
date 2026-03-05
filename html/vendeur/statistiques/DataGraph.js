@@ -187,8 +187,8 @@ export default class DataGraph {
         if (type == 'Y') {
             for (let i = 0; i < 12; i++) {
                 //res.push({"date": now.valueOf()-(UN_MOIS*i),"quantite":0,"prix":0})
-                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0, "nb_commande": 0 })
-                now.setTime(now.setMonth(now.getMonth() - 1));
+                res.push({ "date": new Date(now.valueOf()), "quantite": 0, "prix": 0 })
+                now.setTime(now.setMonth(now.getMonth()-1));
             };
         }
         return res;

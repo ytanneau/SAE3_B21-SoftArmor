@@ -297,7 +297,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 sales: false,
                 reduc: false,
                 sellers : "",
-                raison_sociale : ""
+                seller_name : ""
             },
             sort: {
                 field: "nom_public", 
@@ -335,7 +335,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             }
                         });
                     }
-                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                    if((info == 'latitude' || info == 'longitude')&& vendeur[info] != null){
                         tab_coor.push(vendeur[info])
                     } else if (info == 'raison_sociale'){
                         raison_sociale = vendeur[info]
@@ -349,7 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
-                            searchState.filters.raison_sociale = raison_sociale;
+                            searchState.filters.seller_name = vendeur['raison_social'];
                             console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
@@ -521,7 +521,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = "";
             }
             if (searchState.filters.sellers !== "") {
-                forSellers.textContent = `Vendeur "${}"`;
+                forSellers.textContent = `Vendeur "${searchState.filters.seller_name}"`;
             } else {
                 forSellers.textContent = "";
             }

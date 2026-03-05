@@ -47,8 +47,8 @@
             }
 
             echo $response;
-            $longitude = $data[0]["lon"];
-            $latitude = $data[0]["lat"];
+            $longitude = $response[0]["lon"];
+            $latitude = $response[0]["lat"];
             
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
@@ -81,8 +81,8 @@
 </head>
 <body id="inscription_vendeur">
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
-    $longitude = get_longitude($id_compte);    
-    $latitude = get_latitude($id_compte);
+    $longitude = get_latitude($id_compte);
+    $latitude = get_longitude($id_compte);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
@@ -93,10 +93,10 @@
                 <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
             </div>
             <div>
-                <label for="longitude">Longitude</label>
-                <input type="text" id="longitude" value=<?= $longitude ?>>
                 <label for="latitude">Latitude</label>
                 <input type="text" id="latitude" value=<?= $latitude ?>>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value=<?= $longitude ?>>
             </div>
             <input type="submit">
         </form>

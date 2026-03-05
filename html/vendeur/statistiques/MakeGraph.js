@@ -72,6 +72,7 @@ export default class MakeGraph {
                 let liste = this.use.filter(ele => {
                     return this.CompareDate(now, ele.date);
                 });
+                
                 res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setDate(now.getDate() - 1));
             };
@@ -96,7 +97,7 @@ export default class MakeGraph {
                 now.setTime(now.setMonth(now.getMonth() - 1));
             };
         }
-
+        
         return this.formateValue(res.reverse());
     }
 
@@ -110,7 +111,6 @@ export default class MakeGraph {
             quantite.push(ele.quantite);
             nb.push(ele.nb_commande);
         });
-
         return {
             prix: prix,
             quantite, quantite,
