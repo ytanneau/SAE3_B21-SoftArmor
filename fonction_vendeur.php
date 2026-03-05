@@ -95,11 +95,11 @@
         }
     }
 
-    function get_longitude($id_compte){
+    function get_latitude($id_compte){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT coor_x 
+            $stmt = $pdo->prepare("SELECT latitude
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
@@ -112,11 +112,11 @@
             throw $e;
         }
     }
-    function get_latitude($id_compte){
+    function get_longitude($id_compte){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT coor_y 
+            $stmt = $pdo->prepare("SELECT longitude 
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
