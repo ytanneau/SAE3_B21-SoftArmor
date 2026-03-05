@@ -519,7 +519,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = "";
             }
             if (searchState.filters.sellers !== "") {
-                forSellers.textContent = `Vendeur "${searchState.filters.sellers}"`;
+                forSellers.textContent = `Vendeur "${vendeur[cle]}"`;
             } else {
                 forSellers.textContent = "";
             }
