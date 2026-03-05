@@ -47,7 +47,7 @@
             }
 
             $data = json_decode($response);
-
+            print_r($data);
             $longitude = $data[0]["lon"];
             $latitude = $data[0]["lat"];
             
