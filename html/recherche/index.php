@@ -510,7 +510,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 resultGrid.removeChild(resultGrid.firstChild);
             }
 
-            if (searchState.filters.category !== "") {
+            if (searchState.filters.category !== "" AND $categorie != null) {
                 forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
             } else {
                 forCategory.textContent = "";
