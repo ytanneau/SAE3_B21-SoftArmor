@@ -753,11 +753,11 @@ hr {
   padding-right: 0;
 }
 #connect_vendeur .mainCarteInscription, #inscription_vendeur .mainCarteInscription {
-  width: 1000px;
+  width: 700px;
 }
 #connect_vendeur .mainCarteInscription #map, #inscription_vendeur .mainCarteInscription #map {
-  height: 800px;
-  width: 800px;
+  height: 300px;
+  width: 500px;
 }
 
 #connect_vendeur, #connect_client {

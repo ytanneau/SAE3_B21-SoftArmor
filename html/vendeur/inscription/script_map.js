@@ -10,4 +10,4 @@ const longitude = document.getElementById("longitude")
 const latitude = document.getElementById("latitude")
 
 let marker = L.marker([longitude.value, latitude.value]).addTo(map)
-map.setView([longitude.value, latitude.value], 13)
+map.setView([longitude.value, latitude.value], 18)
