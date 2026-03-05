@@ -104,7 +104,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             <div>
                 <div class="">
                     <span id="for_category"></span><br>
-                    <span id="for_sellers"></span>
+                    <b><span id="for_sellers"></span></b>
                     <h1 id="results_for"></h1>
                 </div>
                 <div class="labelEtBandeau">
@@ -349,7 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
-                            searchState.filters.seller_name = vendeur['raison_social'];
+                            searchState.filters.seller_name = vendeur['raison_sociale'];
                             console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
