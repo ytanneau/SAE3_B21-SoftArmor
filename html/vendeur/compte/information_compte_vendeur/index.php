@@ -96,14 +96,15 @@
                     </p>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
-                <a href="desactivation/desactivation.php" id="idDesactivationCompte">Desactiver le compte</a>
+                <a href="desactivation/desactivation.php" id="idDesactivationCompte">Désactiver le compte</a>
+                
 
 
                 <!-- boutons en rapport avec la double authentification -->
                 <?php if (!a_2FA($_SESSION['id_compte'])) { ?>
-                    <a class="bouton" href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a>
+                    <a href="<?= HOME_SITE . "authentikator/activer.php" ?>" id="idActivation2FA">Activer la 2FA</a>
                 <?php } else { ?>
-                    <a class="bouton grave" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                    <a href="<?= HOME_SITE . "authentikator/desactiver.php" ?>" id="idDesactivation2FA">Désactiver la 2FA</a>
                 <?php } ?>
             </div>
         </main>

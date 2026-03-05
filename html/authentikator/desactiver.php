@@ -17,10 +17,14 @@ if (!isset($_SESSION['logged_in']) || !a_2FA($_SESSION['id_compte'])) {
     exit;
 }
 
+$vendeur = isset($_SESSION['raison_sociale']);
+$accueil = $vendeur ? 'vendeur/accueil' : '';
+$chemin = $vendeur ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations';
+$header = $vendeur ? 'vendeur/header.php' : 'header.php';
+
 require_once(HOME_GIT . 'vendor/autoload.php');
 use OTPHP\TOTP;
 
-$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
 $erreur = "";
 
 // si l'user a attendu le temps qu'il fallait (après avoir lamentablement échoué plusieurs fois)
@@ -48,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['nb_tentatives_connexion']);
 
             desactiver_2FA($_SESSION['id_compte']);
-            header("Location:$accueil");
+            header("Location: " . HOME_SITE . $accueil);
 
         } else {
             // si l'user a lamentablement échoué pour le code PIN
@@ -75,14 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body id="inscription_client">
+<body id="page_2fa">
     <?php 
-        include HOME_SITE . "header.php";
-        include HOME_SITE . "toolbar_categories.php"; 
+        include HOME_SITE . $header;
+        if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
     ?>
 
     <main>
-        <?php $chemin = isset($_SESSION['raison_sociale']) ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations' ?>
         <a href="<?= HOME_SITE . $chemin ?>"><img src="../image/retour.svg"></a>
 
         <h1>Désactiver la double authentification</h1>
@@ -91,18 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>Ouvrez votre application de double authentification, et entrez le code PIN enregistré pour votre compte</h3>
 
             <label for="codePIN">Code PIN</label>
-            <input type="number" id="codePIN" name="codePIN">
+            <input type="number" id="codePIN" name="codePIN" class="champ">
             <p type="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
                 <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
             <?php } else { ?>
-                <input type="submit" value="Désactiver">
+                <input type="submit" value="Désactiver" class="bouton grave">
             <?php } ?>
     
-            <h3>Clef perdue ?</h3> 
-
-            <p>Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a></p>
+            <p>Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
         </form>
     </main>
 

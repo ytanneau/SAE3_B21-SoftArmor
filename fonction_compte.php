@@ -28,7 +28,7 @@
     }
     
     // Fonction qui permet de créer un compte vendeur
-    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemin){
+    function create_profile_vendeur($raisonSocial, $numSiret, $numCobrec, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $mdpc, $chemin, $lon, $lat){
         global $pdo;
         $erreurs = [];
         
@@ -57,7 +57,7 @@
             try{
                 if (!sql_check_email($pdo, $email)){
                     if (sql_check_cle($pdo, $numCobrec)){
-                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec);
+                        sql_create_vendeur($pdo, $raisonSocial, $numSiret, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec, $lon, $lat);
                     }
                     else{
                         $erreurs['numero_cobrec'] = EXISTE_PAS;
@@ -156,8 +156,10 @@
 
                         if ($typeCompte == 'vendeur'){
                             $_SESSION['raison_sociale'] = $resSQL['raison_sociale'];
+                            unset($_SESSION['pseudo']);
                         } else {
                             $_SESSION['pseudo'] = $resSQL['pseudo'];
+                            unset($_SESSION['raison_sociale']);
 
                             require "fonction_panier.php";
                             transferer_panier_visiteur_compte($resSQL['id_compte']);
@@ -677,10 +679,10 @@
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec) {
+    function sql_create_vendeur($pdo, $raisonSociale, $numSiret, $email, $ville, $adresse, $compAdresse, $codePostal, $mdp, $numCobrec, $lon, $lat) {
         $mdp = crypte_v2($mdp);
         
-        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :ville, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec)");
+        $requete = $pdo->prepare("CALL creer_vendeur_compte(:email, :mdp, :ville, :adresse, :complement_adresse, :code_postal, :raison_sociale, :num_siret, :cle_cobrec, :lon, lat)");
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
         $requete->bindValue(":mdp", $mdp, PDO::PARAM_STR);
         $requete->bindValue(":ville", $ville, PDO::PARAM_STR);
@@ -690,6 +692,8 @@
         $requete->bindValue(":raison_sociale", $raisonSociale, PDO::PARAM_STR);
         $requete->bindValue(":num_siret", $numSiret, PDO::PARAM_STR);
         $requete->bindValue(":cle_cobrec", $numCobrec, PDO::PARAM_STR);
+        $requete->bindValue(":lon", $lon, PDO::PARAM_STR);
+        $requete->bindValue(":lat", $lat, PDO::PARAM_STR);
 
         $requete->execute();
     }

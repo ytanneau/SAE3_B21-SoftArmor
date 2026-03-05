@@ -59,7 +59,7 @@
                     // _compte
                     $modifEmail = bin2hex(random_bytes(10));
                     $modifMdp = ANONYMISATION_STRING;
-                    $modifBoolSupprime = 1;
+                    $modifBoolSupprime = 0;
                     $modifIdImageProfil = NULL;
                     $modifDateCreation = date('0-0-0 0:0:0');
 

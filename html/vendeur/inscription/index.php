@@ -21,7 +21,36 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
-            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
+            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+            $ch = curl_init();
+
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_USERAGENT => "marketplace-test",
+
+                CURLOPT_PROXY => "10.254.0.254:3128",
+                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
+
+                CURLOPT_HTTPPROXYTUNNEL => true,
+
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false
+            ]);
+            $response = curl_exec($ch);
+
+            if(curl_errno($ch)){
+                echo "Erreur cURL : " . curl_error($ch);
+            }
+
+            echo $response;
+            $longitude = $response[0]["lon"];
+            $latitude = $response[0]["lat"];
+            
+            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
             array_pop($erreurs);
             if (empty($erreurs)) {
@@ -52,8 +81,8 @@
 </head>
 <body id="inscription_vendeur">
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
-    $longitude = get_longitude($id_compte);    
-    $latitude = get_latitude($id_compte);
+    $longitude = get_latitude($id_compte);
+    $latitude = get_longitude($id_compte);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
@@ -61,17 +90,17 @@
         <form action="" id="formCoordonnee">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
-                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'] )?>">
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
             </div>
             <div>
-                <label for="longitude">Longitude</label>
-                <input type="text" id="longitude" value=<?= $longitude ?>>
                 <label for="latitude">Latitude</label>
                 <input type="text" id="latitude" value=<?= $latitude ?>>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value=<?= $longitude ?>>
             </div>
             <input type="submit">
         </form>
-    <script scr="script_map.js"></script>
+    <script src="script_map.js"></script>
 <?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
 <main>
         <h1>Votre compte a été créé</h1>

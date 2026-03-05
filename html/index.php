@@ -171,7 +171,7 @@ if($tabPromotion != false){
     <footer>
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
-    <script src="script.js?t=2"></script>
+    <script src="script.js?t=4"></script>
     <!-- t=2 -> actualise le fichier js (en faisant croire au cache qu'il ne l'a pas) -->
 
     <script>

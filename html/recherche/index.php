@@ -103,7 +103,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         <div class="resultat">
             <div>
                 <div class="">
-                    <span id="for_category"></span>
+                    <span id="for_category"></span><br>
+                    <span id="for_sellers"></span>
                     <h1 id="results_for"></h1>
                 </div>
                 <div class="labelEtBandeau">
@@ -295,7 +296,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : null
+                sellers : "",
+                seller_name : ""
             },
             sort: {
                 field: "nom_public", 
@@ -333,7 +335,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             }
                         });
                     }
-                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                    if((info == 'latitude' || info == 'longitude')&& vendeur[info] != null){
                         tab_coor.push(vendeur[info])
                     } else if (info == 'raison_sociale'){
                         raison_sociale = vendeur[info]
@@ -347,6 +349,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
+                            searchState.filters.seller_name = vendeur['raison_social'];
                             console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
@@ -370,7 +373,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
         const forCategory = document.querySelector("#for_category");
-        
+        const forSellers = document.querySelector("#for_sellers");
+
         let promCheck = document.getElementById("prom");
 
         promCheck.addEventListener('change', (e) => {
@@ -484,7 +488,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.price.max = null;
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
-            searchState.filters.category = null;
+            searchState.filters.category = "";
+            searchState.filters.sellers = "";
             <?php $categorie = null;
             $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
@@ -514,6 +519,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
             } else {
                 forCategory.textContent = "";
+            }
+            if (searchState.filters.sellers !== "") {
+                forSellers.textContent = `Vendeur "${searchState.filters.seller_name}"`;
+            } else {
+                forSellers.textContent = "";
             }
 
 

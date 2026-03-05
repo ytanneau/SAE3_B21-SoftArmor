@@ -86,6 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$vendeur = isset($_SESSION['raison_sociale']);
+
 ?>
 
 <!DOCTYPE html>
@@ -96,21 +98,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include HOME_SITE . 'link_head.php' ?>
     <title>Alizon - 2FA</title>
 </head>
-<body id="inscription_client">
-    <form action="" method="post">
-        <p>Ouvrez l'application où vous avez entré votre clef de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</p>
-        <label for="codePIN">Code PIN</label>
-        <input type="number" id="codePIN" name="codePIN">
-        <p type="error"><?= $erreur ?></p>
+<body id="connect_<?=$vendeur ? 'vendeur' : 'client'?>">
+    <main>
+        <a href="<?= HOME_SITE ?>">
+            <img src="<?= HOME_SITE ?>image/Alizon_<?=$vendeur ? 'vendeur_noir' : 'noir'?>.png" alt="Logo alizon" title="Logo alizon">
+        </a>
+        <h2>S'identifier</h2>
+        <form action="" method="post">
+            <label>Ouvrez votre application de double authentification, et entrez ci-dessous le code PIN affiché pour vous connecter</label>
+            <label for="codePIN">Code PIN</label>
+            <input type="number" id="codePIN" name="codePIN" class="champ">
+            <p type="error"><?= $erreur ?></p>
 
-        <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
-            <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
-        <?php } else { ?>
-            <input type="submit" value="Se connecter">
-        <?php } ?>
-        
-        <p>Clef perdue ? Veuillez contacter le service client à l'email <a href="mailto:service@alizon.bzh">service@alizon.bzh</a>.</p>
-    </form>
+            <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
+                <p type="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
+            <?php } else { ?>
+                <input type="submit" value="Se connecter" class="bouton">
+            <?php } ?>
+            
+        </form>
+        <p style="text-align:center">Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
+    </main>
 </body>
 <script>
     <?php if (isset($_SESSION['temps_attente_connexion'])) { ?>
