@@ -23,16 +23,28 @@
             require_once $fichier;
             $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
-            $opts = [
-                "http" => [
-                    "header" => "User-Agent: MaMarketplace/1.0\r\n"
-                ]
-            ];
+            $ch = curl_init();
 
-            $context = stream_context_create($opts);
-            $response = file_get_contents($url, false, $context);
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_USERAGENT => "marketplace-test",
 
-            $data = json_decode($response, true);
+                CURLOPT_PROXY => "10.253.5.107:8080",
+                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                CURLOPT_HTTPPROXYTUNNEL => true,
+
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false
+            ]);
+            $response = curl_exec($ch);
+
+            if(curl_errno($ch)){
+                echo "Erreur cURL : " . curl_error($ch);
+            }
+
+            echo $response;
             $longitude = $data[0]["lon"];
             $latitude = $data[0]["lat"];
             

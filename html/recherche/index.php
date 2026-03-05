@@ -104,6 +104,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             <div>
                 <div class="">
                     <span id="for_category"></span>
+                    <span id="for_sellers"></span>
                     <h1 id="results_for"></h1>
                 </div>
                 <div class="labelEtBandeau">
@@ -295,7 +296,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 price: {min: null, max: null},
                 sales: false,
                 reduc: false,
-                sellers : null
+                sellers : ""
             },
             sort: {
                 field: "nom_public", 
@@ -370,7 +371,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         const input = document.querySelector("#recherche");
         const resultsFor = document.querySelector("#results_for");
         const forCategory = document.querySelector("#for_category");
-        
+        const forSellers = document.querySelector("#for_sellers");
+
         let promCheck = document.getElementById("prom");
 
         promCheck.addEventListener('change', (e) => {
@@ -484,7 +486,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             searchState.filters.price.max = null;
             searchState.filters.sales = false;
             searchState.filters.reduc = false;
-            searchState.filters.category = null;
+            searchState.filters.category = "";
+            searchState.filters.sellers = "";
             <?php $categorie = null;
             $_GET['categorie'] = null ?>
             document.querySelectorAll('input[name="prix"]').forEach(radio => radio.checked = false);
@@ -514,6 +517,11 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = `Catégorie "${searchState.filters.category}"`;
             } else {
                 forCategory.textContent = "";
+            }
+            if (searchState.filters.sellers !== "") {
+                forSellers.textContent = `Vendeur "${searchState.filters.sellers}"`;
+            } else {
+                forSellers.textContent = "";
             }
 
 
