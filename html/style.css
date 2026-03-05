@@ -3529,15 +3529,15 @@ aside .achat:hover {
   padding-right: 0;
 }
 #page_2fa #cle_2fa {
+  padding: 1em;
   font-weight: bold;
   font-size: 1.1em;
+  border: solid 1px gray;
+  border-radius: 5px;
 }
 #page_2fa #qrCode {
-  margin: 2em;
-  border: solid 1px gray;
-  border-radius: 50px;
-  padding: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 4em;
 }/*# sourceMappingURL=style.css.map */
