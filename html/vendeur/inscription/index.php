@@ -30,8 +30,10 @@
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_USERAGENT => "marketplace-test",
 
-                CURLOPT_PROXY => "10.253.5.107:8080",
+                CURLOPT_PROXY => "10.254.0.254:3128",
                 CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
 
                 CURLOPT_HTTPPROXYTUNNEL => true,
 
