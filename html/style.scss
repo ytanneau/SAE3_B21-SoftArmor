@@ -184,6 +184,13 @@ hr {
 // définition des pages inscriptions et connexions
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+    .mainCarteInscription{
+        width: 1000px;
+        #map{
+            height: 100px;
+            width: 100px;
+        }
+    }
 }
 
 #connect_vendeur, #connect_client{
@@ -1415,12 +1422,21 @@ aside {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
     }
-    #idDesactivationCompte{
+
+    #idDesactivationCompte, #idDesactivation2FA {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
         width: 577px;
     }
+
+    #idActivation2FA {
+        @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
+        margin-top: 30px;
+        padding: 0.6em;
+        width: 577px;
+    }
+    
 }
 
 
@@ -2126,6 +2142,14 @@ aside {
 }
 
 /* Page d'activation*/
-#activer_2FA {
-    @include page_connect_inscription($nuance, white);
+#page_2fa {
+    .champ {
+        display: block;
+        border: solid 1px gray;
+        border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+    }
 }

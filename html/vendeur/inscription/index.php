@@ -11,6 +11,8 @@
         header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
     }
     
+    require_once HOME_GIT . 'fonction_vendeur.php';
+
     $etape = 0;
 
     if ($_POST != null) {
@@ -19,8 +21,24 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
-            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
+            $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
+            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+            $opts = [
+                "http" => [
+                    "header" => "User-Agent: MaMarketplace/1.0\r\n"
+                ]
+            ];
+
+            $context = stream_context_create($opts);
+            $response = file_get_contents($url, false, $context);
+
+            $data = json_decode($response, true);
+            $longitude = $data[0]["lon"];
+            $latitude = $data[0]["lat"];
             
+            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
+            $id_compte = $erreurs['id_compte'];
+            array_pop($erreurs);
             if (empty($erreurs)) {
                 // L'inscription est réussie, donc connexion directe
                 connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
@@ -48,12 +66,29 @@
     
 </head>
 <body id="inscription_vendeur">
-    <main>
-<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ ?>
-        
-    <div id="map"></div>
-
+<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
+    $longitude = get_longitude($id_compte);    
+    $latitude = get_latitude($id_compte);
+?>
+    <main class="mainCarteInscription">
+        <h1>Mon adresse</h1>
+        <div id="map"></div>
+        <form action="" id="formCoordonnee">
+            <div>
+                <label for="adresseSaisi">Adresse saisi : </label>
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
+            </div>
+            <div>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value=<?= $longitude ?>>
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" value=<?= $latitude ?>>
+            </div>
+            <input type="submit">
+        </form>
+    <script src="script_map.js"></script>
 <?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
+<main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
         <p><a href="../stock">Aller à la page d'accueil</a></p>
@@ -62,6 +97,7 @@
         <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 
 <?php } else { ?>
+<main>
     <img src=""  alt="">
     <a href="../"><img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon"></a>
 
@@ -242,6 +278,5 @@
         <a href="../">Retourner au côté client</a></p>
 <?php } ?>
     </main>
-    <script scr="script_map.js"></script>
 </body>
 </html>
