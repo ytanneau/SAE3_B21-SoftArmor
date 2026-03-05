@@ -23,20 +23,25 @@
             require_once $fichier;
             $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
-            $opts = [
-                "http" => [
-                    "proxy" => "tcp://10.253.5.107:8080",
-                    "request_fulluri" => true,
-                    "header" => "Proxy-Authorization: Basic " . base64_encode("sae301_b21:a9ntNhsglad)") . "\r\n" . "User-Agent: MaMarketplace/1.0\r\n"
-                ]
-            ];
+            $ch = curl_init();
 
-            $context = stream_context_create($opts);
-            $response = file_get_contents($url, false, $context);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            $data = json_decode($response, true);
-            $longitude = $data[0]["lon"];
-            $latitude = $data[0]["lat"];
+            curl_setopt($ch, CURLOPT_PROXY, "10.253.5.107:8080"); // ton proxy
+            curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true); // important pour HTTPS
+
+            curl_setopt($ch, CURLOPT_USERAGENT, "marketplace-test");
+
+            $response = curl_exec($ch);
+
+            if(curl_errno($ch)){
+                echo "Erreur cURL : " . curl_error($ch);
+            }
+
+            echo $response;
+            // $longitude = $data[0]["lon"];
+            // $latitude = $data[0]["lat"];
             
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
