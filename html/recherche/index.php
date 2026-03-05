@@ -103,7 +103,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         <div class="resultat">
             <div>
                 <div class="">
-                    <span id="for_category"></span>
+                    <span id="for_category"></span><br>
                     <span id="for_sellers"></span>
                     <h1 id="results_for"></h1>
                 </div>
@@ -519,7 +519,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 forCategory.textContent = "";
             }
             if (searchState.filters.sellers !== "") {
-                forSellers.textContent = `Vendeur "${searchState.filters.sellers}"`;
+                forSellers.textContent = `Vendeur "${vendeur[cle]}"`;
             } else {
                 forSellers.textContent = "";
             }
