@@ -756,8 +756,8 @@ hr {
   width: 1000px;
 }
 #connect_vendeur .mainCarteInscription #map, #inscription_vendeur .mainCarteInscription #map {
-  height: 100px;
-  width: 100px;
+  height: 800px;
+  width: 800px;
 }
 
 #connect_vendeur, #connect_client {
