@@ -185,10 +185,10 @@ hr {
 #connect_vendeur, #inscription_vendeur{
     @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
     .mainCarteInscription{
-        width: 1000px;
+        width: 700px;
         #map{
-            height: 800px;
-            width: 800px;
+            height: 300px;
+            width: 500px;
         }
     }
 }
