@@ -46,7 +46,7 @@
                 echo "Erreur cURL : " . curl_error($ch);
             }
 
-            $data = json_decode($response);
+            $data = json_decode($response, true);
             print_r($data);
             $longitude = $data[0]["lon"];
             $latitude = $data[0]["lat"];
