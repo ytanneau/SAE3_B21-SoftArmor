@@ -3559,7 +3559,5 @@ aside .achat:hover {
 }
 
 #codePIN {
-  display: flex;
-  justify-content: center;
-  margin: 1.2em auto;
+  margin: 1.2em 0;
 }/*# sourceMappingURL=style.css.map */

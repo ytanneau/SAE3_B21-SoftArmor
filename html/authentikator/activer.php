@@ -89,7 +89,6 @@ $grCodeUri = $otp->getQrCodeUri(
         
         <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
         
-        <label for="codePIN">Code PIN</label>
         <input type="number" name="codePIN" id="inputPIN" hidden value="">
 
         <div id="codePIN">
@@ -144,8 +143,6 @@ $grCodeUri = $otp->getQrCodeUri(
                 document.getElementById("valider").style.display = "none";
             }
         }
-
-        console.log(document.getElementById("inputPIN").value);
 
         if (nbTentative > 0 && document.getElementById("inputPIN").value.length == 6) {
             xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("inputPIN").value + "&clef=<?=$otp->getSecret()?>");

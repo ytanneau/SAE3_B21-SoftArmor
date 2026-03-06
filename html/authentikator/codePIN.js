@@ -32,10 +32,24 @@
             }
         });
         
-        element.addEventListener('keyup', (e) => {
-            if (e.keyCode == 8 && e.target.previousSibling.nodeType == 1) { // backspace
-                e.target.previousSibling.focus();
-                e.target.previousSibling.value = ""
+        element.addEventListener('keydown', (e) => {
+            let elementPrec = e.target.previousSibling;
+            let elementSuiv = e.target.nextSibling;
+
+            if (e.keyCode == 8 && elementPrec.nodeType == 1) { // backspace
+                if (e.target.value == "") {
+                    elementPrec.focus();
+                    elementPrec.value = "";
+
+                } else {
+                    e.target.value = "";
+                }
+            }
+
+            if (e.keyCode == 37 && elementPrec.nodeType == 1) { // flèche gauche
+                elementPrec.focus();
+            } else if (e.keyCode == 39 && elementSuiv.nodeType == 1) { // flèche droite
+                elementSuiv.focus();
             }
         });
     }
