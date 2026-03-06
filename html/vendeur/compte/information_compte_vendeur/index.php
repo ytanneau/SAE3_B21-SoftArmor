@@ -65,6 +65,13 @@
         <?php include HOME_SITE . 'link_head.php';?>
         <meta charset="UTF-8">
         <title>Alizon - Mes informations</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
     </head>
     <body>
         <!-- inclusion du header -->
@@ -80,20 +87,25 @@
 
                 <!-- formulaire de saisie des modifications des informations d'un vendeur -->
                 <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
-                    <p>
-                        <label for="raison_sociale">Raison sociale</label>
-                        <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
-                        <label for="ville">Ville</label>
-                        <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
-                        <label for="adresse">Adresse</label>
-                        <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
-                        <label for="code_postal">Code postal</label>
-                        <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
-                        <label for="complementAdr">Complement d'adresse</label>
-                        <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
-                        <label for="description">Description</label>
-                        <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
-                    </p>
+                    <div>
+                        <p>
+                            <label for="raison_sociale">Raison sociale</label>
+                            <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
+                            <label for="ville">Ville</label>
+                            <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
+                            <label for="code_postal">Code postal</label>
+                            <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
+                            <label for="complementAdr">Complement d'adresse</label>
+                            <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
+                            <label for="description">Description</label>
+                            <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
+                        </p>
+                        <p>
+                            <div id="map"></div>
+                        </p>
+                    </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
                 <a href="desactivation/desactivation.php" id="idDesactivationCompte">Désactiver le compte</a>
@@ -108,8 +120,15 @@
                 <?php } ?>
             </div>
         </main>
-        <footer>
-
-        </footer>
+        <?php include HOME_SITE . "footer.php"?>
     </body>
+    <script>
+        let map = L.map('map').setView([48.113,-2.642],8)
+        let groupMarker = L.layerGroup().addTo(map)
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map)
+    </script>
 </html>
