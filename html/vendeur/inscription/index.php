@@ -13,16 +13,13 @@
     
     require_once HOME_GIT . 'fonction_vendeur.php';
 
-    $etape = 0;
-
     if ($_POST != null) {
         $erreurs = [];
         $fichier = HOME_GIT . 'fonction_compte.php';
         
         if (file_exists($fichier)) {
             require_once $fichier;
-            if($etape == 0){
-                $etape++;
+            if($_POST['stage'] == 0){
                 $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
                 $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
                 $ch = curl_init();
@@ -61,8 +58,8 @@
                 array_pop($erreurs);
                 
             }
-            else if($etape == 1){
-                $etape++;
+            else if($_POST['stage'] == 1){
+                $_POST['stage'] = 2;
                 $lon = $_POST['longitude'];
                 $lat = $_POST['latitude'];
                 $id_adresse = get_adresse_vendeur_with_vendeur_id($id_compte);
@@ -96,7 +93,7 @@
     
 </head>
 <body id="inscription_vendeur">
-<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){
+<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1){
 ?>
     <main class="mainCarteInscription">
         <h1>Confirmer les coordonnées</h1>
@@ -112,10 +109,12 @@
                 <label for="latitude">Latitude</label>
                 <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>" name="latitude">
             </div>
-            <input type="submit">
+            <input type="text" name="stage" hidden value="1">
+
+            <input type="submit" class="bouton">
         </form>
     <script src="script_map.js"></script>
-<?php } elseif (isset($erreurs) && $erreurs == [] && $etape == 2) { ?>
+<?php } elseif (isset($erreurs) && $erreurs == [] && $_POST['stage'] == 2) { ?>
 <main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
@@ -297,7 +296,7 @@
                 <?="Erreur : ".$erreurs['mdpc']?>
             </p>
         <?php } ?>
-
+            <input type="text" name="stage" hidden value="0">
             <input type="submit" value="S'inscrire" class="bouton">
         </form>
 
