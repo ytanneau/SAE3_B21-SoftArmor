@@ -75,7 +75,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, coor_x, coor_y, v.id_compte, v.raison_sociale FROM _adresse a join _vendeur v on a.id_adresse = v.id_adresse");
+            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, latitude, longitude, v.id_compte, v.raison_sociale FROM _adresse a join _vendeur v on a.id_adresse = v.id_adresse");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
@@ -95,11 +95,11 @@
         }
     }
 
-    function get_longitude($id_compte){
+    function get_latitude($id_compte){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT coor_x 
+            $stmt = $pdo->prepare("SELECT lat
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
@@ -112,11 +112,11 @@
             throw $e;
         }
     }
-    function get_latitude($id_compte){
+    function get_longitude($id_compte){
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT coor_y 
+            $stmt = $pdo->prepare("SELECT lon
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 

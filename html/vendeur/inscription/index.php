@@ -21,6 +21,9 @@
         $etape++;
         if (file_exists($fichier)) {
             require_once $fichier;
+            if($etape == 1){
+                
+            }
             $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $ch = curl_init();
@@ -46,9 +49,13 @@
                 echo "Erreur cURL : " . curl_error($ch);
             }
 
-            echo $response;
-            $longitude = $data[0]["lon"];
-            $latitude = $data[0]["lat"];
+            $data = json_decode($response, true);
+
+            if(!empty($data)){
+                $data = $data[0];
+                $longitude = $data["lat"];
+                $latitude = $data["lon"];
+            }
             
             $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
             $id_compte = $erreurs['id_compte'];
@@ -81,8 +88,6 @@
 </head>
 <body id="inscription_vendeur">
 <?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
-    $longitude = get_longitude($id_compte);    
-    $latitude = get_latitude($id_compte);
 ?>
     <main class="mainCarteInscription">
         <h1>Mon adresse</h1>
@@ -94,9 +99,9 @@
             </div>
             <div>
                 <label for="longitude">Longitude</label>
-                <input type="text" id="longitude" value=<?= $longitude ?>>
+                <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>">
                 <label for="latitude">Latitude</label>
-                <input type="text" id="latitude" value=<?= $latitude ?>>
+                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>">
             </div>
             <input type="submit">
         </form>
@@ -140,7 +145,7 @@
         <input type="text" 
             name="numSiret"
             id="numSiret"
-            minlenght="14"
+            minlength="14"
             placeholder="362 521 879 00034"
             value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
             required
