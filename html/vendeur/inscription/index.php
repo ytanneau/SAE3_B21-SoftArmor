@@ -18,53 +18,61 @@
     if ($_POST != null) {
         $erreurs = [];
         $fichier = HOME_GIT . 'fonction_compte.php';
-        $etape++;
+        
         if (file_exists($fichier)) {
             require_once $fichier;
-            if($etape == 1){
+            if($etape == 0){
+                $etape++;
+                $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
+                $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+                $ch = curl_init();
+
+                curl_setopt_array($ch, [
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_USERAGENT => "marketplace-test",
+
+                    CURLOPT_PROXY => "10.254.0.254:3128",
+                    CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                    CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
+
+                    CURLOPT_HTTPPROXYTUNNEL => true,
+
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_SSL_VERIFYHOST => false
+                ]);
+                $response = curl_exec($ch);
+
+                if(curl_errno($ch)){
+                    echo "Erreur cURL : " . curl_error($ch);
+                }
+
+                $data = json_decode($response, true);
+
+                if(!empty($data)){
+                    $data = $data[0];
+                    $longitude = $data["lat"];
+                    $latitude = $data["lon"];
+                }
                 
+                $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
+                $id_compte = $erreurs['id_compte'];
+                array_pop($erreurs);
+                if (empty($erreurs)) {
+                    // L'inscription est réussie, donc connexion directe
+                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
+                    $_SESSION['logged_in'] = true;
+                }
             }
-            $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
-            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
-            $ch = curl_init();
-
-            curl_setopt_array($ch, [
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_USERAGENT => "marketplace-test",
-
-                CURLOPT_PROXY => "10.254.0.254:3128",
-                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
-
-                CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
-
-                CURLOPT_HTTPPROXYTUNNEL => true,
-
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false
-            ]);
-            $response = curl_exec($ch);
-
-            if(curl_errno($ch)){
-                echo "Erreur cURL : " . curl_error($ch);
-            }
-
-            $data = json_decode($response, true);
-
-            if(!empty($data)){
-                $data = $data[0];
-                $longitude = $data["lat"];
-                $latitude = $data["lon"];
+            else if($etape == 1){
+                $etape++;
+                $lon = $_POST['longitude'];
+                $lat = $_POST['latitude'];
+                $id_adresse = get_adresse_vendeur_with_vendeur_id($id_compte);
+                set_lon_lat($id_adresse, $lon, $lat);
             }
             
-            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
-            $id_compte = $erreurs['id_compte'];
-            array_pop($erreurs);
-            if (empty($erreurs)) {
-                // L'inscription est réussie, donc connexion directe
-                connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
-                $_SESSION['logged_in'] = true;
-            }
         } else {
             $erreurs['fatal'] = true;
         }
@@ -87,21 +95,21 @@
     
 </head>
 <body id="inscription_vendeur">
-<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){ 
+<?php if(isset($erreurs) && $erreurs == [] && $etape == 1){
 ?>
     <main class="mainCarteInscription">
-        <h1>Mon adresse</h1>
+        <h1>Confirmer les coordonnées</h1>
         <div id="map"></div>
-        <form action="" id="formCoordonnee">
+        <form action="" id="formCoordonnee" method="post">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
                 <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
             </div>
             <div>
                 <label for="longitude">Longitude</label>
-                <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>">
+                <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>" name="longitude">
                 <label for="latitude">Latitude</label>
-                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>">
+                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>" name="latitude">
             </div>
             <input type="submit">
         </form>
