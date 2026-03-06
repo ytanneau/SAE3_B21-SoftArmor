@@ -112,7 +112,7 @@
                 <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>" name="latitude">
             </div>
             <input type="text" name="stage" hidden value="1">
-
+            <input type="text" name="id_compte" hidden value="<?= htmlspecialchars($_POST['id_compte']) ?>">
             <input type="submit" class="bouton">
         </form>
     <script src="script_map.js"></script>
