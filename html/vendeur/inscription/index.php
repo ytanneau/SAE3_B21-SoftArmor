@@ -7,7 +7,7 @@
     }
 
     // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $_SESSION['stage'] === 2) {
         header(isset($_SESSION['raison_sociale']) ? 'location: ../accueil' : 'location: ' . HOME_SITE);
     }
     
@@ -58,19 +58,21 @@
                 $_POST['id_compte'] = $erreurs['id_compte'];
                 array_pop($erreurs);
                 
+                if (empty($erreurs)) {
+                    // L'inscription est réussie, donc connexion directe
+                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['stage'] = $_POST['stage'];
+                }
             }
             else if($_POST['stage'] == 1){
                 $_POST['stage'] = 2;
+                $_SESSION = $_POST['stage'];
                 
                 $lon = $_POST['longitude'];
                 $lat = $_POST['latitude'];
                 $id_adresse = get_adresse_vendeur_with_vendeur_id($_POST['id_compte']);
                 set_lon_lat($id_adresse, $lon, $lat);
-                if (empty($erreurs)) {
-                    // L'inscription est réussie, donc connexion directe
-                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
-                    $_SESSION['logged_in'] = true;
-                }
             }
             
         } else {

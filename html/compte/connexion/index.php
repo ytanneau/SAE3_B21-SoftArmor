@@ -125,7 +125,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </form>
         <p style="text-align:center;">Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription?produit=<?=$_GET['produit'] ?? ''?>">S'inscrire</a> 
         <br>
-        <a href="<?=HOME_SITE?>vendeur/">Passez du coté vendeur</a>
+        <a href="<?=HOME_SITE?>vendeur/">Passer du coté vendeur</a>
         
         </p>
         </main>
