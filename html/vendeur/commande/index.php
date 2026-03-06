@@ -34,6 +34,7 @@ if (isset($_GET["commande"])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,82 +49,86 @@ if (isset($_GET["commande"])) {
 </head>
 
 <body class="liste">
-    <?php include HOME_SITE . 'vendeur/header.php'?>
+    <?php include HOME_SITE . 'vendeur/header.php' ?>
     <main>
 
-    <?php if (isset($_GET["commande"])) { ?>
-        <div>
-            <a href="."><img src="<?=HOME_SITE?>image/retour.svg"></a>
-            <?php if (count($liste_elements) == 0) { ?>
-                <p>Vous n'avez pas accès à cette commande</p>
-            <?php } else { 
-                $somme_totale = 0; 
-                $pseudo = get_pseudo_commande($_GET['commande']);
-                $date_commande = get_date_commande($_GET['commande']);
-                
-                $d = strtotime($date_commande);
-                $jour = $JOUR_SEMAINE[date("w", $d)];
-                $mois = $MOIS_ANNEE[date((int)"m", $d)];
+        <?php if (isset($_GET["commande"])) { ?>
+            <div>
+                <a href="."><img src="<?= HOME_SITE ?>image/retour.svg"></a>
+                <?php if (count($liste_elements) == 0) { ?>
+                    <p>Vous n'avez pas accès à cette commande</p>
+                <?php } else {
+                    $somme_totale = 0;
+                    $pseudo = get_pseudo_commande($_GET['commande']);
+                    $date_commande = get_date_commande($_GET['commande']);
 
-                ?>
-                
-                <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
-                <p>Faite par <?=$pseudo?></p>
-                <h1>Liste des éléments de la commande : </h1>
-                <ul>
-                    <?php foreach ($liste_elements as $element) { ?>
-                        <li>
-                            <p>Produit : <?=$element["nom_produit"]?></p>
-                            <p>Prix unitaire : <?=number_format($element["prix"], 2, ',', ' ')?> €</p>
-                            <p>Quantité achetée : <?=$element["quantite"]?></p>
-                            <p>Prix total : <?=number_format($element["prix"] * $element["quantite"], 2, ',', ' ')?> €</p>
-                        </li>
-                        <hr>
-
-                        <?php $somme_totale += $element["prix"] * $element["quantite"]?>
-                    <?php } ?>
-                </ul>
-
-                <p>Somme totale de la commande : <?=number_format($somme_totale, 2, ',', ' ')?> €</p>
-            
-                <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
-            <?php } ?>
-        </div>
-
-    <?php } else { ?>
-        <div>
-            <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
-            <?php if (count($liste_commandes) == 0) { ?>
-                <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
-            <?php } else {?> 
-                <ul class="liste-commande">
-                <?php foreach ($liste_commandes as $commande) {
-                    $d = strtotime($commande["date_commande"]);
+                    $d = strtotime($date_commande);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
-                    $mois = $MOIS_ANNEE[date((int)"m", $d)];
+                    $mois = $MOIS_ANNEE[date((int) "m", $d)];
+
                     ?>
 
-                    <li>
-                        <div>
-                            <p>Commande du <?=$jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d)?></p>
-                            <p>Effectuée par <?=$commande["pseudo_client"]?></p>
-                            <a href="?commande=<?=$commande["id_commande"]?>" class="bouton">Consulter la commande</a>
-                        </div>
-                    </li>
-                    <hr>
+                    <p>Commande du <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></p>
+                    <p>Faite par <?= $pseudo ?></p>
+                    <h1>Liste des éléments de la commande : </h1>
+                    <ul>
+                        <?php foreach ($liste_elements as $element) { ?>
+                            <li>
+                                <p>Produit : <?= $element["nom_produit"] ?></p>
+                                <p>Prix unitaire : <?= number_format($element["prix"], 2, ',', ' ') ?> €</p>
+                                <p>Quantité achetée : <?= $element["quantite"] ?></p>
+                                <p>Prix total : <?= number_format($element["prix"] * $element["quantite"], 2, ',', ' ') ?> €</p>
+                            </li>
+                            <hr>
 
+                            <?php $somme_totale += $element["prix"] * $element["quantite"] ?>
+                        <?php } ?>
+                    </ul>
+
+                    <p>Somme totale de la commande : <?= number_format($somme_totale, 2, ',', ' ') ?> €</p>
+
+                    <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
                 <?php } ?>
+            </div>
 
-                </ul>
-            <?php } ?>
-        </div>
-        
-    <?php } ?>
+        <?php } else { ?>
+            <div>
+                <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
+                <?php if (count($liste_commandes) == 0) { ?>
+                    <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
+                <?php } else { ?>
+                    <table class="liste-commande">
+                        <?php foreach ($liste_commandes as $commande) {
+                            $d = strtotime($commande["date_commande"]);
+                            $jour = $JOUR_SEMAINE[date("w", $d)];
+                            $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                            ?>
+
+                            <tr>
+                                <td>
+                                    Commande du <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
+                                </td>
+                                <td>
+                                    Effectuée par <?= $commande["pseudo_client"] ?>
+                                </td>
+                                <td>
+                                    <a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a>
+                                </td>
+                            </tr>
+
+                        <?php } ?>
+
+                    </table>
+                <?php } ?>
+            </div>
+
+        <?php } ?>
     </main>
 
     <?php if (!isset($_GET["commande"])) {
         include HOME_SITE . "footer.php";
-    }?>
+    } ?>
 
 </body>
+
 </html>
