@@ -124,6 +124,16 @@ hr {
     margin: 0 8px 0 0;
 }
 
+
+.champ {
+    border: none;
+    border-radius: $angle_petit;
+    height: 2em;
+    font-size: $font_size_normal;
+    padding-left: 0.6em;
+    padding-right: 0;
+}
+
 .toolbar {
     &#categories {
         @include toolbar($couleur_primaire_client, $color: white);
@@ -473,15 +483,15 @@ ul#results {
 
 .infos {
     .bouton {
-        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 15em);
+        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: auto);
     }
 
     .modif {
-        @include bouton_new($color: white, $largeur: 15em);
+        @include bouton_new($color: white, $largeur: unset);
     }
 
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 100%);
     }
 
     .image_bouton {

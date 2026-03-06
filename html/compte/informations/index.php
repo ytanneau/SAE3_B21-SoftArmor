@@ -432,9 +432,9 @@ if ($_POST != NULL){
                     <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
 
                     <?php if (!$a_2FA) { ?>
-                        <a class="bouton" href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a>
+                        <button class="bouton"><a href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a></button>
                     <?php } else { ?>
-                        <a class="bouton grave" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                    <button class="bouton grave"><a href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a></button>
                     <?php } ?>
                 </article>
             </form>

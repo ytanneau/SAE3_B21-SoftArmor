@@ -145,6 +145,15 @@ hr {
   margin: 0 8px 0 0;
 }
 
+.champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+
 .toolbar#categories {
   background-color: #3157A3;
   width: 100%;
@@ -791,15 +800,6 @@ hr {
 #inscription_vendeur main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-#connect_vendeur main .champ,
-#inscription_vendeur main .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
 #connect_vendeur .mainCarteInscription,
 #inscription_vendeur .mainCarteInscription {
   width: 700px;
@@ -923,15 +923,6 @@ hr {
 #connect_client main .bouton:hover,
 #inscription_client main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-#connect_client main .champ,
-#inscription_client main .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
 }
 
 #inscription_vendeur,
@@ -1225,7 +1216,7 @@ ul#results > li > a > h3 {
 .infos .bouton {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: auto;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1248,7 +1239,7 @@ ul#results > li > a > h3 {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: unset;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1271,7 +1262,7 @@ ul#results > li > a > h3 {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: 100%;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
