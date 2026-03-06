@@ -145,14 +145,14 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         <h2>Departement</h2>
                         <div>
                             <input type="checkbox" id="cotedarmor" value="departement">
-                            <label for="cotedarmor">Cote d'armor - 22</label>
+                            <label for="cotedarmor">Côtes d'Armor - 22</label>
                         </div>
                         <div>
                             <input type="checkbox" id="finistere" value="departement">
-                            <label for="finistere">Finistere - 29</label>
+                            <label for="finistere">Finistère - 29</label>
                         <div>
                             <input type="checkbox" id="illeetvilaine" value="departement">
-                            <label for="illeetvilaine">Ille et vilaine - 35</label>
+                            <label for="illeetvilaine">Ille et Vilaine - 35</label>
                         </div>
                         <div>
                             <input type="checkbox" id="morbihan" value="departement">
@@ -307,7 +307,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // INITILISATION DE LA CARTE
         let map = L.map('map').setView([48.113,-2.642],8)
-        let groupMarker = L.MarkerClusterGroup().addTo(map)
+        //let groupMarker = L.MarkerClusterGroup().addTo(map)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
