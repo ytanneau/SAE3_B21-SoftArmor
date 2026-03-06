@@ -8,7 +8,7 @@
 
     // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
+        header(isset($_SESSION['raison_sociale']) ? 'location: ../accueil' : 'location: ' . HOME_SITE);
     }
     
     require_once HOME_GIT . 'fonction_vendeur.php';
@@ -59,11 +59,7 @@
                 $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
                 $id_compte = $erreurs['id_compte'];
                 array_pop($erreurs);
-                if (empty($erreurs)) {
-                    // L'inscription est réussie, donc connexion directe
-                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
-                    $_SESSION['logged_in'] = true;
-                }
+                
             }
             else if($etape == 1){
                 $etape++;
@@ -71,6 +67,11 @@
                 $lat = $_POST['latitude'];
                 $id_adresse = get_adresse_vendeur_with_vendeur_id($id_compte);
                 set_lon_lat($id_adresse, $lon, $lat);
+                if (empty($erreurs)) {
+                    // L'inscription est réussie, donc connexion directe
+                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
+                    $_SESSION['logged_in'] = true;
+                }
             }
             
         } else {
