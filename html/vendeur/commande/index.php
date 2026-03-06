@@ -98,26 +98,34 @@ if (isset($_GET["commande"])) {
                     <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
                 <?php } else { ?>
                     <table class="liste-commande">
-                        <?php foreach ($liste_commandes as $commande) {
-                            $d = strtotime($commande["date_commande"]);
-                            $jour = $JOUR_SEMAINE[date("w", $d)];
-                            $mois = $MOIS_ANNEE[date((int) "m", $d)];
-                            ?>
-
+                        <thead>
                             <tr>
-                                <td>
-                                    Commande du <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
-                                </td>
-                                <td>
-                                    Effectuée par <?= $commande["pseudo_client"] ?>
-                                </td>
-                                <td>
-                                    <a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a>
-                                </td>
+                                <th>Date de la commande</th>
+                                <th>Client</th>
+                                <th>Récapitulatif de la commande</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($liste_commandes as $commande) {
+                                $d = strtotime($commande["date_commande"]);
+                                $jour = $JOUR_SEMAINE[date("w", $d)];
+                                $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                                ?>
 
-                        <?php } ?>
+                                <tr>
+                                    <td>
+                                        <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
+                                    </td>
+                                    <td>
+                                        <?= $commande["pseudo_client"] ?>
+                                    </td>
+                                    <td>
+                                        <a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a>
+                                    </td>
+                                </tr>
 
+                            <?php } ?>
+                        </tbody>
                     </table>
                 <?php } ?>
             </div>
