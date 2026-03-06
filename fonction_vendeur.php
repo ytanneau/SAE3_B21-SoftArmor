@@ -134,7 +134,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_adresse 
+            $stmt = $pdo->prepare("SELECT adr.id_adresse 
                                     FROM _adresse adr 
                                     INNER JOIN _vendeur vdr
                                     ON adr.id_adresse = vdr.id_adresse 
