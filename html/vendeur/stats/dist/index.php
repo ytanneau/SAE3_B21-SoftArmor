@@ -9,7 +9,7 @@
     <link rel="stylesheet" crossorigin href="./assets/index-DAbL5Ljp.css">
   </head>
   <body>
-    <?php include "../header.php" ?>
+    <?php include "/vendeur/header.php" ?>
     <div id="app">
       
     </div>
