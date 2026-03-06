@@ -96,7 +96,7 @@ if (isset($_GET["commande"])) {
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
             <?php } else {?> 
-                <ul>
+                <ul class="liste-commande">
                 <?php foreach ($liste_commandes as $commande) {
                     $d = strtotime($commande["date_commande"]);
                     $jour = $JOUR_SEMAINE[date("w", $d)];
