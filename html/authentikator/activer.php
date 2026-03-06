@@ -77,20 +77,35 @@ $grCodeUri = $otp->getQrCodeUri(
         <h3>Depuis votre application de double authentification, scannez ce QRCode ou saisissez la clé</h3>
         <p><strong>Ce code ne sera affiché qu'une seule fois.</strong> Veuillez le conserver dans votre application, ou vous risquez de perdre votre compte.</p>
         
-        <img src="<?=$grCodeUri?>">
-        <p>Clef: <?=$otp->getSecret()?></p>
+        <div id="qrCode">
+            <img src="<?=$grCodeUri?>">
+
+            <p id="cle_2fa">
+                <?=$otp->getSecret()?>
+            </p>
+        </div>
 
         <h2>Étape 2</h2>
         
         <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
         
-        <label for="codePIN">Code PIN</label>
-        <input type="number" name="codePIN" id="codePIN" class="champ">
-        <p id="erreur" class="erreur"></p>
+        <input type="number" name="codePIN" id="inputPIN" hidden value="">
+
+        <div id="codePIN">
+            <?php
+            for ($i=0; $i < 6; $i++) { 
+                ?><input <?=$i == 0 ? 'autofocus' : ''?> type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0"><?php
+            }
+            ?>
+        </div>
+        
+        <p id="erreur" class="error"></p>
         
         <button id="valider" class="bouton">Valider</button>
     </main>
 </body>
+
+<script src="codePIN.js"></script>
 
 <script>
     const NB_TENTATIVES_DEPART = 10;
@@ -102,7 +117,6 @@ $grCodeUri = $otp->getQrCodeUri(
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correct, vous pouvez aller à l'accueil";
                 window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
@@ -115,7 +129,7 @@ $grCodeUri = $otp->getQrCodeUri(
 
                 let idInterval = setInterval(() => {
                     tempsIntervalle--;
-                    document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez reessayer dans " + tempsIntervalle + " secondes";
+                    document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
 
                     if (tempsIntervalle <= 0) {
                         document.getElementById("valider").style.display = "";
@@ -125,13 +139,13 @@ $grCodeUri = $otp->getQrCodeUri(
                     }
                 }, 1000);
 
-                document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez réessayer dans " + tempsIntervalle + " secondes";
+                document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
                 document.getElementById("valider").style.display = "none";
             }
         }
 
-        if (nbTentative > 0) {
-            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("codePIN").value + "&clef=<?=$otp->getSecret()?>");
+        if (nbTentative > 0 && document.getElementById("inputPIN").value.length == 6) {
+            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("inputPIN").value + "&clef=<?=$otp->getSecret()?>");
             xmlhttp.send();
         }
     };
@@ -142,9 +156,10 @@ $grCodeUri = $otp->getQrCodeUri(
     document.getElementById('codePIN').addEventListener('blur', (e) => {inputHasFocus = false;});
 
     document.addEventListener("keypress", function(e) {
-        if (e.keyCode == 13 && !e.repeat && inputHasFocus) {
+        if (e.keyCode == 13 && !e.repeat && inputHasFocus) { // touche entrée
             document.getElementById("valider").click();
         }
     })
 </script>
+
 </html>
