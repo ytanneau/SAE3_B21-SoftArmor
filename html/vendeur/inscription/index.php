@@ -55,15 +55,16 @@
                 }
                 
                 $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
-                $id_compte = $erreurs['id_compte'];
+                $_POST['id_compte'] = $erreurs['id_compte'];
                 array_pop($erreurs);
                 
             }
             else if($_POST['stage'] == 1){
                 $_POST['stage'] = 2;
+                
                 $lon = $_POST['longitude'];
                 $lat = $_POST['latitude'];
-                $id_adresse = get_adresse_vendeur_with_vendeur_id($id_compte);
+                $id_adresse = get_adresse_vendeur_with_vendeur_id($_POST['id_compte']);
                 set_lon_lat($id_adresse, $lon, $lat);
                 if (empty($erreurs)) {
                     // L'inscription est réussie, donc connexion directe
