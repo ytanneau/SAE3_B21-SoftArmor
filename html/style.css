@@ -2578,6 +2578,14 @@ aside .achat:hover {
   flex-direction: column;
   width: 600px;
 }
+.mainInfoVendeur div form div {
+  display: flex;
+  flex-direction: row;
+}
+.mainInfoVendeur div form div p #map {
+  width: 600px;
+  height: 500px;
+}
 .mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;
   display: block;
