@@ -233,6 +233,30 @@ session_start();
       height: 60px;
       width: 60px;
     }
+
+    #header_vendeur .nav-buttom {
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        list-style: none;
+
+        a {
+          text-decoration: none;
+          color: #000;
+          background-color: #C3C1F5;
+          padding: 5px 10px;
+          border-radius: 20px;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+    }
   </style>
 </head>
 
