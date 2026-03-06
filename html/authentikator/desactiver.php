@@ -93,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="post">
             <h3>Ouvrez votre application de double authentification, et entrez le code PIN enregistré pour votre compte</h3>
 
-            <label for="codePIN">Code PIN</label>
             <input type="number" name="codePIN" id="inputPIN" hidden value="">
 
             <div id="codePIN">
