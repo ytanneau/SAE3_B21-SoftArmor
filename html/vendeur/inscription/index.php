@@ -7,7 +7,7 @@
     }
 
     // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $_SESSION['stage'] === 2) {
         header(isset($_SESSION['raison_sociale']) ? 'location: ../accueil' : 'location: ' . HOME_SITE);
     }
     
@@ -55,21 +55,24 @@
                 }
                 
                 $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
-                $id_compte = $erreurs['id_compte'];
+                $_POST['id_compte'] = $erreurs['id_compte'];
                 array_pop($erreurs);
                 
-            }
-            else if($_POST['stage'] == 1){
-                $_POST['stage'] = 2;
-                $lon = $_POST['longitude'];
-                $lat = $_POST['latitude'];
-                $id_adresse = get_adresse_vendeur_with_vendeur_id($id_compte);
-                set_lon_lat($id_adresse, $lon, $lat);
                 if (empty($erreurs)) {
                     // L'inscription est réussie, donc connexion directe
                     connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
                     $_SESSION['logged_in'] = true;
+                    $_SESSION['stage'] = $_POST['stage'];
                 }
+            }
+            else if($_POST['stage'] == 1){
+                $_POST['stage'] = 2;
+                $_SESSION = $_POST['stage'];
+                
+                $lon = $_POST['longitude'];
+                $lat = $_POST['latitude'];
+                $id_adresse = get_adresse_vendeur_with_vendeur_id($_POST['id_compte']);
+                set_lon_lat($id_adresse, $lon, $lat);
             }
             
         } else {
@@ -111,7 +114,7 @@
                 <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>" name="latitude">
             </div>
             <input type="text" name="stage" hidden value="1">
-
+            <input type="text" name="id_compte" hidden value="<?= htmlspecialchars($_POST['id_compte']) ?>">
             <input type="submit" class="bouton">
         </form>
     <script src="script_map.js"></script>

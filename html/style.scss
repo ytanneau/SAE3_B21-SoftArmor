@@ -2305,6 +2305,7 @@ aside {
 
 /* Page d'activation*/
 #page_2fa {
+
     .champ {
         display: block;
         border: solid 1px gray;
@@ -2333,4 +2334,27 @@ aside {
 
         margin: 4em;
     }
+}
+
+.PIN {
+    border-radius: 30%;
+    -moz-appearance: textfield;
+    border: 1px solid gray;
+
+    padding: 0.75em 0.5em;
+    margin: 0.325em;
+    text-align: center;
+
+    &[disabled] {
+        background-color: #ddd4;
+    }
+
+    font-size: 1.6em;
+}
+
+#codePIN {
+    display:flex;
+    justify-content: center;
+
+    margin: 1.2em auto;
 }

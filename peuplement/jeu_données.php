@@ -251,7 +251,7 @@ function i_vendeur() {
 	
 	foreach($vendeurs as $vendeur) {
 		$pdo->query('INSERT INTO _cle_vendeur VALUES (\'AAAAAAAAAAAAAAA\')');
-		sql_create_vendeur($pdo, $vendeur['raison_sociale'], $vendeur['num_siret'], $vendeur['email'], $vendeur['ville'], $vendeur['adresse'], $vendeur['complement_adresse'], $vendeur['code_postal'], $vendeur['mdp'], 'AAAAAAAAAAAAAAA');
+		sql_create_vendeur($pdo, $vendeur['raison_sociale'], $vendeur['num_siret'], $vendeur['email'], $vendeur['ville'], $vendeur['adresse'], $vendeur['complement_adresse'], $vendeur['code_postal'], $vendeur['mdp'], 'AAAAAAAAAAAAAAA', 2, 2);
 	}
 }
 

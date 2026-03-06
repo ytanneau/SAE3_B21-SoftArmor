@@ -97,7 +97,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </form>
         <p style="text-align:center;">Pas de compte ? <a href="inscription/">S'inscrire</a>
         <br>
-        <a href="../">Retourner au côté client</a></p>
+        <a href="../">Passer au côté client</a></p>
 <?php
     }
 ?>
