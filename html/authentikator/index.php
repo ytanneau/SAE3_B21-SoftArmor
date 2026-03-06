@@ -106,15 +106,23 @@ $vendeur = isset($_SESSION['raison_sociale']);
         <h2>S'identifier</h2>
         <form action="" method="post">
             <label>Ouvrez votre application de double authentification, puis entrez le code PIN affiché pour vous connecter</label>
-            <label for="codePIN">Code PIN</label>
-            <input type="number" id="codePIN" name="codePIN" class="champ">
+            <input type="number" name="codePIN" id="inputPIN" hidden value="">
+
+            <div id="codePIN">
+                <?php
+                for ($i=0; $i < 6; $i++) { 
+                    ?><input <?=$i == 0 ? 'autofocus' : ''?> type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0" <?=$_SESSION['nb_tentatives_connexion'] <= 0 ? 'disabled' : ''?>><?php
+                }
+                ?>
+            </div>
+
             <p class="error"><?= $erreur ?></p>
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
                 <p class="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
-            <?php } else { ?>
-                <input type="submit" value="Se connecter" class="bouton">
             <?php } ?>
+            
+            <input type="submit" value="Se connecter" class="bouton grave" id="valider">
             
         </form>
         <p style="text-align:center">Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
@@ -136,4 +144,6 @@ $vendeur = isset($_SESSION['raison_sociale']);
         }, 1000);
     <?php } ?>
 </script>
+
+<script src="codePIN.js"></script>
 </html>

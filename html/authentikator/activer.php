@@ -90,12 +90,23 @@ $grCodeUri = $otp->getQrCodeUri(
         <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
         
         <label for="codePIN">Code PIN</label>
-        <input type="number" name="codePIN" id="codePIN" class="champ">
+        <input type="number" name="codePIN" id="inputPIN" hidden value="">
+
+        <div id="codePIN">
+            <?php
+            for ($i=0; $i < 6; $i++) { 
+                ?><input <?=$i == 0 ? 'autofocus' : ''?> type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0"><?php
+            }
+            ?>
+        </div>
+        
         <p id="erreur" class="error"></p>
         
         <button id="valider" class="bouton">Valider</button>
     </main>
 </body>
+
+<script src="codePIN.js"></script>
 
 <script>
     const NB_TENTATIVES_DEPART = 10;
@@ -106,7 +117,7 @@ $grCodeUri = $otp->getQrCodeUri(
     document.getElementById("valider").onclick = function() {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
-            if (this.responseText == '1') {l";
+            if (this.responseText == '1') {
                 window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
@@ -134,8 +145,10 @@ $grCodeUri = $otp->getQrCodeUri(
             }
         }
 
-        if (nbTentative > 0) {
-            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("codePIN").value + "&clef=<?=$otp->getSecret()?>");
+        console.log(document.getElementById("inputPIN").value);
+
+        if (nbTentative > 0 && document.getElementById("inputPIN").value.length == 6) {
+            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("inputPIN").value + "&clef=<?=$otp->getSecret()?>");
             xmlhttp.send();
         }
     };
@@ -146,9 +159,10 @@ $grCodeUri = $otp->getQrCodeUri(
     document.getElementById('codePIN').addEventListener('blur', (e) => {inputHasFocus = false;});
 
     document.addEventListener("keypress", function(e) {
-        if (e.keyCode == 13 && !e.repeat && inputHasFocus) {
+        if (e.keyCode == 13 && !e.repeat && inputHasFocus) { // touche entrée
             document.getElementById("valider").click();
         }
     })
 </script>
+
 </html>
