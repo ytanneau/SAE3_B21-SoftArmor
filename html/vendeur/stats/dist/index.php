@@ -20,8 +20,8 @@ session_start();
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vite App</title>
-  <script type="module" crossorigin src="./assets/index-DKmDw5fQ.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-gzs_Z5ZU.css">
+  <script type="module" crossorigin src="./assets/index-DfKfvJDl.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DrrHkUzT.css">
 
   <style>
     #header_vendeur {
