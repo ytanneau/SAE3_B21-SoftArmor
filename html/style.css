@@ -3488,8 +3488,8 @@ aside .achat:hover {
   padding: 0;
 }
 .main_accueil > div li {
-  border: solid 1px rgb(113, 0, 0);
-  background-color: rgb(220, 109, 109);
+  border: solid 2px rgb(113, 0, 0);
+  background-color: rgb(224, 129, 129);
   border-radius: 5px;
   padding: 1em;
 }
