@@ -2162,8 +2162,8 @@ aside {
         }
 
         li {
-            border: solid 1 black;
-            background-color: #9C9C9C;
+            border: solid 1px rgb(113, 0, 0);
+            background-color: rgb(220, 109, 109);
             border-radius: 5px;
             padding: 1em;
         }
@@ -2353,8 +2353,5 @@ aside {
 }
 
 #codePIN {
-    display:flex;
-    justify-content: center;
-
-    margin: 1.2em auto;
+    margin: 1.2em 0;
 }
