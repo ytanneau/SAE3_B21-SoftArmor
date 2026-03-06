@@ -3489,12 +3489,12 @@ aside .achat:hover {
 }
 .main_accueil > div li {
   border: solid 1 black;
-  background-color: #9C9C9C;
+  background-color: red;
   border-radius: 5px;
   padding: 1em;
 }
 .main_accueil > div a {
-  color: #000;
+  color: white;
   text-decoration: none;
 }
 .main_accueil .liste_accueil_vendeur {
