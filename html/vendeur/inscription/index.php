@@ -20,6 +20,7 @@
         if (file_exists($fichier)) {
             require_once $fichier;
             if($_POST['stage'] == 0){
+                $_POST['stage'] = 1;
                 $adresseSubmit = $_POST['adresse'] . $_POST['compAdresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
                 $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
                 $ch = curl_init();
