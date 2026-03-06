@@ -2162,14 +2162,14 @@ aside {
         }
 
         li {
-            border: solid 1 black;
-            background-color: red;
+            border: solid 1px rgb(113, 0, 0);
+            background-color: rgb(222, 86, 86);
             border-radius: 5px;
             padding: 1em;
         }
 
         a {
-            color: white;
+            color: #000;
             text-decoration: none;
         }
     }
