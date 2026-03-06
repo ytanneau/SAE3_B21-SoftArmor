@@ -335,7 +335,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             }
                         });
                     }
-                    if((info == 'latitude' || info == 'longitude')&& vendeur[info] != null){
+                    if((info == 'lat' || info == 'lon')&& vendeur[info] != null){
                         tab_coor.push(vendeur[info])
                     } else if (info == 'raison_sociale'){
                         raison_sociale = vendeur[info]

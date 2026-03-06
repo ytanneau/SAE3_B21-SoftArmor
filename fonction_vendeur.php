@@ -75,7 +75,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, latitude, longitude, v.id_compte, v.raison_sociale FROM _adresse a join _vendeur v on a.id_adresse = v.id_adresse");
+            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, lon, lat, v.id_compte, v.raison_sociale FROM _adresse a join _vendeur v on a.id_adresse = v.id_adresse");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
@@ -125,6 +125,40 @@
                 'id_compte' => $id_compte
             ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_adresse_vendeur_with_vendeur_id($id_compte){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_adresse 
+                                    FROM _adresse adr 
+                                    INNER JOIN _vendeur vdr
+                                    ON adr.id_adresse = vdr.id_adresse 
+                                    WHERE vdr.id_compte = :id_compte");
+            $stmt->execute([
+                "id_compte" =>$id_compte
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function set_lon_lat($id_adresse, $longitude, $latitude){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _adresse SET lon = :longitude, lat = :latitude WHERE id_adresse = :id_adresse");
+            $stmt->execute([
+                "longitude" => $longitude,
+                "latitude" => $latitude,
+                "id_adresse" => $id_adresse 
+            ]);
         } catch (PDOException $e){
             throw $e;
         }
