@@ -3672,4 +3672,10 @@ aside .achat:hover {
 
 .liste .liste-commande {
   width: 80vw;
+}
+.liste .liste-commande .bouton {
+  width: auto;
+}
+.liste .liste-commande th {
+  text-align: left;
 }/*# sourceMappingURL=style.css.map */
