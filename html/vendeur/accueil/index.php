@@ -52,7 +52,7 @@
                 </a>
                 <a class="lien4" href="../statistiques">
                     <img src="<?=HOME_SITE . "image/stats.svg"?>" alt="icone des statistiques">
-                    statistiques
+                    Statistiques
                 </a>
             </article>
             <?php affiche_alarme($_SESSION['id_compte']); ?>
