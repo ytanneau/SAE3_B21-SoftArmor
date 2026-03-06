@@ -6,7 +6,7 @@
             <li onclick=closeSidebar()> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
 
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
-                <li> 
+                <li>
                     <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>">
                         <img src="<?= $images . 'compte_vendeur_blanc.svg' ?>" class="icon">Mon profil
                     </a>
@@ -15,16 +15,25 @@
                 <li>
                     <a href="<?= HOME_SITE . 'deconnexion' ?>">
                         <img src="<?= $images . 'deconnexion_blanc.svg' ?>" class="icon">Déconnexion
-                    </a> 
+                    </a>
                 </li>
             <?php } ?>
         </ul>
-            
+
         <ul>
             <li>
                 <a href="<?= HOME_SITE . 'vendeur/accueil' ?>">
-                    <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon Vendeur" title="Logo Alizon Vendeur"> 
-                </a> 
+                    <img src="<?= $images . 'Alizon_vendeur_blanc.png' ?>" alt="Logo Alizon Vendeur"
+                        title="Logo Alizon Vendeur">
+                </a>
+            </li>
+
+            <li class="nav-buttom">
+                <ul>
+                    <li><a href="<?=HOME_SITE?>vendeur/stock"><img src="<?=HOME_SITE?>image/stocks.svg" alt="stocks">Stocks</a></li>
+                    <li><a href="<?=HOME_SITE?>vendeur/commande"><img src="<?=HOME_SITE?>image/livraison.svg" alt="livraison">Commande</a></li>
+                    <li><a href="<?=HOME_SITE?>vendeur/statistiques"><img src="<?=HOME_SITE?>image/stats.svg" alt="stats">Statistiques</a></li>
+                </ul>
             </li>
 
             <li class="hide-on-mobile">
@@ -35,10 +44,13 @@
                     </button>
 
                     <div id="dropdown-compte" class="dropdown-content">
-                        <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>"> <img src="<?= $images . 'compte_vendeur.svg' ?>" class="icon">Mon profil</a>
+                        <a href="<?= HOME_SITE . 'vendeur/compte/information_compte_vendeur' ?>"> <img
+                                src="<?= $images . 'compte_vendeur.svg' ?>" class="icon">Mon profil</a>
                         <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
-                        <a href="<?= HOME_SITE . 'vendeur/commande'?>"><img src="<?=$images?>panier.svg" class="icon">Commandes</a>
-                        <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?=$images?>deconnexion.svg" class="icon">Déconnexion</a>
+                        <a href="<?= HOME_SITE . 'vendeur/commande' ?>"><img src="<?= $images ?>panier.svg"
+                                class="icon">Commandes</a>
+                        <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images ?>deconnexion.svg"
+                                class="icon">Déconnexion</a>
                     </div>
                 </div>
             </li>
@@ -66,7 +78,7 @@
     }
 
     // Ferme le menu si on clique ailleurs
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (!event.target.matches('.dropdown-button')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
