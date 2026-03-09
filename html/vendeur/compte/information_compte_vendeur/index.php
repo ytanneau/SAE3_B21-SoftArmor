@@ -43,6 +43,8 @@
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
+        $lon = $_POST['lon'];
+        $lat = $_POST['lat'];
         // redifinition des coordonnées suivant la nouvelle adresse
         if($modifVille != $tabAdresseVendeur['ville'] || 
         $modifAdresse != $tabAdresseVendeur['adresse'] ||
@@ -77,11 +79,13 @@
                 $data = $data[0];
                 $lon = $data["lat"];
                 $lat = $data["lon"];
-            } else if(empty($data)){
-                $lon = $tabAdresseVendeur['lon'];
-                $lat = $tabAdresseVendeur['lat'];
             }
         }
+
+        if($lon == null){
+            $lon = $tabAdresseVendeur['lon'];
+        }
+        if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
