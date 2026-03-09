@@ -1526,13 +1526,14 @@ aside {
         display: flex;
         flex-direction: row;
         #map{
-            width: 600px;
-            height: 500px;
+            width: 400px;
+            height: 300px;
         }
     }
     #idValiderModifVendeur{
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
+        width: 600px;
     }
 
     #idDesactivationCompte,
