@@ -45,13 +45,54 @@
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
 
+        // redifinition des coordonnées suivant la nouvelle adresse
+        if($modifVille != $tabAdresseVendeur['ville'] || 
+        $modifAdresse != $tabAdresseVendeur['adresse'] ||
+        $modifCodePostal != $tabAdresseVendeur['code_postal']){
+            $adresseSubmit = $modifVille . $modifAdresse . $modifCodePostal;
+            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+            $ch = curl_init();
+
+            curl_setopt_array($ch, [
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_USERAGENT => "marketplace-test",
+
+                CURLOPT_PROXY => "10.254.0.254:3128",
+                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
+
+                CURLOPT_HTTPPROXYTUNNEL => true,
+
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_SSL_VERIFYHOST => false
+            ]);
+            
+            $response = curl_exec($ch);
+
+            if(curl_errno($ch)){
+                echo "Erreur cURL : " . curl_error($ch);
+            }
+
+            $data = json_decode($response, true);
+
+            if(!empty($data)){
+                $data = $data[0];
+                $lon = $data["lat"];
+                $lat = $data["lon"];
+            }
+            if($_POST['lon'] == null || empty($data["lat"])){$lon = $tabAdresseVendeur['lon'];}
+            if($_POST['lat'] == null || empty($data["lon"])){$lat = $tabAdresseVendeur['lat'];}
+        }
+
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
         update_informations_vendeur($modifRaisonSociale, $modifDescription, $id_compte);
 
         // mise à jour de l'adresse du vendeur
-        update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr);
+        update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr, $lon, $lat);
 
         // redirection vers la page precedente apres la validation du formulaire
         header('Location: ../../accueil/');
@@ -107,17 +148,15 @@
                             <div id="map"></div>
                             <div id="inputs_lon_lat">
                                 <label for="longitude">Longitude</label>
-                                <input type="text" id="longitude">
+                                <input type="text" name="lon" id="longitude" value="<?= $tabAdresseVendeur['lon']?>">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" id="latitude">
+                                <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
                         </div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
                 <a href="desactivation/desactivation.php" id="idDesactivationCompte">Désactiver le compte</a>
-                
-
 
                 <!-- boutons en rapport avec la double authentification -->
                 <?php if (!a_2FA($_SESSION['id_compte'])) { ?>
@@ -130,12 +169,15 @@
         <?php include HOME_SITE . "footer.php"?>
     </body>
     <script>
+        const adresseVendeur = <?php json_encode($tabAdresseVendeur)?>;
         let map = L.map('map').setView([48.113,-2.642],8)
-        let groupMarker = L.layerGroup().addTo(map)
+        let marker = L.marker([adresseVendeur['lon'],adresseVendeur['lat']]).addTo(map)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
+
+
     </script>
 </html>
