@@ -77,7 +77,7 @@ if (isset($_POST['quantite'])) {
         } else {
             ajouter_panier_visiteur($id_prod, $qte);
 
-            }
+        }
         header('Location:' . HOME_SITE . 'panier');
 
     // Sinon, s'il a fait "acheter le produit"
