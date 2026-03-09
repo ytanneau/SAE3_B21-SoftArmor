@@ -1,6 +1,7 @@
 <?php
 
-function ajout_commande($id_commande, $liste_produits) {
+function ajout_commande($id_commande, $liste_produits)
+{
     global $pdo;
 
     foreach ($liste_produits as $produit) {
@@ -16,9 +17,10 @@ function ajout_commande($id_commande, $liste_produits) {
     }
 }
 
-function get_commandes($id_client) {
+function get_commandes($id_client)
+{
     global $pdo;
-    
+
     $stmt = $pdo->prepare("SELECT * FROM _commande WHERE id_client = :id_client ORDER BY date_commande DESC");
     $stmt->bindValue(":id_client", $id_client, PDO::PARAM_INT);
     $stmt->execute();
@@ -26,7 +28,8 @@ function get_commandes($id_client) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_commandes_vendeur($id_vendeur) {
+function get_commandes_vendeur($id_vendeur)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("SELECT DISTINCT _commande.id_commande, date_commande, pseudo AS pseudo_client FROM _commande 
@@ -42,19 +45,21 @@ function get_commandes_vendeur($id_vendeur) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_date_commande($id_commande) {
+function get_date_commande($id_commande)
+{
     global $pdo;
 
-    $stmt =  $pdo->prepare("SELECT date_commande FROM _commande WHERE id_commande = :id_commande");
+    $stmt = $pdo->prepare("SELECT date_commande FROM _commande WHERE id_commande = :id_commande");
     $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC)['date_commande'];
 }
 
-function get_pseudo_commande($id_commande) {
+function get_pseudo_commande($id_commande)
+{
     global $pdo;
 
-    $stmt =  $pdo->prepare("SELECT pseudo 
+    $stmt = $pdo->prepare("SELECT pseudo 
     FROM _commande 
     INNER JOIN client ON id_client = id_compte
     WHERE id_commande = :id_commande");
@@ -63,7 +68,8 @@ function get_pseudo_commande($id_commande) {
     return $stmt->fetch(PDO::FETCH_ASSOC)['pseudo'];
 }
 
-function get_elements_commande($id_commande) {
+function get_elements_commande($id_commande)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("SELECT id_produit, nom_produit, quantite, prix, nom_vendeur FROM _elt_commande 
@@ -75,7 +81,8 @@ function get_elements_commande($id_commande) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_elements_commande_vendeur($id_commande, $id_vendeur) {
+function get_elements_commande_vendeur($id_commande, $id_vendeur)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("SELECT _elt_commande.id_produit, nom_produit, _elt_commande.quantite, _elt_commande.prix FROM _elt_commande 
@@ -88,31 +95,34 @@ function get_elements_commande_vendeur($id_commande, $id_vendeur) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function connexion_delivraptor($fd,$id,$mdp){
-    fwrite($fd,"1.$id.$mdp");
-    $buffer =fread($fd,200);
-    
-    $buffer = explode("=",$buffer);
+function connexion_delivraptor($fd, $id, $mdp)
+{
+    fwrite($fd, "1.$id.$mdp");
+    $buffer = fread($fd, 200);
+
+    $buffer = explode("=", $buffer);
     return trim($buffer[1]);
 }
 
-function create_colis($fd){
-    fwrite($fd,"2");
-    $buffer = fread($fd,200);
-    
-    $buffer = explode("=",$buffer);
+function create_colis($fd)
+{
+    fwrite($fd, "2");
+    $buffer = fread($fd, 200);
+
+    $buffer = explode("=", $buffer);
     return trim($buffer[1]);
 }
 
-function get_info_colis($fd,$bordereau){
-    fwrite($fd,"3.$bordereau");
-    $buffer = fread($fd,200);
+function get_info_colis($fd, $bordereau)
+{
+    fwrite($fd, "3.$bordereau");
+    $buffer = fread($fd, 200);
 
-    $info = explode("\n",trim($buffer));
-    if (count($info)>1) {
-        $etape = explode("=",$info[0])[1];
-        $rendu = explode("=",$info[1])[1];
-        $refus = explode("=",$info[2])[1];
+    $info = explode("\n", trim($buffer));
+    if (count($info) > 1) {
+        $etape = explode("=", $info[0])[1];
+        $rendu = explode("=", $info[1])[1];
+        $refus = explode("=", $info[2])[1];
 
         $info_colis = [
             "ETAPE" => $etape,
@@ -120,9 +130,9 @@ function get_info_colis($fd,$bordereau){
             "REFUS" => $refus,
             "ERROR" => "N/A"
         ];
-    }else{
-        $error = explode("=",$info[0])[1];
-        
+    } else {
+        $error = explode("=", $info[0])[1];
+
         $info_colis = [
             "ETAPE" => "N/A",
             "RENDU" => "N/A",
@@ -130,77 +140,181 @@ function get_info_colis($fd,$bordereau){
             "ERROR" => $error
         ];
     }
-   
+
     return $info_colis;
 }
-function get_image_colis($fd,$bordereau){
+function get_image_colis($fd, $bordereau)
+{
     $fin = false;
-    fwrite($fd,"4.$bordereau");
+    fwrite($fd, "4.$bordereau");
     $photo = '';
-    $file = fopen(HOME_SITE ."ressources/colis/$bordereau.png","w");
+    $file = fopen(HOME_SITE . "ressources/colis/$bordereau.png", "w");
     $buffer = fread($fd, 6);
 
-    if ($buffer === "PHOTO="){
-    
+    if ($buffer === "PHOTO=") {
+
         while (!$fin) {
             $buffer = fread($fd, 4096);
 
-            
 
-            if ($pos = strpos($buffer,"#") !== false) {
-                $buffer = substr($buffer,0,-1); 
+
+            if ($pos = strpos($buffer, "#") !== false) {
+                $buffer = substr($buffer, 0, -1);
                 $fin = true;
             }
-            
+
             fwrite($file, binaire_to_octet($buffer));
-            
+
         }
-                
+
     }
     //sinon recuperer numero de l'erreur
-    else{
+    else {
         $buffer = fread($fd, 1);
         switch ($buffer) {
             //cas erreur pas de colis
             case '3':
-                $texte_img="Colis inexistent";
+                $texte_img = "Colis inexistent";
                 break;
             //cas d'erreur pas de photo
             case '4':
-                $texte_img="Photo inexistante";
+                $texte_img = "Photo inexistante";
                 break;
-            
+
             default:
-                $texte_img="Erreur";
+                $texte_img = "Erreur";
                 break;
         }
         fclose($file);
         return $texte_img;
     }
-    
+
     fclose($file);
     return "";
 }
 
-function binaire_to_octet($binString) {
+function binaire_to_octet($binString)
+{
     $result = '';
     $length = strlen($binString);
     for ($i = 0; $i < $length; $i += 8) {
         $byte = substr($binString, $i, 8);
-        if (strlen($byte) < 8) break; // ignore le reste incomplet
+        if (strlen($byte) < 8)
+            break; // ignore le reste incomplet
         $result .= chr(bindec($byte));
     }
     return $result;
 }
 
-function connexion_socket($ip,$port){
-    $fd =@fsockopen($ip,$port, $errno, $errstr);
+function connexion_socket($ip, $port)
+{
+    $fd = @fsockopen($ip, $port, $errno, $errstr);
     return $fd;
 }
 
-function deconnexion_socket($fd){
-    if($fd !== false){
-        fwrite($fd,"-1");
+function deconnexion_socket($fd)
+{
+    if ($fd !== false) {
+        fwrite($fd, "-1");
         fclose($fd);
     }
+}
+
+function livraison_info($bordereau)
+{
+    global $fd, $conn;
+
+    if ($conn == "1") {
+        //recuperation des données du colis
+        $info_colis = get_info_colis($fd, $bordereau);
+
+        $texte_img = "";
+        //si le colis est rendu dans la boite au lettre et si l'image n'existe pas
+        /*if ($info_colis["RENDU"] == "1" && !file_exists(HOME_SITE . "ressources/colis/$bordereau.png")) {
+
+            //recuperation de l'image
+            $texte_img = get_image_colis($fd, $bordereau);
+        }*/
+
+        if ($info_colis["ERROR"] != "N/A") {
+            return -1;
+
+        }
+
+        $texte_refus = "";
+
+        //affichage du refsu de colis
+        switch ($info_colis["REFUS"]) {
+            case '0':
+                $texte_refus = "Colis endommagé";
+                break;
+            case '1':
+                $texte_refus = "Ne correspond pas à la commande";
+                break;
+            case '2':
+                $texte_refus = "En retard";
+                break;
+            case '3':
+                $texte_refus = "Plus besoin du colis";
+                break;
+        }
+        //affichage rendu du colis
+        switch ($info_colis["RENDU"]) {
+            case '0':
+                return "Colis remis en main propre";
+                break;
+            case '1':
+                return "Colis dans la boite au lettre";
+                break;
+            case '2':
+                return "Colis refusé. cause : $texte_refus";
+                break;
+
+            default:
+                $texte_rendu = "";
+                break;
+        }
+
+        //affichage des etapes
+        $livraison = "Colis en cours de livraison";
+        switch ($info_colis["ETAPE"]) {
+            case "1":
+                return "Colis en cours de traitement";
+                $texte_etape = "";
+                break;
+            case "2":
+                return "Prise en charge du colis chez Alizon";
+                break;
+            case "3":
+                return "Arrivée chez le transporteur";
+                break;
+            case "4":
+                return "Départ vers la plateforme régionale";
+                break;
+            case "5":
+                return "Arrivée sur la plateforme régionale";
+                break;
+            case "6":
+                return "Départ vers le centre local";
+                break;
+            case "7":
+                return "Arrivée au centre local";
+                break;
+            case "8":
+                return "Départ pour la livraison finale";
+                break;
+            case "9":
+                return "Livré";
+                $livraison = "";
+                break;
+
+
+        }
+        return 1;
+    } else {
+        return -1;
+    }
+
+
+
 }

@@ -223,21 +223,27 @@ if (isset($_GET["commande"])) {
                 //deconnexion socket et delivraptor
                 deconnexion_socket($fd);
                 } else {
-                    $d = strtotime($commande["date_commande"]);
-                    $jour = $JOUR_SEMAINE[date("w", $d)];
-                    $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                    $conn = false;
+                    $fd = connexion_socket(IP, PORT);
+                    $conn = connexion_delivraptor($fd, $id_delivraptor, $mdp_delivraptor);
                     ?>
                 <table>
                     <thead>
                         <tr>
                             <th>Liveur</th>
                             <th>Date</th>
+                            <th>Livraison</th>
+                            <th>Image</th>
                             <th>Facture</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($liste_commandes as $commande) { ?>
+                        foreach ($liste_commandes as $commande) {
+                            $d = strtotime($commande["date_commande"]);
+                            $jour = $JOUR_SEMAINE[date("w", $d)];
+                            $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                            ?>
                             <tr>
                                 <td><?php if ($commande['bordereau_colis']) {
                                     echo "Raptor livairaison, Bordereau : " . htmlentities($commande['bordereau_colis']);
@@ -246,7 +252,12 @@ if (isset($_GET["commande"])) {
                                 } ?>
                                 </td>
                                 <td><?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></td>
-                                <td><a href="./info?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la facture</a></td>
+                                <td>
+                                    <?= livraison_info($commande['bordereau_colis']); ?>
+                                </td>
+                                <td>image</td>
+                                <td><a href="./info?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la
+                                        facture</a></td>
                             </tr>
                             <?php
                         }
@@ -254,7 +265,9 @@ if (isset($_GET["commande"])) {
                     </tbody>
                 </table>
 
-            <?php }
+                <?php
+                deconnexion_socket($fd);
+                }
             } ?>
 
 
