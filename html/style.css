@@ -2590,12 +2590,6 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
 }
-.mainInfoVendeur div form div div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 20px;
-}
 .mainInfoVendeur div form div div #map {
   width: 400px;
   height: 300px;
