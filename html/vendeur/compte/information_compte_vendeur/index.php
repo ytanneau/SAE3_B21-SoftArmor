@@ -74,14 +74,14 @@
             if(curl_errno($ch)){
                 echo "Erreur cURL : " . curl_error($ch);
             }
-
+            print_r($response);
             $data = json_decode($response, true);
 
             if(!empty($data)){
                 $data = $data[0];
                 $lon = $data["lat"];
                 $lat = $data["lon"];
-            } else if(empty($data["lat"]) || empty($data["lon"])){
+            } else if(empty($data)){
                 $lon = $tabAdresseVendeur['lon'];
                 $lat = $tabAdresseVendeur['lat'];
             }
