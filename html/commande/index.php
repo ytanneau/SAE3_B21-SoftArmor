@@ -225,7 +225,7 @@ if (isset($_GET["commande"])) {
                     $fd = connexion_socket(IP, PORT);
                     $conn = connexion_delivraptor($fd, $id_delivraptor, $mdp_delivraptor);
                     ?>
-                <table>
+                <table class="liste-commande">
                     <thead>
                         <tr>
                             <th>Liveur</th>
@@ -244,7 +244,7 @@ if (isset($_GET["commande"])) {
                             ?>
                             <tr>
                                 <td><?php if ($commande['bordereau_colis']) {
-                                    echo "Raptor livairaison, Bordereau : " . htmlentities($commande['bordereau_colis']);
+                                    echo "Raptor livairaison <br> Bordereau : " . htmlentities($commande['bordereau_colis']);
                                 } else {
                                     echo "Autre";
                                 } ?>

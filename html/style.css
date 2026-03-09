@@ -3708,4 +3708,8 @@ aside .achat:hover {
 }
 .liste .liste-commande th {
   text-align: left;
+}
+
+.liste-commande th, .liste-commande td {
+  padding: 0px 10px;
 }/*# sourceMappingURL=style.css.map */
