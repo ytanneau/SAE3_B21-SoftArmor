@@ -1524,17 +1524,14 @@ aside {
     @include format_textarea_p_select_input_form;
     form div{
         display: flex;
-        flex-direction: row;
-        div{
-            #map{
-                width: 400px;
-                height: 300px;
-            }
-            .inputs_lon_lat{
-                @include contenu_centre_vertical;
-            }
+        flex-direction: column;
+        #map{
+            width: 400px;
+            height: 300px;
         }
-        
+        .inputs_lon_lat{
+            @include contenu_centre_vertical;
+        }
     }
     #idValiderModifVendeur{
         margin-top: 20px;
