@@ -346,7 +346,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     let marker = L.marker(tab_coor,{
                         title: raison_sociale,
                         alt : vendeur['id_compte']
-                    }).addTo(map)
+                    })
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
