@@ -3731,17 +3731,22 @@ aside .achat:hover {
 
 .liste-commande {
   width: 100vw;
+  margin-top: 1em;
 }
 .liste-commande th,
 .liste-commande td {
   padding: 0px 10px;
   height: 70px;
+  text-align: left;
 }
 .liste-commande tr {
   padding: 20px 0px;
 }
 .liste-commande img {
   width: 50px;
+}
+.liste-commande .bouton {
+  display: initial;
 }
 
 .liste-commande-page {

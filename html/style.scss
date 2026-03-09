@@ -2449,11 +2449,13 @@ aside {
 
 .liste-commande {
     width: 100vw;
+    margin-top: 1em;
 
     th,
     td {
         padding: 0px 10px;
         height: 70px;
+        text-align: left;
     }
 
     tr {
@@ -2462,6 +2464,10 @@ aside {
 
     img {
         width: 50px;
+    }
+
+    .bouton{
+        display: initial;
     }
 }
 
