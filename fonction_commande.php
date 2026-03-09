@@ -132,7 +132,7 @@ function get_info_colis($fd, $bordereau)
         ];
     } else {
         $error = explode("=", $info[0])[1];
-
+        echo "erreur : ".$error.";";
         $info_colis = [
             "ETAPE" => "N/A",
             "RENDU" => "N/A",
@@ -223,6 +223,10 @@ function deconnexion_socket($fd)
 function livraison_info($bordereau)
 {
     global $fd, $conn;
+
+    if ($bordereau == null){
+        return "";
+    }
 
     if ($conn == "1") {
         //recuperation des données du colis
