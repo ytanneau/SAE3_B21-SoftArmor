@@ -254,7 +254,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
 
                                         if ($info_colis["RENDU"] == "1") {
 
-                                            if (!file_exists(HOME_SITE . "ressources/colis/$commande['bordereau_colis'].png")) {
+                                            if (!file_exists(HOME_SITE . "ressources/colis/".$commande['bordereau_colis'].".png")) {
 
                                                 //recuperation de l'image
                                                 $texte_img = get_image_colis($fd, $commande['bordereau_colis']);
