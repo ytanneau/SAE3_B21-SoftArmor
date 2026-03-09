@@ -43,7 +43,7 @@
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
-
+        print_r($_POST);
         // redifinition des coordonnées suivant la nouvelle adresse
         if($modifVille != $tabAdresseVendeur['ville'] || 
         $modifAdresse != $tabAdresseVendeur['adresse'] ||
