@@ -102,9 +102,7 @@
                             <label for="description">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
-                        <p>
-                            <div id="map"></div>
-                        </p>
+                        <div id="map"></div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
