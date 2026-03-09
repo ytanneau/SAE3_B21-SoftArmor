@@ -250,17 +250,17 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                                 <td>
                                     <?php if ($commande['bordereau_colis'] != null) {
 
-                                        $info_colis = get_info_colis($fd, $bordereau);
+                                        $info_colis = get_info_colis($fd, $commande['bordereau_colis']);
 
                                         if ($info_colis["RENDU"] == "1") {
 
-                                            if (!file_exists(HOME_SITE . "ressources/colis/$bordereau.png")) {
+                                            if (!file_exists(HOME_SITE . "ressources/colis/$commande['bordereau_colis'].png")) {
 
                                                 //recuperation de l'image
-                                                $texte_img = get_image_colis($fd, $bordereau);
+                                                $texte_img = get_image_colis($fd, $commande['bordereau_colis']);
                                             }
                                             ?> 
-                                                <img src="<?=HOME_SITE . "ressources/colis/$bordereau.png"?>" alt="">
+                                                <img src="<?=HOME_SITE . "ressources/colis/".$commande['bordereau_colis'].".png"?>" alt="">
                                             <?php
 
                                         }
