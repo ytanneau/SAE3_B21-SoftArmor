@@ -2397,7 +2397,7 @@ aside .achat:hover {
 .bodyAjoutProduit form {
   display: flex;
   flex-direction: column;
-  width: 1100px;
+  width: 600px;
 }
 .bodyAjoutProduit #idCodeBarre {
   width: 150px;
@@ -2472,7 +2472,7 @@ aside .achat:hover {
 .bodyModifProduit form {
   display: flex;
   flex-direction: column;
-  width: 1100px;
+  width: 600px;
 }
 .bodyModifProduit #idCodeBarre {
   width: 150px;
@@ -2584,10 +2584,7 @@ aside .achat:hover {
 .mainInfoVendeur div form {
   display: flex;
   flex-direction: column;
-  width: 1100px;
-}
-.mainInfoVendeur div {
-  width: 1100px;
+  width: 600px;
 }
 .mainInfoVendeur div form div {
   display: flex;
