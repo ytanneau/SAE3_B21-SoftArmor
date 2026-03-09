@@ -3646,6 +3646,7 @@ aside .achat:hover {
   border: none;
 }
 #panneauCarte #div_map section div #liste_vendeur {
+  height: 100px;
   overflow-y: scroll;
 }
 
