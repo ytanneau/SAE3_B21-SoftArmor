@@ -49,6 +49,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
@@ -349,7 +351,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     let marker = L.marker(tab_coor,{
                         title: raison_sociale,
                         alt : vendeur['id_compte']
-                    }).addTo(map)
+                    })
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
