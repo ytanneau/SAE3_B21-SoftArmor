@@ -35,7 +35,6 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
-    print_r($tabAdresseVendeur);
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
@@ -170,8 +169,7 @@
     </body>
     <script>
         const adresseVendeur = <?= json_encode($tabAdresseVendeur)?>;
-        console.log(adresseVendeur)
-        let map = L.map('map').setView([48.113,-2.642],8)
+        let map = L.map('map')
         let marker = L.marker([adresseVendeur['lon'],adresseVendeur['lat']]).addTo(map)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -179,6 +177,6 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
 
-
+        map.setView([adresseVendeur['lon'],adresseVendeur['lat']],18)
     </script>
 </html>
