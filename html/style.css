@@ -1327,7 +1327,7 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis div:first-child img {
+.infos .liste_avis img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 2vw;
@@ -1337,6 +1337,23 @@ ul#results > li > a > h3 {
   height: 2vw;
   border-radius: 5px;
   background-color: white;
+}
+.infos .liste_avis .icon {
+  height: 28px;
+}
+.infos .liste_avis a {
+  text-decoration: none;
+  display: block;
+  height: 36px;
+}
+.infos .liste_avis .icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1.2em;
+}
+.infos .liste_avis .icons img {
+  padding: 0.2em;
 }
 .infos .form_infos {
   display: flex;

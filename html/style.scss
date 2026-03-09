@@ -519,11 +519,32 @@ ul#results {
             }
         }
 
-        div:first-child {
+        img {
+            @include image_produit(2vw);
+            background-color: white;
+        }
+
+        .icon {
+            height: 28px;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            height: 36px;
+        }
+        
+        .icons {
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+
+            margin-left: 1.2em;
+
             img {
-                @include image_produit(2vw);
-                background-color: white;
+                padding: 0.2em;
             }
+
         }
     }
 
