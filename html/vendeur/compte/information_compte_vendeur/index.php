@@ -73,7 +73,7 @@
                 echo "Erreur cURL : " . curl_error($ch);
             }
             $data = json_decode($response, true);
-
+            print_r($data);
             if(!empty($data)){
                 $data = $data[0];
                 $lon = $data["lat"];
@@ -83,9 +83,13 @@
                 $lat = $tabAdresseVendeur['lat'];
             }
         }
-
-        if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];}
-        if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
+        if(isset($_POST['lon']) && isset($_POST['lat'])){
+            if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];} 
+            else {$lon = $_POST['lon'];}
+            if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
+            else {$lat = $_POST['lat'];}
+        }
+        
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
@@ -143,7 +147,7 @@
                             <label for="idDescSimple">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
-                        <h2>Corriger mes coordonnées</h2>
+                        <h2 id="warningTitle">Corriger mes coordonnées</h2>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
                             <div>
@@ -172,14 +176,22 @@
     </body>
     <script>
         const adresseVendeur = <?= json_encode($tabAdresseVendeur)?>;
+        let lon = adresseVendeur['lon']
+        let lat = adresseVendeur['lat']
         let map = L.map('map')
-        let marker = L.marker([parseFloat(adresseVendeur['lon']),parseFloat(adresseVendeur['lat'])]).addTo(map)
+        if(lon != null || lat != null){
+            let marker = L.marker([parseFloat(lon),parseFloat(lat)]).addTo(map)
+            map.setView([lon,lat],18)
+        } else {
+            const warningTitle = document.getElementById("warningTitle");
+            warningTitle.innerHTML = "Erreur de coordonnées"
+        }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
-
-        map.setView([adresseVendeur['lon'],adresseVendeur['lat']],18)
+        
+        
     </script>
 </html>
