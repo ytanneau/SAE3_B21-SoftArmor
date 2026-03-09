@@ -1522,7 +1522,7 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
-    .form_without_submit{
+    form div{
         display: flex;
         flex-direction: row;
         #map{

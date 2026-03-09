@@ -2569,11 +2569,11 @@ aside .achat:hover {
   flex-direction: column;
   width: 900px;
 }
-.mainInfoVendeur div .form_without_submit {
+.mainInfoVendeur div form div {
   display: flex;
   flex-direction: row;
 }
-.mainInfoVendeur div .form_without_submit #map {
+.mainInfoVendeur div form div #map {
   width: 600px;
   height: 500px;
 }

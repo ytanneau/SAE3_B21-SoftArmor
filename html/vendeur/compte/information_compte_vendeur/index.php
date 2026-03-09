@@ -87,8 +87,8 @@
 
                 <!-- formulaire de saisie des modifications des informations d'un vendeur -->
                 <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
-                    <div class="form_without_submit">
-                        <div>
+                    <div>
+                        <p>
                             <label for="raison_sociale">Raison sociale</label>
                             <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
                             <label for="ville">Ville</label>
@@ -101,7 +101,7 @@
                             <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
                             <label for="description">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
-                        </div>
+                        </p>
                         <div id="map"></div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
