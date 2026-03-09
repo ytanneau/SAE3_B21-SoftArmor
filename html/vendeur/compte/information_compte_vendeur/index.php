@@ -73,7 +73,6 @@
                 echo "Erreur cURL : " . curl_error($ch);
             }
             $data = json_decode($response, true);
-            print_r($data);
             if(!empty($data)){
                 $data = $data[0];
                 $lon = $data["lat"];
@@ -82,12 +81,6 @@
                 $lon = $tabAdresseVendeur['lon'];
                 $lat = $tabAdresseVendeur['lat'];
             }
-        }
-        if(isset($_POST['lon']) && isset($_POST['lat'])){
-            if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];} 
-            else {$lon = $_POST['lon'];}
-            if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
-            else {$lat = $_POST['lat'];}
         }
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
