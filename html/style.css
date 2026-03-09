@@ -145,6 +145,15 @@ hr {
   margin: 0 8px 0 0;
 }
 
+.champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+
 .toolbar#categories {
   background-color: #3157A3;
   width: 100%;
@@ -1225,7 +1234,7 @@ ul#results > li > a > h3 {
 .infos .bouton {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: auto;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1248,7 +1257,7 @@ ul#results > li > a > h3 {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: unset;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1271,7 +1280,7 @@ ul#results > li > a > h3 {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: 100%;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -2578,11 +2587,11 @@ aside .achat:hover {
   flex-direction: column;
   width: 900px;
 }
-.mainInfoVendeur div .form_without_submit {
+.mainInfoVendeur div form div {
   display: flex;
   flex-direction: row;
 }
-.mainInfoVendeur div .form_without_submit #map {
+.mainInfoVendeur div form div #map {
   width: 600px;
   height: 500px;
 }
@@ -3680,4 +3689,10 @@ aside .achat:hover {
 
 .liste .liste-commande {
   width: 80vw;
+}
+.liste .liste-commande .bouton {
+  width: auto;
+}
+.liste .liste-commande th {
+  text-align: left;
 }/*# sourceMappingURL=style.css.map */
