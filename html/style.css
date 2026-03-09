@@ -3710,6 +3710,12 @@ aside .achat:hover {
   text-align: left;
 }
 
+.liste-commande {
+  width: 100vw;
+}
 .liste-commande th, .liste-commande td {
   padding: 0px 10px;
+}
+.liste-commande tr {
+  padding: 5px 0px;
 }/*# sourceMappingURL=style.css.map */

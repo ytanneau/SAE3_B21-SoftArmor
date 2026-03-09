@@ -2420,7 +2420,13 @@ aside {
 }
 
 .liste-commande{
+    width: 100vw;
+
     th, td{
         padding: 0px 10px;
+    }
+
+    tr{
+        padding: 5px 0px;
     }
 }
