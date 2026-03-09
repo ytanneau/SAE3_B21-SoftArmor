@@ -146,6 +146,7 @@
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
                         <h2>Corriger mes coordonnées</h2>
+                        <?php if($tabAdresseVendeur['lon'] != null || $tabAdresseVendeur['lat'] != null ){?>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
                             <div>
@@ -157,6 +158,7 @@
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
                         </div>
+                        <?php }?>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
@@ -174,14 +176,19 @@
     </body>
     <script>
         const adresseVendeur = <?= json_encode($tabAdresseVendeur)?>;
+        let lon = adresseVendeur['lon']
+        let lat = adresseVendeur['lat']
         let map = L.map('map')
-        let marker = L.marker([parseFloat(adresseVendeur['lon']),parseFloat(adresseVendeur['lat'])]).addTo(map)
+        if(lon != null || lat != null){
+            let marker = L.marker([parseFloat(lon),parseFloat(lat)]).addTo(map)
+            map.setView([lon,lat],18)
+        }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
-
-        map.setView([adresseVendeur['lon'],adresseVendeur['lat']],18)
+        
+        
     </script>
 </html>
