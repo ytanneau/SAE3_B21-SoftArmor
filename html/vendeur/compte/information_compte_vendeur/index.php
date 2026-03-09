@@ -103,12 +103,14 @@
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
                         <div>
-                            <h2>Rectifié mes coordonnées</h2>
+                            <h2>Rectifier mes coordonnées</h2>
                             <div id="map"></div>
-                            <label for="longitude">Longitude</label>
-                            <input type="text" id="longitude">
-                            <label for="latitude">Latitude</label>
-                            <input type="text" id="latitude">
+                            <div>
+                                <label for="longitude">Longitude</label>
+                                <input type="text" id="longitude">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" id="latitude">
+                            </div>
                         </div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
