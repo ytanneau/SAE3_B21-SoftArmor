@@ -60,11 +60,58 @@ if (isset($_GET["commande"])) {
     ?>
 
     <main>
-        <ul>
-            <?php if (count($liste_commandes) == 0) { ?>
-                <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
-            <?php } else {
-                if (RAPTOR) {
+
+        <?php if (isset($_GET["commande"])) { ?>
+
+            <div>
+                <a href="."><img src="../image/retour.svg"></a>
+
+                <?php if (count($liste_elements) == 0) { ?>
+                    <p>Vous n'avez pas accès à cette commande</p>
+
+                <?php } else {
+                    $somme_totale = 0;
+                    $vendeur_prec = "";
+
+                    $d = strtotime($date_commande);
+                    $jour = $JOUR_SEMAINE[date("w", $d)];
+                    $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                    ?>
+
+                    <p>Commande du <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></p>
+                    <h1>Liste des éléments de la commande : </h1>
+                    <ul>
+                        <hr>
+                        <?php foreach ($liste_elements as $element) {
+                            if ($element["nom_vendeur"] != $vendeur_prec) { ?>
+                                <h2>Vendu par <?= $element["nom_vendeur"] ?></h2>
+                                <?php
+                                $vendeur_prec = $element["nom_vendeur"];
+                            } ?>
+
+                            <li>
+                                <p>Produit : <?= $element["nom_produit"] ?></p>
+                                <p>Prix unitaire : <?= number_format($element["prix"], 2, ',', ' ') ?> €</p>
+                                <p>Quantité achetée : <?= $element["quantite"] ?></p>
+                                <p>Prix total : <?= number_format($element["prix"] * $element["quantite"], 2, ',', ' ') ?> €</p>
+                            </li>
+                            <hr>
+
+                            <?php $somme_totale += $element["prix"] * $element["quantite"] ?>
+                        <?php } ?>
+                    </ul>
+
+                    <p>Somme totale de la commande : <?= number_format($somme_totale, 2, ',', ' ') ?> €</p>
+
+                    <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
+                <?php } ?>
+            </div>
+
+        <?php } else { ?>
+            <ul>
+                <?php if (count($liste_commandes) == 0) { ?>
+                    <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
+                <?php } else {
 
                     //connexion delivraptor
                     $conn = false;
@@ -97,8 +144,6 @@ if (isset($_GET["commande"])) {
                                 }
                             }
                         }
-
-
                         ?>
 
                         <li>
@@ -217,54 +262,19 @@ if (isset($_GET["commande"])) {
                             <hr>
                         </li>
 
-                    <?php } ?>
-                </ul>
-                <?php
-                //deconnexion socket et delivraptor
-                deconnexion_socket($fd);
-                } else {
-                    $d = strtotime($commande["date_commande"]);
-                    $jour = $JOUR_SEMAINE[date("w", $d)];
-                    $mois = $MOIS_ANNEE[date((int) "m", $d)];
-                    ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Liveur</th>
-                            <th>Date</th>
-                            <th>Facture</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($liste_commandes as $commande) { ?>
-                            <tr>
-                                <td><?php if ($commande['bordereau_colis']) {
-                                    echo "Raptor livairaison, Bordereau : " . htmlentities($commande['bordereau_colis']);
-                                } else {
-                                    echo "Autre";
-                                } ?>
-                                </td>
-                                <td><?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></td>
-                                <td><a href="./info?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la facture</a></td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                    <?php }
+                    //deconnexion socket et delivraptor
+                    deconnexion_socket($fd);
+                } ?>
 
-            <?php }
-            } ?>
+            </ul>
 
+        </main>
 
-
-    </main>
-
-    <?php
-    if (!isset($_GET["commande"])) {
-        include HOME_SITE . "footer.php";
-    } ?>
+    <?php }
+        if (!isset($_GET["commande"])) {
+            include HOME_SITE . "footer.php";
+        } ?>
 </body>
 
 </html>
