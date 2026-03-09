@@ -55,7 +55,9 @@ function ecrire_nom($rows){
                     <span> | </span>
 
                     <form action="./update_stock.php">
-                        <label for="nb">Quantité</label>
+                        <label for="nb">Quantité
+                            <span class="aide" data-tooltip="' + ' devant pour ajouter une valeur\n' - ' devant pour retirer une valeur\net appuyez sur entrée pour valider\nex: '+52' ajoute 52 à la quantité dans le panier">?</span>
+                        </label>
                         <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
                         <input type="text" size="8" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
                         <input type="submit" class="bouton" value="Valider">
@@ -95,6 +97,40 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
+    <script>
+        let listeAides = document.getElementsByClassName('aide');
+
+        for (i = 0; i < listeAides.length; i++) {
+            let element = listeAides[i];
+
+            element.addEventListener('mouseover', (e) => {
+                let baliseAide = document.createElement('p');
+
+                let lignes = e.target.getAttribute('data-tooltip').split('\\n');
+
+                for (ligne of lignes) {
+                    let baliseLigne = document.createElement('span');
+                    baliseLigne.textContent = ligne;
+                    baliseAide.appendChild(baliseLigne);
+
+                    baliseAide.appendChild(document.createElement('br'));
+                }
+
+                baliseAide.className = 'info-bulle';
+                
+                let x = e.target.getBoundingClientRect().x - 250;
+                let y = e.target.getBoundingClientRect().y - 40 - 20 * lignes.length;
+                
+                baliseAide.setAttribute('style', 'top : ' + y + 'px; left : ' + x + 'px');
+
+                e.target.appendChild(baliseAide);
+            });
+
+            element.addEventListener('mouseout', e => {
+                e.target.removeChild(document.getElementsByClassName('info-bulle')[0]);
+            })
+        }
+    </script>
 </html>
 
 
