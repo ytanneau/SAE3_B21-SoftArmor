@@ -105,7 +105,7 @@
                         <div>
                             <h2>Rectifier mes coordonnées</h2>
                             <div id="map"></div>
-                            <div>
+                            <div id="inputs_lon_lat">
                                 <label for="longitude">Longitude</label>
                                 <input type="text" id="longitude">
                                 <label for="latitude">Latitude</label>

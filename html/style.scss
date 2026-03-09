@@ -1532,6 +1532,9 @@ aside {
                 width: 400px;
                 height: 300px;
             }
+            .inputs_lon_lat{
+                @include contenu_centre_vertical;
+            }
         }
         
     }

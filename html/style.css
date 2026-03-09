@@ -2583,6 +2583,11 @@ aside .achat:hover {
   width: 400px;
   height: 300px;
 }
+.mainInfoVendeur div form div div .inputs_lon_lat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;
   display: block;
