@@ -83,11 +83,13 @@
                 $lat = $tabAdresseVendeur['lat'];
             }
         }
-
-        if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];} 
-        else {$lon = $_POST['lon'];}
-        if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
-        else {$lat = $_POST['lat'];}
+        if(isset($_POST['lon']) && isset($_POST['lat'])){
+            if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];} 
+            else {$lon = $_POST['lon'];}
+            if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
+            else {$lat = $_POST['lat'];}
+        }
+        
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
@@ -145,7 +147,7 @@
                             <label for="idDescSimple">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
-                        <h2>Corriger mes coordonnées</h2>
+                        <h2 id="warningTitle">Corriger mes coordonnées</h2>
                         <?php if($tabAdresseVendeur['lon'] != null || $tabAdresseVendeur['lat'] != null ){?>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
@@ -182,6 +184,9 @@
         if(lon != null || lat != null){
             let marker = L.marker([parseFloat(lon),parseFloat(lat)]).addTo(map)
             map.setView([lon,lat],18)
+        } else {
+            const warningTitle = document.getElementById("warningTitle");
+            warningTitle.innerHTML = "Erreur de coordonnées"
         }
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
