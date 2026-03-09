@@ -73,7 +73,7 @@
                 echo "Erreur cURL : " . curl_error($ch);
             }
             $data = json_decode($response, true);
-
+            print_r($data);
             if(!empty($data)){
                 $data = $data[0];
                 $lon = $data["lat"];
@@ -88,9 +88,6 @@
             else {$lon = $_POST['lon'];}
             if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
             else {$lat = $_POST['lat'];}
-        } else {
-            $lon = null;
-            $lat = null;
         }
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
@@ -151,7 +148,6 @@
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
                         <h2 id="warningTitle">Corriger mes coordonnées</h2>
-                        <?php if($tabAdresseVendeur['lon'] != null || $tabAdresseVendeur['lat'] != null ){?>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
                             <div>
@@ -163,7 +159,6 @@
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
                         </div>
-                        <?php }?>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
