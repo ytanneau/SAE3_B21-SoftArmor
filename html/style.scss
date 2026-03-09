@@ -1527,6 +1527,7 @@ aside {
         flex-direction: row;
         div{
             @include contenu_centre_vertical;
+            margin-left: 20px;
             #map{
                 width: 400px;
                 height: 300px;
