@@ -142,15 +142,13 @@
                             <label for="description">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
-                        <div>
-                            <h2>Rectifier mes coordonnées</h2>
-                            <div id="map"></div>
-                            <div id="inputs_lon_lat">
-                                <label for="longitude">Longitude</label>
-                                <input type="text" name="lon" id="longitude" value="<?= $tabAdresseVendeur['lon']?>">
-                                <label for="latitude">Latitude</label>
-                                <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
-                            </div>
+                        <h2>Rectifier mes coordonnées</h2>
+                        <div id="map"></div>
+                        <div id="inputs_lon_lat">
+                            <label for="longitude">Longitude</label>
+                            <input type="text" name="lon" id="longitude" value="<?= $tabAdresseVendeur['lon']?>">
+                            <label for="latitude">Latitude</label>
+                            <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                         </div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
