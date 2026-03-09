@@ -2596,8 +2596,14 @@ aside .achat:hover {
 }
 .mainInfoVendeur div form div .inputs_lon_lat {
   display: flex;
+  flex-direction: row;
+}
+.mainInfoVendeur div form div .inputs_lon_lat div {
+  display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.mainInfoVendeur div form div .inputs_lon_lat div input {
+  width: 50%;
 }
 .mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;

@@ -1551,7 +1551,15 @@ aside {
             height: 300px;
         }
         .inputs_lon_lat{
-            @include contenu_centre_vertical;
+            display: flex;
+            flex-direction: row;
+            div{
+                display: flex;
+                flex-direction: column;
+                input{
+                    width: 50%;
+                }
+            }
         }
     }
     #idValiderModifVendeur{
