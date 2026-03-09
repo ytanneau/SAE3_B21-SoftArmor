@@ -132,13 +132,13 @@
                     <div>
                         <p>
                             <label for="raison_sociale">Raison sociale</label>
-                            <input type="text" name="raison_sociale" id="raison_sociale" value="<?= $raisonSociale ?>">
+                            <input type="text" name="raison_sociale" id="raison_sociale" value="<?= $raisonSociale ?>" required>
                             <label for="ville">Ville</label>
-                            <input type="text" name="ville" id="ville" value="<?= $tabAdresseVendeur['ville'] ?>">
+                            <input type="text" name="ville" id="ville" value="<?= $tabAdresseVendeur['ville'] ?>" required>
                             <label for="adresse">Adresse</label>
-                            <input type="text" name="adresse" id="adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
+                            <input type="text" name="adresse" id="adresse" value="<?= $tabAdresseVendeur['adresse'] ?>" required>
                             <label for="code_postal">Code postal</label>
-                            <input type="text" name="code_postal" id="code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
+                            <input type="text" name="code_postal" id="code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>" required>
                             <label for="complementAdr">Complement d'adresse</label>
                             <textarea type="text" name="complementAdr" id="complementAdr"><?= $tabAdresseVendeur['complement_adresse'] ?></textarea>
                             <label for="idDescSimple">Description</label>
@@ -176,13 +176,8 @@
         let lon = adresseVendeur['lon']
         let lat = adresseVendeur['lat']
         let map = L.map('map')
-        if(lon != null || lat != null){
-            let marker = L.marker([parseFloat(lon),parseFloat(lat)]).addTo(map)
-            map.setView([lon,lat],18)
-        } else {
-            const warningTitle = document.getElementById("warningTitle");
-            warningTitle.innerHTML = "Erreur de coordonnées"
-        }
+        let marker = L.marker([parseFloat(lon),parseFloat(lat)]).addTo(map)
+        map.setView([lon,lat],18)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
