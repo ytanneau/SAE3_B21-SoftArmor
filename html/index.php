@@ -132,10 +132,13 @@ if($tabPromotion != false){
             <?php afficher_produits($produit_recent, "recent")?>
             <hr>
             
-            <!-- Produits en réduction -->
-            <h1>Produits en promotion</h1>
-            <?php afficher_produits($produit_promotion, "reduction")?>
-            <hr>
+
+            <?php if (count($produit_promotion) > 0) { ?>
+                <!-- Produits en réduction -->
+                <h1>Produits en promotion</h1>
+                <?php afficher_produits($produit_promotion, "reduction")?>
+                <hr>
+            <?php } ?>
 
             <!-- Produits de catégories -->
             <?php
