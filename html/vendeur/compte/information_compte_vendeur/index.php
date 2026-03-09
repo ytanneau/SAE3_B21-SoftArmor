@@ -80,11 +80,14 @@
                 $data = $data[0];
                 $lon = $data["lat"];
                 $lat = $data["lon"];
+            } else if(empty($data["lat"]) || empty($data["lon"])){
+                $lon = $tabAdresseVendeur['lon'];
+                $lat = $tabAdresseVendeur['lat'];
             }
-            if($_POST['lon'] == null || empty($data["lat"])){$lon = $tabAdresseVendeur['lon'];}
-            if($_POST['lat'] == null || empty($data["lon"])){$lat = $tabAdresseVendeur['lat'];}
         }
 
+        if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];}
+        if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
