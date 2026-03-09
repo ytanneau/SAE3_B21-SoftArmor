@@ -2398,7 +2398,7 @@ aside .achat:hover {
 .bodyAjoutProduit form {
   display: flex;
   flex-direction: column;
-  width: 900px;
+  width: 1000px;
 }
 .bodyAjoutProduit #idCodeBarre {
   width: 150px;
@@ -2473,7 +2473,7 @@ aside .achat:hover {
 .bodyModifProduit form {
   display: flex;
   flex-direction: column;
-  width: 900px;
+  width: 1000px;
 }
 .bodyModifProduit #idCodeBarre {
   width: 150px;
@@ -2585,15 +2585,15 @@ aside .achat:hover {
 .mainInfoVendeur div form {
   display: flex;
   flex-direction: column;
-  width: 900px;
+  width: 1000px;
 }
 .mainInfoVendeur div form div {
   display: flex;
   flex-direction: row;
 }
 .mainInfoVendeur div form div #map {
-  width: 600px;
-  height: 500px;
+  width: 400px;
+  height: 300px;
 }
 .mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;
@@ -2618,6 +2618,9 @@ aside .achat:hover {
 }
 .mainInfoVendeur div #idValiderModifVendeur:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.mainInfoVendeur div #idValiderModifVendeur {
+  width: 600px;
 }
 .mainInfoVendeur div #idDesactivationCompte,
 .mainInfoVendeur div #idDesactivation2FA {
