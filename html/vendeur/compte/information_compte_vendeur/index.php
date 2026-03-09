@@ -48,6 +48,7 @@
         if($modifVille != $tabAdresseVendeur['ville'] || 
         $modifAdresse != $tabAdresseVendeur['adresse'] ||
         $modifCodePostal != $tabAdresseVendeur['code_postal']){
+            echo "confirm";
             $adresseSubmit = $modifVille . $modifAdresse . $modifCodePostal;
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $ch = curl_init();
@@ -84,6 +85,7 @@
                 $lon = $tabAdresseVendeur['lon'];
                 $lat = $tabAdresseVendeur['lat'];
             }
+            print_r($data);
         }
 
         if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];}
