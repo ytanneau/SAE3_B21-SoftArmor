@@ -3710,11 +3710,11 @@ aside .achat:hover {
 }
 .liste-commande th, .liste-commande td {
   padding: 0px 10px;
+  height: 70px;
 }
 .liste-commande tr {
-  padding: 5px 0px;
+  padding: 20px 0px;
 }
 .liste-commande img {
-  width: 20px;
-  padding: 20px;
+  width: 50px;
 }/*# sourceMappingURL=style.css.map */

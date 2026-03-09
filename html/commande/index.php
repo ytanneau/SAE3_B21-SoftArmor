@@ -264,8 +264,10 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                                                 $texte_img = get_image_colis($fd, $commande['bordereau_colis']);
                                             }
                                             ?>
-                                            <img src="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>"
+                                            <a href="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>" target="_blank">
+                                                <img src="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>"
                                                 alt="">
+                                            </a>
                                             <?php
 
                                         }
