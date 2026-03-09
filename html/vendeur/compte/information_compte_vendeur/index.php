@@ -84,8 +84,10 @@
             }
         }
 
-        if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];}
+        if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];} 
+        else {$lon = $_POST['lon'];}
         if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
+        else {$lat = $_POST['lat'];}
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
         // Mise à jour des informations dans la base de donnée
