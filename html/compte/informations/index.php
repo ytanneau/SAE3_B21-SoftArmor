@@ -463,6 +463,15 @@ if ($_POST != NULL){
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($row['note'] ?? '')) ?>
                                 </div>
+
+                                <div class="icons">
+                                    <a href="modification_avis/?produit=<?= htmlentities($row['id_produit'])?>">
+                                        <img src="<?=HOME_SITE?>image/modifier.svg" alt="Modifier" class="icon">
+                                    </a>
+                                    <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte']?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
+                                        <img src="<?=HOME_SITE?>image/supprimer.svg" alt="Supprimer" class="icon">
+                                    </a>
+                                </div>
                             </div>
 
                             <div>
@@ -472,17 +481,6 @@ if ($_POST != NULL){
                             </div>
                         </div>
 
-                        <!-- Boutons d'actions -->
-                        <div>
-                            <a href="modification_avis/?produit=<?= htmlentities($row['id_produit']) ?>" class="bouton modif">Modifier</a>
-                            <?php if (isset($row['url_image'])) { ?>
-                                <a href="?supprimer_avis_image=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis et son image associée ?')">Supprimer</a>
-                            <?php }  else { ?>
-                            
-                                <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
-                            <?php } ?>
-                        </div>
-                        
                         <?php if (isset($row['url_image'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt_image'] ?>">
                         <?php } ?>
