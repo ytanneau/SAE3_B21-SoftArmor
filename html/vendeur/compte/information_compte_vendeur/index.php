@@ -35,7 +35,7 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
-
+    print_r($tabAdresseVendeur);
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
@@ -170,6 +170,7 @@
     </body>
     <script>
         const adresseVendeur = <?php json_encode($tabAdresseVendeur)?>;
+        console.log(adresseVendeur)
         let map = L.map('map').setView([48.113,-2.642],8)
         let marker = L.marker([adresseVendeur['lon'],adresseVendeur['lat']]).addTo(map)
 
