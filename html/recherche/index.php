@@ -49,6 +49,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"/>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 </head>
 <body data-page="search">
     <?php 
@@ -307,7 +310,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // INITILISATION DE LA CARTE
         let map = L.map('map').setView([48.113,-2.642],8)
-        let groupMarker = L.MarkerClusterGroup();
+        let groupMarker = L.MarkerClusterGroup().addTo(map)
+
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -335,7 +339,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             }
                         });
                     }
-                    if((info == 'coor_x' || info == 'coor_y')&& vendeur[info] != null){
+                    if((info == 'lat' || info == 'lon')&& vendeur[info] != null){
                         tab_coor.push(vendeur[info])
                     } else if (info == 'raison_sociale'){
                         raison_sociale = vendeur[info]
@@ -346,7 +350,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         title: raison_sociale,
                         alt : vendeur['id_compte']
                     }).addTo(map)
-                    L.MarkerClusterGroup();
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
