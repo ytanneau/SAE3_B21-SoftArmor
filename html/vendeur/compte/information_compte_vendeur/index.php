@@ -130,19 +130,19 @@
                     <div>
                         <p>
                             <label for="raison_sociale">Raison sociale</label>
-                            <input type="text" name="raison_sociale" id="id_raison_sociale" value="<?= $raisonSociale ?>">
+                            <input type="text" name="raison_sociale" id="raison_sociale" value="<?= $raisonSociale ?>">
                             <label for="ville">Ville</label>
-                            <input type="text" name="ville" id="id_ville" value="<?= $tabAdresseVendeur['ville'] ?>">
+                            <input type="text" name="ville" id="ville" value="<?= $tabAdresseVendeur['ville'] ?>">
                             <label for="adresse">Adresse</label>
-                            <input type="text" name="adresse" id="id_adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
+                            <input type="text" name="adresse" id="adresse" value="<?= $tabAdresseVendeur['adresse'] ?>">
                             <label for="code_postal">Code postal</label>
-                            <input type="text" name="code_postal" id="id_code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
+                            <input type="text" name="code_postal" id="code_postal" value="<?= $tabAdresseVendeur['code_postal'] ?>">
                             <label for="complementAdr">Complement d'adresse</label>
-                            <input type="text" name="complementAdr" id="id_complementAdr" value="<?= $tabAdresseVendeur['complement_adresse'] ?>">
-                            <label for="description">Description</label>
+                            <textarea type="text" name="complementAdr" id="complementAdr"><?= $tabAdresseVendeur['complement_adresse'] ?></textarea>
+                            <label for="idDescSimple">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
-                        <h2>Rectifier mes coordonnées</h2>
+                        <h2>Corriger mes coordonnées</h2>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
                             <div>
