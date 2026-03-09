@@ -170,7 +170,7 @@
     <script>
         const adresseVendeur = <?= json_encode($tabAdresseVendeur)?>;
         let map = L.map('map')
-        let marker = L.marker([adresseVendeur['lon'],adresseVendeur['lat']]).addTo(map)
+        let marker = L.marker([parseFloat(adresseVendeur['lon']),parseFloat(adresseVendeur['lat'])]).addTo(map)
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
