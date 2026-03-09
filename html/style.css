@@ -2573,7 +2573,12 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
 }
-.mainInfoVendeur div form div #map {
+.mainInfoVendeur div form div div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainInfoVendeur div form div div #map {
   width: 400px;
   height: 300px;
 }

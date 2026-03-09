@@ -1525,10 +1525,14 @@ aside {
     form div{
         display: flex;
         flex-direction: row;
-        #map{
-            width: 400px;
-            height: 300px;
+        div{
+            @include contenu_centre_vertical;
+            #map{
+                width: 400px;
+                height: 300px;
+            }
         }
+        
     }
     #idValiderModifVendeur{
         margin-top: 20px;
