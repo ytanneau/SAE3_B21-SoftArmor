@@ -60,7 +60,6 @@ if (isset($_GET["commande"])) {
     ?>
 
     <main>
-        <ul>
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
             <?php } else {
@@ -218,7 +217,6 @@ if (isset($_GET["commande"])) {
                         </li>
 
                     <?php } ?>
-                </ul>
                 <?php
                 //deconnexion socket et delivraptor
                 deconnexion_socket($fd);
