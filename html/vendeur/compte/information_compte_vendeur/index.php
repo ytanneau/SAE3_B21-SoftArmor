@@ -45,46 +45,40 @@
         $modifDescription = $_POST['description'];
         $lon = $_POST['lon'];
         $lat = $_POST['lat'];
+        
         // redifinition des coordonnées suivant la nouvelle adresse
-        if($modifVille != $tabAdresseVendeur['ville'] || 
-        $modifAdresse != $tabAdresseVendeur['adresse'] ||
-        $modifCodePostal != $tabAdresseVendeur['code_postal']){
-            $adresseSubmit = $modifAdresse . ", " . $modifVille. ", " . $modifCodePostal;
-            $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
-            $ch = curl_init();
+        $adresseSubmit = $modifAdresse . ", " . $modifVille. ", " . $modifCodePostal;
+        $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+        $ch = curl_init();
 
-            curl_setopt_array($ch, [
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_USERAGENT => "marketplace-test",
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT => "marketplace-test",
 
-                CURLOPT_PROXY => "10.254.0.254:3128",
-                CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+            CURLOPT_PROXY => "10.254.0.254:3128",
+            CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
 
-                CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
+            CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
 
-                CURLOPT_HTTPPROXYTUNNEL => true,
+            CURLOPT_HTTPPROXYTUNNEL => true,
 
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => false
-            ]);
-            
-            $response = curl_exec($ch);
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false
+        ]);
+        
+        $response = curl_exec($ch);
 
-            if(curl_errno($ch)){
-                echo "Erreur cURL : " . curl_error($ch);
-            }
-            $data = json_decode($response, true);
-            if(!empty($data)){
-                $data = $data[0];
-                $lon = $data["lat"];
-                $lat = $data["lon"];
-            }
+        if(curl_errno($ch)){
+            echo "Erreur cURL : " . curl_error($ch);
         }
-
-        if($lon == null){
-            $lon = $tabAdresseVendeur['lon'];
+        $data = json_decode($response, true);
+        if(!empty($data)){
+            $data = $data[0];
+            $lon = $data["lat"];
+            $lat = $data["lon"];
         }
+        if($lon == null){ $lon = $tabAdresseVendeur['lon'];}
         if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
