@@ -43,14 +43,11 @@
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
-        print_r($_POST);
         // redifinition des coordonnées suivant la nouvelle adresse
         if($modifVille != $tabAdresseVendeur['ville'] || 
         $modifAdresse != $tabAdresseVendeur['adresse'] ||
         $modifCodePostal != $tabAdresseVendeur['code_postal']){
-            echo "confirm";
-            $adresseSubmit = $modifVille . ", " . $modifAdresse . ", " . $modifCodePostal;
-            print_r($adresseSubmit);
+            $adresseSubmit = $modifAdresse . ", " . $modifVille. ", " . $modifCodePostal;
             $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
             $ch = curl_init();
 
@@ -75,7 +72,6 @@
             if(curl_errno($ch)){
                 echo "Erreur cURL : " . curl_error($ch);
             }
-            print_r($response);
             $data = json_decode($response, true);
 
             if(!empty($data)){
@@ -86,7 +82,6 @@
                 $lon = $tabAdresseVendeur['lon'];
                 $lat = $tabAdresseVendeur['lat'];
             }
-            print_r($data);
         }
 
         if($_POST['lon'] == null){$lon = $tabAdresseVendeur['lon'];}
