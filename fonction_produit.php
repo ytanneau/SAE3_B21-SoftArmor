@@ -644,7 +644,7 @@
     function get_image($id_image){
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+        $stmt = $pdo->prepare("SELECT url_image, alt, titre FROM _image WHERE id_image = :id_image");
         $stmt->bindValue(":id_image", $id_image, PDO::PARAM_INT);
         $stmt->execute();
 
