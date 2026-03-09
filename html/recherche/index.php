@@ -307,6 +307,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // INITILISATION DE LA CARTE
         let map = L.map('map').setView([48.113,-2.642],8)
+        let map = L.map('map', { maxZoom: 19 }).setView([48.113,-2.642],8)
         let groupMarker = L.markerClusterGroup().addTo(map)
 
 
