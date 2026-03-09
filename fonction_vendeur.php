@@ -14,7 +14,7 @@
         }
     }
 
-    function update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
+    function update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr, $longitude, $latitude){
         /**
          * Fonction update_adresse_vendeur() prend en parametre les informations d'une adresse et l'id d'un vendeur
          * Met a jour les informations de l'adresse dans la base de données 
@@ -26,9 +26,18 @@
                                 SET a.ville = :ville,
                                     a.adresse = :adresse, 
                                     a.code_postal = :code_postal,
-                                    a.complement_adresse = :complement_adresse 
+                                    a.complement_adresse = :complement_adresse,
+                                    a.lon = :lon,
+                                    a.lat = :lat
                                 WHERE v.id_compte = $id_compte;");
-            $stmt->execute([':ville' => $modifVille, ':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
+            $stmt->execute([
+                'ville' => $modifVille,
+                'adresse' => $modifAdresse,
+                'code_postal' => $modifCodePostal,
+                'complement_adresse' => $modifCompelementAdr,
+                'lon' => $longitude,
+                'lat' => $latitude
+            ]);
         } catch(PDOException $e) {
             throw $e;
         }
