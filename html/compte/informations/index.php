@@ -203,15 +203,13 @@ if ($_POST != NULL){
         <h1>Mon profil</h1>
         
         <section>
-            <?php
-                //affichage des info du compte
-            ?>
+            <!-- affichage des info du compte -->
 
 
             <form class="form_infos" action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img class="image_pp" src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
+                    <img class="image_pp" src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                     
 
 
@@ -445,7 +443,6 @@ if ($_POST != NULL){
             <h2>Vos Avis</h2>
             <ul class="liste_avis">
                 <?php foreach ($avis as $row) {
-                    $image_profil = isset($row['id_image_profil']) ? get_image($row['id_image_profil']) : null;
                     $image_produit = isset($row['id_image_produit']) ? get_image($row['id_image_produit']) : null?>
                     <li>
                         <!-- Image du produit -->
