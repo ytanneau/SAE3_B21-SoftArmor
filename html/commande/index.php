@@ -266,7 +266,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                                             ?>
                                             <a href="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>" target="_blank">
                                                 <img src="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>"
-                                                alt="">
+                                                alt="Image du colis" title="image_colis">
                                             </a>
                                             <?php
 

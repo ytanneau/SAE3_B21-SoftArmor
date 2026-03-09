@@ -533,9 +533,9 @@ ul#results {
             display: block;
             height: 36px;
         }
-        
+
         .icons {
-            display:flex;
+            display: flex;
             flex-direction: row;
             align-items: center;
 
@@ -1543,26 +1543,32 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
-    form div{
+
+    form div {
         display: flex;
         flex-direction: column;
-        #map{
+
+        #map {
             width: 400px;
             height: 300px;
         }
-        .inputs_lon_lat{
+
+        .inputs_lon_lat {
             display: flex;
             flex-direction: row;
-            div{
+
+            div {
                 display: flex;
                 flex-direction: column;
-                input{
+
+                input {
                     width: 50%;
                 }
             }
         }
     }
-    #idValiderModifVendeur{
+
+    #idValiderModifVendeur {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
         width: 600px;
@@ -2341,7 +2347,8 @@ aside {
             border: none;
         }
     }
-    #div_map section div #liste_vendeur{
+
+    #div_map section div #liste_vendeur {
         height: 200px;
         width: 230px;
         overflow-y: scroll;
@@ -2412,19 +2419,47 @@ aside {
 }
 
 
-.liste-commande{
+.liste-commande {
     width: 100vw;
 
-    th, td{
+    th,
+    td {
         padding: 0px 10px;
         height: 70px;
     }
 
-    tr{
+    tr {
         padding: 20px 0px;
     }
 
-    img{
+    img {
         width: 50px;
+    }
+}
+
+
+.liste-commande-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .input_quantite {
+        font-size: 1.4em;
+    }
+
+    main {
+        display: flex;
+        flex: 1;
+        padding: 0;
+
+        img {
+            object-fit: contain;
+        }
+
+        a {
+            position: relative;
+            left: 50px;
+            top: 50px;
+        }
     }
 }

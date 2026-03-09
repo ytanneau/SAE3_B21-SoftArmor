@@ -3708,7 +3708,8 @@ aside .achat:hover {
 .liste-commande {
   width: 100vw;
 }
-.liste-commande th, .liste-commande td {
+.liste-commande th,
+.liste-commande td {
   padding: 0px 10px;
   height: 70px;
 }
@@ -3717,4 +3718,27 @@ aside .achat:hover {
 }
 .liste-commande img {
   width: 50px;
+}
+
+.liste-commande-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.liste-commande-page .input_quantite {
+  font-size: 1.4em;
+}
+.liste-commande-page main {
+  display: flex;
+  flex: 1;
+  padding: 0;
+}
+.liste-commande-page main img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.liste-commande-page main a {
+  position: relative;
+  left: 50px;
+  top: 50px;
 }/*# sourceMappingURL=style.css.map */
