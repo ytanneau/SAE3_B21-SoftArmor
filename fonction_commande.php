@@ -225,7 +225,7 @@ function livraison_info($bordereau)
     global $fd, $conn;
 
     if ($bordereau == null){
-        return "";
+        return "Etatpe inconue";
     }
 
     if ($conn == "1") {
@@ -241,8 +241,7 @@ function livraison_info($bordereau)
         }*/
 
         if ($info_colis["ERROR"] != "N/A") {
-            return -1;
-
+            return "Colis introuvable";
         }
 
         $texte_refus = "";
@@ -316,7 +315,7 @@ function livraison_info($bordereau)
         }
         return 1;
     } else {
-        return -1;
+        return "Erreur server";
     }
 
 
