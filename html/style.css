@@ -3700,16 +3700,6 @@ aside .achat:hover {
   margin: 1.2em 0;
 }
 
-.liste .liste-commande {
-  width: 80vw;
-}
-.liste .liste-commande .bouton {
-  width: auto;
-}
-.liste .liste-commande th {
-  text-align: left;
-}
-
 .liste-commande {
   width: 100vw;
 }
