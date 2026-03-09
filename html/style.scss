@@ -2341,6 +2341,9 @@ aside {
             border: none;
         }
     }
+    #div_map section div #liste_vendeur{
+        overflow-y: scroll;
+    }
 }
 
 /* Quand actif */

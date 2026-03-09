@@ -3645,6 +3645,9 @@ aside .achat:hover {
   font-size: xx-large;
   border: none;
 }
+#panneauCarte #div_map section div #liste_vendeur {
+  overflow-y: scroll;
+}
 
 /* Quand actif */
 #panneauCarte.active {
