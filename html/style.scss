@@ -1515,9 +1515,11 @@ aside {
     form div{
         display: flex;
         flex-direction: row;
-        p #map{
-            width: 600px;
-            height: 500px;
+        p {
+            #map{
+                width: 600px;
+                height: 500px;
+            }
         }
     }
     #idValiderModifVendeur{
