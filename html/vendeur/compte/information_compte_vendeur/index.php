@@ -169,7 +169,7 @@
         <?php include HOME_SITE . "footer.php"?>
     </body>
     <script>
-        const adresseVendeur = <?php json_encode($tabAdresseVendeur)?>;
+        const adresseVendeur = <?= json_encode($tabAdresseVendeur)?>;
         console.log(adresseVendeur)
         let map = L.map('map').setView([48.113,-2.642],8)
         let marker = L.marker([adresseVendeur['lon'],adresseVendeur['lat']]).addTo(map)
