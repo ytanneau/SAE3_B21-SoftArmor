@@ -225,7 +225,11 @@ function livraison_info($bordereau)
     global $fd, $conn;
 
     if ($bordereau == null){
-        return "Etatpe inconue";
+        return "Etape inconue";
+    }
+
+    if ($conn == 0){
+        return "Etape inconue (problème serveur)";
     }
 
     if ($conn == "1") {

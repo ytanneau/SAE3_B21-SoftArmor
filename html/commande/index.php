@@ -217,7 +217,11 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             } else {
                 $conn = false;
                 $fd = connexion_socket(IP, PORT);
-                $conn = connexion_delivraptor($fd, $id_delivraptor, $mdp_delivraptor);
+                if ($fd != false) {
+                    $conn = connexion_delivraptor($fd, $id_delivraptor, $mdp_delivraptor);
+                } else {
+                    $conn = 0;
+                }
                 ?>
                 <table class="liste-commande">
                     <thead>
@@ -248,19 +252,20 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                                     <?= livraison_info($commande['bordereau_colis']); ?>
                                 </td>
                                 <td>
-                                    <?php if ($commande['bordereau_colis'] != null) {
+                                    <?php if ($commande['bordereau_colis'] != null && $conn == 1) {
 
                                         $info_colis = get_info_colis($fd, $commande['bordereau_colis']);
 
                                         if ($info_colis["RENDU"] == "1") {
 
-                                            if (!file_exists(HOME_SITE . "ressources/colis/".$commande['bordereau_colis'].".png")) {
+                                            if (!file_exists(HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png")) {
 
                                                 //recuperation de l'image
                                                 $texte_img = get_image_colis($fd, $commande['bordereau_colis']);
                                             }
-                                            ?> 
-                                                <img src="<?=HOME_SITE . "ressources/colis/".$commande['bordereau_colis'].".png"?>" alt="">
+                                            ?>
+                                            <img src="<?= HOME_SITE . "ressources/colis/" . $commande['bordereau_colis'] . ".png" ?>"
+                                                alt="">
                                             <?php
 
                                         }
