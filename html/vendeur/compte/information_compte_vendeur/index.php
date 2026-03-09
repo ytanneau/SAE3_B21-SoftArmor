@@ -88,6 +88,9 @@
             else {$lon = $_POST['lon'];}
             if($_POST['lat'] == null){$lat = $tabAdresseVendeur['lat'];}
             else {$lat = $_POST['lat'];}
+        } else {
+            $lon = null;
+            $lat = null;
         }
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
