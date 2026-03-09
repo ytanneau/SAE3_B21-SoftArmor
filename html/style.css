@@ -3711,4 +3711,8 @@ aside .achat:hover {
 }
 .liste-commande tr {
   padding: 5px 0px;
+}
+.liste-commande img {
+  width: 20px;
+  padding: 20px;
 }/*# sourceMappingURL=style.css.map */
