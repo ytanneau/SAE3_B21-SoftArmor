@@ -73,47 +73,6 @@ if (isset($_GET["commande"])) {
 <body class="liste-commande-page">
     <?php include HOME_SITE . 'vendeur/header.php' ?>
     <main>
-
-        <?php if (isset($_GET["commande"])) { ?>
-            <div>
-                <a href="."><img src="<?= HOME_SITE ?>image/retour.svg"></a>
-                <?php if (count($liste_elements) == 0) { ?>
-                    <p>Vous n'avez pas accès à cette commande</p>
-                <?php } else {
-                    $somme_totale = 0;
-                    $pseudo = get_pseudo_commande($_GET['commande']);
-                    $date_commande = get_date_commande($_GET['commande']);
-
-                    $d = strtotime($date_commande);
-                    $jour = $JOUR_SEMAINE[date("w", $d)];
-                    $mois = $MOIS_ANNEE[date((int) "m", $d)];
-
-                    ?>
-
-                    <p>Commande du <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></p>
-                    <p>Faite par <?= $pseudo ?></p>
-                    <h1>Liste des éléments de la commande : </h1>
-                    <ul>
-                        <?php foreach ($liste_elements as $element) { ?>
-                            <li>
-                                <p>Produit : <?= $element["nom_produit"] ?></p>
-                                <p>Prix unitaire : <?= number_format($element["prix"], 2, ',', ' ') ?> €</p>
-                                <p>Quantité achetée : <?= $element["quantite"] ?></p>
-                                <p>Prix total : <?= number_format($element["prix"] * $element["quantite"], 2, ',', ' ') ?> €</p>
-                            </li>
-                            <hr>
-
-                            <?php $somme_totale += $element["prix"] * $element["quantite"] ?>
-                        <?php } ?>
-                    </ul>
-
-                    <p>Somme totale de la commande : <?= number_format($somme_totale, 2, ',', ' ') ?> €</p>
-
-                    <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
-                <?php } ?>
-            </div>
-
-        <?php } else { ?>
             <div>
                 <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
                 <?php if (count($liste_commandes) == 0) { ?>
@@ -143,9 +102,9 @@ if (isset($_GET["commande"])) {
                                     </td>
                                     <td>
                                         <button class="bouton"
-                                            onclick="printPage('<?= './?commande=' . $commande['id_commande'] ?>')">Générer le
+                                            onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Générer le
                                             fichier PDF de cette commande</button>
-                                        <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a-->
+                                        <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton" target="_blank">Consulter la commande</a-->
                                     </td>
                                 </tr>
 
@@ -154,8 +113,6 @@ if (isset($_GET["commande"])) {
                     </table>
                 <?php } ?>
             </div>
-
-        <?php } ?>
     </main>
 
     <?php if (!isset($_GET["commande"])) {
