@@ -60,3 +60,32 @@ export class SideMonth {
         return res;
     }
 }
+
+export class SideDay {
+    // valeur en millisegonde
+    static lesJour = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+
+    static next(jour){
+        for (let index = 0; index < this.lesJour.length; index++) {
+            if (jour == this.lesJour.at(index)){
+                if (index == 0){
+                    return this.lesJour.at(this.lesJour.length-1);
+                }
+                else{
+                    return this.lesJour.at(index-1);
+                }
+            }
+        }
+    }
+
+    static start(jour){
+        let res = [];
+        res.push(jour)
+        let j = jour
+        for (let index = 1; index < this.lesJour.length; index++) {
+            j = this.next(j);
+            res.push(j);
+        }
+        return res;
+    }
+}

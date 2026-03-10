@@ -146,7 +146,9 @@ if (isset($_SESSION['logged_in'])) {
                                 </article>
                                 <article>
                                     <form action="update_quantite.php">
-                                        <label for="nb">Quantité</label>
+                                        <label for="nb">Quantité
+                                            <span class="aide" data-tooltip="' + ' devant pour ajouter une valeur\n' - ' devant pour retirer une valeur\net appuyez sur entrée pour valider\nex: '+52' ajoute 52 à la quantité dans le panier">?</span>
+                                        </label>
                                         <br>
                                         <input type="hidden" name="produit" value="<?=$elt['id_produit']?>">
                                         <span class="input_quantite">
@@ -226,4 +228,6 @@ if (isset($_SESSION['logged_in'])) {
             })
         }
     </script>
+
+    <script src="<?=HOME_SITE?>infobulle.js"></script>
 </html>

@@ -203,15 +203,13 @@ if ($_POST != NULL){
         <h1>Mon profil</h1>
         
         <section>
-            <?php
-                //affichage des info du compte
-            ?>
+            <!-- affichage des info du compte -->
 
 
             <form class="form_infos" action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img class="image_pp" src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
+                    <img class="image_pp" src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                     
                     <label for="pdp" class="image_bouton"><?php if (isset($info_compte['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
@@ -430,9 +428,9 @@ if ($_POST != NULL){
                     <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
 
                     <?php if (!$a_2FA) { ?>
-                        <a class="bouton" href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a>
+                        <button class="bouton"><a href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a></button>
                     <?php } else { ?>
-                        <a class="bouton grave" href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a>
+                    <button class="bouton grave"><a href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a></button>
                     <?php } ?>
                 </article>
             </form>
@@ -443,7 +441,6 @@ if ($_POST != NULL){
             <h2>Vos Avis</h2>
             <ul class="liste_avis">
                 <?php foreach ($avis as $row) {
-                    $image_profil = isset($row['id_image_profil']) ? get_image($row['id_image_profil']) : null;
                     $image_produit = isset($row['id_image_produit']) ? get_image($row['id_image_produit']) : null?>
                     <li>
                         <!-- Image du produit -->
@@ -461,6 +458,15 @@ if ($_POST != NULL){
                                 <div class="etoiles">
                                     <?= afficher_moyenne_note(htmlentities($row['note'] ?? '')) ?>
                                 </div>
+
+                                <div class="icons">
+                                    <a href="modification_avis/?produit=<?= htmlentities($row['id_produit'])?>">
+                                        <img src="<?=HOME_SITE?>image/modifier.svg" alt="Modifier" class="icon">
+                                    </a>
+                                    <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte']?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
+                                        <img src="<?=HOME_SITE?>image/supprimer.svg" alt="Supprimer" class="icon">
+                                    </a>
+                                </div>
                             </div>
 
                             <div>
@@ -470,17 +476,6 @@ if ($_POST != NULL){
                             </div>
                         </div>
 
-                        <!-- Boutons d'actions -->
-                        <div>
-                            <a href="modification_avis/?produit=<?= htmlentities($row['id_produit']) ?>" class="bouton modif">Modifier</a>
-                            <?php if (isset($row['url_image'])) { ?>
-                                <a href="?supprimer_avis_image=1&id_produit=<?= $row['id_produit'] ?>&url_img_avis=<?= urlencode($row['url_image'])?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis et son image associée ?')">Supprimer</a>
-                            <?php }  else { ?>
-                            
-                                <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte'] ?>" class="bouton grave" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">Supprimer</a>
-                            <?php } ?>
-                        </div>
-                        
                         <?php if (isset($row['url_image'])) { ?>
                             <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt_image'] ?>">
                         <?php } ?>

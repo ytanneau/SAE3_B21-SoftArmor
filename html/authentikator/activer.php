@@ -17,9 +17,11 @@ if (!isset($_SESSION['logged_in'])) {
     exit;
 }
 
+$vendeur = isset($_SESSION['raison_sociale']);
+
 // Empêcher les comptes avec 2FA d'accéder à la page
 if (a_2FA($_SESSION['id_compte'])) {
-    if (isset($_SESSION['raison_sociale'])){
+    if ($vendeur) {
         header('location: '. HOME_SITE .'vendeur/stock/');
     } else {
         header('location: ' . HOME_SITE);
@@ -28,7 +30,9 @@ if (a_2FA($_SESSION['id_compte'])) {
     exit;
 }
 
-$accueil = isset($_SESSION['raison_sociale']) ? HOME_SITE . "vendeur/accueil" : HOME_SITE;
+$accueil = $vendeur ? 'vendeur/accueil' : '';
+$header = $vendeur ? 'vendeur/header.php' : 'header.php';
+$retour = $vendeur ? 'vendeur/compte/information_compte_vendeur' : 'compte/informations';
 
 require_once HOME_GIT . 'vendor/autoload.php';
 use OTPHP\TOTP;
@@ -56,23 +60,52 @@ $grCodeUri = $otp->getQrCodeUri(
     <title>Alizon - 2FA</title>
 </head>
 
-<body id="activer_2FA">
-    <main>
-        <h2>Scannez ce QRCode depuis une application de double authentification, ou entrez-y la clef</h2>
-        <p>La double authentification permet de sécuriser son compte. À chaque fois que vous vous connecterez à votre compte, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
-        <p>Veuillez garder cette clef enregistrée dans votre application.</p>
-        <img src="<?=$grCodeUri?>">
-        <p>Clef: <?=$otp->getSecret()?></p>
+<body id="page_2fa">
+    <?php 
+        include HOME_SITE . $header;
+        if (!$vendeur) include HOME_SITE . "toolbar_categories.php"; 
+    ?>
 
-        <form>
-            <label for="codePIN">Entrez ensuite le code PIN affiché pour activer la double authentification</label>
-            <input type="number" name="codePIN" id="codePIN">
-            <p id="erreur" class="erreur"></p>
-            
-            <button id="valider">Valider</button>
-        </form>
+    <main>
+        <a href="<?= HOME_SITE . $retour ?>"><img src="../image/retour.svg"></a>
+
+        <h1>Activer la double authentification</h1>
+        <p>La double authentification permet de sécuriser votre compte. À chaque connexion, vous devrez entrer un code PIN affiché dans une application de double authentification.</p>
+        
+        <h2>Étape 1</h2>
+
+        <h3>Depuis votre application de double authentification, scannez ce QRCode ou saisissez la clé</h3>
+        <p><strong>Ce code ne sera affiché qu'une seule fois.</strong> Veuillez le conserver dans votre application, ou vous risquez de perdre votre compte.</p>
+        
+        <div id="qrCode">
+            <img src="<?=$grCodeUri?>">
+
+            <p id="cle_2fa">
+                <?=$otp->getSecret()?>
+            </p>
+        </div>
+
+        <h2>Étape 2</h2>
+        
+        <p>Entrez le <strong>code PIN à 6 chiffres</strong> affiché dans votre application pour activer la double authentification</p>
+        
+        <input type="number" name="codePIN" id="inputPIN" hidden value="">
+
+        <div id="codePIN">
+            <?php
+            for ($i=0; $i < 6; $i++) { 
+                ?><input <?=$i == 0 ? 'autofocus' : ''?> type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0"><?php
+            }
+            ?>
+        </div>
+        
+        <p id="erreur" class="error"></p>
+        
+        <button id="valider" class="bouton">Valider</button>
     </main>
 </body>
+
+<script src="codePIN.js"></script>
 
 <script>
     const NB_TENTATIVES_DEPART = 10;
@@ -84,7 +117,6 @@ $grCodeUri = $otp->getQrCodeUri(
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText == '1') {
-                document.getElementById("erreur").innerHTML = "Code PIN correct, vous pouvez aller à l'accueil";
                 window.location.reload(); // refresh la page et donc va rediriger vers l'accueil
                 
             } else {
@@ -97,7 +129,7 @@ $grCodeUri = $otp->getQrCodeUri(
 
                 let idInterval = setInterval(() => {
                     tempsIntervalle--;
-                    document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez reessayer dans " + tempsIntervalle + " secondes";
+                    document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
 
                     if (tempsIntervalle <= 0) {
                         document.getElementById("valider").style.display = "";
@@ -107,15 +139,27 @@ $grCodeUri = $otp->getQrCodeUri(
                     }
                 }, 1000);
 
-                document.getElementById("erreur").innerHTML = "Vous avez trop de tentatives incorrectes ! Veuillez réessayer dans " + tempsIntervalle + " secondes";
+                document.getElementById("erreur").innerHTML = "Trop de tentatives incorrectes. Veuillez réessayer dans " + tempsIntervalle + " secondes";
                 document.getElementById("valider").style.display = "none";
             }
         }
 
-        if (nbTentative > 0) {
-            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("codePIN").value + "&clef=<?=$otp->getSecret()?>");
+        if (nbTentative > 0 && document.getElementById("inputPIN").value.length == 6) {
+            xmlhttp.open("GET", "verify.php?codePIN=" + document.getElementById("inputPIN").value + "&clef=<?=$otp->getSecret()?>");
             xmlhttp.send();
         }
     };
+
+    let inputHasFocus = false;
+    
+    document.getElementById("codePIN").addEventListener('focus', (e) => {inputHasFocus = true;});
+    document.getElementById('codePIN').addEventListener('blur', (e) => {inputHasFocus = false;});
+
+    document.addEventListener("keypress", function(e) {
+        if (e.keyCode == 13 && !e.repeat && inputHasFocus) { // touche entrée
+            document.getElementById("valider").click();
+        }
+    })
 </script>
+
 </html>

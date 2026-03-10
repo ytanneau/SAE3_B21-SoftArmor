@@ -506,32 +506,17 @@
         }
     }
 
-    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function creer_promotion($id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
-        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
-            VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, id_image_banniere)
+            VALUES (:id_produit, :date_debut, :date_fin, :id_image)");
         $stmt->execute([
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image" => $id_image_banniere
         ]);
-    }
-
-    function banniere_libre($date1,$date2){
-        global $pdo;
-        
-        $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
-        $stmt->execute([
-            "date1" => $date1,
-            "date2" => $date2
-        ]);
-        $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
-        if($resultat === 1){ return true; }
-        else { return false; }
-         
     }
 
     function produit_est_en_promotion($id_produit){
@@ -565,14 +550,13 @@
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
         $stmt = $pdo->prepare("UPDATE _promotion 
         SET id_produit = :id_produit,
             date_debut = :date_debut,
             date_fin = :date_fin,
-            reduction = :reduction,
             id_image_banniere = :id_image_banniere 
         WHERE id_promo = :id_promotion");
 
@@ -580,7 +564,6 @@
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image_banniere" => $id_image_banniere,
             "id_promotion" => $id_promotion
         ]);
@@ -644,7 +627,7 @@
     function get_image($id_image){
         global $pdo;
 
-        $stmt = $pdo->prepare("SELECT * FROM _image WHERE id_image = :id_image");
+        $stmt = $pdo->prepare("SELECT url_image, alt, titre FROM _image WHERE id_image = :id_image");
         $stmt->bindValue(":id_image", $id_image, PDO::PARAM_INT);
         $stmt->execute();
 

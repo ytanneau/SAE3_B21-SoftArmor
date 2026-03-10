@@ -80,8 +80,8 @@ if (isset($_POST['quantite'])) {
 
         } else {
             ajouter_panier_visiteur($id_prod, $qte);
-
-            }
+            
+        }
         header('Location:' . HOME_SITE . 'panier');
 
     // Sinon, s'il a fait "acheter le produit"
@@ -335,6 +335,15 @@ if (isset($_POST['quantite'])) {
 
                 <div id="snackbar" class="snackbar"></div>
             </section>
+
+            <article id="etoiles">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+            </article>
+            <input type="hidden" name="nb_etoiles" id="nb_etoiles">
         </div>
                     
         <!-- Achat du produit  -->
@@ -378,7 +387,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
@@ -386,7 +395,16 @@ if (isset($_POST['quantite'])) {
         </div>
         
     </main>
-    
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <div class="confirm-title" id="confirmTitle"></div>
+            <div class="confirm-message" id="confirmMessage"></div>
+            <div class="confirm-buttons">
+            <button class="btn-cancel" id="confirmCancel"></button>
+            <button class="btn-confirm" id="confirmOk"></button>
+            </div>
+        </div>
+    </div>
     <?php include HOME_SITE . "footer.php" ?>
 
     <script>
@@ -449,6 +467,65 @@ if (isset($_POST['quantite'])) {
             }
         }
 
+
+        function customConfirm({ title = '', message = '', icon = '', cancelText = 'Annuler', confirmText = 'Confirmer' } = {}) {
+            return new Promise((resolve) => {
+                const overlay  = document.getElementById('confirmOverlay');
+                const titleEl  = document.getElementById('confirmTitle');
+                const msgEl    = document.getElementById('confirmMessage');
+                const iconEl   = document.getElementById('confirmIcon');
+                const cancelBtn  = document.getElementById('confirmCancel');
+                const confirmBtn = document.getElementById('confirmOk');
+
+                // Remplir le contenu
+                titleEl.textContent   = title;
+                msgEl.textContent     = message;
+                // iconEl.textContent    = icon;
+                // iconEl.style.display  = icon ? 'block' : 'none';
+                cancelBtn.textContent  = cancelText;
+                confirmBtn.textContent = confirmText;
+
+                // Afficher
+                overlay.classList.add('active');
+
+                // Désactivé les boutons de base du confirm
+                function done(result) {
+                    overlay.classList.remove('active');
+                    cancelBtn.removeEventListener('click', onCancel);
+                    confirmBtn.removeEventListener('click', onConfirm);
+                    resolve(result);
+                }
+                function onCancel()  { done(false); }
+                function onConfirm() { done(true);  }
+
+                cancelBtn.addEventListener('click', onCancel);
+                confirmBtn.addEventListener('click', onConfirm);
+
+                // Clic sur l'overlay = annuler
+                overlay.addEventListener('click', function onBg(e) {
+                    if (e.target === overlay) { overlay.removeEventListener('click', onBg); done(false); }
+                });
+            });
+        }
+        document.getElementById('ajout_panier').addEventListener('click', async function(e) {
+        e.preventDefault(); // bloque la soumission du formulaire
+
+        const goToCart = await customConfirm({
+            title: "Article ajouté au panier !",
+            message: "Que voulez vous faire ?",
+            cancelText: "Continuer les achats",
+            confirmText: "Aller au panier"
+            });
+
+            if (goToCart) {
+                window.location.href = '../panier/';
+            } else {
+                // soumettre le formulaire normalement pour ajouter au panier
+                // mais sans rediriger
+                const form = document.getElementById('ajout_panier').closest('form');
+                form.submit();
+            }
+        });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -571,6 +648,49 @@ if (isset($_POST['quantite'])) {
             }, 5000);
         }
 
+        let dir_images = '<?=HOME_SITE?>image/';
+
+        function activerEtoileR(img) { // active toutes les étoiles à gauche (récursivement) de l'étoile selectionnée
+            img.src = dir_images + 'etoile_pleine.svg';
+            
+            if (img.previousElementSibling && img.previousElementSibling.nodeType == 1) {
+                return 1 + activerEtoileR(img.previousElementSibling);
+            }
+
+            return 1
+        }
+        
+        
+        function desactiverEtoileR(img) { // désactive toutes les étoiles à droite (récursivement) de l'étoile selectionnée
+            img.src = dir_images + 'etoile.svg';
+
+            if (img.nextElementSibling && img.nextElementSibling.nodeType == 1) {
+                desactiverEtoileR(img.nextElementSibling);
+            }
+        }
+
+
+        let children = document.getElementById("etoiles").children;
+
+        for (i = 0; i < children.length; i++) {
+            let element = children[i];
+
+            element.addEventListener('click', (e) => {
+                
+                let src = e.target.getAttribute('src');
+
+                let image = dir_images + 'etoile_pleine.svg';
+                desactiverEtoileR(e.target);
+                let nb_etoiles = activerEtoileR(e.target);
+
+                e.target.setAttribute('src', image);
+
+                document.getElementById('nb_etoiles').value = nb_etoiles;
+            });
+
+        }
+
+        children[2].click(); // met 3 étoiles par défaut
     </script>
 </body>
 </html>

@@ -7,9 +7,11 @@
     }
 
     // Si connecté en vendeur, rediriger vers le stock, si connecté en client, rediriger vers l'accueil
-    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-        header(isset($_SESSION['raison_sociale']) ? 'location: ../stock' : 'location: ' . HOME_SITE);
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && $_SESSION['stage'] === 2) {
+        header(isset($_SESSION['raison_sociale']) ? 'location: ../accueil' : 'location: ' . HOME_SITE);
     }
+    
+    require_once HOME_GIT . 'fonction_vendeur.php';
 
     if ($_POST != null) {
         $erreurs = [];
@@ -17,13 +19,62 @@
         
         if (file_exists($fichier)) {
             require_once $fichier;
-            $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT);
-            
-            if (empty($erreurs)) {
-                // L'inscription est réussie, donc connexion directe
-                connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
-                $_SESSION['logged_in'] = true;
+            if($_POST['stage'] == 0){
+                $_POST['stage'] = 1;
+                $adresseSubmit = $_POST['adresse'] . ", " . $_POST['ville'] . ", " . $_POST['codePostal'];
+                $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($adresseSubmit);
+                $ch = curl_init();
+
+                curl_setopt_array($ch, [
+                    CURLOPT_URL => $url,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_USERAGENT => "marketplace-test",
+
+                    CURLOPT_PROXY => "10.254.0.254:3128",
+                    CURLOPT_PROXYTYPE => CURLPROXY_HTTP,
+
+                    CURLOPT_PROXYUSERPWD => "sae301_b21:a9ntNhsglad)",
+
+                    CURLOPT_HTTPPROXYTUNNEL => true,
+
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_SSL_VERIFYHOST => false
+                ]);
+                $response = curl_exec($ch);
+
+                if(curl_errno($ch)){
+                    echo "Erreur cURL : " . curl_error($ch);
+                }
+
+                $data = json_decode($response, true);
+
+                if(!empty($data)){
+                    $data = $data[0];
+                    $longitude = $data["lat"];
+                    $latitude = $data["lon"];
+                }
+                
+                $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
+                $_POST['id_compte'] = $erreurs['id_compte'];
+                array_pop($erreurs);
+                
+                if (empty($erreurs)) {
+                    // L'inscription est réussie, donc connexion directe
+                    connect_compte($_POST['email'], $_POST['mdp'], "vendeur", "");
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['stage'] = $_POST['stage'];
+                }
             }
+            else if($_POST['stage'] == 1){
+                $_POST['stage'] = 2;
+                $_SESSION = $_POST['stage'];
+                
+                $lon = $_POST['longitude'];
+                $lat = $_POST['latitude'];
+                $id_adresse = get_adresse_vendeur_with_vendeur_id($_POST['id_compte']);
+                set_lon_lat($id_adresse, $lon, $lat);
+            }
+            
         } else {
             $erreurs['fatal'] = true;
         }
@@ -36,10 +87,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include HOME_SITE . 'link_head.php'; ?>
     <title>Alizon - Inscription</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
 </head>
 <body id="inscription_vendeur">
-    <main>
-<?php if (isset($erreurs) && $erreurs == []) { ?>
+<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1){
+?>
+    <main class="mainCarteInscription">
+        <h1>Confirmer les coordonnées</h1>
+        <div id="map"></div>
+        <form action="" id="formCoordonnee" method="post">
+            <div>
+                <label for="adresseSaisi">Adresse saisi : </label>
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
+            </div>
+            <div>
+                <label for="longitude">Longitude</label>
+                <input type="text" id="longitude" value="<?= htmlspecialchars($longitude) ?>" name="longitude">
+                <label for="latitude">Latitude</label>
+                <input type="text" id="latitude" value="<?= htmlspecialchars($latitude) ?>" name="latitude">
+            </div>
+            <input type="text" name="stage" hidden value="1">
+            <input type="text" name="id_compte" hidden value="<?= htmlspecialchars($_POST['id_compte']) ?>">
+            <input type="submit" class="bouton">
+        </form>
+    <script src="script_map.js"></script>
+<?php } elseif (isset($erreurs) && $erreurs == [] && $_POST['stage'] == 2) { ?>
+<main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
         <p><a href="../stock">Aller à la page d'accueil</a></p>
@@ -48,6 +128,7 @@
         <h1 class="fatale">Désolé, nous rencontrons des problèmes serveur</h1>
 
 <?php } else { ?>
+<main>
     <img src=""  alt="">
     <a href="../"><img src="<?=HOME_SITE?>image/Alizon_vendeur_noir.png" alt="logo alizon" title="logo alizon"></a>
 
@@ -76,7 +157,7 @@
         <input type="text" 
             name="numSiret"
             id="numSiret"
-            minlenght="14"
+            minlength="14"
             placeholder="362 521 879 00034"
             value="<?php if (isset($_POST['numSiret'])) echo htmlentities($_POST['numSiret'])?>"
             required
@@ -219,7 +300,7 @@
                 <?="Erreur : ".$erreurs['mdpc']?>
             </p>
         <?php } ?>
-
+            <input type="text" name="stage" hidden value="0">
             <input type="submit" value="S'inscrire" class="bouton">
         </form>
 

@@ -132,10 +132,13 @@ if($tabPromotion != false){
             <?php afficher_produits($produit_recent, "recent")?>
             <hr>
             
-            <!-- Produits en réduction -->
-            <h1>Produits en promotion</h1>
-            <?php afficher_produits($produit_promotion, "reduction")?>
-            <hr>
+
+            <?php if (count($produit_promotion) > 0) { ?>
+                <!-- Produits en réduction -->
+                <h1>Produits en promotion</h1>
+                <?php afficher_produits($produit_promotion, "reduction")?>
+                <hr>
+            <?php } ?>
 
             <!-- Produits de catégories -->
             <?php
@@ -171,7 +174,7 @@ if($tabPromotion != false){
     <footer>
         <?php //include HOME_SITE . 'footer.php' ?>
     </footer>
-    <script src="script.js?t=2"></script>
+    <script src="script.js?t=4"></script>
     <!-- t=2 -> actualise le fichier js (en faisant croire au cache qu'il ne l'a pas) -->
 
     <script>

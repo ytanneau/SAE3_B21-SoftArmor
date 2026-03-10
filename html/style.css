@@ -42,11 +42,17 @@ main {
   border-radius: 5px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Montserrat";
 }
 
-button, input[type=button] {
+button,
+input[type=button] {
   cursor: pointer;
 }
 
@@ -94,7 +100,9 @@ hr {
   font-weight: bold;
   font-size: 0.75em;
 }
-.input_quantite input[type=button], .input_quantite input[type=number], .input_quantite input[type=text] {
+.input_quantite input[type=button],
+.input_quantite input[type=number],
+.input_quantite input[type=text] {
   height: 2em;
   margin: 0;
   padding: 0;
@@ -115,7 +123,8 @@ hr {
 .input_quantite input[type=button]:hover {
   background-color: #d5d5d5;
 }
-.input_quantite input[type=number], .input_quantite input[type=text] {
+.input_quantite input[type=number],
+.input_quantite input[type=text] {
   width: 3em;
   box-sizing: border-box;
   border-left: 0;
@@ -125,13 +134,24 @@ hr {
   -moz-appearance: textfield;
   appearance: textfield;
 }
-.input_quantite input[type=number]::-webkit-inner-spin-button, .input_quantite input[type=number]::-webkit-outer-spin-button, .input_quantite input[type=text]::-webkit-inner-spin-button, .input_quantite input[type=text]::-webkit-outer-spin-button {
+.input_quantite input[type=number]::-webkit-inner-spin-button, .input_quantite input[type=number]::-webkit-outer-spin-button,
+.input_quantite input[type=text]::-webkit-inner-spin-button,
+.input_quantite input[type=text]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
 .icon {
   height: 25px;
   margin: 0 8px 0 0;
+}
+
+.champ {
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
 }
 
 .toolbar#categories {
@@ -670,13 +690,34 @@ hr {
   margin-right: 8px;
 }
 
-#connect_vendeur, #inscription_vendeur {
+#header_vendeur .nav-buttom ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  list-style: none;
+}
+#header_vendeur .nav-buttom ul a {
+  text-decoration: none;
+  color: #000;
+  background-color: #C3C1F5;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+#connect_vendeur,
+#inscription_vendeur {
   background-color: #6B31D0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#connect_vendeur main, #inscription_vendeur main {
+#connect_vendeur main,
+#inscription_vendeur main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -687,65 +728,70 @@ hr {
   width: 30vw;
 }
 @media (max-width: 1440px) {
-  #connect_vendeur main, #inscription_vendeur main {
+  #connect_vendeur main,
+  #inscription_vendeur main {
     width: 60vw;
   }
 }
-#connect_vendeur main img, #inscription_vendeur main img {
+#connect_vendeur main img,
+#inscription_vendeur main img {
   width: 18vw;
 }
 @media (max-width: 1440px) {
-  #connect_vendeur main img, #inscription_vendeur main img {
+  #connect_vendeur main img,
+  #inscription_vendeur main img {
     width: 50vw;
   }
 }
-#connect_vendeur main h2, #inscription_vendeur main h2 {
+#connect_vendeur main h2,
+#inscription_vendeur main h2 {
   font-size: 2em;
   margin: 0;
 }
-#connect_vendeur main form, #inscription_vendeur main form {
+#connect_vendeur main form,
+#inscription_vendeur main form {
   display: flex;
   flex-direction: column;
   align-items: center;
   align-items: normal;
   width: 100%;
 }
-#connect_vendeur main form label, #inscription_vendeur main form label {
+#connect_vendeur main form label,
+#inscription_vendeur main form label {
   margin-top: 5%;
   font-size: 1.5em;
 }
-#connect_vendeur main form .champ, #inscription_vendeur main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-#connect_vendeur main form .text, #inscription_vendeur main form .text {
+#connect_vendeur main form .text,
+#inscription_vendeur main form .text {
   height: 10em;
   text-align: start;
 }
-#connect_vendeur main form .petit, #inscription_vendeur main form .petit {
+#connect_vendeur main form .petit,
+#inscription_vendeur main form .petit {
   width: 30%;
 }
 #connect_vendeur main form input[type=number]::-webkit-inner-spin-button,
-#connect_vendeur main form input[type=number]::-webkit-outer-spin-button, #inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#connect_vendeur main form input[type=number]::-webkit-outer-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
 #inscription_vendeur main form input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#connect_vendeur main form input[type=number], #inscription_vendeur main form input[type=number] {
+#connect_vendeur main form input[type=number],
+#inscription_vendeur main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_vendeur main form p, #inscription_vendeur main form p {
+#connect_vendeur main form p,
+#inscription_vendeur main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-#connect_vendeur main form .error, #inscription_vendeur main form .error {
+#connect_vendeur main form .error,
+#inscription_vendeur main form .error {
   color: #E43737;
 }
-#connect_vendeur main .bouton, #inscription_vendeur main .bouton {
+#connect_vendeur main .bouton,
+#inscription_vendeur main .bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -761,27 +807,41 @@ hr {
   text-decoration: none;
   cursor: pointer;
 }
-#connect_vendeur main .bouton a, #inscription_vendeur main .bouton a {
+#connect_vendeur main .bouton a,
+#inscription_vendeur main .bouton a {
   text-decoration: none;
   color: white;
 }
-#connect_vendeur main .bouton:hover, #inscription_vendeur main .bouton:hover {
+#connect_vendeur main .bouton:hover,
+#inscription_vendeur main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+#connect_vendeur .mainCarteInscription,
+#inscription_vendeur .mainCarteInscription {
+  width: 700px;
+}
+#connect_vendeur .mainCarteInscription #map,
+#inscription_vendeur .mainCarteInscription #map {
+  height: 300px;
+  width: 500px;
+}
 
-#connect_vendeur, #connect_client {
+#connect_vendeur,
+#connect_client {
   justify-content: center;
   overflow-y: hidden;
   height: 100vh;
 }
 
-#connect_client, #inscription_client {
+#connect_client,
+#inscription_client {
   background-color: #3157A3;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#connect_client main, #inscription_client main {
+#connect_client main,
+#inscription_client main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -792,65 +852,70 @@ hr {
   width: 30vw;
 }
 @media (max-width: 1440px) {
-  #connect_client main, #inscription_client main {
+  #connect_client main,
+  #inscription_client main {
     width: 60vw;
   }
 }
-#connect_client main img, #inscription_client main img {
+#connect_client main img,
+#inscription_client main img {
   width: 18vw;
 }
 @media (max-width: 1440px) {
-  #connect_client main img, #inscription_client main img {
+  #connect_client main img,
+  #inscription_client main img {
     width: 50vw;
   }
 }
-#connect_client main h2, #inscription_client main h2 {
+#connect_client main h2,
+#inscription_client main h2 {
   font-size: 2em;
   margin: 0;
 }
-#connect_client main form, #inscription_client main form {
+#connect_client main form,
+#inscription_client main form {
   display: flex;
   flex-direction: column;
   align-items: center;
   align-items: normal;
   width: 100%;
 }
-#connect_client main form label, #inscription_client main form label {
+#connect_client main form label,
+#inscription_client main form label {
   margin-top: 5%;
   font-size: 1.5em;
 }
-#connect_client main form .champ, #inscription_client main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
-#connect_client main form .text, #inscription_client main form .text {
+#connect_client main form .text,
+#inscription_client main form .text {
   height: 10em;
   text-align: start;
 }
-#connect_client main form .petit, #inscription_client main form .petit {
+#connect_client main form .petit,
+#inscription_client main form .petit {
   width: 30%;
 }
 #connect_client main form input[type=number]::-webkit-inner-spin-button,
-#connect_client main form input[type=number]::-webkit-outer-spin-button, #inscription_client main form input[type=number]::-webkit-inner-spin-button,
+#connect_client main form input[type=number]::-webkit-outer-spin-button,
+#inscription_client main form input[type=number]::-webkit-inner-spin-button,
 #inscription_client main form input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-#connect_client main form input[type=number], #inscription_client main form input[type=number] {
+#connect_client main form input[type=number],
+#inscription_client main form input[type=number] {
   -moz-appearance: textfield;
 }
-#connect_client main form p, #inscription_client main form p {
+#connect_client main form p,
+#inscription_client main form p {
   font-size: 0.75em;
   margin: 0.4% 0;
 }
-#connect_client main form .error, #inscription_client main form .error {
+#connect_client main form .error,
+#inscription_client main form .error {
   color: #E43737;
 }
-#connect_client main .bouton, #inscription_client main .bouton {
+#connect_client main .bouton,
+#inscription_client main .bouton {
   display: block;
   max-width: 100%;
   width: auto;
@@ -866,18 +931,22 @@ hr {
   text-decoration: none;
   cursor: pointer;
 }
-#connect_client main .bouton a, #inscription_client main .bouton a {
+#connect_client main .bouton a,
+#inscription_client main .bouton a {
   text-decoration: none;
   color: white;
 }
-#connect_client main .bouton:hover, #inscription_client main .bouton:hover {
+#connect_client main .bouton:hover,
+#inscription_client main .bouton:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
-#inscription_vendeur, #inscription_client {
+#inscription_vendeur,
+#inscription_client {
   height: 100%;
 }
-#inscription_vendeur main, #inscription_client main {
+#inscription_vendeur main,
+#inscription_client main {
   margin: 5% 0;
 }
 
@@ -1068,14 +1137,6 @@ ul#results > li > a > h3 {
   margin-top: 5%;
   font-size: 1.5em;
 }
-.form_client main form .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
-}
 .form_client main form .text {
   height: 10em;
   text-align: start;
@@ -1180,7 +1241,7 @@ ul#results > li > a > h3 {
 .infos .bouton {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: auto;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1203,7 +1264,7 @@ ul#results > li > a > h3 {
 .infos .modif {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: unset;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1226,7 +1287,7 @@ ul#results > li > a > h3 {
 .infos .grave {
   display: block;
   max-width: 100%;
-  width: 15em;
+  width: 100%;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
@@ -1291,11 +1352,7 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-<<<<<<< Updated upstream
-.infos .liste_avis div:first-child img {
-=======
 .infos .liste_avis img:not(.image_pp) {
->>>>>>> Stashed changes
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 2vw;
@@ -1306,8 +1363,6 @@ ul#results > li > a > h3 {
   border-radius: 5px;
   background-color: white;
 }
-<<<<<<< Updated upstream
-=======
 .infos .liste_avis .image_pp {
   height: 40px;
   width: 40px;
@@ -1332,7 +1387,6 @@ ul#results > li > a > h3 {
 .infos .liste_avis .icons img {
   padding: 0.2em;
 }
->>>>>>> Stashed changes
 .infos .form_infos {
   display: flex;
   flex-direction: row-reverse;
@@ -1352,14 +1406,6 @@ ul#results > li > a > h3 {
 .infos .form_infos label {
   margin-top: 5%;
   font-size: 1.5em;
-}
-.infos .form_infos .champ {
-  border: none;
-  border-radius: 5px;
-  height: 2em;
-  font-size: 1em;
-  padding-left: 0.6em;
-  padding-right: 0;
 }
 .infos .form_infos .text {
   height: 10em;
@@ -1433,7 +1479,8 @@ ul#results > li > a > h3 {
     text-align: center;
   }
   .infos section .form_infos article:last-child input,
-  .infos section .form_infos article:last-child button, .infos section .form_infos article:last-child a {
+  .infos section .form_infos article:last-child button,
+  .infos section .form_infos article:last-child a {
     width: 50%;
   }
   .infos section .form_infos article:last-child .champ {
@@ -1506,7 +1553,8 @@ a.bouton:has(+ .liste_avis):hover {
   width: 30px;
   height: 30px;
 }
-.liste_avis li > div:first-of-type > div:nth-child(2) > h3, .liste_avis li > div:first-of-type > div:nth-child(2) > p {
+.liste_avis li > div:first-of-type > div:nth-child(2) > h3,
+.liste_avis li > div:first-of-type > div:nth-child(2) > p {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
@@ -2001,6 +2049,108 @@ div:has(> aside) {
   }
 }
 
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.confirm-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.confirm-box {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.confirm-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.confirm-message {
+  font-size: 0.92rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.confirm-buttons button {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cancel {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  color: #444;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-cancel a {
+  text-decoration: none;
+  color: #444;
+}
+.btn-cancel:hover {
+  background-color: hsl(0, 0%, 109.1176470588%);
+}
+
+.btn-confirm {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-confirm a {
+  text-decoration: none;
+  color: white;
+}
+.btn-confirm:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+
 .prix {
   color: #2E7A30;
   font-size: 1.2em;
@@ -2029,17 +2179,34 @@ h3 {
   font-weight: bold;
 }
 
+.info-bulle {
+  display: block;
+  position: fixed;
+  padding: 10px 20px;
+  border: 1px solid #b3c9ce;
+  border-radius: 10px;
+  font: italic 14px/1.3 sans-serif;
+  color: #333;
+  background: #fff;
+  z-index: 22;
+}
+
+.aide {
+  border: 0.5px solid black;
+  border-radius: 100%;
+  padding: 0 0.4em;
+  font-size: 1em;
+  background-color: #e9e9e9;
+}
+.aide:hover {
+  background-color: #9e9e9e;
+}
+
 .liste {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 .liste .input_quantite {
   font-size: 1.4em;
-}
-.liste main {
-  display: flex;
-  flex: 1;
 }
 .liste main img {
   -o-object-fit: contain;
@@ -2206,7 +2373,8 @@ h3 {
   .liste main ul li article:first-child p:nth-child(2) {
     display: none;
   }
-  .liste main ul li article:first-child p, .liste main ul li article:first-child h3 {
+  .liste main ul li article:first-child p,
+  .liste main ul li article:first-child h3 {
     font-size: 1em;
   }
   .liste main ul li article:first-child form {
@@ -2373,18 +2541,24 @@ aside .achat:hover {
 }
 
 .anonymisation-client main form button {
-  /*@include bouton();
-  background-color: $rouge;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #E43737;
   color: white;
-  font-size: $font_size_normal;
+  font-size: 1em;
   padding: 0.5em 1em;
   border: none;
-  border-radius: $angle_petit;
-  cursor: pointer;*/
-  width: 90%;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 17%;
+  height: 200%;
 }
 .anonymisation-client a {
-  width: 50%;
+  width: 15%;
+  height: 10%;
 }
 
 .desactivation-vendeur main form input {
@@ -2530,6 +2704,11 @@ aside .achat:hover {
   flex-direction: row;
   gap: 70px;
 }
+.bodyModifProduit .blockImg .overImg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 .bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -2634,6 +2813,25 @@ aside .achat:hover {
   flex-direction: column;
   width: 600px;
 }
+.mainInfoVendeur div form div {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur div form div #map {
+  width: 500px;
+  height: 300px;
+}
+.mainInfoVendeur div form div .inputs_lon_lat {
+  display: flex;
+  flex-direction: row;
+}
+.mainInfoVendeur div form div .inputs_lon_lat div {
+  display: flex;
+  flex-direction: column;
+}
+.mainInfoVendeur div form div .inputs_lon_lat div input {
+  width: 50%;
+}
 .mainInfoVendeur div #idValiderModifVendeur {
   margin-top: 20px;
   display: block;
@@ -2658,7 +2856,11 @@ aside .achat:hover {
 .mainInfoVendeur div #idValiderModifVendeur:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.mainInfoVendeur div #idDesactivationCompte {
+.mainInfoVendeur div #idValiderModifVendeur {
+  width: 600px;
+}
+.mainInfoVendeur div #idDesactivationCompte,
+.mainInfoVendeur div #idDesactivation2FA {
   display: block;
   max-width: 100%;
   width: auto;
@@ -2674,14 +2876,45 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.mainInfoVendeur div #idDesactivationCompte a {
+.mainInfoVendeur div #idDesactivationCompte a,
+.mainInfoVendeur div #idDesactivation2FA a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.mainInfoVendeur div #idDesactivationCompte:hover {
+.mainInfoVendeur div #idDesactivationCompte:hover,
+.mainInfoVendeur div #idDesactivation2FA:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.mainInfoVendeur div #idDesactivationCompte {
+.mainInfoVendeur div #idDesactivationCompte,
+.mainInfoVendeur div #idDesactivation2FA {
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
+}
+.mainInfoVendeur div #idActivation2FA {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mainInfoVendeur div #idActivation2FA a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.mainInfoVendeur div #idActivation2FA:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+.mainInfoVendeur div #idActivation2FA {
   margin-top: 30px;
   padding: 0.6em;
   width: 577px;
@@ -2734,11 +2967,13 @@ aside .achat:hover {
     flex-direction: column;
     gap: 20px;
   }
-  #create_avis main article, #create_avis main form {
+  #create_avis main article,
+  #create_avis main form {
     width: 70vw;
     padding: 0 1em 1em;
   }
-  #create_avis main article .image_bouton, #create_avis main form .image_bouton {
+  #create_avis main article .image_bouton,
+  #create_avis main form .image_bouton {
     margin-top: 1em;
     margin-bottom: 0;
   }
@@ -2901,7 +3136,8 @@ aside .achat:hover {
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-.produit-vendeur table th, .produit-vendeur table td {
+.produit-vendeur table th,
+.produit-vendeur table td {
   padding: 1rem;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -2934,7 +3170,9 @@ aside .achat:hover {
   font-weight: bold;
   color: #333;
 }
-.produit-vendeur input[type=submit], .produit-vendeur a.bouton, .produit-vendeur button.bouton {
+.produit-vendeur input[type=submit],
+.produit-vendeur a.bouton,
+.produit-vendeur button.bouton {
   display: block;
   max-width: 100%;
   width: 32em;
@@ -2950,14 +3188,20 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.produit-vendeur input[type=submit] a, .produit-vendeur a.bouton a, .produit-vendeur button.bouton a {
+.produit-vendeur input[type=submit] a,
+.produit-vendeur a.bouton a,
+.produit-vendeur button.bouton a {
   text-decoration: none;
   color: white;
 }
-.produit-vendeur input[type=submit]:hover, .produit-vendeur a.bouton:hover, .produit-vendeur button.bouton:hover {
+.produit-vendeur input[type=submit]:hover,
+.produit-vendeur a.bouton:hover,
+.produit-vendeur button.bouton:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.produit-vendeur input[type=submit], .produit-vendeur a.bouton, .produit-vendeur button.bouton {
+.produit-vendeur input[type=submit],
+.produit-vendeur a.bouton,
+.produit-vendeur button.bouton {
   height: 4em;
 }
 .produit-vendeur .bouton_vendeur_produit {
@@ -3012,12 +3256,15 @@ aside .achat:hover {
 }
 
 .stock {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 .stock main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
 }
 .stock main table {
   display: flex;
@@ -3277,7 +3524,8 @@ aside .achat:hover {
   font-weight: bold;
   margin-top: 0.5em;
 }
-.modal .modal_content form select, .modal .modal_content form input[type=email] {
+.modal .modal_content form select,
+.modal .modal_content form input[type=email] {
   padding: 0.5em;
   border-radius: 5px;
   border: solid 1px #CBCCEA;
@@ -3307,23 +3555,13 @@ aside .achat:hover {
   h1 {
     font-size: 8mm;
   }
-  header, button, footer, a {
+  header,
+  button,
+  footer,
+  a {
     display: none !important;
   }
 }
-.hide_input_file {
-  background-color: #EAC452;
-  padding: 10px 16px 10px 16px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 5px;
-  color: black;
-  font-weight: bold;
-}
-.hide_input_file:hover {
-  background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
-}
-
 .main_promo {
   display: flex;
   flex-direction: column;
@@ -3355,7 +3593,10 @@ aside .achat:hover {
 .main_promo h3 + p + div div input {
   width: 50%;
 }
-.main_promo #warning1, .main_promo #warning2, .main_promo #warning3, .main_promo #warning4 {
+.main_promo #warning1,
+.main_promo #warning2,
+.main_promo #warning3,
+.main_promo #warning4 {
   color: red;
   font-style: italic;
   font-size: 75%;
@@ -3419,6 +3660,11 @@ aside .achat:hover {
   flex-direction: column;
   margin-top: 40px;
 }
+.main_promo .block_banniere .overImg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -3447,9 +3693,6 @@ aside .achat:hover {
   display: flex;
   justify-content: center;
   width: 16.2em;
-}
-.main_promo .ajout_banniere {
-  margin-top: 20px;
 }
 .main_promo .delete_picture {
   display: block;
@@ -3494,8 +3737,8 @@ aside .achat:hover {
   padding: 0;
 }
 .main_accueil > div li {
-  border: solid 1 black;
-  background-color: #9C9C9C;
+  border: solid 2px rgb(124, 5, 5);
+  background-color: rgb(255, 219, 219);
   border-radius: 5px;
   padding: 1em;
 }
@@ -3508,7 +3751,10 @@ aside .achat:hover {
   grid-template-columns: 2fr 2fr;
   grid-gap: 35px;
 }
-.main_accueil .liste_accueil_vendeur .lien1, .main_accueil .liste_accueil_vendeur .lien2, .main_accueil .liste_accueil_vendeur .lien3, .main_accueil .liste_accueil_vendeur .lien4 {
+.main_accueil .liste_accueil_vendeur .lien1,
+.main_accueil .liste_accueil_vendeur .lien2,
+.main_accueil .liste_accueil_vendeur .lien3,
+.main_accueil .liste_accueil_vendeur .lien4 {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -3522,14 +3768,23 @@ aside .achat:hover {
   text-decoration: none;
   background-color: #f3f1fb;
 }
-.main_accueil .liste_accueil_vendeur .lien1:hover, .main_accueil .liste_accueil_vendeur .lien2:hover, .main_accueil .liste_accueil_vendeur .lien3:hover, .main_accueil .liste_accueil_vendeur .lien4:hover {
+.main_accueil .liste_accueil_vendeur .lien1:hover,
+.main_accueil .liste_accueil_vendeur .lien2:hover,
+.main_accueil .liste_accueil_vendeur .lien3:hover,
+.main_accueil .liste_accueil_vendeur .lien4:hover {
   transform: scale(1.02);
 }
-.main_accueil .liste_accueil_vendeur .lien1:visited, .main_accueil .liste_accueil_vendeur .lien2:visited, .main_accueil .liste_accueil_vendeur .lien3:visited, .main_accueil .liste_accueil_vendeur .lien4:visited {
+.main_accueil .liste_accueil_vendeur .lien1:visited,
+.main_accueil .liste_accueil_vendeur .lien2:visited,
+.main_accueil .liste_accueil_vendeur .lien3:visited,
+.main_accueil .liste_accueil_vendeur .lien4:visited {
   color: black;
   text-decoration: none;
 }
-.main_accueil .liste_accueil_vendeur .lien1 img, .main_accueil .liste_accueil_vendeur .lien2 img, .main_accueil .liste_accueil_vendeur .lien3 img, .main_accueil .liste_accueil_vendeur .lien4 img {
+.main_accueil .liste_accueil_vendeur .lien1 img,
+.main_accueil .liste_accueil_vendeur .lien2 img,
+.main_accueil .liste_accueil_vendeur .lien3 img,
+.main_accueil .liste_accueil_vendeur .lien4 img {
   width: 4em;
   height: 4em;
 }
@@ -3609,6 +3864,11 @@ aside .achat:hover {
   font-size: xx-large;
   border: none;
 }
+#panneauCarte #div_map section div #liste_vendeur {
+  height: 200px;
+  width: 230px;
+  overflow-y: scroll;
+}
 
 /* Quand actif */
 #panneauCarte.active {
@@ -3621,100 +3881,88 @@ aside .achat:hover {
 }
 
 /* Page d'activation*/
-#activer_2FA {
-  background-color: #A6A6BF;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#activer_2FA main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  row-gap: 1em;
-  border-radius: 20px;
-  padding: 2em;
-  width: 30vw;
-}
-@media (max-width: 1440px) {
-  #activer_2FA main {
-    width: 60vw;
-  }
-}
-#activer_2FA main img {
-  width: 18vw;
-}
-@media (max-width: 1440px) {
-  #activer_2FA main img {
-    width: 50vw;
-  }
-}
-#activer_2FA main h2 {
-  font-size: 2em;
-  margin: 0;
-}
-#activer_2FA main form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: normal;
-  width: 100%;
-}
-#activer_2FA main form label {
-  margin-top: 5%;
-  font-size: 1.5em;
-}
-#activer_2FA main form .champ {
-  border: none;
+#page_2fa .champ {
+  display: block;
+  border: solid 1px gray;
   border-radius: 5px;
   height: 2em;
   font-size: 1em;
   padding-left: 0.6em;
   padding-right: 0;
 }
-#activer_2FA main form .text {
-  height: 10em;
-  text-align: start;
-}
-#activer_2FA main form .petit {
-  width: 30%;
-}
-#activer_2FA main form input[type=number]::-webkit-inner-spin-button,
-#activer_2FA main form input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-#activer_2FA main form input[type=number] {
-  -moz-appearance: textfield;
-}
-#activer_2FA main form p {
-  font-size: 0.75em;
-  margin: 0.4% 0;
-}
-#activer_2FA main form .error {
-  color: #E43737;
-}
-#activer_2FA main .bouton {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 0.75em 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
+#page_2fa #cle_2fa {
+  margin-top: 2em;
+  padding: 1em;
   font-weight: bold;
-  background-color: #BB2BB2;
-  color: white;
-  border: none;
-  border-radius: 50px;
+  font-size: 1.1em;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+#page_2fa #qrCode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4em;
+}
+
+.PIN {
+  border-radius: 30%;
+  -moz-appearance: textfield;
+  border: 1px solid gray;
+  padding: 0.75em 0.5em;
+  margin: 0.325em;
   text-align: center;
-  text-decoration: none;
-  cursor: pointer;
 }
-#activer_2FA main .bouton a {
-  text-decoration: none;
-  color: white;
+.PIN[disabled] {
+  background-color: rgba(221, 221, 221, 0.2666666667);
 }
-#activer_2FA main .bouton:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+.PIN {
+  font-size: 1.6em;
+}
+
+#codePIN {
+  margin: 1.2em 0;
+}
+
+.liste-commande {
+  width: 100vw;
+  margin-top: 3em;
+}
+.liste-commande th,
+.liste-commande td {
+  padding: 0px 10px;
+  height: 70px;
+  text-align: left;
+}
+.liste-commande tr {
+  padding: 20px 0px;
+}
+.liste-commande img {
+  width: 50px;
+}
+.liste-commande .bouton {
+  display: initial;
+}
+
+.liste-commande-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.liste-commande-page .input_quantite {
+  font-size: 1.4em;
+}
+.liste-commande-page main {
+  display: flex;
+  flex: 1;
+  padding: 0;
+}
+.liste-commande-page main img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.liste-commande-page main div > a, .liste-commande-page main div > span {
+  position: relative;
+  left: 50px;
+  top: 30px;
 }/*# sourceMappingURL=style.css.map */

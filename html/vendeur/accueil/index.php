@@ -50,9 +50,9 @@
                     <img src="<?=HOME_SITE . "image/panier.svg"?>" alt="icone des commandes ">
                     Commandes
                 </a>
-                <a class="lien4" href="../avis">
-                    <img src="<?=HOME_SITE . "image/etoile.svg"?>" alt="icone des avis">
-                    Avis
+                <a class="lien4" href="../statistiques">
+                    <img src="<?=HOME_SITE . "image/stats.svg"?>" alt="icone des statistiques">
+                    Statistiques
                 </a>
             </article>
             <?php affiche_alarme($_SESSION['id_compte']); ?>

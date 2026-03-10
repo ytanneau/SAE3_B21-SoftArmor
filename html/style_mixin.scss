@@ -278,15 +278,6 @@
         margin-top: 5%;
         font-size: $font_size_sup;
     }
-
-    .champ {
-        border: none;
-        border-radius: $angle_petit;
-        height: 2em;
-        font-size: $font_size_normal;
-        padding-left: 0.6em;
-        padding-right: 0;
-    }
     
     // pour les champs avec beaucoup de texte (ex : description)
     .text {
@@ -325,7 +316,7 @@
     background-color: $background;
 
     @include contenu_centre_vertical;
-
+    
     main {
         @include contenu_centre_vertical;
 
@@ -506,4 +497,10 @@
     &:hover{
         background: adjust-color($color: $background, $lightness: 15%);
     }
+}
+
+@mixin input_img_over_img{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; 
 }

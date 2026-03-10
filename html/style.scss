@@ -29,11 +29,17 @@ main {
     @include image_produit($image_petit);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: $font_title;
 }
 
-button, input[type="button"] {
+button,
+input[type="button"] {
     cursor: pointer;
 }
 
@@ -47,6 +53,7 @@ hr {
     color: white;
     font-size: $font_size_normal;
     margin-top: 2%;
+
     @media (max-width: 1440px) {
         margin-top: 5%;
     }
@@ -58,16 +65,18 @@ hr {
         font-weight: bold;
         font-size: 0.75em;
     }
-    
+
 
     // Champ et boutons - et +
-    input[type="button"], input[type="number"], input[type="text"] {
+    input[type="button"],
+    input[type="number"],
+    input[type="text"] {
         height: 2em;
         margin: 0;
         padding: 0;
 
         background-color: $couleur_background;
-        border: solid 2px #d5d5d5; 
+        border: solid 2px #d5d5d5;
     }
 
     // Boutons
@@ -90,7 +99,8 @@ hr {
     }
 
     // Champ
-    input[type="number"], input[type="text"] {
+    input[type="number"],
+    input[type="text"] {
         width: 3em;
         box-sizing: border-box;
         border-left: 0;
@@ -114,6 +124,16 @@ hr {
     margin: 0 8px 0 0;
 }
 
+
+.champ {
+    border: none;
+    border-radius: $angle_petit;
+    height: 2em;
+    font-size: $font_size_normal;
+    padding-left: 0.6em;
+    padding-right: 0;
+}
+
 .toolbar {
     &#categories {
         @include toolbar($couleur_primaire_client, $color: white);
@@ -135,17 +155,21 @@ hr {
     &#stock {
         @include toolbar($nuance, $color: black);
     }
-    &#produit{
+
+    &#produit {
         @include toolbar($nuance, $color: black);
-        ul{
-            .bouton_avis_vendeur_produit{
+
+        ul {
+            .bouton_avis_vendeur_produit {
                 background-color: $couleur_etoile;
-                &:hover{
-                    background-color: adjust-color($couleur_etoile,$lightness: 5%);
+
+                &:hover {
+                    background-color: adjust-color($couleur_etoile, $lightness: 5%);
                 }
             }
-            li{
-                button{
+
+            li {
+                button {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
@@ -155,17 +179,21 @@ hr {
                     font-weight: bold;
                     background-color: $nuance;
                     border: none;
-                    &:hover{
+
+                    &:hover {
                         background-color: adjust-color($nuance, $lightness: 5%);
                     }
                 }
             }
-            .supprimer_produit{
+
+            .supprimer_produit {
                 background-color: $rouge;
-                &:hover{
-                    background-color: adjust-color($rouge,$lightness: 5%);
+
+                &:hover {
+                    background-color: adjust-color($rouge, $lightness: 5%);
                 }
-                a{
+
+                a {
                     color: $couleur_background;
                 }
             }
@@ -181,43 +209,84 @@ hr {
     @include header($couleur_primaire_vendeur);
 }
 
-// définition des pages inscriptions et connexions
-#connect_vendeur, #inscription_vendeur{
-    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+#header_vendeur .nav-buttom {
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        list-style: none;
+
+        a {
+            text-decoration: none;
+            color: #000;
+            background-color: #C3C1F5;
+            padding: 5px 10px;
+            border-radius: 20px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+    }
 }
 
-#connect_vendeur, #connect_client{
+// définition des pages inscriptions et connexions
+#connect_vendeur,
+#inscription_vendeur {
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+
+    .mainCarteInscription {
+        width: 700px;
+
+        #map {
+            height: 300px;
+            width: 500px;
+        }
+    }
+}
+
+#connect_vendeur,
+#connect_client {
     justify-content: center;
     overflow-y: hidden;
     height: 100vh;
 }
 
-#connect_client, #inscription_client{
+#connect_client,
+#inscription_client {
     @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
 }
 
-#inscription_vendeur, #inscription_client{
+#inscription_vendeur,
+#inscription_client {
     height: 100%;
-    main{
+
+    main {
         margin: 5% 0;
     }
 }
 
-.pageRecherche{
+.pageRecherche {
     display: flex;
     gap: 2em;
+
     @media (max-width: 1024px) {
         flex-direction: column;
     }
 }
 
-.labelEtBandeau{
+.labelEtBandeau {
     display: flex;
 }
-.TriEtFiltre div div{
+
+.TriEtFiltre div div {
     flex-direction: column;
 }
-.TriEtFiltre{
+
+.TriEtFiltre {
     width: 260px;
     background-color: #fafafa;
     border-radius: $angle_normal;
@@ -256,10 +325,11 @@ hr {
     }
 }
 
-.resultat{
+.resultat {
     width: 100%;
 }
-.resultat > div {
+
+.resultat>div {
     align-items: center;
     margin-bottom: 1.5em;
     gap: 1em;
@@ -274,12 +344,13 @@ section.results {
     @include contenu_centre_vertical();
     width: 100%;
 }
-.resultat { 
-    > div {
+
+.resultat {
+    >div {
         display: flex;
         justify-content: space-between;
-        
-        > div:first-child {
+
+        >div:first-child {
             flex-direction: column;
 
             h1 {
@@ -297,24 +368,27 @@ ul#results {
     list-style: none;
     justify-content: left;
     margin-left: 10%;
-    
-    > li {
+
+    >li {
         @include produit_catalogue();
     }
 }
-.labelBendeau{
+
+.labelBendeau {
     width: 10em;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#results_for{
+
+#results_for {
     justify-content: space-around;
     display: flex;
 }
 
-.deroulant{
+.deroulant {
     align-self: center;
+
     select {
         padding: 0.5em;
         border-radius: 5px;
@@ -322,19 +396,20 @@ ul#results {
         font-size: $font_size_normal;
     }
 }
+
 // pages côté client où y'a qu'un formulaire (ou à peu près)
 .form_client {
     overflow-x: hidden;
-    
-    main{
+
+    main {
         @include contenu_centre_horizontal();
         justify-content: space-evenly;
-        
+
         margin: 0;
         padding: 0;
         padding-top: 5%;
 
-        form{
+        form {
             @include contenu_centre_vertical();
             @include formulaire();
             background-color: $nuance_primaire_client;
@@ -344,12 +419,12 @@ ul#results {
             font-size: $font_size_normal;
         }
 
-        a{
+        a {
             color: black;
             //text-decoration: none;
         }
 
-        article{
+        article {
             @include contenu_centre_vertical();
             background-color: $nuance_primaire_client;
             width: 30vw;
@@ -358,33 +433,33 @@ ul#results {
             padding: 3em 3em;
             text-align: center;
 
-            h2{
+            h2 {
                 margin-top: 0;
                 font-size: $font_size_grand;
                 text-align: center;
             }
 
-            img{
+            img {
                 width: 40%;
                 height: 40%;
                 object-fit: contain;
                 background-color: white;
-                
+
             }
         }
     }
 }
 
-#avis_vendeur{
+#avis_vendeur {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 
-    main{
+    main {
         flex: 1;
     }
-    
-    article{
+
+    article {
         @include contenu_centre_horizontal();
         justify-content: center;
         gap: 20px;
@@ -413,18 +488,18 @@ ul#results {
 
 .infos {
     .bouton {
-        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 15em);
+        @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: auto);
     }
 
-    .modif{
-        @include bouton_new($color: white, $largeur: 15em);
+    .modif {
+        @include bouton_new($color: white, $largeur: unset);
     }
 
     .grave {
-        @include bouton_new($background: $rouge, $color: white, $largeur: 15em);
+        @include bouton_new($background: $rouge, $color: white, $largeur: 100%);
     }
 
-    .image_bouton{
+    .image_bouton {
         @include bouton_new($couleur_etoile);
         border-radius: $angle_normal;
         padding: 0.5em;
@@ -432,7 +507,7 @@ ul#results {
         margin-bottom: 1em;
         font-size: $font_size_sup;
 
-        p{
+        p {
             font-size: 10px;
         }
     }
@@ -440,11 +515,7 @@ ul#results {
 
     .liste_avis {
         li {
-<<<<<<< Updated upstream
-            > img{
-=======
             > img {
->>>>>>> Stashed changes
                 &:first-child {
                     @include image_produit(10vw);
                     margin-left: 0;
@@ -453,12 +524,6 @@ ul#results {
             }
         }
 
-<<<<<<< Updated upstream
-        div:first-child{
-            img{
-                @include image_produit(2vw);
-                background-color: white;
-=======
         img:not(.image_pp) {
             @include image_produit(2vw);
             background-color: white;
@@ -477,9 +542,9 @@ ul#results {
             display: block;
             height: 36px;
         }
-        
+
         .icons {
-            display:flex;
+            display: flex;
             flex-direction: row;
             align-items: center;
 
@@ -487,8 +552,8 @@ ul#results {
 
             img {
                 padding: 0.2em;
->>>>>>> Stashed changes
             }
+
         }
     }
 
@@ -512,8 +577,8 @@ ul#results {
         padding: 3em 3em;
 
         .champ {
-            border:rgba(0,0,0,0.25) 1px solid;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+            border: rgba(0, 0, 0, 0.25) 1px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
         }
 
         .image_pp {
@@ -521,20 +586,23 @@ ul#results {
         }
 
     }
+
     @media screen and (max-width: 1024px) {
-        main{
+        main {
             padding: 0;
         }
+
         section {
-                @include contenu_centre_vertical;
+            @include contenu_centre_vertical;
+
             .form_infos {
-                flex-direction: column;        
-                align-items: center; 
+                flex-direction: column;
+                align-items: center;
                 padding: 0;
                 margin: 1em;
-                gap: 2em;                      
-            
-                
+                gap: 2em;
+
+
                 article {
                     padding: 0;
                     display: flex;
@@ -544,7 +612,7 @@ ul#results {
                         align-items: center;
 
                         .image_pp {
-                            width: clamp(140px, 40vw, 240px);  
+                            width: clamp(140px, 40vw, 240px);
                             border-radius: 8px;
                         }
 
@@ -557,8 +625,10 @@ ul#results {
 
 
                     &:last-child {
+
                         input,
-                        button,a {
+                        button,
+                        a {
                             width: 50%;
                         }
 
@@ -594,31 +664,31 @@ a.bouton:has(+ .liste_avis) {
         align-items: center;
         justify-content: space-between;
 
-        margin: 2.5em 0; 
+        margin: 2.5em 0;
 
         // Avis
-        > div:first-of-type {
+        >div:first-of-type {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
 
             // PP + étoiles
-            > div:first-child {
+            >div:first-child {
                 display: flex;
                 align-items: center;
 
-                > img:not(.etoiles) {
+                >img:not(.etoiles) {
                     @include image_pp(40px);
                     margin-right: 0.5em;
                 }
-                
+
                 // Bouton signaler
                 button {
                     border: none;
                     background: none;
                     line-height: 0;
 
-                    > img {
+                    >img {
                         width: 30px;
                         height: 30px;
                     }
@@ -626,13 +696,15 @@ a.bouton:has(+ .liste_avis) {
             }
 
             // Reste de l'avis
-            > div:nth-child(2) {
-                > h3, > p {
+            >div:nth-child(2) {
+
+                >h3,
+                >p {
                     margin-top: 0.5em;
                     margin-bottom: 0;
                 }
 
-                > p:last-child {
+                >p:last-child {
                     margin-top: 1em;
                     font-style: italic;
                     font-weight: 100;
@@ -642,7 +714,7 @@ a.bouton:has(+ .liste_avis) {
         }
 
         // Image de l'avis
-        > img:last-child { 
+        >img:last-child {
             flex-basis: 20%;
             max-width: 20%;
             margin-left: 2em;
@@ -650,7 +722,7 @@ a.bouton:has(+ .liste_avis) {
 
         a {
             flex-basis: 20%;
-            
+
             img {
                 width: 100%;
             }
@@ -688,7 +760,7 @@ div.gauche {
     @media screen and (max-width: 1024px) {
         font-size: 1.4em;
         line-height: 2em;
-        
+
     }
 
     
@@ -697,20 +769,20 @@ div.gauche {
 div:has(> aside) {
     flex-grow: 1;
 
-    @media screen and (max-width : 1024px){
-        order: -1; 
+    @media screen and (max-width : 1024px) {
+        order: -1;
     }
 }
 
 .detail_produit {
     font-family: $font_text;
 
-    > article:first-child {
+    >article:first-child {
         margin: 0 0 2em 0;
         display: flex;
 
         // Images
-        > div:first-child {
+        >div:first-child {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -718,14 +790,14 @@ div:has(> aside) {
             margin: 0 4em;
 
             // Image principale
-            > div:first-child {
+            >div:first-child {
                 img {
                     @include image_produit(300px);
                 }
             }
 
             // Images secondaires
-            > div:nth-child(2) {
+            >div:nth-child(2) {
                 img {
                     @include image_produit(100px);
                 }
@@ -733,17 +805,17 @@ div:has(> aside) {
         }
 
         // Détails du produit
-        > div:nth-child(2) {
-            > h1 {
+        >div:nth-child(2) {
+            >h1 {
                 margin: 0;
                 font-size: 2em;
 
                 font-family: $font_title;
                 font-weight: 700;
-            } 
+            }
 
             // Étoiles + nombre d'avis
-            > div {
+            >div {
                 .etoiles {
                     margin-right: 0.5em;
                 }
@@ -752,7 +824,7 @@ div:has(> aside) {
                 align-items: center;
             }
 
-            > p:last-child {
+            >p:last-child {
                 margin-top: 2em;
             }
         }
@@ -767,7 +839,7 @@ div:has(> aside) {
         flex-direction: row;
     }
 
-    div:last-child{
+    div:last-child {
         display: flex;
     }
 
@@ -853,7 +925,7 @@ div:has(> aside) {
     position: relative;
     bottom: 0;
 
-    >div{
+    >div {
         padding: 40px 60px;
     }
 
@@ -880,16 +952,17 @@ div:has(> aside) {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
+
     .logo {
         width: 150px;
     }
 }
+
 .footer-columns {
     display: flex;
     flex: 1;
     justify-content: space-around;
-    
+
     h4 {
         margin-bottom: 10px;
         font-size: 15px;
@@ -907,7 +980,7 @@ div:has(> aside) {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    
+
     img {
         width: 26px;
         height: 26px;
@@ -920,7 +993,7 @@ div:has(> aside) {
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    
+
     .footer-links {
         display: flex;
         gap: 25px;
@@ -932,11 +1005,13 @@ div:has(> aside) {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .footer-columns {
         width: 100%;
         justify-content: space-between;
         flex-direction: column;
     }
+
     .footer-socials {
         flex-direction: row;
     }
@@ -954,9 +1029,10 @@ div:has(> aside) {
 }
 
 .accueil {
-    .prix{
+    .prix {
         font-size: $font_size_grand;
     }
+
     .ancien_prix {
         display: inline-block;
         margin-right: 6px;
@@ -967,7 +1043,7 @@ div:has(> aside) {
     .pourcentage {
         display: inline-block;
         padding: 2px 6px;
-        
+
         width: auto;
 
         background-color: $couleur_primaire_vendeur;
@@ -979,26 +1055,32 @@ div:has(> aside) {
 
         vertical-align: middle;
     }
+
     nav {
         display: none;
     }
-    > main {
-        .banniere{
+
+    >main {
+        .banniere {
             display: flex;
             justify-content: center;
-            a{
+
+            a {
                 display: flex;
                 justify-content: center;
                 width: 50%;
-                img{
+
+                img {
                     width: 100%;
                 }
             }
         }
-        > div {
+
+        >div {
             display: flex;
             flex-direction: row;
-            > button {
+
+            >button {
                 z-index: 10;
                 width: 40px;
                 height: 40px;
@@ -1006,13 +1088,13 @@ div:has(> aside) {
                 align-self: center;
                 position: relative;
                 background-color: $couleur_primaire_client;
-                color:$couleur_background;
+                color: $couleur_background;
                 border: 5px $couleur_background;
                 @include contenu_centre_horizontal;
                 justify-content: center;
                 box-shadow: 0 0 20px black;
-                    
-                > img {
+
+                >img {
                     width: 75%;
                 }
 
@@ -1020,29 +1102,33 @@ div:has(> aside) {
                     background-color: adjust-color($color: $couleur_primaire_client, $lightness: 5%);
                 }
             }
+
             .gauche {
                 transform: rotate(180deg);
                 left: 50px;
                 padding: 0 3px;
             }
+
             .droite {
                 right: 50px;
                 padding: 0 3px;
             }
-            > ul {
+
+            >ul {
                 @include contenu_centre_horizontal;
                 align-items: start;
                 overflow: hidden;
                 list-style: none;
                 padding: 0;
-                width:100%;
-                
-                > li {
+                width: 100%;
+
+                >li {
                     @include produit_catalogue();
-                    > a {
+
+                    >a {
                         position: relative;
 
-                        > .reduction {
+                        >.reduction {
                             position: absolute;
 
                             width: 32px;
@@ -1064,8 +1150,9 @@ div:has(> aside) {
             }
         }
     }
+
     // format telephone
-    @media screen and (max-width: 1024px){
+    @media screen and (max-width: 1024px) {
         nav:not(header nav) {
             width: 100%;
             @include contenu_centre_horizontal;
@@ -1075,27 +1162,32 @@ div:has(> aside) {
             background-color: $couleur_background;
             height: 3em;
         }
-        > main {
-            > div {
-                > button {
-                    display:none;
+
+        >main {
+            >div {
+                >button {
+                    display: none;
                 }
-                > ul {
+
+                >ul {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 10px;
-                    justify-items:center;
+                    justify-items: center;
                     padding: 0;
-                    > li {
+
+                    >li {
                         @include contenu_centre_vertical;
                         margin: 20px;
-                        > a {  
+
+                        >a {
                             display: flex;
                             flex-direction: column;
                             width: fit-content;
-                            text-align: left;   
+                            text-align: left;
                             align-items: flex-start;
-                            > img {
+
+                            >img {
                                 background-color: $couleur_fond_produit;
                                 width: 25vw;
                                 max-width: 300px;
@@ -1103,11 +1195,13 @@ div:has(> aside) {
                                 border-radius: $angle_petit;
                                 align-self: center;
                             }
-                            > p {
+
+                            >p {
                                 font-size: $font_size_sup;
-                            }   
-                            > h3 {                            
-                                height :2em;
+                            }
+
+                            >h3 {
+                                height: 2em;
                             }
                         }
                     }
@@ -1115,6 +1209,59 @@ div:has(> aside) {
             }
         }
     }
+}
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+.confirm-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.confirm-box {
+    background: white;
+    border-radius: 14px;
+    padding: 2rem;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.confirm-title { 
+    font-size: 1.15rem; 
+    font-weight: 700; 
+    margin-bottom: 0.5rem; 
+}
+.confirm-message { 
+    font-size: 0.92rem; 
+    color: #666; 
+    margin-bottom: 1.5rem; 
+}
+.confirm-buttons { 
+    display: flex; gap: 
+    0.75rem; 
+}
+.confirm-buttons button { 
+    flex: 1; 
+    padding: 0.65rem 1rem; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    border: none; 
+}
+.btn-cancel  { 
+    @include bouton_new($background: #f0f0f0, $color: #444, $largeur: auto);
+}
+.btn-confirm { 
+    @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: auto);
 }
 
 .prix {
@@ -1145,17 +1292,42 @@ h3 {
     font-weight: bold;
 }
 
+.info-bulle {
+    display: block;
+    position: fixed;
+    
+    padding: 10px 20px;
+    border: 1px solid #b3c9ce;
+    border-radius: 10px;
+    // text-align: center;
+    font: italic 14px/1.3 sans-serif;
+    color: #333;
+    background: #fff;
+
+    z-index: 22;
+}
+
+.aide {
+    border: 0.5px solid black;
+    border-radius: 100%;
+    padding: 0 0.4em;
+    font-size: 1em;
+    background-color: #e9e9e9;
+
+    &:hover {
+        
+        background-color: #9e9e9e;
+    }
+}
+
 .liste {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
+
     .input_quantite {
-        font-size:1.4em;
+        font-size: 1.4em;
     }
 
     main {
-        display: flex;
-        flex: 1;
 
         img {
             object-fit: contain;
@@ -1165,12 +1337,12 @@ h3 {
         .entete {
             display: flex;
             align-items: center;
-            
+
             // tous les enfants de l'entête
             >* {
                 margin-right: 3em;
             }
-            
+
         }
 
 
@@ -1179,12 +1351,12 @@ h3 {
             width: 60vw;
             padding: 0;
 
-            li > div {
+            li>div {
                 display: flex;
                 flex-grow: 1;
                 align-items: center;
             }
-            
+
             // la partie description etc. du produit
             li article:first-child {
                 display: flex;
@@ -1199,7 +1371,7 @@ h3 {
                     display: none;
                 }
             }
-             
+
             // l'autre partie avec quantité et prix
             li article:last-child {
                 display: flex;
@@ -1288,12 +1460,14 @@ h3 {
                 }
 
                 li article:first-child {
+
                     // retirer le description 
                     p:nth-child(2) {
                         display: none;
                     }
 
-                    p, h3 {
+                    p,
+                    h3 {
                         font-size: 1em;
                     }
 
@@ -1308,6 +1482,7 @@ h3 {
                 }
 
                 li article:last-child {
+
                     // bouton supprimer côté ordi
                     form {
                         display: none;
@@ -1371,7 +1546,7 @@ aside {
         margin: 1em 0;
     }
 
-    > div:first-child {
+    >div:first-child {
         margin-top: 0;
     }
 
@@ -1379,24 +1554,24 @@ aside {
         margin: 0.5em 0;
     }
 
-    
+
     input.bouton {
         @include bouton_new($focus, white, $largeur: 100%, $padding: 0.5em, $size: 0.8em);
     }
-    
+
     .achat {
         @include bouton_new($couleur_etoile, black, $largeur: 100%, $padding: 0.5em 0, $size: 0.8em);
     }
 
-    @media screen and (max-width : 1024px){
+    @media screen and (max-width : 1024px) {
         position: static;
         order: -1;
-        margin:0;
+        margin: 0;
         font-size: 2em;
 
         p {
             margin-bottom: 0;
-        }     
+        }
     }
 }
 
@@ -1421,24 +1596,27 @@ aside {
 }
 
 .anonymisation-client {
-    main form button{
-        /*@include bouton();
+    main form button {
+        @include bouton();
         background-color: $rouge;
         color: white;
         font-size: $font_size_normal;
         padding: 0.5em 1em;
         border: none;
         border-radius: $angle_petit;
-        cursor: pointer;*/
-        width: 90%;
+        cursor: pointer;
+        width: 17%;
+        height: 200%;
     }
-    a{
-        width: 50%;
+
+    a {
+        width: 15%;
+        height: 10%;
     }
 }
 
 .desactivation-vendeur {
-    main form input{
+    main form input {
         @include bouton();
         background-color: $rouge;
         color: white;
@@ -1456,22 +1634,22 @@ aside {
     color: $rouge;
 }
 
-.bodyAjoutProduit{
+.bodyAjoutProduit {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
     @include code_barre;
 
-    
-    .divEnLigne{
+
+    .divEnLigne {
         @include en_ligne;
     }
-    
-    input[type="file"]{
+
+    input[type="file"] {
         padding-top: 7px;
     }
-    
-    #creerProduit{
+
+    #creerProduit {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
     }
@@ -1483,55 +1661,97 @@ aside {
     @include format_textarea_p_select_input_form;
     @include code_barre;
 
-    .divEnLigne{
+    .divEnLigne {
         @include en_ligne;
     }
-    
-    .blockImg{
-        img{
+
+    .blockImg {
+        .overImg{
+            @include input_img_over_img;
+        }
+        img {
             @include image_produit(250px);
         }
     }
-    #idCheckMajeur{
+
+    #idCheckMajeur {
         margin-right: 70px;
     }
-    #idModifierProduit{
+
+    #idModifierProduit {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
     }
-    .delete_picture{
+
+    .delete_picture {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         width: 17.45em;
         padding: 6px;
     }
 }
 
-.mainInfoVendeur div{
+.mainInfoVendeur div {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     @include format_textarea_p_select_input_form;
-    
-    #idValiderModifVendeur{
+
+    form div {
+        display: flex;
+        flex-direction: column;
+        #map{
+            width: 500px;
+            height: 300px;
+        }
+
+        .inputs_lon_lat {
+            display: flex;
+            flex-direction: row;
+
+            div {
+                display: flex;
+                flex-direction: column;
+
+                input {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
+    #idValiderModifVendeur {
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
+        width: 600px;
     }
-    #idDesactivationCompte{
+
+    #idDesactivationCompte,
+    #idDesactivation2FA {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
         width: 577px;
     }
+
+    #idActivation2FA {
+        @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
+        margin-top: 30px;
+        padding: 0.6em;
+        width: 577px;
+    }
+
 }
 
 
-#create_avis{
+#create_avis {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    main{
+
+    main {
         padding-top: 2em;
         flex: 1;
-        .image_bouton{
+
+        .image_bouton {
             @include bouton_new($couleur_etoile);
             border-radius: $angle_normal;
             padding: 0.5em;
@@ -1539,7 +1759,7 @@ aside {
             margin-bottom: 1em;
             font-size: $font_size_sup;
 
-            p{
+            p {
                 font-size: 10px;
             }
         }
@@ -1548,11 +1768,12 @@ aside {
             flex-direction: column;
             gap: 20px;
 
-            article, form{
+            article,
+            form {
                 width: 70vw;
                 padding: 0 1em 1em;
 
-                .image_bouton{
+                .image_bouton {
                     margin-top: 1em;
                     margin-bottom: 0;
                 }
@@ -1563,66 +1784,73 @@ aside {
 }
 
 .info_vendeur {
-    > main {
+    >main {
         div {
-        width: 60vw;
-    }
-    p { 
-        border: none;
-        border-radius: $angle_petit;
-        height: auto;
-        font-size: $font_size_normal;
-        padding-left: 0.6em;
-        padding-right: 0;
-        width: 50%;
-        border:rgba(0,0,0,0.25) 1px solid;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+            width: 60vw;
+        }
 
-    }
+        p {
+            border: none;
+            border-radius: $angle_petit;
+            height: auto;
+            font-size: $font_size_normal;
+            padding-left: 0.6em;
+            padding-right: 0;
+            width: 50%;
+            border: rgba(0, 0, 0, 0.25) 1px solid;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 
-    .modif_info {
-        color: $couleur_background;
-        text-decoration: none;
-    }
-    h3 {
-        font-size: $font_size_sup;
-        margin-top: 2%;
-    }
+        }
+
+        .modif_info {
+            color: $couleur_background;
+            text-decoration: none;
+        }
+
+        h3 {
+            font-size: $font_size_sup;
+            margin-top: 2%;
+        }
     }
 }
 
 
-#body404{
+#body404 {
     height: 100vh;
     width: 100vw;
     background: #3157A3;
 }
+
 .le404 {
     display: flex;
     justify-content: center;
     flex-direction: column;
     color: white;
-    font-style: $font_text; 
+    font-style: $font_text;
 }
-.all_404{
+
+.all_404 {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.all_404 h1{
+
+.all_404 h1 {
     justify-self: center;
 }
-.logo{
+
+.logo {
     width: 400px;
 }
-.titre404{
+
+.titre404 {
     font-size: 100px;
     font-style: $font_title;
-    
+
 }
 
-.bouton404{
+.bouton404 {
     @include bouton_new($rouge, $color: white, $padding: 0.5em 1em, $size: 1em, $angle: $angle_petit)
 }
 
@@ -1684,88 +1912,96 @@ aside {
 }*/
 
 
-.fini{
+.fini {
     @include contenu_centre_vertical();
 }
 
 .produit-vendeur {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 2rem;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 
-    th, td {
-      padding: 1rem;
-      border-bottom: 1px solid #e5e5e5;
+        th,
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        th {
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+        }
     }
 
-    th {
-      text-align: left;
-      font-weight: 600;
-      color: #333;
+    >div img {
+        @include image_produit($image_normal);
     }
-  }
 
-  > div img {
-    @include image_produit($image_normal);
-  }
+    >div img:hover {
+        transform: scale(1.04);
+    }
 
-  > div img:hover {
-    transform: scale(1.04);
-  }
+    >div {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #444;
+    }
 
-  > div {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #444;
-  }
+    div table td {
+        padding: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+    }
 
-  div table td {
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-  }
-
-    input[type="submit"], a.bouton, button.bouton {
-        @include bouton_new($background:$rouge ,$color: white, $largeur: 32em); 
+    input[type="submit"],
+    a.bouton,
+    button.bouton {
+        @include bouton_new($background: $rouge , $color: white, $largeur: 32em);
         height: 4em;
     }
-    .bouton_vendeur_produit{
-        @include bouton_new($background:$nuance,$color: black, $largeur: 30em);
+
+    .bouton_vendeur_produit {
+        @include bouton_new($background: $nuance, $color: black, $largeur: 30em);
     }
 
-    .bouton_avis_vendeur_produit{
-        @include bouton_new($background:$couleur_etoile ,$color: black, $largeur: 30em); 
+    .bouton_avis_vendeur_produit {
+        @include bouton_new($background: $couleur_etoile , $color: black, $largeur: 30em);
     }
 }
 
 
 
 
-.fleche_produit_arriere{
+.fleche_produit_arriere {
     margin: 5px;
 }
 
 .stock {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     main {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        flex :1;
         table {
             display: flex;
             flex-direction: column;
             align-self: center;
         }
+
         tr {
             width: 50vw;
             display: flex;
@@ -1784,23 +2020,24 @@ aside {
             @include bouton_new($color: white, $padding: 0.8em, $size: 0.8em, $display: inline);
 
         }
-        
+
         td {
             display: flex;
             justify-content: center;
             gap: 2em;
 
             button {
-                margin:0;
-                padding:0;
+                margin: 0;
+                padding: 0;
             }
 
             a .bouton {
+
                 // bouton voir les avis
                 &:nth-child(2) {
                     @include bouton_new(white, $padding: 0, $size: 0.8em, $display: inline);
                 }
-                
+
                 // bouton modifier
                 &:first-child {
                     @include bouton_new(white, $padding: 0, $size: 0.8em, $display: inline);
@@ -1819,18 +2056,18 @@ aside {
 
 #snackbar {
     visibility: hidden;
-    
-    position: fixed; 
-    left: 50%; 
+
+    position: fixed;
+    left: 50%;
     bottom: 30px;
-    
+
     transform: translate(-50%, 0);
     color: black;
     border: solid 1px;
 
     text-align: center;
-    border-radius: $angle_petit; 
-    padding: 1em; 
+    border-radius: $angle_petit;
+    padding: 1em;
     z-index: 10;
 
     &.success {
@@ -1839,57 +2076,71 @@ aside {
     }
 
     &.error {
-        background-color: #fedcd9; 
+        background-color: #fedcd9;
         border-color: adjust-color($color: #fdd2cf, $lightness: -50%);
     }
 }
 
 #snackbar.show {
     visibility: visible;
-    
+
     animation: montrer_snackbar 0.5s, cacher_snackbar 0.5s 4.6s;
 }
 
 @keyframes montrer_snackbar {
     from {
-        bottom: 0; 
+        bottom: 0;
         opacity: 0;
     }
 
     to {
-        bottom: 30px; 
+        bottom: 30px;
         opacity: 1;
     }
 }
 
 @-webkit-keyframes montrer_snackbar {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
 }
 
 @keyframes cacher_snackbar {
     from {
-        bottom: 30px; 
+        bottom: 30px;
         opacity: 1;
     }
 
     to {
-        bottom: 0; 
+        bottom: 0;
         opacity: 0;
     }
 }
 
 @-webkit-keyframes cacher_snackbar {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
 }
 
 .modal {
     display: none;
     position: fixed;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    
+
     left: 0;
     top: 0;
 
@@ -1904,7 +2155,7 @@ aside {
         margin: 10% auto;
         padding: $padding_normal;
         width: 30%;
-        
+
         background-color: $couleur_background;
         border-radius: $angle_petit;
 
@@ -1924,7 +2175,8 @@ aside {
                 font-size: 24px;
                 font-weight: bold;
 
-                &:hover, &:focus {
+                &:hover,
+                &:focus {
                     cursor: pointer;
                     text-decoration: none;
                 }
@@ -1970,7 +2222,8 @@ aside {
                 margin-top: 0.5em;
             }
 
-            select, input[type="email"] {
+            select,
+            input[type="email"] {
                 padding: 0.5em;
 
                 border-radius: 5px;
@@ -1995,12 +2248,12 @@ aside {
 
 @keyframes ouvrir_modal {
     from {
-        top: -200px; 
+        top: -200px;
         opacity: 0;
     }
 
     to {
-        top: 0; 
+        top: 0;
         opacity: 1
     }
 }
@@ -2010,61 +2263,76 @@ aside {
     h1 {
         font-size: 8mm;
     }
-    header, button, footer, a {
-        display:none !important;
+
+    header,
+    button,
+    footer,
+    a {
+        display: none !important;
     }
 }
 
-.hide_input_file{
-    @include hide_input_file();
-}
-
-.main_promo{
+.main_promo {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-    .en_ligne{
+
+    .en_ligne {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
-    .en_colonne{
+
+    .en_colonne {
         display: flex;
         flex-direction: column;
     }
-    .cout_final{
+
+    .cout_final {
         width: 50%;
     }
-    h3 + p + div{
-        div{
-            input{
+
+    h3+p+div {
+        div {
+            input {
                 width: 50%;
             }
         }
     }
-    #warning1, #warning2, #warning3, #warning4{
-        color:red;
+
+    #warning1,
+    #warning2,
+    #warning3,
+    #warning4 {
+        color: red;
         font-style: italic;
         font-size: 75%;
     }
-    #valider{
+
+    #valider {
         @include bouton_new($color: $couleur_background);
         margin-top: 20px;
         width: 100%;
     }
-    #supprimer_promotion{
+
+    #supprimer_promotion {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
         padding: 10px 16px 10px 16px;
     }
-    .block_banniere{
+
+    .block_banniere {
         display: flex;
         flex-direction: column;
         margin-top: 40px;
-        img{
-           @include image_produit(250px);
+        .overImg{
+            @include input_img_over_img;
+        }
+        img {
+            @include image_produit(250px);
         }
     }
-    .hide_input_file{
+
+    .hide_input_file {
         margin-top: 20px;
         margin-bottom: 7px;
         @include hide_input_file();
@@ -2072,23 +2340,21 @@ aside {
         justify-content: center;
         width: 16.2em;
     }
-    .ajout_banniere{
-        margin-top: 20px;
-    }
-    .delete_picture{
+
+    .delete_picture {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         width: 17.45em;
         padding: 6px;
     }
 }
 
-.main_accueil{
+.main_accueil {
     @include contenu_centre_horizontal;
     justify-content: center;
     gap: 10%;
 
-    >div{
-        ul{
+    >div {
+        ul {
             list-style-type: none;
             display: flex;
             flex-direction: column;
@@ -2096,24 +2362,28 @@ aside {
             padding: 0;
         }
 
-        li{
-            border: solid 1 black;
-            background-color: #9C9C9C;
+        li {
+            border: solid 2px rgb(124, 5, 5);
+            background-color: rgb(255, 219, 219);
             border-radius: 5px;
             padding: 1em;
         }
 
-        a{
+        a {
             color: #000;
             text-decoration: none;
         }
     }
 
-    .liste_accueil_vendeur{
+    .liste_accueil_vendeur {
         display: grid;
         grid-template-columns: 2fr 2fr;
         grid-gap: 35px;
-        .lien1, .lien2, .lien3, .lien4{
+
+        .lien1,
+        .lien2,
+        .lien3,
+        .lien4 {
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -2126,15 +2396,17 @@ aside {
             color: black;
             text-decoration: none;
             background-color: $couleur_fond_produit;
-            &:hover{
+
+            &:hover {
                 transform: scale(1.02);
             }
-            
-            &:visited{
+
+            &:visited {
                 color: black;
                 text-decoration: none;
             }
-            img{
+
+            img {
                 width: 4em;
                 height: 4em;
             }
@@ -2142,15 +2414,17 @@ aside {
     }
 }
 
-#div_map{
+#div_map {
     display: flex;
     flex-direction: row;
-    #map{
+
+    #map {
         height: 600px;
         width: 1000px;
         margin-left: 20px;
     }
-    #tri_departement{
+
+    #tri_departement {
         display: flex;
         flex-direction: column;
     }
@@ -2160,12 +2434,13 @@ aside {
     position: fixed;
     inset: 0;
     width: 16%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
     z-index: 50;
-    .fermerCarteDroite{
+
+    .fermerCarteDroite {
         height: 100px;
         width: 30px;
         position: absolute;
@@ -2177,7 +2452,8 @@ aside {
         font-size: xx-large;
     }
 }
-.ouvrirCarteDroite{
+
+.ouvrirCarteDroite {
     height: 100px;
     width: 30px;
     position: fixed;
@@ -2188,7 +2464,8 @@ aside {
     box-shadow: grey -1px 0px 8px;
     border-radius: 5px 0px 0px 5px;
     font-size: xx-large;
-}   
+}
+
 /* Panneau */
 #panneauCarte {
     position: fixed;
@@ -2201,17 +2478,25 @@ aside {
     transition: transform 0.4s ease;
     z-index: 1000;
     padding: 2rem;
-    .enteteCarte{
-        display:flex;
+
+    .enteteCarte {
+        display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        #btnFermerCarte{
+
+        #btnFermerCarte {
             height: fit-content;
             background-color: white;
             font-size: xx-large;
             border: none;
         }
+    }
+
+    #div_map section div #liste_vendeur {
+        height: 200px;
+        width: 230px;
+        overflow-y: scroll;
     }
 }
 
@@ -2226,6 +2511,106 @@ aside {
 }
 
 /* Page d'activation*/
-#activer_2FA {
-    @include page_connect_inscription($nuance, white);
+#page_2fa {
+
+    .champ {
+        display: block;
+        border: solid 1px gray;
+        border-radius: $angle_petit;
+        height: 2em;
+        font-size: $font_size_normal;
+        padding-left: 0.6em;
+        padding-right: 0;
+    }
+
+    #cle_2fa {
+        margin-top: 2em;
+        padding: 1em;
+
+        font-weight: bold;
+        font-size: 1.1em;
+
+        border: solid 1px gray;
+        border-radius: $angle_petit;
+    }
+
+    #qrCode {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin: 4em;
+    }
+}
+
+.PIN {
+    border-radius: 30%;
+    -moz-appearance: textfield;
+    border: 1px solid gray;
+
+    padding: 0.75em 0.5em;
+    margin: 0.325em;
+    text-align: center;
+
+    &[disabled] {
+        background-color: #ddd4;
+    }
+
+    font-size: 1.6em;
+}
+
+#codePIN {
+    margin: 1.2em 0;
+}
+
+
+.liste-commande {
+    width: 100vw;
+    margin-top: 3em;
+
+    th,
+    td {
+        padding: 0px 10px;
+        height: 70px;
+        text-align: left;
+    }
+
+    tr {
+        padding: 20px 0px;
+    }
+
+    img {
+        width: 50px;
+    }
+
+    .bouton{
+        display: initial;
+    }
+}
+
+
+.liste-commande-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .input_quantite {
+        font-size: 1.4em;
+    }
+
+    main {
+        display: flex;
+        flex: 1;
+        padding: 0;
+
+        img {
+            object-fit: contain;
+        }
+
+        div>a, div>span {
+            position: relative;
+            left: 50px;
+            top: 30px;
+        }
+    }
 }

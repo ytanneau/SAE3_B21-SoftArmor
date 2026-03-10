@@ -55,7 +55,9 @@ function ecrire_nom($rows){
                     <span> | </span>
 
                     <form action="./update_stock.php">
-                        <label for="nb">Quantité</label>
+                        <label for="nb">Quantité
+                            <span class="aide" data-tooltip="' + ' devant pour ajouter une valeur\n' - ' devant pour retirer une valeur\net appuyez sur entrée pour valider\nex: '+52' ajoute 52 à la quantité dans le stock">?</span>
+                        </label>
                         <input type="hidden" id="produit" name="produit" value=<?= htmlentities($row['id_produit'] ?? '')?>>
                         <input type="text" size="8" id="nb" name="nb" value=<?= htmlentities($row['quantite'] ?? '')?>>
                         <input type="submit" class="bouton" value="Valider">
@@ -95,6 +97,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
+    <script src="<?=HOME_SITE?>infobulle.js"></script>
 </html>
 
 

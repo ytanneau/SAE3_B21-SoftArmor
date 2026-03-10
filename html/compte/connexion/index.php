@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 if ($_POST != null) {
     require_once (HOME_GIT . 'fonction_compte.php');
     require_once (HOME_GIT . 'fonction_2FA.php');
+    
     $resultat = connect_compte($_POST['email'], $_POST['mdp'], 'client', HOME_GIT);
 
     // Toutes les informations sont correctes
@@ -124,7 +125,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
         </form>
         <p style="text-align:center;">Pas de compte ? <a href="<?=HOME_SITE?>compte/inscription?produit=<?=$_GET['produit'] ?? ''?>">S'inscrire</a> 
         <br>
-        <a href="<?=HOME_SITE?>vendeur/">Passez du coté vendeur</a>
+        <a href="<?=HOME_SITE?>vendeur/">Passer du coté vendeur</a>
         
         </p>
         </main>

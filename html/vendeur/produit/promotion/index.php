@@ -29,52 +29,40 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
 
-    $prix = detail_produit($_GET['produit'])['prix'];
-    
-
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        if(isset($_POST['pourcentage']) && $_POST['pourcentage'] !== ""){
-            $pourcentage = $_POST['pourcentage'];
-            $pourcentage = str_replace('-', "",$pourcentage);
-        } else {
-            $pourcentage = 0;
-        }
-
-        if (isset($_FILES['photoPromotion']) &&
-                $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
-        $nomImageTemp = $_FILES['photoPromotion'];
-        // recupere le nom temporaire du fichier pour le deplacer
-        $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-        
-        switch($_FILES['photoPromotion']['type']){
-            case 'image/jpeg' : 
-                $extension = '.jpeg';
-                break;
-            case 'image/webp' :
-                $extension = '.webp';
-                break;
-            case 'image/jpg' :
-                $extension = '.jpg';
-                break;
-            default :
-                $extension = '.png';
-                break;
-        }
-        $nomImage = $id_produit . "_promotion" . $extension;
-        
-        $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
-        // definition des caractéristiques d'une image
-        $url = "ressources/promotion/" . $nomImage;
-        $altDefault = "Image de promotion";
-        if(move_uploaded_file($cheminTemp,$cheminFinal)){
-            $id_image_principal = add_image($url,$nomImage, $altDefault);
-        }
+        if (isset($_FILES['photoPromotion']) && $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK){
+            $nomImageTemp = $_FILES['photoPromotion'];
+            // recupere le nom temporaire du fichier pour le deplacer
+            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+            
+            switch($_FILES['photoPromotion']['type']){
+                case 'image/jpeg' : 
+                    $extension = '.jpeg';
+                    break;
+                case 'image/webp' :
+                    $extension = '.webp';
+                    break;
+                case 'image/jpg' :
+                    $extension = '.jpg';
+                    break;
+                default :
+                    $extension = '.png';
+                    break;
+            }
+            $nomImage = $id_produit . "_promotion" . $extension;
+            
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
+            // definition des caractéristiques d'une image
+            $url = "ressources/promotion/" . $nomImage;
+            $altDefault = "Image de promotion";
+            if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                $id_image_principal = add_image($url,$nomImage, $altDefault);
+            }
         } else {
             $id_image_principal = null;
         }
-        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_image_principal);
+        creer_promotion($id_produit, $_POST['dateDebut'],$_POST['dateFin'],$id_image_principal);
         header("Location: ../?produit=" . $id_produit);
         exit();
     }
@@ -117,31 +105,13 @@
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
-                    <label class="hide_input_file" for="photoPromotion">Ajouter une banniere</label>
-                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
-                </div>
-
-                <h3>Réduction</h3>
-                <p>Prix actuel : <?=htmlentities($prix)?>€</p>
-                <div class="en_ligne">
-                    <div class="en_colonne">
-                        <label for="pourcentage">Pourcentage : </label>
-                        <input type="text" id="pourcentage" name="pourcentage">
-                        <p style="display:none;" id="warning3">Le pourcentage ne peut <br>être supérieur à 100</p>
-                    </div>
-                    <div class="en_colonne">
-                        <label for="euro">Remise appliquée : </label>
-                        <input type="text" id="euro" name="euro" readonly>
-                    </div>
-                    <div class="en_colonne">
-                        <label for="prixFinal">Prix final : </label>
-                        <input type="text" id="prixFinal" readonly>
-                    </div>
+                    <label for="photoPromotion">Ajouter une banniere</label>
+                    <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
                 <input type="submit" id="valider" value="Valider">
             </form>
         </main>
-        <?php include "../../../footer.php" ?>    
+        <?php include HOME_SITE . "footer.php" ?>    
     </body>
     <script>
 
@@ -158,7 +128,6 @@
         const dateCourante = new Date();
         dateCourante.setHours(0, 0, 0, 0);
 
-        // const tab_date_occupe = <?php // echo json_encode($tab_date) ?>;
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
@@ -210,51 +179,16 @@
 
             cout.value = PRIX * diffJours + PRIX + "€";
         }
-
-        /*function check_date(date){
-            for()
-        }*/
-        // REDUCTION //
-
-        const warning3 = document.getElementById("warning3");
-        const pourcentage = document.getElementById("pourcentage");
-        const euro = document.getElementById("euro");
-        const prixInitial = <?= json_encode($prix) ?>;
-        const prixFinal = document.getElementById("prixFinal");
-
-        pourcentage.addEventListener('input', () => {
-            pourcentage.value = pourcentage.value.replace(",",".");
-            pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            if(pourcentage.value <= 100){
-                calculR();
-            } else {
-                warning3.style.display = "block";
-            }
-            
-        })
-
-        function calculR(){
-            if(pourcentage.value != ""){
-                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
-                euro.value = prixInitial - prixFinal.value;
-                prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2);
-                euro.value = Number.parseFloat(euro.value).toFixed(2);
-            } else {
-                euro.value = "";
-            }
-        }
         
         // VALIDATION DU FORM //
         valider.addEventListener('click', (event) => {
             warning1.style.display = "none";
             warning2.style.display = "none";
-            warning3.style.display = "none";
             warning4.style.display = "none";
 
             if (!dateDebut.value || !dateFin.value) {
                 warning2.style.display = "block";
                 event.preventDefault();
-                return;
             }
 
             if (dateDebut.value > dateFin.value) {
@@ -262,14 +196,22 @@
                 event.preventDefault();
             }
             
-            if (pourcentage.value >= 100){
-                warning3.style.display = "block";
-                event.preventDefault();
-            }
             if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
                 warning4.style.display = "block";
                 event.preventDefault();
             }
         });
+        
+        let date = new Date()
+        let current_string_date
+
+        if(date.getMonth() < 9){
+            current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
+        } else {
+            current_string_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+        }
+        dateDebut.value = current_string_date
+        dateFin.value = current_string_date
+        cout.value = PRIX + "€";
     </script>
 </html>
