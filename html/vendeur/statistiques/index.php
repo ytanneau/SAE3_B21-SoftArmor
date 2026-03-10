@@ -75,6 +75,12 @@
                 <h1>Statistiques Par Catégories</h1>
                 <label>Categories</label>
                 <select id="filtreCat"></select>
+                <label>Tirer Les</label>
+                <select id="filtreOrdCat">
+                    <option value="qte">Quantité</option>
+                    <option value="prix">Prix</option>
+                    <option value="nbAchat">Nombres D'achats</option>
+                </select>
                 <label>Sur Les</label>
                 <select id="filtreAbsCat">
                     <option value="M">12 Derniers Mois</option>
@@ -183,7 +189,6 @@
                         toutecategories.push(element.nom_categorie);
                         
                     });
-                    console.log(toutecategories);
                     data.forEach(element => {
                         if(element.nom_categorie_sup !== null){
                             
@@ -201,7 +206,6 @@
                             tabAssociatifCat[element.nom_categorie] = [];
                         }
                     });
-                    console.log(tabAssociatifCat);
 
                     //mettre les categories 
                     if(document.getElementById("filtreCat").children.length === 0){
@@ -294,6 +298,13 @@
                     console.error('Erreur :', error);
                 });
 
+
+                /*  
+                    ---------------------
+                    ------FONCITONS------
+                    ---------------------
+                */
+
                 //supprimer un graphe
                 function deleteChart(chart,idCanva) {
                     chart.destroy();
@@ -355,7 +366,6 @@
                                             value.push(event.chart.data.datasets[0].data[index] - value.reduce(
                                                         (accumulator, currentValue) => accumulator + currentValue,
                                                         initialValue,));
-                                            console.log(index,label,value,tabAssociatifCat[label],);
                                             deleteChart(graphe,id);
         
                                             createChart(id,typeChart,tabAssociatifCat[label],value,offsetChart,displayLegend);
@@ -430,18 +440,109 @@
                         case "m": return graph.getHour();
                     }
                 }
+                
+                function getValueData(graph,typeVal,typeCat,plage){
+                    let tableauAled = [typeCat];
+                    switch (typeVal) {
+                        case 'prix':
+                            
+                            tabAssociatifCat[typeCat].forEach(element => {
+                                tableauAled.push(element);
+                            });
+                            
+                            return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.prix;
+                            
+                            break;
+                        
+                        case 'qte':
+                            
+
+                            tabAssociatifCat[typeCat].forEach(element => {
+                                tableauAled.push(element);
+                            });
+                            
+                            return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.quantite;
+                            
+                            break;
+                        
+                        case 'nbAchat':
+                            
+
+                            tabAssociatifCat[typeCat].forEach(element => {
+                                tableauAled.push(element);
+                            });
+                            
+                            return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.nb_commande;
+                            
+                            break;
+                        
+                    }
+                }
+
+                //creer le graphe par categorie
+                function createCatChart() {
+                    //s'il est affiché => supprimer
+                    if(CatChart !== null){
+                        deleteChart(CatChart,"b");
+                    }
+
+                    tabCat = [];
+                    categories.forEach(element => {
+                        
+                        let initialValue = 0;
+                        let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.quantite.reduce(
+                                (accumulator, currentValue) => accumulator + currentValue,
+                                initialValue,);
+                        
+                        tabAssociatifCat[element].forEach(elt => {
+                            initialValue = 0;
+                            quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.quantite.reduce(
+                                (accumulator, currentValue) => accumulator + currentValue,
+                                initialValue,);
+                        });
+                        tabCat.push(quantiteCat);
+
+                    });
+
+
+
+                    //affiche le graphe
+                    CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true);
+                    
+                } 
+
+                /*  
+                    ----------------------
+                    ------Categories------
+                    ----------------------
+                */
+
+                //reset les filtres graphe categorie
+                document.getElementById("resetCat").addEventListener('click',()=>{
+                    createCatChart();
+                    document.getElementById('b_container').style="width:40vw;";
+                    const select = document.getElementById("filtreAbsCat");
+                    const select2 = document.getElementById("filtreCat");
+
+                    for (let option of select.options) {
+                        option.selected = option.defaultSelected;
+                    }
+
+                    for (let option of select2.options) {
+                        option.selected = option.defaultSelected;
+                    }
+                });
 
                 //changer le type de graphe catégorie
                 document.getElementById("filtreCat").addEventListener("change", () => {
 
                     let typeCat = document.getElementById("filtreCat").value;
                     let plage = document.getElementById("filtreAbsCat").value;
-
+                    let typeVal = document.getElementById("filtreOrdCat").value;
                     
 
                     if(typeCat === "all"){
                         createCatChart();
-                        console.log(document.getElementById('b_container'));
                         document.getElementById('b_container').style="width:40vw;";
                         return;
                     }
@@ -453,28 +554,30 @@
                     let baseData = getTimeData(baseGraph,plage);
                     
 
-                    let values = [...baseData.value.quantite];
+                    let values = getValueData(baseGraph,typeVal,typeCat,plage);
                     
 
-                    // ajouter les sous catégories
-                    if(tabAssociatifCat[typeCat]){
-                        tabAssociatifCat[typeCat].forEach(subCat => {
+                    // // ajouter les sous catégories
+                    // if(tabAssociatifCat[typeCat]){
+                    //     tabAssociatifCat[typeCat].forEach(subCat => {
 
-                            let subGraph = graphCat.resetData().filtreByCategorie([subCat]);
-                            let subData = getTimeData(baseGraph,plage);
+                    //         let subGraph = graphCat.resetData().filtreByCategorie([subCat]);
+                    //         let subData = getTimeData(baseGraph,plage);
 
-                            subData.value.quantite.forEach((v,i)=>{
-                                values[i] += v;
-                            });
+                    //         subData.value.prix.forEach((v,i)=>{
+                    //             values[i] += v;
+                    //         });
 
-                        });
-                    }
+                    //     });
+                    // }
 
                     CatChart = createChart(
                         "b",
                         "bar",
                         baseData.label,
-                        values
+                        values,
+                            "auto",
+                            false
                     );
 
                 });
@@ -484,41 +587,41 @@
 
                     const plage = document.getElementById("filtreAbsCat").value;
                     const typeCat = document.getElementById("filtreCat").value;
-
+                    const typeVal = document.getElementById('filtreOrdCat').value;
                     //toutes les categories 
                     if(typeCat === "all"){
 
-                        tabCat = [];
+                        tabCat = getValueData(graphCat,typeVal,typeCat,plage);
+                        // tabCat = [];
+                        // categories.forEach(element => {
 
-                        categories.forEach(element => {
+                        //     let initialValue = 0;
 
-                            let initialValue = 0;
+                        //     let data = getTimeData(
+                        //         graphCat.resetData().filtreByCategorie([element]),plage
+                        //     ).value.prix;
 
-                            let data = getTimeData(
-                                graphCat.resetData().filtreByCategorie([element]),plage
-                            ).value.prix;
+                        //     let quantiteCat = data.reduce(
+                        //         (accumulator, currentValue) => accumulator + currentValue,
+                        //         initialValue
+                        //     );
 
-                            let quantiteCat = data.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue
-                            );
+                        //     tabAssociatifCat[element].forEach(elt => {
 
-                            tabAssociatifCat[element].forEach(elt => {
+                        //         let subData = getTimeData(
+                        //             graphCat.resetData().filtreByCategorie([elt]),plage
+                        //         ).value.prix;
 
-                                let subData = getTimeData(
-                                    graphCat.resetData().filtreByCategorie([elt]),plage
-                                ).value.prix;
+                        //         quantiteCat += subData.reduce(
+                        //             (accumulator, currentValue) => accumulator + currentValue,
+                        //             0
+                        //         );
 
-                                quantiteCat += subData.reduce(
-                                    (accumulator, currentValue) => accumulator + currentValue,
-                                    0
-                                );
+                        //     });
 
-                            });
+                        //     tabCat.push(quantiteCat);
 
-                            tabCat.push(quantiteCat);
-
-                        });
+                        // });
 
                         deleteChart(CatChart,"b");
 
@@ -542,30 +645,74 @@
                         let graph = graphCat.resetData().filtreByCategorie([typeCat]);
                         let base = getTimeData(graph,plage);
 
-                        let values = [...base.value.quantite];
+                        // let values = [...base.value.prix];
+                        // 
+                        // // ajouter les sous catégories
+                        // tabAssociatifCat[typeCat].forEach(sub => {
 
-                        // ajouter les sous catégories
-                        tabAssociatifCat[typeCat].forEach(sub => {
+                        //     let subGraph = graphCat.resetData().filtreByCategorie([sub]);
+                        //     let subData = getTimeData(subGraph,plage);
 
-                            let subGraph = graphCat.resetData().filtreByCategorie([sub]);
-                            let subData = getTimeData(subGraph,plage);
+                        //     subData.value.prix.forEach((v,i)=>{
+                        //         values[i] += v;
+                        //     });
 
-                            subData.value.quantite.forEach((v,i)=>{
-                                values[i] += v;
-                            });
+                        // });
 
-                        });
-
+                        let values = getValueData(graphCat,typeVal,typeCat,plage);
+                        
                         CatChart = createChart(
                             "b",
                             "bar",
                             base.label,
-                            values
+                            values,
+                            "auto",
+                            false
                         );
                     }
                     
                 });
+
+                //changer l'ordonnee du graphique categorie
+                document.getElementById("filtreOrdCat").addEventListener('change',()=>{
+
+                    const plage = document.getElementById("filtreAbsCat").value;
+                    const typeCat = document.getElementById("filtreCat").value;
+                    const typeVal = document.getElementById('filtreOrdCat').value;
+
+                    // if(typeCat === "all"){
+                    //     createCatChart();
+                    //     document.getElementById('b_container').style="width:40vw;";
+                    //     return;
+                    // }
+                    
+                    let graph = graphCat.resetData().filtreByCategorie([typeCat]);
+                    let base = getTimeData(graph,plage);
+
+                    let values = getValueData(graphCat,typeVal,typeCat,plage);
+                    
+                    //elenve lancien graphe et met un nouveau canvas
+                    deleteChart(CatChart,"b");
+                            
+                    //ajoute le graphe
+                    CatChart = createChart(
+                            "b",
+                            "bar",
+                            base.label,
+                            values,
+                            "auto",
+                            false
+                        );
+                    
+                }); 
                 
+
+                /*  
+                    ----------------------
+                    ------Generales-------
+                    ----------------------
+                */
+
                 //changer l'oronnée du graphique général
                 document.getElementById("filtreOrd").addEventListener('change',()=>{
                     //recup type pour ordonnée
@@ -690,8 +837,7 @@
                     //ajoute le graphe
                     myChart = createChart("a",typeG,abscisse.reverse(),tab.reverse(),offsetG,false);
                     
-                });
-                    
+                });    
                 
                 //changer type graphique general
                 document.getElementById("typeGraph").addEventListener('change',()=>{
@@ -706,54 +852,6 @@
                     
                 });
                 
-                //creer le graphe par categorie
-                function createCatChart() {
-                    //s'il est affiché => supprimer
-                    if(CatChart !== null){
-                        deleteChart(CatChart,"b");
-                    }
-
-                    tabCat = [];
-                    categories.forEach(element => {
-                        
-                        let initialValue = 0;
-                        let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.prix.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
-                        
-                        tabAssociatifCat[element].forEach(elt => {
-                            initialValue = 0;
-                            quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.prix.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
-                        });
-                        tabCat.push(quantiteCat);
-
-                    });
-
-
-
-                    //affiche le graphe
-                    CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true);
-                    
-                } 
-
-                //reset les filtres graphe categorie
-                document.getElementById("resetCat").addEventListener('click',()=>{
-                    createCatChart();
-                    document.getElementById('b_container').style="width:40vw;";
-                    const select = document.getElementById("filtreAbsCat");
-                    const select2 = document.getElementById("filtreCat");
-
-                    for (let option of select.options) {
-                        option.selected = option.defaultSelected;
-                    }
-
-                    for (let option of select2.options) {
-                        option.selected = option.defaultSelected;
-                    }
-                });
-
             </script>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
