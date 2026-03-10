@@ -45,6 +45,28 @@ if (isset($_GET["commande"])) {
         function generePDF(url) {
             window.open(url).print();
         }
+
+        async function printPage(url) {
+            const response = await fetch(url);
+            const html = await response.text();
+
+            // Ouvre une nouvelle fenêtre
+            const printWindow = window.open("", "_blank");
+
+            // Injecte le HTML récupéré
+            printWindow.document.write(html);
+            printWindow.document.close();
+
+            // Attend que la page soit chargée avant impression
+            printWindow.onload = () => {
+                printWindow.print();
+                printWindow.close();
+            };
+        }
+
+        // Utilisation
+        //printPage("https://example.com");
+
     </script>
 </head>
 
@@ -120,7 +142,9 @@ if (isset($_GET["commande"])) {
                                         <?= $commande["pseudo_client"] ?>
                                     </td>
                                     <td>
-                                        <button class="bouton" onclick="generePDF('<?= './?commande=' . $commande['id_commande'] ?>')">Générer le fichier PDF de cette commande</button>
+                                        <button class="bouton"
+                                            onclick="printPage('<?= './?commande=' . $commande['id_commande'] ?>')">Générer le
+                                            fichier PDF de cette commande</button>
                                         <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a-->
                                     </td>
                                 </tr>
