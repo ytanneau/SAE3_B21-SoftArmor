@@ -519,20 +519,6 @@
         ]);
     }
 
-    function banniere_libre($date1,$date2){
-        global $pdo;
-        
-        $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
-        $stmt->execute([
-            "date1" => $date1,
-            "date2" => $date2
-        ]);
-        $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
-        if($resultat === 1){ return true; }
-        else { return false; }
-         
-    }
-
     function produit_est_en_promotion($id_produit){
 
         $resultat = get_info_promotion($id_produit);

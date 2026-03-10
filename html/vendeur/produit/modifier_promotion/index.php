@@ -91,17 +91,15 @@
                 $date_debut_initial != $_POST['dateDebut'] ||
                 $date_fin_initial != $_POST['dateFin']
             ){
-                if(banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
                     
-                    if(move_uploaded_file($cheminTemp,$cheminFinal)){
-                        $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
+                if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                    $id_nouvelle_banniere = add_image($url, $nomImage, $altDefault);
 
-                        if($id_nouvelle_banniere){
-                            update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
-                        }
-                        if($id_image_initial){
-                            delete_image($id_image_initial);
-                        }
+                    if($id_nouvelle_banniere){
+                        update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$pourcentage,$id_nouvelle_banniere);
+                    }
+                    if($id_image_initial){
+                        delete_image($id_image_initial);
                     }
                 }
             } else {
