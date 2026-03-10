@@ -147,9 +147,10 @@
                             Modifier la promotion du <?= htmlentities($new_date)?>
                         </a>
                     </li>
-                </ul>
+                
             </div>
             <?php }}?>
+            </ul>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
 
