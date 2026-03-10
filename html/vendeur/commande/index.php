@@ -120,7 +120,7 @@ if (isset($_GET["commande"])) {
                                         <?= $commande["pseudo_client"] ?>
                                     </td>
                                     <td>
-                                        <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
+                                        <button class="bouton" onclick="generePDF('<?= './?commande=' . $commande['id_commande'] ?>')">Générer le fichier PDF de cette commande</button>
                                         <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a-->
                                     </td>
                                 </tr>
