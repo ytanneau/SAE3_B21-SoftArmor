@@ -342,7 +342,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="pop_up_panier()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
@@ -460,20 +460,25 @@ if (isset($_POST['quantite'])) {
                 });
             });
         }
-        async function pop_up_panier(){
-            const goToCart = await customConfirm({
-                title: "Article ajouté au panier !",
-                message: "Que voulez vous faire ?",
-                cancelText :"Continuer les achat",
-                confirmText :"Aller au panier"
+        document.getElementById('ajout_panier').addEventListener('click', async function(e) {
+        e.preventDefault(); // bloque la soumission du formulaire
+
+        const goToCart = await customConfirm({
+            title: "Article ajouté au panier !",
+            message: "Que voulez vous faire ?",
+            cancelText: "Continuer les achats",
+            confirmText: "Aller au panier"
             });
-            if(goToCart) {
-                window.location.href = '../panier/'
-            } 
-            else {
-                
+
+            if (goToCart) {
+                window.location.href = '../panier/';
+            } else {
+                // soumettre le formulaire normalement pour ajouter au panier
+                // mais sans rediriger
+                const form = document.getElementById('ajout_panier').closest('form');
+                form.submit();
             }
-        }
+        });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
