@@ -1139,6 +1139,61 @@ div:has(> aside) {
         }
     }
 }
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+.confirm-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.confirm-box {
+    background: white;
+    border-radius: 14px;
+    padding: 2rem;
+    max-width: 380px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.confirm-title { 
+    font-size: 1.15rem; 
+    font-weight: 700; 
+    margin-bottom: 0.5rem; 
+}
+.confirm-message { 
+    font-size: 0.92rem; 
+    color: #666; 
+    margin-bottom: 1.5rem; 
+}
+.confirm-buttons { 
+    display: flex; gap: 
+    0.75rem; 
+}
+.confirm-buttons button { 
+    flex: 1; 
+    padding: 0.65rem 1rem; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    border: none; 
+}
+.btn-cancel  { 
+    background: #f0f0f0; 
+    color: #444; 
+}
+.btn-confirm { 
+    background: #2563eb; 
+    color: white; 
+}
 
 .prix {
     color: $couleur_prix;
