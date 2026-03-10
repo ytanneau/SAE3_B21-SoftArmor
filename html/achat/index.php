@@ -171,7 +171,7 @@ if ($numEtape == 3) {
 
     // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
+        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix_actuel AS prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
         FROM produit_panier
         INNER JOIN _vendeur ON produit_panier.id_vendeur = _vendeur.id_compte
         WHERE id_client = :id_compte");

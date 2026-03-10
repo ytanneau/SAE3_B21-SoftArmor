@@ -85,7 +85,7 @@ function get_elements_commande_vendeur($id_commande, $id_vendeur)
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT _elt_commande.id_produit, nom_produit, _elt_commande.quantite, _elt_commande.prix FROM _elt_commande 
+    $stmt = $pdo->prepare("SELECT _elt_commande.id_produit, nom_produit, _elt_commande.quantite, _elt_commande.prix, tva FROM _elt_commande 
     INNER JOIN _produit ON _elt_commande.id_produit = _produit.id_produit
     WHERE id_commande = :id_commande AND id_vendeur = :id_vendeur ORDER BY nom_produit");
     $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);

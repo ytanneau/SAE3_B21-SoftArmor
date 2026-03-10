@@ -47,10 +47,7 @@ function print_table($data)
             <tr>
                 <th>Produit</th>
                 <th>Quantité</th>
-                <th>Unité</th>
                 <th>Prix uniaire HT</th>
-                <th>% reduction</th>
-                <th>Total reduction</th>
                 <th>% TVA</th>
                 <th>Total TVA</th>
             </tr>
@@ -58,12 +55,11 @@ function print_table($data)
         <tbody>
             <?php foreach ($data as $valeur) { ?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?= htmlentities($valeur['nom_produit']) ?></td>
+                <td><?= htmlentities($valeur['quantite']) ?></td>
+                <td><?= htmlentities($valeur['prix']) ?></td>
+                <td><?= htmlentities($valeur['tva']) ?></td>
+                <td><?= number_format($valeur['quantite']*$valeur['prix']*(1 + $valeur['tva']/100), 2) ?></td>
             </tr>
             <?php } ?>
         </tbody>
@@ -74,6 +70,7 @@ function print_table($data)
 
 function facture_vendeur($id_vendeur, $id_commande): void{
     $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
+    print_table($data);
     print_r($data);
 }
 
