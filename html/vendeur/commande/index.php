@@ -24,11 +24,9 @@ else if (!isset($_SESSION["raison_sociale"])) {
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "/fonction_commande.php";
 
-if (isset($_GET["commande"])) {
-    $liste_elements = get_elements_commande_vendeur($_GET["commande"], $_SESSION["id_compte"]);
-} else {
-    $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
-}
+
+$liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
+
 
 ?>
 
@@ -73,46 +71,46 @@ if (isset($_GET["commande"])) {
 <body class="liste-commande-page">
     <?php include HOME_SITE . 'vendeur/header.php' ?>
     <main>
-            <div>
-                <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
-                <?php if (count($liste_commandes) == 0) { ?>
-                    <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
-                <?php } else { ?>
-                    <table class="liste-commande">
-                        <thead>
+        <div>
+            <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
+            <?php if (count($liste_commandes) == 0) { ?>
+                <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
+            <?php } else { ?>
+                <table class="liste-commande">
+                    <thead>
+                        <tr>
+                            <th>Date de la commande</th>
+                            <th>Client</th>
+                            <th>Récapitulatif de la commande</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($liste_commandes as $commande) {
+                            $d = strtotime($commande["date_commande"]);
+                            $jour = $JOUR_SEMAINE[date("w", $d)];
+                            $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                            ?>
+
                             <tr>
-                                <th>Date de la commande</th>
-                                <th>Client</th>
-                                <th>Récapitulatif de la commande</th>
+                                <td>
+                                    <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
+                                </td>
+                                <td>
+                                    <?= $commande["pseudo_client"] ?>
+                                </td>
+                                <td>
+                                    <button class="bouton"
+                                        onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Générer le
+                                        fichier PDF de cette commande</button>
+                                    <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton" target="_blank">Consulter la commande</a-->
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($liste_commandes as $commande) {
-                                $d = strtotime($commande["date_commande"]);
-                                $jour = $JOUR_SEMAINE[date("w", $d)];
-                                $mois = $MOIS_ANNEE[date((int) "m", $d)];
-                                ?>
 
-                                <tr>
-                                    <td>
-                                        <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
-                                    </td>
-                                    <td>
-                                        <?= $commande["pseudo_client"] ?>
-                                    </td>
-                                    <td>
-                                        <button class="bouton"
-                                            onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Générer le
-                                            fichier PDF de cette commande</button>
-                                        <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton" target="_blank">Consulter la commande</a-->
-                                    </td>
-                                </tr>
-
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-            </div>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            <?php } ?>
+        </div>
     </main>
 
     <?php if (!isset($_GET["commande"])) {

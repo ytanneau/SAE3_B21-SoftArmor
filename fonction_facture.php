@@ -9,7 +9,7 @@ function print_head()
     <?php
 }
 
-function print_carater($vendeur, $adr_vendeur, $client, $adr_client)
+function print_carater($vendeur, $adr_vendeur, $client, $adr_client, $date)
 {
     ?>
     <div class="facture-carater">
@@ -29,7 +29,52 @@ function print_carater($vendeur, $adr_vendeur, $client, $adr_client)
                 <?= htmlentities($adr_client) ?>
             </div>
         </div>
+        <div>
+            <div><strong>Date</strong></div>
+            <div>
+                <?= htmlentities($date) ?>
+            </div>
+        </div>
     </div>
     <?php
 }
+
+function print_table($data)
+{
+    ?>
+    <table class="facture-carater">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Unité</th>
+                <th>Prix uniaire HT</th>
+                <th>% reduction</th>
+                <th>Total reduction</th>
+                <th>% TVA</th>
+                <th>Total TVA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($data as $valeur) { ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php
+}
+
+
+function facture_vendeur($id_vendeur, $id_commande): void{
+    $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
+    print($data);
+}
+
 

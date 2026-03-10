@@ -26,10 +26,7 @@ require_once HOME_GIT . "/fonction_commande.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande_vendeur($_GET["commande"], $_SESSION["id_compte"]);
-} else {
-    $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -40,31 +37,6 @@ if (isset($_GET["commande"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Les commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
-
-    <script>
-        function generePDF(url) {
-            window.open(url).print();
-        }
-
-        async function printPage(url) {
-            const response = await fetch(url);
-            const html = await response.text();
-
-            // Ouvre une nouvelle fenêtre
-            const printWindow = window.open("", "_blank");
-
-            // Injecte le HTML récupéré
-            printWindow.document.write(html);
-            printWindow.document.close();
-
-            // Attend que la page soit chargée avant impression
-            printWindow.onload = () => {
-                printWindow.print();
-                printWindow.close();
-            };
-        }
-
-    </script>
 </head>
 
 <body class="facture-page">
@@ -118,6 +90,8 @@ if (isset($_GET["commande"])) {
         <?php } ?>
 
     </main>
+
+    <?php facture_vendeur($_SESSION['id_compte'], $_GET['commande']) ?>
 
 </body>
 </html>
