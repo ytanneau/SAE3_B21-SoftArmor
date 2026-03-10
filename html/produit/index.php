@@ -458,7 +458,6 @@ if (isset($_POST['quantite'])) {
                 cancelText :"Continuer les achat",
                 confirmText :"Aller au panier"
             });
-            document.getElementById('result').textContent = goToCart
             if(goToCart) {
                 window.location.href = '../panier/'
             } 
