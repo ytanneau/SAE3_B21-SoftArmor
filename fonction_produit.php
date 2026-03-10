@@ -506,16 +506,15 @@
         }
     }
 
-    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function creer_promotion($id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
-        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
-            VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, id_image_banniere)
+            VALUES (:id_produit, :date_debut, :date_fin, :id_image)");
         $stmt->execute([
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image" => $id_image_banniere
         ]);
     }

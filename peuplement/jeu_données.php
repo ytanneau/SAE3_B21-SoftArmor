@@ -1471,21 +1471,18 @@ function i_promo() {
                 'nom_produit' => 'Galettes de blé noir',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '10',
         ],
 
         [
                 'nom_produit' => 'Palets bretons pur beurre',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '5',
         ],
 
         [
                 'nom_produit' => 'Soupe de poissons bretonne',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '5',
         ],
 
         [
@@ -1498,14 +1495,12 @@ function i_promo() {
                 'nom_produit' => 'Smartphone ArmorX5',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '25',
         ],
 
         [
                 'nom_produit' => 'Tablette BreizhTab 10',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '25',
         ],
 
         [
@@ -1524,21 +1519,18 @@ function i_promo() {
                 'nom_produit' => 'Pull marin en laine',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '5',
         ],
 
         [
                 'nom_produit' => 'Gilet sans manches marin',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '20',
         ],
 
         [
                 'nom_produit' => 'Polo brodé hermine',
                 'date_debut' => '2026-01-20',
                 'date_fin' => '2026-01-23',
-                'reduction' => '15',
         ],
 
 	];
@@ -1546,7 +1538,7 @@ function i_promo() {
 	foreach ($promotions as $p) {
 		$id_produit= $pdo->query("SELECT id_produit FROM _produit WHERE nom_public = '{$p['nom_produit']}'")->fetch(PDO::FETCH_ASSOC)['id_produit'];
 
-		creer_promotion($id_produit, $p['date_debut'], $p['date_fin'], $p['reduction'] ?? 0, null);
+		creer_promotion($id_produit, $p['date_debut'], $p['date_fin'], null);
 	}
 
 }
