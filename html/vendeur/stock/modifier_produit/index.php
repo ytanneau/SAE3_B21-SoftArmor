@@ -286,11 +286,11 @@
                     <h3>Images du produit</h3>
                     <div class="blockImg">
                         <h4>Image principale</h4>
-                        <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                         <div>
                             <label for="photoPrincipale">Modifier l'image principale</label>
                             <input type="file" name="photoPrincipale" id="photoPrincipale">
                         </div>
+                        <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                         <h4>Deuxième image</h4>
                         <?php if($tabImageProduit['id_image1'] != null){?>
                             <div class="">
