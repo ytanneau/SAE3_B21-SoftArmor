@@ -282,5 +282,6 @@
         }
         dateDebut.value = current_string_date
         dateFin.value = current_string_date
+        cout.value = PRIX + "€";
     </script>
 </html>
