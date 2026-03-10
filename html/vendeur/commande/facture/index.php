@@ -1,6 +1,6 @@
 <?php
-const HOME_GIT = "../../../";
-const HOME_SITE = "../../";
+const HOME_GIT = "../../../../";
+const HOME_SITE = "../../../";
 
 $JOUR_SEMAINE = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
 $MOIS_ANNEE = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
