@@ -23,6 +23,7 @@ else if (!isset($_SESSION["raison_sociale"])) {
 
 require_once HOME_GIT . ".config.php";
 require_once HOME_GIT . "/fonction_commande.php";
+require_once HOME_GIT . "/fonction_facture.php";
 
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande_vendeur($_GET["commande"], $_SESSION["id_compte"]);
