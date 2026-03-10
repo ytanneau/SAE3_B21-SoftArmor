@@ -203,56 +203,58 @@ if (isset($_POST['quantite'])) {
 
             <!-- Section des avis -->
             <section id="avis">
+                <?php if (!check_avis_existe($id_produit, $id_client)) { ?>
                     <h2>Rédiger un avis</h2>
                 
-                <?php if (!empty($id_client) && !check_avis_existe($id_produit, $id_client)) { 
-                    $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
-                    
-                    <div id="creation_avis">
+                    <?php if (!empty($id_client)) { 
+                        $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
                         
-                        <div>
-                            <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
+                        <div id="creation_avis">
+                            
+                            <div>
+                                <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
+                
+                                <form id="form_avis" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="produit" value="<?=$produit['id_produit']?>">
             
-                            <form id="form_avis" enctype="multipart/form-data" method="post">
-                                <input type="hidden" name="produit" value="<?=$produit['id_produit']?>">
-        
-                                <div id="etoiles">
-                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                </div>
-                                <input type="hidden" name="note" id="nb_etoiles">
-
-                                <div id="champs">
-                                    <div>
-                                        <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
-
-                                        <div style="display: flex;">
-                                            <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
-                                            <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
-                                        </div>
-
-                                        <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
-                                        
-                                        <div style="display: flex;">
-                                            <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
-                                            <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
-                                        </div>
-
-
-                                        <input type="submit" value="Créer l'avis">
+                                    <div id="etoiles">
+                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
                                     </div>
+                                    <input type="hidden" name="note" id="nb_etoiles">
 
-                                    <input type="file" id="upload" name="image"></input>
-                                </div>
-                            </form>
+                                    <div id="champs">
+                                        <div>
+                                            <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
+
+                                            <div style="display: flex;">
+                                                <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
+                                                <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
+                                            </div>
+
+                                            <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
+                                            
+                                            <div style="display: flex;">
+                                                <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
+                                                <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
+                                            </div>
+
+
+                                            <input type="submit" value="Créer l'avis">
+                                        </div>
+
+                                        <input type="file" id="upload" name="image"></input>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                <?php } else if (empty($id_client)) { ?>
-                    <a href="<?= HOME_SITE . 'compte/connexion/?produit=' . $_GET['produit'] ?>">Connectez-vous pour rédiger un avis</a>
-                <?php } ?>
+                    <?php } else { ?>
+                        <a href="<?= HOME_SITE . 'compte/connexion/?produit=' . $_GET['produit'] ?>">Connectez-vous pour rédiger un avis</a>
+                    <?php }} ?>
+
 
                 <h2>Avis (<?= count($liste_avis) ?>)</h2>
 

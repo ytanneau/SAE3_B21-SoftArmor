@@ -14,8 +14,8 @@
 
     // On récupère la note, le titre et la description
     $note = $_POST['note'] ?? '';
-    $titre = $_POST['titre'] ?? '';
-    $description = $_POST['description'] ?? '';
+    $titre = htmlentities(trim($_POST['titre'] ?? ''));
+    $description = htmlentities(trim($_POST['description'] ?? ''));
     $id_produit = $_POST['produit'] ?? '';
 
     $image = null;
