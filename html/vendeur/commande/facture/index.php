@@ -92,7 +92,7 @@ if (isset($_GET["commande"])) {
 
     </main>
 
-    <?php facture_vendeur($_SESSION['id_compte'], $_GET['commande']) ?>
+    <?php facture_vendeur( $_GET['commande']) ?>
 
 </body>
 </html>

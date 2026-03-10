@@ -39,6 +39,18 @@ function print_carater($vendeur, $adr_vendeur, $client, $adr_client, $date)
     <?php
 }
 
+function sommeHt($data){
+
+}
+
+function sommeTVA($data){
+    
+}
+
+function sommeTTC($data){
+    return sommeHt($data) + sommeTVA($data);
+}
+
 function print_table($data)
 {
     ?>
@@ -54,24 +66,35 @@ function print_table($data)
         </thead>
         <tbody>
             <?php foreach ($data as $valeur) { ?>
-            <tr>
-                <td><?= htmlentities($valeur['nom_produit']) ?></td>
-                <td><?= htmlentities($valeur['quantite']) ?></td>
-                <td><?= htmlentities($valeur['prix']) ?></td>
-                <td><?= htmlentities($valeur['tva']) ?></td>
-                <td><?= number_format($valeur['quantite']*$valeur['prix']*(1 + $valeur['tva']/100), 2) ?></td>
-            </tr>
+                <tr>
+                    <td><?= htmlentities($valeur['nom_produit']) ?></td>
+                    <td><?= htmlentities($valeur['quantite']) ?></td>
+                    <td><?= htmlentities($valeur['prix']) ?></td>
+                    <td><?= htmlentities($valeur['tva']) ?></td>
+                    <td><?= number_format($valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100), 2) ?></td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>
+    <div class="facture-carater">
+
+    </div>
     <?php
 }
 
+function facture($id_vendeur, $id_commande)
+{
+    print_head();
 
-function facture_vendeur($id_vendeur, $id_commande): void{
+    //print_carater();
+
     $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
     print_table($data);
-    print_r($data);
 }
 
+function facture_vendeur($id_commande): void
+{
+    $pseudo = get_pseudo_commande($_GET['commande']);
 
+    facture($_SESSION['id_compte'], $id_commande);
+}
