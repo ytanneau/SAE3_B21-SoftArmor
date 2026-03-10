@@ -213,8 +213,6 @@ if ($_POST != NULL){
                 <article>
                     <img class="image_pp" src="<?= htmlentities("../../". ($info_compte['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                     
-
-
                     <label for="pdp" class="image_bouton"><?php if (isset($info_compte['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
@@ -454,10 +452,10 @@ if ($_POST != NULL){
                         <div>
                             <div>
                                 <?php if (isset($image_profil)) {?>
-                                    <img src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt_image'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
+                                    <img class="image_pp" src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt_image'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
                                 <?php
                                     } else {?>
-                                    <img src="<?= HOME_SITE . 'image/compte.svg'?>">
+                                    <img class="image_pp" src="<?= HOME_SITE . 'image/compte.svg'?>">
                                 <?php } ?>
 
                                 <div class="etoiles">

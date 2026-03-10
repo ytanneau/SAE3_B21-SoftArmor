@@ -2,12 +2,6 @@
     define('HOME_GIT', '../../../../');
     define('HOME_SITE', '../../../');
 
-    define('EXISTE', 'Existe déjà');
-    define('EXISTE_PAS', 'Existe pas');
-    define('VIDE', 'Veuillez renseigner ce champ');
-    define('DEPASSE', 'Dépassement de champ');
-    define('FORMAT', 'Le format est invalide');
-
     define('TAILLE_TITRE', '100');
     define('TAILLE_DESCRIPTION', '1000');
     define('TAILLE_IMAGE', '5000000');
@@ -31,6 +25,7 @@
     require_once HOME_GIT . 'fonction_avis.php';
     require_once HOME_GIT . 'fonction_produit.php';
     require_once HOME_GIT . 'fonction_categorie.php';
+    require_once HOME_GIT . 'fonction_compte.php';
 
     $erreur = [];
 

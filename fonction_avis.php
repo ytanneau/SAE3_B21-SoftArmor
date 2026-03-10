@@ -1,7 +1,10 @@
 <?php
     require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
 
-    
+    define('TAILLE_TITRE', '100');
+    define('TAILLE_DESCRIPTION', '1000');
+    define('TAILLE_IMAGE', '5000000');
 
     // fonction qui verifie les champs de l'avis 
     function condition_avis(){
@@ -77,8 +80,8 @@
             $requete->bindValue(':titre', $titre, PDO::PARAM_STR);
             $requete->bindValue(':description', $description, PDO::PARAM_STR);
             $requete->bindValue(':url', $image, PDO::PARAM_STR);
-            $requete->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
-            $requete->bindValue(':alt', 'image avis', PDO::PARAM_STR);
+            $requete->bindValue(':img_titre', 'Image avis', PDO::PARAM_STR);
+            $requete->bindValue(':alt', 'Image avis', PDO::PARAM_STR);
             $requete->execute();
             
             return 0;
@@ -91,12 +94,12 @@
     function check_avis_existe($id_produit, $id_client){
         global $pdo;
         
-        $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
+        $requete = $pdo->prepare("SELECT 1 FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
         $requete->execute();
         
-        return $requete->fetch(PDO::FETCH_ASSOC);
+        return $requete->rowCount() > 0;
     }
 
     // récupérer un avis par son identifiant

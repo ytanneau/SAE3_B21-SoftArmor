@@ -165,6 +165,11 @@
             }
         }
     }
+
+    .image_pp {
+        @include image_pp(30px);
+        margin-right: 8px;
+    }
 }
 
 @mixin produit_catalogue() {

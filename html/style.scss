@@ -404,6 +404,11 @@ ul#results {
     resize: none;
     height: 10em;
     font-family: $font_text;
+    padding-top: 0.3em;
+}
+
+.image_pp.grand {
+    @include image_pp(200px);
 }
 
 .infos {
@@ -435,7 +440,11 @@ ul#results {
 
     .liste_avis {
         li {
+<<<<<<< Updated upstream
             > img{
+=======
+            > img {
+>>>>>>> Stashed changes
                 &:first-child {
                     @include image_produit(10vw);
                     margin-left: 0;
@@ -444,10 +453,41 @@ ul#results {
             }
         }
 
+<<<<<<< Updated upstream
         div:first-child{
             img{
                 @include image_produit(2vw);
                 background-color: white;
+=======
+        img:not(.image_pp) {
+            @include image_produit(2vw);
+            background-color: white;
+        }
+
+        .image_pp {
+            @include image_pp(40px);
+        }
+
+        .icon {
+            height: 28px;
+        }
+
+        a {
+            text-decoration: none;
+            display: block;
+            height: 36px;
+        }
+        
+        .icons {
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+
+            margin-left: 1.2em;
+
+            img {
+                padding: 0.2em;
+>>>>>>> Stashed changes
             }
         }
     }
@@ -650,6 +690,8 @@ div.gauche {
         line-height: 2em;
         
     }
+
+    
 }
 
 div:has(> aside) {
@@ -736,6 +778,66 @@ div:has(> aside) {
             display: flex;
         }
     }
+}
+
+#creation_avis {
+    > div {
+        display: flex;
+        
+        > div {
+            width: 200px;
+            height: 200px;
+        }
+
+        .image_pp.grand {
+            @include image_pp(100px);
+            border: solid 2px black;
+            margin-right: 1em;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            flex-grow: 1;
+
+            #etoiles img {
+                width: 35px;
+                height: 35px;
+            }
+
+            #champs {
+                display: flex;
+                gap: 2em;
+
+                > div:first-of-type {
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;
+                    gap: 1em;
+                }
+
+                #upload {
+                    width: 200px;
+                    height: 200px;
+                    background-color: gray;
+                }
+            }
+
+            .champ {
+                border: solid 1px gray;
+            }
+
+            input[type="submit"] {
+                @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 10em);
+            }
+
+            > div:last-of-type {
+                display: flex;
+            }
+        }
+    }
+
 }
 
 

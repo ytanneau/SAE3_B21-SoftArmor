@@ -16,6 +16,7 @@
     const TAILLE_MDP = 100;
     
     require_once ".config.php";
+    require_once "fonction_produit.php";
     
     // Fonction qui renvoie le mot de passe crypté et salé
     function crypte_v1($mdp){
@@ -151,6 +152,8 @@
                     if (check_crypte_MDP($mdp, $resSQL['mdp'])){
                         $_SESSION['logged_in'] = false;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
+
+                        $_SESSION['pp'] = get_image($resSQL['id_image_profil'])['url_image'] ?? '';
                         $_SESSION['email'] = $email;
 
                         if ($typeCompte == 'vendeur'){
@@ -785,6 +788,22 @@
         
         $requete = $pdo->prepare('SELECT * FROM _adresse WHERE id_adresse = :id_adresse;');
         $requete->bindValue(":id_adresse", $id_adresse, PDO::PARAM_INT);
+        $requete->execute();
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function sql_get_photo_profil($id_compte) {
+        global $pdo;
+    
+        $requete = $pdo->prepare("
+            SELECT i.url_image, i.titre, i.alt 
+            FROM client c
+            INNER JOIN _image i
+            ON c.id_image_profil = i.id_image 
+            WHERE c.id_compte = :id_compte;
+        ");
+        
+        $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }

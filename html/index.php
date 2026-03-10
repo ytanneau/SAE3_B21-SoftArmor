@@ -27,7 +27,7 @@ $produit_promotion = info_produit_accueil_promotion();
 
 function afficher_un_produit($row){?>
     <li>
-        <a href="/produit/?produit=<?= $row['id_produit'];?>"> 
+        <a href="produit/?produit=<?= $row['id_produit'];?>"> 
             <?php
             $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
             $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
