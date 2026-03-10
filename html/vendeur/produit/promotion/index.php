@@ -29,48 +29,36 @@
     $_GET['produit'] = htmlentities(trim($_GET['produit'] ?? ''));
     $id_produit = $_GET['produit'];
 
-    $prix = detail_produit($_GET['produit'])['prix'];
-    
-
     if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        if(isset($_POST['pourcentage']) && $_POST['pourcentage'] !== ""){
-            $pourcentage = $_POST['pourcentage'];
-            $pourcentage = str_replace('-', "",$pourcentage);
-        } else {
-            $pourcentage = 0;
-        }
-
-        if (isset($_FILES['photoPromotion']) &&
-                $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK && 
-                banniere_libre($_POST['dateDebut'],$_POST['dateFin'])){
-        $nomImageTemp = $_FILES['photoPromotion'];
-        // recupere le nom temporaire du fichier pour le deplacer
-        $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
-        
-        switch($_FILES['photoPromotion']['type']){
-            case 'image/jpeg' : 
-                $extension = '.jpeg';
-                break;
-            case 'image/webp' :
-                $extension = '.webp';
-                break;
-            case 'image/jpg' :
-                $extension = '.jpg';
-                break;
-            default :
-                $extension = '.png';
-                break;
-        }
-        $nomImage = $id_produit . "_promotion" . $extension;
-        
-        $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
-        // definition des caractéristiques d'une image
-        $url = "ressources/promotion/" . $nomImage;
-        $altDefault = "Image de promotion";
-        if(move_uploaded_file($cheminTemp,$cheminFinal)){
-            $id_image_principal = add_image($url,$nomImage, $altDefault);
-        }
+        if (isset($_FILES['photoPromotion']) && $_FILES['photoPromotion']['error'] === UPLOAD_ERR_OK){
+            $nomImageTemp = $_FILES['photoPromotion'];
+            // recupere le nom temporaire du fichier pour le deplacer
+            $cheminTemp = $_FILES['photoPromotion']['tmp_name'];
+            
+            switch($_FILES['photoPromotion']['type']){
+                case 'image/jpeg' : 
+                    $extension = '.jpeg';
+                    break;
+                case 'image/webp' :
+                    $extension = '.webp';
+                    break;
+                case 'image/jpg' :
+                    $extension = '.jpg';
+                    break;
+                default :
+                    $extension = '.png';
+                    break;
+            }
+            $nomImage = $id_produit . "_promotion" . $extension;
+            
+            $cheminFinal = HOME_SITE . "ressources/promotion/" . $nomImage;
+            // definition des caractéristiques d'une image
+            $url = "ressources/promotion/" . $nomImage;
+            $altDefault = "Image de promotion";
+            if(move_uploaded_file($cheminTemp,$cheminFinal)){
+                $id_image_principal = add_image($url,$nomImage, $altDefault);
+            }
         } else {
             $id_image_principal = null;
         }
