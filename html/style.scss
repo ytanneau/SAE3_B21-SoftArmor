@@ -2272,12 +2272,6 @@ aside {
         width: 16.2em;
     }
 
-    .ajout_banniere {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-
     .delete_picture {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         width: 17.45em;
@@ -2544,7 +2538,7 @@ aside {
             object-fit: contain;
         }
 
-        div>a {
+        div>a, div>span {
             position: relative;
             left: 50px;
             top: 30px;
