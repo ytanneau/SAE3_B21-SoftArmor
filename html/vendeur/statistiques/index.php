@@ -97,17 +97,239 @@
                 import {TimeMilli,Compare,SideMonth,SideDay} from "./DataTime.js";
                 import MakeGraph from "./MakeGraph.js";
 
+                //supprimer un graphe
+                function deleteChart(chart,idCanva) {
+                    chart.destroy();
+                    document.getElementById(idCanva).remove();
+                    let elm = document.createElement('canvas');
+                    elm.id=idCanva;
+                    document.getElementById(`${idCanva}_container`).append(elm);
+                    
+                }
+
+                //creer un graphe
+                function createChart(id,typeChart,labelsChart,dataChart,offsetChart="auto",displayLegend=true,isClickable=false, displayScales=true) {
+                    let options = {
+                            plugins: {
+                                legend: {
+                                    display: displayLegend
+                                }
+                            },
+                            
+                            scales: {
+                                y: {
+                                    display: displayScales,
+                                    suggestedMax: Math.max(...dataChart),
+                                    suggestedMin: 0,
+                                    grid: {
+                                        display: displayScales,
+                                    }
+                                },
+                                x: {
+                                    display: displayScales,
+                                    offset : offsetChart,
+                                    grid: {
+                                        display: displayScales,
+                                    }
+                                }
+                            }
+                        }
+
+                    if(isClickable){
+                        options.onClick = (event, elements) => {
+                            if (elements.length > 0) {
+                                const graphe = event.chart;
+                                const index = elements[0].index;
+                                const label = event.chart.data.labels[index];
+                                const value = [];
+                                const plage = document.getElementById('filtreAbsCat').value;
+                                
+                                if(tabAssociatifCat[label].length != 0){
+
+                                    tabAssociatifCat[label].forEach(element => {
+
+                                        let initialValue = 0;
+                                        value.push(getTimeData(graphCat.resetData().filtreByCategorie([element]),plage).value.prix.reduce(
+                                                (accumulator, currentValue) => accumulator + currentValue,
+                                                initialValue,)
+                                            );
+                                    });
+
+                                    tabAssociatifCat[label].push("Autres");
+                                    let initialValue = 0;
+                                    value.push(event.chart.data.datasets[0].data[index] - value.reduce(
+                                                (accumulator, currentValue) => accumulator + currentValue,
+                                                initialValue,));
+                                    console.log(index,label,value,tabAssociatifCat[label],);
+                                    deleteChart(graphe,id);
+
+                                    createChart(id,typeChart,tabAssociatifCat[label],value,offsetChart,displayLegend, displayScales);
+                                    tabAssociatifCat[label].pop();
+                                }
+                            }
+                        }
+                    }
+
+                    return new Chart(document.getElementById(id), {
+                        type: typeChart,
+                        data: {
+                            labels: labelsChart,
+                            datasets: [{
+                                data: dataChart
+                            }]
+                        },
+                        options: options
+                    });
+                }
+
+                // créer un graphe pour la section "générale"
+                function createGenChart() {
+                    //recup type pour abscisse
+                    valAbs=document.getElementById("filtreAbs").value;
+
+                    //recup type pour ordonnée
+                    valOrd=document.getElementById("filtreOrd").value;
+                    
+                    //reinitialise les données
+                    tab = [];
+
+                    //set la valeur pour abscisse
+                    abscisse = [];
+                    switch (valAbs) {
+                        case "M" :
+                            typeG = 'bar';
+                            datas = dataY;
+                            abscisse = SideMonth.start(SideMonth.lesMois.at(datas.at(0).date.getMonth()));
+                            // abscisse.push(...MakeGraph.lesMois);
+                        break;
+                
+                        case "W":
+                            typeG = 'line';
+                            abscisse.push("Auj");
+                            for (let i = 1; i < 31; i++) {
+                                abscisse.push(`J -${i}`);   
+                            }
+                            datas = dataM;
+                        break;
+
+                        case "D":
+                            datas = dataW;
+                            typeG = 'bar';
+                            abscisse = SideDay.start(SideDay.lesJour.at(datas.at(0).date.getDay()));
+                            // abscisse.push(...MakeGraph.lesJour);
+                        break;
+
+                        case "h":
+                            datas = dataD;
+                            abscisse.push("Auj");
+                            typeG = 'line';
+                            for (let i = 1; i < 25; i++) {
+                                abscisse.push(`-${i}h`); 
+                            }
+                        break;
+
+                        case "m":
+                            typeG = 'line';
+                            abscisse.push("Auj");
+                            datas = dataH;
+                            for (let i = 1; i < 61; i++) {
+                                abscisse.push(`-${i}m`);   
+                            }
+                        break;
+
+                        
+                    } 
+
+                    //set les datas pour la ordonnées
+                    switch (valOrd) {
+                        case 'qte':
+                            datas.forEach(element => {
+                                tab.push(element.quantite);
+                            });
+                        break;
+                
+                        case 'prix':
+                            datas.forEach(element => {
+                                tab.push(element.prix);
+                            });
+                        break;
+
+                        case 'nbAchat':
+                            datas.forEach(element => {
+                                tab.push(element.nb_commande);
+                            });
+                        break;
+                        
+                    }
+
+                    //elenve lancien graphe et met un nouveau canvas
+                    if (myChart != null) {
+                        deleteChart(myChart,"a");
+                    }
+
+                    //recup le type de graphe
+                    typeG = document.getElementById("typeGraph").value;
+                            
+                    //ajoute le graphe
+                    myChart = createChart("a",typeG,abscisse.reverse(),tab.reverse(),offsetG,false);
+                }
+
+                //creer le graphe pour la section "catégories"
+                function createCatChart() {
+
+                    //s'il est affiché => supprimer
+                    if(CatChart !== null){
+                        deleteChart(CatChart,"b");
+                    }
+
+                    tabCat = [];
+                    categories.forEach(element => {
+                        
+                        let initialValue = 0;
+                        let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.prix.reduce(
+                                (accumulator, currentValue) => accumulator + currentValue,
+                                initialValue,);
+                        
+                        tabAssociatifCat[element].forEach(elt => {
+                            initialValue = 0;
+                            quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.prix.reduce(
+                                (accumulator, currentValue) => accumulator + currentValue,
+                                initialValue,);
+                        });
+                        tabCat.push(quantiteCat);
+
+                    });
+
+                    //affiche le graphe
+                    CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true, false);
+                    
+                }
+
+
                 let sec1 = document.getElementById("sectionGen");
 
                 let sec2 = document.getElementById("section_cat");
                 sec2.style.display = "None";
                 let sec3 = document.getElementById("section_prod");
                 sec3.style.display = "None";
+                
+                function resetOptions() {
+                    let listeSelects = document.getElementsByTagName('select');
+
+                    for (let select of listeSelects) {
+                        for (let option of select.options) {
+                            option.selected = option.defaultSelected;
+                        }
+                    }
+                }
 
                 document.getElementById("general").addEventListener('click', () => {
                     sec1.style.display = "initial";
                     sec2.style.display = "None";
                     sec3.style.display = "None";
+
+                    resetOptions();
+                    createGenChart();
                 });
 
                 document.getElementById("categories").addEventListener('click', () => {
@@ -116,23 +338,18 @@
                     sec3.style.display = "None";
                     createCatChart();
                     document.getElementById('b_container').style="width:40vw;";
-                    const select = document.getElementById("filtreAbsCat");
-                    const select2 = document.getElementById("filtreCat");
 
-                    for (let option of select.options) {
-                        option.selected = option.defaultSelected;
-                    }
-
-                    for (let option of select2.options) {
-                        option.selected = option.defaultSelected;
-                    }
+                    resetOptions();
                 });
 
                 document.getElementById("produits").addEventListener('click', () => {
                     sec1.style.display = "None";
                     sec2.style.display = "None";
                     sec3.style.display = "initial";
+
+                    resetOptions();
                 });
+
 
                 let tempY = DataGraph.createTempleteV2('Y'); 
                 let tempM = DataGraph.createTempleteV2('M');
@@ -167,6 +384,7 @@
                 let toutecategories= [];
                 let tabAssociatifCat= {};
 
+                // récupère catégories
                 fetch('./json_prod.php?categorie=true&id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
                 .then(data => {
@@ -176,6 +394,7 @@
                     });
                 });
 
+                // récupère toutes les catégories (catégories enfants aussi)
                 fetch('./json_prod.php?toutecategorie=true&id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
                 .then(data => {
@@ -224,6 +443,7 @@
 
                 });
 
+                // récupère les produits du vendeur
                 fetch('./json_prod.php?id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
                 .then(data => {
@@ -239,40 +459,13 @@
                     dataD = DataGraph.groupByTime(data,"h",tempD);
                     dataH = DataGraph.groupByTime(data,"m",tempH);
 
-                    datas = dataY;
-
-                    typeG = 'bar';
-
-                    abscisse = SideMonth.start(SideMonth.lesMois.at(datas.at(0).date.getMonth()));
-                    //set les valeurs pour l'ordonnées
-                    switch (valOrd) {
-                        case 'qte':
-                            datas.forEach(element => {
-                                tab.push(element.quantite);
-                            });
-                        break;
-                
-                        case 'prix':
-                            datas.forEach(element => {
-                                tab.push(element.prix);
-                            });
-                        break;
-
-                        case 'nbAchat':
-                            datas.forEach(element => {
-                                tab.push(element.nb_commande);
-                            });
-
-                            
-                        break;
-                        
-                    }
-
+                    datas = data;
+                    
                     //recup le type de graphe
                     typeG = document.getElementById("typeGraph").value;
 
                     //affiche le graphe
-                    myChart = createChart("a",typeG,abscisse.reverse(),tab.reverse(),offsetG,false);
+                    myChart = createGenChart();
                     
 
                     // STATISTIQUES CATEGORIE
@@ -286,140 +479,12 @@
                                 initialValue,)
                             );
                     });
-                    
-
 
                 })
                 .catch(error => {
                     console.error('Erreur :', error);
                 });
 
-                //supprimer un graphe
-                function deleteChart(chart,idCanva) {
-                    chart.destroy();
-                    document.getElementById(idCanva).remove();
-                    let elm = document.createElement('canvas');
-                    elm.id=idCanva;
-                    document.getElementById(`${idCanva}_container`).append(elm);
-                    
-                }
-
-                //creer un graphe
-                function createChart(id,typeChart,labelsChart,dataChart,offsetChart="auto",displayLegend=true,isClickable=false) {
-                    let options
-                    if(isClickable){
-                        options = {
-                                scales: {
-                                    y: {
-                                        display: false,
-                                        suggestedMax: Math.max(...dataChart),
-                                        suggestedMin: 0,
-                                        grid: {
-                                            display: false,
-                                            }
-                                    },
-                                    x: {
-                                        display: false,
-                                        offset : offsetChart,
-                                        grid: {
-                                            display: false,
-                                            }
-                                    }
-                                },
-                                plugins: {
-                                    legend: {
-                                        display: displayLegend
-                                    }
-                                },
-                                onClick: (event, elements) => {
-                                    if (elements.length > 0) {
-                                        const graphe = event.chart;
-                                        const index = elements[0].index;
-                                        const label = event.chart.data.labels[index];
-                                        const value = [];
-                                        const plage = document.getElementById('filtreAbsCat').value;
-                                        
-                                        if(tabAssociatifCat[label].length != 0){
-
-                                            tabAssociatifCat[label].forEach(element => {
-
-                                                let initialValue = 0;
-                                                value.push(getTimeData(graphCat.resetData().filtreByCategorie([element]),plage).value.prix.reduce(
-                                                        (accumulator, currentValue) => accumulator + currentValue,
-                                                        initialValue,)
-                                                    );
-                                            });
-    
-                                            tabAssociatifCat[label].push("Autres");
-                                            let initialValue = 0;
-                                            value.push(event.chart.data.datasets[0].data[index] - value.reduce(
-                                                        (accumulator, currentValue) => accumulator + currentValue,
-                                                        initialValue,));
-                                            console.log(index,label,value,tabAssociatifCat[label],);
-                                            deleteChart(graphe,id);
-        
-                                            createChart(id,typeChart,tabAssociatifCat[label],value,offsetChart,displayLegend);
-                                            tabAssociatifCat[label].pop();
-                                        }
-                                    }
-                                }
-                        } 
-                    }
-                    else if (typeChart == 'pie') {           
-                        options = {
-                            scales: {
-                                y: {
-                                    display: false,
-                                    suggestedMax: Math.max(...dataChart),
-                                    suggestedMin: 0,
-                                    grid: {
-                                        display: false,
-                                        }
-                                },
-                                x: {
-                                    display: false,
-                                    offset : offsetChart,
-                                    grid: {
-                                        display: false,
-                                        }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: displayLegend
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        options = {
-                            scales: {
-                                y: {
-                                    suggestedMax: Math.max(...dataChart),
-                                    suggestedMin: 0
-                                },
-                                x: {
-                                    offset : offsetChart
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: displayLegend
-                                }
-                            }
-                        }
-                    }
-                    return new Chart(document.getElementById(id), {
-                            type: typeChart,
-                            data: {
-                                labels: labelsChart,
-                                datasets: [{
-                                    data: dataChart
-                                }]
-                            },
-                            options: options
-                        });
-                }
 
                 function getTimeData(graph,plage){
                     switch(plage){
@@ -529,7 +594,8 @@
                             tabCat,
                             "auto",
                             true,
-                            true
+                            true,
+                            false
                         );
 
                     }
@@ -560,7 +626,8 @@
                             "b",
                             "bar",
                             base.label,
-                            values
+                            values,
+                            displayScales=false
                         );
                     }
                     
@@ -568,190 +635,25 @@
                 
                 //changer l'oronnée du graphique général
                 document.getElementById("filtreOrd").addEventListener('change',()=>{
-                    //recup type pour ordonnée
-                    valOrd=document.getElementById("filtreOrd").value;
-                    
-                    //reinitialise les données
-                    tab = [];
-
-                    //set la valeur pour orodnnée
-                    switch (valOrd) {
-                        case 'qte':
-                            datas.forEach(element => {
-                                tab.push(element.quantite);
-                            });
-                        break;
-                
-                        case 'prix':
-                            datas.forEach(element => {
-                                tab.push(element.prix);
-                            });
-                        break;
-                        
-                        case 'nbAchat':
-                            datas.forEach(element => {
-                                tab.push(element.nb_commande);
-                            });
-                        break;
-                    }
-                    
-                    deleteChart(myChart,"a");
-                    
-                    //recup le type de graphe
-                    typeG = document.getElementById("typeGraph").value;
-                    
-                    myChart = createChart("a",typeG,abscisse,tab.reverse(),offsetG,false);
+                    createGenChart();
                 });
 
                 //changer l'abscisse du graphique général
                 document.getElementById("filtreAbs").addEventListener('change',()=>{
-                    //recup type pour abscisse
-                    valAbs=document.getElementById("filtreAbs").value;
-
-                    //recup type pour ordonnée
-                    valOrd=document.getElementById("filtreOrd").value;
-                    
-                    //reinitialise les données
-                    tab = [];
-
-                    //set la valeur pour abscisse
-                    abscisse = [];
-                    switch (valAbs) {
-                        case "M" :
-                            typeG = 'bar';
-                            datas = dataY;
-                            abscisse = SideMonth.start(SideMonth.lesMois.at(datas.at(0).date.getMonth()));
-                        break;
-                
-                        case "W":
-                            typeG = 'line';
-                            abscisse.push("Auj");
-                            for (let i = 1; i < 31; i++) {
-                                abscisse.push(`J -${i}`);   
-                            }
-                            datas = dataM;
-                        break;
-
-                        case "D":
-                            datas = dataW;
-                            typeG = 'bar';
-                            abscisse = SideDay.start(SideDay.lesJour.at(datas.at(0).date.getDay()));
-                        break;
-
-                        case "h":
-                            datas = dataD;
-                            abscisse.push("Auj");
-                            typeG = 'line';
-                            for (let i = 1; i < 25; i++) {
-                                abscisse.push(`-${i}h`); 
-                            }
-                        break;
-
-                        case "m":
-                            typeG = 'line';
-                            abscisse.push("Auj");
-                            datas = dataH;
-                            for (let i = 1; i < 61; i++) {
-                                abscisse.push(`-${i}m`);   
-                            }
-                        break;
-
-                        
-                    } 
-
-                    //set les datas pour la ordonnées
-                    switch (valOrd) {
-                        case 'qte':
-                            datas.forEach(element => {
-                                tab.push(element.quantite);
-                            });
-                        break;
-                
-                        case 'prix':
-                            datas.forEach(element => {
-                                tab.push(element.prix);
-                            });
-                        break;
-
-                        case 'nbAchat':
-                            datas.forEach(element => {
-                                tab.push(element.nb_commande);
-                            });
-                        break;
-                        
-                    }
-
-                    //elenve lancien graphe et met un nouveau canvas
-                    deleteChart(myChart,"a");
-
-                    //recup le type de graphe
-                    typeG = document.getElementById("typeGraph").value;
-                            
-                    //ajoute le graphe
-                    myChart = createChart("a",typeG,abscisse.reverse(),tab.reverse(),offsetG,false);
-                    
+                    createGenChart();
                 });
                     
                 
                 //changer type graphique general
                 document.getElementById("typeGraph").addEventListener('change',()=>{
-                    //elenve lancien graphe et met un nouveau canvas
-                    deleteChart(myChart,"a");
-
-                    //recup le type de graphe
-                    typeG = document.getElementById("typeGraph").value;
-                            
-                    //ajoute le graphe
-                    myChart = createChart("a",typeG,abscisse,tab.reverse(),offsetG,false);
-                    
+                    createGenChart();
                 });
-                
-                //creer le graphe par categorie
-                function createCatChart() {
-                    //s'il est affiché => supprimer
-                    if(CatChart !== null){
-                        deleteChart(CatChart,"b");
-                    }
 
-                    tabCat = [];
-                    categories.forEach(element => {
-                        
-                        let initialValue = 0;
-                        let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.prix.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
-                        
-                        tabAssociatifCat[element].forEach(elt => {
-                            initialValue = 0;
-                            quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.prix.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
-                        });
-                        tabCat.push(quantiteCat);
-
-                    });
-
-
-
-                    //affiche le graphe
-                    CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true);
-                    
-                } 
 
                 //reset les filtres graphe categorie
                 document.getElementById("resetCat").addEventListener('click',()=>{
+                    resetOptions();
                     createCatChart();
-                    document.getElementById('b_container').style="width:40vw;";
-                    const select = document.getElementById("filtreAbsCat");
-                    const select2 = document.getElementById("filtreCat");
-
-                    for (let option of select.options) {
-                        option.selected = option.defaultSelected;
-                    }
-
-                    for (let option of select2.options) {
-                        option.selected = option.defaultSelected;
-                    }
                 });
 
             </script>
