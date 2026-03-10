@@ -118,7 +118,7 @@
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
-                    <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
+                    <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
 
                 <h3>Réduction</h3>
@@ -281,5 +281,6 @@
             current_string_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
         }
         dateDebut.value = current_string_date
+        dateFin.value = current_string_date
     </script>
 </html>

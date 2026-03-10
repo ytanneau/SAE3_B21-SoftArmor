@@ -2218,6 +2218,8 @@ aside {
 
     .ajout_banniere {
         margin-top: 20px;
+        display: flex;
+        flex-direction: column;
     }
 
     .delete_picture {

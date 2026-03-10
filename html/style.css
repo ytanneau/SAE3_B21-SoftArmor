@@ -3483,6 +3483,8 @@ aside .achat:hover {
 }
 .main_promo .ajout_banniere {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .main_promo .delete_picture {
   display: block;
