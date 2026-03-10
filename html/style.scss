@@ -1545,6 +1545,7 @@ aside {
         .overImg{
             display: flex;
             flex-direction: column;
+            margin-bottom: 10px;
         }
         img {
             @include image_produit(250px);
