@@ -243,39 +243,39 @@
         });
 
         function calculP() {
-            const d1 = new Date(dateDebut.value + "T00:00:00");
-            const d2 = new Date(dateFin.value + "T00:00:00");
+            const d1 = new Date(dateDebut.value + "T00:00:00")
+            const d2 = new Date(dateFin.value + "T00:00:00")
 
-            const diffJours = (d2 - d1) / 86400000;
+            const diffJours = (d2 - d1) / 86400000
 
             if (diffJours < 0) {
-                cout.value = "";
-                return;
+                cout.value = ""
+                return
             }
 
-            cout.value = PRIX * diffJours + PRIX + "€";
+            cout.value = PRIX * diffJours + PRIX + "€"
         }
 
         // VALIDATION DU FORM //
         valider.addEventListener('click', (event) => {
-            warning1.style.display = "none";
-            warning2.style.display = "none";
-            warning4.style.display = "none";
+            warning1.style.display = "none"
+            warning2.style.display = "none"
+            warning4.style.display = "none"
 
             if (!dateDebut.value || !dateFin.value) {
-                warning2.style.display = "block";
-                event.preventDefault();
-                return;
+                warning2.style.display = "block"
+                event.preventDefault()
             }
 
             if (dateDebut.value > dateFin.value) {
-                warning1.style.display = "block";
-                event.preventDefault();
+                warning1.style.display = "block"
+                event.preventDefault()
             }
             if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
-                warning4.style.display = "block";
-                event.preventDefault();
+                warning4.style.display = "block"
+                event.preventDefault()
             }
-        });
+        })
+        calculP()
     </script>
 </html>
