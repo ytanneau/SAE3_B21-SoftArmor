@@ -3452,6 +3452,10 @@ aside .achat:hover {
   flex-direction: column;
   margin-top: 40px;
 }
+.main_promo .block_banniere .overImg {
+  display: flex;
+  flex-direction: column;
+}
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
