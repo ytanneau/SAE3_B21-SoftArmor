@@ -64,18 +64,20 @@ if (isset($_GET["commande"])) {
             };
         }
 
-        // Utilisation
-        //printPage("https://example.com");
-
     </script>
 </head>
 
-<body class="liste-commande-page">
+<body class="facture-page">
     <?php include HOME_SITE . 'vendeur/header.php' ?>
     <main>
 
         <?php if (isset($_GET["commande"])) { ?>
-            <div>
+
+            <div class="facture">
+                <div class="facture-head">
+
+                </div>
+
                 <a href="."><img src="<?= HOME_SITE ?>image/retour.svg"></a>
                 <?php if (count($liste_elements) == 0) { ?>
                     <p>Vous n'avez pas accès à cette commande</p>
