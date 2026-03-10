@@ -76,8 +76,8 @@ if (isset($_POST['quantite'])) {
 
         } else {
             ajouter_panier_visiteur($id_prod, $qte);
-
-            }
+            
+        }
         header('Location:' . HOME_SITE . 'panier');
 
     // Sinon, s'il a fait "acheter le produit"
@@ -342,7 +342,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="pop_up_panier()">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
@@ -411,7 +411,61 @@ if (isset($_POST['quantite'])) {
             }
         }
 
-        
+
+        function customConfirm({ title = '', message = '', icon = '', cancelText = 'Annuler', confirmText = 'Confirmer' } = {}) {
+            return new Promise((resolve) => {
+                const overlay  = document.getElementById('confirmOverlay');
+                const titleEl  = document.getElementById('confirmTitle');
+                const msgEl    = document.getElementById('confirmMessage');
+                const iconEl   = document.getElementById('confirmIcon');
+                const cancelBtn  = document.getElementById('confirmCancel');
+                const confirmBtn = document.getElementById('confirmOk');
+
+                // Remplir le contenu
+                titleEl.textContent   = title;
+                msgEl.textContent     = message;
+                // iconEl.textContent    = icon;
+                // iconEl.style.display  = icon ? 'block' : 'none';
+                cancelBtn.textContent  = cancelText;
+                confirmBtn.textContent = confirmText;
+
+                // Afficher
+                overlay.classList.add('active');
+
+                // Désactivé les boutons de base du confirm
+                function done(result) {
+                    overlay.classList.remove('active');
+                    cancelBtn.removeEventListener('click', onCancel);
+                    confirmBtn.removeEventListener('click', onConfirm);
+                    resolve(result);
+                }
+                function onCancel()  { done(false); }
+                function onConfirm() { done(true);  }
+
+                cancelBtn.addEventListener('click', onCancel);
+                confirmBtn.addEventListener('click', onConfirm);
+
+                // Clic sur l'overlay = annuler
+                overlay.addEventListener('click', function onBg(e) {
+                    if (e.target === overlay) { overlay.removeEventListener('click', onBg); done(false); }
+                });
+            });
+        }
+        async function choix_panier(){
+            conts goToCart = await customConfirm({
+                title: "Article ajouté au panier !",
+                message: "Que voulez vous faire ?",
+                cancelText :"Continuer les achat",
+                confirmText :"Aller au panier"
+            });
+            document.getElementById('result').textContent = goToCart
+            if(goToCart) {
+                window.location.href = '../panier/'
+            } 
+            else {
+                
+            }
+        }
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();
