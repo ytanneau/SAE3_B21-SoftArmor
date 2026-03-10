@@ -143,11 +143,19 @@ if ($numEtape == 3) {
     //connexion au delivraptor
     $conn =false;
     $fd = connexion_socket(IP,PORT);
-    if($fd){
+    if($fd != null){
         $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
         //creer bordereau colis
-        $bordereau = create_colis($fd);
-        deconnexion_socket($fd);
+        if ($conn == 1){
+            $bordereau = create_colis($fd);
+            deconnexion_socket($fd);
+        }
+        else{
+            $bordereau = null;
+        }
+    }
+    else{
+        $bordereau = null;
     }
 
     
@@ -222,7 +230,7 @@ if ($numEtape == 3) {
             ajout_commande($id_commande, $liste_produits);
             vider_panier($_SESSION['id_compte']);
         }
-        header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
+        header("location: " . HOME_SITE . "commande/facture/?commande=" . $id_commande);
     }
 
     $_POST = [];
