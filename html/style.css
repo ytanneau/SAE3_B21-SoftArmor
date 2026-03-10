@@ -2482,6 +2482,10 @@ aside .achat:hover {
   flex-direction: row;
   gap: 70px;
 }
+.bodyModifProduit .blockImg .overImg {
+  display: flex;
+  flex-direction: column;
+}
 .bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
