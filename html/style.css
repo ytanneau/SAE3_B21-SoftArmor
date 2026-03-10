@@ -2615,7 +2615,7 @@ aside .achat:hover {
   flex-direction: column;
 }
 .mainInfoVendeur div form div #map {
-  width: 400px;
+  width: 500px;
   height: 300px;
 }
 .mainInfoVendeur div form div .inputs_lon_lat {
