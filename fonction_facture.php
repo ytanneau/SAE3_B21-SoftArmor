@@ -74,7 +74,7 @@ function print_table($data)
 
 function facture_vendeur($id_vendeur, $id_commande): void{
     $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
-    print($data);
+    print_r($data);
 }
 
 
