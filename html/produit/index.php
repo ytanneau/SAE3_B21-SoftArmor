@@ -451,8 +451,8 @@ if (isset($_POST['quantite'])) {
                 });
             });
         }
-        async function choix_panier(){
-            conts goToCart = await customConfirm({
+        async function pop_up_panier(){
+            const goToCart = await customConfirm({
                 title: "Article ajouté au panier !",
                 message: "Que voulez vous faire ?",
                 cancelText :"Continuer les achat",
