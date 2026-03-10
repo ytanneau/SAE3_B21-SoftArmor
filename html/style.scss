@@ -1543,9 +1543,7 @@ aside {
 
     .blockImg {
         .overImg{
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
+            @include input_img_over_img;
         }
         img {
             @include image_produit(250px);
@@ -2202,8 +2200,7 @@ aside {
         flex-direction: column;
         margin-top: 40px;
         .overImg{
-            display: flex;
-            flex-direction: column;
+            @include input_img_over_img;
         }
         img {
             @include image_produit(250px);

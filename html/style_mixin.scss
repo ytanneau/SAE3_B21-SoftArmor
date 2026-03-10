@@ -493,3 +493,9 @@
         background: adjust-color($color: $background, $lightness: 15%);
     }
 }
+
+@mixin input_img_over_img{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; 
+}
