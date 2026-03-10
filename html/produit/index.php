@@ -350,7 +350,16 @@ if (isset($_POST['quantite'])) {
         </div>
         
     </main>
-    
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <div class="confirm-title" id="confirmTitle"></div>
+            <div class="confirm-message" id="confirmMessage"></div>
+            <div class="confirm-buttons">
+            <button class="btn-cancel" id="confirmCancel"></button>
+            <button class="btn-confirm" id="confirmOk"></button>
+            </div>
+        </div>
+    </div>
     <?php include HOME_SITE . "footer.php" ?>
 
     <script>
