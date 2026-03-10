@@ -43,7 +43,7 @@ if (isset($_GET["commande"])) {
 
     <script>
         function generePDF(url) {
-            open(url).print();
+            window.open(url).print();
         }
     </script>
 </head>
