@@ -288,7 +288,7 @@
                         <h4>Image principale</h4>
                         <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                         <div>
-                            <label class="hide_input_file" for="photoPrincipale">Modifier l'image principale</label>
+                            <label for="photoPrincipale">Modifier l'image principale</label>
                             <input type="file" name="photoPrincipale" id="photoPrincipale">
                         </div>
                         <h4>Image secondaire</h4>
@@ -297,7 +297,7 @@
                             <a class="delete_picture" href="delete_photo.php?idImage=<?=$tabImageProduit['id_image1']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
                         <?php }?>
                         <div>
-                            <label class="hide_input_file" for="photo2">Ajouter/Modifier la seconde image</label>
+                            <label for="photo2">Ajouter/Modifier la seconde image</label>
                             <input type="file" name="photo2" accept="image/png" id="photo2">
                         </div>
                         <h4>Troisième image</h4>
@@ -306,7 +306,7 @@
                             <a class="delete_picture" href="delete_photo.php?idImage=<?=$tabImageProduit['id_image2']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
                         <?php }?>
                         <div>
-                            <label class="hide_input_file" for="photo3">Ajouter/Modifier la troisième image</label>
+                            <label for="photo3">Ajouter/Modifier la troisième image</label>
                             <input type="file" name="photo3" accept="image/png" id="photo3">
                         </div>
                     </div>
