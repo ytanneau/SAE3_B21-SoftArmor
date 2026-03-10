@@ -1187,12 +1187,10 @@ div:has(> aside) {
     border: none; 
 }
 .btn-cancel  { 
-    background: #f0f0f0; 
-    color: #444; 
+    @include bouton_new($background: #f0f0f0, $color: #444, $largeur: auto);
 }
 .btn-confirm { 
-    background: #2563eb; 
-    color: white; 
+    @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: auto);
 }
 
 .prix {

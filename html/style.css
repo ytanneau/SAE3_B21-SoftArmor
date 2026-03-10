@@ -2001,13 +2001,51 @@ div:has(> aside) {
 }
 
 .btn-cancel {
-  background: #f0f0f0;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f0f0f0;
   color: #444;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-cancel a {
+  text-decoration: none;
+  color: #444;
+}
+.btn-cancel:hover {
+  background-color: hsl(0, 0%, 109.1176470588%);
 }
 
 .btn-confirm {
-  background: #2563eb;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
   color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-confirm a {
+  text-decoration: none;
+  color: white;
+}
+.btn-confirm:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }
 
 .prix {
