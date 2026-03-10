@@ -117,7 +117,7 @@
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
-                    <label class="hide_input_file" for="photoPromotion">Ajouter une banniere</label>
+                    <label for="photoPromotion">Ajouter une banniere</label>
                     <input style="display:none;"type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
 
@@ -271,5 +271,15 @@
                 event.preventDefault();
             }
         });
+        
+        let date = new Date()
+        let current_string_date
+
+        if(date.getMonth() < 9){
+            current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
+        } else {
+            current_string_date = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+        }
+        dateDebut.value = current_string_date
     </script>
 </html>
