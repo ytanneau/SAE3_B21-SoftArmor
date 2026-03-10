@@ -58,8 +58,10 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             <p>Vous n'avez effectué aucune commande sur le site avec ce compte</p>
         <?php } else {
             ?>
-            <span class="aide"
+            <div>
+                <span class="aide"
                 data-tooltip="Etape 1 : Création d’un bordereau de livraison\nEtape 2 : Prise en charge du colis chez le vendeur\nEtape 3 : Arrivée chez le transporteur.\nEtape 4 : Départ vers la plateforme régionale\nEtape 5 : Arrivée sur la plateforme régionale\nEtape 6 : Départ vers le centre local\nEtape 7 : Arrivée au centre local\nEtape 8 : Départ pour la livraison finale\nEtape 9 : Livré ou refusé\nEtape inconnue : livraison non prise en charge par le site\Problème serveur : Erreur de connexion au serveur">?</span>
+            </div>
             <?php
             $fd = connexion_socket(IP, PORT);
             if ($fd != false) {

@@ -3825,7 +3825,7 @@ aside .achat:hover {
   -o-object-fit: contain;
      object-fit: contain;
 }
-.liste-commande-page main div > a, .liste-commande-page main span {
+.liste-commande-page main div > a, .liste-commande-page main div > span {
   position: relative;
   left: 50px;
   top: 30px;
