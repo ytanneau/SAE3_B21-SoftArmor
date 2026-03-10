@@ -162,12 +162,12 @@
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <?php if($tab_image_promotion != null){ ?>
                     <div class="block_banniere">
-                        <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
-                        <label class="hide_input_file" for="photoPromotion">Changer la banniere</label>
-                        <input style="display:none;" type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
-                        <div>
-                            <a class="delete_picture" href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
+                        <div class="overImg">
+                            <label for="photoPromotion">Changer la banniere</label>
+                            <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                         </div>
+                        <img src=<?= HOME_SITE . $tab_image_promotion['url_image']?> alt="Banniere de promotion">
+                        <a class="delete_picture" href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
                     </div>
                 <?php } else { ?>
                     <div class="ajout_banniere">
