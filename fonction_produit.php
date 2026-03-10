@@ -550,14 +550,13 @@
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
         $stmt = $pdo->prepare("UPDATE _promotion 
         SET id_produit = :id_produit,
             date_debut = :date_debut,
             date_fin = :date_fin,
-            reduction = :reduction,
             id_image_banniere = :id_image_banniere 
         WHERE id_promo = :id_promotion");
 
@@ -565,7 +564,6 @@
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image_banniere" => $id_image_banniere,
             "id_promotion" => $id_promotion
         ]);
