@@ -42,8 +42,8 @@ if (isset($_GET["commande"])) {
     <?php include HOME_SITE . 'link_head.php' ?>
 
     <script>
-        function generePDF() {
-            window.print();
+        function generePDF(url) {
+            open(url).print();
         }
     </script>
 </head>
@@ -120,7 +120,8 @@ if (isset($_GET["commande"])) {
                                         <?= $commande["pseudo_client"] ?>
                                     </td>
                                     <td>
-                                        <a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a>
+                                        <button class="bouton" onclick="generePDF()">Générer le fichier PDF de cette commande</button>
+                                        <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la commande</a-->
                                     </td>
                                 </tr>
 
