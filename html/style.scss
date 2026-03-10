@@ -870,7 +870,6 @@ div:has(> aside) {
         form {
             display: flex;
             flex-direction: column;
-            gap: 1em;
             flex-grow: 1;
 
             #etoiles img {
@@ -881,12 +880,12 @@ div:has(> aside) {
             #champs {
                 display: flex;
                 gap: 2em;
+                margin: 0.25em 0;
 
                 > div:first-of-type {
                     display: flex;
                     flex-direction: column;
                     flex-grow: 1;
-                    gap: 1em;
                 }
 
                 #upload {
@@ -900,8 +899,14 @@ div:has(> aside) {
                 border: solid 1px gray;
             }
 
+            .error {
+                margin: 0 0 1em 0;
+                flex-grow: 1;
+            }
+
             input[type="submit"] {
                 @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 10em);
+                margin-top: 1em;
             }
 
             > div:last-of-type {

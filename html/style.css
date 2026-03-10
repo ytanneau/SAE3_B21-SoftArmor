@@ -1703,7 +1703,6 @@ div:has(> aside) {
 #creation_avis > div form {
   display: flex;
   flex-direction: column;
-  gap: 1em;
   flex-grow: 1;
 }
 #creation_avis > div form #etoiles img {
@@ -1713,12 +1712,12 @@ div:has(> aside) {
 #creation_avis > div form #champs {
   display: flex;
   gap: 2em;
+  margin: 0.25em 0;
 }
 #creation_avis > div form #champs > div:first-of-type {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 1em;
 }
 #creation_avis > div form #champs #upload {
   width: 200px;
@@ -1727,6 +1726,10 @@ div:has(> aside) {
 }
 #creation_avis > div form .champ {
   border: solid 1px gray;
+}
+#creation_avis > div form .error {
+  margin: 0 0 1em 0;
+  flex-grow: 1;
 }
 #creation_avis > div form input[type=submit] {
   display: block;
@@ -1750,6 +1753,9 @@ div:has(> aside) {
 }
 #creation_avis > div form input[type=submit]:hover {
   background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+#creation_avis > div form input[type=submit] {
+  margin-top: 1em;
 }
 #creation_avis > div form > div:last-of-type {
   display: flex;

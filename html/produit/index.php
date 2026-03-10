@@ -203,11 +203,12 @@ if (isset($_POST['quantite'])) {
 
             <!-- Section des avis -->
             <section id="avis">
-                <?php if (!check_avis_existe($id_produit, $id_client)) { 
-                    $pp = $_SESSION['pp'] ?? ('image/compte.svg');
-                    ?>
+                    <h2>Rédiger un avis</h2>
+                
+                <?php if (!empty($id_client) && !check_avis_existe($id_produit, $id_client)) { 
+                    $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
+                    
                     <div id="creation_avis">
-                        <h2>Rédiger un avis</h2>
                         
                         <div>
                             <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
@@ -226,19 +227,31 @@ if (isset($_POST['quantite'])) {
 
                                 <div id="champs">
                                     <div>
-                                        <input type="text" placeholder="Titre de l'avis" name="titre" class="champ">
-                                        <textarea placeholder="Description de l'avis" name="description" class="text champ"></textarea>
-                    
+                                        <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
+
+                                        <div style="display: flex;">
+                                            <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
+                                            <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
+                                        </div>
+
+                                        <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
+                                        
+                                        <div style="display: flex;">
+                                            <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
+                                            <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
+                                        </div>
+
+
                                         <input type="submit" value="Créer l'avis">
                                     </div>
 
                                     <input type="file" id="upload" name="image"></input>
                                 </div>
                             </form>
-
-                            
                         </div>
                     </div>
+                <?php } else if (empty($id_client)) { ?>
+                    <a href="<?= HOME_SITE . 'compte/connexion/?produit=' . $_GET['produit'] ?>">Connectez-vous pour rédiger un avis</a>
                 <?php } ?>
 
                 <h2>Avis (<?= count($liste_avis) ?>)</h2>
@@ -335,15 +348,6 @@ if (isset($_POST['quantite'])) {
 
                 <div id="snackbar" class="snackbar"></div>
             </section>
-
-            <article id="etoiles">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-            </article>
-            <input type="hidden" name="nb_etoiles" id="nb_etoiles">
         </div>
                     
         <!-- Achat du produit  -->
@@ -417,12 +421,22 @@ if (isset($_POST['quantite'])) {
         const inputId = document.getElementById("id_avis");
         const inputEmail = document.getElementById("input_email");
         const inputIdReponseSignalement = document.getElementById("id_reponse");
+        const inputTitre = document.getElementById("titre_avis");
+        const inputDescription = document.getElementById("description_avis");
 
         const estVisiteur = (inputEmail != null);
 
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
 
+        const pErrorTitre = document.getElementById("error_titre");
+        const pErrorDescription = document.getElementById("error_description");
+
+        const nbCarTitre = document.getElementById("nb_car_titre");
+        const nbCarDescription = document.getElementById("nb_car_description");
+
+        const TAILLE_TITRE = 100;
+        const TAILLE_DESCRIPTION = 1000;
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
@@ -592,6 +606,8 @@ if (isset($_POST['quantite'])) {
             }
         });
 
+
+
         // Création d'un avis
         formAvis.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -600,11 +616,25 @@ if (isset($_POST['quantite'])) {
             const data = new FormData(formAvis);
 
             let avisSansTitre = (data.get("description").trim() != "") && (data.get("titre") == "");
+            let titreLong = (data.get("titre").trim().length > TAILLE_TITRE);
+            let descriptionLongue = (data.get("description").trim().length > TAILLE_DESCRIPTION);
 
-            pErrorTitre.style.visibility = avisSansTitre ? "visible" : "hidden";
+            // Affichage des erreurs
+            
+            pErrorTitre.style.visibility = (avisSansTitre | titreLong) ? "visible" : "hidden";
+            pErrorDescription.style.visibility = descriptionLongue ? "visible" : "hidden";
+            
+            if (avisSansTitre) {
+                pErrorTitre.textContent = "Veuillez remplir ce champ";
+                return;
 
-            if (avisVide || avisSansTitre) {
-                // On ne continue pas le traitement s'il manque des informations
+            } else if (titreLong) {
+                pErrorTitre.textContent = "Ce champ dépasse la limite de caractères";
+                return;
+            } 
+            
+            else if (descriptionLongue) {
+                pErrorDescription.textContent = "Ce champ dépasse la limite de caractères";
                 return;
             }
 
@@ -629,6 +659,30 @@ if (isset($_POST['quantite'])) {
 
                     window.location.replace(`./?produit=${produit}`);
                 }, 5000);
+            }
+        });
+
+        // Empêcher les titres d'avis trop longs
+        inputTitre.addEventListener("input", (e) => {
+            pErrorTitre.style.visibility = "hidden";
+            
+            nbCarTitre.textContent = `${inputTitre.value.length}/${TAILLE_TITRE}`;
+            
+            if (inputTitre.value.length > TAILLE_TITRE) {
+                nbCarTitre.style.color = "red";
+            } else {
+                nbCarTitre.style.color = "black";
+            }
+        });
+
+        // Empêcher les descriptions d'avis trop longues
+        inputDescription.addEventListener("input", (e) => {
+            nbCarDescription.textContent = `${inputDescription.value.length}/${TAILLE_DESCRIPTION}`;
+            
+            if (inputDescription.value.length > TAILLE_DESCRIPTION) {
+                nbCarDescription.style.color = "red";
+            } else {
+                nbCarDescription.style.color = "black";
             }
         });
 
