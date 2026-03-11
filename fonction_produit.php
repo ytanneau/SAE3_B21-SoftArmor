@@ -769,3 +769,18 @@
             throw $e;
         }
     }
+
+    function get_all_reduction_with_id_produit ($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _reduction WHERE id_produit = :id");
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
