@@ -706,3 +706,46 @@
             throw $e;
         }
     }
+
+    function create_reduction($dateDebut, $dateFin, $pourcentage){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _reduction VALUES (:dateDebut, :dateFin, :pourcentage");
+            $stmt->execute([
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin,
+                "pourcentage" => $pourcentage
+            ]);
+
+            $last_id = $pdo->lastInsertId();
+            $good_insert = get_reduction($last_id);
+            if($good_insert === -1){
+                return -1;
+            } else {
+                return $last_id;
+            }
+            
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_reduction($id_reduction){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_reduction FROM _reduction WHERE id_reduction = :id");
+            $stmt->execute([
+                "id" => $id_reduction
+            ]);
+            $response = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($response == null){
+                return -1;
+            } else {
+                return $response;
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }

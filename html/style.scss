@@ -2490,3 +2490,15 @@ aside {
         }
     }
 }
+
+
+.main_reduction{
+    .entete{
+        @include entete_page_vendeur;
+    }
+
+    form div{
+        display: flex;
+        flex-direction: column;
+    }
+}

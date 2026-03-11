@@ -3760,4 +3760,20 @@ aside .achat:hover {
   position: relative;
   left: 50px;
   top: 30px;
+}
+
+.main_reduction .entete .entete {
+  display: flex;
+  align-items: center;
+}
+.main_reduction .entete .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.main_reduction .entete .entete h1 {
+  margin-right: 30px;
+}
+.main_reduction form div {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=style.css.map */
