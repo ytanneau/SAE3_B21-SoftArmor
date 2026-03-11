@@ -749,3 +749,23 @@
             throw $e;
         }
     }
+
+    function get_prix_produit($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT prix FROM _produit WHERE id_produit = :id");
+
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            if($stmt === null){
+                return -1;
+            } else {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }

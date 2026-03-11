@@ -26,8 +26,9 @@
     }
 
     $id_produit = $_GET['produit'];
+    $prix = get_prix_produit($id_produit);
 
-    if($_SERVEUR['REQUEST_METHOD'] == "POST"){
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
         if($_POST['pourcentage'] <= 100 && $_POST['pourcentage'] != null && $_POST['dateFin'] != null && $_POST['dateDebut'] != null){
             $id_reduction = create_reduction($_POST['dateDebut'], $_POST['dateFin'], $_POST['pourcentage']);
         }
