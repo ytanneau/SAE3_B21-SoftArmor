@@ -763,7 +763,7 @@
             if($stmt === null){
                 return -1;
             } else {
-                return $stmt->fetch(PDO::FETCH_ASSOC);
+                return $stmt->fetch(PDO::FETCH_ASSOC)['prix'];
             }
         } catch (PDOException $e){
             throw $e;
