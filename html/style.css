@@ -3893,10 +3893,9 @@ aside .achat:hover {
   width: 80vw;
   display: flex;
   flex-direction: row;
-  height: 15vw;
 }
 .facture-page-vendeur .facture .facture-head img {
-  height: 15vw;
+  height: 40px;
   position: relative;
   right: 0;
 }
@@ -3930,4 +3929,7 @@ aside .achat:hover {
 .facture-page-vendeur .facture .facture-toto {
   position: relative;
   right: 0;
+}
+.facture-page-vendeur .facture .facture-toto tr {
+  height: 50px;
 }/*# sourceMappingURL=style.css.map */
