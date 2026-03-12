@@ -71,8 +71,9 @@ function print_table($data)
                 <th>Produit</th>
                 <th>Quantité</th>
                 <th>Prix uniaire HT</th>
+                <th>Prix HT</th>
                 <th>TVA</th>
-                <th>Total TVA</th>
+                <th>Prix TVA</th>
             </tr>
         </thead>
         <tbody>
@@ -81,6 +82,7 @@ function print_table($data)
                     <td><?= htmlentities($valeur['nom_produit']) ?></td>
                     <td><?= htmlentities($valeur['quantite']) ?></td>
                     <td><?= htmlentities($valeur['prix']) ?> €</td>
+                    <td><?= htmlentities($valeur['prix']*$valeur['quantite']) ?> €</td>
                     <td><?= htmlentities($valeur['tva']) ?> %</td>
                     <td><?= number_format($valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100), 2) ?> €</td>
                 </tr>
