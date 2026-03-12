@@ -134,17 +134,24 @@ function facture_client($id_commande): void
         }
     }
 
+    $id_adresse = get_infos_commande($id_commande, $id_vendeurs[0])['id_adresse_client'];
 
-    /*$adresse = sql_get_adresse($id_adresse);
+    $adresse = sql_get_adresse($id_adresse);
     if ($adresse != null){
-        $adr_client = $adresse['adresse'] . $adresse['ville'] . $adresse['code_postal'];
-    }*/
+        $adr_client = $adresse['adresse'] ." ". $adresse['ville'] .", ". $adresse['code_postal'];
+    }
+    else{
+        $adr_client = " ";
+    }
 
     foreach ($id_vendeurs as $id_vendeur) {
         print_head();
 
+        $info = get_infos_commande($id_commande, $id_vendeur);
+        $adresse = sql_get_adresse($info['id_adresse_vendeur']);
+        $adr_vendeur = $adresse['adresse'] ." ". $adresse['ville'] .", ". $adresse['code_postal'];
 
-        //print_carater();
+        print_carater($info['raison_sociale'], $adr_vendeur, $info['nom_client']." ". $info['prenom_client'], $adr_client, $info['date_commande']);
 
         $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
         print_table($data);
