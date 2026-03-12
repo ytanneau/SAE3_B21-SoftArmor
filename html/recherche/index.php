@@ -27,7 +27,6 @@ require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_panier.php');
 require_once (HOME_GIT . 'fonction_categorie.php');
-require_once (HOME_GIT . 'fonction_recherche.php');
 require_once (HOME_GIT . "fonction_vendeur.php");
 
     $tab_vendeurs = get_coor_id_vendeur();
