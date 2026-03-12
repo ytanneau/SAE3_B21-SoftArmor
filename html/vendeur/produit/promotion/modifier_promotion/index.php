@@ -121,7 +121,7 @@
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
     <body>
-        <?php include "../../header.php" ?>
+        <?php include ".././../header.php" ?>
         <main class="main_promo">
             <div class="entete">
                 <a href="../index.php?produit=<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
@@ -172,7 +172,7 @@
             </form>
             
         </main>
-        <?php include "../../../footer.php" ?>    
+        <?php include HOME_SITE . "footer.php" ?>    
     </body>
     <script>
 
