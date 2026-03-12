@@ -66,6 +66,9 @@
                     <label for="dateFin">Fin de la réduction</label>
                     <input type="date" id="dateFin" name="dateFin" required>
                 </div>
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
+                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div>
                     <label for="pourcentage">Pourcentage : </label>
                     <input type="text" id="pourcentage" name="pourcentage" required>
@@ -84,18 +87,19 @@
         </main>
         <?php include HOME_SITE . "footer.php"?>
         <script>
+            
+
+            // REDUCTION //
             const warning = document.getElementById("warning");
             const pourcentage = document.getElementById("pourcentage");
             const euro = document.getElementById("euro");
             const prixInitial = <?= json_encode($prix) ?>;
-            const prixFinal = document.getElementById("prixFinal");
-            
+            const prixFinal = document.getElementById("prixFinal")
+            const dateDebut = document.getElementById("dateDebut")
+            const dateFin = document.getElementById("dateFin")
+
             warning.style.display = "none";
 
-            if (pourcentage.value >= 100){
-                    warning.style.display = "block";
-                    event.preventDefault();
-                }
             pourcentage.addEventListener('input', () => {
                 pourcentage.value = pourcentage.value.replace(",",".");
                 pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
@@ -117,16 +121,6 @@
                     euro.value = "";
                 }
             }
-
-            // REDUCTION //
-            const warning = document.getElementById("warning");
-            const pourcentage = document.getElementById("pourcentage");
-            const euro = document.getElementById("euro");
-            const prixInitial = <?= json_encode($prix) ?>;
-            const prixFinal = document.getElementById("prixFinal")
-            const dateDebut = document.getElementById("dateDebut")
-            const dateFin = document.getElementById("dateFin")
-
 
             dateDebut.addEventListener('change', () => {
                 if(dateFin.value != ""){
