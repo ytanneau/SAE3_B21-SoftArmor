@@ -2560,6 +2560,10 @@ aside {
 .facture-page-vendeur{
 line-height: 0;
 
+    main{
+        padding: 0;
+    }
+
     .facture{
         width: 80vw;
         display: flex;
@@ -2615,9 +2619,7 @@ line-height: 0;
                 text-align: start;
             }
 
-            tr:last-child td:first-child{
-                color: #3157A3;
-            }
+            
 
         }
 
@@ -2630,6 +2632,10 @@ line-height: 0;
             }
             td:first-child{
                 width: 100px;
+            }
+
+            tr:last-child td:first-child{
+                color: #3157A3;
             }
         }
     }

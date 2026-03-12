@@ -3883,6 +3883,9 @@ aside .achat:hover {
 .facture-page-vendeur {
   line-height: 0;
 }
+.facture-page-vendeur main {
+  padding: 0;
+}
 .facture-page-vendeur .facture {
   width: 80vw;
   display: flex;
@@ -3926,9 +3929,6 @@ aside .achat:hover {
 .facture-page-vendeur .facture .facture-table td:first-child {
   text-align: start;
 }
-.facture-page-vendeur .facture .facture-table tr:last-child td:first-child {
-  color: #3157A3;
-}
 .facture-page-vendeur .facture .facture-toto {
   position: relative;
   right: 0;
@@ -3938,4 +3938,7 @@ aside .achat:hover {
 }
 .facture-page-vendeur .facture .facture-toto td:first-child {
   width: 100px;
+}
+.facture-page-vendeur .facture .facture-toto tr:last-child td:first-child {
+  color: #3157A3;
 }/*# sourceMappingURL=style.css.map */
