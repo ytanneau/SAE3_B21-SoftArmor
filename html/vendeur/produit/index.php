@@ -161,7 +161,7 @@
                             $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                     ?>
                     <li>
-                        <a href="reduction/modifier_reduction?produit=<?=htmlentities($_GET['produit'] . "&idReduc" . $id_reduc)?>">
+                        <a href="reduction/modifier_reduction?produit=<?=htmlentities($_GET['produit'] . "&idReduc=" . $id_reduc)?>">
                             <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification" title="Modifier une réduction">
                             Modifier la reduction du <?= htmlentities($new_date)?>
                         </a>
