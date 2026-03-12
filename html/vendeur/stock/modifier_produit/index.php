@@ -286,29 +286,39 @@
                     <h3>Images du produit</h3>
                     <div class="blockImg">
                         <h4>Image principale</h4>
-                        <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
                         <div>
-                            <label class="hide_input_file" for="photoPrincipale">Modifier l'image principale</label>
-                            <input style="display:none;" type="file" name="photoPrincipale" id="photoPrincipale">
+                            <label for="photoPrincipale">Modifier l'image principale</label>
+                            <input type="file" name="photoPrincipale" id="photoPrincipale">
                         </div>
-                        <h4>Image secondaire</h4>
-                        <?php if($tabImageProduit['id_image1'] != null){?> 
+                        <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_1.png')?>" alt="">
+                        <h4>Deuxième image</h4>
+                        <?php if($tabImageProduit['id_image1'] != null){?>
+                            <div class="">
+                                <label for="photo2">Modifier la deuxième image</label>
+                                <input type="file" name="photo2" accept="image/png" id="photo2">
+                            </div>
                             <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_2.png') ?>" alt="">
                             <a class="delete_picture" href="delete_photo.php?idImage=<?=$tabImageProduit['id_image1']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
-                        <?php }?>
+                        <?php } else {?>
                         <div>
-                            <label class="hide_input_file" for="photo2">Ajouter/Modifier la seconde image</label>
-                            <input style="display:none;" type="file" name="photo2" accept="image/png" id="photo2">
+                            <label for="photo2">Ajouter une deuxième image</label>
+                            <input type="file" name="photo2" accept="image/png" id="photo2">
                         </div>
+                        <?php }?>
                         <h4>Troisième image</h4>
-                        <?php if($tabImageProduit['id_image2'] != null){?> 
+                        <?php if($tabImageProduit['id_image2'] != null){?>
+                            <div class="">
+                                <label for="photo3">Modifier la troisième image</label>
+                                <input type="file" name="photo3" accept="image/png" id="photo3">
+                            </div>
                             <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($idProduit . '_3.png') ?>" alt="">
                             <a class="delete_picture" href="delete_photo.php?idImage=<?=$tabImageProduit['id_image2']?>&idProduit=<?=$idProduit?>">Supprimer la photo</a> 
-                        <?php }?>
+                        <?php } else {?>
                         <div>
-                            <label class="hide_input_file" for="photo3">Ajouter/Modifier la troisième image</label>
-                            <input style="display:none;" type="file" name="photo3" accept="image/png" id="photo3">
+                            <label for="photo3">Ajouter la troisième image</label>
+                            <input type="file" name="photo3" accept="image/png" id="photo3">
                         </div>
+                        <?php }?>
                     </div>
                     <h3>Gestion du stock</h3>
                     <div class="divEnLigne">

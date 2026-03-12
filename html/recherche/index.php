@@ -43,12 +43,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <?php include HOME_SITE . "link_head.php" ?>
     <title>Alizon - Recherche</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body data-page="search">
     <?php 
@@ -104,7 +104,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             <div>
                 <div class="">
                     <span id="for_category"></span><br>
-                    <span id="for_sellers"></span>
+                    <b><span id="for_sellers"></span></b>
                     <h1 id="results_for"></h1>
                 </div>
                 <div class="labelEtBandeau">
@@ -145,14 +145,14 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         <h2>Departement</h2>
                         <div>
                             <input type="checkbox" id="cotedarmor" value="departement">
-                            <label for="cotedarmor">Cote d'armor - 22</label>
+                            <label for="cotedarmor">Côtes d'Armor - 22</label>
                         </div>
                         <div>
                             <input type="checkbox" id="finistere" value="departement">
-                            <label for="finistere">Finistere - 29</label>
+                            <label for="finistere">Finistère - 29</label>
                         <div>
                             <input type="checkbox" id="illeetvilaine" value="departement">
-                            <label for="illeetvilaine">Ille et vilaine - 35</label>
+                            <label for="illeetvilaine">Ille et Vilaine - 35</label>
                         </div>
                         <div>
                             <input type="checkbox" id="morbihan" value="departement">
@@ -306,8 +306,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         };
 
         // INITILISATION DE LA CARTE
-        let map = L.map('map').setView([48.113,-2.642],8)
-        let groupMarker = L.layerGroup().addTo(map)
+        let map = L.map('map', { maxZoom: 19 }).setView([48.113,-2.642],8)
+        let groupMarker = L.markerClusterGroup().addTo(map)
+
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -335,7 +336,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                             }
                         });
                     }
-                    if((info == 'latitude' || info == 'longitude')&& vendeur[info] != null){
+                    if((info == 'lat' || info == 'lon')&& vendeur[info] != null){
                         tab_coor.push(vendeur[info])
                     } else if (info == 'raison_sociale'){
                         raison_sociale = vendeur[info]
@@ -345,7 +346,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     let marker = L.marker(tab_coor,{
                         title: raison_sociale,
                         alt : vendeur['id_compte']
-                    }).addTo(map)
+                    })
                     marker.on('click', function() {
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];

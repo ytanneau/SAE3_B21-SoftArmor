@@ -1,4 +1,5 @@
 <?php
+/*
     session_start();
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
@@ -15,7 +16,7 @@
     if($_SESSION['id_compte']!=$_GET['id_compte']){
         header('location: ../');
     }
-
+*/
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
     require_once HOME_GIT .".config.php";

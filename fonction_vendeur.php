@@ -14,7 +14,7 @@
         }
     }
 
-    function update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr){
+    function update_adresse_vendeur($id_compte, $modifVille, $modifAdresse, $modifCodePostal, $modifCompelementAdr, $longitude, $latitude){
         /**
          * Fonction update_adresse_vendeur() prend en parametre les informations d'une adresse et l'id d'un vendeur
          * Met a jour les informations de l'adresse dans la base de données 
@@ -26,9 +26,18 @@
                                 SET a.ville = :ville,
                                     a.adresse = :adresse, 
                                     a.code_postal = :code_postal,
-                                    a.complement_adresse = :complement_adresse 
+                                    a.complement_adresse = :complement_adresse,
+                                    a.lon = :lon,
+                                    a.lat = :lat
                                 WHERE v.id_compte = $id_compte;");
-            $stmt->execute([':ville' => $modifVille, ':adresse' => $modifAdresse, ':code_postal' => $modifCodePostal, ':complement_adresse' => $modifCompelementAdr]);
+            $stmt->execute([
+                'ville' => $modifVille,
+                'adresse' => $modifAdresse,
+                'code_postal' => $modifCodePostal,
+                'complement_adresse' => $modifCompelementAdr,
+                'lon' => $longitude,
+                'lat' => $latitude
+            ]);
         } catch(PDOException $e) {
             throw $e;
         }
@@ -75,7 +84,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, latitude, longitude, v.id_compte, v.raison_sociale FROM _adresse a join _vendeur v on a.id_adresse = v.id_adresse");
+            $stmt = $pdo->prepare("SELECT a.id_adresse, adresse, lon, lat, v.id_compte, v.raison_sociale FROM _adresse a join vendeur v on a.id_adresse = v.id_adresse");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e){
@@ -99,7 +108,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT latitude
+            $stmt = $pdo->prepare("SELECT lat
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
@@ -116,7 +125,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT longitude 
+            $stmt = $pdo->prepare("SELECT lon
                                     FROM _adresse as adr 
                                     INNER JOIN _vendeur as vdr 
                                     ON adr.id_adresse = vdr.id_adresse 
@@ -125,6 +134,40 @@
                 'id_compte' => $id_compte
             ]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_adresse_vendeur_with_vendeur_id($id_compte){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT adr.id_adresse 
+                                    FROM _adresse adr 
+                                    INNER JOIN _vendeur vdr
+                                    ON adr.id_adresse = vdr.id_adresse 
+                                    WHERE vdr.id_compte = :id_compte");
+            $stmt->execute([
+                "id_compte" =>$id_compte
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function set_lon_lat($id_adresse, $longitude, $latitude){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _adresse SET lon = :longitude, lat = :latitude WHERE id_adresse = :id_adresse");
+            $stmt->execute([
+                "longitude" => $longitude,
+                "latitude" => $latitude,
+                "id_adresse" => $id_adresse 
+            ]);
         } catch (PDOException $e){
             throw $e;
         }

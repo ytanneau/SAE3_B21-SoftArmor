@@ -1,4 +1,4 @@
-<?
+<?php
     require_once HOME_GIT . 'fonction_categorie.php';
     
     $recherche = urlencode($_GET['recherche'] ?? '');

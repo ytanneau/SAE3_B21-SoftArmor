@@ -290,6 +290,15 @@ if (isset($_POST['quantite'])) {
 
                 <div id="snackbar" class="snackbar"></div>
             </section>
+
+            <article id="etoiles">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+            </article>
+            <input type="hidden" name="nb_etoiles" id="nb_etoiles">
         </div>
                     
         <!-- Achat du produit  -->
@@ -485,6 +494,49 @@ if (isset($_POST['quantite'])) {
             }, 5000);
         }
 
+        let dir_images = '<?=HOME_SITE?>image/';
+
+        function activerEtoileR(img) { // active toutes les étoiles à gauche (récursivement) de l'étoile selectionnée
+            img.src = dir_images + 'etoile_pleine.svg';
+            
+            if (img.previousElementSibling && img.previousElementSibling.nodeType == 1) {
+                return 1 + activerEtoileR(img.previousElementSibling);
+            }
+
+            return 1
+        }
+        
+        
+        function desactiverEtoileR(img) { // désactive toutes les étoiles à droite (récursivement) de l'étoile selectionnée
+            img.src = dir_images + 'etoile.svg';
+
+            if (img.nextElementSibling && img.nextElementSibling.nodeType == 1) {
+                desactiverEtoileR(img.nextElementSibling);
+            }
+        }
+
+
+        let children = document.getElementById("etoiles").children;
+
+        for (i = 0; i < children.length; i++) {
+            let element = children[i];
+
+            element.addEventListener('click', (e) => {
+                
+                let src = e.target.getAttribute('src');
+
+                let image = dir_images + 'etoile_pleine.svg';
+                desactiverEtoileR(e.target);
+                let nb_etoiles = activerEtoileR(e.target);
+
+                e.target.setAttribute('src', image);
+
+                document.getElementById('nb_etoiles').value = nb_etoiles;
+            });
+
+        }
+
+        children[2].click(); // met 3 étoiles par défaut
     </script>
 </body>
 </html>

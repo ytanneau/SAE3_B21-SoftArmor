@@ -70,9 +70,6 @@
                     <button type="submit"><img src="<?= $images . 'loupe.svg' ?>"></button>
                 </form>
             </li>
-            <li>
-                <a href="<?= HOME_SITE . 'carte/'?>">Carte</a>
-            </li>
             <li class="hide-on-mobile">
                 <a href="<?= HOME_SITE . 'panier/' ?>">
                     <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
