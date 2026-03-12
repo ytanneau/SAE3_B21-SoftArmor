@@ -95,8 +95,8 @@
     
         console.log(tab_reduction)
 
-        dateDebut.value = tab_reduction['dateDebut']
-        dateFin.value = tab_reduction['dateFin']
+        dateDebut.value = tab_reduction['date_debut']
+        dateFin.value = tab_reduction['date_fin']
         warning.style.display = "none";
     </script>
 </html>
