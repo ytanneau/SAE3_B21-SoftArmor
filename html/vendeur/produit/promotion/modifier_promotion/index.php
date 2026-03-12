@@ -107,7 +107,7 @@
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$id_nouvelle_banniere);
         }
         
-        header("Location: ../?produit=" . $id_produit);
+        header("Location: ../../?produit=" . $id_produit);
         exit();
     } 
 ?>
@@ -121,7 +121,7 @@
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
     <body>
-        <?php include ".././../header.php" ?>
+        <?php include "../../../header.php" ?>
         <main class="main_promo">
             <div class="entete">
                 <a href="../index.php?produit=<?= $id_produit ?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>

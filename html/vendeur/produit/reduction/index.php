@@ -60,15 +60,15 @@
             <form action="" method="post">
                 <div>
                     <label for="dateDebut">Debut de la réduction</label>
-                    <input type="date" id="dateDebut" name="dateDebut">
+                    <input type="date" id="dateDebut" name="dateDebut" required>
                 </div>
                 <div>
                     <label for="dateFin">Fin de la réduction</label>
-                    <input type="date" id="dateFin" name="dateFin">
+                    <input type="date" id="dateFin" name="dateFin" required>
                 </div>
                 <div>
                     <label for="pourcentage">Pourcentage : </label>
-                    <input type="text" id="pourcentage" name="pourcentage">
+                    <input type="text" id="pourcentage" name="pourcentage" required>
                     <p style="display:none;" id="warning">Le pourcentage ne peut <br>être supérieur à 100</p>
                 </div>
                 <div>
@@ -89,7 +89,9 @@
             const euro = document.getElementById("euro");
             const prixInitial = <?= json_encode($prix) ?>;
             const prixFinal = document.getElementById("prixFinal");
+            
             warning.style.display = "none";
+
             if (pourcentage.value >= 100){
                     warning.style.display = "block";
                     event.preventDefault();
