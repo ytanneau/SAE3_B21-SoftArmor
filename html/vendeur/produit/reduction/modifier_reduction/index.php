@@ -90,13 +90,13 @@
         const warning = document.getElementById("warning")
         const pourcentage = document.getElementById("pourcentage")
         const euro = document.getElementById("euro")
-        const prixInitial = <?= json_encode($prix) ?>
+        const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
     
-        
+        console.log(tab_reduction)
 
-        dateDebut.value = tab_reduction['dateDebut']
-        dateFin.value = tab_reduction['dateFin']
+        dateDebut.value = tab_reduction['date_debut']
+        dateFin.value = tab_reduction['date_fin']
         warning.style.display = "none";
     </script>
 </html>
