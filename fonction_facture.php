@@ -43,7 +43,7 @@ function sommeHt($data)
 {
     $somme = 0;
     foreach ($data as $valeur) {
-        $somme += $valeur['prix'];
+        $somme += $valeur['prix'] * $valeur['quantite'];
     }
     return $somme;
 }
