@@ -28,6 +28,14 @@
 
     $id_produit = $_GET['produit'];
     try {
+        $tab_promo = get_info_promotion($id_produit);
+        foreach($tab_promo as $promo){
+            delete_promotion($promo['id_promo']);
+        }
+        $tab_reduc = get_all_reduction_with_id_produit($id_produit);
+        foreach($tab_reduc as $reduc){
+            delete_reduction($reduc['id_reduction']);
+        }
         supprimer_produit_stock($id_produit);
     } catch (PDOException $e) {
         die('Suppression du produit ' . $id_produit . ' impossible : ' . $e->getMessage());
