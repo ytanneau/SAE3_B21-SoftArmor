@@ -95,6 +95,29 @@ hr {
   }
 }
 
+.image_uploader {
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_preview {
+  height: 100%;
+}
+.image_preview img {
+  height: 100%;
+  max-width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#input_image {
+  display: none;
+}
+
 .input_quantite * {
   font-family: "Montserrat";
   font-weight: bold;
@@ -1718,11 +1741,6 @@ div:has(> aside) {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-}
-#creation_avis > div form #champs #upload {
-  width: 200px;
-  height: 200px;
-  background-color: gray;
 }
 #creation_avis > div form .champ {
   border: solid 1px gray;

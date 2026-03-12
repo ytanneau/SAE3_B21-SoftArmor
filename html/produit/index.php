@@ -246,7 +246,10 @@ if (isset($_POST['quantite'])) {
                                             <input type="submit" value="Créer l'avis">
                                         </div>
 
-                                        <input type="file" id="upload" name="image"></input>
+                                        <label class="image_uploader" for="input_image" tabIndex="0">
+                                            <span id="image_preview" class="image_preview">+</span>
+                                        </label>
+                                        <input type="file" id="input_image" name="image"></input>
                                     </div>
                                 </form>
                             </div>
@@ -425,6 +428,8 @@ if (isset($_POST['quantite'])) {
         const inputIdReponseSignalement = document.getElementById("id_reponse");
         const inputTitre = document.getElementById("titre_avis");
         const inputDescription = document.getElementById("description_avis");
+        const inputImage = document.getElementById("input_image");
+        const imagePreview = document.getElementById("image_preview");
 
         const estVisiteur = (inputEmail != null);
 
@@ -685,6 +690,25 @@ if (isset($_POST['quantite'])) {
                 nbCarDescription.style.color = "red";
             } else {
                 nbCarDescription.style.color = "black";
+            }
+        });
+
+        inputImage.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", (e) => {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.classList.add("image_uploaded");
+
+                    imagePreview.innerHTML = "";
+                    imagePreview.appendChild(img);
+                });
+
+                reader.readAsDataURL(file);
             }
         });
 
