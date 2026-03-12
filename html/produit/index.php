@@ -341,7 +341,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="this.form.submit()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
@@ -460,27 +460,21 @@ if (isset($_POST['quantite'])) {
             });
         }
         document.getElementById('ajout_panier').addEventListener('click', async function(e) {
-            e.preventDefault();
+        //e.preventDefault(); // bloque la soumission du formulaire
 
-            const goToCart = await customConfirm({
-                title: "Article ajouté au panier !",
-                message: "Que voulez vous faire ?",
-                cancelText: "Continuer les achats",
-                confirmText: "Aller au panier"
+        const goToCart = await customConfirm({
+            title: "Article ajouté au panier !",
+            message: "Que voulez vous faire ?",
+            cancelText: "Continuer les achats",
+            confirmText: "Aller au panier"
             });
-
-            // Ajouter manuellement un champ caché pour simuler le clic sur le bouton
-            const form = this.closest('form');
-            const hidden = document.createElement('input');
-            hidden.type = 'hidden';
-            hidden.name = 'panier';
-            hidden.value = 'Ajouter au panier';
-            form.appendChild(hidden);
-
+            //form.submit();
             if (goToCart) {
                 window.location.href = '../panier/';
             } else {
-                form.submit();
+                // soumettre le formulaire normalement pour ajouter au panier
+                // mais sans rediriger
+                const form = document.getElementById('ajout_panier').closest('form');
             }
         });
         // Confirmation du signalement
