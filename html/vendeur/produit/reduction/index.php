@@ -30,7 +30,7 @@
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         if($_POST['pourcentage'] <= 100 && $_POST['pourcentage'] != null && $_POST['dateFin'] != null && $_POST['dateDebut'] != null){
-            $id_reduction = create_reduction($_POST['dateDebut'], $_POST['dateFin'], $_POST['pourcentage']);
+            $id_reduction = create_reduction($id_produit, $_POST['dateDebut'], $_POST['dateFin'], $_POST['pourcentage']);
         }
 
         if($id_reduction === -1){
