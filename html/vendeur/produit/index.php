@@ -156,7 +156,7 @@
                     <?php if($tab_reduc != null){
                         foreach($tab_reduc as $ligne){
                             $id_reduc = $ligne['id_reduction'];
-                            $date = $ligne['dateDebut'];
+                            $date = $ligne['date_debut'];
                             $temp_date = explode("-",$date);
                             $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                     ?>
