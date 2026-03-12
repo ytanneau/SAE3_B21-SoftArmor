@@ -479,7 +479,7 @@ if (isset($_POST['quantite'])) {
         // });
 
         document.getElementById('ajout_panier').addEventListener('click', async function(e) {
-            e.preventDefault(); // ← indispensable pour bloquer la soumission immédiate
+            e.preventDefault(); // indispensable pour bloquer la soumission immédiate
 
             const goToCart = await customConfirm({
                 title: "Article ajouté au panier !",
@@ -498,6 +498,7 @@ if (isset($_POST['quantite'])) {
             form.appendChild(hidden);
 
             if (goToCart) {
+                form.submit(); 
                 window.location.href = '../panier/';
             } else {
                 form.submit(); // soumet avec le champ caché, PHP reçoit bien $_POST['panier']
