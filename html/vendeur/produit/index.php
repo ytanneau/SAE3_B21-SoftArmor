@@ -139,7 +139,7 @@
                             $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                     ?>
                     <li>
-                        <a href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
+                        <a href="promotion/modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
                             <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification" title="Modifier une promotion">
                             Modifier la promotion du <?= htmlentities($new_date)?>
                         </a>

@@ -1,10 +1,7 @@
-<?php 
-    define("HOME_GIT", "../../../../");
-    define("HOME_SITE", "../../../");
-
-    require_once HOME_GIT . 'fonction_produit.php';
-    require_once HOME_GIT . '.config.php';
-
+<?php
+    define('HOME_GIT', '../../../../../');
+    define('HOME_SITE', '../../../../');
+ 
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -20,13 +17,17 @@
         exit;
     }
 
-    if ($_GET == NULL || !isset($_GET['idPromo']) || !isset($_GET['idProduit'])) {
-       renvoi();
-    }
-    
+    // appel des fichiers de configuration et fonctions
+    require_once HOME_GIT . ".config.php";
+    include HOME_GIT . "fonction_categorie.php";
+    include HOME_GIT . "fonction_produit.php";
 
-    delete_promotion($_GET['idPromo']);
+    $promotion = $_GET['promotion'];
+    $banniere = $_GET['banniere'];
+    $produit = $_GET['produit'];
+    unlink_image_promotion($promotion);
+    delete_image($banniere);
 
-    header("Location: ../?produit=" . $_GET['idProduit']);
+    header("Location: ../index.php?produit=". $produit . "&idPromo=" . $promotion);
     exit();
 ?>
