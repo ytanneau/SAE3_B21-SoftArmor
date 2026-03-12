@@ -459,24 +459,6 @@ if (isset($_POST['quantite'])) {
                 });
             });
         }
-        // document.getElementById('ajout_panier').addEventListener('click', async function(e) {
-        // e.preventDefault(); // bloque la soumission du formulaire
-
-        // const goToCart = await customConfirm({
-        //     title: "Article ajouté au panier !",
-        //     message: "Que voulez vous faire ?",
-        //     cancelText: "Continuer les achats",
-        //     confirmText: "Aller au panier"
-        //     });
-            
-        //     if (goToCart) {
-        //         window.location.href = '../panier/';
-        //     } else {
-        //         // soumettre le formulaire normalement pour ajouter au panier
-        //         // mais sans rediriger
-        //         const form = document.getElementById('ajout_panier').closest('form');
-        //     }
-        // });
 
         document.getElementById('ajout_panier').addEventListener('click', async function(e) {
             e.preventDefault();
@@ -503,7 +485,7 @@ if (isset($_POST['quantite'])) {
             if (goToCart) {
                 window.location.href = '../panier/';
             }
-            // Si "Continuer les achats" → on ne fait rien, l'article est déjà ajouté
+            // Si "Continuer les achats"  on ne fait rien, l'article est déjà ajouté
         });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
