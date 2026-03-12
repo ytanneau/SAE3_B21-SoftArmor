@@ -83,7 +83,7 @@
         <?php include HOME_SITE . "footer.php"?>
     </body>
     <script>
-        let tab_reduction = <?= json_encode($tab_reduction)?>
+        let tab_reduction = <?= json_encode($tab_reduction)?>;
 
         const dateDebut = document.getElementById("dateDebut")
         const dateFin = document.getElementById("dateFin")
