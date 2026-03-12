@@ -706,3 +706,82 @@
             throw $e;
         }
     }
+
+    function create_reduction($id_produit, $dateDebut, $dateFin, $pourcentage){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _reduction(id_produit,date_debut,date_fin,pourcentage) VALUES (:id_produit, :dateDebut, :dateFin, :pourcentage)");
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin,
+                "pourcentage" => $pourcentage
+            ]);
+
+            $last_id = $pdo->lastInsertId();
+            $good_insert = get_reduction($last_id);
+            if($good_insert === -1){
+                return -1;
+            } else {
+                return $last_id;
+            }
+            
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_reduction($id_reduction){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT id_reduction FROM _reduction WHERE id_reduction = :id");
+            $stmt->execute([
+                "id" => $id_reduction
+            ]);
+            $response = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($response == null){
+                return -1;
+            } else {
+                return $response;
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_prix_produit($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT prix FROM _produit WHERE id_produit = :id");
+
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            if($stmt === null){
+                return -1;
+            } else {
+                return $stmt->fetch(PDO::FETCH_ASSOC)['prix'];
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_all_reduction_with_id_produit ($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _reduction WHERE id_produit = :id");
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
