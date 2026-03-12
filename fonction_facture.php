@@ -12,30 +12,30 @@ function print_head()
 function print_carater($vendeur, $adr_vendeur, $client, $adr_client, $date)
 {
     ?>
-    <div class="facture-carater">
-        <div>
-            <div><strong>Vendeur</strong></div>
-            <div>
+    <table class="facture-carater">
+        <tr>
+            <td><strong>Vendeur</strong></td>
+            <td>
                 <?= htmlentities($vendeur) ?>
                 <br>
                 <?= htmlentities($adr_vendeur) ?>
-            </div>
-        </div>
-        <div>
-            <div><strong>Client</strong></div>
-            <div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Client</strong></td>
+            <td>
                 <?= htmlentities($client) ?>
                 <br>
                 <?= htmlentities($adr_client) ?>
-            </div>
-        </div>
-        <div>
-            <div><strong>Date</strong></div>
-            <div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Date</strong></td>
+            <td>
                 <?= htmlentities($date) ?>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
     <?php
 }
 
@@ -172,5 +172,5 @@ function facture_client($id_commande): void
         echo "<hr>";
     }
 
-    facture($_SESSION['id_compte'], $id_commande);
+    //facture($_SESSION['id_compte'], $id_commande);
 }

@@ -2555,3 +2555,30 @@ aside {
         flex-direction: column;
     }
 }
+
+
+.facture-page-vendeur{
+
+    .facture{
+
+        .facture-head{
+            display: flex;
+            flex-direction: row;
+            height: 20vw;
+        }
+
+        .facture-carater{
+            >div{
+                
+            }
+        }
+
+        .facture-table{
+
+        }
+
+        .facture-toto{
+
+        }
+    }
+}

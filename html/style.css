@@ -3878,4 +3878,10 @@ aside .achat:hover {
 .main_reduction form div {
   display: flex;
   flex-direction: column;
+}
+
+.facture-page-vendeur .facture .facture-head {
+  display: flex;
+  flex-direction: row;
+  height: 20vw;
 }/*# sourceMappingURL=style.css.map */
