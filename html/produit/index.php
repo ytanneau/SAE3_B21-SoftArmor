@@ -78,7 +78,6 @@ if (isset($_POST['quantite'])) {
             ajouter_panier_visiteur($id_prod, $qte);
             
         }
-        header('Location:' . HOME_SITE . 'panier');
 
     // Sinon, s'il a fait "acheter le produit"
     } elseif (isset($_POST['achat'])) {
@@ -342,7 +341,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="this.form.submit()">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
