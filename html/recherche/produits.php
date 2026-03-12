@@ -20,7 +20,7 @@
     $sellers    = $filters['sellers'] ?? null;
     // Construire la requête SQL à partir de la recherche
     $requete = 
-        "SELECT p.*, i.url_image, i.titre, i.alt, pj.reduction, p.id_vendeur
+        "SELECT p.*, i.url_image, i.titre, i.alt, rj.pourcentage, p.id_vendeur
         FROM produit_en_ligne p
         INNER JOIN _image i
         ON p.id_image_principale = i.id_image
@@ -28,6 +28,8 @@
         ON p.categorie = c.nom_categorie
         LEFT JOIN promo_jour pj
         ON pj.id_produit = p.id_produit
+        LEFT JOIN reduc_jour rj
+        ON rj.id_produit = p.id_produit
         WHERE 1 = 1";
     
     $params = [];
@@ -36,7 +38,7 @@
         $requete .= " AND en_promotion = 1";
     }
     if ($reduc == true) {
-        $requete .= " AND pj.reduction > 0";
+        $requete .= " AND rj.pourcentage > 0";
     }
 
     // Filtre par recherche
