@@ -711,7 +711,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("INSERT INTO _reduction VALUES (:id_produit, :dateDebut, :dateFin, :pourcentage");
+            $stmt = $pdo->prepare("INSERT INTO _reduction VALUES (:id_produit, :dateDebut, :dateFin, :pourcentage)");
             $stmt->execute([
                 "id_produit" => $id_produit,
                 "dateDebut" => $dateDebut,
