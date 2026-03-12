@@ -48,10 +48,10 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
-    <body><?php include "../../header.php" ?>
+    <body><?php include "../../../header.php" ?>
         <main class="main_reduction">
             <div class="entete">
-                <a href="../index.php?produit=<?=$id_produit?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
+                <a href="../../index.php?produit=<?=$id_produit?>"><img src="../../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une réduction</h1>
             </div>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
@@ -83,7 +83,7 @@
         <?php include HOME_SITE . "footer.php"?>
     </body>
     <script>
-        let tab_reduction = <?= json_encode($tab_reduction)?>
+        let tab_reduction = <?= json_encode($tab_reduction)?>;
 
         const dateDebut = document.getElementById("dateDebut")
         const dateFin = document.getElementById("dateFin")
