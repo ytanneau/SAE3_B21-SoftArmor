@@ -95,6 +95,37 @@ function get_elements_commande_vendeur($id_commande, $id_vendeur)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function get_infos_commande($id_commande, $id_vendeur) {
+    global $pdo;
+
+    $infos = [];
+
+    $stmt = $pdo->prepare("SELECT raison_sociale, id_adresse AS id_adresse_vendeur FROM _vendeur WHERE id_compte = :id_vendeur");
+    $stmt->bindValue(":id_vendeur", $id_vendeur, PDO::PARAM_INT);
+    $stmt->execute();
+    $infos_vendeur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($infos_vendeur !== false) {
+        $infos += $infos_vendeur;
+    }
+
+    $stmt = $pdo->prepare("SELECT nom AS nom_client, prenom AS prenom_client, id_adresse_fac AS id_adresse_client, date_commande
+    FROM _commande 
+    INNER JOIN _client 
+    ON _commande.id_client = _client.id_compte 
+    WHERE id_commande = :id_commande");
+
+    $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
+    $stmt->execute();
+    $infos_client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($infos_client !== false) {
+        $infos += $infos_client;
+    }
+
+    return $infos;
+}
+
 function connexion_delivraptor($fd, $id, $mdp)
 {
     fwrite($fd, "1.$id.$mdp");
