@@ -2565,11 +2565,15 @@ aside {
             display: flex;
             flex-direction: row;
             height: 20vw;
+
+            img{
+                height: 18vw;
+            }
         }
 
         .facture-carater{
-            >div{
-                
+            tr{
+                height: 25px;
             }
         }
 

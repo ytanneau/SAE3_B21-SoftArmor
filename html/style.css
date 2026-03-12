@@ -3884,4 +3884,10 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
   height: 20vw;
+}
+.facture-page-vendeur .facture .facture-head img {
+  height: 18vw;
+}
+.facture-page-vendeur .facture .facture-carater tr {
+  height: 25px;
 }/*# sourceMappingURL=style.css.map */
