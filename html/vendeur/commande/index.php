@@ -58,7 +58,7 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
             // Attend que la page soit chargée avant impression
             printWindow.onload = () => {
                 printWindow.print();
-                printWindow.close();
+                //printWindow.close();
             };
         }
 
