@@ -342,7 +342,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
