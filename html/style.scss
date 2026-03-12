@@ -2562,6 +2562,8 @@ line-height: 0;
 
     .facture{
         width: 80vw;
+        display: flex;
+        gap: 20px;
 
         .facture-head{
             width: 80vw;
@@ -2573,6 +2575,10 @@ line-height: 0;
                 height: 18vh;
                 position: relative;
                 right: 0;
+            }
+
+            h1{
+                margin: 0;
             }
         }
 
@@ -2587,8 +2593,13 @@ line-height: 0;
         }
 
         .facture-table{
-            width: 100vw;
+            width: 80vw;
+            border-collapse: collapse;
 
+            th, td{
+                border: 1px solid black;
+                padding: 10px;
+            }
         }
 
         .facture-toto{
