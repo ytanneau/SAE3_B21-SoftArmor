@@ -736,7 +736,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT id_reduction FROM _reduction WHERE id_reduction = :id");
+            $stmt = $pdo->prepare("SELECT * FROM _reduction WHERE id_reduction = :id");
             $stmt->execute([
                 "id" => $id_reduction
             ]);
@@ -796,6 +796,23 @@
                 "id" => $id_reduction
             ]);
         } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function update_reduction($id_reduction, $date_debut, $date_fin, $pourcentage){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _reduction SET date_debut = :debut, date_fin = :fin, pourcentage = :pourcentage WHERE id_reduction = :id");
+
+            $stmt->execute([
+                "debut" => $date_debut,
+                "fin" => $date_fin,
+                "pourcentage" => $pourcentage,
+                "id" => $id_reduction
+            ]);
+        } catch(PDOException $e){
             throw $e;
         }
     }
