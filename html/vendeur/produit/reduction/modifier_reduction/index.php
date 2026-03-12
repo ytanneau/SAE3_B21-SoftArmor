@@ -66,11 +66,11 @@
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
+                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
                 <div>
                     <label for="pourcentage">Pourcentage : </label>
                     <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
-                    <p style="display:none;" id="warning">Le pourcentage ne peut <br>être supérieur à 100</p>
+                    <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
                 </div>
                 <div>
                     <label for="euro">Remise appliquée : </label>
@@ -90,11 +90,14 @@
 
         const dateDebut = document.getElementById("dateDebut")
         const dateFin = document.getElementById("dateFin")
-        const warning = document.getElementById("warning")
+        const warningPourcentage = document.getElementById("warningPourcentage")
         const pourcentage = document.getElementById("pourcentage")
         const euro = document.getElementById("euro")
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
+        const warning1 = document.getElementById("warning1");
+        const warning2 = document.getElementById("warning2");
+        const warning3 = document.getElementById("warning3");
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
@@ -103,10 +106,10 @@
                 } else if (dateFin == ""){
                     dateFin.value = dateDebut.value;
                 } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
-                    warning4.style.display = "block";
+                    warning3.style.display = "block";
                 } else {
                     warning1.style.display = "none";
-                    warning4.style.display = "none";
+                    warning3.style.display = "none";
                     calculP();
                 }
                 
@@ -140,7 +143,7 @@
             if(pourcentage.value <= 100){
                 calculR();
             } else {
-                warning.style.display = "block";
+                warningPourcentage.style.display = "block";
             }
         })
 
@@ -159,6 +162,6 @@
 
         dateDebut.value = tab_reduction['date_debut']
         dateFin.value = tab_reduction['date_fin']
-        warning.style.display = "none";
+        warningPourcentage.style.display = "none";
     </script>
 </html>

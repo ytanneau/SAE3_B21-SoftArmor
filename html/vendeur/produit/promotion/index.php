@@ -103,7 +103,7 @@
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
+                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
                 <div class="ajout_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
@@ -123,7 +123,7 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
-        const warning4 = document.getElementById("warning4");
+        const warning3 = document.getElementById("warning3");
         const divPhoto = document.getElementById("divPhoto");
         const dateCourante = new Date();
         dateCourante.setHours(0, 0, 0, 0);
