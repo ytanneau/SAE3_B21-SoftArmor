@@ -176,6 +176,11 @@
                 fetch('./json_prod.php?categorie=true&id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
                 .then(data => {
+                    tabAssociatifCat['all']=[];
+                    data.forEach(element => {
+                        tabAssociatifCat['all'].push(element.nom_categorie);
+                        
+                    });
                     data.forEach(element => {
                         categories.push(element.nom_categorie);
                         
@@ -185,6 +190,9 @@
                 fetch('./json_prod.php?toutecategorie=true&id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
                 .then(data => {
+                    
+                    
+                    
                     data.forEach(element => {
                         toutecategories.push(element.nom_categorie);
                         
@@ -206,7 +214,7 @@
                             tabAssociatifCat[element.nom_categorie] = [];
                         }
                     });
-
+                    console.log(tabAssociatifCat);
                     //mettre les categories 
                     if(document.getElementById("filtreCat").children.length === 0){
                         
@@ -442,13 +450,22 @@
                 }
                 
                 function getValueData(graph,typeVal,typeCat,plage){
-                    let tableauAled = [typeCat];
+                    let tableauAled;
+                    if(typeCat == 'all'){
+                        tableauAled = tabAssociatifCat[typeCat];
+                        console.log(getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage));
+               
+                    }else{
+
+                        tableauAled = [typeCat];
+                        tabAssociatifCat[typeCat].forEach(element => {
+                                tableauAled.push(element);
+                            });
+                    }
                     switch (typeVal) {
                         case 'prix':
                             
-                            tabAssociatifCat[typeCat].forEach(element => {
-                                tableauAled.push(element);
-                            });
+                            
                             
                             return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.prix;
                             
@@ -457,20 +474,13 @@
                         case 'qte':
                             
 
-                            tabAssociatifCat[typeCat].forEach(element => {
-                                tableauAled.push(element);
-                            });
                             
                             return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.quantite;
                             
                             break;
                         
                         case 'nbAchat':
-                            
 
-                            tabAssociatifCat[typeCat].forEach(element => {
-                                tableauAled.push(element);
-                            });
                             
                             return getTimeData(graph.resetData().filtreByCategorie(tableauAled),plage).value.nb_commande;
                             
@@ -480,29 +490,29 @@
                 }
 
                 //creer le graphe par categorie
-                function createCatChart() {
+                function createCatChart(ord='qte',plage='M') {
                     //s'il est affiché => supprimer
                     if(CatChart !== null){
                         deleteChart(CatChart,"b");
                     }
 
-                    tabCat = [];
-                    categories.forEach(element => {
+                    tabCat = getValueData(graphCat,ord,'all',plage);
+                    // categories.forEach(element => {
                         
-                        let initialValue = 0;
-                        let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.quantite.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
+                    //     let initialValue = 0;
+                    //     let quantiteCat = graphCat.resetData().filtreByCategorie([element]).getYear().value.quantite.reduce(
+                    //             (accumulator, currentValue) => accumulator + currentValue,
+                    //             initialValue,);
                         
-                        tabAssociatifCat[element].forEach(elt => {
-                            initialValue = 0;
-                            quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.quantite.reduce(
-                                (accumulator, currentValue) => accumulator + currentValue,
-                                initialValue,);
-                        });
-                        tabCat.push(quantiteCat);
+                    //     tabAssociatifCat[element].forEach(elt => {
+                    //         initialValue = 0;
+                    //         quantiteCat+= graphCat.resetData().filtreByCategorie([elt]).getYear().value.quantite.reduce(
+                    //             (accumulator, currentValue) => accumulator + currentValue,
+                    //             initialValue,);
+                    //     });
+                    //     tabCat.push(quantiteCat);
 
-                    });
+                    // });
 
 
 
@@ -542,7 +552,7 @@
                     
 
                     if(typeCat === "all"){
-                        createCatChart();
+                        createCatChart(typeCat,plage);
                         document.getElementById('b_container').style="width:40vw;";
                         return;
                     }
@@ -555,21 +565,7 @@
                     
 
                     let values = getValueData(baseGraph,typeVal,typeCat,plage);
-                    
-
-                    // // ajouter les sous catégories
-                    // if(tabAssociatifCat[typeCat]){
-                    //     tabAssociatifCat[typeCat].forEach(subCat => {
-
-                    //         let subGraph = graphCat.resetData().filtreByCategorie([subCat]);
-                    //         let subData = getTimeData(baseGraph,plage);
-
-                    //         subData.value.prix.forEach((v,i)=>{
-                    //             values[i] += v;
-                    //         });
-
-                    //     });
-                    // }
+ 
 
                     CatChart = createChart(
                         "b",
@@ -592,37 +588,7 @@
                     if(typeCat === "all"){
 
                         tabCat = getValueData(graphCat,typeVal,typeCat,plage);
-                        // tabCat = [];
-                        // categories.forEach(element => {
-
-                        //     let initialValue = 0;
-
-                        //     let data = getTimeData(
-                        //         graphCat.resetData().filtreByCategorie([element]),plage
-                        //     ).value.prix;
-
-                        //     let quantiteCat = data.reduce(
-                        //         (accumulator, currentValue) => accumulator + currentValue,
-                        //         initialValue
-                        //     );
-
-                        //     tabAssociatifCat[element].forEach(elt => {
-
-                        //         let subData = getTimeData(
-                        //             graphCat.resetData().filtreByCategorie([elt]),plage
-                        //         ).value.prix;
-
-                        //         quantiteCat += subData.reduce(
-                        //             (accumulator, currentValue) => accumulator + currentValue,
-                        //             0
-                        //         );
-
-                        //     });
-
-                        //     tabCat.push(quantiteCat);
-
-                        // });
-
+                        
                         deleteChart(CatChart,"b");
 
                         CatChart = createChart(
@@ -645,20 +611,6 @@
                         let graph = graphCat.resetData().filtreByCategorie([typeCat]);
                         let base = getTimeData(graph,plage);
 
-                        // let values = [...base.value.prix];
-                        // 
-                        // // ajouter les sous catégories
-                        // tabAssociatifCat[typeCat].forEach(sub => {
-
-                        //     let subGraph = graphCat.resetData().filtreByCategorie([sub]);
-                        //     let subData = getTimeData(subGraph,plage);
-
-                        //     subData.value.prix.forEach((v,i)=>{
-                        //         values[i] += v;
-                        //     });
-
-                        // });
-
                         let values = getValueData(graphCat,typeVal,typeCat,plage);
                         
                         CatChart = createChart(
@@ -679,18 +631,20 @@
                     const plage = document.getElementById("filtreAbsCat").value;
                     const typeCat = document.getElementById("filtreCat").value;
                     const typeVal = document.getElementById('filtreOrdCat').value;
-
-                    // if(typeCat === "all"){
-                    //     createCatChart();
-                    //     document.getElementById('b_container').style="width:40vw;";
-                    //     return;
-                    // }
+                    
+                    
+                    if(typeCat === "all"){
+                        createCatChart(typeVal,plage);
+                        document.getElementById('b_container').style="width:40vw;";
+                        return;
+                    }
                     
                     let graph = graphCat.resetData().filtreByCategorie([typeCat]);
                     let base = getTimeData(graph,plage);
 
                     let values = getValueData(graphCat,typeVal,typeCat,plage);
-                    
+
+                    console.log(graph,base,values);
                     //elenve lancien graphe et met un nouveau canvas
                     deleteChart(CatChart,"b");
                             
