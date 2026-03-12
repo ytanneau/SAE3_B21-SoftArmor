@@ -2560,14 +2560,18 @@ aside {
 .facture-page-vendeur{
 
     .facture{
+        width: 100vw;
 
         .facture-head{
+            width: 100vw;
             display: flex;
             flex-direction: row;
-            height: 20vw;
+            height: 20vh;
 
             img{
-                height: 18vw;
+                height: 18vh;
+                position: relative;
+                right: 0;
             }
         }
 
@@ -2578,10 +2582,13 @@ aside {
         }
 
         .facture-table{
+            width: 100vw;
 
         }
 
         .facture-toto{
+            position: relative;
+            right: 0;
 
         }
     }
