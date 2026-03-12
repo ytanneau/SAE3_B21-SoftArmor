@@ -479,8 +479,20 @@ if (isset($_POST['quantite'])) {
         // });
 
         document.getElementById('ajout_panier').addEventListener('click', async function(e) {
-            e.preventDefault(); // indispensable pour bloquer la soumission immédiate
+            e.preventDefault();
 
+            const form = this.closest('form');
+
+            // D'abord, ajouter au panier via fetch (sans recharger la page)
+            const formData = new FormData(form);
+            formData.append('panier', 'Ajouter au panier');
+
+            await fetch('', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Ensuite, afficher le popup
             const goToCart = await customConfirm({
                 title: "Article ajouté au panier !",
                 message: "Que voulez vous faire ?",
@@ -488,21 +500,10 @@ if (isset($_POST['quantite'])) {
                 confirmText: "Aller au panier"
             });
 
-            const form = this.closest('form');
-
-            // Ajouter un champ caché pour que PHP détecte $_POST['panier']
-            const hidden = document.createElement('input');
-            hidden.type = 'hidden';
-            hidden.name = 'panier';
-            hidden.value = 'Ajouter au panier';
-            form.appendChild(hidden);
-
             if (goToCart) {
-                form.submit(); 
                 window.location.href = '../panier/';
-            } else {
-                form.submit(); // soumet avec le champ caché, PHP reçoit bien $_POST['panier']
             }
+            // Si "Continuer les achats" → on ne fait rien, l'article est déjà ajouté
         });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
