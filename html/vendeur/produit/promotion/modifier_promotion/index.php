@@ -107,7 +107,7 @@
             update_promotion($tab_info_promotion['id_promo'],$id_produit, $_POST['dateDebut'],$_POST['dateFin'],$id_nouvelle_banniere);
         }
         
-        header("Location: ../?produit=" . $id_produit);
+        header("Location: ../../?produit=" . $id_produit);
         exit();
     } 
 ?>
