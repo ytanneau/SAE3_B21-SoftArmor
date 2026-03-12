@@ -56,6 +56,8 @@
     
     if (!$avis_existant){
         $erreur['avis'] = EXISTE_PAS;
+    } else {
+        $avis = avis_produit();
     }
 
     //met le limage avec les autre pour éviter de la perdre
