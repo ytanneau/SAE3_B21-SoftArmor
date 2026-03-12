@@ -3880,11 +3880,14 @@ aside .achat:hover {
   flex-direction: column;
 }
 
+.facture-page-vendeur {
+  line-height: 0;
+}
 .facture-page-vendeur .facture {
-  width: 100vw;
+  width: 80vw;
 }
 .facture-page-vendeur .facture .facture-head {
-  width: 100vw;
+  width: 80vw;
   display: flex;
   flex-direction: row;
   height: 20vh;
@@ -3895,7 +3898,10 @@ aside .achat:hover {
   right: 0;
 }
 .facture-page-vendeur .facture .facture-carater tr {
-  height: 25px;
+  height: 50px;
+}
+.facture-page-vendeur .facture .facture-carater td:first-child {
+  width: 100px;
 }
 .facture-page-vendeur .facture .facture-table {
   width: 100vw;
