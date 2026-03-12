@@ -785,3 +785,17 @@
             throw $e;
         }
     }
+
+    function delete_reduction($id_reduction){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("DELETE FROM _reduction WHERE id_reduction = :id");
+
+            $stmt->execute([
+                "id" => $id_reduction
+            ]);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
