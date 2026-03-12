@@ -90,15 +90,15 @@ function print_table($data)
     <table class="facture-toto">
         <tr>
             <td>Total HT</td>
-            <td><?= sommeHt($data) ?></td>
+            <td><?= sommeHt($data) ?> €</td>
         </tr>
         <tr>
             <td>Total TVA</td>
-            <td><?= sommeTVA($data) ?></td>
+            <td><?= sommeTVA($data) ?> €</td>
         </tr>
         <tr>
             <td>Total TTC</td>
-            <td><?= number_format(sommeTTC($data), 2) ?></td>
+            <td><?= number_format(sommeTTC($data), 2) ?> €</td>
         </tr>
     </table>
     <?php

@@ -3932,4 +3932,7 @@ aside .achat:hover {
 }
 .facture-page-vendeur .facture .facture-toto tr {
   height: 50px;
+}
+.facture-page-vendeur .facture .facture-toto td {
+  width: 100px;
 }/*# sourceMappingURL=style.css.map */
