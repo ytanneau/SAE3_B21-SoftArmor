@@ -52,7 +52,7 @@ function sommeTVA($data)
 {
     $somme = 0;
     foreach ($data as $valeur) {
-        $somme += number_format($valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100), 2);
+        $somme += $valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100);
     }
     return $somme;
 }
@@ -98,7 +98,7 @@ function print_table($data)
         </tr>
         <tr>
             <td>Total TTC</td>
-            <td><?= sommeTTC($data) ?></td>
+            <td><?= number_format(sommeTTC($data), 2) ?></td>
         </tr>
     </table>
     <?php
@@ -109,7 +109,19 @@ function facture($id_vendeur, $id_commande)
     print_head();
 
 
-    //print_carater();
+    $info = get_infos_commande($id_commande, $id_vendeur);
+    $adresse = sql_get_adresse($info['id_adresse_vendeur']);
+    $adr_vendeur = $adresse['adresse'] . " " . $adresse['ville'] . ", " . $adresse['code_postal'];
+
+    $adresse = sql_get_adresse($info['id_adresse_client']);
+    if ($adresse != null) {
+        $adr_client = $adresse['adresse'] . " " . $adresse['ville'] . ", " . $adresse['code_postal'];
+    } else {
+        $adr_client = " ";
+    }
+
+    print_carater($info['raison_sociale'], $adr_vendeur, $info['nom_client'] . " " . $info['prenom_client'], $adr_client, $info['date_commande']);
+
 
     $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
     print_table($data);
@@ -134,7 +146,7 @@ function facture_client($id_commande): void
         }
     }
 
-    $id_adresse = get_infos_commande($id_commande, $id_vendeurs[0])['id_adresse_client'];
+    /*$id_adresse = get_infos_commande($id_commande, $id_vendeurs[0])['id_adresse_client'];
 
     $adresse = sql_get_adresse($id_adresse);
     if ($adresse != null){
@@ -142,10 +154,12 @@ function facture_client($id_commande): void
     }
     else{
         $adr_client = " ";
-    }
+    }*/
 
     foreach ($id_vendeurs as $id_vendeur) {
-        print_head();
+        facture($id_vendeur, $id_commande);
+
+        /*print_head();
 
         $info = get_infos_commande($id_commande, $id_vendeur);
         $adresse = sql_get_adresse($info['id_adresse_vendeur']);
@@ -154,7 +168,7 @@ function facture_client($id_commande): void
         print_carater($info['raison_sociale'], $adr_vendeur, $info['nom_client']." ". $info['prenom_client'], $adr_client, $info['date_commande']);
 
         $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
-        print_table($data);
+        print_table($data);*/
         echo "<hr>";
     }
 
