@@ -93,7 +93,7 @@
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
     
-        
+        console.log(tab_reduction)
 
         dateDebut.value = tab_reduction['dateDebut']
         dateFin.value = tab_reduction['dateFin']
