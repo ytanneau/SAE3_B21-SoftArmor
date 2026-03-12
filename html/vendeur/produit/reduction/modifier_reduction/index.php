@@ -64,6 +64,9 @@
                     <label for="dateFin">Fin de la réduction</label>
                     <input type="date" id="dateFin" name="dateFin" required>
                 </div>
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
+                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
                 <div>
                     <label for="pourcentage">Pourcentage : </label>
                     <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
@@ -92,7 +95,66 @@
         const euro = document.getElementById("euro")
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
+
+        dateDebut.addEventListener('change', () => {
+            if(dateFin.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning1.style.display = "block";
+                } else if (dateFin == ""){
+                    dateFin.value = dateDebut.value;
+                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                    warning4.style.display = "block";
+                } else {
+                    warning1.style.display = "none";
+                    warning4.style.display = "none";
+                    calculP();
+                }
+                
+            }
+            if(!verif_date_pour_suppression(dateDebut.value)){
+                btn_suppr.style.display = "none";
+            } else {
+                btn_suppr.style.display = "block";
+            }
+            
+        });
+        dateFin.addEventListener('change', () => {
+            if(dateDebut.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning1.style.display = "block";
+                } else {
+                    warning1.style.display = "none";
+                    calculP();
+                }
+            }
+            if (check_date(dateFin.value)){
+                divPhoto.style.display = "block";
+            } else {
+                divPhoto.style.display = "none";
+            }
+        });
     
+        pourcentage.addEventListener('input', () => {
+            pourcentage.value = pourcentage.value.replace(",",".");
+            pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
+            if(pourcentage.value <= 100){
+                calculR();
+            } else {
+                warning.style.display = "block";
+            }
+        })
+
+        function calculR(){
+            if(pourcentage.value != ""){
+                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
+                euro.value = prixInitial - prixFinal.value;
+                prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2) + "€";
+                euro.value = Number.parseFloat(euro.value).toFixed(2);
+            } else {
+                euro.value = "";
+            }
+        }
+
         console.log(tab_reduction)
 
         dateDebut.value = tab_reduction['date_debut']
