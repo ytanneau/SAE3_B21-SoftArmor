@@ -90,7 +90,7 @@
         const warning = document.getElementById("warning")
         const pourcentage = document.getElementById("pourcentage")
         const euro = document.getElementById("euro")
-        const prixInitial = <?= json_encode($prix) ?>
+        const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
     
         
