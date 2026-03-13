@@ -46,20 +46,22 @@ class PDF extends tFPDF
         foreach ($data as $row) {
             $x = $this->GetX();
             $y = $this->GetY();
-            $this->Image(HOME_SITE . $row['url_image'], null, null, 0, 20);
+            $this->Image(HOME_SITE . $row['url_image'], null, null, 20, 20);
             $this->SetXY(45, $y);
             //$this->SetY($y);
-            $this->MultiCell(60, 10, $row['nom_public'], 0);
+            $this->MultiCell(60, 10, $row['nom_public']+$row['nom_public']*($row['tva']/100), 0);
             $this->SetXY(50 + 65, $y);
-            $this->Cell(30, 20, round($row['prix'], 2) . " €", 0, 0, 'c');
+            $this->Cell(30, 20, round($row['prix']+$row['prix']*($row['tva']/100), 2) . " €", 0, 0, 'c');
             $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
             $this->Ln();
             $this->Line(20, $y + 20, 200, $y + 21);
             $this->SetY($y + 22);
             $i++;
-            if ($i == 13) {
+            if ($i == 12) {
                 $i = 0;
                 $this->AddPage();
+                $this->Text($this->GetX(), $this->GetY(), "Le prix est sujet a variation");
+                $this->head_tableau();
             }
 
         }
@@ -91,7 +93,16 @@ class PDF extends tFPDF
         }
     }
 
+    function head_tableau(){
+        $this->Cell(30, 10, "Image", 0, 0, 'c');
+        $this->Cell(30, 10, "Nom", 0, 0, 'c');
+        $this->Cell(30, 10, "Prix TTC", 0, 0, 'c');
+        $this->Cell(30, 10, "Note", 0, 0, 'c');
+    }
+
 }
+
+
 
 // Chargement des données
 $data = info_produit_accueil();
@@ -103,6 +114,7 @@ $pdf->SetFont('DejaVu', '', 10);
 //$pdf->SetFont('Arial', '', 10);
 $pdf->AddPage();
 $pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
+$pdf->head_tableau();
 $pdf->Ln();
 $pdf->Ln();
 $pdf->BasicTable($data);
