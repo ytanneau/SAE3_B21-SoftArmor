@@ -44,12 +44,14 @@ class PDF extends FPDF
         foreach ($data as $row) {
                 $x = $this->GetX();
                 $y = $this->GetY();
-                $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
-                $this->SetXY(50, $y);
+                $this->Image(HOME_SITE . $row['url_image'], null,null,0, 30);
+                $this->SetXY(35, $y);
                 //$this->SetY($y);
-                $this->MultiCell(60, 20, $row['nom_public'], 1);
-                $this->Cell(40, 20, round($row['prix'],2). " €", 1, 0, 'c');
+                $this->MultiCell(60, 10, $row['nom_public'], 0);
+                $this->SetXY(35+65, $y);
+                $this->Cell(40, 20, round($row['prix'],2). " €", 0, 0, 'c');
             $this->Ln();
+            $this->Line(0, $y+30, 200, $y+31);
         }
     }
 
@@ -60,7 +62,7 @@ $data = info_produit_accueil();
 $pdf = new PDF();
 
 //$data
-$pdf->SetFont('Arial', '', 11);
+$pdf->SetFont('Arial', '', 10);
 $pdf->AddPage();
 $pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
 $pdf->Ln();
