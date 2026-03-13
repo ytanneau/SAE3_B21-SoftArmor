@@ -81,6 +81,7 @@
                     <input type="text" id="prixFinal" readonly>
                 </div>
                 <input type="submit" id="btn_confirm_reduc">
+                <a href="supprimer_reduc.php?idProduit=<?=htmlentities($id_produit)?>&idReduc=<?=htmlentities($id_reduction)?>">Supprimer la réduction</a>
             </form>
         </main>
         <?php include HOME_SITE . "footer.php"?>
