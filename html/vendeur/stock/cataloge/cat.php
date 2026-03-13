@@ -42,9 +42,9 @@ class PDF extends FPDF
     {
         // Données
         foreach ($data as $row) {
-                $this->Image(HOME_SITE . $row['url_image']);
-                $this->Cell(40, 6, $row['nom_public'], 1);
-                $this->Cell(40, 6, $row['prix'], 1);
+                $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
+                $this->Cell(40, 20, $row['nom_public'], 1);
+                $this->Cell(40, 20, $row['prix'], 1);
             $this->Ln();
         }
     }
