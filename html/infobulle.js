@@ -4,6 +4,8 @@ let listeAides = document.getElementsByClassName('aide');
 for (i = 0; i < listeAides.length; i++) {
     let element = listeAides[i];
 
+    element.textContent = '?';
+
     element.addEventListener('mouseover', (e) => {
         let baliseAide = document.createElement('p');
 

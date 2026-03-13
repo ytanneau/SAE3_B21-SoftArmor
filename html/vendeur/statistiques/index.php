@@ -90,6 +90,7 @@
                     <option value="m">60 Dernieres Minutes</option>
                 </select>
                 <button id='resetCat'>Reset Filtre</button>
+                <span class="aide" data-tooltip="Cliquez sur une catégorie dans le diagramme pour afficher toutes les sous-catégories, ou tous les produits dans cette catégorie"></span>
                 <div id="b_container">
                     <canvas id="b"></canvas>
                 </div>
@@ -812,6 +813,8 @@
                 });
 
             </script>
+
+            <script src="<?=HOME_SITE?>infobulle.js"></script>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
