@@ -45,10 +45,10 @@ class PDF extends FPDF
                 $x = $this->GetX();
                 $y = $this->GetY();
                 $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
-                $this->SetX($x-20);
-                $this->SetY($y+20);
+                $this->SetX($x+20);
+                $this->SetY($y);
                 $this->Cell(40, 20, $row['nom_public'], 1);
-                $this->Cell(40, 20, $row['prix'], 1);
+                $this->Cell(40, 20, round($row['prix'],2). " €", 1);
             $this->Ln();
         }
     }
@@ -62,7 +62,7 @@ $pdf = new PDF();
 //$data
 $pdf->SetFont('Arial', '', 11);
 $pdf->AddPage();
-$pdf->Text(null, null, "Le prix est sujet a variation");
+$pdf->Text($this->GetX(), $this->GetY(), "Le prix est sujet a variation");
 $pdf->Ln();
 $pdf->Ln();
 $pdf->BasicTable( $data);
