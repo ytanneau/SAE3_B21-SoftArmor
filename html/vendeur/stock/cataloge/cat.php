@@ -49,7 +49,7 @@ class PDF extends tFPDF
             $this->Image(HOME_SITE . $row['url_image'], null, null, 20, 20);
             $this->SetXY(45, $y);
             //$this->SetY($y);
-            $this->MultiCell(60, 10, $row['nom_public']+$row['nom_public']*($row['tva']/100), 0);
+            $this->MultiCell(60, 10, $row['nom_public'], 0);
             $this->SetXY(50 + 65, $y);
             $this->Cell(30, 20, round($row['prix']+$row['prix']*($row['tva']/100), 2) . " €", 0, 0, 'c');
             $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
