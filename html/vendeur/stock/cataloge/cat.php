@@ -73,7 +73,7 @@ class PDF extends tFPDF
             //$this->SetY($y);
             $this->MultiCell(60, 10, $row['nom_public'], 0);
             $this->SetXY(50 + 65, $y);
-            $this->Cell(30, 20, round($row['prix']+$row['prix']*($row['tva']/100), 2) . " €", 0, 0, 'c');
+            $this->Cell(30, 20, number_format($row['prix']+$row['prix']*($row['tva']/100), 2,',', ' ') . " €", 0, 0, 'c');
             $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
             $this->Ln();
             $this->Line(20, $y + 20, 200, $y + 21);
