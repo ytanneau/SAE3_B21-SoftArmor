@@ -96,7 +96,7 @@ class PDF extends tFPDF
     function head_tableau(){
         $this->SetFont('Arial', 'B', 10);
         $this->Cell(35, 5, "Image", 0, 0, 'c');
-        $this->Cell(60, 5, "Nom", 0, 0, 'c');
+        $this->Cell(70, 5, "Nom", 0, 0, 'c');
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
         $this->Cell(30, 5, "Note", 0, 0, 'c');
         $this->SetFont('DejaVu', '', 10);
