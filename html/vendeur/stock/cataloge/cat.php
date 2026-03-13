@@ -57,7 +57,7 @@ class PDF extends tFPDF
             $this->Line(20, $y + 20, 200, $y + 21);
             $this->SetY($y + 22);
             $i++;
-            if ($i == 12) {
+            if ($i == 11) {
                 $i = 0;
                 $this->AddPage();
                 $this->Text($this->GetX(), $this->GetY(), "Le prix est sujet a variation");
@@ -98,7 +98,7 @@ class PDF extends tFPDF
         $this->Cell(35, 5, "Image", 0, 0, 'c');
         $this->Cell(70, 5, "Nom", 0, 0, 'c');
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
-        $this->Cell(30, 5, "Note", 0, 0, 'c');
+        $this->Cell(40, 5, "Note", 0, 0, 'c');
         $this->SetFont('DejaVu', '', 10);
     }
 
