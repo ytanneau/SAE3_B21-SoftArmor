@@ -52,6 +52,7 @@ class PDF extends FPDF
                 $this->Cell(40, 20, round($row['prix'],2). " €", 0, 0, 'c');
             $this->Ln();
             $this->Line(0, $y+30, 200, $y+31);
+            $this->SetY( $y+32);
         }
     }
 
