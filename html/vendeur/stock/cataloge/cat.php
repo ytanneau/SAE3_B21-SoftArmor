@@ -71,7 +71,9 @@ $data = info_produit_accueil();
 $pdf = new PDF();
 
 //$data
-$pdf->SetFont('Arial', '', 10);
+$pdf->AddFont('DejaVu','','DejaVuSansCondensed.ttf',true);
+$pdf->SetFont('DejaVu','',10);
+//$pdf->SetFont('Arial', '', 10);
 $pdf->AddPage();
 $pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
 $pdf->Ln();
