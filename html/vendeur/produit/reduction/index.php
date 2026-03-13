@@ -66,10 +66,13 @@
                     <label for="dateFin">Fin de la réduction</label>
                     <input type="date" id="dateFin" name="dateFin" required>
                 </div>
+                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
+                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
                 <div>
                     <label for="pourcentage">Pourcentage : </label>
                     <input type="text" id="pourcentage" name="pourcentage" required>
-                    <p style="display:none;" id="warning">Le pourcentage ne peut <br>être supérieur à 100</p>
+                    <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
                 </div>
                 <div>
                     <label for="euro">Remise appliquée : </label>
@@ -84,25 +87,29 @@
         </main>
         <?php include HOME_SITE . "footer.php"?>
         <script>
-            const warning = document.getElementById("warning");
+            
+
+            // REDUCTION //
+            const warningPourcentage = document.getElementById("warningPourcentage");
             const pourcentage = document.getElementById("pourcentage");
             const euro = document.getElementById("euro");
             const prixInitial = <?= json_encode($prix) ?>;
-            const prixFinal = document.getElementById("prixFinal");
-            
-            warning.style.display = "none";
+            const prixFinal = document.getElementById("prixFinal")
+            const dateDebut = document.getElementById("dateDebut")
+            const dateFin = document.getElementById("dateFin")
+            const warning1 = document.getElementById("warning1");
+            const warning2 = document.getElementById("warning2");
+            const warning3 = document.getElementById("warning3");
 
-            if (pourcentage.value >= 100){
-                    warning.style.display = "block";
-                    event.preventDefault();
-                }
+            warningPourcentage.style.display = "none";
+
             pourcentage.addEventListener('input', () => {
                 pourcentage.value = pourcentage.value.replace(",",".");
                 pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
                 if(pourcentage.value <= 100){
                     calculR();
                 } else {
-                    warning.style.display = "block";
+                    warningPourcentage.style.display = "block";
                 }
                 
             })
@@ -117,16 +124,6 @@
                     euro.value = "";
                 }
             }
-
-            // REDUCTION //
-            const warning = document.getElementById("warning");
-            const pourcentage = document.getElementById("pourcentage");
-            const euro = document.getElementById("euro");
-            const prixInitial = <?= json_encode($prix) ?>;
-            const prixFinal = document.getElementById("prixFinal")
-            const dateDebut = document.getElementById("dateDebut")
-            const dateFin = document.getElementById("dateFin")
-
 
             dateDebut.addEventListener('change', () => {
                 if(dateFin.value != ""){
