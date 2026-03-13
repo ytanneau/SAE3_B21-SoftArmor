@@ -1,12 +1,18 @@
 <?php
 
+use BcMath\Number;
+
 require_once ".config.php";
 require_once HOME_GIT . "vendor/autoload.php";
 use OTPHP\TOTP;
 
-// permet d'activer la double authentification sur un compte, en ajoutant la clef de la 2FA au compte dans la BDD
+/** 
+ * permet d'activer la double authentification sur un compte, en ajoutant la clef de la 2FA au compte dans la BDD 
+ * */
 function activer_2FA($id_compte, $clef) {
     global $pdo;
+
+    $clef = chiffrement_2FA($clef);
     
     $requete = $pdo->prepare('UPDATE _compte SET clef = :clef WHERE id_compte = :id_compte');
     $requete->bindValue(":clef", $clef, PDO::PARAM_STR);
@@ -44,7 +50,7 @@ function get_clef_2FA($id_compte) {
     $requete->bindValue(":id_compte", $id_compte, PDO::PARAM_INT);
     $requete->execute();
 
-    return $requete->fetch(PDO::FETCH_ASSOC)['clef'];
+    return dechiffrement_2FA($requete->fetch(PDO::FETCH_ASSOC)['clef']);
 }
 
 // permet de vérifier le code PIN envoyé par l'utilisateur
@@ -65,4 +71,41 @@ function check_code_PIN($codePIN) {
     } 
 
     return $erreur;
+}
+
+// fonction permettant de chiffrer la clef de double authentification
+function chiffrement_2FA($clef) {
+    $str_chiffre = "";
+    $liste_cars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    $increment = 14;
+    
+    foreach (str_split($clef) as $car) {
+        if (is_numeric($car)) {
+            $str_chiffre .= $liste_cars[(ord($car) - ord("0") + strpos($liste_cars, "0") + $increment) % strlen($liste_cars)];
+        } else {
+            $str_chiffre .= $liste_cars[(ord($car) - ord("A") + $increment) % strlen($liste_cars) % strlen($liste_cars)];
+        }
+    }
+
+    return $str_chiffre;
+}
+
+
+// fonction permettant de chiffrer la clef de double authentification
+function dechiffrement_2FA($clef) {
+    $str_chiffre = "";
+    $liste_cars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    
+    $increment = 14;
+
+    foreach (str_split($clef) as $car) {
+        if (is_numeric($car)) {
+            $str_chiffre .= $liste_cars[(ord($car) - ord("0") + strpos($liste_cars, "0") - $increment) % strlen($liste_cars)];
+        } else {
+            $str_chiffre .= $liste_cars[(ord($car) - ord("A") - $increment) % strlen($liste_cars)];
+        }
+    }
+
+    return $str_chiffre;
 }
