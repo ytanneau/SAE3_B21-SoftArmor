@@ -94,10 +94,10 @@ class PDF extends tFPDF
     }
 
     function head_tableau(){
-        $this->Cell(30, 10, "Image", 0, 0, 'c');
-        $this->Cell(30, 10, "Nom", 0, 0, 'c');
-        $this->Cell(30, 10, "Prix TTC", 0, 0, 'c');
-        $this->Cell(30, 10, "Note", 0, 0, 'c');
+        $this->Cell(35, 5, "Image", 0, 0, 'c');
+        $this->Cell(60, 5, "Nom", 0, 0, 'c');
+        $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
+        $this->Cell(30, 5, "Note", 0, 0, 'c');
     }
 
 }
