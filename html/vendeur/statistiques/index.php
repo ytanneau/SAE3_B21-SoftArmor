@@ -32,8 +32,9 @@
         <script src="dist/chart.umd.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php include HOME_SITE . 'link_head.php'; ?>
         <title>Alizon - Accueil vendeur</title>
+        <?php include HOME_SITE . 'link_head.php' ?>
+
     </head>
     <body class="stat">
         <?php include "../header.php" ?>
@@ -42,7 +43,7 @@
                 <button id="general">General</button>
                 <button id="categories">Categories</button>
                 <button id="produits">Produits</button>
-                <button id="autre">Personnalisé</button>
+                <a href="./personnalisee" id="autre">Personnalisé</a>
             </section>
             <section id="sectionGen">
                 <h1>Statistiques Générales</h1>
@@ -96,12 +97,45 @@
             </section>
             <section id="section_prod">
                 <h1>Statistiques Par Produits</h1>
+                <section id ="section_prod">
+                    <select class="produit" id="filtreProd"></select>
+                    <label>Tirer Les</label>
+                    <select class="produit" id="filtreOrdProd">
+                        <option value="qte">Quantité</option>
+                        <option value="prix">Prix</option>
+                        <option value="nbAchat">Nombres D'achats</option>
+                    </select>
+                    <label>Sur Les</label>
+                    <select class="produit" id="filtreAbsProd">
+                        <option value="M">12 Derniers Mois</option>
+                        <option value="W">30 Derniers Jours</option>
+                        <option value="D">7 Derniers Jours</option>
+                        <option value="h">24 Dernieres Heures</option>
+                        <option value="m">60 Dernieres Minutes</option>
+                    </select>
+                    <label>Diagramme en </label>
+                    <select class="produit" id="typeGraphProd">
+                        <option value="bar">Barre</option>
+                        <option value="line">Ligne</option>
+                    </select>
+                    <div id="c_container">
+                        <canvas id="c"></canvas>
+                    </div>
+                </section>
+            </section>
+            <section id="app">
             </section>
             
             <script type="module">
                 import DataGraph from "./DataGraph.js";
                 import {TimeMilli,Compare,SideMonth,SideDay} from "./DataTime.js";
                 import MakeGraph from "./MakeGraph.js";
+               
+                /*  
+                    ---------------------
+                    ------FONCITONS------
+                    ---------------------
+                */
 
                 //supprimer un graphe
                 function deleteChart(chart,idCanva) {
@@ -112,13 +146,6 @@
                     document.getElementById(`${idCanva}_container`).append(elm);
                     
                 }
-
-                /*  
-                    ---------------------
-                    ------FONCITONS------
-                    ---------------------
-                */
-
 
                 //creer un graphe
                 function createChart(id,typeChart,labelsChart,dataChart,offsetChart="auto",displayLegend=true,isClickable=false, displayScales=true) {
@@ -158,7 +185,6 @@
                                 const plage = document.getElementById('filtreAbsCat').value;
                                 
                                 labelGraph = [];
-                                console.log(labelGraph);
                                 let valOrd = document.getElementById("filtreOrdCat").value;
 
                                 let methodeDonne;
@@ -194,7 +220,10 @@
                                                 initialValue,));
                                     deleteChart(graphe,id);
 
-                                    createChart(id,typeChart,labelGraph,value,offsetChart,displayLegend, displayScales);
+                                    createChart(id,typeChart,labelGraph,value,offsetChart,displayLegend, true, false);
+                                }else{
+                                    let lstProdCat = getTimeData(graphCat.resetData().filtreByCategorie([label]),plage).value[methodeDonne];
+                                    console.log(label,lstProdCat);
                                 }
                             }
                         }
@@ -380,6 +409,69 @@
                     document.getElementById('b_container').style.setProperty("width", "40vw");
                 }
 
+                //creer le graphe pour la section "produit"
+                function createProdChart() {
+
+                    //s'il est affiché => supprimer
+                    if(ProdChart !== null){
+                        deleteChart(ProdChart,"c");
+                    }
+                    
+                    let idProduit = document.getElementById("filtreProd").value;
+                    let valAbs = document.getElementById("filtreAbsProd").value;
+                    let valOrd = document.getElementById("filtreOrdProd").value;
+                    let type = document.getElementById("typeGraphProd").value;
+
+                    tabCat = [];
+                
+                    let methodePeriode;
+                    let methodeDonne;
+
+                    switch (valAbs) {
+                        case "M":
+                            methodePeriode = "getYear"
+                        break;
+
+                        case "W":
+                            methodePeriode = "getMonth"
+                        break;
+
+                        case "D":
+                            methodePeriode = "getWeek"
+                        break;
+
+                        case "h":
+                            methodePeriode = "getDay"
+                        break;
+
+                        case "m":
+                            methodePeriode = "getHour"
+                        break;
+                    }
+
+                    switch (valOrd) {
+                        case "qte":
+                            methodeDonne = "quantite"
+                        break;
+
+                        case "nbAchat":
+                            methodeDonne = "nb_commande"
+                        break;
+
+                        case "prix":
+                            methodeDonne = "prix"
+                        break;
+
+                    }
+                    
+                    let dataBase = graphCat.resetData().filtreByProduit(idProduit)[methodePeriode]();
+                    let produit = dataBase.value[methodeDonne];
+                    let label = dataBase.label;
+                    
+                    //affiche le graphe
+                    ProdChart = createChart("c", type, label, produit, "auto", false, true, true);
+                }
+
                 function createOnlyCatChart() {
                     let typeCat = document.getElementById("filtreCat").value;
                     let plage = document.getElementById("filtreAbsCat").value;
@@ -395,20 +487,6 @@
 
                     let values = getValueData(graphCat,typeVal,typeCat,plage);
 
-
-                    // // ajouter les sous catégories
-                    // if(tabAssociatifCat[typeCat]){
-                    //     tabAssociatifCat[typeCat].forEach(subCat => {
-
-                    //         let subGraph = graphCat.resetData().filtreByCategorie([subCat]);
-                    //         let subData = getTimeData(baseGraph,plage);
-
-                    //         subData.value.quantite.forEach((v,i)=>{
-                    //             values[i] += v;
-                    //         });
-
-                    //     });
-                    // }
 
                     CatChart = createChart(
                         "b",
@@ -468,14 +546,6 @@
                     }
                 }
 
-
-                let sec1 = document.getElementById("sectionGen");
-
-                let sec2 = document.getElementById("section_cat");
-                sec2.style.display = "None";
-                let sec3 = document.getElementById("section_prod");
-                sec3.style.display = "None";
-                
                 function resetOptions() {
                     let listeSelects = document.getElementsByTagName('select');
 
@@ -486,10 +556,21 @@
                     }
                 }
 
+                let sec1 = document.getElementById("sectionGen");
+
+                let sec2 = document.getElementById("section_cat");
+                sec2.style.display = "None";
+                let sec3 = document.getElementById("section_prod");
+                sec3.style.display = "None";
+                let sec4 = document.getElementById("app");
+                sec4.style.display = "None";
+                
+
                 document.getElementById("general").addEventListener('click', () => {
                     sec1.style.display = "initial";
                     sec2.style.display = "None";
                     sec3.style.display = "None";
+                    sec4.style.display = "None";
 
                     resetOptions();
                     createGenChart();
@@ -499,6 +580,7 @@
                     sec1.style.display = "None";
                     sec2.style.display = "initial";
                     sec3.style.display = "None";
+                    sec4.style.display = "None";
                     createCatChart();
 
                     resetOptions();
@@ -508,6 +590,16 @@
                     sec1.style.display = "None";
                     sec2.style.display = "None";
                     sec3.style.display = "initial";
+                    sec4.style.display = "None";
+
+                    resetOptions();
+                });
+
+                document.getElementById("autre").addEventListener('click', () => {
+                    sec1.style.display = "None";
+                    sec2.style.display = "None";
+                    sec3.style.display = "None";
+                    sec4.style.display = "initial";
 
                     resetOptions();
                 });
@@ -533,6 +625,7 @@
                 let tab= [];
                 var myChart;
                 let CatChart = null;
+                let ProdChart = null;
                 let labelGraph = [];
 
 
@@ -542,7 +635,8 @@
                 let graphCat ;
                 let tabCat;
 
-                let dataPourCategorie
+                let dataPourCategorie;
+                let dataPourProduit;
 
                 let categories=[];
                 let toutecategories= [];
@@ -609,6 +703,27 @@
 
                 });
 
+                // récupère liste des produits du vendeur
+                fetch('./json_prod.php?listeprod=true&id_compte=<?= $_SESSION['id_compte']?>')
+                .then(response => response.json())
+                .then(data => {
+                    dataPourProduit = data;
+                    //mettre le select produit 
+                    if(document.getElementById("filtreProd").children.length === 0){
+
+                        //creer les option pour les categories
+                        dataPourProduit.forEach(element => {
+                            
+                            let elm = document.createElement('option');
+                            elm.value=`${element.id_produit}`;
+                            elm.innerText=`${element.id_produit} - ${element.nom_stock}`;
+                            document.getElementById("filtreProd").append(elm);
+                            
+                        });
+                    }
+
+                });                
+
                 // récupère les produits du vendeur
                 fetch('./json_prod.php?id_compte=<?= $_SESSION['id_compte']?>')
                 .then(response => response.json())
@@ -644,6 +759,9 @@
                                 initialValue,)
                             );
                     });
+
+                    //STATISTIQUES PRODUIT
+                    createProdChart();
 
                 })
                 .catch(error => {
@@ -789,6 +907,18 @@
                 document.getElementById("resetCat").addEventListener('click',()=>{
                     resetOptions();
                     createCatChart();
+                });
+               
+                /*  
+                    ----------------------
+                    --------Produit-------
+                    ----------------------
+                */
+                //changer filtre produit
+                document.querySelectorAll(".produit").forEach((element)=>{
+                    element.addEventListener('change',()=>{
+                        createProdChart();
+                    });
                 });
 
             </script>
