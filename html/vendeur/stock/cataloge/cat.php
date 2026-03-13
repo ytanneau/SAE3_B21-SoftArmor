@@ -54,7 +54,7 @@ class PDF extends tFPDF
             $this->Cell(30, 20, round($row['prix'], 2) . " €", 0, 0, 'c');
             $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
             $this->Ln();
-            $this->Line(0, $y + 20, 200, $y + 21);
+            $this->Line(20, $y + 20, 200, $y + 21);
             $this->SetY($y + 22);
             $i++;
             if ($i == 13) {
