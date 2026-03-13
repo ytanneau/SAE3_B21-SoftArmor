@@ -17,7 +17,8 @@ else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
     exit;
 }
 
-require('./fpdf186/fpdf.php');
+//require('./fpdf186/fpdf.php');
+require('./tfpdf/tfpdf.php');
 require_once HOME_GIT . '.config.php';
 //require_once HOME_GIT . 'fonction_produit.php';
 
@@ -48,9 +49,9 @@ class PDF extends FPDF
                 $this->Image(HOME_SITE . $row['url_image'], null,null,0, 30);
                 $this->SetXY(45, $y);
                 //$this->SetY($y);
-                $this->MultiCell(60, 10, $row['nom_public'], 0);
+                $this->MultiCell(60, 15, $row['nom_public'], 0);
                 $this->SetXY(50+65, $y);
-                $this->Cell(40, 20, round($row['prix'],2). " €", 0, 0, 'c');
+                $this->Cell(40, 30, round($row['prix'],2). " €", 0, 0, 'c');
             $this->Ln();
             $this->Line(0, $y+30, 200, $y+31);
             $this->SetY( $y+32);
