@@ -131,6 +131,8 @@ class PDF extends tFPDF
 
 // Chargement des données
 $data = info_produit_accueil();
+//$data = info_produit($id_liste);
+
 $pdf = new PDF();
 
 //$data
