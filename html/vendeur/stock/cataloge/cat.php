@@ -1,35 +1,109 @@
 <?php
-require('./fpdf186/fpdf.php');
+define("HOME_GIT", "../../../../");
+define("HOME_SITE", "../../../");
 
-class PDF extends FPDF
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true && !isset($_SESSION['raison_sociale'])) {
+    header('location: ' . HOME_SITE);
+    exit;
+}
+// Sinon si je ne suis pas connecté, retour à la page connexion vendeur
+else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+    header('location: ../');
+    exit;
+}
+
+//require('./fpdf186/fpdf.php');
+require('./tfpdf/tfpdf.php');
+require_once HOME_GIT . '.config.php';
+//require_once HOME_GIT . 'fonction_produit.php';
+
+function info_produit_accueil()
+{
+    global $pdo;
+
+    $requete = $pdo->prepare('
+        SELECT p.*, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image WHERE id_vendeur = :id_vendeur');
+    $requete->bindValue(':id_vendeur', $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+class PDF extends tFPDF
 {
 
     // Tableau simple
-    function BasicTable($header, $data)
+    function BasicTable($data)
     {
-        // En-tête
-        foreach ($header as $col)
-            $this->Cell(40, 7, $col, 1);
-        $this->Ln();
+        $i = 0;
         // Données
         foreach ($data as $row) {
-            foreach ($row as $col)
-                $this->Cell(40, 6, $col, 1);
+            $x = $this->GetX();
+            $y = $this->GetY();
+            $this->Image(HOME_SITE . $row['url_image'], null, null, 0, 20);
+            $this->SetXY(45, $y);
+            //$this->SetY($y);
+            $this->MultiCell(60, 10, $row['nom_public'], 0);
+            $this->SetXY(50 + 65, $y);
+            $this->Cell(30, 20, round($row['prix'], 2) . " €", 0, 0, 'c');
+            $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
             $this->Ln();
+            $this->Line(20, $y + 20, 200, $y + 21);
+            $this->SetY($y + 22);
+            $i++;
+            if ($i == 13) {
+                $i = 0;
+                $this->AddPage();
+            }
+
+        }
+    }
+
+    function etoile($moyenne, $x, $y)
+    {
+        $e=0;
+        if (is_null($moyenne)) {
+            $this->Cell(40, 20, "pas de note", 0, 0, 'c');
+            return null;
+        }
+        if ($moyenne > 5 || $moyenne < 0) {
+            $this->Cell(40, 20, "pas de note", 0, 0, 'c');
+            return null;
+        }
+        // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
+        for ($i = 1; $i <= floor($moyenne); $i++) {
+            $this->Image(HOME_SITE."/image/etoile_pleine.png", $x+5+10*$e, $y+5, 10, 10);
+            $e++;
+        }
+        if (fmod(floor($moyenne * 2), 2)) {
+            $this->Image(HOME_SITE."/image/etoile_demi.png", null, $y+5, 10, 10);
+            $e++;
+        }
+        for ($i = 5; $i > round($moyenne); $i--) {
+            $this->Image(HOME_SITE."/image/etoile_vide.png", null, $y+5, 10, 10);
+            $e++;
         }
     }
 
 }
 
-
-$pdf = new PDF();
-// Titres des colonnes
-$header = array('Pays', 'Capitale', 'Superficie (km²)', 'Pop. (milliers)');
 // Chargement des données
+$data = info_produit_accueil();
+$pdf = new PDF();
+
 //$data
-$pdf->SetFont('Arial', '', 14);
+$pdf->AddFont('DejaVu', '', 'DejaVuSansCondensed.ttf', true);
+$pdf->SetFont('DejaVu', '', 10);
+//$pdf->SetFont('Arial', '', 10);
 $pdf->AddPage();
-$pdf->Text($pdf->GetX(),$pdf->GetY(), "Le prix est sujet a variation");
+$pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
 $pdf->Ln();
-//$pdf->BasicTable($header, $data);
+$pdf->Ln();
+$pdf->BasicTable($data);
 $pdf->Output();
