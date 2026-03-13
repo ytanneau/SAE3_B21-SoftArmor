@@ -82,11 +82,11 @@ class PDF extends tFPDF
             $e++;
         }
         if (fmod(floor($moyenne * 2), 2)) {
-            $this->Image(HOME_SITE."image/etoile_demi.png", null, $y+5, 10, 10);
+            $this->Image(HOME_SITE."image/etoile_demi.png", $x+5+10*$e, $y+5, 10, 10);
             $e++;
         }
         for ($i = 5; $i > round($moyenne); $i--) {
-            $this->Image(HOME_SITE."image/etoile_vide.png", null, $y+5, 10, 10);
+            $this->Image(HOME_SITE."image/etoile_vide.png", $x+5+10*$e, $y+5, 10, 10);
             $e++;
         }
     }
