@@ -46,7 +46,7 @@ class PDF extends FPDF
                 $y = $this->GetY();
                 $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
                 $this->SetX($x-20);
-                $this->SetY($y);
+                $this->SetY($y+20);
                 $this->Cell(40, 20, $row['nom_public'], 1);
                 $this->Cell(40, 20, $row['prix'], 1);
             $this->Ln();
@@ -55,15 +55,15 @@ class PDF extends FPDF
 
 }
 
+// Chargement des données
 $data = info_produit_accueil();
 $pdf = new PDF();
-// Titres des colonnes
-$header = array('Pays', 'Capitale', 'Superficie (km²)', 'Pop. (milliers)');
-// Chargement des données
+
 //$data
 $pdf->SetFont('Arial', '', 11);
 $pdf->AddPage();
-$pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
+$pdf->Text(null, null, "Le prix est sujet a variation");
+$pdf->Ln();
 $pdf->Ln();
 $pdf->BasicTable( $data);
 $pdf->Output();
