@@ -46,7 +46,7 @@ function info_produit_id($id)
     $requete->bindValue(':id_vendeur', $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->bindValue(':id_produit', $id, PDO::PARAM_INT);
     $requete->execute();
-    return $requete->fetchAll(PDO::FETCH_ASSOC);
+    return $requete->fetch(PDO::FETCH_ASSOC);
 }
 
 function info_produit($id_liste)
