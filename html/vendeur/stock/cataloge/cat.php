@@ -44,8 +44,8 @@ class PDF extends FPDF
         foreach ($data as $row) {
                 $x = $this->GetX();
                 $y = $this->GetY();
-                $this->Image(HOME_SITE . $row['url_image'], 20,null,0, 20);
-                $this->SetX(20);
+                $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
+                $this->SetX(50);
                 $this->SetY($y);
                 $this->Cell(40, 20, $row['nom_public'], 1, 0, 'c');
                 $this->Cell(40, 20, round($row['prix'],2). " €", 1, 0, 'c');
