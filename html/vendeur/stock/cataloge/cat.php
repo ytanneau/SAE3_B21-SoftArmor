@@ -62,7 +62,7 @@ $pdf = new PDF();
 //$data
 $pdf->SetFont('Arial', '', 11);
 $pdf->AddPage();
-$pdf->Text($this->GetX(), $this->GetY(), "Le prix est sujet a variation");
+$pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
 $pdf->Ln();
 $pdf->Ln();
 $pdf->BasicTable( $data);
