@@ -47,7 +47,7 @@ class PDF extends FPDF
                 $this->Image(HOME_SITE . $row['url_image'], null,null,0, 20);
                 $this->SetXY(50, $y);
                 //$this->SetY($y);
-                $this->MultiCell(60, 20, $row['nom_public'], 1, 'c');
+                $this->MultiCell(60, 20, $row['nom_public'], 1);
                 $this->Cell(40, 20, round($row['prix'],2). " €", 1, 0, 'c');
             $this->Ln();
         }
