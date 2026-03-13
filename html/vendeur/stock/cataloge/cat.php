@@ -60,7 +60,7 @@ class PDF extends tFPDF
             if ($i == 11) {
                 $i = 0;
                 $this->AddPage();
-                $this->Text($this->GetX(), $this->GetY(), "Le prix est sujet a variation");
+                $this->Text($this->GetX(), $this->GetY(), "Le prix est sujet à variation");
                 $this->head_tableau();
             }
 
@@ -95,6 +95,7 @@ class PDF extends tFPDF
 
     function head_tableau(){
         $this->SetFont('Arial', 'B', 10);
+        $this->Ln();
         $this->Cell(35, 5, "Image", 0, 0, 'c');
         $this->Cell(70, 5, "Nom", 0, 0, 'c');
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
@@ -115,7 +116,7 @@ $pdf->AddFont('DejaVu', '', 'DejaVuSansCondensed.ttf', true);
 $pdf->SetFont('DejaVu', '', 10);
 //$pdf->SetFont('Arial', '', 10);
 $pdf->AddPage();
-$pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet a variation");
+$pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet à variation");
 $pdf->head_tableau();
 $pdf->Ln();
 $pdf->BasicTable($data);
