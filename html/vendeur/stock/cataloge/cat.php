@@ -123,6 +123,7 @@ class PDF extends tFPDF
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
         $this->Cell(40, 5, "Note", 0, 0, 'c');
         $this->SetFont('DejaVu', '', 10);
+        $this->SetY(20);
     }
 
 }
