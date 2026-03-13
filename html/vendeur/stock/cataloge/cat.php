@@ -78,15 +78,15 @@ class PDF extends tFPDF
         }
         // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
         for ($i = 1; $i <= floor($moyenne); $i++) {
-            $this->Image(HOME_SITE."image/etoile_pleine.png", $x+5+10*$e, $y+5, 10, 10);
+            $this->Image(HOME_SITE."image/etoile_pleine.png", $x+5+5*$e, $y+5, 5, 5);
             $e++;
         }
         if (fmod(floor($moyenne * 2), 2)) {
-            $this->Image(HOME_SITE."image/etoile_demi.png", $x+5+10*$e, $y+5, 10, 10);
+            $this->Image(HOME_SITE."image/etoile_demi.png", $x+5+5*$e, $y+5, 5, 5);
             $e++;
         }
         for ($i = 5; $i > round($moyenne); $i--) {
-            $this->Image(HOME_SITE."image/etoile_vide.png", $x+5+10*$e, $y+5, 10, 10);
+            $this->Image(HOME_SITE."image/etoile_vide.png", $x+5+5*$e, $y+5, 5, 5);
             $e++;
         }
     }
