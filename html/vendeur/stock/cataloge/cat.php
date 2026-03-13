@@ -19,7 +19,7 @@ else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
 
 require('./fpdf186/fpdf.php');
 require_once HOME_GIT . '.config.php';
-require_once HOME_GIT . 'fonction_produit.php';
+//require_once HOME_GIT . 'fonction_produit.php';
 
 function info_produit_accueil()
 {
