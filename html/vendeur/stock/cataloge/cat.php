@@ -35,6 +35,28 @@ function info_produit_accueil()
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function info_produit_id($id)
+{
+    global $pdo;
+
+    $requete = $pdo->prepare('
+        SELECT p.*, url_image, alt, _image.titre
+        FROM produit_en_ligne p
+        INNER JOIN _image ON id_image_principale = _image.id_image WHERE id_vendeur = :id_vendeur AND id_produit = :id_produit');
+    $requete->bindValue(':id_vendeur', $_SESSION['id_compte'], PDO::PARAM_INT);
+    $requete->bindValue(':id_produit', $id, PDO::PARAM_INT);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function info_produit($id_liste)
+{
+    $res = [];
+    foreach ($id_liste as $id){
+        array_push($res, info_produit_id($id));
+    }
+}
+
 class PDF extends tFPDF
 {
 
