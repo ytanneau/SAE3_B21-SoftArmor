@@ -35,7 +35,7 @@ function info_produit_accueil()
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
-class PDF extends FPDF
+class PDF extends tFPDF
 {
 
     // Tableau simple
