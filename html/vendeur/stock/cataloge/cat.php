@@ -94,7 +94,7 @@ class PDF extends tFPDF
     }
 
     function head_tableau(){
-        $this->SetFont('DejaVu', 'strong', 10);
+        $this->SetFont('DejaVu', 'B', 10);
         $this->Cell(35, 5, "Image", 0, 0, 'c');
         $this->Cell(60, 5, "Nom", 0, 0, 'c');
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
