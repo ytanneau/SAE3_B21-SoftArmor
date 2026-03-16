@@ -171,7 +171,7 @@ if ($numEtape == 3) {
 
     // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix_actuel AS prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
+        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix_actuel AS prix, quantite_panier AS quantite, _vendeur.id_compte AS id_vendeur
         FROM produit_panier
         INNER JOIN _vendeur ON produit_panier.id_vendeur = _vendeur.id_compte
         WHERE id_client = :id_compte");
@@ -215,7 +215,7 @@ if ($numEtape == 3) {
                 "prix" => $produit["prix"],
                 "quantite" => $quantite_achetee,
                 "nom_produit" => $produit["nom_produit"],
-                "nom_vendeur" => $produit["nom_vendeur"]
+                "id_vendeur" => $produit["id_vendeur"]
             ];
 
             update_stock($_POST['id_produit'], "-$quantite_achetee");
