@@ -1,6 +1,7 @@
 <?php
 define("HOME_GIT", "../../../../");
 define("HOME_SITE", "../../../");
+define("URL", "");
 
 if (!isset($_SESSION)) {
     session_start();
@@ -80,6 +81,7 @@ class PDF extends tFPDF
             $this->Ln();
             $this->Line(20, $y + 20, 200, $y + 21);
             $this->SetY($y + 22);
+            //$this->Link($x, $y, 200, 20, );
             $i++;
             if ($i == 11) {
                 $i = 0;
