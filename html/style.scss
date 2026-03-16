@@ -2265,10 +2265,6 @@ aside {
         flex-direction: column;
     }
 
-    .cout_final {
-        width: 50%;
-    }
-
     h3+p+div {
         div {
             input {
@@ -2288,7 +2284,7 @@ aside {
 
     #valider {
         @include bouton_new($color: $couleur_background);
-        margin-top: 20px;
+        margin-top: 40px;
         width: 100%;
     }
 
@@ -2311,15 +2307,6 @@ aside {
         img {
             @include image_produit(250px);
         }
-    }
-
-    .hide_input_file {
-        margin-top: 20px;
-        margin-bottom: 7px;
-        @include hide_input_file();
-        display: flex;
-        justify-content: center;
-        width: 16.2em;
     }
 
     .delete_picture {
