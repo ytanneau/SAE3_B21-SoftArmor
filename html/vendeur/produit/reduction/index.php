@@ -88,7 +88,7 @@
                         <input type="text" id="prixFinal" readonly>
                     </div>
                 </div>
-                <input type="submit" id="btn_confirm_reduc">
+                <input type="submit" id="valider">
             </form>
         </main>
         <?php include HOME_SITE . "footer.php"?>
