@@ -3567,9 +3567,6 @@ aside .achat:hover {
   display: flex;
   flex-direction: column;
 }
-.main_promo .cout_final {
-  width: 50%;
-}
 .main_promo h3 + p + div div input {
   width: 50%;
 }
@@ -3605,7 +3602,7 @@ aside .achat:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 .main_promo #valider {
-  margin-top: 20px;
+  margin-top: 40px;
   width: 100%;
 }
 .main_promo #supprimer_promotion {
@@ -3638,7 +3635,10 @@ aside .achat:hover {
 .main_promo .block_banniere {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 30px;
+}
+.main_promo .block_banniere label {
+  font-weight: bold;
 }
 .main_promo .block_banniere .overImg {
   display: flex;
@@ -3654,25 +3654,6 @@ aside .achat:hover {
   width: 250px;
   height: 250px;
   border-radius: 5px;
-}
-.main_promo .hide_input_file {
-  margin-top: 20px;
-  margin-bottom: 7px;
-  background-color: #EAC452;
-  padding: 10px 16px 10px 16px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 5px;
-  color: black;
-  font-weight: bold;
-}
-.main_promo .hide_input_file:hover {
-  background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
-}
-.main_promo .hide_input_file {
-  display: flex;
-  justify-content: center;
-  width: 16.2em;
 }
 .main_promo .delete_picture {
   display: block;

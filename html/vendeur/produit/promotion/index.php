@@ -96,16 +96,18 @@
                         <label for="dateFin">Date de fin : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
-                    <div class="en_colonne">
-                        <label for="cout">Coût final : </label>
-                        <input type="text" id="cout" readonly class="cout_final">
-                    </div>
                 </div>
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input type="text" id="cout" readonly>
+                </div>
+                
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
-                <div class="ajout_banniere">
-                    <label for="photoPromotion">Ajouter une banniere</label>
+                
+                <div class="block_banniere">
+                    <label for="photoPromotion">Ajouter une banniere (optionnel)</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
                 <input type="submit" id="valider" value="Valider">
