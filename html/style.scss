@@ -1909,8 +1909,13 @@ aside {
     }
 
     .list_promotion{
-        li a{
-            @include bouton_new($background: $couleur_primaire_vendeur, $largeur: 30em);
+        li {
+            marker: none;
+            a{
+                display: flex;
+                flex-direction: row;
+                background-color: $couleur_primaire_vendeur;
+            }
         }
     }
 }
