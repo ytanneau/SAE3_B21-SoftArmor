@@ -1946,6 +1946,108 @@ div:has(> aside) {
   }
 }
 
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.confirm-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.confirm-box {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.confirm-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.confirm-message {
+  font-size: 0.92rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.confirm-buttons button {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cancel {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  color: #444;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-cancel a {
+  text-decoration: none;
+  color: #444;
+}
+.btn-cancel:hover {
+  background-color: hsl(0, 0%, 109.1176470588%);
+}
+
+.btn-confirm {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-confirm a {
+  text-decoration: none;
+  color: white;
+}
+.btn-confirm:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+
 .prix {
   color: #2E7A30;
   font-size: 1.2em;
@@ -2499,6 +2601,11 @@ aside .achat:hover {
   flex-direction: row;
   gap: 70px;
 }
+.bodyModifProduit .blockImg .overImg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 .bodyModifProduit .blockImg img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -3046,12 +3153,15 @@ aside .achat:hover {
 }
 
 .stock {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 .stock main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex: 1;
 }
 .stock main table {
   display: flex;
@@ -3447,6 +3557,11 @@ aside .achat:hover {
   flex-direction: column;
   margin-top: 40px;
 }
+.main_promo .block_banniere .overImg {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
 .main_promo .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
@@ -3475,9 +3590,6 @@ aside .achat:hover {
   display: flex;
   justify-content: center;
   width: 16.2em;
-}
-.main_promo .ajout_banniere {
-  margin-top: 20px;
 }
 .main_promo .delete_picture {
   display: block;
@@ -3711,7 +3823,7 @@ aside .achat:hover {
 
 .liste-commande {
   width: 100vw;
-  margin-top: 1em;
+  margin-top: 3em;
 }
 .liste-commande th,
 .liste-commande td {
@@ -3746,8 +3858,87 @@ aside .achat:hover {
   -o-object-fit: contain;
      object-fit: contain;
 }
-.liste-commande-page main div > a {
+.liste-commande-page main div > a, .liste-commande-page main div > span {
   position: relative;
   left: 50px;
   top: 30px;
+}
+
+.main_reduction .entete .entete {
+  display: flex;
+  align-items: center;
+}
+.main_reduction .entete .entete a {
+  height: 24px;
+  margin-right: 50px;
+}
+.main_reduction .entete .entete h1 {
+  margin-right: 30px;
+}
+.main_reduction form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.facture-page-vendeur {
+  line-height: 0;
+}
+.facture-page-vendeur main {
+  padding: 0;
+}
+.facture-page-vendeur .facture {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.facture-page-vendeur .facture .facture-head {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+}
+.facture-page-vendeur .facture .facture-head img {
+  height: 40px;
+  position: relative;
+  right: 0;
+}
+.facture-page-vendeur .facture .facture-head h1 {
+  margin: 0;
+}
+.facture-page-vendeur .facture .facture-carater tr {
+  height: 50px;
+}
+.facture-page-vendeur .facture .facture-carater td:first-child {
+  width: 100px;
+}
+.facture-page-vendeur .facture .facture-table {
+  width: 80vw;
+  border-collapse: collapse;
+}
+.facture-page-vendeur .facture .facture-table th, .facture-page-vendeur .facture .facture-table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+.facture-page-vendeur .facture .facture-table th {
+  background-color: #3157A3;
+  color: white;
+}
+.facture-page-vendeur .facture .facture-table td {
+  text-align: center;
+}
+.facture-page-vendeur .facture .facture-table td:first-child {
+  text-align: start;
+}
+.facture-page-vendeur .facture .facture-toto {
+  position: relative;
+  right: 0;
+}
+.facture-page-vendeur .facture .facture-toto tr {
+  height: 50px;
+}
+.facture-page-vendeur .facture .facture-toto td:first-child {
+  width: 100px;
+}
+.facture-page-vendeur .facture .facture-toto tr:last-child td:first-child {
+  color: #3157A3;
 }/*# sourceMappingURL=style.css.map */

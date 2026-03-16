@@ -506,32 +506,17 @@
         }
     }
 
-    function creer_promotion($id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function creer_promotion($id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
-        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, reduction, id_image_banniere)
-            VALUES (:id_produit, :date_debut, :date_fin, :reduction, :id_image)");
+        $stmt = $pdo->prepare("INSERT INTO _promotion(id_produit, date_debut, date_fin, id_image_banniere)
+            VALUES (:id_produit, :date_debut, :date_fin, :id_image)");
         $stmt->execute([
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image" => $id_image_banniere
         ]);
-    }
-
-    function banniere_libre($date1,$date2){
-        global $pdo;
-        
-        $stmt = $pdo->prepare("SELECT periode_banniere_libre(:date1,:date2) AS is_active");
-        $stmt->execute([
-            "date1" => $date1,
-            "date2" => $date2
-        ]);
-        $resultat = $stmt->fetch(PDO::FETCH_ASSOC)['is_active'];
-        if($resultat === 1){ return true; }
-        else { return false; }
-         
     }
 
     function produit_est_en_promotion($id_produit){
@@ -565,14 +550,13 @@
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $reduction, $id_image_banniere){
+    function update_promotion($id_promotion, $id_produit, $date_debut, $date_fin, $id_image_banniere){
         global $pdo;
 
         $stmt = $pdo->prepare("UPDATE _promotion 
         SET id_produit = :id_produit,
             date_debut = :date_debut,
             date_fin = :date_fin,
-            reduction = :reduction,
             id_image_banniere = :id_image_banniere 
         WHERE id_promo = :id_promotion");
 
@@ -580,7 +564,6 @@
             "id_produit" => $id_produit,
             "date_debut" => $date_debut,
             "date_fin" => $date_fin,
-            "reduction" => $reduction,
             "id_image_banniere" => $id_image_banniere,
             "id_promotion" => $id_promotion
         ]);
@@ -719,6 +702,116 @@
             else {
                 return false;
             }
+        } catch(PDOException $e){
+            throw $e;
+        }
+    }
+
+    function create_reduction($id_produit, $dateDebut, $dateFin, $pourcentage){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("INSERT INTO _reduction(id_produit,date_debut,date_fin,pourcentage) VALUES (:id_produit, :dateDebut, :dateFin, :pourcentage)");
+            $stmt->execute([
+                "id_produit" => $id_produit,
+                "dateDebut" => $dateDebut,
+                "dateFin" => $dateFin,
+                "pourcentage" => $pourcentage
+            ]);
+
+            $last_id = $pdo->lastInsertId();
+            $good_insert = get_reduction($last_id);
+            if($good_insert === -1){
+                return -1;
+            } else {
+                return $last_id;
+            }
+            
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_reduction($id_reduction){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _reduction WHERE id_reduction = :id");
+            $stmt->execute([
+                "id" => $id_reduction
+            ]);
+            $response = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($response == null){
+                return -1;
+            } else {
+                return $response;
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_prix_produit($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT prix FROM _produit WHERE id_produit = :id");
+
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            if($stmt === null){
+                return -1;
+            } else {
+                return $stmt->fetch(PDO::FETCH_ASSOC)['prix'];
+            }
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_all_reduction_with_id_produit ($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT * FROM _reduction WHERE id_produit = :id");
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function delete_reduction($id_reduction){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("DELETE FROM _reduction WHERE id_reduction = :id");
+
+            $stmt->execute([
+                "id" => $id_reduction
+            ]);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function update_reduction($id_reduction, $date_debut, $date_fin, $pourcentage){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("UPDATE _reduction SET date_debut = :debut, date_fin = :fin, pourcentage = :pourcentage WHERE id_reduction = :id");
+
+            $stmt->execute([
+                "debut" => $date_debut,
+                "fin" => $date_fin,
+                "pourcentage" => $pourcentage,
+                "id" => $id_reduction
+            ]);
         } catch(PDOException $e){
             throw $e;
         }

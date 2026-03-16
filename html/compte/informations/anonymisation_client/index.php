@@ -27,7 +27,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         // _client
-        $modifPseudo = "un Compte supprimé";
+        $modifPseudo = "Compte supprimé";
         $modifNom = ANONYMISATION_STRING;
         $modifPrenom = ANONYMISATION_STRING;
         $modifDateNaissance = date('0-0-0 0:0:0');

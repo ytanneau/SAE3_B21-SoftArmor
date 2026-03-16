@@ -76,9 +76,8 @@ if (isset($_POST['quantite'])) {
 
         } else {
             ajouter_panier_visiteur($id_prod, $qte);
-
-            }
-        header('Location:' . HOME_SITE . 'panier');
+            
+        }
 
     // Sinon, s'il a fait "acheter le produit"
     } elseif (isset($_POST['achat'])) {
@@ -342,7 +341,7 @@ if (isset($_POST['quantite'])) {
                             <input type="button" onclick="changer(-1)" value="-"><input id="input_quantite" type="number" name="quantite" min=1 value=1 max=50000 pattern="\d*" required><input type="button" onclick="changer(1)" value="+">
                         </span>
                     </div> 
-                    <input class="bouton" type="submit" name="panier" value="Ajouter au panier" onclick="submit()">
+                    <input id="ajout_panier" class="bouton" type="submit" name="panier" value="Ajouter au panier">
 
                     <input class="achat" type="submit" name="achat" value="Acheter cet article">
                 </form>
@@ -350,7 +349,16 @@ if (isset($_POST['quantite'])) {
         </div>
         
     </main>
-    
+    <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+            <div class="confirm-title" id="confirmTitle"></div>
+            <div class="confirm-message" id="confirmMessage"></div>
+            <div class="confirm-buttons">
+            <button class="btn-cancel" id="confirmCancel"></button>
+            <button class="btn-confirm" id="confirmOk"></button>
+            </div>
+        </div>
+    </div>
     <?php include HOME_SITE . "footer.php" ?>
 
     <script>
@@ -411,7 +419,74 @@ if (isset($_POST['quantite'])) {
             }
         }
 
-        
+
+        function customConfirm({ title = '', message = '', icon = '', cancelText = 'Annuler', confirmText = 'Confirmer' } = {}) {
+            return new Promise((resolve) => {
+                const overlay  = document.getElementById('confirmOverlay');
+                const titleEl  = document.getElementById('confirmTitle');
+                const msgEl    = document.getElementById('confirmMessage');
+                const iconEl   = document.getElementById('confirmIcon');
+                const cancelBtn  = document.getElementById('confirmCancel');
+                const confirmBtn = document.getElementById('confirmOk');
+
+                // Remplir le contenu
+                titleEl.textContent   = title;
+                msgEl.textContent     = message;
+                // iconEl.textContent    = icon;
+                // iconEl.style.display  = icon ? 'block' : 'none';
+                cancelBtn.textContent  = cancelText;
+                confirmBtn.textContent = confirmText;
+
+                // Afficher
+                overlay.classList.add('active');
+
+                // Désactivé les boutons de base du confirm
+                function done(result) {
+                    overlay.classList.remove('active');
+                    cancelBtn.removeEventListener('click', onCancel);
+                    confirmBtn.removeEventListener('click', onConfirm);
+                    resolve(result);
+                }
+                function onCancel()  { done(false); }
+                function onConfirm() { done(true);  }
+
+                cancelBtn.addEventListener('click', onCancel);
+                confirmBtn.addEventListener('click', onConfirm);
+
+                // Clic sur l'overlay = annuler
+                overlay.addEventListener('click', function onBg(e) {
+                    if (e.target === overlay) { overlay.removeEventListener('click', onBg); done(false); }
+                });
+            });
+        }
+
+        document.getElementById('ajout_panier').addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            const form = this.closest('form');
+
+            // D'abord, ajouter au panier via fetch (sans recharger la page)
+            const formData = new FormData(form);
+            formData.append('panier', 'Ajouter au panier');
+
+            await fetch('', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Ensuite, afficher le popup
+            const goToCart = await customConfirm({
+                title: "Article ajouté au panier !",
+                message: "Que voulez vous faire ?",
+                cancelText: "Continuer les achats",
+                confirmText: "Aller au panier"
+            });
+
+            if (goToCart) {
+                window.location.href = '../panier/';
+            }
+            // Si "Continuer les achats"  on ne fait rien, l'article est déjà ajouté
+        });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {
             e.preventDefault();

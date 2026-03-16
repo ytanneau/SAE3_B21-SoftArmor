@@ -143,11 +143,19 @@ if ($numEtape == 3) {
     //connexion au delivraptor
     $conn =false;
     $fd = connexion_socket(IP,PORT);
-    if($fd){
+    if($fd != null){
         $conn = connexion_delivraptor($fd,$id_delivraptor,$mdp_delivraptor);
         //creer bordereau colis
-        $bordereau = create_colis($fd);
-        deconnexion_socket($fd);
+        if ($conn == 1){
+            $bordereau = create_colis($fd);
+            deconnexion_socket($fd);
+        }
+        else{
+            $bordereau = null;
+        }
+    }
+    else{
+        $bordereau = null;
     }
 
     
@@ -163,7 +171,7 @@ if ($numEtape == 3) {
 
     // Sinon si c'est un panier
     } else {
-        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
+        $requete = $pdo->prepare("SELECT nom_public AS nom_produit, id_produit, prix_actuel AS prix, quantite_panier AS quantite, _vendeur.raison_sociale AS nom_vendeur
         FROM produit_panier
         INNER JOIN _vendeur ON produit_panier.id_vendeur = _vendeur.id_compte
         WHERE id_client = :id_compte");
@@ -222,7 +230,7 @@ if ($numEtape == 3) {
             ajout_commande($id_commande, $liste_produits);
             vider_panier($_SESSION['id_compte']);
         }
-        header("location: " . HOME_SITE . "commande/?commande=" . $id_commande);
+        header("location: " . HOME_SITE . "commande/facture/?commande=" . $id_commande);
     }
 
     $_POST = [];
