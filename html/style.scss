@@ -1911,7 +1911,7 @@ aside {
         @include bouton_new($background: $couleur_etoile , $color: black, $largeur: 30em);
     }
 
-    .list_promotion{
+    .list_promotion_reduction{
         list-style-type: none;
         li {
             margin-top: 20px;
@@ -1929,10 +1929,10 @@ aside {
                 background-color: $couleur_primaire_vendeur;
                 color: $couleur_background;
                 text-decoration: none;
-                border-radius: $angle_normal;
+                border-radius: $angle_petit;
             }
             a:hover{
-                transform: scale(1.04);
+                transform: scale(1.02);
             }
         }
     }
