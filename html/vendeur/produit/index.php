@@ -129,7 +129,7 @@
                 <ul class="list_promotion">
                     <li>
                         <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion" title="Démarrer une promotion">
+                            <img src="<?=HOME_SITE . "image/promo_blanc.svg"?>" alt="promotion" title="Démarrer une promotion">
                             Promotion
                         </a>
                     </li>
@@ -142,7 +142,7 @@
                     ?>
                     <li>
                         <a href="promotion/modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                            <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification" title="Modifier une promotion">
+                            <img src="<?=HOME_SITE . "image/modifier_blanc.svg"?>" alt="modification" title="Modifier une promotion">
                             Modifier la promotion du <?= htmlentities($new_date)?>
                         </a>
                     </li>
@@ -151,7 +151,7 @@
             </div>
             <div>
                 <a href="reduction?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                    <img src="<?=HOME_SITE . "image/reduction.svg"?>" alt="reduction" title="Démarrer une réduction">
+                    <img src="<?=HOME_SITE . "image/reduction_blanc.svg"?>" alt="reduction" title="Démarrer une réduction">
                     Réduction
                 </a>
                 <ul>
@@ -164,7 +164,7 @@
                     ?>
                     <li>
                         <a href="reduction/modifier_reduction?produit=<?=htmlentities($_GET['produit'] . "&idReduc=" . $id_reduc)?>">
-                            <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification" title="Modifier une réduction">
+                            <img src="<?=HOME_SITE . "image/modifier_blanc.svg"?>" alt="modification" title="Modifier une réduction">
                             Modifier la reduction du <?= htmlentities($new_date)?>
                         </a>
                     </li>
