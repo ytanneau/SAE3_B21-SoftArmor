@@ -88,7 +88,7 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
                         <?php foreach ($liste_commandes as $commande) {
                             $d = strtotime($commande["date_commande"]);
                             $jour = $JOUR_SEMAINE[date("w", $d)];
-                            $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                            $mois = $MOIS_ANNEE[date("m", $d) - 1];
                             ?>
 
                             <tr>
