@@ -3046,7 +3046,7 @@ aside .achat:hover {
   font-weight: 600;
   color: #333;
 }
-.produit-vendeur > div img {
+.produit-vendeur > .img_prod {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 200px;
@@ -3056,7 +3056,7 @@ aside .achat:hover {
   height: 200px;
   border-radius: 5px;
 }
-.produit-vendeur > div img:hover {
+.produit-vendeur > .img_prod:hover {
   transform: scale(1.04);
 }
 .produit-vendeur > div {
@@ -3153,10 +3153,15 @@ aside .achat:hover {
 .produit-vendeur .list_promotion li {
   marker: none;
 }
+.produit-vendeur .list_promotion li a img {
+  width: 50px;
+  height: 50px;
+}
 .produit-vendeur .list_promotion li a {
   display: flex;
   flex-direction: row;
   background-color: #6B31D0;
+  color: #FFFFFF;
 }
 
 .fleche_produit_arriere {
