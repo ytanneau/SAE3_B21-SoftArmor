@@ -2314,6 +2314,10 @@ h3 {
   }
 }
 
+.mainPanier {
+  display: flex;
+}
+
 /*
 aside {
     position: fixed;
