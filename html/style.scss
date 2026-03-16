@@ -1875,11 +1875,11 @@ aside {
         }
     }
 
-    > .img_prod {
+    >div .img_prod {
         @include image_produit($image_normal);
     }
 
-    > .img_prod:hover {
+    >div .img_prod:hover {
         transform: scale(1.04);
     }
 
@@ -1913,17 +1913,22 @@ aside {
 
     .list_promotion{
         li {
-            marker: none;
             a{
                 img{
+                    margin-left: 5px;
                     width: 50px;
                     height: 50px;
                 }
                 display: flex;
                 flex-direction: row;
+                align-items: center;
+                width: 300px;
                 background-color: $couleur_primaire_vendeur;
                 color: $couleur_background;
-            
+                text-decoration: none;
+            }
+            a:hover{
+                transform: scale(1.04);
             }
         }
     }
