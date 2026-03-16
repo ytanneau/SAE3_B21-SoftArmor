@@ -363,7 +363,6 @@ section.results {
 ul#results {
     display: flex;
     padding: 0;
-    width: 100%;
     flex-wrap: wrap;
     list-style: none;
     justify-content: left;
@@ -1910,6 +1909,17 @@ aside {
 
     .bouton_avis_vendeur_produit {
         @include bouton_new($background: $couleur_etoile , $color: black, $largeur: 30em);
+    }
+
+    .list_promotion{
+        li {
+            marker: none;
+            a{
+                display: flex;
+                flex-direction: row;
+                background-color: $couleur_primaire_vendeur;
+            }
+        }
     }
 }
 
