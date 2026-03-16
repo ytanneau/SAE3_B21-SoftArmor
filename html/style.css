@@ -3157,7 +3157,6 @@ aside .achat:hover {
   margin-top: 20px;
 }
 .produit-vendeur .list_promotion_reduction li a img {
-  margin-left: 5px;
   width: 50px;
   height: 50px;
 }
@@ -3174,6 +3173,7 @@ aside .achat:hover {
 }
 .produit-vendeur .list_promotion_reduction li a:hover {
   transform: scale(1.02);
+  background-color: rgb(151.7509881423, 111.2885375494, 222.2114624506);
 }
 
 .fleche_produit_arriere {
@@ -3197,7 +3197,7 @@ aside .achat:hover {
   align-self: center;
 }
 .stock main tr {
-  width: 50vw;
+  width: 75vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
