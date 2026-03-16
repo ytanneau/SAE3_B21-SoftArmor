@@ -123,7 +123,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
 
                                 ?>
                             </td>
-                            <td><a href="./info?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la
+                            <td><a href="./facture?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la
                                     facture</a></td>
                         </tr>
                         <?php
