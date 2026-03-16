@@ -126,7 +126,7 @@
                 <?php 
             } ?>
             <div>
-                <ul class="list_promotion">
+                <ul class="list_promotion_reduction">
                     <li>
                         <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
                             <img src="<?=HOME_SITE . "image/promo_blanc.svg"?>" alt="promotion" title="Démarrer une promotion">
