@@ -101,14 +101,14 @@
                         <td><?= htmlentities($rows['quantite'] ?? '')  ?></td>
                     </tr>
                 </table>
-                <div class="img_prod">
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
+                <div>
+                    <img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
                     <?php
                         if (isset($rows2['id_image1'])) {
-                            ?><img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
+                            ?><img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
                         }
                         if (isset($rows2['id_image2'])) {
-                            ?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
+                            ?> <img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
                         }
                     ?>
                 </div>
