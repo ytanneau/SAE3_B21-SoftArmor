@@ -125,12 +125,14 @@
                 
                 <?php 
             } ?>
-            <div class="list_promotion">
-                <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                    <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion" title="Démarrer une promotion">
-                    Promotion
-                </a>
-                <ul>
+            <div>
+                <ul class="list_promotion">
+                    <li>
+                        <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion" title="Démarrer une promotion">
+                            Promotion
+                        </a>
+                    </li>
                     <?php if($tab_promo != null){
                         foreach($tab_promo as $ligne){
                             $id_promo = $ligne['id_promo'];
