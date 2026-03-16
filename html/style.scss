@@ -1875,11 +1875,11 @@ aside {
         }
     }
 
-    >.img_prod {
+    > .img_prod {
         @include image_produit($image_normal);
     }
 
-    >.img_prod:hover {
+    > .img_prod:hover {
         transform: scale(1.04);
     }
 
