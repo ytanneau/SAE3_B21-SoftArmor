@@ -98,7 +98,7 @@
                     </div>
                     <div class="en_colonne">
                         <label for="cout">Coût final : </label>
-                        <input type="text" id="cout" readonly class="cout_final">
+                        <input type="text" id="cout" readonly>
                     </div>
                 </div>
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
