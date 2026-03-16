@@ -29,7 +29,7 @@ function info_produit_accueil()
     $requete = $pdo->prepare('
         SELECT p.*, url_image, alt, _image.titre
         FROM produit_en_ligne p
-        INNER JOIN _image ON id_image_principale = _image.id_image WHERE id_vendeur = :id_vendeur');
+        INNER JOIN _image ON id_image_principale = _image.id_image WHERE id_vendeur = :id_vendeur LIMIT 3');
     $requete->bindValue(':id_vendeur', $_SESSION['id_compte'], PDO::PARAM_INT);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -55,6 +55,8 @@ function info_produit($id_liste)
     foreach ($id_liste as $id){
         array_push($res, info_produit_id($id));
     }
+
+    return $res;
 }
 
 class PDF extends tFPDF
@@ -128,10 +130,9 @@ class PDF extends tFPDF
 }
 
 
-
 // Chargement des données
-$data = info_produit_accueil();
-//$data = info_produit($id_liste);
+// $data = info_produit_accueil();
+$data = info_produit($_GET['p']);
 
 $pdf = new PDF();
 
@@ -144,4 +145,4 @@ $pdf->Text($pdf->GetX(), $pdf->GetY(), "Le prix est sujet à variation");
 $pdf->head_tableau();
 $pdf->Ln();
 $pdf->BasicTable($data);
-$pdf->Output();
+$pdf->Output('D', 'SelectionCatalogue.pdf');

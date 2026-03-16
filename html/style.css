@@ -3261,6 +3261,14 @@ aside .achat:hover {
 .stock main td form * {
   margin: auto 10px;
 }
+.stock main > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stock main > div button {
+  margin-top: 0;
+}
 
 #snackbar {
   visibility: hidden;
