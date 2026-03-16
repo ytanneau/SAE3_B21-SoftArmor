@@ -532,7 +532,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             } else {
                 resultsFor.textContent = "";
             }
-
+                console.log(data);
             data.produits.forEach(produit => {
                 let listItem = document.createElement("li");
                 
