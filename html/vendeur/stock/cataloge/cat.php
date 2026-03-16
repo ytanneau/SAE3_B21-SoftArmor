@@ -75,7 +75,7 @@ class PDF extends tFPDF
             //$this->SetY($y);
             $this->MultiCell(60, 10, $row['nom_public'], 0);
             $this->SetXY(50 + 65, $y);
-            $this->Cell(30, 20, round($row['prix']+$row['prix']*($row['tva']/100), 2) . " €", 0, 0, 'c');
+            $this->Cell(30, 20, number_format($row['prix']+$row['prix']*($row['tva']/100), 2,',', ' ') . " €", 0, 0, 'c');
             $this->etoile($row['note_moy'], $this->GetX(), $this->GetY());
             $this->Ln();
             $this->Line(20, $y + 20, 200, $y + 21);
@@ -104,15 +104,15 @@ class PDF extends tFPDF
         }
         // code de iwan pour calculer et afficher les moyennes d'un produit en fonction de sa moyenne
         for ($i = 1; $i <= floor($moyenne); $i++) {
-            $this->Image(HOME_SITE."image/etoile_pleine.png", $x+5+5*$e, $y+5, 5, 5);
+            $this->Image(HOME_SITE."image/etoile_pleine.png", $x+5*$e, $y+5, 5, 5);
             $e++;
         }
         if (fmod(floor($moyenne * 2), 2)) {
-            $this->Image(HOME_SITE."image/etoile_demi.png", $x+5+5*$e, $y+5, 5, 5);
+            $this->Image(HOME_SITE."image/etoile_demi.png", $x+5*$e, $y+5, 5, 5);
             $e++;
         }
         for ($i = 5; $i > round($moyenne); $i--) {
-            $this->Image(HOME_SITE."image/etoile_vide.png", $x+5+5*$e, $y+5, 5, 5);
+            $this->Image(HOME_SITE."image/etoile_vide.png", $x+5*$e, $y+5, 5, 5);
             $e++;
         }
     }
@@ -120,11 +120,13 @@ class PDF extends tFPDF
     function head_tableau(){
         $this->SetFont('Arial', 'B', 10);
         $this->Ln();
+        $this->SetY(15);
         $this->Cell(35, 5, "Image", 0, 0, 'c');
         $this->Cell(70, 5, "Nom", 0, 0, 'c');
         $this->Cell(30, 5, "Prix TTC", 0, 0, 'c');
         $this->Cell(40, 5, "Note", 0, 0, 'c');
         $this->SetFont('DejaVu', '', 10);
+        $this->SetY(20);
     }
 
 }
