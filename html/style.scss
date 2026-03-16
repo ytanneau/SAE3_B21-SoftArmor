@@ -1919,10 +1919,13 @@ aside {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                width: 150px;
+                width: 300px;
                 background-color: $couleur_primaire_vendeur;
                 color: $couleur_background;
                 text-decoration: none;
+            }
+            a:hover{
+                transform: scale(1.04);
             }
         }
     }
