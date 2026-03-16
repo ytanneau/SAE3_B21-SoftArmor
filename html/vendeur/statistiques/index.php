@@ -34,21 +34,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Alizon - Accueil vendeur</title>
         <?php include HOME_SITE . 'link_head.php' ?>
+        <style>
+
+.stat #sectionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.stat #sectionButton button, .stat #sectionButton a {
+  line-height: 1.5em;
+  margin-top: 0px;
+}/*# sourceMappingURL=style.css.map */
+        </style>
 
     </head>
     <body class="stat">
         <?php include "../header.php" ?>
         <main>
-            <section>
-                <button id="general">General</button>
-                <button id="categories">Categories</button>
-                <button id="produits">Produits</button>
-                <a href="./personnalisee" id="autre">Personnalisé</a>
-            </section>
+            <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+            <div id="sectionButtonContainer">
+                <section id="sectionButton">
+                    <button class="bouton" id="general">General</button>
+                    <button class="bouton" id="categories">Categories</button>
+                    <button class="bouton" id="produits">Produits</button>
+                    <a class="bouton" href="./personnalisee" id="autre">Personnalisé</a>
+                </section>
+            </div>
             <section id="sectionGen">
                 <h1>Statistiques Générales</h1>
                 
-                <label>Tirer Les</label>
+                <label>Les</label>
                 <select id="filtreOrd">
                     <option value="qte">Quantité</option>
                     <option value="prix">Prix</option>
@@ -76,7 +95,7 @@
                 <h1>Statistiques Par Catégories</h1>
                 <label>Categories</label>
                 <select id="filtreCat"></select>
-                <label>Tirer Les</label>
+                <label>Les</label>
                 <select id="filtreOrdCat">
                     <option value="qte">Quantité</option>
                     <option value="prix">Prix</option>
@@ -97,9 +116,8 @@
             </section>
             <section id="section_prod">
                 <h1>Statistiques Par Produits</h1>
-                <section id ="section_prod">
                     <select class="produit" id="filtreProd"></select>
-                    <label>Tirer Les</label>
+                    <label>Les</label>
                     <select class="produit" id="filtreOrdProd">
                         <option value="qte">Quantité</option>
                         <option value="prix">Prix</option>
@@ -121,16 +139,14 @@
                     <div id="c_container">
                         <canvas id="c"></canvas>
                     </div>
-                </section>
             </section>
             <section id="app">
             </section>
-            
-            <script type="module">
+            <script type="module" >
                 import DataGraph from "./DataGraph.js";
                 import {TimeMilli,Compare,SideMonth,SideDay} from "./DataTime.js";
                 import MakeGraph from "./MakeGraph.js";
-               
+
                 /*  
                     ---------------------
                     ------FONCITONS------
@@ -187,7 +203,9 @@
                                 labelGraph = [];
                                 let valOrd = document.getElementById("filtreOrdCat").value;
 
+                                let methodePeriode;
                                 let methodeDonne;
+
                                 switch (valOrd) {
                                     case "qte":
                                         methodeDonne = "quantite"
@@ -201,6 +219,28 @@
                                         methodeDonne = "prix"
                                     break;
 
+                                }
+
+                                switch (plage) {
+                                    case "M":
+                                        methodePeriode = "getYearC"
+                                    break;
+
+                                    case "W":
+                                        methodePeriode = "getMonthC"
+                                    break;
+
+                                    case "D":
+                                        methodePeriode = "getWeekC"
+                                    break;
+
+                                    case "h":
+                                        methodePeriode = "getDayC"
+                                    break;
+
+                                    case "m":
+                                        methodePeriode = "getHourC"
+                                    break;
                                 }
                                 
                                 if(tabAssociatifCat[label].length != 0){
@@ -222,8 +262,12 @@
 
                                     createChart(id,typeChart,labelGraph,value,offsetChart,displayLegend, true, false);
                                 }else{
-                                    let lstProdCat = getTimeData(graphCat.resetData().filtreByCategorie([label]),plage).value[methodeDonne];
-                                    console.log(label,lstProdCat);
+                                    let lstProdCat = graphCat.resetData()[methodePeriode](label);
+                                    console.log(lstProdCat);
+                                    
+                                    deleteChart(graphe,id);
+                                    createChart(id,typeChart,lstProdCat.label,lstProdCat.value[methodeDonne],offsetChart,displayLegend, true, false);
+
                                 }
                             }
                         }
@@ -763,6 +807,8 @@
                     //STATISTIQUES PRODUIT
                     createProdChart();
 
+
+
                 })
                 .catch(error => {
                     console.error('Erreur :', error);
@@ -920,6 +966,7 @@
                         createProdChart();
                     });
                 });
+                
 
             </script>
         </main>

@@ -3941,4 +3941,24 @@ aside .achat:hover {
 }
 .facture-page-vendeur .facture .facture-toto tr:last-child td:first-child {
   color: #3157A3;
+}
+
+.stat #sectionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.stat #sectionButton button, .stat #sectionButton a {
+  line-height: 1.5em;
+  margin-top: 0px;
+}
+.stat #sectionButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=style.css.map */
