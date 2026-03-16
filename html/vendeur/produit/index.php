@@ -101,7 +101,7 @@
                         <td><?= htmlentities($rows['quantite'] ?? '')  ?></td>
                     </tr>
                 </table>
-                <div>
+                <div class="img_prod">
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
                     <?php
                         if (isset($rows2['id_image1'])) {
