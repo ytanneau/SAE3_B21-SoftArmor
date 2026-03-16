@@ -1909,7 +1909,9 @@ aside {
     }
 
     .list_promotion{
-        @include bouton_new($background: $couleur_primaire_vendeur, $largeur: 30em);
+        li a{
+            @include bouton_new($background: $couleur_primaire_vendeur, $largeur: 30em);
+        }
     }
 }
 
