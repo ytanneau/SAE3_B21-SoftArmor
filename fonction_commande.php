@@ -94,9 +94,9 @@ function get_elements_commande($id_commande)
 {
     global $pdo;
 
-    $stmt = $pdo->prepare("SELECT id_produit, nom_produit, quantite, prix, nom_vendeur, id_vendeur FROM _elt_commande 
+    $stmt = $pdo->prepare("SELECT id_produit, nom_produit, quantite, prix, id_vendeur FROM _elt_commande
     WHERE id_commande = :id_commande
-    ORDER BY nom_vendeur");
+    ORDER BY id_vendeur");
     $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
     $stmt->execute();
 

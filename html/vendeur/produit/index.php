@@ -101,7 +101,7 @@
                         <td><?= htmlentities($rows['quantite'] ?? '')  ?></td>
                     </tr>
                 </table>
-                <div>
+                <div class="img_prod">
                     <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
                     <?php
                         if (isset($rows2['id_image1'])) {
@@ -126,11 +126,13 @@
                 <?php 
             } ?>
             <div>
-                <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                    <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion" title="Démarrer une promotion">
-                    Promotion
-                </a>
-                <ul>
+                <ul class="list_promotion">
+                    <li>
+                        <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion" title="Démarrer une promotion">
+                            Promotion
+                        </a>
+                    </li>
                     <?php if($tab_promo != null){
                         foreach($tab_promo as $ligne){
                             $id_promo = $ligne['id_promo'];
