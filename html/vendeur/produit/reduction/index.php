@@ -51,7 +51,7 @@
     </head>
     <body>
         <?php include "../../header.php" ?>
-        <main class="main_reduction">
+        <main class="main_reduc">
             <div class="entete">
                 <a href="../index.php?produit=<?=$id_produit?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une réduction</h1>
