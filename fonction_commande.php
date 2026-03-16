@@ -46,7 +46,7 @@ function get_commandes_vendeur($id_vendeur)
     INNER JOIN _elt_commande ON _commande.id_commande = _elt_commande.id_commande
     INNER JOIN _produit ON _elt_commande.id_produit = _produit.id_produit
     INNER JOIN _client ON _commande.id_client = _client.id_compte
-    WHERE _elt_command.id_vendeur = :id_vendeur
+    WHERE _elt_commande.id_vendeur = :id_vendeur
     ORDER BY date_commande DESC");
 
     $stmt->bindValue(":id_vendeur", $id_vendeur, PDO::PARAM_INT);
