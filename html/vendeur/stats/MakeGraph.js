@@ -264,12 +264,12 @@ export default class MakeGraph {
     //------------------------------------------------------------
 
     listeProduit() {
-        res = [];
+        let res = [];
         this.use.forEach(element => {
             if (res.find(ele => {
                 return ele == element.id_produit;
             }) == undefined) {
-                ele.push(element.id_produit);
+                res.push(element.id_produit);
             }
         });
         return res;
@@ -286,7 +286,6 @@ export default class MakeGraph {
         let liste = this.listeProduit();
 
         let labels = [];
-        let values = [];
         let prixs = [];
         let quantites = [];
         let commandes  = [];
@@ -311,7 +310,7 @@ export default class MakeGraph {
             ));
 
             initialValue = 0;
-            commandes.push(val.commande.reduce(
+            commandes.push(val.nb_commande.reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
                 initialValue,
             ));
@@ -328,61 +327,189 @@ export default class MakeGraph {
         }
     }
 
-    getDayC(categorie) {
+    getDayC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getDay().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
         return {
-            label: this.labelDay(),
-            value: this.createTempleteV2('D')
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
         }
     }
 
-    getWeekC() {
+    getWeekC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getWeek().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
         return {
-            label: this.start(MakeGraph.lesJour.at(new Date().getDay()), MakeGraph.lesJour),
-            value: this.createTempleteV2('W')
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
         }
     }
 
-    getMonthC() {
+    getMonthC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getMonth().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
         return {
-            label: this.labelMonth(),
-            value: this.createTempleteV2('M')
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
         }
     }
 
-    getYearC() {
+    getYearC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getYear().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
         return {
-            label: this.start(MakeGraph.lesMois.at(new Date().getMonth()), MakeGraph.lesMois),
-            value: this.createTempleteV2('Y')
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
         }
     }
 
-    labelHourC() {
-        let now = new Date();
-        let res = [];
-        for (let index = 0; index < 60; index++) {
-            res.push(`${now.getHours()}h${now.getMinutes()}`);
-            now.setMinutes(now.getMinutes() - 1);
-        }
-        return res.reverse();
-    }
-
-    labelDayC() {
-        let now = new Date();
-        let res = [];
-        for (let index = 0; index < 60; index++) {
-            res.push(`${now.getHours()}h, (${MakeGraph.lesJour.at(now.getDay())})`);
-            now.setHours(now.getHours() - 1);
-        }
-        return res.reverse();
-    }
-
-    labelMonthC() {
-        let now = new Date();
-        let res = [];
-        for (let index = 0; index < 60; index++) {
-            res.push(`${now.getDate()}/${now.getMonth() + 1}`);
-            now.setDate(now.getDate() - 1);
-        }
-        return res.reverse();
-    }
+    
 }
