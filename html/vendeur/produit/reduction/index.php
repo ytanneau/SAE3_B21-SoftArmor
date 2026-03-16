@@ -58,29 +58,35 @@
             </div>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <form action="" method="post">
-                <div>
-                    <label for="dateDebut">Debut de la réduction</label>
-                    <input type="date" id="dateDebut" name="dateDebut" required>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="dateDebut">Date de début de la réduction : </label>
+                        <input type="date" id="dateDebut" name="dateDebut" required>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="dateFin">Date de fin de la réduction : </label>
+                        <input type="date" id="dateFin" name="dateFin" required>
+                    </div>
                 </div>
-                <div>
-                    <label for="dateFin">Fin de la réduction</label>
-                    <input type="date" id="dateFin" name="dateFin" required>
-                </div>
+
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
-                <div>
-                    <label for="pourcentage">Pourcentage : </label>
-                    <input type="text" id="pourcentage" name="pourcentage" required>
-                    <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
-                </div>
-                <div>
-                    <label for="euro">Remise appliquée : </label>
-                    <input type="text" id="euro" readonly>
-                </div>
-                <div>
-                    <label for="prixFinal">Prix final : </label>
-                    <input type="text" id="prixFinal" readonly>
+
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="pourcentage">Pourcentage : </label>
+                        <input type="text" id="pourcentage" name="pourcentage" required>
+                        <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="euro">Remise appliquée : </label>
+                        <input type="text" id="euro" readonly>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="prixFinal">Prix final : </label>
+                        <input type="text" id="prixFinal" readonly>
+                    </div>
                 </div>
                 <input type="submit" id="btn_confirm_reduc">
             </form>
