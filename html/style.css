@@ -3043,7 +3043,7 @@ aside .achat:hover {
   font-weight: 600;
   color: #333;
 }
-.produit-vendeur > .img_prod {
+.produit-vendeur > div .img_prod {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 200px;
@@ -3053,7 +3053,7 @@ aside .achat:hover {
   height: 200px;
   border-radius: 5px;
 }
-.produit-vendeur > .img_prod:hover {
+.produit-vendeur > div .img_prod:hover {
   transform: scale(1.04);
 }
 .produit-vendeur > div {

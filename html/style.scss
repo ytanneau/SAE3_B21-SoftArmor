@@ -1872,11 +1872,11 @@ aside {
         }
     }
 
-    > .img_prod {
+    >div .img_prod {
         @include image_produit($image_normal);
     }
 
-    > .img_prod:hover {
+    >div .img_prod:hover {
         transform: scale(1.04);
     }
 
@@ -1920,7 +1920,6 @@ aside {
                 flex-direction: row;
                 background-color: $couleur_primaire_vendeur;
                 color: $couleur_background;
-            
             }
         }
     }
