@@ -154,7 +154,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         function valideSelect() {
             let produitSelect = false;
             
-            let lien = "cataloge/cat.php?";
+            let lien = "catalogue/cat.php?";
 
             listeInputs.forEach(element => {
                 if (element.checked) {
