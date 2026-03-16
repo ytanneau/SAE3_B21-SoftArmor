@@ -3265,9 +3265,56 @@ aside .achat:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2em;
 }
 .stock main > div button {
-  margin-top: 0;
+  margin: 0 0.5em auto;
+}
+.stock main > div .select {
+  display: inline;
+  max-width: 100%;
+  width: auto;
+  padding: 0.8em;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.stock main > div .select a {
+  text-decoration: none;
+  color: white;
+}
+.stock main > div .select:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+.stock main > div .annuler {
+  display: inline;
+  max-width: 100%;
+  width: auto;
+  padding: 0.8em;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.stock main > div .annuler a {
+  text-decoration: none;
+  color: black;
+}
+.stock main > div .annuler:hover {
+  background-color: rgb(249.25, 249.25, 249.25);
 }
 
 #snackbar {
