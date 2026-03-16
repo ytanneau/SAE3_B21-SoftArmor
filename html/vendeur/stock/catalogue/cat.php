@@ -71,7 +71,17 @@ class PDF extends tFPDF
         foreach ($data as $row) {
             $x = $this->GetX();
             $y = $this->GetY();
-            $this->Image(HOME_SITE . $row['url_image'], null, null, 20, 20);
+
+            $image = getimagesize(HOME_SITE . $row['url_image']);
+            if ($image[0] > $image[1]){
+                $imgX = 20;
+                $imgY = 0;
+            }else{
+                $imgX = 0;
+                $imgY = 20;
+            }
+
+            $this->Image(HOME_SITE . $row['url_image'], null, null, $imgX, $imgY);
             $this->SetXY(45, $y);
             //$this->SetY($y);
             $this->MultiCell(60, 10, $row['nom_public'], 0);
