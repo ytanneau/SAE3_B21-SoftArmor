@@ -3147,18 +3147,18 @@ aside .achat:hover {
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
-.produit-vendeur .list_promotion {
+.produit-vendeur .list_promotion_reduction {
   list-style-type: none;
 }
-.produit-vendeur .list_promotion li {
+.produit-vendeur .list_promotion_reduction li {
   margin-top: 20px;
 }
-.produit-vendeur .list_promotion li a img {
+.produit-vendeur .list_promotion_reduction li a img {
   margin-left: 5px;
   width: 50px;
   height: 50px;
 }
-.produit-vendeur .list_promotion li a {
+.produit-vendeur .list_promotion_reduction li a {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -3167,10 +3167,10 @@ aside .achat:hover {
   background-color: #6B31D0;
   color: #FFFFFF;
   text-decoration: none;
-  border-radius: 20px;
+  border-radius: 5px;
 }
-.produit-vendeur .list_promotion li a:hover {
-  transform: scale(1.04);
+.produit-vendeur .list_promotion_reduction li a:hover {
+  transform: scale(1.02);
 }
 
 .fleche_produit_arriere {
