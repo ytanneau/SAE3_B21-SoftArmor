@@ -1,6 +1,6 @@
 <?php
-const HOME_GIT = "../../";
-const HOME_SITE = "../";
+const HOME_GIT = "../../../";
+const HOME_SITE = "../../";
 const IP = "host.docker.internal";
 const PORT = "9000";
 const RAPTOR = false;
