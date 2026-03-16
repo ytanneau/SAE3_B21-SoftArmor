@@ -2250,7 +2250,7 @@ aside {
     }
 }
 
-.main_promo {
+.main_promo .main_reduc{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     form{
@@ -2584,18 +2584,6 @@ aside {
             left: 50px;
             top: 30px;
         }
-    }
-}
-
-
-.main_reduction{
-    .entete{
-        @include entete_page_vendeur;
-    }
-
-    form div{
-        display: flex;
-        flex-direction: column;
     }
 }
 

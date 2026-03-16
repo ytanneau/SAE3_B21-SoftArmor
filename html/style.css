@@ -3542,47 +3542,47 @@ aside .achat:hover {
     display: none !important;
   }
 }
-.main_promo {
+.main_promo .main_reduc {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.main_promo .entete {
+.main_promo .main_reduc .entete {
   display: flex;
   align-items: center;
 }
-.main_promo .entete a {
+.main_promo .main_reduc .entete a {
   height: 24px;
   margin-right: 50px;
 }
-.main_promo .entete h1 {
+.main_promo .main_reduc .entete h1 {
   margin-right: 30px;
 }
-.main_promo form {
+.main_promo .main_reduc form {
   width: 500px;
 }
-.main_promo form .en_ligne {
+.main_promo .main_reduc form .en_ligne {
   display: flex;
   flex-direction: row;
 }
-.main_promo form .en_colonne {
+.main_promo .main_reduc form .en_colonne {
   display: flex;
   flex-direction: column;
 }
-.main_promo form .en_colonne + .en_colonne {
+.main_promo .main_reduc form .en_colonne + .en_colonne {
   margin-left: 50px;
 }
-.main_promo form #cout {
+.main_promo .main_reduc form #cout {
   width: 20%;
 }
-.main_promo #warning1,
-.main_promo #warning2,
-.main_promo #warning3 {
+.main_promo .main_reduc #warning1,
+.main_promo .main_reduc #warning2,
+.main_promo .main_reduc #warning3 {
   color: red;
   font-style: italic;
   font-size: 75%;
 }
-.main_promo #valider {
+.main_promo .main_reduc #valider {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3598,18 +3598,18 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo #valider a {
+.main_promo .main_reduc #valider a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo #valider:hover {
+.main_promo .main_reduc #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.main_promo #valider {
+.main_promo .main_reduc #valider {
   margin-top: 40px;
   width: 100%;
 }
-.main_promo #supprimer_promotion {
+.main_promo .main_reduc #supprimer_promotion {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3625,31 +3625,31 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo #supprimer_promotion a {
+.main_promo .main_reduc #supprimer_promotion a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo #supprimer_promotion:hover {
+.main_promo .main_reduc #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.main_promo #supprimer_promotion {
+.main_promo .main_reduc #supprimer_promotion {
   margin-top: 10px;
   padding: 10px 16px 10px 16px;
 }
-.main_promo .block_banniere {
+.main_promo .main_reduc .block_banniere {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
 }
-.main_promo .block_banniere label {
+.main_promo .main_reduc .block_banniere label {
   font-weight: bold;
 }
-.main_promo .block_banniere .overImg {
+.main_promo .main_reduc .block_banniere .overImg {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
-.main_promo .block_banniere img {
+.main_promo .main_reduc .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 250px;
@@ -3659,7 +3659,7 @@ aside .achat:hover {
   height: 250px;
   border-radius: 5px;
 }
-.main_promo .delete_picture {
+.main_promo .main_reduc .delete_picture {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3675,14 +3675,14 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo .delete_picture a {
+.main_promo .main_reduc .delete_picture a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo .delete_picture:hover {
+.main_promo .main_reduc .delete_picture:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.main_promo .delete_picture {
+.main_promo .main_reduc .delete_picture {
   width: 17.45em;
   padding: 6px;
 }
@@ -3937,22 +3937,6 @@ aside .achat:hover {
   position: relative;
   left: 50px;
   top: 30px;
-}
-
-.main_reduction .entete .entete {
-  display: flex;
-  align-items: center;
-}
-.main_reduction .entete .entete a {
-  height: 24px;
-  margin-right: 50px;
-}
-.main_reduction .entete .entete h1 {
-  margin-right: 30px;
-}
-.main_reduction form div {
-  display: flex;
-  flex-direction: column;
 }
 
 .facture-page-vendeur {
