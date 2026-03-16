@@ -1980,6 +1980,26 @@ aside {
                 }
             }
         }
+
+        >div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2em;
+
+            button {
+                margin: 0 0.5em auto;
+            }
+
+            .select {
+                @include bouton_new($couleur_primaire_client, white, $padding: 0.8em, $size: 0.8em, $display: inline);
+            }
+
+            .annuler {
+                @include bouton_new(lightgray, black, $padding: 0.8em, $size: 0.8em, $display: inline);
+            }
+
+        }
     }
 }
 
