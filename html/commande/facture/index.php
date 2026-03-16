@@ -53,7 +53,7 @@ if (isset($_GET["commande"])) {
     </script>
 </head>
 
-<body class="liste">
+<body class="facture-page-vendeur">
     <?php
     include HOME_SITE . "header.php";
 
