@@ -3638,7 +3638,10 @@ aside .achat:hover {
 .main_promo .block_banniere {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 30px;
+}
+.main_promo .block_banniere label {
+  font-weight: bold;
 }
 .main_promo .block_banniere .overImg {
   display: flex;
