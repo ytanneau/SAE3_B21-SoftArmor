@@ -2254,6 +2254,7 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     form{
+        width: 500px;
         .en_ligne {
             display: flex;
             flex-direction: row;
@@ -2262,6 +2263,9 @@ aside {
         .en_colonne {
             display: flex;
             flex-direction: column;
+        }
+        #cout{
+            width: 20%;
         }
     }
 
