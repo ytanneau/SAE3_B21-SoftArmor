@@ -38,8 +38,8 @@
         renvoi();
     }
 
-    $tab_promo = get_info_promotion($id_produit);
-    $tab_reduc = get_all_reduction_with_id_produit($id_produit);
+    $tab_promo = get_promotion_a_venir($id_produit);
+    $tab_reduc = get_reduction_a_venir($id_produit);
 ?>
 <!doctype html>
 <html lang="fr">
