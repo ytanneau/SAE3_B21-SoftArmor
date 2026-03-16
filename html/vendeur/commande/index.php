@@ -100,7 +100,7 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
                                 </td>
                                 <td>
                                     <button class="bouton"
-                                        onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Afficher la facture</button>
+                                        onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Consulter la facture</button>
                                     <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton" target="_blank">Consulter la commande</a-->
                                 </td>
                             </tr>
