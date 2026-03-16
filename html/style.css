@@ -3907,6 +3907,9 @@ aside .achat:hover {
 .liste-commande-vendeur .liste-commande {
   margin-left: 3em;
 }
+.liste-commande-vendeur .liste-commande .liste-commande {
+  width: 80vw;
+}
 
 .liste-commande {
   width: 100vw;
