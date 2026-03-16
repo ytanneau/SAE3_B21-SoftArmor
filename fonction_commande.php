@@ -9,13 +9,13 @@ function ajout_commande($id_commande, $liste_produits)
     global $pdo;
 
     foreach ($liste_produits as $produit) {
-        $stmt = $pdo->prepare("INSERT INTO _elt_commande (id_commande, id_produit, quantite, prix, nom_produit, nom_vendeur) VALUES (:id_commande, :id_produit, :quantite, :prix, :nom_produit, :nom_vendeur)");
+        $stmt = $pdo->prepare("INSERT INTO _elt_commande (id_commande, id_produit, quantite, prix, nom_produit, id_vendeur) VALUES (:id_commande, :id_produit, :quantite, :prix, :nom_produit, :nom_vendeur)");
         $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
         $stmt->bindValue(":id_produit", $produit["id_produit"], PDO::PARAM_INT);
         $stmt->bindValue(":quantite", $produit["quantite"], PDO::PARAM_INT);
         $stmt->bindValue(":prix", $produit["prix"], PDO::PARAM_INT);
         $stmt->bindValue(":nom_produit", $produit["nom_produit"], PDO::PARAM_STR);
-        $stmt->bindValue(":nom_vendeur", $produit["nom_vendeur"], PDO::PARAM_STR);
+        $stmt->bindValue(":id_vendeur", $produit["id_vendeur"], PDO::PARAM_STR);
 
         $stmt->execute();
     }
