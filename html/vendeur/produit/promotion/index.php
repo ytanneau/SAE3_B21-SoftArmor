@@ -86,7 +86,6 @@
             </div>
             <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
             <form action="" method="post" enctype="multipart/form-data">
-                <h3>Promotion</h3>
                 <div class="en_ligne">
                     <div class="en_colonne">
                         <label for="dateDebut">Date de début de la promotion: </label>
