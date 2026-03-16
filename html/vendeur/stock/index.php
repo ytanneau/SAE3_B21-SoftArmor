@@ -25,18 +25,16 @@ require_once HOME_GIT . 'fonction_produit.php';
 function ecrire_nom($rows){
     ?>
         <table>
-    <?php
-    if (empty($rows)) {
-    ?>
-    <h1>Vous n'avez pas de produit</h1>
-    <?php
-    } else {
+    <?php if (empty($rows)) { ?>
+        <h1>Vous n'avez pas de produit</h1>
+    <?php } else {
         foreach ($rows as $row){
         ?>
         
             <tr id=<?= htmlentities($row['id_produit'] ?? '')?>>
                 <!-- <td><img src="MenuBurger.png" alt=""> </td> -->
                 <td> 
+                    <input type="hidden" class="selectCheckbox" name="<?=$row['id_produit']?>">
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
@@ -91,13 +89,93 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         <?php include HOME_SITE . 'vendeur/header.php'; ?>
         <?php include HOME_SITE . 'vendeur/toolbar_stock.php'; ?>
         <main class="content_produit_vendeur">
-            <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+            <div>
+                <a href="../accueil"><img src="../../image/retour.svg" class = "fleche_produit_arriere"></a>
+                <?php if (!empty($stmt)) { ?>
+                    <div id="select">
+                        <button class="bouton" onclick="activateSelectMode()">Sélectionner des produits</button>
+                        <span class="aide" data-tooltip="Permet de générer un fichier PDF\navec uniquement les produits sélectionnés">?</span>
+                    </div>
+                <?php } ?>
+            </div>
             <!-- affiche tous les produits -->
             <?php ecrire_nom($stmt); ?>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
     </body>
     <script src="<?=HOME_SITE?>infobulle.js"></script>
+    <script>
+        let listeInputs = document.getElementsByClassName("selectCheckbox");
+        let divSelect = document.getElementById("select");
+
+        function activateSelectMode() {
+
+            for (i = 0; i < listeInputs.length; i++) {
+                listeInputs[i].type = "checkbox";
+            }
+
+
+            divSelect.removeChild(divSelect.firstElementChild);
+            
+            let bt = document.createElement("button");
+            bt.classList.add("bouton");
+            bt.classList.add("valider");
+            bt.textContent = "Valider";
+            bt.setAttribute("onclick", "valideSelect()")
+            divSelect.appendChild(bt);
+
+            bt = document.createElement("button");
+            bt.classList.add("bouton");
+            bt.classList.add("grave");
+            bt.textContent = "Annuler";
+            bt.setAttribute("onclick", "window.location = ''");
+            divSelect.appendChild(bt);
+
+        }
+
+        function deactivateSelectMode() {
+            window.location = "";
+        }
+
+        function valideSelect() {
+            let selectionnes = [];
+            
+            let lien = "cataloge/cat.php?";
+
+            for (i = 0; i < listeInputs.length; i++) {
+                let element = listeInputs[i];
+
+                if (element.checked) {
+                    selectionnes.push(element.name);
+                    lien += "p[]=" + element.name + '&';
+                }
+            }
+
+            // console.log(lien);
+            
+            window.location = lien;
+
+            // fetch(lien)
+            // .then(reponse => reponse.text())
+            // .then(data => download("test.pdf", data));
+
+
+        }
+
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:pdf;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.textContent = "AAA";
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+    </script>
 </html>
 
 
