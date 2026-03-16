@@ -2258,11 +2258,13 @@ aside {
         .en_ligne {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
         }
         .en_colonne {
             display: flex;
             flex-direction: column;
+            & + .en_colonne{
+                margin-left: 50px;
+            }
         }
         #cout{
             width: 20%;

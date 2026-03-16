@@ -3564,11 +3564,13 @@ aside .achat:hover {
 .main_promo form .en_ligne {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 .main_promo form .en_colonne {
   display: flex;
   flex-direction: column;
+}
+.main_promo form .en_colonne + .en_colonne {
+  margin-left: 50px;
 }
 .main_promo form #cout {
   width: 20%;
