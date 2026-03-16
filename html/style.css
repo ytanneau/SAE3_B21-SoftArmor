@@ -3159,10 +3159,13 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 150px;
+  width: 300px;
   background-color: #6B31D0;
   color: #FFFFFF;
   text-decoration: none;
+}
+.produit-vendeur .list_promotion li a:hover {
+  transform: scale(1.04);
 }
 
 .fleche_produit_arriere {
