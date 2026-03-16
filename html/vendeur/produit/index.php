@@ -150,11 +150,13 @@
                 </ul>
             </div>
             <div>
-                <a href="reduction?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                    <img src="<?=HOME_SITE . "image/reduction_blanc.svg"?>" alt="reduction" title="Démarrer une réduction">
-                    Réduction
-                </a>
-                <ul>
+                <ul class="list_promotion_reduction">
+                    <li>
+                        <a href="reduction?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/reduction_blanc.svg"?>" alt="reduction" title="Démarrer une réduction">
+                            Réduction
+                        </a>
+                    </li>
                     <?php if($tab_reduc != null){
                         foreach($tab_reduc as $ligne){
                             $id_reduc = $ligne['id_reduction'];
