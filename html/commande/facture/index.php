@@ -46,11 +46,6 @@ if (isset($_GET["commande"])) {
     <title>Alizon - Vos commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
 
-    <script>
-        function generePDF() {
-            window.print();
-        }
-    </script>
 </head>
 
 <body class="facture-page-vendeur">

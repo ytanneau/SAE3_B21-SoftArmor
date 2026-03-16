@@ -82,7 +82,7 @@ function print_table($data)
                     <td><?= htmlentities($valeur['nom_produit']) ?></td>
                     <td><?= htmlentities($valeur['quantite']) ?></td>
                     <td><?= htmlentities($valeur['prix']) ?> €</td>
-                    <td><?= htmlentities($valeur['prix']*$valeur['quantite']) ?> €</td>
+                    <td><?= htmlentities($valeur['prix'] * $valeur['quantite']) ?> €</td>
                     <td><?= htmlentities($valeur['tva']) ?> %</td>
                     <td><?= number_format($valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100), 2) ?> €</td>
                 </tr>
@@ -92,11 +92,11 @@ function print_table($data)
     <table class="facture-toto">
         <tr>
             <td><strong>Total HT</strong></td>
-            <td><?= number_format(sommeHt($data),2) ?> €</td>
+            <td><?= number_format(sommeHt($data), 2) ?> €</td>
         </tr>
         <tr>
             <td><strong>Total TVA</strong></td>
-            <td><?= number_format(sommeTVA($data),2) ?> €</td>
+            <td><?= number_format(sommeTVA($data), 2) ?> €</td>
         </tr>
         <tr>
             <td><strong>Total TTC</strong></td>
@@ -159,19 +159,21 @@ function facture_client($id_commande): void
     }*/
 
     foreach ($id_vendeurs as $id_vendeur) {
+        ?>
+        <div class="facture"> <?php
         facture($id_vendeur, $id_commande);
+        ?> </div><?php
+         /*print_head();
 
-        /*print_head();
+         $info = get_infos_commande($id_commande, $id_vendeur);
+         $adresse = sql_get_adresse($info['id_adresse_vendeur']);
+         $adr_vendeur = $adresse['adresse'] ." ". $adresse['ville'] .", ". $adresse['code_postal'];
 
-        $info = get_infos_commande($id_commande, $id_vendeur);
-        $adresse = sql_get_adresse($info['id_adresse_vendeur']);
-        $adr_vendeur = $adresse['adresse'] ." ". $adresse['ville'] .", ". $adresse['code_postal'];
+         print_carater($info['raison_sociale'], $adr_vendeur, $info['nom_client']." ". $info['prenom_client'], $adr_client, $info['date_commande']);
 
-        print_carater($info['raison_sociale'], $adr_vendeur, $info['nom_client']." ". $info['prenom_client'], $adr_client, $info['date_commande']);
-
-        $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
-        print_table($data);*/
-        echo "<hr>";
+         $data = get_elements_commande_vendeur($id_commande, $id_vendeur);
+         print_table($data);*/
+         echo "<hr>";
     }
 
     //facture($_SESSION['id_compte'], $id_commande);
