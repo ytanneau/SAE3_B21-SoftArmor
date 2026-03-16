@@ -3147,6 +3147,12 @@ aside .achat:hover {
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
+.produit-vendeur .list_promotion {
+  list-style-type: none;
+}
+.produit-vendeur .list_promotion li {
+  margin-top: 20px;
+}
 .produit-vendeur .list_promotion li a img {
   margin-left: 5px;
   width: 50px;
@@ -3156,10 +3162,12 @@ aside .achat:hover {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 300px;
+  justify-content: center;
+  width: 500px;
   background-color: #6B31D0;
   color: #FFFFFF;
   text-decoration: none;
+  border-radius: 20px;
 }
 .produit-vendeur .list_promotion li a:hover {
   transform: scale(1.04);
