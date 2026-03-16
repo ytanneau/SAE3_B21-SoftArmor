@@ -3558,22 +3558,18 @@ aside .achat:hover {
 .main_promo .entete h1 {
   margin-right: 30px;
 }
-.main_promo .en_ligne {
+.main_promo form .en_ligne {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.main_promo .en_colonne {
+.main_promo form .en_colonne {
   display: flex;
   flex-direction: column;
 }
-.main_promo h3 + p + div div input {
-  width: 50%;
-}
 .main_promo #warning1,
 .main_promo #warning2,
-.main_promo #warning3,
-.main_promo #warning4 {
+.main_promo #warning3 {
   color: red;
   font-style: italic;
   font-size: 75%;
