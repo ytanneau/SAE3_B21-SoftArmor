@@ -104,7 +104,7 @@
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
-                <div class="ajout_banniere">
+                <div class="block_banniere">
                     <label for="photoPromotion">Ajouter une banniere</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
