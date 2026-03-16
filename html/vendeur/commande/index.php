@@ -76,7 +76,7 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
             <?php } else { ?>
-                <table class="liste-commande">
+                <table class="liste-commande vendeur">
                     <thead>
                         <tr>
                             <th>Date de la commande</th>
