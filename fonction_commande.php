@@ -118,7 +118,7 @@ function get_elements_commande_vendeur($id_commande, $id_vendeur)
 
     $stmt = $pdo->prepare("SELECT _elt_commande.id_produit, nom_produit, _elt_commande.quantite, _elt_commande.prix, tva FROM _elt_commande 
     INNER JOIN _produit ON _elt_commande.id_produit = _produit.id_produit
-    WHERE id_commande = :id_commande AND id_vendeur = :id_vendeur ORDER BY nom_produit");
+    WHERE id_commande = :id_commande AND _elt_commande.id_vendeur = :id_vendeur ORDER BY nom_produit");
     $stmt->bindValue(":id_commande", $id_commande, PDO::PARAM_INT);
     $stmt->bindValue(":id_vendeur", $id_vendeur, PDO::PARAM_INT);
     $stmt->execute();
