@@ -70,13 +70,13 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
 
 <body class="liste-commande-page">
     <?php include HOME_SITE . 'vendeur/header.php' ?>
-    <main>
+    <main class="liste-commande-vendeur">
         <div>
             <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
             <?php if (count($liste_commandes) == 0) { ?>
                 <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
             <?php } else { ?>
-                <table class="liste-commande vendeur">
+                <table class="liste-commande">
                     <thead>
                         <tr>
                             <th>Date de la commande</th>
