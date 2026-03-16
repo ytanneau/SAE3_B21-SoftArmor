@@ -3150,12 +3150,12 @@ aside .achat:hover {
 .produit-vendeur .list_promotion a {
   display: block;
   max-width: 100%;
-  width: auto;
+  width: 30em;
   padding: 1em;
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: #BB2BB2;
+  background-color: #6B31D0;
   color: black;
   border: none;
   border-radius: 5px;
@@ -3168,7 +3168,7 @@ aside .achat:hover {
   color: black;
 }
 .produit-vendeur .list_promotion a:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+  background-color: rgb(151.7509881423, 111.2885375494, 222.2114624506);
 }
 .produit-vendeur .list_promotion a img {
   width: 50px;
