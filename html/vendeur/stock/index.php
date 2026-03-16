@@ -34,7 +34,7 @@ function ecrire_nom($rows){
             <tr id=<?= htmlentities($row['id_produit'] ?? '')?>>
                 <!-- <td><img src="MenuBurger.png" alt=""> </td> -->
                 <td> 
-                    <input type="hidden" class="selectCheckbox" name="<?=$row['id_produit']?>">
+                    <input type="hidden" onclick="testBoutonsSelect()" class="selectCheckbox" name="<?=$row['id_produit']?>">
                     <!-- le nom du produit (nom_stock) avec le lien qui est l'id du produit (id_produit) -->
                     <a href= "../produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"> <?= htmlentities($row['nom_stock'] ?? '')?> 
                     </a>
@@ -105,7 +105,7 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
     </body>
     <script src="<?=HOME_SITE?>infobulle.js"></script>
     <script>
-        let listeInputs = document.getElementsByClassName("selectCheckbox");
+        let listeInputs = Array.from(document.getElementsByClassName("selectCheckbox"));
         let divSelect = document.getElementById("select");
 
         function activateSelectMode() {
@@ -114,21 +114,32 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
                 listeInputs[i].type = "checkbox";
             }
 
-
             divSelect.removeChild(divSelect.firstElementChild);
             
+            // Création bouton validation
             let bt = document.createElement("button");
             bt.classList.add("bouton");
             bt.classList.add("valider");
-            bt.textContent = "Valider";
-            bt.setAttribute("onclick", "valideSelect()")
+            bt.textContent = "Télécharger la sélection";
+            bt.setAttribute("onclick", "valideSelect()");
+            bt.style.display = "none";
             divSelect.appendChild(bt);
 
+            // Création bouton pour annuler
             bt = document.createElement("button");
             bt.classList.add("bouton");
-            bt.classList.add("grave");
+            bt.classList.add("annuler");
             bt.textContent = "Annuler";
             bt.setAttribute("onclick", "window.location = ''");
+            divSelect.appendChild(bt);
+
+            // Création bouton pour tout sélectionner
+            bt = document.createElement("button");
+            bt.classList.add("bouton");
+            bt.classList.add("select");
+            bt.textContent = "Tout sélectionner";
+            bt.setAttribute("onclick", "selectAll()");
+            bt.setAttribute("id", "selectAllButton");
             divSelect.appendChild(bt);
 
         }
@@ -138,42 +149,58 @@ $stmt = vendeur_All_produit($_SESSION['id_compte']);
         }
 
         function valideSelect() {
-            let selectionnes = [];
+            let produitSelect = false;
             
             let lien = "cataloge/cat.php?";
 
-            for (i = 0; i < listeInputs.length; i++) {
-                let element = listeInputs[i];
-
+            listeInputs.forEach(element => {
                 if (element.checked) {
-                    selectionnes.push(element.name);
                     lien += "p[]=" + element.name + '&';
+                    produitSelect = true;
                 }
-            }
-
-            // console.log(lien);
+            });
             
-            window.location = lien;
-
-            // fetch(lien)
-            // .then(reponse => reponse.text())
-            // .then(data => download("test.pdf", data));
-
+            if (produitSelect) {
+                window.location = lien;
+            }
 
         }
 
-        function download(filename, text) {
-            var element = document.createElement('a');
-            element.setAttribute('href', 'data:pdf;charset=utf-8,' + encodeURIComponent(text));
-            element.setAttribute('download', filename);
-            element.textContent = "AAA";
+        function testBoutonsSelect() {
+            if (!auMoins1ProduitSelect()) {
+                document.getElementsByClassName("valider")[0].style.display = "none";
+            } else {
+                document.getElementsByClassName("valider")[0].style.display = "";
 
-            element.style.display = 'none';
-            document.body.appendChild(element);
+            }
+        }
 
-            element.click();
+        function auMoins1ProduitSelect() {
+            return listeInputs.some(element => {return element.checked});
+        }
 
-            document.body.removeChild(element);
+        function selectAll() {
+            listeInputs.forEach(element => {
+                element.checked = true;
+            });
+
+            let bt = document.getElementById("selectAllButton");
+            bt.textContent = "Tout désélectionner";
+            bt.setAttribute("onclick", "unselectAll()");
+
+            testBoutonsSelect();
+        }
+
+        function unselectAll() {
+            listeInputs.forEach(element => {
+                element.checked = false;
+            });
+
+            let bt = document.getElementById("selectAllButton");
+            bt.textContent = "Tout sélectionner";
+            bt.setAttribute("onclick", "selectAll()");
+
+            testBoutonsSelect();
         }
     </script>
 </html>
