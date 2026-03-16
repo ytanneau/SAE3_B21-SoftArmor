@@ -3147,6 +3147,33 @@ aside .achat:hover {
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
+.produit-vendeur .list_promotion a {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.produit-vendeur .list_promotion a a {
+  text-decoration: none;
+  color: black;
+}
+.produit-vendeur .list_promotion a:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.produit-vendeur .list_promotion a img {
+  width: 50px;
+  height: 50px;
+}
 
 .fleche_produit_arriere {
   margin: 5px;
