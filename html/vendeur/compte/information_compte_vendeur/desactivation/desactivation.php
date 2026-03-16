@@ -51,7 +51,7 @@
         <?php include HOME_SITE . 'link_head.php'; ?>
     </head>
     <body class="desactivation-vendeur">
-        <?php include HOME_SITE . "header.php"?>
+        <?php include "../../../header.php"?>
         <main>
             <form action="" name="formulaireModif" method="post" enctype="multipart/form-data">
                 <input type="submit" value="Confirmer la désactivation du compte">

@@ -427,12 +427,12 @@ if ($_POST != NULL){
                     ?>
 
                     <button id="test1" type="submit" class="bouton modif">Modifier mes informations</button>
-                    <button class="bouton grave"><a href="anonymisation_client/index.php">Désactiver mon compte</a></button>
+                    <a href="anonymisation_client/index.php" id="idDesactivationCompte">Désactiver mon compte</a>
 
                     <?php if (!$a_2FA) { ?>
-                        <button class="bouton"><a href="<?= HOME_SITE . "authentikator/activer.php" ?>">Activer la 2FA</a></button>
+                        <a href="<?= HOME_SITE . "authentikator/activer.php" ?>" id="idActivation2FA">Activer la 2FA</a>
                     <?php } else { ?>
-                    <button class="bouton grave"><a href="<?= HOME_SITE . "authentikator/desactiver.php" ?>">Désactiver la 2FA</a></button>
+                    <a href="<?= HOME_SITE . "authentikator/desactiver.php" ?>" id="idDesactivation2FA">Désactiver la 2FA</a>
                     <?php } ?>
                 </article>
             </form>
