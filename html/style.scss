@@ -2301,7 +2301,10 @@ aside {
     .block_banniere {
         display: flex;
         flex-direction: column;
-        margin-top: 40px;
+        margin-top: 30px;
+        label{
+            font-weight: bold;
+        }
         .overImg{
             @include input_img_over_img;
         }
