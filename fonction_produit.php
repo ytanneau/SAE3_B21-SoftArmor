@@ -853,7 +853,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT date_debut, date_fin, FROM promo_a_venir WHERE id_produit = :id");
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM promo_a_venir WHERE id_produit = :id");
 
             $stmt->execute([
                 "id" => $id_produit
@@ -868,7 +868,7 @@
         global $pdo;
 
         try{
-            $stmt = $pdo->prepare("SELECT date_debut, date_fin, FROM reduction_a_venir WHERE id_produit = :id");
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM reduction_a_venir WHERE id_produit = :id");
 
             $stmt->execute([
                 "id" => $id_produit
