@@ -365,12 +365,12 @@
             $requete = $pdo->prepare(
                 "SELECT 1 
                 FROM avis_client
-                WHERE id_client = :id_compte
+                WHERE id_client = :id_client
                 AND id_produit = :id_produit"
             );
 
-            $requete->bindValue(':id_compte', $id_client, PDO::PARAM_INT);
-            $requete->bindValue(':id_avis', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->execute();
 
             return $requete->rowCount() > 0;
