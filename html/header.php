@@ -6,11 +6,12 @@
     <nav>
         <ul class="sidebar">
             <li onclick="closeSidebar()"> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
-            <li><a href="<?= HOME_SITE . 'carte/'?>">Carte</a></li>
+            <!--li><a href="<?= HOME_SITE . 'carte/'?>">
+                <img src="<?= $images . 'map_blanc.svg' ?>" class="icon">Carte</a></li-->
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                 <li> 
-                    <a href=""> 
+                    <a href="<?= HOME_SITE . 'panier' ?>"> 
                         <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mon panier
                     </a> 
                 </li>
@@ -22,7 +23,7 @@
                 </li>
 
                 <li> 
-                    <a href="<?= HOME_SITE . 'compte/informations' ?>"> 
+                    <a href="<?= HOME_SITE . 'commande' ?>"> 
                         <img src="<?= $images . 'panier_blanc.svg' ?>" class="icon">Mes commandes
                     </a> 
                 </li>

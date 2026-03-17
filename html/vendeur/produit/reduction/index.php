@@ -104,6 +104,8 @@
 
             const date_occupe = <?= json_encode($date_occupe_reduction)?>;
             console.log(date_occupe)
+            let date = new Date()
+            let current_string_date
 
             pourcentage.addEventListener('input', () => {
                 pourcentage.value = pourcentage.value.replace(",",".");
@@ -120,7 +122,7 @@
                 if(dateFin.value != ""){
                     if(dateDebut.value > dateFin.value) {
                         warning_date_anterieur.style.display = "block";
-                    } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                    } else if(new Date(dateDebut.value).getTime() < date.getTime()){
                         warning_date_passe.style.display = "block";
                     } else {
                         warning_date_anterieur.style.display = "none";
@@ -128,7 +130,7 @@
                     }
                 }
 
-                if(!check_dispo_date(dateDebut.value)){
+                if(check_dispo_date(dateDebut.value)){
                     warning_date_occupe.style.display = "block"
                 } else {
                     warning_date_occupe.style.display = "none"
@@ -143,7 +145,7 @@
                         warning_date_anterieur.style.display = "none";
                     }
                 }
-                if(!check_dispo_date(dateFin.value)){
+                if(check_dispo_date(dateFin.value)){
                     warning_date_occupe.style.display = "block"
                 } else {
                     warning_date_occupe.style.display = "none"
@@ -155,7 +157,8 @@
                     return true
                 } else {
                     date_occupe.forEach(periode => {
-                        if(date >= periode['date_debut'] && date <= periode['date_fin']){
+                        if(new Date(date).getTime() >= new Date(periode['date_debut']).getTime() && 
+                            new Date(date).getTime() <= new Date(periode['date_fin']).getTime()){
                             return true
                         } else {
                             return false
@@ -165,8 +168,7 @@
             }
 
             // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
-            let date = new Date()
-            let current_string_date
+            
 
             if(date.getMonth() < 9){
                 current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
@@ -175,6 +177,12 @@
             }
             dateDebut.value = current_string_date
             dateFin.value = current_string_date
+
+            if(check_dispo_date(dateDebut.value)){
+                warning_date_occupe.style.display = "block"
+            } else {
+                warning_date_occupe.style.display = "none"
+            }
         </script>
     </body>
 </html>
