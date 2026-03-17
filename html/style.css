@@ -3887,11 +3887,7 @@ aside .achat:hover {
 .main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
   width: 80%;
 }
-.main_promo #warning1,
-.main_promo #warning2,
-.main_promo #warning3, .main_reduc #warning1,
-.main_reduc #warning2,
-.main_reduc #warning3 {
+.main_promo .warning, .main_reduc .warning {
   color: red;
   font-style: italic;
   font-size: 75%;
