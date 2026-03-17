@@ -146,7 +146,7 @@
   text-decoration: none;
 }
 #header_client > nav > ul.sidebar {
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   right: 0;
