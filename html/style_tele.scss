@@ -308,3 +308,17 @@ body {
         display: none;
     }
 }
+
+.mainPanier{
+
+    .panier_vide{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img{
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+        }
+    }
+}
