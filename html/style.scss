@@ -2253,30 +2253,27 @@ aside {
 .main_promo {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-
-    .en_ligne {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .en_colonne {
-        display: flex;
-        flex-direction: column;
-    }
-
-    h3+p+div {
-        div {
-            input {
-                width: 50%;
+    form{
+        width: 500px;
+        .en_ligne {
+            display: flex;
+            flex-direction: row;
+        }
+        .en_colonne {
+            display: flex;
+            flex-direction: column;
+            & + .en_colonne{
+                margin-left: 50px;
             }
+        }
+        #cout{
+            width: 20%;
         }
     }
 
     #warning1,
     #warning2,
-    #warning3,
-    #warning4 {
+    #warning3 {
         color: red;
         font-style: italic;
         font-size: 75%;
