@@ -2426,7 +2426,7 @@ aside {
         width: 100%;
     }
 
-    #supprimer_promotion {
+    #supprimer {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 10px;
         padding: 10px 16px 10px 16px;

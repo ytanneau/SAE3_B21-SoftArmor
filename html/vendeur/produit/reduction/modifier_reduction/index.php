@@ -49,39 +49,41 @@
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
     <body><?php include "../../../header.php" ?>
-        <main class="main_reduction">
+        <main class="main_reduc">
             <div class="entete">
                 <a href="../../index.php?produit=<?=$id_produit?>"><img src="../../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une réduction</h1>
             </div>
             <p>Prix actuel : <?=htmlentities($prix)?>€</p>
             <form action="" method="post">
-                <div>
-                    <label for="dateDebut">Debut de la réduction</label>
-                    <input type="date" id="dateDebut" name="dateDebut" required>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="dateDebut">Debut de la réduction</label>
+                        <input type="date" id="dateDebut" name="dateDebut" required>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="dateFin">Fin de la réduction</label>
+                        <input type="date" id="dateFin" name="dateFin" required>
+                    </div>
                 </div>
-                <div>
-                    <label for="dateFin">Fin de la réduction</label>
-                    <input type="date" id="dateFin" name="dateFin" required>
-                </div>
+
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
-                <div>
-                    <label for="pourcentage">Pourcentage : </label>
-                    <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
-                    <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
+
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="pourcentage">Pourcentage : </label>
+                        <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
+                        <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="prixFinal">Prix final : </label>
+                        <input type="text" id="prixFinal" readonly>
+                    </div>
                 </div>
-                <div>
-                    <label for="euro">Remise appliquée : </label>
-                    <input type="text" id="euro" readonly>
-                </div>
-                <div>
-                    <label for="prixFinal">Prix final : </label>
-                    <input type="text" id="prixFinal" readonly>
-                </div>
-                <input type="submit" id="btn_confirm_reduc">
-                <a href="supprimer_reduc.php?idProduit=<?=htmlentities($id_produit)?>&idReduc=<?=htmlentities($id_reduction)?>">Supprimer la réduction</a>
+                <input type="submit" id="valider">
+                <a id="supprimer" href="supprimer_reduc.php?idProduit=<?=htmlentities($id_produit)?>&idReduc=<?=htmlentities($id_reduction)?>">Supprimer la réduction</a>
             </form>
         </main>
         <?php include HOME_SITE . "footer.php"?>

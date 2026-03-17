@@ -3920,7 +3920,7 @@ aside .achat:hover {
   margin-top: 40px;
   width: 100%;
 }
-.main_promo #supprimer_promotion, .main_reduc #supprimer_promotion {
+.main_promo #supprimer, .main_reduc #supprimer {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3936,14 +3936,14 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo #supprimer_promotion a, .main_reduc #supprimer_promotion a {
+.main_promo #supprimer a, .main_reduc #supprimer a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo #supprimer_promotion:hover, .main_reduc #supprimer_promotion:hover {
+.main_promo #supprimer:hover, .main_reduc #supprimer:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.main_promo #supprimer_promotion, .main_reduc #supprimer_promotion {
+.main_promo #supprimer, .main_reduc #supprimer {
   margin-top: 10px;
   padding: 10px 16px 10px 16px;
 }
