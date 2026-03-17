@@ -125,7 +125,7 @@ if($tabPromotion != false){
     ?>
 
     <main>
-        <!--Produit Banniere au jour (possiblement a faire)-->
+        <!--Produit Banniere au jour-->
         <?php if(!$pub){?>
         <div class="banniere">
             <a href="produit/?produit=<?=$tabPromotion['id_produit']?>">
@@ -133,18 +133,25 @@ if($tabPromotion != false){
             </a>
         </div>
         <?php } ?>
-        <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
+
+            <!--Vedette de la journée (possiblement a faire)(pour telephone)-->
+
+
             <!--Produit Ajoutés Récemment-->
-            <h1>Produits ajoutés récemment</h1>
-            <?php afficher_produits($produit_recent, "recent")?>
+            <section>
+                <h1>Produits ajoutés récemment</h1>
+                <?php afficher_produits($produit_recent, "recent")?>
+            </section>
             <hr>
             
 
             <?php if (count($produit_promotion) > 0) { ?>
-                <!-- Produits en réduction -->
-                <h1>Produits en promotion</h1>
-                <?php afficher_produits($produit_promotion, "reduction")?>
-                <hr>
+                <section>
+                    <!-- Produits en réduction -->
+                    <h1>Produits en promotion</h1>
+                    <?php afficher_produits($produit_promotion, "reduction")?>
+                    <hr>
+                </section>
             <?php } ?>
 
             <!-- Produits de catégories -->
@@ -157,25 +164,27 @@ if($tabPromotion != false){
 
                 if (count($produits_cat) != 0) {
                     ?>
-                    <h1>Produits <?=strtolower($cat)?></h1>
-                    <?php afficher_produits($produits_cat, strtolower($cat))?>
+                    <section>
+                        <h1>Produits <?=strtolower($cat)?></h1>
+                        <?php afficher_produits($produits_cat, strtolower($cat))?>
+                    </section>
                     <hr>
                 <?php }
             } ?>
 
             <!-- Tous les produits du catalogue -->
-            <h1>Produits du catalogue</h1>
-            <?php afficher_produits($produit_catalogue, "catalogue")?>
+            <section>
+                <h1>Produits du catalogue</h1>
+                <?php afficher_produits($produit_catalogue, "catalogue")?>
+            </section>
 
-            <!-- Navigation (pour teléphone)
+            <!-- Navigation (pour teléphone) -->
             <nav>
-                <a href=""><img src="image/home.svg" title="Acceder à la page d'Accueil" alt="logo page d'accueil"></a>
-                <a href="/panier"><img src="image/panier.svg" title="Acceder au Panier" alt="logo page panier"></a>
-            
-                <a href="#"><img src="image/favori.svg" title="Acceder aux favoris" alt="logo page favoris"></a>
-                <a href="#"><img src="image/notification.svg" title="Acceder aux notifications" alt="logo page notifications"></a>
+                <a href="<?=HOME_SITE?>panier"><img src="<?=HOME_SITE?>image/panier.svg" title="Acceder au Panier" alt="panier"></a>
+                <a href="<?=HOME_SITE?>"><img src="<?=HOME_SITE?>image/home.svg" title="Acceder à la page d'Accueil" alt="accueil"></a>
+                <a href="<?=HOME_SITE?>compte/informations"><img src="<?=HOME_SITE?>image/compte.svg" title="Acceder aux information du compte" alt="compte"></a>
             </nav>  
-            -->
+           
     </main>
 
     <footer>

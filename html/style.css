@@ -2099,11 +2099,11 @@ div:has(> aside) {
 .accueil > main .banniere a article:has(img) {
   width: 100%;
 }
-.accueil > main > div {
+.accueil > main section > div {
   display: flex;
   flex-direction: row;
 }
-.accueil > main > div > button {
+.accueil > main section > div > button {
   z-index: 10;
   width: 40px;
   height: 40px;
@@ -2119,22 +2119,22 @@ div:has(> aside) {
   justify-content: center;
   box-shadow: 0 0 20px black;
 }
-.accueil > main > div > button > img {
+.accueil > main section > div > button > img {
   width: 75%;
 }
-.accueil > main > div > button:hover {
+.accueil > main section > div > button:hover {
   background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
 }
-.accueil > main > div .gauche {
+.accueil > main section > div .gauche {
   transform: rotate(180deg);
   left: 50px;
   padding: 0 3px;
 }
-.accueil > main > div .droite {
+.accueil > main section > div .droite {
   right: 50px;
   padding: 0 3px;
 }
-.accueil > main > div > ul {
+.accueil > main section > div > ul {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2144,16 +2144,16 @@ div:has(> aside) {
   padding: 0;
   width: 100%;
 }
-.accueil > main > div > ul > li {
+.accueil > main section > div > ul > li {
   width: 20vw;
   margin: 20px 40px 20px 20px;
 }
-.accueil > main > div > ul > li > a {
+.accueil > main section > div > ul > li > a {
   color: black;
   text-decoration: none;
   line-height: 1.5em;
 }
-.accueil > main > div > ul > li > a > img {
+.accueil > main section > div > ul > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 15vw;
@@ -2163,33 +2163,33 @@ div:has(> aside) {
   height: 15vw;
   border-radius: 5px;
 }
-.accueil > main > div > ul > li > a > div {
+.accueil > main section > div > ul > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.accueil > main > div > ul > li > a > div > img {
+.accueil > main section > div > ul > li > a > div > img {
   width: 20px;
   height: 20px;
   background: none;
 }
-.accueil > main > div > ul > li > a > div > p {
+.accueil > main section > div > ul > li > a > div > p {
   margin: 5px 0;
 }
-.accueil > main > div > ul > li > a > div {
+.accueil > main section > div > ul > li > a > div {
   height: 2em;
 }
-.accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
+.accueil > main section > div > ul > li > a > p, .accueil > main section > div > ul > li > a > h3 {
   margin: 5px 0;
   width: 100%;
 }
-.accueil > main > div > ul > li > a > h3 {
+.accueil > main section > div > ul > li > a > h3 {
   height: 3em;
 }
-.accueil > main > div > ul > li > a {
+.accueil > main section > div > ul > li > a {
   position: relative;
 }
-.accueil > main > div > ul > li > a > .reduction {
+.accueil > main section > div > ul > li > a > .reduction {
   position: absolute;
   width: 32px;
   height: 32px;
