@@ -1112,6 +1112,14 @@ div:has(> aside) {
         vertical-align: middle;
     }
 
+    h3 {
+        height: 48px;
+    }
+
+    .etoiles {
+        height: 30px;
+    }
+
     nav {
         display: none;
     }
@@ -1127,6 +1135,10 @@ div:has(> aside) {
                 width: 50%;
 
                 img {
+                    width: 100%;
+                }
+
+                article:has(img) {
                     width: 100%;
                 }
             }
@@ -1643,6 +1655,10 @@ aside {
 .etoiles {
     display: flex;
     flex-wrap: nowrap;
+
+    p {
+        margin: 0;
+    }
 }
 
 .etoile {
@@ -2416,9 +2432,7 @@ aside {
         }
     }
 
-    #warning1,
-    #warning2,
-    #warning3 {
+    .warning {
         color: red;
         font-style: italic;
         font-size: 75%;

@@ -858,7 +858,7 @@
             $stmt->execute([
                 "id" => $id_produit
             ]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e){
             throw $e;
         }
@@ -873,7 +873,7 @@
             $stmt->execute([
                 "id" => $id_produit
             ]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e){
             throw $e;
         }

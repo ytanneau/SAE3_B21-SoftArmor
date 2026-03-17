@@ -461,9 +461,9 @@ if ($_POST != NULL){
                                 </div>
 
                                 <div class="icons">
-                                    <a href="modification_avis/?produit=<?= htmlentities($row['id_produit'])?>">
+                                    <button class="bouton_modifier" data-avis="<?= $row['id_produit'] ?>">
                                         <img src="<?=HOME_SITE?>image/modifier.svg" alt="Modifier" class="icon">
-                                    </a>
+                                    </button>
                                     <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte']?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
                                         <img src="<?=HOME_SITE?>image/supprimer.svg" alt="Supprimer" class="icon">
                                     </a>
@@ -495,7 +495,7 @@ if ($_POST != NULL){
                 </div>
                 
                 <form id="form_modifier" action="" method="post">
-                    <input type="hidden" name="id_avis" id="id_avis_modifier">
+                    <input name="id_avis" id="id_avis_modifier">
                     
                     <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
 
@@ -535,6 +535,28 @@ if ($_POST != NULL){
 
     // Modification d'un avis
 
+    const modal = document.getElementById("modal_modifier");
+
+    const formModifier = document.getElementById("form_modifier");
+    const contentModifier = document.getElementById("content_modifier");
+
+    const snackbar = document.getElementById("snackbar");
+    const inputIdAvisModifier = document.getElementById("id_avis_modifier");
+
+    document.querySelectorAll(".bouton_modifier").forEach(btn => {
+        btn.addEventListener("click", () => {
+            inputIdAvisModifier.value = btn.dataset.avis;
+
+            // Afficher le bon formulaire
+            contentModifier.style.display = "block";
+
+            // Afficher le modal
+            modal.style.display = "block";
+
+            // Empêcher le scroll tant que le modal est ouvert
+            document.body.style.overflowY = "hidden";
+        });
+    });
     
 </script>
 </html>

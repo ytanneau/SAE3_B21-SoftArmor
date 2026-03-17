@@ -2075,6 +2075,12 @@ div:has(> aside) {
   font-weight: bold;
   vertical-align: middle;
 }
+.accueil h3 {
+  height: 48px;
+}
+.accueil .etoiles {
+  height: 30px;
+}
 .accueil nav {
   display: none;
 }
@@ -2088,6 +2094,9 @@ div:has(> aside) {
   width: 50%;
 }
 .accueil > main .banniere a img {
+  width: 100%;
+}
+.accueil > main .banniere a article:has(img) {
   width: 100%;
 }
 .accueil > main > div {
@@ -2726,6 +2735,9 @@ aside .achat:hover {
 .etoiles {
   display: flex;
   flex-wrap: nowrap;
+}
+.etoiles p {
+  margin: 0;
 }
 
 .etoile {
@@ -3887,11 +3899,7 @@ aside .achat:hover {
 .main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
   width: 80%;
 }
-.main_promo #warning1,
-.main_promo #warning2,
-.main_promo #warning3, .main_reduc #warning1,
-.main_reduc #warning2,
-.main_reduc #warning3 {
+.main_promo .warning, .main_reduc .warning {
   color: red;
   font-style: italic;
   font-size: 75%;
