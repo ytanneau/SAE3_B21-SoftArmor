@@ -160,7 +160,7 @@
                         <a class="delete_picture" href="delete_photo.php?banniere=<?=$id_image_initial?>&promotion=<?=$id_promo?>&produit=<?=$id_produit?>">Supprimer la bannière</a>
                 <?php } else { ?>
                     <div class="overImg">
-                        <label for="photoPromotion">Ajouter une bannière</label>
+                        <label for="photoPromotion">Ajouter une bannière (optionnel)</label>
                         <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg">
                     </div>
                 <?php } ?>
