@@ -520,7 +520,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     }
                 }
             });
-            
             return tableauVendeur;
         }
         function afficherProduits(data) {
