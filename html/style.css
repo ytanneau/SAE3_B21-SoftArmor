@@ -3859,7 +3859,7 @@ aside .achat:hover {
   margin-right: 30px;
 }
 .main_promo form, .main_reduc form {
-  width: 600px;
+  width: 500px;
 }
 .main_promo form .en_ligne, .main_reduc form .en_ligne {
   display: flex;
