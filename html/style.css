@@ -3662,6 +3662,9 @@ aside .achat:hover {
 .main_promo form #cout, .main_reduc form #cout {
   width: 20%;
 }
+.main_promo form div div input[type=text], .main_reduc form div div input[type=text] {
+  width: 20%;
+}
 .main_promo #warning1,
 .main_promo #warning2,
 .main_promo #warning3, .main_reduc #warning1,
