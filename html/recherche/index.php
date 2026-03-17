@@ -419,7 +419,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
         liste_vendeur.addEventListener("change", (e) =>{
-            const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked').value;
+            const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked');
             if(inputsCoches === 0){
                 groupMarker.clearLayers();
                 afficherMarker(listeVendeurAffiche);
