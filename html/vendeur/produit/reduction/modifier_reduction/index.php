@@ -161,6 +161,6 @@
         dateDebut.value = tab_reduction['date_debut']
         dateFin.value = tab_reduction['date_fin']
         prixFinal.value = prixInitial * (1-(pourcentage.value / 100))
-        prixFinal.value.toFixed(2)
+        prixFinal.value = prixFinal.value.toFixed(2)
     </script>
 </html>
