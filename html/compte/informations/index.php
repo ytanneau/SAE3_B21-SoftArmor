@@ -495,7 +495,14 @@ if ($_POST != NULL){
                 </div>
                 
                 <form id="form_modifier" action="" method="post">
-                    <input name="id_avis" id="id_avis_modifier">
+                    <input type="hidden" name="id_avis" id="id_avis_modifier">
+
+                    <label for="titre_avis">Titre</label>
+                    <input type="text" name="titre_avis" id="titre_avis" value="">
+
+                    <label for="titre_avis">Description</label>
+                    <input type="text" name="description_avis" id="titre_avis">
+
                     
                     <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
 
@@ -543,12 +550,14 @@ if ($_POST != NULL){
     const snackbar = document.getElementById("snackbar");
     const inputIdAvisModifier = document.getElementById("id_avis_modifier");
 
+    const selection = {
+        id_avis: null
+    };
+
+    // Ouvrir le modal
     document.querySelectorAll(".bouton_modifier").forEach(btn => {
         btn.addEventListener("click", () => {
             inputIdAvisModifier.value = btn.dataset.avis;
-
-            // Afficher le bon formulaire
-            contentModifier.style.display = "block";
 
             // Afficher le modal
             modal.style.display = "block";
@@ -557,6 +566,39 @@ if ($_POST != NULL){
             document.body.style.overflowY = "hidden";
         });
     });
+
+    // Fermer le modal
+    document.querySelectorAll(".fermer_modal").forEach(element => {
+        element.addEventListener("click", () => {
+            modal.style.display = "none";
+            document.body.style.overflowY = "auto";
+        });
+    });
+
+    async function preremplirChamps() {
+        fetch('./infos_avis.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(selection)
+        })
+        .then(res => res.json())
+        .then(data => {
+            // Préremplir les champs
+            boutons[data.note].click();
+            inputTitreAvis.value = data.titre;
+            inputCommentaire.value = data.commentaire;
+
+            imagePreviewAvis.backgroundImage = `url("${data.image}")`;
+            
+
+            
+            // Afficher le modal
+            modal.style.display = "block";
+
+            // Empêcher le scroll tant que le modal est ouvert
+            document.body.style.overflowY = "hidden";
+        });
+    }
     
 </script>
 </html>
