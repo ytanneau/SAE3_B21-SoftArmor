@@ -28,6 +28,6 @@
     unlink_image_promotion($promotion);
     delete_image($banniere);
 
-    header("Location: ../index.php?produit=". $produit . "&idPromo=" . $promotion);
+    header("Location: index.php?produit=". $produit . "&idPromo=" . $promotion);
     exit();
 ?>
