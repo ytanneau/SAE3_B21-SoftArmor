@@ -28,46 +28,53 @@ $produit_promotion = info_produit_accueil_promotion();
 function afficher_un_produit($row){?>
     <li>
         <a href="produit/?produit=<?= $row['id_produit'];?>"> 
-            <?php
+        <?php
             $prix_normal = $row['prix'] * (1 + $row['tva'] / 100);
             $prix_reduit = $row['prix_actuel'] * (1 + $row['tva'] / 100);
             $reduction = $prix_normal != $prix_reduit;
             $pourcentage = round((1 - ($prix_reduit / $prix_normal) )*100);
 
-                        if($reduction){?>
-                        <span class="reduction">%</span>
-                        <?php }?>
 
-                        <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
-                        <h3><?= limiter_caracteres($row['nom_public'],50); ?></h3>
-                        
+            ?>
+            <article>
+                <?php if($reduction){?>
+                    <span class="reduction">%</span>
+                <?php }?>
 
-                        <div>
-                            <?php 
+                <img  src="<?= $row['url_image'];?>" title="<?= pset($row['titre'])?>" alt="<?= pset($row['alt'])?>">
 
-                                if(!isset($row['note_moy'])){
-                                    ?><p>Produit Non Noté</p><?php
-                                }
-                                else{
-                                    $moy = $row['note_moy'];
-                                    afficher_moyenne_note($moy);
-                                }
-                            ?>
-                        </div>
+            </article>
+            <article>
+                <h3><?= limiter_caracteres($row['nom_public'], 50)?></h3>
+                
 
-                        
+                <div class="etoiles">
+                    <?php
+                        if(!isset($row['note_moy'])){
+                            ?><p>Produit Non Noté</p><?php
+                        }
 
-                        <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
-                        <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
-                        
-                        
-                        
-                        <?php if ($reduction) { ?>
-                            <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
-                            <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
-                        <?php } ?>
-                    </a>
-                </li>
+                        else{
+                            $moy = $row['note_moy'];
+                            afficher_moyenne_note($moy);
+                        }
+                    ?>
+                </div>
+
+                
+
+                <!-- Affiche que le prix normal s'il n'y a pas de réduction, sinon affiche aussi le prix réduit (et barre le normal)-->
+                <p class="<?=$reduction ? "ancien_prix" : "prix"?>"><?= number_format($prix_normal, 2, ',', '')?> €</p>
+                
+                
+                
+                <?php if ($reduction) { ?>
+                    <p class="pourcentage"><?= $reduction ? htmlentities("-$pourcentage%") : ""?></p>
+                    <p class="prix"><?= number_format($prix_reduit, 2, ',', ''); ?> €</p>
+                <?php } ?>
+            </article>
+        </a>
+    </li>
     <?php }
 
 

@@ -2075,6 +2075,12 @@ div:has(> aside) {
   font-weight: bold;
   vertical-align: middle;
 }
+.accueil h3 {
+  height: 48px;
+}
+.accueil .etoiles {
+  height: 30px;
+}
 .accueil nav {
   display: none;
 }
@@ -2088,6 +2094,9 @@ div:has(> aside) {
   width: 50%;
 }
 .accueil > main .banniere a img {
+  width: 100%;
+}
+.accueil > main .banniere a article:has(img) {
   width: 100%;
 }
 .accueil > main > div {
@@ -2726,6 +2735,9 @@ aside .achat:hover {
 .etoiles {
   display: flex;
   flex-wrap: nowrap;
+}
+.etoiles p {
+  margin: 0;
 }
 
 .etoile {
