@@ -56,15 +56,15 @@
                 <a href="../index.php?produit=<?=$id_produit?>"><img src="../../../../image/retour.svg" alt="bouton retour en arrière"></a>
                 <h1>Démarrer une réduction</h1>
             </div>
-            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
+            <p>Prix actuel du produit : <?=htmlentities($prix)?>€</p>
             <form action="" method="post">
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début de la réduction : </label>
+                        <label for="dateDebut">Début de la réduction : </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin de la réduction : </label>
+                        <label for="dateFin">Fin de la réduction : </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
                 </div>
@@ -78,10 +78,6 @@
                         <label for="pourcentage">Pourcentage : </label>
                         <input type="text" id="pourcentage" name="pourcentage" required>
                         <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
-                    </div>
-                    <div class="en_colonne">
-                        <label for="euro">Remise appliquée : </label>
-                        <input type="text" id="euro" readonly>
                     </div>
                     <div class="en_colonne">
                         <label for="prixFinal">Prix final : </label>

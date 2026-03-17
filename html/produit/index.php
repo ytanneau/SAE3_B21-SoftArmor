@@ -3,20 +3,24 @@
 define('HOME_GIT', '../../');
 define('HOME_SITE', '../');
 
-if (!isset($_SESSION)) {
-    session_start();
-    
-    if(isset($_SESSION['raison_sociale'])){
-        header('location: /vendeur/stock/');
-    }
-}
-
 require_once (HOME_GIT . '.config.php');
 require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_produit.php');
 require_once (HOME_GIT . 'fonction_global.php');
 require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_panier.php');
+require_once (HOME_GIT . 'fonction_compte.php');
+
+if (!isset($_SESSION)) {
+    session_start();
+    
+    if (isset($_SESSION['raison_sociale'])){
+        header('location: /vendeur/stock/');
+    }
+
+    $id_client = $_SESSION['id_compte'] ?? '';
+    $pp = sql_get_photo_profil($id_client);
+}
 
 if (!isset($_GET['produit']) || !is_numeric($_GET['produit'])) {
     die("ID du produit invalide.");
@@ -198,22 +202,89 @@ if (isset($_POST['quantite'])) {
 
             <!-- Section des avis -->
             <section id="avis">
-                <!-- Rajouter le nombre -->
-                <h2>Avis (<?= count($liste_avis) ?>)</h2>
+                <?php if (!check_avis_existe($id_produit, $id_client)) { ?>
+                    <h2>Rédiger un avis</h2>
+                
+                    <?php if (!empty($id_client)) { 
+                        $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
+                        
+                        <div id="creation_avis">
+                            <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
+            
+                            <form id="form_avis" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="produit" value="<?=$produit['id_produit']?>">
+        
+                                <div id="etoiles">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                </div>
 
-                <a class="bouton" href="../avis/?produit=<?= urlencode($produit['id_produit']) ?>">Ajouter un avis</a>
+                                <input type="hidden" name="note" id="nb_etoiles">
+
+                                <div id="champs">
+                                    <div>
+                                        <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
+
+                                        <div style="display: flex;">
+                                            <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
+                                            <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
+                                        </div>
+
+                                        <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
+                                        
+                                        <div style="display: flex;">
+                                            <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
+                                            <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
+                                        </div>
+
+
+                                        <input type="submit" value="Créer l'avis">
+                                    </div>
+
+                                    <div id="image_avis">
+                                        <label class="image_uploader" for="input_image" tabIndex="0">
+                                            <div id="image_preview" class="image_preview">
+                                                <span>+</span>
+                                                <span>Ajouter une image</span>
+                                            </div>
+                                        </label>
+                                        
+                                        <button id="clear_image">
+                                            <img src="../image/supprimer_blanc.svg">
+                                        </button>
+                                        
+                                        <input type="file" id="input_image" name="image" accept="image/png"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    <?php } else { ?>
+                        <a href="<?= HOME_SITE . 'compte/connexion/?produit=' . $_GET['produit'] ?>">Connectez-vous pour rédiger un avis</a>
+                    <?php }} ?>
+
+
+                <h2>Avis (<?= count($liste_avis) ?>)</h2>
 
                 <ul class="liste_avis">
                     <?php foreach ($liste_avis as $avis) { ?>
                         <li>
-                            <!-- Informations du produit -->
+                            <!-- Informations de l'avis -->
                             <div>
                                 <div>
-                                    <?php if (isset($avis['profile'])) {?>
-                                        <img height="40px" width="40px" src="../ressources/27_1.png">
+                                    <?php if (isset($avis['id_image_pp'])) {
+                                        $image = get_image($avis['id_image_pp']);
+                                        $url = $image['url_image'];
+                                        $titre = $image['titre'];
+                                        $alt = $image['alt'];
+                                        ?>
+
+                                        <img class="image_pp" src="<?= HOME_SITE . $url ?>" title="<?= $titre ?>" alt="<?= $alt ?>">
                                     <?php
                                         } else {?>
-                                        <img height="40px" width="40px" src="<?=HOME_SITE . 'image/compte.svg'?>">
+                                        <img src="<?=HOME_SITE . 'image/compte.svg'?>">
                                     <?php } ?>
 
                                     <div class="etoiles">
@@ -289,15 +360,6 @@ if (isset($_POST['quantite'])) {
 
                 <div id="snackbar" class="snackbar"></div>
             </section>
-
-            <article id="etoiles">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-            </article>
-            <input type="hidden" name="nb_etoiles" id="nb_etoiles">
         </div>
                     
         <!-- Achat du produit  -->
@@ -364,17 +426,33 @@ if (isset($_POST['quantite'])) {
     <script>
         const modal = document.getElementById("modal_signalement");
         const formSignalement = document.getElementById("form_signalement");
+        const formAvis = document.getElementById("form_avis");
+        const divAvis = document.getElementById("creation_avis");
         const snackbar = document.getElementById("snackbar");
 
         const inputId = document.getElementById("id_avis");
         const inputEmail = document.getElementById("input_email");
         const inputIdReponseSignalement = document.getElementById("id_reponse");
+        const inputTitre = document.getElementById("titre_avis");
+        const inputDescription = document.getElementById("description_avis");
+
+        const inputImage = document.getElementById("input_image");
+        const imagePreview = document.getElementById("image_preview");
+        const buttonClearImage = document.getElementById("clear_image");
 
         const estVisiteur = (inputEmail != null);
 
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
 
+        const pErrorTitre = document.getElementById("error_titre");
+        const pErrorDescription = document.getElementById("error_description");
+
+        const nbCarTitre = document.getElementById("nb_car_titre");
+        const nbCarDescription = document.getElementById("nb_car_description");
+
+        const TAILLE_TITRE = 100;
+        const TAILLE_DESCRIPTION = 1000;
 
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
@@ -551,6 +629,126 @@ if (isset($_POST['quantite'])) {
                 const img = document.querySelector(`${selector} img`);
                 img.src = "../image/reported_rouge.svg";
             }
+        });
+
+
+
+        // Création d'un avis
+        formAvis.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            // Récupérer les données du formulaire
+            const data = new FormData(formAvis);
+
+            let avisSansTitre = (data.get("description").trim() != "") && (data.get("titre") == "");
+            let titreLong = (data.get("titre").trim().length > TAILLE_TITRE);
+            let descriptionLongue = (data.get("description").trim().length > TAILLE_DESCRIPTION);
+
+            // Affichage des erreurs
+            
+            pErrorTitre.style.visibility = (avisSansTitre | titreLong) ? "visible" : "hidden";
+            pErrorDescription.style.visibility = descriptionLongue ? "visible" : "hidden";
+            
+            if (avisSansTitre) {
+                pErrorTitre.textContent = "Veuillez remplir ce champ";
+                return;
+
+            } else if (titreLong) {
+                pErrorTitre.textContent = "Ce champ dépasse la limite de caractères";
+                return;
+            } 
+            
+            else if (descriptionLongue) {
+                pErrorDescription.textContent = "Ce champ dépasse la limite de caractères";
+                return;
+            }
+
+            // Envoyer les données du formulaire en JSON à une autre page
+            const res = await fetch("../avis/creation.php", {
+                method: "POST",
+                body: data
+            });
+
+            const json = await res.json();
+
+            // Afficher la snackbar
+            showSnackbar(json.message, json.success ? "success" : "error");
+
+            if (json.success) {
+                // Cacher le formulaire de création d'un avis
+                divAvis.style.display = "none";
+
+                setTimeout(() => {
+                    let params = new URLSearchParams(document.location.search);
+                    let produit = params.get("produit");
+
+                    window.location.replace(`./?produit=${produit}`);
+                }, 5000);
+            }
+        });
+
+        // Empêcher les titres d'avis trop longs
+        inputTitre.addEventListener("input", (e) => {
+            pErrorTitre.style.visibility = "hidden";
+            
+            nbCarTitre.textContent = `${inputTitre.value.length}/${TAILLE_TITRE}`;
+            
+            if (inputTitre.value.length > TAILLE_TITRE) {
+                nbCarTitre.style.color = "red";
+            } else {
+                nbCarTitre.style.color = "black";
+            }
+        });
+
+        // Empêcher les descriptions d'avis trop longues
+        inputDescription.addEventListener("input", (e) => {
+            nbCarDescription.textContent = `${inputDescription.value.length}/${TAILLE_DESCRIPTION}`;
+            
+            if (inputDescription.value.length > TAILLE_DESCRIPTION) {
+                nbCarDescription.style.color = "red";
+            } else {
+                nbCarDescription.style.color = "black";
+            }
+        });
+
+        // Uploader une image
+        inputImage.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", (e) => {
+                    imagePreview.style.backgroundImage = `url(${e.target.result})`;
+                    imagePreview.innerHTML = "";
+
+                    // Afficher le bouton de suppression
+                    buttonClearImage.style.display = "block";
+                });
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Supprimer l'image uploadée
+        buttonClearImage.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            inputImage.value = "";
+            imagePreview.style.backgroundImage = "";
+            imagePreview.innerHTML = "";
+
+            // Cacher le bouton de suppression d'image
+            buttonClearImage.style.display = "none";
+
+            const spanPlus = document.createElement("span");
+            const spanTexte = document.createElement("span");
+            
+            spanPlus.textContent = "+";
+            spanTexte.textContent = "Ajouter une image";
+
+            imagePreview.appendChild(spanPlus);
+            imagePreview.appendChild(spanTexte);
         });
 
         function emailValide(email) {

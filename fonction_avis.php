@@ -1,7 +1,11 @@
 <?php
     require_once HOME_GIT . '.config.php';
+    require_once HOME_GIT . 'fonction_produit.php';
 
-    
+    define('TAILLE_TITRE', '100');
+    define('TAILLE_DESCRIPTION', '1000');
+    define('TAILLE_IMAGE', '5000000');
+
     // fonction qui verifie les champs de l'avis 
     // renvoie une variable liste avec toutes les erreurs sur les champs
     // (liste vide si aucune erreur)
@@ -80,8 +84,8 @@
             $requete->bindValue(':titre', $titre, PDO::PARAM_STR);
             $requete->bindValue(':description', $description, PDO::PARAM_STR);
             $requete->bindValue(':url', $image, PDO::PARAM_STR);
-            $requete->bindValue(':img_titre', 'image avis', PDO::PARAM_STR);
-            $requete->bindValue(':alt', 'image avis', PDO::PARAM_STR);
+            $requete->bindValue(':img_titre', 'Image avis', PDO::PARAM_STR);
+            $requete->bindValue(':alt', 'Image avis', PDO::PARAM_STR);
             $requete->execute();
             
             return 0;
@@ -94,13 +98,12 @@
     function get_avis($id_produit, $id_client){
         global $pdo;
         
-        $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, id_image
-        FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
+        $requete = $pdo->prepare("SELECT 1 FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
         $requete->execute();
         
-        return count($requete->fetch(PDO::FETCH_ASSOC)) > 0;
+        return $requete->rowCount() > 0;
     }
 
     // récupérer un avis par son identifiant
@@ -148,15 +151,38 @@
         }
     }
 
-    // fonction pour supprimer un avis sans image d'un client sur un produit
-    function supprimer_avis($id_produit, $id_client){
+    // fonction pour supprimer l'avis d'un client et son image
+    function supprimer_avis($id_produit, $id_client) {
         global $pdo;
         try {
+            // Suppression du fichier de l'image
+
+            $requete = $pdo->prepare("
+                SELECT i.url_image 
+                FROM _avis a
+                INNER JOIN _image i
+                ON a.id_image = i.id_image 
+                WHERE id_produit = :id_produit 
+                AND id_client = :id_client;
+            ");
+
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
+
+            $res = $requete->fetch(PDO::FETCH_ASSOC);
+            $url = $res['url_image'];
+
+            if (file_exists(HOME_SITE . $url)) {
+                unlink(HOME_SITE . $url);
+            }
+
+            // Suppression de l'avis (entraîne la suppression de l'image en BDD)
+
             $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
-            
             
             return 0;
         } catch (PDOException $e) {

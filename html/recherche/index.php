@@ -211,8 +211,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         // });
 
         // AFFICHAGE DES FILTRES
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
+        const tab_vendeurs = <?= json_encode($tab_vendeurs) ?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
         let listeVendeurAffiche = []
 
@@ -506,7 +506,23 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             fetchProduitsJSON();
         });
 
+        function recupVendeur(data) {
+            let tableauVendeur = [];
+            let idsVus = [];
 
+            data.produits.forEach(produit => {
+                if (!idsVus.includes(produit.id_vendeur)) {
+                    idsVus.push(produit.id_vendeur);
+
+                    let vendeurTrouve = tab_vendeurs.find(v => v.id_compte ==produit.id_vendeur);
+                    if (vendeurTrouve) {
+                        tableauVendeur.push(vendeurTrouve);
+                    }
+                }
+            });
+            
+            return tableauVendeur;
+        }
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
             // console.log(resultGrid);
@@ -653,6 +669,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             .then(res => res.json())
             .then(data => {
                 afficherProduits(data);
+                const tab_vendeurs_filtres = recupVendeur(data, tab_vendeurs);
+
+                liste_vendeur.replaceChildren();
+                groupMarker.clearLayers();
+                listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs_filtres);
+                afficherMarker(listeVendeurAffiche);
             });
         }
     </script>
