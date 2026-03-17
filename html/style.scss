@@ -2290,6 +2290,9 @@ aside {
         #cout{
             width: 20%;
         }
+        p + div {
+            margin-top: 20px;
+        }
         div {
             justify-content: space-between;
             div{
