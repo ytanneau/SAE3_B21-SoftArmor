@@ -80,10 +80,6 @@
                         <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
                     </div>
                     <div class="en_colonne">
-                        <label for="euro">Remise appliquée : </label>
-                        <input type="text" id="euro" readonly>
-                    </div>
-                    <div class="en_colonne">
                         <label for="prixFinal">Prix final : </label>
                         <input type="text" id="prixFinal" readonly>
                     </div>
