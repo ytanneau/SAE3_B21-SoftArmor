@@ -2666,10 +2666,14 @@ aside {
         background-color: #ddd4;
     }
 
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
 #codePIN {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
     margin: 1.2em 0;
 }
 
