@@ -103,7 +103,9 @@
             const warning_date_occupe = document.getElementById("warning_date_occupe");
 
             const date_occupe = <?= json_encode($date_occupe_reduction)?>;
-            console.log(date_occupe)
+
+            let date = new Date()
+            let current_string_date
 
             pourcentage.addEventListener('input', () => {
                 pourcentage.value = pourcentage.value.replace(",",".");
@@ -120,7 +122,7 @@
                 if(dateFin.value != ""){
                     if(dateDebut.value > dateFin.value) {
                         warning_date_anterieur.style.display = "block";
-                    } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
+                    } else if(new Date(dateDebut.value).getTime() < date.getTime()){
                         warning_date_passe.style.display = "block";
                     } else {
                         warning_date_anterieur.style.display = "none";
@@ -165,8 +167,7 @@
             }
 
             // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
-            let date = new Date()
-            let current_string_date
+            
 
             if(date.getMonth() < 9){
                 current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
