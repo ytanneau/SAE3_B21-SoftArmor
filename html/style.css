@@ -3878,9 +3878,6 @@ aside .achat:hover {
 .main_promo form p + div, .main_reduc form p + div {
   margin-top: 20px;
 }
-.main_promo form div, .main_reduc form div {
-  justify-content: space-between;
-}
 .main_promo form div div input[type=text], .main_reduc form div div input[type=text] {
   width: 60%;
 }
