@@ -316,7 +316,7 @@ p {
             @include contenu_centre_horizontal;
             justify-content: space-evenly;
             position: sticky;
-            bottom: 0;
+            bottom: -1em;
             width: 80%;
             left: 10%;
             border-radius: 3.2vh;
