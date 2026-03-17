@@ -478,7 +478,7 @@ if ($_POST != NULL){
                         </div>
 
                         <?php if (isset($row['url_image'])) { ?>
-                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt_image'] ?>">
+                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt'] ?>">
                         <?php } ?>
 
                         
@@ -486,26 +486,55 @@ if ($_POST != NULL){
                 <?php } ?>
             </ul>
         </section>
+
+        <div id="modal_modifier" class="modal">
+            <div class="modal_content" id="content_modifier">
+                <div class="titre">
+                    <h3>Modifier cet avis</h3>
+                    <span class="fermer_modal">&times;</span>
+                </div>
+                
+                <form id="form_modifier" action="" method="post">
+                    <input type="hidden" name="id_avis" id="id_avis_modifier">
+                    
+                    <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
+
+                    <div class="boutons">
+                        <button type="reset" class="fermer_modal">Annuler</button>
+                        <button type="submit">Modifier</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="snackbar" class="snackbar"></div>
     </main>
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 <script>
-        const inputImage = document.getElementById("input_image");
-        const imagePreview = document.getElementById("image_preview");
+    // Modification de la photo de profil
 
-        inputImage.addEventListener("change", (e) => {
-            const file = e.target.files[0];
+    const inputImage = document.getElementById("input_image");
+    const imagePreview = document.getElementById("image_preview");
 
-            if (file) {
-                const reader = new FileReader();
+    inputImage.addEventListener("change", (e) => {
+        const file = e.target.files[0];
 
-                reader.addEventListener("load", (e) => {
-                    imagePreview.style.backgroundImage = `url(${e.target.result})`;
-                    imagePreview.innerHTML = "";
-                });
+        if (file) {
+            const reader = new FileReader();
 
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+            reader.addEventListener("load", (e) => {
+                imagePreview.style.backgroundImage = `url(${e.target.result})`;
+                imagePreview.innerHTML = "";
+            });
+
+            reader.readAsDataURL(file);
+        }
+    });
+
+
+    // Modification d'un avis
+
+    
+</script>
 </html>
