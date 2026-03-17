@@ -2275,7 +2275,7 @@ aside {
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     form{
-        width: 500px;
+        width: 600px;
         .en_ligne {
             display: flex;
             flex-direction: row;
@@ -2291,7 +2291,7 @@ aside {
             width: 20%;
         }
         div div input[type="text"]{
-            width: 20%;
+            width: 60%;
         }
     }
 
