@@ -88,23 +88,25 @@
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début de la promotion: </label>
+                        <label for="dateDebut">Début de la promotion: </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin de la promotion: </label>
+                        <label for="dateFin">Fin de la promotion: </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
                 </div>
-                <div class="en_colonne">
-                    <label for="cout">Coût final : </label>
-                    <input type="text" id="cout" readonly>
-                </div>
+                
                 
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
                 
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input type="text" id="cout" readonly>
+                </div>
+
                 <div class="block_banniere">
                     <label for="photoPromotion">Ajouter une banniere (optionnel)</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">

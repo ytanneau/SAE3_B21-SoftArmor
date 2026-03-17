@@ -49,39 +49,41 @@
         <link rel="stylesheet" href="<?=HOME_SITE?>style.css">
     </head>
     <body><?php include "../../../header.php" ?>
-        <main class="main_reduction">
+        <main class="main_reduc">
             <div class="entete">
                 <a href="../../index.php?produit=<?=$id_produit?>"><img src="../../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-                <h1>Démarrer une réduction</h1>
+                <h1>Modifier la réduction</h1>
             </div>
-            <p>Prix actuel : <?=htmlentities($prix)?>€</p>
+            <p>Prix actuel du produit : <?=htmlentities($prix)?>€</p>
             <form action="" method="post">
-                <div>
-                    <label for="dateDebut">Debut de la réduction</label>
-                    <input type="date" id="dateDebut" name="dateDebut" required>
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="dateDebut">Debut de la réduction : </label>
+                        <input type="date" id="dateDebut" name="dateDebut" required>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="dateFin">Fin de la réduction : </label>
+                        <input type="date" id="dateFin" name="dateFin" required>
+                    </div>
                 </div>
-                <div>
-                    <label for="dateFin">Fin de la réduction</label>
-                    <input type="date" id="dateFin" name="dateFin" required>
-                </div>
+
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
                 <p style="display:none;" id="warning3">Date de debut déjà passé</p>
-                <div>
-                    <label for="pourcentage">Pourcentage : </label>
-                    <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
-                    <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
+
+                <div class="en_ligne">
+                    <div class="en_colonne">
+                        <label for="pourcentage">Pourcentage : </label>
+                        <input type="text" id="pourcentage" name="pourcentage" required value="<?=htmlentities($tab_reduction['pourcentage'])?>">
+                        <p style="display:none;" id="warningPourcentage">Le pourcentage ne peut <br>être supérieur à 100</p>
+                    </div>
+                    <div class="en_colonne">
+                        <label for="prixFinal">Prix final : </label>
+                        <input type="text" id="prixFinal" readonly>
+                    </div>
                 </div>
-                <div>
-                    <label for="euro">Remise appliquée : </label>
-                    <input type="text" id="euro" readonly>
-                </div>
-                <div>
-                    <label for="prixFinal">Prix final : </label>
-                    <input type="text" id="prixFinal" readonly>
-                </div>
-                <input type="submit" id="btn_confirm_reduc">
-                <a href="supprimer_reduc.php?idProduit=<?=htmlentities($id_produit)?>&idReduc=<?=htmlentities($id_reduction)?>">Supprimer la réduction</a>
+                <input type="submit" id="valider">
+                <a id="supprimer" href="supprimer_reduc.php?idProduit=<?=htmlentities($id_produit)?>&idReduc=<?=htmlentities($id_reduction)?>">Supprimer la réduction</a>
             </form>
         </main>
         <?php include HOME_SITE . "footer.php"?>
@@ -93,7 +95,6 @@
         const dateFin = document.getElementById("dateFin")
         const warningPourcentage = document.getElementById("warningPourcentage")
         const pourcentage = document.getElementById("pourcentage")
-        const euro = document.getElementById("euro")
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
         const warning1 = document.getElementById("warning1");
@@ -151,18 +152,15 @@
         function calculR(){
             if(pourcentage.value != ""){
                 prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
-                euro.value = prixInitial - prixFinal.value;
                 prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2) + "€";
-                euro.value = Number.parseFloat(euro.value).toFixed(2);
             } else {
                 euro.value = "";
             }
         }
 
-        console.log(tab_reduction)
-
         dateDebut.value = tab_reduction['date_debut']
         dateFin.value = tab_reduction['date_fin']
-        warningPourcentage.style.display = "none";
+        prixFinal.value = prixInitial * (1-(pourcentage.value / 100))
+        prixFinal.value = prixFinal.value.toFixed(2)
     </script>
 </html>

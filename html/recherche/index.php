@@ -225,9 +225,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 let label = document.createElement("label")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
-                        input.id = vendeur[cle]
-                        label.innerHTML = vendeur[cle]
-                        label.htmlFor = vendeur[cle]
+                        input.id = vendeur['id_compte']
+                        label.innerHTML = vendeur['raison_sociale']
+                        label.htmlFor = vendeur['id_compte']
                         input.value = "vendeur_check"
                     }
                 }
@@ -418,6 +418,20 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
         });
+        liste_vendeur.addEventListener("change", (e) =>{
+            const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked');
+            if(inputsCoches.length === 0){
+                groupMarker.clearLayers();
+                afficherMarker(listeVendeurAffiche);
+                return;
+            }
+            const idsCoches = Array.from(inputsCoches).map(input => input.id);
+            const vendeurFiltres = listeVendeurAffiche.filter(vendeur =>
+                idsCoches.includes(String(vendeur.id_compte))
+            );
+            groupMarker.clearLayers();
+            afficherMarker(vendeurFiltres);
+        });
 
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
@@ -520,7 +534,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     }
                 }
             });
-            
             return tableauVendeur;
         }
         function afficherProduits(data) {
