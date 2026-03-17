@@ -2271,7 +2271,7 @@ aside {
     }
 }
 
-.main_promo .main_reduc{
+.main_promo, .main_reduc{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
     form{
