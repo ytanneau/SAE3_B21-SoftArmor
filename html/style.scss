@@ -2290,8 +2290,14 @@ aside {
         #cout{
             width: 20%;
         }
-        div div input[type="text"]{
-            width: 60%;
+        div div {
+            justify-content: space-between;
+            input[type="text"]{
+                width: 60%;
+            }
+            input[type="date"]{
+                width: 80%;
+            }
         }
     }
 
