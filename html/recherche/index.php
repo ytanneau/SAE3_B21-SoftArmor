@@ -212,6 +212,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         // AFFICHAGE DES FILTRES
         const tab_adresse = <?= json_encode($tab_adresse)?>;
+        const tab_vendeurs = <?= json_encode($tab_vendeurs) ?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
         let listeVendeurAffiche = []
 
