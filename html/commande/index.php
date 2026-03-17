@@ -82,7 +82,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             ?>
             <div>
                 <span class="aide"
-                    data-tooltip="Etape 1 : Création d’un bordereau de livraison\nEtape 2 : Prise en charge du colis chez le vendeur\nEtape 3 : Arrivée chez le transporteur.\nEtape 4 : Départ vers la plateforme régionale\nEtape 5 : Arrivée sur la plateforme régionale\nEtape 6 : Départ vers le centre local\nEtape 7 : Arrivée au centre local\nEtape 8 : Départ pour la livraison finale\nEtape 9 : Livré ou refusé\nEtape inconnue : livraison non prise en charge par le site\Problème serveur : Erreur de connexion au serveur">?</span>
+                    data-tooltip="Etape 1 : Création d’un bordereau de livraison\nEtape 2 : Prise en charge du colis chez le vendeur\nEtape 3 : Arrivée chez le transporteur.\nEtape 4 : Départ vers la plateforme régionale\nEtape 5 : Arrivée sur la plateforme régionale\nEtape 6 : Départ vers le centre local\nEtape 7 : Arrivée au centre local\nEtape 8 : Départ pour la livraison finale\nEtape 9 : Livré ou refusé\nEtape inconnue : livraison non prise en charge par le site\nProblème serveur : Erreur de connexion au serveur">?</span>
             </div>
             <?php
             $fd = connexion_socket(IP, PORT);
@@ -95,7 +95,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             <table class="liste-commande">
                 <thead>
                     <tr>
-                        <th>Liveur</th>
+                        <th>Livreur</th>
                         <th>Date</th>
                         <th>Livraison</th>
                         <th>Image</th>
@@ -111,14 +111,16 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                         ?>
                         <tr>
                             <td><?php if ($commande['bordereau_colis']) {
-                                echo "Raptor livairaison <br> Bordereau : " . htmlentities($commande['bordereau_colis']);
-                            } else {
-                                echo "Autre";
+                                ?><p>Raptor livraison<br>Bordereau : <?=htmlentities($commande['bordereau_colis'])?>
+                            <?php } else {
+                                ?><p>Autre</p><?php
                             } ?>
                             </td>
-                            <td><?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></td>
                             <td>
-                                <?= livraison_info($commande['bordereau_colis']); ?>
+                                <p><?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></p>
+                            </td>
+                            <td>
+                                <p><?= livraison_info($commande['bordereau_colis'])?></p>
                             </td>
                             <td>
                                 <?php if ($commande['bordereau_colis'] != null && $conn == 1) {
