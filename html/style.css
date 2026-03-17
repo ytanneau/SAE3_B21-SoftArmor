@@ -4196,43 +4196,17 @@ aside .achat:hover {
   background-color: rgba(221, 221, 221, 0.2666666667);
 }
 .PIN {
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 
 #codePIN {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
   margin: 1.2em 0;
 }
 
-<<<<<<< HEAD
-.liste-commande-vendeur .liste-commande {
-  margin-left: 3em;
-}
-.liste-commande-vendeur .liste-commande .liste-commande {
-  width: 80vw;
-}
-
-.liste-commande {
-  width: 100vw;
-  margin-top: 3em;
-}
-.liste-commande th,
-.liste-commande td {
-  padding: 0px 10px;
-  height: 70px;
-  text-align: left;
-}
-.liste-commande tr {
-  padding: 20px 0px;
-}
-.liste-commande img {
-  width: 50px;
-}
-.liste-commande .bouton {
-  display: initial;
-}
-
-=======
->>>>>>> 21485bf5fbebf219d9703265d849db70ef20d20f
 .liste-commande-page {
   display: flex;
   flex-direction: column;
