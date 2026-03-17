@@ -445,12 +445,12 @@ if ($_POST != NULL){
                     $image_produit = isset($row['id_image_produit']) ? get_image($row['id_image_produit']) : null?>
                     <li>
                         <!-- Image du produit -->
-                        <img src="<?= HOME_SITE.$image_produit['url_image'];?>" alt="<?= htmlentities($image_produit['alt_image'] ?? '')?>" title="<?= htmlentities($image_produit['titre_image'] ?? '')?>">
+                        <img src="<?= HOME_SITE.$image_produit['url_image'];?>" alt="<?= htmlentities($image_produit['alt'] ?? '')?>" title="<?= htmlentities($image_produit['titre'] ?? '')?>">
 
                         <div>
                             <div>
                                 <?php if (isset($image_profil)) {?>
-                                    <img class="image_pp" src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt_image'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
+                                    <img class="image_pp" src="<?= HOME_SITE . $image_profil['url_image'] ?>" alt="<?= htmlentities($image_profil['alt'] ?? '')?>" title="<?= htmlentities($image_profil['titre_image'] ?? '')?>">
                                 <?php
                                     } else {?>
                                     <img class="image_pp" src="<?= HOME_SITE . 'image/compte.svg'?>">
