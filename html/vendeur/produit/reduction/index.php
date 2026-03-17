@@ -103,7 +103,7 @@
             const warning_date_occupe = document.getElementById("warning_date_occupe");
 
             const date_occupe = <?= json_encode($date_occupe_reduction)?>;
-
+            console.log(date_occupe)
             let date = new Date()
             let current_string_date
 
@@ -176,6 +176,12 @@
             }
             dateDebut.value = current_string_date
             dateFin.value = current_string_date
+
+            if(!check_dispo_date(dateDebut.value)){
+                warning_date_occupe.style.display = "block"
+            } else {
+                warning_date_occupe.style.display = "none"
+            }
         </script>
     </body>
 </html>
