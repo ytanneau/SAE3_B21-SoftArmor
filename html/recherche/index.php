@@ -211,7 +211,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         // });
 
         // AFFICHAGE DES FILTRES
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
+        const tab_vendeurs = recupVendeur(data);
         const tab_adresse = <?= json_encode($tab_adresse)?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
         let listeVendeurAffiche = []
@@ -506,7 +506,17 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             fetchProduitsJSON();
         });
 
-
+        function recupVendeur(data) {
+            let tableauVendeur = [];
+            
+            data.produits.forEach(produit => {
+                if (!tableauVendeur.includes(produit.id_vendeur)) {
+                    tableauVendeur.push(produit.id_vendeur);
+                }
+            });
+            
+            return tableauVendeur;
+        }
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
             // console.log(resultGrid);
