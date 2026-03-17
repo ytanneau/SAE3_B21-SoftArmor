@@ -210,49 +210,57 @@ if (isset($_POST['quantite'])) {
                         $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
                         
                         <div id="creation_avis">
-                            
-                            <div>
-                                <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
-                
-                                <form id="form_avis" enctype="multipart/form-data" method="post">
-                                    <input type="hidden" name="produit" value="<?=$produit['id_produit']?>">
+                            <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
             
-                                    <div id="etoiles">
-                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                        <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
-                                    </div>
-                                    <input type="hidden" name="note" id="nb_etoiles">
+                            <form id="form_avis" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="produit" value="<?=$produit['id_produit']?>">
+        
+                                <div id="etoiles">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                    <img src="<?=HOME_SITE?>image/etoile.svg" alt="e">
+                                </div>
 
-                                    <div id="champs">
-                                        <div>
-                                            <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
+                                <input type="hidden" name="note" id="nb_etoiles">
 
-                                            <div style="display: flex;">
-                                                <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
-                                                <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
-                                            </div>
+                                <div id="champs">
+                                    <div>
+                                        <input type="text" placeholder="Titre de l'avis" id="titre_avis" name="titre" class="champ">
 
-                                            <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
-                                            
-                                            <div style="display: flex;">
-                                                <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
-                                                <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
-                                            </div>
-
-
-                                            <input type="submit" value="Créer l'avis">
+                                        <div style="display: flex;">
+                                            <p id="error_titre" class="error" style="visibility: hidden">Veuillez remplir ce champ</p>
+                                            <span id="nb_car_titre">0/<?= TAILLE_TITRE ?></span>
                                         </div>
 
-                                        <label class="image_uploader" for="input_image" tabIndex="0">
-                                            <span id="image_preview" class="image_preview">+</span>
-                                        </label>
-                                        <input type="file" id="input_image" name="image"></input>
+                                        <textarea placeholder="Description de l'avis" id="description_avis" name="description" class="text champ"></textarea>
+                                        
+                                        <div style="display: flex;">
+                                            <p id="error_description" class="error" style="visibility: hidden">Ce champ dépasse la limite autorisée</p>
+                                            <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
+                                        </div>
+
+
+                                        <input type="submit" value="Créer l'avis">
                                     </div>
-                                </form>
-                            </div>
+
+                                    <div id="image_avis">
+                                        <label class="image_uploader" for="input_image" tabIndex="0">
+                                            <div id="image_preview" class="image_preview">
+                                                <span>+</span>
+                                                <span>Ajouter une image</span>
+                                            </div>
+                                        </label>
+                                        
+                                        <button id="clear_image">
+                                            <img src="../image/supprimer_blanc.svg">
+                                        </button>
+                                        
+                                        <input type="file" id="input_image" name="image" accept="image/png"></input>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     <?php } else { ?>
                         <a href="<?= HOME_SITE . 'compte/connexion/?produit=' . $_GET['produit'] ?>">Connectez-vous pour rédiger un avis</a>
@@ -428,8 +436,10 @@ if (isset($_POST['quantite'])) {
         const inputIdReponseSignalement = document.getElementById("id_reponse");
         const inputTitre = document.getElementById("titre_avis");
         const inputDescription = document.getElementById("description_avis");
+
         const inputImage = document.getElementById("input_image");
         const imagePreview = document.getElementById("image_preview");
+        const buttonClearImage = document.getElementById("clear_image");
 
         const estVisiteur = (inputEmail != null);
 
@@ -693,6 +703,7 @@ if (isset($_POST['quantite'])) {
             }
         });
 
+        // Uploader une image
         inputImage.addEventListener("change", (e) => {
             const file = e.target.files[0];
 
@@ -700,16 +711,36 @@ if (isset($_POST['quantite'])) {
                 const reader = new FileReader();
 
                 reader.addEventListener("load", (e) => {
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.classList.add("image_uploaded");
-
+                    imagePreview.style.backgroundImage = `url(${e.target.result})`;
                     imagePreview.innerHTML = "";
-                    imagePreview.appendChild(img);
+
+                    // Afficher le bouton de suppression
+                    buttonClearImage.style.display = "block";
                 });
 
                 reader.readAsDataURL(file);
             }
+        });
+
+        // Supprimer l'image uploadée
+        buttonClearImage.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            inputImage.value = "";
+            imagePreview.style.backgroundImage = "";
+            imagePreview.innerHTML = "";
+
+            // Cacher le bouton de suppression d'image
+            buttonClearImage.style.display = "none";
+
+            const spanPlus = document.createElement("span");
+            const spanTexte = document.createElement("span");
+            
+            spanPlus.textContent = "+";
+            spanTexte.textContent = "Ajouter une image";
+
+            imagePreview.appendChild(spanPlus);
+            imagePreview.appendChild(spanTexte);
         });
 
         function emailValide(email) {

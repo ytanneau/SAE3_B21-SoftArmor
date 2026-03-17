@@ -37,8 +37,20 @@
         $fichier = $id_compte . '_'. time();
         move_uploaded_file($_FILES['image']['tmp_name'], HOME_SITE . "ressources/avis/" . $fichier);
 
+        switch($_FILES['image']['type']) {
+            case "image/png":
+                $ext = ".png";
+                break;
+            case "image/jpeg":
+                $ext = ".jpg";
+                break;
+            case "image/webp":
+                $ext = ".webp";
+                break;
+        }
+
         if ($_FILES['image']['size'] > 0) {
-            $image = 'ressources/avis/' . $id_produit . '_' . $id_compte . '.png';
+            $image = 'ressources/avis/' . $id_produit . '_' . $id_compte . $ext;
         }
     }
 
@@ -81,8 +93,6 @@
         if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
             if (file_exists('../ressources/avis/' . $fichier)){
                 unlink('../ressources/avis/' . $fichier);
-            } else if (file_exists(HOME_SITE . $image)){
-                unlink(HOME_SITE . $image);
             }
         }
     }

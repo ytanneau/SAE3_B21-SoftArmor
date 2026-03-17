@@ -95,21 +95,90 @@ hr {
   }
 }
 
+.show {
+  visibility: visible;
+}
+
 .image_uploader {
   width: 200px;
   height: 200px;
-  background-color: gray;
+  border: 2px gray dashed;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.image_preview {
-  height: 100%;
+.image_uploader:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
-.image_preview img {
+.image_uploader .image_preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   height: 100%;
-  max-width: 100%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+}
+.image_uploader .image_preview span {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+.image_uploader .image_preview span:first-child {
+  display: inline-block;
+  font-size: 7em;
+  height: 0.55em;
+}
+.image_uploader .image_preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.infos .image_uploader {
+  width: 200px;
+  height: 200px;
+  border: 2px gray dashed;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.infos .image_uploader:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+.infos .image_uploader .image_preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 100px;
+}
+.infos .image_uploader .image_preview span {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+.infos .image_uploader .image_preview span:first-child {
+  display: inline-block;
+  font-size: 7em;
+  height: 0.55em;
+}
+.infos .image_uploader .image_preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -1707,14 +1776,14 @@ div:has(> aside) {
   display: flex;
 }
 
-#creation_avis > div {
+#creation_avis {
   display: flex;
 }
-#creation_avis > div > div {
+#creation_avis > div {
   width: 200px;
   height: 200px;
 }
-#creation_avis > div .image_pp.grand {
+#creation_avis .image_pp.grand {
   height: 100px;
   width: 100px;
   border-radius: 100px;
@@ -1723,33 +1792,33 @@ div:has(> aside) {
   border: solid 2px black;
   margin-right: 1em;
 }
-#creation_avis > div form {
+#creation_avis form {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
-#creation_avis > div form #etoiles img {
+#creation_avis form #etoiles img {
   width: 35px;
   height: 35px;
 }
-#creation_avis > div form #champs {
+#creation_avis form #champs {
   display: flex;
   gap: 2em;
   margin: 0.25em 0;
 }
-#creation_avis > div form #champs > div:first-of-type {
+#creation_avis form #champs > div:first-of-type {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
-#creation_avis > div form .champ {
+#creation_avis form .champ {
   border: solid 1px gray;
 }
-#creation_avis > div form .error {
+#creation_avis form .error {
   margin: 0 0 1em 0;
   flex-grow: 1;
 }
-#creation_avis > div form input[type=submit] {
+#creation_avis form input[type=submit] {
   display: block;
   max-width: 100%;
   width: 10em;
@@ -1765,18 +1834,35 @@ div:has(> aside) {
   text-decoration: none;
   cursor: pointer;
 }
-#creation_avis > div form input[type=submit] a {
+#creation_avis form input[type=submit] a {
   text-decoration: none;
   color: white;
 }
-#creation_avis > div form input[type=submit]:hover {
+#creation_avis form input[type=submit]:hover {
   background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }
-#creation_avis > div form input[type=submit] {
+#creation_avis form input[type=submit] {
   margin-top: 1em;
 }
-#creation_avis > div form > div:last-of-type {
+#creation_avis form > div:last-of-type {
   display: flex;
+}
+#creation_avis #image_avis {
+  display: flex;
+  flex-direction: column;
+}
+#creation_avis #image_avis #clear_image {
+  display: none;
+  align-self: end;
+  position: relative;
+  bottom: 3em;
+  width: 3em;
+  height: 3em;
+  padding: 0;
+  background-color: #E43737;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .footer {

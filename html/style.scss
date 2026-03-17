@@ -59,24 +59,16 @@ hr {
     }
 }
 
-.image_uploader {
-    width: 200px;
-    height: 200px;
-    background-color: gray;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.show {
+    visibility: visible;
 }
 
-.image_preview {
-    height: 100%;
-    
-    img {
-        height: 100%;
-        max-width: 100%;
-        object-fit: cover;
-    }
+.image_uploader {
+    @include image_uploader(200px);
+}
+
+.infos .image_uploader {
+    @include image_uploader(200px, 100px);
 }
 
 #input_image {
@@ -877,59 +869,80 @@ div:has(> aside) {
 }
 
 #creation_avis {
+    display: flex;
+        
     > div {
+        width: 200px;
+        height: 200px;
+    }
+
+    .image_pp.grand {
+        @include image_pp(100px);
+        border: solid 2px black;
+        margin-right: 1em;
+    }
+    
+    form {
         display: flex;
-        
-        > div {
-            width: 200px;
-            height: 200px;
+        flex-direction: column;
+        flex-grow: 1;
+
+        #etoiles img {
+            width: 35px;
+            height: 35px;
         }
 
-        .image_pp.grand {
-            @include image_pp(100px);
-            border: solid 2px black;
-            margin-right: 1em;
-        }
-        
-        form {
+        #champs {
             display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+            gap: 2em;
+            margin: 0.25em 0;
 
-            #etoiles img {
-                width: 35px;
-                height: 35px;
-            }
-
-            #champs {
+            > div:first-of-type {
                 display: flex;
-                gap: 2em;
-                margin: 0.25em 0;
-
-                > div:first-of-type {
-                    display: flex;
-                    flex-direction: column;
-                    flex-grow: 1;
-                }
-            }
-
-            .champ {
-                border: solid 1px gray;
-            }
-
-            .error {
-                margin: 0 0 1em 0;
+                flex-direction: column;
                 flex-grow: 1;
             }
+        }
 
-            input[type="submit"] {
-                @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 10em);
-                margin-top: 1em;
-            }
+        .champ {
+            border: solid 1px gray;
+        }
 
-            > div:last-of-type {
-                display: flex;
-            }
+        .error {
+            margin: 0 0 1em 0;
+            flex-grow: 1;
+        }
+
+        input[type="submit"] {
+            @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 10em);
+            margin-top: 1em;
+        }
+
+        > div:last-of-type {
+            display: flex;
+        }
+    }
+
+    #image_avis {
+        display: flex;
+        flex-direction: column;
+
+        #clear_image {
+            display: none;
+            align-self: end;
+    
+            position: relative;
+            bottom: 3em;
+    
+            width: 3em;
+            height: 3em;
+    
+            padding: 0;
+    
+            background-color: $rouge;
+            border: none;
+            border-top-left-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
     }
 

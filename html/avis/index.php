@@ -50,15 +50,10 @@
     if (!$succes && isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
         if (file_exists('../ressources/avis/' . $fichier)){
             unlink('../ressources/avis/' . $fichier);
-        } else if (file_exists(HOME_SITE . $image)){
+        } else if (file_exists(HOME_SITE . $image)) {
             unlink(HOME_SITE . $image);
         }
     }
-    
-    // Rediriger vers la page du produit
-    // if ($succes === true) {
-    //     header('location: ' . HOME_SITE . 'produit/?produit=' . $_GET['produit']);
-    // }
 ?>
 
 

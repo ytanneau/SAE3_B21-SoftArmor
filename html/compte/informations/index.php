@@ -46,13 +46,7 @@ $avis = get_avis_client($_SESSION['id_compte']);
 // Savoir si le client a activé la double authentification (2FA)
 $a_2FA = a_2FA($_SESSION['id_compte']);
 
-//traitement de la suppression d'un avis avec image
-if (isset($_GET['supprimer_avis_image']) && isset($_GET['id_produit']) && isset($_GET['url_img_avis']) && isset($_GET['id_client'])){
-    supprimer_avis_image($_GET['id_produit'], $_GET['url_img_avis'], $_GET['id_client']);
-    header("Location: ./");
-    exit;
-}
-//traitement de la suppression d'un avis sans image
+//traitement de la suppression d'un avis et de son image éventuelle
 if (isset($_GET['supprimer_avis']) && isset($_GET['id_produit']) && isset($_GET['id_client'])){
     supprimer_avis($_GET['id_produit'], $_GET['id_client']);
     header("Location: ./");
@@ -209,12 +203,19 @@ if ($_POST != NULL){
             <form class="form_infos" action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <img class="image_pp" src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
-                    
+                    <!--
                     <label for="pdp" class="image_bouton"><?php if (isset($info_compte['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
                             <p id="image-name">Aucun fichier choisi</p>
                         </label>
                     <input id="pdp" type="file" name="pdp" accept=".png" hidden>
+                    -->
+
+                    <label class="image_uploader" for="input_image" tabIndex="0">
+                        <span id="image_preview" class="image_preview">
+                            <img src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
+                        </span>
+                    </label>
+                    <input type="file" id="input_image" name="pdp" accept="image/png"></input>
                 </article>
 
                 <article>
@@ -246,7 +247,7 @@ if ($_POST != NULL){
                         }
                     ?>
 
-                    <label for="prenom">Prenom</label>
+                    <label for="prenom">Prénom</label>
                     <input required type="text" name="prenom" value="<?= htmlentities($info_compte['prenom'] ?? '')?>" placeholder="À renseigner" class="champ">
 
                     <!--Erreur prenom-->
@@ -260,7 +261,7 @@ if ($_POST != NULL){
                         }
                     ?>
 
-                    <label for="date">Date de Naissance</label>
+                    <label for="date">Date de naissance</label>
                     <label name="date"><?= date("d/m/Y", strtotime(htmlentities($info_compte['date_naissance'] )?? ''))?></label>
 
                     <label for="mail">Mail</label>
@@ -317,10 +318,10 @@ if ($_POST != NULL){
                         }
                     ?>
 
-                    <label for="complement_adresse">Complement Adresse</label>
+                    <label for="complement_adresse">Complément d'adresse</label>
                     <input type="textarea" name="complement_adresse" value="<?= htmlentities($adresse_compte['complement_adresse'] ?? '')?>" placeholder="À renseigner" class="champ text">
                     
-                    <label for="code_postal">Code Postal</label>
+                    <label for="code_postal">Code postal</label>
                     <input type="text" name="code_postal" value="<?= htmlentities($adresse_compte['code_postal'] ?? '')?>" placeholder="À renseigner" class="petit champ">
                     
                     <!--Erreur code postal-->
@@ -489,13 +490,22 @@ if ($_POST != NULL){
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 <script>
-        const fileInput = document.getElementById("pdp");
-        const fileName = document.getElementById("image-name");
+        const inputImage = document.getElementById("input_image");
+        const imagePreview = document.getElementById("image_preview");
 
-        fileInput.addEventListener("change", () => {
-            fileName.textContent = fileInput.files.length > 0 
-            ? fileInput.files[0].name 
-            : "Aucun fichier choisi";
+        inputImage.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener("load", (e) => {
+                    imagePreview.style.backgroundImage = `url(${e.target.result})`;
+                    imagePreview.innerHTML = "";
+                });
+
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </html>
