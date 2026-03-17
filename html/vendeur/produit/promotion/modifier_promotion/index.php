@@ -139,14 +139,17 @@
                         <label for="dateFin">Date de fin :</label>
                         <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
                     </div>
-                    <div class="en_colonne">
-                        <label for="cout">Coût final : </label>
-                        <input class="cout_final" type="text" id="cout" readonly>
-                    </div>
                 </div>
+
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionné(s)</p>
                 <p style="display:none;" id="warning4">Date de debut déjà passé</p>
+
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input class="cout_final" type="text" id="cout" readonly>
+                </div>
+
                 <div class="block_banniere">
                 <?php if($tab_image_promotion != null){ ?>
                         <div class="overImg">
