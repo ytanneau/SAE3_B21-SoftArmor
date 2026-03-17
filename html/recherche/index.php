@@ -419,9 +419,19 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 fetchProduitsJSON();
         });
         liste_vendeur.addEventListener("change", (e) =>{
-            let tableauNewMarker = document.querySelector('input[value=\"vendeur_check\"]:checked').value;
-            afficherMarker(tableauNewMarker);
-        })
+            const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked').value;
+            if(inputsCoches === 0){
+                groupMarker.clearLayers();
+                afficherMarker(listeVendeurAffiche);
+                return;
+            }
+            const idsCoches = Array.from(inputsCoches).map(input => input.id);
+            const vendeurFiltres = listeVendeurAffiche.filter(vendeur =>
+                idsCoches.includes(String(vendeur.id_compte))
+            );
+            groupMarker.clearLayers();
+            afficherMarker(vendeurFiltres);
+        });
 
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
