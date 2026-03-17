@@ -167,7 +167,7 @@
                 </div>
                 <input type="submit" id="valider" value="Valider">
                 <a 
-                    id="supprimer_promotion"
+                    id="supprimer"
                     style="display:block; color:none;"
                     href="supprimer_promo.php?idProduit=<?=htmlentities($id_produit)?>&idPromo=<?=htmlentities($id_promo)?>"
                     >Supprimer la promotion
