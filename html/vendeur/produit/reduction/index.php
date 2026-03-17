@@ -130,7 +130,7 @@
                     }
                 }
 
-                if(!check_dispo_date(dateDebut.value)){
+                if(check_dispo_date(dateDebut.value)){
                     warning_date_occupe.style.display = "block"
                 } else {
                     warning_date_occupe.style.display = "none"
@@ -145,7 +145,7 @@
                         warning_date_anterieur.style.display = "none";
                     }
                 }
-                if(!check_dispo_date(dateFin.value)){
+                if(check_dispo_date(dateFin.value)){
                     warning_date_occupe.style.display = "block"
                 } else {
                     warning_date_occupe.style.display = "none"
@@ -177,7 +177,7 @@
             dateDebut.value = current_string_date
             dateFin.value = current_string_date
 
-            if(!check_dispo_date(dateDebut.value)){
+            if(check_dispo_date(dateDebut.value)){
                 warning_date_occupe.style.display = "block"
             } else {
                 warning_date_occupe.style.display = "none"
