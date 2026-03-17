@@ -1135,7 +1135,6 @@ section.results {
 ul#results {
   display: flex;
   padding: 0;
-  width: 100%;
   flex-wrap: wrap;
   list-style: none;
   justify-content: left;
@@ -1431,6 +1430,93 @@ ul#results > li > a > h3 {
 }
 .infos .image_bouton p {
   font-size: 10px;
+}
+.infos #idValiderModifVendeur {
+  margin-top: 20px;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos #idValiderModifVendeur a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.infos #idValiderModifVendeur:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.infos #idValiderModifVendeur {
+  width: 600px;
+}
+.infos #idDesactivationCompte,
+.infos #idDesactivation2FA {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos #idDesactivationCompte a,
+.infos #idDesactivation2FA a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.infos #idDesactivationCompte:hover,
+.infos #idDesactivation2FA:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.infos #idDesactivationCompte,
+.infos #idDesactivation2FA {
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
+}
+.infos #idActivation2FA {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos #idActivation2FA a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.infos #idActivation2FA:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+.infos #idActivation2FA {
+  margin-top: 30px;
+  padding: 0.6em;
+  width: 577px;
 }
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
@@ -2527,6 +2613,10 @@ h3 {
   }
 }
 
+.mainPanier {
+  display: flex;
+}
+
 /*
 aside {
     position: fixed;
@@ -3256,7 +3346,7 @@ aside .achat:hover {
   font-weight: 600;
   color: #333;
 }
-.produit-vendeur > div img {
+.produit-vendeur > div .img_prod {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 200px;
@@ -3266,7 +3356,7 @@ aside .achat:hover {
   height: 200px;
   border-radius: 5px;
 }
-.produit-vendeur > div img:hover {
+.produit-vendeur > div .img_prod:hover {
   transform: scale(1.04);
 }
 .produit-vendeur > div {
@@ -3360,6 +3450,31 @@ aside .achat:hover {
 .produit-vendeur .bouton_avis_vendeur_produit:hover {
   background-color: rgb(242.2809278351, 219.2654639175, 150.2190721649);
 }
+.produit-vendeur .list_promotion_reduction {
+  list-style-type: none;
+}
+.produit-vendeur .list_promotion_reduction li {
+  margin-top: 20px;
+}
+.produit-vendeur .list_promotion_reduction li a img {
+  width: 50px;
+  height: 50px;
+}
+.produit-vendeur .list_promotion_reduction li a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  background-color: #6B31D0;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.produit-vendeur .list_promotion_reduction li a:hover {
+  transform: scale(1.02);
+  background-color: rgb(151.7509881423, 111.2885375494, 222.2114624506);
+}
 
 .fleche_produit_arriere {
   margin: 5px;
@@ -3382,7 +3497,7 @@ aside .achat:hover {
   align-self: center;
 }
 .stock main tr {
-  width: 50vw;
+  width: 75vw;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
@@ -3473,6 +3588,61 @@ aside .achat:hover {
 }
 .stock main td form * {
   margin: auto 10px;
+}
+.stock main > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.stock main > div button {
+  margin: 0 0.5em auto;
+}
+.stock main > div .select {
+  display: inline;
+  max-width: 100%;
+  width: auto;
+  padding: 0.8em;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.stock main > div .select a {
+  text-decoration: none;
+  color: white;
+}
+.stock main > div .select:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+.stock main > div .annuler {
+  display: inline;
+  max-width: 100%;
+  width: auto;
+  padding: 0.8em;
+  font-family: "Montserrat";
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: lightgray;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.stock main > div .annuler a {
+  text-decoration: none;
+  color: black;
+}
+.stock main > div .annuler:hover {
+  background-color: rgb(249.25, 249.25, 249.25);
 }
 
 #snackbar {
@@ -3672,46 +3842,58 @@ aside .achat:hover {
     display: none !important;
   }
 }
-.main_promo {
+.main_promo, .main_reduc {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.main_promo .entete {
+.main_promo .entete, .main_reduc .entete {
   display: flex;
   align-items: center;
 }
-.main_promo .entete a {
+.main_promo .entete a, .main_reduc .entete a {
   height: 24px;
   margin-right: 50px;
 }
-.main_promo .entete h1 {
+.main_promo .entete h1, .main_reduc .entete h1 {
   margin-right: 30px;
 }
-.main_promo .en_ligne {
+.main_promo form, .main_reduc form {
+  width: 600px;
+}
+.main_promo form .en_ligne, .main_reduc form .en_ligne {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
-.main_promo .en_colonne {
+.main_promo form .en_colonne, .main_reduc form .en_colonne {
   display: flex;
   flex-direction: column;
 }
-.main_promo .cout_final {
-  width: 50%;
+.main_promo form .en_colonne + .en_colonne, .main_reduc form .en_colonne + .en_colonne {
+  margin-left: 50px;
 }
-.main_promo h3 + p + div div input {
-  width: 50%;
+.main_promo form #cout, .main_reduc form #cout {
+  width: 20%;
+}
+.main_promo form div, .main_reduc form div {
+  justify-content: space-between;
+}
+.main_promo form div div input[type=text], .main_reduc form div div input[type=text] {
+  width: 60%;
+}
+.main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
+  width: 80%;
 }
 .main_promo #warning1,
 .main_promo #warning2,
-.main_promo #warning3,
-.main_promo #warning4 {
+.main_promo #warning3, .main_reduc #warning1,
+.main_reduc #warning2,
+.main_reduc #warning3 {
   color: red;
   font-style: italic;
   font-size: 75%;
 }
-.main_promo #valider {
+.main_promo #valider, .main_reduc #valider {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3727,18 +3909,18 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo #valider a {
+.main_promo #valider a, .main_reduc #valider a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo #valider:hover {
+.main_promo #valider:hover, .main_reduc #valider:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
-.main_promo #valider {
-  margin-top: 20px;
+.main_promo #valider, .main_reduc #valider {
+  margin-top: 40px;
   width: 100%;
 }
-.main_promo #supprimer_promotion {
+.main_promo #supprimer_promotion, .main_reduc #supprimer_promotion {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3754,28 +3936,31 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo #supprimer_promotion a {
+.main_promo #supprimer_promotion a, .main_reduc #supprimer_promotion a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo #supprimer_promotion:hover {
+.main_promo #supprimer_promotion:hover, .main_reduc #supprimer_promotion:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.main_promo #supprimer_promotion {
+.main_promo #supprimer_promotion, .main_reduc #supprimer_promotion {
   margin-top: 10px;
   padding: 10px 16px 10px 16px;
 }
-.main_promo .block_banniere {
+.main_promo .block_banniere, .main_reduc .block_banniere {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 30px;
 }
-.main_promo .block_banniere .overImg {
+.main_promo .block_banniere label, .main_reduc .block_banniere label {
+  font-weight: bold;
+}
+.main_promo .block_banniere .overImg, .main_reduc .block_banniere .overImg {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
-.main_promo .block_banniere img {
+.main_promo .block_banniere img, .main_reduc .block_banniere img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 250px;
@@ -3785,26 +3970,7 @@ aside .achat:hover {
   height: 250px;
   border-radius: 5px;
 }
-.main_promo .hide_input_file {
-  margin-top: 20px;
-  margin-bottom: 7px;
-  background-color: #EAC452;
-  padding: 10px 16px 10px 16px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 5px;
-  color: black;
-  font-weight: bold;
-}
-.main_promo .hide_input_file:hover {
-  background: rgb(242.2809278351, 219.2654639175, 150.2190721649);
-}
-.main_promo .hide_input_file {
-  display: flex;
-  justify-content: center;
-  width: 16.2em;
-}
-.main_promo .delete_picture {
+.main_promo .delete_picture, .main_reduc .delete_picture {
   display: block;
   max-width: 100%;
   width: auto;
@@ -3820,14 +3986,14 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.main_promo .delete_picture a {
+.main_promo .delete_picture a, .main_reduc .delete_picture a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.main_promo .delete_picture:hover {
+.main_promo .delete_picture:hover, .main_reduc .delete_picture:hover {
   background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
-.main_promo .delete_picture {
+.main_promo .delete_picture, .main_reduc .delete_picture {
   width: 17.45em;
   padding: 6px;
 }
@@ -4034,6 +4200,13 @@ aside .achat:hover {
   margin: 1.2em 0;
 }
 
+.liste-commande-vendeur .liste-commande {
+  margin-left: 3em;
+}
+.liste-commande-vendeur .liste-commande .liste-commande {
+  width: 80vw;
+}
+
 .liste-commande {
   width: 100vw;
   margin-top: 3em;
@@ -4075,4 +4248,67 @@ aside .achat:hover {
   position: relative;
   left: 50px;
   top: 30px;
+}
+
+.facture-page-vendeur {
+  line-height: 0;
+}
+.facture-page-vendeur main {
+  padding: 0;
+}
+.facture-page-vendeur .facture {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.facture-page-vendeur .facture .facture-head {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+}
+.facture-page-vendeur .facture .facture-head img {
+  height: 40px;
+  position: relative;
+  right: 0;
+}
+.facture-page-vendeur .facture .facture-head h1 {
+  margin: 0;
+}
+.facture-page-vendeur .facture .facture-carater tr {
+  height: 50px;
+}
+.facture-page-vendeur .facture .facture-carater td:first-child {
+  width: 100px;
+}
+.facture-page-vendeur .facture .facture-table {
+  width: 80vw;
+  border-collapse: collapse;
+}
+.facture-page-vendeur .facture .facture-table th, .facture-page-vendeur .facture .facture-table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+.facture-page-vendeur .facture .facture-table th {
+  background-color: #3157A3;
+  color: white;
+}
+.facture-page-vendeur .facture .facture-table td {
+  text-align: center;
+}
+.facture-page-vendeur .facture .facture-table td:first-child {
+  text-align: start;
+}
+.facture-page-vendeur .facture .facture-toto {
+  position: relative;
+  right: 0;
+}
+.facture-page-vendeur .facture .facture-toto tr {
+  height: 50px;
+}
+.facture-page-vendeur .facture .facture-toto td:first-child {
+  width: 100px;
+}
+.facture-page-vendeur .facture .facture-toto tr:last-child td:first-child {
+  color: #3157A3;
 }/*# sourceMappingURL=style.css.map */

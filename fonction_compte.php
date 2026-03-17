@@ -18,7 +18,7 @@
     require_once ".config.php";
     require_once "fonction_produit.php";
     
-    // Fonction qui renvoie le mot de passe crypté et salé
+    // Fonction qui renvoie le mot de passe crypté et salé (outdated, déprécié, utilisez crypte_v2)
     function crypte_v1($mdp){
         return hash(algo: "xxh128",data: $mdp);
     }

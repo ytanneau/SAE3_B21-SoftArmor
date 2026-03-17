@@ -38,11 +38,8 @@
         renvoi();
     }
 
-    $compteur = 0;
-    $tab_promo = get_info_promotion($id_produit);
-    foreach($tab_promo as $ligne){
-        $compteur++;
-    }
+    $tab_promo = get_promotion_a_venir($id_produit);
+    $tab_reduc = get_reduction_a_venir($id_produit);
 ?>
 <!doctype html>
 <html lang="fr">
@@ -105,13 +102,13 @@
                     </tr>
                 </table>
                 <div>
-                    <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
+                    <img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_1.png' ?>" > 
                     <?php
                         if (isset($rows2['id_image1'])) {
-                            ?><img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
+                            ?><img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_2.png' ?>" > <?php
                         }
                         if (isset($rows2['id_image2'])) {
-                            ?> <img src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
+                            ?> <img class="img_prod" src="<?= HOME_SITE . 'ressources/produit/' . htmlentities($_GET['produit'] ?? '') . '_3.png' ?>" > <?php
                         }
                     ?>
                 </div>
@@ -129,11 +126,13 @@
                 <?php 
             } ?>
             <div>
-                <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
-                    <img src="<?=HOME_SITE . "image/promo.svg"?>" alt="promotion">
-                    Promotion
-                </a>
-                <ul>
+                <ul class="list_promotion_reduction">
+                    <li>
+                        <a href="promotion?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/promo_blanc.svg"?>" alt="promotion" title="Démarrer une promotion">
+                            Promotion
+                        </a>
+                    </li>
                     <?php if($tab_promo != null){
                         foreach($tab_promo as $ligne){
                             $id_promo = $ligne['id_promo'];
@@ -142,15 +141,38 @@
                             $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
                     ?>
                     <li>
-                        <a href="modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
-                            <img src="<?=HOME_SITE . "image/modifier.svg"?>" alt="modification">
+                        <a href="promotion/modifier_promotion?produit=<?= htmlentities($_GET['produit'] . "&idPromo=" . $id_promo)?>">
+                            <img src="<?=HOME_SITE . "image/modifier_blanc.svg"?>" alt="modification" title="Modifier une promotion">
                             Modifier la promotion du <?= htmlentities($new_date)?>
                         </a>
                     </li>
                     <?php }}?>
                 </ul>
             </div>
-            
+            <div>
+                <ul class="list_promotion_reduction">
+                    <li>
+                        <a href="reduction?produit=<?= htmlentities($_GET['produit'] ?? '')?>">
+                            <img src="<?=HOME_SITE . "image/reduction_blanc.svg"?>" alt="reduction" title="Démarrer une réduction">
+                            Réduction
+                        </a>
+                    </li>
+                    <?php if($tab_reduc != null){
+                        foreach($tab_reduc as $ligne){
+                            $id_reduc = $ligne['id_reduction'];
+                            $date = $ligne['date_debut'];
+                            $temp_date = explode("-",$date);
+                            $new_date = $temp_date[2] . "/" . $temp_date[1] . "/" . $temp_date[0];
+                    ?>
+                    <li>
+                        <a href="reduction/modifier_reduction?produit=<?=htmlentities($_GET['produit'] . "&idReduc=" . $id_reduc)?>">
+                            <img src="<?=HOME_SITE . "image/modifier_blanc.svg"?>" alt="modification" title="Modifier une réduction">
+                            Modifier la reduction du <?= htmlentities($new_date)?>
+                        </a>
+                    </li>
+                    <?php }}?>
+                </ul>
+            </div>
         </main>
         <?php include HOME_SITE . "footer.php" ?>
 

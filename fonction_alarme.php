@@ -1,5 +1,13 @@
 <?php
 
+    // renvoie tous les produits d'un vendeur où la quantité en stock est inférieure ou égale à la valeur mise en alerte
+    // les produits sont sous la forme :
+    //  [
+    //      "id_vendeur" => int,
+    //      "id_produit" => int,
+    //      "nom_stock" => str,
+    //      "quantite" => int
+    //  ]
     function get_alarme($id_vendeur){
         global $pdo;
         $requete = $pdo->prepare("SELECT id_vendeur, id_produit, nom_stock, quantite FROM produit_alerte WHERE id_vendeur = :id_vendeur");
@@ -11,7 +19,7 @@
     }
 
 
-
+    // fonction view (HTML) qui affiche tous les produits en alerte d'un vendeur
     function affiche_alarme($id_vendeur){
         $data = get_alarme($id_vendeur);
         if($data != null){

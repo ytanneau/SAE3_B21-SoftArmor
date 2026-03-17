@@ -379,7 +379,6 @@ section.results {
 ul#results {
     display: flex;
     padding: 0;
-    width: 100%;
     flex-wrap: wrap;
     list-style: none;
     justify-content: left;
@@ -526,6 +525,27 @@ ul#results {
         p {
             font-size: 10px;
         }
+    }
+
+    #idValiderModifVendeur {
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+        width: 600px;
+    }
+
+    #idDesactivationCompte,
+    #idDesactivation2FA {
+        @include bouton_new($background: $rouge, $color: $couleur_background);
+        margin-top: 30px;
+        padding: 0.6em;
+        width: 577px;
+    }
+
+    #idActivation2FA {
+        @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
+        margin-top: 30px;
+        padding: 0.6em;
+        width: 577px;
     }
 
 
@@ -1536,6 +1556,10 @@ h3 {
     }
 }
 
+.mainPanier {
+    display: flex;
+}
+
 
 // la partie à droite d'une page (ex. avec récap dans page panier)
 /*
@@ -1979,11 +2003,11 @@ aside {
         }
     }
 
-    >div img {
+    >div .img_prod {
         @include image_produit($image_normal);
     }
 
-    >div img:hover {
+    >div .img_prod:hover {
         transform: scale(1.04);
     }
 
@@ -2014,6 +2038,32 @@ aside {
     .bouton_avis_vendeur_produit {
         @include bouton_new($background: $couleur_etoile , $color: black, $largeur: 30em);
     }
+
+    .list_promotion_reduction{
+        list-style-type: none;
+        li {
+            margin-top: 20px;
+            a{
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                width: 500px;
+                background-color: $couleur_primaire_vendeur;
+                color: $couleur_background;
+                text-decoration: none;
+                border-radius: $angle_petit;
+            }
+            a:hover{
+                transform: scale(1.02);
+                background-color: adjust-color($color: $couleur_primaire_vendeur, $lightness: 15%);
+            }
+        }
+    }
 }
 
 
@@ -2039,7 +2089,7 @@ aside {
         }
 
         tr {
-            width: 50vw;
+            width: 75vw;
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid black;
@@ -2086,6 +2136,26 @@ aside {
                     margin: auto 10px;
                 }
             }
+        }
+
+        >div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2em;
+
+            button {
+                margin: 0 0.5em auto;
+            }
+
+            .select {
+                @include bouton_new($couleur_primaire_client, white, $padding: 0.8em, $size: 0.8em, $display: inline);
+            }
+
+            .annuler {
+                @include bouton_new(lightgray, black, $padding: 0.8em, $size: 0.8em, $display: inline);
+            }
+
         }
     }
 }
@@ -2308,37 +2378,41 @@ aside {
     }
 }
 
-.main_promo {
+.main_promo, .main_reduc{
     @include contenu_centre_vertical;
     @include entete_page_vendeur;
-
-    .en_ligne {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .en_colonne {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .cout_final {
-        width: 50%;
-    }
-
-    h3+p+div {
+    form{
+        width: 600px;
+        .en_ligne {
+            display: flex;
+            flex-direction: row;
+        }
+        .en_colonne {
+            display: flex;
+            flex-direction: column;
+            & + .en_colonne{
+                margin-left: 50px;
+            }
+        }
+        #cout{
+            width: 20%;
+        }
         div {
-            input {
-                width: 50%;
+            justify-content: space-between;
+            div{
+                input[type="text"]{
+                    width: 60%;
+                }
+                input[type="date"]{
+                    width: 80%;
+                }
             }
         }
     }
 
     #warning1,
     #warning2,
-    #warning3,
-    #warning4 {
+    #warning3 {
         color: red;
         font-style: italic;
         font-size: 75%;
@@ -2346,7 +2420,7 @@ aside {
 
     #valider {
         @include bouton_new($color: $couleur_background);
-        margin-top: 20px;
+        margin-top: 40px;
         width: 100%;
     }
 
@@ -2359,22 +2433,16 @@ aside {
     .block_banniere {
         display: flex;
         flex-direction: column;
-        margin-top: 40px;
+        margin-top: 30px;
+        label{
+            font-weight: bold;
+        }
         .overImg{
             @include input_img_over_img;
         }
         img {
             @include image_produit(250px);
         }
-    }
-
-    .hide_input_file {
-        margin-top: 20px;
-        margin-bottom: 7px;
-        @include hide_input_file();
-        display: flex;
-        justify-content: center;
-        width: 16.2em;
     }
 
     .delete_picture {
@@ -2599,6 +2667,13 @@ aside {
     margin: 1.2em 0;
 }
 
+.liste-commande-vendeur .liste-commande{
+    margin-left: 3em;
+
+    .liste-commande{
+        width: 80vw;
+    }
+}
 
 .liste-commande {
     width: 100vw;
@@ -2647,6 +2722,91 @@ aside {
             position: relative;
             left: 50px;
             top: 30px;
+        }
+    }
+}
+
+
+.facture-page-vendeur{
+line-height: 0;
+
+    main{
+        padding: 0;
+    }
+
+    .facture{
+        width: 80vw;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .facture-head{
+            width: 80vw;
+            display: flex;
+            flex-direction: row;
+
+            img{
+                height: 40px;
+                position: relative;
+                right: 0;
+            }
+
+            h1{
+                margin: 0;
+            }
+        }
+
+        .facture-carater{
+
+            tr{
+                height: 50px;
+            }
+
+            td:first-child{
+                width: 100px;
+            }
+        }
+
+        .facture-table{
+            width: 80vw;
+            border-collapse: collapse;
+
+            th, td{
+                border: 1px solid black;
+                padding: 10px;
+            }
+
+            th{
+                background-color: #3157A3;
+                color: white;
+            }
+
+            td{
+                text-align: center;
+            }
+
+            td:first-child{
+                text-align: start;
+            }
+
+            
+
+        }
+
+        .facture-toto{
+            position: relative;
+            right: 0;
+
+            tr{
+                height: 50px;
+            }
+            td:first-child{
+                width: 100px;
+            }
+
+            tr:last-child td:first-child{
+                color: #3157A3;
+            }
         }
     }
 }

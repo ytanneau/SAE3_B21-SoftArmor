@@ -7,6 +7,8 @@
     define('TAILLE_IMAGE', '5000000');
 
     // fonction qui verifie les champs de l'avis 
+    // renvoie une variable liste avec toutes les erreurs sur les champs
+    // (liste vide si aucune erreur)
     function condition_avis(){
         $erreur = [];
 
@@ -60,7 +62,9 @@
     function get_avis_client($id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_client = :id_client;");
+            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, url_image
+            FROM avis_client WHERE id_client = :id_client;");
+
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -90,8 +94,8 @@
         }
     }
 
-    // verifie si un avis existe déjà
-    function check_avis_existe($id_produit, $id_client){
+    // récupère l'avis avec le produit et le client
+    function get_avis($id_produit, $id_client){
         global $pdo;
         
         $requete = $pdo->prepare("SELECT 1 FROM avis_client WHERE id_produit=:id_produit AND id_client=:id_client");
@@ -103,10 +107,11 @@
     }
 
     // récupérer un avis par son identifiant
-    function get_avis($id_avis){
+    function get_infos_avis($id_avis){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT * FROM avis_client WHERE id_avis = :id_avis");
+            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, id_image
+            FROM avis_client WHERE id_avis = :id_avis");
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
             $requete->execute();
             return $requete->fetch(PDO::FETCH_ASSOC);
@@ -115,14 +120,36 @@
         }
     }
 
+    // récupère tous les avis postés sur un produit donné
     function avis_produit($id_produit){
         global $pdo;
-        $requete = $pdo->prepare("SELECT * FROM _avis WHERE id_produit=:id_produit");
+        $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, id_image
+        FROM _avis WHERE id_produit=:id_produit");
         $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
         $requete->execute();
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    // fonction pour supprimer un avis avec image d'un client sur un produit
+    function supprimer_avis_image($id_produit, $url_img_avis, $id_client){
+        global $pdo;
+        try {
+            $requete = $pdo->prepare("DELETE FROM _avis WHERE id_produit = :id_produit AND id_client = :id_client;");
+            $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+            $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
+            $requete->execute();
+            
+            
+            $requete = $pdo->prepare("DELETE FROM _image WHERE url_image = :url_img_avis ;");
+            $requete->bindValue(':url_img_avis', $url_img_avis, PDO::PARAM_STR);
+            $requete->execute();
+            
+            
+            return 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
 
     // fonction pour supprimer l'avis d'un client et son image
     function supprimer_avis($id_produit, $id_client) {
@@ -213,6 +240,7 @@
         }
     }
 
+    // fonction permettant de créer un signalement sur un avis
     function signaler_avis($id_compte, $id_avis, $raison, $email) {
         global $pdo;
 
@@ -235,6 +263,7 @@
         }
     }
 
+    // fonction permettant de créer un signalement sur une réponse d'un vendeur
     function signaler_reponse($id_compte, $id_reponse, $raison, $email) {
         global $pdo;
 
@@ -291,6 +320,7 @@
         }
     }
 
+    // fonction permettant de savoir si une réponse d'un vendeur a été signalé
     function reponse_est_signalee($id_reponse, $id_compte = null, $email = null) {
         global $pdo;
 
@@ -350,10 +380,12 @@
         }
     }
 
+    // permet de savoir si un avis à une réponse associée
     function avis_est_repondu($id_avis) {
         return get_reponse($id_avis) != null;
     }
 
+    // permet de récupérer la réponse associée à un avis
     function get_reponse($id_avis) {
         global $pdo;
 
@@ -378,6 +410,7 @@
         }
     }
 
+    // fonction permettant de créer une réponse à un avis
     function repondre_avis($id_avis, $reponse) {
         global $pdo;
 
@@ -400,6 +433,7 @@
         }
     }
 
+    // fonction permettant de modifier une réponse associée à un avis
     function modifier_reponse($id_reponse, $reponse) {
         global $pdo;
 
@@ -424,6 +458,7 @@
         }
     }
 
+    // fonction permettant de supprimer une réponse associée à un avis
     function supprimer_reponse($id_reponse) {
         global $pdo;
 

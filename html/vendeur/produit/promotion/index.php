@@ -85,27 +85,28 @@
                 <h1>Démarrer une promotion</h1>
             </div>
             <p style="color:red;">Une promotion à un coût journalier de 26€ par jour</p>
-            <form action="" method="post" enctype="multipart/form-data" class="form_promo">
-                <h3>Promotion</h3>
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début : </label>
+                        <label for="dateDebut">Date de début de la promotion: </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin : </label>
+                        <label for="dateFin">Date de fin de la promotion: </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
-                    <div class="en_colonne">
-                        <label for="cout">Coût final : </label>
-                        <input type="text" id="cout" readonly class="cout_final">
-                    </div>
                 </div>
+                <div class="en_colonne">
+                    <label for="cout">Coût final : </label>
+                    <input type="text" id="cout" readonly>
+                </div>
+                
                 <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <p style="display:none;" id="warning4">Date de debut déjà passé</p>
-                <div class="ajout_banniere">
-                    <label for="photoPromotion">Ajouter une banniere</label>
+                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
+                
+                <div class="block_banniere">
+                    <label for="photoPromotion">Ajouter une banniere (optionnel)</label>
                     <input type="file" id="photoPromotion" name="photoPromotion" accept="image/png, image/webp, image/jpeg, image/jpg">
                 </div>
                 <input type="submit" id="valider" value="Valider">
@@ -123,7 +124,7 @@
         const valider = document.getElementById("valider");
         const warning1 = document.getElementById("warning1");
         const warning2 = document.getElementById("warning2");
-        const warning4 = document.getElementById("warning4");
+        const warning3 = document.getElementById("warning3");
         const divPhoto = document.getElementById("divPhoto");
         const dateCourante = new Date();
         dateCourante.setHours(0, 0, 0, 0);

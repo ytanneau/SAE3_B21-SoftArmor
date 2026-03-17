@@ -82,7 +82,6 @@ if (isset($_POST['quantite'])) {
             ajouter_panier_visiteur($id_prod, $qte);
             
         }
-        header('Location:' . HOME_SITE . 'panier');
 
     // Sinon, s'il a fait "acheter le produit"
     } elseif (isset($_POST['achat'])) {
@@ -538,24 +537,33 @@ if (isset($_POST['quantite'])) {
                 });
             });
         }
-        document.getElementById('ajout_panier').addEventListener('click', async function(e) {
-        e.preventDefault(); // bloque la soumission du formulaire
 
-        const goToCart = await customConfirm({
-            title: "Article ajouté au panier !",
-            message: "Que voulez vous faire ?",
-            cancelText: "Continuer les achats",
-            confirmText: "Aller au panier"
+        document.getElementById('ajout_panier').addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            const form = this.closest('form');
+
+            // D'abord, ajouter au panier via fetch (sans recharger la page)
+            const formData = new FormData(form);
+            formData.append('panier', 'Ajouter au panier');
+
+            await fetch('', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Ensuite, afficher le popup
+            const goToCart = await customConfirm({
+                title: "Article ajouté au panier !",
+                message: "Que voulez vous faire ?",
+                cancelText: "Continuer les achats",
+                confirmText: "Aller au panier"
             });
 
             if (goToCart) {
                 window.location.href = '../panier/';
-            } else {
-                // soumettre le formulaire normalement pour ajouter au panier
-                // mais sans rediriger
-                const form = document.getElementById('ajout_panier').closest('form');
-                form.submit();
             }
+            // Si "Continuer les achats"  on ne fait rien, l'article est déjà ajouté
         });
         // Confirmation du signalement
         formSignalement.addEventListener("submit", async (e) => {

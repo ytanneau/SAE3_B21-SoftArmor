@@ -41,9 +41,31 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
     <?php include HOME_SITE . 'link_head.php' ?>
 
     <script>
-        function generePDF() {
-            window.print();
+        function generePDF(url) {
+            window.open(url).print();
         }
+
+        async function printPage(url) {
+            const response = await fetch(url);
+            const html = await response.text();
+
+            // Ouvre une nouvelle fenêtre
+            const printWindow = window.open("", "_blank");
+
+            // Injecte le HTML récupéré
+            printWindow.document.write(html);
+            printWindow.document.close();
+
+            // Attend que la page soit chargée avant impression
+            printWindow.onload = () => {
+                printWindow.print();
+                printWindow.close();
+            };
+        }
+
+        // Utilisation
+        //printPage("https://example.com");
+
     </script>
 </head>
 
@@ -60,7 +82,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             ?>
             <div>
                 <span class="aide"
-                data-tooltip="Etape 1 : Création d’un bordereau de livraison\nEtape 2 : Prise en charge du colis chez le vendeur\nEtape 3 : Arrivée chez le transporteur.\nEtape 4 : Départ vers la plateforme régionale\nEtape 5 : Arrivée sur la plateforme régionale\nEtape 6 : Départ vers le centre local\nEtape 7 : Arrivée au centre local\nEtape 8 : Départ pour la livraison finale\nEtape 9 : Livré ou refusé\nEtape inconnue : livraison non prise en charge par le site\Problème serveur : Erreur de connexion au serveur">?</span>
+                    data-tooltip="Etape 1 : Création d’un bordereau de livraison\nEtape 2 : Prise en charge du colis chez le vendeur\nEtape 3 : Arrivée chez le transporteur.\nEtape 4 : Départ vers la plateforme régionale\nEtape 5 : Arrivée sur la plateforme régionale\nEtape 6 : Départ vers le centre local\nEtape 7 : Arrivée au centre local\nEtape 8 : Départ pour la livraison finale\nEtape 9 : Livré ou refusé\nEtape inconnue : livraison non prise en charge par le site\Problème serveur : Erreur de connexion au serveur">?</span>
             </div>
             <?php
             $fd = connexion_socket(IP, PORT);
@@ -85,7 +107,7 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
                     foreach ($liste_commandes as $commande) {
                         $d = strtotime($commande["date_commande"]);
                         $jour = $JOUR_SEMAINE[date("w", $d)];
-                        $mois = $MOIS_ANNEE[date((int) "m", $d)];
+                        $mois = $MOIS_ANNEE[date("m", $d) - 1];
                         ?>
                         <tr>
                             <td><?php if ($commande['bordereau_colis']) {
@@ -123,8 +145,13 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
 
                                 ?>
                             </td>
-                            <td><a href="./info?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la
-                                    facture</a></td>
+                            <td>
+                                <button class="bouton"
+                                    onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Consulter la
+                                    facture</button>
+                                <!--a href="./facture?commande=<?= $commande["id_commande"] ?>" class="bouton">Consulter la
+                                    facture</a-->
+                            </td>
                         </tr>
                         <?php
                     }
