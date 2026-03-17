@@ -354,6 +354,31 @@
         }
     }
 
+    function check_avis_existe($id_produit, $id_client) {
+        if (!isset($id_client)) {
+            return false;
+        }
+    
+        global $pdo;
+
+        try {
+            $requete = $pdo->prepare(
+                "SELECT 1 
+                FROM avis_client
+                WHERE id_client = :id_compte
+                AND id_produit = :id_produit"
+            );
+
+            $requete->bindValue(':id_compte', $id_client, PDO::PARAM_INT);
+            $requete->bindValue(':id_avis', $id_produit, PDO::PARAM_INT);
+            $requete->execute();
+
+            return $requete->rowCount() > 0;
+        } catch (PDOException $e) {
+            throw $e;
+        }
+    }
+
     // Renvoie true si le compte en paramètre a rédigé l'avis, false sinon
     function avis_fait_par($id_avis, $id_compte) {
         if (!isset($id_compte)) {
