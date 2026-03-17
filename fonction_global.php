@@ -4,7 +4,7 @@ function pset($value) {
     return isset($value) ? htmlentities($value) : "";
 }
 
-//fonction pour aficcher les textes trop fong avec des ...
+//fonction pour afficher les textes trop fong avec des ...
 function limiter_caracteres($texte, $limite) {
     $largeur = 0;
     $resultat = "";
