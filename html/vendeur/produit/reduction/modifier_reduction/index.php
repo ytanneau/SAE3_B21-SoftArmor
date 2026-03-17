@@ -123,6 +123,7 @@
             }
             
         });
+        
         dateFin.addEventListener('change', () => {
             if(dateDebut.value != ""){
                 if(dateDebut.value > dateFin.value) {

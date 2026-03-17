@@ -71,45 +71,42 @@ $liste_commandes = get_commandes_vendeur($_SESSION["id_compte"]);
 <body class="liste-commande-page">
     <?php include HOME_SITE . 'vendeur/header.php' ?>
     <main class="liste-commande-vendeur">
-        <div>
-            <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
-            <?php if (count($liste_commandes) == 0) { ?>
-                <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
-            <?php } else { ?>
-                <table class="liste-commande">
-                    <thead>
+        <a href="../accueil"><img src="../../image/retour.svg" class="fleche_produit_arriere"></a>
+        <?php if (count($liste_commandes) == 0) { ?>
+            <p>Aucune commande n'inclut l'un de vos produits mis en vente</p>
+        <?php } else { ?>
+            <table class="liste-commande">
+                <thead>
+                    <tr>
+                        <th>Client</th>
+                        <th>Date de la commande</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($liste_commandes as $commande) {
+                        $d = strtotime($commande["date_commande"]);
+                        $jour = $JOUR_SEMAINE[date("w", $d)];
+                        $mois = $MOIS_ANNEE[date("m", $d) - 1];
+                        ?>
+
                         <tr>
-                            <th>Date de la commande</th>
-                            <th>Client</th>
-                            <th>Récapitulatif de la commande</th>
+                            <td>
+                                <p><?= $commande["pseudo_client"] ?></p>
+                            </td>
+                            <td>
+                                <p><?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?></p>
+                            </td>
+                            <td>
+                                <button class="bouton"
+                                    onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Consulter la facture</button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($liste_commandes as $commande) {
-                            $d = strtotime($commande["date_commande"]);
-                            $jour = $JOUR_SEMAINE[date("w", $d)];
-                            $mois = $MOIS_ANNEE[date("m", $d) - 1];
-                            ?>
 
-                            <tr>
-                                <td>
-                                    <?= $jour . date(" d ", $d) . $mois . date(" Y à H:i:s", $d) ?>
-                                </td>
-                                <td>
-                                    <?= $commande["pseudo_client"] ?>
-                                </td>
-                                <td>
-                                    <button class="bouton"
-                                        onclick="printPage('<?= 'facture/?commande=' . $commande['id_commande'] ?>')">Consulter la facture</button>
-                                    <!--a href="?commande=<?= $commande["id_commande"] ?>" class="bouton" target="_blank">Consulter la commande</a-->
-                                </td>
-                            </tr>
-
-                        <?php } ?>
-                    </tbody>
-                </table>
-            <?php } ?>
-        </div>
+                    <?php } ?>
+                </tbody>
+            </table>
+        <?php } ?>
     </main>
 
     <?php if (!isset($_GET["commande"])) {

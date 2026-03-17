@@ -848,3 +848,33 @@
             throw $e;
         }
     }
+
+    function get_all_date_promotion($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM promo_a_venir WHERE id_produit = :id");
+
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }
+
+    function get_all_date_reduction($id_produit){
+        global $pdo;
+
+        try{
+            $stmt = $pdo->prepare("SELECT date_debut, date_fin FROM reduction_a_venir WHERE id_produit = :id");
+
+            $stmt->execute([
+                "id" => $id_produit
+            ]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e){
+            throw $e;
+        }
+    }

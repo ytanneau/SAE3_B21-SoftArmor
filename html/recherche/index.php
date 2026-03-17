@@ -225,9 +225,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 let label = document.createElement("label")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
-                        input.id = vendeur[cle]
-                        label.innerHTML = vendeur[cle]
-                        label.htmlFor = vendeur[cle]
+                        input.id = vendeur['id_compte']
+                        label.innerHTML = vendeur['raison_sociale']
+                        label.htmlFor = vendeur['id_compte']
                         input.value = "vendeur_check"
                     }
                 }
@@ -420,7 +420,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         });
         liste_vendeur.addEventListener("change", (e) =>{
             const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked');
-            if(inputsCoches === 0){
+            if(inputsCoches.length === 0){
                 groupMarker.clearLayers();
                 afficherMarker(listeVendeurAffiche);
                 return;

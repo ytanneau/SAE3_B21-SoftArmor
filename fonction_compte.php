@@ -154,7 +154,7 @@
                         $_SESSION['logged_in'] = false;
                         $_SESSION['id_compte'] = $resSQL['id_compte'];
 
-                        $_SESSION['pp'] = get_image($resSQL['id_image_profil'])['url_image'] ?? '';
+                        $_SESSION['pp'] = get_image($resSQL['id_image_profil'] ?? 0)['url_image'] ?? '';
                         $_SESSION['email'] = $email;
 
                         if ($typeCompte == 'vendeur'){
