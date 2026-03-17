@@ -2305,9 +2305,7 @@ aside {
         }
     }
 
-    #warning1,
-    #warning2,
-    #warning3 {
+    .warning {
         color: red;
         font-style: italic;
         font-size: 75%;
