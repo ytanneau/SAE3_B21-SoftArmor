@@ -289,6 +289,9 @@ body {
   flex-direction: column;
   margin-top: 1em;
 }
+.liste-commande-page tr p {
+  margin: 0;
+}
 .liste-commande-page td:first-child {
   display: none;
 }
