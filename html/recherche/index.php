@@ -418,6 +418,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
         });
+        liste_vendeur.addEventListener("change", (e) =>{
+            let tableauNewMarker = document.querySelector('input[value=\"vendeur_check\"]:checked').value;
+            afficherMarker(tableauNewMarker);
+        })
 
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
