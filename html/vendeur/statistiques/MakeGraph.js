@@ -277,7 +277,7 @@ export default class MakeGraph {
 
     nomProduit(id_produit) {
         return this.use.find(ele => {
-            return ele.id_produit = id_produit;
+            return ele.id_produit == id_produit;
         }).nom_stock;
     }
 

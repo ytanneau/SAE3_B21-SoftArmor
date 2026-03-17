@@ -34,27 +34,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Alizon - Accueil vendeur</title>
         <?php include HOME_SITE . 'link_head.php' ?>
-        <style>
-.stat .container{
-    display:flex;
-    justify-content:center;
-}
-.stat #sectionButton {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 50%;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-.stat #sectionButton button, .stat #sectionButton a {
-  line-height: 1.5em;
-  margin-top: 0px;
-}/*# sourceMappingURL=style.css.map */
-
-
-        </style>
 
     </head>
     <body class="stat">
@@ -247,8 +226,8 @@
                                         methodePeriode = "getHourC"
                                     break;
                                 }
-                                
-                                if(tabAssociatifCat[label].length != 0){
+                                let labelAutre = /^Autres */.test(label)
+                                if(!labelAutre && tabAssociatifCat[label].length != 0){
 
                                     tabAssociatifCat[label].forEach(element => {
                                         let initialValue = 0;
@@ -267,7 +246,11 @@
 
                                     createChart(id,typeChart,labelGraph,value,offsetChart,displayLegend, true, false);
                                 }else{
-                                    let lstProdCat = graphCat.resetData()[methodePeriode](label);
+                                    let labelProd = label;
+                                    if(labelAutre){
+                                        labelProd = label.split(" ")[1];
+                                    }
+                                    let lstProdCat = graphCat.resetData()[methodePeriode](labelProd);
                                     console.log(lstProdCat);
                                     
                                     deleteChart(graphe,id);

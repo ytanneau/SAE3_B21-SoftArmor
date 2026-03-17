@@ -21,6 +21,16 @@ else if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
 //permet d'utiliser le fichier config.php
 require_once HOME_GIT . '.config.php';
 require_once HOME_GIT . 'fonction_produit.php';
+
+//verif si le produit appartien au vendeur
+if(vendeur_verif_produit($_GET["id_produit"],$_SESSION["id_compte"])){
+
+    $nom = detail_produit($_GET["id_produit"])["nom_stock"];
+}
+else{
+    header('location: ../');
+    exit;
+}
     ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,7 +47,7 @@ require_once HOME_GIT . 'fonction_produit.php';
     <a href="../../accueil"><img src="../../../image/retour.svg" class = "fleche_produit_arriere"></a>
 
     <section id="section_prod">
-        <h1>Statistiques Par Produits</h1>
+        <h1>Statistiques <?php echo $nom; ?></h1>
         <label>Tirer Les</label>
         <select class="produit" id="filtreOrdProd">
             <option value="qte">Quantité</option>
