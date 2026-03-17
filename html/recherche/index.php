@@ -350,6 +350,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                         if (vendeur['id_compte']) {
                             searchState.filters.sellers = vendeur['id_compte'];
                             searchState.filters.seller_name = vendeur['raison_sociale'];
+                            console.log(searchState.filters.sellers);   
                             fetchProduitsJSON();
                         }
                         closePanel();
@@ -519,7 +520,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     }
                 }
             });
-            
             return tableauVendeur;
         }
         function afficherProduits(data) {
@@ -547,6 +547,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             } else {
                 resultsFor.textContent = "";
             }
+                console.log(data);
             data.produits.forEach(produit => {
                 let listItem = document.createElement("li");
                 
@@ -597,6 +598,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                     pPrix.classList.add("ancien_prix");
                     pPrixReduit.classList.add("prix");
                 } else {
+                    console.log("test 2");
                     pPrix.classList.add("prix");
                 }
         
@@ -659,7 +661,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         // Récupérer tous les produits dans un objet JSON
         async function fetchProduitsJSON() {
             fetch('/recherche/produits.php', {
-                method: 'POST',afficher_listes_vendeur
+                method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(searchState)
             })
