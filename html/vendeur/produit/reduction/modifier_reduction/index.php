@@ -52,7 +52,7 @@
         <main class="main_reduc">
             <div class="entete">
                 <a href="../../index.php?produit=<?=$id_produit?>"><img src="../../../../../image/retour.svg" alt="bouton retour en arrière"></a>
-                <h1>Démarrer une réduction</h1>
+                <h1>Modifier la réduction</h1>
             </div>
             <p>Prix actuel du produit : <?=htmlentities($prix)?>€</p>
             <form action="" method="post">
@@ -95,7 +95,6 @@
         const dateFin = document.getElementById("dateFin")
         const warningPourcentage = document.getElementById("warningPourcentage")
         const pourcentage = document.getElementById("pourcentage")
-        const euro = document.getElementById("euro")
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
         const warning1 = document.getElementById("warning1");
@@ -161,10 +160,8 @@
             }
         }
 
-        console.log(tab_reduction)
-
         dateDebut.value = tab_reduction['date_debut']
         dateFin.value = tab_reduction['date_fin']
-        warningPourcentage.style.display = "none";
+        prixFinal.value = prixInitial * (pourcentage.value / 100)
     </script>
 </html>
