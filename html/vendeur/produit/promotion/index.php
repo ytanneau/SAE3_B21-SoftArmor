@@ -88,11 +88,11 @@
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début de la promotion: </label>
+                        <label for="dateDebut">Début de la promotion: </label>
                         <input type="date" id="dateDebut" name="dateDebut" required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin de la promotion: </label>
+                        <label for="dateFin">Fin de la promotion: </label>
                         <input type="date" id="dateFin" name="dateFin" required>
                     </div>
                 </div>
