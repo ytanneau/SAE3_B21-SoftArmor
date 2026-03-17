@@ -35,7 +35,10 @@
         <title>Alizon - Accueil vendeur</title>
         <?php include HOME_SITE . 'link_head.php' ?>
         <style>
-
+.stat .container{
+    display:flex;
+    justify-content:center;
+}
 .stat #sectionButton {
   display: flex;
   flex-direction: row;
@@ -49,6 +52,8 @@
   line-height: 1.5em;
   margin-top: 0px;
 }/*# sourceMappingURL=style.css.map */
+
+
         </style>
 
     </head>
@@ -64,7 +69,7 @@
                     <a class="bouton" href="./personnalisee" id="autre">Personnalisé</a>
                 </section>
             </div>
-            <section id="sectionGen">
+            <section id="sectionGen">   
                 <h1>Statistiques Générales</h1>
                 
                 <label>Les</label>
@@ -110,7 +115,7 @@
                     <option value="m">60 Dernieres Minutes</option>
                 </select>
                 <button id='resetCat'>Reset Filtre</button>
-                <div id="b_container">
+                <div class="container" id="b_container">
                     <canvas id="b"></canvas>
                 </div>
             </section>
@@ -136,7 +141,7 @@
                         <option value="bar">Barre</option>
                         <option value="line">Ligne</option>
                     </select>
-                    <div id="c_container">
+                    <div class="container" id="c_container">
                         <canvas id="c"></canvas>
                     </div>
             </section>
