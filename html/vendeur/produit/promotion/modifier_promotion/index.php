@@ -132,11 +132,11 @@
                 <h3>Promotion</h3>
                 <div class="en_ligne">
                     <div class="en_colonne">
-                        <label for="dateDebut">Date de début :</label>
+                        <label for="dateDebut">Début de la promotion :</label>
                         <input type="date" id="dateDebut" name="dateDebut" value=<?= htmlentities($tab_info_promotion['date_debut'])?> required>
                     </div>
                     <div class="en_colonne">
-                        <label for="dateFin">Date de fin :</label>
+                        <label for="dateFin">Fin de la promotion:</label>
                         <input type="date" id="dateFin" name="dateFin" value=<?= htmlentities($tab_info_promotion['date_fin'])?> required>
                     </div>
                 </div>
