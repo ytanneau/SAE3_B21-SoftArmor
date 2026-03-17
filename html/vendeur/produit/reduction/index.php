@@ -157,7 +157,7 @@
                     return true
                 } else {
                     date_occupe.forEach(periode => {
-                        if(date >= periode['date_debut'] && date <= periode['date_fin']){
+                        if(date.getTime() >= periode['date_debut'].getTime() && date.getTime() <= periode['date_fin'].getTime()){
                             return true
                         } else {
                             return false
