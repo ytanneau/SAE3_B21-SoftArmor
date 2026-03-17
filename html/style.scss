@@ -59,6 +59,22 @@ hr {
     }
 }
 
+.show {
+    visibility: visible;
+}
+
+.image_uploader {
+    @include image_uploader(200px);
+}
+
+.infos .image_uploader {
+    @include image_uploader(200px, 100px);
+}
+
+#input_image {
+    display: none;
+}
+
 .input_quantite {
     * {
         font-family: $font_title;
@@ -478,6 +494,11 @@ ul#results {
     resize: none;
     height: 10em;
     font-family: $font_text;
+    padding-top: 0.3em;
+}
+
+.image_pp.grand {
+    @include image_pp(200px);
 }
 
 .infos {
@@ -530,7 +551,7 @@ ul#results {
 
     .liste_avis {
         li {
-            >img {
+            > img {
                 &:first-child {
                     @include image_produit(10vw);
                     margin-left: 0;
@@ -539,9 +560,13 @@ ul#results {
             }
         }
 
-        img {
+        img:not(.image_pp) {
             @include image_produit(2vw);
             background-color: white;
+        }
+
+        .image_pp {
+            @include image_pp(40px);
         }
 
         .icon {
@@ -773,6 +798,8 @@ div.gauche {
         line-height: 2em;
 
     }
+
+    
 }
 
 div:has(> aside) {
@@ -859,6 +886,86 @@ div:has(> aside) {
             display: flex;
         }
     }
+}
+
+#creation_avis {
+    display: flex;
+        
+    > div {
+        width: 200px;
+        height: 200px;
+    }
+
+    .image_pp.grand {
+        @include image_pp(100px);
+        border: solid 2px black;
+        margin-right: 1em;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        #etoiles img {
+            width: 35px;
+            height: 35px;
+        }
+
+        #champs {
+            display: flex;
+            gap: 2em;
+            margin: 0.25em 0;
+
+            > div:first-of-type {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+        }
+
+        .champ {
+            border: solid 1px gray;
+        }
+
+        .error {
+            margin: 0 0 1em 0;
+            flex-grow: 1;
+        }
+
+        input[type="submit"] {
+            @include bouton_new($background: $couleur_primaire_client, $color: white, $largeur: 10em);
+            margin-top: 1em;
+        }
+
+        > div:last-of-type {
+            display: flex;
+        }
+    }
+
+    #image_avis {
+        display: flex;
+        flex-direction: column;
+
+        #clear_image {
+            display: none;
+            align-self: end;
+    
+            position: relative;
+            bottom: 3em;
+    
+            width: 3em;
+            height: 3em;
+    
+            padding: 0;
+    
+            background-color: $rouge;
+            border: none;
+            border-top-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
 }
 
 
@@ -1262,6 +1369,10 @@ h3 {
     padding: 0 0.4em;
     font-size: 1em;
     background-color: #e9e9e9;
+
+    p {
+        text-align: left !important;
+    }
 
     &:hover {
         
@@ -2290,8 +2401,18 @@ aside {
         #cout{
             width: 20%;
         }
-        div div input[type="text"]{
-            width: 20%;
+        p + div {
+            margin-top: 20px;
+        }
+        div {
+            div{
+                input[type="text"]{
+                    width: 60%;
+                }
+                input[type="date"]{
+                    width: 80%;
+                }
+            }
         }
     }
 
@@ -2309,9 +2430,9 @@ aside {
         width: 100%;
     }
 
-    #supprimer_promotion {
+    #supprimer {
         @include bouton_new($background: $rouge, $color: $couleur_background);
-        margin-top: 10px;
+        margin-top: 20px;
         padding: 10px 16px 10px 16px;
     }
 
@@ -2545,43 +2666,16 @@ aside {
         background-color: #ddd4;
     }
 
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
 #codePIN {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
     margin: 1.2em 0;
-}
-
-.liste-commande-vendeur .liste-commande{
-    margin-left: 3em;
-
-    .liste-commande{
-        width: 80vw;
-    }
-}
-
-.liste-commande {
-    width: 100vw;
-    margin-top: 3em;
-
-    th,
-    td {
-        padding: 0px 10px;
-        height: 70px;
-        text-align: left;
-    }
-
-    tr {
-        padding: 20px 0px;
-    }
-
-    img {
-        width: 50px;
-    }
-
-    .bouton{
-        display: initial;
-    }
+    max-width: 30vw;
 }
 
 
@@ -2590,23 +2684,73 @@ aside {
     flex-direction: column;
     min-height: 100vh;
 
-    .input_quantite {
-        font-size: 1.4em;
-    }
-
     main {
         display: flex;
-        flex: 1;
-        padding: 0;
+        flex-direction: column;
+        justify-content: center;
+        flex :1;
 
-        img {
-            object-fit: contain;
+        table {
+            display: flex;
+            flex-direction: column;
+            align-self: center;
         }
 
-        div>a, div>span {
-            position: relative;
-            left: 50px;
-            top: 30px;
+        tr {
+            width: 75vw;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid black;
+            margin-top: 1em;
+            padding-bottom: 1em;
+        }
+
+        .bouton {
+            @include bouton_new($color: white, $display: inline);
+
+        }
+
+        p {
+            margin: 0;
+            text-align: center;
+            align-content: center;
+        }
+
+        td {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+
+            button {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        td, th {
+            width: 8vw;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}
+
+.liste-commande-page {
+    th, td {
+        &:nth-child(2) {
+            width: 20vw;
+            >p {
+                text-align: left;
+            }
+        }
+
+        &:nth-child(4) {
+            width: 5vw;
+        }
+
+        &:last-child {
+            width: 12vw;
         }
     }
 }

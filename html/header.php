@@ -1,9 +1,11 @@
-<?php $images = HOME_SITE . "image/" ?>
+<?php 
+    $images = HOME_SITE . "image/";
+?>
 
 <header id="header_client">
     <nav>
         <ul class="sidebar">
-            <li onclick=closeSidebar()> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
+            <li onclick="closeSidebar()"> <img src="<?= $images . 'fermer_blanc.svg' ?>"> </li>
             <li><a href="<?= HOME_SITE . 'carte/'?>">Carte</a></li>
             <!-- Si connecté -->
             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
@@ -77,17 +79,21 @@
             </li>
             
             <!-- Si connecté -->
-            <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
+            <?php
+            if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { 
+                $image = $_SESSION['pp'] ?? '';
+
+                ?>
                 <li class="hide-on-mobile">
                     <div class="dropdown">
                         <button onclick="ouvrirMenu()" class="dropdown-button">
-                            <img src="<?= $images . 'compte_blanc.svg' ?>" class="icon">
+                            <!-- Afficher la photo de profil ou l'icône par défaut -->
+                            <img class="image_pp" src="<?= empty($image) ? $images . 'compte_blanc.svg' : HOME_SITE . $image ?>" class="icon">
                             <?= htmlentities($_SESSION['pseudo'] ?? '') ?>
                         </button>
 
                         <div id="dropdown-compte" class="dropdown-content">
                             <a href="<?= HOME_SITE . 'compte/informations' ?>"> <img src="<?= $images . 'compte.svg' ?>" class="icon">Mon profil</a>
-                            <!-- <a href="#"> <img src="../image/options.svg" class="icon">Paramètres</a> -->
                             <a href="<?= HOME_SITE . 'commande' ?>"> <img src="<?= $images . 'panier.svg' ?>" class="icon">Mes commandes</a>
                             <a href="<?= HOME_SITE . 'deconnexion' ?>"> <img src="<?= $images . 'deconnexion.svg' ?>" class="icon">Déconnexion</a>
                         </div>

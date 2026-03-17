@@ -211,8 +211,8 @@ require_once (HOME_GIT . "fonction_vendeur.php");
         // });
 
         // AFFICHAGE DES FILTRES
-        const tab_vendeurs = <?= json_encode($tab_vendeurs)?>;
         const tab_adresse = <?= json_encode($tab_adresse)?>;
+        const tab_vendeurs = <?= json_encode($tab_vendeurs) ?>;
         const liste_vendeur = document.getElementById("liste_vendeur")
         let listeVendeurAffiche = []
 
@@ -225,9 +225,9 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 let label = document.createElement("label")
                 for(let cle in vendeur){
                     if(cle == 'raison_sociale'){
-                        input.id = vendeur[cle]
-                        label.innerHTML = vendeur[cle]
-                        label.htmlFor = vendeur[cle]
+                        input.id = vendeur['id_compte']
+                        label.innerHTML = vendeur['raison_sociale']
+                        label.htmlFor = vendeur['id_compte']
                         input.value = "vendeur_check"
                     }
                 }
@@ -418,6 +418,20 @@ require_once (HOME_GIT . "fonction_vendeur.php");
                 console.log(searchState.sort.order);
                 fetchProduitsJSON();
         });
+        liste_vendeur.addEventListener("change", (e) =>{
+            const inputsCoches = document.querySelectorAll('input[value=\"vendeur_check\"]:checked');
+            if(inputsCoches.length === 0){
+                groupMarker.clearLayers();
+                afficherMarker(listeVendeurAffiche);
+                return;
+            }
+            const idsCoches = Array.from(inputsCoches).map(input => input.id);
+            const vendeurFiltres = listeVendeurAffiche.filter(vendeur =>
+                idsCoches.includes(String(vendeur.id_compte))
+            );
+            groupMarker.clearLayers();
+            afficherMarker(vendeurFiltres);
+        });
 
         let radios = document.querySelectorAll("input[name=\"prix\"]");
 
@@ -506,7 +520,22 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             fetchProduitsJSON();
         });
 
+        function recupVendeur(data) {
+            let tableauVendeur = [];
+            let idsVus = [];
 
+            data.produits.forEach(produit => {
+                if (!idsVus.includes(produit.id_vendeur)) {
+                    idsVus.push(produit.id_vendeur);
+
+                    let vendeurTrouve = tab_vendeurs.find(v => v.id_compte ==produit.id_vendeur);
+                    if (vendeurTrouve) {
+                        tableauVendeur.push(vendeurTrouve);
+                    }
+                }
+            });
+            return tableauVendeur;
+        }
         function afficherProduits(data) {
             const resultGrid = document.querySelector("#results");
             // console.log(resultGrid);
@@ -653,6 +682,12 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             .then(res => res.json())
             .then(data => {
                 afficherProduits(data);
+                const tab_vendeurs_filtres = recupVendeur(data, tab_vendeurs);
+
+                liste_vendeur.replaceChildren();
+                groupMarker.clearLayers();
+                listeVendeurAffiche = afficher_listes_vendeur(tab_vendeurs_filtres);
+                afficherMarker(listeVendeurAffiche);
             });
         }
     </script>
