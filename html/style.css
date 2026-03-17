@@ -3662,7 +3662,7 @@ aside .achat:hover {
 .main_promo form #cout, .main_reduc form #cout {
   width: 20%;
 }
-.main_promo form div div, .main_reduc form div div {
+.main_promo form div, .main_reduc form div {
   justify-content: space-between;
 }
 .main_promo form div div input[type=text], .main_reduc form div div input[type=text] {
