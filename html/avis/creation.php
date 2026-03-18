@@ -18,7 +18,7 @@
     $description = trim($_POST['description'] ?? '');
     $id_produit = $_POST['produit'] ?? '';
 
-    $image = null;
+    $image = "";
 
     $erreur = condition_avis();
 
@@ -64,7 +64,7 @@
         }
             
         // Tout est bon : on donne à l'image son nom définitif
-        if ($image != null) {
+        if ($image != "") {
             rename('../ressources/avis/' . $fichier, '../' . $image);
         }
 

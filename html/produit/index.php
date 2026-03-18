@@ -389,6 +389,8 @@ if (isset($_POST['quantite'])) {
         const pErrorEmail = document.getElementById("error_email");
         const pErrorRaison = document.getElementById("error_raison");
 
+        const HOME_SITE = "../";
+
         // Afficher le modal en cliquant sur l'icône signaler
         document.querySelectorAll(".bouton_signalement").forEach(btn => {
             btn.addEventListener("click", () => {

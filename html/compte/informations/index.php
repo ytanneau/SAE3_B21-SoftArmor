@@ -505,6 +505,8 @@ if ($_POST != NULL){
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 <script>
+    const HOME_SITE = "../../";
+
     // Modification de la photo de profil
 
     const inputImagePP = document.getElementById("input_image_pp");
@@ -580,8 +582,13 @@ if ($_POST != NULL){
             inputTitre.value = data.titre;
             inputCommentaire.value = data.commentaire;
 
-            imagePreviewAvis.innerHTML = "";
-            imagePreviewAvis.style.backgroundImage = `url("../../${data.image}")`;
+            if (data.image != "") {
+                imagePreviewAvis.innerHTML = "";
+                imagePreviewAvis.style.backgroundImage = `url("../../${data.image}")`;
+                
+                // Afficher le bouton de suppression
+                buttonClearImageAvis.style.display = "block";
+            }
             
             // Afficher le modal
             modal.style.display = "block";
@@ -589,6 +596,20 @@ if ($_POST != NULL){
             // Empêcher le scroll tant que le modal est ouvert
             document.body.style.overflowY = "hidden";
         });
+    }
+
+    // Montrer la snackbar pendant 5 secondes
+    function showSnackbar(msg, mode) {
+        snackbar.textContent = msg;
+        snackbar.className = `show ${mode}`;
+
+        // Fermer le modal au cas où il serait ouvert
+        modal.style.display = "none";
+        document.body.style.overflowY = "auto";
+
+        setTimeout(() => {
+            snackbar.className = "";
+        }, 3000);
     }
 </script>
 </html>

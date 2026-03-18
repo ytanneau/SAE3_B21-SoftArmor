@@ -194,7 +194,7 @@
     function modifier_avis($id_client, $id_produit, $note, $titre, $commentaire, $image){
         global $pdo;
         try {
-            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :commentaire, date_avis = NOW() WHERE id_client = :id_client AND id_produit = :id_produit");
+            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :commentaire, date_avis = NOW(), id_image = NULL WHERE id_client = :id_client AND id_produit = :id_produit");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':note', $note, PDO::PARAM_INT);
@@ -203,7 +203,7 @@
             $requete->execute();
 
             // Gérer l'image si elle existe
-            if ($image !== null) {
+            if (!empty($image)) {
                 // Vérifier si une image existe déjà pour cet avis
                 $check_img = $pdo->prepare("SELECT i.url_image FROM _avis a LEFT JOIN _image i ON a.id_image = i.id_image WHERE a.id_client = :id_client AND a.id_produit = :id_produit");
                 $check_img->bindValue(':id_client', $id_client, PDO::PARAM_INT);
@@ -233,7 +233,7 @@
                     $link_img->execute();
                 }
             }
-            
+
             return 0;
         } catch (PDOException $e) {
             throw $e;

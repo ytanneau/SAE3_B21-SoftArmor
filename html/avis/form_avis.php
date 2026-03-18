@@ -27,8 +27,7 @@
                 <span id="nb_car_description">0/<?= TAILLE_DESCRIPTION ?></span>
             </div>
 
-
-            <input type="submit" value="Créer l'avis">
+            <input type="submit" value="Publier l'avis">
         </div>
 
         <div id="image_avis">
@@ -40,7 +39,7 @@
             </label>
             
             <button id="clear_image_avis" class="clear_image">
-                <img src="../image/supprimer_blanc.svg">
+                <img src="<?= HOME_SITE . "image/supprimer_blanc.svg" ?>">
             </button>
             
             <input type="file" id="input_image_avis" class="input_image" name="image" accept="image/png"></input>
@@ -100,7 +99,7 @@
 
         // Envoyer les données du formulaire en JSON à une autre page
 
-        const res = await fetch("../avis/creation.php", {
+        const res = await fetch(HOME_SITE + "avis/creation.php", {
             method: "POST",
             body: data
         });
@@ -115,9 +114,6 @@
             divAvis.style.display = "none";
 
             setTimeout(() => {
-                let params = new URLSearchParams(document.location.search);
-                let produit = params.get("produit");
-
                 window.location.reload();
             }, 5000);
         }
