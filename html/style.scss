@@ -405,10 +405,13 @@ ul#results {
     justify-content: space-around;
     display: flex;
 }
-#btn_reset_filter{
-    @include bouton_new($color: $rouge);
+#resetFilters{
+    @include bouton_new($background: $rouge, $color: white, $largeur: auto);
+    background-color: pink;
 }
-
+#btnOuvrirCarte{
+    @include bouton_new($background: gray, $color: white, $largeur: auto);
+}
 .deroulant {
     align-self: center;
 

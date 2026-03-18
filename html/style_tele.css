@@ -530,8 +530,8 @@ body {
   gap: 20px;
 }
 .footer .footer-socials img {
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 .footer .footer-bottom {
   flex-direction: column;

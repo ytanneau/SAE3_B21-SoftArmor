@@ -45,8 +45,13 @@
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
-        $lon = $_POST['lon'];
-        $lat = $_POST['lat'];
+        if(isset($_POST['lon']) && isset($_POST['lat'])){
+            $lon = $_POST['lon'];
+            $lat = $_POST['lat'];
+        } else {
+            $lon = null;
+            $lat = null;
+        }
         
         // redifinition des coordonnées suivant la nouvelle adresse
         $adresseSubmit = $modifAdresse . ", " . $modifVille. ", " . $modifCodePostal;
@@ -85,8 +90,6 @@
             header('Location: error_adress.php');
             exit();
         }
-        if($lon == null){ $lon = $tabAdresseVendeur['lon'];}
-        if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
