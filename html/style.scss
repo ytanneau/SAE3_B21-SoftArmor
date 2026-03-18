@@ -2854,3 +2854,11 @@ line-height: 0;
         }
     }
 }
+
+.erreur_adress{
+    display: flex;
+    flex-direction: column;
+    a{
+        @include bouton_new();
+    }
+}
