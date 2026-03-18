@@ -157,7 +157,7 @@
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
                         </div>
-                        <div style="display:flex; flex-direction:row;">
+                        <div style="display:flex; flex-direction:row; justify-content:space-between;">
                             <p style="display:none;" class="warning" id="warningLon">Erreur de saisi - longitude</p>
                             <p style="display:none;" class="warning" id="warningLat">Erreur de saisi - latitude</p>
                         </div>
