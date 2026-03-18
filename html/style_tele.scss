@@ -429,17 +429,24 @@ p {
                 font-size: 1.5em;
                 background-color: $focus;
                 border-radius: 15px;
+                color: #fff;
             }
         }
     }
 
     .entete{
         display: flex;
+        margin: 2em 0;
+
+        h1{
+            margin: 0;
+        }
 
         .grave{
             font-size: 1em;
             background-color: $rouge;
             border-radius: 15px;
+            color: #fff;
         }
     }
 

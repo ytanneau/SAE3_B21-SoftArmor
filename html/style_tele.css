@@ -407,14 +407,20 @@ p {
   font-size: 1.5em;
   background-color: #BB2BB2;
   border-radius: 15px;
+  color: #fff;
 }
 .mainPanier .entete {
   display: flex;
+  margin: 2em 0;
+}
+.mainPanier .entete h1 {
+  margin: 0;
 }
 .mainPanier .entete .grave {
   font-size: 1em;
   background-color: #E43737;
   border-radius: 15px;
+  color: #fff;
 }
 .mainPanier #panier_vide {
   display: flex;
