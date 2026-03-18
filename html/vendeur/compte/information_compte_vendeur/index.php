@@ -156,6 +156,8 @@
                                 <label for="latitude">Latitude</label>
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
+                            <p style="display:none;" id="warningLon">Erreur de saisi - longitude</p>
+                            <p style="display:none;" id="warningLat">Erreur de saisi - latitude</p>
                         </div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
@@ -185,6 +187,26 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
         
-        
+
+        const inputLongitude = document.getElementById("longitude")
+        const inputLatitude = document.getElementById("latitude")
+        const warningLon = document.getElementById("warningLon")
+        const warningLat = document.getElementById("warningLat")
+
+        inputLongitude.addEventListener('input', (e) => {
+            if(inputLongitude.value > -90 || inputLongitude.valude < 90){
+                warningLon.style.display = "block"
+            } else {
+                warningLon.style.display = "none"
+            }
+        })
+
+        inputLatitude.addEventListener('input', (e) => {
+            if(inputLatitude.value > -90 || inputLatitude.valude < 90){
+                warningLat.style.display = "block"
+            } else {
+                warningLat.style.display = "none"
+            }
+        })
     </script>
 </html>
