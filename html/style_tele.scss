@@ -833,3 +833,101 @@ ul#results {
         font-size: $font_size_normal;
     }
 }
+
+.produit {
+    main {
+        h2{
+            font-size: 1em;
+        }
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        font-size: 2em;
+
+        .gauche {
+            width: 100%;
+
+            #avis {
+                display: none;
+            }
+        }
+
+        .detail_produit {
+            width: 100%;
+
+            article {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    width: 60vw;
+                    height: auto;
+                    margin: 1rem 0;
+                }
+
+                h1 {
+                    font-size: 1.2rem;
+                    text-align: center;
+                }
+
+                p {
+                    text-align: center;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        aside {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-top: 1px solid #ccc;
+
+            div {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+
+            .input_quantite {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+
+                input[type="number"] {
+                    width: 60px;
+                    text-align: center;
+                }
+            }
+
+            .bouton,
+            .achat {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+        .bouton {
+            @include bouton_new;
+            background-color: $focus;
+            color: white;
+            font-size: $font_size_normal;
+            margin-top: 2%;
+            padding: 0.5em;
+
+            @media (max-width: 1440px) {
+                margin-top: 5%;
+            }
+        }
+        .achat {
+            @include bouton_new;
+            background-color: $couleur_etoile;
+            color: black;
+            font-size: $font_size_normal;
+            margin-top: 2%;
+            padding: 0.5em;
+            @media (max-width: 1440px) {
+                margin-top: 5%;
+            }
+        }
+    }
+}

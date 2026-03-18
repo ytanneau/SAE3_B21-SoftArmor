@@ -102,6 +102,7 @@ if (isset($_POST['quantite'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <?php include HOME_SITE . "link_head.php"; ?>
     <title>Alizon - <?= htmlentities($produit['nom_public'] ?? 'Produit') ?></title>
 </head>
