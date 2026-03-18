@@ -407,6 +407,7 @@ ul#results {
 }
 #btn_reset_filter{
     @include bouton_new($background: $rouge, $color: white, $largeur: auto);
+    background-color: pink;
 }
 
 .deroulant {
