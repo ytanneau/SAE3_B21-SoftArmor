@@ -34,8 +34,8 @@
     <body>
         <?php include '../../header.php'?>
         <main class="erreur_adress">
-            <h1>Erreur - Adresse saisi inconnue</h1>
-            <h4>Par défaut, l'ancienne adresse est consérvé</h4>
+            <h1>Erreur - Adresse saisie inconnue</h1>
+            <h4>Par défaut, l'ancienne adresse est conservée</h4>
             <a href="index.php">Modifier mon compte</a>
             <a href="../../accueil">Revenir à l'acceuil</a>
         </main>
