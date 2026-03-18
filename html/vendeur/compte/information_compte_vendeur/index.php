@@ -194,10 +194,13 @@
         const inputLatitude = document.getElementById("latitude")
         const warningLon = document.getElementById("warningLon")
         const warningLat = document.getElementById("warningLat")
+        const validerModifVendeur = document.getElementById("idValiderModifVendeur")
 
         inputLongitude.addEventListener('input', (e) => {
             if(inputLongitude.value < -90 || inputLongitude.value > 90){
                 warningLon.style.display = "block"
+                validerModifVendeur.style.backgroundColor = "ligth-grey"
+                validerModifVendeur.ariaDisabled = true
             } else {
                 warningLon.style.display = "none"
             }
@@ -206,6 +209,8 @@
         inputLatitude.addEventListener('input', (e) => {
             if(inputLatitude.value < -90 || inputLatitude.value > 90){
                 warningLat.style.display = "block"
+                validerModifVendeur.style.backgroundColor = "ligth-grey"
+                validerModifVendeur.ariaDisabled = true
             } else {
                 warningLat.style.display = "none"
             }
