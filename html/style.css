@@ -1226,6 +1226,30 @@ ul#results > li > a > h3 {
   background-color: pink;
 }
 
+#btnOuvrirCarte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#btnOuvrirCarte a {
+  text-decoration: none;
+  color: white;
+}
+#btnOuvrirCarte:hover {
+  background-color: rgb(166.25, 166.25, 166.25);
+}
+
 .deroulant {
   align-self: center;
 }
