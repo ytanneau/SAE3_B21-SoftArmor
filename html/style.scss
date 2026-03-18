@@ -2388,12 +2388,6 @@ aside {
         }
     }
 
-    .warning {
-        color: red;
-        font-style: italic;
-        font-size: 75%;
-    }
-
     #valider {
         @include bouton_new($color: $couleur_background);
         margin-top: 40px;
@@ -2820,4 +2814,10 @@ line-height: 0;
     a{
         @include bouton_new();
     }
+}
+
+.warning {
+    color: red;
+    font-style: italic;
+    font-size: 75%;
 }
