@@ -123,12 +123,6 @@
                         warning_date_passe.style.display = "none";
                     }
                 }
-
-                if(check_dispo_date(dateDebut.value)){
-                    warning_date_occupe.style.display = "block"
-                } else {
-                    warning_date_occupe.style.display = "none"
-                }
             });
 
             dateFin.addEventListener('change', () => {
@@ -141,7 +135,7 @@
                 }
             });
 
-            
+
             // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
             if(date.getMonth() < 9){
                 current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
