@@ -97,7 +97,7 @@
     
 </head>
 <body id="inscription_vendeur">
-<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1){
+<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1 && !empty($data)){
 ?>
     <main class="mainCarteInscription">
         <h1>Confirmer les coordonnées</h1>
@@ -118,7 +118,7 @@
             <input type="submit" class="bouton">
         </form>
     <script src="script_map.js"></script>
-<?php } elseif (isset($erreurs) && $erreurs == [] && $_POST['stage'] == 2) { ?>
+<?php } else if (isset($erreurs) && $erreurs == [] && ($_POST['stage'] == 2 || $_POST['stage'] == 1)) { ?>
 <main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
