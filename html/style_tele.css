@@ -431,14 +431,14 @@ p {
 .mainPanier .produit_paniner > a img {
   width: 50%;
 }
-.mainPanier .produit_paniner div article:first-child {
+.mainPanier .produit_paniner > div > article:first-child {
   display: flex;
   align-items: center;
 }
-.mainPanier .produit_paniner div article:first-child p {
+.mainPanier .produit_paniner > div > article:first-child p {
   margin: 0;
 }
-.mainPanier .produit_paniner div article:last-child p {
+.mainPanier .produit_paniner > div > article:last-child p {
   margin: 0;
 }
 .mainPanier #panier_vide {
