@@ -35,6 +35,8 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
+    $first_adress = $tabAdresseVendeur['adresse'] . ", " . $tabAdresseVendeur['ville'] . ", " . $tabAdresseVendeur['code_postal'];
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
@@ -70,14 +72,16 @@
         $response = curl_exec($ch);
 
         if(curl_errno($ch)){
-            echo "Erreur cURL : " . curl_error($ch);
+            echo "Erreur CURL : " . curl_error($ch);
         }
+        
         $data = json_decode($response, true);
-        if(!empty($data)){
+
+        if(!empty($data) && $first_adress != $adresseSubmit){
             $data = $data[0];
             $lon = $data["lat"];
             $lat = $data["lon"];
-        } else {
+        } else if (empty($data)) {
             header('Location: error_adress.php');
             exit();
         }
