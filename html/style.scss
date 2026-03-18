@@ -2837,5 +2837,12 @@ line-height: 0;
         border-radius: $angle_petit;
         text-align : center;
     }
+}
 
+.erreur_adress{
+    display: flex;
+    flex-direction: column;
+    a{
+        @include bouton_new();
+    }
 }
