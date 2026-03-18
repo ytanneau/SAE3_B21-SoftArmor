@@ -2886,8 +2886,10 @@ line-height: 0;
 .erreur_adress{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     a{
-        @include bouton_new();
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
     }
 }
 
