@@ -127,10 +127,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             </section>
         </div>
         <!-- Zone de la carte -->
-        <button id="btnOuvrirCarteDroite" class="ouvrirCarteDroite"><</button>
-        <div id="ombre">
-            <button id="btnFermerCarteDroite" class="fermerCarteDroite">></button>
-        </div>
+        <div id="ombre"></div>
 
         <section id="panneauCarte">
             <div class="enteteCarte">
@@ -172,20 +169,10 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <script>
         // document.addEventListener("DOMContentLoaded", () => {
             const btnOuvrir = document.getElementById("btnOuvrirCarte");
-            const btnOuvrirDroite = document.getElementById("btnOuvrirCarteDroite");
             const btnFermer = document.getElementById("btnFermerCarte");
-            const btnFermerDroite = document.getElementById("btnFermerCarteDroite");
             const carte = document.getElementById("panneauCarte");
             const ombre = document.getElementById("ombre");
             
-            btnOuvrirDroite.addEventListener("click", () => {
-                carte.classList.add("active");
-                ombre.classList.add("active");
-                document.body.style.overflow = "hidden"; // bloque scroll
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 300);
-            });
             btnOuvrir.addEventListener("click", (e) => {
                 e.preventDefault();
                 carte.classList.add("active");
@@ -205,7 +192,6 @@ require_once (HOME_GIT . "fonction_vendeur.php");
             }
 
             btnFermer.addEventListener("click", closePanel);
-            btnFermerDroite.addEventListener("click", closePanel);
             ombre.addEventListener("click", closePanel);
 
         // });
@@ -633,7 +619,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         function listeEtoiles(moyenne) {
             let divEtoiles = document.createElement("div");
-
+            divEtoiles
             if (moyenne == null || moyenne < 0 || moyenne > 5) {
                 return null;
             }

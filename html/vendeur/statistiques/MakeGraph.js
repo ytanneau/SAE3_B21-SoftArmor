@@ -253,7 +253,7 @@ export default class MakeGraph {
     labelMonth() {
         let now = new Date();
         let res = [];
-        for (let index = 0; index < 60; index++) {
+        for (let index = 0; index < 30; index++) {
             res.push(`${now.getDate()}/${now.getMonth() + 1}`);
             now.setDate(now.getDate() - 1);
         }
