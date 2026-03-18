@@ -623,10 +623,6 @@ ul#results {
     list-style: none;
     justify-content: left;
     margin-left: 10%;
-
-    >li {
-        @include produit_catalogue();
-    }
 }
 
 .labelBendeau {
