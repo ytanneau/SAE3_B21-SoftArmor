@@ -95,6 +95,7 @@
                 </select>
                 <button id='resetCat'>Reset Filtre</button>
                 <span class="aide" data-tooltip="Cliquez sur une catégorie dans le diagramme pour afficher toutes les sous-catégories, ou tous les produits dans cette catégorie"></span>
+<<<<<<< HEAD
                 
 
 
@@ -102,6 +103,11 @@
                         <canvas id="b"></canvas>
                     </div>
 
+=======
+                <div class="container" id="b_container">
+                    <canvas id="b"></canvas>
+                </div>
+>>>>>>> 507d73bca97aa5846120c43f05f4765d06135ac8
             </section>
             <section id="section_prod">
                 <h1>Statistiques Par Produits</h1>
@@ -444,6 +450,69 @@
                     //affiche le graphe
                     CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true, false);
                     document.getElementById('b_container').style.setProperty("height", "40vw");
+                }
+
+                //creer le graphe pour la section "produit"
+                function createProdChart() {
+
+                    //s'il est affiché => supprimer
+                    if(ProdChart !== null){
+                        deleteChart(ProdChart,"c");
+                    }
+                    
+                    let idProduit = document.getElementById("filtreProd").value;
+                    let valAbs = document.getElementById("filtreAbsProd").value;
+                    let valOrd = document.getElementById("filtreOrdProd").value;
+                    let type = document.getElementById("typeGraphProd").value;
+
+                    tabCat = [];
+                
+                    let methodePeriode;
+                    let methodeDonne;
+
+                    switch (valAbs) {
+                        case "M":
+                            methodePeriode = "getYear"
+                        break;
+
+                        case "W":
+                            methodePeriode = "getMonth"
+                        break;
+
+                        case "D":
+                            methodePeriode = "getWeek"
+                        break;
+
+                        case "h":
+                            methodePeriode = "getDay"
+                        break;
+
+                        case "m":
+                            methodePeriode = "getHour"
+                        break;
+                    }
+
+                    switch (valOrd) {
+                        case "qte":
+                            methodeDonne = "quantite"
+                        break;
+
+                        case "nbAchat":
+                            methodeDonne = "nb_commande"
+                        break;
+
+                        case "prix":
+                            methodeDonne = "prix"
+                        break;
+
+                    }
+                    
+                    let dataBase = graphCat.resetData().filtreByProduit(idProduit)[methodePeriode]();
+                    let produit = dataBase.value[methodeDonne];
+                    let label = dataBase.label;
+                    
+                    //affiche le graphe
+                    ProdChart = createChart("c", type, label, produit, "auto", false, true, true);
                 }
 
                 //creer le graphe pour la section "produit"
@@ -894,7 +963,11 @@
                     
                     if(typeCat === "all"){
                         createCatChart();
+<<<<<<< HEAD
                         document.getElementById('b_container').style="height:40vw;";
+=======
+                        document.getElementById('b_container').style="width:40vw;";
+>>>>>>> 507d73bca97aa5846120c43f05f4765d06135ac8
                         return;
                     }
                     
