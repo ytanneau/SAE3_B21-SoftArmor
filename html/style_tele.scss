@@ -512,13 +512,29 @@ p {
         }
 
         div {
-            background-color: aqua;
             article:first-child {
                 display: flex;
                 align-items: center;
 
-                p {
+                div{
+                    width: 90%;
+                }
+
+                p, h3 {
                     margin: 0;
+                    a{
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
+
+                button{
+                    background-color: $rouge;
+                    color: #fff;
+                    border-radius: 15px;
+                    img{
+                        width: 80px;
+                    }
                 }
             }
 
