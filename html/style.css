@@ -183,7 +183,7 @@ hr {
      object-fit: cover;
 }
 
-#input_image {
+.input_image {
   display: none;
 }
 
@@ -1937,7 +1937,7 @@ div:has(> aside) {
   display: flex;
   flex-direction: column;
 }
-#creation_avis #image_avis #clear_image {
+#creation_avis #image_avis .clear_image {
   display: none;
   align-self: end;
   position: relative;
@@ -3834,6 +3834,75 @@ aside .achat:hover {
 }
 .modal .modal_content form .error {
   visibility: hidden;
+}
+
+.infos .modal .modal_content {
+  width: 50%;
+  margin: 5% auto;
+}
+.infos .modal .modal_content .image_uploader {
+  width: 200px;
+  height: 200px;
+  border: 2px gray dashed;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.infos .modal .modal_content .image_uploader:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+.infos .modal .modal_content .image_uploader .image_preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+}
+.infos .modal .modal_content .image_uploader .image_preview span {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+.infos .modal .modal_content .image_uploader .image_preview span:first-child {
+  display: inline-block;
+  font-size: 7em;
+  height: 0.55em;
+}
+.infos .modal .modal_content .image_uploader .image_preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.infos .modal .modal_content .boutons button[type=submit] {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos .modal .modal_content .boutons button[type=submit] a {
+  text-decoration: none;
+  color: white;
+}
+.infos .modal .modal_content .boutons button[type=submit]:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }
 
 @keyframes ouvrir_modal {

@@ -62,7 +62,7 @@
     function get_avis_client($id_client){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, url_image, id_image_produit
+            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, url_image, titre_image, alt_image, id_image_produit
             FROM avis_client WHERE id_client = :id_client;");
 
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
@@ -110,7 +110,7 @@
     function get_infos_avis($id_avis){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, id_image
+            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, url_image
             FROM avis_client WHERE id_avis = :id_avis");
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
             $requete->execute();
