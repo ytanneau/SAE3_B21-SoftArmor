@@ -4331,7 +4331,7 @@ aside .achat:hover {
 .erreur_adress {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-items: center;
   width: 50%;
 }
 .erreur_adress a {
@@ -4357,6 +4357,9 @@ aside .achat:hover {
 }
 .erreur_adress a:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.erreur_adress a {
+  width: 100%;
 }
 
 .warning {

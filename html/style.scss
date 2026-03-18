@@ -2811,11 +2811,12 @@ line-height: 0;
 .erreur_adress{
     display: flex;
     flex-direction: column;
-    align-self: center;
+    align-items: center;
     width: 50%;
     a{
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
+        width: 100%;
     }
 }
 
