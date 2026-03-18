@@ -185,7 +185,7 @@
                     <div class="divEnLigne">
                         <p>
                             <label for="prixProd">Prix* hors taxe (€)</label>
-                            <input type="text" name="prix" id="prix" value="<?= $tabInfoProduit['prix']?>" required>
+                            <input type="text" name="prix" id="prixProd" value="<?= $tabInfoProduit['prix']?>" required>
                         </p>
                         <p>
                             <label for="tva">TVA*</label>
@@ -349,7 +349,7 @@
         <script>
             const nomPrv = document.getElementById("nomPrv");
             const nomPblc = document.getElementById("nomPblc");
-            const prix = document.getElementById("prix");
+            const prix = document.getElementById("prixProd");
             const tva = document.getElementById("tva");
             const codeBarre = document.getElementById("codeBarre");
             const modifierProduit = document.getElementById("modifierProduit");
