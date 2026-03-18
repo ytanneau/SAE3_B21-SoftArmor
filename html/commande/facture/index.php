@@ -52,13 +52,13 @@ if (isset($_GET["commande"])) {
 
     ?>
 
-    <main>
+    <main><?php
+        facture_client($_GET['commande']); ?>
 
         <?php if (isset($_GET["commande"])) { ?>
             <?php if (isset($liste_elements)) { ?>
-                <p>Vous n'avez pas accès à cette commande</p>
+                <!--p>Vous n'avez pas accès à cette commande</p-->
             <?php } else {
-                facture_client($_GET['commande']);
             } ?>
 
         <?php } ?>
