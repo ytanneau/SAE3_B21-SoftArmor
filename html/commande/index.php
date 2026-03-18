@@ -49,18 +49,11 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             const response = await fetch(url);
             const html = await response.text();
 
-            // Ouvre une nouvelle fenêtre
             const printWindow = window.open("", "_blank");
 
-            // Injecte le HTML récupéré
             printWindow.document.write(html);
             printWindow.document.close();
 
-            // Attend que la page soit chargée avant impression
-            printWindow.onload = () => {
-                printWindow.print();
-                printWindow.close();
-            };
         }
 
         // Utilisation

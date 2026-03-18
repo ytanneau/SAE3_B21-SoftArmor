@@ -30,9 +30,6 @@ require_once HOME_GIT . "/fonction_compte.php";
 if (isset($_GET["commande"])) {
     $liste_elements = get_elements_commande($_GET["commande"]);
     $date_commande = get_date_commande($_GET['commande']);
-} else {
-    $liste_commandes = get_commandes($_SESSION["id_compte"]);
-
 }
 
 ?>
@@ -57,7 +54,7 @@ if (isset($_GET["commande"])) {
     <main>
 
         <?php if (isset($_GET["commande"])) { ?>
-            <?php if (count($liste_elements) == 0) { ?>
+            <?php if (isset($liste_elements)) { ?>
                 <p>Vous n'avez pas accès à cette commande</p>
             <?php } else {
                 facture_client($_GET['commande']);
@@ -73,5 +70,7 @@ if (isset($_GET["commande"])) {
         include HOME_SITE . "footer.php";
     } ?>
 </body>
-
+<script>
+    window.print();
+</script>
 </html>
