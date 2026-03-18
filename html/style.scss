@@ -2888,6 +2888,7 @@ line-height: 0;
     flex-direction: column;
     align-items: center;
     width: 50%;
+    justify-self: center;
     a{
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
