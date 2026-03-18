@@ -464,18 +464,21 @@ p {
             width: 50%;
         }
 
-        div:first-child {
-            display: flex;
-            align-items: center;
+        div {
 
-            p {
-                margin: 0;
+            article:first-child {
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin: 0;
+                }
             }
-        }
 
-        div:last-child {
-            p {
-                margin: 0;
+            article:last-child {
+                p {
+                    margin: 0;
+                }
             }
         }
     }
