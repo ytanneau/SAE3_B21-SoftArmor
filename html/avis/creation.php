@@ -22,16 +22,6 @@
 
     $erreur = condition_avis();
 
-    // S'il y a des erreurs dans la soumission, fin du traitement
-    if (!empty($erreur)) {
-        echo json_encode([
-            'success' => false,
-            'message' => "L'avis n'a pas pu être créé. Veuillez réessayer plus tard."
-        ]);
-        supprimer_image($fichier, $image);
-        die();
-    }
-
     // Met l'image uploadée avec les autres pour éviter de la perdre
     if (isset($_FILES['image']) && isset($_FILES['image']['name'])) {
         $fichier = $id_compte . '_'. time();
@@ -50,30 +40,34 @@
         }
 
         if ($_FILES['image']['size'] > 0) {
+            // Nom à donner à l'image en cas de succès de l'upload
             $image = 'ressources/avis/' . $id_produit . '_' . $id_compte . $ext;
         }
     }
 
+    // S'il y a des erreurs dans la soumission, fin du traitement
+    if (!empty($erreur)) {
+        echo json_encode([
+            'success' => false,
+            'message' => "L'avis n'a pas pu être créé. Veuillez réessayer plus tard."
+        ]);
+        supprimer_image($fichier);
+        die();
+    }
+
     try {
-        // Si déjà signalé par l'utilisateur, erreur
+        // Si déjà créé par l'utilisateur, on le modifie, sinon on le crée
         if (check_avis_existe($id_produit, $id_compte)) {
-            echo json_encode([
-                'success' => false,
-                'message' => "Vous avez déjà donné votre avis sur ce produit."
-            ]);
-            supprimer_image($fichier, $image);
-            die();
+            modifier_avis($id_compte, $id_produit, $note, $titre, $description, $image);
+        } else {
+            cree_avis($id_compte, $id_produit, $note, $titre, $description, $image);
+        }
+            
+        // Tout est bon : on donne à l'image son nom définitif
+        if ($image != null) {
+            rename('../ressources/avis/' . $fichier, '../' . $image);
         }
 
-        // Créer l'avis
-        if (!empty($id_produit)) {
-            cree_avis($id_compte, $id_produit, $note, $titre, $description, $image);
-        
-            if ($image != null) {
-                rename('../ressources/avis/' . $fichier, '../' . $image);
-            }
-        }
-        
         echo json_encode([
             'success' => true,
             'message' => "Merci pour votre retour. Votre avis sera visible dans quelques instants."
@@ -84,12 +78,12 @@
             'success' => false,
             'message' => "Nous rencontrons des problèmes serveur. Veuillez réessayer plus tard. " . $e->getMessage()
         ]);
-        supprimer_image($fichier, $image);
+        supprimer_image($fichier);
         die();
     }
 
 
-    function supprimer_image($fichier, $image) {
+    function supprimer_image($fichier) {
         if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
             if (file_exists('../ressources/avis/' . $fichier)){
                 unlink('../ressources/avis/' . $fichier);

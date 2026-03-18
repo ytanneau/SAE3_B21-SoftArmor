@@ -71,7 +71,7 @@ hr {
     @include image_uploader(200px, 100px);
 }
 
-#input_image {
+.input_image {
     display: none;
 }
 
@@ -215,6 +215,11 @@ hr {
             }
         }
     }
+}
+
+
+#nav_tel {
+    display: none;
 }
 
 #header_client {
@@ -508,6 +513,10 @@ ul#results {
 
     .modif {
         @include bouton_new($color: white, $largeur: unset);
+        width: 370px;
+        padding: 0.6em;
+        line-height: 2em;
+        margin-top: 8%;
     }
 
     .grave {
@@ -527,25 +536,19 @@ ul#results {
         }
     }
 
-    #idValiderModifVendeur {
-        margin-top: 20px;
-        @include bouton_new($color: $couleur_background);
-        width: 600px;
-    }
-
     #idDesactivationCompte,
     #idDesactivation2FA {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
     #idActivation2FA {
         @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
 
@@ -621,6 +624,65 @@ ul#results {
             @include image_pp(200px);
         }
 
+    }
+
+
+    @media screen and (max-width: 1024px) {
+        main {
+            padding: 0;
+        }
+
+        section {
+            @include contenu_centre_vertical;
+
+            .form_infos {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                margin: 1em;
+                gap: 2em;
+
+
+                article {
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                    &:first-child {
+                        align-items: center;
+
+                        .image_pp {
+                            width: clamp(140px, 40vw, 240px);
+                            border-radius: 8px;
+                        }
+
+                        label {
+                            margin-top: 1em;
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }
+
+
+                    &:last-child {
+
+                        input,
+                        button,
+                        a {
+                            width: 50%;
+                        }
+
+                        .champ {
+                            margin-bottom: 1em;
+                        }
+
+                        .bouton {
+                            margin-top: 1.2em;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
@@ -889,7 +951,7 @@ div:has(> aside) {
         display: flex;
         flex-direction: column;
 
-        #clear_image {
+        .clear_image {
             display: none;
             align-self: end;
     
@@ -1060,10 +1122,6 @@ div:has(> aside) {
 
     .etoiles {
         height: 30px;
-    }
-
-    nav {
-        display: none;
     }
 
     >main {
@@ -2328,6 +2386,21 @@ aside {
     }
 }
 
+.infos .modal {
+    .modal_content {
+        width: 50%;
+        margin: 5% auto;
+
+        .image_uploader {
+            @include image_uploader(200px);
+        }
+
+        .boutons button[type="submit"] {
+            @include bouton_new($couleur_primaire_client, $color: white, $padding: 0.5em);
+        }
+    }
+}
+
 @keyframes ouvrir_modal {
     from {
         top: -200px;
@@ -2386,12 +2459,6 @@ aside {
                 }
             }
         }
-    }
-
-    .warning {
-        color: red;
-        font-style: italic;
-        font-size: 75%;
     }
 
     #valider {
@@ -2819,7 +2886,16 @@ line-height: 0;
 .erreur_adress{
     display: flex;
     flex-direction: column;
+    align-self: center;
+    width: 50%;
     a{
-        @include bouton_new();
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
     }
+}
+
+.warning {
+    color: red;
+    font-style: italic;
+    font-size: 75%;
 }

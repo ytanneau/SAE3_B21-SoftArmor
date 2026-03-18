@@ -93,7 +93,7 @@
                     <option value="h">24 Dernieres Heures</option>
                     <option value="m">60 Dernieres Minutes</option>
                 </select>
-                <button id='resetCat'>Reset Filtre</button>
+                <button id='resetCat'>Reinitialiser Filtre</button>
                 <span class="aide" data-tooltip="Cliquez sur une catégorie dans le diagramme pour afficher toutes les sous-catégories, ou tous les produits dans cette catégorie"></span>
                 <div class="container" id="b_container">
                     <canvas id="b"></canvas>

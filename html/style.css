@@ -183,7 +183,7 @@ hr {
      object-fit: cover;
 }
 
-#input_image {
+.input_image {
   display: none;
 }
 
@@ -406,6 +406,10 @@ hr {
 }
 .toolbar#produit ul .supprimer_produit a {
   color: #FFFFFF;
+}
+
+#nav_tel {
+  display: none;
 }
 
 #header_client {
@@ -1375,6 +1379,12 @@ ul#results > li > a > h3 {
 .infos .modif:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+.infos .modif {
+  width: 370px;
+  padding: 0.6em;
+  line-height: 2em;
+  margin-top: 8%;
+}
 .infos .grave {
   display: block;
   max-width: 100%;
@@ -1431,33 +1441,6 @@ ul#results > li > a > h3 {
 .infos .image_bouton p {
   font-size: 10px;
 }
-.infos #idValiderModifVendeur {
-  margin-top: 20px;
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.infos #idValiderModifVendeur a {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-.infos #idValiderModifVendeur:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.infos #idValiderModifVendeur {
-  width: 600px;
-}
 .infos #idDesactivationCompte,
 .infos #idDesactivation2FA {
   display: block;
@@ -1488,7 +1471,7 @@ ul#results > li > a > h3 {
 .infos #idDesactivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos #idActivation2FA {
   display: block;
@@ -1516,7 +1499,7 @@ ul#results > li > a > h3 {
 .infos #idActivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
@@ -1892,7 +1875,7 @@ div:has(> aside) {
   display: flex;
   flex-direction: column;
 }
-#creation_avis #image_avis #clear_image {
+#creation_avis #image_avis .clear_image {
   display: none;
   align-self: end;
   position: relative;
@@ -2035,9 +2018,6 @@ div:has(> aside) {
 }
 .accueil .etoiles {
   height: 30px;
-}
-.accueil nav {
-  display: none;
 }
 .accueil > main .banniere {
   display: flex;
@@ -3804,6 +3784,75 @@ aside .achat:hover {
   visibility: hidden;
 }
 
+.infos .modal .modal_content {
+  width: 50%;
+  margin: 5% auto;
+}
+.infos .modal .modal_content .image_uploader {
+  width: 200px;
+  height: 200px;
+  border: 2px gray dashed;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.infos .modal .modal_content .image_uploader:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+.infos .modal .modal_content .image_uploader .image_preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+}
+.infos .modal .modal_content .image_uploader .image_preview span {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+.infos .modal .modal_content .image_uploader .image_preview span:first-child {
+  display: inline-block;
+  font-size: 7em;
+  height: 0.55em;
+}
+.infos .modal .modal_content .image_uploader .image_preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.infos .modal .modal_content .boutons button[type=submit] {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.5em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.infos .modal .modal_content .boutons button[type=submit] a {
+  text-decoration: none;
+  color: white;
+}
+.infos .modal .modal_content .boutons button[type=submit]:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
+}
+
 @keyframes ouvrir_modal {
   from {
     top: -200px;
@@ -3866,11 +3915,6 @@ aside .achat:hover {
 }
 .main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
   width: 80%;
-}
-.main_promo .warning, .main_reduc .warning {
-  color: red;
-  font-style: italic;
-  font-size: 75%;
 }
 .main_promo #valider, .main_reduc #valider {
   display: block;
@@ -4337,8 +4381,11 @@ aside .achat:hover {
 .erreur_adress {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  width: 50%;
 }
 .erreur_adress a {
+  margin-top: 20px;
   display: block;
   max-width: 100%;
   width: auto;
@@ -4347,7 +4394,7 @@ aside .achat:hover {
   font-size: 1em;
   font-weight: bold;
   background-color: #BB2BB2;
-  color: black;
+  color: #FFFFFF;
   border: none;
   border-radius: 5px;
   text-align: center;
@@ -4356,8 +4403,14 @@ aside .achat:hover {
 }
 .erreur_adress a a {
   text-decoration: none;
-  color: black;
+  color: #FFFFFF;
 }
 .erreur_adress a:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+
+.warning {
+  color: red;
+  font-style: italic;
+  font-size: 75%;
 }/*# sourceMappingURL=style.css.map */

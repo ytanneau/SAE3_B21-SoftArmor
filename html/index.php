@@ -179,7 +179,7 @@ if($tabPromotion != false){
             </section>
 
             <!-- Navigation (pour teléphone) -->
-            <nav>
+            <nav id="nav_tel">
                 <a href="<?=HOME_SITE?>panier"><img src="<?=HOME_SITE?>image/panier.svg" title="Acceder au Panier" alt="panier"></a>
                 <a href="<?=HOME_SITE?>"><img src="<?=HOME_SITE?>image/home.svg" title="Acceder à la page d'Accueil" alt="accueil"></a>
 

@@ -210,12 +210,12 @@ if ($_POST != NULL){
                     <input id="pdp" type="file" name="pdp" accept=".png" hidden>
                     -->
 
-                    <label class="image_uploader" for="input_image" tabIndex="0">
+                    <label class="image_uploader" for="input_image_pp" tabIndex="0">
                         <span id="image_preview" class="image_preview">
                             <img src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                         </span>
                     </label>
-                    <input type="file" id="input_image" name="pdp" accept="image/png"></input>
+                    <input type="file" id="input_image_pp" name="pdp" accept="image/png"></input>
                 </article>
 
                 <article>
@@ -461,7 +461,7 @@ if ($_POST != NULL){
                                 </div>
 
                                 <div class="icons">
-                                    <button class="bouton_modifier" data-avis="<?= $row['id_produit'] ?>">
+                                    <button class="bouton_modifier" data-produit="<?= $row['id_produit'] ?>" data-avis="<?= $row['id_avis'] ?>">
                                         <img src="<?=HOME_SITE?>image/modifier.svg" alt="Modifier" class="icon">
                                     </button>
                                     <a href="?supprimer_avis=1&id_produit=<?= $row['id_produit'] ?>&id_client=<?= $_SESSION['id_compte']?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')">
@@ -478,7 +478,7 @@ if ($_POST != NULL){
                         </div>
 
                         <?php if (isset($row['url_image'])) { ?>
-                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt'] ?>">
+                            <img src="<?= HOME_SITE . $row['url_image'] ?>" title="<?= $row['titre_image'] ?>" alt="<?= $row['alt_image'] ?>">
                         <?php } ?>
 
                         
@@ -494,23 +494,9 @@ if ($_POST != NULL){
                     <span class="fermer_modal">&times;</span>
                 </div>
                 
-                <form id="form_modifier" action="" method="post">
-                    <input type="hidden" name="id_avis" id="id_avis_modifier">
-
-                    <label for="titre_avis">Titre</label>
-                    <input type="text" name="titre_avis" id="titre_avis" value="">
-
-                    <label for="titre_avis">Description</label>
-                    <input type="text" name="description_avis" id="titre_avis">
-
-                    
-                    <p class="error" id="error_raison">Veuillez indiquer la raison du signalement</p>
-
-                    <div class="boutons">
-                        <button type="reset" class="fermer_modal">Annuler</button>
-                        <button type="submit">Modifier</button>
-                    </div>
-                </form>
+                <div id="creation_avis">
+                    <?php include HOME_SITE . "avis/form_avis.php"; ?>
+                </div>
             </div>
         </div>
 
@@ -521,34 +507,35 @@ if ($_POST != NULL){
 <script>
     // Modification de la photo de profil
 
-    const inputImage = document.getElementById("input_image");
-    const imagePreview = document.getElementById("image_preview");
+    const inputImagePP = document.getElementById("input_image_pp");
+    const imagePreviewPP = document.getElementById("image_preview_pp");
+    //const clearImagePP = document.getElementById("clear_image_pp");
 
-    inputImage.addEventListener("change", (e) => {
+    inputImagePP.addEventListener("change", (e) => {
         const file = e.target.files[0];
 
         if (file) {
             const reader = new FileReader();
 
             reader.addEventListener("load", (e) => {
-                imagePreview.style.backgroundImage = `url(${e.target.result})`;
-                imagePreview.innerHTML = "";
+                imagePreviewPP.style.backgroundImage = `url(${e.target.result})`;
+                imagePreviewPP.innerHTML = "";
             });
 
             reader.readAsDataURL(file);
         }
     });
 
-
     // Modification d'un avis
 
     const modal = document.getElementById("modal_modifier");
 
-    const formModifier = document.getElementById("form_modifier");
+    const formModifier = document.getElementById("form_avis");
     const contentModifier = document.getElementById("content_modifier");
 
     const snackbar = document.getElementById("snackbar");
-    const inputIdAvisModifier = document.getElementById("id_avis_modifier");
+
+    const inputIdProduitAvis = document.getElementById("id_produit_avis");
 
     const selection = {
         id_avis: null
@@ -557,13 +544,16 @@ if ($_POST != NULL){
     // Ouvrir le modal
     document.querySelectorAll(".bouton_modifier").forEach(btn => {
         btn.addEventListener("click", () => {
-            inputIdAvisModifier.value = btn.dataset.avis;
-
+            inputIdProduitAvis.value = btn.dataset.produit;
+            selection.id_avis = btn.dataset.avis;
+            
             // Afficher le modal
             modal.style.display = "block";
-
+            
             // Empêcher le scroll tant que le modal est ouvert
             document.body.style.overflowY = "hidden";
+
+            preremplirChamps();
         });
     });
 
@@ -576,7 +566,7 @@ if ($_POST != NULL){
     });
 
     async function preremplirChamps() {
-        fetch('./infos_avis.php', {
+        fetch('../../avis/infos_avis.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(selection)
@@ -584,13 +574,14 @@ if ($_POST != NULL){
         .then(res => res.json())
         .then(data => {
             // Préremplir les champs
-            boutons[data.note].click();
-            inputTitreAvis.value = data.titre;
+            let etoiles =  Array.from(document.querySelector("#etoiles").children);
+            etoiles[data.note - 1].click();
+
+            inputTitre.value = data.titre;
             inputCommentaire.value = data.commentaire;
 
-            imagePreviewAvis.backgroundImage = `url("${data.image}")`;
-            
-
+            imagePreviewAvis.innerHTML = "";
+            imagePreviewAvis.style.backgroundImage = `url("../../${data.image}")`;
             
             // Afficher le modal
             modal.style.display = "block";
@@ -599,6 +590,5 @@ if ($_POST != NULL){
             document.body.style.overflowY = "hidden";
         });
     }
-    
 </script>
 </html>
