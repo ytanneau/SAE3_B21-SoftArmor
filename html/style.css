@@ -408,6 +408,10 @@ hr {
   color: #FFFFFF;
 }
 
+#nav_tel {
+  display: none;
+}
+
 #header_client {
   position: sticky;
   top: 0;
@@ -2035,9 +2039,6 @@ div:has(> aside) {
 }
 .accueil .etoiles {
   height: 30px;
-}
-.accueil nav {
-  display: none;
 }
 .accueil > main .banniere {
   display: flex;
@@ -4326,6 +4327,7 @@ aside .achat:hover {
 .stat select {
   border-radius: 5px;
   text-align: center;
+  margin-right: 3em;
 }
 
 .erreur_adress {
