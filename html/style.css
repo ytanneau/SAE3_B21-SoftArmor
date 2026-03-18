@@ -3867,11 +3867,6 @@ aside .achat:hover {
 .main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
   width: 80%;
 }
-.main_promo .warning, .main_reduc .warning {
-  color: red;
-  font-style: italic;
-  font-size: 75%;
-}
 .main_promo #valider, .main_reduc #valider {
   display: block;
   max-width: 100%;
@@ -4359,4 +4354,10 @@ aside .achat:hover {
 }
 .erreur_adress a:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+
+.warning {
+  color: red;
+  font-style: italic;
+  font-size: 75%;
 }/*# sourceMappingURL=style.css.map */

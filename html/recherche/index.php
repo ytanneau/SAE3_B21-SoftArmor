@@ -619,7 +619,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
 
         function listeEtoiles(moyenne) {
             let divEtoiles = document.createElement("div");
-
+            divEtoiles
             if (moyenne == null || moyenne < 0 || moyenne > 5) {
                 return null;
             }
