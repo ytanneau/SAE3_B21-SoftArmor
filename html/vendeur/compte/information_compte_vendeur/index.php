@@ -194,7 +194,7 @@
         const warningLat = document.getElementById("warningLat")
 
         inputLongitude.addEventListener('input', (e) => {
-            if(inputLongitude.value < -90 || inputLongitude.valude > 90){
+            if(inputLongitude.value < -90 || inputLongitude.value > 90){
                 warningLon.style.display = "block"
             } else {
                 warningLon.style.display = "none"
@@ -202,7 +202,7 @@
         })
 
         inputLatitude.addEventListener('input', (e) => {
-            if(inputLatitude.value < -90 || inputLatitude.valude > 90){
+            if(inputLatitude.value < -90 || inputLatitude.value > 90){
                 warningLat.style.display = "block"
             } else {
                 warningLat.style.display = "none"
