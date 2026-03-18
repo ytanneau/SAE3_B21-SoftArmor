@@ -5,7 +5,7 @@
 
 #header_client {
     position: sticky;
-    width:100vw;
+    width: 100vw;
 
     top: 0;
     z-index: 11;
@@ -348,7 +348,8 @@ p {
 
 
 .accueil {
-    font-size:3em;
+    font-size: 3em;
+
     .prix {
         font-size: 1.5em;
         color: $couleur_prix;
@@ -406,7 +407,7 @@ p {
     }
 
     main {
-        
+
 
         .droite,
         .gauche {
@@ -559,7 +560,7 @@ p {
                     border-radius: 15px;
 
                     img {
-                        width: 80px;
+                        width: 40px;
                     }
                 }
             }
@@ -569,13 +570,24 @@ p {
                     margin: 0;
                 }
 
-                >form, >div{
+                >form,
+                >div {
                     display: flex;
                     gap: 30px;
                 }
 
-                >form:last-child{
+                >form:last-child {
                     display: none;
+                }
+
+                input {
+                    width: 2em;
+                    height: 2em;
+                }
+
+                .input_quantite130 {
+                    width: 3em;
+                    height: 1.5em;
                 }
             }
         }

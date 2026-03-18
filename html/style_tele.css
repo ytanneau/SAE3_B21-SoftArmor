@@ -723,17 +723,26 @@ p {
   border-radius: 15px;
 }
 .mainPanier .produit_panier div article:first-child button img {
-  width: 80px;
+  width: 40px;
 }
 .mainPanier .produit_panier div article:last-child p {
   margin: 0;
 }
-.mainPanier .produit_panier div article:last-child > form, .mainPanier .produit_panier div article:last-child > div {
+.mainPanier .produit_panier div article:last-child > form,
+.mainPanier .produit_panier div article:last-child > div {
   display: flex;
   gap: 30px;
 }
 .mainPanier .produit_panier div article:last-child > form:last-child {
   display: none;
+}
+.mainPanier .produit_panier div article:last-child input {
+  width: 2em;
+  height: 2em;
+}
+.mainPanier .produit_panier div article:last-child .input_quantite130 {
+  width: 3em;
+  height: 1.5em;
 }
 .mainPanier #panier_vide {
   display: flex;
