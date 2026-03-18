@@ -52,6 +52,9 @@
                     $data = $data[0];
                     $longitude = $data["lat"];
                     $latitude = $data["lon"];
+                } else {
+                    $longitude = null;
+                    $latitude = null;
                 }
                 
                 $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
