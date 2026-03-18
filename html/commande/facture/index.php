@@ -46,7 +46,7 @@ if (isset($_GET["commande"])) {
 
 </head>
 
-<body class="liste-commande-page">
+<body class="facture-page-vendeur">
     <?php
     include HOME_SITE . "header.php";
 
@@ -72,7 +72,9 @@ if (isset($_GET["commande"])) {
     } ?>
 </body>
 <script defer>
-    window.print();
-    window.close();
+    window.onload = () => {
+                window.print();
+                window.close();
+            };
 </script>
 </html>
