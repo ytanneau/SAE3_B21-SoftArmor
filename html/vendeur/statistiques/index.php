@@ -520,7 +520,7 @@
 
                     let values = getValueData(graphCat,typeVal,typeCat,plage);
 
-
+                    console.log(baseData);
                     CatChart = createChart(
                         "b",
                         "bar",
