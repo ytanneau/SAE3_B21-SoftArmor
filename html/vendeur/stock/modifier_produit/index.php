@@ -234,7 +234,7 @@
 
                         <p id="pSousCategorieAlimentaire">
                             <label for="sous_categorie">Sous-catégories alimentaire*</label>
-                            <select name="sous_categorie" id="sous_cate">
+                            <select name="sous_categorie" id="sous_categorie">
                                 <option value="">-- Choisir une catégorie --</option>
                                 <?php 
                                     $tabSousCategorie = get_sous_categorie("Alimentaire");
@@ -251,7 +251,7 @@
                     <div class="divEnLigne">
                         <p>
                             <label for="qtAchete">Quantité acheté</label>
-                            <input type="number" name="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
+                            <input type="number" name="qtAchete" id="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
                         </p>
                         <p id="blockUniteMasse" style="display:none;">
                             <label for="uniteMasse">Unités de masse</label>
@@ -316,7 +316,7 @@
                             <input type="number" name="qtStock" id="qtStock" value="<?= $tabInfoProduit['quantite'] ?>">
                         </p>
                         <p>
-                            <label for="idSeuilAlerte">Seuil d'alerte</label>
+                            <label for="seuilAlerte">Seuil d'alerte</label>
                             <input type="number" name="seuilAlerte" id="seuilAlerte" value="<?= $tabInfoProduit['seuil_alerte']?>">
                         </p>
                     </div>
@@ -356,7 +356,7 @@
 
             const categorie = document.getElementById("categorie");
             const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
-            const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
+            const selectSousCategorieAlimentaire = document.getElementById("sous_categorie");
 
             const uniteLiquide = document.getElementById("blockUniteLiquide");
             const uniteMasse = document.getElementById("blockUniteMasse");
