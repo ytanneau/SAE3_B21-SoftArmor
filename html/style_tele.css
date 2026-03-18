@@ -474,6 +474,17 @@ body {
   font-family: "Montserrat";
 }
 
+@media print {
+  h1 {
+    font-size: 8mm;
+  }
+  header,
+  button,
+  footer,
+  a {
+    display: none !important;
+  }
+}
 .hide-on-mobile,
 .toolbar,
 .fleche {
