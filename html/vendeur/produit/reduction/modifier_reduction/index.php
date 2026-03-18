@@ -67,9 +67,8 @@
                     </div>
                 </div>
 
-                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
-                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
+                <p style="display:none;" class="warning" id="warning_date_anterieur">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" class="warning" id="warning_date_passe">Date de debut déjà passé</p>
 
                 <div class="en_ligne">
                     <div class="en_colonne">
@@ -91,73 +90,57 @@
     <script>
         let tab_reduction = <?= json_encode($tab_reduction)?>;
 
-        const dateDebut = document.getElementById("dateDebut")
-        const dateFin = document.getElementById("dateFin")
-        const warningPourcentage = document.getElementById("warningPourcentage")
-        const pourcentage = document.getElementById("pourcentage")
+        const warningPourcentage = document.getElementById("warningPourcentage");
+        const pourcentage = document.getElementById("pourcentage");
         const prixInitial = <?= json_encode($prix) ?>;
         const prixFinal = document.getElementById("prixFinal")
-        const warning1 = document.getElementById("warning1");
-        const warning2 = document.getElementById("warning2");
-        const warning3 = document.getElementById("warning3");
+        const dateDebut = document.getElementById("dateDebut")
+        const dateFin = document.getElementById("dateFin")
+        const warning_date_anterieur = document.getElementById("warning_date_anterieur");
+        const warning_date_passe = document.getElementById("warning_date_passe");
 
-        dateDebut.addEventListener('change', () => {
-            if(dateFin.value != ""){
-                if(dateDebut.value > dateFin.value) {
-                    warning1.style.display = "block";
-                } else if (dateFin == ""){
-                    dateFin.value = dateDebut.value;
-                } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
-                    warning3.style.display = "block";
-                } else {
-                    warning1.style.display = "none";
-                    warning3.style.display = "none";
-                    calculP();
-                }
-                
-            }
-            if(!verif_date_pour_suppression(dateDebut.value)){
-                btn_suppr.style.display = "none";
-            } else {
-                btn_suppr.style.display = "block";
-            }
-            
-        });
-        
-        dateFin.addEventListener('change', () => {
-            if(dateDebut.value != ""){
-                if(dateDebut.value > dateFin.value) {
-                    warning1.style.display = "block";
-                } else {
-                    warning1.style.display = "none";
-                    calculP();
-                }
-            }
-            if (check_date(dateFin.value)){
-                divPhoto.style.display = "block";
-            } else {
-                divPhoto.style.display = "none";
-            }
-        });
-    
+        let date = new Date()
+        let current_string_date
+
         pourcentage.addEventListener('input', () => {
             pourcentage.value = pourcentage.value.replace(",",".");
             pourcentage.value = pourcentage.value.replace(/[^\d.,]/g,"");
-            if(pourcentage.value <= 100){
-                calculR();
+            if(pourcentage.value <= 100 && pourcentage.value != ""){
+                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
+                prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2) + "€";
             } else {
                 warningPourcentage.style.display = "block";
             }
         })
 
-        function calculR(){
-            if(pourcentage.value != ""){
-                prixFinal.value = prixInitial * (1 - pourcentage.value / 100);
-                prixFinal.value = Number.parseFloat(prixFinal.value).toFixed(2) + "€";
-            } else {
-                euro.value = "";
+        dateDebut.addEventListener('change', () => {
+            if(dateFin.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning_date_anterieur.style.display = "block";
+                } else if(new Date(dateDebut.value).getTime() < date.getTime()){
+                    warning_date_passe.style.display = "block";
+                } else {
+                    warning_date_anterieur.style.display = "none";
+                    warning_date_passe.style.display = "none";
+                }
             }
-        }
+
+            if(check_dispo_date(dateDebut.value)){
+                warning_date_occupe.style.display = "block"
+            } else {
+                warning_date_occupe.style.display = "none"
+            }
+        });
+
+        dateFin.addEventListener('change', () => {
+            if(dateDebut.value != ""){
+                if(dateDebut.value > dateFin.value) {
+                    warning_date_anterieur.style.display = "block";
+                } else {
+                    warning_date_anterieur.style.display = "none";
+                }
+            }
+        });
 
         dateDebut.value = tab_reduction['date_debut']
         dateFin.value = tab_reduction['date_fin']
