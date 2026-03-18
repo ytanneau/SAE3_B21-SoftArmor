@@ -953,11 +953,7 @@
                     
                     if(typeCat === "all"){
                         createCatChart();
-<<<<<<< HEAD
                         document.getElementById('b_container').style="height:40vw;";
-=======
-                        document.getElementById('b_container').style="width:40vw;";
->>>>>>> 507d73bca97aa5846120c43f05f4765d06135ac8
                         return;
                     }
                     
