@@ -478,98 +478,165 @@ p {
   }
 }
 
-.search .prix {
-  font-size: 1.5em;
-  color: #2E7A30;
-  font-weight: bold;
-  margin: 0;
-  font-family: "Montserrat";
-}
-.search .ancien_prix {
-  display: inline-block;
-  margin-right: 6px;
-  width: auto;
-}
-.search .pourcentage {
-  display: inline-block;
-  padding: 2px 6px;
-  width: auto;
-  background-color: #6B31D0;
-  color: white;
-  border-radius: 5px;
-  font-size: 0.75em;
-  font-weight: bold;
-  vertical-align: middle;
-}
-.search h1 {
-  margin: auto 0.8em;
-}
-.search h3 {
-  height: 177px;
-  font-size: 1em;
-  width: 100%;
-  margin-bottom: 12px;
-}
-.search .etoiles {
-  width: 100%;
-  height: 75px;
-}
-.search .etoiles .etoile {
-  height: 60px;
-}
-.search .etoiles p {
-  font-size: 0.8em;
-  margin: 0;
-}
-.search nav {
-  display: none;
-}
-.search main nav {
+.pageRecherche {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  position: sticky;
-  bottom: -1em;
-  width: 80%;
-  left: 10%;
-  border-radius: 3.2vh;
-  background-color: #FFFFFF;
-  height: 3em;
-  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
+  gap: 2em;
 }
-.search main nav a {
-  height: 100%;
+@media (max-width: 1024px) {
+  .pageRecherche {
+    flex-direction: column;
+  }
+}
+
+.labelEtBandeau {
   display: flex;
-  align-items: center;
 }
-.search main nav img {
-  height: 60%;
+
+.TriEtFiltre div div {
+  flex-direction: column;
 }
-.search main .droite,
-.search main .gauche {
-  display: none;
+
+.TriEtFiltre {
+  width: 260px;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 1.2em;
 }
-.search main ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  justify-items: center;
+@media (max-width: 1024px) {
+  .TriEtFiltre {
+    width: 100%;
+  }
+}
+
+.TriEtFiltre fieldset {
+  border: none;
   padding: 0;
 }
-.search main ul > li {
+
+.TriEtFiltre legend {
+  font-family: "Montserrat";
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.sousFiltre {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+  cursor: pointer;
+}
+.sousFiltre label {
+  cursor: pointer;
+}
+.sousFiltre input {
+  accent-color: #3157A3;
+  cursor: pointer;
+}
+
+.resultat {
+  width: 100%;
+}
+
+.resultat > div {
+  align-items: center;
+  margin-bottom: 1.5em;
+  gap: 1em;
+}
+@media (max-width: 768px) {
+  .resultat > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+section.results {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px 20px;
-  width: 40vw;
+  width: 100%;
 }
-.search main ul > li > a {
+
+.resultat > div {
+  display: flex;
+  justify-content: space-between;
+}
+.resultat > div > div:first-child {
+  flex-direction: column;
+}
+.resultat > div > div:first-child h1 {
+  margin-top: 0;
+}
+
+ul#results {
+  display: flex;
+  padding: 0;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: left;
+  margin-left: 10%;
+}
+ul#results > li {
+  width: 20vw;
+  margin: 20px 40px 20px 20px;
+}
+ul#results > li > a {
   color: black;
   text-decoration: none;
+  line-height: 1.5em;
+}
+ul#results > li > a > img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  min-width: 15vw;
+  max-width: 15vw;
+  background-color: #f3f1fb;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 5px;
+}
+ul#results > li > a > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ul#results > li > a > div > img {
+  width: 20px;
+  height: 20px;
+  background: none;
+}
+ul#results > li > a > div > p {
+  margin: 5px 0;
+}
+ul#results > li > a > div {
+  height: 2em;
+}
+ul#results > li > a > p, ul#results > li > a > h3 {
+  margin: 5px 0;
   width: 100%;
 }
-.search main ul > li article > img {
-  width: 100%;
+ul#results > li > a > h3 {
+  height: 3em;
+}
+
+.labelBendeau {
+  width: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#results_for {
+  justify-content: space-around;
+  display: flex;
+}
+
+.deroulant {
+  align-self: center;
+}
+.deroulant select {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: solid 1px #CBCCEA;
+  font-size: 1em;
 }/*# sourceMappingURL=style_tele.css.map */
