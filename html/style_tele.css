@@ -856,4 +856,19 @@ p {
 }
 .search main ul > li article > img {
   width: 100%;
+}
+
+.produit .detail_produit img {
+  width: 60vw;
+  margin: 2em;
+}
+.produit .detail_produit div {
+  display: flex;
+  justify-content: center;
+}
+.produit .detail_produit article:first-child div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 30px;
 }/*# sourceMappingURL=style_tele.css.map */

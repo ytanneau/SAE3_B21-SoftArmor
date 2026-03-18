@@ -731,3 +731,28 @@ p {
         }
     }
 }
+.produit{
+    .detail_produit{
+
+        img{
+            width: 60vw;
+            margin: 2em;
+        }
+        div{
+            display: flex;
+            justify-content: center;
+        }
+
+        article{
+            &:first-child{
+                div{
+
+                    @include contenu_centre_horizontal();
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+
+
+}

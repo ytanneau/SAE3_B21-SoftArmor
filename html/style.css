@@ -4331,6 +4331,7 @@ aside .achat:hover {
 .stat select {
   border-radius: 5px;
   text-align: center;
+  margin-right: 3em;
 }
 
 .erreur_adress {
