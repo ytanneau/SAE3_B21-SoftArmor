@@ -1207,8 +1207,8 @@ ul#results > li > a > h3 {
   font-family: "Montserrat";
   font-size: 1em;
   font-weight: bold;
-  background-color: #BB2BB2;
-  color: #E43737;
+  background-color: #E43737;
+  color: white;
   border: none;
   border-radius: 5px;
   text-align: center;
@@ -1217,10 +1217,10 @@ ul#results > li > a > h3 {
 }
 #btn_reset_filter a {
   text-decoration: none;
-  color: #E43737;
+  color: white;
 }
 #btn_reset_filter:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
 }
 
 .deroulant {

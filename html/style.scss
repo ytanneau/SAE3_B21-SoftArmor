@@ -406,7 +406,7 @@ ul#results {
     display: flex;
 }
 #btn_reset_filter{
-    @include bouton_new($color: $rouge);
+    @include bouton_new($background: $rouge, $color: white, $largeur: auto);
 }
 
 .deroulant {
