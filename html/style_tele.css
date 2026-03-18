@@ -411,7 +411,7 @@ p {
 }
 .mainPanier .entete {
   display: flex;
-  margin: 2em 0;
+  margin: 1em 0;
   align-items: center;
   gap: 2em;
 }
@@ -423,6 +423,23 @@ p {
   background-color: #E43737;
   border-radius: 15px;
   color: #fff;
+}
+.mainPanier .gauche ul {
+  margin: 0;
+  list-style: none;
+}
+.mainPanier .produit_paniner > a img {
+  width: 50%;
+}
+.mainPanier .produit_paniner article:first-child {
+  display: flex;
+  align-items: center;
+}
+.mainPanier .produit_paniner article:first-child p {
+  margin: 0;
+}
+.mainPanier .produit_paniner article:last-child p {
+  margin: 0;
 }
 .mainPanier #panier_vide {
   display: flex;
