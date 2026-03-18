@@ -505,69 +505,6 @@
                     ProdChart = createChart("c", type, label, produit, "auto", false, true, true);
                 }
 
-                //creer le graphe pour la section "produit"
-                function createProdChart() {
-
-                    //s'il est affiché => supprimer
-                    if(ProdChart !== null){
-                        deleteChart(ProdChart,"c");
-                    }
-                    
-                    let idProduit = document.getElementById("filtreProd").value;
-                    let valAbs = document.getElementById("filtreAbsProd").value;
-                    let valOrd = document.getElementById("filtreOrdProd").value;
-                    let type = document.getElementById("typeGraphProd").value;
-
-                    tabCat = [];
-                
-                    let methodePeriode;
-                    let methodeDonne;
-
-                    switch (valAbs) {
-                        case "M":
-                            methodePeriode = "getYear"
-                        break;
-
-                        case "W":
-                            methodePeriode = "getMonth"
-                        break;
-
-                        case "D":
-                            methodePeriode = "getWeek"
-                        break;
-
-                        case "h":
-                            methodePeriode = "getDay"
-                        break;
-
-                        case "m":
-                            methodePeriode = "getHour"
-                        break;
-                    }
-
-                    switch (valOrd) {
-                        case "qte":
-                            methodeDonne = "quantite"
-                        break;
-
-                        case "nbAchat":
-                            methodeDonne = "nb_commande"
-                        break;
-
-                        case "prix":
-                            methodeDonne = "prix"
-                        break;
-
-                    }
-                    
-                    let dataBase = graphCat.resetData().filtreByProduit(idProduit)[methodePeriode]();
-                    let produit = dataBase.value[methodeDonne];
-                    let label = dataBase.label;
-                    
-                    //affiche le graphe
-                    ProdChart = createChart("c", type, label, produit, "auto", false, true, true);
-                }
-
                 function createOnlyCatChart() {
                     let typeCat = document.getElementById("filtreCat").value;
                     let plage = document.getElementById("filtreAbsCat").value;
