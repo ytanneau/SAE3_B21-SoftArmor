@@ -7,7 +7,7 @@ export default class MakeGraph {
         this.data = this.formate(data)
         this.use = data;
     }
-    
+
     formate(data) {
         let res = [];
         data.forEach(ele => {
@@ -75,7 +75,7 @@ export default class MakeGraph {
                 let liste = this.use.filter(ele => {
                     return this.CompareDate(now, ele.date);
                 });
-                
+
                 res.push({ "date": new Date(now.valueOf()), "quantite": this.sommeQuantiter(liste), "prix": this.sommePrix(liste), "nb_commande": liste.length })
                 now.setTime(now.setDate(now.getDate() - 1));
             };
@@ -100,7 +100,7 @@ export default class MakeGraph {
                 now.setTime(now.setMonth(now.getMonth() - 1));
             };
         }
-        
+
         return this.formateValue(res.reverse());
     }
 
@@ -115,13 +115,13 @@ export default class MakeGraph {
             prix.push(ele.prix);
             quantite.push(ele.quantite);
             nb.push(ele.nb_commande);
-            if (ele.nb_commande == 0){
+            if (ele.nb_commande == 0) {
                 moyenPrix.push(0);
                 moyenQuantie.push(0);
             }
-            else{
-                moyenPrix.push(ele.prix/ele.nb_commande);
-                moyenQuantie.push(ele.quantite/ele.nb_commande);
+            else {
+                moyenPrix.push(ele.prix / ele.nb_commande);
+                moyenQuantie.push(ele.quantite / ele.nb_commande);
             }
         });
         return {
@@ -230,33 +230,286 @@ export default class MakeGraph {
         }
     }
 
-    labelHour(){
+    labelHour() {
         let now = new Date();
         let res = [];
         for (let index = 0; index < 60; index++) {
             res.push(`${now.getHours()}h${now.getMinutes()}`);
-            now.setMinutes(now.getMinutes()-1);
+            now.setMinutes(now.getMinutes() - 1);
         }
         return res.reverse();
     }
 
-    labelDay(){
+    labelDay() {
         let now = new Date();
         let res = [];
         for (let index = 0; index < 60; index++) {
             res.push(`${now.getHours()}h, (${MakeGraph.lesJour.at(now.getDay())})`);
-            now.setHours(now.getHours()-1);
+            now.setHours(now.getHours() - 1);
         }
         return res.reverse();
     }
 
-    labelMonth(){
+    labelMonth() {
         let now = new Date();
         let res = [];
         for (let index = 0; index < 60; index++) {
-            res.push(`${now.getDate()}/${now.getMonth()+1}`);
-            now.setDate(now.getDate()-1);
+            res.push(`${now.getDate()}/${now.getMonth() + 1}`);
+            now.setDate(now.getDate() - 1);
         }
         return res.reverse();
     }
+
+
+    //------------------------------------------------------------
+
+    listeProduit() {
+        let res = [];
+        this.use.forEach(element => {
+            if (res.find(ele => {
+                return ele == element.id_produit;
+            }) == undefined) {
+                res.push(element.id_produit);
+            }
+        });
+        return res;
+    }
+
+    nomProduit(id_produit) {
+        return this.use.find(ele => {
+            return ele.id_produit == id_produit;
+        }).nom_stock;
+    }
+
+    getHourC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getHour().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
+        return {
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
+        }
+    }
+
+    getDayC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getDay().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
+        return {
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
+        }
+    }
+
+    getWeekC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getWeek().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
+        return {
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
+        }
+    }
+
+    getMonthC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getMonth().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
+        return {
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
+        }
+    }
+
+    getYearC(categos) {
+        this.filtreByCategorie([categos]);
+        let liste = this.listeProduit();
+
+        let labels = [];
+        let prixs = [];
+        let quantites = [];
+        let commandes  = [];
+
+        liste.forEach(id => {
+            labels.push(this.nomProduit(id));
+
+            let boj = new MakeGraph(this.data);
+            boj.filtreByProduit(id);
+            let val = boj.getYear().value;
+
+            let initialValue = 0;
+            prixs.push(val.prix.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            quantites.push(val.quantite.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+            initialValue = 0;
+            commandes.push(val.nb_commande.reduce(
+                (accumulator, currentValue) => accumulator + currentValue,
+                initialValue,
+            ));
+
+        });
+
+        return {
+            label: labels,
+            value: {
+                prix: prixs,
+                quantite: quantites,
+                commande: commandes
+            }
+        }
+    }
+
+    
 }

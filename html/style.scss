@@ -623,64 +623,6 @@ ul#results {
 
     }
 
-    @media screen and (max-width: 1024px) {
-        main {
-            padding: 0;
-        }
-
-        section {
-            @include contenu_centre_vertical;
-
-            .form_infos {
-                flex-direction: column;
-                align-items: center;
-                padding: 0;
-                margin: 1em;
-                gap: 2em;
-
-
-                article {
-                    padding: 0;
-                    display: flex;
-                    flex-direction: column;
-
-                    &:first-child {
-                        align-items: center;
-
-                        .image_pp {
-                            width: clamp(140px, 40vw, 240px);
-                            border-radius: 8px;
-                        }
-
-                        label {
-                            margin-top: 1em;
-                            font-size: 1rem;
-                            text-align: center;
-                        }
-                    }
-
-
-                    &:last-child {
-
-                        input,
-                        button,
-                        a {
-                            width: 50%;
-                        }
-
-                        .champ {
-                            margin-bottom: 1em;
-                        }
-
-                        .bouton {
-                            margin-top: 1.2em;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
 }
 
 // Bouton Ajouter un avis
@@ -1163,7 +1105,7 @@ div:has(> aside) {
                 box-shadow: 0 0 20px black;
 
                 >img {
-                    width: 75%;
+                    max-width: 75%;
                 }
 
                 &:hover {
@@ -1192,6 +1134,19 @@ div:has(> aside) {
 
                 >li {
                     @include produit_catalogue();
+
+                    img {
+                        max-width:15vw;
+                        max-height: 15vw;
+                        object-fit: contain;
+                    }
+
+                    article:has(img:only-child) {
+                        width: 15vw;
+                        height: 15vw;
+                        display: flex;
+                        justify-content: center;
+                    }
 
                     >a {
                         position: relative;
@@ -2852,4 +2807,34 @@ line-height: 0;
             }
         }
     }
+}
+.stat{
+    
+    #sectionButton{
+        @include contenu_centre_horizontal;
+        justify-content: space-evenly;
+        width: 50%;
+        
+        height: fit-content;
+        button, a{
+            line-height: 1.5em;
+            margin-top:0px;
+        }
+    }
+    #sectionButtonContainer{
+        @include contenu_centre_horizontal;
+        justify-content: center;
+    }
+
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
+    select{
+        border-radius: $angle_petit;
+        text-align : center;
+    }
+
 }

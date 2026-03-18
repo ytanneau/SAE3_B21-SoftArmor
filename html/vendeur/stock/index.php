@@ -47,8 +47,9 @@ function ecrire_nom($rows){
                     <?php } ?>
                     
 
-                    <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton icon"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button></a>
-                    <a href= "../stock/modifier_produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton icon"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
+                    <a href= "stat_produit/?id_produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/stats.svg"></button></a>
+                    <a href= "../avis/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/etoile.svg"></button></a>
+                    <a href= "../stock/modifier_produit/?produit=<?= htmlentities($row['id_produit'] ?? '') ?>"><button class="bouton"><img src="<?= HOME_SITE ?>/image/modifier.svg"></button></a>
 
                     <span> | </span>
 

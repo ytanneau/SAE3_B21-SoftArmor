@@ -430,4 +430,50 @@ p {
 .mainPanier #panier_vide a:visited {
   color: black;
   text-decoration: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .infos main {
+    padding: 0;
+  }
+  .infos section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infos section .form_infos {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 1em;
+    gap: 2em;
+  }
+  .infos section .form_infos article {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos section .form_infos article:first-child {
+    align-items: center;
+  }
+  .infos section .form_infos article:first-child .image_pp {
+    width: clamp(140px, 40vw, 240px);
+    border-radius: 8px;
+  }
+  .infos section .form_infos article:first-child label {
+    margin-top: 1em;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .infos section .form_infos article:last-child input,
+  .infos section .form_infos article:last-child button,
+  .infos section .form_infos article:last-child a {
+    width: 50%;
+  }
+  .infos section .form_infos article:last-child .champ {
+    margin-bottom: 1em;
+  }
+  .infos section .form_infos article:last-child .bouton {
+    margin-top: 1.2em;
+  }
 }/*# sourceMappingURL=style_tele.css.map */
