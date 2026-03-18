@@ -145,6 +145,9 @@
                             <label for="idDescSimple">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
+                        <?php if($tabAdresseVendeur['lon'] === null || $tabAdresseVendeur['lat'] === null) {?>
+                            <p class="warning">Les coordonnées ne ce sont pas définis lors de la création de votre compte car votre adresse est inconnue</p>
+                        <?php } else {?>
                         <h2 id="warningTitle">Corriger mes coordonnées</h2>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
@@ -161,6 +164,7 @@
                             <p style="display:none;" class="warning" id="warningLon">Erreur de saisi - longitude</p>
                             <p style="display:none; margin-left:5px;" class="warning" id="warningLat">Erreur de saisi - latitude</p>
                         </div>
+                    <?php } ?>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
@@ -199,7 +203,7 @@
         inputLongitude.addEventListener('input', (e) => {
             if(inputLongitude.value < -90 || inputLongitude.value > 90){
                 warningLon.style.display = "block"
-                validerModifVendeur.style.backgroundColor = "ligth-grey"
+                validerModifVendeur.style.backgroundColor = "ligthgray"
                 validerModifVendeur.ariaDisabled = true
             } else {
                 warningLon.style.display = "none"
@@ -209,7 +213,7 @@
         inputLatitude.addEventListener('input', (e) => {
             if(inputLatitude.value < -90 || inputLatitude.value > 90){
                 warningLat.style.display = "block"
-                validerModifVendeur.style.backgroundColor = "ligth-grey"
+                validerModifVendeur.style.backgroundColor = "ligthgray"
                 validerModifVendeur.ariaDisabled = true
             } else {
                 warningLat.style.display = "none"
