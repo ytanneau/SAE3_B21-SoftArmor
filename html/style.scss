@@ -405,7 +405,7 @@ ul#results {
     justify-content: space-around;
     display: flex;
 }
-#btn_reset_filter{
+#resetFilters{
     @include bouton_new($background: $rouge, $color: white, $largeur: auto);
     background-color: pink;
 }
