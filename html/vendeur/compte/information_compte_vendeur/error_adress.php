@@ -31,9 +31,9 @@
         <title>Alizon - Erreurs d'adresse</title>
 
     </head>
-    <body class="erreur_adress">
+    <body>
         <?php include '../../header.php'?>
-        <main>
+        <main class="erreur_adress">
             <h1>Erreur - Adresse saisi inconnue</h1>
             <h4>Par défaut, l'ancienne adresse est consérvé</h4>
             <a href="index.php">Modifier mon compte</a>
