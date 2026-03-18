@@ -4382,9 +4382,11 @@ aside .achat:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.erreur_adress main {
   width: 50%;
 }
-.erreur_adress a {
+.erreur_adress main a {
   margin-top: 20px;
   display: block;
   max-width: 100%;
@@ -4401,11 +4403,11 @@ aside .achat:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.erreur_adress a a {
+.erreur_adress main a a {
   text-decoration: none;
   color: #FFFFFF;
 }
-.erreur_adress a:hover {
+.erreur_adress main a:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
 
