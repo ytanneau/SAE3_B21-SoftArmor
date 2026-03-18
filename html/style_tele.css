@@ -186,6 +186,264 @@
   margin-right: 8px;
 }
 
+#connect_vendeur,
+#inscription_vendeur {
+  background-color: #6B31D0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#connect_vendeur main,
+#inscription_vendeur main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #C3C1F5;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main,
+  #inscription_vendeur main {
+    width: 60vw;
+  }
+}
+#connect_vendeur main img,
+#inscription_vendeur main img {
+  width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main img,
+  #inscription_vendeur main img {
+    width: 50vw;
+  }
+}
+#connect_vendeur main h2,
+#inscription_vendeur main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_vendeur main form,
+#inscription_vendeur main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  width: 100%;
+}
+#connect_vendeur main form label,
+#inscription_vendeur main form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+#connect_vendeur main form .text,
+#inscription_vendeur main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_vendeur main form .petit,
+#inscription_vendeur main form .petit {
+  width: 30%;
+}
+#connect_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#connect_vendeur main form input[type=number]::-webkit-outer-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_vendeur main form input[type=number],
+#inscription_vendeur main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_vendeur main form p,
+#inscription_vendeur main form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+#connect_vendeur main form .error,
+#inscription_vendeur main form .error {
+  color: #E43737;
+}
+#connect_vendeur main .bouton,
+#inscription_vendeur main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#connect_vendeur main .bouton a,
+#inscription_vendeur main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+#connect_vendeur main .bouton:hover,
+#inscription_vendeur main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_vendeur .mainCarteInscription,
+#inscription_vendeur .mainCarteInscription {
+  width: 700px;
+}
+#connect_vendeur .mainCarteInscription #map,
+#inscription_vendeur .mainCarteInscription #map {
+  height: 300px;
+  width: 500px;
+}
+#connect_vendeur,
+#inscription_vendeur {
+  width: 100vw;
+  font-size: 1em;
+}
+#connect_vendeur input,
+#inscription_vendeur input {
+  margin-top: 2%;
+}
+
+#connect_vendeur,
+#connect_client {
+  justify-content: center;
+  height: 100vh;
+}
+
+#connect_client,
+#inscription_client {
+  background-color: #3157A3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#connect_client main,
+#inscription_client main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #CBCCEA;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+@media (max-width: 1440px) {
+  #connect_client main,
+  #inscription_client main {
+    width: 60vw;
+  }
+}
+#connect_client main img,
+#inscription_client main img {
+  width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_client main img,
+  #inscription_client main img {
+    width: 50vw;
+  }
+}
+#connect_client main h2,
+#inscription_client main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_client main form,
+#inscription_client main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  width: 100%;
+}
+#connect_client main form label,
+#inscription_client main form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+#connect_client main form .text,
+#inscription_client main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_client main form .petit,
+#inscription_client main form .petit {
+  width: 30%;
+}
+#connect_client main form input[type=number]::-webkit-inner-spin-button,
+#connect_client main form input[type=number]::-webkit-outer-spin-button,
+#inscription_client main form input[type=number]::-webkit-inner-spin-button,
+#inscription_client main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_client main form input[type=number],
+#inscription_client main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_client main form p,
+#inscription_client main form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+#connect_client main form .error,
+#inscription_client main form .error {
+  color: #E43737;
+}
+#connect_client main .bouton,
+#inscription_client main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#connect_client main .bouton a,
+#inscription_client main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+#connect_client main .bouton:hover,
+#inscription_client main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_client,
+#inscription_client {
+  width: 100vw;
+  font-size: 1em;
+}
+#connect_client input,
+#inscription_client input {
+  margin-top: 2%;
+}
+
+#inscription_vendeur,
+#inscription_client {
+  height: 100%;
+}
+#inscription_vendeur main,
+#inscription_client main {
+  margin: 5% 0;
+}
+
 body {
   padding: 0;
   margin: 0;

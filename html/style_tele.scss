@@ -168,6 +168,53 @@
     }
 }
 
+
+// définition des pages inscriptions et connexions
+#connect_vendeur,
+#inscription_vendeur {
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+
+    .mainCarteInscription {
+        width: 700px;
+
+        #map {
+            height: 300px;
+            width: 500px;
+        }
+    }
+    width: 100vw;
+    font-size: 1em;
+    input {
+        margin-top: 2%;
+    }
+}
+
+#connect_vendeur,
+#connect_client {
+    justify-content: center;
+    height: 100vh;
+}
+
+#connect_client,
+#inscription_client {
+    @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
+
+    width: 100vw;
+    font-size: 1em;
+    input {
+        margin-top: 2%;
+    }
+}
+
+#inscription_vendeur,
+#inscription_client {
+    height: 100%;
+
+    main {
+        margin: 5% 0;
+    }
+}
+
 body {
     padding: 0;
     margin: 0;
