@@ -71,10 +71,5 @@ if (isset($_GET["commande"])) {
         include HOME_SITE . "footer.php";
     } ?>
 </body>
-<script defer>
-    window.onload = () => {
-                window.print();
-                window.close();
-            };
-</script>
+
 </html>
