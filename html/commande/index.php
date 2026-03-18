@@ -54,6 +54,11 @@ $liste_commandes = get_commandes($_SESSION["id_compte"]);
             printWindow.document.write(html);
             printWindow.document.close();
 
+            printWindow.onload = () => {
+                printWindow.print();
+                printWindow.close();
+            };
+
         }
 
         // Utilisation
