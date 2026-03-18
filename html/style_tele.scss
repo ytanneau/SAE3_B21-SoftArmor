@@ -535,7 +535,7 @@ p {
 
         div {
 
-            article:first-child {
+            article:first-child() {
                 display: flex;
                 align-items: center;
 
@@ -544,7 +544,7 @@ p {
                 }
             }
 
-            article:last-child {
+            article:last-child() {
                 p {
                     margin: 0;
                 }
