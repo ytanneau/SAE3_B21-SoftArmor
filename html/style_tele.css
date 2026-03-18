@@ -689,15 +689,27 @@ p {
 .mainPanier .produit_panier > a img {
   width: 50%;
 }
-.mainPanier .produit_panier div {
-  background-color: aqua;
-}
 .mainPanier .produit_panier div article:first-child {
   display: flex;
   align-items: center;
 }
-.mainPanier .produit_panier div article:first-child p {
+.mainPanier .produit_panier div article:first-child div {
+  width: 90%;
+}
+.mainPanier .produit_panier div article:first-child p, .mainPanier .produit_panier div article:first-child h3 {
   margin: 0;
+}
+.mainPanier .produit_panier div article:first-child p a, .mainPanier .produit_panier div article:first-child h3 a {
+  text-decoration: none;
+  color: #000;
+}
+.mainPanier .produit_panier div article:first-child button {
+  background-color: #E43737;
+  color: #fff;
+  border-radius: 15px;
+}
+.mainPanier .produit_panier div article:first-child button img {
+  width: 80px;
 }
 .mainPanier .produit_panier div article:last-child p {
   margin: 0;
