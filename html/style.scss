@@ -1105,7 +1105,7 @@ div:has(> aside) {
                 box-shadow: 0 0 20px black;
 
                 >img {
-                    width: 75%;
+                    max-width: 75%;
                 }
 
                 &:hover {
@@ -1134,6 +1134,19 @@ div:has(> aside) {
 
                 >li {
                     @include produit_catalogue();
+
+                    img {
+                        max-width:15vw;
+                        max-height: 15vw;
+                        object-fit: contain;
+                    }
+
+                    article:has(img:only-child) {
+                        width: 15vw;
+                        height: 15vw;
+                        display: flex;
+                        justify-content: center;
+                    }
 
                     >a {
                         position: relative;
