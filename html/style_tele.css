@@ -874,48 +874,6 @@ ul#results {
   justify-content: left;
   margin-left: 10%;
 }
-ul#results > li {
-  width: 20vw;
-  margin: 20px 40px 20px 20px;
-}
-ul#results > li > a {
-  color: black;
-  text-decoration: none;
-  line-height: 1.5em;
-}
-ul#results > li > a > img {
-  -o-object-fit: contain;
-     object-fit: contain;
-  min-width: 15vw;
-  max-width: 15vw;
-  background-color: #f3f1fb;
-  width: 15vw;
-  height: 15vw;
-  border-radius: 5px;
-}
-ul#results > li > a > div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-ul#results > li > a > div > img {
-  width: 20px;
-  height: 20px;
-  background: none;
-}
-ul#results > li > a > div > p {
-  margin: 5px 0;
-}
-ul#results > li > a > div {
-  height: 2em;
-}
-ul#results > li > a > p, ul#results > li > a > h3 {
-  margin: 5px 0;
-  width: 100%;
-}
-ul#results > li > a > h3 {
-  height: 3em;
-}
 
 .labelBendeau {
   width: 10em;
