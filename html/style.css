@@ -4378,4 +4378,12 @@ aside .achat:hover {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.stat .container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.stat select {
+  border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */

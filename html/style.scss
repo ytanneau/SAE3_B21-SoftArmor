@@ -2870,4 +2870,15 @@ line-height: 0;
         @include contenu_centre_horizontal;
         justify-content: center;
     }
+
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
+    select{
+        border-radius: $angle_petit;
+    }
+
 }
