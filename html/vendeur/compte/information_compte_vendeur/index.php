@@ -35,6 +35,8 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
+    $first_adress = $tabAdresseVendeur['adresse'] . ", " . $tabAdresseVendeur['ville'] . ", " . $tabAdresseVendeur['code_postal'];
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
@@ -70,13 +72,18 @@
         $response = curl_exec($ch);
 
         if(curl_errno($ch)){
-            echo "Erreur cURL : " . curl_error($ch);
+            echo "Erreur CURL : " . curl_error($ch);
         }
+        
         $data = json_decode($response, true);
-        if(!empty($data)){
+
+        if(!empty($data) && $first_adress != $adresseSubmit){
             $data = $data[0];
             $lon = $data["lat"];
             $lat = $data["lon"];
+        } else if (empty($data)) {
+            header('Location: error_adress.php');
+            exit();
         }
         if($lon == null){ $lon = $tabAdresseVendeur['lon'];}
         if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
@@ -149,6 +156,8 @@
                                 <label for="latitude">Latitude</label>
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
+                            <p style="display:none;" id="warningLon">Erreur de saisi - longitude</p>
+                            <p style="display:none;" id="warningLat">Erreur de saisi - latitude</p>
                         </div>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
@@ -178,6 +187,26 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
         
-        
+
+        const inputLongitude = document.getElementById("longitude")
+        const inputLatitude = document.getElementById("latitude")
+        const warningLon = document.getElementById("warningLon")
+        const warningLat = document.getElementById("warningLat")
+
+        inputLongitude.addEventListener('input', (e) => {
+            if(inputLongitude.value > -90 || inputLongitude.valude < 90){
+                warningLon.style.display = "block"
+            } else {
+                warningLon.style.display = "none"
+            }
+        })
+
+        inputLatitude.addEventListener('input', (e) => {
+            if(inputLatitude.value > -90 || inputLatitude.valude < 90){
+                warningLat.style.display = "block"
+            } else {
+                warningLat.style.display = "none"
+            }
+        })
     </script>
 </html>

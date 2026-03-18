@@ -168,6 +168,53 @@
     }
 }
 
+
+// définition des pages inscriptions et connexions
+#connect_vendeur,
+#inscription_vendeur {
+    @include page_connect_inscription($couleur_primaire_vendeur, $nuance_primaire_vendeur);
+
+    .mainCarteInscription {
+        width: 700px;
+
+        #map {
+            height: 300px;
+            width: 500px;
+        }
+    }
+    width: 100vw;
+    font-size: 1em;
+    input {
+        margin-top: 2%;
+    }
+}
+
+#connect_vendeur,
+#connect_client {
+    justify-content: center;
+    height: 100vh;
+}
+
+#connect_client,
+#inscription_client {
+    @include page_connect_inscription($couleur_primaire_client, $nuance_primaire_client);
+
+    width: 100vw;
+    font-size: 1em;
+    input {
+        margin-top: 2%;
+    }
+}
+
+#inscription_vendeur,
+#inscription_client {
+    height: 100%;
+
+    main {
+        margin: 5% 0;
+    }
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -425,7 +472,7 @@ p {
             gap: 15px;
             margin-top: 20px;
 
-            .bouton{
+            .bouton {
                 font-size: 1.5em;
                 background-color: $focus;
                 border-radius: 15px;
@@ -434,17 +481,17 @@ p {
         }
     }
 
-    .entete{
+    .entete {
         display: flex;
-        margin: 2em 0;
+        margin: 1em 0;
         align-items: center;
         gap: 2em;
 
-        h1{
+        h1 {
             margin: 0;
         }
 
-        .grave{
+        .grave {
             font-size: 1em;
             background-color: $rouge;
             border-radius: 15px;
@@ -452,6 +499,52 @@ p {
         }
     }
 
+    .gauche {
+        ul {
+            margin: 0;
+            list-style: none;
+        }
+    }
+
+    .produit_panier {
+        >a img {
+            width: 50%;
+        }
+
+        div {
+            article:first-child {
+                display: flex;
+                align-items: center;
+
+                div{
+                    width: 90%;
+                }
+
+                p, h3 {
+                    margin: 0;
+                    a{
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
+
+                button{
+                    background-color: $rouge;
+                    color: #fff;
+                    border-radius: 15px;
+                    img{
+                        width: 80px;
+                    }
+                }
+            }
+
+            article:last-child {
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
 
 
     #panier_vide {
@@ -473,6 +566,8 @@ p {
     }
 }
 
+
+    
 .infos {
     @media screen and (max-width: 1024px) {
         main {
