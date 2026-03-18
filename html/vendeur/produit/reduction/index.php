@@ -71,7 +71,6 @@
 
                 <p style="display:none;" class="warning" id="warning_date_anterieur">Date de fin antérieur à la date de debut</p>
                 <p style="display:none;" class="warning" id="warning_date_passe">Date de debut déjà passé</p>
-                <p style="display:none;" class="warning" id="warning_date_occupe">Date déjà prise pas une reduction sur ce produit</p>
 
                 <div class="en_ligne">
                     <div class="en_colonne">
@@ -89,8 +88,6 @@
         </main>
         <?php include HOME_SITE . "footer.php"?>
         <script>
-            
-
             // REDUCTION //
             const warningPourcentage = document.getElementById("warningPourcentage");
             const pourcentage = document.getElementById("pourcentage");
@@ -100,9 +97,6 @@
             const dateFin = document.getElementById("dateFin")
             const warning_date_anterieur = document.getElementById("warning_date_anterieur");
             const warning_date_passe = document.getElementById("warning_date_passe");
-            const warning_date_occupe = document.getElementById("warning_date_occupe");
-
-            const date_occupe = <?= json_encode($date_occupe_reduction)?>;
 
             let date = new Date()
             let current_string_date
@@ -129,12 +123,6 @@
                         warning_date_passe.style.display = "none";
                     }
                 }
-
-                if(!check_dispo_date(dateDebut.value)){
-                    warning_date_occupe.style.display = "block"
-                } else {
-                    warning_date_occupe.style.display = "none"
-                }
             });
 
             dateFin.addEventListener('change', () => {
@@ -145,30 +133,10 @@
                         warning_date_anterieur.style.display = "none";
                     }
                 }
-                if(!check_dispo_date(dateFin.value)){
-                    warning_date_occupe.style.display = "block"
-                } else {
-                    warning_date_occupe.style.display = "none"
-                }
             });
 
-            function check_dispo_date(date) {
-                if(date_occupe == null){
-                    return true
-                } else {
-                    date_occupe.forEach(periode => {
-                        if(date >= periode['date_debut'] && date <= periode['date_fin']){
-                            return true
-                        } else {
-                            return false
-                        }
-                    });
-                }
-            }
 
             // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
-            
-
             if(date.getMonth() < 9){
                 current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
             } else {

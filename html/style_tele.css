@@ -247,35 +247,112 @@ body {
   gap: 15px;
 }
 
-.accueil main ul {
+.footer-bottom {
+  flex-direction: column;
   gap: 15px;
 }
-.accueil main li {
-  height: 50vw;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat";
 }
-.accueil main li a {
+
+p {
+  font-family: "Inter";
+}
+
+.accueil .prix {
+  font-size: 1.5em;
+  color: #2E7A30;
+  font-weight: bold;
+  margin: 0;
+  font-family: "Montserrat";
+}
+.accueil .ancien_prix {
+  display: inline-block;
+  margin-right: 6px;
+  width: auto;
+}
+.accueil .pourcentage {
+  display: inline-block;
+  padding: 2px 6px;
+  width: auto;
+  background-color: #6B31D0;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.accueil h1 {
+  margin: auto 0.8em;
+}
+.accueil h3 {
+  height: 177px;
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.accueil .etoiles {
+  width: 100%;
+  height: 75px;
+}
+.accueil .etoiles .etoile {
+  height: 60px;
+}
+.accueil .etoiles p {
+  font-size: 0.8em;
+  margin: 0;
+}
+.accueil nav {
+  display: none;
+}
+.accueil main nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  position: sticky;
+  bottom: -1em;
+  width: 80%;
+  left: 10%;
+  border-radius: 3.2vh;
+  background-color: #FFFFFF;
+  height: 3em;
+  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
+}
+.accueil main nav a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.accueil main nav img {
+  height: 60%;
+}
+.accueil main .droite, .accueil main .gauche {
+  display: none;
+}
+.accueil main ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  justify-items: center;
+  padding: 0;
+}
+.accueil main ul > li {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 80px 20px;
+  width: 40vw;
 }
-.accueil main li a span {
-  background-color: red;
-  border: 50%;
+.accueil main ul > li > a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
 }
-.accueil main li a > img {
-  max-width: 50vw;
-  max-height: 50vw;
-  position: absolute;
-  right: 0;
-  background-color: white;
-}
-.accueil main li a div {
-  display: flex;
-  flex-direction: column;
-}
-.accueil main li a .etoile {
-  position: none;
-  width: 10px;
-  height: 10px;
+.accueil main ul > li article > img {
+  width: 100%;
 }
 
 .liste-commande-page main {
@@ -289,6 +366,9 @@ body {
   flex-direction: column;
   margin-top: 1em;
 }
+.liste-commande-page tr p {
+  margin: 0;
+}
 .liste-commande-page td:first-child {
   display: none;
 }
@@ -301,4 +381,65 @@ body {
 }
 .liste-commande-page span {
   display: none;
+}
+
+.mainPanier #panier_vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainPanier #panier_vide img {
+  margin-top: 100px;
+  width: 400px;
+  height: 400px;
+}
+.mainPanier #panier_vide a, .mainPanier #panier_vide a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .infos main {
+    padding: 0;
+  }
+  .infos section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infos section .form_infos {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 1em;
+    gap: 2em;
+  }
+  .infos section .form_infos article {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos section .form_infos article:first-child {
+    align-items: center;
+  }
+  .infos section .form_infos article:first-child .image_pp {
+    width: clamp(140px, 40vw, 240px);
+    border-radius: 8px;
+  }
+  .infos section .form_infos article:first-child label {
+    margin-top: 1em;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .infos section .form_infos article:last-child input,
+  .infos section .form_infos article:last-child button,
+  .infos section .form_infos article:last-child a {
+    width: 50%;
+  }
+  .infos section .form_infos article:last-child .champ {
+    margin-bottom: 1em;
+  }
+  .infos section .form_infos article:last-child .bouton {
+    margin-top: 1.2em;
+  }
 }/*# sourceMappingURL=style_tele.css.map */

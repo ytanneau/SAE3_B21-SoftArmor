@@ -175,23 +175,23 @@
                     <div>
                         <p>
                             <label for="nomPrv">Référence*</label>
-                            <input type="text" name="nomPrv" id="idNomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
+                            <input type="text" name="nomPrv" id="nomPrv" value="<?= $tabInfoProduit['nom_stock']?>" required>
                         </p>
                         <p>
                             <label for="nomPblc">Libellé public*</label>
-                            <input type="text" name="nomPblc" id="idNomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
+                            <input type="text" name="nomPblc" id="nomPblc" value="<?= $tabInfoProduit['nom_public']?>" required>
                         </p>
                     </div>
                     <div class="divEnLigne">
                         <p>
                             <label for="prixProd">Prix* hors taxe (€)</label>
-                            <input type="text" name="prix" id="idPrix" value="<?= $tabInfoProduit['prix']?>" required>
+                            <input type="text" name="prix" id="prix" value="<?= $tabInfoProduit['prix']?>" required>
                         </p>
                         <p>
                             <label for="tva">TVA*</label>
                             <?php $select5 = ''; $select10 = ''; $select20 = '';
                                 if($tabInfoProduit['tva'] == 5){$select5 = 'selected';}elseif($tabInfoProduit['tva'] == 10){$select10 = 'selected';}else{$select20 = 'selected';} ?>
-                            <select name="tva" id="idtva" required>
+                            <select name="tva" id="tva" required>
                                 <option value="">-- Taux de TVA --</option>
                                 <option value="5" <?= $select5 ?>>5%</option>
                                 <option value="10" <?= $select10 ?>>10%</option>
@@ -200,21 +200,21 @@
                         </p>
                         <p>
                             <label for="codeBarre">Code barre*</label>
-                            <input type="text" name="codeBarre" id="idCodeBarre" maxlength="13" value="<?= $tabInfoProduit['code_barre']?>" required>
+                            <input type="text" name="codeBarre" id="codeBarre" maxlength="13" value="<?= $tabInfoProduit['code_barre']?>" required>
                             <span id="messageErrCodeBarre" style="display:none; color:red">Le code barre doit comporter 13 chiffres</span>
                         </p>
                     </div>
                     <div>
                         <label for="checkMajeur">Réservé aux majeurs</label>
-                        <input type="checkbox" name="checkMajeur" id="idCheckMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
+                        <input type="checkbox" name="checkMajeur" id="checkMajeur" <?php if($tabInfoProduit['plus_18'] === 1){?> checked <?php } ?>>
                         <label for="checkEnLigne">Produit en ligne</label>
-                        <input type="checkbox" name="checkEnLigne" id="idCheckEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
+                        <input type="checkbox" name="checkEnLigne" id="checkEnLigne" <?php if($tabInfoProduit['en_ligne'] === 1){?> checked <?php }?>>
                     </div>
                     <p>Categorie actuel : <?php if(isset($tabInfoProduit['categorie'])){ echo $tabInfoProduit['categorie'] ; } ?></p>
                     <div class="divEnLigne">
                         <p>
                             <label for="categorie">Catégories*</label>
-                            <select name="categorie" id="idCategorie" style="width: 175px;">
+                            <select name="categorie" id="categorie" style="width: 175px;">
                                 <option value="">-- Choisir une catégorie --</option>
 
                                 <?php
@@ -252,17 +252,6 @@
                         <p>
                             <label for="qtAchete">Quantité acheté</label>
                             <input type="number" name="qtAchete" value="<?= explode(";",$tabInfoProduit['quantite_unite'])[0]?>">
-                        </p>
-                        <p id="blockUniteVetement" style="display:none;">
-                            <label for="uniteVetement">Unités de Masse</label>
-                            <select name="unite" id="uniteVetement">
-                                <option value="">-- Choisir une unitée --</option>
-                                <option value="xs">XS</option>
-                                <option value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                            </select>
                         </p>
                         <p id="blockUniteMasse" style="display:none;">
                             <label for="uniteMasse">Unités de masse</label>
@@ -324,48 +313,48 @@
                     <div class="divEnLigne">
                         <p>
                             <label for="qtStock">Quantite en stock</label>
-                            <input type="number" name="qtStock" id="idQtStock" value="<?= $tabInfoProduit['quantite'] ?>">
+                            <input type="number" name="qtStock" id="qtStock" value="<?= $tabInfoProduit['quantite'] ?>">
                         </p>
                         <p>
                             <label for="idSeuilAlerte">Seuil d'alerte</label>
-                            <input type="number" name="seuilAlerte" id="idSeuilAlerte" value="<?= $tabInfoProduit['seuil_alerte']?>">
+                            <input type="number" name="seuilAlerte" id="seuilAlerte" value="<?= $tabInfoProduit['seuil_alerte']?>">
                         </p>
                     </div>
                     <h3>Description</h3>
                     <div>
                         <p>
                             <label for="descSimple">Description simple (200 caractères maximum)</label>
-                            <textarea name="descSimple" id="idDescSimple" maxlength="200"><?= $tabInfoProduit['description'] ?></textarea>
+                            <textarea name="descSimple" id="descSimple" maxlength="200"><?= $tabInfoProduit['description'] ?></textarea>
                         </p>
                         <p>
                             <label for="descDetaille">Description détaillée (2000 caractères maximum)</label>
-                            <textarea name="descDetaille" id="idDescDetaille" maxlength="2000"><?= $tabInfoProduit['description_detaillee']?></textarea>
+                            <textarea name="descDetaille" id="descDetaille" maxlength="2000"><?= $tabInfoProduit['description_detaillee']?></textarea>
                         </p>
                     </div>
                     <h3>Livraison</h3>
                     <div class="divEnLigne">
                         <p>
                             <label for="poidColis">Poid du colis</label>
-                            <input type="text" name="poidColis" id="idPoidColis" value="<?= $tabInfoProduit['poids']?>" required>
+                            <input type="text" name="poidColis" id="poidColis" value="<?= $tabInfoProduit['poids']?>" required>
                         </p>
                         <p>
                             <label for="volumeColis">Volume du colis</label>
-                            <input type="text" name="volumeColis" id="idVolumeColis" value="<?= $tabInfoProduit['volume']?>" required>
+                            <input type="text" name="volumeColis" id="volumeColis" value="<?= $tabInfoProduit['volume']?>" required>
                         </p>
                     </div>
-                    <input type="submit" value="Valider les modifications" id="idModifierProduit">
+                    <input type="submit" value="Valider les modifications" id="modifierProduit">
                 </form>
             </div>
         </main>
         <script>
-            const nomPrv = document.getElementById("idNomPrv");
-            const nomPblc = document.getElementById("idNomPblc");
-            const prix = document.getElementById("idPrix");
-            const tva = document.getElementById("idtva");
-            const codeBarre = document.getElementById("idCodeBarre");
-            const modifierProduit = document.getElementById("idModifierProduit");
+            const nomPrv = document.getElementById("nomPrv");
+            const nomPblc = document.getElementById("nomPblc");
+            const prix = document.getElementById("prix");
+            const tva = document.getElementById("tva");
+            const codeBarre = document.getElementById("codeBarre");
+            const modifierProduit = document.getElementById("modifierProduit");
 
-            const categorie = document.getElementById("idCategorie");
+            const categorie = document.getElementById("categorie");
             const pSousCategorie = document.getElementById("pSousCategorieAlimentaire");
             const selectSousCategorieAlimentaire = document.getElementById("sous_cate");
 
@@ -373,11 +362,11 @@
             const uniteMasse = document.getElementById("blockUniteMasse");
             const uniteVetement = document.getElementById("blockUniteVetement");
             
-            const descSimple = document.getElementById("idDescSimple");
-            const descDetaille = document.getElementById("idDescDetaille");
+            const descSimple = document.getElementById("descSimple");
+            const descDetaille = document.getElementById("descDetaille");
 
-            const poidColis = document.getElementById("idPoidColis");
-            const volumeColis = document.getElementById("idVolumeColis");
+            const poidColis = document.getElementById("poidColis");
+            const volumeColis = document.getElementById("volumeColis");
             
             poidColis.addEventListener('input', () => {
                 poidColis.value = poidColis.value.replace(",",".");
