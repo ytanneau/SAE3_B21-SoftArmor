@@ -513,6 +513,10 @@ ul#results {
 
     .modif {
         @include bouton_new($color: white, $largeur: unset);
+        width: 370px;
+        padding: 0.6em;
+        line-height: 2em;
+        margin-top: 8%;
     }
 
     .grave {
@@ -532,25 +536,19 @@ ul#results {
         }
     }
 
-    #idValiderModifVendeur {
-        margin-top: 20px;
-        @include bouton_new($color: $couleur_background);
-        width: 600px;
-    }
-
     #idDesactivationCompte,
     #idDesactivation2FA {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
     #idActivation2FA {
         @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
 
