@@ -19,7 +19,7 @@ session_start();
   <link rel="icon" type="image/png" href="<?= HOME_SITE ?>image/logo_Alizon_bleu.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vite App</title>
+  <title>Stats personaliser</title>
   <script type="module" crossorigin src="./assets/index-BlZKbmqL.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-DVSIR_Cm.css">
 
