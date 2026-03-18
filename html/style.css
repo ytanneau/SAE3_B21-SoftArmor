@@ -1199,6 +1199,30 @@ ul#results > li > a > h3 {
   display: flex;
 }
 
+#btn_reset_filter {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #E43737;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#btn_reset_filter a {
+  text-decoration: none;
+  color: #E43737;
+}
+#btn_reset_filter:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+
 .deroulant {
   align-self: center;
 }
@@ -4426,8 +4450,9 @@ aside .achat:hover {
 .erreur_adress {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-items: center;
   width: 50%;
+  justify-self: center;
 }
 .erreur_adress a {
   margin-top: 20px;
@@ -4452,6 +4477,9 @@ aside .achat:hover {
 }
 .erreur_adress a:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.erreur_adress a {
+  width: 100%;
 }
 
 .warning {

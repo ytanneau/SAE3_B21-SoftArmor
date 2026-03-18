@@ -405,6 +405,9 @@ ul#results {
     justify-content: space-around;
     display: flex;
 }
+#btn_reset_filter{
+    @include bouton_new($color: $rouge);
+}
 
 .deroulant {
     align-self: center;
@@ -2886,11 +2889,13 @@ line-height: 0;
 .erreur_adress{
     display: flex;
     flex-direction: column;
-    align-self: center;
+    align-items: center;
     width: 50%;
+    justify-self: center;
     a{
         margin-top: 20px;
         @include bouton_new($color: $couleur_background);
+        width: 100%;
     }
 }
 
