@@ -502,6 +502,17 @@ if ($_POST != NULL){
 
         <div id="snackbar" class="snackbar"></div>
     </main>
+    <!-- Navigation (pour teléphone) -->
+    <nav id="nav_tel">
+        <a href="<?=HOME_SITE?>panier"><img src="<?=HOME_SITE?>image/panier.svg" title="Acceder au Panier" alt="panier"></a>
+        <a href="<?=HOME_SITE?>"><img src="<?=HOME_SITE?>image/home.svg" title="Acceder à la page d'Accueil" alt="accueil"></a>
+
+        <?php if ($_SESSION['logged_in'] ?? false === true) { ?>
+            <a href="<?=HOME_SITE?>compte/informations"><img src="<?=HOME_SITE?>image/compte.svg" title="Acceder aux information du compte" alt="compte"></a>
+        <?php } else { ?>
+            <a href="<?=HOME_SITE?>compte/connexion"><img src="<?=HOME_SITE?>image/connexion.svg" title="Se connecter" alt="connexion"></a>
+        <?php } ?>
+    </nav>  
     <?php include HOME_SITE . "footer.php" ?>
 </body>
 <script>
