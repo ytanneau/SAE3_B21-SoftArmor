@@ -1375,6 +1375,12 @@ ul#results > li > a > h3 {
 .infos .modif:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+.infos .modif {
+  width: 370px;
+  padding: 0.6em;
+  line-height: 2em;
+  margin-top: 8%;
+}
 .infos .grave {
   display: block;
   max-width: 100%;
@@ -1431,33 +1437,6 @@ ul#results > li > a > h3 {
 .infos .image_bouton p {
   font-size: 10px;
 }
-.infos #idValiderModifVendeur {
-  margin-top: 20px;
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.infos #idValiderModifVendeur a {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-.infos #idValiderModifVendeur:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.infos #idValiderModifVendeur {
-  width: 600px;
-}
 .infos #idDesactivationCompte,
 .infos #idDesactivation2FA {
   display: block;
@@ -1488,7 +1467,7 @@ ul#results > li > a > h3 {
 .infos #idDesactivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos #idActivation2FA {
   display: block;
@@ -1516,7 +1495,7 @@ ul#results > li > a > h3 {
 .infos #idActivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
