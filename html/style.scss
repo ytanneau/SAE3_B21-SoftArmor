@@ -2812,10 +2812,12 @@ line-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%;
-    a{
-        margin-top: 20px;
-        @include bouton_new($color: $couleur_background);
+    main{
+        width: 50%;
+        a{
+            margin-top: 20px;
+            @include bouton_new($color: $couleur_background);
+        }
     }
 }
 
