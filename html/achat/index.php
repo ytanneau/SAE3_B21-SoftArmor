@@ -203,7 +203,7 @@ if ($numEtape == 3) {
         // Si c'est un produit unique (pas un panier)
         if ($_POST['id_produit'] != 'panier') {
 
-            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur
+            $requete = $pdo->prepare("SELECT prix, nom_public AS nom_produit, raison_sociale AS nom_vendeur, id_vendeur
             FROM produit
             WHERE id_produit = :id_produit");
             $requete->bindValue(":id_produit", $_POST['id_produit']);
