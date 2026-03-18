@@ -71,7 +71,7 @@ hr {
     @include image_uploader(200px, 100px);
 }
 
-#input_image {
+.input_image {
     display: none;
 }
 
@@ -628,6 +628,65 @@ ul#results {
 
     }
 
+
+    @media screen and (max-width: 1024px) {
+        main {
+            padding: 0;
+        }
+
+        section {
+            @include contenu_centre_vertical;
+
+            .form_infos {
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                margin: 1em;
+                gap: 2em;
+
+
+                article {
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+
+                    &:first-child {
+                        align-items: center;
+
+                        .image_pp {
+                            width: clamp(140px, 40vw, 240px);
+                            border-radius: 8px;
+                        }
+
+                        label {
+                            margin-top: 1em;
+                            font-size: 1rem;
+                            text-align: center;
+                        }
+                    }
+
+
+                    &:last-child {
+
+                        input,
+                        button,
+                        a {
+                            width: 50%;
+                        }
+
+                        .champ {
+                            margin-bottom: 1em;
+                        }
+
+                        .bouton {
+                            margin-top: 1.2em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 // Bouton Ajouter un avis
@@ -894,7 +953,7 @@ div:has(> aside) {
         display: flex;
         flex-direction: column;
 
-        #clear_image {
+        .clear_image {
             display: none;
             align-self: end;
     
@@ -2325,6 +2384,21 @@ aside {
             .error {
                 visibility: hidden;
             }
+        }
+    }
+}
+
+.infos .modal {
+    .modal_content {
+        width: 50%;
+        margin: 5% auto;
+
+        .image_uploader {
+            @include image_uploader(200px);
+        }
+
+        .boutons button[type="submit"] {
+            @include bouton_new($couleur_primaire_client, $color: white, $padding: 0.5em);
         }
     }
 }
