@@ -36,7 +36,7 @@
         <main class="erreur_adress">
             <h1>Erreur - Adresse saisie inconnue</h1>
             <h4>Par défaut, l'ancienne adresse est conservée</h4>
-            <a href="index.php">Modifier mon compte</a>
+            <a href="index.php">Continuer de modifier mon compte</a>
             <a href="../../accueil">Revenir à l'acceuil</a>
         </main>
         <?php include HOME_SITE . 'footer.php' ?>
