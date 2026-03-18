@@ -705,14 +705,17 @@ p {
 .produit_paniner > a img {
   width: 50%;
 }
-.produit_paniner div article:first-child() {
+.produit_paniner div {
+  background-color: aqua;
+}
+.produit_paniner div article:first-child {
   display: flex;
   align-items: center;
 }
-.produit_paniner div article:first-child() p {
+.produit_paniner div article:first-child p {
   margin: 0;
 }
-.produit_paniner div article:last-child() p {
+.produit_paniner div article:last-child p {
   margin: 0;
 }
 
