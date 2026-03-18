@@ -306,7 +306,7 @@
 
         <p style="text-align:center;">Déjà inscrit ? <a href="../">Se connecter</a>
         <br>
-        <a href="../">Retourner au côté client</a></p>
+        <a href="../../compte/inscription">Retourner au côté client</a></p>
 <?php } ?>
     </main>
 </body>
