@@ -4332,6 +4332,7 @@ aside .achat:hover {
   display: flex;
   flex-direction: column;
   align-self: center;
+  width: 50%;
 }
 .erreur_adress a {
   margin-top: 20px;
