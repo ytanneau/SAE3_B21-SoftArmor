@@ -182,8 +182,10 @@
             width: 500px;
         }
     }
+
     width: 100vw;
     font-size: 1em;
+
     input {
         margin-top: 2%;
     }
@@ -201,6 +203,7 @@
 
     width: 100vw;
     font-size: 1em;
+
     input {
         margin-top: 2%;
     }
@@ -512,27 +515,31 @@ p {
         }
 
         div {
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
             article:first-child {
                 display: flex;
                 align-items: center;
 
-                div{
-                    width: 90%;
+                div {
+                    width: 80%;
                 }
 
-                p, h3 {
+                p,
+                h3 {
                     margin: 0;
-                    a{
-                        text-decoration: none;
-                        color: #000;
-                    }
+
                 }
 
-                button{
+                button {
                     background-color: $rouge;
                     color: #fff;
                     border-radius: 15px;
-                    img{
+
+                    img {
                         width: 80px;
                     }
                 }
@@ -541,6 +548,19 @@ p {
             article:last-child {
                 p {
                     margin: 0;
+                }
+
+                >form, >div{
+                    display: flex;
+                    gap: 30px;
+                }
+
+                input{
+                    
+                }
+
+                >form:last-child{
+                    display: none;
                 }
             }
         }
@@ -567,7 +587,7 @@ p {
 }
 
 
-    
+
 .infos {
     @media screen and (max-width: 1024px) {
         main {
