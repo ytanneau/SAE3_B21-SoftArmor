@@ -459,7 +459,7 @@ p {
     display: flex;
     flex-direction: column;
 
-    div:last-child {
+    div:last-of-type {
         order: -1;
 
         aside {

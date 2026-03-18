@@ -643,17 +643,17 @@ p {
   display: flex;
   flex-direction: column;
 }
-.mainPanier div:last-child {
+.mainPanier div:last-of-type {
   order: -1;
 }
-.mainPanier div:last-child aside {
+.mainPanier div:last-of-type aside {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   margin-top: 20px;
 }
-.mainPanier div:last-child aside .bouton {
+.mainPanier div:last-of-type aside .bouton {
   font-size: 1.5em;
   background-color: #BB2BB2;
   border-radius: 15px;
