@@ -1087,6 +1087,30 @@ ul#results > li > a > h3 {
   display: flex;
 }
 
+#btn_reset_filter {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #E43737;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#btn_reset_filter a {
+  text-decoration: none;
+  color: #E43737;
+}
+#btn_reset_filter:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+
 .deroulant {
   align-self: center;
 }
@@ -2718,7 +2742,6 @@ aside .achat:hover {
   flex-direction: column;
 }
 .mainInfoVendeur div form div #map {
-  z-index: 0;
   width: 500px;
   height: 300px;
 }
