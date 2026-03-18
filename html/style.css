@@ -2120,7 +2120,7 @@ div:has(> aside) {
   box-shadow: 0 0 20px black;
 }
 .accueil > main section > div > button > img {
-  width: 75%;
+  max-width: 75%;
 }
 .accueil > main section > div > button:hover {
   background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
@@ -2185,6 +2185,18 @@ div:has(> aside) {
 }
 .accueil > main section > div > ul > li > a > h3 {
   height: 3em;
+}
+.accueil > main section > div > ul > li img {
+  max-width: 15vw;
+  max-height: 15vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.accueil > main section > div > ul > li article:has(img:only-child) {
+  width: 15vw;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
 }
 .accueil > main section > div > ul > li > a {
   position: relative;
