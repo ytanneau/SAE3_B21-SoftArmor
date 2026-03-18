@@ -556,9 +556,6 @@ p {
   font-family: "Inter";
 }
 
-.accueil {
-  font-size: 3em;
-}
 .accueil .prix {
   font-size: 1.5em;
   color: #2E7A30;
@@ -586,20 +583,19 @@ p {
   margin: auto 0.8em;
 }
 .accueil h3 {
-  height: 177px;
+  height: 60px;
   font-size: 1em;
   width: 100%;
   margin-bottom: 12px;
 }
 .accueil .etoiles {
   width: 100%;
-  height: 75px;
+  height: 30px;
 }
 .accueil .etoiles .etoile {
-  height: 60px;
+  height: 6vw;
 }
 .accueil .etoiles p {
-  font-size: 0.8em;
   margin: 0;
 }
 .accueil main .droite,
@@ -618,7 +614,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px 20px;
+  margin: 40px 20px;
   width: 40vw;
 }
 .accueil main ul > li > a {
@@ -626,8 +622,19 @@ p {
   text-decoration: none;
   width: 100%;
 }
+.accueil main ul > li article {
+  width: 40vw;
+  height: 40vw;
+}
+.accueil main ul > li article:first-child {
+  display: flex;
+  justify-content: center;
+}
 .accueil main ul > li article > img {
-  width: 100%;
+  max-width: 40vw;
+  max-height: 40vw;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .liste-commande-page main {
@@ -989,4 +996,135 @@ ul#results > li > a > h3 {
   border-radius: 5px;
   border: solid 1px #CBCCEA;
   font-size: 1em;
+}
+
+.produit main h2 {
+  font-size: 1em;
+}
+.produit main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 2em;
+}
+.produit main .gauche {
+  width: 100%;
+}
+.produit main .gauche #avis {
+  display: none;
+}
+.produit main .detail_produit {
+  width: 100%;
+}
+.produit main .detail_produit article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.produit main .detail_produit article img {
+  width: 60vw;
+  height: auto;
+  margin: 1rem 0;
+}
+.produit main .detail_produit article h1 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+.produit main .detail_produit article p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+.produit main aside {
+  width: 100%;
+  margin-top: 1.5rem;
+  border-top: 1px solid #ccc;
+}
+.produit main aside div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.produit main aside .input_quantite {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.produit main aside .input_quantite input[type=number] {
+  width: 60px;
+  text-align: center;
+}
+.produit main aside .bouton,
+.produit main aside .achat {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.produit main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.produit main .bouton a {
+  text-decoration: none;
+  color: black;
+}
+.produit main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.produit main .bouton {
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+  padding: 0.5em;
+}
+@media (max-width: 1440px) {
+  .produit main .bouton {
+    margin-top: 5%;
+  }
+}
+.produit main .achat {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.produit main .achat a {
+  text-decoration: none;
+  color: black;
+}
+.produit main .achat:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.produit main .achat {
+  background-color: #EAC452;
+  color: black;
+  font-size: 1em;
+  margin-top: 2%;
+  padding: 0.5em;
+}
+@media (max-width: 1440px) {
+  .produit main .achat {
+    margin-top: 5%;
+  }
 }/*# sourceMappingURL=style_tele.css.map */

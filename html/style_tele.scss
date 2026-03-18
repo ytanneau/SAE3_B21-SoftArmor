@@ -348,8 +348,7 @@ p {
 
 
 .accueil {
-    font-size: 3em;
-
+    
     .prix {
         font-size: 1.5em;
         color: $couleur_prix;
@@ -386,7 +385,7 @@ p {
     }
 
     h3 {
-        height: 177px;
+        height: 60px;
         font-size: 1em;
         width: 100%;
         margin-bottom: 12px;
@@ -394,14 +393,13 @@ p {
 
     .etoiles {
         width: 100%;
-        height: 75px;
+        height: 30px;
 
         .etoile {
-            height: 60px;
+            height: 6vw;
         }
 
         p {
-            font-size: 0.8em;
             margin: 0;
         }
     }
@@ -424,7 +422,7 @@ p {
 
             >li {
                 @include contenu_centre_vertical;
-                margin: 80px 20px;
+                margin: 40px 20px;
                 width: 40vw;
 
 
@@ -434,8 +432,20 @@ p {
                     width: 100%;
                 }
 
+                article {
+                    width: 40vw;
+                    height: 40vw;
+
+                    &:first-child {
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+
                 article>img {
-                    width: 100%;
+                    max-width: 40vw;
+                    max-height: 40vw;
+                    object-fit: contain;
                 }
             }
         }
@@ -821,5 +831,103 @@ ul#results {
         border-radius: 5px;
         border: solid 1px $nuance_primaire_client;
         font-size: $font_size_normal;
+    }
+}
+
+.produit {
+    main {
+        h2{
+            font-size: 1em;
+        }
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        font-size: 2em;
+
+        .gauche {
+            width: 100%;
+
+            #avis {
+                display: none;
+            }
+        }
+
+        .detail_produit {
+            width: 100%;
+
+            article {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                img {
+                    width: 60vw;
+                    height: auto;
+                    margin: 1rem 0;
+                }
+
+                h1 {
+                    font-size: 1.2rem;
+                    text-align: center;
+                }
+
+                p {
+                    text-align: center;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        aside {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-top: 1px solid #ccc;
+
+            div {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+
+            .input_quantite {
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+
+                input[type="number"] {
+                    width: 60px;
+                    text-align: center;
+                }
+            }
+
+            .bouton,
+            .achat {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+        .bouton {
+            @include bouton_new;
+            background-color: $focus;
+            color: white;
+            font-size: $font_size_normal;
+            margin-top: 2%;
+            padding: 0.5em;
+
+            @media (max-width: 1440px) {
+                margin-top: 5%;
+            }
+        }
+        .achat {
+            @include bouton_new;
+            background-color: $couleur_etoile;
+            color: black;
+            font-size: $font_size_normal;
+            margin-top: 2%;
+            padding: 0.5em;
+            @media (max-width: 1440px) {
+                margin-top: 5%;
+            }
+        }
     }
 }
