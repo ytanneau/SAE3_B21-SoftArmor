@@ -412,6 +412,8 @@ p {
 .mainPanier .entete {
   display: flex;
   margin: 2em 0;
+  align-items: center;
+  gap: 2em;
 }
 .mainPanier .entete h1 {
   margin: 0;
