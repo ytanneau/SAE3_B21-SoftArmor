@@ -459,29 +459,6 @@ p {
         }
     }
 
-    .produit_paniner {
-        >a img {
-            width: 50%;
-        }
-
-        >div {
-
-            >article:first-child {
-                display: flex;
-                align-items: center;
-
-                p {
-                    margin: 0;
-                }
-            }
-
-            >article:last-child {
-                p {
-                    margin: 0;
-                }
-            }
-        }
-    }
 
 
     #panier_vide {
@@ -502,6 +479,31 @@ p {
         }
     }
 }
+
+
+    .produit_paniner {
+        >a img {
+            width: 50%;
+        }
+
+        div {
+
+            article:first-child {
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            article:last-child {
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
 
 .infos {
     @media screen and (max-width: 1024px) {
