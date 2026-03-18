@@ -252,7 +252,12 @@ body {
   gap: 15px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Montserrat";
 }
 
@@ -328,7 +333,8 @@ p {
 .accueil main nav img {
   height: 60%;
 }
-.accueil main .droite, .accueil main .gauche {
+.accueil main .droite,
+.accueil main .gauche {
   display: none;
 }
 .accueil main ul {
@@ -383,6 +389,33 @@ p {
   display: none;
 }
 
+.mainPanier {
+  display: flex;
+  flex-direction: column;
+}
+.mainPanier div:last-child {
+  order: -1;
+}
+.mainPanier div:last-child aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+.mainPanier div:last-child aside .bouton {
+  font-size: 1.5em;
+  background-color: #BB2BB2;
+  border-radius: 15px;
+}
+.mainPanier .entete {
+  display: flex;
+}
+.mainPanier .entete .grave {
+  font-size: 1em;
+  background-color: #E43737;
+  border-radius: 15px;
+}
 .mainPanier #panier_vide {
   display: flex;
   flex-direction: column;
@@ -393,7 +426,8 @@ p {
   width: 400px;
   height: 400px;
 }
-.mainPanier #panier_vide a, .mainPanier #panier_vide a:visited {
+.mainPanier #panier_vide a,
+.mainPanier #panier_vide a:visited {
   color: black;
   text-decoration: none;
 }
