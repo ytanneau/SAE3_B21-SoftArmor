@@ -556,9 +556,6 @@ p {
   font-family: "Inter";
 }
 
-.accueil {
-  font-size: 3em;
-}
 .accueil .prix {
   font-size: 1.5em;
   color: #2E7A30;
@@ -586,20 +583,19 @@ p {
   margin: auto 0.8em;
 }
 .accueil h3 {
-  height: 177px;
+  height: 60px;
   font-size: 1em;
   width: 100%;
   margin-bottom: 12px;
 }
 .accueil .etoiles {
   width: 100%;
-  height: 75px;
+  height: 30px;
 }
 .accueil .etoiles .etoile {
-  height: 60px;
+  height: 6vw;
 }
 .accueil .etoiles p {
-  font-size: 0.8em;
   margin: 0;
 }
 .accueil main .droite,
@@ -618,7 +614,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 80px 20px;
+  margin: 40px 20px;
   width: 40vw;
 }
 .accueil main ul > li > a {
@@ -626,8 +622,19 @@ p {
   text-decoration: none;
   width: 100%;
 }
+.accueil main ul > li article {
+  width: 40vw;
+  height: 40vw;
+}
+.accueil main ul > li article:first-child {
+  display: flex;
+  justify-content: center;
+}
 .accueil main ul > li article > img {
-  width: 100%;
+  max-width: 40vw;
+  max-height: 40vw;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .liste-commande-page main {
