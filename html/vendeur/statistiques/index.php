@@ -95,9 +95,13 @@
                 </select>
                 <button id='resetCat'>Reset Filtre</button>
                 <span class="aide" data-tooltip="Cliquez sur une catégorie dans le diagramme pour afficher toutes les sous-catégories, ou tous les produits dans cette catégorie"></span>
-                <div class="container" id="b_container">
-                    <canvas id="b"></canvas>
-                </div>
+                
+
+
+                    <div class="container" id="b_container">
+                        <canvas id="b"></canvas>
+                    </div>
+
             </section>
             <section id="section_prod">
                 <h1>Statistiques Par Produits</h1>
@@ -439,7 +443,7 @@
 
                     //affiche le graphe
                     CatChart = createChart("b", "pie", categories, tabCat, "auto", true, true, false);
-                    document.getElementById('b_container').style.setProperty("width", "40vw");
+                    document.getElementById('b_container').style.setProperty("height", "40vw");
                 }
 
                 //creer le graphe pour la section "produit"
@@ -813,7 +817,7 @@
                 //reset les filtres graphe categorie
                 document.getElementById("resetCat").addEventListener('click',()=>{
                     createCatChart();
-                    document.getElementById('b_container').style="width:40vw;";
+                    document.getElementById('b_container').style="height:40vw;";
                     const select = document.getElementById("filtreAbsCat");
                     const select2 = document.getElementById("filtreCat");
 
@@ -890,7 +894,7 @@
                     
                     if(typeCat === "all"){
                         createCatChart();
-                        document.getElementById('b_container').style="width:40vw;";
+                        document.getElementById('b_container').style="height:40vw;";
                         return;
                     }
                     

@@ -2854,7 +2854,7 @@ line-height: 0;
     }
 }
 .stat{
-    
+
     #sectionButton{
         @include contenu_centre_horizontal;
         justify-content: space-evenly;
@@ -2870,4 +2870,16 @@ line-height: 0;
         @include contenu_centre_horizontal;
         justify-content: center;
     }
+
+    select {
+        border-radius:5px;
+        text-align : center;
+    }
+
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
 }
