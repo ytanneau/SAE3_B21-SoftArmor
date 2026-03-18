@@ -49,7 +49,7 @@ require_once (HOME_GIT . "fonction_vendeur.php");
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
-<body data-page="search">
+<body data-page="search" class="search">
     <?php 
         include HOME_SITE . "header.php";
         include HOME_SITE . "toolbar_categories.php";
