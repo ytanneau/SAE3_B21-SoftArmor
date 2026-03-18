@@ -141,9 +141,8 @@
                 }
             });
 
-            // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
             
-
+            // INITIALISATION DES INPUT DATES A LA DATE DU JOUR //
             if(date.getMonth() < 9){
                 current_string_date= date.getFullYear() + "-0" + (date.getMonth()+1) + "-" + date.getDate()
             } else {
