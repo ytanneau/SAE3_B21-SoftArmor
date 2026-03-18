@@ -484,4 +484,100 @@ p {
   .infos section .form_infos article:last-child .bouton {
     margin-top: 1.2em;
   }
+}
+
+.search .prix {
+  font-size: 1.5em;
+  color: #2E7A30;
+  font-weight: bold;
+  margin: 0;
+  font-family: "Montserrat";
+}
+.search .ancien_prix {
+  display: inline-block;
+  margin-right: 6px;
+  width: auto;
+}
+.search .pourcentage {
+  display: inline-block;
+  padding: 2px 6px;
+  width: auto;
+  background-color: #6B31D0;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.search h1 {
+  margin: auto 0.8em;
+}
+.search h3 {
+  height: 177px;
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.search .etoiles {
+  width: 100%;
+  height: 75px;
+}
+.search .etoiles .etoile {
+  height: 60px;
+}
+.search .etoiles p {
+  font-size: 0.8em;
+  margin: 0;
+}
+.search nav {
+  display: none;
+}
+.search main nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  position: sticky;
+  bottom: -1em;
+  width: 80%;
+  left: 10%;
+  border-radius: 3.2vh;
+  background-color: #FFFFFF;
+  height: 3em;
+  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
+}
+.search main nav a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.search main nav img {
+  height: 60%;
+}
+.search main .droite,
+.search main .gauche {
+  display: none;
+}
+.search main ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  justify-items: center;
+  padding: 0;
+}
+.search main ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px 20px;
+  width: 40vw;
+}
+.search main ul > li > a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
+}
+.search main ul > li article > img {
+  width: 100%;
 }/*# sourceMappingURL=style_tele.css.map */
