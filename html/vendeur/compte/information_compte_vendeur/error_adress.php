@@ -32,13 +32,13 @@
 
     </head>
     <body>
-        <?php include HOME_SITE . 'header.php'?>
+        <?php include '../../header.php'?>
         <main class="erreur_adress">
             <h1>Erreur - Adresse saisi inconnue</h1>
             <h4>Par défaut, l'ancienne adresse est consérver</h4>
             <a href="index.php">Modifier mon compte</a>
             <a href="../../accueil">Revenir à l'acceuil</a>
         </main>
-        <?php include HOME_GIT . 'footer.php' ?>
+        <?php include HOME_SITE . 'footer.php' ?>
     </body>
 </html>
