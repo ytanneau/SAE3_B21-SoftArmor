@@ -95,19 +95,9 @@
                 </select>
                 <button id='resetCat'>Reset Filtre</button>
                 <span class="aide" data-tooltip="Cliquez sur une catégorie dans le diagramme pour afficher toutes les sous-catégories, ou tous les produits dans cette catégorie"></span>
-<<<<<<< HEAD
-                
-
-
-                    <div class="container" id="b_container">
-                        <canvas id="b"></canvas>
-                    </div>
-
-=======
                 <div class="container" id="b_container">
                     <canvas id="b"></canvas>
                 </div>
->>>>>>> 507d73bca97aa5846120c43f05f4765d06135ac8
             </section>
             <section id="section_prod">
                 <h1>Statistiques Par Produits</h1>
