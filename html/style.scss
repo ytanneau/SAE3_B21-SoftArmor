@@ -217,6 +217,11 @@ hr {
     }
 }
 
+
+#nav_tel {
+    display: none;
+}
+
 #header_client {
     @include header($couleur_primaire_client);
 }
@@ -1060,10 +1065,6 @@ div:has(> aside) {
 
     .etoiles {
         height: 30px;
-    }
-
-    nav {
-        display: none;
     }
 
     >main {

@@ -5,6 +5,8 @@
 
 #header_client {
     position: sticky;
+    width:100vw;
+
     top: 0;
     z-index: 11;
     padding: 0.5em 1em;
@@ -15,14 +17,10 @@
         font-weight: bold;
     }
 
-    @media screen and (max-width: 1024px) {
-        padding: 1.5em 1em;
-    }
+    padding: 1.5em 1em;
 
     .hide-on-mobile {
-        @media screen and (max-width: 1024px) {
-            display: none;
-        }
+        display: none;
     }
 
     .menu-button {
@@ -34,9 +32,7 @@
             width: 75px;
         }
 
-        @media screen and (max-width: 1024px) {
-            display: block;
-        }
+        display: block;
     }
 
     .dropdown {
@@ -215,13 +211,35 @@
     }
 }
 
+#nav_tel {
+    @include contenu_centre_horizontal;
+    justify-content: space-evenly;
+    position: sticky;
+    bottom: -5vh;
+    width: 80%;
+    left: 10%;
+    border-radius: 2em;
+    background-color: $couleur_background;
+    height: 3em;
+
+    box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
+
+    a {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        height: 60%;
+    }
+}
+
 body {
     padding: 0;
     margin: 0;
     text-decoration: none;
     width: 100vw;
-    width: fit-content;
-    font-size: 3em;
     font-family: "Montserrat";
 }
 
@@ -359,34 +377,8 @@ p {
         }
     }
 
-    nav {
-        display: none;
-    }
-
     main {
-        nav {
-            @include contenu_centre_horizontal;
-            justify-content: space-evenly;
-            position: sticky;
-            bottom: -1em;
-            width: 80%;
-            left: 10%;
-            border-radius: 3.2vh;
-            background-color: $couleur_background;
-            height: 3em;
-
-            box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
-
-            a {
-                height: 100%;
-                display: flex;
-                align-items: center;
-            }
-
-            img {
-                height: 60%;
-            }
-        }
+        
 
         .droite,
         .gauche {
@@ -423,7 +415,7 @@ p {
 
 .liste-commande-page {
     main {
-        margin-left: 50vw;
+        margin-left: 8vw;
     }
 
     thead {
@@ -434,6 +426,8 @@ p {
         display: flex;
         flex-direction: column;
         margin-top: 1em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid black;
 
         p {
             margin: 0;

@@ -1,5 +1,6 @@
 #header_client {
   position: sticky;
+  width: 100vw;
   top: 0;
   z-index: 11;
   padding: 0.5em 1em;
@@ -9,15 +10,11 @@
   font-family: "Montserrat";
   font-weight: bold;
 }
-@media screen and (max-width: 1024px) {
-  #header_client {
-    padding: 1.5em 1em;
-  }
+#header_client {
+  padding: 1.5em 1em;
 }
-@media screen and (max-width: 1024px) {
-  #header_client .hide-on-mobile {
-    display: none;
-  }
+#header_client .hide-on-mobile {
+  display: none;
 }
 #header_client .menu-button {
   display: none;
@@ -27,10 +24,8 @@
   height: 75px;
   width: 75px;
 }
-@media screen and (max-width: 1024px) {
-  #header_client .menu-button {
-    display: block;
-  }
+#header_client .menu-button {
+  display: block;
 }
 #header_client .dropdown {
   position: relative;
@@ -444,14 +439,34 @@
   margin: 5% 0;
 }
 
+#nav_tel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  position: sticky;
+  bottom: -5vh;
+  width: 80%;
+  left: 10%;
+  border-radius: 2em;
+  background-color: #FFFFFF;
+  height: 3em;
+  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
+}
+#nav_tel a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#nav_tel img {
+  height: 60%;
+}
+
 body {
   padding: 0;
   margin: 0;
   text-decoration: none;
   width: 100vw;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-size: 3em;
   font-family: "Montserrat";
 }
 
@@ -566,31 +581,6 @@ p {
   font-size: 0.8em;
   margin: 0;
 }
-.accueil nav {
-  display: none;
-}
-.accueil main nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  position: sticky;
-  bottom: -1em;
-  width: 80%;
-  left: 10%;
-  border-radius: 3.2vh;
-  background-color: #FFFFFF;
-  height: 3em;
-  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.326);
-}
-.accueil main nav a {
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-.accueil main nav img {
-  height: 60%;
-}
 .accueil main .droite,
 .accueil main .gauche {
   display: none;
@@ -620,7 +610,7 @@ p {
 }
 
 .liste-commande-page main {
-  margin-left: 50vw;
+  margin-left: 8vw;
 }
 .liste-commande-page thead {
   display: none;
@@ -629,6 +619,8 @@ p {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid black;
 }
 .liste-commande-page tr p {
   margin: 0;
