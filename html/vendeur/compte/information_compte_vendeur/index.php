@@ -156,9 +156,9 @@
                                 <label for="latitude">Latitude</label>
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
-                            <p style="display:none;" class="warning" id="warningLon">Erreur de saisi - longitude</p>
-                            <p style="display:none;" class="warning" id="warningLat">Erreur de saisi - latitude</p>
                         </div>
+                        <p style="display:none;" class="warning" id="warningLon">Erreur de saisi - longitude</p>
+                        <p style="display:none;" class="warning" id="warningLat">Erreur de saisi - latitude</p>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
