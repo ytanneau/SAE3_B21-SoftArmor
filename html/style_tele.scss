@@ -464,7 +464,7 @@ p {
             width: 50%;
         }
 
-        article:first-child {
+        div:first-child {
             display: flex;
             align-items: center;
 
@@ -473,7 +473,7 @@ p {
             }
         }
 
-        article:last-child {
+        div:last-child {
             p {
                 margin: 0;
             }
