@@ -144,12 +144,6 @@
             }
             dateDebut.value = current_string_date
             dateFin.value = current_string_date
-
-            if(check_dispo_date(dateDebut.value)){
-                warning_date_occupe.style.display = "block"
-            } else {
-                warning_date_occupe.style.display = "none"
-            }
         </script>
     </body>
 </html>
