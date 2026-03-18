@@ -77,6 +77,8 @@
             $data = $data[0];
             $lon = $data["lat"];
             $lat = $data["lon"];
+        } else {
+            header('Location: error_adress.php');
         }
         if($lon == null){ $lon = $tabAdresseVendeur['lon'];}
         if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
