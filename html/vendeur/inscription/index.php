@@ -108,7 +108,7 @@
         <form action="" id="formCoordonnee" method="post">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
-                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>" readonly>
             </div>
             <div>
                 <label for="longitude">Longitude</label>
