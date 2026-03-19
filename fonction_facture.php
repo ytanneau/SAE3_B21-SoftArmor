@@ -52,7 +52,7 @@ function sommeTVA($data)
 {
     $somme = 0;
     foreach ($data as $valeur) {
-        $somme += $valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100);
+        $somme += $valeur['quantite'] * $valeur['prix'] * ($valeur['tva'] / 100);
     }
     return $somme;
 }
@@ -84,7 +84,7 @@ function print_table($data)
                     <td><?= htmlentities($valeur['prix']) ?> €</td>
                     <td><?= htmlentities($valeur['prix'] * $valeur['quantite']) ?> €</td>
                     <td><?= htmlentities($valeur['tva']) ?> %</td>
-                    <td><?= number_format($valeur['quantite'] * $valeur['prix'] * (1 + $valeur['tva'] / 100), 2) ?> €</td>
+                    <td><?= number_format($valeur['quantite'] * $valeur['prix'] * ($valeur['tva'] / 100), 2) ?> €</td>
                 </tr>
             <?php } ?>
         </tbody>
