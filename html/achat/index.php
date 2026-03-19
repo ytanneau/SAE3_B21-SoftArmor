@@ -230,7 +230,7 @@ if ($numEtape == 3) {
             ajout_commande($id_commande, $liste_produits);
             vider_panier($_SESSION['id_compte']);
         }
-        header("location: " . HOME_SITE . "commande/commande");
+        header("location: " . HOME_SITE . "commande/");
     }
 
     $_POST = [];
