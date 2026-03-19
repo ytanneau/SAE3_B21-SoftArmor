@@ -407,7 +407,6 @@ ul#results {
 }
 #resetFilters{
     @include bouton_new($background: $rouge, $color: white, $largeur: auto);
-    background-color: pink;
 }
 #btnOuvrirCarte{
     @include bouton_new($background: gray, $color: white, $largeur: auto);
