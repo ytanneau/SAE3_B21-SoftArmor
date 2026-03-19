@@ -347,6 +347,20 @@ p {
 }
 
 
+.champ, .PIN {
+    display: block;
+    border: none;
+    border-radius: $angle_petit;
+    height: 2em;
+    font-size: $font_size_normal;
+    padding-left: 0.6em;
+    padding-right: 0;
+}
+
+#codePIN {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .aide {
     display:none;

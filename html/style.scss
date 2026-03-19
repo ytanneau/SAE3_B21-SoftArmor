@@ -1089,8 +1089,7 @@ div:has(> aside) {
 }
 
 .grave {
-    @include bouton();
-    background-color: $rouge;
+    @include bouton_new($rouge);
     color: white;
 }
 

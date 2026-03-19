@@ -93,20 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="post">
             <h3>Ouvrez votre application de double authentification, et entrez le code PIN enregistré pour votre compte</h3>
 
-<<<<<<< Updated upstream
-=======
             <label for="codePIN">Code PIN</label>
->>>>>>> Stashed changes
             <input type="number" name="codePIN" id="inputPIN" hidden value="">
 
             <div id="codePIN">
                 <?php
                 for ($i=0; $i < 6; $i++) { 
-<<<<<<< Updated upstream
                     ?><input <?=$i == 0 ? 'autofocus' : ''?> type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0" <?=$_SESSION['nb_tentatives_connexion'] <= 0 ? 'disabled' : ''?>><?php
-=======
-                    ?><input type="number" id="codePIN<?=$i?>" class="PIN"  max="9" min="0"><?php
->>>>>>> Stashed changes
                 }
                 ?>
             </div>
@@ -115,87 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if ($_SESSION['nb_tentatives_connexion'] <= 0) {?>
                 <p class="error">Nombre de tentatives dépassé, attendez <span id="temps"><?=$_SESSION['temps_attente_connexion']?></span> secondes avant de réessayer</p>
-<<<<<<< Updated upstream
-=======
             <?php } else { ?>
                 <input type="submit" value="Désactiver" class="bouton grave" id="valider">
->>>>>>> Stashed changes
             <?php } ?>
-            
-            <input type="submit" value="Désactiver" class="bouton grave" id="valider">
     
             <p>Clef perdue ? <a href="mailto:service@alizon.bzh">Contactez le service client</a></p>
         </form>
     </main>
 
 </body>
-<script>
-    <?php if (isset($_SESSION['temps_attente_connexion'])) { ?>
-        let tempsRestant = <?=$_SESSION['temps_attente_connexion'] - time()?>;
-        document.getElementById("temps").innerHTML = tempsRestant;
-
-        let idInterval = setInterval(() => {
-            tempsRestant--;
-            document.getElementById("temps").innerHTML = tempsRestant;
-
-            if (tempsRestant <= 0) {
-                clearInterval(idInterval);
-                window.location.href = "";
-            }
-        }, 1000);
-    <?php } ?>
-
-    let blocCodePIN = document.getElementById("codePIN");
-
-    blocCodePIN.firstElementChild.focus();
-
-    for (const input in blocCodePIN.children) {
-        if (!Object.hasOwn(blocCodePIN.children, input)) continue;
-        
-        const element = blocCodePIN.children[input];
-        
-        element.addEventListener('keypress', (e) => {
-            
-            if (!('0' <= e.key && e.key <= '9')) {
-                e.preventDefault();
-                
-            } else {
-                if (e.target.value != "") {
-                    e.target.value = "";
-                }
-
-                if (e.target.nextSibling.nodeType == 1) { // passe le focus sur le suivant
-
-                    e.target.nextSibling.focus();
-
-                } else { // dernier champ, donc valide
-
-                    // écrit la touche parce que ça envoie sur le bouton avant de prendre en compte la touche de l'utilsateur
-                    e.preventDefault();
-                    e.target.value = e.key;
-                    document.getElementById("valider").click();
-
-                }
-            }
-        });        
-    }
-
-    document.getElementById("valider").addEventListener("click", (e) => {
-        let code = "";
-
-        for (const input in blocCodePIN.children) {
-            if (!Object.hasOwn(blocCodePIN.children, input)) continue;
-            
-            const element = blocCodePIN.children[input];
-
-            code += element.value;
-            console.log(element.value);
-        }
-
-        console.log(code);
-        document.getElementById("inputPIN").setAttribute('value', code);
-    })
-</script>
 
 <script src="codePIN.js"></script>
 </html>

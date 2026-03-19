@@ -556,6 +556,21 @@ p {
   font-family: "Inter";
 }
 
+.champ, .PIN {
+  display: block;
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+
+#codePIN {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .aide {
   display: none;
 }
