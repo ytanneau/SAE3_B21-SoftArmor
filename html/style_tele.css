@@ -557,17 +557,7 @@ p {
 }
 
 .aide {
-  border: 0.5px solid black;
-  border-radius: 100%;
-  padding: 0 0.4em;
-  font-size: 1em;
-  background-color: #e9e9e9;
-}
-.aide p {
-  text-align: left !important;
-}
-.aide:hover {
-  background-color: #9e9e9e;
+  display: none;
 }
 
 .accueil .prix {
@@ -792,6 +782,9 @@ p {
 .mainPanier button, .mainPanier input[type=submit] {
   border: none;
   padding: 0.5em;
+}
+.mainPanier input[value=Supprimer] {
+  display: none;
 }
 .mainPanier aside {
   font-size: 2em;
