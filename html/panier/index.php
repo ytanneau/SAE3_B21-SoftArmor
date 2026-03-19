@@ -195,6 +195,7 @@ if (isset($_SESSION['logged_in'])) {
                     <input type="hidden" name="produit" id="produit" value="panier">
                     <input type="submit" value="Passer au paiement" class="bouton">
                 </form>
+                <hr>
             </aside>
         </div>
 
