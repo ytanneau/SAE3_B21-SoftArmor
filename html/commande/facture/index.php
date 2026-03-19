@@ -28,7 +28,7 @@ require_once HOME_GIT . "/fonction_facture.php";
 require_once HOME_GIT . "/fonction_compte.php";
 
 if (isset($_GET["commande"])) {
-    echo $_GET['commande'];
+    //echo $_GET['commande'];
     $liste_elements = get_elements_commande($_GET['commande']);
     $date_commande = get_date_commande($_GET['commande']);
 }
