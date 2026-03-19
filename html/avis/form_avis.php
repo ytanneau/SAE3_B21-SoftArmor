@@ -10,6 +10,8 @@
     </div>
 
     <input type="hidden" name="note" id="nb_etoiles">
+    <input type="hidden" name="id_image" value="-1" id="id_image">
+    <input type="hidden" name="supprime" value="0" id="supprime">
 
     <div id="champs">
         <div>
@@ -53,6 +55,8 @@
 
     const inputTitre = document.getElementById("titre_avis");
     const inputCommentaire = document.getElementById("description_avis");
+    const inputIdImage = document.getElementById("id_image");
+    const inputSupprime = document.getElementById("supprime");
 
     const inputImageAvis = document.getElementById("input_image_avis");
     const imagePreviewAvis = document.getElementById("image_preview_avis");
@@ -156,6 +160,7 @@
 
                 // Afficher le bouton de suppression
                 buttonClearImageAvis.style.display = "block";
+                inputSupprimer.value = 0;
             });
 
             reader.readAsDataURL(file);
@@ -172,6 +177,8 @@
 
         // Cacher le bouton de suppression d'image
         buttonClearImageAvis.style.display = "none";
+
+        inputSupprime.value = 1;
 
         const spanPlus = document.createElement("span");
         const spanTexte = document.createElement("span");

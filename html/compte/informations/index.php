@@ -29,9 +29,6 @@ require_once (HOME_GIT . 'fonction_avis.php');
 require_once (HOME_GIT . 'fonction_categorie.php');
 require_once (HOME_GIT . 'fonction_2FA.php');
 
-//requete pour recuperer informations du compte sans l'adresse
-//$sql = "SELECT * FROM compte_client LEFT JOIN compte_image_profil ON compte_client.id_compte = compte_image_profil.id_compte WHERE compte_client.id_compte = {$_SESSION['id_compte']};";    
-
 $info_compte = sql_get_info_compte($_SESSION['id_compte']);
 
 if (isset($info_compte['id_image_profil'])) {
@@ -203,19 +200,13 @@ if ($_POST != NULL){
             <form class="form_infos" action="" method="post" id="donnee" enctype="multipart/form-data">
                 
                 <article>
-                    <!--
-                    <label for="pdp" class="image_bouton"><?php if (isset($info_compte['url_image'])) {echo "Modifier l'";} else {echo "Ajouter une ";}?>image
-                            <p id="image-name">Aucun fichier choisi</p>
-                        </label>
-                    <input id="pdp" type="file" name="pdp" accept=".png" hidden>
-                    -->
-
                     <label class="image_uploader" for="input_image_pp" tabIndex="0">
-                        <span id="image_preview" class="image_preview">
+                        <span id="image_preview_pp" class="image_preview">
                             <img src="<?= htmlentities(HOME_SITE . ($image_profil['url_image'] ?? 'image/compte.svg'))?>" alt="<?= htmlentities($info_compte['alt_image'] ?? '')?>" title="<?= htmlentities($info_compte['titre_image'] ?? '')?>">
                         </span>
                     </label>
-                    <input type="file" id="input_image_pp" name="pdp" accept="image/png"></input>
+
+                    <input type="file" id="input_image_pp" class="input_image" name="pdp" accept="image/png"></input>
                 </article>
 
                 <article>
@@ -511,7 +502,6 @@ if ($_POST != NULL){
 
     const inputImagePP = document.getElementById("input_image_pp");
     const imagePreviewPP = document.getElementById("image_preview_pp");
-    //const clearImagePP = document.getElementById("clear_image_pp");
 
     inputImagePP.addEventListener("change", (e) => {
         const file = e.target.files[0];
@@ -581,10 +571,13 @@ if ($_POST != NULL){
 
             inputTitre.value = data.titre;
             inputCommentaire.value = data.commentaire;
-
+            
             if (data.image != "") {
                 imagePreviewAvis.innerHTML = "";
                 imagePreviewAvis.style.backgroundImage = `url("../../${data.image}")`;
+                
+                inputIdImage.value = data.id_image;
+                inputSupprime.value = 0;
                 
                 // Afficher le bouton de suppression
                 buttonClearImageAvis.style.display = "block";

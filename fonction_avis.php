@@ -110,7 +110,7 @@
     function get_infos_avis($id_avis){
         global $pdo;
         try {
-            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, url_image
+            $requete = $pdo->prepare("SELECT id_avis, id_client, id_produit, note, titre, commentaire, date_avis, id_image, url_image
             FROM avis_client WHERE id_avis = :id_avis");
             $requete->bindValue(':id_avis', $id_avis, PDO::PARAM_INT);
             $requete->execute();
@@ -191,10 +191,10 @@
     }
 
     // fonction pour modifier un avis existant
-    function modifier_avis($id_client, $id_produit, $note, $titre, $commentaire, $image){
+    function modifier_avis($id_client, $id_produit, $note, $titre, $commentaire, $image, $id_image, $supprime) {
         global $pdo;
         try {
-            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :commentaire, date_avis = NOW(), id_image = NULL WHERE id_client = :id_client AND id_produit = :id_produit");
+            $requete = $pdo->prepare("UPDATE _avis SET note = :note, titre = :titre, commentaire = :commentaire, date_avis = NOW() WHERE id_client = :id_client AND id_produit = :id_produit");
             $requete->bindValue(':id_client', $id_client, PDO::PARAM_INT);
             $requete->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
             $requete->bindValue(':note', $note, PDO::PARAM_INT);
@@ -205,19 +205,13 @@
             // Gérer l'image si elle existe
             if (!empty($image)) {
                 // Vérifier si une image existe déjà pour cet avis
-                $check_img = $pdo->prepare("SELECT i.url_image FROM _avis a LEFT JOIN _image i ON a.id_image = i.id_image WHERE a.id_client = :id_client AND a.id_produit = :id_produit");
+                $check_img = $pdo->prepare("SELECT url_image FROM _avis a INNER JOIN _image i ON a.id_image = i.id_image WHERE a.id_client = :id_client AND a.id_produit = :id_produit");
                 $check_img->bindValue(':id_client', $id_client, PDO::PARAM_INT);
                 $check_img->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
                 $check_img->execute();
                 $existing_img = $check_img->fetch(PDO::FETCH_ASSOC);
 
-                if ($existing_img && $existing_img['url_image']) {
-                    // Mettre à jour l'image existante
-                    $update_img = $pdo->prepare("UPDATE _image SET url_image = :url WHERE url_image = :old_url");
-                    $update_img->bindValue(':url', $image, PDO::PARAM_STR);
-                    $update_img->bindValue(':old_url', $existing_img['url_image'], PDO::PARAM_STR);
-                    $update_img->execute();
-                } else {
+                if (!isset($existing_img['url_image'])) {
                     // Insérer une nouvelle image et la lier à l'avis
                     $insert_img = $pdo->prepare("INSERT INTO _image (url_image, titre, alt) VALUES (:url, :img_titre, :alt)");
                     $insert_img->bindValue(':url', $image, PDO::PARAM_STR);
@@ -232,6 +226,18 @@
                     $link_img->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
                     $link_img->execute();
                 }
+            } else if ($id_image != -1 && $supprime) {
+                // Il y avait déjà une image et elle a été supprimée
+
+                // Retirer l'image de l'avis (pas de trigger car sinon triggers en dépendance circulaire)
+                $delete_img = $pdo->prepare("UPDATE _avis SET id_image = NULL WHERE id_image = :id_image");
+                $delete_img->bindValue(':id_image', $id_image, PDO::PARAM_INT);
+                $delete_img->execute();
+
+                // Supprimer l'image
+                $delete_img = $pdo->prepare("DELETE FROM _image WHERE id_image = :id_image");
+                $delete_img->bindValue(':id_image', $id_image, PDO::PARAM_INT);
+                $delete_img->execute();
             }
 
             return 0;

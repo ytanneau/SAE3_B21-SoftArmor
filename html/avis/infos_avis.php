@@ -19,6 +19,7 @@
         'note' => $infos['note'],
         'titre' => $infos['titre'],
         'commentaire' => $infos['commentaire'],
-        'image' => $infos['url_image'] ?? ''
+        'image' => $infos['url_image'] ?? '',
+        'id_image' => $infos['id_image'] ?? -1
     ]);
 ?>

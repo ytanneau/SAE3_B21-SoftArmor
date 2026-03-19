@@ -17,6 +17,8 @@
     $titre = trim($_POST['titre'] ?? '');
     $description = trim($_POST['description'] ?? '');
     $id_produit = $_POST['produit'] ?? '';
+    $id_image = $_POST['id_image'] ?? -1;
+    $supprime = $_POST['supprime'] ?? 0;
 
     $image = "";
 
@@ -58,7 +60,7 @@
     try {
         // Si déjà créé par l'utilisateur, on le modifie, sinon on le crée
         if (check_avis_existe($id_produit, $id_compte)) {
-            modifier_avis($id_compte, $id_produit, $note, $titre, $description, $image);
+            modifier_avis($id_compte, $id_produit, $note, $titre, $description, $image, $id_image, $supprime);
         } else {
             cree_avis($id_compte, $id_produit, $note, $titre, $description, $image);
         }
