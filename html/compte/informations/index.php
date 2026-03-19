@@ -127,17 +127,14 @@ if ($_POST != NULL){
         $file_name = "$dossier$id$ext";
         $titre="'Image de Profil'";
         $alt="'Image de Profil'";
+        $possede_image = $_SESSION['pp'] ?? '';
+
         if ($_FILES!=NULL) {
             if(!$_FILES["pdp"]["error"]){
                 if ($_FILES["pdp"]["size"] < MAX_SIZE) {
                     move_uploaded_file($_FILES["pdp"]["tmp_name"],"$dossier$id$ext");
 
-                    $est_entre_img= false;
-                    
-                    foreach ($possede_image as $row){ 
-                        $est_entre_img=true;
-                    }
-                    if($est_entre_img){
+                    if($possede_image){
                         //met a jour les données de l'image de profil
                         $sql="UPDATE _compte INNER JOIN _image ON _compte.id_image_profil = _image.id_image SET url_image={$chemin}, alt={$alt}, titre={$titre} WHERE _compte.id_compte = {$_SESSION['id_compte']};";
                     }
@@ -582,6 +579,9 @@ if ($_POST != NULL){
 
             inputTitre.value = data.titre;
             inputCommentaire.value = data.commentaire;
+
+            nbCarTitre.textContent = `${inputTitre.value.length}/${TAILLE_TITRE}`;
+            nbCarTitre.textContent = `${inputCommentaire.value.length}/${TAILLE_DESCRIPTION}`;
             
             if (data.image != "") {
                 imagePreviewAvis.innerHTML = "";
