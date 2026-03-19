@@ -566,10 +566,19 @@ ul#results {
                     margin-left: 0;
                     margin-right: 1em;
                 }
+
+                &:last-child {
+                    flex-basis: 20%;
+                    max-width: 20%;
+                    margin-left: 2em;
+                    width: 10em;
+                    height: 10em;
+                    object-fit: cover;
+                }
             }
         }
 
-        img:not(.image_pp) {
+        .etoiles img {
             @include image_produit(2vw);
             background-color: white;
         }
@@ -579,13 +588,12 @@ ul#results {
         }
 
         .icon {
-            height: 28px;
+            height: 30px;
         }
 
         a {
             text-decoration: none;
-            display: block;
-            height: 36px;
+            display: flex;
         }
 
         .icons {
@@ -594,11 +602,6 @@ ul#results {
             align-items: center;
 
             margin-left: 1.2em;
-
-            img {
-                padding: 0.2em;
-            }
-
         }
     }
 
@@ -764,14 +767,13 @@ a.bouton:has(+ .liste_avis) {
             flex-basis: 20%;
             max-width: 20%;
             margin-left: 2em;
+            width: 10em;
+            height: 10em;
+            object-fit: cover;
         }
 
         a {
             flex-basis: 20%;
-
-            img {
-                width: 100%;
-            }
         }
 
         &.reponse {

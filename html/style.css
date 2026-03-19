@@ -1564,7 +1564,16 @@ ul#results > li > a > h3 {
   margin-left: 0;
   margin-right: 1em;
 }
-.infos .liste_avis img:not(.image_pp) {
+.infos .liste_avis li > img:last-child {
+  flex-basis: 20%;
+  max-width: 20%;
+  margin-left: 2em;
+  width: 10em;
+  height: 10em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.infos .liste_avis .etoiles img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 2vw;
@@ -1583,21 +1592,17 @@ ul#results > li > a > h3 {
      object-fit: cover;
 }
 .infos .liste_avis .icon {
-  height: 28px;
+  height: 30px;
 }
 .infos .liste_avis a {
   text-decoration: none;
-  display: block;
-  height: 36px;
+  display: flex;
 }
 .infos .liste_avis .icons {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: 1.2em;
-}
-.infos .liste_avis .icons img {
-  padding: 0.2em;
 }
 .infos .form_infos {
   display: flex;
@@ -1780,12 +1785,13 @@ a.bouton:has(+ .liste_avis):hover {
   flex-basis: 20%;
   max-width: 20%;
   margin-left: 2em;
+  width: 10em;
+  height: 10em;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .liste_avis li a {
   flex-basis: 20%;
-}
-.liste_avis li a img {
-  width: 100%;
 }
 .liste_avis li.reponse {
   padding-left: 3em;
