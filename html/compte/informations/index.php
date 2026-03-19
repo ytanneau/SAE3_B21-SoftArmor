@@ -117,7 +117,7 @@ if ($_POST != NULL){
         && (!isset($erreur['pseudo']))){
 
         //update la BDD
-        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['ville'], $_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'],$adresse_compte['id_adresse']);
+        sql_update_client($pdo ,$_POST['nom'],$_POST['prenom'],$_POST['pseudo'],$_POST['email'],$_POST['ville'], $_POST['adresse'],$_POST['code_postal'],$_POST['complement_adresse'],$_POST['n_mdp'], $_SESSION['id_compte'], isset($adresse_compte) ? $adresse_compte['id_adresse'] : null);
         
         //modifie la photo de profil
         $id=$_SESSION['id_compte'];
