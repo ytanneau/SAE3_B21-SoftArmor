@@ -2165,7 +2165,7 @@ div:has(> aside) {
   right: 50px;
   padding: 0 3px;
 }
-.accueil > main section > div > ul {
+.accueil > main section > div ul {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2175,16 +2175,16 @@ div:has(> aside) {
   padding: 0;
   width: 100%;
 }
-.accueil > main section > div > ul > li {
+.accueil > main section > div ul > li {
   width: 20vw;
   margin: 20px 40px 20px 20px;
 }
-.accueil > main section > div > ul > li > a {
+.accueil > main section > div ul > li > a {
   color: black;
   text-decoration: none;
   line-height: 1.5em;
 }
-.accueil > main section > div > ul > li > a > img {
+.accueil > main section > div ul > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 15vw;
@@ -2194,45 +2194,45 @@ div:has(> aside) {
   height: 15vw;
   border-radius: 5px;
 }
-.accueil > main section > div > ul > li > a > div {
+.accueil > main section > div ul > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.accueil > main section > div > ul > li > a > div > img {
+.accueil > main section > div ul > li > a > div > img {
   width: 20px;
   height: 20px;
   background: none;
 }
-.accueil > main section > div > ul > li > a > div > p {
+.accueil > main section > div ul > li > a > div > p {
   margin: 5px 0;
 }
-.accueil > main section > div > ul > li > a > div {
+.accueil > main section > div ul > li > a > div {
   height: 2em;
 }
-.accueil > main section > div > ul > li > a > p, .accueil > main section > div > ul > li > a > h3 {
+.accueil > main section > div ul > li > a > p, .accueil > main section > div ul > li > a > h3 {
   margin: 5px 0;
   width: 100%;
 }
-.accueil > main section > div > ul > li > a > h3 {
+.accueil > main section > div ul > li > a > h3 {
   height: 3em;
 }
-.accueil > main section > div > ul > li img {
+.accueil > main section > div ul > li img {
   max-width: 15vw;
   max-height: 15vw;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.accueil > main section > div > ul > li article:has(img:only-child) {
+.accueil > main section > div ul > li article:first-child {
   width: 15vw;
   height: 15vw;
   display: flex;
   justify-content: center;
 }
-.accueil > main section > div > ul > li > a {
+.accueil > main section > div ul > li > a {
   position: relative;
 }
-.accueil > main section > div > ul > li > a > .reduction {
+.accueil > main section > div ul > li > a .reduction {
   position: absolute;
   width: 32px;
   height: 32px;
