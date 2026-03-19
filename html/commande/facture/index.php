@@ -28,11 +28,9 @@ require_once HOME_GIT . "/fonction_facture.php";
 require_once HOME_GIT . "/fonction_compte.php";
 
 if (isset($_GET["commande"])) {
-    $liste_elements = get_elements_commande($_GET["commande"]);
+    //echo $_GET['commande'];
+    $liste_elements = get_elements_commande($_GET['commande']);
     $date_commande = get_date_commande($_GET['commande']);
-} else {
-    $liste_commandes = get_commandes($_SESSION["id_compte"]);
-
 }
 
 ?>
@@ -45,6 +43,7 @@ if (isset($_GET["commande"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alizon - Vos commandes</title>
     <?php include HOME_SITE . 'link_head.php' ?>
+        <link rel="stylesheet" media="print" href="<?= HOME_SITE ?>style.css"/>
 
 </head>
 
@@ -54,13 +53,13 @@ if (isset($_GET["commande"])) {
 
     ?>
 
-    <main>
+    <main><?php
+        facture_client($_GET['commande']); ?>
 
         <?php if (isset($_GET["commande"])) { ?>
-            <?php if (count($liste_elements) == 0) { ?>
-                <p>Vous n'avez pas accès à cette commande</p>
+            <?php if (isset($liste_elements)) { ?>
+                <!--p>Vous n'avez pas accès à cette commande</p-->
             <?php } else {
-                facture_client($_GET['commande']);
             } ?>
 
         <?php } ?>

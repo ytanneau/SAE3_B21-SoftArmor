@@ -408,6 +408,10 @@ hr {
   color: #FFFFFF;
 }
 
+#nav_tel {
+  display: none;
+}
+
 #header_client {
   position: sticky;
   top: 0;
@@ -1195,6 +1199,57 @@ ul#results > li > a > h3 {
   display: flex;
 }
 
+#resetFilters {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #E43737;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#resetFilters a {
+  text-decoration: none;
+  color: white;
+}
+#resetFilters:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+#resetFilters {
+  background-color: pink;
+}
+
+#btnOuvrirCarte {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#btnOuvrirCarte a {
+  text-decoration: none;
+  color: white;
+}
+#btnOuvrirCarte:hover {
+  background-color: rgb(166.25, 166.25, 166.25);
+}
+
 .deroulant {
   align-self: center;
 }
@@ -1375,6 +1430,12 @@ ul#results > li > a > h3 {
 .infos .modif:hover {
   background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
 }
+.infos .modif {
+  width: 370px;
+  padding: 0.6em;
+  line-height: 2em;
+  margin-top: 8%;
+}
 .infos .grave {
   display: block;
   max-width: 100%;
@@ -1431,33 +1492,6 @@ ul#results > li > a > h3 {
 .infos .image_bouton p {
   font-size: 10px;
 }
-.infos #idValiderModifVendeur {
-  margin-top: 20px;
-  display: block;
-  max-width: 100%;
-  width: auto;
-  padding: 1em;
-  font-family: "Montserrat";
-  font-size: 1em;
-  font-weight: bold;
-  background-color: #BB2BB2;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.infos #idValiderModifVendeur a {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-.infos #idValiderModifVendeur:hover {
-  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
-}
-.infos #idValiderModifVendeur {
-  width: 600px;
-}
 .infos #idDesactivationCompte,
 .infos #idDesactivation2FA {
   display: block;
@@ -1488,7 +1522,7 @@ ul#results > li > a > h3 {
 .infos #idDesactivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos #idActivation2FA {
   display: block;
@@ -1516,7 +1550,7 @@ ul#results > li > a > h3 {
 .infos #idActivation2FA {
   margin-top: 30px;
   padding: 0.6em;
-  width: 577px;
+  width: 351px;
 }
 .infos .liste_avis li > img:first-child {
   -o-object-fit: contain;
@@ -2047,12 +2081,29 @@ div:has(> aside) {
   }
 }
 .grave {
-  border: none;
-  border-radius: 50px;
-  padding: 0.5em 2em;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
   font-weight: bold;
-  align-self: center;
   background-color: #E43737;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.grave a {
+  text-decoration: none;
+  color: black;
+}
+.grave:hover {
+  background-color: rgb(237.0991189427, 122.4008810573, 122.4008810573);
+}
+.grave {
   color: white;
 }
 
@@ -2081,9 +2132,6 @@ div:has(> aside) {
 .accueil .etoiles {
   height: 30px;
 }
-.accueil nav {
-  display: none;
-}
 .accueil > main .banniere {
   display: flex;
   justify-content: center;
@@ -2099,11 +2147,11 @@ div:has(> aside) {
 .accueil > main .banniere a article:has(img) {
   width: 100%;
 }
-.accueil > main > div {
+.accueil > main section > div {
   display: flex;
   flex-direction: row;
 }
-.accueil > main > div > button {
+.accueil > main section > div > button {
   z-index: 10;
   width: 40px;
   height: 40px;
@@ -2119,22 +2167,22 @@ div:has(> aside) {
   justify-content: center;
   box-shadow: 0 0 20px black;
 }
-.accueil > main > div > button > img {
-  width: 75%;
+.accueil > main section > div > button > img {
+  max-width: 75%;
 }
-.accueil > main > div > button:hover {
+.accueil > main section > div > button:hover {
   background-color: rgb(54.8938679245, 97.4646226415, 182.6061320755);
 }
-.accueil > main > div .gauche {
+.accueil > main section > div .gauche {
   transform: rotate(180deg);
   left: 50px;
   padding: 0 3px;
 }
-.accueil > main > div .droite {
+.accueil > main section > div .droite {
   right: 50px;
   padding: 0 3px;
 }
-.accueil > main > div > ul {
+.accueil > main section > div ul {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -2144,16 +2192,16 @@ div:has(> aside) {
   padding: 0;
   width: 100%;
 }
-.accueil > main > div > ul > li {
+.accueil > main section > div ul > li {
   width: 20vw;
   margin: 20px 40px 20px 20px;
 }
-.accueil > main > div > ul > li > a {
+.accueil > main section > div ul > li > a {
   color: black;
   text-decoration: none;
   line-height: 1.5em;
 }
-.accueil > main > div > ul > li > a > img {
+.accueil > main section > div ul > li > a > img {
   -o-object-fit: contain;
      object-fit: contain;
   min-width: 15vw;
@@ -2163,33 +2211,45 @@ div:has(> aside) {
   height: 15vw;
   border-radius: 5px;
 }
-.accueil > main > div > ul > li > a > div {
+.accueil > main section > div ul > li > a > div {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.accueil > main > div > ul > li > a > div > img {
+.accueil > main section > div ul > li > a > div > img {
   width: 20px;
   height: 20px;
   background: none;
 }
-.accueil > main > div > ul > li > a > div > p {
+.accueil > main section > div ul > li > a > div > p {
   margin: 5px 0;
 }
-.accueil > main > div > ul > li > a > div {
+.accueil > main section > div ul > li > a > div {
   height: 2em;
 }
-.accueil > main > div > ul > li > a > p, .accueil > main > div > ul > li > a > h3 {
+.accueil > main section > div ul > li > a > p, .accueil > main section > div ul > li > a > h3 {
   margin: 5px 0;
   width: 100%;
 }
-.accueil > main > div > ul > li > a > h3 {
+.accueil > main section > div ul > li > a > h3 {
   height: 3em;
 }
-.accueil > main > div > ul > li > a {
+.accueil > main section > div ul > li img {
+  max-width: 15vw;
+  max-height: 15vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.accueil > main section > div ul > li article:first-child {
+  width: 15vw;
+  height: 15vw;
+  display: flex;
+  justify-content: center;
+}
+.accueil > main section > div ul > li > a {
   position: relative;
 }
-.accueil > main > div > ul > li > a > .reduction {
+.accueil > main section > div ul > li > a .reduction {
   position: absolute;
   width: 32px;
   height: 32px;
@@ -3033,6 +3093,7 @@ aside .achat:hover {
   flex-direction: column;
 }
 .mainInfoVendeur div form div #map {
+  z-index: 0;
   width: 500px;
   height: 300px;
 }
@@ -3968,11 +4029,6 @@ aside .achat:hover {
 .main_promo form div div input[type=date], .main_reduc form div div input[type=date] {
   width: 80%;
 }
-.main_promo .warning, .main_reduc .warning {
-  color: red;
-  font-style: italic;
-  font-size: 75%;
-}
 .main_promo #valider, .main_reduc #valider {
   display: block;
   max-width: 100%;
@@ -4162,36 +4218,12 @@ aside .achat:hover {
 #ombre {
   position: fixed;
   inset: 0;
-  width: 16%;
+  width: 100%;
   background: rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease;
   z-index: 50;
-}
-#ombre .fermerCarteDroite {
-  height: 100px;
-  width: 30px;
-  position: absolute;
-  right: 0;
-  top: 45%;
-  background-color: white;
-  border-radius: 5px 0px 0px 5px;
-  border: none;
-  font-size: xx-large;
-}
-
-.ouvrirCarteDroite {
-  height: 100px;
-  width: 30px;
-  position: fixed;
-  right: 0;
-  top: 45%;
-  background-color: white;
-  border: none;
-  box-shadow: grey -1px 0px 8px;
-  border-radius: 5px 0px 0px 5px;
-  font-size: xx-large;
 }
 
 /* Panneau */
@@ -4427,4 +4459,75 @@ aside .achat:hover {
 }
 .facture-page-vendeur .facture .facture-toto tr:last-child td:first-child {
   color: #3157A3;
+}
+
+.stat #sectionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.stat #sectionButton button, .stat #sectionButton a {
+  line-height: 1.5em;
+  margin-top: 0px;
+}
+.stat #sectionButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.stat .container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.stat select {
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 3em;
+}
+
+.erreur_adress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  justify-self: center;
+}
+.erreur_adress a {
+  margin-top: 20px;
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.erreur_adress a a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+.erreur_adress a:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.erreur_adress a {
+  width: 100%;
+}
+
+.warning {
+  color: red;
+  font-style: italic;
+  font-size: 75%;
 }/*# sourceMappingURL=style.css.map */

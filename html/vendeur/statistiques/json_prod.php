@@ -1,5 +1,4 @@
 <?php
-/*
     session_start();
 
     // Si je suis connecté mais pas en tant que vendeur, retour à l'accueil client
@@ -16,7 +15,7 @@
     if($_SESSION['id_compte']!=$_GET['id_compte']){
         header('location: ../');
     }
-*/
+
     define("HOME_GIT", "../../../");
     define("HOME_SITE", "../../");
     require_once HOME_GIT .".config.php";
@@ -50,6 +49,17 @@
     elseif (isset($_GET['toutecategorie'])) {
         $sql = "SELECT nom_categorie,nom_categorie_sup FROM _categorie";
         $requete = $pdo->prepare($sql);
+        $requete->execute();
+        $data= $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($data);
+    }
+    elseif (isset($_GET['listeprod'])) {
+        $sql= "SELECT DISTINCT 
+                id_produit,
+                nom_stock FROM stats_par_produit WHERE id_vendeur = :id_vendeur";
+        $requete = $pdo->prepare($sql);
+        $requete->bindValue(":id_vendeur", trim($_GET['id_compte']), PDO::PARAM_INT);
         $requete->execute();
         $data= $requete->fetchAll(PDO::FETCH_ASSOC);
 

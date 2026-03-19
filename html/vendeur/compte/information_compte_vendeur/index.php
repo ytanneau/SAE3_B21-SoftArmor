@@ -35,6 +35,8 @@
 
     // recuperation des informations d'adresse du vendeur
     $tabAdresseVendeur = get_adresse_vendeur($id_adresse);
+    $first_adress = $tabAdresseVendeur['adresse'] . ", " . $tabAdresseVendeur['ville'] . ", " . $tabAdresseVendeur['code_postal'];
+
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // récupération des données du formulaire de saisie
         $modifRaisonSociale = $_POST['raison_sociale'];
@@ -43,8 +45,13 @@
         $modifCodePostal = $_POST['code_postal'];
         $modifCompelementAdr = $_POST['complementAdr'];
         $modifDescription = $_POST['description'];
-        $lon = $_POST['lon'];
-        $lat = $_POST['lat'];
+        if(isset($_POST['lon']) && isset($_POST['lat'])){
+            $lon = $_POST['lon'];
+            $lat = $_POST['lat'];
+        } else {
+            $lon = null;
+            $lat = null;
+        }
         
         // redifinition des coordonnées suivant la nouvelle adresse
         $adresseSubmit = $modifAdresse . ", " . $modifVille. ", " . $modifCodePostal;
@@ -70,16 +77,19 @@
         $response = curl_exec($ch);
 
         if(curl_errno($ch)){
-            echo "Erreur cURL : " . curl_error($ch);
+            echo "Erreur CURL : " . curl_error($ch);
         }
+        
         $data = json_decode($response, true);
-        if(!empty($data)){
+
+        if(!empty($data) && $first_adress != $adresseSubmit){
             $data = $data[0];
             $lon = $data["lat"];
             $lat = $data["lon"];
+        } else if (empty($data)) {
+            header('Location: error_adress.php');
+            exit();
         }
-        if($lon == null){ $lon = $tabAdresseVendeur['lon'];}
-        if($lat == null){ $lat = $tabAdresseVendeur['lat'];}
         
         $_SESSION['raison_sociale'] = $modifRaisonSociale;
 
@@ -138,6 +148,9 @@
                             <label for="idDescSimple">Description</label>
                             <textarea type="textarea" name="description" id="idDescSimple"><?= $description ?></textarea>
                         </p>
+                        <?php if($tabAdresseVendeur['lon'] === null || $tabAdresseVendeur['lat'] === null) {?>
+                            <p class="warning">Les coordonnées ne ce sont pas définis lors de la création de votre compte car votre adresse est inconnue</p>
+                        <?php } else {?>
                         <h2 id="warningTitle">Corriger mes coordonnées</h2>
                         <div id="map"></div>
                         <div class="inputs_lon_lat">
@@ -150,6 +163,11 @@
                                 <input type="text" name="lat" id="latitude" value="<?= $tabAdresseVendeur['lat']?>">
                             </div>
                         </div>
+                        <div style="display:flex; flex-direction:row;">
+                            <p style="display:none;" class="warning" id="warningLon">Erreur de saisi - longitude</p>
+                            <p style="display:none; margin-left:5px;" class="warning" id="warningLat">Erreur de saisi - latitude</p>
+                        </div>
+                    <?php } ?>
                     </div>
                     <input type="submit" value="Valider la modification" id="idValiderModifVendeur">
                 </form>
@@ -178,6 +196,31 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map)
         
-        
+
+        const inputLongitude = document.getElementById("longitude")
+        const inputLatitude = document.getElementById("latitude")
+        const warningLon = document.getElementById("warningLon")
+        const warningLat = document.getElementById("warningLat")
+        const validerModifVendeur = document.getElementById("idValiderModifVendeur")
+
+        inputLongitude.addEventListener('input', (e) => {
+            if(inputLongitude.value < -90 || inputLongitude.value > 90){
+                warningLon.style.display = "block"
+                validerModifVendeur.style.backgroundColor = "ligthgray"
+                validerModifVendeur.ariaDisabled = true
+            } else {
+                warningLon.style.display = "none"
+            }
+        })
+
+        inputLatitude.addEventListener('input', (e) => {
+            if(inputLatitude.value < -90 || inputLatitude.value > 90){
+                warningLat.style.display = "block"
+                validerModifVendeur.style.backgroundColor = "ligthgray"
+                validerModifVendeur.ariaDisabled = true
+            } else {
+                warningLat.style.display = "none"
+            }
+        })
     </script>
 </html>

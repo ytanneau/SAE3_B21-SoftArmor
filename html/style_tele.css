@@ -1,23 +1,19 @@
 #header_client {
   position: sticky;
+  width: 100vw;
   top: 0;
   z-index: 11;
-  padding: 0.5em 1em;
   background-color: #3157A3;
 }
 #header_client * {
   font-family: "Montserrat";
   font-weight: bold;
 }
-@media screen and (max-width: 1024px) {
-  #header_client {
-    padding: 1.5em 1em;
-  }
+#header_client {
+  padding: 1.5em 0;
 }
-@media screen and (max-width: 1024px) {
-  #header_client .hide-on-mobile {
-    display: none;
-  }
+#header_client .hide-on-mobile {
+  display: none;
 }
 #header_client .menu-button {
   display: none;
@@ -27,10 +23,8 @@
   height: 75px;
   width: 75px;
 }
-@media screen and (max-width: 1024px) {
-  #header_client .menu-button {
-    display: block;
-  }
+#header_client .menu-button {
+  display: block;
 }
 #header_client .dropdown {
   position: relative;
@@ -92,6 +86,10 @@
   width: 100%;
   margin: 0;
   padding: 0;
+}
+#header_client > nav > ul:first-child {
+  width: 50vw;
+  height: 100vh;
 }
 #header_client > nav > ul > li {
   margin: 0 1em;
@@ -186,17 +184,307 @@
   margin-right: 8px;
 }
 
+#connect_vendeur,
+#inscription_vendeur {
+  background-color: #6B31D0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#connect_vendeur main,
+#inscription_vendeur main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #C3C1F5;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main,
+  #inscription_vendeur main {
+    width: 60vw;
+  }
+}
+#connect_vendeur main img,
+#inscription_vendeur main img {
+  width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_vendeur main img,
+  #inscription_vendeur main img {
+    width: 50vw;
+  }
+}
+#connect_vendeur main h2,
+#inscription_vendeur main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_vendeur main form,
+#inscription_vendeur main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  width: 100%;
+}
+#connect_vendeur main form label,
+#inscription_vendeur main form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+#connect_vendeur main form .text,
+#inscription_vendeur main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_vendeur main form .petit,
+#inscription_vendeur main form .petit {
+  width: 30%;
+}
+#connect_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#connect_vendeur main form input[type=number]::-webkit-outer-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-inner-spin-button,
+#inscription_vendeur main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_vendeur main form input[type=number],
+#inscription_vendeur main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_vendeur main form p,
+#inscription_vendeur main form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+#connect_vendeur main form .error,
+#inscription_vendeur main form .error {
+  color: #E43737;
+}
+#connect_vendeur main .bouton,
+#inscription_vendeur main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#connect_vendeur main .bouton a,
+#inscription_vendeur main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+#connect_vendeur main .bouton:hover,
+#inscription_vendeur main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_vendeur .mainCarteInscription,
+#inscription_vendeur .mainCarteInscription {
+  width: 700px;
+}
+#connect_vendeur .mainCarteInscription #map,
+#inscription_vendeur .mainCarteInscription #map {
+  height: 300px;
+  width: 500px;
+}
+#connect_vendeur,
+#inscription_vendeur {
+  width: 100vw;
+  font-size: 1em;
+}
+#connect_vendeur input,
+#inscription_vendeur input {
+  margin-top: 2%;
+}
+
+#connect_vendeur,
+#connect_client {
+  justify-content: center;
+  height: 100vh;
+}
+
+#connect_client,
+#inscription_client {
+  background-color: #3157A3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#connect_client main,
+#inscription_client main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #CBCCEA;
+  row-gap: 1em;
+  border-radius: 20px;
+  padding: 2em;
+  width: 30vw;
+}
+@media (max-width: 1440px) {
+  #connect_client main,
+  #inscription_client main {
+    width: 60vw;
+  }
+}
+#connect_client main img,
+#inscription_client main img {
+  width: 18vw;
+}
+@media (max-width: 1440px) {
+  #connect_client main img,
+  #inscription_client main img {
+    width: 50vw;
+  }
+}
+#connect_client main h2,
+#inscription_client main h2 {
+  font-size: 2em;
+  margin: 0;
+}
+#connect_client main form,
+#inscription_client main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
+  width: 100%;
+}
+#connect_client main form label,
+#inscription_client main form label {
+  margin-top: 5%;
+  font-size: 1.5em;
+}
+#connect_client main form .text,
+#inscription_client main form .text {
+  height: 10em;
+  text-align: start;
+}
+#connect_client main form .petit,
+#inscription_client main form .petit {
+  width: 30%;
+}
+#connect_client main form input[type=number]::-webkit-inner-spin-button,
+#connect_client main form input[type=number]::-webkit-outer-spin-button,
+#inscription_client main form input[type=number]::-webkit-inner-spin-button,
+#inscription_client main form input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#connect_client main form input[type=number],
+#inscription_client main form input[type=number] {
+  -moz-appearance: textfield;
+}
+#connect_client main form p,
+#inscription_client main form p {
+  font-size: 0.75em;
+  margin: 0.4% 0;
+}
+#connect_client main form .error,
+#inscription_client main form .error {
+  color: #E43737;
+}
+#connect_client main .bouton,
+#inscription_client main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 0.75em 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#connect_client main .bouton a,
+#inscription_client main .bouton a {
+  text-decoration: none;
+  color: white;
+}
+#connect_client main .bouton:hover,
+#inscription_client main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+#connect_client,
+#inscription_client {
+  width: 100vw;
+  font-size: 1em;
+}
+#connect_client input,
+#inscription_client input {
+  margin-top: 2%;
+}
+
+#inscription_vendeur,
+#inscription_client {
+  height: 100%;
+}
+#inscription_vendeur main,
+#inscription_client main {
+  margin: 5% 0;
+}
+
+#nav_tel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  position: sticky;
+  bottom: 1em;
+  width: 80%;
+  left: 10%;
+  border-radius: 2em;
+  background-color: #FFFFFF;
+  height: 3em;
+  margin-top: 5em;
+  box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.205);
+}
+#nav_tel a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#nav_tel img {
+  height: 60%;
+}
+
 body {
   padding: 0;
   margin: 0;
   text-decoration: none;
   width: 100vw;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-size: 3em;
   font-family: "Montserrat";
 }
 
+@media print {
+  h1 {
+    font-size: 8mm;
+  }
+  header,
+  button,
+  footer,
+  a {
+    display: none !important;
+  }
+}
 .hide-on-mobile,
 .toolbar,
 .fleche {
@@ -228,6 +516,9 @@ body {
   flex-direction: column;
   align-items: flex-start;
 }
+.footer .footer-top img {
+  width: 40vw;
+}
 .footer .footer-columns {
   width: 100%;
   justify-content: space-between;
@@ -239,47 +530,147 @@ body {
   gap: 20px;
 }
 .footer .footer-socials img {
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 .footer .footer-bottom {
   flex-direction: column;
   gap: 15px;
 }
 
-.accueil main ul {
+.footer-bottom {
+  flex-direction: column;
   gap: 15px;
 }
-.accueil main li {
-  height: 50vw;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat";
 }
-.accueil main li a {
+
+p {
+  font-family: "Inter";
+}
+
+.champ, .PIN {
+  display: block;
+  border: none;
+  border-radius: 5px;
+  height: 2em;
+  font-size: 1em;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+
+#codePIN {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.aide {
+  display: none;
+}
+
+.accueil .prix {
+  font-size: 1.5em;
+  color: #2E7A30;
+  font-weight: bold;
+  margin: 0;
+  font-family: "Montserrat";
+}
+.accueil .ancien_prix {
+  display: inline-block;
+  margin-right: 6px;
+  width: auto;
+}
+.accueil .pourcentage {
+  display: inline-block;
+  padding: 2px 6px;
+  width: auto;
+  background-color: #6B31D0;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  vertical-align: middle;
+}
+.accueil h1 {
+  margin: auto 0.8em;
+}
+.accueil h3 {
+  height: 60px;
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.accueil .etoiles {
+  width: 100%;
+  height: 30px;
+}
+.accueil .etoiles .etoile {
+  height: 6vw;
+}
+.accueil .etoiles p {
+  margin: 0;
+}
+.accueil main .droite,
+.accueil main .gauche {
+  display: none;
+}
+.accueil main ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  justify-items: center;
+  padding: 0;
+}
+.accueil main ul > li {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 40px 20px;
+  width: 40vw;
 }
-.accueil main li a span {
-  background-color: red;
-  border: 50%;
+.accueil main ul > li > a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
 }
-.accueil main li a > img {
-  max-width: 50vw;
-  max-height: 50vw;
+.accueil main ul > li > a .reduction {
   position: absolute;
-  right: 0;
-  background-color: white;
-}
-.accueil main li a div {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #E43737;
+  color: white;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 2;
 }
-.accueil main li a .etoile {
-  position: none;
-  width: 10px;
-  height: 10px;
+.accueil main ul > li article {
+  width: 40vw;
+  height: 40vw;
+}
+.accueil main ul > li article:first-child {
+  display: flex;
+  justify-content: center;
+}
+.accueil main ul > li article > img {
+  max-width: 40vw;
+  max-height: 40vw;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .liste-commande-page main {
-  margin-left: 50vw;
+  margin-left: 8vw;
 }
 .liste-commande-page thead {
   display: none;
@@ -288,6 +679,11 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid black;
+}
+.liste-commande-page tr p {
+  margin: 0;
 }
 .liste-commande-page td:first-child {
   display: none;
@@ -303,6 +699,86 @@ body {
   display: none;
 }
 
+.mainPanier {
+  display: flex;
+  flex-direction: column;
+}
+.mainPanier div:last-of-type {
+  order: -1;
+}
+.mainPanier .entete {
+  display: flex;
+  margin: 1em 0;
+  align-items: center;
+  gap: 2em;
+}
+.mainPanier .entete h1 {
+  margin: 0;
+}
+.mainPanier .entete .grave {
+  font-size: 1em;
+  background-color: #E43737;
+  border-radius: 15px;
+  color: #fff;
+}
+.mainPanier .gauche ul {
+  margin: 0;
+  list-style: none;
+}
+.mainPanier .produit_panier > a img {
+  width: 50%;
+}
+.mainPanier .produit_panier div a {
+  text-decoration: none;
+  color: #000;
+}
+.mainPanier .produit_panier div article:first-child {
+  display: flex;
+  align-items: center;
+}
+.mainPanier .produit_panier div article:first-child div {
+  width: 80%;
+}
+.mainPanier .produit_panier div article:first-child p,
+.mainPanier .produit_panier div article:first-child h3 {
+  margin: 0;
+}
+.mainPanier .produit_panier div article:first-child button {
+  background-color: #E43737;
+  color: #fff;
+  border-radius: 15px;
+}
+.mainPanier .produit_panier div article:first-child button img {
+  width: 40px;
+}
+.mainPanier .produit_panier div article:last-child p {
+  margin: 0;
+}
+.mainPanier .produit_panier div article:last-child > form,
+.mainPanier .produit_panier div article:last-child > div {
+  display: flex;
+  gap: 30px;
+}
+.mainPanier .produit_panier div article:last-child input[type=button]:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 2em;
+}
+.mainPanier .produit_panier div article:last-child input[type=button]:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 2em;
+}
+.mainPanier .produit_panier div article:last-child input[type=number], .mainPanier .produit_panier div article:last-child input[type=text] {
+  width: 3em;
+  box-sizing: border-box;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 .mainPanier #panier_vide {
   display: flex;
   flex-direction: column;
@@ -310,10 +786,547 @@ body {
 }
 .mainPanier #panier_vide img {
   margin-top: 100px;
-  width: 400px;
-  height: 400px;
+  width: 80vw;
+  height: 80vw;
 }
-.mainPanier #panier_vide a, .mainPanier #panier_vide a:visited {
+.mainPanier #panier_vide a,
+.mainPanier #panier_vide a:visited {
   color: black;
   text-decoration: none;
+}
+.mainPanier button, .mainPanier input[type=submit] {
+  border: none;
+  padding: 0.5em;
+}
+.mainPanier input[value=Supprimer] {
+  display: none;
+}
+.mainPanier aside {
+  font-size: 2em;
+}
+.mainPanier aside .prix {
+  font-family: "Montserrat";
+  font-weight: bold;
+  color: #2E7A30;
+}
+.mainPanier aside .HT {
+  font-size: 0.75em;
+  color: black;
+}
+.mainPanier aside {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+.mainPanier aside div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+.mainPanier aside .bouton {
+  font-size: 1em;
+  background-color: #BB2BB2;
+  border-radius: 15px;
+  border: none;
+  color: #fff;
+  width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+  .infos main {
+    padding: 0;
+  }
+  .infos section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .infos section .form_infos {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 1em;
+    gap: 2em;
+  }
+  .infos section .form_infos article {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .infos section .form_infos article:first-child {
+    align-items: center;
+  }
+  .infos section .form_infos article:first-child .image_pp {
+    width: clamp(140px, 40vw, 240px);
+    border-radius: 8px;
+  }
+  .infos section .form_infos article:first-child label {
+    margin-top: 1em;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .infos section .form_infos article:last-child input,
+  .infos section .form_infos article:last-child button,
+  .infos section .form_infos article:last-child a {
+    width: 50%;
+  }
+  .infos section .form_infos article:last-child .champ {
+    margin-bottom: 1em;
+  }
+  .infos section .form_infos article:last-child .bouton {
+    margin-top: 1.2em;
+  }
+}
+
+.anonymisation-client main form button {
+  border: none;
+  border-radius: 50px;
+  padding: 0.5em 2em;
+  font-weight: bold;
+  align-self: center;
+  background-color: #E43737;
+  color: white;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 17%;
+  height: 200%;
+}
+
+.anonymisation-client a {
+  width: 15%;
+  height: 10%;
+}
+
+.pageRecherche {
+  display: flex;
+  gap: 2em;
+}
+@media (max-width: 1024px) {
+  .pageRecherche {
+    flex-direction: column;
+  }
+}
+
+.labelEtBandeau {
+  display: flex;
+}
+
+.TriEtFiltre div div {
+  flex-direction: column;
+}
+
+.TriEtFiltre {
+  width: 260px;
+  background-color: #fafafa;
+  border-radius: 20px;
+  padding: 1.2em;
+}
+@media (max-width: 1024px) {
+  .TriEtFiltre {
+    width: 100%;
+  }
+}
+
+.TriEtFiltre fieldset {
+  border: none;
+  padding: 0;
+}
+
+.TriEtFiltre legend {
+  font-family: "Montserrat";
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.sousFiltre {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+  cursor: pointer;
+}
+.sousFiltre label {
+  cursor: pointer;
+}
+.sousFiltre input {
+  accent-color: #3157A3;
+  cursor: pointer;
+}
+
+.resultat {
+  width: 100%;
+}
+
+.resultat > div {
+  align-items: center;
+  margin-bottom: 1.5em;
+  gap: 1em;
+}
+@media (max-width: 768px) {
+  .resultat > div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+section.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.resultat > div {
+  display: flex;
+  justify-content: space-between;
+}
+.resultat > div > div:first-child {
+  flex-direction: column;
+}
+.resultat > div > div:first-child h1 {
+  margin-top: 0;
+}
+
+ul#results {
+  display: flex;
+  padding: 0;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: left;
+  margin-left: 10%;
+}
+ul#results > li {
+  width: 20vw;
+  margin: 20px 40px 20px 20px;
+}
+ul#results > li > a {
+  color: black;
+  text-decoration: none;
+  line-height: 1.5em;
+}
+ul#results > li > a > img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  min-width: 15vw;
+  max-width: 15vw;
+  background-color: #f3f1fb;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 5px;
+}
+ul#results > li > a > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ul#results > li > a > div > img {
+  width: 20px;
+  height: 20px;
+  background: none;
+}
+ul#results > li > a > div > p {
+  margin: 5px 0;
+}
+ul#results > li > a > div {
+  height: 2em;
+}
+ul#results > li > a > p, ul#results > li > a > h3 {
+  margin: 5px 0;
+  width: 100%;
+}
+ul#results > li > a > h3 {
+  height: 3em;
+}
+
+.labelBendeau {
+  width: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#results_for {
+  justify-content: space-around;
+  display: flex;
+}
+
+.deroulant {
+  align-self: center;
+}
+.deroulant select {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: solid 1px #CBCCEA;
+  font-size: 1em;
+}
+
+.produit main h2 {
+  font-size: 1em;
+}
+.produit main {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: 2em;
+}
+.produit main .gauche {
+  width: 100%;
+}
+.produit main .gauche #avis {
+  display: none;
+}
+.produit main .detail_produit {
+  width: 100%;
+}
+.produit main .detail_produit article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.produit main .detail_produit article img {
+  width: 60vw;
+  height: auto;
+  margin: 1rem 0;
+}
+.produit main .detail_produit article > div > div:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.produit main .detail_produit article > div > div:nth-child(3) a {
+  font-size: 0.8em;
+}
+.produit main .detail_produit article > div > div:nth-child(3) img {
+  width: 5vw;
+}
+.produit main .detail_produit article h1 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+.produit main .detail_produit article p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+.produit main aside .prix {
+  font-family: "Montserrat";
+  font-weight: bold;
+  color: #2E7A30;
+}
+.produit main aside .HT {
+  font-size: 0.75em;
+  color: black;
+}
+.produit main aside {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+.produit main aside div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.produit main aside .input_quantite {
+  display: flex;
+  justify-content: center;
+  border-color: #ccc;
+}
+.produit main aside .input_quantite input[type=button]:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 3em;
+}
+.produit main aside .input_quantite input[type=button]:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  width: 3em;
+}
+.produit main aside .input_quantite input[type=number], .produit main aside .input_quantite input[type=text] {
+  width: 4em;
+  box-sizing: border-box;
+  border-left: 0;
+  border-right: 0;
+  text-align: center;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.produit main aside .bouton,
+.produit main aside .achat {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.produit main .bouton {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.produit main .bouton a {
+  text-decoration: none;
+  color: black;
+}
+.produit main .bouton:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.produit main .bouton {
+  background-color: #BB2BB2;
+  color: white;
+  font-size: 1em;
+  margin-top: 2%;
+  padding: 0.5em;
+}
+@media (max-width: 1440px) {
+  .produit main .bouton {
+    margin-top: 5%;
+  }
+}
+.produit main .achat {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #BB2BB2;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.produit main .achat a {
+  text-decoration: none;
+  color: black;
+}
+.produit main .achat:hover {
+  background-color: rgb(216.9543478261, 89.5456521739, 208.9913043478);
+}
+.produit main .achat {
+  background-color: #EAC452;
+  color: black;
+  font-size: 1em;
+  margin-top: 2%;
+  padding: 0.5em;
+}
+@media (max-width: 1440px) {
+  .produit main .achat {
+    margin-top: 5%;
+  }
+}
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.confirm-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.confirm-box {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  max-width: 380px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.confirm-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.confirm-message {
+  font-size: 0.92rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.confirm-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.confirm-buttons button {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cancel {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  color: #444;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-cancel a {
+  text-decoration: none;
+  color: #444;
+}
+.btn-cancel:hover {
+  background-color: hsl(0, 0%, 109.1176470588%);
+}
+
+.btn-confirm {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  padding: 1em;
+  font-family: "Montserrat";
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #3157A3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-confirm a {
+  text-decoration: none;
+  color: white;
+}
+.btn-confirm:hover {
+  background-color: rgb(84.695754717, 124.3985849057, 203.804245283);
 }/*# sourceMappingURL=style_tele.css.map */

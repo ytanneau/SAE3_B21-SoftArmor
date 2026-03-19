@@ -52,6 +52,9 @@
                     $data = $data[0];
                     $longitude = $data["lat"];
                     $latitude = $data["lon"];
+                } else {
+                    $longitude = null;
+                    $latitude = null;
                 }
                 
                 $erreurs = create_profile_vendeur($_POST['raisonSocial'], $_POST['numSiret'], $_POST['numCobrec'], $_POST['email'], $_POST['ville'], $_POST['adresse'], $_POST['compAdresse'], $_POST['codePostal'], $_POST['mdp'], $_POST['mdpc'], HOME_GIT, $longitude, $latitude);
@@ -97,7 +100,7 @@
     
 </head>
 <body id="inscription_vendeur">
-<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1){
+<?php if(isset($erreurs) && $erreurs == [] && $_POST['stage'] == 1 && !empty($data)){
 ?>
     <main class="mainCarteInscription">
         <h1>Confirmer les coordonnées</h1>
@@ -105,7 +108,7 @@
         <form action="" id="formCoordonnee" method="post">
             <div>
                 <label for="adresseSaisi">Adresse saisi : </label>
-                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>">
+                <input type="text" id="adresseSaisi" value="<?= htmlspecialchars($adresseSubmit)?>" readonly>
             </div>
             <div>
                 <label for="longitude">Longitude</label>
@@ -118,7 +121,7 @@
             <input type="submit" class="bouton">
         </form>
     <script src="script_map.js"></script>
-<?php } elseif (isset($erreurs) && $erreurs == [] && $_POST['stage'] == 2) { ?>
+<?php } else if (isset($erreurs) && $erreurs == [] && ($_POST['stage'] == 2 || $_POST['stage'] == 1)) { ?>
 <main>
         <h1>Votre compte a été créé</h1>
         <p>Voulez-vous activer la double authentification ? <a href="../../authentikator/activer.php">Cliquez ici</a></p>
@@ -306,7 +309,7 @@
 
         <p style="text-align:center;">Déjà inscrit ? <a href="../">Se connecter</a>
         <br>
-        <a href="../">Retourner au côté client</a></p>
+        <a href="../../compte/inscription">Retourner au côté client</a></p>
 <?php } ?>
     </main>
 </body>

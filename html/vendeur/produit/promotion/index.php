@@ -97,10 +97,8 @@
                     </div>
                 </div>
                 
-                
-                <p style="display:none;" id="warning1">Date de fin antérieur à la date de debut</p>
-                <p style="display:none;" id="warning2">Date(s) non selectionnée(s)</p>
-                <p style="display:none;" id="warning3">Date de debut déjà passé</p>
+                <p style="display:none;" class="warning" id="warning_date_anterieur">Date de fin antérieur à la date de debut</p>
+                <p style="display:none;" class="warning" id="warning_date_passe">Date de debut déjà passé</p>
                 
                 <div class="en_colonne">
                     <label for="cout">Coût final : </label>
@@ -117,55 +115,40 @@
         <?php include HOME_SITE . "footer.php" ?>    
     </body>
     <script>
-
         // PROMOTION //
         const PRIX = 26;
         const cout = document.getElementById("cout");
         const dateDebut = document.getElementById("dateDebut");
         const dateFin = document.getElementById("dateFin");
         const valider = document.getElementById("valider");
-        const warning1 = document.getElementById("warning1");
-        const warning2 = document.getElementById("warning2");
-        const warning3 = document.getElementById("warning3");
-        const divPhoto = document.getElementById("divPhoto");
+        const warning_date_anterieur = document.getElementById("warning_date_anterieur");
+        const warning_date_passe = document.getElementById("warning_date_passe");
         const dateCourante = new Date();
         dateCourante.setHours(0, 0, 0, 0);
 
         dateDebut.addEventListener('change', () => {
             if(dateFin.value != ""){
                 if(dateDebut.value > dateFin.value) {
-                    warning1.style.display = "block";
-                } else if (dateFin == ""){
-                    dateFin.value = dateDebut.value;
+                    warning_date_anterieur.style.display = "block";
                 } else if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
-                    warning4.style.display = "block";
+                    warning_date_passe.style.display = "block";
                 } else {
-                    warning1.style.display = "none";
-                    warning4.style.display = "none";
+                    warning_date_passe.style.display = "none";
+                    warning_date_passe.style.display = "none";
                     calculP();
                 }
-                
             }
-            if(!verif_date_pour_suppression(dateDebut.value)){
-                btn_suppr.style.display = "none";
-            } else {
-                btn_suppr.style.display = "block";
-            }
-            
         });
+
+
         dateFin.addEventListener('change', () => {
             if(dateDebut.value != ""){
                 if(dateDebut.value > dateFin.value) {
-                    warning1.style.display = "block";
+                    warning_date_anterieur.style.display = "block";
                 } else {
-                    warning1.style.display = "none";
+                    warning_date_anterieur.style.display = "none";
                     calculP();
                 }
-            }
-            if (check_date(dateFin.value)){
-                divPhoto.style.display = "block";
-            } else {
-                divPhoto.style.display = "none";
             }
         });
 
@@ -185,22 +168,16 @@
         
         // VALIDATION DU FORM //
         valider.addEventListener('click', (event) => {
-            warning1.style.display = "none";
-            warning2.style.display = "none";
-            warning4.style.display = "none";
-
-            if (!dateDebut.value || !dateFin.value) {
-                warning2.style.display = "block";
-                event.preventDefault();
-            }
+            warning_date_anterieur.style.display = "none";
+            warning_date_passe.style.display = "none";
 
             if (dateDebut.value > dateFin.value) {
-                warning1.style.display = "block";
+                warning_date_anterieur.style.display = "block";
                 event.preventDefault();
             }
             
             if(new Date(dateDebut.value).getTime() < dateCourante.getTime()){
-                warning4.style.display = "block";
+                warning_date_passe.style.display = "block";
                 event.preventDefault();
             }
         });

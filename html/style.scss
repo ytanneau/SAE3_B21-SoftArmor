@@ -217,6 +217,11 @@ hr {
     }
 }
 
+
+#nav_tel {
+    display: none;
+}
+
 #header_client {
     @include header($couleur_primaire_client);
 }
@@ -400,7 +405,13 @@ ul#results {
     justify-content: space-around;
     display: flex;
 }
-
+#resetFilters{
+    @include bouton_new($background: $rouge, $color: white, $largeur: auto);
+    background-color: pink;
+}
+#btnOuvrirCarte{
+    @include bouton_new($background: gray, $color: white, $largeur: auto);
+}
 .deroulant {
     align-self: center;
 
@@ -508,6 +519,10 @@ ul#results {
 
     .modif {
         @include bouton_new($color: white, $largeur: unset);
+        width: 370px;
+        padding: 0.6em;
+        line-height: 2em;
+        margin-top: 8%;
     }
 
     .grave {
@@ -527,25 +542,19 @@ ul#results {
         }
     }
 
-    #idValiderModifVendeur {
-        margin-top: 20px;
-        @include bouton_new($color: $couleur_background);
-        width: 600px;
-    }
-
     #idDesactivationCompte,
     #idDesactivation2FA {
         @include bouton_new($background: $rouge, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
     #idActivation2FA {
         @include bouton_new($background: $couleur_primaire_client, $color: $couleur_background);
         margin-top: 30px;
         padding: 0.6em;
-        width: 577px;
+        width: 351px;
     }
 
 
@@ -1080,8 +1089,7 @@ div:has(> aside) {
 }
 
 .grave {
-    @include bouton();
-    background-color: $rouge;
+    @include bouton_new($rouge);
     color: white;
 }
 
@@ -1121,10 +1129,6 @@ div:has(> aside) {
         height: 30px;
     }
 
-    nav {
-        display: none;
-    }
-
     >main {
         .banniere {
             display: flex;
@@ -1145,7 +1149,7 @@ div:has(> aside) {
             }
         }
 
-        >div {
+        section>div {
             display: flex;
             flex-direction: row;
 
@@ -1164,7 +1168,7 @@ div:has(> aside) {
                 box-shadow: 0 0 20px black;
 
                 >img {
-                    width: 75%;
+                    max-width: 75%;
                 }
 
                 &:hover {
@@ -1183,7 +1187,7 @@ div:has(> aside) {
                 padding: 0 3px;
             }
 
-            >ul {
+            ul {
                 @include contenu_centre_horizontal;
                 align-items: start;
                 overflow: hidden;
@@ -1194,10 +1198,23 @@ div:has(> aside) {
                 >li {
                     @include produit_catalogue();
 
+                    img {
+                        max-width:15vw;
+                        max-height: 15vw;
+                        object-fit: contain;
+                    }
+
+                    article:first-child {
+                        width: 15vw;
+                        height: 15vw;
+                        display: flex;
+                        justify-content: center;
+                    }
+
                     >a {
                         position: relative;
 
-                        >.reduction {
+                        .reduction {
                             position: absolute;
 
                             width: 32px;
@@ -1780,6 +1797,7 @@ aside {
         display: flex;
         flex-direction: column;
         #map{
+            z-index: 0;
             width: 500px;
             height: 300px;
         }
@@ -2448,12 +2466,6 @@ aside {
         }
     }
 
-    .warning {
-        color: red;
-        font-style: italic;
-        font-size: 75%;
-    }
-
     #valider {
         @include bouton_new($color: $couleur_background);
         margin-top: 40px;
@@ -2573,37 +2585,12 @@ aside {
 #ombre {
     position: fixed;
     inset: 0;
-    width: 16%;
+    width: 100%;
     background: rgba(0, 0, 0, 0.4);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
     z-index: 50;
-
-    .fermerCarteDroite {
-        height: 100px;
-        width: 30px;
-        position: absolute;
-        right: 0;
-        top: 45%;
-        background-color: white;
-        border-radius: 5px 0px 0px 5px;
-        border: none;
-        font-size: xx-large;
-    }
-}
-
-.ouvrirCarteDroite {
-    height: 100px;
-    width: 30px;
-    position: fixed;
-    right: 0;
-    top: 45%;
-    background-color: white;
-    border: none;
-    box-shadow: grey -1px 0px 8px;
-    border-radius: 5px 0px 0px 5px;
-    font-size: xx-large;
 }
 
 /* Panneau */
@@ -2868,4 +2855,54 @@ line-height: 0;
             }
         }
     }
+}
+.stat{
+    
+    #sectionButton{
+        @include contenu_centre_horizontal;
+        justify-content: space-evenly;
+        width: 50%;
+        
+        height: fit-content;
+        button, a{
+            line-height: 1.5em;
+            margin-top:0px;
+        }
+    }
+    #sectionButtonContainer{
+        @include contenu_centre_horizontal;
+        justify-content: center;
+    }
+
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
+    select{
+        border-radius: $angle_petit;
+        text-align : center;
+        margin-right: 3em;
+
+    }
+}
+
+.erreur_adress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    justify-self: center;
+    a{
+        margin-top: 20px;
+        @include bouton_new($color: $couleur_background);
+        width: 100%;
+    }
+}
+
+.warning {
+    color: red;
+    font-style: italic;
+    font-size: 75%;
 }
