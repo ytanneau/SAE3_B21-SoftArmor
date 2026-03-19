@@ -622,6 +622,19 @@ p {
   text-decoration: none;
   width: 100%;
 }
+.accueil main ul > li > a .reduction {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #E43737;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 2;
+}
 .accueil main ul > li article {
   width: 40vw;
   height: 40vw;

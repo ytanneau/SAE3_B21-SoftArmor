@@ -1188,7 +1188,7 @@ div:has(> aside) {
                 padding: 0 3px;
             }
 
-            >ul {
+            ul {
                 @include contenu_centre_horizontal;
                 align-items: start;
                 overflow: hidden;
@@ -1205,7 +1205,7 @@ div:has(> aside) {
                         object-fit: contain;
                     }
 
-                    article:has(img:only-child) {
+                    article:first-child {
                         width: 15vw;
                         height: 15vw;
                         display: flex;
@@ -1215,7 +1215,7 @@ div:has(> aside) {
                     >a {
                         position: relative;
 
-                        >.reduction {
+                        .reduction {
                             position: absolute;
 
                             width: 32px;
