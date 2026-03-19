@@ -581,7 +581,7 @@ if ($_POST != NULL){
             inputCommentaire.value = data.commentaire;
 
             nbCarTitre.textContent = `${inputTitre.value.length}/${TAILLE_TITRE}`;
-            nbCarTitre.textContent = `${inputCommentaire.value.length}/${TAILLE_DESCRIPTION}`;
+            nbCarDescription.textContent = `${inputCommentaire.value.length}/${TAILLE_DESCRIPTION}`;
             
             if (data.image != "") {
                 imagePreviewAvis.innerHTML = "";
