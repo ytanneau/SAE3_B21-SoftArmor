@@ -207,7 +207,7 @@ if (isset($_POST['quantite'])) {
                     <h2>Rédiger un avis</h2>
                 
                     <?php if (!empty($id_client)) { 
-                        $pp = $_SESSION['pp'] ?? ('image/compte.svg'); ?>
+                        $pp = empty($_SESSION['pp']) ? 'image/compte.svg' : $_SESSION['pp']; ?>
                         
                         <div id="creation_avis">
                             <img src="<?= HOME_SITE . $pp ?>" alt="Photo de profil" title="Photo de profil" class="image_pp grand">
