@@ -514,6 +514,7 @@ hr {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  width: 0;
 }
 #header_client > nav > ul > li.searchbar form {
   display: flex;
@@ -701,6 +702,7 @@ hr {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  width: 0;
 }
 #header_vendeur > nav > ul > li.searchbar form {
   display: flex;
